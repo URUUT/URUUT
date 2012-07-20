@@ -1,0 +1,16 @@
+= form_for @projects do |f|
+
+	%div
+		= f.label :name 
+		%br
+		= f.text_field :name
+	%div
+		= f.label :amount
+		%br
+		= f.text_field :amount
+	%div
+		= f.label :due_date
+		%br
+		= f.text_field :due_date
+	%div
+		= f.submit "Sign up" 
