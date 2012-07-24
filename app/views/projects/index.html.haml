@@ -1,0 +1,10 @@
+- if @projects
+	- @projects.each do |p|
+		.project
+			%p= p.name
+			%p= p.amount
+			%p= p.due_date.to_date()
+			- if p.image_file_name
+				%p= image_tag p.image.url(:medium)
+- else
+	%h3 Sorry, no projects

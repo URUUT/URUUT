@@ -1,4 +1,4 @@
-= form_for @projects do |f|
+= form_for @projects, :html => { :multipart => true } do |f|
 
 	%div
 		= f.label :name 
@@ -12,5 +12,8 @@
 		= f.label :due_date
 		%br
 		= f.text_field :due_date
+	%div
+		= f.label :image, "Select an image for the project"
+		=f.file_field :image
 	%div
 		= f.submit "Sign up" 

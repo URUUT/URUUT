@@ -7,7 +7,7 @@ gem 'rails', '3.2.6'
 
 gem 'sqlite3'
 gem 'activeadmin'
-gem 'paperclip'
+gem 'paperclip', '~>3.1.3'
 gem 'haml'
 gem "twitter-bootstrap-rails"
 gem 'devise'
