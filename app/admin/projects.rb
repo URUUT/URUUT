@@ -12,5 +12,39 @@ ActiveAdmin.register Project do
 	    	end
 	    end
 	  end
-  
+
+	# form do |f|
+
+		
+	# 	f.label :name 
+	
+	# 	f.text_field :name
+	
+	# 	f.label :amount
+	
+	# 	f.text_field :amount
+
+	# 	f.label :due_date
+	
+	# 	f.text_field :due_date
+
+	# 	f.label :image, "Select an image for the project"
+	# 	f.file_field :image
+	
+	# 	f.submit "Sign up" 
+
+	# end
+
+	form do |f|
+      f.inputs "Details" do
+        f.input :name
+        f.input :amount
+        f.input :due_date
+      end
+      f.inputs "Content" do
+        f.input :image
+      end
+      f.buttons
+    end
+
 end
