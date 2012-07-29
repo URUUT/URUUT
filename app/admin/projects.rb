@@ -41,6 +41,7 @@ ActiveAdmin.register Project do
         f.input :amount
       end
       f.inputs "Due Date" do
+      	f.label "Due Date"
       	f.date_select :due_date
       end
       f.inputs "Assets" do
