@@ -41,7 +41,7 @@ ActiveAdmin.register Project do
         f.input :amount
       end
       f.inputs "Due Date" do
-      	f.date_select :due_date, :label => "Due Date"
+      	f.input :due_date, :label => "Due Date"
       end
       f.inputs "Assets" do
         f.input :image
