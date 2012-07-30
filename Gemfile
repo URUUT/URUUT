@@ -13,6 +13,7 @@ gem 'haml'
 gem "twitter-bootstrap-rails"
 gem 'devise'
 gem 'heroku'
+gem 'aws-sdk'
 
 
 # Gems used only for assets and not required
