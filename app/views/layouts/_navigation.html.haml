@@ -1,0 +1,21 @@
+= link_to "Home", root_path, :class => 'brand'
+%ul.nav
+  - if user_signed_in?
+    %li
+      %a
+        = current_user.name
+        = image_tag('down-arrow.png')
+      %ul
+        %li
+          = link_to('Profile', users_profile_path)
+        %li
+          = link_to('Logout', destroy_user_session_path, :method=>'delete')
+  - else
+    %li
+      = link_to('Login', new_user_session_path)
+  - if user_signed_in?
+    / %li
+    /   = link_to('Edit account', edit_user_registration_path)
+  - else
+    %li
+      = link_to('Sign up', new_user_registration_path)

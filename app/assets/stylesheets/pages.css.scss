@@ -1,0 +1,21 @@
+// Place all the styles related to the pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+ul.nav {
+	li {
+		line-height:40px;
+		position:relative;
+		img {
+			vertical-align:0px;	}
+		ul {
+			background:#2C2C2C;
+			display:none;
+			position:absolute;
+			width:100%;
+			z-index:100;
+			li {
+				list-style-type:none;
+				padding:0 10px;
+				a{
+					color:#fff;	}}}}}

@@ -7,14 +7,21 @@ gem 'rails', '3.2.6'
 
 # gem 'sqlite3'
 # gem 'pg'
-gem 'activeadmin'
+#   
 gem 'paperclip', '~>3.1.3'
+gem "paperclip-ffmpeg"
+gem 'delayed_paperclip', '2.4.5.2', :git => 'git://github.com/tommeier/delayed_paperclip', :branch => 'fix_312'
 gem 'haml'
 gem "twitter-bootstrap-rails"
 gem 'devise'
 gem 'heroku'
+# gem 'carrierwave'
+# gem 'carrierwave_direct'
+# gem "fog"
+# gem "rmagick"
 gem 'aws-sdk'
-
+gem 'delayed_job_active_record'
+gem "daemons"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -34,7 +41,7 @@ group :production do
 end
 
 group :development, :test do
-  gem 'sqlite3'
+  gem "mysql2", "~> 0.3.11"
 end
 
 gem 'jquery-rails'
