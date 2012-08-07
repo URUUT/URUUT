@@ -1,11 +1,24 @@
 Crowdfund::Application.routes.draw do
-  devise_for :admin_users, ActiveAdmin::Devise.config
+  get "image/new"
+
+  get "users/profile"
+
+  get "pages/index"
+
+  get "projects/add_desc"
+
+  devise_for :users
+
+  resources :s3_uploads
 
   resources :projects
 
-  ActiveAdmin.routes(self)
+  # devise_for :admin_users, ActiveAdmin::Devise.config
 
-  root to: "projects#index"
+  # ActiveAdmin.routes(self)
+
+
+  root to: "pages#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
