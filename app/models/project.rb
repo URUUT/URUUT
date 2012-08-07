@@ -1,18 +1,35 @@
 class Project < ActiveRecord::Base
-  attr_accessible :amount, :due_date, :name, :image
-  
-  # has_attached_file :image, 
-  # 	:styles => { 
-  # 		:large => "640x480>", 
-  # 		:medium => "200x150>", 
-  # 		:thumb => "100x100>" }
+  attr_accessible :category, :description, :duration, :goal, :location, :title, :images_attributes, :videos_attributes
 
-  has_attached_file :image,
-     :storage => :s3,
-     :s3_credentials => "#{::Rails.root.to_s}/config/s3.yml",
-     :s3_headers => {"Content-Disposition" => "attachment"},
-     :styles => { 
-		:large => "640x480>", 
-		:medium => "200x150>", 
-		:thumb => "100x100>" }
+  has_many :images
+  has_many :videos
+
+  accepts_nested_attributes_for :images
+  accepts_nested_attributes_for :videos
+  # mount_uploader :image, ImageUploader
+  # mount_uploader :video, VideoUploader
+
+  # has_attached_file :project_image,
+  #      :styles => {
+  #      :thumb=> "100x100#",
+  #      :small  => "400x400>" },
+  #    :storage => :s3,
+  #    :s3_credentials => {:access_key_id => ENV['S3_KEY'], 
+  #                        :secret_access_key => ENV['S3_SECRET'],
+  #                    	   :bucket => 'venturebridge-dev'}
+
+  # has_attached_file :project_video,
+  # 		:styles => { 
+	 #      :medium => { :geometry => "640x480", :format => 'flv' },
+	 #      :thumb => { :geometry => "100x100#", :format => 'jpg', :time => 10 }
+	 #    }, :processors => [:ffmpeg],
+  #    :storage => :s3,
+  #    :s3_credentials => {:access_key_id => ENV['S3_KEY'], 
+  #                        :secret_access_key => ENV['S3_SECRET'],
+  #                    	   :bucket => 'venturebridge-dev'}
+
+  # process_in_background :project_image
+  # process_in_background :project_video
+
+
 end
