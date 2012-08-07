@@ -1,19 +1,22 @@
-= form_for @projects, :html => { :multipart => true } do |f|
+= form_for @project, :html => { :multipart => true } do |f|
 
 	%div
-		= f.label :name 
+		= f.label :title 
 		%br
-		= f.text_field :name
+		= f.text_field :title
 	%div
-		= f.label :amount
+		= f.label :goal
 		%br
-		= f.text_field :amount
+		= f.text_field :goal
+
+	= f.fields_for(@project.image) do |builder|
+		%div
+			= builder.label :image, "Select an image for the project"
+			= builder.file_field :image
+
+		/ = f.fields_for :videos do |builder|
+		/ 	%div
+		/ 		= builder.label :video, "Select a video for the project"
+		/ 		= builder.file_field :video
 	%div
-		= f.label :due_date
-		%br
-		= f.text_field :due_date
-	%div
-		= f.label :image, "Select an image for the project"
-		=f.file_field :image
-	%div
-		= f.submit "Sign up" 
+		= f.submit "Submit"
