@@ -14,4 +14,5 @@ class Video < ActiveRecord::Base
                      	   :bucket => 'venturebridge-dev'}
 
   process_in_background :project_video
+
 end

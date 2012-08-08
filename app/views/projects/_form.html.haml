@@ -9,6 +9,7 @@
 		%br
 		= f.text_field :goal
 
+
 	= f.fields_for :images do |builder|
 		%div
 			= builder.label :project_image, "Select an image for the project"
@@ -18,5 +19,6 @@
 		%div
 			= builder.label :project_video, "Select a video for the project"
 			= builder.file_field :project_video
+
 	%div
 		= f.submit "Submit"
