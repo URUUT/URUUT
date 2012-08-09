@@ -1,24 +1,13 @@
 = form_for @project, :html => { :multipart => true } do |f|
 
-	%div
-		= f.label :title 
-		%br
-		= f.text_field :title
-	%div
-		= f.label :goal
-		%br
-		= f.text_field :goal
+	%title Create Your Project
 
+	= render "#{@project.current_step}_step", :f => f
+	= render "#{@project.current_step}_step", :f => f
+	= render "#{@project.current_step}_step", :f => f
 
-	= f.fields_for :images do |builder|
-		%div
-			= builder.label :project_image, "Select an image for the project"
-			= builder.file_field :project_image
+	%p= f.submit "Continue"
+	%p= f.submit "Back", :name => "previous_button" unless @project.first_step?
 
-	= f.fields_for :videos do |builder|
-		%div
-			= builder.label :project_video, "Select a video for the project"
-			= builder.file_field :project_video
-
-	%div
-		= f.submit "Submit"
+	/ %div
+	/ 	= f.submit "Submit"

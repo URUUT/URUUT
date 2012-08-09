@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120807191515) do
+ActiveRecord::Schema.define(:version => 20120808205756) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(:version => 20120807191515) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
-
 
   create_table "images", :force => true do |t|
     t.datetime "created_at",                 :null => false
@@ -52,22 +51,16 @@ ActiveRecord::Schema.define(:version => 20120807191515) do
     t.integer  "duration"
     t.integer  "goal"
     t.string   "category"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
-    t.string   "project_video_file_name"
-    t.string   "project_video_content_type"
-    t.integer  "project_video_file_size"
-    t.datetime "project_video_updated_at"
-    t.string   "project_image_file_name"
-    t.string   "project_image_content_type"
-    t.integer  "project_image_file_size"
-    t.datetime "project_image_updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.string   "image"
     t.string   "video"
+    t.string   "tags"
+  end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "email",                      :default => "", :null => false
+    t.string   "encrypted_password",         :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -94,8 +87,12 @@ ActiveRecord::Schema.define(:version => 20120807191515) do
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
   create_table "videos", :force => true do |t|
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.string   "video_file_name"
+    t.integer  "video_file_size"
+    t.string   "video_content_type"
+    t.datetime "video_updated_at"
     t.string   "project_video_file_name"
     t.integer  "project_video_file_size"
     t.string   "project_video_content_type"

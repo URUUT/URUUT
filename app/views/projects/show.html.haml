@@ -2,16 +2,6 @@
 	%div{:style => "width:200px"}
 	%p= p.title
 
-	/ - if !p.image.project_image.url.nil?
+	
 	- for image in p.images
 		=image_tag(image.project_image.url(:thumb))
-
-	/ - if p.project_video.url
-	- for video in p.videos
-		:javascript
-			AC_FL_RunContent('codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0', 'width', '640', 'height', '505', 'src', ((!DetectFlashVer(9, 0, 0) && DetectFlashVer(8, 0, 0)) ? '/flash/OSplayer' : '/flash/OSplayer'), 'pluginspage', 'http://www.macromedia.com/go/getflashplayer', 'id', 'flvPlayer', 'allowFullScreen', 'true', 'movie', ((!DetectFlashVer(9, 0, 0) && DetectFlashVer(8, 0, 0)) ? '/flash/OSplayer' : '/flash/OSplayer'), 'FlashVars', 'movie=#{video.project_video.url(:thumb)}&btncolor=0x333333&accentcolor=0x20b3f7&txtcolor=0xffffff&volume=&previewimage=&autoload=on');
-		%noscript
-			%object#flvPlayer{:height => "505", :width => "640"}
-				%param{:name => "allowFullScreen", :value => "true"}
-					%param{:name => "movie", :value => "/flash/OSplayer.swf?movie=http://s3.amazonaws.com/venturebridge-dev/projects/project_videos/000/000/015/medium/chad_movie_test_-_Broadband.flv&btncolor=0x333333&accentcolor=0x20b3f7&txtcolor=0xffffff&volume=&previewimage=&autoload=on"}
-					%embed{:allowFullScreen => "true", :height => "505", :src => "/flash/OSplayer.swf?movie=http://s3.amazonaws.com/venturebridge-dev/projects/project_videos/000/000/015/medium/chad_movie_test_-_Broadband.flv&btncolor=0x333333&accentcolor=0x20b3f7&txtcolor=0xffffff&volume=&previewimage=&autoload=on", :type => "application/x-shockwave-flash", :width => "640"}
