@@ -1,8 +1,7 @@
 %h2 Project Details
-= f.fields_for :images do |builder|
-	%div
-		= builder.label :project_image, "Select an image for the project"
-		= builder.file_field :project_image
+%div
+	= f.label :image, "Select an image for the project"
+	= f.file_field :image
 %div
 	= f.label :video 
 	%br

@@ -3,8 +3,8 @@
 	%title Create Your Project
 
 	= render "#{@project.current_step}_step", :f => f
-	= render "#{@project.current_step}_step", :f => f
-	= render "#{@project.current_step}_step", :f => f
+	/ = render "#{@project.current_step}_step", :f => f
+	/ = render "#{@project.current_step}_step", :f => f
 
 	%p= f.submit "Continue"
 	%p= f.submit "Back", :name => "previous_button" unless @project.first_step?
