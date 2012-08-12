@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120808205756) do
+ActiveRecord::Schema.define(:version => 20120810064427) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -29,21 +29,6 @@ ActiveRecord::Schema.define(:version => 20120808205756) do
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
-  create_table "images", :force => true do |t|
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
-    t.string   "image_file_name"
-    t.integer  "image_file_size"
-    t.string   "image_content_type"
-    t.datetime "image_updated_at"
-    t.integer  "project_id"
-    t.string   "project_image_file_name"
-    t.integer  "project_image_file_size"
-    t.string   "project_image_content_type"
-    t.datetime "project_image_updated_at"
-    t.string   "project_image_processing"
-  end
-
   create_table "projects", :force => true do |t|
     t.string   "title"
     t.string   "description"
@@ -51,11 +36,14 @@ ActiveRecord::Schema.define(:version => 20120808205756) do
     t.integer  "duration"
     t.integer  "goal"
     t.string   "category"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.string   "image"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.string   "video"
     t.string   "tags"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "users", :force => true do |t|
@@ -85,20 +73,5 @@ ActiveRecord::Schema.define(:version => 20120808205756) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
-
-  create_table "videos", :force => true do |t|
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
-    t.string   "video_file_name"
-    t.integer  "video_file_size"
-    t.string   "video_content_type"
-    t.datetime "video_updated_at"
-    t.string   "project_video_file_name"
-    t.integer  "project_video_file_size"
-    t.string   "project_video_content_type"
-    t.datetime "project_video_updated_at"
-    t.integer  "project_id"
-    t.string   "project_video_processing"
-  end
 
 end
