@@ -4,6 +4,6 @@
 
 $ ->
 	$('ul.nav li').hover ->
-		$(this).children('ul').css('display', 'block') 
+		$(this).children('div').css('display', 'block') 
 	,->
-		$(this).children('ul').css('display', 'none')
+		$(this).children('div').css('display', 'none')

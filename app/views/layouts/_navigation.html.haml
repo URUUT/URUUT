@@ -5,11 +5,17 @@
       %a
         = current_user.name
         = image_tag('down-arrow.png')
-      %ul
-        %li
-          = link_to('Profile', users_profile_path)
-        %li
-          = link_to('Logout', destroy_user_session_path, :method=>'delete')
+      %div
+        %ul.profile
+          %li
+            = link_to('Profile', users_profile_path)
+          %li
+            = link_to('Logout', destroy_user_session_path, :method=>'delete')
+        %ul.projects
+          %li
+            = link_to('New Project', new_project_path)
+          %li
+            = link_to('Show Projects', projects_path)
   - else
     %li
       = link_to('Login', new_user_session_path)

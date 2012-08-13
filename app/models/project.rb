@@ -8,9 +8,7 @@ class Project < ActiveRecord::Base
        :thumb=> "100x100#",
        :small  => "400x400>" },
      :storage => :s3,
-     :s3_credentials => {:access_key_id => ENV['S3_KEY'], 
-                         :secret_access_key => ENV['S3_SECRET'],
-                       :bucket => 'venturebridge-dev'}
+     :s3_credentials => "#{Rails.root}/config/s3.yml"
 
   # process_in_background :image
 

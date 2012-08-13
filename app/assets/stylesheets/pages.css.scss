@@ -8,14 +8,31 @@ ul.nav {
 		position:relative;
 		img {
 			vertical-align:0px;	}
-		ul {
-			background:#2C2C2C;
+		div {
 			display:none;
 			position:absolute;
-			width:100%;
-			z-index:100;
-			li {
-				list-style-type:none;
-				padding:0 10px;
-				a{
-					color:#fff;	}}}}}
+			width:300px;
+			ul:first-child {
+				background:#2C2C2C;
+				left:0;
+				position:absolute;
+				top:0;
+				width:150px;
+				z-index:100;
+				li {
+					list-style-type:none;
+					padding:0 10px;
+					a{
+						color:#fff;	}}}
+			ul:nth-child(2) {
+				background:#2C2C2C;
+				left:150px;
+				position:absolute;
+				top:0;
+				width:150px;
+				z-index:100;
+				li {
+					list-style-type:none;
+					padding:0 10px;
+					a{
+						color:#fff;	}}}}}}
