@@ -3,5 +3,5 @@
 	%p= p.title
 
 	
-	- for image in p.images
-		=image_tag(image.project_image.url(:thumb))
+	/ - for image in p.images
+	/ 	=image_tag(image.project_image.url(:thumb))
