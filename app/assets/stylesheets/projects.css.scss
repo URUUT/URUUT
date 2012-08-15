@@ -7,3 +7,26 @@
 
 #new_project input[type=submit] {
 	display:none; }
+
+.project-details {
+	margin:25px 0;
+	li {
+		display:inline-block;
+		position:relative;
+		top:0;
+		text-align:center;
+		margin:0 25px 0 0;
+		vertical-align:top;
+		p {
+			font-weight:bold;
+			font-size:16px;
+			position:relative;
+			top:0; }
+		div {
+			height:20px;
+			width:250px; } } }
+
+#project_tags_tag {}
+
+form.edit_project input[type=submit] {
+	display:none; }

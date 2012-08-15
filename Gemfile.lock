@@ -44,6 +44,8 @@ GEM
       nokogiri (>= 1.4.4)
       uuidtools (~> 2.1)
     bcrypt-ruby (3.0.1)
+    bootstrap-wysihtml5-rails (0.3.0)
+      railties (>= 3.0)
     builder (3.0.0)
     capistrano (2.12.0)
       highline
@@ -198,6 +200,7 @@ PLATFORMS
 
 DEPENDENCIES
   aws-sdk
+  bootstrap-wysihtml5-rails
   capistrano
   coffee-rails (~> 3.2.1)
   daemons

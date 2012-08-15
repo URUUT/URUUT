@@ -1,7 +1,28 @@
-- @project.each do |p|
-	%div{:style => "width:200px"}
-	%p= p.title
+.span12
+	.span6.alpha{:style => "float:left;"}
 
-	
-	/ - for image in p.images
-	/ 	=image_tag(image.project_image.url(:thumb))
+		 
+		%iframe{:src => "#{vidUrl(@project.video)}", :style => "width:490px; height:340px;", :frameborder => 0}
+	.span6{:style => "float:left;width:570px;word-wrap:break-word;"}
+		%h2{:style => "word-wrap:break-word;"}= @project.title
+		= @project.description.html_safe
+		%ul.project-details
+			%li
+				%p Percent Funded
+				#progressbar
+			%li
+				%p Funding Goal
+				= number_to_currency(@project.goal, :precision => 0)
+			%li
+				%p Days to go
+				= time_left(@project.duration).to_i
+				/ = Date.parse(@project.duration)
+
+		%span.btn Fund Now
+
+:javascript
+	$(function(){
+		$( "#progressbar" ).progressbar({
+			value: 59
+		});
+	});
