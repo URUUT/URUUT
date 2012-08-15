@@ -7,7 +7,7 @@
     %title= content_for?(:title) ? yield(:title) : "Myapp"
     %meta{:content => "", :name => "description"}
     %meta{:content => "", :name => "author"}
-    = stylesheet_link_tag    "application", :media => "all"
+    = stylesheet_link_tag    "application", "trontastic/jquery-ui-1.8.22.custom.css", :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
     = yield(:head)
