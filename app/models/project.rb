@@ -3,6 +3,7 @@ class Project < ActiveRecord::Base
   attr_writer :current_step
 
   belongs_to :user
+  has_many :donations
 
   has_attached_file :image,
        :styles => {

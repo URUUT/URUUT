@@ -3,5 +3,17 @@ module ApplicationHelper
 	def current_project
 		session[:current_project]
 	end
+
+	def percent_funded(id)
+		project = Project.find(id)
+		donation = Donation.where("project_id = ?", id)
+		total_funded = 0
+		donation.each do |d|
+			total_funded = total_funded + d.amount
+		end
+		percentage = total_funded/project.goal
+		return percentage.round(2) * 100
+		# return total_funded
+	end
 	
 end
