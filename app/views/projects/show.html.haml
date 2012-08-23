@@ -2,7 +2,7 @@
 	.span6.alpha{:style => "float:left;"}
 
 		 
-		/ %iframe{:src => "#{vidUrl(@project.video)}", :style => "width:490px; height:340px;", :frameborder => 0}
+		%iframe{:src => "#{vidUrl(@project.video)}", :style => "width:490px; height:340px;", :frameborder => 0}
 	.span6{:style => "float:left;width:570px;word-wrap:break-word;"}
 		%h2{:style => "word-wrap:break-word;"}= @project.title
 		= @project.description.html_safe

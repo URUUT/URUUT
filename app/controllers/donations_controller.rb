@@ -8,7 +8,7 @@ class DonationsController < ApplicationController
 		@donation = Donation.new(params[:donation])
 		@token = @donation.token
 	    if @donation.save
-	      redirect_to root_path, :notice => "Thank you for subscribing!"
+	      redirect_to project_url(@donation.project_id), :notice => "Thank you for contributing!"
 	    else
 	      render :new
 	    end
