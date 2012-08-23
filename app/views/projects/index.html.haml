@@ -1,6 +1,6 @@
 - @projects.each do |p|
 	%div.project{:style => "width:230px;height:350px;padding:10px;float:left;border:1px solid #efefef;margin:0 20px 20px 0;overflow:hidden;"}
-		/ = image_tag("#{p.image.url(:small)}", :style => "max-width:230px;")
+		= image_tag("#{p.image.url(:small)}", :style => "max-width:230px;")
 		 
 		%h3{:style => "width:230px;word-wrap:break-word;"}
 			= link_to p.title, project_path(p.id)
@@ -12,7 +12,7 @@
 		%p= number_to_currency(p.goal, :precision => 0)
 		%h4 Days Left
 		%p #{time_left(p.duration).to_i} Days
-		= percent_funded(p.id)
+		/ = percent_funded(p.id)
 		= link_to "Edit Project", edit_project_url(p.id)
 		:javascript
 			$('.progressbar#{p.id}').progressbar({
