@@ -18,7 +18,9 @@
 				= time_left(@project.duration).to_i
 				/ = Date.parse(@project.duration)
 
-		%span.btn Fund Now
+		= link_to "Fund Now", new_donation_path, :class => "btn"
+		%span 
+			= project_title(session[:current_project])
 
 :javascript
 	$(function(){
