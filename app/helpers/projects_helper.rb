@@ -16,4 +16,13 @@ module ProjectsHelper
 		newUrl = scheme + '://www.youtube.com/' + addition + path
 		return newUrl
 	end
+
+	def project_title(id)
+		project = Project.find(id)
+		return project.title
+	end
+
+	def current_project
+		session[:current_project]
+	end
 end

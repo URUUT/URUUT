@@ -29,6 +29,7 @@ class ProjectsController < ApplicationController
 
 	def show
 		@project = Project.find(params[:id])
+		session[:current_project] = @project.id
 	end
 
 	def update  
