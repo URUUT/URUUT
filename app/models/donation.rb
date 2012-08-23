@@ -1,6 +1,8 @@
 class Donation < ActiveRecord::Base
   attr_accessible :amount, :project_id, :token, :user_id, :email
 
+  belongs_to :project
+
   def save_with_payment(stripe_token)
    
     Stripe.api_key = "sk_0EJjKro10y6bBBYfyZnCRgM2w8HOB"
