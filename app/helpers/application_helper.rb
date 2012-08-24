@@ -15,5 +15,10 @@ module ApplicationHelper
 		return percentage.round(2) * 100
 		# return total_funded
 	end
+
+	def get_user(id)
+		user = User.find_by_id(id)
+		return user.name
+	end
 	
 end
