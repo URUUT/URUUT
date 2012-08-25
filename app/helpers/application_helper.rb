@@ -7,12 +7,15 @@ module ApplicationHelper
 	def percent_funded(id)
 		project = Project.find(id)
 		donation = Donation.where("project_id = ?", id)
-		total_funded = 0
+		total_funded = 0.0
 		donation.each do |d|
-			total_funded = total_funded + d.amount
+			total_funded = total_funded + d.amount.to_f
 		end
 		percentage = total_funded/project.goal
+		
 		return percentage.round(2) * 100
+		# return total_funded
+		# return percentage
 		# return total_funded
 	end
 
