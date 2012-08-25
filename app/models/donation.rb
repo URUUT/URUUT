@@ -1,12 +1,13 @@
 class Donation < ActiveRecord::Base
   attr_accessible :amount, :project_id, :token, :user_id, :email
+  attr_accessor :token
 
   belongs_to :project
 
-  def save_with_payment(stripe_token)
-   
+  def save_with_payment
+    current_user = :current_user
     Stripe.api_key = "sk_0EJjKro10y6bBBYfyZnCRgM2w8HOB"
-      customer = Stripe::Customer.create(description: current_user.email, email: current_user.email, card: stripe_token)
+      customer = Stripe::Customer.create(description: email, email: email, card: token)
       self.token = customer.id
       save!
   
