@@ -7,7 +7,8 @@
 
 		%p by #{current_user.name}
 
-		%div{:style => "height:20px;", :class => "progressbar#{p.id}"}
+		%div{:style => "height:20px;position:relative;", :class => "progressbar#{p.id}"} 
+			%span{:style => "position:absolute;dislay:block;text-align:center;width:100%"} #{number_with_delimiter(percent_funded(p.id).round(0), :delimiter => ',')}%
 		%h4 Goal
 		%p= number_to_currency(p.goal, :precision => 0)
 		%h4 Days Left
