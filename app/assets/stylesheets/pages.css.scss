@@ -8,31 +8,28 @@ ul.nav {
 		position:relative;
 		img {
 			vertical-align:0px;	}
-		div {
+		div.dropdown {
 			display:none;
 			position:absolute;
 			width:300px;
-			ul:first-child {
-				background:#2C2C2C;
-				left:0;
-				position:absolute;
-				top:0;
-				width:150px;
-				z-index:100;
-				li {
-					list-style-type:none;
-					padding:0 10px;
-					a{
-						color:#fff;	}}}
-			ul:nth-child(2) {
-				background:#2C2C2C;
-				left:150px;
-				position:absolute;
-				top:0;
-				width:150px;
-				z-index:100;
-				li {
-					list-style-type:none;
-					padding:0 10px;
-					a{
-						color:#fff;	}}}}}}
+			div{
+				background:#2c2c2c;
+				padding:20px;
+				h5 {
+					border-bottom:1px solid #ccc;}
+				&:first-child {
+					left:0;
+					position:absolute;
+					top:0;
+					width:150px;}
+				&:nth-child(2) {
+					left:150px;
+					position:absolute;
+					top:0;
+					width:150px; }
+				ul {
+					margin-left:0;
+					padding-left:0;
+					li {
+						line-height:180%;
+						list-style-type:none;}}}}}}
