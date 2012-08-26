@@ -17,11 +17,12 @@
 				%p Days to go
 				= time_left(@project.duration).to_i
 				/ = Date.parse(@project.duration)
-
-		= link_to "Fund Now", new_donation_path, :class => "btn"
-		/ %span 
-		/ 	= project_title(session[:current_project])
-		/ 	= percent_funded
+		- if Donation.already_donated(@project.id, current_user.id).nil?
+			= link_to "Fund Now", new_donation_path, :class => "btn"
+		- else
+			.well{:style => "width:200px;text-align:center"}
+				%h3 You've donated #{number_to_currency(Donation.already_donated(@project.id, current_user.id), :precision => 0)}
+				= link_to "Edit Your Donation", edit_donation_path(Donation.edit_donation(@project.id, current_user.id))
 
 :javascript
 	$(function(){

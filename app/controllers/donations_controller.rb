@@ -15,4 +15,17 @@ class DonationsController < ApplicationController
 	    end
 	end
 
+	def edit
+		@donation = Donation.find(params[:id])
+		@donation.save!
+	end
+
+	def update  
+		@donation = Donation.find(params[:id])  
+		if @donation.update_attributes(params[:donation])  
+			flash[:notice] = "Successfully updated donation."  
+		end  
+		redirect_to project_path(@donation.project_id)
+	end 
+
 end
