@@ -8,6 +8,7 @@ development:
   database: db_crowdfund_dev
   username: root
   password: Porous2010
+  host: 127.0.0.1
   pool: 5
   timeout: 5000
 

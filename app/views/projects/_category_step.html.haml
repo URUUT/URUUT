@@ -2,8 +2,7 @@
 %div
 	= f.label :category
 	%br
-	= f.text_field :category
-%div
+	= f.select :category, options_for_select([["Select One", ""], "Technology", "Infrastructure", "Parks", "Something1", "Something2"])
 	= f.label :tags 
 	%br
 	= f.text_field :tags

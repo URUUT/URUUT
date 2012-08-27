@@ -23,5 +23,10 @@ module ApplicationHelper
 		user = User.find_by_id(id)
 		return user.name
 	end
+
+	def get_gravatar(email)
+		digest = Digest::MD5.hexdigest(email)
+		return "http://www.gravatar.com/avatar/" + digest + ".jpg?s=32"
+	end
 	
 end

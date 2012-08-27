@@ -1,6 +1,6 @@
 - @projects.each do |p|
 	%div.project{:style => "width:230px;height:350px;padding:10px;float:left;border:1px solid #efefef;margin:0 20px 20px 0;overflow:hidden;"}
-		= image_tag("#{p.image.url(:small)}", :style => "max-width:230px;")
+		/ = image_tag("#{p.image.url(:thumb)}", :style => "width:230px !important;height:180px !important;")
 		 
 		%h3{:style => "width:230px;word-wrap:break-word;"}
 			= link_to p.title, project_path(p.id)
