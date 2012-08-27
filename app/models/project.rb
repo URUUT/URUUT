@@ -7,8 +7,8 @@ class Project < ActiveRecord::Base
 
   has_attached_file :image,
        :styles => {
-       :thumb=> "100x100#",
-       :small  => "230x230>" },
+       :thumb=> "230x180#",
+       :small  => "230x180#" },
      :storage => :s3,
      :s3_credentials => "#{Rails.root}/config/s3.yml"
 

@@ -1,8 +1,9 @@
-= link_to "Home", root_path, :class => 'brand'
-%ul.nav
+= link_to "Venture Bridge", root_path, :class => 'brand', :style => "line-height:32px;"
+%ul.nav{:style => "float:right"}
   - if user_signed_in?
     %li
       %a
+        = image_tag(get_gravatar(current_user.email), :style => "vertical-align:middle")
         = current_user.name
         = image_tag('down-arrow.png')
       %div.dropdown
