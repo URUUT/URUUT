@@ -6,7 +6,7 @@ new_subscription =
   setupForm: ->
     $('input[type=submit].btn').attr('disabled', true)
     if $('#card_number').length
-      subscription.processCard()
+      new_subscription.processCard()
       false
     else
       $('input[type=submit].btn').attr('disabled', false)
@@ -19,7 +19,7 @@ new_subscription =
       expMonth: $('#card_month').val()
       expYear: $('#card_year').val()
 
-    Stripe.createToken(card, subscription.handleStripeResponse)
+    Stripe.createToken(card, new_subscription.handleStripeResponse)
 
   handleStripeResponse: (status, response) ->
     if status == 200
@@ -36,7 +36,7 @@ edit_subscription =
   setupForm: ->
     $('input[type=submit].btn').attr('disabled', true)
     if $('#card_number').length
-      subscription.processCard()
+      edit_subscription.processCard()
       false
     else
       $('input[type=submit].btn').attr('disabled', false)
@@ -49,7 +49,7 @@ edit_subscription =
       expMonth: $('#card_month').val()
       expYear: $('#card_year').val()
 
-    Stripe.createToken(card, subscription.handleStripeResponse)
+    Stripe.createToken(card, edit_subscription.handleStripeResponse)
 
   handleStripeResponse: (status, response) ->
     if status == 200
