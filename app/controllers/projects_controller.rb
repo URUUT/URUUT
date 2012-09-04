@@ -6,6 +6,7 @@ class ProjectsController < ApplicationController
 
 	def new
 		@project = Project.new
+		5.times { @project.objectives.build }
 		# @project.images.build
 		# @project.videos.build
 		respond_to do |format|
@@ -24,6 +25,7 @@ class ProjectsController < ApplicationController
 
 	def edit
 		@project = Project.find(params[:id])
+		5.times { @project.objectives.build }
 	end
 
 	def show

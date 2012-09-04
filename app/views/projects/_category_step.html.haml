@@ -6,3 +6,9 @@
 	= f.label :tags 
 	%br
 	= f.text_field :tags
+
+	= f.fields_for :objectives do |object|
+		%div
+			= object.label :content, "Objective"
+			= object.text_field :content
+     
