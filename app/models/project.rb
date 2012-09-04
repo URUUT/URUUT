@@ -1,9 +1,12 @@
 class Project < ActiveRecord::Base
-  attr_accessible :category, :description, :duration, :goal, :location, :title, :image, :video, :tags
+  attr_accessible :category, :description, :duration, :goal, :location, :title, :image, :video, :tags, :objectives_attributes
   attr_writer :current_step
 
   belongs_to :user
-  has_many :donations
+  has_many :donations, :dependent => :destroy
+  has_many :objectives, :dependent => :destroy
+
+  accepts_nested_attributes_for :objectives, :allow_destroy => true
 
   has_attached_file :image,
        :styles => {
