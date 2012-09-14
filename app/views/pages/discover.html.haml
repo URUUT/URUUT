@@ -1,0 +1,12 @@
+.span8
+	- if !@category.first.nil?
+		- @category.each do |c|
+			%div= c.id
+	- else
+		- @projects.each do |all|
+			%div= all.id
+
+.span3
+	%p= link_to "All", pages_discover_path
+	%p= link_to "Technology", {:controller => "pages", :action => "discover", :category => "technology" }
+	%p= link_to "Infrastructure", {:controller => "pages", :action => "discover", :category => "Infrastructure" }
