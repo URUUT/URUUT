@@ -3,12 +3,11 @@
 	= f.label :category
 	%br
 	= f.select :category, options_for_select([["Select One", ""], "Technology", "Infrastructure", "Parks", "Something1", "Something2"])
-	= f.label :tags 
+	= f.label :tags
 	%br
 	= f.text_field :tags
 
-	= f.fields_for :objectives do |object|
-		%div
-			= object.label :content, "Objective"
-			= object.text_field :content
-     
+	/ = f.fields_for :objectives do |object|
+	/ 	%div
+	/ 		= object.label :content, "Objective"
+	/ 		= object.text_field :content

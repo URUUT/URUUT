@@ -5,6 +5,10 @@ Crowdfund::Application.routes.draw do
 
   get "pages/index"
 
+  get "pages/discover"
+
+  get "pages/categories"
+
   get "projects/add_desc"
 
   devise_for :users
