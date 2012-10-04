@@ -4,8 +4,8 @@ development:
   secret_access_key: OmUlCRtm0CR+s/zyvD8QMrCoqOyfamtV/gNF3Z+y
 test:
   bucket: venturebridge-dev
-  access_key_id: ENV['S3_KEY']
-  secret_access_key: ENV['S3_SECRET']
+  access_key_id: AKIAIRG5XEIHBB42GFBQ
+  secret_access_key: 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
 production:
   bucket: venturebridge
   access_key_id: ENV['S3_KEY']

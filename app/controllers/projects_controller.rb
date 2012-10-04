@@ -6,9 +6,6 @@ class ProjectsController < ApplicationController
 
 	def new
 		@project = Project.new
-		5.times { @project.objectives.build }
-		# @project.images.build
-		# @project.videos.build
 		respond_to do |format|
 	      format.html # new.html.erb
 	      format.xml  { render :xml => @project }
@@ -25,11 +22,12 @@ class ProjectsController < ApplicationController
 
 	def edit
 		@project = Project.find(params[:id])
-		5.times { @project.objectives.build }
 	end
 
 	def show
 		@project = Project.find(params[:id])
+		tags = @project.tags
+		@tags = tags.split(',')
 		session[:current_project] = @project.id
 	end
 

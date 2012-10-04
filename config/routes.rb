@@ -9,6 +9,10 @@ Crowdfund::Application.routes.draw do
 
   get "pages/categories"
 
+  post "pages/contact"
+
+  get "pages/contact"
+
   get "projects/add_desc"
 
   devise_for :users

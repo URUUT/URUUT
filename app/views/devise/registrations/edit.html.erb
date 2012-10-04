@@ -15,8 +15,20 @@
   <div><%= f.label :password_confirmation %><br />
   <%= f.password_field :password_confirmation %></div>
 
-  <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-  <%= f.password_field :current_password %></div>
+  <h3>Location Details</h3>
+  <small>This will help in finding locations near you</small>
+
+  <div><%= f.label :city %><br />
+  <%= f.text_field :city %></div>
+
+  <div><%= f.label :state %><br />
+  <%= select_tag :state, options_for_select(us_states) %></div>
+
+  <div><%= f.label :zip %><br />
+  <%= f.text_field :zip %></div>
+
+  <div><%= f.label :neighborhood %><br />
+  <%= f.text_field :neighborhood %></div>
 
   <div><%= f.submit "Update" %></div>
 <% end %>

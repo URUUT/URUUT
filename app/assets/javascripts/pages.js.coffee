@@ -3,6 +3,11 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
+
+	userLocation = 'http://api.wipmania.com/jsonp?callback=?'
+	$.getJSON userLocation, (data)->
+		console.log(data)
+
 	$('ul.nav li').hover ->
 		$(this).children('div').css('display', 'block') 
 	,->

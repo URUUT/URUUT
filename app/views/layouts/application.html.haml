@@ -14,9 +14,31 @@
     = csrf_meta_tags
     = yield(:head)
   %body
-    %header.navbar.navbar-fixed-top
-      %nav.navbar-inner
-        .container
+
+    #myModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "display:none"}
+      %form{:action => "#{pages_contact_path}"}
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+          %h3#myModalLabel Contact Us
+        .modal-body
+          %div
+            %label Name
+            %input{:type => 'text', :name => 'name'}
+          %div
+            %label Email
+            %input{:type => 'text', :name => 'email'}
+          %div
+            %label Message
+            %textarea{:name => 'message'}
+        .modal-footer
+          %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
+          %button.btn.btn-primary.send Send Message
+
+    %header.navbar
+      .container
+        %h1.logo
+          = link_to "Home", root_path
+        %nav.navbar-inner
           = render 'layouts/navigation'
     #main{:role => "main"}
       .container
@@ -26,4 +48,25 @@
               = render 'layouts/messages'
               = yield
           %footer
-          
+            %a{:href => "", "data-toggle" => "modal", "data-target" => "#myModal"}Launch modal
+:javascript
+  var uvOptions = {};
+  (function() {
+    var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+    uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/EZcN5zkxSoms2jGf8ncVmw.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+  })();
+
+  $(function(){
+    $('#myModal form').submit(function() {  
+      var valuesToSubmit = $(this).serialize();
+      $.ajax({
+          url: $(this).attr('action'), //sumbits it to the given url of the form
+          data: valuesToSubmit,
+          dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
+      }).success(function(json){
+          console.log(json);
+      });
+    return false; // prevents normal behaviour
+  });
+  })

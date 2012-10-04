@@ -1,19 +1,40 @@
-<img src="http://placehold.it/1170x350" style="margin:25px 0;">
+.featured.clearfix{:style => "margin-bottom:65px"}
+	%span.label{:style => 'padding:10px;display:inline-block;'} Featured project
+	%img{:src => "http://placehold.it/1170x350", :style => "margin-bottom:15px;"}
+	.details
+		= image_tag "map.jpg", :style => "float:left"
+		.info{:style => "float:left;margin-left:10px;"}
+			%h2 Oak Valley Trail Improvement
+			%p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie convallis mollis. Aliquam quis purus...
+			%h4 Funded $45,000 of $55k
+			= image_tag "progress.jpg"
+			%h4{:style => 'display:inline-block;margin-left:40px;margin-right:20px;'} 15 Days Left
+			%span.label.label-success{:style => "padding:7px;font-size:12px;"} Fund Now!
+
+%h2{:style => "border-bottom:1px solid #ccc;margin-bottom:30px;"} Recent Projects
 
 - @projects.each do |p|
-	%div.project{:style => "width:230px;height:350px;padding:10px;float:left;border:1px solid #efefef;margin:0 20px 20px 0;overflow:hidden;"}
-		= image_tag("#{p.image.url(:small)}", :style => "width:230px !important;height:180px !important;")
+	%div.project{:style => "width:230px;height:350px;padding:10px;float:left;margin:0 20px 20px 0;overflow:hidden;"}
+		.location
+			%span{:style => "float:left;"}= p.location
+			= image_tag "marker.jpg", :style => "float:right;"
+		= image_tag("#{p.image.url(:original)}", :style => "width:230px !important;height:125px !important;margin-bottom:15px;")
 		 
 		%h3{:style => "width:230px;word-wrap:break-word;"}
 			= link_to p.title, project_path(p.id)
+		%p= truncate(p.description, :length => 100)
+		/ %p by #{get_user(p.user_id)}
+		%h5 Funded:
+		%p{:style => "margin-bottom:5px;"}
+			= number_to_currency(p.goal, :precision => 0)
+			of
+			= number_to_currency(p.goal, :precision => 0)
 
-		%p by #{get_user(p.user_id)}
-
-		%div{:style => "height:20px;", :class => "progressbar#{p.id}"}
-		%h4 Goal
-		%p= number_to_currency(p.goal, :precision => 0)
-		%h4 Days Left
-		%p #{time_left(p.duration).to_i} Days
+		%div{:style => "height:20px;margin-bottom:5px;", :class => "progressbar#{p.id}"}
+		/ %h4 Goal
+		/ %p= number_to_currency(p.goal, :precision => 0)
+		%h5{:style => "display:inline-block"} Time Left
+		%p{:style => "display:inline-block"} #{time_left(p.duration).to_i} Days
 		/ = percent_funded(p.id)
 		- if current_user
 			- if p.user_id == current_user.id
