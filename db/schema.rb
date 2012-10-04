@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120913134904) do
+ActiveRecord::Schema.define(:version => 20121004063410) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(:version => 20120913134904) do
     t.string   "duration"
     t.integer  "goal"
     t.string   "category"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.string   "video"
     t.string   "tags"
     t.string   "image_file_name"
@@ -62,6 +62,12 @@ ActiveRecord::Schema.define(:version => 20120913134904) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.integer  "user_id"
+    t.boolean  "deleted",            :default => false
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.integer  "zip"
+    t.string   "neighborhood"
   end
 
   create_table "users", :force => true do |t|
@@ -91,6 +97,10 @@ ActiveRecord::Schema.define(:version => 20120913134904) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.boolean  "municipality",               :default => false
+    t.string   "city"
+    t.string   "state"
+    t.integer  "zip"
+    t.string   "neighborhood"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

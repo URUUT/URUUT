@@ -1,11 +1,36 @@
 // Place all the styles related to the pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+header {
+	.container {
+		width:1170px !important;}
+	h1.logo {
+		background: transparent url(image-path('logo.png'))top left no-repeat;
+		height:90px;
+		left:0px;
+		margin-bottom:65px;
+		position:relative;
+		top:25px;
+		width:310px; 
+		a {
+			display:inline-block;
+			height:90px;
+			text-indent:-9999px;
+			width:310px;}}} 
+
+#myModal.modal {
+	display:none; }
 
 ul.nav {
+	height:45px;
 	li {
-		line-height:40px;
+		height:45px;
+		line-height:45px;
 		position:relative;
+		a {
+			color:#fff !important;
+			line-height:25px !important;
+			text-shadow:0 0 0 !important;}
 		img {
 			vertical-align:0px;	}
 		div.dropdown {
@@ -32,5 +57,11 @@ ul.nav {
 					margin-left:0;
 					padding-left:0;
 					li {
-						line-height:180%;
+						line-height:45px;
 						list-style-type:none;}}}}}}
+
+nav.navbar-inner {
+	background:#b0b0b0;
+	border-radius:0 !important;
+	box-shadow:0 0 0 0 !important;
+	height:45px; }

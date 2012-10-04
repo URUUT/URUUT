@@ -1,7 +1,6 @@
-= link_to "Venture Bridge", root_path, :class => 'brand', :style => "line-height:32px;"
-%ul.nav{:style => "float:left;margin-left:35px;"}
+%ul.nav{:style => "float:left;"}
   %li
-    = link_to "Discover", pages_discover_path, :style => "line-height:32px"
+    = link_to "Projects", pages_discover_path
 %ul.nav{:style => "float:right"}
   - if user_signed_in?
     %li
@@ -27,11 +26,11 @@
             %li
               = link_to('Show Projects', projects_path)
   - else
-    %li{:style => "top:5px"}
+    %li
       = link_to('Login', new_user_session_path)
   - if user_signed_in?
     / %li
     /   = link_to('Edit account', edit_user_registration_path)
   - else
-    %li{:style => "top:5px;"}
+    %li
       = link_to('Sign up', new_user_registration_path)
