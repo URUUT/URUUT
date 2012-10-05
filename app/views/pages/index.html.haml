@@ -26,7 +26,7 @@
 		/ %p by #{get_user(p.user_id)}
 		%h5 Funded:
 		%p{:style => "margin-bottom:5px;"}
-			= number_to_currency(p.goal, :precision => 0)
+			= number_to_currency(amount_funded(p.id), :precision => 0)
 			of
 			= number_to_currency(p.goal, :precision => 0)
 

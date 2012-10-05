@@ -7,9 +7,25 @@
 	%br
 	= f.text_field :video
 %div
-	= f.label :location
+	= f.label :address
 	%br
-	= f.text_field :location
+	= f.text_field :address
+%div
+	= f.label :city 
+	%br 
+	= f.text_field :city 
+%div
+	= f.label :state 
+	%br
+	= f.select :state, options_for_select(us_states) 
+%div
+	= f.label :zip 
+	%br
+	= f.text_field :zip 
+%div
+	= f.label :neighborhood 
+	%br
+	= f.text_field :neighborhood
 %div
 	= f.label :duration
 	%br
