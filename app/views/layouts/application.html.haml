@@ -48,7 +48,10 @@
               = render 'layouts/messages'
               = yield
           %footer
-            %a{:href => "", "data-toggle" => "modal", "data-target" => "#myModal"}Launch modal
+            %nav
+              %a{:href => "", "data-toggle" => "modal", "data-target" => "#myModal"}Contact Us
+              %a{:href => "http://hashfire.uservoice.com/knowledgebase"}Help
+
 :javascript
   var uvOptions = {};
   (function() {

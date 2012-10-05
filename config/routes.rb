@@ -15,7 +15,7 @@ Crowdfund::Application.routes.draw do
 
   get "projects/add_desc"
 
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => "registrations" }
 
   resources :s3_uploads
 

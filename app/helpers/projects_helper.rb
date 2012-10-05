@@ -25,4 +25,17 @@ module ProjectsHelper
 	def current_project
 		session[:current_project]
 	end
+
+	def project_categories
+		[
+			'parks and recreation',
+			'neighborhood',
+			'cleanup/beautification',
+			'roads and sidewalks',
+			'health & well being',
+			'child & adolescent',
+			'pets',
+			'miscellaneous'
+		]
+	end
 end
