@@ -28,5 +28,58 @@
 
 #project_tags_tag {}
 
+form.edit_project, form.new_project {
+	float:right;
+	width:570px;
+}
+
+form.edit_project fieldset legend, form.new_project fieldset legend {
+	display:none;
+}
+
+form.edit_project fieldset label, form.new_project fieldset label {
+	font-weight:600;
+}
+
 form.edit_project input[type=submit] {
 	display:none; }
+	
+form {
+	input[type=text], input[type=email], input[type=password]  {
+		display:block;
+		margin-bottom:15px;}
+	ul.pager {
+		display:inline-block;}}
+		
+#steps {
+	float:left;
+	li {
+		color:#dfdfdf;
+		display:block;
+		font-size:22px;
+		font-weight:200;
+		list-style-type:none;
+		margin-bottom:30px;
+		margin-right:20px;
+		&.current {
+			color:#222;}
+		span {
+			display:inline-block;
+			font-size:22px;
+			font-weight:200;
+			&:before {
+				content:':';}}}}
+				
+p[id*='commands'] {
+	margin-top:20px;
+	text-align:right;
+}
+
+p[id*='commands'] .btn {
+	margin-left:20px;
+}
+
+.redactor_box {
+	min-height:200px;
+}
+			

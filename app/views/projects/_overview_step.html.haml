@@ -1,11 +1,8 @@
-%h2 Project Overview
-%div
-	= f.label :title 
-	%br
-	= f.text_field :title, :placeholder => "Project Title"
-%div
-	= f.label :description 
-	%br
-	= f.text_area :description, :style => "width:537px;height:300px;border:1px solid #efefef;"
-%div
-	%span.btn.next Next
+%fieldset
+	%legend Project Overview
+	%div
+		= f.label :title 
+		= f.text_field :title, :placeholder => "Project Title"
+	%div
+		= f.label :description 
+		= f.text_area :description

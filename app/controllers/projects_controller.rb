@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
 	before_filter :authenticate_user!, :only => [:index, :new, :create, :edit, :update]
+  
 	def index
 		@projects = Project.find_all_by_user_id(current_user.id)
 	end
@@ -35,7 +36,7 @@ class ProjectsController < ApplicationController
 		@project = Project.find(params[:id])  
 		if @project.update_attributes(params[:project])  
 			flash[:notice] = "Successfully updated project."  
+      redirect_to @project
 		end  
-		respond_with(@project)  
 	end  
 end

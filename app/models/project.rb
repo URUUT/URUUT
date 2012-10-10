@@ -1,5 +1,6 @@
 class Project < ActiveRecord::Base
-  attr_accessible :category, :description, :duration, :goal, :location, :title, :image, :video, :tags
+  attr_accessible :category, :description, :duration, :goal, :address, 
+    :city, :state, :zip, :neighborhood, :title, :image, :video, :tags, :live
 
   belongs_to :user
   has_many :donations, :dependent => :destroy
@@ -8,10 +9,10 @@ class Project < ActiveRecord::Base
 
   has_attached_file :image,
        :styles => {
-       :thumb=> "230x180#",
-       :small  => "230x180#" },
+         :thumb=> "100x100#" },
      :storage => :s3,
-     :s3_credentials => "#{Rails.root}/config/s3.yml"
+     :s3_credentials => "#{Rails.root}/config/s3.yml",
+     :path => "/:id/:style/:filename"
 
   process_in_background :image
 

@@ -14,15 +14,19 @@ $ ->
 		$(this).children('div').css('display', 'none')
 
 	$('#duration').datepicker({altField: '#project_duration', altFormat: 'yy-mm-dd'})
-	$('#project_description').wysihtml5({
-		"events": 
-			"paste": -> 
-				console.log("Pasted");
-				input = $('.wysihtml5-sandbox').contents().find('body').find('p');
-				console.log(input);
-				$(input).each ->
-					$(this).css({
-						display: 'block',
-						margin: '20px 0' });
-					$(this).after('<br /><br />');
-	});
+	# $('#project_description').wysihtml5({
+	# 		"events": 
+	# 			"paste": -> 
+	# 				console.log("Pasted");
+	# 				input = $('.wysihtml5-sandbox').contents().find('body').find('p');
+	# 				console.log(input);
+	# 				$(input).each ->
+	# 					$(this).css({
+	# 						display: 'block',
+	# 						margin: '20px 0' });
+	# 					$(this).after('<br /><br />');
+	# 	});
+	
+	$('#project_description').redactor({
+			imageUpload: '/public/images/'
+		});

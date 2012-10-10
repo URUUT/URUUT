@@ -7,7 +7,8 @@
 		 
 		%h3{:style => "width:230px;word-wrap:break-word;"}
 			= link_to p.title, project_path(p.id)
-		%p= truncate(p.description, :length => 100)
+		%p
+			= p.description
 		/ %p by #{get_user(p.user_id)}
 		%h5 Funded:
 		%p{:style => "margin-bottom:5px;"}
