@@ -8,7 +8,7 @@
     %meta{:content => "", :name => "description"}
     %meta{:content => "", :name => "author"}
     = stylesheet_link_tag    "application", "trontastic/jquery-ui-1.8.22.custom.css", :media => "all"
-    = javascript_include_tag "application", "https://js.stripe.com/v1/"
+    = javascript_include_tag "application", "https://js.stripe.com/v1/", "formToWizard.js"
     = javascript_tag do
       Stripe.setPublishableKey('pk_0EJjrLzbYh33TkSMmfGjt4upjqVOW');
     = csrf_meta_tags
@@ -47,10 +47,15 @@
             .span12
               = render 'layouts/messages'
               = yield
+          %hr
           %footer
-            %nav
-              %a{:href => "", "data-toggle" => "modal", "data-target" => "#myModal"}Contact Us
-              %a{:href => "http://hashfire.uservoice.com/knowledgebase"}Help
+            .row
+              %nav.span4
+                %a{:href => "", "data-toggle" => "modal", "data-target" => "#myModal"}Contact Us
+                %a{:href => "http://hashfire.uservoice.com/knowledgebase"}Help
+              %p.span4.offset4{:style => "text-align:right;"}
+                &copy; 2012 URUUT.com
+								
 
 :javascript
   var uvOptions = {};
@@ -61,6 +66,9 @@
   })();
 
   $(function(){
+    $('#new_project').formToWizard({ submitButton: 'project-submit' });
+    $('.edit_project').formToWizard({ submitButton: 'project-submit' });
+    $('form fieldset p a').addClass('btn');
     $('#myModal form').submit(function() {  
       var valuesToSubmit = $(this).serialize();
       $.ajax({

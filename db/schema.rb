@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121005021425) do
+ActiveRecord::Schema.define(:version => 20121010225828) do
+
+  create_table "categories", :force => true do |t|
+    t.string   "name"
+    t.integer  "project_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -51,8 +58,7 @@ ActiveRecord::Schema.define(:version => 20121005021425) do
     t.text     "description"
     t.string   "location"
     t.string   "duration"
-    t.integer  "goal"
-    t.string   "category"
+    t.string   "goal"
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
     t.string   "video"
@@ -68,7 +74,8 @@ ActiveRecord::Schema.define(:version => 20121005021425) do
     t.string   "state"
     t.integer  "zip"
     t.string   "neighborhood"
-    t.boolean  "live"
+    t.string   "category"
+    t.boolean  "live",               :default => false
   end
 
   create_table "users", :force => true do |t|

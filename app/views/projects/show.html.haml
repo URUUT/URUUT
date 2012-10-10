@@ -1,42 +1,43 @@
 .span12
-	.span6.alpha{:style => "float:left;"}
+	.row
+		.span6.alpha{:style => "float:left;"}
 
 		 
-		%iframe{:src => "#{vidUrl(@project.video)}", :style => "width:490px; height:340px;", :frameborder => 0}
-	.span6{:style => "float:left;width:570px;word-wrap:break-word;"}
-		- @tags.each do |t|
-			%span.label.label-success= t
+			%iframe{:src => "#{vidUrl(@project.video)}", :style => "width:490px; height:340px;", :frameborder => 0}
+		.span6{:style => "float:left;width:570px;word-wrap:break-word;"}
+			- @tags.each do |t|
+				%span.label.label-success= t
 
-		%h2{:style => "word-wrap:break-word;"}= @project.title
-		= @project.description.html_safe
+			%h2{:style => "word-wrap:break-word;"}= @project.title
+			= @project.description.html_safe
 
-		%ul.project-details
-			%li
-				%p Percent Funded
-				#progressbar
+			%ul.project-details
+				%li
+					%p Percent Funded
+					#progressbar
 
-			%li
-				%p Funding Goal
-				= number_to_currency(@project.goal, :precision => 0)
+				%li
+					%p Funding Goal
+					= number_to_currency(@project.goal, :precision => 0)
 
-			%li
-				%p Days to go
-				= time_left(@project.duration).to_i
+				%li
+					%p Days to go
+					= time_left(@project.duration).to_i
 
-		- if current_user
-			- if Donation.already_donated(@project.id, current_user.id).nil?
+			- if current_user
+				- if Donation.already_donated(@project.id, current_user.id).nil?
+					= link_to "Fund Now", new_donation_path, :class => "btn"
+				- else
+					.well{:style => "width:200px;text-align:center"}
+						%h3 You've donated #{number_to_currency(Donation.already_donated(@project.id, current_user.id), :precision => 0)}
+						= link_to "Edit Your Donation", edit_donation_path(Donation.edit_donation(@project.id, current_user.id))
+			- elsif !current_user
 				= link_to "Fund Now", new_donation_path, :class => "btn"
-			- else
-				.well{:style => "width:200px;text-align:center"}
-					%h3 You've donated #{number_to_currency(Donation.already_donated(@project.id, current_user.id), :precision => 0)}
-					= link_to "Edit Your Donation", edit_donation_path(Donation.edit_donation(@project.id, current_user.id))
-		- elsif !current_user
-			= link_to "Fund Now", new_donation_path, :class => "btn"
 
 		
-
-.span12
-	%h3{:style => "border-bottom:1px solid #ccc;margin-top:30px;"} Similar Projects
+.row
+	.span12
+		%h3{:style => "border-bottom:1px solid #ccc;margin-top:30px;"} Similar Projects
 
 :javascript
 	$(function(){

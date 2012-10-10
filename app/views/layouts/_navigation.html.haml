@@ -5,7 +5,7 @@
   - if user_signed_in?
     %li
       %a
-        = image_tag(get_gravatar(current_user.email), :style => "vertical-align:middle")
+        = image_tag(get_gravatar(current_user.email), :style => "vertical-align:middle", :class => "img-circle")
         = current_user.name
         = image_tag('down-arrow.png')
       %div.dropdown

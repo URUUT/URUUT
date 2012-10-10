@@ -1,29 +1,23 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.6'
+gem 'rails','3.2.8'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-# gem 'sqlite3'
-# gem 'pg'
-#   
+ 
 gem 'paperclip', '~>3.1.3'
 gem "paperclip-ffmpeg"
-gem 'delayed_paperclip', '2.4.5.2', :git => 'git://github.com/tommeier/delayed_paperclip', :branch => 'fix_312'
+gem 'delayed_paperclip'
 gem 'haml'
 gem "twitter-bootstrap-rails"
 gem 'devise'
 gem 'heroku'
-# gem 'carrierwave'
-# gem 'carrierwave_direct'
-# gem "fog"
-# gem "rmagick"
 gem 'aws-sdk'
 gem 'delayed_job_active_record'
 gem "daemons"
 gem "bootstrap-wysihtml5-rails"
 gem "stripe"
+gem "truncate_html"
 
 # Gems used only for assets and not required
 # in production environments by default.

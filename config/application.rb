@@ -60,6 +60,7 @@ module Crowdfund
     config.assets.version = '1.0'
     config.assets.initialize_on_precompile = false
     # config.assets.precompile += %w( active_admin.css.scss )
+    config.logger = Logger.new(STDOUT)
 
   end
 end

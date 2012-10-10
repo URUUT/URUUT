@@ -1,13 +1,11 @@
-%h2 Project Category
-%div
-	= f.label :category
-	%br
-	= f.select :category, options_for_select(project_categories)
-	= f.label :tags
-	%br
-	= f.text_field :tags
-
-	/ = f.fields_for :objectives do |object|
-	/ 	%div
-	/ 		= object.label :content, "Objective"
-	/ 		= object.text_field :content
+%fieldset
+	%legend Project Category
+	%div
+		= f.label :category
+		= f.select :category, options_for_select(project_categories)
+	%div
+		= f.label :tags
+		= f.text_field :tags
+	%div
+		= f.label :live, "Make This Project Active"
+		= f.check_box :live

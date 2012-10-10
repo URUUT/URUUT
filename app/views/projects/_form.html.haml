@@ -2,12 +2,10 @@
 
 	%title Create Your Project
 
-	#step-1
-		= render "overview_step", :f => f
-	#step-2
-		= render "details_step", :f => f
-	#step-3
-		= render "category_step", :f => f
+	= render "overview_step", :f => f
+	= render "details_step", :f => f
+	= render "category_step", :f => f
 
 	%div
-		= f.submit "Submit", :class => "btn"
+		= f.submit "Submit", :class => "btn", :id => "project-submit"
+	
