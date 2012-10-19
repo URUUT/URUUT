@@ -14,7 +14,7 @@
 		= f.text_field :city 
 	%div
 		= f.label :state 
-		= f.select :state, options_for_select(us_states) 
+		= f.select :state, options_for_select(us_states, @project.state) 
 	%div
 		= f.label :zip 
 		= f.text_field :zip 
@@ -23,7 +23,7 @@
 		= f.text_field :neighborhood
 	%div
 		= f.label :duration
-		= text_field_tag "duration"
+		= text_field_tag "duration"# , Time.parse(@project.duration).strftime("%m/%d/%y")
 		= f.hidden_field :duration
 	%div
 		= f.label :goal

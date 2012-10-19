@@ -7,7 +7,7 @@ $ ->
 	userLocation = 'http://api.wipmania.com/jsonp?callback=?'
 	$.getJSON userLocation, (data)->
 		console.log(data)
-
+		
 	$('ul.nav li').hover ->
 		$(this).children('div').css('display', 'block') 
 	,->

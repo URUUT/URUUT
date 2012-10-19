@@ -1,54 +1,62 @@
-.span8
-	- if !@category.first.nil?
-		- @category.each do |c|
-			%div.project{:style => "width:230px;height:350px;padding:10px;float:left;margin:0 20px 20px 0;overflow:hidden;"}
-				.location
-					%span{:style => "float:left;text-transform:capitalize;"}
-						= c.city + ", "
-						= c.state
-					= image_tag "marker.jpg", :style => "float:right;"
-				= image_tag("#{c.image.url(:original)}", :style => "width:230px !important;height:125px !important;margin-bottom:15px;")
+.row
+	.span8
+		- if !@category.first.nil?
+			- @category.each do |c|
+				- if c.live == true && c.deleted == false
+					%div.project{:style => "width:230px;height:350px;padding:10px;float:left;margin:0 20px 20px 0;overflow:hidden;"}
+						.location
+							%span{:style => "float:left;text-transform:capitalize;"}
+								= c.city + ", "
+								= c.state
+							= image_tag "marker.jpg", :style => "float:right;"
+						= image_tag("#{c.image.url(:original)}", :style => "width:230px !important;height:125px !important;margin-bottom:15px;")
 		 
-				%h3{:style => "width:230px;word-wrap:break-word;text-transform:capitalize;"}
-					= link_to c.title, project_path(c.id)
-				%p= truncate_html(clean_data(c.description), :length => 50)
+						%h3{:style => "width:230px;word-wrap:break-word;text-transform:capitalize;"}
+							= link_to c.title, project_path(c.id)
+						%p= truncate_html(clean_data(c.description), :length => 50)
 	
-				%h5 Funded:
-				%p{:style => "margin-bottom:5px;"}
-					= number_to_currency(amount_funded(c.id), :precision => 0)
-					of
-					= number_to_currency(c.goal, :precision => 0)
+						%h5 Funded:
+						%p{:style => "margin-bottom:5px;"}
+							= number_to_currency(amount_funded(c.id), :precision => 0)
+							of
+							= number_to_currency(c.goal, :precision => 0)
 
-				%div{:style => "height:20px;margin-bottom:5px;", :class => "progressbar#{c.id}"}
-				%h5{:style => "display:inline-block"} Time Left
-				%p{:style => "display:inline-block"} #{time_left(c.duration).to_i} Days
+						%div{:style => "height:20px;margin-bottom:5px;", :class => "progressbar#{c.id}"}
+						%h5{:style => "display:inline-block"} Time Left
+						%p{:style => "display:inline-block"} #{time_left(c.duration).to_i} Days
 		
-				- if current_user
-					- if c.user_id == current_user.id
-						= link_to "Edit Project", edit_project_url(c.id)
-						:javascript
-							$(function(){
-								$('.progressbar#{c.id}').progressbar({
-									value: #{percent_funded(c.id)}
-								});
-							});		      
+						- if current_user
+							- if c.user_id == current_user.id
+								= link_to "Edit Project", edit_project_url(c.id)
+								:javascript
+									$(function(){
+										$('.progressbar#{c.id}').progressbar({
+											value: #{percent_funded(c.id)}
+										});
+									});	
+				- else
+					%h2 Be the first to put down ruuts in this category
+					%h3 
+						plant your 
+						%a{:class => "idea"} seed
+				
 			
-	- else
-		%h2 Be the first to put down ruuts in this category
-		%h3 
-			plant your 
-			%a{:class => "idea"} seed
+		- else
+			%h2 Be the first to put down ruuts in this category
+			%h3 
+				plant your 
+				%a{:class => "idea"} seed
 
-.span3
-	/ %p= link_to "All", pages_discover_path
-	%p= link_to "Parks & Recreation", {:controller => "pages", :action => "discover", :category => "parks_recreation" }
-	%p= link_to "Neighborhood", {:controller => "pages", :action => "discover", :category => "neighborhood" }
-	%p= link_to "Cleanup/Beautification", {:controller => "pages", :action => "discover", :category => "cleanup_beautification" }
-	%p= link_to "Roads & Sidewalks", {:controller => "pages", :action => "discover", :category => "roads_sidewalks" }
-	%p= link_to "Health & Well Being", {:controller => "pages", :action => "discover", :category => "health_well_being" }
-	%p= link_to "Child & Adolescent", {:controller => "pages", :action => "discover", :category => "child_adolescent" }
-	%p= link_to "Pets", {:controller => "pages", :action => "discover", :category => "pets" }
-	%p= link_to "Miscellaneous", {:controller => "pages", :action => "discover", :category => "miscellaneous" }
+	.span3
+		/ %p= link_to "All", pages_discover_path
+		%p= link_to "Parks & Recreation", {:controller => "pages", :action => "discover", :category => "parks_recreation" }
+		%p= link_to "Neighborhood", {:controller => "pages", :action => "discover", :category => "neighborhood" }
+		%p= link_to "Cleanup/Beautification", {:controller => "pages", :action => "discover", :category => "cleanup_beautification" }
+		%p= link_to "Roads & Sidewalks", {:controller => "pages", :action => "discover", :category => "roads_sidewalks" }
+		%p= link_to "Health & Well Being", {:controller => "pages", :action => "discover", :category => "health_well_being" }
+		%p= link_to "Child & Adolescent", {:controller => "pages", :action => "discover", :category => "child_adolescent" }
+		%p= link_to "Pets", {:controller => "pages", :action => "discover", :category => "pets" }
+		%p= link_to "Miscellaneous", {:controller => "pages", :action => "discover", :category => "miscellaneous" }
 	
 :javascript
 	$(function(){
