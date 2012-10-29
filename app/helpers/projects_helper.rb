@@ -28,14 +28,20 @@ module ProjectsHelper
 
 	def project_categories
 		[
-			['parks and recreation','parks_recreation'],
+			['parks & recreation','parks & recreation'],
 			['neighborhood','neighborhood'],
-			['cleanup/beautification','cleanup_beautification'],
-			['roads and sidewalks','roads_sidewalks'],
-			['health & well being','health_well_being'],
-			['child & adolescent','child_adolescent'],
+			['cleanup/beautification','cleanup & beautification'],
+			['roads & sidewalks','roads & sidewalks'],
+			['health & well being','health & well being'],
+			['child & adolescent','child & adolescent'],
 			['pets','pets'],
 			['miscellaneous','miscellaneous']
 		]
 	end
+  
+  def project_duration(duration)
+    if !duration.nil?
+      Time.parse(duration).strftime("%m/%d/%y")
+    end
+  end
 end

@@ -7,56 +7,22 @@
     %title= content_for?(:title) ? yield(:title) : "Myapp"
     %meta{:content => "", :name => "description"}
     %meta{:content => "", :name => "author"}
-    = stylesheet_link_tag    "application", "trontastic/jquery-ui-1.8.22.custom.css", :media => "all"
-    = javascript_include_tag "application", "https://js.stripe.com/v1/", "formToWizard.js"
+    = stylesheet_link_tag    "application", "trontastic/jquery-ui-1.8.22.custom.css", "https://d3jyn100am7dxp.cloudfront.net/assets/widget_embed.cssgz?1350971636",  :media => "all"
+    = javascript_include_tag "application", "https://js.stripe.com/v1/", "formToWizard.js", "http://maps.googleapis.com/maps/api/js?sensor=false", "https://d3jyn100am7dxp.cloudfront.net/assets/widget_embed_libraries.jsgz?1350971636"
     = javascript_tag do
-      Stripe.setPublishableKey('pk_0EJjrLzbYh33TkSMmfGjt4upjqVOW');
-    %script{:type => "text/javascript", :src => "http://maps.googleapis.com/maps/api/js?sensor=false"}
-    %script
-      :plain
-				
-        function initialize() {
-          geocoder = new google.maps.Geocoder();
-          var mapOptions = {
-            center: new google.maps.LatLng(-34.397, 150.644),
-            zoom: 8,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-          };
-          var canvas = document.getElementById('map_canvas');
-          map = new google.maps.Map(canvas,mapOptions);
-        }
-				
-        $('div.project div.location img').click(function(){
-          console.log('hello');
-        });
-				
-        function codeAddress() {
-            geocoder.geocode( { 'address': address}, function(results, status) {
-              if (status == google.maps.GeocoderStatus.OK) {
-                map.setCenter(results[0].geometry.location);
-                var marker = new google.maps.Marker({
-                    map: map,
-                    position: results[0].geometry.location
-                });
-              } else {
-                alert("Geocode was not successful for the following reason: " + status);
-              }
-            });
-         }
-				 
-         $(function(){
-           $('div.project div.location img').click(function(){
-             address = $(this).siblings('span').html().trim();
-             console.log(address);
-             initialize();
-             codeAddress();
-             $('#myMap').modal();
-           });
-         });
-				
+      Stripe.setPublishableKey('pk_0EJjrLzbYh33TkSMmfGjt4upjqVOW');		
     = csrf_meta_tags
     = yield(:head)
   %body
+    #fb-root
+    :javascript
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
 
     #myModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "display:none"}
       %form{:action => "#{pages_contact_path}"}
@@ -67,16 +33,24 @@
           %div
             %label Name
             %input{:type => 'text', :name => 'name'}
-          %div
-            %label Email
+              %div
+                %label Email
             %input{:type => 'text', :name => 'email'}
-          %div
-            %label Message
+              %div
+                %label Message
             %textarea{:name => 'message'}
-        .modal-footer
-          %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
+              .modal-footer
+                %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
           %button.btn.btn-primary.send Send Message
-					
+
+    #contact.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "display:none"}
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+        %h3#myModalLabel Contact Us
+      .modal-body
+        <iframe src ="http://uruut.desk.com/customer/emails/new" width="500" height="450" border="0" scrolling="no"></iframe>
+        %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
+
     #myMap.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "display:none"}
       %form{:action => "#{pages_contact_path}"}
         .modal-header
@@ -84,8 +58,8 @@
           %h3#myModalLabel Project Location
         .modal-body
           #map_canvas{:style => "width:500px;height:450px;position:relative;"}
-        .modal-footer
-          %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
+            .modal-footer
+              %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
 
     %header.navbar
       .container
@@ -103,15 +77,32 @@
           %hr
           %footer
             .row
-              %nav.span4
-                %a{:href => "", "data-toggle" => "modal", "data-target" => "#myModal"}Contact Us
+              %nav.span5
+                %a{:href => "", "data-toggle" => "modal", "data-target" => "#contact"}Contact Us
                 %a{:href => "", "data-toggle" => "modal", "data-target" => "#myMap"}Map
                 %a{:href => "http://hashfire.uservoice.com/knowledgebase"}Help
                 %a Terms of Use
                 %a Privacy Policy
-              %p.span4.offset4{:style => "text-align:right;"}
+                %a
+                  :javascript
+                    new DESK.Widget({ 
+                      version: 1, 
+                      site: 'uruut.desk.com', 
+                      port: '80', 
+                      email:'', 
+                      displayMode: 1,
+                      features: {}, 
+                      fields: { 
+                        ticket: {}, 
+                        interaction: {}, 
+                        email: {}, 
+                        customer: {} 
+                      } 
+                    }).render();
+					  
+              %p.span4.offset3{:style => "text-align:right;"}
                 &copy; 2012 URUUT.com
-								
+
 / %script{:type => "text/javascript", :src => "http://maps.googleapis.com/maps/api/js?key=AIzaSyAucG9ZTBqTLefKHdk_592S08LTS3lvD_k&sensor=false"}
 
 :javascript
@@ -130,12 +121,11 @@
     $('#myModal form').submit(function() {  
       var valuesToSubmit = $(this).serialize();
       $.ajax({
-          url: $(this).attr('action'), //sumbits it to the given url of the form
+        url: $(this).attr('action'), //sumbits it to the given url of the form
           data: valuesToSubmit,
           dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
       }).success(function(json){
-          console.log(json);
+        console.log(json);
       });
     return false; // prevents normal behaviour
   });
-  })

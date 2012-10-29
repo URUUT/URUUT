@@ -3,9 +3,9 @@
 	%div
 		= f.label :category
 		= f.select :category, options_for_select(project_categories)
-	%div
-		= f.label :tags
-		= f.text_field :tags
+	/ %div
+	/ 		= f.label :tags
+	/ 		= f.text_field :tags
 	%div
 		= f.label :live, "Make This Project Active"
 		= f.check_box :live

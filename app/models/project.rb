@@ -1,6 +1,6 @@
 class Project < ActiveRecord::Base
   attr_accessible :category, :description, :duration, :goal, :address, 
-    :city, :state, :zip, :neighborhood, :title, :image, :video, :tags, :live
+    :city, :state, :zip, :neighborhood, :title, :image, :video, :tags, :live, :short_description
 
   belongs_to :user
   has_many :donations, :dependent => :destroy
