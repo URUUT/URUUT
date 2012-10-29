@@ -3,6 +3,11 @@
 	%div
 		= f.label :title 
 		= f.text_field :title, :placeholder => "Project Title"
+		
+	%div
+		= f.label :short_description 
+		= f.text_area :short_description, :placeholder => "Short Description", :style => "width:350px;height:200px;"
+		
 	%div
 		= f.label :description 
 		= f.text_area :description

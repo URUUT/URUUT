@@ -1,4 +1,7 @@
 Crowdfund::Application.routes.draw do
+  
+  devise_for :users
+  
   get "image/new"
 
   get "users/profile"
@@ -14,8 +17,8 @@ Crowdfund::Application.routes.draw do
   get "pages/contact"
 
   get "projects/add_desc"
-
-  devise_for :users, :controllers => { :registrations => "registrations" }
+  
+  post "#{Rails.root}/public/images/"
 
   resources :s3_uploads
 

@@ -3,5 +3,3 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
-	$('button').click ->
-		s3_swf_1_object.startUploading()
