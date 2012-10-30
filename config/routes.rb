@@ -1,6 +1,7 @@
 Crowdfund::Application.routes.draw do
   
   devise_for :users
+  devise_for :sponsors
   
   get "image/new"
 
