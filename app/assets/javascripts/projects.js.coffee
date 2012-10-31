@@ -22,9 +22,9 @@ $ ->
 	# 		$('#step-2').hide()
 	# 		$('#step-1').show()
 	
-	$('#project_tags').tagsInput({
-		'defaultText':'',
-		'interactive':true,
-		'removeWithBackspace' : true,
-		'placeholderColor' : '#cfcfcf'
-	});
+	#$('#project_tags').tagsInput({
+		#'defaultText':'',
+		#'interactive':true,
+		#'removeWithBackspace' : true,
+		#'placeholderColor' : '#cfcfcf'
+	#});
