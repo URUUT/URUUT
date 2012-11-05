@@ -1,0 +1,2 @@
+module Sponsors::DashboardHelper
+end

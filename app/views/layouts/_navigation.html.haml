@@ -25,6 +25,30 @@
               = link_to('New Project', new_project_path)
             %li
               = link_to('Show Projects', projects_path)
+  - elsif sponsor_signed_in?
+    %li
+      %a
+        = image_tag(get_gravatar(current_sponsor.email), :style => "vertical-align:middle", :class => "img-circle")
+        = current_sponsor.name
+        = image_tag('down-arrow.png')
+      %div.dropdown
+        %div
+          %h5 My Account
+          %ul
+            %li
+              = link_to('Profile', edit_sponsor_registration_path)
+            %li
+              = link_to 'Logout', destroy_sponsor_session_path, :method => "delete"
+
+        / -if current_user.municipality #Add this back in after testing
+        %div
+          %h5 My Projects
+          %ul
+            %li
+              = link_to('New Project', new_project_path)
+            %li
+              = link_to('Show Projects', projects_path)
+  
   - else
     %li
       %a{:href => "", "data-toggle" => "modal", "data-target" => "#login"}Log In

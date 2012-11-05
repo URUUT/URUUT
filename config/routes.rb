@@ -1,7 +1,13 @@
 Crowdfund::Application.routes.draw do
   
   devise_for :users
-  devise_for :sponsors
+  devise_for :sponsors, :controllers => { :dashboard => "sponsors/dashboard" }
+  
+  namespace :sponsors do 
+    resources :projects
+  end
+
+  #get "sponsors/dashboard/index"
   
   get "image/new"
 
@@ -25,7 +31,7 @@ Crowdfund::Application.routes.draw do
 
   resources :projects
 
-  resources :donations
+  #resources :donations
 
   # devise_for :admin_users, ActiveAdmin::Devise.config
 
