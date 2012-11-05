@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121030060921) do
+ActiveRecord::Schema.define(:version => 20121103053916) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(:version => 20121030060921) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "name"
   end
 
   add_index "sponsors", ["email"], :name => "index_sponsors_on_email", :unique => true
