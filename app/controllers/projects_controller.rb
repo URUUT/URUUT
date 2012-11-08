@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-	before_filter :authenticate_user!, :only => [:index, :new, :create, :edit, :update]
+	before_filter :authenticate_sponsor!, :only => [:index, :new, :create, :edit, :update]
   
 	def index
 		@projects = Project.find_all_by_user_id(current_user.id)
