@@ -6,7 +6,8 @@
 	display:none; }
 
 #new_project input[type=submit] {
-	display:none; }
+  /*display:none;*/
+}
 
 .project-details {
 	margin:25px 0;
@@ -42,7 +43,8 @@ form.edit_project fieldset label, form.new_project fieldset label {
 }
 
 form.edit_project input[type=submit] {
-	display:none; }
+  /*display:none;*/
+}
 	
 form {
 	input[type=text], input[type=email], input[type=password]  {
