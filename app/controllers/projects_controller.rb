@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
 	before_filter :authenticate_sponsor!, :only => [:index, :new, :create, :edit, :update]
   
 	def index
-		@projects = Project.find_all_by_user_id(current_sponsor.id)
+		@projects = Project.find_all_by_sponsor_id(current_sponsor.id)
 	end
 
 	def new
@@ -15,7 +15,7 @@ class ProjectsController < ApplicationController
 
 	def create
 		@project = Project.new(params[:project])
-		@project.user = current_sponsor
+		@project.user = current_user
 		if @project.save
 			redirect_to @project
 		end
