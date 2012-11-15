@@ -1,4 +1,3 @@
-!!! 5
 %html
   %head
     %meta{:charset => "utf-8"}
@@ -15,16 +14,16 @@
     = yield(:head)
   %body
     #fb-root
-    -#:javascript
-      -#(function(d, s, id) {
-        -#var js, fjs = d.getElementsByTagName(s)[0];
-        -#if (d.getElementById(id)) return;
-        -#js = d.createElement(s); js.id = id;
-        -#js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=487449314607252";
-        -#fjs.parentNode.insertBefore(js, fjs);
-      -#}(document, 'script', 'facebook-jssdk'));
+    :javascript
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=487449314607252";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
       
-      -#!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+      !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 
     #myModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "display:none"}
       %form{:action => "#{pages_contact_path}"}
@@ -123,15 +122,9 @@
               %p.span4.offset3{:style => "text-align:right;"}
                 &copy; 2012 URUUT.com
 
-/ %script{:type => "text/javascript", :src => "http://maps.googleapis.com/maps/api/js?key=AIzaSyAucG9ZTBqTLefKHdk_592S08LTS3lvD_k&sensor=false"}
+%script{:type => "text/javascript", :src => "http://maps.googleapis.com/maps/api/js?key=AIzaSyAucG9ZTBqTLefKHdk_592S08LTS3lvD_k&sensor=false"}
 
 :javascript
-  -#var uvOptions = {};
-  -#(function() {
-    -#var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
-    -#uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/EZcN5zkxSoms2jGf8ncVmw.js';
-    -#var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
-  -#})();
 
   $(function(){
     //initialize();
