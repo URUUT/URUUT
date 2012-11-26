@@ -18,6 +18,7 @@ gem "daemons"
 gem "bootstrap-wysihtml5-rails"
 gem "stripe"
 gem "truncate_html"
+gem "kaminari"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -38,6 +39,8 @@ end
 
 group :development, :test do
   gem "mysql2", "~> 0.3.11"
+  gem 'rb-fsevent', '~> 0.9.1'
+  gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git', :require => 'rails_development_boost'
 end
 
 gem 'jquery-rails'

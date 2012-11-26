@@ -24,8 +24,8 @@ $ ->
 	$("div.project div.location img").click ->
 	  console.log "hello"
   
-  $('.short_description').hover ->
-    $('.short_description').tooltip()
+  #$('.short_description').hover ->
+    #$('.short_description').tooltip()
 		
 	initialize = ->
 			geocoder = new google.maps.Geocoder()

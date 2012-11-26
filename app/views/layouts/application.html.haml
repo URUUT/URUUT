@@ -6,24 +6,26 @@
     %title= content_for?(:title) ? yield(:title) : "Myapp"
     %meta{:content => "", :name => "description"}
     %meta{:content => "", :name => "author"}
-    = stylesheet_link_tag    "application", "trontastic/jquery-ui-1.8.22.custom.css", "https://d3jyn100am7dxp.cloudfront.net/assets/widget_embed.cssgz?1350971636",  :media => "all"
-    = javascript_include_tag "application", "https://js.stripe.com/v1/", "formToWizard.js", "http://maps.googleapis.com/maps/api/js?sensor=false", "https://d3jyn100am7dxp.cloudfront.net/assets/widget_embed_libraries.jsgz?1350971636"
+    = stylesheet_link_tag "application", "trontastic/jquery-ui-1.8.22.custom.css",  :media => "all"
+    -#= stylesheet_link_tag    "application", "trontastic/jquery-ui-1.8.22.custom.css", "https://d3jyn100am7dxp.cloudfront.net/assets/widget_embed.cssgz?1350971636",  :media => "all"
+    = javascript_include_tag "application", "https://js.stripe.com/v1/", "formToWizard.js"
+    -#= javascript_include_tag "application", "https://js.stripe.com/v1/", "formToWizard.js", "http://maps.googleapis.com/maps/api/js?sensor=false", "https://d3jyn100am7dxp.cloudfront.net/assets/widget_embed_libraries.jsgz?1350971636"
     = javascript_tag do
       Stripe.setPublishableKey('pk_0EJjrLzbYh33TkSMmfGjt4upjqVOW');		
     = csrf_meta_tags
     = yield(:head)
   %body
     #fb-root
-    :javascript
-      (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=487449314607252";
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
+    -#:javascript
+      -#(function(d, s, id) {
+        -#var js, fjs = d.getElementsByTagName(s)[0];
+        -#if (d.getElementById(id)) return;
+        -#js = d.createElement(s); js.id = id;
+        -#js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=487449314607252";
+        -#fjs.parentNode.insertBefore(js, fjs);
+      -#}(document, 'script', 'facebook-jssdk'));
       
-      !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+      -#!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 
     #myModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "display:none"}
       %form{:action => "#{pages_contact_path}"}
@@ -82,10 +84,9 @@
 
     %header.navbar
       .container
-        %h1.logo
+        -#%h1.logo
           = link_to "Home", root_path
-        %nav.navbar-inner
-          = render 'layouts/navigation'
+        = render 'layouts/navigation'
     #main{:role => "main"}
       .container
         .content
@@ -122,7 +123,7 @@
               %p.span4.offset3{:style => "text-align:right;"}
                 &copy; 2012 URUUT.com
 
-%script{:type => "text/javascript", :src => "http://maps.googleapis.com/maps/api/js?key=AIzaSyAucG9ZTBqTLefKHdk_592S08LTS3lvD_k&sensor=false"}
+-#%script{:type => "text/javascript", :src => "http://maps.googleapis.com/maps/api/js?key=AIzaSyAucG9ZTBqTLefKHdk_592S08LTS3lvD_k&sensor=false"}
 
 :javascript
 

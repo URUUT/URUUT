@@ -5,19 +5,24 @@ header {
 	.container {
 		width:1170px !important;}
 	h1.logo {
-		background: transparent url(image-path('logo.png'))top left no-repeat;
-		height:90px;
+    /*
+		 *background: transparent url(image-path('logo.png'))top left no-repeat;
+     */
+		float:left;
+    height:90px;
 		left:0px;
-		margin-bottom:65px;
 		position:relative;
-		top:25px;
 		width:310px; 
 		a {
 			display:inline-block;
 			height:90px;
 			text-indent:-9999px;
 			width:310px;}}} 
-			
+		
+h2 {
+  border-bottom:1px solid #ccc;
+  margin-bottom:30px;}
+
 footer {
 	nav {
 		a {
@@ -27,25 +32,27 @@ footer {
 	display:none; }
 
 ul.nav {
-	height:45px;
+  color:#242424;
 	li {
-		height:45px;
-		line-height:45px;
+    padding:0 10px;
 		position:relative;
 		a {
-			color:#fff !important;
-			line-height:25px !important;
+			color:#242424;
+			line-height:19px !important;
+      padding:0 !important;
 			text-shadow:0 0 0 !important;}
 		img {
-			vertical-align:0px;	}
+			vertical-align:middle;	}
 		div.dropdown {
-			display:none;
+			color:#fff;
+      display:none;
 			position:absolute;
 			right:0;
 			width:300px;
 			div{
 				background:#2c2c2c;
-				padding:20px;
+				color:#fff;
+        padding:20px;
 				h5 {
 					border-bottom:1px solid #ccc;}
 				&:first-child {
@@ -62,20 +69,98 @@ ul.nav {
 					margin-left:0;
 					padding-left:0;
 					li {
+            color:#fff;
 						line-height:45px;
-						list-style-type:none;}}}}}}
+						list-style-type:none;
+            a{
+              color:#fff;}}}}}}}
 
 .img-circle {
-  vertical-align:middle;}
+  vertical-align:middle !important;}
 
 .nav.left {
-  float:left;}
+  float:left;
+  margin-left:35px;
+  top:45px;
+  li {
+    border-right:1px solid #242424;
+    &:last-child {
+      border:none;}}}
 
 .nav.right {
-  float:right;}
+  float:right;
+  font-size:12px;
+  top:49px;
+  li {
+    border-right:1px solid #242424;
+    &:last-child {
+      border:none;}
+    &:nth-child(2){
+      border:none;}
+    a {
+      line-height:15px !important;}}
+  li.signed-in {
+    border:none;}
+  input[type=search]{
+    margin-top:-8px;
+    position:relative;}}
 
 nav.navbar-inner {
 	background:#b0b0b0;
 	border-radius:0 !important;
 	box-shadow:0 0 0 0 !important;
 	height:45px; }
+
+.project {
+  width:220px;
+  height:380px;
+  padding:10px;
+  float:left;
+  margin:0 15px 20px 0;
+  overflow:hidden;
+  .location span {
+    float:left;
+    text-transform:capitalize; 
+  .location img {
+    float:right;}}}
+
+.marker {
+  float:right;}
+
+.project-image {
+  width:230px !important;
+  height:125px !important;}
+
+.cont-desc {
+  height:120px;
+  text-overflow:ellipsis;
+  overflow:hidden;
+  width:100%;
+  h3 {
+    width:230px;
+    word-wrap:break-word;
+    text-transform:capitalize;
+    margin:0;}
+  p.short-description{
+    text-overflow:ellipsis;
+    overflow:hidden;
+    width:100%;}}
+
+p.funded {
+  margin-bottom:5px;}
+
+div[class*='progressbar#']{
+  height:20px;
+  margin-bottom:5px;}
+
+h5.time-left {
+  display:inline-block;}
+
+p.days {
+  display:inline-block;}
+
+.discover div.project {
+  margin-top:0;}
+
+.discover div.project:nth-child(3n) {
+  margin-right:0 !important;}
