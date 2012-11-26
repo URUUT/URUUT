@@ -19,9 +19,9 @@
             = image_tag "marker.jpg", :class => "marker"
            = image_tag "#{p.image.url(:original)}", :class => "project-image"
 
-            .cont-desc
-              %h3= link_to p.title, project_path(p.id)
-                %p.short-description= p.short_description
+             .cont-desc
+               %h3= link_to p.title, project_path(p.id)
+                 %p.short-description= p.short_description
 
               %h5 Funded:
                 %p.fundedd
@@ -42,8 +42,8 @@
                   });
 
       .clearfix
-      = paginate @projects
-      
+        = paginate @projects
+
     - else							
       - if !@category.first.nil?
         - @category.each do |c|
@@ -52,7 +52,7 @@
               %span #{c.city}, #{c.state}
               = image_tag "marker.jpg", :class => "marker"
             = image_tag "#{c.image.url(:original)}", :class => "project-image" 
-      
+
               .cont-desc
                 %h3= link_to c.title, project_path(c.id)
                   %p.short-description= c.short_description
@@ -76,9 +76,9 @@
                           value: #{percent_funded(c.id)}
                         });
                       });	
-           
+
         .clearfix
-        = paginate @category
+          = paginate @category
       - else
         %h2 Be the first to put down ruuts in this category
         %h3 
