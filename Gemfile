@@ -11,7 +11,6 @@ gem 'delayed_paperclip'
 gem 'haml'
 gem "twitter-bootstrap-rails"
 gem 'devise'
-gem 'heroku'
 gem 'aws-sdk'
 gem 'delayed_job_active_record'
 gem "daemons"
