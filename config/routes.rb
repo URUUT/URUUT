@@ -23,6 +23,8 @@ Crowdfund::Application.routes.draw do
 
   get "pages/contact"
 
+  get "pages/how_it_works"
+
   get "projects/add_desc"
   
   post "#{Rails.root}/public/images/"

@@ -2,11 +2,13 @@ class PagesController < ApplicationController
 
   def index
   	@projects = Project.find(:all)
+    @ending = Project.find(:all, :order => "duration")
   end
 
   def discover
-  	@projects = Project.find(:all)
-  	@category = Project.where("category = ?", params[:category])
+  	@cat = params[:category]
+    @category = Project.where("live = true and deleted = false and category = '#{@cat}'").page(params[:page]).per(9)
+    @projects = Project.where('live = true AND deleted = false').page(params[:page]).per(9)
   end
 
   def categories
@@ -18,6 +20,9 @@ class PagesController < ApplicationController
     @email = params[:email]
     @message = params[:message]
     ContactMailer.contact_confirmation(@name, @email, @message).deliver
+  end
+
+  def how_it_works
   end
 
 end
