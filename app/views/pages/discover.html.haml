@@ -44,7 +44,7 @@
       .clearfix
         = paginate @projects
 
-    - else							
+    - else
       - if !@category.first.nil?
         - @category.each do |c|
           %div.project.well
