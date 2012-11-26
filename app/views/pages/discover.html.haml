@@ -17,29 +17,29 @@
           .location
             %span #{p.city}, #{p.state}
             = image_tag "marker.jpg", :class => "marker"
-            -#= image_tag "#{p.image.url(:original)}", :class => "project-image"
+           = image_tag "#{p.image.url(:original)}", :class => "project-image"
 
-              .cont-desc
-                %h3= link_to p.title, project_path(p.id)
-                  %p.short-description= p.short_description
+            .cont-desc
+              %h3= link_to p.title, project_path(p.id)
+                %p.short-description= p.short_description
 
-                %h5 Funded:
-                  %p.fundedd
-                    = number_to_currency(amount_funded(p.id), :precision => 0)
-                    of
-                    = get_currency(p.goal)
+              %h5 Funded:
+                %p.fundedd
+                  = number_to_currency(amount_funded(p.id), :precision => 0)
+                  of
+                  = get_currency(p.goal)
 
-                  -#%div.progressbar#{p.id}
-                  %h5.time-left Time Left
-                  %p.days #{time_left(p.duration).to_i} Days
+                -#%div.progressbar#{p.id}
+                %h5.time-left Time Left
+                %p.days #{time_left(p.duration).to_i} Days
 
-                  - if current_user
-                    - if p.user_id == current_user.id
-                      = link_to "Edit Project", edit_project_url(p.id)
-                  :javascript
-                    $('.progressbar#{p.id}').progressbar({
-                      value: #{percent_funded(p.id)}
-                    });
+                - if current_user
+                  - if p.user_id == current_user.id
+                    = link_to "Edit Project", edit_project_url(p.id)
+                :javascript
+                  $('.progressbar#{p.id}').progressbar({
+                    value: #{percent_funded(p.id)}
+                  });
 
       .clearfix
       = paginate @projects
@@ -51,21 +51,21 @@
             .location
               %span #{c.city}, #{c.state}
               = image_tag "marker.jpg", :class => "marker"
-            -#= image_tag "#{c.image.url(:original)}", :class => "project-image" 
+            = image_tag "#{c.image.url(:original)}", :class => "project-image" 
       
               .cont-desc
-                -#%h3= link_to c.title, project_path(c.id)
-                  -#%p.short-description= c.short_description
+                %h3= link_to c.title, project_path(c.id)
+                  %p.short-description= c.short_description
 
-                -#%h5 Funded:
-                -#%p.funded
-                  -#= number_to_currency(amount_funded(c.id), :precision => 0)
-                  -#of
-                  -#= get_currency(c.goal)
+                %h5 Funded:
+                %p.funded
+                  = number_to_currency(amount_funded(c.id), :precision => 0)
+                  of
+                  = get_currency(c.goal)
 
                 -#%div.progressbar#{c.id}"
-                -#%h5.time-left Time Left
-                -#%p.days #{time_left(c.duration).to_i} Days
+                %h5.time-left Time Left
+                %p.days #{time_left(c.duration).to_i} Days
 
                 -#- if current_user
                   -#- if c.user_id == current_user.id
