@@ -14,7 +14,7 @@
     - if @cat.nil?
       - @projects.each do |p|
         %div.project.well
-          .location
+         .location
             %span #{p.city}, #{p.state}
             = image_tag "marker.jpg", :class => "marker"
            = image_tag "#{p.image.url(:original)}", :class => "project-image"
