@@ -1,11 +1,18 @@
+%h1.logo
+  = link_to "Home", root_path
 %ul.nav.left
   %li
-    = link_to "Projects", pages_discover_path
+    = link_to "Browse", pages_discover_path
+  %li
+    = link_to "How It Works", pages_how_it_works_path
+  %li
+    = link_to "Create A Project", new_project_path
+
 %ul.nav.right
   - if user_signed_in?
-    %li
+    %li.signed-in
       %a
-        = image_tag(get_gravatar(current_user.email), :class => "img-circle")
+        -#= image_tag(get_gravatar(current_user.email), :class => "img-circle")
         = current_user.name
         = image_tag('down-arrow.png')
       %div.dropdown
@@ -20,7 +27,7 @@
   - elsif sponsor_signed_in?
     %li
       %a
-        = image_tag(get_gravatar(current_sponsor.email), :class => "img-circle")
+        -#= image_tag(get_gravatar(current_sponsor.email), :class => "img-circle")
         = current_sponsor.name
         = image_tag('down-arrow.png')
       %div.dropdown
@@ -49,3 +56,5 @@
   - else
     %li
       %a{:href => "", "data-toggle" => "modal", "data-target" => "#signup"}Sign Up
+
+  %input{:type => "search", :placeholder => "Search"}

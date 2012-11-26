@@ -5,14 +5,14 @@ class Project < ActiveRecord::Base
   belongs_to :user
   has_many :donations, :dependent => :destroy
 
-  # accepts_nested_attributes_for :objectives, :allow_destroy => true
+  #accepts_nested_attributes_for :objectives, :allow_destroy => true
 
-  has_attached_file :image,
-       :styles => {
-         :thumb=> "100x100#" },
-     :storage => :s3,
-     :s3_credentials => "#{Rails.root}/config/s3.yml",
-     :path => "/:id/:style/:filename"
+  has_attached_file :image
+       #:styles => {
+        #:thumb=> "100x100#" },
+     #:storage => :file
+     #:s3_credentials => "#{Rails.root}/config/s3.yml",
+     #:path => "/public/images/:id/:style/:filename"
 
   process_in_background :image
 

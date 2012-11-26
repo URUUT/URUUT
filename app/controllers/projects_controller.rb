@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
   
 	def index
 		@projects = Project.find_all_by_sponsor_id(current_sponsor.id)
-	end
+  end
 
 	def new
 		@project = Project.new
