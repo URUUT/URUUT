@@ -8,8 +8,9 @@ class Project < ActiveRecord::Base
   #accepts_nested_attributes_for :objectives, :allow_destroy => true
 
   has_attached_file :image
-       #:styles => {
-        #:thumb=> "100x100#" },
+    :styles => {
+      :thumb=> "100x100#",
+      :medium=> "280x124#" }
      #:storage => :file
      #:s3_credentials => "#{Rails.root}/config/s3.yml",
      #:path => "/public/images/:id/:style/:filename"
