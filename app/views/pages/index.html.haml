@@ -13,7 +13,7 @@
   - if @projects
     - @projects.take(4).each do |p|
       - if p.live == true && p.deleted == false
-        %div.project.well
+        %div.project
           .location
             %span #{p.city}, #{p.state}
             = image_tag "marker.jpg", :class => "marker"
@@ -52,7 +52,7 @@
   - if @ending
     - @ending.take(4).each do |e|
       - if e.live == true && e.deleted == false
-        %div.project.well
+        %div.project
           .location
             %span #{e.city}, #{e.state}
             = image_tag "marker.jpg", :class => "marker"
