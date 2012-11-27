@@ -14,6 +14,6 @@ class Project < ActiveRecord::Base
      #:s3_credentials => "#{Rails.root}/config/s3.yml",
      #:path => "/public/images/:id/:style/:filename"
 
-  process_in_background :image
+  #process_in_background :image
 
 end
