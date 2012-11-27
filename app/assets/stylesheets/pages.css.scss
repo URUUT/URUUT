@@ -109,18 +109,35 @@ nav.navbar-inner {
 	box-shadow:0 0 0 0 !important;
 	height:45px; }
 
+.slider {
+  ul {
+    li {
+      display:block;
+      margin-bottom:10px;}}}
+
 .project {
-  box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 6px rgba(50,50,50,0.2);
+  border-bottom-right-radius:3px;
+  border-bottom-left-radius:3px;
   width:280px;
   height:380px;
   float:left;
   margin:0 15px 20px 0;
   overflow:hidden;
+  .location {
+    padding:10px;
+    width:260px;}
   .location span {
     float:left;
-    text-transform:capitalize; 
+    text-transform:capitalize;} 
   .location img {
-    float:right;}}}
+    float:left;
+    margin-left:5px;}
+  hr {
+    border-top:1px solid #efefef;
+    border-bottom:1px solid #fdfdfd;
+    margin:0;
+    padding:0;}}
 
 .marker {
   float:right;}
@@ -130,39 +147,69 @@ nav.navbar-inner {
   height:125px !important;}
 
 .cont-desc {
-  height:120px;
+  height:110px;
   text-overflow:ellipsis;
   overflow:hidden;
   padding:10px;
-  width:100%;
-  h3 {
-    width:230px;
+  width:260px;
+  h4 {
+    width:260px;
     word-wrap:break-word;
     text-transform:capitalize;
-    margin:0;}
+    margin:0 0 5px;}
   p.short-description{
     text-overflow:ellipsis;
     overflow:hidden;
-    width:100%;}}
+    width:260px;}}
 
-p.funded {
-  margin-bottom:5px;}
+.funding {
+  background:#fcfcfc;
+  height:64px;
+  padding:10px;
+  position:relative;
+  width:260px;
+  hr {
+    border-top:1px solid #efefef;
+    border-bottom:1px solid #fdfdfd;
+    left:0;
+    margin:0;
+    padding:0;
+    position:absolute;
+    width:280px;} 
+  ul {
+    margin:15px 0 0; 
+    li {
+      display:inline-block;
+      list-style-type:none;}
+    li.funded {
+      width:170px;
+      p {
+        margin:0;}}
+    li.days-left {
+      width:80px;}}
+  h5 {
+    margin:0;}}
 
-div[class*='progressbar#']{
-  height:20px;
-  margin-bottom:5px;}
+div[class*='progressbar']{
+  border-radius:0;
+  height:10px !important;
+  margin-bottom:10px;}
 
 h5.time-left {
   display:inline-block;}
 
 p.days {
-  display:inline-block;}
+  display:inline-block;
+  margin-bottom:0;}
 
 .discover div.project {
   margin-top:0;}
 
 .discover div.project:nth-child(3n) {
   margin-right:0 !important;}
+
+.recent, .ending-soon, .featured-success {
+  margin-bottom:40px;}
 
 .recent div.project:nth-child(4), .ending-soon div.project:nth-child(4) {
   margin-right:0 !important;}
