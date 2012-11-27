@@ -16,7 +16,7 @@
     = yield(:head)
   %body
     #fb-root
-    -#:javascript
+      -#:javascript
       -#(function(d, s, id) {
         -#var js, fjs = d.getElementsByTagName(s)[0];
         -#if (d.getElementById(id)) return;
@@ -24,7 +24,7 @@
         -#js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=487449314607252";
         -#fjs.parentNode.insertBefore(js, fjs);
       -#}(document, 'script', 'facebook-jssdk'));
-      
+
       -#!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 
     #myModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "display:none"}
@@ -71,7 +71,7 @@
         = link_to "Sponsor", new_sponsor_registration_path
       .modal-body
         %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
-    
+
     #myMap.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "display:none"}
       %form{:action => "#{pages_contact_path}"}
         .modal-header
@@ -107,19 +107,19 @@
                   -#:javascript
                     -#new DESK.Widget({ 
                       -#version: 1, 
-                      -#site: 'uruut.desk.com', 
-                      -#port: '80', 
-                      -#email:'', 
-                      -#displayMode: 1,
-                      -#features: {}, 
-                      -#fields: { 
+                        -#site: 'uruut.desk.com', 
+                          -#port: '80', 
+                            -#email:'', 
+                              -#displayMode: 1,
+                                -#features: {}, 
+                                  -#fields: { 
                         -#ticket: {}, 
-                        -#interaction: {}, 
-                        -#email: {}, 
-                        -#customer: {} 
+                          -#interaction: {}, 
+                            -#email: {}, 
+                              -#customer: {} 
                       -#} 
                     -#}).render();
-					  
+
               %p.span4.offset3{:style => "text-align:right;"}
                 &copy; 2012 URUUT.com
 
