@@ -110,9 +110,8 @@ nav.navbar-inner {
 	height:45px; }
 
 .project {
-  width:220px;
+  width:280px;
   height:380px;
-  padding:10px;
   float:left;
   margin:0 15px 20px 0;
   overflow:hidden;
@@ -126,13 +125,14 @@ nav.navbar-inner {
   float:right;}
 
 .project-image {
-  width:230px !important;
+  width:100% !important;
   height:125px !important;}
 
 .cont-desc {
   height:120px;
   text-overflow:ellipsis;
   overflow:hidden;
+  padding:10px;
   width:100%;
   h3 {
     width:230px;
