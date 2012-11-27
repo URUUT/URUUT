@@ -11,9 +11,9 @@ class Project < ActiveRecord::Base
     :styles => {
       :thumb=> "100x100#",
       :medium=> "280x124#" }
-     #:storage => :file
+     :storage => :file,
      #:s3_credentials => "#{Rails.root}/config/s3.yml",
-     #:path => "/public/images/:id/:style/:filename"
+     :path => "/public/images/:id/:style/:filename"
 
   #process_in_background :image
 
