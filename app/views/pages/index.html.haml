@@ -17,7 +17,7 @@
           .location
             %span #{p.city}, #{p.state}
             = image_tag "marker.jpg", :class => "marker"
-          -#= image_tag "#{p.image.url(:original)}", :class => "project-image"
+          = image_tag "#{p.image.url(:original)}", :class => "project-image"
 
           .cont-desc
             %h3= link_to p.title, project_path(p.id)
@@ -56,7 +56,7 @@
           .location
             %span #{e.city}, #{e.state}
             = image_tag "marker.jpg", :class => "marker"
-          -#= image_tag "#{e.image.url(:original)}", :class => "project-image"
+          = image_tag "#{e.image.url(:original)}", :class => "project-image"
 
           .cont-desc
             %h3= link_to e.title, project_path(e.id)
