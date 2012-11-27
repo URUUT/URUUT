@@ -1,41 +1,44 @@
-.row
+.row.slider
   .span9
     %img{:style => "width:100%;height:400px;"}
   .span3
     %ul
-      %li Projects
-      %li How it works
-      %li Create A Project
+      %li.btn Projects
+      %li.btn How it works
+      %li.btn Create A Project
 
-.recent
+.recent.clearfix
   %h2 Recent Projects
 
   - if @projects
     - @projects.take(4).each do |p|
       - if p.live == true && p.deleted == false
         %div.project
-          .location
-            %span #{p.city}, #{p.state}
-            = image_tag "marker.jpg", :class => "marker"
           = image_tag "#{p.image.url(:original)}", :class => "project-image"
 
           .cont-desc
-            %h3= link_to p.title, project_path(p.id)
+            %h4= link_to p.title, project_path(p.id)
             %p.short-description= p.short_description
-
-          %h5 Funded:
-          %p.funded{:style => "margin-bottom:5px;"}
-            = number_to_currency(amount_funded(p.id), :precision => 0)
-            of
-            = get_currency(p.goal)
-
-          -#%div.progressbar#{p.id}
-          %h5.time-left Time Left
-          %p.days #{time_left(p.duration).to_i} Days
+          
+          .location.clearfix
+            %span #{p.city}, #{p.state}
+            = image_tag "marker.jpg", :class => "marker"
+          %hr
+          .funding
+            %div{:class => "progressbar#{p.id}"}
+            %hr
+            %ul
+              %li.funded
+                %p
+                  = number_to_currency(amount_funded(p.id), :precision => 0)
+                  of
+                  = get_currency(p.goal)
+                %h5 Funded
+              
+              %li.days-left
+                %p.days #{time_left(p.duration).to_i}
+                %h5.time-left Days Left
       
-          - if current_user
-            - if p.user_id == current_user.id
-              = link_to "Edit Project", edit_project_url(p.id)
           :javascript
             $('.progressbar#{p.id}').progressbar({
             value: #{percent_funded(p.id)}
@@ -44,9 +47,7 @@
   - else
     %h3 Sorry, No Projects To Show
 
-.clearfix
-
-.ending-soon
+.ending-soon.clearfix
   %h2 Ending Soon 
 
   - if @ending
@@ -62,15 +63,17 @@
             %h3= link_to e.title, project_path(e.id)
             %p.short-description= e.short_description
 
-          %h5 Funded:
-          %p.funded{:style => "margin-bottom:5px;"}
-            = number_to_currency(amount_funded(e.id), :precision => 0)
-            of
-            = get_currency(e.goal)
+          %hr
+          .funding
+            %h5 Funded:
+            %p.funded{:style => "margin-bottom:5px;"}
+              = number_to_currency(amount_funded(e.id), :precision => 0)
+              of
+              = get_currency(e.goal)
 
-          -#%div.progressbar#{e.id}
-          %h5.time-left Time Left
-          %p.days #{time_left(e.duration).to_i} Days
+            -#%div.progressbar#{e.id}
+            %h5.time-left Time Left
+            %p.days #{time_left(e.duration).to_i} Days
       
           - if current_user
             - if e.user_id == current_user.id
@@ -83,10 +86,7 @@
   - else
     %h3 Sorry, No Projects To Show
 
-.clearfix
-
-
-.featured-success
+.featured-success.clearfix
   %h2 Featured Success 
 
   - if @featured
