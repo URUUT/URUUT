@@ -7,7 +7,8 @@ class ProjectsController < ApplicationController
 
 	def new
 		@project = Project.new
-		respond_to do |format|
+		perks = @project.perks.build
+    respond_to do |format|
 	      format.html # new.html.erb
 	      format.xml  { render :xml => @project }
 	    end
@@ -15,7 +16,7 @@ class ProjectsController < ApplicationController
 
 	def create
 		@project = Project.new(params[:project])
-		@project.user = current_user
+    @project.user = current_user
 		if @project.save
 			redirect_to @project
 		end

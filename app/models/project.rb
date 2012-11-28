@@ -4,7 +4,9 @@ class Project < ActiveRecord::Base
 
   belongs_to :user
   has_many :donations, :dependent => :destroy
+  has_many :perks
 
+  accepts_nested_attributes_for :perks, :allow_destroy => true
   #accepts_nested_attributes_for :objectives, :allow_destroy => true
 
   has_attached_file :image

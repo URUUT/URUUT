@@ -1,0 +1,12 @@
+= f.fields_for :perks do |p|
+  %fieldset
+    %legend Perks
+    %div
+      = p.label :name
+      = p.text_field :name
+    %div
+      = p.label :amount
+      = p.text_field :amount
+    %div
+      = p.label :description
+      = p.text_area :description
