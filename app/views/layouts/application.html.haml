@@ -6,26 +6,24 @@
     %title= content_for?(:title) ? yield(:title) : "Myapp"
     %meta{:content => "", :name => "description"}
     %meta{:content => "", :name => "author"}
-    = stylesheet_link_tag "application", "trontastic/jquery-ui-1.8.22.custom.css",  :media => "all"
-    -#= stylesheet_link_tag    "application", "trontastic/jquery-ui-1.8.22.custom.css", "https://d3jyn100am7dxp.cloudfront.net/assets/widget_embed.cssgz?1350971636",  :media => "all"
-    = javascript_include_tag "application", "https://js.stripe.com/v1/", "formToWizard.js"
-    -#= javascript_include_tag "application", "https://js.stripe.com/v1/", "formToWizard.js", "http://maps.googleapis.com/maps/api/js?sensor=false", "https://d3jyn100am7dxp.cloudfront.net/assets/widget_embed_libraries.jsgz?1350971636"
+    = stylesheet_link_tag    "application", "trontastic/jquery-ui-1.8.22.custom.css", "https://d3jyn100am7dxp.cloudfront.net/assets/widget_embed.cssgz?1350971636",  :media => "all"
+    = javascript_include_tag "application", "https://js.stripe.com/v1/", "formToWizard.js", "http://maps.googleapis.com/maps/api/js?sensor=false", "https://d3jyn100am7dxp.cloudfront.net/assets/widget_embed_libraries.jsgz?1350971636"
     = javascript_tag do
       Stripe.setPublishableKey('pk_0EJjrLzbYh33TkSMmfGjt4upjqVOW');		
     = csrf_meta_tags
     = yield(:head)
   %body
     #fb-root
-      -#:javascript
-      -#(function(d, s, id) {
-        -#var js, fjs = d.getElementsByTagName(s)[0];
-        -#if (d.getElementById(id)) return;
-        -#js = d.createElement(s); js.id = id;
-        -#js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=487449314607252";
-        -#fjs.parentNode.insertBefore(js, fjs);
-      -#}(document, 'script', 'facebook-jssdk'));
+      :javascript
+        (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=487449314607252";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
 
-      -#!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 
     #myModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "display:none"}
       %form{:action => "#{pages_contact_path}"}
@@ -41,6 +39,7 @@
             %input{:type => 'text', :name => 'email'}
               %div
                 %label Message
+                rem ipsum dolor sit amet, consectetur adipiscing elit. In eros sapien, tristique id vestibulum non, condimentum at orci. Nam cursus iaculis gravida. Vivamus dapibus felis tellus. Nunc sed enim nec quam rutrum gravida adipiscing a enim. Morbi interdum libero quis tortor euismod vitae sagittis sapien aliquet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla eleifend, enim sit amet vestibulum interdum, ligula est rhoncus velit, sed dignissim leo nisi at quam. Nullam sollicitudin arcu mauris, bibendum lobortis risus. Etiam ante tellus, mollis a bibendum quis, sollicitudin ut dui. Cras at malesuada odio. Praesent hendrerit laoreet mauris, quis faucibus sem venenatis ut. Fusce elementum, quam eget eleifend luctus, sapien ante euismod dui, a commodo lectus libero non tortor. Vivamus ac libero est. Vestibulum sit amet orci id lectus vestibulum faucibus. Sed dignissim aliquam tortor ac commodo. Ut et massa elementum enim tincidunt ultrices.
             %textarea{:name => 'message'}
               .modal-footer
                 %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
@@ -84,8 +83,6 @@
 
     %header.navbar
       .container
-        -#%h1.logo
-          = link_to "Home", root_path
         = render 'layouts/navigation'
     #main{:role => "main"}
       .container
@@ -104,21 +101,21 @@
                 %a Terms of Use
                 %a Privacy Policy
                 %a
-                  -#:javascript
-                    -#new DESK.Widget({ 
-                      -#version: 1, 
-                        -#site: 'uruut.desk.com', 
-                          -#port: '80', 
-                            -#email:'', 
-                              -#displayMode: 1,
-                                -#features: {}, 
-                                  -#fields: { 
-                        -#ticket: {}, 
-                          -#interaction: {}, 
-                            -#email: {}, 
-                              -#customer: {} 
-                      -#} 
-                    -#}).render();
+                  :javascript
+                    new DESK.Widget({ 
+                      version: 1, 
+                      site: 'uruut.desk.com', 
+                      port: '80', 
+                      email:'', 
+                      displayMode: 1,
+                      features: {}, 
+                      fields: { 
+                        ticket: {}, 
+                        interaction: {}, 
+                        email: {}, 
+                        customer: {} 
+                      } 
+                    }).render();
 
               %p.span4.offset3{:style => "text-align:right;"}
                 &copy; 2012 URUUT.com
@@ -126,7 +123,6 @@
 -#%script{:type => "text/javascript", :src => "http://maps.googleapis.com/maps/api/js?key=AIzaSyAucG9ZTBqTLefKHdk_592S08LTS3lvD_k&sensor=false"}
 
 :javascript
-
   $(function(){
     //initialize();
     $('#new_project').formToWizard({ submitButton: 'project-submit' });
@@ -136,10 +132,11 @@
       var valuesToSubmit = $(this).serialize();
       $.ajax({
         url: $(this).attr('action'), //sumbits it to the given url of the form
-          data: valuesToSubmit,
-          dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
+        data: valuesToSubmit,
+        dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
       }).success(function(json){
         console.log(json);
       });
-    return false; // prevents normal behaviour
+      return false; // prevents normal behaviour
+    });
   });

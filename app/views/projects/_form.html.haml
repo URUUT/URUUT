@@ -1,11 +1,12 @@
 = form_for(@project, :html => {:multipart => true}) do |f|
 
-	%title Create Your Project
+  %title Create Your Project
 
-	= render "overview_step", :f => f
-	= render "details_step", :f => f
-	= render "category_step", :f => f
+  = render "overview_step", :f => f
+  = render "details_step", :f => f
+  = render "perks_step", :f => f
+  = render "category_step", :f => f
 
-	%div
-		= f.submit "Submit", :class => "btn", :id => "project-submit"
-	
+  %div
+    = f.submit "Submit", :class => "btn", :id => "project-submit"
+
