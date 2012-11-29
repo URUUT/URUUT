@@ -66,8 +66,11 @@
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
         %h3#myModalLabel Sign Up As...
-        = link_to "Donator", new_user_registration_path
-        = link_to "Sponsor", new_sponsor_registration_path
+        %ul.sign-up
+          %li
+            %h3= link_to "Donator", new_user_registration_path
+          %li
+            %h3= link_to "Sponsor", new_sponsor_registration_path
       .modal-body
         %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
 

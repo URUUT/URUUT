@@ -1,6 +1,35 @@
 // Place all the styles related to the pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+body {
+  color:#464646;
+  font:normal 12px/15px verdana, arial, sans-serif;}
+
+h1,h2,h3,h4,h5,h6 {
+  color:#464646;
+  font-family:'Lato', sans-serif;}
+
+input[type=text] {
+  border-radius: 0;
+  height: 32px;
+  line-height: 18px;
+  font-size: 13px;
+  padding: 5px 7px;}
+
+textarea {
+  border-radius:0;
+  font-size:13px;
+  padding:5px 7px;}
+
+#signup ul.sign-up {
+  margin:0;
+  padding:0;
+  li {
+    display:inline-block;
+    width:49%;
+    %h3 {
+      font-weight:300 !important;}}}
+
 header {
 	.container {
 		width:1170px !important;}
@@ -16,9 +45,10 @@ header {
 			height:90px;
 			text-indent:-9999px;
 			width:310px;}}} 
-		
-h2 {
-  border-bottom:1px solid #ccc;
+
+h2.sections {
+  border-bottom:1px solid #D5D6D9;
+  font-weight:300;
   margin-bottom:30px;}
 
 footer {
@@ -36,10 +66,14 @@ ul.nav {
 		position:relative;
 		a {
 			color:#242424;
-			line-height:19px !important;
+      font-family:'Lato', sans-serif;
+      font-size:11px;
+			line-height:13px !important;
       padding:0 !important;
-			text-shadow:0 0 0 !important;}
+			text-shadow:0 0 0 !important;
+      text-transform:uppercase;}
 		img {
+      margin:-6px 0 0 5px;
 			vertical-align:middle;	}
 		div.dropdown {
 			color:#fff;
@@ -78,7 +112,7 @@ ul.nav {
 
 .nav.left {
   float:left;
-  margin-left:35px;
+  margin-left:75px;
   top:45px;
   li {
     border-right:1px solid #242424;
@@ -88,7 +122,7 @@ ul.nav {
 .nav.right {
   float:right;
   font-size:12px;
-  top:49px;
+  top:44px;
   li {
     border-right:1px solid #242424;
     &:last-child {
@@ -100,8 +134,14 @@ ul.nav {
   li.signed-in {
     border:none;}
   input[type=search]{
-    margin-top:-8px;
-    position:relative;}}
+    border-radius: 0;
+    font-family:'Lato', sans-serif;
+    font-size:11px;
+    line-height: 18px;
+    margin-left:5px;
+    margin-top:-7px;
+    position:relative;
+    text-transform:uppercase;}}
 
 nav.navbar-inner {
 	background:#b0b0b0;
@@ -120,10 +160,20 @@ nav.navbar-inner {
   border-bottom-right-radius:3px;
   border-bottom-left-radius:3px;
   width:280px;
-  height:380px;
+  height:350px;
   float:left;
   margin:0 15px 20px 0;
   overflow:hidden;
+  position:relative;
+  p.category {
+    background:#689d00;
+    color:#fff;
+    font:300 11px/11px 'Lato', sans-serif;
+    left:0;
+    padding:5px 15px;
+    position:absolute;
+    text-transform:uppercase;
+    top:104px;}
   h4 {
     a{
       color:#689d00;
@@ -131,7 +181,10 @@ nav.navbar-inner {
       font-size:15px;
       font-weight:400;
       line-height:28px;
-      text-transform:uppercase;}}
+      text-transform:uppercase;
+      &:hover {
+        color:#486b02;
+        text-decoration:none;}}}
   .location {
     padding:10px;
     width:260px;}
@@ -146,20 +199,21 @@ nav.navbar-inner {
     float:left;
     margin-left:5px;}
   hr {
-    border-top:1px solid #ececec;
+    border-top:1px solid #e6e6e6;
     border-bottom:1px solid #f3f3f3;
     margin:0;
     padding:0;}}
 
 .marker {
-  float:right;}
+  float:right;
+  margin:2px 0 0 2px;}
 
 .project-image {
   width:100% !important;
   height:125px !important;}
 
 .cont-desc {
-  height:110px;
+  height:80px;
   text-overflow:ellipsis;
   overflow:hidden;
   padding:10px;
@@ -176,12 +230,12 @@ nav.navbar-inner {
 
 .funding {
   background:#f2f2f2;
-  height:65px;
+  height:auto;
   padding:10px;
   position:relative;
   width:260px;
   hr {
-    border-top:1px solid #ececec;
+    border-top:1px solid #e6e6e6;
     border-bottom:1px solid #f3f3f3;
     left:0;
     margin:0;
@@ -192,22 +246,27 @@ nav.navbar-inner {
     font-family:'Georgia', serif;
     font-size:11px;}
   ul {
-    margin:15px 0 0; 
+    margin:0; 
     li {
       display:inline-block;
       list-style-type:none;}
     li.funded {
+      border-right:1px solid #e6e6e6;
       font-family:'Lato', serif;
       font-size:17px;
       font-style:italic;
+      padding:10px 0 5px 0;
       width:170px;
       p {
         margin:0;}}
     li.days-left {
+      border-left:1px solid #f8f8f8;
       font-family:'Lato', serif;
       font-size:17px;
       font-style:italic;
-      width:80px;
+      margin-left:-4px;
+      padding:10px 0 5px 10px;
+      width:70px;
       p {
         display:block}}}
   h5 {
@@ -241,3 +300,12 @@ p.days {
 
 .recent div.project:nth-child(4), .ending-soon div.project:nth-child(4) {
   margin-right:0 !important;}
+
+.redactor_box {
+  height:350px;
+  max-width:570px;
+  width:570px;
+  .redactor_editor {
+    height:285px;
+    max-height:285px;
+    overflow-y:scroll;}}
