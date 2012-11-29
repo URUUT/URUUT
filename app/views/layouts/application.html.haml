@@ -6,7 +6,7 @@
     %title= content_for?(:title) ? yield(:title) : "Myapp"
     %meta{:content => "", :name => "description"}
     %meta{:content => "", :name => "author"}
-    = stylesheet_link_tag    "application", "trontastic/jquery-ui-1.8.22.custom.css", "https://d3jyn100am7dxp.cloudfront.net/assets/widget_embed.cssgz?1350971636",  :media => "all"
+    = stylesheet_link_tag    "application", "trontastic/jquery-ui-1.8.22.custom.css", "https://d3jyn100am7dxp.cloudfront.net/assets/widget_embed.cssgz?1350971636", "http://fonts.googleapis.com/css?family=Lato:300,400,700,400italic", :media => "all"
     = javascript_include_tag "application", "https://js.stripe.com/v1/", "formToWizard.js", "http://maps.googleapis.com/maps/api/js?sensor=false", "https://d3jyn100am7dxp.cloudfront.net/assets/widget_embed_libraries.jsgz?1350971636"
     = javascript_tag do
       Stripe.setPublishableKey('pk_0EJjrLzbYh33TkSMmfGjt4upjqVOW');		
