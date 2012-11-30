@@ -1,0 +1,28 @@
+html { 
+  background: url(image-path('little-italy.jpg')) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='image-path('little-italy.jpg')', sizingMethod='scale');
+  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='image-path('little-italy.jpg')', sizingMethod='scale')";}
+
+body {
+  height:auto !important;
+  min-height:450px;
+  min-width:730px;}
+
+.login-logo {
+  background:#3f3f37;
+  color:#fff;
+  left:0;
+  padding:10px 50px;
+  position:absolute;
+  top:30px;}
+
+.seed {
+  display:block;
+  margin:0 auto;}
+
+.seed.name {
+  margin-bottom:30px;}

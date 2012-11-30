@@ -2,24 +2,64 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 body {
-  color:#464646;
-  font:normal 12px/15px verdana, arial, sans-serif;}
+  color:#333;
+  font:normal 12px/15px 'Georgia', georgia, serif;}
 
 h1,h2,h3,h4,h5,h6 {
   color:#464646;
   font-family:'Lato', sans-serif;}
 
-input[type=text] {
+input[type=text], input[type=email], input[type=password] {
   border-radius: 0;
-  height: 32px;
+  height: 28px;
   line-height: 18px;
   font-size: 13px;
   padding: 5px 7px;}
+
+input[type=submit] {
+  background:#689d00;
+  border:none;
+  box-shadow:1px 1px 1px rgba(0,0,0,.28);
+  color:#fff;
+  font:300 13px/17px 'Lato', sans-serif;
+  padding:5px 8px;}
 
 textarea {
   border-radius:0;
   font-size:13px;
   padding:5px 7px;}
+
+.signup-container {
+  background:transparent url(image-path('grid.png')) top left repeat;
+  bottom:0;
+  display:inline-block;
+  left:30%;
+  padding:30px 20px 50px;
+  position:absolute;
+  label {
+    display:block;
+    margin-bottom:5px;}
+  input[type=text], input[type=email], input[type=password] {
+    border-radius: 0;
+    height: 18px;
+    line-height: 18px;
+    font-size: 13px;
+    padding: 4px 7px;
+    width:250px;}
+  input[type=submit] {
+    margin-bottom:20px;
+    margin-left:209px;}
+  h3 {
+    border-bottom:1px dotted #464646;
+    font-size:20px;
+    font-weight:300;
+    margin-bottom:20px;
+    padding-bottom:10px;
+    text-transform:uppercase;}
+  a {
+    color:#689d00;
+    margin-bottom:5px;
+    text-decoration:none;}}
 
 #signup ul.sign-up {
   margin:0;
@@ -29,6 +69,9 @@ textarea {
     width:49%;
     %h3 {
       font-weight:300 !important;}}}
+
+#signup h3 {
+  font-weight:300 !important;}
 
 header {
 	.container {
@@ -65,18 +108,20 @@ ul.nav {
     padding:0 10px;
 		position:relative;
 		a {
-			color:#242424;
+			color:#464646 !important;
       font-family:'Lato', sans-serif;
       font-size:11px;
 			line-height:13px !important;
       padding:0 !important;
 			text-shadow:0 0 0 !important;
-      text-transform:uppercase;}
+      text-transform:uppercase;
+      &:hover {
+        color:#242424 !important;}}
 		img {
       margin:-6px 0 0 5px;
 			vertical-align:middle;	}
 		div.dropdown {
-			color:#fff;
+			color:#fff !important;
       display:none;
 			position:absolute;
 			right:0;
@@ -86,7 +131,10 @@ ul.nav {
 				color:#fff;
         padding:20px;
 				h5 {
-					border-bottom:1px solid #ccc;}
+					border-bottom:1px solid #ccc;
+          color:#fff;
+          font-weight:400;
+          text-transform:uppercase;}
 				&:first-child {
 					left:0;
 					position:absolute;
@@ -102,10 +150,14 @@ ul.nav {
 					padding-left:0;
 					li {
             color:#fff;
-						line-height:45px;
+						line-height:25px;
 						list-style-type:none;
+            margin:0;
+            padding:0;
             a{
-              color:#fff;}}}}}}}
+              color:#fff !important;
+              font-size:11px;
+              text-transform:capitalize}}}}}}}
 
 .img-circle {
   vertical-align:middle !important;}
