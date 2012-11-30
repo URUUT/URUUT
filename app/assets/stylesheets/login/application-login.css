@@ -9,7 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require projects
- *= require pages
- *= require login
+ *= require default/projects
+ *= require default/pages 
+ *= require login/login
  */
