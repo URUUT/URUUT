@@ -1,0 +1,28 @@
+%script{:src => "https://d3jyn100am7dxp.cloudfront.net/assets/widget_embed_libraries.jsgz?1350971636"}
+%footer
+  .row
+    %nav.span5
+      %a{:href => "", "data-toggle" => "modal", "data-target" => "#contact"}Contact Us
+      %a{:href => "", "data-toggle" => "modal", "data-target" => "#myMap"}Map
+      %a{:href => "http://hashfire.uservoice.com/knowledgebase"}Help
+      %a Terms of Use
+      %a Privacy Policy
+      %a
+        :javascript
+          new DESK.Widget({ 
+            version: 1, 
+            site: 'uruut.desk.com', 
+            port: '80', 
+            email:'', 
+            displayMode: 1,
+            features: {}, 
+            fields: { 
+              ticket: {}, 
+              interaction: {}, 
+              email: {}, 
+              customer: {} 
+            } 
+          }).render();
+
+    %p.span4.offset3{:style => "text-align:right;"}
+      &copy; 2012 URUUT.com

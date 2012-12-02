@@ -6,8 +6,8 @@
     %title= content_for?(:title) ? yield(:title) : "Myapp"
     %meta{:content => "", :name => "description"}
     %meta{:content => "", :name => "author"}
-    = stylesheet_link_tag    "default/application", "trontastic/jquery-ui-1.8.22.custom.css", "https://d3jyn100am7dxp.cloudfront.net/assets/widget_embed.cssgz?1350971636", "http://fonts.googleapis.com/css?family=Lato:300,400,700,400italic", :media => "all"
-    = javascript_include_tag "application", "https://js.stripe.com/v1/", "formToWizard.js", "http://maps.googleapis.com/maps/api/js?sensor=false", "https://d3jyn100am7dxp.cloudfront.net/assets/widget_embed_libraries.jsgz?1350971636"
+    = stylesheet_link_tag    "default/application", "trontastic/jquery-ui-1.8.22.custom.css", "http://cdn.leafletjs.com/leaflet-0.4/leaflet.css",  "https://d3jyn100am7dxp.cloudfront.net/assets/widget_embed.cssgz?1350971636", "http://fonts.googleapis.com/css?family=Lato:300,400,700,400italic", :media => "all"
+    = javascript_include_tag "application", "https://js.stripe.com/v1/"
     = javascript_tag do
       Stripe.setPublishableKey('pk_0EJjrLzbYh33TkSMmfGjt4upjqVOW');		
     = csrf_meta_tags
@@ -25,68 +25,19 @@
 
         !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 
-    #myModal.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "display:none"}
-      %form{:action => "#{pages_contact_path}"}
-        .modal-header
-          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-          %h3#myModalLabel Contact Us
-        .modal-body
-          %div
-            %label Name
-            %input{:type => 'text', :name => 'name'}
-              %div
-                %label Email
-            %input{:type => 'text', :name => 'email'}
-              %div
-                %label Message
-                rem ipsum dolor sit amet, consectetur adipiscing elit. In eros sapien, tristique id vestibulum non, condimentum at orci. Nam cursus iaculis gravida. Vivamus dapibus felis tellus. Nunc sed enim nec quam rutrum gravida adipiscing a enim. Morbi interdum libero quis tortor euismod vitae sagittis sapien aliquet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla eleifend, enim sit amet vestibulum interdum, ligula est rhoncus velit, sed dignissim leo nisi at quam. Nullam sollicitudin arcu mauris, bibendum lobortis risus. Etiam ante tellus, mollis a bibendum quis, sollicitudin ut dui. Cras at malesuada odio. Praesent hendrerit laoreet mauris, quis faucibus sem venenatis ut. Fusce elementum, quam eget eleifend luctus, sapien ante euismod dui, a commodo lectus libero non tortor. Vivamus ac libero est. Vestibulum sit amet orci id lectus vestibulum faucibus. Sed dignissim aliquam tortor ac commodo. Ut et massa elementum enim tincidunt ultrices.
-            %textarea{:name => 'message'}
-              .modal-footer
-                %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
-          %button.btn.btn-primary.send Send Message
-
-    #contact.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "display:none"}
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-        %h3#myModalLabel Contact Us
-      .modal-body
-        <iframe src ="http://uruut.desk.com/customer/emails/new" width="500" height="450" border="0" scrolling="no"></iframe>
-        %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
-
-    #login.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "display:none"}
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-        %h3#myModalLabel Log In As...
-        = link_to "Donator", new_user_session_path
-        = link_to "Sponsor", new_sponsor_session_path
-      .modal-body
-        %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
-
-    #signup.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "display:none"}
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-        %h3#myModalLabel Sign Up As...
-        %ul.sign-up
-          %li
-            %h3= link_to "Donator", new_user_registration_path
-          %li
-            %h3= link_to "Sponsor", new_sponsor_registration_path
-      .modal-body
-        %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
-
-    #myMap.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "display:none"}
-      %form{:action => "#{pages_contact_path}"}
-        .modal-header
-          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-          %h3#myModalLabel Project Location
-        .modal-body
-          #map_canvas{:style => "width:500px;height:450px;position:relative;"}
-            .modal-footer
-              %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
+    = render "partials/modal_message"
+    = render "partials/modal_contact"
+    = render "partials/modal_login"
+    = render "partials/modal_signup"
+    = render "partials/modal_map"
 
     %header.navbar
       .container
         = render 'layouts/navigation'
+
+    .banner{:style => "padding: 10px 0;border: 1px solid #DFDFDF;box-shadow: 0 0 7px rgba(0, 0, 0, .10);margin-bottom:35px;"}
+      #map{:style => "height:480px;width:100%;"}
+        
     #main{:role => "main"}
       .container
         .content
@@ -94,40 +45,28 @@
             .span12
               = render 'layouts/messages'
               = yield
+          
           %hr
-          %footer
-            .row
-              %nav.span5
-                %a{:href => "", "data-toggle" => "modal", "data-target" => "#contact"}Contact Us
-                %a{:href => "", "data-toggle" => "modal", "data-target" => "#myMap"}Map
-                %a{:href => "http://hashfire.uservoice.com/knowledgebase"}Help
-                %a Terms of Use
-                %a Privacy Policy
-                %a
-                  :javascript
-                    new DESK.Widget({ 
-                      version: 1, 
-                      site: 'uruut.desk.com', 
-                      port: '80', 
-                      email:'', 
-                      displayMode: 1,
-                      features: {}, 
-                      fields: { 
-                        ticket: {}, 
-                        interaction: {}, 
-                        email: {}, 
-                        customer: {} 
-                      } 
-                    }).render();
-
-              %p.span4.offset3{:style => "text-align:right;"}
-                &copy; 2012 URUUT.com
+          = render 'partials/footer'
 
 -#%script{:type => "text/javascript", :src => "http://maps.googleapis.com/maps/api/js?key=AIzaSyAucG9ZTBqTLefKHdk_592S08LTS3lvD_k&sensor=false"}
 
+%script{:src => "http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"}
+%script{:src => "http://maps.stamen.com/js/tile.stamen.js?v1.2.1"} 
+%script{:src => "formToWizard.js"}
+%script{:src => "http://maps.googleapis.com/maps/api/js?sensor=false"} 
+
 :javascript
   $(function(){
-    //initialize();
+    //initialize();	
+    var map = L.map('map').setView([33.7489, -84.3881], 11);
+
+    L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {
+      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
+    }).addTo(map);
+		
+    L.marker([33.7489, -84.3881]).addTo(map).bindPopup('<h4>Welcome to URUUT</h4>').openPopup();
+		  		
     $('#new_project').formToWizard({ submitButton: 'project-submit' });
     $('.edit_project').formToWizard({ submitButton: 'project-submit' });
     $('form fieldset p a').addClass('btn');

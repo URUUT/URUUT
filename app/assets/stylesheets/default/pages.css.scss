@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 body {
   color:#333;
-  font:normal 12px/15px 'Georgia', georgia, serif;}
+  font:normal 13px/19px 'Georgia', georgia, serif;}
 
 h1,h2,h3,h4,h5,h6 {
   color:#464646;
@@ -164,8 +164,8 @@ ul.nav {
 
 .nav.left {
   float:left;
-  margin-left:75px;
-  top:45px;
+  margin-left:25px;
+  top:60px;
   li {
     border-right:1px solid #242424;
     &:last-child {
@@ -174,7 +174,7 @@ ul.nav {
 .nav.right {
   float:right;
   font-size:12px;
-  top:44px;
+  top:59px;
   li {
     border-right:1px solid #242424;
     &:last-child {

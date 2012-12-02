@@ -1,0 +1,9 @@
+#myMap.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "display:none"}
+  %form{:action => "#{pages_contact_path}"}
+    .modal-header
+      %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+      %h3#myModalLabel Project Location
+    .modal-body
+      #map_canvas{:style => "width:500px;height:450px;position:relative;"}
+        .modal-footer
+          %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
