@@ -1,0 +1,8 @@
+#login.modal{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "display:none"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel Log In As...
+    = link_to "Donator", new_user_session_path
+    = link_to "Sponsor", new_sponsor_session_path
+  .modal-body
+    %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
