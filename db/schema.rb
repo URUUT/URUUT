@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121128054418) do
+ActiveRecord::Schema.define(:version => 20121205055111) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -146,6 +146,8 @@ ActiveRecord::Schema.define(:version => 20121128054418) do
     t.string   "state"
     t.integer  "zip"
     t.string   "neighborhood"
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
