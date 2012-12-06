@@ -7,8 +7,8 @@
     = link_to "How It Works", pages_how_it_works_path
   %li
     = link_to "Create A Project", new_project_path
-  %li
-    = link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
+  -#%li
+    -#= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
 
 %ul.nav.right
   - if user_signed_in?
