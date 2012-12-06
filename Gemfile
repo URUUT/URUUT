@@ -19,8 +19,7 @@ gem "stripe"
 gem "truncate_html"
 gem "activerecord-postgresql-adapter"
 gem "kaminari"
-gem 'omniauth'
-gem 'omniauth-facebook'
+gem 'omniauth-facebook', '1.4.0'
 
 # Gems used only for assets and not required
 # in production environments by default.

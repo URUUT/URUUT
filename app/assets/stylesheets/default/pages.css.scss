@@ -79,7 +79,7 @@ header {
 	h1.logo {
 		background: transparent url(image-path('logo.png'))top left no-repeat;
 		float:left;
-    height:90px;
+    height:104px;
 		left:0px;
 		position:relative;
 		width:310px; 
@@ -165,7 +165,7 @@ ul.nav {
 .nav.left {
   float:left;
   margin-left:25px;
-  top:60px;
+  top:67px;
   li {
     border-right:1px solid #242424;
     &:last-child {
@@ -174,7 +174,7 @@ ul.nav {
 .nav.right {
   float:right;
   font-size:12px;
-  top:59px;
+  top:66px;
   li {
     border-right:1px solid #242424;
     &:last-child {
