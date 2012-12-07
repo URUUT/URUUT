@@ -15,6 +15,46 @@
   %body
     #fb-root
       :javascript
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '517310951621035', // App ID
+            channelUrl : '//uruut.herokuapp.com/channel.html', // Channel File
+            status     : true, // check login status
+            cookie     : true, // enable cookies to allow the server to access the session
+            xfbml      : true  // parse XFBML
+          });
+            // Additional init code here
+          FB.getLoginStatus(function(response) {
+            if (response.status === 'connected') {
+                // connected
+            } else if (response.status === 'not_authorized') {
+                // not_authorized
+                login();
+            } else {
+                // not_logged_in
+                login();
+            }
+          });
+        };
+
+        function login() {
+          FB.login(function(response) {
+            if (response.authResponse) {
+              // connected
+              testAPI();
+            } else {
+              // cancelled
+            }
+          });
+        }
+
+        function testAPI() {
+          console.log('Welcome!  Fetching your information.... ');
+          FB.api('/me', function(response) {
+            console.log('Good to see you, ' + response.name + '.');
+          });
+        }
+
         (function(d, s, id) {
           var js, fjs = d.getElementsByTagName(s)[0];
           if (d.getElementById(id)) return;
@@ -34,20 +74,20 @@
     %header.navbar
       .container
         = render 'layouts/navigation'
-
-    .banner{:style => "padding: 10px 0;border: 1px solid #DFDFDF;box-shadow: 0 0 7px rgba(0, 0, 0, .10);margin-bottom:35px;"}
-      #map{:style => "height:480px;width:100%;"}
+    .container
+      .row-fluid
+        .span12.banner{:style => "padding: 10px;border: 1px solid #DFDFDF;box-shadow: 0 0 7px rgba(0, 0, 0, .10);margin-bottom:35px;"}
+          #map{:style => "height:350px;width:100%;"}
         
     #main{:role => "main"}
       .container
         .content
-          .row
+          .row-fluid
             .span12
               = render 'layouts/messages'
               = yield
           
-          %hr
-          = render 'partials/footer'
+      = render 'partials/footer'
 
 -#%script{:type => "text/javascript", :src => "http://maps.googleapis.com/maps/api/js?key=AIzaSyAucG9ZTBqTLefKHdk_592S08LTS3lvD_k&sensor=false"}
 

@@ -1,62 +1,67 @@
-%h1.logo
-  = link_to "Home", root_path
-%ul.nav.left
-  %li
-    = link_to "Browse", pages_discover_path
-  %li
-    = link_to "How It Works", pages_how_it_works_path
-  %li
-    = link_to "Create A Project", new_project_path
-  -#%li
-    -#= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
+.row-fluid
+  .span3
+    %h1.logo
+      = link_to "Home", root_path
 
-%ul.nav.right
-  - if user_signed_in?
-    %li.signed-in
-      %a
-        -#= image_tag(get_gravatar(current_user.email), :class => "img-circle")
-        = current_user.name
-        = image_tag('down-arrow.png')
-      %div.dropdown
-        %div
-          %h5 My Account
-          %ul
-            %li
-              = link_to('Profile', users_profile_path)
-            %li
-              = link_to 'Logout', destroy_user_session_path, :method => :delete
-
-  - elsif sponsor_signed_in?
-    %li
-      %a
-        -#= image_tag(get_gravatar(current_sponsor.email), :class => "img-circle")
-        = current_sponsor.name
-        = image_tag('down-arrow.png')
-      %div.dropdown
-        %div
-          %h5 My Account
-          %ul
-            %li
-              = link_to('Profile', edit_sponsor_registration_path)
-            %li
-              = link_to 'Logout', destroy_sponsor_session_path, :method => "delete"
-
-        %div
-          %h5 My Projects
-          %ul
-            %li
-              = link_to('New Project', new_project_path)
-            %li
-              = link_to('Show Projects', projects_path)
+  .span6  
+    %ul.nav.left
+      %li
+        = link_to "Browse", pages_discover_path
+      %li
+        = link_to "How It Works", pages_how_it_works_path
+      %li
+        = link_to "Create A Project", new_project_path
+      -#%li
+        -#= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
   
-  - else
-    %li
-      %a{:href => "", "data-toggle" => "modal", "data-target" => "#login"}Log In
-  - if user_signed_in?
-    / %li
-    /   = link_to('Edit account', edit_user_registration_path)
-  - else
-    %li
-      %a{:href => "", "data-toggle" => "modal", "data-target" => "#signup"}Sign Up
+  .span3
+    %ul.nav.right
+      - if user_signed_in?
+        %li.signed-in
+          %a
+            -#= image_tag(get_gravatar(current_user.email), :class => "img-circle")
+            = current_user.name
+            = image_tag('down-arrow.png')
+          %div.dropdown
+            %div
+              %h5 My Account
+              %ul
+                %li
+                  = link_to('Profile', users_profile_path)
+                %li
+                  = link_to 'Logout', destroy_user_session_path, :method => :delete
 
-  %input{:type => "search", :placeholder => "Search"}
+      - elsif sponsor_signed_in?
+        %li
+          %a
+            -#= image_tag(get_gravatar(current_sponsor.email), :class => "img-circle")
+            = current_sponsor.name
+            = image_tag('down-arrow.png')
+          %div.dropdown
+            %div
+              %h5 My Account
+              %ul
+                %li
+                  = link_to('Profile', edit_sponsor_registration_path)
+                %li
+                  = link_to 'Logout', destroy_sponsor_session_path, :method => "delete"
+
+            %div
+              %h5 My Projects
+              %ul
+                %li
+                  = link_to('New Project', new_project_path)
+                %li
+                  = link_to('Show Projects', projects_path)
+      
+      - else
+        %li
+          %a{:href => "", "data-toggle" => "modal", "data-target" => "#login"}Log In
+      - if user_signed_in?
+        / %li
+        /   = link_to('Edit account', edit_user_registration_path)
+      - else
+        %li
+          %a{:href => "", "data-toggle" => "modal", "data-target" => "#signup"}Sign Up
+
+      -#%input{:type => "search", :placeholder => "Search"}
