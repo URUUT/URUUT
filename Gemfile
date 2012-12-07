@@ -18,8 +18,8 @@ gem "bootstrap-wysihtml5-rails"
 gem "stripe"
 gem "truncate_html"
 gem "activerecord-postgresql-adapter"
-gem "kaminari"
-gem 'omniauth-facebook', '1.4.0'
+gem "omniauth"
+gem "omniauth-facebook"
 
 # Gems used only for assets and not required
 # in production environments by default.
