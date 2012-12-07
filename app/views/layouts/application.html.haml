@@ -6,7 +6,7 @@
     %title= content_for?(:title) ? yield(:title) : "Myapp"
     %meta{:content => "", :name => "description"}
     %meta{:content => "", :name => "author"}
-    = stylesheet_link_tag    "default/application", "trontastic/jquery-ui-1.8.22.custom.css", "http://cdn.leafletjs.com/leaflet-0.4/leaflet.css",  "https://d3jyn100am7dxp.cloudfront.net/assets/widget_embed.cssgz?1350971636", "http://fonts.googleapis.com/css?family=Lato:300,400,700,400italic", :media => "all"
+    = stylesheet_link_tag    "default/application", "trontastic/jquery-ui-1.8.22.custom.css", "http://cdn.leafletjs.com/leaflet-0.4/leaflet.css", "http://fonts.googleapis.com/css?family=Lato:300,400,700,400italic", :media => "all"
     = javascript_include_tag "application", "https://js.stripe.com/v1/"
     = javascript_tag do
       Stripe.setPublishableKey('pk_0EJjrLzbYh33TkSMmfGjt4upjqVOW');		
@@ -28,10 +28,12 @@
             if (response.status === 'connected') {
                 // connected
             } else if (response.status === 'not_authorized') {
-                // not_authorized
+              // not_authorized
+                alert("help");
                 login();
             } else {
                 // not_logged_in
+                alert("not logged in");
                 login();
             }
           });
@@ -59,7 +61,7 @@
           var js, fjs = d.getElementsByTagName(s)[0];
           if (d.getElementById(id)) return;
           js = d.createElement(s); js.id = id;
-          js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=487449314607252";
+          js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=517310951621035";
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
 
@@ -89,11 +91,8 @@
           
       = render 'partials/footer'
 
--#%script{:type => "text/javascript", :src => "http://maps.googleapis.com/maps/api/js?key=AIzaSyAucG9ZTBqTLefKHdk_592S08LTS3lvD_k&sensor=false"}
-
 %script{:src => "http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"}
 %script{:src => "http://maps.stamen.com/js/tile.stamen.js?v1.2.1"} 
-%script{:src => "formToWizard.js"}
 %script{:src => "http://maps.googleapis.com/maps/api/js?sensor=false"} 
 
 :javascript
