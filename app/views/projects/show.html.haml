@@ -1,5 +1,5 @@
 .span12
-  .row
+  .row-fluid
     .span8.alpha{:style => "float:left;"}
       %h2{:style => "font-weight:400;text-transform:uppercase;word-wrap:break-word;margin:0"}= @project.title
       %p{:style => "margin-top:0;"}in #{@project.category.titlecase}
@@ -41,7 +41,7 @@
         = link_to "Fund Now", new_donation_path, :class => "btn"
 
 
-.row
+.row-fluid
   .span12
     %h3{:style => "border-bottom:1px solid #ccc;margin-top:30px;"} Similar Projects
 

@@ -1,4 +1,4 @@
-/ .row.slider
+/ .row-fluid.slider
 /   .span9
 /     %img{:style => "width:100%;height:400px;"}
 /   .span3
@@ -11,7 +11,7 @@
   %h2.sections Recent Projects
 
   - if @projects
-    - @projects.take(4).each do |p|
+    - @projects.take(3).each do |p|
       - if p.live == true && p.deleted == false
         %div.project
           = image_tag "#{p.image.url(:original)}", :class => "project-image"
@@ -51,7 +51,7 @@
   %h2.sections Ending Soon 
 
   - if @ending
-    - @ending.take(4).each do |e|
+    - @ending.take(3).each do |e|
       - if e.live == true && e.deleted == false
         %div.project
           = image_tag "#{e.image.url(:original)}", :class => "project-image"

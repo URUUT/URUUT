@@ -1,28 +1,15 @@
-%script{:src => "https://d3jyn100am7dxp.cloudfront.net/assets/widget_embed_libraries.jsgz?1350971636"}
-%footer
-  .row
-    %nav.span5
-      %a{:href => "", "data-toggle" => "modal", "data-target" => "#contact"}Contact Us
-      %a{:href => "", "data-toggle" => "modal", "data-target" => "#myMap"}Map
-      %a{:href => "http://hashfire.uservoice.com/knowledgebase"}Help
-      %a Terms of Use
-      %a Privacy Policy
-      %a
-        :javascript
-          new DESK.Widget({ 
-            version: 1, 
-            site: 'uruut.desk.com', 
-            port: '80', 
-            email:'', 
-            displayMode: 1,
-            features: {}, 
-            fields: { 
-              ticket: {}, 
-              interaction: {}, 
-              email: {}, 
-              customer: {} 
-            } 
-          }).render();
+%footer.row-fluid
+  .container
+    .row-fluid
+      
+      .span3= image_tag "logo-name-white.png", :style => "width:105px;margin-top:10px;"
 
-    %p.span4.offset3{:style => "text-align:right;"}
-      &copy; 2012 URUUT.com
+      %nav.span6
+        %a{:href => "", "data-toggle" => "modal", "data-target" => "#contact"}Contact Us
+        %a{:href => "", "data-toggle" => "modal", "data-target" => "#myMap"}Map
+        %a{:href => "http://hashfire.uservoice.com/knowledgebase"}Help
+        %a{:href => "#"} Terms of Use
+        %a{:href => "#"} Privacy Policy
+
+      %p.span3{:style => "text-align:right;"}
+        &copy; 2012 URUUT.com
