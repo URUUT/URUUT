@@ -54,21 +54,89 @@ form {
 		display:inline-block;}}
 		
 #steps {
-	float:left;
+	display:block;
+	margin:-15px auto 50px;
+	overflow:hidden;
+	padding-right:20px;
+	text-align:center;
 	li {
-		color:#dfdfdf;
-		display:block;
+		background:#dfdfdf;
+		color:#fff;
+    cursor:pointer;
+		display:inline-block;
     font-family:'Lato', sans-serif;
-		font-size:22px;
+		font-size:18px;
 		font-weight:200;
 		list-style-type:none;
-		margin-bottom:30px;
 		margin-right:20px;
+		padding:5px 70px 5px 30px;
+		position:relative;
+    &:hover {
+      background:#5ea240;
+      &:after {
+        border-top: 50px solid transparent; /* Go big on the size, and let overflow hide */
+        border-bottom: 50px solid transparent;
+        border-left: 30px solid #5ea240;}}
+		&:after { 
+			content: " "; 
+			display: block; 
+			width: 0; 
+			height: 0;
+			border-top: 50px solid transparent;           /* Go big on the size, and let overflow hide */
+			border-bottom: 50px solid transparent;
+			border-left: 30px solid #dfdfdf;
+			position: absolute;
+			top: 50%;
+			margin-top: -50px; 
+			left: 100%;
+			z-index: 2;}
+		&:before {
+			content: " ";
+			display: block;
+			width: 0;
+			height: 0;
+			border-top: 50px solid transparent;
+			border-bottom: 50px solid transparent;
+			border-left: 30px solid white;
+			position: absolute;
+			top: 50%;
+			margin-top: -50px;
+			margin-left: 1px;
+			left: 100%;
+			z-index: 1;}
 		&.current {
-			color:#464646;}
+			background:#70bf4c;
+			color:#fff;
+			&:after { 
+				content: " "; 
+				display: block; 
+				width: 0; 
+				height: 0;
+				border-top: 50px solid transparent;           /* Go big on the size, and let overflow hide */
+				border-bottom: 50px solid transparent;
+				border-left: 30px solid #70bf4c;
+				position: absolute;
+				top: 50%;
+				margin-top: -50px; 
+				left: 100%;
+				z-index: 2;}
+			&:before {
+				content: " ";
+				display: block;
+				width: 0;
+				height: 0;
+				border-top: 50px solid transparent;
+				border-bottom: 50px solid transparent;
+				border-left: 30px solid white;
+				position: absolute;
+				top: 50%;
+				margin-top: -50px;
+				margin-left: 1px;
+				left: 100%;
+				z-index: 1;}}
 		span {
 			display:inline-block;
-			font-size:22px;
+			font-size:18px;
 			font-weight:200;
 			&:before {
 				content:':';}}}}

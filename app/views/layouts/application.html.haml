@@ -15,47 +15,6 @@
   %body
     #fb-root
       :javascript
-        window.fbAsyncInit = function() {
-          FB.init({
-            appId      : '517310951621035', // App ID
-            channelUrl : '//uruut.herokuapp.com/channel.html', // Channel File
-            status     : true, // check login status
-            cookie     : true, // enable cookies to allow the server to access the session
-            xfbml      : true  // parse XFBML
-          });
-            // Additional init code here
-          FB.getLoginStatus(function(response) {
-            if (response.status === 'connected') {
-                // connected
-            } else if (response.status === 'not_authorized') {
-              // not_authorized
-                alert("help");
-                login();
-            } else {
-                // not_logged_in
-                alert("not logged in");
-                login();
-            }
-          });
-        };
-
-        function login() {
-          FB.login(function(response) {
-            if (response.authResponse) {
-              // connected
-              testAPI();
-            } else {
-              // cancelled
-            }
-          });
-        }
-
-        function testAPI() {
-          console.log('Welcome!  Fetching your information.... ');
-          FB.api('/me', function(response) {
-            console.log('Good to see you, ' + response.name + '.');
-          });
-        }
 
         (function(d, s, id) {
           var js, fjs = d.getElementsByTagName(s)[0];
@@ -76,11 +35,7 @@
     %header.navbar
       .container
         = render 'layouts/navigation'
-    .container
-      .row-fluid
-        .span12.banner{:style => "padding: 10px;border: 1px solid #DFDFDF;box-shadow: 0 0 7px rgba(0, 0, 0, .10);margin-bottom:35px;"}
-          #map{:style => "height:350px;width:100%;"}
-        
+    
     #main{:role => "main"}
       .container
         .content
@@ -91,24 +46,28 @@
           
       = render 'partials/footer'
 
-%script{:src => "http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"}
-%script{:src => "http://maps.stamen.com/js/tile.stamen.js?v1.2.1"} 
-%script{:src => "http://maps.googleapis.com/maps/api/js?sensor=false"} 
+= javascript_include_tag "formToWizard"
 
 :javascript
   $(function(){
     //initialize();	
-    var map = L.map('map').setView([33.7489, -84.3881], 11);
-
-    L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {
-      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
-    }).addTo(map);
-		
-    L.marker([33.7489, -84.3881]).addTo(map).bindPopup('<h4>Welcome to URUUT</h4>').openPopup();
-		  		
-    $('#new_project').formToWizard({ submitButton: 'project-submit' });
-    $('.edit_project').formToWizard({ submitButton: 'project-submit' });
+    $('#new_project').formToWizard({ submitButton: 'project-submit', showStepNo: false });
+    $('.edit_project').formToWizard({ submitButton: 'project-submit', showStepNo: false });
     $('form fieldset p a').addClass('btn');
+    $('#steps li').each(function(){
+      var child = $(this).find('span');
+      child.text().replace(/:/g, '');
+      $(this).html(child);
+    });
+		
+    $('[id^=stepDesc]').click(function(){
+      var l = $(this).attr('id');
+      var num = l.substr(-1, l.length-1);
+      $('div[id^=step]').hide();
+      $('div#step' + num).show();
+      $('[id^=stepDesc]').removeClass('current');
+      $(this).addClass('current');
+    });
     $('#myModal form').submit(function() {  
       var valuesToSubmit = $(this).serialize();
       $.ajax({

@@ -3,21 +3,10 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
+  $('#stepDesc1').click ->
+    console.log "clicked"
+    $('#step0').hide()
+    $('#step1').show()
 
-	$('#step-1 .btn.next').click ->
-		$('#step-1').hide()
-		$('#step-2').show()
-		
-	$('#step-2 .btn.next').click ->
-		$('#step-2').hide()
-		$('#step-3').show()
-		$('#new_project input[type=submit]').show()
-		
-	$('#step-2 .btn.next').click ->
-		$('#step-2').hide()
-		$('#step-3').show()
-		$('.edit_project input[type=submit]').show()
-		
-	$('#step-2 .btn.back').click ->
-		$('#step-2').hide()
-		$('#step-1').show()
+  $('.down').click ->
+    $('.dropdown').toggle()

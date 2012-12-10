@@ -43,6 +43,7 @@ group :development, :test do
   gem "erb2haml"
   gem 'rb-fsevent', '~> 0.9.1'
   gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git', :require => 'rails_development_boost'
+  gem "better_errors"
 end
 
 gem 'jquery-rails'
