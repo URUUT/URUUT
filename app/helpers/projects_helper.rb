@@ -44,4 +44,11 @@ module ProjectsHelper
       Time.parse(duration).strftime("%m/%d/%y")
     end
   end
+  
+  def stored_content
+    content_for :description do
+      "This is some text"
+    end
+  end
+
 end

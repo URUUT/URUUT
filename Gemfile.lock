@@ -45,6 +45,9 @@ GEM
       nokogiri (>= 1.4.4)
       uuidtools (~> 2.1)
     bcrypt-ruby (3.0.1)
+    better_errors (0.0.8)
+      coderay
+      erubis
     bootstrap-wysihtml5-rails (0.3.1.13)
       railties (>= 3.0)
     builder (3.0.4)
@@ -55,6 +58,7 @@ GEM
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
     cocaine (0.4.2)
+    coderay (1.0.8)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -218,6 +222,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-postgresql-adapter
   aws-sdk
+  better_errors
   bootstrap-wysihtml5-rails
   capistrano
   coffee-rails (~> 3.2.1)

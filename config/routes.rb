@@ -2,11 +2,7 @@ Crowdfund::Application.routes.draw do
   
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   devise_for :sponsors, :controllers => { :dashboard => "sponsors/dashboard" }
-
-  namespace :sponsors do 
-    resources :projects
-  end
-
+  
   #get "sponsors/dashboard/index"
   
   get "image/new"
@@ -34,6 +30,8 @@ Crowdfund::Application.routes.draw do
   resources :projects
 
   resources :donations
+  
+  resources :projects
 
   # devise_for :admin_users, ActiveAdmin::Devise.config
 

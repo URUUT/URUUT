@@ -4,7 +4,7 @@
       = link_to "Home", root_path
 
   .span6  
-    %ul.nav.left
+    %ul.left
       %li
         = link_to "Browse", pages_discover_path
       %li
@@ -15,13 +15,13 @@
         -#= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
   
   .span3
-    %ul.nav.right
+    %ul.right
       - if user_signed_in?
         %li.signed-in
           %a
             -#= image_tag(get_gravatar(current_user.email), :class => "img-circle")
             = current_user.name
-            = image_tag('down-arrow.png')
+            = image_tag 'down-arrow.png', :class => "down"
           %div.dropdown
             %div
               %h5 My Account
