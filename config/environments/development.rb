@@ -46,8 +46,8 @@ Crowdfund::Application.configure do
     domain: "hashfire.com",
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: "chad.bartels@gmail.com",
-    password: "cbartels6016"
+    user_name: "chad.bartels@hashfire.com",
+    password: "porous2010"
   }
 
   Paperclip.options[:command_path] = "/usr/local/Cellar/imagemagick/6.7.1-1/bin"

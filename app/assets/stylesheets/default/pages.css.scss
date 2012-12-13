@@ -113,11 +113,30 @@ h2.sections {
 
 footer {
   background:#423f38;
-  padding:5px 0 10px;
+  padding:35px 0 40px;
 	p.span3 {
     margin-top:15px;}
+  ul.pages {
+    font:400 12px/12px arial, sans-serif;
+    text-transform:uppercase;}
   ul {
-    float:left;}
+    float:left;
+    width:140px;
+    li {
+      color:#fff;
+      font-size:11px;
+      list-style-type:none;
+      h5 {
+        color:#fff;
+        font-size:12px;
+        font-weight:400;
+        margin:0;
+        text-transform:uppercase;}
+      a {
+        color:#fff;
+        &:hover {
+          color:#fff;
+          text-decoration:none;}}}}
   nav {
     margin-top:15px;
     text-align:center;
@@ -132,7 +151,9 @@ footer {
         text-decoration:underline;}}}}
 
 .copyright {
-  background:#53544b;}
+  background:#53544b;
+  color:#fff;
+  line-height:45px;}
 
 #myModal.modal {
 	display:none; }
