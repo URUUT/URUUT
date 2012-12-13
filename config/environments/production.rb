@@ -65,7 +65,7 @@ Crowdfund::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  FACEBOOK_KEY="406604396088865"
-  FACEBOOK_SECRET="9d5ea826d09f6561781e4a942b38fda0"
+  FACEBOOK_KEY="517310951621035"
+  FACEBOOK_SECRET="d47245ebf8b7a2c433b2aeb8c6c39ec7"
 
 end
