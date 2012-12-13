@@ -13,3 +13,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignore config for omniauth
+config/initializers/devise.rb
+config/environments/development.rb
