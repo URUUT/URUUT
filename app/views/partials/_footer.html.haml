@@ -1,15 +1,50 @@
-%footer.row-fluid
+%footer
   .container
     .row-fluid
       
-      .span3= image_tag "logo-name-white.png", :style => "width:105px;margin-top:10px;"
+      %ul
+        %li
+          %h5 Find Projects
+        %li
+        %li
+          %h5 Get Funding
+        %li
+          how it works
+        %li
+          create your project
 
-      %nav.span6
-        %a{:href => "", "data-toggle" => "modal", "data-target" => "#contact"}Contact Us
-        %a{:href => "", "data-toggle" => "modal", "data-target" => "#myMap"}Map
-        %a{:href => "http://hashfire.uservoice.com/knowledgebase"}Help
-        %a{:href => "#"} Terms of Use
-        %a{:href => "#"} Privacy Policy
+      %ul
+        %li
+          %h5 About URUUT
+        %li
+          about us
+        %li
+          how it works
+        %li
+          our team
+        %li
+          partnerships
 
-      %p.span3{:style => "text-align:right;"}
-        &copy; 2012 URUUT.com
+      %ul 
+        %li
+          %a{:href => "", "data-toggle" => "modal", "data-target" => "#contact"}Contact Us
+        %li
+          %a{:href => "", "data-toggle" => "modal", "data-target" => "#myMap"}Map
+        %li
+          %a{:href => "http://hashfire.uservoice.com/knowledgebase"}Help
+        %li 
+          = link_to "Terms", pages_terms_url
+        %li
+          %a{:href => "#"} Privacy Policy
+
+      %ul
+        %li
+          %h5 Find Us On
+        %li
+          FB TW
+
+.copyright
+  .container  
+    .row-fluid
+      %p.span3
+        &copy 2012 URUUT.com

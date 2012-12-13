@@ -1,50 +1,51 @@
 .span12
   .row-fluid
-    .span8.alpha{:style => "float:left;"}
-      %h2{:style => "font-weight:400;text-transform:uppercase;word-wrap:break-word;margin:0"}= @project.title
-      %p{:style => "margin-top:0;"}in #{@project.category.titlecase}
+    .span8
+      %h2= @project.title
+      %p in #{@project.category.titlecase}
       .fb-like{"data-href" => "#{request.url}", "data-send" => "false", "data-layout" => "button_count", "data-width" => "100", "data-show-faces" => "false", :style => "top:-3px;margin-right:10px;"}
 
       %a.twitter-share-button{:href => "https://twitter.com/share"}Tweet
 
       %hr
 
-      %iframe{:src => "#{vidUrl(@project.video)}", :style => "width:100%; height:400px;display:block;margin-top: 15px;", :frameborder => 0}
+      %iframe{:src => "#{vidUrl(@project.video)}"}
 
       %hr
 
-      %div{:style => "margin-top:35px;"}= @project.description.html_safe
+      %div= @project.description.html_safe
 
-    .span3.well{:style => "float:left;margin-top:0;"}
-      %h3{:style => "text-align:center;font-weight:400;font-style:italic;color:#464646;"}= number_to_currency(amount_funded(@project.id))
-      %ul.project-details{:style => "margin:0;text-align:center;"}
-        %li{:style => "margin:0;text-align:center;"}
+    .span4
+      %h3= number_to_currency(amount_funded(@project.id))
+      %ul.project-details
+        %li
           %p Percent Funded
           #progressbar
 
-        %li{:style => "margin:15px 20px;text-align:center;"}
+        %li
           %p Funding Goal
           = number_to_currency(@project.goal, :precision => 0)
 
-        %li{:style => "margin:15px 20px;text-align:center;"}
+        %li
           %p Days to go
           = time_left(@project.duration).to_i
 
       - if current_user
         - if Donation.already_donated(@project.id, current_user.id).nil?
-          = link_to "Fund Now", new_donation_path, :class => "btn", :style => "padding:10px 20px;width:67px;display:block;margin:0 auto;"
+          = link_to "Fund Now", new_donation_path, :class => "btn"
         - else
-          .well{:style => "width:200px;text-align:center;display:block;margin:25px auto 0;background:#fff;"}
+          .well
             %h4 You've donated #{number_to_currency(Donation.already_donated(@project.id, current_user.id), :precision => 0)}
             = link_to "Edit Your Donation", edit_donation_path(Donation.edit_donation(@project.id, current_user.id))
       - elsif !current_user
         = link_to "Fund Now", new_donation_path, :class => "btn"
 
-
-.row-fluid
-  .span12
-    %h3{:style => "border-bottom:1px solid #ccc;margin-top:30px;"} Similar Projects
-
+      %ul.perks
+        - @perks.each do |p|
+          %li
+            %h3= p.name
+            %p= p.amount
+            %p= p.description
 :javascript
   $(function(){
     $( "#progressbar" ).progressbar({

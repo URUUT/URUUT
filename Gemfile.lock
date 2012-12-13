@@ -105,6 +105,9 @@ GEM
     json (1.7.5)
     jwt (0.1.5)
       multi_json (>= 1.0)
+    kaminari (0.14.1)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     kgio (2.7.4)
     listen (0.6.0)
     mail (2.4.4)
@@ -233,6 +236,7 @@ DEPENDENCIES
   erb2haml
   haml
   jquery-rails
+  kaminari
   mysql2 (~> 0.3.11)
   omniauth
   omniauth-facebook

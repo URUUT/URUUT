@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   layout :layout_by_resource
 
   def after_sign_in_path_for(resource)
-	  pages_index_path
+	  browse_projects_path
 	end
 
   protected
