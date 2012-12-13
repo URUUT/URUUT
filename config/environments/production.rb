@@ -64,4 +64,8 @@ Crowdfund::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+
+  FACEBOOK_KEY="406604396088865"
+  FACEBOOK_SECRET="9d5ea826d09f6561781e4a942b38fda0"
+
 end
