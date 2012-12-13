@@ -12,7 +12,7 @@
       Stripe.setPublishableKey('pk_0EJjrLzbYh33TkSMmfGjt4upjqVOW');		
     = csrf_meta_tags
     = yield(:head)
-  %body
+  %body{:class => "#{controller_name} #{action_name}"}
     #fb-root
       :javascript
 
@@ -44,7 +44,7 @@
               = render 'layouts/messages'
               = yield
           
-      = render 'partials/footer'
+    = render 'partials/footer'
 
 = javascript_include_tag "formToWizard"
 
@@ -59,7 +59,7 @@
       child.text().replace(/:/g, '');
       $(this).html(child);
     });
-		
+
     $('[id^=stepDesc]').click(function(){
       var l = $(this).attr('id');
       var num = l.substr(-1, l.length-1);
@@ -78,5 +78,8 @@
         console.log(json);
       });
       return false; // prevents normal behaviour
+    });
+    $(document).on('click', '.redactor_editor', function(){
+      $(this).garlic();
     });
   });

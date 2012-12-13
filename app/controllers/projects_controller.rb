@@ -29,10 +29,9 @@ class ProjectsController < ApplicationController
 
 	def show
 		@project = Project.find(params[:id])
-		tags = @project.tags
     @donation = Donation.where("project_id = ?", @project.id)
-    # @tags = tags.split(',')
-		session[:current_project] = @project.id
+		@perks = Perk.where("project_id = ?", @project.id)
+    session[:current_project] = @project.id
 	end
 
 	def update  

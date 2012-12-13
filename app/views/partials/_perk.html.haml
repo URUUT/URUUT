@@ -1,0 +1,16 @@
+.perk-container
+  -#%div
+    -#= p.label :name
+    -#= p.text_field :name
+
+  -#%div
+    -#= p.label :amount
+    -#= p.text_field :amount
+
+  -#%div
+    -#= p.label :description
+    -#= p.text_area :description
+
+  -#%div
+    -#%a.remove{:href => "#"} Remove
+    -#%a.add-perk{:href => "#"} Add

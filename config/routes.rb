@@ -3,13 +3,11 @@ Crowdfund::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   devise_for :sponsors, :controllers => { :dashboard => "sponsors/dashboard" }
   
-  #get "sponsors/dashboard/index"
-  
   get "image/new"
 
   get "users/profile"
 
-  get "pages/index"
+  match "browse/projects" => "pages#index"
 
   get "pages/discover"
 
@@ -20,6 +18,8 @@ Crowdfund::Application.routes.draw do
   get "pages/contact"
 
   get "pages/how_it_works"
+
+  get "pages/terms"
 
   get "projects/add_desc"
   
@@ -33,12 +33,7 @@ Crowdfund::Application.routes.draw do
   
   resources :projects
 
-  # devise_for :admin_users, ActiveAdmin::Devise.config
-
-  # ActiveAdmin.routes(self)
-
-
-  root to: "pages#index"
+  root to: "pages#home"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

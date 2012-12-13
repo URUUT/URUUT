@@ -1,12 +1,37 @@
-= f.fields_for :perks do |p|
-  %fieldset
-    %legend Perks
-    %div
-      = p.label :name
-      = p.text_field :name
-    %div
-      = p.label :amount
-      = p.text_field :amount
-    %div
-      = p.label :description
-      = p.text_area :description
+%fieldset
+  %legend Perks
+  .perk-container
+    = render "perk", :f => f
+
+  %div
+    %a.add-perk{:href => "#"} Add
+
+:javascript
+  var i = 0;
+  var new_index = function(){
+    $('.perk').each(function(){
+      $(this).find('div').each(function(){
+        $(this).children().each(function(){
+          if($(this).attr('id')){
+            var id = $(this).attr('id');
+            var name = $(this).attr('name');
+            name = name.replace('test', i);
+            id = id.replace('test', i);
+            $(this).attr('name', name);
+            $(this).attr('id', id);
+            $(this).garlic();
+          }
+        });
+      });
+      i++;
+    });
+  }
+
+  $('.add-perk').click(function(){
+    $('.perk-container').append(" #{escape_javascript(render 'perk', :f => f )}");
+    new_index();
+  });
+
+  $(document).on('click', '.remove', function(){
+    $(this).parent().remove();
+  });

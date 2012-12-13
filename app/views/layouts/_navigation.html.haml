@@ -6,9 +6,9 @@
   .span6  
     %ul.left
       %li
-        = link_to "Browse", pages_discover_path
+        = link_to "Find Projects", browse_projects_path
       %li
-        = link_to "How It Works", pages_how_it_works_path
+        = link_to "About URUUT", pages_how_it_works_path
       %li
         = link_to "Create A Project", new_project_path
       -#%li
@@ -29,7 +29,7 @@
                 %li
                   = link_to('Profile', users_profile_path)
                 %li
-                  = link_to 'Logout', destroy_user_session_path, :method => :delete
+                  = link_to 'Logout', destroy_user_session_path
 
       - elsif sponsor_signed_in?
         %li
@@ -56,12 +56,8 @@
       
       - else
         %li
-          %a{:href => "", "data-toggle" => "modal", "data-target" => "#login"}Log In
-      - if user_signed_in?
-        / %li
-        /   = link_to('Edit account', edit_user_registration_path)
-      - else
-        %li
-          %a{:href => "", "data-toggle" => "modal", "data-target" => "#signup"}Sign Up
+          = link_to "Log In", user_session_path
+          or 
+          = link_to "Sign Up", new_user_registration_path, :class => "sign-up"
 
       -#%input{:type => "search", :placeholder => "Search"}
