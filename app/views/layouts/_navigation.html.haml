@@ -1,9 +1,9 @@
 .row-fluid
-  .span3
+  .span1
     %h1.logo
       = link_to "Home", root_path
 
-  .span6  
+  .span6.offset2  
     %ul.left
       %li
         = link_to "Find Projects", browse_projects_path
@@ -57,7 +57,7 @@
       - else
         %li
           = link_to "Log In", user_session_path
-          or 
-          = link_to "Sign Up", new_user_registration_path, :class => "sign-up"
+          %span.or or 
+          = link_to "Sign Up", new_user_registration_path, :class => "sign-up-link"
 
       -#%input{:type => "search", :placeholder => "Search"}
