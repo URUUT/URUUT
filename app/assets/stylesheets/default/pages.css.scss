@@ -5,7 +5,7 @@ body {
   color:#333;
   font:normal 13px/19px 'Georgia', georgia, serif;
   margin:0;
-  padding:0;}
+  padding:100px 0 0;}
 
 h1,h2,h3,h4,h5,h6 {
   color:#464646;
@@ -33,8 +33,13 @@ textarea {
   padding:5px 7px;}
 
 .pages.home {
-  background:url(image-path('bg_01.jpg')) top center no-repeat;
-  height:100%;}
+  background:url(image-path('bg_01.jpg')) no-repeat center center fixed;
+  height:100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  padding:0;}
 
 .pages.home #main .container {
   height:100%;}
@@ -116,24 +121,40 @@ footer {
   padding:35px 0 40px;
 	p.span3 {
     margin-top:15px;}
-  ul.pages {
-    font:400 12px/12px arial, sans-serif;
+  ul.pages li a {
+    font:normal 12px/12px "Proxima Nova", arial, sans-serif;
+    letter-spacing:1px;
     text-transform:uppercase;}
   ul {
     float:left;
-    width:140px;
+    margin-left:0;
+    width:160px;
     li {
       color:#fff;
       font-size:11px;
+      line-height:19px;
       list-style-type:none;
       h5 {
         color:#fff;
-        font-size:12px;
-        font-weight:400;
+        font:normal 12px/19px 'Proxima Nova',arial, sans-serifi !important;
+        font-style:none;
+        letter-spacing:1px;
         margin:0;
-        text-transform:uppercase;}
+        text-transform:uppercase;
+        -webkit-font-smoothing: subpixel-antialiased;
+        a {
+          color:#fff;
+          font:normal 12px/19px 'Proxima Nova', arial, sans-serifi !important;
+          font-style:none;
+          letter-spacing:2px;
+          margin:0;
+          text-transform:uppercase;
+          -webkit-font-smoothing: subpixel-antialiased;}}
       a {
+        font:normal 10px/12px 'Georgia', georgia, serif;
         color:#fff;
+        font-style:italic;
+        -webkit-font-smoothing: subpixel-antialiased;
         &:hover {
           color:#fff;
           text-decoration:none;}}}}
@@ -232,15 +253,18 @@ div.dropdown {
   width:100%;
   li {
     border-left:1px solid #55554d;
-    font-family:'Lato', sans-serif;
+    font:normal 12px/12px 'Proxima Nova', sans-serif;
     display:inline-block;
-    line-height:60px;
+    letter-spacing:2px;
+    line-height:60px;    
     list-style-type:none;
     padding:0 32px 0 9px;
     a {
       color:#fff;
       font-size:11px;
-      text-transform:uppercase;}}}
+      text-transform:uppercase;
+      &:hover{
+        text-decoration:none;}}}}
 
 .right {
   display:block;
@@ -250,9 +274,10 @@ div.dropdown {
   width:100%;
   li {
     border-right:1px solid #242424;
-    font-family:'Lato', sans-serif;
+    font:normal 12px/12px 'Proxima Nova', sans-serif;
     display:inline-block;
     list-style-type:none;
+    -webkit-font-smoothing: subpixel-antialiased;
     img {
       margin:-6px 0 0 5px;
 			vertical-align:middle;}
@@ -262,8 +287,19 @@ div.dropdown {
       border:none;}
     a {
       color:#fff;
+      letter-spacing:2px;
       line-height:60px !important;
-      text-transform:uppercase;}}
+      text-transform:uppercase;
+      -webkit-font-smoothing: subpixel-antialiased;
+      &:hover {
+        text-decoration:none}}
+    a.sign-up-link {
+      color:#83c140;}
+    span.or {
+      color:#fff;
+      font-family:"Georgia", georgia, serif;
+      font-style:italic;
+      margin:0 5px;}}
   li.signed-in {
     border:none;}
   input[type=search]{
