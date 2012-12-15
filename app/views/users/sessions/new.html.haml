@@ -3,7 +3,8 @@
   = image_tag "logo-seed.png", :class => 'seed'
   = image_tag "logo-name-white.png", :class => 'seed name'
 
-  %h3 Sign in as Donator
+  %hr
+
   = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
     %div
       = f.label :email

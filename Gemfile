@@ -45,6 +45,7 @@ group :development, :test do
   gem 'rb-fsevent', '~> 0.9.1'
   gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git', :require => 'rails_development_boost'
   gem "better_errors"
+  gem "binding_of_caller"
 end
 
 gem 'jquery-rails'

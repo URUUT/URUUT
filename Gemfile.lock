@@ -48,6 +48,7 @@ GEM
     better_errors (0.0.8)
       coderay
       erubis
+    binding_of_caller (0.6.8)
     bootstrap-wysihtml5-rails (0.3.1.13)
       railties (>= 3.0)
     builder (3.0.4)
@@ -226,6 +227,7 @@ DEPENDENCIES
   activerecord-postgresql-adapter
   aws-sdk
   better_errors
+  binding_of_caller
   bootstrap-wysihtml5-rails
   capistrano
   coffee-rails (~> 3.2.1)

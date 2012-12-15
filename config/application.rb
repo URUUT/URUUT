@@ -61,6 +61,7 @@ module Crowdfund
     config.assets.initialize_on_precompile = false
     # config.assets.precompile += %w( active_admin.css.scss )
     config.logger = Logger.new(STDOUT)
-
+    config.assets.paths << "#{Rails.root}/app/assets/fonts"
+    config.assets.precompile += %w( .svg .eot .woff .ttf )
   end
 end
