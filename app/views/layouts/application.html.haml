@@ -52,7 +52,7 @@
   $(function(){
     //initialize();	
     $('#new_project').formToWizard({ submitButton: 'project-submit', showStepNo: false });
-    $('.edit_project').formToWizard({ submitButton: 'project-submit', showStepNo: false });
+    $('form[id^=edit_project]').formToWizard({ submitButton: 'project-submit', showStepNo: false });
     $('form fieldset p a').addClass('btn');
     $('#steps li').each(function(){
       var child = $(this).find('span');

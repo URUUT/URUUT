@@ -1,30 +1,30 @@
 %fieldset
-	%legend Project Details
-	%div
-		= f.label :image, "Select an image for the project"
-		= f.file_field :image
-	%div
-		= f.label :video
-		= f.text_field :video
-	%div
-		= f.label :address
-		= f.text_field :address
-	%div
-		= f.label :city
-		= f.text_field :city
-	%div
-		= f.label :state
-		= f.select :state, options_for_select(us_states, @project.state)
-	%div
-		= f.label :zip
-		= f.text_field :zip
-	%div
-		= f.label :neighborhood
-		= f.text_field :neighborhood
-	%div
-		= f.label :duration
-		= text_field_tag "duration", project_duration(@project.duration)
-		= f.hidden_field :duration
-	%div
-		= f.label :goal
-		= f.text_field :goal
+  %legend.heading Project Details
+  %div
+    = f.label :image, "Select an image for the project"
+    = f.file_field :image
+  %div
+    = f.label :video
+    = f.text_field :video
+  %div
+    = f.label :address
+    = f.text_field :address
+  %div
+    = f.label :city
+    = f.text_field :city
+  %div
+    = f.label :state
+    = f.select :state, options_for_select(us_states, @project.state)
+  %div
+    = f.label :zip
+    = f.text_field :zip
+  %div
+    = f.label :neighborhood
+    = f.text_field :neighborhood
+  %div
+    = f.label :duration
+    = text_field_tag "duration", project_duration(@project.duration)
+    = f.hidden_field :duration
+  %div
+    = f.label :goal
+    = f.text_field :goal

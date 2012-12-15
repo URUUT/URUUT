@@ -13,7 +13,7 @@ module ProjectsHelper
 		path = uri.path
 		host = uri.host
 		addition = 'embed'
-		newUrl = scheme + '://www.youtube.com/' + addition + path
+		newUrl = '#{scheme}://www.youtube.com/#{addition}#{path}'
 		return newUrl
 	end
 
