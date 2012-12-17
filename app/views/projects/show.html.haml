@@ -1,54 +1,58 @@
-.span12
-  .row-fluid
-    .span8
-      %h2= @project.title
-      %p in #{@project.category.titlecase}
-      .fb-like{"data-href" => "#{request.url}", "data-send" => "false", "data-layout" => "button_count", "data-width" => "100", "data-show-faces" => "false", :style => "top:-3px;margin-right:10px;"}
+#large_image
+  %p Test
+  .funding-info
+    .container
+      %p test
+.row-fluid.show-content
+  .span8
+    %h2= @project.title
+    %p in #{@project.category.titlecase}
+    .fb-like{"data-href" => "#{request.url}", "data-send" => "false", "data-layout" => "button_count", "data-width" => "100", "data-show-faces" => "false", :style => "top:-3px;margin-right:10px;"}
 
-      %a.twitter-share-button{:href => "https://twitter.com/share"}Tweet
+    %a.twitter-share-button{:href => "https://twitter.com/share"}Tweet
 
-      %hr
+    %hr
 
-      %iframe{:src => "#{vidUrl(@project.video)}"}
+    %iframe{:src => "#{vidUrl(@project.video)}"}
 
-      %hr
+    %hr
 
-      %div= @project.description.html_safe
+    %div= @project.description.html_safe
 
-    .span4
-      %h3= number_to_currency(amount_funded(@project.id))
-      %ul.project-details
-        %li
-          %p Percent Funded
-          #progressbar
+  .span4
+    %h3= number_to_currency(amount_funded(@project.id))
+    %ul.project-details
+      %li
+        %p Percent Funded
+        #progressbar
 
-        %li
-          %p Funding Goal
-          = number_to_currency(@project.goal, :precision => 0)
+      %li
+        %p Funding Goal
+        = number_to_currency(@project.goal, :precision => 0)
 
-        %li
-          %p Days to go
-          = time_left(@project.duration).to_i
+      %li
+        %p Days to go
+        = time_left(@project.duration).to_i
 
-      - if current_user
-        - if Donation.already_donated(@project.id, current_user.id).nil?
-          = link_to "Fund Now", new_donation_path, :class => "btn"
-        - else
-          .well
-            %h4 You've donated #{number_to_currency(Donation.already_donated(@project.id, current_user.id), :precision => 0)}
-            = link_to "Edit Your Donation", edit_donation_path(Donation.edit_donation(@project.id, current_user.id))
-      - elsif !current_user
+    - if current_user
+      - if Donation.already_donated(@project.id, current_user.id).nil?
         = link_to "Fund Now", new_donation_path, :class => "btn"
+      - else
+        .well
+          %h4 You've donated #{number_to_currency(Donation.already_donated(@project.id, current_user.id), :precision => 0)}
+          = link_to "Edit Your Donation", edit_donation_path(Donation.edit_donation(@project.id, current_user.id))
+    - elsif !current_user
+      = link_to "Fund Now", new_donation_path, :class => "btn"
 
-      %ul.perks
-        - @perks.each do |p|
-          %li
-            %h3= p.name
-            %p= p.amount
-            %p= p.description
+    %ul.perks
+      - @perks.each do |p|
+        %li
+          %h3= p.name
+          %p= p.amount
+          %p= p.description
 :javascript
-  $(function(){
-    $( "#progressbar" ).progressbar({
-      value: #{percent_funded(@project.id)}
-    });
+$(function(){
+  $( "#progressbar" ).progressbar({
+    value: #{percent_funded(@project.id)}
   });
+});

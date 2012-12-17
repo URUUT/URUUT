@@ -46,6 +46,7 @@ group :development, :test do
   gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git', :require => 'rails_development_boost'
   gem "better_errors"
   gem "binding_of_caller"
+  gem "rails_best_practices"
 end
 
 gem 'jquery-rails'

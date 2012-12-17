@@ -28,14 +28,27 @@ module ProjectsHelper
 
 	def project_categories
 		[
-			['parks & recreation','parks & recreation'],
-			['neighborhood','neighborhood'],
-			['cleanup/beautification','cleanup & beautification'],
-			['roads & sidewalks','roads & sidewalks'],
-			['health & well being','health & well being'],
-			['child & adolescent','child & adolescent'],
-			['pets','pets'],
-			['miscellaneous','miscellaneous']
+			#['parks & recreation','parks & recreation'],
+			#['neighborhood','neighborhood'],
+			#['cleanup/beautification','cleanup & beautification'],
+			#['roads & sidewalks','roads & sidewalks'],
+			#['health & well being','health & well being'],
+			#['child & adolescent','child & adolescent'],
+			#['pets','pets'],
+			#['miscellaneous','miscellaneous']
+      #['Animal / Pets],
+      ['Art / Culture'],
+      ['Athletic / Sports'],
+      ['Education / Schools'],
+      ['Health / Wellness'],
+      ['Local Business'],
+      ['Neighborhood Improvements'],
+      ['Parks & Recreation'],
+      ['Safety'],
+      ['Sustainability / Energy'],
+      ['Technology'],
+      ['Transit / Transportation'],
+      ['Walkability / Bike / Paths']
 		]
 	end
   
