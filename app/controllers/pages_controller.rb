@@ -23,6 +23,7 @@ class PagesController < ApplicationController
   end
 
   def how_it_works
+    # session[:previous_page] = request.referer
   end
 
 end

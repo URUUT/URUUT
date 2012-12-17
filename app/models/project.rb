@@ -2,6 +2,8 @@ class Project < ActiveRecord::Base
   attr_accessible :category, :description, :duration, :goal, :address, 
     :city, :state, :zip, :neighborhood, :title, :image, :video, :tags, :live, :short_description, :perks_attributes
 
+  validates :title, :presence => true
+
   belongs_to :user
   has_many :donations, :dependent => :destroy
   has_many :perks

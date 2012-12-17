@@ -551,3 +551,28 @@ textarea[id*='perk'] {
 
 div[id^='step'] {
   position:relative;}
+
+#large_image {
+  background:url(image-path('collider.jpg')) top left no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height:545px;
+  left:0;
+  overflow:hidden;
+  position:absolute;
+  top:0;
+  width:100%;
+  .funding-info {
+    background:rgba(72,201,76, 0.95);
+    bottom:0;
+    height:125px;
+    left:0;
+    padding:20px;
+    position:absolute;
+    width:100%;}}
+
+.show-content {
+  margin-top:445px;
+}
