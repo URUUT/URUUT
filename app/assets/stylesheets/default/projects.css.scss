@@ -16,19 +16,28 @@ legend.heading {
 }
 
 .project-details {
-	margin:25px 0;
+	margin:15px 0;
 	li {
 		display:inline-block;
-		position:relative;
+		font:bold 26px/26px "Proxima Nova Semi", arial, sans-serif;
+    position:relative;
 		top:0;
-		text-align:center;
-		margin:0 25px 0 0;
+		text-align:left;
+		margin:0;
 		vertical-align:top;
-		p {
-			font-weight:bold;
-			font-size:16px;
-			position:relative;
-			top:0; }
+		&:first-child {
+      width:70%;
+      span.small {
+        width:50px;}}
+    span.small {
+      color:#fff;
+      display:inline-block;
+			font:normal 10px/15px "Rubrik Medium", arial, sans-serif;
+      letter-spacing:1px;
+      margin-top:-5px;
+      position:relative;
+			top:0; 
+      width:35px;}
 		div {
 			height:20px;
 			width:250px; }}}
