@@ -31,6 +31,7 @@ class ProjectsController < ApplicationController
 		@project = Project.find(params[:id])
     @donation = Donation.where("project_id = ?", @project.id)
 		@perks = Perk.where("project_id = ?", @project.id)
+    @user = User.find(@project.user_id)
     session[:current_project] = @project.id
 	end
 

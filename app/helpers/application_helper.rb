@@ -41,9 +41,9 @@ module ApplicationHelper
 		return user.name
 	end
 
-	def get_gravatar(email)
+	def get_gravatar(email, size)
 		digest = Digest::MD5.hexdigest(email)
-		return "http://www.gravatar.com/avatar/" + digest + ".jpg?s=32"
+		return "http://www.gravatar.com/avatar/" + digest + ".jpg?s=#{size}"
 	end
   
   def clean_data(data)

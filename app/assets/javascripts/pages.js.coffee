@@ -8,7 +8,7 @@ $ ->
 	map = ''
 	codeAddress = ''
 	userLocation = 'http://api.wipmania.com/jsonp?callback=?'
-	$.getJSON userLocation, (data)->
+	window.getLocation = $.getJSON userLocation, (data)->
 		console.log(data)
 		
 	$('ul.nav li').hover ->
