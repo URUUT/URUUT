@@ -753,8 +753,9 @@ ul.perks {
       margin:0;}
     p.description {
       font-style:italic;
-      height:45px;
+      height:42px;
       margin:5px 0;
+      overflow:hidden;
       text-overflow:ellipsis;
       &:after {
         content:"...";}}
@@ -809,6 +810,7 @@ ul.perks {
 
 .projects.show .seed {
   float:left;
+  margin-left:70px;
   margin-right:7px;}
 
 .progress-container {

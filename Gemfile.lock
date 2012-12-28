@@ -50,6 +50,10 @@ GEM
       coderay (>= 1.0.0)
       erubis (>= 2.7.0)
     binding_of_caller (0.6.8)
+    bitly (0.8.0)
+      crack (>= 0.1.4)
+      httparty (>= 0.7.6)
+      oauth2 (>= 0.5.0, < 0.9)
     bootstrap-wysihtml5-rails (0.3.1.13)
       railties (>= 3.0)
     builder (3.0.4)
@@ -71,6 +75,7 @@ GEM
       execjs
     coffee-script-source (1.4.0)
     colored (1.2)
+    crack (0.3.1)
     daemons (1.1.9)
     delayed_job (3.0.4)
       activesupport (~> 3.0)
@@ -241,6 +246,7 @@ DEPENDENCIES
   aws-sdk
   better_errors
   binding_of_caller
+  bitly
   bootstrap-wysihtml5-rails
   capistrano
   coffee-rails (~> 3.2.1)
