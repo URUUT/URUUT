@@ -1,5 +1,7 @@
 class ProjectsController < ApplicationController
-	before_filter :authenticate_user!, :only => [:index, :new, :create, :edit, :update]
+	require 'bitly'
+
+  before_filter :authenticate_user!, :only => [:index, :new, :create, :edit, :update]
   
 	def index
 		@projects = Project.find_all_by_user_id(current_sponsor.id)
@@ -18,8 +20,15 @@ class ProjectsController < ApplicationController
 	def create
 		@project = Project.new(params[:project])
     @project.user = current_user
-		if @project.save
-			redirect_to @project
+    if @project.save
+      logger.debug("Project ID is #{@project.id}")
+      bitly = Bitly.new('chadbartels','R_b1c64c4fb7afc739d0e2da6bcdaf946b')
+      page_url = bitly.shorten("#{request.scheme}://#{request.host_with_port}/projects/#{@project.id}")
+      logger.debug("Testing URL: #{request.scheme}://#{request.host_with_port}/projects/#{@project.id}")
+      @project.bitly = page_url.short_url
+      @project.save!
+
+      redirect_to @project
 		end
 	end
 
