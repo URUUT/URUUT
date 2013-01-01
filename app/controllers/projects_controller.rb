@@ -11,6 +11,7 @@ class ProjectsController < ApplicationController
 		@project = Project.new
     @default = Project.default_value 
 		perks = @project.perks.build
+    galleries = @project.galleries.build
     respond_to do |format|
 	      format.html # new.html.erb
 	      format.xml  { render :xml => @project }

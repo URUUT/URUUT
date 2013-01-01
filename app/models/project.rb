@@ -1,15 +1,17 @@
 class Project < ActiveRecord::Base
   attr_accessible :category, :description, :duration, :goal, :address, 
-    :city, :state, :zip, :neighborhood, :title, :image, :video, :tags, :live, :short_description, :perks_attributes
+    :city, :state, :zip, :neighborhood, :title, :image, :video, :tags, :live, :short_description, :perks_attributes, :galleries_attributes
 
   validates :title, :presence => true
 
   belongs_to :user
   has_many :donations, :dependent => :destroy
   has_many :perks
-
+  has_many :galleries
+  
   accepts_nested_attributes_for :perks, :allow_destroy => true
   #accepts_nested_attributes_for :objectives, :allow_destroy => true
+  accepts_nested_attributes_for :galleries, :allow_destroy => true
 
   has_attached_file :image
     #:styles => {
