@@ -7,7 +7,6 @@ gem 'rails','3.2.8'
  
 # gem "mongoid", ">= 3.0.14"
 gem 'paperclip', '~>3.1.3'
-gem "paperclip-ffmpeg"
 gem 'delayed_paperclip'
 gem 'haml'
 gem "twitter-bootstrap-rails"

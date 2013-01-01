@@ -14,5 +14,9 @@
   = render "perks_step", :f => f
   = render "category_step", :f => f
 
+  - f.fields_for :galleries do |gallery_fields|
+    %p
+      = gallery_fields.file_field :gallery
+  
   %div
     = f.submit "Submit", :class => "btn", :id => "project-submit"

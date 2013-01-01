@@ -1,3 +1,17 @@
-%ul
-	%li
-		= link_to('Edit account', edit_user_registration_path)
+%div
+  = image_tag(get_gravatar(current_user.email, 100), :style => "float:left;margin-right:20px;")
+
+  %h4.user-name= current_user.name
+  %p.user-email= current_user.email
+
+.cf
+
+%h4 My Projects
+- @projects.each do |project|
+  %div{:style => "float:left;margin-top:20px;width:309px"}
+    = image_tag project.image, :style => "width:200px;height:125px;vertical-align:text-top;"
+    %h5{:style => "display:inline-block;width:50%;"}
+      = link_to "#{project.title}", project_path(project.id), :style => "color:#3f403b;"
+
+.cf
+= paginate @projects
