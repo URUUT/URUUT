@@ -139,7 +139,9 @@
       success: function(data) {
         var latitude = $(data).find('latitude')[0].textContent;
         var longitude = $(data).find('longitude')[0].textContent;
-        var map = L.map('map').setView([latitude,longitude], 11);
+        var map = L.map('map', {
+          scrollWheelZoom: false
+        }).setView([latitude,longitude], 11);
 
         L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {
           attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
