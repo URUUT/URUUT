@@ -525,6 +525,12 @@ div[class*='progressbar']{
   height:100% !important;
   margin-bottom:10px;}
 
+.index div[class*='progressbar']{
+  border-radius:0;
+  background:#413f37;
+  height:10px !important;
+  margin-bottom:10px;}
+
 h5.time-left {
   display:inline-block;}
 
