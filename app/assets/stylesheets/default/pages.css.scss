@@ -599,6 +599,9 @@ textarea[id*='perk'] {
 .perk-container {
   position:relative;}
 
+.perk {
+  position:relative;}
+
 .remove {
   color:#413E37;
   font:bold 12px/12px "Proxima Nova", arial, sans-serif;
@@ -617,6 +620,18 @@ textarea[id*='perk'] {
 
 div[id^='step'] {
   position:relative;}
+
+#project-submit {
+  background:#423F38;
+  border-radius:0;
+  display:block;
+  font:bold 16px/16px "Proxima Nova Semi", arial, sans-serif; 
+  margin:20px auto 0;
+  padding:15px 24px;
+  text-shadow:none;
+  text-transform:uppercase;
+  &:hover {
+    background:#eee;}}
 
 #large_image {
   background:url(image-path('classroom.png')) top left no-repeat;

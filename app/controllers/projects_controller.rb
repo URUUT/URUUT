@@ -25,7 +25,6 @@ class ProjectsController < ApplicationController
       logger.debug("Project ID is #{@project.id}")
       bitly = Bitly.new('chadbartels','R_b1c64c4fb7afc739d0e2da6bcdaf946b')
       page_url = bitly.shorten("#{request.scheme}://#{request.host_with_port}/projects/#{@project.id}")
-      logger.debug("Testing URL: #{request.scheme}://#{request.host_with_port}/projects/#{@project.id}")
       @project.bitly = page_url.short_url
       @project.save!
 
@@ -67,11 +66,30 @@ class ProjectsController < ApplicationController
   def step2
     @project = Project.find(session[:current_project])
     galleries = @project.galleries.build
+    @project.update_attributes(params[:project])
+    method = params[:_method]
+    if method.nil?
+      logger.debug("Nothing for Method")
+    else
+      logger.debug("Method is " + method)
+      redirect_to :action => "step3"
+    end
   end
   
   def step3
     @project = Project.find(session[:current_project])
     perks = @project.perks.build
+    method = params[:_method]
+    if method.nil?
+      logger.debug("Nothing for Method")
+    else
+      logger.debug("Method is " + method)
+      redirect_to :action => "step3"
+    end
   end
 
+  def step4
+    @project = Project.find(session[:current_project])
+    session[:current_url] = "#{request.protocol}#{request.host_with_port}#{request.fullpath}"
+  end
 end
