@@ -7,16 +7,16 @@ class ProjectsController < ApplicationController
 		@projects = Project.find_all_by_user_id(current_sponsor.id)
   end
 
-	def new
-		@project = Project.new
-    @default = Project.default_value 
-		perks = @project.perks.build
-    galleries = @project.galleries.build
-    respond_to do |format|
-	      format.html # new.html.erb
-	      format.xml  { render :xml => @project }
-	    end
-	end
+	# def new
+	#     @project = Project.new
+	#     @default = Project.default_value 
+	#     perks = @project.perks.build
+	#     galleries = @project.galleries.build
+	#     respond_to do |format|
+	#         format.html # new.html.erb
+	#         format.xml  { render :xml => @project }
+	#       end
+	#   end
 
 	def create
 		@project = Project.new(params[:project])
@@ -29,7 +29,10 @@ class ProjectsController < ApplicationController
       @project.bitly = page_url.short_url
       @project.save!
 
-      redirect_to @project
+      session[:current_project] = @project.id
+      session[:current_step] = "step1"
+      logger.debug("current step is " + session[:current_step])
+      redirect_to :action => "step2"
 		end
 	end
 
@@ -51,5 +54,24 @@ class ProjectsController < ApplicationController
 			flash[:notice] = "Successfully updated project."  
       redirect_to @project
 		end  
-	end  
+	end 
+
+  def step1
+    @project = Project.new
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @project }
+    end
+  end
+
+  def step2
+    @project = Project.find(session[:current_project])
+    galleries = @project.galleries.build
+  end
+  
+  def step3
+    @project = Project.find(session[:current_project])
+    perks = @project.perks.build
+  end
+
 end

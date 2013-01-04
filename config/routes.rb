@@ -24,7 +24,18 @@ Crowdfund::Application.routes.draw do
   get "pages/about"
 
   get "projects/add_desc"
+ 
+  get "projects/step1"
+  post "projects/step1"
   
+  get "projects/step2"
+  post "projects/step2"
+  put "projects/step2"
+  
+  get "projects/step3"
+  post "projects/step3"
+  put "projects/step3"
+
   post "#{Rails.root}/public/images/"
 
   resources :s3_uploads

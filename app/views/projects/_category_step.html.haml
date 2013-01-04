@@ -1,11 +1,14 @@
 %fieldset
-	%legend.heading Project Category
-	%div
-		= f.label :category
-		= f.select :category, options_for_select(project_categories)
-	/ %div
-	/ 		= f.label :tags
-	/ 		= f.text_field :tags
-	%div
-		= f.label :live, "Make This Project Active"
-		= f.check_box :live
+  %legend.heading Project Category
+  %div
+    = f.label :category
+    = f.select :category, options_for_select(project_categories)
+  / %div
+  / 		= f.label :tags
+  / 		= f.text_field :tags
+  -#%div
+    -#= f.label :live, "Make This Project Active"
+    -#= f.check_box :live
+
+
+  = link_to "Stripe", "https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_0nuMjzTruvR2hOSuHDJSlxzeA7q4h5ai&redirect_url=http://www.google.com"
