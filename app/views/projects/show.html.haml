@@ -14,7 +14,7 @@
             %h4.already-donated You've donated #{number_to_currency(Donation.already_donated(@project.id, current_user.id), :precision => 0)}
             #{link_to "Edit Your Donation", edit_donation_path(Donation.edit_donation(@project.id, current_user.id)), :class => "edit"}
         - elsif !current_user
-          %a{:href => "#{new_donation_path}", :class => "fund btn"} Fund Now #{image_tag('arrow.png')}
+          %a{:href => "#{new_donation_path(:id => @project.id)}", :class => "fund btn"} Fund Now #{image_tag('arrow.png')}
       
       .span4.offset3
         /%h3= number_to_currency(amount_funded(@project.id))
@@ -87,13 +87,13 @@
 
         .details
 
-    %hr
-    .comments 
-      %h4.comment Post a message
-      %p
-        Tell #{@project.title} you support their campaign! Got questions or need more information? Post them here and get an answer!
+    -#%hr
+    -#.comments 
+      -#%h4.comment Post a message
+      -#%p
+        -#Tell #{@project.title} you support their campaign! Got questions or need more information? Post them here and get an answer!
 
-    .fb-comments{'data-href' => "http://127.0.0.1:8080", :style => "width:100%"}
+    -#.fb-comments{'data-href' => "http://127.0.0.1:8080", :style => "width:100%"}
 
 
   .span4.sidebar

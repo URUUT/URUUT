@@ -45,14 +45,9 @@
               = yield
           
     = render 'partials/footer'
-
-= javascript_include_tag "formToWizard"
-
+		
 :javascript
   $(function(){
-    //initialize();	
-    $('#new_project').formToWizard({ submitButton: 'project-submit', showStepNo: false });
-    $('form[id^=edit_project]').formToWizard({ submitButton: 'project-submit', showStepNo: false });
     $('form fieldset p a').addClass('btn');
     $('#steps li').each(function(){
       var child = $(this).find('span');
@@ -78,8 +73,5 @@
         console.log(json);
       });
       return false; // prevents normal behaviour
-    });
-    $(document).on('click', '.redactor_editor', function(){
-      $(this).garlic();
     });
   });

@@ -10,4 +10,5 @@
 
   %div
     = f.label :description 
-    = f.text_area :description, :value => "#{@default if @project.description.nil?}"
+    = f.text_area :description
+    -#, :value => "#{@default if @project.description.nil?}"
