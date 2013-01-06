@@ -1,12 +1,12 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :set_previous_page
+  # before_filter :set_previous_page
     
   layout :layout_by_resource
 
   def after_sign_in_path_for(resource)
     # logger.debug "#{session[:previous_page]}"
-    return session[:previous_page]
+    return root_url
   end  
 
   protected
