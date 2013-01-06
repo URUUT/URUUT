@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  after_create :send_welcome_email
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -34,5 +36,11 @@ class User < ActiveRecord::Base
         user.email = data["email"] if user.email.blank?
       end
     end
+  end
+
+  private
+
+  def send_welcome_email
+    ContactMailer.contact_confirmation("Chad", "cbartels@uruut.com", "This is a test")
   end
 end
