@@ -1,0 +1,22 @@
+= form_for(@project, :url => {:controller => "projects", :action => "step3"}, :html => {:method => "put", :class => "span8 well", :multipart => true}) do |f|
+  
+  - if @project.errors.any?  
+    #errorExplanation  
+      %h2 #{pluralize(@project.errors.count, "error")}  
+      %ul  
+      - @project.errors.full_messages.each do |msg|  
+        %li #{msg}  
+             
+  %title Create Your Project
+
+  -#= render "overview_step", :f => f
+  -#= render "details_step", :f => f
+  -#= render "perks_step", :f => f
+  = render "category_step", :f => f
+
+  - f.fields_for :galleries do |gallery_fields|
+    %p
+      = gallery_fields.file_field :gallery
+  
+  %div
+    = f.submit "Submit For Approval", :class => "btn", :id => "project-submit"

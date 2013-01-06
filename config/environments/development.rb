@@ -14,7 +14,7 @@ Crowdfund::Application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
@@ -38,7 +38,7 @@ Crowdfund::Application.configure do
 
   config.action_mailer.delivery_method = :smtp
 
-  config.action_mailer.default_url_options = { host: "localhost:3000" }
+  # config.action_mailer.default_url_options = { host: "127.0.0.1:8080" }
 
   config.action_mailer.smtp_settings = {
     address: "smtp.gmail.com",
@@ -47,7 +47,7 @@ Crowdfund::Application.configure do
     authentication: "plain",
     enable_starttls_auto: true,
     user_name: "chad.bartels@hashfire.com",
-    password: "porous2010"
+    password: "Porous2010"
   }
 
   Paperclip.options[:command_path] = "/usr/local/Cellar/imagemagick/6.7.1-1/bin"
