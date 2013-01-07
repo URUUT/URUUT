@@ -7,9 +7,9 @@ class Donation < ActiveRecord::Base
   def save_with_payment
     current_user = :current_user
     Stripe.api_key = "sk_0EJjKro10y6bBBYfyZnCRgM2w8HOB"
-      customer = Stripe::Customer.create(description: email, email: email, card: token)
-      self.customer_token = customer.id
-      save!
+    customer = Stripe::Customer.create(description: email, email: email, card: token)
+    self.customer_token = customer.id
+    save!
   
   rescue Stripe::InvalidRequestError => e
     logger.error "Stripe error while creating customer: #{e.message}"

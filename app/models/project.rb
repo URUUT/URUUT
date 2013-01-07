@@ -50,4 +50,12 @@ class Project < ActiveRecord::Base
           if someone stopped reading here would they be ready to make a contribution?<br /><br />'
     return x.html_safe
   end
+  
+  def self.get_sponsor_token
+    if :current_user
+      Stripe.api_key = "sk_0EJjKro10y6bBBYfyZnCRgM2w8HOB"
+      
+    end
+  end
+  
 end

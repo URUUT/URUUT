@@ -1,7 +1,11 @@
 class ProjectsController < ApplicationController
 	require 'bitly'
+  require "net/http"
+  require "uri"
 
   before_filter :authenticate_user!, :only => [:index, :new, :create, :edit, :update]
+  
+  layout false, :only => "stripe_update"
   
 	def index
 		@projects = Project.find_all_by_user_id(current_sponsor.id)
@@ -53,7 +57,17 @@ class ProjectsController < ApplicationController
 			flash[:notice] = "Successfully updated project."  
       redirect_to @project
 		end  
-	end 
+	end
+  
+  def stripe_update
+    code = params[:code]
+    logger.debug(code)
+    
+    client = OAuth2::Client.new('ca_0nuMjzTruvR2hOSuHDJSlxzeA7q4h5ai', 'WgS06w2YL9BvVOxe97SDjokVT0JjZ7S4', :site => "https://connect.stripe.com/oauth/authorize")
+    token = client.auth_code.get_token("#{code}", :headers => {'Authorization' => 'Bearer WgS06w2YL9BvVOxe97SDjokVT0JjZ7S4'})
+    response = token.post('https://connect.stripe.com/oauth/token', :params => { 'code' => code, 'grant_type' => 'refresh_token' })
+    logger.debug(response)
+  end
 
   def step1
     @project = Project.new
@@ -71,7 +85,7 @@ class ProjectsController < ApplicationController
     if method.nil?
       logger.debug("Nothing for Method")
     else
-      logger.debug("Method is " + method)
+      # logger.debug("Method is " + method)
       redirect_to :action => "step3"
     end
   end
@@ -83,8 +97,8 @@ class ProjectsController < ApplicationController
     if method.nil?
       logger.debug("Nothing for Method")
     else
-      logger.debug("Method is " + method)
-      redirect_to :action => "step3"
+      # logger.debug("Method is " + method)
+      redirect_to :action => "step4"
     end
   end
 

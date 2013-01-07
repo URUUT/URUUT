@@ -35,6 +35,12 @@ Crowdfund::Application.routes.draw do
   get "projects/step3"
   post "projects/step3"
   put "projects/step3"
+  
+  get "projects/step4"
+  post "projects/step4"
+  put "projects/step4"
+  
+  get "projects/stripe_update"
 
   post "#{Rails.root}/public/images/"
 
