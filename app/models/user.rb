@@ -41,6 +41,6 @@ class User < ActiveRecord::Base
   private
 
   def send_welcome_email
-    ContactMailer.contact_confirmation("Chad", "cbartels@uruut.com", "This is a test")
+    ContactMailer.contact_confirmation("Chad", "cbartels@uruut.com", "This is a test").deliver
   end
 end
