@@ -64,10 +64,13 @@ class ProjectsController < ApplicationController
     logger.debug(code)
     
     client = OAuth2::Client.new('ca_0nuMjzTruvR2hOSuHDJSlxzeA7q4h5ai', 'sk_test_XF9K5nq63HTSmTK1ZMiW6tvw', :site => "https://connect.stripe.com/oauth/authorize")
-    token = client.auth_code.get_token(code, :headers => {'Authorization' => 'Bearer WgS06w2YL9BvVOxe97SDjokVT0JjZ7S4'})
+    token = client.auth_code.get_token(code, :headers => {'Authorization' => 'Bearer sk_test_XF9K5nq63HTSmTK1ZMiW6tvw'})
     logger.debug(token.token)
     # response = token.post('https://connect.stripe.com/oauth/token', :params => { 'code' => code, 'grant_type' => 'refresh_token' })
     #     logger.debug(response)
+    
+    logger.debug("last page was: #{session[:current_url]}")
+    redirect_to session[:current_url], :param => "connected"
   end
 
   def step1
