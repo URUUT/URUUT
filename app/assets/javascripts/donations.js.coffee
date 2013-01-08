@@ -66,7 +66,7 @@ edit_subscription =
 $ ->
 	$('#new_donation #donate').live 'click', (event) ->
     event.preventDefault()
-    Stripe.setPublishableKey('pk_0EJjrLzbYh33TkSMmfGjt4upjqVOW')
+    Stripe.setPublishableKey('pk_test_WRrfoQLUDkpGHAxCmOY0Y6ud')
     if $('#card_number').val() == ''
       $('#new_donation')[0].submit()
     else
@@ -74,7 +74,7 @@ $ ->
 
   $('#edit_donation #donate').live 'click', (event) ->
     event.preventDefault()
-    Stripe.setPublishableKey('pk_0EJjrLzbYh33TkSMmfGjt4upjqVOW')
+    Stripe.setPublishableKey('pk_test_WRrfoQLUDkpGHAxCmOY0Y6ud')
     if $('#card_number').val() == ''
       $('#edit_donation')[0].submit()
     else

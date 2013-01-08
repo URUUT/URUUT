@@ -63,10 +63,11 @@ class ProjectsController < ApplicationController
     code = params[:code]
     logger.debug(code)
     
-    client = OAuth2::Client.new('ca_0nuMjzTruvR2hOSuHDJSlxzeA7q4h5ai', 'WgS06w2YL9BvVOxe97SDjokVT0JjZ7S4', :site => "https://connect.stripe.com/oauth/authorize")
-    token = client.auth_code.get_token("#{code}", :headers => {'Authorization' => 'Bearer WgS06w2YL9BvVOxe97SDjokVT0JjZ7S4'})
-    response = token.post('https://connect.stripe.com/oauth/token', :params => { 'code' => code, 'grant_type' => 'refresh_token' })
-    logger.debug(response)
+    client = OAuth2::Client.new('ca_0nuMjzTruvR2hOSuHDJSlxzeA7q4h5ai', 'sk_test_XF9K5nq63HTSmTK1ZMiW6tvw', :site => "https://connect.stripe.com/oauth/authorize")
+    token = client.auth_code.get_token(code, :headers => {'Authorization' => 'Bearer WgS06w2YL9BvVOxe97SDjokVT0JjZ7S4'})
+    logger.debug(token.token)
+    # response = token.post('https://connect.stripe.com/oauth/token', :params => { 'code' => code, 'grant_type' => 'refresh_token' })
+    #     logger.debug(response)
   end
 
   def step1
