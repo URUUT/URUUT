@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121231044019) do
+ActiveRecord::Schema.define(:version => 20130108202753) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(:version => 20121231044019) do
     t.boolean  "live",               :default => false
     t.text     "short_description"
     t.string   "bitly"
+    t.string   "project_token"
   end
 
   create_table "sponsors", :force => true do |t|

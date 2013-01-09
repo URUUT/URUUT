@@ -70,6 +70,10 @@ class ProjectsController < ApplicationController
     #     logger.debug(response)
     
     logger.debug("last page was: #{session[:current_url]}")
+    project = Project.find(session[:current_project])
+    project.project_token = token.token
+    project.save!
+    
     redirect_to session[:current_url], :param => "connected"
   end
 
