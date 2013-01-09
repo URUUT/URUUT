@@ -54,4 +54,6 @@ Crowdfund::Application.configure do
 
   FACEBOOK_KEY="406604396088865"
   FACEBOOK_SECRET="9d5ea826d09f6561781e4a942b38fda0"
+  LINKEDIN_KEY="yvlpm8nfpfi2"
+  LINKEDIN_SECRET="0iHOoNy1lAKlMVwe"
 end

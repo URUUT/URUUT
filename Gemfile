@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails','3.2.8'
+gem 'rails','3.2.11'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -21,6 +21,7 @@ gem "activerecord-postgresql-adapter"
 gem "oauth2"
 gem "omniauth"
 gem "omniauth-facebook"
+gem "omniauth-linkedin"
 gem "kaminari"
 gem "bitly"
 
