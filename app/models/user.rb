@@ -1,10 +1,11 @@
 class User < ActiveRecord::Base
   after_create :send_welcome_email
-
+  has_many :authentications, :dependent => :destroy
+  
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :omniauthable, :registerable,
+  devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
@@ -16,11 +17,10 @@ class User < ActiveRecord::Base
 
   has_many :projects, :dependent => :destroy
 
-
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
-    user = User.where(:provider => auth.provider, :uid => auth.uid).first
+    user = User.authentications.where(:provider => auth.provider, :uid => auth.uid).first
     unless user
-      user = User.create(name:auth.extra.raw_info.name,
+      user = User.authentications.create(name:auth.extra.raw_info.name,
                            provider:auth.provider,
                            uid:auth.uid,
                            email:auth.info.email,
@@ -31,9 +31,9 @@ class User < ActiveRecord::Base
   end
   
   def self.find_for_linkedin_oauth(auth, signed_in_resource=nil)
-    user = User.where(:provider => auth.provider, :uid => auth.uid).first
+    user = User.authentications.where(:provider => auth.provider, :uid => auth.uid).first
     unless user
-      user = User.create(name:auth.extra.raw_info.firstName + " " + auth.extra.raw_info.lastName,
+      user = User.authentications.create(name:auth.extra.raw_info.firstName + " " + auth.extra.raw_info.lastName,
                            provider:auth.provider,
                            uid:auth.uid,
                            email:auth.info.email,
