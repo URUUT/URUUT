@@ -1,7 +1,12 @@
+= debug session["devise.linkedin_data"]
+
 .signup-container
 
   = image_tag "logo-seed.png", :class => 'seed'
   = image_tag "logo-name-white.png", :class => 'seed name'
+
+  = link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
+  = link_to "Sign in with LinkedIn", user_omniauth_authorize_path(:linkedin)
 
   %h3 Sign up as a Donator
 

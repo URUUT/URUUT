@@ -11,18 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130109214243) do
-
-  create_table "authentications", :force => true do |t|
-    t.string   "provider"
-    t.string   "name"
-    t.string   "uid"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.string   "password"
-    t.string   "email"
-    t.string   "user_id"
-  end
+ActiveRecord::Schema.define(:version => 20130108202753) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
