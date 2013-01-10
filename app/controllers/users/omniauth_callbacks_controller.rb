@@ -2,6 +2,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   skip_before_filter :set_previous_page
   
   def facebook
+    User.authentications.build
     # You need to implement the method below in your model (e.g. app/models/user.rb)
     @user = User.find_for_facebook_oauth(request.env["omniauth.auth"], current_user)
 
@@ -15,6 +16,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
   
   def linkedin
+    User.authentications.build
     # You need to implement the method below in your model (e.g. app/models/user.rb)
     @user = User.find_for_linkedin_oauth(request.env["omniauth.auth"], current_user)
 
