@@ -1,3 +1,13 @@
+%ul.breadcrumbs
+  %li.active
+    = link_to "Step 1", projects_step1_url
+  %li 
+    = link_to "Step 2", projects_step2_url
+  %li 
+    = link_to "Step 3", projects_step3_url
+  %li 
+    = link_to "Step 4", projects_step4_url
+
 = form_for(@project, :html => {:method => "post", :class => "span8 well", :multipart => true}) do |f|
   
   - if @project.errors.any?  

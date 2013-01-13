@@ -896,3 +896,58 @@ ul.perks {
 
 .user-email {
   font-style:italic;}
+
+.breadcrumbs {
+	list-style-type: none;
+  height: 40px;
+  background: #ddd;
+	li.active {
+		background:#ccc;
+		&:after {
+			content: "";
+	    width: 0;
+	    height: 0;
+	    border-top: 20px solid transparent;
+	    border-left: 8px solid #ccc;
+	    border-bottom: 20px solid transparent;
+	    position: absolute;
+	    right: -7px;
+	    z-index: 10;}}
+	li {
+		float: left;
+    height: 40px;
+    line-height: 40px;
+    margin: 0;
+    padding: 0 0 0 12px;
+    position: relative;
+    min-width: 100px;
+		text-align:center;
+		&:after {
+			content: "";
+	    width: 0;
+	    height: 0;
+	    border-top: 20px solid transparent;
+	    border-left: 8px solid #ddd;
+	    border-bottom: 20px solid transparent;
+	    position: absolute;
+	    right: -7px;
+	    z-index: 10;}
+		&:before {
+			content: "";
+	    width: 0;
+	    height: 0;
+	    border-top: 20px solid transparent;
+	    border-left: 8px solid #fff;
+	    border-bottom: 20px solid transparent;
+	    position: absolute;
+	    right: -8px;
+	    z-index: 10;}
+		&:hover {
+			background: #ccc;}
+		&:hover:after {
+			border-left: 8px solid #ccc;}
+		a {
+			color:#333;
+			font: normal 15px/42px "Proxima Nova Semi", arial, sans-serif !important;
+			letter-spacing:2px;
+			text-transform:uppercase;}}}
