@@ -2,10 +2,6 @@ source 'http://rubygems.org'
 
 gem 'rails','3.2.11'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
- 
-# gem "mongoid", ">= 3.0.14"
 gem 'paperclip', '~>3.1.3'
 gem 'delayed_paperclip'
 gem 'haml'
@@ -14,7 +10,6 @@ gem 'devise'
 gem 'aws-sdk'
 gem 'delayed_job_active_record'
 gem "daemons"
-gem "bootstrap-wysihtml5-rails"
 gem "stripe"
 gem "truncate_html"
 gem "activerecord-postgresql-adapter"
@@ -24,16 +19,11 @@ gem "omniauth-facebook"
 gem "omniauth-linkedin"
 gem "kaminari"
 gem "bitly"
+gem "wicked"
 
-# Gems used only for assets and not required
-# in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
-
   gem 'uglifier', '>= 1.0.3'
 end
 
@@ -53,9 +43,5 @@ group :development, :test do
 end
 
 gem 'jquery-rails'
-
-# Use unicorn as the app server
 gem 'unicorn'
-
-# Deploy with Capistrano
 gem 'capistrano'

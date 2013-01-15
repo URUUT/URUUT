@@ -11,31 +11,24 @@ class ProjectsController < ApplicationController
 		@projects = Project.find_all_by_user_id(current_sponsor.id)
   end
 
-	# def new
-	#     @project = Project.new
-	#     @default = Project.default_value 
-	#     perks = @project.perks.build
-	#     galleries = @project.galleries.build
-	#     respond_to do |format|
-	#         format.html # new.html.erb
-	#         format.xml  { render :xml => @project }
-	#       end
-	#   end
+	def new
+	  @project = Project.new
+	end
 
 	def create
 		@project = Project.new(params[:project])
-    @project.user = current_user
+    #@project.user = current_user
     if @project.save
-      logger.debug("Project ID is #{@project.id}")
-      bitly = Bitly.new('chadbartels','R_b1c64c4fb7afc739d0e2da6bcdaf946b')
-      page_url = bitly.shorten("#{request.scheme}://#{request.host_with_port}/projects/#{@project.id}")
-      @project.bitly = page_url.short_url
-      @project.save!
+      #bitly = Bitly.new('chadbartels','R_b1c64c4fb7afc739d0e2da6bcdaf946b')
+      #page_url = bitly.shorten("#{request.scheme}://#{request.host_with_port}/projects/#{@project.id}")
+      #@project.bitly = page_url.short_url
+      #@project.save!
 
-      session[:current_project] = @project.id
-      session[:current_step] = "step1"
-      logger.debug("current step is " + session[:current_step])
-      redirect_to :action => "step2"
+      session[:current_project] = @project
+      session[:started] = 1
+      redirect_to project_steps_path 
+    else
+      render :new
 		end
 	end
 
@@ -79,6 +72,8 @@ class ProjectsController < ApplicationController
 
   def step1
     @project = Project.new
+    perks = @project.perks.build
+    galleries = @project.galleries.build
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @project }
@@ -87,7 +82,6 @@ class ProjectsController < ApplicationController
 
   def step2
     @project = Project.find(session[:current_project])
-    galleries = @project.galleries.build
     @project.update_attributes(params[:project])
     method = params[:_method]
     if method.nil?
