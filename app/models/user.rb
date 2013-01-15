@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :city, :state, :zip, :neighborhood, :provider, :uid
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :city, :state, :zip, :neighborhood, :provider, :uid, :token
   # attr_accessible :title, :body
 
   validates_presence_of :name
@@ -24,7 +24,8 @@ class User < ActiveRecord::Base
                            provider:auth.provider,
                            uid:auth.uid,
                            email:auth.info.email,
-                           password:Devise.friendly_token[0,20]
+                           password:Devise.friendly_token[0,20],
+                           token:auth.credentials.token
                            )
     end
     user
