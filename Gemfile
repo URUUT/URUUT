@@ -21,7 +21,6 @@ gem "activerecord-postgresql-adapter"
 gem "oauth2"
 gem "omniauth"
 gem "omniauth-facebook"
-gem "omniauth-linkedin"
 gem "kaminari"
 gem "bitly"
 
