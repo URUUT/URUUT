@@ -27,6 +27,7 @@ Crowdfund::Application.routes.draw do
  
   get "projects/step1"
   post "projects/step1"
+  put "projects/step1"
   
   get "projects/step2"
   post "projects/step2"
@@ -51,6 +52,8 @@ Crowdfund::Application.routes.draw do
   resources :donations
   
   resources :projects
+
+  resources :project_steps
 
   root to: "pages#home"
 
