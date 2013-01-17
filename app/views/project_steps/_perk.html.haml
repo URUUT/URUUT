@@ -1,0 +1,15 @@
+= f.fields_for :perks, :child_index => "test" do |p|
+  .perk
+    %div
+      = p.label :name
+      = p.text_field :name
+
+    %div
+      = p.label :amount
+      = p.text_field :amount
+
+    %div
+      = p.label :description
+      = p.text_area :description
+
+    %a.remove{:href => "#"} Remove X
