@@ -1,10 +1,10 @@
-%fieldset
+%fieldset{:style => "position:relative"}
   %legend.heading Perks
   .perk-container
     = render "perk", :f => f
 
-    %div
-      %a.add-perk.btn{:href => "#"} Add Perk
+  
+  %a.add-perk.btn{:href => "#"} Add Perk
 
 :javascript
   var i = 0;
