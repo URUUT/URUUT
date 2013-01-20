@@ -19,12 +19,12 @@ class ProjectsController < ApplicationController
 
 	def create
 		@project = Project.new(params[:project])
-    #@project.user = current_user
+    @project.status = 'step1'
     if @project.save
-      #bitly = Bitly.new('chadbartels','R_b1c64c4fb7afc739d0e2da6bcdaf946b')
-      #page_url = bitly.shorten("#{request.scheme}://#{request.host_with_port}/projects/#{@project.id}")
-      #@project.bitly = page_url.short_url
-      #@project.save!
+      bitly = Bitly.new('chadbartels','R_b1c64c4fb7afc739d0e2da6bcdaf946b')
+      page_url = bitly.shorten("#{request.scheme}://#{request.host_with_port}/projects/#{@project.id}")
+      @project.bitly = page_url.short_url
+      @project.save!
 
       session[:current_project] = @project.id
       session[:started] = 1
@@ -58,58 +58,13 @@ class ProjectsController < ApplicationController
   
   def stripe_update
     code = params[:code]
-    logger.debug(code)
-    
     client = OAuth2::Client.new('ca_0nuMjzTruvR2hOSuHDJSlxzeA7q4h5ai', 'sk_test_XF9K5nq63HTSmTK1ZMiW6tvw', :site => "https://connect.stripe.com/oauth/authorize")
     token = client.auth_code.get_token(code, :headers => {'Authorization' => 'Bearer sk_test_XF9K5nq63HTSmTK1ZMiW6tvw'})
-    logger.debug(token.token)
-    # response = token.post('https://connect.stripe.com/oauth/token', :params => { 'code' => code, 'grant_type' => 'refresh_token' })
-    #     logger.debug(response)
-    
-    logger.debug("last page was: #{session[:current_url]}")
     project = Project.find(session[:current_project])
     project.project_token = token.token
     project.save!
     
-    redirect_to session[:current_url], :param => "connected"
+    redirect_to '/project_steps/step4', :param => "connected"
   end
 
-  #def step1
-    #@project = Project.new
-    #perks = @project.perks.build
-    #galleries = @project.galleries.build
-    #respond_to do |format|
-      #format.html # new.html.erb
-      #format.xml  { render :xml => @project }
-    #end
-  #end
-
-  #def step2
-    #@project = Project.find(session[:current_project])
-    #@project.update_attributes(params[:project])
-    #method = params[:_method]
-    #if method.nil?
-      #logger.debug("Nothing for Method")
-    #else
-      ## logger.debug("Method is " + method)
-      #redirect_to :action => "step3"
-    #end
-  #end
-  
-  #def step3
-    #@project = Project.find(session[:current_project])
-    #perks = @project.perks.build
-    #method = params[:_method]
-    #if method.nil?
-      #logger.debug("Nothing for Method")
-    #else
-      ## logger.debug("Method is " + method)
-      #redirect_to :action => "step4"
-    #end
-  #end
-
-  #def step4
-    #@project = Project.find(session[:current_project])
-    #session[:current_url] = "#{request.protocol}#{request.host_with_port}#{request.fullpath}"
-  #end
 end
