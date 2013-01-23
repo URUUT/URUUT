@@ -4,11 +4,9 @@ class ProjectStepsController < ApplicationController
   
   def show
     @project = Project.find_by_id(session[:current_project])
-    logger.debug(step)
-    logger.debug(URI(request.referer).path)
-    logger.debug("current project is #{session[:current_project]}")
     @project.perks.build
     @project.galleries.build
+    @step = step
     if URI(request.referer).path == '/projects/new' ||  URI(request.referer).path == '/projects' and step == :step1
       redirect_to '/project_steps/step2'
     else
@@ -18,9 +16,13 @@ class ProjectStepsController < ApplicationController
 
   def update
     @project = Project.find_by_id(session[:current_project])
-    params[:project][:status] = step
-    params[:project][:status] = 'active' if step == steps.last
-    @project.attributes = params[:project]
-    render_wizard @project
+    @project.status = step
+    @project.update_attributes!(params[:project])
+    if @project.valid?
+      logger.debug(@project.status)
+      render_wizard @project, :notice => "You are on #{step}"
+    else
+      logger.debug("Not Valid")
+    end
   end
 end

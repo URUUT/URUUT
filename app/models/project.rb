@@ -4,9 +4,8 @@ class Project < ActiveRecord::Base
   attr_accessible :category, :description, :duration, :goal, :address, 
     :city, :state, :zip, :neighborhood, :title, :image, :video, :tags, :live, :short_description, :perks_attributes, :galleries_attributes, :status
 
-  validates :title, :short_description, :description, :presence => true, :if => :active_or_step1? 
-  #validates :short_description, :presence => true, :if => :active_or_title?
-  #validates :description, :presence => true, :if => :active_or_title?
+  #validates :title, :short_description, :description, :presence => true, :if => :active? 
+  #validates :image, :address, :city, :state, :zip, :neighborhood, :duration, :goal, :presence => true, :if => :active_or_step1?
 
   has_many :donations, :dependent => :destroy
   has_many :perks
@@ -29,14 +28,18 @@ class Project < ActiveRecord::Base
     status == 'active'
   end
 
-  def active_or_step1?
-    status == ('step1') || active?
-    #status.include?('short_description') || active?
-    #status.include?('description') || active?
+  def step2_valid?
+    status == 'step2'
   end
 
-  def active_or_price?
-    status.include?('price') || active?
+  def active_or_step1?
+    status == ('step1') || active?
+  end
+
+  def active_or_step2?
+    logger.debug("Running!!!")
+    logger.debug("step is #{@step}")
+    status == ('step2') || active?
   end
 
   def active_or_category?
