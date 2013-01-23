@@ -2,14 +2,14 @@
   .perk
     %div
       = p.label :name
-      = p.text_field :name
+      = p.text_field :name, :required => true
 
     %div
       = p.label :amount
-      = p.text_field :amount
+      = p.text_field :amount, :required => true
 
     %div
       = p.label :description
-      = p.text_area :description
+      = p.text_area :description, :required => true
 
     %a.remove{:href => "#"} Remove X

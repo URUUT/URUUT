@@ -26,43 +26,25 @@
 
         !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 
-    = render "partials/modal_message"
-    = render "partials/modal_contact"
-    = render "partials/modal_login"
-    = render "partials/modal_signup"
-    = render "partials/modal_map"
-
-    %header.navbar.navbar-fixed-top
+    #wrap 
+      %header.navbar
+        .container
+          = render 'layouts/navigation'
+      
       .container
-        = render 'layouts/navigation'
-    
-    #main{:role => "main"}
-      .container
-        .content
-          .row-fluid
-            .span12
-              = render 'layouts/messages'
-              = yield
-          
+        .row-fluid
+          .span12
+            = render 'layouts/messages'
+            = yield
+      #push          
     = render 'partials/footer'
 		
 :javascript
   $(function(){
     $('form fieldset p a').addClass('btn');
-    $('#steps li').each(function(){
-      var child = $(this).find('span');
-      child.text().replace(/:/g, '');
-      $(this).html(child);
-    });
-
-    $('[id^=stepDesc]').click(function(){
-      var l = $(this).attr('id');
-      var num = l.substr(-1, l.length-1);
-      $('div[id^=step]').hide();
-      $('div#step' + num).show();
-      $('[id^=stepDesc]').removeClass('current');
-      $(this).addClass('current');
-    });
+    $('form [id*="edit_project"]').h5Validate();
+    $('form [id*="new_project"]').h5Validate();
+    
     $('#myModal form').submit(function() {  
       var valuesToSubmit = $(this).serialize();
       $.ajax({

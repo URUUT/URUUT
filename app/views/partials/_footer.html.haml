@@ -1,49 +1,40 @@
 %footer
   .container
     .row-fluid
-      
-      %ul
-        %li
-          %h5= link_to "Find Projects", browse_projects_path
-        %li
-          &nbsp;
-        %li
-          %h5 Get Funding
-        %li
-          = link_to "How It Works", pages_how_it_works_path 
-        %li
-          = link_to "Create Your Project"
+      .span3
+        = image_tag "footer-logo.png", :style => "margin-right:5px;"
+        &copy; 2012 URUUT. 
+        %span.italic All Rights Reserved.
+      .span7
+        %nav
+          = link_to 'Home'  
+          %span.divider 
+            |  
+          = link_to 'Find Projects'  
+          %span.divider 
+            |  
+          = link_to 'Get Funding'  
+          %span.divider 
+            |  
+          = link_to 'About URUUT'  
+          %span.divider 
+            |  
+          = link_to 'Blog'  
+          %span.divider 
+            |  
+          = link_to 'Contact'  
+          %span.divider 
+            |  
+          = link_to 'FAQ'  
+          %span.divider 
+            |  
+          = link_to 'Press & Media'  
+          %span.divider 
+            |  
+          = link_to 'Legal'
+      .span2.social
+        = link_to "http://www.facebook.com/get.ruuted" do
+          = image_tag "facebook.png"
 
-      %ul
-        %li
-          %h5 About URUUT
-        %li
-          = link_to "About Us", pages_about_path
-        %li
-          = link_to "How It Works", pages_how_it_works_path
-        %li
-          = link_to "Our Team"
-        %li
-          = link_to "Partnerships"
-
-      %ul.pages 
-        %li
-          %a{:href => "", "data-toggle" => "modal", "data-target" => "#contact"}Contact Us
-        %li
-          %a{:href => "", "data-toggle" => "modal", "data-target" => "#myMap"}Map
-        %li 
-          = link_to "Terms", pages_terms_url
-        %li
-          %a{:href => "#"} Privacy Policy
-
-      %ul
-        %li
-          %h5 Find Us On
-        %li
-          FB TW
-
-.copyright
-  .container  
-    .row-fluid
-      %p.span3
-        &copy 2012 URUUT.com
+        = link_to "http://www.twitter.com/uruut" do
+          = image_tag "twitter.png"

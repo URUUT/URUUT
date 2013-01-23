@@ -1,0 +1,14 @@
+.info-left
+  %h3.green Find a Local Project.
+  %br
+  %h3.brown Help and Watch it Grow.
+  .sign-up
+    = link_to new_user_registration_path do
+      sign up now
+      = image_tag "arrow-brown.png"
+  .sign-up  
+    = link_to browse_projects_url do
+      find projects 
+      = image_tag "arrow-brown.png"
+.graphic-right
+  = image_tag "power-of-u.png"
