@@ -7,11 +7,11 @@ class ProjectStepsController < ApplicationController
     @project.perks.build
     @project.galleries.build
     @step = step
-    if URI(request.referer).path == '/projects/new' ||  URI(request.referer).path == '/projects' and step == :step1
-      redirect_to '/project_steps/step2'
-    else
-      render_wizard
-    end
+    #if URI(request.referer).path == '/projects/new' ||  URI(request.referer).path == '/projects' and step == :step1
+      #redirect_to '/project_steps/step2'
+    #else
+    render_wizard
+    #end
   end
 
   def update

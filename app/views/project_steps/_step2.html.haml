@@ -1,32 +1,37 @@
 %ul.breadcrumbs
   %li
-    = link_to "Step 1", '/project_steps/step1'
+    = link_to "Step 1", 'project_stepsstep1'
   %li.active 
-    = link_to "Step 2", '/project_steps/step2'
+    = link_to "Step 2", 'project_stepsstep2'
   %li 
-    = link_to "Step 3", '/project_steps/step3'
+    = link_to "Step 3", 'project_stepsstep3'
   %li 
-    = link_to "Step 4", '/project_steps/step4'
+    = link_to "Step 4", 'project_stepsstep4'
 
 = form_for(@project, :url => wizard_path, :html => {:class => "span8 well", :multipart => true}) do |f|
   
-  / - if @project.errors.any?  
-  /    #errorExplanation  
-  /      %h2 #{pluralize(@project.errors.count, "error")}  
-  /      %ul  
-  /      - @project.errors.full_messages.each do |msg|  
-  /        %li #{msg}  
+   - if @project.errors.any?  
+      #errorExplanation  
+        %h2 #{pluralize(@project.errors.count, "error")}  
+        %ul  
+        - @project.errors.full_messages.each do |msg|  
+          %li #{msg}  
              
   %title Create Your Project
 
-  -#= render "overview_step", :f => f
-  = render "details_step", :f => f
-  -#= render "perks_step", :f => f
-  -#= render "category_step", :f => f
+  = f.label_for :goal
+  = f.text_field :goal
 
-  / - f.fields_for :galleries do |gallery_fields|
-  /     %p
-  /       = gallery_fields.file_field :gallery
-  /   
+  = f.label_for :duration
+  = f.text_field :duration
+
+  = f.label_for :title
+  = f.text_field :title
+
+  = f.label_for :story
+  = f.textarea :story
+
+  = f.label_for :about
+  = f.textarea :about
   %div
     = f.submit "Save And Continue", :class => "btn", :id => "project-submit"

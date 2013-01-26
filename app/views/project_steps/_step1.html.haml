@@ -9,24 +9,47 @@
     = link_to "Step 4", '/project_steps/step4'
 
 = form_for(@project, :url => wizard_path, :html => {:class => "span8 well", :multipart => true}) do |f|
-  
-  / - if @project.errors.any?  
-  /     #errorExplanation  
-  /       %h2 #{pluralize(@project.errors.count, "error")}  
-  /       %ul  
-  /       - @project.errors.full_messages.each do |msg|  
-  /         %li #{msg}  
-             
+
+  - if @project.errors.any?  
+    #errorExplanation  
+      %h2 #{pluralize(@project.errors.count, "error")}  
+      %ul  
+        - @project.errors.full_messages.each do |msg|  
+          %li #{msg}  
+
   %title Create Your Project
 
-  = render "overview_step", :f => f
-  -#= render "details_step", :f => f
-  -#= render "perks_step", :f => f
-  -#= render "category_step", :f => f
+  %div
+    = f.label :organization
+    = f.text_field :organization, :required => true
 
-  / - f.fields_for :galleries do |gallery_fields|
-  /     %p
-  /       = gallery_fields.file_field :gallery
-  
+  %div
+    = f.label :address 
+    = f.text_field :address, :required => true
+
+  %div
+    = f.label :city 
+    = f.text_field :city, :required => true
+
+  %div
+    = f.label :state
+    = f.select :state, options_for_select(us_states, @project.state), :required => true
+
+  %div
+    = f.label :zip
+    = f.text_field :zip, :required => true
+
+  %div
+    = f.label :website 
+    = f.text_field :website, :required => true
+
+  %div
+    = f.label :twitter_handle 
+    = f.text_field :twitter_handle, :required => true
+
+  %div
+    = f.label :facebook_page
+    = f.text_field :facebook_page, :required => true
+
   %div
     = f.submit "Save And Continue", :class => "btn", :id => "project-submit"
