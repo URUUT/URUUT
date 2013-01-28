@@ -1,15 +1,15 @@
 = f.fields_for :perks, :child_index => "test" do |p|
   .perk
-    %div
+    %div.inline
       = p.label :name
-      = p.text_field :name, :required => true
+      = p.text_field :name, :required => true, :size => 18
 
-    %div
+    %div.inline{:style => "margin-left:20px;"}
       = p.label :amount
-      = p.text_field :amount, :required => true
+      = p.text_field :amount, :required => true, :size => 17
 
     %div
       = p.label :description
-      = p.text_area :description, :required => true
+      = p.text_area :description, :required => true, :size => "85x30"
 
-    %a.remove{:href => "#"} Remove X
+    / %a.remove{:href => "#"} Remove X

@@ -6,12 +6,13 @@ class ProjectStepsController < ApplicationController
     @project = Project.find_by_id(session[:current_project])
     @project.perks.build
     @project.galleries.build
+    logger.debug(request.referer)
     @step = step
-    #if URI(request.referer).path == '/projects/new' ||  URI(request.referer).path == '/projects' and step == :step1
-      #redirect_to '/project_steps/step2'
-    #else
-    render_wizard
-    #end
+    if URI(request.referer).path == '/projects/new' ||  URI(request.referer).path == '/projects' and step == :step1
+      redirect_to '/project_steps/step2'
+    else
+      render_wizard
+    end
   end
 
   def update

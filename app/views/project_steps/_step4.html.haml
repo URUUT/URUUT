@@ -1,12 +1,12 @@
 %ul.breadcrumbs
   %li
-    = link_to "Step 1", '/project_steps/step1'
+    = link_to "Step 1", 'step1'
   %li 
-    = link_to "Step 2", '/project_steps/step2'
+    = link_to "Step 2", 'step2'
   %li 
-    = link_to "Step 3", '/project_steps/step3'
+    = link_to "Step 3", 'step3'
   %li.active
-    = link_to "Step 4", '/project_steps/step4'
+    = link_to "Step 4", 'step4'
 
 = form_for(@project, :url => wizard_path, :html => {:class => "span8 well", :multipart => true}) do |f|
   
