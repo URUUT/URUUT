@@ -28,7 +28,7 @@ class ProjectsController < ApplicationController
 
       session[:current_project] = @project.id
       session[:started] = 1
-      redirect_to project_steps_path 
+      redirect_to project_steps_path
     else
       render :new
 		end

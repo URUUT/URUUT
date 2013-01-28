@@ -1,37 +1,43 @@
 %ul.breadcrumbs
   %li
-    = link_to "Step 1", 'project_stepsstep1'
+    = link_to "Step 1", 'step1'
   %li.active 
-    = link_to "Step 2", 'project_stepsstep2'
+    = link_to "Step 2", 'step2'
   %li 
-    = link_to "Step 3", 'project_stepsstep3'
+    = link_to "Step 3", 'step3'
   %li 
-    = link_to "Step 4", 'project_stepsstep4'
+    = link_to "Step 4", 'step4'
 
 = form_for(@project, :url => wizard_path, :html => {:class => "span8 well", :multipart => true}) do |f|
   
-   - if @project.errors.any?  
-      #errorExplanation  
-        %h2 #{pluralize(@project.errors.count, "error")}  
-        %ul  
-        - @project.errors.full_messages.each do |msg|  
-          %li #{msg}  
+  - if @project.errors.any?  
+    #errorExplanation  
+      %h2 #{pluralize(@project.errors.count, "error")}  
+      %ul  
+      - @project.errors.full_messages.each do |msg|  
+        %li #{msg}  
              
   %title Create Your Project
 
-  = f.label_for :goal
-  = f.text_field :goal
+  = f.label :goal do
+    FUNDING GOAL* 
+    %span.italic (must be at least $XXXX)
+  = f.text_field :goal, :required => true, :size => 45
 
-  = f.label_for :duration
-  = f.text_field :duration
+  = f.label :duration do 
+    CAMPAIGN LENGTH* 
+    %span.italic (max 45 days)
+  = f.text_field :duration, :required => true, :size => 17
 
-  = f.label_for :title
-  = f.text_field :title
+  = f.label :title do
+    CAMPAIGN HEADLINE* 
+    %span.italic (XX characters remaing)
+  = f.text_field :title, :required => true, :size => 45
 
-  = f.label_for :story
-  = f.textarea :story
+  = f.label :story, "YOUR STORY*"
+  = f.text_area :story, :required => true, :style => "height:138px;width:585px;"
 
-  = f.label_for :about
-  = f.textarea :about
+  = f.label :about, "TELL US ABOUT YOUR PROJECT*"
+  = f.text_area :about, :required => true, :style => "height:217px;width:585px;"
   %div
     = f.submit "Save And Continue", :class => "btn", :id => "project-submit"

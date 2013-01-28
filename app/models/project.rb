@@ -2,7 +2,9 @@ class Project < ActiveRecord::Base
   belongs_to :user
   
   attr_accessible :category, :description, :duration, :goal, :address, 
-    :city, :state, :zip, :neighborhood, :title, :image, :video, :tags, :live, :short_description, :perks_attributes, :galleries_attributes, :status
+    :city, :state, :zip, :neighborhood, :title, :image, :video, :tags, :live, :short_description, 
+    :perks_attributes, :galleries_attributes, :status, :organization, :website, :twitter_handle, :facebook_page,
+    :story, :about
 
   #validates :title, :short_description, :description, :presence => true, :if => :active? 
   #validates :image, :address, :city, :state, :zip, :neighborhood, :duration, :goal, :presence => true, :if => :active_or_step1?

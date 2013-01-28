@@ -104,11 +104,12 @@ h1,h2,h3,h4,h5,h6 {
   text-transform:uppercase;}
 
 input[type=text], input[type=email], input[type=date], input[type=password] {
-  border-radius: 0;
-  height: 28px;
-  line-height: 18px;
-  font-size: 13px;
-  padding: 5px 7px;}
+  border-radius:5px;
+	box-shadow:1px 1px 1px rgba(0,0,0,0.5);
+	font:bold 24px/24px arial, helvetica, sans-serif;
+	height:54px;
+	padding:19px;
+	width:auto !important}
 
 input[type=submit] {
   background:#689d00;
@@ -119,12 +120,26 @@ input[type=submit] {
   padding:5px 8px;}
 
 textarea {
-  border-radius:0;
+  border-radius:5px;
+	box-shadow:1px 1px 1px rgba(0,0,0,0.5);
   font-size:13px;
-  padding:5px 7px;}
+  padding:19px;}
+	
+	.well {
+		border-radius:0;
+		border:none;
+		border-top:6px solid #70bf4c;
+		box-shadow:none;}
 
 .center {
   text-align:center;}
+	
+.inline {
+	display:inline-block;	}
+	
+	.italic {
+		font:italic 12px/12px "Georgia", georgia, serif;
+		text-transform:none;}
 
 .pages.home {
   background:url(image-path('bg_01.jpg')) no-repeat center center fixed;
@@ -623,8 +638,8 @@ p.days {
   padding-left:15px;}
 
 textarea[id*='perk'] {
-  height:220px;
-  width:310px;}
+  height:138px;
+  width:587px;}
 
 .perk-container {
   position:relative;}
@@ -973,6 +988,37 @@ ul.perks {
 
 .user-email {
   font-style:italic;}
+	
+#project_duration_input {
+	font:bold 24px/24px arial, helvetica, sans-serif;
+	width:278px !important;
+}
+	
+input.selectbox {
+	background:#fff url(image-path('select-back.png')) 94% center no-repeat;
+	width:140px !important;
+	position:relative;}
+	
+.selectbox-wrapper {
+	border-bottom-right-radius:3px;
+	border-bottom-left-radius:3px;
+	margin-top:-20px;
+	position:absolute;
+	ul {
+		background:#fff;
+		box-shadow:1px 1px 1px rgba(0,0,0,0.5);
+		border-bottom-right-radius:3px;
+		border-bottom-left-radius:3px;
+		margin:0;
+		height:150px;
+		width:101px;
+		overflow-y:scroll;
+		padding:19px;
+		li {
+			font:bold 24px/24px arial, helvetica, sans-serif;
+			list-style-type:none;
+			margin-bottom:19px;
+			width:120px;}}}
 
 .breadcrumbs {
 	list-style-type: none;
