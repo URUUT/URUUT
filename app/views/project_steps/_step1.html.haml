@@ -1,12 +1,34 @@
-%ul.breadcrumbs
-  %li.active
-    = link_to "Step 1", '/project_steps/step1'
-  %li 
-    = link_to "Step 2", '/project_steps/step2'
-  %li 
-    = link_to "Step 3", '/project_steps/step3'
-  %li 
-    = link_to "Step 4", '/project_steps/step4'
+.breadcrumb-container
+  %ul.breadcrumbs
+    %li.active
+      = link_to '/project_steps/step1' do
+        %span.step Step 1
+        %span.title RUUTS
+        %span.description Basic Information
+
+    %li 
+      = link_to '/project_steps/step2' do
+        %span.step Step 2
+        %span.title STORY
+        %span.description Project Details
+
+    %li 
+      = link_to '/project_steps/step3' do
+        %span.step Step 3
+        %span.title PERKS
+        %span.description Donor Rewards
+
+    %li 
+      = link_to '/project_steps/step4' do
+        %span.step Step 4
+        %span.title VISUALS
+        %span.description Project Page Setup
+
+    %li
+      = link_to 'submit' do
+        %span.step Submission
+        %span.title GET RUUTED
+        %span.description Submit Your Project for Approval
 
 = form_for(@project, :html => {:class => "span8 well", :multipart => true}) do |f|
 
@@ -16,9 +38,11 @@
       %ul  
         - @project.errors.full_messages.each do |msg|  
           %li #{msg}  
-
-  %title Create Your Project
-
+					
+  %h4.title 
+    YOUR RUUTS 
+    %span.italic (Basic Information)
+	
   %div
     = f.label :organization, "Organization/Business Name*"
     = f.text_field :organization, :required => true, :size => 45

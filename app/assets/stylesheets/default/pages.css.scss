@@ -99,8 +99,8 @@ body {
 
 h1,h2,h3,h4,h5,h6 {
   color:#464646;
-  font-family:'Proxima Nova', sans-serif;
-  font-weight:300;
+  font-family:'Proxima Nova Semi', sans-serif;
+	letter-spacing:2px;
   text-transform:uppercase;}
 
 input[type=text], input[type=email], input[type=date], input[type=password] {
@@ -125,11 +125,21 @@ textarea {
   font-size:13px;
   padding:19px;}
 	
-	.well {
-		border-radius:0;
-		border:none;
-		border-top:6px solid #70bf4c;
-		box-shadow:none;}
+label {
+	font:normal 12px/12px "Proxima Nova Semi", arial, sans-serif;
+	letter-spacing:2px;
+	text-transform:uppercase;}
+	
+.well {
+	border-radius:0;
+	border:none;
+	border-top:6px solid #70bf4c;
+	box-shadow:none;
+	position:relative;
+	.title {
+		left:0;
+		position:absolute;
+		top:-40px;}}
 
 .center {
   text-align:center;}
@@ -232,6 +242,13 @@ textarea {
 
 #signup h3 {
   font-weight:300 !important;}
+	
+.logged-in {
+	font:normal 12px/12px "Proxima Nova Semi", arial, sans-serif;
+	list-style-type:none;
+	margin-top:20px;
+	a {
+		color:#fff;	}}
 
 header {
 	.container {
@@ -291,20 +308,24 @@ footer {
 
 ul.nav {
   color:#242424;
+	margin-left:76px !important;
 	li {
+		border-left:1px solid #55554d;
     padding:0 10px;
 		position:relative;
+		width:152px;
 		a {
-			color:#464646 !important;
-      font-family:'Proxima Nova', sans-serif;
-      font-size:11px;
-			line-height:13px !important;
+			color:#fff !important;
+      font-family:'Proxima Nova Semi', sans-serif;
+      font-size:12px;
+			letter-spacing:2px;
+			line-height:60px !important;
       padding:0 !important;
       text-decoration:none;
 			text-shadow:0 0 0 !important;
       text-transform:uppercase;
       &:hover {
-        color:#242424 !important;
+        color:#70bf4c !important;
         text-decoration:underline;}}
 		img {
       margin:-6px 0 0 5px;
@@ -378,11 +399,9 @@ div.dropdown {
         text-decoration:none;}}}}
 
 .right {
-  display:block;
   font-size:11px;
   margin:0 auto;
   text-align:right;
-  width:100%;
   li {
     border-right:1px solid #242424;
     font:normal 12px/12px 'Proxima Nova', sans-serif;
@@ -390,7 +409,7 @@ div.dropdown {
     list-style-type:none;
     -webkit-font-smoothing: subpixel-antialiased;
     img {
-      margin:-6px 0 0 5px;
+      margin:1px 0 0 5px;
 			vertical-align:middle;}
     &:last-child {
       border:none;}
@@ -413,7 +432,10 @@ div.dropdown {
       font-style:italic;
       margin:0 5px;}}
   li.signed-in {
-    border:none;}
+    border:none;
+		a {
+			font:normal 12px/12px "Proxima Nova Semi", arial, sans-serif;
+			text-transform:none;	}}
   input[type=search]{
     border-radius: 0;
     font-family:'Proxima Nova', sans-serif;
@@ -614,6 +636,15 @@ p.days {
   background:#403e37;
   height:60px;
   margin-bottom:0;}
+	
+.nav {
+	height:60px;
+	li {
+		a {
+			line-height:60px;
+		}
+	}
+}
 
 .projects.edit, .projects.new { 
   input[type=text], textarea {
@@ -989,6 +1020,10 @@ ul.perks {
 .user-email {
   font-style:italic;}
 	
+#new_user {
+	margin-left:0;
+}
+	
 #project_duration_input {
 	font:bold 24px/24px arial, helvetica, sans-serif;
 	width:278px !important;
@@ -996,6 +1031,7 @@ ul.perks {
 	
 input.selectbox {
 	background:#fff url(image-path('select-back.png')) 94% center no-repeat;
+	cursor:pointer;
 	width:140px !important;
 	position:relative;}
 	
@@ -1020,60 +1056,76 @@ input.selectbox {
 			margin-bottom:19px;
 			width:120px;}}}
 
+.breadcrumb-container {
+	background:url(image-path('bg-tile.jpg')) top left repeat;
+	left:0;
+	position:absolute;
+	width:100%;
+}
+
 .breadcrumbs {
 	list-style-type: none;
-  height: 40px;
-  background: #ddd;
-	li.active {
-		background:#ccc;
-		&:after {
-			content: "";
-	    width: 0;
-	    height: 0;
-	    border-top: 20px solid transparent;
-	    border-left: 8px solid #ccc;
-	    border-bottom: 20px solid transparent;
-	    position: absolute;
-	    right: -7px;
-	    z-index: 10;}}
+  height: 120px;
+	margin:0 auto;
+	position:relative;
+	width:960px;
 	li {
+		border-left:1px solid #403e37;
 		float: left;
-    height: 40px;
+    height: 120px;
     line-height: 40px;
     margin: 0;
     padding: 0 0 0 12px;
     position: relative;
-    min-width: 100px;
+    min-width: 160px;
 		text-align:center;
-		&:after {
-			content: "";
-	    width: 0;
-	    height: 0;
-	    border-top: 20px solid transparent;
-	    border-left: 8px solid #ddd;
-	    border-bottom: 20px solid transparent;
-	    position: absolute;
-	    right: -7px;
-	    z-index: 10;}
-		&:before {
-			content: "";
-	    width: 0;
-	    height: 0;
-	    border-top: 20px solid transparent;
-	    border-left: 8px solid #fff;
-	    border-bottom: 20px solid transparent;
-	    position: absolute;
-	    right: -8px;
-	    z-index: 10;}
-		&:hover {
-			background: #ccc;}
+		&:last-child {
+			width:255px;}
+		&:hover {}
 		&:hover:after {
 			border-left: 8px solid #ccc;}
 		a {
 			color:#333;
 			font: normal 15px/42px "Proxima Nova Semi", arial, sans-serif !important;
 			letter-spacing:2px;
-			text-transform:uppercase;}}}
+			text-transform:uppercase;
+			&:hover {
+				text-decoration:none;}}
+		span {
+			display:block;
+			text-align:left;
+			text-shadow:0 1px 1px rgba(255, 255, 255, 0.15);}
+		.step {
+			font:normal 12px/12px "Proxima Nova Semi", arial, sans-serif;
+			margin:30px 0 3px 0;}
+		.title {
+			font:normal 24px/24px "Proxima Nova Semi", arial, sans-serif;
+			margin-bottom:3px;}
+		.description {
+			font:italic 12px/12px "Georgia", georgia, serif;
+			text-transform:none;}}}
+			
+.active {
+	span {
+		display:block;
+		text-align:left;
+		text-shadow:0 1px 1px rgba(255, 255, 255, 0.15);}
+	.step {
+		color:#fff;
+		font:normal 12px/12px "Proxima Nova Semi", arial, sans-serif;
+		margin:30px 0 3px 0;}
+	.title {
+		color:#70bf4c;
+		font:normal 24px/24px "Proxima Nova Semi", arial, sans-serif;
+		margin-bottom:3px;}
+	.description {
+		color:#b6b6b4;
+		font:italic 12px/12px "Georgia", georgia, serif;
+		text-transform:none;}}
+			
+form[id*=project] {
+	margin-left:0 !important;
+	margin-top:190px;}
 			
 .stripe-connect {
   display: inline-block;
