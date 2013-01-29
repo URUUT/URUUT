@@ -7,6 +7,8 @@
     = link_to "Step 3", 'step3'
   %li 
     = link_to "Step 4", 'step4'
+	%li
+		= link_to "Submit", 'submit'
 
 = form_for(@project, :url => wizard_path, :html => {:class => "span8 well", :multipart => true}) do |f|
   

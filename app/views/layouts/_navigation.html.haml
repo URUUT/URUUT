@@ -1,63 +1,59 @@
-.row-fluid
-  .span2
-    %h1.logo
-      = link_to "Home", root_path
+%h1.logo.pull-left
+  = link_to "Home", root_path
 
-  .span7  
-    %ul.left
-      %li
-        = link_to "Find Projects", browse_projects_path
-      %li
-        = link_to "About URUUT", pages_how_it_works_path
-      %li
-        = link_to "Create A Project", new_project_path
-      -#%li
-        -#= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
+%ul.nav
+  %li
+    = link_to "Find Projects", browse_projects_path
+  %li
+    = link_to "About URUUT", pages_how_it_works_path
+  %li
+    = link_to "Create A Project", new_project_path
+  -#%li
+    -#= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
   
-  .span3
-    %ul.right
-      - if user_signed_in?
-        %li.signed-in
-          %a
-            -#= image_tag(get_gravatar(current_user.email), :class => "img-circle")
-            = current_user.name
-            = image_tag 'down-arrow.png', :class => "down"
-          %div.dropdown
-            %div
-              %h5 My Account
-              %ul
-                %li
-                  = link_to('Profile', users_profile_path)
-                %li
-                  = link_to 'Logout', destroy_user_session_path
+%ul.pull-right.right.logged-in
+  - if user_signed_in?
+    %li.signed-in
+      %a
+        -#= image_tag(get_gravatar(current_user.email), :class => "img-circle")
+        = current_user.name
+        = image_tag 'down-arrow.png', :class => "down"
+      %div.dropdown
+        %div
+          %h5 My Account
+          %ul
+            %li
+              = link_to('Profile', users_profile_path)
+            %li
+              = link_to 'Logout', destroy_user_session_path
 
-      - elsif sponsor_signed_in?
-        %li
-          %a
-            -#= image_tag(get_gravatar(current_sponsor.email), :class => "img-circle")
-            = current_sponsor.name
-            = image_tag('down-arrow.png')
-          %div.dropdown
-            %div
-              %h5 My Account
-              %ul
-                %li
-                  = link_to('Profile', edit_sponsor_registration_path)
-                %li
-                  = link_to 'Logout', destroy_sponsor_session_path, :method => "delete"
+  - elsif sponsor_signed_in?
+    %li
+      %a
+        -#= image_tag(get_gravatar(current_sponsor.email), :class => "img-circle")
+        = current_sponsor.name
+        = image_tag('down-arrow.png')
+      %div.dropdown
+        %div
+          %h5 My Account
+          %ul
+            %li
+              = link_to('Profile', edit_sponsor_registration_path)
+            %li
+              = link_to 'Logout', destroy_sponsor_session_path, :method => "delete"
 
-            %div
-              %h5 My Projects
-              %ul
-                %li
-                  = link_to('New Project', new_project_path)
-                %li
-                  = link_to('Show Projects', projects_path)
+        %div
+          %h5 My Projects
+          %ul
+            %li
+              = link_to('New Project', new_project_path)
+            %li
+              = link_to('Show Projects', projects_path)
       
-      - else
-        %li
-          = link_to "Log In", user_session_path
-          %span.or or 
-          = link_to "Sign Up", new_user_registration_path, :class => "sign-up-link"
+  - else
+    %li
+      = link_to "Log In", user_session_path
+      %span.or or 
+      = link_to "Sign Up", new_user_registration_path, :class => "sign-up-link"
 
-      -#%input{:type => "search", :placeholder => "Search"}
+  -#%input{:type => "search", :placeholder => "Search"}

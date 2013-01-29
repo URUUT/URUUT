@@ -59,3 +59,8 @@ $ ->
 	
   desc = $(".short-description:visible").text().length
   console.log(desc)
+	
+	$('.breadcrumbs li').hover ->
+		$(this).addClass('active')
+	,->
+		$(this).removeClass('active')
