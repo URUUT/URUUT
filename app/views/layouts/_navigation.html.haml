@@ -26,30 +26,6 @@
               = link_to('Profile', users_profile_path)
             %li
               = link_to 'Logout', destroy_user_session_path
-
-  - elsif sponsor_signed_in?
-    %li
-      %a
-        -#= image_tag(get_gravatar(current_sponsor.email), :class => "img-circle")
-        = current_sponsor.name
-        = image_tag('down-arrow.png')
-      %div.dropdown
-        %div
-          %h5 My Account
-          %ul
-            %li
-              = link_to('Profile', edit_sponsor_registration_path)
-            %li
-              = link_to 'Logout', destroy_sponsor_session_path, :method => "delete"
-
-        %div
-          %h5 My Projects
-          %ul
-            %li
-              = link_to('New Project', new_project_path)
-            %li
-              = link_to('Show Projects', projects_path)
-      
   - else
     %li
       = link_to "Log In", user_session_path

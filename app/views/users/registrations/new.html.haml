@@ -1,20 +1,27 @@
-%h4 Create an account
-= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => "span8 well"}) do |f| 
-  = devise_error_messages! 
+.span8
+  %h4 Create an account
+  = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => "well"}) do |f| 
+    = devise_error_messages! 
 
-  = f.label :name 
-  = f.text_field :name
+    %div
+      = f.label :name 
+      = f.text_field :name, :size => 45 
+    
+    %div
+      = f.label :email
+      = f.email_field :email, :size => 45
 
-  = f.label :email
-  = f.email_field :email
+    %div.inline
+      = f.label :password
+      = f.password_field :password, :size => 17
 
-  = f.label :password
-  = f.password_field :password
+    %div.inline{:style => "margin-left:25px;"}
+      = f.label :password_confirmation
+      = f.password_field :password_confirmation, :size => 17
 
-  = f.label :password_confirmation
-  = f.password_field :password_confirmation
+    %div.inline
+      = button_tag(type: 'submit', class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;") do
+        Create My Account
+        = image_tag('arrow.png')
 
-  = button_tag(type: 'submit', class: "btn btn-primary", id: "project-submit") do
-    Test
-
-/ = render "devise/shared/links"
+  / = render "devise/shared/links"
