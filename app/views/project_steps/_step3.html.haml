@@ -1,12 +1,35 @@
-%ul.breadcrumbs
-  %li
-    = link_to "Step 1", 'step1'
-  %li 
-    = link_to "Step 2", 'step2'
-  %li.active
-    = link_to "Step 3", 'step3'
-  %li 
-    = link_to "Step 4", 'step4'
+.breadcrumb-container
+  %ul.breadcrumbs
+    %li
+      = link_to '/project_steps/step1' do
+        %span.step Step 1
+        %span.title RUUTS
+        %span.description Basic Information
+
+    %li 
+      = link_to '/project_steps/step2' do
+        %span.step Step 2
+        %span.title STORY
+        %span.description Project Details
+
+    %li.active
+      = link_to '/project_steps/step3' do
+        %span.step Step 3
+        %span.title PERKS
+        %span.description Donor Rewards
+
+    %li 
+      = link_to '/project_steps/step4' do
+        %span.step Step 4
+        %span.title VISUALS
+        %span.description Project Page Setup
+
+    %li
+      = link_to 'submit' do
+        %span.step Submission
+        %span.title GET RUUTED
+        %span.description Submit Your Project for Approval
+
 		
 = form_for(@project, :url => wizard_path, :html => {:class => "span8 well", :multipart => true}) do |f|
   

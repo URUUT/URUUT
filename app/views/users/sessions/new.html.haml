@@ -1,21 +1,40 @@
-.signup-container
-
-  = image_tag "logo-seed.png", :class => 'seed'
-  = image_tag "logo-name-white.png", :class => 'seed name'
-
-  %hr
-
-  = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+.span8{:style => "margin-top:35px;"}
+  %h4 Login 
+  = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "well"}) do |f| 
+    = devise_error_messages! 
+    
     %div
       = f.label :email
-      = f.email_field :email
-    %div
+      = f.email_field :email, :size => 45
+
+    %div.inline
       = f.label :password
-      = f.password_field :password
+      = f.password_field :password, :size => 45
+
     - if devise_mapping.rememberable?
       %div
-        = f.check_box :remember_me
-        = f.label :remember_me
-    %div= f.submit "Sign in"
-		
-  = render "devise/shared/links"
+        = f.check_box :remember_me, :style => "display:inline-block;"
+        = f.label :remember_me, :style => "display:inline-block;vertical-align:-3px;"
+    %div.inline
+      = button_tag(type: 'submit', class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:left;") do
+        Create My Account
+        = image_tag('arrow.png')
+
+  -#= render "devise/shared/links"
+
+.span4.social-login{:style => "margin-top:35px;"}
+  %h4 Easy Account Login
+  .well
+    %h6 LOG IN WITH FACEBOOK
+    %p It’s fast and easy.
+    = link_to user_omniauth_authorize_path(:facebook) do
+      = image_tag('fb-login.png')
+    %p.grey We'll never post anything without permission.
+
+    %hr
+
+    %h6 LOG IN WITH TWITTER 
+    %p It’s fast and easy.
+    = link_to "#" do
+      = image_tag('tw-login.png')
+    %p.grey We'll never post anything without permission.

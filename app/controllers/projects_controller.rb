@@ -13,8 +13,8 @@ class ProjectsController < ApplicationController
 
 	def new
 	  @project = Project.new
-    perks = @project.perks.build
-    galleries = @project.galleries.build
+    @project.perks.build
+    @project.galleries.build
   end
 
 	def create

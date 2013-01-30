@@ -1,1 +1,14 @@
 = render :partial => "project_steps/step1"
+:javascript
+  $(function(){
+    $('.breadcrumbs li a').each(function(){
+      $(this).addClass('no-hover')
+    })
+		
+    $('.breadcrumbs li a').click(function(e){
+      e.preventDefault()
+    })
+		
+    $('.breadcrumbs li:first-child a').removeClass('no-hover').addClass('hover')
+		
+  })
