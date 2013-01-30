@@ -147,9 +147,32 @@ label {
 .inline {
 	display:inline-block;	}
 	
-	.italic {
+.italic {
+	font:italic 12px/12px "Georgia", georgia, serif;
+	text-transform:none;}
+	
+.no-hover {
+	span {
+		color:#333 !important;
+		cursor:default;}}
+		
+.hover {
+	span {
+		display:block;
+		text-align:left;
+		text-shadow:0 1px 1px rgba(255, 255, 255, 0.15);}
+	.step {
+		color:#fff;
+		font:normal 12px/12px "Proxima Nova Semi", arial, sans-serif;
+		margin:30px 0 3px 0;}
+	.title {
+		color:#70bf4c;
+		font:normal 24px/24px "Proxima Nova Semi", arial, sans-serif;
+		margin-bottom:3px;}
+	.description {
+		color:#b6b6b4;
 		font:italic 12px/12px "Georgia", georgia, serif;
-		text-transform:none;}
+		text-transform:none;}}
 
 .pages.home {
   background:url(image-path('bg_01.jpg')) no-repeat center center fixed;
@@ -711,6 +734,7 @@ div[id^='step'] {
   border-radius:0;
   display:block;
   font:bold 16px/16px "Proxima Nova Semi", arial, sans-serif; 
+	letter-spacing:2px;
   margin:20px auto 0;
   padding:15px 24px;
   text-shadow:none;
@@ -1126,6 +1150,29 @@ input.selectbox {
 form[id*=project] {
 	margin-left:0 !important;
 	margin-top:190px;}
+	
+	.social-login {
+		position:relative;
+		h6 {
+			color:#70bf4c;
+			margin-bottom:0;
+		}
+		p {
+			font-family:arial, sans-serif;
+			margin-bottom:5px;
+		}
+		hr {
+			background:#e9e9e9;
+			border:0;
+			height:1px;
+			margin:34px 0 24px -20px;
+			padding:0;
+			width:306px;
+		}
+		.grey {
+			color:#b6b6b4;
+			font-size:12px;
+			margin-top:5px;}}
 			
 .stripe-connect {
   display: inline-block;
