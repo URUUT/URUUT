@@ -52,8 +52,4 @@ Crowdfund::Application.configure do
 
   Paperclip.options[:command_path] = "/usr/local/Cellar/imagemagick/6.7.1-1/bin"
 
-  FACEBOOK_KEY="406604396088865"
-  FACEBOOK_SECRET="9d5ea826d09f6561781e4a942b38fda0"
-  LINKEDIN_KEY="yvlpm8nfpfi2"
-  LINKEDIN_SECRET="0iHOoNy1lAKlMVwe"
 end
