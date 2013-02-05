@@ -66,5 +66,12 @@ class ProjectsController < ApplicationController
     
     redirect_to '/project_steps/step4', :param => "connected"
   end
+  
+  def save_image
+    @project = session[:current_project]
+    @project.large_image = params[:large_image]
+    
+    @project.save!
+  end
 
 end

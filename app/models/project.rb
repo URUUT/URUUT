@@ -4,7 +4,7 @@ class Project < ActiveRecord::Base
   attr_accessible :category, :description, :duration, :goal, :address, 
     :city, :state, :zip, :neighborhood, :title, :image, :video, :tags, :live, :short_description, 
     :perks_attributes, :galleries_attributes, :status, :organization, :website, :twitter_handle, :facebook_page,
-    :story, :about
+    :story, :about, :large_image
 
   #validates :title, :short_description, :description, :presence => true, :if => :active? 
   #validates :image, :address, :city, :state, :zip, :neighborhood, :duration, :goal, :presence => true, :if => :active_or_step1?

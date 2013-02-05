@@ -30,8 +30,11 @@
         %span.title GET RUUTED
         %span.description Submit Your Project for Approval
 
-		
 = form_for(@project, :url => wizard_path, :html => {:class => "span8 well", :multipart => true}) do |f|
+  
+  %h4.title 
+    SEEDER PERKS 
+    %span.italic (Rewards for your donors)
   
   - if @project.errors.any?  
     #errorExplanation  
@@ -40,16 +43,18 @@
       - @project.errors.full_messages.each do |msg|  
         %li #{msg}  
              
-  %title Create Your Project
-
-  -#= render "overview_step", :f => f
-  -#= render "details_step", :f => f
   = render "perks_step", :f => f
-  -#= render "category_step", :f => f
 
-  - f.fields_for :galleries do |gallery_fields|
-    %p
-      = gallery_fields.file_field :gallery
-  
   %div
     = f.submit "Save And Continue", :class => "btn", :id => "project-submit", :style => "left: 175px;position: relative;"
+
+
+.span4{:style => "margin-top:155px;"}
+  %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
+  .well.info
+    %h5{:style => "color:#70bf4c;margin-bottom:10px;"} SEEDER PERKS 
+    %p Funding on URUUT is made in exchange for payment in kind: goods, services, special benefits or other perks. Offer something valuable for the funds. No T-shirts and shout-outs for $100.
+
+    %p Perks could include a house account for your investors, discounted goods or services, special lessons or workshops, or a private party just for seeders. Be creative!
+    %p The most common amounts invested are between $25-$100. We suggest you offer some good value perks at a low cost for casual investors who might not know your organization well, and a handful of high end rewards that are likely to appeal to your inner circle or die-hard fans. 
+    %p If you’re having a hard time thinking about some great perks, check out our Project Guide or just let us know and we can help you.

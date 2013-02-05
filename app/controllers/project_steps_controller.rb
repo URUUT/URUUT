@@ -4,8 +4,8 @@ class ProjectStepsController < ApplicationController
   
   def show
     @project = Project.find_by_id(session[:current_project])
-    @project.perks.build
-    @project.galleries.build
+    # @project.perks.build
+    # @project.galleries.build
     logger.debug(request.referer)
     @step = step
     if URI(request.referer).path == '/projects/new' ||  URI(request.referer).path == '/projects' and step == :step1
