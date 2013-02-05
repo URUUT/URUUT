@@ -19,6 +19,7 @@ gem "omniauth-facebook"
 gem "kaminari"
 gem "bitly"
 gem "wicked"
+gem "filepicker-rails"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

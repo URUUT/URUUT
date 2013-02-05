@@ -63,5 +63,6 @@ module Crowdfund
     config.logger = Logger.new(STDOUT)
     config.assets.paths << "#{Rails.root}/app/assets/fonts"
     config.assets.precompile += %w( .svg .eot .woff .ttf )
+    config.filepicker_rails.api_key = ENV['FILEPICKER_API']
   end
 end
