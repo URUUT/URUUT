@@ -28,19 +28,19 @@
 
         !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 
-    #wrap 
+    #wrap
       %header.navbar
         .container
           = render 'layouts/navigation'
-      
+
       .container
         .row-fluid
           .span12
             -#= render 'layouts/messages'
             = yield
-      #push          
+      #push
     = render 'partials/footer'
-		
+
 :javascript
   var updateCover = function(event){
     console.log(event.fpfile.url);
@@ -54,9 +54,10 @@
         }
     }).done(function(){
       console.log("finished");
+      $('#large_image').css('background-image','url(' + largeImage + ')');
     });
   }
-  
+
   $(function(){
     $('form fieldset p a').addClass('btn');
     $('form [id*="edit_project"]').h5Validate();
@@ -68,7 +69,7 @@
       console.log("Hello Close");
     });
 
-    $('#myModal form').submit(function() {  
+    $('#myModal form').submit(function() {
       var valuesToSubmit = $(this).serialize();
       $.ajax({
         url: $(this).attr('action'), //sumbits it to the given url of the form

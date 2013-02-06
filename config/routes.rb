@@ -24,6 +24,7 @@ Crowdfund::Application.routes.draw do
 
   get "projects/add_desc"
   get "projects/save_image"
+  post "projects/save_image"
   #  
   # get "projects/step1"
   # post "projects/step1"
