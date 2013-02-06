@@ -68,10 +68,12 @@ class ProjectsController < ApplicationController
   end
   
   def save_image
-    @project = session[:current_project]
+    @project = Project.find_by_id(session[:current_project])
     @project.large_image = params[:large_image]
     
-    @project.save!
+    if @project.save
+      render :nothing => true
+    end
   end
 
 end
