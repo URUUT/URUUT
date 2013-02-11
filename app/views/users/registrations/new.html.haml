@@ -1,12 +1,12 @@
 .span8{:style => "margin-top:35px;"}
   %h4 Create an account
-  = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => "well"}) do |f| 
-    = devise_error_messages! 
+  = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => "well"}) do |f|
+    = devise_error_messages!
 
     %div
-      = f.label :name 
-      = f.text_field :name, :size => 45 
-    
+      = f.label :name
+      = f.text_field :name, :size => 45
+
     %div
       = f.label :email
       = f.email_field :email, :size => 45
@@ -39,7 +39,7 @@
 
     %hr
 
-    %h6 LOG IN WITH TWITTER 
+    %h6 LOG IN WITH TWITTER
     %p It’s fast and easy.
     = link_to "#" do
       = image_tag('tw-login.png')

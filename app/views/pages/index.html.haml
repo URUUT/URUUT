@@ -1,139 +1,34 @@
 = render "partials/banner_map"
- 
+
 .recent.clearfix
-  %p.sections 
+  %p.sections
     = image_tag "recent-project-icon.png"
     Recent Projects
 
-  - if @projects
-    - @projects.take(3).each do |p|
-      - if p.live == true && p.deleted == false
-        %div.project
-          = image_tag "#{p.image.url(:original)}", :class => "project-image"
-          %p.category #{p.category}
-          .cont-desc
-            %h4= link_to p.title, project_path(p.id)
-            %p.short-description= p.short_description
-          
-          .location.clearfix
-            %span #{p.city}, #{p.state}
-            = image_tag "pin.png", :class => "marker"
-          %hr
-          .funding
-            %div{:class => "progressbar#{p.id}"}
-            %hr
-            %ul
-              %li.funded
-                %p
-                  = number_to_currency(amount_funded(p.id), :precision => 0)
-                  %span of
-                  = get_currency(p.goal)
-                %h5 Funded
-              
-              %li.days-left
-                %p.days #{time_left(p.duration).to_i}
-                %h5.time-left Days Left
-      
-          :javascript
-            $('.progressbar#{p.id}').progressbar({
-            value: #{percent_funded(p.id)}
-            });
-            
-  - else
-    %h3 Sorry, No Projects To Show
+  = render "project", :projects => @projects
 
 .ending-soon.clearfix
-  %p.sections 
+  %p.sections
     = image_tag 'ending-soon-icon.png'
-    Projects Ending Soon 
+    Projects Ending Soon
 
-  - if @ending
-    - @ending.take(3).each do |e|
-      - if e.live == true && e.deleted == false
-        %div.project
-          = image_tag "#{e.image.url(:original)}", :class => "project-image"
-
-          .cont-desc
-            %h4= link_to e.title, project_path(e.id)
-            %e.short-description= e.short_description
-          
-          .location.clearfix
-            %span #{e.city}, #{e.state}
-            = image_tag "pin.png", :class => "marker"
-          %hr
-          .funding
-            %div{:class => "progressbar#{e.id}"}
-            %hr
-            %ul
-              %li.funded
-                %p
-                  = number_to_currency(amount_funded(e.id), :precision => 0)
-                  %span of
-                  = get_currency(e.goal)
-                %h5 Funded
-              
-              %li.days-left
-                %e.days #{time_left(e.duration).to_i}
-                %h5.time-left Days Left
-      
-          :javascript
-            $('.progressbar#{e.id}').progressbar({
-            value: #{percent_funded(e.id)}
-            });
-            
-  - else
-    %h3 Sorry, No Projects To Show
-
+  = render "project", :projects => @ending
+ 
 .featured-success.clearfix
-  %p.sections 
+  %p.sections
     = image_tag 'featured-success-icon.png'
-    Featured Success 
+    Featured Success
 
-  - if @featured
-    - @featured.take(1).each do |f|
-      - if f.live == true && f.deleted == false
-        %div.project.well
-          .location
-            %span #{f.city}, #{f.state}
-            = image_tag "marker.jpg", :class => "marker"
-          -#= image_tag "#{f.image.url(:original)}", :class => "project-image"
-
-          .cont-desc
-            %h3= link_to f.title, project_path(f.id)
-            %p.short-description= f.short_description
-
-          %h5 Funded:
-          %p.funded{:style => "margin-bottom:5px;"}
-            = number_to_currency(amount_funded(f.id), :precision => 0)
-            of
-            = get_currency(f.goal)
-
-          -#%div.progressbar#{f.id}
-          %h5.time-left Time Left
-          %p.days #{time_left(f.duration).to_i} Days
-      
-          - if current_user
-            - if f.user_id == current_user.id
-              = link_to "Edit Project", edit_project_url(f.id)
-          :javascript
-            $('.progressbar#{f.id}').progressbar({
-            value: #{percent_funded(f.id)}
-            });
-            
-  - else
-    %h3 Sorry, No Projects To Show
-
+  = render "project", :projects => @featured
+	
 .clearfix
 
-%script{:src => "http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"}
-%script{:src => "http://maps.stamen.com/js/tile.stamen.js?v1.2.1"}
+  %script{:src => "http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"}
+  %script{:src => "http://maps.stamen.com/js/tile.stamen.js?v1.2.1"}
 
 :javascript
   $(function(){
-  
     var map = L.map('map').setView([33.7489, -84.3881], 11);
-
     L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png').addTo(map);
-		
     L.marker([33.7489, -84.3881]).addTo(map).bindPopup('<h4>Welcome to URUUT</h4>').openPopup();
   });

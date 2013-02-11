@@ -1,22 +1,22 @@
 %ul.breadcrumbs
   %li.active
     = link_to "Step 1", "project_steps/step1"
-  %li 
+  %li
     = link_to "Step 2", projects_step2_url
-  %li 
+  %li
     = link_to "Step 3", projects_step3_url
-  %li 
+  %li
     = link_to "Step 4", projects_step4_url
 
 = form_for(@project, :html => {:method => "post", :class => "span8 well", :multipart => true}) do |f|
-  
-  - if @project.errors.any?  
-    #errorExplanation  
-      %h2 #{pluralize(@project.errors.count, "error")}  
-      %ul  
-      - @project.errors.full_messages.each do |msg|  
-        %li #{msg}  
-             
+
+  - if @project.errors.any?
+    #errorExplanation
+      %h2 #{pluralize(@project.errors.count, "error")}
+      %ul
+      - @project.errors.full_messages.each do |msg|
+        %li #{msg}
+
   %title Create Your Project
 
   = render "overview_step", :f => f
@@ -27,6 +27,6 @@
   - f.fields_for :galleries do |gallery_fields|
     %p
       = gallery_fields.file_field :gallery
-  
+
   %div
     = f.submit "Save And Continue", :class => "btn", :id => "project-submit"

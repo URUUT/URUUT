@@ -6,7 +6,7 @@
         %span.title RUUTS
         %span.description Basic Information
 
-    %li 
+    %li
       = link_to '/project_steps/step2' do
         %span.step Step 2
         %span.title STORY
@@ -18,7 +18,7 @@
         %span.title PERKS
         %span.description Donor Rewards
 
-    %li 
+    %li
       = link_to '/project_steps/step4' do
         %span.step Step 4
         %span.title VISUALS
@@ -31,18 +31,18 @@
         %span.description Submit Your Project for Approval
 
 = form_for(@project, :url => wizard_path, :html => {:class => "span8 well", :multipart => true}) do |f|
-  
-  %h4.title 
-    SEEDER PERKS 
+
+  %h4.title
+    SEEDER PERKS
     %span.italic (Rewards for your donors)
-  
-  - if @project.errors.any?  
-    #errorExplanation  
-      %h2 #{pluralize(@project.errors.count, "error")}  
-      %ul  
-      - @project.errors.full_messages.each do |msg|  
-        %li #{msg}  
-             
+
+  - if @project.errors.any?
+    #errorExplanation
+      %h2 #{pluralize(@project.errors.count, "error")}
+      %ul
+      - @project.errors.full_messages.each do |msg|
+        %li #{msg}
+
   = render "perks_step", :f => f
 
   %div
@@ -52,9 +52,9 @@
 .span4{:style => "margin-top:155px;"}
   %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
   .well.info
-    %h5{:style => "color:#70bf4c;margin-bottom:10px;"} SEEDER PERKS 
+    %h5{:style => "color:#70bf4c;margin-bottom:10px;"} SEEDER PERKS
     %p Funding on URUUT is made in exchange for payment in kind: goods, services, special benefits or other perks. Offer something valuable for the funds. No T-shirts and shout-outs for $100.
 
     %p Perks could include a house account for your investors, discounted goods or services, special lessons or workshops, or a private party just for seeders. Be creative!
-    %p The most common amounts invested are between $25-$100. We suggest you offer some good value perks at a low cost for casual investors who might not know your organization well, and a handful of high end rewards that are likely to appeal to your inner circle or die-hard fans. 
+    %p The most common amounts invested are between $25-$100. We suggest you offer some good value perks at a low cost for casual investors who might not know your organization well, and a handful of high end rewards that are likely to appeal to your inner circle or die-hard fans.
     %p If you’re having a hard time thinking about some great perks, check out our Project Guide or just let us know and we can help you.

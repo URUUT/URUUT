@@ -12,9 +12,9 @@ module ApplicationHelper
 			total_funded = total_funded + d.amount.to_f
 		end
     project_goal = project.goal.to_s.gsub(/,/, '').to_f
-    
+
 		percentage = total_funded/project_goal
-		
+
 		return percentage.round(2) * 100
 		# return total_funded
 		# return percentage
@@ -29,7 +29,7 @@ module ApplicationHelper
 			total_funded = total_funded + d.amount.to_f
 		end
 		# percentage = total_funded/project.goal
-		
+
 		# return percentage.round(2) * 100
 		return total_funded
 		# return percentage
@@ -45,15 +45,15 @@ module ApplicationHelper
 		digest = Digest::MD5.hexdigest(email)
 		return "http://www.gravatar.com/avatar/" + digest + ".jpg?s=#{size}"
 	end
-  
+
   def clean_data(data)
     clean = data.html_safe
     return clean
   end
-  
+
   def get_currency(amount)
     amount = amount.to_s.gsub(/,/, '').to_f
     number_to_currency(amount, :precision => 0)
   end
-	
+
 end

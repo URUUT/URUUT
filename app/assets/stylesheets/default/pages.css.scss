@@ -79,7 +79,8 @@
   *zoom: 1;
  }
 
-html, body {
+html, 
+body {
   height:100%; }
 
 #wrap {
@@ -88,7 +89,8 @@ html, body {
   height: 100%;
   margin: 0 auto -45px;}
 
-#push, #footer {
+#push, 
+#footer {
   height: 45px;}
 
 body {
@@ -97,19 +99,27 @@ body {
   margin:0;
   padding:0;}
 
-h1,h2,h3,h4,h5,h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color:#464646;
   font-family:'Proxima Nova Semi', sans-serif;
 	letter-spacing:2px;
   text-transform:uppercase;}
 
-input[type=text], input[type=email], input[type=date], input[type=password] {
+input[type=text], 
+input[type=email], 
+input[type=date], 
+input[type=password] {
   border-radius:5px;
 	box-shadow:1px 1px 1px rgba(0,0,0,0.5);
 	font:bold 24px/24px arial, helvetica, sans-serif;
 	height:54px;
 	padding:19px;
-	width:auto !important}
+	width:auto !important;}
 
 input[type=submit] {
   background:#689d00;
@@ -131,8 +141,8 @@ label {
 	text-transform:uppercase;}
 	
 .well {
-	border-radius:0;
 	border:none;
+	border-radius:0;
 	border-top:6px solid #70bf4c;
 	box-shadow:none;
 	position:relative;
@@ -154,7 +164,9 @@ label {
 .no-hover {
 	span {
 		color:#333 !important;
-		cursor:default;}}
+		cursor:default;}
+	span.border{
+		display:none !important;}}
 		
 .hover {
 	span {
@@ -175,12 +187,12 @@ label {
 		text-transform:none;}}
 
 .pages.home {
-  background:url(image-path('bg_01.jpg')) no-repeat center center fixed;
-  height:100%;
-  -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;
+	-webkit-background-size: cover;
+  background:url(image-path('bg_01.jpg')) no-repeat center center fixed;
+	background-size: cover;
+  height:100%;
   padding:0;}
 
 .info-left {
@@ -232,11 +244,13 @@ label {
   label {
     display:block;
     margin-bottom:5px;}
-  input[type=text], input[type=email], input[type=password] {
+  input[type=text], 
+	input[type=email], 
+	input[type=password] {
     border-radius: 0;
+		font-size: 13px;
     height: 18px;
     line-height: 18px;
-    font-size: 13px;
     padding: 4px 7px;
     width:250px;}
   input[type=submit] {
@@ -677,7 +691,7 @@ p.days {
     text-transform:uppercase;}
   .btn{
     background:none;
-    background:#413e37;
+    background:#70bf4c;
     box-shadow:none;
     border-radius:0;
     color:#fff;
@@ -730,7 +744,7 @@ div[id^='step'] {
   position:relative;}
 
 #project-submit {
-  background:#423F38;
+  background:#70bf4c;
   border-radius:0;
   display:block;
   font:bold 16px/16px "Proxima Nova Semi", arial, sans-serif; 
@@ -740,7 +754,7 @@ div[id^='step'] {
   text-shadow:none;
   text-transform:uppercase;
   &:hover {
-    background:#eee;}}
+    background:#70bf4c;}}
 
 #large_image {
   background:url(image-path('classroom.png')) top left no-repeat;
@@ -1127,12 +1141,20 @@ input.selectbox {
 			margin-bottom:3px;}
 		.description {
 			font:italic 12px/12px "Georgia", georgia, serif;
-			text-transform:none;}}}
+			text-transform:none;}
+		.border {
+			background:url(image-path('step-border-background.png')) top left repeat;
+			bottom:0;
+			display:none;
+			height:12px;
+			margin-left:-12px;
+			position:absolute;
+			width:100%;}}}
 
 .info {
   font:normal 12px/18px arial, helvetica, sans-serif;}
 
-.active {
+.active, .current {
 	span {
 		display:block;
 		text-align:left;
@@ -1148,34 +1170,47 @@ input.selectbox {
 	.description {
 		color:#b6b6b4;
 		font:italic 12px/12px "Georgia", georgia, serif;
-		text-transform:none;}}
+		text-transform:none;}
+	.border {
+		background:url(image-path('step-border-background.png')) top left repeat;
+		bottom:0;
+		display:block !important;
+		height:12px;
+		margin-left:-12px;
+		position:absolute;
+		width:100%;}}
 			
 form[id*=project] {
 	margin-left:0 !important;
-	margin-top:190px;}
+	margin-top:190px;
+	#project_twitter_handle {
+		background:#fff url(image-path('twitter-handle.png')) 2% 50% no-repeat;
+		padding-left:35px;
+		position:relative;}}
+
 	
-	.social-login {
-		position:relative;
-		h6 {
-			color:#70bf4c;
-			margin-bottom:0;
-		}
-		p {
-			font-family:arial, sans-serif;
-			margin-bottom:5px;
-		}
-		hr {
-			background:#e9e9e9;
-			border:0;
-			height:1px;
-			margin:34px 0 24px -20px;
-			padding:0;
-			width:306px;
-		}
-		.grey {
-			color:#b6b6b4;
-			font-size:12px;
-			margin-top:5px;}}
+.social-login {
+	position:relative;
+	h6 {
+		color:#70bf4c;
+		margin-bottom:0;
+	}
+	p {
+		font-family:arial, sans-serif;
+		margin-bottom:5px;
+	}
+	hr {
+		background:#e9e9e9;
+		border:0;
+		height:1px;
+		margin:34px 0 24px -20px;
+		padding:0;
+		width:306px;
+	}
+	.grey {
+		color:#b6b6b4;
+		font-size:12px;
+		margin-top:5px;}}
 			
 .stripe-connect {
   display: inline-block;
@@ -1254,13 +1289,13 @@ form[id*=project] {
 }
 
 .stripe-connect:active {
-  background: #005D93;
+  background: #005d93;
 }
 
 .stripe-connect:active span {
-  color: #EEE;
+  color: #eee;
 
-  background: #008CDD;
+  background: #008cdd;
   background-image: -webkit-linear-gradient(#008CDD, #008CDD 85%, #239ADF);
   background-image: -moz-linear-gradient(#008CDD, #008CDD 85%, #239ADF);
   background-image: -ms-linear-gradient(#008CDD, #008CDD 85%, #239ADF);

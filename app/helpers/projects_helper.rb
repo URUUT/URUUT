@@ -1,10 +1,9 @@
 module ProjectsHelper
 
-	def time_left(endDate)
-		newEndDate = Date.parse(endDate)
-		today = Date.today
-		timeLeft = newEndDate - today
-		return timeLeft
+	def time_left(endDate, startDate)
+		newDate = Date.parse(startDate)
+		timeLeft = (newDate + endDate.to_i) - Date.today
+		return timeLeft.to_i
 	end
 
 	def vidUrl(oldUrl)
@@ -51,13 +50,13 @@ module ProjectsHelper
       ['Walkability / Bike / Paths']
 		]
 	end
-  
+
   def project_duration(duration)
     if !duration.nil?
       Time.parse(duration).strftime("%m/%d/%y")
     end
   end
-  
+
   def stored_content
     content_for :description do
       "This is some text"

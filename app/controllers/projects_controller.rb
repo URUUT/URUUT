@@ -4,9 +4,9 @@ class ProjectsController < ApplicationController
   require "uri"
 
   before_filter :authenticate_user!, :only => [:index, :new, :create, :edit, :update]
-  
+
   layout false, :only => "stripe_update"
-  
+
 	def index
 		@projects = Project.find_all_by_user_id(current_sponsor.id)
   end
@@ -19,6 +19,8 @@ class ProjectsController < ApplicationController
 
 	def create
 		@project = Project.new(params[:project])
+    @project.user_id = current_user.id
+    logger.debug("Current User is #{current_user.id}")
     @project.status = 'step1'
     if @project.save
       bitly = Bitly.new('chadbartels','R_b1c64c4fb7afc739d0e2da6bcdaf946b')
@@ -48,14 +50,14 @@ class ProjectsController < ApplicationController
     session[:current_project] = @project.id
 	end
 
-	def update  
-		@project = Project.find(params[:id])  
-		if @project.update_attributes(params[:project])  
-			flash[:notice] = "Successfully updated project."  
+	def update
+		@project = Project.find(params[:id])
+		if @project.update_attributes(params[:project])
+			flash[:notice] = "Successfully updated project."
       redirect_to @project
-		end  
+		end
 	end
-  
+
   def stripe_update
     code = params[:code]
     client = OAuth2::Client.new('ca_0nuMjzTruvR2hOSuHDJSlxzeA7q4h5ai', 'sk_test_XF9K5nq63HTSmTK1ZMiW6tvw', :site => "https://connect.stripe.com/oauth/authorize")
@@ -63,14 +65,14 @@ class ProjectsController < ApplicationController
     project = Project.find(session[:current_project])
     project.project_token = token.token
     project.save!
-    
+
     redirect_to '/project_steps/step4', :param => "connected"
   end
-  
+
   def save_image
     @project = Project.find_by_id(session[:current_project])
     @project.large_image = params[:large_image]
-    
+
     if @project.save
       render :nothing => true
     end

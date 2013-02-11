@@ -11,7 +11,7 @@ class Donation < ActiveRecord::Base
     customer = Stripe::Customer.create(description: email, card: token)
     self.customer_token = customer.id
     save!
-  
+
   rescue Stripe::InvalidRequestError => e
     logger.error "Stripe error while creating customer: #{e.message}"
     errors.add :base, "There was a problem with your credit card."

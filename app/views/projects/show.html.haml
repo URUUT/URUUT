@@ -6,7 +6,7 @@
         %span.location #{@project.city}, #{@project.state}
         %hr
         %p.short-desc= @project.short_description
-              
+
         - if current_user
           - if Donation.already_donated(@project.id, current_user.id).nil?
             = link_to "Fund Now", new_donation_path, :class => "btn"
@@ -15,7 +15,7 @@
             #{link_to "Edit Your Donation", edit_donation_path(Donation.edit_donation(@project.id, current_user.id)), :class => "edit"}
         - elsif !current_user
           %a{:href => "#{new_donation_path(:id => @project.id)}", :class => "fund btn"} Fund Now #{image_tag('arrow.png')}
-      
+
       .span4.offset3
         /%h3= number_to_currency(amount_funded(@project.id))
 
@@ -29,24 +29,24 @@
               - totalDonated = 0
               - @donation.each do |d|
                 - totalDonated += d.amount
-              %p= number_to_currency(totalDonated, :precision => 0)  
-            
+              %p= number_to_currency(totalDonated, :precision => 0)
+
         #progressbar
 
         %ul.project-details
           %li
-            %span.small 
-              Project 
-              %br  
+            %span.small
+              Project
+              %br
               Goal
             = number_to_currency(@project.goal, :precision => 0)
 
           %li
-            %span.small 
-              Days 
+            %span.small
+              Days
               %br
-              Left 
-            = time_left(@project.duration).to_i
+              Left
+            = time_left(@project.duration, @project.approval_date).to_i
 
 .row-fluid.show-content
   .span8
@@ -60,7 +60,7 @@
     %ul.nav.nav-tabs
       %li.active
         %a{:href => "#planting_seeds"}
-          %h4 
+          %h4
             Planting Seeds
             %span (About)
       %li
@@ -72,7 +72,7 @@
         %a{:href => "#gallery"}
           %h4
             Gallery
-    #content_container 
+    #content_container
       #planting_seeds
         %p= @project.description.html_safe
 
@@ -88,7 +88,7 @@
         .details
 
     -#%hr
-    -#.comments 
+    -#.comments
       -#%h4.comment Post a message
       -#%p
         -#Tell #{@project.title} you support their campaign! Got questions or need more information? Post them here and get an answer!
@@ -111,13 +111,13 @@
               %a{:href => "#{new_donation_path}", :class => "fund btn"} Fund Now #{image_tag('arrow.png')}
 
     %h4.title
-      Planter 
+      Planter
       %span (Project Organizer)
-    .planter 
+    .planter
       = image_tag(get_gravatar(@user.email, 100), :style => "display:inline-block;margin-right:20px;")
       %h4{:style => "display:inline-block;color:#70bf4c;letter-spacing:2px;"}= @project.title
 
-    %h4.title 
+    %h4.title
       Seeders (#{@donation.count})
       %span (Project Funders)
     -@donation.each do |donator|
@@ -159,14 +159,14 @@
     $('.nav-tabs li a').click(function(e){
       e.preventDefault();
       var show = $(this).attr('href');
-      
+
       $('.nav-tabs li').removeClass('active');
       $('.nav-tabs li').each(function(){
         var content = $(this).find('a').attr('href');
         console.log(content);
         $(content).hide();
       });
-      
+
       $(this).parent('li').addClass('active');
       $(show).show();
     });
