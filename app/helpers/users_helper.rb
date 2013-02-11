@@ -55,7 +55,7 @@ module UsersHelper
 	      ['WY']
 	    ]
 	end
-  
+
 	def project_length
 	    [
 	      [5],

@@ -1,14 +1,14 @@
 %fieldset
   %legend.heading Project Overview
   %div
-    = f.label :title 
+    = f.label :title
     = f.text_field :title, :placeholder => "Project Title"
 
   %div{:class => "short_description", :rel => "tooltip", "data-placement" => "right", "data-original-title" => "Tooltip on right"}
-    = f.label :short_description 
+    = f.label :short_description
     = f.text_area :short_description, :placeholder => "Short Description", :style => "width:350px;height:200px;"
 
   %div
-    = f.label :description 
+    = f.label :description
     = f.text_area :description
     -#, :value => "#{@default if @project.description.nil?}"

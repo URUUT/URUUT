@@ -15,4 +15,4 @@ class Sponsors::RegistrationsController < Devise::RegistrationsController
       render "edit"
     end
   end
-end 
+end

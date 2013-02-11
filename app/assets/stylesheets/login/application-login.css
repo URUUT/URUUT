@@ -10,6 +10,6 @@
  *
  *= require_self
  *= require default/projects
- *= require default/pages 
+ *= require default/pages
  *= require login/login
  */

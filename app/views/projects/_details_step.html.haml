@@ -28,9 +28,9 @@
   %div
     = f.label :goal
     = f.text_field :goal
-  
+
   %h4 Add Gallery Images
   %div
     = f.fields_for :galleries do |gallery_fields|
       %p
-        = gallery_fields.file_field :gallery 
+        = gallery_fields.file_field :gallery

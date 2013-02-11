@@ -11,7 +11,7 @@
   %div{:style => "float:left;margin-top:20px;width:309px"}
     = image_tag project.image, :style => "width:200px;height:125px;vertical-align:text-top;"
     %h5{:style => "display:inline-block;width:50%;"}
-      = link_to "#{project.title}", project_path(project.id), :style => "color:#3f403b;"
+      = link_to "#{project.organization}", project_path(project.id), :controller => 'projects', :action => 'show', :style => "color:#3f403b;"
 
 .cf
 = paginate @projects

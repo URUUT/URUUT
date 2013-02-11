@@ -1,28 +1,32 @@
 .breadcrumb-container
   %ul.breadcrumbs
-    %li.active
+    %li.current
       = link_to '/project_steps/step1' do
         %span.step Step 1
         %span.title RUUTS
         %span.description Basic Information
+        %span.border
 
-    %li 
+    %li
       = link_to '/project_steps/step2' do
         %span.step Step 2
         %span.title STORY
         %span.description Project Details
+        %span.border
 
-    %li 
+    %li
       = link_to '/project_steps/step3' do
         %span.step Step 3
         %span.title PERKS
         %span.description Donor Rewards
+        %span.border
 
-    %li 
+    %li
       = link_to '/project_steps/step4' do
         %span.step Step 4
         %span.title VISUALS
         %span.description Project Page Setup
+        %span.border
 
     %li
       = link_to 'submit' do
@@ -32,17 +36,17 @@
 
 = form_for(@project, :html => {:class => "span8 well", :multipart => true}) do |f|
 
-  - if @project.errors.any?  
-    #errorExplanation  
-      %h2 #{pluralize(@project.errors.count, "error")}  
-      %ul  
-        - @project.errors.full_messages.each do |msg|  
-          %li #{msg}  
-					
-  %h4.title 
-    YOUR RUUTS 
+  - if @project.errors.any?
+    #errorExplanation
+      %h2 #{pluralize(@project.errors.count, "error")}
+      %ul
+        - @project.errors.full_messages.each do |msg|
+          %li #{msg}
+
+  %h4.title
+    YOUR RUUTS
     %span.italic (Basic Information)
-	
+
   %div
     = f.label :organization, "Organization/Business Name*"
     = f.text_field :organization, :required => true, :size => 45
@@ -52,7 +56,7 @@
     = f.text_field :address, :required => true, :size => 45
 
   %div.inline
-    = f.label :city 
+    = f.label :city
     = f.text_field :city, :required => true, :size => 17
 
   %div.inline{:style => "margin-left:18px;"}
@@ -65,13 +69,13 @@
 
   %div
     = f.label :website do
-      WEBSITE ADDRESS 
+      WEBSITE ADDRESS
       %span.italic (Format: http://www.mysite.com)
     = f.text_field :website, :required => true, :size => 45
 
   %div.inline
-    = f.label :twitter_handle, "Twitter Account" 
-    = f.text_field :twitter_handle, :required => true, :size => 17
+    = f.label :twitter_handle, "Twitter Account"
+    = f.text_field :twitter_handle, :required => true, :size => 15
 
   %div.inline{:style => "margin-left:24px;"}
     = f.label :facebook_page, "Facebook Page"
