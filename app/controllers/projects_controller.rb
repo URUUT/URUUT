@@ -37,8 +37,9 @@ class ProjectsController < ApplicationController
 	end
 
 	def edit
-		@project = Project.find(params[:id])
-    session[:current_project] = @project.id
+		# @project = Project.find(params[:id])
+#     session[:current_project] = @project.id
+    logger.debug("EDIT")
     redirect_to project_steps_path
 	end
 
@@ -50,13 +51,27 @@ class ProjectsController < ApplicationController
     session[:current_project] = @project.id
 	end
 
-	def update
-		@project = Project.find(params[:id])
-		if @project.update_attributes(params[:project])
-			flash[:notice] = "Successfully updated project."
-      redirect_to @project
-		end
-	end
+	# def update
+#     redirect_to project_steps_path
+		# @project = Project.find(params[:id])
+#     if @project.update_attributes(params[:project])
+#       flash[:notice] = "Successfully updated project."
+#       redirect_to project_steps_path
+#     end
+  # end
+  
+  def update
+    @project = Project.find_by_id(session[:current_project])
+    @project.update_attributes!(params[:project])
+    if @project.valid?
+      logger.debug(@project.status)
+      if request.referrer == 'http://127.0.0.1:8080/project_steps/step1'
+        redirect_to "/project_steps/step2"
+      end
+    else
+      logger.debug("Not Valid")
+    end
+  end
 
   def stripe_update
     code = params[:code]
@@ -74,6 +89,17 @@ class ProjectsController < ApplicationController
     @project.large_image = params[:large_image]
 
     if @project.save
+      render :nothing => true
+    end
+  end
+  
+  def add_perk
+    perk = Perk.new
+    perk.name = params[:name]
+    perk.amount = params[:amount]
+    perk.description = params[:description]
+    perk.project_id = session[:current_project]
+    if perk.save!
       render :nothing => true
     end
   end

@@ -4,11 +4,11 @@ class ProjectStepsController < ApplicationController
 
   def show
     @project = Project.find_by_id(session[:current_project])
-    # @project.perks.build
+    @project.perks.build
     # @project.galleries.build
     logger.debug("Referrer is #{request.referer}")
     @step = step
-    if URI(request.referer).path == '/projects/new' ||  URI(request.referer).path == '/projects' and step == :step1
+    if request.referer == 'http://127.0.0.1:8080/projects/new' ||  request.referer == 'http://127.0.0.1:8080/projects' and step == :step1
       redirect_to '/project_steps/step2'
     else
       render_wizard

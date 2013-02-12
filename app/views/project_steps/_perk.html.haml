@@ -1,4 +1,4 @@
-= f.fields_for :perks, :child_index => "test" do |p|
+= f.fields_for :perks do |p|
   .perk
     %div.inline
       = p.label :name
@@ -11,5 +11,3 @@
     %div
       = p.label :description
       = p.text_area :description, :required => true, :size => "85x30"
-
-    / %a.remove{:href => "#"} Remove X

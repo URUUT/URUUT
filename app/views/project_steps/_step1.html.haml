@@ -64,7 +64,7 @@
     = f.select :state, options_for_select(us_states, @project.state), :required => true, :style => "width:140px;"
 
   %div.inline{:style => "margin-left:18px;"}
-    = f.label :zip
+    = f.label :zip, "Zipcode"
     = f.text_field :zip, :required => true, :size => 3
 
   %div
