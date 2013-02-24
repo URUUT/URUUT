@@ -1,0 +1,134 @@
+$(document).ready(function () {
+
+      /* initialize dropdowns */
+      $('[id^="dropdown"]').each(function () {
+        $(this).ddslick({
+          width: 200,
+          background: "#ffffff",
+          selectText: "Select One"
+        });
+      });
+
+      /* initialize checkboxes */
+      /* work around for IE7 and IE8 bug */
+      if ($.browser && $.browser.msie && parseInt($.browser.version) < 9) {
+          $('input').each(function () {
+            $(this).click(function () {
+              $(this).toggleClass('checked');
+            });
+          });
+      } else {
+          $('input:checkbox').each(function () {
+            $(this).click(function () {
+              $(this).toggleClass('checked');
+            });
+          });
+      }
+
+      if ($.browser && $.browser.msie && parseInt($.browser.version) <= 9) {
+          $('.products').columnize({columns: 2});
+          $('.products .column').css('width', '45%');
+          $('.products').parent().hover(function () {
+            $(this).find('.subnav').css('visibility', 'visible');
+          }, function () {
+            $(this).find('.subnav').css('visibility', 'hidden');
+          });
+      }
+
+      $('#primary-nav li').hover(function () {
+        $(this).find('.subnav').show();
+      }, function () {
+        $(this).find('.subnav').hide();
+      });
+
+      $('.manage-locations .open-handle').on('click', function () {
+        if ($(this).parent().hasClass('open')) {
+          $(this).parent().removeClass('open');
+          $(this).parent().animate({"right": "-=1154px"}, "fast");
+        } else {
+          $(this).parent().addClass('open');
+          $(this).parent().animate({"right": "+=1154px"}, "fast");
+        }
+      });
+
+      $('.cloud-services .open-handle').on('click', function () {
+        if ($(this).parent().hasClass('open')) {
+          $(this).parent().removeClass('open');
+          $(this).parent().animate({"left": "-=1154px"}, "fast");
+        } else {
+          $(this).parent().addClass('open');
+          $(this).parent().animate({"left": "+=1154px"}, "fast");
+        }
+      });
+
+      //init google map
+      var NewYork = new google.maps.LatLng(40.7142, -74.0064);
+      initializeMap(NewYork);
+  });
+
+function addMarker(location) {
+    marker = new google.maps.Marker({
+        position: location,
+        map: map
+    });
+}
+
+// Testing the addMarker function
+
+function TestMarker() {
+    CentralPark = new google.maps.LatLng(37.7699298, -122.4469157);
+    addMarker(CentralPark);
+}
+
+function initializeMap(coords) {
+    var map;
+
+    var stylez = [{
+        featureType: "poi",
+        stylers: [{
+            visibility: "off"
+        }]
+    }, {
+        featureType: "road",
+        elementType: "all",
+        stylers: [{
+            visibility: "off"
+        }]
+    }, {
+        featureType: "water",
+        stylers: [{
+            color: "#808080"
+        }]
+    }, {
+        featureType: "landscape.natural",
+        elementType: "geometry",
+        stylers: [{
+            color: "#FFFFFF"
+        }]
+    }, {
+        featureType: "landscape.man_made",
+        elementType: "geometry",
+        stylers: [{
+            visibility: "off"
+        }]
+    }];
+
+    var mapOptions = {
+        zoom: 8,
+        center: coords
+    };
+
+    map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+    var styledMapOptions = {
+        map: map,
+        name: "styledMap"
+    }
+
+    var testmap = new google.maps.StyledMapType(stylez, styledMapOptions);
+
+    map.mapTypes.set('styledMap', testmap);
+    map.setMapTypeId('styledMap');
+
+    TestMarker();
+}

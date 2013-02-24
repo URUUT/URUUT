@@ -1,5 +1,13 @@
 Crowdfund::Application.routes.draw do
 
+   # match '/auth/:provider/callback', to: 'services#create'
+
+  get "services/index"
+
+  get "services/create"
+
+  get "services/destroy"
+
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   get "image/new"
@@ -41,6 +49,7 @@ Crowdfund::Application.routes.draw do
   resources :projects
 
   resources :project_steps
+  resources :services 
 
   root to: "pages#home"
 
