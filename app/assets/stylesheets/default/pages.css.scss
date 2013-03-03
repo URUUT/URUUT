@@ -109,6 +109,14 @@ h6 {
   font-family:'Proxima Nova Semi', sans-serif;
 	letter-spacing:2px;
   text-transform:uppercase;}
+	
+h2 {
+	font-size:24px;
+}
+	
+h3 {
+	font-size:18px;
+}
 
 input[type=text], 
 input[type=email], 
@@ -156,10 +164,32 @@ label {
 	
 .inline {
 	display:inline-block;	}
+
+.float-left {
+	float:left;
+}
+
+.float-right {
+	float:right;
+}
 	
 .italic {
 	font:italic 12px/12px "Georgia", georgia, serif;
 	text-transform:none;}
+	
+.btn {
+  background:none;
+  background:#3f403b;
+  border:none;
+  border-radius:0;
+  box-shadow:none;
+  color:#fff;
+  font:normal 13px/13px "Proxima Nova", arial, sans-serif;
+  letter-spacing:2px;
+  padding:10px 25px;
+  position:relative;
+  text-shadow:none;
+  text-transform:uppercase;}
 	
 .no-hover {
 	span {
@@ -1211,6 +1241,122 @@ form[id*=project] {
 		color:#b6b6b4;
 		font-size:12px;
 		margin-top:5px;}}
+		
+.full-width {
+	&.description {
+		background:url(image-path('URUUT_BG.jpg')) center center;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		height:455px;
+		min-height:455px;
+	}
+	&.partner {
+		background:url(image-path('bg-tile.jpg')) top left repeat;
+		height:378px;
+		.marketing {
+			margin-top:100px;
+			width:480px;
+			h2 {
+				color:#b6b6b4;
+				letter-spacing:normal;
+				line-height:30px;
+				margin-top:0;
+				text-transform:none;
+			}
+			h3 {
+				color:#70bf4c;
+				margin-bottom:0;
+			}
+		}
+		.pie-chart {
+			margin-top:60px;
+		}
+	}
+	&.better {
+		background:#70bf4c;
+		box-shadow: inset 0px 2px 5px rgba(64,62,55,0.25), inset 0px -3px 5px rgba(64,62,55,0.20);
+		height:787px;
+	}
+	&.transparency {
+		background:#fff;
+		height:455px;
+		.marketing {
+			display:inline-block;
+			margin-left:75px;
+			width:455px;
+			h2 {
+				color:#403e37;
+				font-family: 'Proxima Nova';
+				letter-spacing:1px;
+				line-height:100%;
+				margin-bottom:25px;
+				margin-top:0;
+				text-transform:none;}
+			h3 {
+				color:#70bf4c;
+				font-family: 'Proxima Nova';
+				line-height:100%;
+				margin-top:0;}
+			p {
+				color:#b6b6b4;
+				font:normal 14px/24px "Myriad Pro", arial, helvetica;}
+			.btn {
+				background:#70bf4c;
+				border-radius:5px;
+				box-shadow:1px 1px 2px rgba(0,0,0,0.45);
+				color:#fff;
+				margin-top:20px;
+				text-shadow:1px 1px 3px rgba(0,0,0,0.45);
+				span {
+					background:url(image-path('arrow.png')) top left no-repeat;
+					display:inline-block;
+					height:11px;
+					margin-left:2px;
+					vertical-align:-2px;
+					width:10px;}}}
+		.float-left {
+			margin-top:70px;}
+	}
+	&.who-should-use {
+		background:#eee;
+		border-bottom:1px solid #d1d1d0;
+		border-top:1px solid #999;
+		box-shadow: inset 0px 2px 3px rgba(0,0,0,0.25), inset 0px -3px 5px rgba(0,0,0,0.20);
+		height:558px;
+	}
+	&.make-it-happen {
+		background:#fff;
+		height:168px;
+		text-align:center;
+		h2 {
+			display:inline-block;
+			font-family:'Proxima Nova', arial, sans-serif;
+			margin-top:70px;
+			text-transform:none;
+		}
+		.btn {
+			background:#70bf4c;
+			border-radius:5px;
+			box-shadow:1px 1px 2px rgba(0,0,0,0.45);
+			color:#fff;
+			font-size:18px;
+			margin-left:25px;
+			margin-top:-5px;
+			padding:22px;
+			text-shadow:1px 1px 3px rgba(0,0,0,0.45);
+			span {
+				background:url(image-path('big-arrow.png')) top left no-repeat;
+				display:inline-block;
+				height:14px;
+				margin-left:3px;
+				vertical-align:-2px;
+				width:13px;
+			}
+		}
+	}
+}
 			
 .stripe-connect {
   display: inline-block;

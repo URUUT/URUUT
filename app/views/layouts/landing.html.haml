@@ -1,0 +1,78 @@
+%html
+  %head
+    %meta{:charset => "utf-8"}
+    %meta{"http-equiv" => "X-UA-Compatible", :content => "IE=edge,chrome=1"}
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1, maximum-scale=1"}
+    %title= content_for?(:title) ? yield(:title) : "Myapp"
+    %meta{:content => "", :name => "description"}
+    %meta{:content => "", :name => "author"}
+    = stylesheet_link_tag    "default/application", "trontastic/jquery-ui-1.8.22.custom.css", "http://cdn.leafletjs.com/leaflet-0.4/leaflet.css", "http://fonts.googleapis.com/css?family=Ubuntu:300,400,500",  "http://fonts.googleapis.com/css?family=Lato:300,400,700,400italic", :media => "all"
+    = javascript_include_tag "application", "https://js.stripe.com/v1/"
+    = filepicker_js_include_tag
+    = javascript_tag do
+      Stripe.setPublishableKey('pk_test_WRrfoQLUDkpGHAxCmOY0Y6ud');
+
+    = csrf_meta_tags
+    = yield(:head)
+  %body
+    #fb-root
+      :javascript
+
+        (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=517310951621035";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+
+    #wrap
+      %header.navbar
+        .container
+          = render 'layouts/navigation'
+      = yield
+      #push
+    = render 'partials/footer'
+
+:javascript
+  var updateCover = function(event){
+    console.log(event.fpfile.url);
+    var largeImage = event.fpfile.url;
+
+    $.ajax({
+      url: '/projects/save_image',
+      method: 'PUT',
+      data: {
+        large_image: largeImage
+        }
+    }).done(function(){
+      console.log("finished");
+      $('#large_image').css('background-image','url(' + largeImage + ')');
+    });
+  }
+
+  $(function(){
+    $('form fieldset p a').addClass('btn');
+    $('form [id*="edit_project"]').h5Validate();
+    $('form [id*="new_project"]').h5Validate();
+    $('#project_state').selectbox();
+    $('#project_duration').selectbox();
+
+    $('.coverphoto').bind('change', function(event){
+      console.log("Hello Close");
+    });
+
+    $('#myModal form').submit(function() {
+      var valuesToSubmit = $(this).serialize();
+      $.ajax({
+        url: $(this).attr('action'), //sumbits it to the given url of the form
+        data: valuesToSubmit,
+        dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
+      }).success(function(json){
+        console.log(json);
+      });
+      return false; // prevents normal behaviour
+    });
+  });

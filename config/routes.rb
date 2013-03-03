@@ -29,6 +29,8 @@ Crowdfund::Application.routes.draw do
   get "pages/terms"
 
   get "pages/about"
+  
+  get "pages/home"
 
   get "projects/add_desc"
   get "projects/save_image"
