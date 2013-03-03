@@ -25,5 +25,8 @@ class PagesController < ApplicationController
   def how_it_works
     # session[:previous_page] = request.referer
   end
+  
+  def home
+  end
 
 end

@@ -12,11 +12,11 @@ class ApplicationController < ActionController::Base
   protected
 
   def layout_by_resource
-    # if devise_controller?
-    #      "login"
-    #    else
+    if root_path
+      "landing"
+    else
       "application"
-    # end
+    end
   end
 
   def set_previous_page
