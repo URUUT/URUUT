@@ -27,6 +27,7 @@ class PagesController < ApplicationController
   end
   
   def home
+    render :layout => "landing"
   end
 
 end
