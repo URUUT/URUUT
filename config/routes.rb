@@ -41,15 +41,14 @@ Crowdfund::Application.routes.draw do
   get "projects/stripe_update"
 
   post "#{Rails.root}/public/images/"
+  
+  get "admin/unapproved"
+  post "admin/approve"
 
   resources :s3_uploads
-
   resources :projects
-
   resources :donations
-
   resources :projects
-
   resources :project_steps
   resources :services 
 
