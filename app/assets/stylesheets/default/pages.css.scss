@@ -1529,6 +1529,22 @@ form[id*=project] {
 		}
 	}
 }
+
+.admin {
+	table {
+		th {
+			font-family:'Proxima Nova';
+			font-size:14px;
+			text-align:center;
+		}
+		td {
+			color:#969694;
+			font-family:'Proxima Nova';
+			font-size:12px;
+			text-align:center;
+		}
+	}
+}
 			
 .stripe-connect {
   display: inline-block;

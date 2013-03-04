@@ -1,0 +1,56 @@
+%table.table.table-striped
+	%thead
+		%tr
+			%th
+				ID
+			%th
+				Title
+			%th
+				Description
+			%th
+				Duration
+			%th
+				Website
+			%th
+				Facebook
+			%th
+				Twitter
+	%tbody
+	- @unapproved_projects.each do |project|
+		%tr
+			%td
+				= project.id
+			%td
+				= project.title
+			%td
+				= project.description
+			%td
+				= project.duration
+			%td
+				= project.website
+			%td
+				= project.facebook_page
+			%td
+				= project.twitter_handle
+			%td
+				.btn.btn-success{:style => "background:#70bf4c;"}
+					Approve
+				.btn.btn-danger{:style => "background:#a81221;"}
+					Deny
+					
+:javascript
+	$(function(){
+		$('.btn-success').click(function(){
+			var id = $.trim($(this).parent().parent().find('td:first').text());
+			$.ajax({
+				type: "POST",
+				url: 'http://127.0.0.1:8080/admin/approve',
+				data: {approved:'true', id: id}
+			}).done(function(html) {
+			  var data = $.parseJSON(html);
+				if(data === 'Success'){
+					location.reload();
+				}
+			});
+		});
+	});
