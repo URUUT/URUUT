@@ -20,7 +20,7 @@
 
       %div{:style => "height:20px;margin-bottom:5px;", :class => "progressbar#{p.id}"}
       %h5{:style => "display:inline-block"} Time Left
-      %p{:style => "display:inline-block"} #{time_left(p.duration).to_i} Days
+      %p{:style => "display:inline-block"} #{time_left(p.duration, p.approval_date).to_i} Days
 
       - if current_user
         - if p.user_id == current_user.id
