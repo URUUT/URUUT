@@ -18,6 +18,7 @@ class AdminController < ApplicationController
       newData = "Success"
       project = Project.find_by_id(id)
       project.live = 1
+      project.approval_date = Date.today
       project.save!
     else
       newData = "Failure"

@@ -533,36 +533,29 @@ nav.navbar-inner {
       margin-bottom:10px;}}}
 
 .project {
-  border:1px solid #e9e9e9;
-  width:280px;
-  height:350px;
+  border-top:6px solid #70bf4c;
+  width:300px;
+  height:396px;
   float:left;
   margin:0 20px 20px;
   overflow:hidden;
   position:relative;
-  p.category {
-    background:#689d00;
-    color:#fff;
-    font:300 11px/11px 'Proxima Nova', sans-serif;
-    left:0;
-    letter-spacing:2px;
-    padding:5px 15px;
-    position:absolute;
-    text-transform:uppercase;
-    top:104px;}
   h4 {
     height:38px;
+		letter-spacing:1px;
     overflow:hidden;
     a{
       color:#689d00;
       font-family: 'Proxima Nova', sans-serif;
-      font-size:15px;
       font-weight:400;
       line-height:normal;
       text-transform:uppercase;
       &:hover {
         color:#486b02;
         text-decoration:none;}}}
+	.content {
+		background:#f8f8f8;
+		border:1px solid #e9e9e9;}
   .location {
     padding:10px;
     width:260px;}
@@ -587,7 +580,7 @@ nav.navbar-inner {
 
 .project-image {
   width:100% !important;
-  height:125px !important;}
+  height:150px;}
 
 .cont-desc {
   height:80px;
@@ -606,11 +599,11 @@ nav.navbar-inner {
     width:260px;}}
 
 .funding {
-  background:#f8f8f8;
-  height:auto;
-  padding:10px;
+  background:url(image-path('bg-tile.jpg')) top left repeat;
+	display:inline-block;
+  height:90px;
   position:relative;
-  width:260px;
+  width:100%;
   hr {
     border-top:1px solid #e6e6e6;
     border-bottom:1px solid #f3f3f3;
@@ -623,56 +616,73 @@ nav.navbar-inner {
     font-family:'Georgia', serif;
     font-size:11px;}
   ul {
+		border-top:1px solid #403e37;
+		height:47px;
     margin:0; 
     padding:0;
     li {
       display:inline-block;
-      list-style-type:none;}
+			height:100%;
+      list-style-type:none;
+			margin-top:-1px;}
     li.funded {
-      border-right:1px solid #e6e6e6;
       font-family:'Proxima Nova', serif;
-      font-size:17px;
+      font-size:16px;
       font-style:italic;
-      padding:8px 0 5px 0;
+			margin-left:20px;
+      padding:0;
       width:170px;
       p {
-        margin:0;}}
+				color:#fff;
+				line-height:100%;
+				margin-bottom:0;
+        padding:12px 0 0;}}
     li.days-left {
-      border-left:1px solid #f8f8f8;
+      border-left:1px solid #403e37;
+			color:#fff;
       font-family:'Proxima Nova', serif;
-      font-size:17px;
+      font-size:16px;
       font-style:italic;
       margin-top:-5px;
-      padding:0 0 5px 10px;
+      padding:0 0 0 14px;
       width:70px;
       p {
-        display:block}}}
+				line-height:100%;
+				margin-bottom:0;
+				padding:12px 0 0;}}}
   h5 {
+		color:#b6b6b4;
+		display:block;
     font-family: 'Proxima Nova', sans-serif;
-    font-size:10px;
+    font-size:8px;
     font-style:normal;
     font-weight:400;
-    margin:0;
+		letter-spacing:normal;
+		line-height:100%;
+    margin:2px 0 0;
     text-transform:uppercase;}}
 
-div[class*='progressbar']{
+/*div[class*='progressbar']{
   border-radius:0;
   background:#413f37;
   height:100% !important;
-  margin-bottom:10px;}
+  margin-bottom:10px;}*/
 
-.index div[class*='progressbar']{
+div[class*='progressbar']{
   border-radius:0;
-  background:#413f37;
-  height:10px !important;
-  margin-bottom:10px;}
+	border:1px solid #fff;
+  background:url(image-path('progress-bar-back.png')) top left repeat;
+	display:block;
+  height:16px;
+  margin:12px auto;
+	width:258px;}
 
 h5.time-left {
   display:inline-block;}
 
-p.days {
+/*p.days {
   display:inline-block;
-  margin-bottom:0;}
+  margin-bottom:0;}*/
 
 .discover div.project {
   margin-top:0;}
@@ -689,6 +699,10 @@ p.days {
 
 .recent div.project:nth-child(4), .ending-soon div.project:nth-child(4) {
   margin-right:0 !important;}
+	
+.recent .project {
+	margin-left:0 !important;
+}
 
 .redactor_box {
   height:350px;
