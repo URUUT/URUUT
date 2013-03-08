@@ -4,7 +4,7 @@ class ProjectStepsController < ApplicationController
 
   def show
     @project = Project.find_by_id(session[:current_project])
-    @project.perks.build
+    # @project.perks.build
     # @project.galleries.build
     logger.debug("Referrer is #{request.referer}")
     @step = step
