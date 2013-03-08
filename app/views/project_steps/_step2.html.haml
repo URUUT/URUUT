@@ -48,6 +48,11 @@
         - @project.errors.full_messages.each do |msg|
           %li #{msg}
 
+  = f.label :project_title do
+    PROJECT TITLE*
+    %span.italic (Ex. Dunwoody City Park Fountain)
+  = f.text_field :project_title, :required => true, :size => 45
+	
   = f.label :goal do
     FUNDING GOAL*
     %span.italic (must be at least $XXXX)
