@@ -1,14 +1,17 @@
-= render :partial => "project_steps/step1"
+%h1 This is a test and holder for project creation landing page
+
+.btn.create Create Project
 :javascript
-  $(function(){
-    $('.breadcrumbs li a').each(function(){
-      $(this).addClass('no-hover')
-    })
-
-    $('.breadcrumbs li a').click(function(e){
-      e.preventDefault()
-    })
-
-    $('.breadcrumbs li:first-child a').removeClass('no-hover').addClass('hover')
-
-  })
+	$(function(){
+		$('.btn.create').click(function(){
+			$.ajax({
+				type: 'POST',
+				url: '#{projects_path}',
+				data: ''
+			}).done(function(data){
+				console.log("Success???");
+				console.log(data);
+				window.location.href = '/projects/' + data + '/edit#sponsor-info';
+			})
+		})
+	})

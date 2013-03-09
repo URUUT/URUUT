@@ -12,34 +12,24 @@ class ProjectsController < ApplicationController
   end
 
 	def new
-	  @project = Project.new
-    @project.perks.build
-    @project.galleries.build
+    @project = Project.new
+ #    @project.perks.build
+ #    @project.galleries.build
   end
 
 	def create
-		@project = Project.new(params[:project])
+    @project = Project.new(params[:project])
     @project.user_id = current_user.id
-    logger.debug("Current User is #{current_user.id}")
-    @project.status = 'step1'
     if @project.save
-      bitly = Bitly.new('chadbartels','R_b1c64c4fb7afc739d0e2da6bcdaf946b')
-      page_url = bitly.shorten("#{request.scheme}://#{request.host_with_port}/projects/#{@project.id}")
-      @project.bitly = page_url.short_url
-      @project.save!
-
-      session[:current_project] = @project.id
-      redirect_to project_steps_path
-    else
-      render :new
-		end
+      respond_to do |format|
+        format.js { render :js => @project.id }
+      end
+    end
 	end
 
 	def edit
-		# @project = Project.find(params[:id])
-#     session[:current_project] = @project.id
-    logger.debug("EDIT")
-    redirect_to project_steps_path
+		@project = Project.find(params[:id])
+    @project.update_attributes!(params[:project])
 	end
 
 	def show
@@ -60,15 +50,12 @@ class ProjectsController < ApplicationController
   # end
   
   def update
-    @project = Project.find_by_id(session[:current_project])
+    @project = Project.find(params[:id])
     @project.update_attributes!(params[:project])
-    if @project.valid?
-      logger.debug(@project.status)
-      if request.referrer == 'http://127.0.0.1:8080/project_steps/step1'
-        redirect_to "/project_steps/step2"
+    if @project.save
+      respond_to do |format|
+        format.js { render :js => @project.id }
       end
-    else
-      logger.debug("Not Valid")
     end
   end
 
