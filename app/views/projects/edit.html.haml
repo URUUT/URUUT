@@ -1,3 +1,406 @@
-%h1 Edit Project
-%hr{:style => "margin-top:10px;margin-bottom:35px;"}
-= render :partial => "project_steps/step1"
+.breadcrumb-container
+  %ul.breadcrumbs
+    %li.current
+      = link_to '/project_steps/step1' do
+        %span.step Step 1
+        %span.title RUUTS
+        %span.description Basic Information
+        %span.border
+
+    %li
+      = link_to '/project_steps/step2' do
+        %span.step Step 2
+        %span.title STORY
+        %span.description Project Details
+        %span.border
+
+    %li
+      = link_to '/project_steps/step3' do
+        %span.step Step 3
+        %span.title PERKS
+        %span.description Donor Rewards
+        %span.border
+
+    %li
+      = link_to '/project_steps/step4' do
+        %span.step Step 4
+        %span.title VISUALS
+        %span.description Project Page Setup
+        %span.border
+
+    %li
+      = link_to 'submit' do
+        %span.step Submission
+        %span.title GET RUUTED
+        %span.description Submit Your Project for Approval
+
+.step-container{"data-id" => "sponsor-info"}
+  = form_for(@project, :html => {:class => "span8 well", :multipart => true}) do |f|
+
+    - if @project.errors.any?
+      #errorExplanation
+        %h2 #{pluralize(@project.errors.count, "error")}
+        %ul
+          - @project.errors.full_messages.each do |msg|
+            %li #{msg}
+
+    %h4.title
+      YOUR RUUTS
+      %span.italic (Basic Information)
+
+    %div
+      = f.label :organization, "Organization/Business Name*"
+      = f.text_field :organization, :required => true, :size => 45
+
+    %div
+      = f.label :address , "STREET ADDRESS*"
+      = f.text_field :address, :required => true, :size => 45
+
+    %div.inline
+      = f.label :city
+      = f.text_field :city, :required => true, :size => 17
+
+    %div.inline{:style => "margin-left:18px;"}
+      = f.label :state
+      = f.select :state, options_for_select(us_states, @project.state), :required => true, :style => "width:140px;"
+
+    %div.inline{:style => "margin-left:18px;"}
+      = f.label :zip, "Zipcode"
+      = f.text_field :zip, :required => true, :size => 3
+
+    %div
+      = f.label :website do
+        WEBSITE ADDRESS
+        %span.italic (Format: http://www.mysite.com)
+      = f.text_field :website, :required => true, :size => 45
+
+    %div.inline
+      = f.label :twitter_handle, "Twitter Account"
+      = f.text_field :twitter_handle, :required => true, :size => 15
+
+    %div.inline{:style => "margin-left:24px;"}
+      = f.label :facebook_page, "Facebook Page"
+      = f.text_field :facebook_page, :required => true, :size => 17
+
+    %div
+      = f.submit "Save And Continue", :class => "btn", :id => "project-submit"
+
+  .span4{:style => "margin-top:155px;"}
+    %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
+    .well.info
+      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Your Ruuts
+      %p First, we are so thrilled ot have you on URUUT!
+
+      %p The process of bulding your project is simple and easy. We will walk you through each step and offer handy tips to make your project a success. For a more detailed guide on how to build and run a successful project,  take a look at our handy Project Guide (pdf).
+
+      %p The first steps are Your Ruuts - which is your basic information - go ahead and get started! Don’t worry if you get stuck - you can come back anytime to edit your project.
+
+.step-container{"data-id" => "project-details"}
+  = form_for(@project, :html => {:class => "span8 well", :multipart => true}) do |f|
+
+    %h4.title
+      YOUR STORY
+      %span.italic (Basic Information)
+
+    - if @project.errors.any?
+      #errorExplanation
+        %h2 #{pluralize(@project.errors.count, "error")}
+        %ul
+          - @project.errors.full_messages.each do |msg|
+            %li #{msg}
+
+    = f.label :project_title do
+      PROJECT TITLE*
+      %span.italic (Ex. Dunwoody City Park Fountain)
+    = f.text_field :project_title, :required => true, :size => 45
+
+    = f.label :goal do
+      FUNDING GOAL*
+      %span.italic (must be at least $XXXX)
+    = f.text_field :goal, :required => true, :size => 45
+
+    = f.label :duration do
+      CAMPAIGN LENGTH*
+      %span.italic (max 45 days)
+    = f.select :duration, options_for_select(project_length, @project.duration), :required => true, :size => 17
+
+    = f.label :title do
+      CAMPAIGN HEADLINE*
+      %span.italic (XX characters remaing)
+    = f.text_field :title, :required => true, :size => 45
+
+    = f.label :story, "YOUR STORY*"
+    = f.text_area :story, :required => true, :style => "height:138px;width:585px;"
+
+    = f.label :about, "TELL US ABOUT YOUR PROJECT*"
+    = f.text_area :about, :required => true, :style => "height:217px;width:585px;"
+    %div
+      = f.submit "Save And Continue", :class => "btn", :id => "project-submit"
+
+
+  .span4{:style => "margin-top:155px;"}
+    %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
+    .well.info
+      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} FUNDING GOAL
+      %p How much do you want to raise on URUUT?
+
+      %p Remember to keep in mind the cost of a campaign and perks fulfillment. We suggest you add 10% to the amount you need to raise. This will cover URUUT’s 5% fee, our payment providers 3% fee and any potential extras.
+
+      %p Also, URUUT is an all-or-nothing funding platform. That means you have to hit the goal you set in order to get any of the funding you raise. Try to choose something attainable based on your personal and social networks.
+
+      %p Take the amount you want to raise and divide it by 100. Or 50. Do you think you’ll be able to reach that many people in your personal and professional networks to get to your goal?
+
+      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} CAMPAIGN HEADLINE
+      %p A short and sweet summary of your project. This is the text that will appear on the browse page and should be a brief description of who you are and why you're here. Try to avoid using words like "help" and "need".
+      %p.bold Examples include:
+      %ul
+        %li Build a shady nook to sip your coffee when you fund our project.
+        %li Homemade, ready-to-serve dipping sauces. From Brooklyn with love.
+        %li We're launching a new fall collection: sourced locally and creating jobs in New York.
+
+      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} YOUR STORY
+      %pTell the world why they should invest in you. Include some background information about you and your business partners (if any), how long you’ve been in business, why the neighborhood should invest in you and why you’re raising funds on URUUT.
+
+      %p If you want to add any images to your story, you can do so at the final step.
+
+      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} TELL US ABOUT YOUR PROJECT
+      %p Give us a description of your project. What are you looking to raise funding for? Be specific! Your investors will care about how you use their money.
+
+      %p Remember, URUUT is for specific business projects, like capital improvements or equipment, not a source of working capital to pay rent or make ends meet.
+
+      %p It’s helpful to include some more specific descriptions of the rewards you’re offering too. Don’t feel like you need to put everything in right away -- you can go back and edit this before activating your campaign!
+
+      %p If you want to add any images to your project description, you can do so at the final step.
+
+.step-container{"data-id" => "perks"}
+  = form_for(@project, :html => {:class => "span8 well", :multipart => true}) do |f|
+
+    %h4.title
+      SEEDER PERKS
+      %span.italic (Rewards for your donors)
+
+    - if @project.errors.any?
+      #errorExplanation
+        %h2 #{pluralize(@project.errors.count, "error")}
+        %ul
+          - @project.errors.full_messages.each do |msg|
+            %li #{msg}
+
+    %fieldset{:style => "position:relative"}
+      .perk-container
+        .perk
+          %div.inline
+            = label_tag "Name"
+            = text_field_tag "perk-name", '', :size => 18
+
+          %div.inline{:style => "margin-left:20px;"}
+            = label_tag "Amount"
+            = text_field_tag "perk-amount", '', :size => 17
+
+          %div
+            = label_tag "Description"
+            = text_area_tag "perk-description", '', :size => "85x30"
+
+
+      %a.add-perk.btn{:href => "#"} SAVE PERK & ADD MORE
+
+
+    %div
+      = f.submit "Save And Continue", :class => "btn", :id => "project-submit", :style => "left: 175px;position: relative;"
+
+
+  .span4{:style => "margin-top:155px;"}
+    %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
+    .well.info
+      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} SEEDER PERKS
+      %p Funding on URUUT is made in exchange for payment in kind: goods, services, special benefits or other perks. Offer something valuable for the funds. No T-shirts and shout-outs for $100.
+
+      %p Perks could include a house account for your investors, discounted goods or services, special lessons or workshops, or a private party just for seeders. Be creative!
+      %p The most common amounts invested are between $25-$100. We suggest you offer some good value perks at a low cost for casual investors who might not know your organization well, and a handful of high end rewards that are likely to appeal to your inner circle or die-hard fans.
+      %p If you’re having a hard time thinking about some great perks, check out our Project Guide or just let us know and we can help you.
+
+.step-container{"data-id" => "assets"}
+  = form_for(@project, :html => {:multipart => true}) do |f|
+    #large_image{:style => "margin-top:180px"}
+
+      %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Upload an image', 'data-fp-apikey' => ENV['FILEPICKER_API'], 'data-fp-button-class' => 'coverphoto', 'onchange' => 'updateCover(event)'}
+
+        .funding-info
+          .container
+            .span5
+              %h4.title= @project.title
+            %span.location #{@project.city}, #{@project.state}
+            %hr
+            %p.short-desc= @project.about
+
+            - if current_user
+              - if Donation.already_donated(@project.id, current_user.id).nil?
+                = link_to "Fund Now", new_donation_path, :class => "btn"
+              - else
+                %h4.already-donated You've donated #{number_to_currency(Donation.already_donated(@project.id, current_user.id), :precision => 0)}
+                #{link_to "Edit Your Donation", edit_donation_path(Donation.edit_donation(@project.id, current_user.id)), :class => "edit"}
+            - elsif !current_user
+              %a{:href => "#{new_donation_path(:id => @project.id)}", :class => "fund btn"} Fund Now #{image_tag('arrow.png')}
+
+          .span4.offset3
+            /%h3= number_to_currency(amount_funded(@project.id))
+
+            .progress-container
+              = image_tag 'seed.png', :class => "seed"
+              %div
+                %span Seed Funds Pledged
+                / - if @donation.count == 0
+                %p $0
+                / - else
+                /               - totalDonated = 0
+                /               - @donation.each do |d|
+                /                 - totalDonated += d.amount
+                /               %p= number_to_currency(totalDonated, :precision => 0)
+
+            #progressbar
+
+              %ul.project-details
+                %li
+                  %span.small
+                    Project
+                  %br
+                  Goal
+                = number_to_currency(@project.goal, :precision => 0)
+
+              %li
+                %span.small
+                  Days
+                  %br
+                  Left
+                / = time_left(@project.duration).to_i
+
+    .show-content
+      .span8
+        %h4.title Where We're Ruuted
+        .map-container
+          #map{:style => "width:100%;height:300px"}
+            #map-details
+              .project-location
+                %h4= @project.title
+
+        %ul.nav.nav-tabs
+          %li.active
+            %a{:href => "#planting_seeds"}
+              %h4
+                Planting Seeds
+                %span (About)
+          / %li
+          /         %a{:href => "#growth"}
+          /           %h4
+          /             Growth
+          /             %span (Updates)
+          /       %li
+          /         %a{:href => "#gallery"}
+          /           %h4
+          /             Gallery
+        #content_container
+          #planting_seeds
+            %p= @project.about
+
+          / #growth
+          /        %p This is growth
+          /
+            /      #gallery
+          /        %p This is gallery
+
+          #cultivation
+            .ending
+
+              .details
+                = @project.story
+        -#%hr
+        -#.comments
+          -#%h4.comment Post a message
+          -#%p
+            -#Tell #{@project.title} you support their campaign! Got questions or need more information? Post them here and get an answer!
+
+        -#.fb-comments{'data-href' => "http://127.0.0.1:8080", :style => "width:100%"}
+
+
+      .span4.sidebar
+        %h4.title Seeder Perks
+        %ul.perks
+          -if @perks
+            - @perks.each do |p|
+              %li.perk
+                %h3= p.name
+                %p.description= p.description
+                %ul
+                  %li
+                    %h6 SEED
+                    %p.amount $#{p.amount.to_i}
+                  %li.fund-button
+                    %a{:href => "#{new_donation_path}", :class => "fund btn"} Fund Now #{image_tag('arrow.png')}
+
+        %h4.title
+          Planter
+          %span (Project Organizer)
+        .planter
+          / = image_tag(get_gravatar(@user.email, 100), :style => "display:inline-block;margin-right:20px;")
+          %h4{:style => "display:inline-block;color:#70bf4c;letter-spacing:2px;"}= @project.title
+
+        %h4.title
+          / Seeders (#{@donation.count})
+          %span (Project Funders)
+        / -@donation.each do |donator|
+        /       = image_tag(get_gravatar(donator.email, 25), :style => "float:left; margin:0 5px 5px 0;")
+
+:javascript
+  $(function(){
+    $('.step').each(function(){
+      $(this).hide();
+    });
+		
+    if(!window.location.hash) {
+      $('.step-container[data-id="sponsor-info"]').show();
+    }else{
+      var hashVal = window.location.hash.split("#")[1];
+      if(hashVal == 'sponsor-info') {
+        $("[data-id='" + hashVal + "']").show();
+      }
+      if(hashVal == 'project-details') {
+        $("[data-id='" + hashVal + "']").show();
+      }
+      if(hashVal == 'perks') {
+        $("[data-id='" + hashVal + "']").show();
+      }
+    }
+		
+    $('.step-container[data-id="sponsor-info"] form').on('submit', function(e){
+      e.preventDefault();
+      console.log("prevent worked");
+      var data = $(this).serialize();
+      console.log(data);
+      $.ajax({
+        type: 'POST',
+        url: '#{project_path(@project.id)}',
+        data: data
+      }).done(function(data){
+        console.log("Success???");
+        console.log(data);
+        window.location.href = '/projects/' + data + '/edit#project-details';   
+        window.location.reload(true);     
+      })
+    })
+		
+    $('.step-container[data-id="project-details"] form').on('submit', function(e){
+      e.preventDefault();
+      console.log("prevent worked");
+      var data = $(this).serialize();
+      console.log(data);
+      $.ajax({
+        type: 'POST',
+        url: '#{project_path(@project.id)}',
+        data: data
+      }).done(function(data){
+        console.log("Success???");
+        window.location.href = '/projects/' + data + '/edit#project-details';   
+        window.location.reload(true);     
+      })
+    })
+  })

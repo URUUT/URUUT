@@ -1,32 +1,55 @@
-%ul.breadcrumbs
-  %li.active
-    = link_to "Step 1", "project_steps/step1"
-  %li
-    = link_to "Step 2", projects_step2_url
-  %li
-    = link_to "Step 3", projects_step3_url
-  %li
-    = link_to "Step 4", projects_step4_url
-
-= form_for(@project, :html => {:method => "post", :class => "span8 well", :multipart => true}) do |f|
-
+.span8.well
   - if @project.errors.any?
     #errorExplanation
       %h2 #{pluralize(@project.errors.count, "error")}
       %ul
-      - @project.errors.full_messages.each do |msg|
-        %li #{msg}
+        - @project.errors.full_messages.each do |msg|
+          %li #{msg}
 
-  %title Create Your Project
-
-  = render "overview_step", :f => f
-  -#= render "details_step", :f => f
-  -#= render "perks_step", :f => f
-  -#= render "category_step", :f => f
-
-  - f.fields_for :galleries do |gallery_fields|
-    %p
-      = gallery_fields.file_field :gallery
+  %h4.title
+    YOUR RUUTS
+    %span.italic (Basic Information)
 
   %div
-    = f.submit "Save And Continue", :class => "btn", :id => "project-submit"
+    = f.label :organization, "Organization/Business Name*"
+    = f.text_field :organization, :required => true, :size => 45
+
+  %div
+    = f.label :address , "STREET ADDRESS*"
+    = f.text_field :address, :required => true, :size => 45
+
+  %div.inline
+    = f.label :city
+    = f.text_field :city, :required => true, :size => 17
+
+  %div.inline{:style => "margin-left:18px;"}
+    = f.label :state
+    = f.select :state, options_for_select(us_states, @project.state), :required => true, :style => "width:140px;"
+
+  %div.inline{:style => "margin-left:18px;"}
+    = f.label :zip, "Zipcode"
+    = f.text_field :zip, :required => true, :size => 3
+
+  %div
+    = f.label :website do
+      WEBSITE ADDRESS
+      %span.italic (Format: http://www.mysite.com)
+    = f.text_field :website, :required => true, :size => 45
+
+  %div.inline
+    = f.label :twitter_handle, "Twitter Account"
+    = f.text_field :twitter_handle, :required => true, :size => 15
+
+  %div.inline{:style => "margin-left:24px;"}
+    = f.label :facebook_page, "Facebook Page"
+    = f.text_field :facebook_page, :required => true, :size => 17
+
+/ .span4{:style => "margin-top:155px;"}
+/   %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
+/   .well.info
+/     %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Your Ruuts
+/     %p First, we are so thrilled ot have you on URUUT!
+/ 
+/     %p The process of bulding your project is simple and easy. We will walk you through each step and offer handy tips to make your project a success. For a more detailed guide on how to build and run a successful project,  take a look at our handy Project Guide (pdf).
+/ 
+/     %p The first steps are Your Ruuts - which is your basic information - go ahead and get started! Don’t worry if you get stuck - you can come back anytime to edit your project.
