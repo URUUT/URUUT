@@ -84,9 +84,11 @@ class ProjectsController < ApplicationController
     perk.name = params[:name]
     perk.amount = params[:amount]
     perk.description = params[:description]
-    perk.project_id = session[:current_project]
+    perk.project_id = params[:project]
     if perk.save!
-      render :nothing => true
+      respond_to do |format|
+        format.js { render :js => perk.id }
+      end
     end
   end
 

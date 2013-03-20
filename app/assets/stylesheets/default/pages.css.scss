@@ -118,6 +118,18 @@ h3 {
 	font-size:18px;
 }
 
+h4 {
+	font-size:16px;
+}
+
+h5 {
+	font-size:14px;
+}
+
+h6 {
+	font-size:12px;
+}
+
 input[type=text], 
 input[type=email], 
 input[type=date], 
@@ -171,6 +183,11 @@ label {
 
 .float-right {
 	float:right;
+}
+
+.fixed {
+	margin-top:20px;
+	position:fixed;
 }
 	
 .italic {
@@ -382,12 +399,14 @@ footer {
 
 ul.nav {
   color:#242424;
-	margin-left:76px !important;
+	margin-left:64px !important;
 	li {
 		border-left:1px solid #55554d;
     padding:0 10px;
 		position:relative;
-		width:152px;
+		width:139px;
+		&:last-child {
+			border-right:1px solid #55554d;}
 		a {
 			color:#fff !important;
       font-family:'Proxima Nova Semi', sans-serif;
@@ -447,7 +466,8 @@ div.dropdown {
           text-transform:capitalize}}}}}
 
     
-.img-circle {
+.right li .img-circle {
+	margin-right:5px;
   vertical-align:middle !important;}
 
 .left {
@@ -509,6 +529,7 @@ div.dropdown {
     border:none;
 		a {
 			font:normal 12px/12px "Proxima Nova Semi", arial, sans-serif;
+			letter-spacing:normal;
 			text-transform:none;	}}
   input[type=search]{
     border-radius: 0;
@@ -533,6 +554,7 @@ nav.navbar-inner {
       margin-bottom:10px;}}}
 
 .step-container {
+	color:#464646;
 	display:none;}
 	
 .project {
@@ -706,6 +728,15 @@ h5.time-left {
 .recent .project {
 	margin-left:0 !important;
 }
+	
+.project {
+	margin-left:0 !important;
+	margin-right:20px;
+}
+
+.project:nth-child(odd) {
+	margin-right:0 !important;
+}
 
 .redactor_box {
   height:350px;
@@ -820,7 +851,7 @@ div[id^='step'] {
   left:0;
   overflow:hidden;
   position:absolute;
-  top:0;
+  top:60px;
   width:100%;
   .funding-info {
     background:rgba(72,201,76, 0.95);
@@ -834,7 +865,7 @@ div[id^='step'] {
 .show-content {
   margin-top:495px;}
 
-.projects.show {
+.projects.show, .projects.edit {
   h4.title {
     border-bottom:5px solid #48c94c;
     font-size:17px;
@@ -889,6 +920,11 @@ div[id^='step'] {
       padding:10px 25px;
       text-shadow:none;
       text-transform:uppercase;}}}
+			
+.projects.edit {
+	h4.title {
+		border:none;
+		padding:0;}}
 
 .nav-tabs {
   border-bottom:5px solid #48c94c;
@@ -1169,10 +1205,9 @@ input.selectbox {
     margin: 0;
     padding: 0 0 0 12px;
     position: relative;
-    min-width: 160px;
+    min-width: 147px;
 		text-align:center;
-		&:last-child {
-			width:255px;}
+		width:147px;
 		&:hover {}
 		&:hover:after {
 			border-left: 8px solid #ccc;}
@@ -1187,7 +1222,7 @@ input.selectbox {
 			display:block;
 			text-align:left;
 			text-shadow:0 1px 1px rgba(255, 255, 255, 0.15);}
-		.step {
+		.steps {
 			font:normal 12px/12px "Proxima Nova Semi", arial, sans-serif;
 			margin:30px 0 3px 0;}
 		.title {
@@ -1213,7 +1248,7 @@ input.selectbox {
 		display:block;
 		text-align:left;
 		text-shadow:0 1px 1px rgba(255, 255, 255, 0.15);}
-	.step {
+	.steps {
 		color:#fff;
 		font:normal 12px/12px "Proxima Nova Semi", arial, sans-serif;
 		margin:30px 0 3px 0;}
