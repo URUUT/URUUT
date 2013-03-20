@@ -5,9 +5,9 @@
   %li
     = link_to "Find Projects", browse_projects_path
   %li
-    = link_to "About URUUT", pages_how_it_works_path
+    = link_to "Get Funding", pages_how_it_works_path
   %li
-    = link_to "Create A Project", new_project_path
+    = link_to "About URUUT", new_project_path
   -#%li
     -#= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
 
@@ -15,7 +15,7 @@
   - if user_signed_in?
     %li.signed-in
       %a
-        -#= image_tag(get_gravatar(current_user.email), :class => "img-circle")
+        = image_tag(get_gravatar(current_user.email, 26), :class => "img-circle")
         = current_user.name
         = image_tag 'down-arrow.png', :class => "down"
       %div.dropdown

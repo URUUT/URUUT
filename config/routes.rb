@@ -17,20 +17,14 @@ Crowdfund::Application.routes.draw do
   match "browse/projects" => "pages#index"
 
   get "pages/discover"
-
   get "pages/categories"
-
   post "pages/contact"
-
   get "pages/contact"
-
   get "pages/how_it_works"
-
   get "pages/terms"
-
-  get "pages/about"
-  
+  get "pages/about"  
   get "pages/home"
+  get "pages/faqs"
 
   get "projects/add_desc"
   get "projects/save_image"

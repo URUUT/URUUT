@@ -1,37 +1,44 @@
 .breadcrumb-container
   %ul.breadcrumbs
-    %li.current
-      = link_to '/project_steps/step1' do
-        %span.step Step 1
+    %li.sponsor-info
+      = link_to "/projects/#{@project.id}/edit#sponsor-info" do
+        %span.steps Step 1
         %span.title RUUTS
         %span.description Basic Information
         %span.border
 
-    %li
-      = link_to '/project_steps/step2' do
-        %span.step Step 2
+    %li.project-details
+      = link_to "/projects/#{@project.id}/edit#project-details" do
+        %span.steps Step 2
         %span.title STORY
         %span.description Project Details
         %span.border
 
-    %li
-      = link_to '/project_steps/step3' do
-        %span.step Step 3
+    %li.perks
+      = link_to "/projects/#{@project.id}/edit#perks" do
+        %span.steps Step 3
         %span.title PERKS
         %span.description Donor Rewards
         %span.border
 
-    %li
-      = link_to '/project_steps/step4' do
-        %span.step Step 4
+    %li.sponsorship
+      = link_to "/projects/#{@project.id}/edit#sponsorship" do
+        %span.steps Step 4
+        %span.title Sponsors
+        %span.description Sponsorship Details
+        %span.border
+
+    %li.assets
+      = link_to "/projects/#{@project.id}/edit#assets" do
+        %span.steps Step 5
         %span.title VISUALS
         %span.description Project Page Setup
         %span.border
 
-    %li
+    %li.submit
       = link_to 'submit' do
-        %span.step Submission
-        %span.title GET RUUTED
+        %span.steps Get Ruuted
+        %span.title Submit
         %span.description Submit Your Project for Approval
 
 .step-container{"data-id" => "sponsor-info"}
@@ -219,6 +226,118 @@
       %p The most common amounts invested are between $25-$100. We suggest you offer some good value perks at a low cost for casual investors who might not know your organization well, and a handful of high end rewards that are likely to appeal to your inner circle or die-hard fans.
       %p If you’re having a hard time thinking about some great perks, check out our Project Guide or just let us know and we can help you.
 
+.step-container{"data-id" => "sponsorship"}
+  = form_for(@project, :html => {:class => "span8 well", :multipart => true}) do |f|
+
+    %h4.title
+      SPONSORSHIP DETAILS
+      %span.italic (Benefits For Project Sponsorsf)
+
+    - if @project.errors.any?
+      #errorExplanation
+        %h2 #{pluralize(@project.errors.count, "error")}
+        %ul
+          - @project.errors.full_messages.each do |msg|
+            %li #{msg}
+
+    %div
+      %h6{:style => "color:#70bf4c"}
+        PLATINUM LEVEL SPONSORSHIP*
+        %span{:style => "font-size:10px;color:#403e37"} (1 AVAILABLE)
+    .cf
+      .span3.left{:style => "text-align:left;color:#464646;"}
+        %h6 Cost
+        %h4 $100,000
+        %p (30% of funding goal)
+      .span9.left{:style => "text-align:left;color:#464646;"}
+        %p Platinum Level Sponsorship includes priority logo placement, a link to the sponor’s website, and the company / foundation’s mission statement on your project page. In addition to these benefits select additional benefits for platinum level sponsors from the checklist below.
+        %div
+          = check_box_tag "Test"
+          Lorem ipsum dolor sit amet.
+        %div
+          = check_box_tag "Test"
+          Lorem ipsum dolor sit amet.
+        %div
+          = check_box_tag "Test"
+          Lorem ipsum dolor sit amet.
+        %div
+          = check_box_tag "Test"
+          Lorem ipsum dolor sit amet.
+        %div
+          = check_box_tag "Test"
+          Lorem ipsum dolor sit amet.
+    %hr
+
+    %div
+      %h6{:style => "color:#70bf4c"}
+        PLATINUM LEVEL SPONSORSHIP*
+        %span{:style => "font-size:10px;color:#403e37"} (1 AVAILABLE)
+    .cf
+      .span3.left{:style => "text-align:left;color:#464646;"}
+        %h6 Cost
+        %h4 $100,000
+        %p (30% of funding goal)
+      .span9.left{:style => "text-align:left;color:#464646;"}
+        %p Platinum Level Sponsorship includes priority logo placement, a link to the sponor’s website, and the company / foundation’s mission statement on your project page. In addition to these benefits select additional benefits for platinum level sponsors from the checklist below.
+        %div
+          = check_box_tag "Test"
+          Lorem ipsum dolor sit amet.
+        %div
+          = check_box_tag "Test"
+          Lorem ipsum dolor sit amet.
+        %div
+          = check_box_tag "Test"
+          Lorem ipsum dolor sit amet.
+        %div
+          = check_box_tag "Test"
+          Lorem ipsum dolor sit amet.
+        %div
+          = check_box_tag "Test"
+          Lorem ipsum dolor sit amet.
+    %hr
+
+    %div
+      %h6{:style => "color:#70bf4c"}
+        PLATINUM LEVEL SPONSORSHIP*
+        %span{:style => "font-size:10px;color:#403e37"} (1 AVAILABLE)
+    .cf
+      .span3.left{:style => "text-align:left;color:#464646;"}
+        %h6 Cost
+        %h4 $100,000
+        %p (30% of funding goal)
+      .span9.left{:style => "text-align:left;color:#464646;"}
+        %p Platinum Level Sponsorship includes priority logo placement, a link to the sponor’s website, and the company / foundation’s mission statement on your project page. In addition to these benefits select additional benefits for platinum level sponsors from the checklist below.
+        %div
+          = check_box_tag "Test"
+          Lorem ipsum dolor sit amet.
+        %div
+          = check_box_tag "Test"
+          Lorem ipsum dolor sit amet.
+        %div
+          = check_box_tag "Test"
+          Lorem ipsum dolor sit amet.
+        %div
+          = check_box_tag "Test"
+          Lorem ipsum dolor sit amet.
+        %div
+          = check_box_tag "Test"
+          Lorem ipsum dolor sit amet.
+    %hr
+
+    %div
+      = f.submit "Save And Continue", :class => "btn", :id => "project-submit", :style => "left: 175px;position: relative;"
+
+
+  .span4{:style => "margin-top:155px;"}
+    %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
+    .well.info
+      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} SEEDER PERKS
+      %p Funding on URUUT is made in exchange for payment in kind: goods, services, special benefits or other perks. Offer something valuable for the funds. No T-shirts and shout-outs for $100.
+
+      %p Perks could include a house account for your investors, discounted goods or services, special lessons or workshops, or a private party just for seeders. Be creative!
+      %p The most common amounts invested are between $25-$100. We suggest you offer some good value perks at a low cost for casual investors who might not know your organization well, and a handful of high end rewards that are likely to appeal to your inner circle or die-hard fans.
+      %p If you’re having a hard time thinking about some great perks, check out our Project Guide or just let us know and we can help you.
+
 .step-container{"data-id" => "assets"}
   = form_for(@project, :html => {:multipart => true}) do |f|
     #large_image{:style => "margin-top:180px"}
@@ -243,19 +362,20 @@
               %a{:href => "#{new_donation_path(:id => @project.id)}", :class => "fund btn"} Fund Now #{image_tag('arrow.png')}
 
           .span4.offset3
-            /%h3= number_to_currency(amount_funded(@project.id))
+            %h3= number_to_currency(amount_funded(@project.id))
 
             .progress-container
               = image_tag 'seed.png', :class => "seed"
               %div
                 %span Seed Funds Pledged
-                / - if @donation.count == 0
-                %p $0
-                / - else
-                /               - totalDonated = 0
-                /               - @donation.each do |d|
-                /                 - totalDonated += d.amount
-                /               %p= number_to_currency(totalDonated, :precision => 0)
+                - if @donation && @donation.length == 0
+                  %p $0
+                - else
+                  - totalDonated = 0
+                  - if @donation
+                    - @donation.each do |d|
+                      - totalDonated += d.amount
+                  %p= number_to_currency(totalDonated, :precision => 0)
 
             #progressbar
 
@@ -266,13 +386,6 @@
                   %br
                   Goal
                 = number_to_currency(@project.goal, :precision => 0)
-
-              %li
-                %span.small
-                  Days
-                  %br
-                  Left
-                / = time_left(@project.duration).to_i
 
     .show-content
       .span8
@@ -289,30 +402,30 @@
               %h4
                 Planting Seeds
                 %span (About)
-          / %li
-          /         %a{:href => "#growth"}
-          /           %h4
-          /             Growth
-          /             %span (Updates)
-          /       %li
-          /         %a{:href => "#gallery"}
-          /           %h4
-          /             Gallery
+          %li
+            %a{:href => "#growth"}
+              %h4
+                Growth
+                %span (Updates)
+          %li
+            %a{:href => "#gallery"}
+              %h4
+                Gallery
         #content_container
           #planting_seeds
             %p= @project.about
 
-          / #growth
-          /        %p This is growth
-          /
-            /      #gallery
-          /        %p This is gallery
+          #growth
+            %p This is growth
+
+          #gallery
+            %p This is gallery
 
           #cultivation
             .ending
 
-              .details
-                = @project.story
+            .details
+              = @project.story
         -#%hr
         -#.comments
           -#%h4.comment Post a message
@@ -345,35 +458,70 @@
           %h4{:style => "display:inline-block;color:#70bf4c;letter-spacing:2px;"}= @project.title
 
         %h4.title
-          / Seeders (#{@donation.count})
+          Seeders (0)
           %span (Project Funders)
-        / -@donation.each do |donator|
-        /       = image_tag(get_gravatar(donator.email, 25), :style => "float:left; margin:0 5px 5px 0;")
 
 :javascript
-  $(function(){
-    $('.step').each(function(){
-      $(this).hide();
-    });
-		
-    if(!window.location.hash) {
-      $('.step-container[data-id="sponsor-info"]').show();
-    }else{
+  var getHash = function() {
+    if(window.location.hash) {
+      $('.step-container').each(function(){
+        $(this).hide();
+      });
+
+      $('.breadcrumbs li').each(function(){
+        $(this).removeClass('active');
+      })
+
       var hashVal = window.location.hash.split("#")[1];
+      console.log(hashVal);
       if(hashVal == 'sponsor-info') {
         $("[data-id='" + hashVal + "']").show();
+        $('.breadcrumbs li[class*="' + hashVal + '"]').addClass('active');
       }
       if(hashVal == 'project-details') {
         $("[data-id='" + hashVal + "']").show();
+        $('li.' + hashVal).addClass('active');
       }
       if(hashVal == 'perks') {
         $("[data-id='" + hashVal + "']").show();
+        $('.breadcrumbs li[class*="' + hashVal + '"]').addClass('active');
       }
+      if(hashVal == 'sponsorship') {
+        $("[data-id='" + hashVal + "']").show();
+        $('.breadcrumbs li[class*="' + hashVal + '"]').addClass('active');
+      }
+      if(hashVal == 'assets') {
+        $("[data-id='" + hashVal + "']").show();
+        $('.breadcrumbs li[class*="' + hashVal + '"]').addClass('active');
+      }
+    }else{
+      window.location.href = "/projects/#{@project.id}/edit#sponsor-info";
+      window.location.reload(true);
     }
-		
-    $('.step-container[data-id="sponsor-info"] form').on('submit', function(e){
-      e.preventDefault();
-      console.log("prevent worked");
+  }
+
+  $(function(){
+
+    getHash();
+    $(window).on('hashchange', function() {
+      getHash();
+      // window.location.reload(true);
+    });
+
+    $('.breadcrumbs li').hover(function() {
+      $(this).addClass('active');
+    }, function() {
+      var hash = window.location.hash.split("#")[1];
+      if($(this).hasClass(hash)){
+        $(this).addClass('active');
+      }else{
+        $(this).removeClass('active');
+      }
+    });
+
+   $('.step-container[data-id="sponsor-info"] form').on('submit', function(e){
+     e.preventDefault();
+       console.log("prevent worked");
       var data = $(this).serialize();
       console.log(data);
       $.ajax({
@@ -383,11 +531,11 @@
       }).done(function(data){
         console.log("Success???");
         console.log(data);
-        window.location.href = '/projects/' + data + '/edit#project-details';   
-        window.location.reload(true);     
+        window.location.href = '/projects/' + data + '/edit#project-details';
+        window.location.reload(true);
       })
     })
-		
+
     $('.step-container[data-id="project-details"] form').on('submit', function(e){
       e.preventDefault();
       console.log("prevent worked");
@@ -399,8 +547,56 @@
         data: data
       }).done(function(data){
         console.log("Success???");
-        window.location.href = '/projects/' + data + '/edit#project-details';   
-        window.location.reload(true);     
+        window.location.href = '/projects/' + data + '/edit#perks';
+        window.location.reload(true);
       })
+    })
+
+    $('.step-container[data-id="perks"] form').on('submit', function(e){
+      e.preventDefault();
+      console.log("prevent worked");
+      var data = $(this).serialize();
+      console.log(data);
+      $.ajax({
+        type: 'POST',
+        url: '#{project_path(@project.id)}',
+        data: data
+      }).done(function(data){
+        console.log("Success???");
+        window.location.href = '/projects/' + data + '/edit#sponsorship';
+        window.location.reload(true);
+      })
+    })
+
+    $('.step-container[data-id="sponsorship"] form').on('submit', function(e){
+      e.preventDefault();
+      console.log("prevent worked");
+      var data = $(this).serialize();
+      console.log(data);
+      $.ajax({
+        type: 'POST',
+        url: '#{project_path(@project.id)}',
+        data: data
+      }).done(function(data){
+        console.log("Success???");
+        window.location.href = '/projects/' + data + '/edit#assets';
+        window.location.reload(true);
+      })
+    })
+		
+    $('.add-perk').on('click', function(e) {
+      e.preventDefault();
+      var name = $('#perk-name').val();
+      var amount = $('#perk-amount').val();
+      var description = $('#perk-description').val();
+      var project = #{@project.id};
+      var data = {name: name, amount: amount, description: description, project: project};
+      $.ajax({
+        type: 'POST',
+        url: 'http://127.0.0.1:8080/projects/add_perk',
+        data: data
+      }).done(function(data) {
+        console.log(data);
+      });
     })
   })

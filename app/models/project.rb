@@ -32,5 +32,9 @@ class Project < ActiveRecord::Base
 
     end
   end
-
+  
+  def printTest
+    logger.debug("Test Crap")
+  end
+  
 end
