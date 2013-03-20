@@ -1,8 +1,0 @@
-%fieldset
-  %legend.heading Project Category
-  %div
-    = f.label :category
-    = f.select :category, options_for_select(project_categories), :required => true
-
-  = link_to "https://connect.stripe.com/oauth/authorize?response_type=code&scope=read_write&client_id=ca_0nuMjzTruvR2hOSuHDJSlxzeA7q4h5ai", :class => "stripe-connect" do
-    %span Connect With Stripe
