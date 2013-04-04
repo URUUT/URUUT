@@ -31,6 +31,9 @@ Crowdfund::Application.routes.draw do
   post "projects/save_image"
   
   post "projects/add_perk"
+  post "projects/get_perk"
+  post "projects/update_perk"
+  post "projects/delete_perk"
 
   get "projects/stripe_update"
 

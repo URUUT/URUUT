@@ -91,3 +91,9 @@
 		.btn 
 			Sign Up Now
 			%span
+			
+:javascript
+	if(window.opener) {
+		window.opener.location.reload(true);
+		window.close()
+	}

@@ -800,6 +800,9 @@ textarea[id*='perk'] {
 .perk {
   position:relative;}
 
+.update-perk {
+	display:none;	}
+
 .remove {
   color:#413E37;
   font:bold 12px/12px "Proxima Nova", arial, sans-serif;
@@ -811,7 +814,7 @@ textarea[id*='perk'] {
   &:hover {
     color:#413e37;}}
 
-.add-perk {
+.add-perk, .update-perk {
 	background: #423F38;
 	border-radius: 0;
 	color: #fff;
@@ -824,6 +827,9 @@ textarea[id*='perk'] {
   bottom:-66px;
   left:0;
   position:absolute;}
+
+.update-perk {
+	display:none;	}
 
 div[id^='step'] {
   position:relative;}
@@ -842,17 +848,17 @@ div[id^='step'] {
     background:#70bf4c;}}
 
 #large_image {
-  background:url(image-path('classroom.png')) top left no-repeat;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  background:#ddd url(image-path('cover-photo.png')) top center no-repeat;
   height:545px;
   left:0;
   overflow:hidden;
   position:absolute;
-  top:60px;
+  top:180px;
   width:100%;
+	.coverphoto {
+		left:100px;
+		position:relative;
+		top:330px;}
   .funding-info {
     background:rgba(72,201,76, 0.95);
     bottom:0;
@@ -861,6 +867,15 @@ div[id^='step'] {
     padding:20px 0;
     position:absolute;
     width:100%;}}
+		
+.planting-seed-image {
+	background:url(image-path('click-add-photo.png')) top center no-repeat;
+	border: none;
+	height:414px;
+	padding: 0;
+	text-indent: -9999px;
+	width:100%;
+}
 
 .show-content {
   margin-top:495px;}
@@ -922,6 +937,8 @@ div[id^='step'] {
       text-transform:uppercase;}}}
 			
 .projects.edit {
+	.edit_project {
+		width:100%;}
 	h4.title {
 		border:none;
 		padding:0;}}
@@ -960,7 +977,7 @@ div[id^='step'] {
   font-family:arial, sans-serif;
   div {
     color:#b2b2b2 !important;
-    display:none;
+    display:block;
     h1,h2,h3,h4,h5,h6 {
       color:#b2b2b2 !important;
       font-family:arial, sans-serif;}}}
@@ -1174,15 +1191,16 @@ input.selectbox {
 		border-bottom-right-radius:3px;
 		border-bottom-left-radius:3px;
 		margin:0;
-		height:150px;
-		width:101px;
+		//height:200px;
+		width:135px;
 		overflow-y:scroll;
 		padding:19px;
 		li {
+			cursor:pointer;
 			font:bold 24px/24px arial, helvetica, sans-serif;
 			list-style-type:none;
 			margin-bottom:19px;
-			width:120px;}}}
+			width:135px;}}}
 
 .breadcrumb-container {
 	background:url(image-path('bg-tile.jpg')) top left repeat;

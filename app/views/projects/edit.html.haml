@@ -88,6 +88,10 @@
     %div.inline{:style => "margin-left:24px;"}
       = f.label :facebook_page, "Facebook Page"
       = f.text_field :facebook_page, :required => true, :size => 17
+		
+    %div
+      = link_to "Connect with Stripe", "https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_wpEV9n5an4SEoG7ti78FizqqYmkClrtt", :target => "_blank"
+      %input{:type => 'hidden', :value => "#{@connected}", :id => "connected"}
 
     %div
       = f.submit "Save And Continue", :class => "btn", :id => "project-submit"
@@ -207,9 +211,12 @@
           %div
             = label_tag "Description"
             = text_area_tag "perk-description", '', :size => "85x30"
+						
+          %input{:type => 'hidden', :value => "", :id => "perk-id"}
 
 
       %a.add-perk.btn{:href => "#"} SAVE PERK & ADD MORE
+      %a.update-perk.btn{:href => "#"} UPDATE PERK
 
 
     %div
@@ -219,6 +226,18 @@
   .span4{:style => "margin-top:155px;"}
     %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
     .well.info
+      - unless @perks.blank?
+        %h5{:style => "color:#70bf4c;margin-bottom:10px;"} CURRENT PERKS
+        - @perks.each do |p|
+          %div.created-perk
+            %h6= get_currency(p.amount)
+            %h6= p.name
+            %p{:style => "width:268px;word-wrap: break-word;"}= p.description
+            %input{:type => 'hidden', :value => "#{p.id}", :id => "perk-#{p.id}"}
+            %a{:class => "perk-edit", :style => "color:#70bf4c;"} edit
+            |
+            %a{:class => "perk-delete", :style => "color:#70bf4c;"} delete
+		
       %h5{:style => "color:#70bf4c;margin-bottom:10px;"} SEEDER PERKS
       %p Funding on URUUT is made in exchange for payment in kind: goods, services, special benefits or other perks. Offer something valuable for the funds. No T-shirts and shout-outs for $100.
 
@@ -340,9 +359,9 @@
 
 .step-container{"data-id" => "assets"}
   = form_for(@project, :html => {:multipart => true}) do |f|
-    #large_image{:style => "margin-top:180px"}
+    #large_image
 
-      %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Upload an image', 'data-fp-apikey' => ENV['FILEPICKER_API'], 'data-fp-button-class' => 'coverphoto', 'onchange' => 'updateCover(event)'}
+      %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => ENV['FILEPICKER_API'], 'data-fp-button-class' => 'coverphoto btn', 'onchange' => 'updateCover(event)'}
 
         .funding-info
           .container
@@ -413,7 +432,8 @@
                 Gallery
         #content_container
           #planting_seeds
-            %p= @project.about
+            %input{:type => 'filepicker', :name => 'planting_seed_image', 'data-fp-button-text' => '', 'data-fp-apikey' => ENV['FILEPICKER_API'], 'data-fp-button-class' => 'planting-seed-image', 'onchange' => 'updatePlantingSeedImage(event)'}
+            %p= @project.description
 
           #growth
             %p This is growth
@@ -518,6 +538,11 @@
         $(this).removeClass('active');
       }
     });
+		
+   $('.breadcrumbs a').click(function() {
+     console.log($(this).parent()[0].className.split(' ')[0]);
+		 
+   })
 
    $('.step-container[data-id="sponsor-info"] form').on('submit', function(e){
      e.preventDefault();
@@ -597,6 +622,54 @@
         data: data
       }).done(function(data) {
         console.log(data);
+        window.location.reload(true);
       });
     })
+
+    $('.update-perk').on('click', function(e) {
+      e.preventDefault();
+      var name = $('#perk-name').val();
+      var amount = $('#perk-amount').val();
+      var description = $('#perk-description').val();
+      var perk_id = $('#perk-id').val();
+      var data = {name: name, amount: amount, description: description, id: perk_id};
+      $.ajax({
+        type: 'POST',
+        url: 'http://127.0.0.1:8080/projects/update_perk',
+        data: data
+      }).done(function(data) {
+        console.log(data);
+        window.location.reload(true);
+      });
+    })
+		
+    $('.perk-delete').on('click', function(e) {
+      e.preventDefault();
+      var perk_id = $(this).parent().find('input[type=hidden]').val();
+      console.log(perk_id);
+      var data = {id: perk_id};
+      $.ajax({
+        type: 'POST',
+        url: 'http://127.0.0.1:8080/projects/delete_perk',
+        data: data
+      }).done(function(data) {
+        console.log(data);
+        window.location.reload(true);
+      });
+    })
+		
+    $('.created-perk .perk-edit').on('click', function() {
+      $.ajax({
+        type: 'POST',
+        url: '#{projects_get_perk_url}',
+        data: {id: $(this).parent().find('input[type=hidden]').val()}
+      }).done(function(data) { 
+        $('#perk-name').val(data.name);
+        $('#perk-amount').val(data.amount);
+        $('#perk-description').val(data.description);
+        $('#perk-id').val(data.id)
+        $('.add-perk').hide();
+        $('.update-perk').show();
+      });
+    });
   })

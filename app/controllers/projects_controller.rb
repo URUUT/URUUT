@@ -13,6 +13,8 @@ class ProjectsController < ApplicationController
 
 	def new
     @project = Project.new
+    session[:current_project] = ''
+    session[:connected] = ''
  #    @project.perks.build
  #    @project.galleries.build
   end
@@ -29,7 +31,12 @@ class ProjectsController < ApplicationController
 
 	def edit
 		@project = Project.find(params[:id])
+    session[:current_project] = @project.id
+    logger.debug("Current session id is: #{session[:current_project]}")
     @project.update_attributes!(params[:project])
+    @perks = Perk.where("project_id = ?", @project.id)
+    @connected = session[:connected]
+    logger.debug(@connected)
 	end
 
 	def show
@@ -66,8 +73,14 @@ class ProjectsController < ApplicationController
     project = Project.find(session[:current_project])
     project.project_token = token.token
     project.save!
-
-    redirect_to '/project_steps/step4', :param => "connected"
+    
+    logger.debug(project.project_token)
+    if project.project_token
+      session[:connected] = "true"
+    else
+      session[:connected] = ""
+    end
+    redirect_to "/projects/#{project.id}/edit#sponsor-info"
   end
 
   def save_image
@@ -88,6 +101,34 @@ class ProjectsController < ApplicationController
     if perk.save!
       respond_to do |format|
         format.js { render :js => perk.id }
+      end
+    end
+  end
+  
+  def get_perk
+    perk = Perk.find_by_id(params[:id])
+    respond_to do |format|
+      format.json { render :json => {name: perk.name, amount: perk.amount, description: perk.description, id: perk.id} }
+    end
+  end
+  
+  def update_perk
+    perk = Perk.find_by_id(params[:id])
+    perk.name = params[:name]
+    perk.amount = params[:amount]
+    perk.description = params[:description]
+    if perk.save!
+      respond_to do |format|
+        format.json { render :json => perk }
+      end
+    end
+  end
+  
+  def delete_perk
+    perk = Perk.find_by_id(params[:id])
+    if perk.destroy
+      respond_to do |format|
+        format.json { render :json => {destroy: true} }
       end
     end
   end

@@ -42,6 +42,13 @@
     = render 'partials/footer'
 
 :javascript
+  $('.social-login a').click(function(e) {
+    e.preventDefault();
+    var ahref = $(this).attr('href');
+    console.log(ahref);
+    window.open(ahref,'_blank', 'height=500,width=500,location=no,menubar=no');
+  })
+	
   var updateCover = function(event){
     console.log(event.fpfile.url);
     var largeImage = event.fpfile.url;
