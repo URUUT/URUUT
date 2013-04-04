@@ -1,0 +1,2 @@
+class ProjectSponsorController < ApplicationController
+end
