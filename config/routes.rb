@@ -1,5 +1,7 @@
 Crowdfund::Application.routes.draw do
 
+  #devise_for :users
+
    # match '/auth/:provider/callback', to: 'services#create'
 
   get "services/index"

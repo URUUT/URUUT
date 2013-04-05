@@ -42,7 +42,7 @@
         %span.description Submit Your Project for Approval
 
 .step-container{"data-id" => "sponsor-info"}
-  = form_for(@project, :html => {:class => "span8 well", :multipart => true}) do |f|
+  = form_for(@project, :html => {:class => "sponsor-info span8 well", :multipart => true}) do |f|
 
     - if @project.errors.any?
       #errorExplanation
@@ -540,8 +540,15 @@
     });
 		
    $('.breadcrumbs a').click(function() {
-     console.log($(this).parent()[0].className.split(' ')[0]);
-		 
+     //console.log($(this).parent().attr('class').split(' ')[0]);
+     var formClass = $(this).parent().attr('class').split(' ')[0];
+     var formValidate = $('[data-id="' + formClass + '"]').find('form');
+     $('form[class*="' + formClass + '"]').submit();
+     console.log(formClass);
+   })
+	 
+   $('form.sponsor-info').submit(function(){
+     return $(this).h5Validate();
    })
 
    $('.step-container[data-id="sponsor-info"] form').on('submit', function(e){
@@ -672,4 +679,5 @@
         $('.update-perk').show();
       });
     });
+		
   })
