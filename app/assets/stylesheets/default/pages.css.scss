@@ -849,6 +849,7 @@ div[id^='step'] {
 
 #large_image {
   background:#ddd url(image-path('cover-photo.png')) top center no-repeat;
+	display:inline-block;
   height:545px;
   left:0;
   overflow:hidden;
@@ -871,6 +872,7 @@ div[id^='step'] {
 .planting-seed-image {
 	background:url(image-path('click-add-photo.png')) top center no-repeat;
 	border: none;
+	display:inline-block;
 	height:414px;
 	padding: 0;
 	text-indent: -9999px;

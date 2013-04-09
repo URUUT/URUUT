@@ -3,11 +3,9 @@ class AdminController < ApplicationController
   layout :layout_by_resource
   
   def unapproved
-    @unapproved_projects = Project.where("live = ?", 0)
+    @unapproved_projects = Project.where(:ready_for_approval => 1)
+    logger.debug(@unapproved_projects)
   end
-  
-  # def create
- #  end
   
   def approve
     data = params['approved']
@@ -18,6 +16,7 @@ class AdminController < ApplicationController
       newData = "Success"
       project = Project.find_by_id(id)
       project.live = 1
+      project.ready_for_approval = 0
       project.approval_date = Date.today
       project.save!
     else
@@ -27,8 +26,6 @@ class AdminController < ApplicationController
       format.js { render :json => newData.to_json }
     end
   end
-  
-  
 
   def layout_by_resource
     'admin'

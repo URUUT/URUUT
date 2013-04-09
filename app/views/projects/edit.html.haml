@@ -90,8 +90,10 @@
       = f.text_field :facebook_page, :required => true, :size => 17
 		
     %div
-      = link_to "Connect with Stripe", "https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_wpEV9n5an4SEoG7ti78FizqqYmkClrtt", :target => "_blank"
-      %input{:type => 'hidden', :value => "#{@connected}", :id => "connected"}
+      = link_to "https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_wpEV9n5an4SEoG7ti78FizqqYmkClrtt", :target => "_blank", :class => "stripe-connect" do
+        %span Connect with Stripe
+				
+      %input{:type => 'hidden', :value => "#{@connected}", :id => "connected", :required => true}
 
     %div
       = f.submit "Save And Continue", :class => "btn", :id => "project-submit"
@@ -538,24 +540,16 @@
         $(this).removeClass('active');
       }
     });
-		
-   $('.breadcrumbs a').click(function() {
-     //console.log($(this).parent().attr('class').split(' ')[0]);
-     var formClass = $(this).parent().attr('class').split(' ')[0];
-     var formValidate = $('[data-id="' + formClass + '"]').find('form');
-     $('form[class*="' + formClass + '"]').submit();
-     console.log(formClass);
-   })
 	 
-   $('form.sponsor-info').submit(function(){
+   $('.step-container').on('form', 'submit', function() {
+     console.log("form submitted");
      return $(this).h5Validate();
-   })
+   });
 
    $('.step-container[data-id="sponsor-info"] form').on('submit', function(e){
-     e.preventDefault();
-       console.log("prevent worked");
+     if($('#connected').val() == 'true') {
+      e.preventDefault();
       var data = $(this).serialize();
-      console.log(data);
       $.ajax({
         type: 'POST',
         url: '#{project_path(@project.id)}',
@@ -566,6 +560,10 @@
         window.location.href = '/projects/' + data + '/edit#project-details';
         window.location.reload(true);
       })
+     }else{
+       alert("Connect with Stripe, please.");
+       return false;
+     }
     })
 
     $('.step-container[data-id="project-details"] form').on('submit', function(e){
@@ -679,5 +677,19 @@
         $('.update-perk').show();
       });
     });
+		
+    $('li.submit a').click(function(event) {
+      event.preventDefault();
+      console.log(#{@project.id})
+      $.ajax({
+        type:'POST',
+        url: '#{projects_submit_project_url}',
+        data: {id: #{@project.id}}
+      }).done(function(data) {
+        if(data == "successful") {
+          window.location.href = "#{pages_thank_you_url}";
+        }
+      })
+    })
 		
   })

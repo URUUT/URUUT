@@ -4,7 +4,7 @@ class Project < ActiveRecord::Base
   attr_accessible :category, :description, :duration, :goal, :address, :project_title,
     :city, :state, :zip, :neighborhood, :title, :image, :video, :tags, :live, :short_description,
     :perks_attributes, :galleries_attributes, :status, :organization, :website, :twitter_handle, :facebook_page,
-    :story, :about, :large_image
+    :story, :about, :large_image, :ready_for_approval
 
   #validates :title, :short_description, :description, :presence => true, :if => :active?
   #validates :image, :address, :city, :state, :zip, :neighborhood, :duration, :goal, :presence => true, :if => :active_or_step1?
@@ -35,6 +35,10 @@ class Project < ActiveRecord::Base
   
   def printTest
     logger.debug("Test Crap")
+  end
+  
+  def self.send_confirmation_email(project)
+    ProjectConfirmation.project_confirmation(project).deliver
   end
   
 end

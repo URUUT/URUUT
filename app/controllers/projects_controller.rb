@@ -132,5 +132,18 @@ class ProjectsController < ApplicationController
       end
     end
   end
+  
+  def submit_project
+    logger.debug(params[:id])
+    project = Project.find_by_id(params[:id])
+    project.ready_for_approval = 1
+    if project.save!
+      logger.debug("Saving!!!")
+      respond_to do |format|
+        Project.send_confirmation_email(project)
+        format.text { render :text => "successful" }
+      end
+    end
+  end
 
 end
