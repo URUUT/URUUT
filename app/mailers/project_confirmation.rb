@@ -1,4 +1,4 @@
-class ContactMailer < ActionMailer::Base
+class ProjectConfirmation < ActionMailer::Base
   default from: "info@uruut.com"
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -6,13 +6,14 @@ class ContactMailer < ActionMailer::Base
   #
   #   en.contact_mailer.contact_confirmation.subject
   #
-  def contact_confirmation(user)
-    @greeting = "Hi"
-
+  def project_confirmation(project)
+    user = User.find_by_id(project.user_id)
+    logger.debug(user)
+    
     @name = user.name
     @email = user.email
-    @message = message
+    @project_title = project.title
 
-    mail to: @email, subject: "Welcome to URUUT"
+    mail to: @email, subject: @project_title
   end
 end

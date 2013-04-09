@@ -27,6 +27,7 @@ Crowdfund::Application.routes.draw do
   get "pages/about"  
   get "pages/home"
   get "pages/faqs"
+  get "pages/thank_you"
 
   get "projects/add_desc"
   get "projects/save_image"
@@ -36,6 +37,7 @@ Crowdfund::Application.routes.draw do
   post "projects/get_perk"
   post "projects/update_perk"
   post "projects/delete_perk"
+  post "projects/submit_project"
 
   get "projects/stripe_update"
 
