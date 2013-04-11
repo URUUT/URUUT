@@ -68,8 +68,8 @@ class ProjectsController < ApplicationController
 
   def stripe_update
     code = params[:code]
-    client = OAuth2::Client.new('ca_0nuMjzTruvR2hOSuHDJSlxzeA7q4h5ai', 'sk_test_XF9K5nq63HTSmTK1ZMiW6tvw', :site => "https://connect.stripe.com/oauth/authorize")
-    token = client.auth_code.get_token(code, :headers => {'Authorization' => 'Bearer sk_test_XF9K5nq63HTSmTK1ZMiW6tvw'})
+    client = OAuth2::Client.new('ca_11bkBTsx7AbDtgYdLdl4cYeI8WoIyP81','sk_test_ZIf90yfmH2DHuuuX8LnU0WJe', :site => "https://connect.stripe.com/oauth/authorize")
+    token = client.auth_code.get_token(code, :headers => {'Authorization' => 'Bearer sk_test_ZIf90yfmH2DHuuuX8LnU0WJe'})
     project = Project.find(session[:current_project])
     project.project_token = token.token
     project.save!
@@ -85,7 +85,11 @@ class ProjectsController < ApplicationController
 
   def save_image
     @project = Project.find_by_id(session[:current_project])
-    @project.large_image = params[:large_image]
+    if params[:large_image]
+	@project.large_image = params[:large_image]
+    elsif params[:seed_image]
+	@project.seed_image = params[:seed_image]
+    end
 
     if @project.save
       render :nothing => true
@@ -100,7 +104,8 @@ class ProjectsController < ApplicationController
     perk.project_id = params[:project]
     if perk.save!
       respond_to do |format|
-        format.js { render :js => perk.id }
+        format.text { render :text => "Success" }
+	#format.js { render :js => perk.id }
       end
     end
   end

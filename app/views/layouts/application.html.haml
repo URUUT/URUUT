@@ -10,7 +10,7 @@
     = javascript_include_tag "application", "https://js.stripe.com/v1/"
     = filepicker_js_include_tag
     = javascript_tag do
-      Stripe.setPublishableKey('pk_test_WRrfoQLUDkpGHAxCmOY0Y6ud');
+      Stripe.setPublishableKey('pk_test_X2ChJG1uldzGYPWeOANhp0pr');
 
     = csrf_meta_tags
     = yield(:head)
@@ -61,7 +61,27 @@
         }
     }).done(function(){
       console.log("finished");
-      $('#large_image').css('background-image','url(' + largeImage + ')');
+      $('#large_image').css('background-image','url(' + largeImage + ')').css('-webkit-background-size', 'cover').css('-moz-background-size', 'cover').css('background-size', 'cover');
+    });
+  }
+
+  var updatePlantingSeedImage = function(event) {
+    console.log(event.fpfile.url);
+    var plantingSeedImage = event.fpfile.url;
+
+    $.ajax({
+      url: '/projects/save_image',
+      method: 'PUT',
+      data: {
+        seed_image: plantingSeedImage
+        }
+    }).done(function(){
+      console.log("finished");
+      $('.planting-seed-image').remove();
+      $('#planting_seeds').append('<div class="seed-image"><img src="' + plantingSeedImage + '"</div>');
+      $('.seed-image').css({
+        height: '100%'
+      });
     });
   }
 
