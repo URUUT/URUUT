@@ -1671,6 +1671,97 @@ form[id*=project] {
 	}
 }
 
+.full-width {
+	&.our-story {
+		background:#70bf4c;
+		padding:80px 0;
+		h2 {
+		 color:#fff;}
+		p {
+			color:#55554d;
+			font-family:'Proxima Nova';
+			font-size:16px;
+			line-height:24px;}}
+	&.our-mission {
+		background:#55554d;
+		padding:80px 0;
+		div.half {
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+			display:inline-block;
+			float:left;
+			width:50%;
+			h3 {
+				color:#70bf4c;
+				margin-bottom:0;}
+			h2 {
+				color:#fff;
+				font-family: 'Proxima Nova';
+				font-weight:normal;
+				line-height:normal;
+				margin-top:0;
+				text-transform:none;}
+			p {
+				color:#b6b6b4;
+				font-family: 'Proxima Nova';
+				font-size:14px;
+				line-height:150%;}
+			&:first-child {
+				padding-right:25px;}
+			&:last-child {
+				padding-left:25px;}}}
+	&.meet-the-team {
+		padding:80px 0;
+		div.founder {
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+			display:inline-block;
+			float:left;
+			padding:0 25px;
+			width:33%;
+			img {
+				display:block;
+				margin:30px auto 15px;
+				position:relative;}
+			p {
+				color:#403e37;
+				line-height:200%;}
+			h2 {
+				margin-bottom:0;}
+			.title {
+				color:#70bf4c;
+				font-family:'Proxima Nova';
+				font-size:14px;
+				font-weight:600;
+				margin-bottom:5px;
+				text-align:center;}}
+		p {
+			color:#b6b6b4;
+			font-family: 'Proxima Nova';
+			font-size:14px;
+			line-height:200%;
+			text-align:center;}
+		h2 {
+			color:#403e37;
+			font-family: 'Proxima Nova';
+			font-weight:normal;
+			line-height:normal;
+			margin-top:0;
+			text-align:center;
+			text-transform:none;}
+		h3 {
+			color:#70bf4c;
+			line-height:normal;
+			margin:0 0 10px;
+			text-align:center;}}
+	&.advisory-board {
+		background:#eee;
+		padding:80px 0;}
+	&.more-information {
+		padding:50px 0;}}
+
 .admin {
 	table {
 		th {
