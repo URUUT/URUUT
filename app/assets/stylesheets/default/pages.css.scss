@@ -79,7 +79,7 @@
   *zoom: 1;
  }
 
-html, 
+html,
 body {
   height:100%; }
 
@@ -89,7 +89,7 @@ body {
   height: 100%;
   margin: 0 auto -45px;}
 
-#push, 
+#push,
 #footer {
   height: 45px;}
 
@@ -109,11 +109,11 @@ h6 {
   font-family:'Proxima Nova Semi', sans-serif;
 	letter-spacing:2px;
   text-transform:uppercase;}
-	
+
 h2 {
 	font-size:24px;
 }
-	
+
 h3 {
 	font-size:18px;
 }
@@ -130,9 +130,9 @@ h6 {
 	font-size:12px;
 }
 
-input[type=text], 
-input[type=email], 
-input[type=date], 
+input[type=text],
+input[type=email],
+input[type=date],
 input[type=password] {
   border-radius:5px;
 	box-shadow:1px 1px 1px rgba(0,0,0,0.5);
@@ -154,12 +154,12 @@ textarea {
 	box-shadow:1px 1px 1px rgba(0,0,0,0.5);
   font-size:13px;
   padding:19px;}
-	
+
 label {
 	font:normal 12px/12px "Proxima Nova Semi", arial, sans-serif;
 	letter-spacing:2px;
 	text-transform:uppercase;}
-	
+
 .well {
 	border:none;
 	border-radius:0;
@@ -173,7 +173,7 @@ label {
 
 .center {
   text-align:center;}
-	
+
 .inline {
 	display:inline-block;	}
 
@@ -189,11 +189,11 @@ label {
 	margin-top:20px;
 	position:fixed;
 }
-	
+
 .italic {
 	font:italic 12px/12px "Georgia", georgia, serif;
 	text-transform:none;}
-	
+
 .btn {
   background:none;
   background:#3f403b;
@@ -214,14 +214,14 @@ label {
 		vertical-align:-1px;
 		width:9px;
 	}}
-	
+
 .no-hover {
 	span {
 		color:#333 !important;
 		cursor:default;}
 	span.border{
 		display:none !important;}}
-		
+
 .hover {
 	span {
 		display:block;
@@ -298,8 +298,8 @@ label {
   label {
     display:block;
     margin-bottom:5px;}
-  input[type=text], 
-	input[type=email], 
+  input[type=text],
+	input[type=email],
 	input[type=password] {
     border-radius: 0;
 		font-size: 13px;
@@ -333,7 +333,7 @@ label {
 
 #signup h3 {
   font-weight:300 !important;}
-	
+
 .logged-in {
 	font:normal 12px/12px "Proxima Nova Semi", arial, sans-serif;
 	list-style-type:none;
@@ -352,13 +352,13 @@ header {
     margin-left:10px;
     margin-top:8px;
 		position:relative;
-		width:87px; 
+		width:87px;
 		a {
 			display:inline-block;
 			height:40px;
       text-decoration:none;
 			text-indent:-9999px;
-			width:87px;}}} 
+			width:87px;}}}
 
 p.sections {
   color:#55554d;
@@ -465,7 +465,7 @@ div.dropdown {
           font-size:11px;
           text-transform:capitalize}}}}}
 
-    
+
 .right li .img-circle {
 	margin-right:5px;
   vertical-align:middle !important;}
@@ -481,7 +481,7 @@ div.dropdown {
     font:normal 12px/12px 'Proxima Nova', sans-serif;
     display:inline-block;
     letter-spacing:2px;
-    line-height:60px;    
+    line-height:60px;
     list-style-type:none;
     padding:0 32px 0 9px;
     a {
@@ -556,7 +556,7 @@ nav.navbar-inner {
 .step-container {
 	color:#464646;
 	display:none;}
-	
+
 .project {
   border-top:6px solid #70bf4c;
   width:300px;
@@ -636,14 +636,14 @@ nav.navbar-inner {
     margin:0;
     padding:0;
     position:absolute;
-    width:280px;} 
+    width:280px;}
   span {
     font-family:'Georgia', serif;
     font-size:11px;}
   ul {
 		border-top:1px solid #403e37;
 		height:47px;
-    margin:0; 
+    margin:0;
     padding:0;
     li {
       display:inline-block;
@@ -724,11 +724,11 @@ h5.time-left {
 
 .recent div.project:nth-child(4), .ending-soon div.project:nth-child(4) {
   margin-right:0 !important;}
-	
+
 .recent .project {
 	margin-left:0 !important;
 }
-	
+
 .project {
 	margin-left:0 !important;
 	margin-right:20px;
@@ -758,7 +758,7 @@ h5.time-left {
   background:#403e37;
   height:60px;
   margin-bottom:0;}
-	
+
 .nav {
 	height:60px;
 	li {
@@ -768,7 +768,7 @@ h5.time-left {
 	}
 }
 
-.projects.edit, .projects.new { 
+.projects.edit, .projects.new {
   input[type=text], textarea {
     margin-bottom:25px;}
   label {
@@ -838,7 +838,7 @@ div[id^='step'] {
   background:#70bf4c;
   border-radius:0;
   display:block;
-  font:bold 16px/16px "Proxima Nova Semi", arial, sans-serif; 
+  font:bold 16px/16px "Proxima Nova Semi", arial, sans-serif;
 	letter-spacing:2px;
   margin:20px auto 0;
   padding:15px 24px;
@@ -868,7 +868,7 @@ div[id^='step'] {
     padding:20px 0;
     position:absolute;
     width:100%;}}
-		
+
 .planting-seed-image {
 	background:url(image-path('click-add-photo.png')) top center no-repeat;
 	border: none;
@@ -937,7 +937,7 @@ div[id^='step'] {
       padding:10px 25px;
       text-shadow:none;
       text-transform:uppercase;}}}
-			
+
 .projects.edit {
 	.edit_project {
 		width:100%;}
@@ -971,7 +971,7 @@ div[id^='step'] {
     border-radius: 10px 10px 0 0;
     margin-bottom:0;
     padding:0 20px;
-    h4 {  
+    h4 {
       color:#3f403b;}}}
 
 #content_container {
@@ -1046,7 +1046,7 @@ div[id^='step'] {
   iframe {
     width:100% !important;}}
 
-.comments {  
+.comments {
   color:#b6b6b4;
   font-family:arial, sans-serif;
   p {
@@ -1059,7 +1059,7 @@ div[id^='step'] {
 
 ul.perks {
   margin:-10px 0 0;
-  padding:0; 
+  padding:0;
   li {
     background:#f8f8f8;
     border-bottom:1px solid #e9e9e9;
@@ -1166,22 +1166,22 @@ ul.perks {
 
 .user-email {
   font-style:italic;}
-	
+
 #new_user {
 	margin-left:0;
 }
-	
+
 #project_duration_input {
 	font:bold 24px/24px arial, helvetica, sans-serif;
 	width:278px !important;
 }
-	
+
 input.selectbox {
 	background:#fff url(image-path('select-back.png')) 94% center no-repeat;
 	cursor:pointer;
 	width:140px !important;
 	position:relative;}
-	
+
 .selectbox-wrapper {
 	border-bottom-right-radius:3px;
 	border-bottom-left-radius:3px;
@@ -1288,7 +1288,7 @@ input.selectbox {
 		margin-left:-12px;
 		position:absolute;
 		width:100%;}}
-			
+
 form[id*=project] {
 	margin-left:0 !important;
 	margin-top:190px;
@@ -1297,7 +1297,7 @@ form[id*=project] {
 		padding-left:35px;
 		position:relative;}}
 
-	
+
 .social-login {
 	position:relative;
 	h6 {
@@ -1320,7 +1320,7 @@ form[id*=project] {
 		color:#b6b6b4;
 		font-size:12px;
 		margin-top:5px;}}
-		
+
 .full-width {
 	&.green-description {
 		background:#70bf4c;
@@ -1757,10 +1757,134 @@ form[id*=project] {
 			margin:0 0 10px;
 			text-align:center;}}
 	&.advisory-board {
-		background:#eee;
-		padding:80px 0;}
+    background:#eee;
+		padding:80px 0;
+    p {
+      color:#55554d;
+      font-family:'Proxima Nova';
+      font-size:14px;
+		  line-height:150%;
+      margin-bottom:50px;
+      text-align:center;}
+    .other-associations {
+      color:#b6b6b4;
+      margin:0 auto;
+      width:610px;}
+    h3 {
+      color:#70bf4c;
+      margin-bottom:10px;
+      text-align:center;}
+    .advisor {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      float:left;
+      margin-bottom:35px;
+      width:50%;
+      img {
+        margin-right:10px;
+        position:relative;
+        vertical-align:middle;}
+      .details {
+        display:inline-block;
+        vertical-align:middle;}
+      p {
+        color:#403e37;
+        font-family:'myriad pro', arial, sans-serif;
+        font-size:12px;
+        margin-bottom:0;
+        text-align:left;}
+      .name {
+        color:#70bf4c;
+        font-family:'myriad pro', arial, sans-serif;
+        font-size:14px}
+      .experience {
+        color:#403e37;
+        font-family:'myriad pro', arial, sans-serif;
+        font-size:12px;
+        font-weight:600;}}}
+
 	&.more-information {
-		padding:50px 0;}}
+    padding:50px 0;
+    text-align:center;
+    h2 {
+      display:inline-block;
+      font-family:'Proxima Nova';
+      font-weight:normal;
+      text-transform:none;}
+    }
+		.btn {
+			background:#70bf4c;
+			border-radius:5px;
+			box-shadow:1px 1px 2px rgba(0,0,0,0.45);
+			color:#fff;
+			font-size:18px;
+			margin-left:25px;
+			margin-top:-5px;
+			padding:22px 0;
+			text-shadow:1px 1px 3px rgba(0,0,0,0.45);
+			width:220px;
+      span {
+				background:url(image-path('big-arrow.png')) top left no-repeat;
+				display:inline-block;
+				height:14px;
+				margin-left:3px;
+				vertical-align:-2px;
+				width:13px;
+			}
+			&.brown {
+				background:#403e37;
+				padding:22px 0;
+			}}}
+
+.faqs {
+  h2 {
+    font-family:'Proxima Nova';
+    line-height:normal;
+    margin:0 0 5px;
+    text-transform:none;
+    &.anchor {
+      color:#70bf4c;
+      text-transform:uppercase;}}
+  p {
+    color:#b6b6b4;
+    font-family:'Proxima Nova';
+    font-size:14px;
+    line-height:200%;
+    margin-bottom:30px;}
+  .fixed {
+    background:#f8f8f8;
+    border-top:6px solid #70bf4c;
+    counter-reset: my-badass-counter;
+    margin-left:0;
+    padding:15px 0;
+    width:300px;
+    dt {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      background:transparent url(image-path('dt-arrow.png')) 280px center no-repeat;
+      border-bottom:1px solid #e9e9e9;
+      color:#403e37;
+      font-family:'Proxima Nova';
+      line-height:30px;
+      padding:0 20px;
+      &.active, &:hover {
+        background:#70bf4c url(image-path('dt-arrow-active.png')) 280px center no-repeat;
+        color:#fff;
+        text-shadow:1px 1px 1px #508937;
+        a {
+          color:#fff;}}
+      &:before {
+        content: counter(my-badass-counter);
+        counter-increment: my-badass-counter;
+        display:inline-block;
+        margin-right:5px;
+        width:5px;}
+      &:first-child {
+        border-top:1px solid #e9e9e9;}
+      a {
+        color:#403e37;}}}}
 
 .admin {
 	table {
@@ -1777,7 +1901,7 @@ form[id*=project] {
 		}
 	}
 }
-			
+
 .stripe-connect {
   display: inline-block;
   margin-bottom: 1px;
