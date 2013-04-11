@@ -90,7 +90,7 @@
       = f.text_field :facebook_page, :required => true, :size => 17
 		
     %div
-      = link_to "https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_wpEV9n5an4SEoG7ti78FizqqYmkClrtt", :target => "_blank", :class => "stripe-connect" do
+      = link_to "https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_11bkBTsx7AbDtgYdLdl4cYeI8WoIyP81", :target => "_blank", :class => "stripe-connect" do
         %span Connect with Stripe
 				
       %input{:type => 'hidden', :value => "#{@connected}", :id => "connected", :required => true}
@@ -361,9 +361,9 @@
 
 .step-container{"data-id" => "assets"}
   = form_for(@project, :html => {:multipart => true}) do |f|
-    #large_image
-
-      %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => ENV['FILEPICKER_API'], 'data-fp-button-class' => 'coverphoto btn', 'onchange' => 'updateCover(event)'}
+    #large_image{:style => "background-image: url(#{@project.large_image}); -webkit-background-size: cover; background-size: cover;"}
+      - if not @project.large_image
+        %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => ENV['FILEPICKER_API'], 'data-fp-button-class' => 'coverphoto btn', 'onchange' => 'updateCover(event)'}
 
         .funding-info
           .container
@@ -616,6 +616,7 @@
 		
     $('.add-perk').on('click', function(e) {
       e.preventDefault();
+      console.log(document.location.hostname);
       var name = $('#perk-name').val();
       var amount = $('#perk-amount').val();
       var description = $('#perk-description').val();
@@ -623,11 +624,13 @@
       var data = {name: name, amount: amount, description: description, project: project};
       $.ajax({
         type: 'POST',
-        url: 'http://127.0.0.1:8080/projects/add_perk',
+        url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/add_perk',
         data: data
       }).done(function(data) {
         console.log(data);
         window.location.reload(true);
+      }).error(function(error) {
+        console.log(error);
       });
     })
 
@@ -640,7 +643,7 @@
       var data = {name: name, amount: amount, description: description, id: perk_id};
       $.ajax({
         type: 'POST',
-        url: 'http://127.0.0.1:8080/projects/update_perk',
+        url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/update_perk',
         data: data
       }).done(function(data) {
         console.log(data);
@@ -655,7 +658,7 @@
       var data = {id: perk_id};
       $.ajax({
         type: 'POST',
-        url: 'http://127.0.0.1:8080/projects/delete_perk',
+        url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/delete_perk',
         data: data
       }).done(function(data) {
         console.log(data);

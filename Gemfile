@@ -47,4 +47,4 @@ end
 gem 'jquery-rails'
 gem 'unicorn'
 gem 'capistrano'
-gem 'whenever', require: false
+#gem 'whenever', require: false
