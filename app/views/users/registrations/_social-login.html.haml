@@ -3,7 +3,7 @@
   .well
     %h6 LOG IN WITH FACEBOOK
     %p It’s fast and easy.
-    = link_to '/auth/facebook', :target => "_blank" do
+    = link_to user_omniauth_authorize_path(:facebook), :target => "_blank" do
       = image_tag('fb-login.png')
     %p.grey We'll never post anything without permission.
 
@@ -11,7 +11,7 @@
 
     %h6 LOG IN WITH TWITTER
     %p It’s fast and easy.
-    = link_to '/auth/twitter', :target => "_blank" do
+    = link_to user_omniauth_authorize_path(:twitter), :target => "_blank" do
       = image_tag('tw-login.png')
     %p.grey We'll never post anything without permission.
 
@@ -19,6 +19,6 @@
 
     %h6 LOG IN WITH LINKEDIN
     %p It’s fast and easy.
-    = link_to '/auth/linkedin', :target => "_blank" do
+    = link_to user_omniauth_authorize_path(:linkedin), :target => "_blank" do
       = image_tag('li-login.png')
     %p.grey We'll never post anything without permission.

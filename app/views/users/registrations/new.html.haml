@@ -24,7 +24,11 @@
         Create My Account
         = image_tag('arrow.png')
 
-      %p{:style => "color:#b6b6b4;float:left;width:270px;margin-top:25px;margin-left:20px;font-family:arial;"}By creating an account, you agree to our terms of use and privacy policy.
+      %p{:style => "color:#b6b6b4;float:left;width:270px;margin-top:25px;margin-left:20px;font-family:arial;"}
+        By creating an account, you agree to our 
+        = link_to "terms of use", terms_pages_path, :target => "_blank"
+        and
+        = link_to "privacy policy", "http://www.google.com", :target => "_blank"
 
   / = render "devise/shared/links"
 
