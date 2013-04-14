@@ -1,3 +1,30 @@
-%h1 Thank You For Your Contribution #{image_tag('secure_payment_logo.png')}
+.full-width.hero
+  .container
+    = image_tag "thank-u.png"
+    .headline
+      %h2 Your donations help make our dreams reality.
+      %p Continue to the checkout process below to confirm your funding amount and perk, then enter your payment information
 
-= render "form"
+.container
+  .span8
+    %h3 CHECKOUT
+    .donation
+      %h3 CITY OF DUNWOODY RECREATION CENTER
+      %p
+        %span
+        48 Perimeter Center East, dUNWOODY, GA 30346
+      
+      .well
+        %div
+          test
+        %div
+          test2
+        %p Continue to payment information below or choose a different seed amount/perk from the right.
+      
+      %h3 Payment Information
+      .well
+        = render "form"
+				
+  .span4
+    OTHER PERKS
+    .well

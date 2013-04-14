@@ -1,6 +1,7 @@
 class DonationsController < ApplicationController
 	before_filter :authenticate_user!
-
+  layout "landing"
+  
 	def new
 		@donation = Donation.new
 	end

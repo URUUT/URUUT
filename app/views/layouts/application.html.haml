@@ -6,8 +6,8 @@
     %title= content_for?(:title) ? yield(:title) : "Myapp"
     %meta{:content => "", :name => "description"}
     %meta{:content => "", :name => "author"}
-    = stylesheet_link_tag    "default/application", "trontastic/jquery-ui-1.8.22.custom.css", "http://cdn.leafletjs.com/leaflet-0.4/leaflet.css", "http://fonts.googleapis.com/css?family=Ubuntu:300,400,500",  "http://fonts.googleapis.com/css?family=Lato:300,400,700,400italic", :media => "all"
-    = javascript_include_tag "application", "https://js.stripe.com/v1/"
+    = stylesheet_link_tag    "default/application", "trontastic/jquery-ui-1.8.22.custom.css", :media => "all"
+    = javascript_include_tag "application"
     = filepicker_js_include_tag
     = javascript_tag do
       Stripe.setPublishableKey('pk_test_X2ChJG1uldzGYPWeOANhp0pr');
@@ -48,7 +48,7 @@
     console.log(ahref);
     window.open(ahref,'_blank', 'height=500,width=500,location=no,menubar=no');
   })
-	
+
   var updateCover = function(event){
     console.log(event.fpfile.url);
     var largeImage = event.fpfile.url;

@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
     end
     user
   end
-  
+
   def self.find_for_twitter_oauth(auth, signed_in_resource=nil)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
     unless user
@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
     end
     user
   end
-  
+
   def self.find_for_linkedin_oauth(auth, signed_in_resource=nil)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
     unless user
@@ -83,7 +83,7 @@ class User < ActiveRecord::Base
       end
     end
   end
-  
+
   def password_required?
     super && provider.blank?
   end
@@ -91,6 +91,6 @@ class User < ActiveRecord::Base
   private
 
   def send_welcome_email
-    ContactMailer.contact_confirmation(self).deliver
+    WelcomeMailer.welcome_confirmation(self).deliver
   end
 end
