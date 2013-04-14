@@ -14,7 +14,7 @@
 
     = csrf_meta_tags
     = yield(:head)
-  %body
+  %body{:class => "#{controller_name} #{action_name}"}
     #fb-root
       :javascript
 

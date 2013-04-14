@@ -669,7 +669,7 @@
     $('.created-perk .perk-edit').on('click', function() {
       $.ajax({
         type: 'POST',
-        url: '#{projects_get_perk_url}',
+        url: '#{get_perk_projects_url}',
         data: {id: $(this).parent().find('input[type=hidden]').val()}
       }).done(function(data) { 
         $('#perk-name').val(data.name);
@@ -686,11 +686,11 @@
       console.log(#{@project.id})
       $.ajax({
         type:'POST',
-        url: '#{projects_submit_project_url}',
+        url: '#{submit_project_projects_url}',
         data: {id: #{@project.id}}
       }).done(function(data) {
         if(data == "successful") {
-          window.location.href = "#{pages_thank_you_url}";
+          window.location.href = "#{thank_you_pages_url}";
         }
       })
     })

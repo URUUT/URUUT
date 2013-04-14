@@ -1,5 +1,9 @@
 Crowdfund::Application.routes.draw do
 
+  get "contacts/new"
+
+  get "contacts/edit"
+
   #devise_for :users
 
    # match '/auth/:provider/callback', to: 'services#create'
@@ -78,6 +82,7 @@ Crowdfund::Application.routes.draw do
     get "categories", :on => :collection
     post "contact", :on => :collection
     get "contact", :on => :collection
+    post "contact_send", :on => :collection
     get "how_it_works", :on => :collection
     get "terms", :on => :collection
     get "about", :on => :collection

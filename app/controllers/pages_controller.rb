@@ -16,10 +16,17 @@ class PagesController < ApplicationController
   end
 
   def contact
-    @name = params[:name]
-    @email = params[:email]
-    @message = params[:message]
-    ContactMailer.contact_confirmation(@name, @email, @message).deliver
+  end
+  
+  def contact_send
+    name = params[:pages][:name]
+    email = params[:pages][:email]
+    subject = params[:pages][:subject]
+    message = params[:pages][:message]
+    
+    logger.debug(params[:pages][:subject])
+
+    ContactMailer.contact_confirmation(name, email, subject, message).deliver
   end
 
   def how_it_works
