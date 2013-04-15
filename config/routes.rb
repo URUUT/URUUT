@@ -43,7 +43,7 @@ Crowdfund::Application.routes.draw do
 #   post "projects/delete_perk"
 #   post "projects/submit_project"
 
-  # get "projects/stripe_update"
+   get "projects/stripe_update"
 
   post "#{Rails.root}/public/images/"
   
@@ -61,7 +61,7 @@ Crowdfund::Application.routes.draw do
   resources :projects do 
     get "add_desc", :on => :collection
     get "save_image", :on => :collection
-    get "stripe_update", :on => :collection
+   # get "stripe_update", :on => :collection
     post "save_image", :on => :collection
     post "add_perk", :on => :collection
     post "get_perk", :on => :collection
