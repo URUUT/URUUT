@@ -2024,6 +2024,76 @@ form[id*=project] {
 			margin-left:3px;
 			vertical-align:-1px;
 			width:13px;}}}}
+			
+.projects.new {
+	.hero {
+		background: url(image-path('bg-tile.jpg')) top left repeat;
+		padding:35px 0 70px;
+		.container {
+			div {
+				display:inline-block;
+				margin-left:120px;
+				position:relative;
+				vertical-align:middle;
+				h2 {
+					color:#fff;
+					font-family:'Proxima Nova';
+					line-height:100%;
+					margin:10px 0 0;
+					text-transform:none;
+				}
+				h3 {
+					color:#70bf4c;
+					line-height:100%;
+					margin:0;}
+				p {
+					color:#b6b6b4;
+					font-family:'Proxima Nova';
+					font-size:14px;
+					margin-top:30px;}
+				.btn {
+					background:#70bf4c;
+					border-radius:4px;
+					box-shadow:1px 1px 2px rgba(0,0,0,0.45);
+					color:#fff;
+					display:block;
+					font-size:18px;
+					left:0;
+					margin:25px 0 0;
+					padding:22px 0;
+					width:220px;
+			    span {
+						background:url(image-path('plain-arrow.png')) top left no-repeat;
+						display:inline-block;
+						height:14px;
+						margin-left:3px;
+						vertical-align:-1px;
+						width:13px;}}}}}
+	.need-to-know {
+		background:#eee;
+		padding:60px 0;}
+	.create-project {
+		padding:53px;
+		h2 {
+			display:inline-block;}
+		.btn {
+			background:#70bf4c;
+			border-radius:4px;
+			box-shadow:1px 1px 2px rgba(0,0,0,0.45);
+			color:#fff;
+			display:inline-block;
+			font-size:18px;
+			left:0;
+			margin:0;
+			padding:22px 0;
+			width:220px;
+	    span {
+				background:url(image-path('plain-arrow.png')) top left no-repeat;
+				display:inline-block;
+				height:14px;
+				margin-left:3px;
+				vertical-align:-1px;
+				width:13px;}}}}
 
 .admin {
 	table {

@@ -1,6 +1,39 @@
-%h1 This is a test and holder for project creation landing page
+.full-width.hero
+	.container
+		= image_tag "light-bulb.png"
+		%div
+			%h3 GET FUNDING
+			%h2 Your ideas. Our platform.
+			%p It’s free and easy to submit your project on Uruut. Click below to get started.
 
-.btn.create Create Project
+			= button_tag :class => "btn create" do
+				Get Started
+				%span
+				
+.full-width.need-to-know
+	.container
+		%h3 WHAT DO I NEED TO KNOW?
+		%h2 Before getting started here’s a quick guide for a successful project.
+		%div
+			= image_tag ''
+			%h5 IDENTIFY
+			%p You have a project you want to see become a reality. If you are a registered municipal organization, member organization, and/or civic organization identify the project you want to see funded.
+		%div
+			= image_tag ''
+			%h5 CREATE
+			%p Click “Get Started” and follow our easy to use project wizard. In five steps you will be one step closer to funding your dream project.
+		%div
+			= image_tag ''
+			%h5 PROMOTE
+			%p Get out there and spread the word.  Shout it from the roof tops, share with your friends, your networks and talk to your local businesses about sponsorships. Between your network and our tools, there isn't anything stopping you.
+			
+.full-width.create-project
+	.container
+		%h2 Create your project & get funded now.
+		= button_tag :class => "btn create" do
+			Get Started
+			%span
+			
 :javascript
 	$(function(){
 		$('.btn.create').click(function(){
