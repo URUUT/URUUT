@@ -34,25 +34,25 @@ Crowdfund::Application.routes.draw do
   # get "pages/thank_you"
 
   # get "projects/add_desc"
-#   get "projects/save_image"
-#   post "projects/save_image"
+   get "projects/save_image"
+   post "projects/save_image"
 #   
 #   post "projects/add_perk"
 #   post "projects/get_perk"
 #   post "projects/update_perk"
 #   post "projects/delete_perk"
-#   post "projects/submit_project"
+   post "projects/submit_project"
 
    get "projects/stripe_update"
 
   post "#{Rails.root}/public/images/"
   
-  # get "admin/unapproved"
-  # post "admin/approve"
+   get "admin/unapproved"
+   post "admin/approve"
 
   resources :admin do
-    get 'unapproved', :on => :collection
-    post 'admin/approve', :on => :collection
+  #  get 'unapproved', :on => :collection
+  #  post 'admin/approve', :on => :collection
   end
   
   resources :s3_uploads
@@ -60,14 +60,14 @@ Crowdfund::Application.routes.draw do
   resources :donations
   resources :projects do 
     get "add_desc", :on => :collection
-    get "save_image", :on => :collection
+   # get "save_image", :on => :collection
    # get "stripe_update", :on => :collection
-    post "save_image", :on => :collection
+   # post "save_image", :on => :collection
     post "add_perk", :on => :collection
     post "get_perk", :on => :collection
     post "update_perk", :on => :collection
     post "delete_perk", :on => :collection
-    post "submit_project", :on => :collection
+   # post "submit_project", :on => :collection
   end
   
   resources :project_steps
