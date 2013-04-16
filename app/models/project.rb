@@ -38,7 +38,7 @@ class Project < ActiveRecord::Base
   end
   
   def self.send_confirmation_email(project)
-    ProjectConfirmation.project_confirmation(project).deliver
+    ProjectMailer.project_confirmation(project).deliver
   end
   
 end
