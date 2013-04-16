@@ -1,7 +1,8 @@
 class PagesController < ApplicationController
 
   def index
-  	@projects = Project.find(:all)
+  	@projects = Project.where("live = 1 AND ready_for_approval = 0")
+    logger.debug(@projects)
     @ending = Project.find(:all, :order => "duration")
   end
 

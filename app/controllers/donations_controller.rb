@@ -4,6 +4,7 @@ class DonationsController < ApplicationController
   
 	def new
 		@donation = Donation.new
+    @perk = param[:perk]
 	end
 
 	def create
