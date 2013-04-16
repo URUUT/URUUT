@@ -44,7 +44,7 @@
 			var id = $.trim($(this).parent().parent().find('td:first').text());
 			$.ajax({
 				type: "POST",
-				url: 'http://127.0.0.1:8080/admin/approve',
+				url: 'http://' + document.location.host + '/admin/approve',
 				data: {approved:'true', id: id}
 			}).done(function(html) {
 			  var data = $.parseJSON(html);
