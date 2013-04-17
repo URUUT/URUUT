@@ -56,7 +56,7 @@ class ProjectsController < ApplicationController
 #       redirect_to project_steps_path
 #     end
   # end
-  
+
   def update
     @project = Project.find(params[:id])
     @project.update_attributes!(params[:project])
@@ -69,12 +69,12 @@ class ProjectsController < ApplicationController
 
   def stripe_update
     code = params[:code]
-    client = OAuth2::Client.new('ca_11bkBTsx7AbDtgYdLdl4cYeI8WoIyP81','sk_test_ZIf90yfmH2DHuuuX8LnU0WJe', :site => "https://connect.stripe.com/oauth/authorize")
+    client = OAuth2::Client.new(ENV['STRIPE_CLIENT_ID'], ENV['STRIPE_KEY'], :site => "https://connect.stripe.com/oauth/authorize")
     token = client.auth_code.get_token(code, :headers => {'Authorization' => 'Bearer sk_test_ZIf90yfmH2DHuuuX8LnU0WJe'})
     project = Project.find(session[:current_project])
     project.project_token = token.token
     project.save!
-    
+
     logger.debug(project.project_token)
     if project.project_token
       session[:connected] = "true"
@@ -96,7 +96,7 @@ class ProjectsController < ApplicationController
       render :nothing => true
     end
   end
-  
+
   def add_perk
     perk = Perk.new
     perk.name = params[:name]
@@ -110,14 +110,14 @@ class ProjectsController < ApplicationController
       end
     end
   end
-  
+
   def get_perk
     perk = Perk.find_by_id(params[:id])
     respond_to do |format|
       format.json { render :json => {name: perk.name, amount: perk.amount, description: perk.description, id: perk.id} }
     end
   end
-  
+
   def update_perk
     perk = Perk.find_by_id(params[:id])
     perk.name = params[:name]
@@ -129,7 +129,7 @@ class ProjectsController < ApplicationController
       end
     end
   end
-  
+
   def delete_perk
     perk = Perk.find_by_id(params[:id])
     if perk.destroy
@@ -138,7 +138,7 @@ class ProjectsController < ApplicationController
       end
     end
   end
-  
+
   def submit_project
     logger.debug(params[:id])
     project = Project.find_by_id(params[:id])
