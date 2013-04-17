@@ -361,8 +361,10 @@
 
 .step-container{"data-id" => "assets"}
   = form_for(@project, :html => {:multipart => true}) do |f|
-    #large_image{:style => "background-image: url(#{@project.large_image}); -webkit-background-size: cover; background-size: cover;"}
-      - if not @project.large_image
+    - if @project.large_image
+      #large_image{:style => "background-image: url(#{@project.large_image}); -webkit-background-size: cover; background-size: cover;"}
+    - else
+      #large_image
         %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => ENV['FILEPICKER_API'], 'data-fp-button-class' => 'coverphoto btn', 'onchange' => 'updateCover(event)'}
 
         .funding-info
