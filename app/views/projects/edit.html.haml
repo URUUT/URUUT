@@ -686,7 +686,7 @@
       console.log(#{@project.id})
       $.ajax({
         type:'POST',
-        url: '#{submit_project_projects_url}',
+        url: '#{projects_submit_project_url}',
         data: {id: #{@project.id}}
       }).done(function(data) {
         if(data == "successful") {
