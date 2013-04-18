@@ -38,6 +38,7 @@ class ProjectsController < ApplicationController
     @perks = Perk.where("project_id = ?", @project.id)
     @connected = session[:connected]
     logger.debug(@connected)
+    render :layout => 'landing'
 	end
 
 	def show

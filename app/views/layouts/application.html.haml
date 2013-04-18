@@ -40,6 +40,7 @@
             = yield
       #push
     = render 'partials/footer'
+    
 
 :javascript
   if(window.opener) {
@@ -103,6 +104,8 @@
     $('form [id*="new_project"]').h5Validate();
     $('#project_state').selectbox();
     $('#project_duration').selectbox();
+    $('.pages #category').selectbox();
+    $('.pages #location').selectbox();
 
     $('.coverphoto').bind('change', function(event){
       console.log("Hello Close");
