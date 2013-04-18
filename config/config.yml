@@ -1,0 +1,2 @@
+development:
+  stripe_pub_key: ENV['STRIPE_PUB_KEY']

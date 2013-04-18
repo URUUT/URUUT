@@ -1,25 +1,25 @@
 = render "partials/banner_map"
-
-.recent.clearfix
-  %p.sections
-    = image_tag "recent-project-icon.png"
-    Recent Projects
+.container
+  .recent.clearfix
+    %p.sections
+      = image_tag "recent-project-icon.png"
+      CURRENT PROJECTS
     
-  = render "project", :projects => @projects
+    = render "project", :projects => @projects
 
-/ .ending-soon.clearfix
-/   %p.sections
-/     = image_tag 'ending-soon-icon.png'
-/     Projects Ending Soon
-/ 
-/   = render "project", :projects => @ending
-/  
-/ .featured-success.clearfix
-/   %p.sections
-/     = image_tag 'featured-success-icon.png'
-/     Featured Success
-/ 
-/   = render "project", :projects => @featured
+  .ending-soon.clearfix
+    %p.sections
+      = image_tag 'ending-soon-icon.png'
+      Projects Ending Soon
+
+    = render "project", :projects => @ending
+ 
+  .featured-success.clearfix
+    %p.sections
+      = image_tag 'featured-success-icon.png'
+      Featured Success
+
+    = render "project", :projects => @featured
 	
 .clearfix
 
