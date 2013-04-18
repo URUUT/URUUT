@@ -252,7 +252,7 @@
 
     %h4.title
       SPONSORSHIP DETAILS
-      %span.italic (Benefits For Project Sponsorsf)
+      %span.italic (Benefits For Project Sponsors)
 
     - if @project.errors.any?
       #errorExplanation
@@ -264,151 +264,129 @@
     %div
       %h6{:style => "color:#70bf4c"}
         PLATINUM LEVEL SPONSORSHIP*
-        %span{:style => "font-size:10px;color:#403e37"} (1 AVAILABLE)
+        %span{:style => "font-size:10px;color:#b6b6b4;letter-spacing:normal;"} (industry-specific exclusivity)
+        %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;"} (1 AVAILABLE)
     .cf
       .span3.left{:style => "text-align:left;color:#464646;"}
-        %h6 Cost
-        %h4 $100,000
-        %p (30% of funding goal)
+        %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0;"} Cost
+        %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0"}= number_to_currency((@project.goal.to_i * 0.70).ceil, :precision => 0)
+        %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (70% of funding goal)
       .span9.left{:style => "text-align:left;color:#464646;"}
-        %p Platinum Level Sponsorship includes priority logo placement, a link to the sponor’s website, and the company / foundation’s mission statement on your project page. In addition to these benefits select additional benefits for platinum level sponsors from the checklist below.
-        %div
+        %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"} 
+          Platinum Level Sponsorship includes priority logo placement, a link to the sponsor’s website, and the company / foundation’s mission statement on your project page. Platinum Sponsors gain industry exclusivity for project sponsors. In addition to these benefits select suggested benefits or create custom benefits for platinum level sponsors from the checklist below. 
+          %span{:style =>  "color:#b6b6b4;font-style:italic;"}
+            (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
+        %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"} SUGGESTED BENEFITS:
+        %div.checkbox
           = check_box_tag "Test"
-          Lorem ipsum dolor sit amet.
-        %div
+          Recognition plaque on project site.
+        %div.checkbox
           = check_box_tag "Test"
-          Lorem ipsum dolor sit amet.
-        %div
+          Platinum Sponsor mention on all media press releases and in community newsletter.
+        %div.checkbox
           = check_box_tag "Test"
-          Lorem ipsum dolor sit amet.
-        %div
+          Profile of your company on our website with photo.
+        %div.checkbox
           = check_box_tag "Test"
-          Lorem ipsum dolor sit amet.
-        %div
+          Monthly plug on social media leading up to the project and the month after the project has been complete.
+        %div.checkbox
           = check_box_tag "Test"
-          Lorem ipsum dolor sit amet.
+          Twenty tickets to VIP Gala Event.
     %hr
 
     %div
       %h6{:style => "color:#70bf4c"}
-        PLATINUM LEVEL SPONSORSHIP*
-        %span{:style => "font-size:10px;color:#403e37"} (1 AVAILABLE)
+        Gold LEVEL SPONSORSHIP*
+        %span{:style => "font-size:10px;color:#b6b6b4;letter-spacing:normal;"} (industry-specific exclusivity)
+        %span{:style => "font-size:10px;color:#403e37"} (3 AVAILABLE)
     .cf
       .span3.left{:style => "text-align:left;color:#464646;"}
-        %h6 Cost
-        %h4 $100,000
-        %p (30% of funding goal)
+        %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0;"} Cost
+        %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0"}= number_to_currency((@project.goal.to_i * 0.15).ceil, :precision => 0)
+        %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (15% of funding goal)
       .span9.left{:style => "text-align:left;color:#464646;"}
-        %p Platinum Level Sponsorship includes priority logo placement, a link to the sponor’s website, and the company / foundation’s mission statement on your project page. In addition to these benefits select additional benefits for platinum level sponsors from the checklist below.
-        %div
+        %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"} 
+          Gold Level Sponsorship includes includes placement of a large sized logo and a link to the sponsor’s website on your project page. Gold Sponsors gain industry exclusivity for project sponsors. In addition to these benefits select suggested benefits or create custom benefits for gold level sponsors from the checklist below. 
+          %span{:style =>  "color:#b6b6b4;font-style:italic;"}
+            (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
+        %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"} SUGGESTED BENEFITS:
+        %div.checkbox
           = check_box_tag "Test"
-          Lorem ipsum dolor sit amet.
-        %div
+          Gold Sponsor mention in community newsletter.
+        %div.checkbox
           = check_box_tag "Test"
-          Lorem ipsum dolor sit amet.
-        %div
+          Profile of your company on our website with photo.
+        %div.checkbox
           = check_box_tag "Test"
-          Lorem ipsum dolor sit amet.
-        %div
+          Monthly plug on social media leading up to the project and the month after the project has been complete.
+        %div.checkbox
           = check_box_tag "Test"
-          Lorem ipsum dolor sit amet.
-        %div
-          = check_box_tag "Test"
-          Lorem ipsum dolor sit amet.
+          Ten tickets to VIP Gala Event.
     %hr
 
     %div
       %h6{:style => "color:#70bf4c"}
-        PLATINUM LEVEL SPONSORSHIP*
-        %span{:style => "font-size:10px;color:#403e37"} (1 AVAILABLE)
+        Silver LEVEL SPONSORSHIP*
+        %span{:style => "font-size:10px;color:#403e37"} (5 AVAILABLE)
     .cf
       .span3.left{:style => "text-align:left;color:#464646;"}
-        %h6 Cost
-        %h4 $100,000
-        %p (30% of funding goal)
+        %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0;"} Cost
+        %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0"}= number_to_currency((@project.goal.to_i * 0.05).ceil, :precision => 0)
+        %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (5% of funding goal)
       .span9.left{:style => "text-align:left;color:#464646;"}
-        %p Platinum Level Sponsorship includes priority logo placement, a link to the sponor’s website, and the company / foundation’s mission statement on your project page. In addition to these benefits select additional benefits for platinum level sponsors from the checklist below.
-        %div
+        %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"} 
+          Silver Level Sponsorship includes includes placement of a medium sized logo and a link to the sponsor’s website on your project page. In addition to these benefits, select suggested benefits or create custom benefits for silver level sponsors from the checklist below. 
+          %span{:style =>  "color:#b6b6b4;font-style:italic;"}
+            (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
+        %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"} SUGGESTED BENEFITS:
+        %div.checkbox
           = check_box_tag "Test"
-          Lorem ipsum dolor sit amet.
-        %div
+          Profile of your company on our website with photo.
+        %div.checkbox
           = check_box_tag "Test"
-          Lorem ipsum dolor sit amet.
-        %div
+          Monthly plug on social media leading up to the project and the month after the project has been complete.
+        %div.checkbox
           = check_box_tag "Test"
-          Lorem ipsum dolor sit amet.
-        %div
-          = check_box_tag "Test"
-          Lorem ipsum dolor sit amet.
-        %div
+          Five tickets to VIP Gala Event.
+        
+    %hr
+		
+    %div
+      %h6{:style => "color:#70bf4c;"}
+        Bronze LEVEL SPONSORSHIP*
+    .cf
+      .span3.left{:style => "text-align:left;color:#464646;"}
+        %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0;"} Cost
+        %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0"} $1,500
+      .span9.left{:style => "text-align:left;color:#464646;"}
+        %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"} Bronze Level Sponsorship includes business / foundation name listing and a link to the sponsor’s website on your project page. In addition to these benefits, you can create custom benefits for bronze level sponsors below.
+        %div.checkbox
           = check_box_tag "Test"
           Lorem ipsum dolor sit amet.
     %hr
-
     %div
-      = f.submit "Save And Continue", :class => "btn", :id => "project-submit", :style => "left: 175px;position: relative;"
+      = f.submit "Save And Continue", :class => "btn", :id => "project-submit", :style => "position: relative;display:block;margin:0 auto;"
 
 
   .span4{:style => "margin-top:155px;"}
     %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
     .well.info
-      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} SEEDER PERKS
-      %p Funding on URUUT is made in exchange for payment in kind: goods, services, special benefits or other perks. Offer something valuable for the funds. No T-shirts and shout-outs for $100.
+      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} SPONSORSHIP DETAILS
+      %p URUUT’s Partner-Funding depends not only individual contributors, but sponsorship from businesses and foundations. 
 
-      %p Perks could include a house account for your investors, discounted goods or services, special lessons or workshops, or a private party just for seeders. Be creative!
-      %p The most common amounts invested are between $25-$100. We suggest you offer some good value perks at a low cost for casual investors who might not know your organization well, and a handful of high end rewards that are likely to appeal to your inner circle or die-hard fans.
-      %p If you’re having a hard time thinking about some great perks, check out our Project Guide or just let us know and we can help you.
+      %p There are 4 different levels of sponsorship, with different benefits for each level. Use the checklists to define what each sponsor level includes. Blah blah blah, this is terrible writing, need to have someone actually write this before launch.
 
 .step-container{"data-id" => "assets"}
   = form_for(@project, :html => {:multipart => true}) do |f|
     - if @project.large_image
       #large_image{:style => "background-image: url(#{@project.large_image}); -webkit-background-size: cover; background-size: cover;"}
+        = render "funding_info"
+      
     - else
       #large_image
         %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => ENV['FILEPICKER_API'], 'data-fp-button-class' => 'coverphoto btn', 'onchange' => 'updateCover(event)'}
 
-        .funding-info
-          .container
-            .span5
-              %h4.title= @project.title
-            %span.location #{@project.city}, #{@project.state}
-            %hr
-            %p.short-desc= @project.about
-
-            - if current_user
-              - if Donation.already_donated(@project.id, current_user.id).nil?
-                = link_to "Fund Now", new_donation_path, :class => "btn"
-              - else
-                %h4.already-donated You've donated #{number_to_currency(Donation.already_donated(@project.id, current_user.id), :precision => 0)}
-                #{link_to "Edit Your Donation", edit_donation_path(Donation.edit_donation(@project.id, current_user.id)), :class => "edit"}
-            - elsif !current_user
-              %a{:href => "#{new_donation_path(:id => @project.id)}", :class => "fund btn"} Fund Now #{image_tag('arrow.png')}
-
-          .span4.offset3
-            %h3= number_to_currency(amount_funded(@project.id))
-
-            .progress-container
-              = image_tag 'seed.png', :class => "seed"
-              %div
-                %span Seed Funds Pledged
-                - if @donation && @donation.length == 0
-                  %p $0
-                - else
-                  - totalDonated = 0
-                  - if @donation
-                    - @donation.each do |d|
-                      - totalDonated += d.amount
-                  %p= number_to_currency(totalDonated, :precision => 0)
-
-            #progressbar
-
-              %ul.project-details
-                %li
-                  %span.small
-                    Project
-                  %br
-                  Goal
-                = number_to_currency(@project.goal, :precision => 0)
+        = render "funding_info"
 
     .show-content
       .span8
