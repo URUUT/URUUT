@@ -1036,18 +1036,51 @@ div[id^='step'] {
       color:#fff;
       font:normal 13px/13px "Proxima Nova", arial, sans-serif;
       letter-spacing:2px;
-      padding:10px 25px;
+			margin-right:20px;
+      padding:10px;
       text-shadow:none;
       text-transform:uppercase;}}}
 
 .projects.edit {
 	#large_image {
-		top:180px;}
+		top:180px;
+		.coverphoto.btn {
+			left:50%;
+			margin-left:-480px;}
+		.funding-info {
+			box-shadow: 0 -1px 5px rgba(0,0,0,0.3);
+			.seed {
+				float:left;
+				margin-right:5px;}
+			.project-details {
+				margin-top:8px;
+				.small {
+					color:#fff;
+					line-height:150%;
+					float:left;}
+				.amount {
+					float:left;
+					font:normal 26px/26px "Proxima Nova Semi", arial, sans-serif;
+					margin-left:5px;
+					margin-top:4px;}
+				.days-left {
+					float:right;}}}}
 	.edit_project {
 		width:100%;}
 	h4.title {
 		border:none;
-		padding:0;}}
+		padding:0;}
+	.show-content {
+    h4.title {
+	    border-bottom:5px solid #48c94c;
+	    font-size:17px;
+	    font-weight:normal;
+	    letter-spacing:2px;
+	    padding-bottom:10px;
+	    text-transform:uppercase;}
+		.project-location {
+			.marker {
+				float:none;}}}}
 
 .nav-tabs {
   border-bottom:5px solid #48c94c;

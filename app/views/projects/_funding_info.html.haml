@@ -4,15 +4,17 @@
       %h4.title= @project.title
       %span.location #{@project.city}, #{@project.state}
       %hr
-      %p.short-desc= @project.about
+      %p.short-desc{:style => "font:normal 12px/18px 'Proxima Nova';"}= @project.about
 
-      = link_to "#", :class => "btn" do
+      = link_to "#assets", :class => "btn" do
         Become A Sponsor
+        %span
+				
+      = link_to "#assets", :class => "btn" do
+        Fund Now
         %span
 
     .span4
-      %h3= number_to_currency(amount_funded(@project.id))
-
       .progress-container
         = image_tag 'seed.png', :class => "seed"
         %div
@@ -28,10 +30,16 @@
 
       #progressbar
 
-        %ul.project-details
-          %li
-            %span.small
-              Project
+      .project-details.cf
+        %span.small
+          Project
+          %br
+          Goal
+        .amount= number_to_currency(@project.goal, :precision => 0)
+				
+        .days-left        
+          %span.small
+            Days
             %br
-            Goal
-          = number_to_currency(@project.goal, :precision => 0)
+            Left
+          .amount= @project.duration
