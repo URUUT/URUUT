@@ -1,4 +1,24 @@
 .full-width.texture  
 	.container
-		= link_to "Find Local Projects", "#", :class => 'large-marker'
-		= link_to "Change Location", "#", :class => 'change-location'
+		%div
+			= image_tag "mag-glass.png"
+			%h3 DISCOVER PROJECTS
+		.category.dropdown
+			%label PROJECT CATEGORY:
+			%select{:id => "category"}
+				%option All Categories
+				%option Test
+				%option Test
+				%option Test
+				%option Test
+		.location.dropdown
+			%label PROJECT LOCATION:
+			%select{:id => "location"}
+				%option All Cities
+				%option Test
+				%option Test
+				%option Test
+				%option Test
+		.keyword.dropdown
+			%label KEYWORD SEARCH
+			%input{:type => 'search', :id => 'keyword', :placeholder => "Keyword..."}
