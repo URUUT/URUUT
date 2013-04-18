@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   	@projects = Project.where("live = 1 AND ready_for_approval = 0")
     logger.debug(@projects)
     @ending = Project.find(:all, :order => "duration")
+    render :layout => 'landing'
   end
 
   def discover

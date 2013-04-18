@@ -618,7 +618,16 @@ nav.navbar-inner {
 
 .step-container {
 	color:#464646;
-	display:none;}
+	display:none;
+	div.checkbox {
+		color:#403e37;
+		font:normal 18px/18px "Proxima Nova", arial, sans-serif;
+		margin-bottom:15px;
+		input[type=checkbox] {
+			display:inline-block;
+			float:none;
+			position:relative;
+			vertical-align:text-top;}}}
 
 .project {
   border-top:6px solid #70bf4c;
@@ -648,11 +657,14 @@ nav.navbar-inner {
     padding:10px;
     width:260px;}
   .location span {
-    float:left;
-    font-family: "Georgia", georgia, serif;
-    font-size:11px;
+		display:inline-block;
+    font-family: "Proxima Nova Semi", arial, sans-serif;
+    font-size:10px;
     font-style:normal;
-    font-weight:normal;}
+    font-weight:normal;
+		letter-spacing:1px;
+		margin-top:-1px;
+		text-transform:uppercase;}
   .location img {
     float:left;
     margin-left:5px;}
@@ -664,7 +676,7 @@ nav.navbar-inner {
 
 .marker {
   float:right;
-  margin:2px 0 0 2px;}
+  margin:2px 5px 0 0;}
 
 .project-image {
   width:100% !important;
@@ -682,6 +694,8 @@ nav.navbar-inner {
     text-transform:capitalize;
     margin:0 0 5px;}
   p.short-description{
+		color:#403e37;
+		font:normal 12px/18px "Proxima Nova", arial, sans-serif;
     text-overflow:ellipsis;
     overflow:hidden;
     width:260px;}}
@@ -1027,6 +1041,8 @@ div[id^='step'] {
       text-transform:uppercase;}}}
 
 .projects.edit {
+	#large_image {
+		top:180px;}
 	.edit_project {
 		width:100%;}
 	h4.title {
@@ -1349,7 +1365,8 @@ input.selectbox {
 			width:100%;}}}
 
 .info {
-  font:normal 12px/18px arial, helvetica, sans-serif;}
+  font:normal 12px/18px "Proxima Nova", arial, sans-serif;
+	letter-spacing:normal;}
 
 .active, .current {
 	span {

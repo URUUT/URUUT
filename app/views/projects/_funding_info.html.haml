@@ -1,0 +1,37 @@
+.funding-info
+  .container
+    .span8
+      %h4.title= @project.title
+      %span.location #{@project.city}, #{@project.state}
+      %hr
+      %p.short-desc= @project.about
+
+      = link_to "#", :class => "btn" do
+        Become A Sponsor
+        %span
+
+    .span4
+      %h3= number_to_currency(amount_funded(@project.id))
+
+      .progress-container
+        = image_tag 'seed.png', :class => "seed"
+        %div
+          %span Seed Funds Pledged
+          - if @donation && @donation.length == 0
+            %p $0
+          - else
+            - totalDonated = 0
+            - if @donation
+              - @donation.each do |d|
+                - totalDonated += d.amount
+            %p= number_to_currency(totalDonated, :precision => 0)
+
+      #progressbar
+
+        %ul.project-details
+          %li
+            %span.small
+              Project
+            %br
+            Goal
+          = number_to_currency(@project.goal, :precision => 0)
