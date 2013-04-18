@@ -55,5 +55,9 @@ module ApplicationHelper
     amount = amount.to_s.gsub(/,/, '').to_f
     number_to_currency(amount, :precision => 0)
   end
+  
+  def stripe_pub_key
+    return ENV['STRIPE_PUB_KEY']
+  end
 
 end

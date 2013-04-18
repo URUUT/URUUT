@@ -90,7 +90,7 @@
       = f.text_field :facebook_page, :required => true, :size => 17
 		
     %div
-      = link_to "https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_11bkBTsx7AbDtgYdLdl4cYeI8WoIyP81", :target => "_blank", :class => "stripe-connect" do
+      = link_to "https://connect.stripe.com/oauth/authorize?response_type=code&client_id=#{ENV['STRIPE_CLIENT_ID']}", :target => "_blank", :class => "stripe-connect" do
         %span Connect with Stripe
 				
       %input{:type => 'hidden', :value => "#{@connected}", :id => "connected", :required => true}

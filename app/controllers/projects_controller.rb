@@ -70,7 +70,7 @@ class ProjectsController < ApplicationController
   def stripe_update
     code = params[:code]
     client = OAuth2::Client.new(ENV['STRIPE_CLIENT_ID'], ENV['STRIPE_KEY'], :site => "https://connect.stripe.com/oauth/authorize")
-    token = client.auth_code.get_token(code, :headers => {'Authorization' => 'Bearer sk_test_ZIf90yfmH2DHuuuX8LnU0WJe'})
+    token = client.auth_code.get_token(code, :headers => {'Authorization' => "Bearer #{ENV['STRIPE_KEY']}"})
     project = Project.find(session[:current_project])
     project.project_token = token.token
     project.save!
