@@ -12,36 +12,35 @@
         = image_tag "bitly-link.png", :style => "margin-right:20px;"
 
       .span4
-        /%h3= number_to_currency(amount_funded(@project.id))
-
         .progress-container
           = image_tag 'seed.png', :class => "seed"
           %div
             %span Seed Funds Pledged
-            - if @donation.count == 0
+            - if @donation && @donation.length == 0
               %p $0
             - else
               - totalDonated = 0
-              - @donation.each do |d|
-                - totalDonated += d.amount
+              - if @donation
+                - @donation.each do |d|
+                  - totalDonated += d.amount
               %p= number_to_currency(totalDonated, :precision => 0)
 
         #progressbar
 
-          %ul.project-details
-            %li
-              %span.small
-                Project
-              %br
-              Goal
-            = number_to_currency(@project.goal, :precision => 0)
-
-          %li
+        .project-details.cf
+          %span.small
+            Project
+            %br
+            Goal
+          .amount= number_to_currency(@project.goal, :precision => 0)
+				
+          .days-left        
             %span.small
               Days
               %br
               Left
-            = time_left(@project.duration, @project.approval_date).to_i
+            .amount= @project.duration
+        
 
 .container
   .row-fluid.show-content
