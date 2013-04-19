@@ -1053,7 +1053,26 @@ div[id^='step'] {
 			
 .projects.show {
 	.show-content {
-		margin-top: 585px;}}
+		margin-top: 585px;}
+	.funding-info {
+		box-shadow: 0 -1px 5px rgba(0,0,0,0.3);
+		.seed {
+			float:left;
+			margin-right:5px;}
+		.project-details {
+			margin-top:8px;
+			.small {
+				color:#fff;
+				font-family:"Proxima Nova";
+				line-height:150%;
+				float:left;}
+			.amount {
+				float:left;
+				font:normal 26px/26px "Proxima Nova Semi", arial, sans-serif;
+				margin-left:5px;
+				margin-top:4px;}
+			.days-left {
+				float:right;}}}}
 
 .projects.edit {
 	#large_image {
