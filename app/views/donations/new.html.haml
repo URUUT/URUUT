@@ -7,24 +7,29 @@
 
 .container
   .span8
-    %h3 CHECKOUT
+    %h3.title CHECKOUT
     .donation
-      %h3 CITY OF DUNWOODY RECREATION CENTER
+      %h3{:style => 'color:#70bf4c;line-height:100%;margin:20px 0 0;'} CITY OF DUNWOODY RECREATION CENTER
       %p
-        %span
-        48 Perimeter Center East, dUNWOODY, GA 30346
+        = image_tag "marker.jpg"			
+        %span{:style => "font:bold 12px/12px 'Proxima Nova Bold';text-transform:uppercase;"}
+          48 Perimeter Center East, dUNWOODY, GA 30346
       
-      .well
-        %div
-          test
-        %div
-          test2
-        %p Continue to payment information below or choose a different seed amount/perk from the right.
+      .well{:style => "border:1px solid #e9e9e9;padding:0;margin-top:20px;"}
+        %div{:style => "float:left;padding-left:20px;display:inline-block;height:115px;width:212px;border-right:1px solid #e9e9e9;margin-right:20px;"}
+          %h6{:style => "line-height:100%;margin-bottom:10px;margin-top:20px;margin-bottom:15px;"} Seed Amount
+          %span{:style => "font-size:52px;color:#70bf4c;font-family:'Proxima Nova Bold';line-height:100%"}= number_to_currency(@perk_amount, :precision => 0)
+        %div{:style => "float:left;display:inline-block;width:340px;padding-right:20px;height:auto"}
+          %h6{:style => "line-height:100%;margin-bottom:10px;margin-top:20px"} Your Perk
+          %h3{:style => 'font-size:20px; color:#70bf4c;line-height:100%;margin:0;'}= @perk_name
+          %span{:style => "font-size:12px;font-family:'Proxima Nova';"}= @perk_description
+        .cf
+        %p{:style => "border-top:1px solid #e9e9e9;padding:10px 20px;font-size:12px;font-family:'Proxima Nova';text-align:center;color:#b6b6b4;margin:0;"} Continue to payment information below or choose a different seed amount/perk from the right.
       
       %h3 Payment Information
       .well
         = render "form"
 				
   .span4
-    OTHER PERKS
-    .well
+    %h3.title OTHER PERKS
+    .well{:style => "border:none;"}

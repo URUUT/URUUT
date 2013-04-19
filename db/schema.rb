@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130410174523) do
+ActiveRecord::Schema.define(:version => 20130419044424) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(:version => 20130410174523) do
     t.string  "address"
     t.string  "city"
     t.string  "state"
-    t.integer "zip"
+    t.string  "zip"
     t.string  "neighborhood"
     t.integer "live"
     t.text    "short_description"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(:version => 20130410174523) do
     t.string  "project_title"
     t.integer "ready_for_approval"
     t.string  "seed_image"
+    t.string  "cultivation_image"
   end
 
   create_table "services", :force => true do |t|

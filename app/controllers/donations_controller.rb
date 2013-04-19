@@ -3,8 +3,13 @@ class DonationsController < ApplicationController
   layout "landing"
   
 	def new
+    logger.debug(session[:current_project])
 		@donation = Donation.new
-    @perk = param[:perk]
+    @perk_name = params[:name].to_s
+    @perk_amount = params[:amount]
+    @perk_description = params[:description]
+    @project = Project.find(session[:current_project])
+    logger.debug(@project.title)
 	end
 
 	def create

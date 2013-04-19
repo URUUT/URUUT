@@ -46,6 +46,7 @@ class ProjectsController < ApplicationController
 		@perks = Perk.where("project_id = ?", @project.id)
     @user = User.find(@project.user_id)
     session[:current_project] = @project.id
+    render :layout => 'landing'
 	end
 
 	# def update
@@ -86,8 +87,13 @@ class ProjectsController < ApplicationController
 
   def save_image
     @project = Project.find_by_id(session[:current_project])
-	  @project.large_image = params[:large_image]
-	  @project.seed_image = params[:seed_image]
+    if params[:large_image]
+	    @project.large_image = params[:large_image]
+    elsif params[:seed_image]
+	    @project.seed_image = params[:seed_image]
+    elsif params[:cultivation_image]
+      @project.cultivation_image = params[:cultivation_image]
+    end
   
     if @project.save
       render :nothing => true
