@@ -444,16 +444,11 @@
                 %h2{:style => "text-align:center;color:#b6b6b4;font-family:'Proxima Nova Semi';margin-top:0;"}= number_to_currency(@project.goal, :precision => 0)
 
             .span9.details
-              %input{:type => 'filepicker', :name => 'planting_seed_image', 'data-fp-button-text' => '', 'data-fp-apikey' => ENV['FILEPICKER_API'], 'data-fp-button-class' => 'planting-seed-image', 'onchange' => 'updatePlantingSeedImage(event)'}
+              - if @project.cultivation_image
+                = image_tag "#{@project.cultivation_image}"
+              - else
+                %input{:type => 'filepicker', :name => 'cultivation_image', 'data-fp-button-text' => '', 'data-fp-apikey' => ENV['FILEPICKER_API'], 'data-fp-button-class' => 'cultivation-image', 'onchange' => 'updateCultivationImage(event)'}
               %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.story
-        -#%hr
-        -#.comments
-          -#%h4.comment Post a message
-          -#%p
-            -#Tell #{@project.title} you support their campaign! Got questions or need more information? Post them here and get an answer!
-
-        -#.fb-comments{'data-href' => "http://127.0.0.1:8080", :style => "width:100%"}
-
 
       .span4.sidebar
         %h4 BECOME A SPONSOR
@@ -493,7 +488,9 @@
         %h4.title{:style => 'margin-top:50px;'}
           Seeders (0)
           %span (Project Funders)
-
+					
+%script{:src => "http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"}
+%script{:src => "http://maps.stamen.com/js/tile.stamen.js?v1.2.1"}
 :javascript
   var getHash = function() {
     if(window.location.hash) {
@@ -534,7 +531,7 @@
   }
 
   $(function(){
-		
+    var map = L.map('map').setView([51.505, -0.09], 13);
     getHash();
     $(window).on('hashchange', function() {
       getHash();

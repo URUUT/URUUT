@@ -57,7 +57,8 @@ Crowdfund::Application.routes.draw do
   
   resources :s3_uploads
   resources :projects
-  resources :donations
+  resources :donations do
+    get "thank_you", :on => :collections
   resources :projects do 
     get "add_desc", :on => :collection
    # get "save_image", :on => :collection

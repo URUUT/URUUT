@@ -6,7 +6,7 @@
     %title= content_for?(:title) ? yield(:title) : "Myapp"
     %meta{:content => "", :name => "description"}
     %meta{:content => "", :name => "author"}
-    = stylesheet_link_tag    "default/application", "trontastic/jquery-ui-1.8.22.custom.css", :media => "all"
+    = stylesheet_link_tag  "default/application", "trontastic/jquery-ui-1.8.22.custom.css", "http://cdn.leafletjs.com/leaflet-0.5/leaflet.css", :media => "all"
     = javascript_include_tag "application"
     = filepicker_js_include_tag
     = javascript_tag do
@@ -91,10 +91,24 @@
     }).done(function(){
       console.log("finished");
       $('.planting-seed-image').remove();
-      $('#planting_seeds').append('<div class="seed-image"><img src="' + plantingSeedImage + '"</div>');
-      $('.seed-image').css({
-        height: '100%'
-      });
+      $('#planting_seeds').prepend('<div class="seed-image"><img src="' + plantingSeedImage + '"</div>');
+    });
+  }
+	
+  var updateCultivationImage = function(event) {
+    console.log(event.fpfile.url);
+    var cultivationImage = event.fpfile.url;
+
+    $.ajax({
+      url: '/projects/save_image',
+      method: 'PUT',
+      data: {
+        cultivation_image: cultivationImage
+        }
+    }).done(function(){
+      console.log("finished");
+      $('.cultivation-image').remove();
+      $('#cultivation .details').prepend('<div class="cultivation-image"><img src="' + cultivationImage + '"</div>');
     });
   }
 

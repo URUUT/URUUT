@@ -977,6 +977,16 @@ div[id^='step'] {
 	width:100%;
 }
 
+.cultivation-image {
+	background:url(image-path('click-add-photo.png')) top center no-repeat;
+	border: none;
+	display:inline-block;
+	height:300px;
+	padding: 0;
+	text-indent: -9999px;
+	width:100%;
+}
+
 .show-content {
   margin-top:495px;}
 
@@ -1040,6 +1050,10 @@ div[id^='step'] {
       padding:10px;
       text-shadow:none;
       text-transform:uppercase;}}}
+			
+.projects.show {
+	.show-content {
+		margin-top: 585px;}}
 
 .projects.edit {
 	#large_image {
@@ -2104,6 +2118,8 @@ form[id*=project] {
 				letter-spacing:normal;
 				margin:0;
 				text-transform:none;}}}
+	h3.title {
+		border-bottom:6px solid #70bf4c;}
 	form {
 		.name {
 			width:100%;

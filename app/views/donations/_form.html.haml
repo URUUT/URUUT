@@ -17,10 +17,10 @@
   - else
     .field
       / = label_tag :amount, "Amount to Donate"
-      = hidden_field_tag :amount, nil, name: "donation[amount]"
+      = hidden_field_tag :amount, @perk_amount, name: "donation[amount]"
     .field.name
       = label_tag "NAME AS IT APPEARS ON CARD*"
-      = text_field_tag nil, nil, name: nil
+      = text_field_tag nil, current_user.name, name: nil
     .field.card-number
       = label_tag :card_number, "Credit Card Number"
       = text_field_tag :card_number, nil, name: nil
@@ -39,7 +39,10 @@
 
   .actions
     %hr
-    %p Note: Your card will not be charged when you make your investment! You will only be charged if this campaign reaches its funding goal. All transactions are processed through a secure third-party payment processor.
+    %p{:style => "font:normal 12px/18px 'Proxima Nova';color:#b6b6b4"} 
+      %span{:style => "Proxima Nova Bold"}
+        Note: 
+      Your card will not be charged when you make your investment! You will only be charged if this campaign reaches its funding goal. All transactions are processed through a secure third-party payment processor.
     = button_tag :type => 'submit', :id => "donate", :class => "btn" do
       Contribute
       %span
