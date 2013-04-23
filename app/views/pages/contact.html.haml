@@ -1,7 +1,11 @@
 .span8
   %h2 CONTACT US
   %p We want to hear from you! Send us anything and we'll get back to you ASAP.
-
+  
+  - if flash[:notice]
+    .flash
+      %h3= flash[:notice]
+  
   %hr
 
   = form_for :pages, :url => {:action => "contact_send"} do |f|

@@ -2261,6 +2261,17 @@ form[id*=project] {
 				margin-left:3px;
 				vertical-align:-1px;
 				width:13px;}}}}
+				
+.pages.contact {
+	.flash {
+		background:url(image-path('step-border-background.png')) top left repeat;
+		color:#fff;
+		padding:20px;
+		%h3 {
+			color:#fff !important;
+			font-family:"Proxima Nova";
+			line-height:100;
+			margin:0;}}}
 
 .admin {
 	table {

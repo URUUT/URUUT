@@ -1,12 +1,12 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  # before_filter :set_previous_page
+  #before_filter :set_previous_page
 
   layout :layout_by_resource
 
   def after_sign_in_path_for(resource)
-    # logger.debug "#{session[:previous_page]}"
-    return root_url
+    logger.debug(request.referrer)
+    return request.referrer
   end
 
   protected
@@ -20,9 +20,8 @@ class ApplicationController < ActionController::Base
   end
 
   def set_previous_page
-    session[:previous_page] = request.referrer
+    session[:previous_page] = request.fullpath
     logger.debug "#{session[:previous_page]}"
   end
-
 
 end
