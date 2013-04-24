@@ -46,8 +46,7 @@ group :development, :test do
 end
 
 group :staging do
-  gem 'pg'
-  gem 'taps'
+  gem 'mysql2', '~> 0.3.11'
   gem 'erb2haml'
   gem 'rb-fsevent', '~> 0.9.1'
   gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git'
