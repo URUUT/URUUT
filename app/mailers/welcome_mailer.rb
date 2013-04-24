@@ -11,7 +11,6 @@ class WelcomeMailer < ActionMailer::Base
 
     @name = user.name
     @email = user.email
-    @project_title = project.title
 
     mail to: @email, subject: "Welcome To URUUT"
   end
