@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     logger.debug(request.referrer)
-    return request.referrer
+    return root_url
   end
 
   protected
