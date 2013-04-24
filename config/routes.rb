@@ -1,4 +1,5 @@
 Crowdfund::Application.routes.draw do
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   get "contacts/new"
 
@@ -13,8 +14,6 @@ Crowdfund::Application.routes.draw do
   # get "services/create"
   # 
   # get "services/destroy"
-
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   get "image/new"
 
