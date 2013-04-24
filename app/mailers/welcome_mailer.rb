@@ -11,7 +11,8 @@ class WelcomeMailer < ActionMailer::Base
 
     @name = user.name
     @email = user.email
-
-    mail to: @email, subject: "Welcome To URUUT"
+    unless @email.empty?
+      mail to: @email, subject: "Welcome To URUUT"
+    end
   end
 end
