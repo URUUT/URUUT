@@ -6,8 +6,7 @@ class WelcomeMailer < ActionMailer::Base
   #
   #   en.contact_mailer.contact_confirmation.subject
   #
-  def welcome_confirmation(project)
-    user = User.find_by_id(project.user_id)
+  def welcome_confirmation(user)
     logger.debug(user)
 
     @name = user.name
