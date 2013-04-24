@@ -12,6 +12,16 @@ development:
   pool: 5
   timeout: 5000
   port: 3306
+	
+staging:
+  adapter: mysql2
+  database: uruutdb
+  username: uruutdb
+  password: Porous2010!
+  host: uruutdb.db.4830064.hostedresource.com
+  pool: 5
+  timeout: 5000
+  port: 3306
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
