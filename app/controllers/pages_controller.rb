@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
-
+  skip_before_filter :set_previous_page
+  
   def index
   	@projects = Project.where("live = 1 AND ready_for_approval = 0")
     logger.debug(@projects)
