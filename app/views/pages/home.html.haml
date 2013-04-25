@@ -24,8 +24,8 @@
 %section.full-width.partner
 	.container
 		.marketing.float-left
-			%h3 WHAT IS URUUT PARTNER-FUNDING?
-			%h2 Funding projects by not only individual contributors, but business and corporate sponsors as well as corporate & family foundations.
+			%h3 A NEW KIND OF CROWDFUNDING PLATFORM.
+			%h2 Unlike others, Uruut is the only one specifically designed to make your contributions go further—much further—by also capturing business and foundation funding and putting it all to work right where you live.
 		.pie-chart.float-right
 			= image_tag "pie-chart.png"
 			
@@ -38,7 +38,7 @@
 			= image_tag "suitcase.png"
 			.content
 				%h5 Business Sponsors
-				%p URUUT offers businesses the opportunity to sponsor projects thereby associating their brand with high-impact projects in their community and on a regional and national level.
+				%p Uruut offers you the opportunity to sponsor projects that associate your brand with high-impact local, regional and national projects.
 				.btn
 					learn more
 					%span
@@ -46,62 +46,62 @@
 			= image_tag "individual.png"
 			.content
 				%h5 Individual CONTRIBUTORS
-				%p URUUT offers individuals the opportunity to monetarily support projects that are most important to them. In exchange for contributions individuals can receive perks.
+				%p Uruut offers you the opportunity to support projects you value, offering perks in exchange for contributions.
 				.btn
 					learn more
 					%span
 		.graphic-3
 			= image_tag "family.png"
 			.content
-				%h5 CORPORATE & FAMILY Foundations
-				%p URUUT provides a simple to use platform for corporate & family foundations to screen, search and provide matching grant dollars to projects and causes relevant to the mission of their foundations.
+				%h5 NON-PROFIT Foundations
+				%p For corporate and family foundations, Uruut offers you an easy, functional platform to screen, search and provide matching grant dollars to projects and causes relevant to your mission.
 				.btn
 					learn more
 					%span
 					
 %section.full-width.transparency
 	.container
+		%h3 ACCOUNTABILITY & TRANSPARENCY
+		%h2 Other crowdfunding platforms essentially say, “OK, the project is funded. Our job is done.”
 		.float-left
 			= image_tag "laptop.jpg"
 		.marketing.float-left 
-			%h3 ANOTHER BIG DIFFERENCE
-			%h2 Accountability & Transparency.
-			%p Other crowdfunding platforms don't think its important to show how funds are spent once a project funds. URUUT doesn't only think its important, we view it as an absolute necessity. As such we've built a robust transparency & accountability platform providing insight into post-funding budget and project status.
-			%a.btn
-				Learn More
-				%span	
+			%p This is a foreign sentiment to us. While others disengage after a project has been funded, for Uruut getting a project funded is just the beginning. We regard accountability and transparency as an absolute necessity, because you should know exactly how your resources are being spent, and that promises are being kept. So we’ve built a robust application to provide insight into post-funding budget and project status.
 				
 %section.full-width.who-should-use
 	.container
-		%h3 WHO SHOULD USE URUUT’S PARTNER-FUNDING?
-		%h2 Anyone who needs money and wants a better chance at raising it.
-		%p With three different sources for funding, projects have a much greater chance of reaching their funding goal.
+		%h3 WHO IS URUUT FOR?
+		%h2 Anyone who wants to raise their odds of fundraising success.
+		%p While URUUT is open to many types of projects, we specialize in working with the following:
 		.graphic-1
 			= image_tag "municipalities.png"
 			.content
 				%h5 Municipalities
-				%p - Public Private Partnerships
-				%p - Under / No Funded Projects
+				%p Cities and local jurisdictions looking to form public/private partnerships and need funding for underfunded or zero funded projects and programs.
 
 		.graphic-2
 			= image_tag "member-organizations.png"
 			.content
 				%h5 Member Organizations
-				%p - Chambers of Commerce
-				%p - PTAs, HOAs, COAs
-				%p - Other Civic Organizations
+				%p Chambers of Commerce, local leadership organizations, PTAs, and others who need a helping hand with community oriented initiatives.
 
 		.graphic-3
 			= image_tag "non-profits.png"
 			.content
-				%h5 Non-Profits
-				%p Non-profits who require a larger reach and greater transparency.
+				%h5 CIVIC ORGANIZATIONS
+				%p Community focused civic organizations who are looking to expand their reach and are seeking greater transparency.
 
 %section.full-width.make-it-happen
 	.container
-		%h2 URUUT Partner-Funding. Make it happen.
-		.btn 
-			Sign Up Now
+		%h2 
+			Connect. Cooperate. 
+			%span{:style => "color:#70bf4c;"} Take Action
+		= link_to new_project_path, :class => "btn brown" do 
+			Get Funded
+			%span
+			
+		= link_to home_pages_path, :class => "btn" do 
+			Fund Projects
 			%span
 			
 :javascript

@@ -269,7 +269,9 @@
     .cf
       .span3.left{:style => "text-align:left;color:#464646;"}
         %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0;"} Cost
-        %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0"}= number_to_currency(@project.goal.gsub(/,/, '').to_i * 0.70, :precision => 0)
+        %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0"}
+          - if @project.goal
+            = number_to_currency(@project.goal.gsub(/,/, '').to_i * 0.70, :precision => 0)
         %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (70% of funding goal)
       .span9.left{:style => "text-align:left;color:#464646;"}
         %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"} 
@@ -302,7 +304,9 @@
     .cf
       .span3.left{:style => "text-align:left;color:#464646;"}
         %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0;"} Cost
-        %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0"}= number_to_currency((@project.goal.to_i * 0.15).ceil, :precision => 0)
+        %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0"}
+          -if @project.goal
+            = number_to_currency(@project.goal.gsub(/,/, '').to_i * 0.15, :precision => 0)
         %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (15% of funding goal)
       .span9.left{:style => "text-align:left;color:#464646;"}
         %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"} 
@@ -331,7 +335,9 @@
     .cf
       .span3.left{:style => "text-align:left;color:#464646;"}
         %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0;"} Cost
-        %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0"}= number_to_currency((@project.goal.to_i * 0.05).ceil, :precision => 0)
+        %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0"}
+          -if @project.goal
+            = number_to_currency(@project.goal.gsub(/,/, '').to_i * 0.05, :precision => 0)
         %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (5% of funding goal)
       .span9.left{:style => "text-align:left;color:#464646;"}
         %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"} 
