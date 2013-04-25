@@ -2240,11 +2240,45 @@ form[id*=project] {
 						width:13px;}}}}}
 	.need-to-know {
 		background:#eee;
-		padding:60px 0;}
+		padding:60px 0 30px;
+		.container {
+			h2 {
+				font-family:"Proxima Nova";
+				letter-spacing:normal;
+				margin:0;
+				text-align:center;
+				text-transform:none;}
+			h3 {
+				color:#70bf4c;
+				font-family:"Proxima Nova Semi";
+				line-height:100%;
+				margin:0;
+				text-align:center;}
+			h5 {
+				color:#70bf4c;
+				font-family:"Proxima Nova Semi";
+				line-height:100%;
+				margin:30px 0 10px;}
+			div {
+				-webkit-box-sizing:border-box;
+				-moz-box-sizing:border-box;
+		    box-sizing:border-box;
+				float:left;
+				padding:30px;
+				text-align:center;
+				width:33%;
+				p {
+					font:normal 14px/24px "Proxima Nova";}}}}
+				
 	.create-project {
 		padding:53px;
+		text-align:center;
 		h2 {
-			display:inline-block;}
+			display:inline-block;
+			font-family:"Proxima Nova";
+			letter-spacing:normal;
+			margin-right:20px;
+			text-transform:none;}
 		.btn {
 			background:#70bf4c;
 			border-radius:4px;
