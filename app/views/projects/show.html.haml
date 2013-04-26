@@ -33,14 +33,13 @@
             %br
             Goal
           .amount= number_to_currency(@project.goal, :precision => 0)
-				
-          .days-left        
+
+          .days-left
             %span.small
               Days
               %br
               Left
             .amount= @project.duration
-        
 
 .container
   .row-fluid.show-content
@@ -114,7 +113,7 @@
       .well
         %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;font-family:'Proxima Nova';"} PROJECT SPONSORSHIP
         %p{:style => "font:normal 12px/18px 'Proxima Nova', arial, sans-serif;color:#403e37;margin-bottom:40px;"} We can’t do this alone. Do your part, by becoming a project sponsor. URUUT Partner-Funding depends on individual contributors as well as project sponsorship from businesses and corporate and family foundations. Click the button below to get more details and become a project sponsor.
-        = link_to "#", :class => 'btn', :style => 'margin-top:10px;' do
+        = link_to new_project_sponsor_path(@project.id), :class => 'btn', :style => 'margin-top:10px;' do
           Become A Sponsor
           %span
 
@@ -169,12 +168,12 @@
         var map = L.map('map', {
           scrollWheelZoom: false
         }).setView([latitude,longitude], 11);
-       
+
         var uruutIcon = L.icon({
           iconUrl: '#{image_path("map-icon.png")}',
           iconSize:     [36, 52]
-        });			 
-			 
+        });
+
         L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {
           attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
         }).addTo(map);

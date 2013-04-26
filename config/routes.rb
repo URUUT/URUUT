@@ -10,9 +10,9 @@ Crowdfund::Application.routes.draw do
    # match '/auth/:provider/callback', to: 'services#create'
 
   # get "services/index"
-  # 
+  #
   # get "services/create"
-  # 
+  #
   # get "services/destroy"
 
   get "image/new"
@@ -27,7 +27,7 @@ Crowdfund::Application.routes.draw do
   # get "pages/contact"
   # get "pages/how_it_works"
   # get "pages/terms"
-  # get "pages/about"  
+  # get "pages/about"
   # get "pages/home"
   # get "pages/faqs"
   # get "pages/thank_you"
@@ -35,7 +35,7 @@ Crowdfund::Application.routes.draw do
   # get "projects/add_desc"
    get "projects/save_image"
    post "projects/save_image"
-#   
+#
 #   post "projects/add_perk"
 #   post "projects/get_perk"
 #   post "projects/update_perk"
@@ -45,7 +45,7 @@ Crowdfund::Application.routes.draw do
    get "projects/stripe_update"
 
   post "#{Rails.root}/public/images/"
-  
+
    get "admin/unapproved"
    post "admin/approve"
 
@@ -53,13 +53,13 @@ Crowdfund::Application.routes.draw do
   #  get 'unapproved', :on => :collection
   #  post 'admin/approve', :on => :collection
   end
-  
+
   resources :s3_uploads
   resources :projects
   resources :donations do
     get "thank_you", :on => :collection
   end
-  resources :projects do 
+  resources :projects do
     get "add_desc", :on => :collection
    # get "save_image", :on => :collection
    # get "stripe_update", :on => :collection
@@ -69,15 +69,16 @@ Crowdfund::Application.routes.draw do
     post "update_perk", :on => :collection
     post "delete_perk", :on => :collection
    # post "submit_project", :on => :collection
+    resources :sponsors
   end
-  
+
   resources :project_steps
   resources :services do
     get "index", :on => :collection
     get "create", :on => :collection
     get "destroy", :on => :collection
   end
-  
+
   resources :pages do
     get "discover", :on => :collection
     get "categories", :on => :collection

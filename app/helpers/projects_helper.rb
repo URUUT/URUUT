@@ -3,7 +3,7 @@ module ProjectsHelper
 	def time_left(endDate, startDate)
     endDate = Date.parse(startDate) + endDate.to_i.days
     finalDate = endDate - Date.today
-    return finalDate.to_i    
+    return finalDate.to_i
 	end
 
 	def vidUrl(oldUrl)
