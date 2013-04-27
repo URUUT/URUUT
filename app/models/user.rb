@@ -24,6 +24,7 @@ class User < ActiveRecord::Base
 
   has_many :services, :dependent => :destroy
   has_many :projects, :dependent => :destroy
+  has_many :donations
 
   def self.create_with_omniauth(info)
     create(name: info['name'])
@@ -90,6 +91,14 @@ class User < ActiveRecord::Base
 
   def password_required?
     super && provider.blank?
+  end
+
+  def projects_funded
+    Project.joins(:donations).where("donations.user_id = ?", 12).uniq
+  end
+
+  def amount_funded
+    donations.sum(:amount)
   end
 
   private
