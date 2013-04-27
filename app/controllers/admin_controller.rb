@@ -1,12 +1,12 @@
 class AdminController < ApplicationController
   http_basic_authenticate_with :name => "frodo", :password => "thering"
   layout :layout_by_resource
-  
+
   def unapproved
     @unapproved_projects = Project.where(:ready_for_approval => 1)
     logger.debug(@unapproved_projects)
   end
-  
+
   def approve
     data = params['approved']
     id = params['id']

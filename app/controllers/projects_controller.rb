@@ -94,7 +94,7 @@ class ProjectsController < ApplicationController
     elsif params[:cultivation_image]
       @project.cultivation_image = params[:cultivation_image]
     end
-  
+
     if @project.save
       render :nothing => true
     end

@@ -49,4 +49,5 @@ end
 gem 'jquery-rails'
 gem 'unicorn'
 gem 'capistrano'
+gem 'carrierwave'
 #gem 'whenever', require: false
