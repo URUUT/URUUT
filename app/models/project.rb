@@ -9,12 +9,14 @@ class Project < ActiveRecord::Base
   #validates :title, :short_description, :description, :presence => true, :if => :active?
   #validates :image, :address, :city, :state, :zip, :neighborhood, :duration, :goal, :presence => true, :if => :active_or_step1?
 
-  has_many :donations, :dependent => :destroy
+  has_many :donations, dependent: :destroy
   has_many :perks
   has_many :galleries
+  has_many :project_sponsors
+  has_many :sponsorship_levels
 
-  accepts_nested_attributes_for :perks, :allow_destroy => true
-  accepts_nested_attributes_for :galleries, :allow_destroy => true
+  accepts_nested_attributes_for :perks, allow_destroy: true
+  accepts_nested_attributes_for :galleries, allow_destroy: true
 
   has_attached_file :image
     #:styles => {
@@ -32,13 +34,13 @@ class Project < ActiveRecord::Base
 
     end
   end
-  
+
   def printTest
     logger.debug("Test Crap")
   end
-  
+
   def self.send_confirmation_email(project)
     ProjectMailer.project_confirmation(project).deliver
   end
-  
+
 end

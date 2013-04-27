@@ -1,6 +1,6 @@
 class AuthenticationsController < ApplicationController
   before_filter :set_previous_page
-  
+
   def index
   end
 
