@@ -9,9 +9,6 @@ class UsersController < ApplicationController
     @projects_funded = @user.projects_funded.live.page(params[:page]).per(2)
   end
 
-  def edit
-  end
-
   def profile
     # @projects = Project.where("user_id = ?", current_user.id).page(params[:page]).per(2)
     @projects_created = current_user.projects.page(params[:page]).per(2)
