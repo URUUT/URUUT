@@ -1,7 +1,7 @@
 class DonationsController < ApplicationController
 	before_filter :authenticate_user!
   layout "landing"
-  
+
 	def new
     logger.debug(session[:current_project])
 		@donation = Donation.new
