@@ -1,7 +1,8 @@
 .full-width.banner
   .container
     .span4
-      = image_tag(get_gravatar(@user.email, 100), :style => "float:left;margin-right:20px;")
+      = image_tag(@user.avatar_url, :class => "img-circle")
+      / = image_tag(get_gravatar(@user.email, 100), :style => "float:left;margin-right:20px;")
 
       %h4.user-name= @user.name
       - if @is_current

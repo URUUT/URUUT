@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :last_name, :email, :password, :password_confirmation, :remember_me, :city, :state, :zip,
-                  :neighborhood, :provider, :uid, :token, :organization, :mission, :subscribed
+                  :neighborhood, :provider, :uid, :token, :organization, :mission, :subscribed, :avatar
   # attr_accessible :title, :body
 
   validates_presence_of :name
@@ -26,6 +26,8 @@ class User < ActiveRecord::Base
   has_many :services, :dependent => :destroy
   has_many :projects, :dependent => :destroy
   has_many :donations
+
+  mount_uploader :avatar, AvatarUploader
 
   def self.create_with_omniauth(info)
     create(name: info['name'])

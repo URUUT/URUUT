@@ -19,8 +19,9 @@
   - if user_signed_in?
     %li.signed-in
       %a
-        - if get_gravatar(current_user.email, 26)
-          = image_tag(get_gravatar(current_user.email, 26), :class => "img-circle")
+        / - if get_gravatar(current_user.email, 26)
+        /  = image_tag(get_gravatar(current_user.email, 26), :class => "img-circle")
+        = image_tag(current_user.avatar_url(:thumb), :class => "img-circle")
         = current_user.name
         = image_tag 'down-arrow.png', :class => "down"
       %div.dropdown
