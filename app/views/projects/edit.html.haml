@@ -573,6 +573,7 @@
         console.log(data);
         window.location.href = '/projects/' + data + '/edit#project-details';
         window.location.reload(true);
+        localStorage.clear();
       })
      }else{
        alert("Connect with Stripe, please.");
@@ -708,5 +709,48 @@
         }
       })
     })
+		
+    $('.stripe-connect').click(function() {
+      localStorage.setItem('organization', $('#project_organization').val());
+      localStorage.setItem('address', $('#project_address').val());
+      localStorage.setItem('city', $('#project_city').val());
+      localStorage.setItem('state', $('#project_state').val());
+      localStorage.setItem('zip', $('#project_zip').val());
+      localStorage.setItem('website', $('#project_website').val());
+      localStorage.setItem('twitter_handle', $('#project_twitter_handle').val());
+      localStorage.setItem('facebook_page', $('#project_facebook_page').val());
+    });
+		
+    if(localStorage.getItem('organization')) {
+      $('#project_organization').val(localStorage.getItem('organization'));
+    }
+		
+    if(localStorage.getItem('address')) {
+      $('#project_address').val(localStorage.getItem('address'));
+    }
+		
+    if(localStorage.getItem('city')) {
+      $('#project_city').val(localStorage.getItem('city'));
+    }
+		
+    if(localStorage.getItem('state')) {
+      $('#project_state').val(localStorage.getItem('state'));
+    }
+		
+    if(localStorage.getItem('zip')) {
+      $('#project_zip').val(localStorage.getItem('zip'));
+    }
+		
+    if(localStorage.getItem('website')) {
+      $('#project_website').val(localStorage.getItem('website'));
+    }
+		
+    if(localStorage.getItem('twitter_handle')) {
+      $('#project_twitter_handle').val(localStorage.getItem('twitter_handle'));
+    }
+		
+    if(localStorage.getItem('facebook_page')) {
+      $('#project_facebook_page').val(localStorage.getItem('facebook_page'));
+    }
 		
   })
