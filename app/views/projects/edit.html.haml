@@ -88,11 +88,11 @@
     %div.inline{:style => "margin-left:24px;"}
       = f.label :facebook_page, "Facebook Page"
       = f.text_field :facebook_page, :required => true, :size => 17
-		
+
     %div
       = link_to "https://connect.stripe.com/oauth/authorize?response_type=code&client_id=#{ENV['STRIPE_CLIENT_ID']}", :target => "_blank", :class => "stripe-connect" do
         %span Connect with Stripe
-				
+
       %input{:type => 'hidden', :value => "#{@connected}", :id => "connected", :required => true}
 
     %div
@@ -464,7 +464,7 @@
           = link_to "#", :class => 'btn', :style => 'margin-top:10px;' do
             Become A Sponsor
             %span
-						
+
         %h4.title{:style => 'margin-top:50px;'} Seeder Perks
         %ul.perks
           -if @perks
@@ -485,7 +485,7 @@
         .planter
           = image_tag(get_gravatar(current_user.email, 100), :style => "display:inline-block;margin-right:20px;width:100px;height:100px;")
           %h4{:style => "display:inline-block;color:#70bf4c;letter-spacing:2px;"}= @project.title
-					
+
         %h4.title{:style => 'margin-top:50px;'} Business Partners
         = link_to "#assets", :class => 'btn', :style => 'margin-top:10px;' do
           Become A Sponsor
@@ -494,7 +494,7 @@
         %h4.title{:style => 'margin-top:50px;'}
           Seeders (0)
           %span (Project Funders)
-					
+
 %script{:src => "http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"}
 %script{:src => "http://maps.stamen.com/js/tile.stamen.js?v1.2.1"}
 :javascript
@@ -554,7 +554,7 @@
         $(this).removeClass('active');
       }
     });
-	 
+
    $('.step-container').on('form', 'submit', function() {
      console.log("form submitted");
      return $(this).h5Validate();
