@@ -97,11 +97,18 @@ class User < ActiveRecord::Base
   end
 
   def projects_funded
-    Project.joins(:donations).where("donations.user_id = ?", 12).uniq
+    Project.joins(:donations).where("donations.user_id = ?", self.id).uniq
   end
 
   def amount_funded
     donations.sum(:amount)
+  end
+
+  def most_funded_city
+    project = Project.select("projects.city, SUM(donations.amount) as city_sum").joins(:donations).
+        where("donations.user_id = ?", self.id).group("projects.city").order("city_sum DESC").first
+    # Return an empty string if user has no donations
+    project.present? ? project.city : ""
   end
 
   private

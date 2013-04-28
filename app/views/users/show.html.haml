@@ -9,11 +9,15 @@
 
     .span2
       %h6 Projects Funded
-      %h3= @projects_funded.all.count
+      %h3= @user.projects_funded.all.count
 
     .span3
-      %h6 Total Amount Funded
-      %h3 $#{ @user.amount_funded }
+      - if @is_current
+        %h6 Total Amount Funded
+        %h3 $#{ @user.amount_funded }
+      - else
+        %h6 Most funded city
+        %h3= @user.most_funded_city
 
 .cf
 .span8{:style => "margin-top:125px;margin-left:-20px;"}
