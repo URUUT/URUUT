@@ -139,7 +139,8 @@ input[type=password] {
 	font:bold 24px/24px arial, helvetica, sans-serif;
 	height:54px;
 	padding:19px;
-	width:auto !important;}
+	width:auto !important;
+}
 
 input[type=submit] {
   background:#689d00;
@@ -1420,13 +1421,52 @@ ul.perks {
   letter-spacing:1px;
   margin-bottom:5px;}
 
-.edit {
-  color:#fff;
-  font:normal 11px/11px "Proxima Nova Semi", arial, sans-serif;
-  letter-spacing:1px;
-  &:hover {
-    color:#fff;
-    text-decoration:underline;}}
+//.edit {
+//  color:#fff;
+//  font:normal 11px/11px "Proxima Nova Semi", arial, sans-serif;
+//  letter-spacing:1px;
+//  &:hover {
+//    color:#fff;
+//    text-decoration:underline;}}
+
+form.registration-edit {
+  label {
+    color:#70bf4c;
+  }
+  input {
+    margin-bottom:20px !important;
+  }
+  #user_avatar {
+    display:none;
+  }
+  .note {
+    color: #aaa;
+    font-size:12px;
+    font-family:"Proxima Nova Semi", arial, sans-serif;;
+  }
+  input[type=text],
+  input[type=email],
+  input[type=password] {
+    width: 100% !important;
+  }
+  textarea {
+    width:100%;
+  }
+  button {
+    background:#70bf4c;
+    border-radius:5px;
+    display:block;
+    font: 18px/18px "Proxima Nova Semi", arial, sans-serif;
+    letter-spacing:3px;
+    margin-bottom:3px;
+    padding:15px 24px;
+    text-shadow:none;
+    text-transform:uppercase;
+    &:hover {
+      background:#70bf4c;
+    }
+  }
+}
 
 .user-name {
   font:normal 18px/18px "Proxima Nova Semi", arial, sans-serif;
