@@ -57,10 +57,12 @@
 
       %p Remember to keep in mind the cost of a campaign and perks fulfillment. We suggest you add 10% to the amount you need to raise. This will cover URUUT’s 5% fee, our payment providers 3% fee and any potential extras.
 
-    %p.title{:style => "margin-bottom:5px;float:left;"} #{who(:whose)} information
-    %p{:style => "text-align:right"}
-      %i.icon-eye-close
-      = link_to "edit", edit_user_registration_path, :class => "green"
+    %div{:style => "margin-top:-20px;margin-bottom:5px;float:left;"}
+      %h3.title #{who(:whose)} information
+    %div{:style => "text-align:right;"}
+      %p
+        %i.icon-eye-close
+        = link_to "edit", edit_user_registration_path, :class => "green"
     .well.info
       %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Profile image
       %p= image_tag(@user.avatar_url)
