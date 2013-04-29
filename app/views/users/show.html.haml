@@ -1,103 +1,105 @@
 .full-width.banner
   .container
     .span4
-      = image_tag(@user.avatar_url, :class => "img-circle", :style => "float:left;margin-right:20px;")
+      = image_tag(@user.avatar_url, :class => "img-circle avatar")
 
       %h4.user-name= @user.name
       - if @is_current
         = link_to "not you? click here to logout", destroy_user_session_path
 
-    .span2
+    .span2.vertical-center
       %h6 Projects Funded
       %h3= @user.projects_funded.all.count
 
-    .span3
+    .span6.vertical-center
       - if @is_current
         %h6 Total Amount Funded
-        %h3 $#{ @user.amount_funded }
+        %h3= number_to_currency(@user.amount_funded, :precision => 0)
       - else
         %h6 Most funded city
         %h3= @user.most_funded_city
 
 .cf
-.span8{:style => "margin-top:125px;margin-left:-20px;"}
-  %h3
-    - if @is_current
-      Projects I've Created
-    - else
-      Their projects
+.row{:style => "margin-top:160px;margin-left:-20px;"}
+  .span8
+    %h3
+      - if @is_current
+        Projects I've Created
+      - else
+        Their projects
 
-  = render "project", :projects => @projects_created
-  .cf
-  = paginate @projects_created
-
-  - if @is_current
-    %h3 Projects I've Funded
-    = render "project", :projects => @projects_funded
+    = render "project", :projects => @projects_created
     .cf
-    = paginate @projects_funded
-
-.span4{:style => "margin-top:125px;"}
-  %h3.title{:style => "margin-bottom:5px;"} #{who(:whose)} badges
-  .well.info
-    %p How much do you want to raise on URUUT?
-
-    %p Remember to keep in mind the cost of a campaign and perks fulfillment. We suggest you add 10% to the amount you need to raise. This will cover URUUT’s 5% fee, our payment providers 3% fee and any potential extras.
-
-  %h3.title{:style => "margin-bottom:5px;"} #{who(:whose)} information
-  .well.info
-    %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Profile image
-    %p= image_tag(@user.avatar_url)
-
-    %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Name
-    %p= @user.name
+    = paginate @projects_created
 
     - if @is_current
-      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Email address
-      %p= @user.email
+      %h3 Projects I've Funded
+      = render "project", :projects => @projects_funded
+      .cf
+      = paginate @projects_funded
 
-      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Business or organization name
-      %p= @user.organization
+  .span4
+    %h3.title{:style => "margin-bottom:5px;"} #{who(:whose)} badges
+    .well.info
+      %p How much do you want to raise on URUUT?
 
-    %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Mission statement / about
-    %p= @user.mission
+      %p Remember to keep in mind the cost of a campaign and perks fulfillment. We suggest you add 10% to the amount you need to raise. This will cover URUUT’s 5% fee, our payment providers 3% fee and any potential extras.
 
-    - if @is_current
-      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Email preference
-      %p
-        = #{(@user.subscribed ? "" : "Not")}
-        Subscribed
+    %h3.title{:style => "margin-bottom:5px;"} #{who(:whose)} information
+    = link_to "edit", edit_user_registration_path
+    .well.info
+      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Profile image
+      %p= image_tag(@user.avatar_url)
+
+      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Name
+      %p= @user.name
+
+      - if @is_current
+        %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Email address
+        %p= @user.email
+
+        %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Business or organization name
+        %p= @user.organization
+
+      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Mission statement / about
+      %p= @user.mission
+
+      - if @is_current
+        %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Email preference
+        %p
+          = #{(@user.subscribed ? "" : "Not")}
+          Subscribed
 
 
-  %h3.title{:style => "margin-bottom:5px;"} SET UP GUIDE
-  .well.info
-    %h5{:style => "color:#70bf4c;margin-bottom:10px;"} FUNDING GOAL
-    %p How much do you want to raise on URUUT?
+    %h3.title{:style => "margin-bottom:5px;"} SET UP GUIDE
+    .well.info
+      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} FUNDING GOAL
+      %p How much do you want to raise on URUUT?
 
-    %p Remember to keep in mind the cost of a campaign and perks fulfillment. We suggest you add 10% to the amount you need to raise. This will cover URUUT’s 5% fee, our payment providers 3% fee and any potential extras.
+      %p Remember to keep in mind the cost of a campaign and perks fulfillment. We suggest you add 10% to the amount you need to raise. This will cover URUUT’s 5% fee, our payment providers 3% fee and any potential extras.
 
-    %p Also, URUUT is an all-or-nothing funding platform. That means you have to hit the goal you set in order to get any of the funding you raise. Try to choose something attainable based on your personal and social networks.
+      %p Also, URUUT is an all-or-nothing funding platform. That means you have to hit the goal you set in order to get any of the funding you raise. Try to choose something attainable based on your personal and social networks.
 
-    %p Take the amount you want to raise and divide it by 100. Or 50. Do you think you’ll be able to reach that many people in your personal and professional networks to get to your goal?
+      %p Take the amount you want to raise and divide it by 100. Or 50. Do you think you’ll be able to reach that many people in your personal and professional networks to get to your goal?
 
-    %h5{:style => "color:#70bf4c;margin-bottom:10px;"} CAMPAIGN HEADLINE
-    %p A short and sweet summary of your project. This is the text that will appear on the browse page and should be a brief description of who you are and why you're here. Try to avoid using words like "help" and "need".
-    %p.bold Examples include:
-    %ul
-      %li Build a shady nook to sip your coffee when you fund our project.
-      %li Homemade, ready-to-serve dipping sauces. From Brooklyn with love.
-      %li We're launching a new fall collection: sourced locally and creating jobs in New York.
+      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} CAMPAIGN HEADLINE
+      %p A short and sweet summary of your project. This is the text that will appear on the browse page and should be a brief description of who you are and why you're here. Try to avoid using words like "help" and "need".
+      %p.bold Examples include:
+      %ul
+        %li Build a shady nook to sip your coffee when you fund our project.
+        %li Homemade, ready-to-serve dipping sauces. From Brooklyn with love.
+        %li We're launching a new fall collection: sourced locally and creating jobs in New York.
 
-    %h5{:style => "color:#70bf4c;margin-bottom:10px;"} YOUR STORY
-    %p Tell the world why they should invest in you. Include some background information about you and your business partners (if any), how long you’ve been in business, why the neighborhood should invest in you and why you’re raising funds on URUUT.
+      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} YOUR STORY
+      %p Tell the world why they should invest in you. Include some background information about you and your business partners (if any), how long you’ve been in business, why the neighborhood should invest in you and why you’re raising funds on URUUT.
 
-    %p If you want to add any images to your story, you can do so at the final step.
+      %p If you want to add any images to your story, you can do so at the final step.
 
-    %h5{:style => "color:#70bf4c;margin-bottom:10px;"} TELL US ABOUT YOUR PROJECT
-    %p Give us a description of your project. What are you looking to raise funding for? Be specific! Your investors will care about how you use their money.
+      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} TELL US ABOUT YOUR PROJECT
+      %p Give us a description of your project. What are you looking to raise funding for? Be specific! Your investors will care about how you use their money.
 
-    %p Remember, URUUT is for specific business projects, like capital improvements or equipment, not a source of working capital to pay rent or make ends meet.
+      %p Remember, URUUT is for specific business projects, like capital improvements or equipment, not a source of working capital to pay rent or make ends meet.
 
-    %p It’s helpful to include some more specific descriptions of the rewards you’re offering too. Don’t feel like you need to put everything in right away -- you can go back and edit this before activating your campaign!
+      %p It’s helpful to include some more specific descriptions of the rewards you’re offering too. Don’t feel like you need to put everything in right away -- you can go back and edit this before activating your campaign!
 
-    %p If you want to add any images to your project description, you can do so at the final step.
+      %p If you want to add any images to your project description, you can do so at the final step.
