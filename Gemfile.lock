@@ -22,6 +22,17 @@ GEM
       rack-cache (~> 1.2)
       rack-test (~> 0.6.1)
       sprockets (~> 2.2.1)
+    active_utils (1.0.5)
+      activesupport (>= 2.3.11)
+      i18n
+    activemerchant (1.32.1)
+      active_utils (>= 1.0.2)
+      activesupport (>= 2.3.14)
+      builder (>= 2.0.0)
+      i18n
+      json (>= 1.5.1)
+      money
+      nokogiri
     activemodel (3.2.11)
       activesupport (= 3.2.11)
       builder (~> 3.0.0)
@@ -156,6 +167,10 @@ GEM
       rack-contrib
       railties
     mime-types (1.23)
+    mini_magick (3.5.0)
+      subexec (~> 0.2.1)
+    money (5.1.1)
+      i18n (~> 0.6.0)
     multi_json (1.7.2)
     multi_xml (0.5.3)
     multipart-post (1.2.0)
@@ -263,6 +278,7 @@ GEM
     stripe (1.8.1)
       multi_json (>= 1.0.4, < 2)
       rest-client (~> 1.4)
+    subexec (0.2.2)
     therubyracer (0.11.4)
       libv8 (~> 3.11.8.12)
       ref
@@ -292,6 +308,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activemerchant
   activerecord-postgresql-adapter
   aws-sdk
   better_errors
@@ -311,6 +328,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   meta_request
+  mini_magick
   mysql2 (~> 0.3.11)
   oauth2
   omniauth

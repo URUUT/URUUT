@@ -11,3 +11,12 @@
  *= require_self
  *= require_tree .
  */
+
+
+.normal-font {
+  font:normal 12px/18px 'Proxima Nova', arial, sans-serif;color:#403e37;margin-bottom:40px;
+}
+
+.green-font {
+  color: #70bf4c !important;
+}
