@@ -41,9 +41,14 @@
       %div
         = f.label :mission, "Mission statement / about"
         = f.text_area :mission, :rows => 4
-      %div
-        = f.label :subscribed
+      = f.label :subscribed, "Email subscriptions"
+      %div.switch{:style => "float:left;margin-right:10px;"}
         = f.check_box :subscribed
+        %label
+          %i
+      %div{:style => "margin-top:11px;"}
+        %h5 URUUT Newsletter
+
       %hr
       %button.btn.btn-primary{:type => "submit"}
         Sumbit changes
