@@ -27,7 +27,7 @@
           %h5 My Account
           %ul
             %li
-              = link_to 'Profile', users_profile_path
+              = link_to 'Profile', current_user
             %li
               = link_to 'Logout', destroy_user_session_path
   - else

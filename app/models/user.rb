@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
   validates_presence_of :name
+  validate :minimum_image_size
   # validates_uniqueness_of :name, :email, :case_sensitive => false
 
   has_many :services, :dependent => :destroy
@@ -115,5 +116,8 @@ class User < ActiveRecord::Base
 
   def send_welcome_email
     WelcomeMailer.welcome_confirmation(self).deliver
+  end
+
+  def minimum_image_size
   end
 end

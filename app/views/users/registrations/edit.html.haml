@@ -9,7 +9,7 @@
         = f.label :avatar, "Profile image "
         .row{:style => "margin-left:0px;margin-bottom:10px;"}
           .span2
-            = image_tag(resource.avatar_url)
+            = image_tag(f.object.avatar_url)
           .span4
             = f.file_field :avatar, class: "btn"
             #file
@@ -44,10 +44,6 @@
       %div
         = f.label :subscribed
         = f.check_box :subscribed
-      %div
-        = f.label :current_password
-        %i (we need your current password to confirm your changes)
-        = f.password_field :current_password
       %hr
       %button.btn.btn-primary{:type => "submit"}
         Sumbit changes
