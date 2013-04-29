@@ -5,8 +5,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @is_current = @user == current_user
 
-    @projects_created = @user.projects.live.page(params[:page]).per(2)
-    @projects_funded = @user.projects_funded.live.page(params[:page]).per(2)
+    @projects_created = @user.projects.live.page(params[:created_page]).per(2)
+    @projects_funded = @user.projects_funded.live.page(params[:funded_page]).per(2)
   end
 
   def profile

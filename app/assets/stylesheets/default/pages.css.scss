@@ -248,7 +248,7 @@ label {
 	background-size: cover;
   height:100%;
   padding:0;}
-	
+
 .pages {
 	.texture {
 		background: url(image-path('bg-tile.jpg')) top left repeat;
@@ -308,6 +308,58 @@ label {
 			}
 		}
 	}
+}
+
+.dropdown-list {
+  display:inline-block;
+  margin-right:20px;
+  margin-top:0px;
+  position:relative;
+  width:300px;
+  z-index:100;
+  label {
+    color:#b6b6b4;
+    //width:50px;
+    //float:left;
+    //margin-top:15px;
+    margin-right:25px;
+  }
+  &:last-child {
+    margin-right:0;
+  }
+  select {
+    width:100%;
+  }
+  .selectbox {
+    width:100% !important;
+    font-size: 20px;
+  }
+  .selectbox-wrapper {
+    background:transparent;
+    left:0;
+    padding:0;
+    top:75px;
+    width:100%;
+    ul {
+      box-sizing:border-box;
+      width:300px;
+      li {
+        box-sizing:border-box;
+        color:#555;
+        padding:10px;
+        width:100%;
+        font-size:20px;
+      }
+    }
+  }
+  #keyword {
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    color:#555;
+    font: bold 24px/24px arial, helvetica, sans-serif;
+    height: 44px;
+    width: 300px;
+  }
 }
 
 .info-left {
@@ -637,6 +689,12 @@ nav.navbar-inner {
   margin:0 20px 20px;
   overflow:hidden;
   position:relative;
+  h3 {
+    margin-top:0;
+    a {
+      color:#70bf4c;
+      line-height:100%;
+      margin:0;}}
   h4 {
     height:38px;
 		letter-spacing:1px;
@@ -1154,6 +1212,10 @@ div[id^='step'] {
   img {
     margin-top:-2px;}}
 
+img.avatar-thumb {
+  border:solid #fff 1px;
+}
+
 .banner {
   background:url(image-path('bg-tile.jpg'))top left repeat;
   left:0;
@@ -1184,10 +1246,6 @@ div[id^='step'] {
   .span4 {
     vertical-align: middle;
   }
-  a {
-    color:#70bf4c;
-    text-decoration:underline;
-  }
   h6 {
     color:#fff;
     font-size:8px;
@@ -1204,7 +1262,11 @@ div[id^='step'] {
     border-right:solid 1px black;
   }
 }
-
+a.green {
+  color:#70bf4c;
+  text-decoration:underline;
+  font-style:italic;
+}
 #search {
   display:block;
   margin:20px auto 10px;

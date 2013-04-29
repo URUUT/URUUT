@@ -5,7 +5,7 @@
 
       %h4.user-name= @user.name
       - if @is_current
-        = link_to "not you? click here to logout", destroy_user_session_path
+        = link_to "not you? click here to logout", destroy_user_session_path, :class => "green"
 
     .span2.vertical-center
       %h6 Projects Funded
@@ -27,16 +27,28 @@
         Projects I've Created
       - else
         Their projects
+    %div
+      .projects-created.dropdown-list
+        %label Project status:
+        %select{:id => "projects-created"}
+          %option Funding Active
+          %option Funding Completed
 
-    = render "project", :projects => @projects_created
+    = render "pages/project", :projects => @projects_created
     .cf
-    = paginate @projects_created
+    = paginate @projects_created, :param_name => "created_page"
 
     - if @is_current
       %h3 Projects I've Funded
+      %div
+        .projects-funded.dropdown-list
+          %label Project status:
+          %select{:id => "projects-funded"}
+            %option Funding Active
+            %option Funding Completed
       = render "project", :projects => @projects_funded
       .cf
-      = paginate @projects_funded
+      = paginate @projects_funded, :param_name => "funded_page"
 
   .span4
     %h3.title{:style => "margin-bottom:5px;"} #{who(:whose)} badges
@@ -45,8 +57,10 @@
 
       %p Remember to keep in mind the cost of a campaign and perks fulfillment. We suggest you add 10% to the amount you need to raise. This will cover URUUT’s 5% fee, our payment providers 3% fee and any potential extras.
 
-    %h3.title{:style => "margin-bottom:5px;"} #{who(:whose)} information
-    = link_to "edit", edit_user_registration_path
+    %p.title{:style => "margin-bottom:5px;float:left;"} #{who(:whose)} information
+    %p{:style => "text-align:right"}
+      %i.icon-eye-close
+      = link_to "edit", edit_user_registration_path, :class => "green"
     .well.info
       %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Profile image
       %p= image_tag(@user.avatar_url)
@@ -69,37 +83,3 @@
         %p
           = #{(@user.subscribed ? "" : "Not")}
           Subscribed
-
-
-    %h3.title{:style => "margin-bottom:5px;"} SET UP GUIDE
-    .well.info
-      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} FUNDING GOAL
-      %p How much do you want to raise on URUUT?
-
-      %p Remember to keep in mind the cost of a campaign and perks fulfillment. We suggest you add 10% to the amount you need to raise. This will cover URUUT’s 5% fee, our payment providers 3% fee and any potential extras.
-
-      %p Also, URUUT is an all-or-nothing funding platform. That means you have to hit the goal you set in order to get any of the funding you raise. Try to choose something attainable based on your personal and social networks.
-
-      %p Take the amount you want to raise and divide it by 100. Or 50. Do you think you’ll be able to reach that many people in your personal and professional networks to get to your goal?
-
-      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} CAMPAIGN HEADLINE
-      %p A short and sweet summary of your project. This is the text that will appear on the browse page and should be a brief description of who you are and why you're here. Try to avoid using words like "help" and "need".
-      %p.bold Examples include:
-      %ul
-        %li Build a shady nook to sip your coffee when you fund our project.
-        %li Homemade, ready-to-serve dipping sauces. From Brooklyn with love.
-        %li We're launching a new fall collection: sourced locally and creating jobs in New York.
-
-      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} YOUR STORY
-      %p Tell the world why they should invest in you. Include some background information about you and your business partners (if any), how long you’ve been in business, why the neighborhood should invest in you and why you’re raising funds on URUUT.
-
-      %p If you want to add any images to your story, you can do so at the final step.
-
-      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} TELL US ABOUT YOUR PROJECT
-      %p Give us a description of your project. What are you looking to raise funding for? Be specific! Your investors will care about how you use their money.
-
-      %p Remember, URUUT is for specific business projects, like capital improvements or equipment, not a source of working capital to pay rent or make ends meet.
-
-      %p It’s helpful to include some more specific descriptions of the rewards you’re offering too. Don’t feel like you need to put everything in right away -- you can go back and edit this before activating your campaign!
-
-      %p If you want to add any images to your project description, you can do so at the final step.
