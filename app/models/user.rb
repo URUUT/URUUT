@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :last_name, :email, :password, :password_confirmation, :remember_me, :city, :state, :zip,
                   :neighborhood, :provider, :uid, :token, :organization, :mission, :subscribed, :avatar
+  attr_accessor :avatar_upload_width, :avatar_upload_height
   # attr_accessible :title, :body
 
   validates_presence_of :name
@@ -119,5 +120,9 @@ class User < ActiveRecord::Base
   end
 
   def minimum_image_size
+    if self.avatar_upload_width && self.avatar_upload_height && (self.avatar_upload_width < 200 || self.avatar_upload_height < 200)
+      errors.add :avatar, "Image should be at least 200px x 200px"
+    end
   end
+
 end

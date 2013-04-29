@@ -39,6 +39,14 @@ class AvatarUploader < CarrierWave::Uploader::Base
     "/images/fallback/avatar_" + [version_name, "default.jpg"].compact.join('_')
   end
 
+  before :cache, :capture_size_before_cache
+  def capture_size_before_cache(new_file)
+    if model.avatar_upload_width.nil? || model.avatar_upload_height.nil?
+      model.avatar_upload_width, model.avatar_upload_height = `identify -format "%wx %h" #{new_file.path}`.split(/x/).
+          map { |dim| dim.to_i }
+    end
+  end
+
   # Process files as they are uploaded:
   # process :scale => [200, 300]
   #
