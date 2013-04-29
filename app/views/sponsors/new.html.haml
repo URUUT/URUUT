@@ -3,7 +3,7 @@
     .span8
       %h4.title{:style => "border-bottom: 6px solid #48C94C; padding-bottom: 10px;"} CHECKOUT
       .project-location
-        %h4{:style => "color: #48C94C;"}= @project.title
+        %h4{:style => "color: #48C94C;"}= @project.project_title
         %div{:style => 'font-family:"Proxima Nova";  margin-bottom: 15px;'}
           = image_tag "marker.jpg", :class => 'marker', :style => 'float:none;'
           = @project.address
@@ -11,19 +11,42 @@
           = @project.state
           = @project.zip
 
-    .span4.sidebar
-      %h4 BECOME A SPONSOR
+    .span4.sidebar.pull-right
+      %h4 SPONSORSHIP LEVELS
       .well
-        %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;font-family:'Proxima Nova';"} PROJECT SPONSORSHIP
-        %p{:style => "font:normal 12px/18px 'Proxima Nova', arial, sans-serif;color:#403e37;margin-bottom:40px;"} We can’t do this alone. Do your part, by becoming a project sponsor. URUUT Partner-Funding depends on individual contributors as well as project sponsorship from businesses and corporate and family foundations. Click the button below to get more details and become a project sponsor.
-        = link_to new_project_sponsor_path(@project.id), :class => 'btn', :style => 'margin-top:10px;' do
-          Become A Sponsor
-          %span
+        -@sponsorship_levels.each_with_index do |sponsorship_level, idx|
+          - if (idx + 1) > 1
+            %div{:style => "margin: 20px 0px; border-top: solid 1px #a1a1a1; position: relative;"}
+          %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;font-family:'Proxima Nova';"}
+            = sponsorship_level.name.upcase
+          %p.normal-font
+            =sponsorship_level.description
+          - sponsorship_level.sponsorship_benefits.each do |benefit|
+            %p.normal-font - #{benefit.name}
+          %div{:style => "height: 80px; width: 100%;"}
+            .pull-left
+              %h5 COST
+              %h3{style: "margin-top:-20px;"}= number_to_currency(sponsorship_level.cost, precision: 0)
+            %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-#{sponsorship_level.id}", :"sponsor-id" => "#{sponsorship_level.id}"}
+              SPONSOR
+              %span
 
     = form_for(@sponsor, :url => project_sponsors_path, :html => {:class => "span8 well", :style => "margin-left: 0;", :multipart => true, method: 'POST'}) do |f|
-      = label_tag :project_sponsor_name do
-        CHOOSE YOUR SPONSORSHIP LEVEL
-      = select :project_sponsor, :level_id, options_for_select(sponsor_option(@project.id)), :required => true, :size => 17
+      .span12{:style => "background-color: #f5f5f5; margin-left: 0px;"}
+        .pull-left{:style => "width: 250px; height: 500px; border-right: solid 1px #d3d3d3;"}
+          %h4 SPONSORSHIP COST
+          %h1.cost-level #{number_to_currency(@sponsorship_levels.first.cost, precision: 0)}
+        .pull-right{:style => "width: 320px;"}
+          = label_tag :project_sponsor_name do
+            CHOOSE YOUR SPONSORSHIP LEVEL
+          = select :project_sponsor, :level_id, options_for_select(sponsor_option(@project.id)), required: true, size: 17, class: "selectbox"
+          = image_tag "3.gif", id: "loading", style: "display: none; margin: -3px 0 10px 10px;"
+          %br/
+          %h5 SPONSORSHIP DETAILS
+          .sponsorship-level-details
+            %h3 #{@sponsorship_levels.first.name.upcase} sponsor
+            - @sponsorship_levels.first.sponsorship_benefits.each do |benefit|
+              %p.normal-font - #{benefit.name}
       %h4 SPONSOR INFORMATION
       %div
         = f.label :name, "Business OR ORGANIZATION NAME*"
@@ -31,8 +54,7 @@
       %div
         = f.label :mission do
           BUSINESS OR ORGANIZATION'S LOGO*
-        / = image_tag(@project_sponsor.logo_url) unless @project_sponsor.logo.nil?
-        / = f.text_field :remote_logo_url
+        = file_field :project_sponsor, :logo
       %div
         = f.label :mission do
           MISSION STATEMENT / ABOUT*
@@ -67,8 +89,11 @@
         %div
           = f.label :phone, "CONTACT PHONE NUMBER*"
           = f.text_field :phone, :size => 15
-      %div{:style => "float: left;"}
-        = f.submit "Save And Continue", :class => "btn", :id => "project-submit"
+      %div{:style => "float: right;"}
+        = f.submit "SUBMIT", :class => "btn", :id => "project-submit"
+
+.project-id{:style => "display: none;"}
+  = @project.id
 
 %script{:src => "http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"}
 %script{:src => "http://maps.stamen.com/js/tile.stamen.js?v1.2.1"}
@@ -84,4 +109,28 @@
         $("#credit-card").hide();
       }
     });
+    $("#project_sponsor_level_id").change(function(){
+      var projectId = parseInt($(".project-id").text());
+      $.ajax({
+        url: "/projects/" + projectId + "/sponsors/" + this.value + "/get_sponsorship_levels.js",
+        beforeSend: function ( xhr ) {
+          $("#loading").show();
+        }
+      }).done(function ( xhr ) {
+        $("#loading").hide();
+      });
+    });
+    $(".sponsor-change").click(function(){
+      var projectId = parseInt($(".project-id").text());
+      var sponsorId = parseInt($(this).attr("sponsor-id"));
+      $.ajax({
+        url: "/projects/" + projectId + "/sponsors/" + sponsorId + "/get_sponsorship_levels.js",
+        beforeSend: function ( xhr ) {
+          $("#loading").show();
+        }
+      }).done(function ( xhr ) {
+        $("#loading").hide();
+      });
+    });
   });
+/ $.get("/projects/" + projectId + "/sponsors/" + this.value + "/get_sponsorship_levels.js")
