@@ -31,36 +31,36 @@
               SPONSOR
               %span
 
-    = form_for(@sponsor, :url => project_sponsors_path, :html => {:class => "span8 well", :style => "margin-left: 0;", multipart: true, method: 'POST'}) do |f|
-
+    = form_for(@sponsor, :url => project_sponsor_path, :html => {:class => "span8 well", :style => "margin-left: 0;", multipart: true, method: 'PUT'}) do |f|
       .span12{:style => "background-color: #f5f5f5; margin-left: 0px;"}
         .pull-left{:style => "width: 250px; height: 500px; border-right: solid 1px #d3d3d3;"}
           %h4 SPONSORSHIP COST
-          %h1.cost-level #{number_to_currency(sponsor_option(@project.id).first.cost, precision: 0)}
+          %h1.cost-level #{number_to_currency(@sponsorship_levels.find(@project_sponsor.level_id).cost, precision: 0)}
         .pull-right{:style => "width: 320px;"}
           = label_tag :project_sponsor_name do
             CHOOSE YOUR SPONSORSHIP LEVEL
-          = select :project_sponsor, :level_id, options_for_select(sponsor_option(@project.id).map {|level| [level.name, level.id]}), required: true, size: 17, class: "selectbox"
+          = select :project_sponsor, :level_id, options_for_select(sponsor_option(@project.id), selected: @project_sponsor.level_id ), required: true, size: 17, class: "selectbox"
           = image_tag "3.gif", id: "loading", style: "display: none; margin: -3px 0 10px 10px;"
           %br/
           %h5 SPONSORSHIP DETAILS
           .sponsorship-level-details
-            %h3 #{sponsor_option(@project.id).first.name.upcase} sponsor
-            - sponsor_option(@project.id).first.sponsorship_benefits.each do |benefit|
+            %h3 #{@sponsorship_levels.find(@project_sponsor.level_id).name.upcase} sponsor
+            - @sponsorship_levels.find(@project_sponsor.level_id).sponsorship_benefits.each do |benefit|
               %p.normal-font - #{benefit.name}
       %h4 SPONSOR INFORMATION
       %div
         = f.label :name, "Business OR ORGANIZATION NAME*"
-        = text_field :project_sponsor, :name, required: true, :size => 40, label: false
+        = text_field :project_sponsor, :name, value: @project_sponsor.name, required: true, :size => 40, label: false
       %div
         = f.label :mission do
           BUSINESS OR ORGANIZATION'S LOGO*
-        = file_field :project_sponsor, :logo, required: true, label: false
+        = image_tag @project_sponsor.logo.thumb.url, style: "height:100px; width: 100px; border: solid 1px #e5e5e5; background: #f9f9f9;"
+        = file_field :project_sponsor, :logo, value: @project_sponsor.logo, label: false
       %div
         = f.label :mission do
           MISSION STATEMENT / ABOUT*
           %span.cutdown.italic
-        = text_area :project_sponsor, :mission, maxlength: 275, required: true, :style => "height: 186px; width: 602px;", label: false, class: "mission"
+        = text_area :project_sponsor, :mission, value: @project_sponsor.mission, maxlength: 275, required: true, :style => "height: 186px; width: 602px;", label: false, class: "mission"
       %div{:style => "border-top: solid 1px #a5a5a5; padding-top: 25px"}
         = f.label :payment_type do
           PREFERRED PAYMENT METHOD*
@@ -68,8 +68,8 @@
         = f.select :payment_type, options_for_select(Sponsor::PAYMENT), :id => "payment_type", required: true, :size => 17
       %div#credit-card{:style => "float: left;"}
         %div
-          = f.label :card_name, "NAME AS IT APPERS ON CARD*"
-          = f.text_field :card_name, :size => 40, required: true, label: false, class: "card-input"
+          = f.label :name, "NAME AS IT APPERS ON CARD*"
+          = f.text_field :name, :size => 40, required: true, label: false, class: "card-input"
         %div{:style => "float: left;"}
           = f.label :card_number, "CARD NUMBER*"
           = f.text_field :card_number, :size => 40, required: true, label: false, class: "card-input"
@@ -112,14 +112,6 @@
         $(".transfer-input").attr("required", "required");
       }
     });
-    function updateCutdown() {
-      var remaining = 275 - jQuery('.mission').val().length;
-      jQuery('.cutdown').text('(' + remaining + ' characters remaining.)');
-    }
-    updateCutdown();
-    $('.mission').change(updateCutdown);
-    $('.mission').keyup(updateCutdown);
-
     $("#project_sponsor_level_id").change(function(){
       var projectId = parseInt($(".project-id").text());
       $.ajax({
@@ -131,6 +123,14 @@
         $("#loading").hide();
       });
     });
+    function updateCutdown() {
+      var remaining = 275 - jQuery('.mission').val().length;
+      jQuery('.cutdown').text('(' + remaining + ' characters remaining.)');
+    }
+    updateCutdown();
+    $('.mission').change(updateCutdown);
+    $('.mission').keyup(updateCutdown);
+
     $(".sponsor-change").click(function(){
       var projectId = parseInt($(".project-id").text());
       var sponsorId = parseInt($(this).attr("sponsor-id"));

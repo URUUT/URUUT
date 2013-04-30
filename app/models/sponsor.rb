@@ -8,10 +8,20 @@ class Sponsor < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :card_number, :payment_type,
-                  :card_expiration, :cvc , :phone, :org_name, :mission, :month, :year_card, :card_name, :years
+                  :card_expiration, :cvc , :phone, :org_name, :mission, :month, :year_card, :card_name
 
-  attr_accessor :org_name, :mission, :years, :card_name
+  attr_accessor :card_name
   # attr_accessible :title, :body
   has_many :project_sponsors
 
+  validates :card_number, :cvc, :month, :year_card, :card_name, presence: true, if: :payment_type_credit_card?
+  validates :phone, :email, :name, presence: true, if: :payment_type_transfer?
+
+  def payment_type_transfer?
+    self.payment_type.eql? "Wire Transfer"
+  end
+
+  def payment_type_credit_card?
+    self.payment_type.eql? "Credit Card"
+  end
 end

@@ -12,7 +12,7 @@ class PaymentsController < ApplicationController
       :month              => sponsor.month,
       :year               => sponsor.year_card,
       :first_name         => sponsor.name.split(" ")[0],
-      :last_name          => sponsor.name.split(" ")[1]
+      :last_name          => sponsor.name.split(" ")[1] || ""
       )
 
     if credit_card.valid?
@@ -20,6 +20,7 @@ class PaymentsController < ApplicationController
       response = GATEWAY.authorize(project_sponsor.cost, credit_card, :ip => request.remote_ip)
       if response.success?
         GATEWAY.capture(project_sponsor.cost, response.authorization)
+        project_sponsor.update_attributes({payment: "Paid", status: "Confirmed"})
         redirect_to project_url(project.id), notice: "Thanks, you successfully registered as a sponsor in project #{project.project_title}"
       else
         redirect_to :back, alert: "Sorry your creditcard is expired."

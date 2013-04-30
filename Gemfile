@@ -52,5 +52,6 @@ gem 'capistrano'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'activemerchant', :require => 'active_merchant'
+gem 'simple_form'
 # gem 'i18n-js', :git => 'git@github.com:fnando/i18n-js.git', :branch => 'master'
 #gem 'whenever', require: false
