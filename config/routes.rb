@@ -36,6 +36,7 @@ Crowdfund::Application.routes.draw do
    get "projects/save_image"
    post "projects/save_image"
    get "projects/:project_id/sponsors/:id/confirmation" => "sponsors#confirmation", as: "confirmation"
+   get "purchase" => "payments#purchase"
 #
 #   post "projects/add_perk"
 #   post "projects/get_perk"

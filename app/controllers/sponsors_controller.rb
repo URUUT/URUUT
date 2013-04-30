@@ -13,11 +13,14 @@ class SponsorsController < ApplicationController
     project = Project.find(params[:project_id])
     sponsor_name = sponsor[:payment_type].eql?("Wire Transfer") ? sponsor[:name] : sponsor[:card_name]
     cost = SponsorshipLevel.find(params[:project_sponsor][:level_id]).cost
-    @sponsor = Sponsor.create(sponsor)
-    @sponsor.update_attribute(:name, sponsor_name)
+    @sponsor = Sponsor.new(params[:sponsor])
+    @sponsor.month = params[:sponsor][:month].to_i
+    @sponsor.year_card = params[:sponsor][:years]
+    @sponsor.name = sponsor_name
+    @sponsor.save(validate: false)
     @project_sponsor = ProjectSponsor.create(params[:project_sponsor])
-    @project_sponsor.update_attributes(cost: cost, project_id: project.id, sponsor_id: @sponsor.id,
-                                      level_id: params[:project_sponsor][:level_id])
+    @project_sponsor.update_attributes({cost: cost, project_id: project.id, sponsor_id: @sponsor.id,
+                                      level_id: params[:project_sponsor][:level_id]})
 
     redirect_to confirmation_url(project.id, @sponsor.id)
   end
@@ -33,8 +36,6 @@ class SponsorsController < ApplicationController
     @sponsor = Sponsor.find(params[:id])
     @project_sponsor = @project.project_sponsors.find_by_sponsor_id(@sponsor.id)
     @sponsorship_level = SponsorshipLevel.find(@project_sponsor.level_id)
-    # session[:project_sponsor] = params[:project_sponsor]
-    # session[:sponsor] = params[:sponsor]
   end
 
   def confirm_sponsor
