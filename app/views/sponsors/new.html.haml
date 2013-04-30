@@ -27,9 +27,10 @@
             .pull-left
               %h5 COST
               %h3{style: "margin-top:-20px;"}= number_to_currency(sponsorship_level.cost, precision: 0)
-            %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-#{sponsorship_level.id}", :"sponsor-id" => "#{sponsorship_level.id}"}
-              SPONSOR
-              %span
+            - if sponsor_option(@project.id).include? sponsorship_level
+              %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-#{sponsorship_level.id}", :"sponsor-id" => "#{sponsorship_level.id}"}
+                SPONSOR
+                %span
 
     = form_for(@sponsor, :url => project_sponsors_path, :html => {:class => "span8 well", :style => "margin-left: 0;", multipart: true, method: 'POST'}) do |f|
 
