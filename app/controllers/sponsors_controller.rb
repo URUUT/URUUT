@@ -4,25 +4,41 @@ class SponsorsController < ApplicationController
 
   def new
     @sponsor = Sponsor.new
-    @sponsorship_levels = @project.sponsorship_levels
     render :layout => 'landing'
+  end
+
+  def edit
+    @sponsor = Sponsor.find(params[:id])
+    @project_sponsor = @sponsor.project_sponsors.first
+    render :layout => 'landing'
+  end
+
+  def update
+    @sponsor = Sponsor.find(params[:id])
+    @project_sponsor = @sponsor.project_sponsors.first
+    sponsor = params[:sponsor]
+    sponsor_name = sponsor[:payment_type].eql?("Wire Transfer") ? sponsor[:name] : sponsor[:card_name]
+    cost = SponsorshipLevel.find(params[:project_sponsor][:level_id]).cost
+    params[:sponsor][:name] = sponsor_name
+    @sponsor.update_attributes(params[:sponsor])
+    @project_sponsor.update_attributes(params[:project_sponsor].merge({cost: cost, project_id: params[:project_id], sponsor_id: @sponsor.id,
+                                      level_id: params[:project_sponsor][:level_id]}))
+    redirect_to confirmation_url(params[:project_id], @sponsor.id)
   end
 
   def create
     sponsor = params[:sponsor]
-    project = Project.find(params[:project_id])
     sponsor_name = sponsor[:payment_type].eql?("Wire Transfer") ? sponsor[:name] : sponsor[:card_name]
     cost = SponsorshipLevel.find(params[:project_sponsor][:level_id]).cost
+    params[:sponsor][:name] = sponsor_name
+
     @sponsor = Sponsor.new(params[:sponsor])
-    @sponsor.month = params[:sponsor][:month].to_i
-    @sponsor.year_card = params[:sponsor][:years]
-    @sponsor.name = sponsor_name
     @sponsor.save(validate: false)
     @project_sponsor = ProjectSponsor.create(params[:project_sponsor])
-    @project_sponsor.update_attributes({cost: cost, project_id: project.id, sponsor_id: @sponsor.id,
+    @project_sponsor.update_attributes({cost: cost, project_id: params[:project_id], sponsor_id: @sponsor.id,
                                       level_id: params[:project_sponsor][:level_id]})
 
-    redirect_to confirmation_url(project.id, @sponsor.id)
+    redirect_to confirmation_url(params[:project_id], @sponsor.id)
   end
 
   def get_sponsorship_levels
@@ -43,13 +59,13 @@ class SponsorsController < ApplicationController
     project_sponsor = ProjectSponsor.find_by_project_id(params[:project_id])
     project_sponsor.update_attribute(:status, "confirmed")
 
-    redirect_to root_url, notice: "Great! you have successfully registered as a sponsor"
+    redirect_to project_url(params[:project_id]), notice: "Great! you have successfully registered as a sponsor"
   end
-
 
   private
 
   def project_id
     @project = Project.find(params[:project_id])
+    @sponsorship_levels = @project.sponsorship_levels
   end
 end

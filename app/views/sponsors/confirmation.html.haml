@@ -43,12 +43,12 @@
       .span12{:style => "background-color: #f5f5f5; margin-left: 0px;"}
         .pull-left{:style => "width: 250px; height: 300px; border-right: solid 1px #d3d3d3;"}
           %h4 SPONSORSHIP AMOUNT
-          =link_to "change", "#", class: "green-font"
+          %p.normal-font=link_to "change", edit_project_sponsor_path(@project.id, @sponsor.id), class: "green-font"
           %h1.cost-level #{number_to_currency(@sponsorship_level.cost, precision: 0)}
         .pull-right{:style => "width: 320px;"}
           = label_tag :project_sponsor_name do
             SPONSORSHIP LEVEL
-            = link_to "change", "#{}", class: "green-font"
+            = link_to "change", edit_project_sponsor_path(@project.id, @sponsor.id), class: "green-font"
           %h3 #{@sponsorship_level.name.upcase} SPONSOR
           %p.normal-font= truncate(@sponsorship_level.description, lenght: 200)
           .sponsorship-level-details
@@ -57,15 +57,15 @@
       %h5 SPONSOR INFORMATION
       %div
         %h3.green-font
-          =session[:project_sponsor][:name]
+          =@project_sponsor.name
       %div
         %h5 LOGO
         = image_tag @project_sponsor.logo.thumb.url, style: "height:100px; width: 100px; border: solid 1px #e5e5e5; background: #f9f9f9;"
       %div
         = label_tag :project_sponsor_name do
           %h5 MISSION STATEMENT / ABOUT*
-          = link_to "change", "#{}", class: "green-font"
-        %p.normal-font= session[:project_sponsor][:mission]
+          = link_to "change", edit_project_sponsor_path(@project.id, @sponsor.id), class: "green-font"
+        %p.normal-font= @project_sponsor.mission
 
 .project-id{:style => "display: none;"}
   = @project.id

@@ -20,3 +20,11 @@
 .green-font {
   color: #70bf4c !important;
 }
+
+label.message {
+  color: red !important;
+}
+
+label {
+  color: #000;
+}
