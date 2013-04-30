@@ -1,45 +1,64 @@
 %footer
+  .container.cf
+    %ul
+      %li
+        = link_to browse_projects_path do
+          %h6 Fund Projects
+      %li &nbsp;
+      %li
+        = link_to new_project_path do
+          %h6 Get Funding
+      %li
+        = link_to "#" do
+          %p Overview
+      %li
+        = link_to new_project_path do
+          %p Create Your Project
+    
+    %ul
+      %li
+        = link_to about_pages_path do
+          %h6 About URUUT
+      %li
+        = link_to about_pages_path do
+          %p About Us
+      %li
+        = link_to "#" do
+          %p How It Works
+      %li
+        = link_to "#" do
+          %p Our Team
+      %li
+        = link_to "#" do
+          %p Sponsorship
+    
+    %ul
+      %li
+        = link_to contact_pages_path do
+          %h6 Contact
+      %li
+        = link_to faqs_pages_path do
+          %h6 FAQ
+      %li
+        = link_to privacy_pages_path do
+          %h6 Privacy Policy
+      %li
+        = link_to terms_pages_path do
+          %h6 Terms of Use
+    
+    %ul
+      %li
+        %h6 Find Us On
+      %li
+        = link_to "","http://www.facebook.com/get.ruuted", :class => "fb"
+        = link_to "","http://www.twitter.com/uruut", :class => "tw"
+				
+.copyright
   .container
-    %ul.span2
-      %li
-        %h6 Fund Projects
-      %li
-      %li
-        %h6 Get Funding
-      %li
-        %p Overview
-      %li
-        %p Create Your Project
-    
-    %ul.span2
-      %li
-        %h6 About URUUT
-      %li
-        %p Something
-      %li
-        %p Get Funding
-      %li
-        %p Overview
-      %li
-        %p Create Your Project
-    
-    %ul.span2
-      %li
-        %h6 Fund Projects
-      %li
-        %h6 Get Funding
-      %li
-        %h6 Overview
-      %li
-        %h6 Create Your Project
-    
-    %ul.span2
-      %li
-        %h6 Fund Projects
-      %li
-      %li
-        %h6 Get Funding
-      %li
-        %p Overview
-      %li
-        %p Create Your Project
+    %p
+      = image_tag 'footer-logo.png'
+      &copy;
+      = Date.today.strftime('%Y')
+      URUUT. 
+      %span.italic
+        All Rights Reserved.
