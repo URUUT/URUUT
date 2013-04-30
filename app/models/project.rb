@@ -18,6 +18,8 @@ class Project < ActiveRecord::Base
   accepts_nested_attributes_for :perks, allow_destroy: true
   accepts_nested_attributes_for :galleries, allow_destroy: true
 
+  scope :live, where("live = 1")
+
   has_attached_file :image
     #:styles => {
       #:thumb=> "100x100#",
