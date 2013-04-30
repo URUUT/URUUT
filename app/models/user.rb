@@ -16,14 +16,20 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :last_name, :email, :password, :password_confirmation, :remember_me, :city, :state, :zip, :neighborhood, :provider, :uid, :token
+  attr_accessible :name, :last_name, :email, :password, :password_confirmation, :remember_me, :city, :state, :zip,
+                  :neighborhood, :provider, :uid, :token, :organization, :mission, :subscribed, :avatar
+  attr_accessor :avatar_upload_width, :avatar_upload_height
   # attr_accessible :title, :body
 
   validates_presence_of :name
+  validate :minimum_image_size
   # validates_uniqueness_of :name, :email, :case_sensitive => false
 
   has_many :services, :dependent => :destroy
   has_many :projects, :dependent => :destroy
+  has_many :donations
+
+  mount_uploader :avatar, AvatarUploader
 
   def self.create_with_omniauth(info)
     create(name: info['name'])
@@ -92,9 +98,31 @@ class User < ActiveRecord::Base
     super && provider.blank?
   end
 
+  def projects_funded
+    Project.joins(:donations).where("donations.user_id = ?", self.id).uniq
+  end
+
+  def amount_funded
+    donations.sum(:amount)
+  end
+
+  def most_funded_city
+    project = Project.select("projects.city, SUM(donations.amount) as city_sum").joins(:donations).
+        where("donations.user_id = ?", self.id).group("projects.city").order("city_sum DESC").first
+    # Return an empty string if user has no donations
+    project.present? ? project.city : ""
+  end
+
   private
 
   def send_welcome_email
     WelcomeMailer.welcome_confirmation(self).deliver
   end
+
+  def minimum_image_size
+    if self.avatar_upload_width && self.avatar_upload_height && (self.avatar_upload_width < 200 || self.avatar_upload_height < 200)
+      errors.add :avatar, "Image should be at least 200px x 200px"
+    end
+  end
+
 end

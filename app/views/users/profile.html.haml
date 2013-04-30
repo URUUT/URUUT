@@ -1,25 +1,60 @@
-.span12.banner
+.full-width.banner
   .container
     .span4
-      = image_tag(get_gravatar(current_user.email, 100), :style => "float:left;margin-right:20px;")
+      = image_tag(get_gravatar(@user.email, 100), :style => "float:left;margin-right:20px;")
 
-      %h4.user-name= current_user.name
-      %p.user-email= current_user.email
+      %h4.user-name= @user.name
+      = link_to "not you? click here to logout", destroy_user_session_path
 
-    .span3
+    .span2
       %h6 Projects Funded
+      %h3= @projects_funded.all.count
 
     .span3
       %h6 Total Amount Funded
+      %h3 $#{ @user.amount_funded }
 
 .cf
 .span8{:style => "margin-top:125px;margin-left:-20px;"}
   %h3 Projects I've Created
-  = render "project", :projects => @projects
+  = render "project", :projects => @projects_created
   .cf
-  = paginate @projects
-	
+  = paginate @projects_created
+
+  %h3 Projects I've Funded
+  = render "project", :projects => @projects_funded
+  .cf
+  = paginate @projects_funded
+
 .span4{:style => "margin-top:125px;"}
+  %h3.title{:style => "margin-bottom:5px;"} My badges
+  .well.info
+    %p How much do you want to raise on URUUT?
+
+    %p Remember to keep in mind the cost of a campaign and perks fulfillment. We suggest you add 10% to the amount you need to raise. This will cover URUUT’s 5% fee, our payment providers 3% fee and any potential extras.
+
+  %h3.title{:style => "margin-bottom:5px;"} My information
+  .well.info
+    %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Profile image
+    %p= image_tag(get_gravatar(@user.email, 100))
+
+    %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Name
+    %p= @user.name
+
+    %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Email address
+    %p= @user.email
+
+    %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Business or organization name
+    %p= @user.organization
+
+    %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Mission statement / about
+    %p= @user.mission
+
+    %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Email preference
+    %p= @user.subscribed
+
+
+
   %h3.title{:style => "margin-bottom:5px;"} SET UP GUIDE
   .well.info
     %h5{:style => "color:#70bf4c;margin-bottom:10px;"} FUNDING GOAL

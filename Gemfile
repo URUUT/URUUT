@@ -50,4 +50,5 @@ gem 'jquery-rails'
 gem 'unicorn'
 gem 'capistrano'
 gem 'carrierwave'
+gem 'mini_magick'
 #gem 'whenever', require: false

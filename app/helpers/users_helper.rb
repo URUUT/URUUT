@@ -65,5 +65,26 @@ module UsersHelper
         [75],
         [90]
 	    ]
-	end
+  end
+
+  # Helper method for I - They on User profile page
+  # @param type
+  # :who - I, they
+  # :whose - my, their
+  def who(type = :who)
+    if @is_current
+      if type == :who
+        "I"
+      else
+        "My"
+      end
+    else
+      if type == :who
+        "They"
+      else
+        "Their"
+      end
+    end
+  end
+
 end
