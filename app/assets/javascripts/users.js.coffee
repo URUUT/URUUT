@@ -2,12 +2,22 @@ $ ->
   $('#projects-created').selectbox();
   $('#projects-funded').selectbox();
 
-  wrapper = $('<div/>').css({height:0,width:0,'overflow:hidden'})
-  file_input = $(':file').wrap(wrapper)
+  $('#edit_user').fileupload
+    dataType: "json"
+    always: (e, data) ->
+      if data.result
+        $('#avatar-img').attr('src', data.result.path)
+        $('#avatar-error').attr('class', 'hidden')
+      else
+        $('#avatar-error').attr('class', 'visible note')
+
+  wrapper = $('<div/>').css({height:0,width:0,'overflow':'hidden'})
+  file_input = $('#avatar-hide').wrap(wrapper)
 
   file_input.change ->
     $this = $(this)
-    $('#file').text($this.val)
+    $('#avatar-file').text($this.val)
 
-  $('#file').click ->
+  $('#avatar-file').click ->
     file_input.click()
+

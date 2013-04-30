@@ -9,10 +9,12 @@
         = f.label :avatar, "Profile image "
         .row{:style => "margin-left:0px;margin-bottom:10px;"}
           .span2
-            = image_tag(f.object.avatar_url)
+            = image_tag(f.object.avatar_url, :id => "avatar-img")
           .span4
-            = f.file_field :avatar, class: "btn"
-            #file
+            = f.file_field :avatar, id: "avatar-hide"
+            #avatar-error.hidden
+              The image should be at least 200px x 200px
+            #avatar-file
               %button.btn.btn-primary{:type => "button"}
                 Upload
                 %span
