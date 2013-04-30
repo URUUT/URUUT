@@ -79,7 +79,7 @@
       = f.label :website do
         WEBSITE ADDRESS
         %span.italic (Format: http://www.mysite.com)
-      = f.text_field :website, :required => true, :size => 45
+      = f.text_field :website, :required => true, :placeholder => "http://makethisgrey.now", :size => 45
 
     %div.inline
       = f.label :twitter_handle, "Twitter Account"
@@ -136,6 +136,11 @@
       CAMPAIGN LENGTH*
       %span.italic (max 45 days)
     = f.select :duration, options_for_select(project_length, @project.duration), :required => true, :size => 17
+		
+    / = f.label :category do
+    /   CATEGORY*
+    /   %span.italic (max 45 days)
+    / = f.select :category, options_for_select(project_category, @project.category), :required => true, :size => 17
 
     = f.label :title do
       CAMPAIGN HEADLINE*
@@ -143,10 +148,10 @@
     = f.text_field :title, :required => true, :size => 45
 
     = f.label :story, "YOUR STORY*"
-    = f.text_area :story, :required => true, :style => "height:138px;width:585px;"
+    = f.text_area :story, :required => true, :style => "height:330px;width:585px;"
 
     = f.label :about, "TELL US ABOUT YOUR PROJECT*"
-    = f.text_area :about, :required => true, :style => "height:217px;width:585px;"
+    = f.text_area :about, :required => true, :style => "height:330px;width:585px;"
     %div
       = f.submit "Save And Continue", :class => "btn", :id => "project-submit"
 
@@ -391,7 +396,7 @@
       
     - else
       #large_image
-        %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => ENV['FILEPICKER_API'], 'data-fp-button-class' => 'coverphoto btn', 'onchange' => 'updateCover(event)', :style => 'left:50%'}
+        %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => ENV['FILEPICKER_API'], 'data-fp-button-class' => 'coverphoto btn pick-cover-photo', 'onchange' => 'updateCover(event)', :style => 'left:50%'}
 
         = render "funding_info"
 
@@ -494,6 +499,14 @@
         %h4.title{:style => 'margin-top:50px;'}
           Seeders (0)
           %span (Project Funders)
+					
+/* Each tip is set within this <ol>. */
+/* This creates the order the tips are displayed */
+%ol{:id => "uruutTour"}
+  /* data-id needs to be the same as the parent it will attach to */
+  %li{"data-class" => "pick-cover-photo"}
+    %p This is some content...
+    %p Here is some more...
 
 %script{:src => "http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"}
 %script{:src => "http://maps.stamen.com/js/tile.stamen.js?v1.2.1"}
@@ -537,6 +550,12 @@
   }
 
   $(function(){
+    $("#large_image").delegate('.pick-cover-photo', 'load', function() {
+      $("#uruutTour").joyride({
+        autoStart : true,
+        'tipLocation': 'bottom'
+      });
+    })
     var map = L.map('map').setView([51.505, -0.09], 13);
     getHash();
     $(window).on('hashchange', function() {

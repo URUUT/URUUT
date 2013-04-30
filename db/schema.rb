@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130419044424) do
+ActiveRecord::Schema.define(:version => 20130426132354) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -50,6 +50,16 @@ ActiveRecord::Schema.define(:version => 20130419044424) do
     t.float   "amount"
     t.text    "description"
     t.integer "project_id"
+  end
+
+  create_table "project_sponsors", :force => true do |t|
+    t.string  "card_token"
+    t.float   "cost"
+    t.text    "logo"
+    t.text    "mission"
+    t.string  "name"
+    t.integer "project_id"
+    t.integer "sponsor_id"
   end
 
   create_table "projects", :force => true do |t|
@@ -94,6 +104,34 @@ ActiveRecord::Schema.define(:version => 20130419044424) do
   create_table "sessions", :force => true do |t|
     t.string "session_id"
     t.text   "data"
+  end
+
+  create_table "sponsors", :force => true do |t|
+    t.string "payment_type"
+    t.string "name"
+    t.string "card_number"
+    t.date   "card_expiration"
+    t.string "cvc"
+    t.string "email"
+    t.string "phone"
+  end
+
+  create_table "sponsorship_benefits", :force => true do |t|
+    t.string   "name"
+    t.integer  "sponsorship_level_id"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  create_table "sponsorship_levels", :force => true do |t|
+    t.string   "name"
+    t.float    "cost"
+    t.text     "description"
+    t.integer  "required"
+    t.integer  "funding_goal"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "project_id"
   end
 
   create_table "users", :force => true do |t|
