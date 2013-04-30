@@ -64,7 +64,7 @@
 
 
       %h4.title{:style => 'margin-top:50px;'} PROJECT SPONSORS
-      = link_to "#assets", :class => 'btn', :style => 'background:#3f403b;padding:10px;margin-top:10px;' do
+      = link_to new_project_sponsor_path(@project.id), :class => 'btn', :style => 'margin-top:10px;'  do
         Become A Sponsor
         %span
 
@@ -139,7 +139,7 @@
         %h4{:style => "display:inline-block;color:#70bf4c;letter-spacing:2px;"}= @project.title
 
       %h4.title{:style => 'margin-top:50px;'} Business Partners
-      = link_to "#assets", :class => 'btn', :style => 'margin-top:10px;' do
+      = link_to new_project_sponsor_path(@project.id), :class => 'btn', :style => 'margin-top:10px;' do
         Become A Sponsor
         %span
 

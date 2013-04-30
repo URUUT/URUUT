@@ -30,18 +30,14 @@
           %h6.green-font Payment Amount
           %p.normal-font #{number_to_currency(@sponsorship_level.cost, precision: 0)}
           %div{:style => "height: 80px; width: 100%;"}
-            .pull-left
-              %h5 COST
-            = link_to "CONFIRM", project_sponsor_confirm_sponsor_path(@project.id, @sponsor.id), :class => "btn", :id => "project-submit"
+            = link_to "CONFIRM", project_sponsor_confirm_sponsor_path(@project.id, @sponsor.id), :class => "btn confirm-button", :id => "project-submit"
         -else
           %h5 Payment using
-          %p.normal-font= session[:sponsor][:payment_type]
+          %p.normal-font= @sponsor.payment_type
           %h5 Payment Amount
           %p.normal-font #{number_to_currency(@sponsorship_level.cost, precision: 0)}
           %div{:style => "height: 80px; width: 100%;"}
-            .pull-left
-              %h5 COST
-            = link_to "CONFIRM", project_sponsor_confirm_sponsor_path(@project.id, @sponsor.id), :class => "btn", :id => "project-submit"
+            = link_to "CONFIRM", purchase_path(project_id: @project.id, sponsor_id: @sponsor.id), :class => "btn confirm-button", :id => "project-submit"
 
     .span8.well{style: "margin-left: 0;"}
       .span12{:style => "background-color: #f5f5f5; margin-left: 0px;"}
@@ -79,25 +75,9 @@
 
 :javascript
   $(document).ready(function(){
-    $("#sponsor_payment_type").change(function(){
-      if(this.value == "Credit Card"){
-        $("#wire-transfer").hide();
-        $("#credit-card").show();
-      }else{
-        $("#wire-transfer").show();
-        $("#credit-card").hide();
-      }
-    });
-    $("#project_sponsor_level_id").change(function(){
-      var projectId = parseInt($(".project-id").text());
-      $.ajax({
-        url: "/projects/" + projectId + "/sponsors/" + this.value + "/get_sponsorship_levels.js",
-        beforeSend: function ( xhr ) {
-          $("#loading").show();
-        }
-      }).done(function ( xhr ) {
-        $("#loading").hide();
-      });
+    $(".confirm-button").click(function(){
+      $(this).attr("disabled", "disabled");
+      $(this).text("processing....");
     });
   });
 / $.get("/projects/" + projectId + "/sponsors/" + this.value + "/get_sponsorship_levels.js")
