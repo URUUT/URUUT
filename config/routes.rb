@@ -74,11 +74,13 @@ Crowdfund::Application.routes.draw do
   end
 
   resources :project_steps
-  resources :services do
-    get "index", :on => :collection
-    get "create", :on => :collection
-    get "destroy", :on => :collection
-  end
+
+  resources :services, :only => [:index, :create, :destroy]
+  #resources :services do
+  #  get "index", :on => :collection
+  #  get "create", :on => :collection
+  #  get "destroy", :on => :collection
+  #end
 
   resources :pages do
     get "discover", :on => :collection
