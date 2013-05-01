@@ -34,10 +34,8 @@
           = render 'layouts/navigation'
 
       .container
-        .row-fluid
-          .span12
-            = render 'layouts/messages'
-            = yield
+        = render 'layouts/messages'
+        = yield
       #push
     = render 'partials/footer'
 

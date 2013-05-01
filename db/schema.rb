@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130429132252) do
+ActiveRecord::Schema.define(:version => 20130430034221) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -110,13 +110,14 @@ ActiveRecord::Schema.define(:version => 20130429132252) do
   end
 
   create_table "sponsors", :force => true do |t|
-    t.string "payment_type"
-    t.string "name"
-    t.string "card_number"
-    t.date   "card_expiration"
-    t.string "cvc"
-    t.string "email"
-    t.string "phone"
+    t.string  "payment_type"
+    t.string  "name"
+    t.string  "card_number"
+    t.string  "cvc"
+    t.string  "email"
+    t.string  "phone"
+    t.integer "month"
+    t.integer "year_card"
   end
 
   create_table "sponsorship_benefits", :force => true do |t|

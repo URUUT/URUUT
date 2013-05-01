@@ -59,6 +59,9 @@ Crowdfund::Application.routes.draw do
 
   resources :s3_uploads
   resources :projects
+  namespace :project_admin do
+    resources :projects
+  end
   resources :donations do
     get "thank_you", :on => :collection
   end
