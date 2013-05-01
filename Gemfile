@@ -53,3 +53,5 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'activemerchant', :require => 'active_merchant'
 gem 'simple_form'
+#gem 'jquery-fileupload-rails'
+#gem 'whenever', require: false
