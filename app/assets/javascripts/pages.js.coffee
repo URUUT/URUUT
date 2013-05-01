@@ -16,7 +16,7 @@ $ ->
 	,->
 		$(this).children('div').css('display', 'none')
 
-	$('#duration').datepicker({altField: '#project_duration', altFormat: 'yy-mm-dd'})
+	# $('#duration').datepicker({altField: '#project_duration', altFormat: 'yy-mm-dd'})
 	
 	$('#project_description').redactor()
 	

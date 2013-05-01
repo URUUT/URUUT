@@ -3,6 +3,7 @@ class Donation < ActiveRecord::Base
   attr_accessor :token
 
   belongs_to :project
+  belongs_to :user
 
   def save_with_payment
     logger.debug(token)

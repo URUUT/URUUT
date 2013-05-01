@@ -1,40 +1,64 @@
 %footer
+  .container.cf
+    %ul
+      %li
+        = link_to browse_projects_path do
+          %h6 Fund Projects
+      %li &nbsp;
+      %li
+        = link_to new_project_path do
+          %h6 Get Funding
+      %li
+        = link_to "#" do
+          %p Overview
+      %li
+        = link_to new_project_path do
+          %p Create Your Project
+    
+    %ul
+      %li
+        = link_to about_pages_path do
+          %h6 About URUUT
+      %li
+        = link_to about_pages_path do
+          %p About Us
+      %li
+        = link_to "#" do
+          %p How It Works
+      %li
+        = link_to "#" do
+          %p Our Team
+      %li
+        = link_to "#" do
+          %p Sponsorship
+    
+    %ul
+      %li
+        = link_to contact_pages_path do
+          %h6 Contact
+      %li
+        = link_to faqs_pages_path do
+          %h6 FAQ
+      %li
+        = link_to privacy_pages_path do
+          %h6 Privacy Policy
+      %li
+        = link_to terms_pages_path do
+          %h6 Terms of Use
+    
+    %ul
+      %li
+        %h6 Find Us On
+      %li
+        = link_to "","http://www.facebook.com/get.ruuted", :class => "fb"
+        = link_to "","http://www.twitter.com/uruut", :class => "tw"
+				
+.copyright
   .container
-    .row-fluid
-      .span3
-        = image_tag "footer-logo.png", :style => "margin-right:5px;"
-        &copy; 2012 URUUT.
-        %span.italic All Rights Reserved.
-      .span7
-        %nav
-          = link_to 'Home'
-          %span.divider
-            |
-          = link_to 'Find Projects'
-          %span.divider
-            |
-          = link_to 'Get Funding'
-          %span.divider
-            |
-          = link_to 'About URUUT'
-          %span.divider
-            |
-          = link_to 'Blog'
-          %span.divider
-            |
-          = link_to 'Contact', contact_pages_url
-          %span.divider
-            |
-          = link_to 'FAQ', faqs_pages_url()
-          %span.divider
-            |
-          = link_to 'Press & Media'
-          %span.divider
-            |
-          = link_to 'Legal', terms_pages_url()
-      .span2.social
-        = link_to "http://www.facebook.com/get.ruuted" do
-          = image_tag "facebook.png"
-
-        = link_to "http://www.twitter.com/uruut" do
-          = image_tag "twitter.png"
+    %p
+      = image_tag 'footer-logo.png'
+      &copy;
+      = Date.today.strftime('%Y')
+      URUUT. 
+      %span.italic
+        All Rights Reserved.

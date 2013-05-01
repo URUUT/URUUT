@@ -1,5 +1,6 @@
 Crowdfund::Application.routes.draw do
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations" }
+  resources :users, :only => [:show]
 
   get "contacts/new"
 
@@ -58,6 +59,9 @@ Crowdfund::Application.routes.draw do
 
   resources :s3_uploads
   resources :projects
+  namespace :project_admin do
+    resources :projects
+  end
   resources :donations do
     get "thank_you", :on => :collection
   end
@@ -96,6 +100,7 @@ Crowdfund::Application.routes.draw do
     get 'home', :on => :collection
     get "faqs", :on => :collection
     get "thank_you", :on => :collection
+    get "privacy", :on => :collection
   end
 
   root to: "pages#home"
