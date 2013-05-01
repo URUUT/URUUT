@@ -4,7 +4,17 @@ class ProjectAdmin::ProjectsController < ApplicationController
   layout false, :only => "stripe_update"
 
 	def index
-		@projects = Project.find_all_by_user_id(current_user.id)
+		@projects = Project.find(params[:id])
+  end
+  
+  def show
+    @project = Project.find(params[:id])
+    @donations = Donation.find_all_by_project_id(@project.id)
+    sponsors = ProjectSponsor.find_by_project_id(@project.id)
+    @sponsor_count = sponsors.nil? ? 0 : sponsors.count
+    logger.debug(@sponsor_count)
+    logger.debug(@project)
+    logger.debug(@donations)
   end
 
 end
