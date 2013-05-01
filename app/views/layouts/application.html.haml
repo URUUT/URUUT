@@ -10,7 +10,7 @@
     = javascript_include_tag "http://code.jquery.com/jquery-1.9.1.js", "http://code.jquery.com/ui/1.10.2/jquery-ui.js", "application", :media => "all"
     = filepicker_js_include_tag
     = javascript_tag do
-      Stripe.setPublishableKey("pk_test_WRrfoQLUDkpGHAxCmOY0Y6ud");
+      Stripe.setPublishableKey(=STRIPE_PUBLIC_KEY);
 
     = csrf_meta_tags
     = yield(:head)
