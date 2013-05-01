@@ -28,3 +28,33 @@ label.message {
 label {
   color: #000;
 }
+
+.edit-text-field {
+  border-radius: 5px 5px 5px 5px !important;
+  box-shadow: none !important;
+  font: 13px arial,helvetica,sans-serif !important;
+  height: 34px !important;
+  padding: 6px !important;
+  width: 320px !important;
+}
+
+.normal-text-field {
+  border-radius: 5px 5px 5px 5px !important;
+  box-shadow: none !important;
+  font: 13px arial,helvetica,sans-serif !important;
+  height: 34px !important;
+  padding: 6px !important;
+  width: 320px !important;
+  border: solid 1px #f5f5f5 !important;
+  background-color: #f5f5f5 !important;
+}
+
+.edit-benefit {
+  margin-top: -70px;
+  cursor: pointer;
+}
+
+.add-another {
+  cursor: pointer;
+  font-size: 18px !important;
+}

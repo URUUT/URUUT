@@ -27,6 +27,8 @@ class SponsorsController < ApplicationController
   end
 
   def create
+    current_user = :current_user
+    Stripe.api_key = "sk_test_XF9K5nq63HTSmTK1ZMiW6tvw"
     sponsor = params[:sponsor]
     sponsor_name = sponsor[:payment_type].eql?("Wire Transfer") ? sponsor[:name] : sponsor[:card_name]
     cost = SponsorshipLevel.find(params[:project_sponsor][:level_id]).cost
@@ -38,12 +40,14 @@ class SponsorsController < ApplicationController
     @project_sponsor.update_attributes({cost: cost, project_id: params[:project_id], sponsor_id: @sponsor.id,
                                       level_id: params[:project_sponsor][:level_id]})
 
+    charge = Stripe::Charge.create({:amount => cost * 1000, :currency => "usd", :card => params[:stripeToken], :description => current_user.email})
+
     redirect_to confirmation_url(params[:project_id], @sponsor.id)
   end
 
   def get_sponsorship_levels
     project = Project.find(params[:project_id])
-    @sponsorship_level = project.sponsorship_levels.find(params[:sponsor_id])
+    @sponsorship_level = SponsorshipLevel.find(params[:sponsor_id])
 
     respond_to :js
   end
@@ -66,6 +70,6 @@ class SponsorsController < ApplicationController
 
   def project_id
     @project = Project.find(params[:project_id])
-    @sponsorship_levels = @project.sponsorship_levels
+    @sponsorship_levels = SponsorshipLevel.all
   end
 end
