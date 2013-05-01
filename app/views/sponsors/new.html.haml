@@ -44,7 +44,7 @@
         .pull-right{:style => "width: 320px;"}
           = label_tag :project_sponsor_name do
             CHOOSE YOUR SPONSORSHIP LEVEL
-          = select :project_sponsor, :level_id, options_for_select(sponsor_option(@project.id).map {|level| [level.name, level.id]}), required: true, size: 17, class: "selectbox"
+          = select :project_sponsor, :level_id, options_for_select(sponsor_option(@project.id).sort.map {|level| [level.name, level.id]}), required: true, size: 17, class: "selectbox"
           = image_tag "3.gif", id: "loading", style: "display: none; margin: -3px 0 10px 10px;"
           %br/
           %h5 SPONSORSHIP DETAILS
