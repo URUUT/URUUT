@@ -14,5 +14,4 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require jquery.h5validate
-//= require rails.validations
 //= require_tree .
