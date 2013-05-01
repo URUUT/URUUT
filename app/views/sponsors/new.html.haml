@@ -30,27 +30,26 @@
             .pull-left
               %h5 COST
               %h3{style: "margin-top:-20px;"}= number_to_currency(sponsorship_level.cost, precision: 0)
-            - if sponsor_option(@project.id).include? sponsorship_level
-              %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-#{sponsorship_level.id}", :"sponsor-id" => "#{sponsorship_level.id}"}
-                SPONSOR
-                %span
+            %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-#{sponsorship_level.id}", :"sponsor-id" => "#{sponsorship_level.id}"}
+              SPONSOR
+              %span
 
     = form_for(@sponsor, :url => project_sponsors_path, :html => {:class => "span8 well", :style => "margin-left: 0;", multipart: true, method: 'POST'}) do |f|
 
       .span12{:style => "background-color: #f5f5f5; margin-left: 0px;"}
         .pull-left{:style => "width: 250px; height: 500px; border-right: solid 1px #d3d3d3;"}
           %h4 SPONSORSHIP COST
-          %h1.cost-level #{number_to_currency(sponsor_option(@project.id).first.cost, precision: 0)}
+          %h1.cost-level #{number_to_currency(@sponsorship_levels.first.cost, precision: 0)}
         .pull-right{:style => "width: 320px;"}
           = label_tag :project_sponsor_name do
             CHOOSE YOUR SPONSORSHIP LEVEL
-          = select :project_sponsor, :level_id, options_for_select(sponsor_option(@project.id).sort.map {|level| [level.name, level.id]}), required: true, size: 17, class: "selectbox"
+          = select :project_sponsor, :level_id, options_for_select(@sponsorship_levels.sort.map {|level| [level.name, level.id]}), required: true, size: 17, class: "selectbox"
           = image_tag "3.gif", id: "loading", style: "display: none; margin: -3px 0 10px 10px;"
           %br/
           %h5 SPONSORSHIP DETAILS
           .sponsorship-level-details
-            %h3 #{sponsor_option(@project.id).first.name.upcase} sponsor
-            - sponsor_option(@project.id).first.sponsorship_benefits.each do |benefit|
+            %h3 #{@sponsorship_levels.first.name.upcase} sponsor
+            - @sponsorship_levels.first.sponsorship_benefits.each do |benefit|
               %p.normal-font - #{benefit.name}
       %h4 SPONSOR INFORMATION
       %div
@@ -96,7 +95,8 @@
           = f.text_field :phone, :size => 25, type: "text", label: false, class: "transfer-input"
       %div{:style => "float: right;"}
         = f.object.payment_type
-        = f.button :submit, :class => "btn", :id => "project-submit"
+        = f.button :submit, :class => "btn", style: "display: none"
+        = link_to "Submit", "#",class: "btn", id: "project-submit"
 
 .project-id{:style => "display: none;"}
   = @project.id
@@ -116,6 +116,7 @@
         $(".transfer-input").attr("required", "required");
       }
     });
+
     function updateCutdown() {
       var remaining = 275 - jQuery('.mission').val().length;
       jQuery('.cutdown').text('(' + remaining + ' characters remaining.)');
