@@ -51,4 +51,5 @@ gem 'unicorn'
 gem 'capistrano'
 gem 'carrierwave'
 gem 'mini_magick'
-#gem 'whenever', require: false
+gem 'activemerchant', :require => 'active_merchant'
+gem 'simple_form'
