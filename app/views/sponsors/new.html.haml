@@ -96,13 +96,39 @@
           = f.text_field :phone, :size => 25, type: "text", label: false, class: "transfer-input"
       %div{:style => "float: right;"}
         = f.object.payment_type
-        = f.button :submit, :class => "btn", :id => "project-submit"
+        = f.button :submit, :class => "btn", style: "display: none"
+        = link_to "Submit", "#",class: "btn", id: "project-submit"
 
 .project-id{:style => "display: none;"}
   = @project.id
 
 :javascript
   $(document).ready(function(){
+    $("#project-submit").click(function(){
+      Stripe.createToken({
+        number: $('#sponsor_card_number').val(),
+        cvc: $('#sponsor_cvc').val(),
+        exp_month: $('#sponsor_month').val(),
+        exp_year: $('#sponsor_year_card').val()
+      }, stripeResponseHandler);
+    })
+
+
+    function stripeResponseHandler(status, response) {
+      if (response.error) {
+          // show the errors on the form
+          $(".payment-errors").text(response.error.message);
+      } else {
+          var form$ = $("#new_sponsor");
+          // token contains id, last4, and card type
+          var token = response['id'];
+          // insert the token into the form so it gets submitted to the server
+          form$.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
+          // and submit
+          form$.get(0).submit();
+      }
+    }
+ 
     $("#sponsor_payment_type").change(function(){
       if(this.value == "Credit Card"){
         $("#wire-transfer").hide();
