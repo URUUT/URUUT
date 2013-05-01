@@ -1,5 +1,8 @@
 Crowdfund::Application.routes.draw do
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations" }
+  match '/users/auth/:provider/callback', to: 'services#create'
+
+  # devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations" }
+  devise_for :users, :controllers => { :registrations => "registrations" }
   resources :users, :only => [:show]
 
   get "contacts/new"
@@ -7,8 +10,6 @@ Crowdfund::Application.routes.draw do
   get "contacts/edit"
 
   #devise_for :users
-
-   # match '/auth/:provider/callback', to: 'services#create'
 
   # get "services/index"
   #
