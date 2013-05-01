@@ -35,6 +35,8 @@ Crowdfund::Application.routes.draw do
   # get "projects/add_desc"
    get "projects/save_image"
    post "projects/save_image"
+   get "projects/:project_id/sponsors/:id/confirmation" => "sponsors#confirmation", as: "confirmation"
+   get "purchase" => "payments#purchase"
 #
 #   post "projects/add_perk"
 #   post "projects/get_perk"
@@ -69,7 +71,10 @@ Crowdfund::Application.routes.draw do
     post "update_perk", :on => :collection
     post "delete_perk", :on => :collection
    # post "submit_project", :on => :collection
-    resources :sponsors
+    resources :sponsors do
+      get :get_sponsorship_levels
+      get :confirm_sponsor
+    end
   end
 
   resources :project_steps
