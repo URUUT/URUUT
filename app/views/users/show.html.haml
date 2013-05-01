@@ -1,0 +1,87 @@
+.full-width.banner
+  .container
+    .span4
+      = image_tag(@user.avatar_url, :class => "img-circle avatar")
+
+      %h4.user-name= @user.name
+      - if @is_current
+        = link_to "not you? click here to logout", destroy_user_session_path, :class => "green"
+
+    .span2.vertical-center
+      %h6 Projects Funded
+      %h3= @user.projects_funded.all.count
+
+    .span6.vertical-center
+      - if @is_current
+        %h6 Total Amount Funded
+        %h3= number_to_currency(@user.amount_funded, :precision => 0)
+      - else
+        %h6 Most funded city
+        %h3= @user.most_funded_city
+
+.cf
+.row{:style => "margin-top:160px;margin-left:-20px;"}
+  .span8
+    %h3
+      - if @is_current
+        Projects I've Created
+      - else
+        Their projects
+    %div
+      .projects-created.dropdown-list
+        %label Project status:
+        %select{:id => "projects-created"}
+          %option Funding Active
+          %option Funding Completed
+
+    = render "pages/project", :projects => @projects_created
+    .cf
+    = paginate @projects_created, :param_name => "created_page"
+
+    - if @is_current
+      %h3 Projects I've Funded
+      %div
+        .projects-funded.dropdown-list
+          %label Project status:
+          %select{:id => "projects-funded"}
+            %option Funding Active
+            %option Funding Completed
+      = render "project", :projects => @projects_funded
+      .cf
+      = paginate @projects_funded, :param_name => "funded_page"
+
+  .span4
+    %h3.title{:style => "margin-bottom:5px;"} #{who(:whose)} badges
+    .well.info
+      %p How much do you want to raise on URUUT?
+
+      %p Remember to keep in mind the cost of a campaign and perks fulfillment. We suggest you add 10% to the amount you need to raise. This will cover URUUT’s 5% fee, our payment providers 3% fee and any potential extras.
+
+    %div{:style => "margin-top:-20px;margin-bottom:5px;float:left;"}
+      %h3.title #{who(:whose)} information
+    %div{:style => "text-align:right;"}
+      %p
+        %i.icon-eye-close
+        = link_to "edit", edit_user_registration_path, :class => "green"
+    .well.info
+      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Profile image
+      %p= image_tag(@user.avatar_url)
+
+      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Name
+      %p= @user.name
+
+      - if @is_current
+        %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Email address
+        %p= @user.email
+
+        %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Business or organization name
+        %p= @user.organization
+
+      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Mission statement / about
+      %p= @user.mission
+
+      - if @is_current
+        %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Email preference
+        %p
+          = #{(@user.subscribed ? "" : "Not")}
+          Subscribed

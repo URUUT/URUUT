@@ -6,8 +6,8 @@
     %title= content_for?(:title) ? yield(:title) : "Myapp"
     %meta{:content => "", :name => "description"}
     %meta{:content => "", :name => "author"}
-    = stylesheet_link_tag  "default/application", "trontastic/jquery-ui-1.8.22.custom.css", "http://cdn.leafletjs.com/leaflet-0.5/leaflet.css", :media => "all"
-    = javascript_include_tag "application"
+    = stylesheet_link_tag  "default/application", "trontastic/jquery-ui-1.8.22.custom.css", "http://cdn.leafletjs.com/leaflet-0.5/leaflet.css", "http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css", :media => "all"
+    = javascript_include_tag "http://code.jquery.com/jquery-1.9.1.js", "http://code.jquery.com/ui/1.10.2/jquery-ui.js", "application", :media => "all"
     = filepicker_js_include_tag
     = javascript_tag do
       Stripe.setPublishableKey("pk_test_WRrfoQLUDkpGHAxCmOY0Y6ud");
@@ -34,10 +34,8 @@
           = render 'layouts/navigation'
 
       .container
-        .row-fluid
-          .span12
-            = render 'layouts/messages'
-            = yield
+        = render 'layouts/messages'
+        = yield
       #push
     = render 'partials/footer'
 

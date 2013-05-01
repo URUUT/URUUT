@@ -2,10 +2,10 @@
   .funding-info
     .container
       .span8
-        %h4.title= @project.title
+        %h4.title= @project.project_title
         %span.location #{@project.city}, #{@project.state}
         %hr
-        %p.short-desc= @project.short_description
+        %p.short-desc= @project.title
         %h6{:style => "color:#403e37;font-family:'Proxima Nova Semi';display:inline-block;margin:0;letter-spacing:normal;"} SHARE:
         = image_tag "fb-count.png", :style => "margin-right:20px;"
         = image_tag "tw-count.png", :style => "margin-right:20px;"

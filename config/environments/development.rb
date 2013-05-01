@@ -51,5 +51,5 @@ Crowdfund::Application.configure do
   }
 
   Paperclip.options[:command_path] = "/usr/local/Cellar/imagemagick/6.7.1-1/bin"
-
+  RailsDevelopmentBoost.async = false if defined?(RailsDevelopmentBoost) 
 end
