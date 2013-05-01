@@ -9,17 +9,9 @@ class RegistrationsController < Devise::RegistrationsController
     else
       @user.update_without_password(params[:user])
     end
+    
+    flash[:notice] = "Profile Successfully Updated"
+    redirect_to user_path(@user.id)
 
-    if successfully_updated
-      # Sign in the user bypassing validation in case his password changed
-      sign_in @user, :bypass => true
-      if params[:user][:avatar]
-        render json: { :path => (@user.errors.empty? ? @user.avatar_url : "#failed#") }
-      else
-        redirect_to root_path
-      end
-    else
-      render "edit"
-    end
   end
 end
