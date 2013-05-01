@@ -95,7 +95,8 @@ class User < ActiveRecord::Base
   end
 
   def password_required?
-    super && provider.blank?
+    # super && provider.blank?
+    super && services.blank?
   end
 
   def projects_funded

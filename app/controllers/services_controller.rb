@@ -5,11 +5,11 @@ class ServicesController < ApplicationController
 
   def create
     # Service parameter from routing and callbacks
-    provider = (params[:service] ? params[:service] : "no provider")
+    provider = (params[:provider] ? params[:provider] : "no provider")
 
     auth = request.env["omniauth.auth"]
     # Proceed if omniauth hash and provider name available
-    if auth && params[:service]
+    if auth && params[:provider]
       case provider
         when "facebook"
           uid = auth.uid

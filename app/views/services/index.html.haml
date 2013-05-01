@@ -1,6 +1,13 @@
 %h3 Services
 
+%p= flash[:notice]
+%p= flash[:error]
+
 %h5 You use
 %ul
 - @services.each do |service|
-  %li= service.provider
+  %li= service.provider.capitalize
+
+%h5 Sign in via
+= link_to user_omniauth_authorize_path(:facebook) do
+  = image_tag('fb-login.png')
