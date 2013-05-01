@@ -7,7 +7,7 @@
     %meta{:content => "", :name => "description"}
     %meta{:content => "", :name => "author"}
     = stylesheet_link_tag  "default/application", "trontastic/jquery-ui-1.8.22.custom.css", "http://cdn.leafletjs.com/leaflet-0.5/leaflet.css", :media => "all"
-    = javascript_include_tag "application"
+    = javascript_include_tag "application", :media => "all"
     = filepicker_js_include_tag
     = javascript_tag do
       Stripe.setPublishableKey("pk_test_WRrfoQLUDkpGHAxCmOY0Y6ud");
@@ -36,18 +36,17 @@
       .container
         .row-fluid
           .span12
-            -#= render 'layouts/messages'
+            = render 'layouts/messages'
             = yield
       #push
     = render 'partials/footer'
-    
 
 :javascript
   if(window.opener) {
     window.opener.location.reload(true);
     window.close()
   }
-	
+
   $('.social-login a').click(function(e) {
     e.preventDefault();
     var ahref = $(this).attr('href');

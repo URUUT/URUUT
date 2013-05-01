@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130427214521) do
+ActiveRecord::Schema.define(:version => 20130429132252) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -60,6 +60,9 @@ ActiveRecord::Schema.define(:version => 20130427214521) do
     t.string  "name"
     t.integer "project_id"
     t.integer "sponsor_id"
+    t.string  "payment",    :default => "Unpaid"
+    t.string  "status",     :default => "Unconfirmed"
+    t.integer "level_id"
   end
 
   create_table "projects", :force => true do |t|
