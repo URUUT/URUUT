@@ -401,6 +401,14 @@ label {
 
 .graphic-right {
   margin-top:60px;}
+	
+.users.show {
+	.project {
+		&:nth-child(even) {
+			margin-right:0;
+		}
+	}
+}
 
 .signup-container {
   background:transparent url(image-path('grid.png')) top left repeat;
