@@ -11,7 +11,7 @@
       = f.label :email
       = f.email_field :email, :size => 45
 
-    - if f.object.password_required?
+    - unless session["devise.provider"] && session["devise.uid"]
       %div.inline
         = f.label :password
         = f.password_field :password, :size => 17
