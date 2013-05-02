@@ -11,13 +11,14 @@
       = f.label :email
       = f.email_field :email, :size => 45
 
-    %div.inline
-      = f.label :password
-      = f.password_field :password, :size => 17
+    - if f.object.password_required?
+      %div.inline
+        = f.label :password
+        = f.password_field :password, :size => 17
 
-    %div.inline{:style => "margin-left:25px;"}
-      = f.label :password_confirmation
-      = f.password_field :password_confirmation, :size => 17
+      %div.inline{:style => "margin-left:25px;"}
+        = f.label :password_confirmation
+        = f.password_field :password_confirmation, :size => 17
 
     %div.inline
       = button_tag(type: 'submit', class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:left;") do

@@ -6,8 +6,14 @@
 %h5 You use
 %ul
 - @services.each do |service|
-  %li= service.provider.capitalize
+  %li
+    = service.provider.capitalize
+    = link_to "Unlink", service, :method => :delete
 
-%h5 Sign in via
+%h4 Link to your profile
+%h5 Facebook
 = link_to user_omniauth_authorize_path(:facebook) do
   = image_tag('fb-login.png')
+%h5 Twitter
+= link_to user_omniauth_authorize_path(:twitter) do
+  = image_tag('tw-login.png')
