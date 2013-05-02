@@ -42,7 +42,7 @@ class ServicesController < ApplicationController
           service = Service.find_by_provider_and_uid(provider, uid)
           if service
             flash[:notice] = "Successfully signed in via #{provider.capitalize}"
-            sign_in_and_redirect(:user, user)
+            sign_in_and_redirect(:user, service.user)
           else
             user = User.find_by_email(email)
             if user
