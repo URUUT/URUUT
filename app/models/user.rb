@@ -81,13 +81,22 @@ class User < ActiveRecord::Base
   end
 
   def self.new_with_session(params, session)
-    super.tap do |user|
-      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
-        user.email = data["email"] if user.email.blank?
-      elsif data = session["devise.twitter_data"]
-        user.name = data["name"] if user.name.blank?
+    if session["devise.user_attributes"]
+      new(session["devise.user_attributes"], :without_protection => true) do |user|
+        user.attributes = params
+        user.services.build(:provider => session["devise.provider"], :uid => session["devise.uid"])
+        user.valid?
       end
+    else
+      super
     end
+    #super.tap do |user|
+    #  if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+    #    user.email = data["email"] if user.email.blank?
+    #  elsif data = session["devise.twitter_data"]
+    #    user.name = data["name"] if user.name.blank?
+    #  end
+    #end
   end
   
   def email_required?
@@ -95,7 +104,6 @@ class User < ActiveRecord::Base
   end
 
   def password_required?
-    # super && provider.blank?
     super && services.blank?
   end
 
