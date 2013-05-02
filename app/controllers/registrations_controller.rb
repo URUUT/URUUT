@@ -4,11 +4,7 @@ class RegistrationsController < Devise::RegistrationsController
     email_changed = @user.email != params[:user][:email]
     password_changed = !params[:user][:password].empty?
 
-    successfully_updated = if email_changed or password_changed
-      @user.update_with_password(params[:user])
-    else
-      @user.update_without_password(params[:user])
-    end
+    successfully_updated = @user.update_attributes(params[:user])
 
     if successfully_updated
       # Sign in the user bypassing validation in case his password changed
@@ -16,7 +12,7 @@ class RegistrationsController < Devise::RegistrationsController
       if params[:user][:avatar]
         render json: { :path => (@user.errors.empty? ? @user.avatar_url : "#failed#") }
       else
-        redirect_to root_path
+        redirect_to @user
       end
     else
       render "edit"
