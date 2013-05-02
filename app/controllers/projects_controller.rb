@@ -71,8 +71,10 @@ end
         x
       end
       status = params["#{level}"]["#{count}"] ? 1 : 0
-      if @project.sponsorship_benefits.blank? || params[level]["id_#{count}"].nil?
-       data <<  {name: params["#{level}"]["info_#{count}"],sponsorship_level_id: key, project_id: @project.id, status: status}
+      if @project.sponsorship_benefits.blank? || params["#{level}"]["id_#{count}"].nil?
+        unless params["#{level}"]["info_#{count}"].blank?
+          data <<  {name: params["#{level}"]["info_#{count}"],sponsorship_level_id: key, project_id: @project.id, status: status}
+        end
      else
         sponsorship_benefit = SponsorshipBenefit.find(params[level]["id_#{count}"])
         sponsorship_benefit.update_attributes({name: params["#{level}"]["info_#{count}"],sponsorship_level_id: key, project_id: @project.id, status: status})
