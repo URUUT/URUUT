@@ -14,6 +14,11 @@
 %h5 Facebook
 = link_to user_omniauth_authorize_path(:facebook) do
   = image_tag('fb-login.png')
+
 %h5 Twitter
 = link_to user_omniauth_authorize_path(:twitter) do
   = image_tag('tw-login.png')
+
+%h5 LinkedIn
+= link_to user_omniauth_authorize_path(:linkedin) do
+  = image_tag('li-login.png')
