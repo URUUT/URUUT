@@ -38,9 +38,9 @@ class SponsorsController < ApplicationController
     @sponsor.save(validate: false)
     @project_sponsor = ProjectSponsor.create(params[:project_sponsor])
     @project_sponsor.update_attributes({cost: cost, project_id: params[:project_id], sponsor_id: @sponsor.id,
-                                      level_id: params[:project_sponsor][:level_id]})
+                                      level_id: params[:project_sponsor][:level_id], card_token: params[:stripeToken]})
 
-    charge = Stripe::Charge.create({:amount => cost * 1000, :currency => "usd", :card => params[:stripeToken], :description => current_user.email})
+    # charge = Stripe::Charge.create({:amount => cost, :currency => "usd", :card => params[:stripeToken]});
 
     redirect_to confirmation_url(params[:project_id], @sponsor.id)
   end

@@ -1,3 +1,4 @@
+= javascript_include_tag "https://js.stripe.com/v2/"
 .full-width.hero
   .container
     %h2 This is a placeholder
@@ -35,35 +36,35 @@
               %span
 
     = form_for(@sponsor, :url => project_sponsors_path, :html => {:class => "span8 well", :style => "margin-left: 0;", multipart: true, method: 'POST'}) do |f|
-
+      .payment-errors
       .span12{:style => "background-color: #f5f5f5; margin-left: 0px;"}
         .pull-left{:style => "width: 250px; height: 500px; border-right: solid 1px #d3d3d3;"}
           %h4 SPONSORSHIP COST
-          %h1.cost-level #{number_to_currency(@sponsorship_levels.first.cost, precision: 0)}
+          %h1.cost-level.green-font #{number_to_currency(@sponsorship_levels.first.cost, precision: 0)}
         .pull-right{:style => "width: 320px;"}
           = label_tag :project_sponsor_name do
             CHOOSE YOUR SPONSORSHIP LEVEL
-          = select :project_sponsor, :level_id, options_for_select(@sponsorship_levels.sort.map {|level| [level.name, level.id]}), required: true, size: 17, class: "selectbox"
+          = select :project_sponsor, :level_id, options_for_select(@sponsorship_levels.map {|level| ["#{level.name} Level", level.id]}), required: true, size: 17, class: "selectbox"
           = image_tag "3.gif", id: "loading", style: "display: none; margin: -3px 0 10px 10px;"
           %br/
           %h5 SPONSORSHIP DETAILS
           .sponsorship-level-details
-            %h3 #{@sponsorship_levels.first.name.upcase} sponsor
+            %h3.green-font #{@sponsorship_levels.first.name.upcase} sponsor
             - @sponsorship_levels.first.sponsorship_benefits.each do |benefit|
               %p.normal-font - #{benefit.name}
       %h4 SPONSOR INFORMATION
       %div
-        = f.label :name, "Business OR ORGANIZATION NAME*"
+        = f.label :name, "Business OR ORGANIZATION NAME*", class: "green-font"
         = text_field :project_sponsor, :name, required: true, :size => 40, label: false
       %div
-        = f.label :mission do
+        = f.label :mission, class: "green-font" do
           BUSINESS OR ORGANIZATION'S LOGO*
         = file_field :project_sponsor, :logo, required: true, label: false
       %div
-        = f.label :mission do
+        = f.label :mission, class: "green-font" do
           MISSION STATEMENT / ABOUT*
           %span.cutdown.italic
-        = text_area :project_sponsor, :mission, maxlength: 275, required: true, :style => "height: 186px; width: 602px;", label: false, class: "mission"
+        = text_area :project_sponsor, :mission, maxlength: 275, required: true, :style => "height: 186px; width: 602px;", label: false, class: "mission", placeholder: "Tell your story here ..."
       %div{:style => "border-top: solid 1px #a5a5a5; padding-top: 25px"}
         = f.label :payment_type do
           PREFERRED PAYMENT METHOD*
@@ -71,38 +72,67 @@
         = f.select :payment_type, options_for_select(Sponsor::PAYMENT), :id => "payment_type", required: true, :size => 17
       %div#credit-card{:style => "float: left;"}
         %div
-          = f.label :card_name, "NAME AS IT APPERS ON CARD*"
+          = f.label :card_name, "NAME AS IT APPERS ON CARD*", class: "green-font"
           = f.text_field :card_name, :size => 40, required: true, label: false, class: "card-input"
         %div{:style => "float: left;"}
-          = f.label :card_number, "CARD NUMBER*"
-          = f.text_field :card_number, :size => 40, required: true, label: false, class: "card-input"
+          = f.label :card_number, "CARD NUMBER*", class: "green-font"
+          = f.text_field :card_number, :size => 40, required: true, label: false, class: "card-input", :"data-stripe" => "number"
         %div{:style => "float: left; margin-right: 60px;"}
-          = f.label :cvc, "CVC*"
-          = f.text_field :cvc, :size => 5, required: true, label: false, class: "card-input"
+          = f.label :cvc, "CVC*", class: "green-font"
+          = f.text_field :cvc, :size => 5, required: true, label: false, class: "card-input", :"data-stripe" => "cvc"
         %div{:style => "float: left; width: 340px;"}
-          = f.label :card_expiration, "CARD EXPIRATION (MM/YYYY)*"
-          = f.text_field :month, :style => "float: left; margin-right: 15px;", size: "4", required: true, label: false, class: "card-input"
-          = f.text_field :year_card, :style => "float: left;", size: "4", required: true, label: false, class: "card-input"
+          = f.label :card_expiration, "CARD EXPIRATION (MM/YYYY)*", class: "green-font"
+          = f.text_field :month, :style => "float: left; margin-right: 15px;", size: "4", required: true, label: false, class: "card-input", :"data-stripe" => "exp-month"
+          = f.text_field :year_card, :style => "float: left;", size: "4", required: true, label: false, class: "card-input", :"data-stripe" => "exp-year"
+        = link_to "https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_1kjvzNoI5Jbkcb1RTv4vtoxljRUueUNZ", :target => "_blank", :class => "stripe-connect light-blue" do
+          %span Connect with Stripe
+
+        %input{:type => 'hidden', :value => "#{@connected}", :id => "connected", :required => true}
       %div#wire-transfer{:style => "display: none; float: left;"}
         %div
-          = f.label :name, "CONTACT NAME*"
+          = f.label :name, "CONTACT NAME*", class: "green-font"
           = f.text_field :name, :size => 40, label: false, class: "transfer-input"
         %div
-          = f.label :email, "CONTACT EMAIL*"
+          = f.label :email, "CONTACT EMAIL*", class: "green-font"
           = f.text_field :email, :size => 40, label: false, class: "transfer-input"
         %div
-          = f.label :phone, "CONTACT PHONE NUMBER*"
+          = f.label :phone, "CONTACT PHONE NUMBER*", class: "green-font"
           = f.text_field :phone, :size => 25, type: "text", label: false, class: "transfer-input"
       %div{:style => "float: right;"}
-        = f.object.payment_type
-        = f.button :submit, :class => "btn", style: "display: none"
-        = link_to "Submit", "#",class: "btn", id: "project-submit"
+        = image_tag "3.gif", id: "submit-progress", style: "display: none; float: left; position: relative; top: 32px; margin-right: -40px; margin-left: 15px; z-index: 9999;"
+        = f.button :submit, class: "btn pull-right", id: "project-submit"
 
 .project-id{:style => "display: none;"}
   = @project.id
 
 :javascript
   $(document).ready(function(){
+    Stripe.setPublishableKey('pk_test_BTNPlS59UIPJC5Fnp7CR9It6');
+    $(function($) {
+      $('#new_sponsor').submit(function(event) {
+        var $form = $(this);
+        $form.find('button').prop('disabled', true);
+        $form.find('button').attr("style", "padding-left: 50px;")
+        $("#submit-progress").show();
+        $('input.card-input').payment('formatCardNumber');
+
+        Stripe.createToken($form, stripeResponseHandler);
+        return false;
+      });
+    });
+    var stripeResponseHandler = function(status, response) {
+      var $form = $('#new_sponsor');
+
+      if (response.error) {
+        $form.find('.payment-errors').text(response.error.message);
+        $form.find('button').prop('disabled', false);
+      } else {
+        var token = response.id;
+        $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+        $form.get(0).submit();
+      }
+    };
+
     $("#sponsor_payment_type").change(function(){
       if(this.value == "Credit Card"){
         $("#wire-transfer").hide();
@@ -115,6 +145,17 @@
         $(".card-input").removeAttr("required");
         $(".transfer-input").attr("required", "required");
       }
+    });
+
+    $('.stripe-connect').click(function() {
+      localStorage.setItem('organization', $('#project_organization').val());
+      localStorage.setItem('address', $('#project_address').val());
+      localStorage.setItem('city', $('#project_city').val());
+      localStorage.setItem('state', $('#project_state').val());
+      localStorage.setItem('zip', $('#project_zip').val());
+      localStorage.setItem('website', $('#project_website').val());
+      localStorage.setItem('twitter_handle', $('#project_twitter_handle').val());
+      localStorage.setItem('facebook_page', $('#project_facebook_page').val());
     });
 
     function updateCutdown() {
@@ -139,6 +180,7 @@
     $(".sponsor-change").click(function(){
       var projectId = parseInt($(".project-id").text());
       var sponsorId = parseInt($(this).attr("sponsor-id"));
+      $("#project_sponsor_level_id option").removeAttr("selected").removeAttr("selected");
       $("#project_sponsor_level_id option[value='"+ sponsorId +"']").attr("selected", "selected");
       $.ajax({
         url: "/projects/" + projectId + "/sponsors/" + sponsorId + "/get_sponsorship_levels.js",
