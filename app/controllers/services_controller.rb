@@ -71,8 +71,13 @@ class ServicesController < ApplicationController
   end
 
   def destroy
-    @service = current_user.services.find(params[:id])
-    @service.destroy
+    # Don't allow user to delete all linked accounts if he has not set password
+    if current_user.services.count == 1 && current_user.encrypted_password.blank?
+      flash[:error] = "Please set your profile password before deleting all social accounts"
+    else
+      @service = current_user.services.find(params[:id])
+      @service.destroy
+    end
 
     redirect_to services_path
   end
