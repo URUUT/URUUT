@@ -1,26 +1,26 @@
 .full-width.banner
   .container
     .span3
-      %h3= @project.title
+      %h4.white-text= @project.title
       %h5 #{@project.city}, #{@project.state}
-    
+
     .span3
       %h6 Current Amount Funded
       %h2= number_to_currency(amount_funded(@project.id), :precision => 0)
       of #{number_to_currency(@project.goal, :precision => 0)}
 
     .span2
-      %h5 Project Sponsors
+      %h6.white-text Project Sponsors
       %h2= @sponsor_count
-			
+
     .span2
-      %h5 Individual Contributions
+      %h6.white-text Individual Contributions
       %h2= @donations.count
-	
+
     .span2
-      %h5 Days Remaining
-      %h2 #{time_left(@project.duration, @project.approval_date)}
-			
+      %h6.white-text Days Remaining
+      / %h2 #{time_left(@project.duration, @project.approval_date)}
+
 .cf
 
 #pages{:style => "margin-top:200px;"}
@@ -33,7 +33,7 @@
       = link_to "Project Funders", "#tabs-3"
     %li
       = link_to "Project Messages", "#tabs-4"
-			
+
   #tabs-1.cf
     .span8
       %h3 Funding Tracker
@@ -45,6 +45,25 @@
       %p Chart goes here
   #tabs-2
     %span4
+      #subtabs
+        %ul
+          %li
+            %a{:href => "#tabs-1"} COVER PHOTO & GALLERY
+          %li
+            %a{:href => "#tabs-2"} PROJECT DETAILS
+          %li
+            %a{:href => "#tabs-3"} STORY VISUAL
+          %li
+            %a{:href => "#tabs-3"} PROJECT UPDATES
+        #tabs-1
+          %h2 Content heading 1
+          %p test
+        #tabs-2
+          %h2 Content heading 2
+          %p test
+        #tabs-3
+          %h2 Content heading 3
+          %p Test
     %span8
       %h3 My Project Cover Photo
       %p Add ability to change cover photo here
@@ -54,10 +73,38 @@
     Test 3
   #tabs-4
     Test 4
-		
-		
+
 %script{:src => "http://code.jquery.com/ui/1.10.2/jquery-ui.js"}
 :javascript
   $(function() {
     $( "#pages" ).tabs();
+    $("#tabs, #subtabs").tabs();
   });
+
+:css
+  #tabs {
+    background: transparent;
+    border: none;
+  }
+  #tabs .ui-widget-header {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid #c0c0c0;
+      -moz-border-radius: 0px;
+      -webkit-border-radius: 0px;
+      border-radius: 0px;
+  }
+  #tabs .ui-tabs-nav .ui-state-default {
+      background: transparent;
+      border: none;
+  }
+  #tabs .ui-tabs-nav .ui-state-active {
+      background: transparent url(img/uiTabsArrow.png) no-repeat bottom center;
+      border: none;
+  }
+  #tabs .ui-tabs-nav .ui-state-default a {
+      color: #c0c0c0;
+  }
+  #tabs .ui-tabs-nav .ui-state-active a {
+      color: #459e00;
+  }

@@ -17,37 +17,40 @@ class ProjectsController < ApplicationController
     session[:connected] = ''
  #    @project.perks.build
  #    @project.galleries.build
- render :layout => 'landing'
-end
+   render :layout => 'landing'
+  end
 
-def create
-  @project = Project.new(params[:project])
-  @project.user_id = current_user.id
-  if @project.save
-    respond_to do |format|
-      format.js { render :js => @project.id }
+  def create
+    @project = Project.new(params[:project])
+    @project.user_id = current_user.id
+    if @project.save
+      respond_to do |format|
+        format.js { render :js => @project.id }
+      end
     end
   end
-end
 
-def edit
-  @project = Project.find(params[:id])
-  session[:current_project] = @project.id
-  logger.debug("Current session id is: #{session[:current_project]}")
-  @project.update_attributes!(params[:project])
-  @perks = Perk.where("project_id = ?", @project.id)
-  @connected = session[:connected]
-  logger.debug(@connected)
-end
+  def edit
+    @project = Project.find(params[:id])
+    session[:current_project] = @project.id
+    logger.debug("Current session id is: #{session[:current_project]}")
+    @project.update_attributes!(params[:project])
+    @perks = Perk.where("project_id = ?", @project.id)
+    @connected = session[:connected]
+    logger.debug(@connected)
+  end
 
-def show
-  @project = Project.find(params[:id])
-  @donation = Donation.where("project_id = ?", @project.id)
-  @perks = Perk.where("project_id = ?", @project.id)
-  @user = User.find(@project.user_id)
-  session[:current_project] = @project.id
-  render :layout => 'landing'
-end
+  def show
+    @project = Project.find(params[:id])
+    sort_sponsorships = @project.project_sponsors.sort_by {|ps| ps.level_id}
+    @project_sponsors = sort_sponsorships.group_by {|sponsor| sponsor.level_id}
+    @sponsorship_levels = SponsorshipLevel.all
+    @donation = Donation.where("project_id = ?", @project.id)
+    @perks = Perk.where("project_id = ?", @project.id)
+    @user = User.find(@project.user_id)
+    session[:current_project] = @project.id
+    render :layout => 'landing'
+  end
 
 	# def update
 #     redirect_to project_steps_path
