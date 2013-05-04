@@ -75,6 +75,7 @@ Crowdfund::Application.routes.draw do
   end
 
   resources :project_steps
+  resources :donation_steps
 
   resources :services, :only => [:index, :create, :destroy]
   #resources :services do
