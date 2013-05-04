@@ -1,1 +1,23 @@
-%h3 Thank you
+.container.donations{:style => "margin-top:30px;"}
+  .span8
+    %h3.title Thank you
+    %h2.green Congratulations!
+    %p.congratulations
+      You are now an official contributor to #{@project.title}! Now it's time to spread the word.
+
+    %p Facebook Twitter Email Bitly
+
+  .span4
+    %h3.title Details
+    .well.green-headered{:style => "border:none;"}
+      %div
+        %h5 Payment amount
+        = number_to_currency(@donation.amount, :precision => 0)
+      %div
+        %h5 Your perk
+        %p
+          %strong= @perk.name
+        %p= @perk.description
+      %p.grey
+        %strong Estimated Delivery:
+        October 2013

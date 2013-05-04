@@ -30,7 +30,6 @@ class DonationStepsController < ApplicationController
     else
       redirect_to wizard_path(:confirmation)
     end
-    #render_wizard @donation
   end
 
 end
