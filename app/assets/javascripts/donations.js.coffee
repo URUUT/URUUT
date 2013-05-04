@@ -24,6 +24,8 @@ new_subscription =
   handleStripeResponse: (status, response) ->
     if status == 200
       $('input#donation_token').attr('value', response.id)
+      $('input#donation_card_last4').attr('value', response.card.last4)
+      $('input#donation_card_type').attr('value', response.card.type)
       $('#new_donation')[0].submit()
       # return false
     else
@@ -54,6 +56,8 @@ edit_subscription =
   handleStripeResponse: (status, response) ->
     if status == 200
       $('input#donation_token').attr('value', response.id)
+      $('input#donation_last4').attr('value', response.card.last4)
+      $('input#donation_card_type').attr('value', response.card.type)
       $('#edit_donation')[0].submit()
       # return false
     else

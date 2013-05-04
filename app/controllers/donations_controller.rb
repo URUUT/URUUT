@@ -5,20 +5,23 @@ class DonationsController < ApplicationController
 	def new
     logger.debug(session[:current_project])
 		@donation = Donation.new
+    @perk = Perk.find(params[:perk])
     @perk_name = params[:name].to_s
     @perk_amount = params[:amount]
     @perk_description = params[:description]
     @project = Project.find(session[:current_project])
+    session[:perk_id] = params[:perk]
     logger.debug(@project.title)
 	end
 
 	def create
     @donation = Donation.new(params[:donation])
-    @token = @donation.token
 
     if @donation.save
       session[:donation_id] = @donation.id
       session[:card_token] = @donation.token
+      session[:card_type] = @donation.card_type
+      session[:card_last4] = @donation.card_last4
       redirect_to donation_steps_path
     else
       render :new
