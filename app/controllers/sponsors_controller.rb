@@ -5,6 +5,7 @@ class SponsorsController < ApplicationController
   def new
     @sponsor = Sponsor.new
     @selected_level = SponsorshipLevel.find(params[:sponsorship_level]) if params[:sponsorship_level]
+    session[:connected] = ''
     render :layout => 'landing'
   end
 

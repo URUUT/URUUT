@@ -18,4 +18,8 @@ class ProjectAdmin::ProjectsController < ApplicationController
     logger.debug(@donations)
   end
 
+  def update
+    asd
+  end
+
 end
