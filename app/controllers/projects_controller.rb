@@ -98,8 +98,10 @@ class ProjectsController < ApplicationController
 
   @sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits) 
   @project.update_attributes!(params[:project])
-
   if @project.save
+    if params[:commit].eql? "Save Updates"
+      redirect_to :back
+    end
     respond_to do |format|
       format.js { render :js => @project.id }
     end

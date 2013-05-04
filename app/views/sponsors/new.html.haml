@@ -84,8 +84,10 @@
           = f.label :card_expiration, "CARD EXPIRATION (MM/YYYY)*", class: "green-font"
           = text_field_tag :month,nil, :style => "float: left; margin-right: 15px;", size: "4", required: true, label: false, class: "card-input", :"data-stripe" => "exp-month"
           = text_field_tag :year_card,nil, :style => "float: left;", size: "4", required: true, label: false, class: "card-input", :"data-stripe" => "exp-year"
-        = link_to "https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_1kjvzNoI5Jbkcb1RTv4vtoxljRUueUNZ", :target => "_blank", :class => "stripe-connect light-blue" do
-          %span Connect with Stripe
+          = link_to "https://connect.stripe.com/oauth/authorize?response_type=code&client_id=#{ENV['STRIPE_CLIENT_ID']}", :target => "_blank", :class => "stripe-connect" do
+            %span Connect with Stripe
+
+          %input{:type => 'hidden', :value => "#{@connected}", :id => "connected", :required => true}
 
         %input{:type => 'hidden', :value => "#{@connected}", :id => "connected", :required => true}
       %div#wire-transfer{:style => "display: none; float: left;"}
@@ -114,10 +116,6 @@
     $(function($) {
       $('#new_sponsor').submit(function(event) {
         var $form = $(this);
-        $form.find('button').prop('disabled', true);
-        $form.find('button').attr("style", "padding-left: 50px;")
-        $("#submit-progress").show();
-        $('input.card-input').payment('formatCardNumber');
 
         Stripe.createToken($form, stripeResponseHandler);
         return false;
@@ -135,6 +133,33 @@
         $form.get(0).submit();
       }
     };
+
+    $('#new_sponsor').on('submit', function(e){
+     if($('#connected').val() == 'true') {
+      e.preventDefault();
+      var data = $(this).serialize();
+      $.ajax({
+        type: 'POST',
+        url: '#{project_path(@project.id)}',
+        data: data,
+        beforeSend: function (xhr) {
+          $form.find('button').prop('disabled', true),
+          $form.find('button').attr("style", "padding-left: 50px;")
+          $("#submit-progress").show();
+          $('input.card-input').payment('formatCardNumber');
+        }
+      }).done(function(data){
+        console.log("Success???");
+        console.log(data);
+        window.location.href = '/projects/' + data + '/sponsors/new';
+        window.location.reload(true);
+        localStorage.clear();
+      })
+     }else{
+       alert("Connect with Stripe, please.");
+       return false;
+     }
+    })
 
     $("#sponsor_payment_type").change(function(){
       if(this.value == "Credit Card"){
