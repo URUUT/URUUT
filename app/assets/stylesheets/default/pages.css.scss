@@ -1272,8 +1272,24 @@ a.green {
 .donation_steps {
   font-family:'Proxima Nova';
 
+  h2.green {
+    color:#70bf4c;
+    font-weight:normal;
+    text-transform:none;
+  }
+  p.congratulations {
+    font-size:16px;
+    margin-bottom:20px;
+  }
+
   .well.green-headered {
-    padding-top: 10px;
+    padding-top:10px;
+    div {
+      margin-bottom:15px;
+      p {
+        margin-bottom:3px;
+      }
+    }
     h5 {
       color:#70bf4c;
       margin-bottom:0px;
@@ -1283,7 +1299,7 @@ a.green {
       color:#b6b6b4;
     }
   }
-  .edit_donation {
+  form.edit_donation {
     button {
       width: 100% !important;
       -webkit-border-radius: 5px !important;
