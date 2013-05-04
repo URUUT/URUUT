@@ -13,13 +13,24 @@ class DonationsController < ApplicationController
 	end
 
 	def create
-		@donation = Donation.new(params[:donation])
-		@token = @donation.token
-	    if @donation.save_with_payment
-	      redirect_to project_url(@donation.project_id), :notice => "Thank you for contributing!"
-	    else
-	      render :new
-	    end
+    @donation = Donation.new(params[:donation])
+    @token = @donation.token
+
+    if @donation.save
+      session[:donation_id] = @donation.id
+      session[:card_token] = @donation.token
+      redirect_to donation_steps_path
+    else
+      render :new
+    end
+
+    #@donation = Donation.new(params[:donation])
+    #@token = @donation.token
+    #if @donation.save_with_payment
+    #  redirect_to project_url(@donation.project_id), :notice => "Thank you for contributing!"
+    #else
+    #  render :new
+    #end
 	end
 
 	def edit

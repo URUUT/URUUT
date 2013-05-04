@@ -1,0 +1,14 @@
+%h3 Confirmation
+
+= form_for @donation, :url => wizard_path do |f|
+  = f.submit
+
+
+  - if @donation.errors.any?
+    .error_messages
+      %h2
+        = pluralize(@donation.errors.count, "error")
+        prohibited this subscription from being saved:
+      %ul
+        - @donation.errors.full_messages.each do |msg|
+          %li= msg

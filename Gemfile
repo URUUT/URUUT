@@ -51,5 +51,6 @@ gem 'unicorn'
 gem 'capistrano'
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'wicked'
 #gem 'jquery-fileupload-rails'
 #gem 'whenever', require: false
