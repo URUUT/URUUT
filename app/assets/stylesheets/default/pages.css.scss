@@ -1268,6 +1268,31 @@ a.green {
   text-decoration:underline;
   font-style:italic;
 }
+
+.donation_steps {
+  font-family:'Proxima Nova';
+
+  .well.green-headered {
+    padding-top: 10px;
+    h5 {
+      color:#70bf4c;
+      margin-bottom:0px;
+      margin-top:0px;
+    }
+    .grey {
+      color:#b6b6b4;
+    }
+  }
+  .edit_donation {
+    button {
+      width: 100% !important;
+      -webkit-border-radius: 5px !important;
+      -moz-border-radius: 5px !important;
+      border-radius: 5px !important;
+    }
+  }
+}
+
 #search {
   display:block;
   margin:20px auto 10px;

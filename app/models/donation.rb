@@ -1,6 +1,6 @@
 class Donation < ActiveRecord::Base
-  attr_accessible :amount, :project_id, :customer_token, :user_id, :email, :token
-  attr_accessor :token
+  attr_accessible :amount, :project_id, :customer_token, :user_id, :email, :token, :card_last4, :card_type
+  attr_accessor :token, :card_last4, :card_type
 
   belongs_to :project
   belongs_to :user
