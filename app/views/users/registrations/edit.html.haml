@@ -10,7 +10,7 @@
         = f.hidden_field :avatar, :value => ""
         .row{:style => "margin-left:0px;margin-bottom:10px;"}
           .span2
-            = image_tag "#{current_user.avatar}/convert?w=100&h=100&fit=crop", :id => "avatar-img" 
+            = image_tag "#{current_user.avatar}", :id => "avatar-img" 
           .span4
             #avatar-file
               %input{:type => 'filepicker', :name => 'avatar', 'data-fp-button-text' => 'Upload', 'data-fp-apikey' => ENV['FILEPICKER_API'], 'data-fp-button-class' => 'avatar btn', 'onchange' => 'updateAvatar(event)'}

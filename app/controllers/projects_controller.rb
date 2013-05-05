@@ -49,15 +49,6 @@ def show
   render :layout => 'landing'
 end
 
-	# def update
-#     redirect_to project_steps_path
-		# @project = Project.find(params[:id])
-#     if @project.update_attributes(params[:project])
-#       flash[:notice] = "Successfully updated project."
-#       redirect_to project_steps_path
-#     end
-  # end
-
   def update
     @project = Project.find(params[:id])
     sponsorship_benefits = []
