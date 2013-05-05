@@ -4,7 +4,7 @@ class DonationStepsController < ApplicationController
 
   def show
     if session[:donation_id]
-      @donation = Donation.find(session[:donation_id])
+      @donation = Donation.unscoped.find(session[:donation_id])
       @project = @donation.project
       @card_type = session[:card_type]
       @card_last4 = session[:card_last4]
@@ -14,15 +14,11 @@ class DonationStepsController < ApplicationController
       redirect_to root_path
     end
 
-    if step == :thank_you
-      session.delete(:donation_id)
-      session.delete(:card_token)
-      session.delete(:perk_id)
-    end
+    session.except!(:donation_id, :card_token, :perk_id) if step == :thank_you
   end
 
   def update
-    @donation = Donation.find(session[:donation_id])
+    @donation = Donation.unscoped.find(session[:donation_id])
     @donation.token = session[:card_token]
 
     if @donation.save_with_payment

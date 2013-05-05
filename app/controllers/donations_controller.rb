@@ -18,10 +18,8 @@ class DonationsController < ApplicationController
     @donation = Donation.new(params[:donation])
 
     if @donation.save
-      session[:donation_id] = @donation.id
-      session[:card_token] = @donation.token
-      session[:card_type] = @donation.card_type
-      session[:card_last4] = @donation.card_last4
+      session.merge!(:donation_id => @donation.id, :card_token => @donation.token, :card_type => @donation.card_type,
+        :card_last4 => @donation.card_last4)
       redirect_to donation_steps_path
     else
       render :new
@@ -37,12 +35,12 @@ class DonationsController < ApplicationController
 	end
 
 	def edit
-		@donation = Donation.find(params[:id])
+		@donation = Donation.unscoped.find(params[:id])
 		@donation.save!
 	end
 
 	def update
-		@donation = Donation.find(params[:id])
+		@donation = Donation.unscoped.find(params[:id])
 		if @donation.update_attributes(params[:donation])
 			flash[:notice] = "Successfully updated donation."
 		end
