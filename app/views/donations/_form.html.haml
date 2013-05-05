@@ -9,6 +9,8 @@
           %li= msg
   / = f.hidden_field :plan_id
   = f.hidden_field :token
+  = f.hidden_field :card_type
+  = f.hidden_field :card_last4
   = f.hidden_field :email, :value => "#{current_user.email}"
   = f.hidden_field :user_id, :value => "#{current_user.id}"
   = f.hidden_field :project_id, :value => "#{current_project}"

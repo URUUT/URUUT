@@ -83,5 +83,5 @@
       - if @is_current
         %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Email preference
         %p
-          = #{(@user.subscribed ? "" : "Not")}
+          = @user.subscribed ? "" : "Not"
           Subscribed
