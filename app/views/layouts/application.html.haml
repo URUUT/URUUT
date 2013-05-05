@@ -111,6 +111,15 @@
     });
   }
 	
+  var updateAvatar = function(event) {
+    console.log(event.fpfile.url);
+    var avatarImage = event.fpfile.url + '/convert?w=100&h=100&fit=crop';
+
+    console.log(avatarImage);
+    $('#user_avatar').val(avatarImage);
+    $('#avatar-img').attr('src', avatarImage);
+  }
+	
   var updateProgressbar = function(id, value) {
     console.log(id);
     $('.progressbar' + id).progressbar({
