@@ -1,6 +1,10 @@
 class Service < ActiveRecord::Base
   attr_accessible :uid, :provider
   belongs_to :user
+
+  def self.from_omniauth(auth)
+
+  end
   
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = Service.where(:provider => auth.provider, :uid => auth.uid).first

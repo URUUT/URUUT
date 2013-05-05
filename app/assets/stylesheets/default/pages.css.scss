@@ -1378,7 +1378,7 @@ div[id^='step'] {
     margin-top:-2px;}}
 
 img.avatar-thumb {
-  border:solid #fff 1px;
+
 }
 
 .banner {
@@ -1432,6 +1432,47 @@ a.green {
   text-decoration:underline;
   font-style:italic;
 }
+
+.donation_steps {
+  font-family:'Proxima Nova';
+
+  h2.green {
+    color:#70bf4c;
+    font-weight:normal;
+    text-transform:none;
+  }
+  p.congratulations {
+    font-size:16px;
+    margin-bottom:20px;
+  }
+
+  .well.green-headered {
+    padding-top:10px;
+    div {
+      margin-bottom:15px;
+      p {
+        margin-bottom:3px;
+      }
+    }
+    h5 {
+      color:#70bf4c;
+      margin-bottom:0px;
+      margin-top:0px;
+    }
+    .grey {
+      color:#b6b6b4;
+    }
+  }
+  form.edit_donation {
+    button {
+      width: 100% !important;
+      -webkit-border-radius: 5px !important;
+      -moz-border-radius: 5px !important;
+      border-radius: 5px !important;
+    }
+  }
+}
+
 #search {
   display:block;
   margin:20px auto 10px;
