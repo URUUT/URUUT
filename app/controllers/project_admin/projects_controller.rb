@@ -13,6 +13,8 @@ class ProjectAdmin::ProjectsController < ApplicationController
     # sponsors = ProjectSponsor.find_by_project_id(@project.id)
     sponsors = ProjectSponsor.where(@project.id)
     @sponsor_count = sponsors.nil? ? 0 : sponsors.count
+    @gallery = Gallery.new
+    @picture_gallery = @project.galleries
     logger.debug(@sponsor_count)
     logger.debug(@project)
     logger.debug(@donations)
