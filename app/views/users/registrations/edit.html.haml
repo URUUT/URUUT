@@ -7,17 +7,13 @@
 
       %div
         = f.label :avatar, "Profile image "
+        = f.hidden_field :avatar, :value => ""
         .row{:style => "margin-left:0px;margin-bottom:10px;"}
           .span2
-            = image_tag(f.object.avatar_url, :id => "avatar-img")
+            = image_tag "#{current_user.avatar}", :id => "avatar-img" 
           .span4
-            = f.file_field :avatar, id: "avatar-hide"
-            #avatar-error.hidden
-              The image should be at least 200px x 200px
             #avatar-file
-              %button.btn.btn-primary{:type => "button"}
-                Upload
-                %span
+              %input{:type => 'filepicker', :name => 'avatar', 'data-fp-button-text' => 'Upload', 'data-fp-apikey' => ENV['FILEPICKER_API'], 'data-fp-button-class' => 'avatar btn', 'onchange' => 'updateAvatar(event)'}
               %p.note
                 %strong Note:
                 Logo files should be at least 200px x 200px jpeg, gif or png files

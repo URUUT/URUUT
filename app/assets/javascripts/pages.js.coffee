@@ -10,6 +10,9 @@ $ ->
 	userLocation = 'http://api.wipmania.com/jsonp?callback=?'
 	window.getLocation = $.getJSON userLocation, (data)->
 		console.log(data)
+
+	$('.down').click ->
+		$('.dropdown').toggle()
 		
 	$('ul.nav li').hover ->
 		$(this).children('div').css('display', 'block') 
@@ -23,9 +26,6 @@ $ ->
 	
 	$("div.project div.location img").click ->
 	  console.log "hello"
-  
-  #$('.short_description').hover ->
-    #$('.short_description').tooltip()
 		
 	initialize = ->
 			geocoder = new google.maps.Geocoder()
