@@ -6,11 +6,11 @@
     %title= content_for?(:title) ? yield(:title) : "Myapp"
     %meta{:content => "", :name => "description"}
     %meta{:content => "", :name => "author"}
-    = stylesheet_link_tag  "default/application", "trontastic/jquery-ui-1.8.22.custom.css", "http://cdn.leafletjs.com/leaflet-0.5/leaflet.css", :media => "all"
-    = javascript_include_tag "application"
+    = stylesheet_link_tag  "default/application", "trontastic/jquery-ui-1.8.22.custom.css", "http://cdn.leafletjs.com/leaflet-0.5/leaflet.css", "http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css", :media => "all"
+    = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js", "application", "https://js.stripe.com/v1/", :media => "all"
     = filepicker_js_include_tag
     = javascript_tag do
-      Stripe.setPublishableKey("pk_test_WRrfoQLUDkpGHAxCmOY0Y6ud");
+      Stripe.setPublishableKey("#{STRIPE_PUBLIC_KEY}");
 
     = csrf_meta_tags
     = yield(:head)
@@ -34,13 +34,12 @@
           = render 'layouts/navigation'
 
       .container
-        .row-fluid
-          .span12
-            -#= render 'layouts/messages'
-            = yield
+        .row
+          = render 'layouts/messages'
+          = yield
       #push
     = render 'partials/footer'
-    
+= javascript_include_tag "pages"
 
 :javascript
   if(window.opener) {
@@ -109,6 +108,22 @@
       console.log("finished");
       $('.cultivation-image').remove();
       $('#cultivation .details').prepend('<div class="cultivation-image"><img src="' + cultivationImage + '"</div>');
+    });
+  }
+	
+  var updateAvatar = function(event) {
+    console.log(event.fpfile.url);
+    var avatarImage = event.fpfile.url + '/convert?w=100&h=100&fit=crop';
+
+    console.log(avatarImage);
+    $('#user_avatar').val(avatarImage);
+    $('#avatar-img').attr('src', avatarImage);
+  }
+	
+  var updateProgressbar = function(id, value) {
+    console.log(id);
+    $('.progressbar' + id).progressbar({
+      value: value
     });
   }
 

@@ -1,0 +1,3 @@
+%h3.green-font #{@sponsorship_level.name.upcase} sponsor
+- @sponsorship_level.sponsorship_benefits.each do |benefit|
+  %p.normal-font - #{benefit.name}

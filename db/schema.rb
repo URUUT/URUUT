@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130427214521) do
+ActiveRecord::Schema.define(:version => 20130502211958) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -60,6 +60,9 @@ ActiveRecord::Schema.define(:version => 20130427214521) do
     t.string  "name"
     t.integer "project_id"
     t.integer "sponsor_id"
+    t.string  "payment",    :default => "Unpaid"
+    t.string  "status",     :default => "Unconfirmed"
+    t.integer "level_id"
   end
 
   create_table "projects", :force => true do |t|
@@ -95,32 +98,30 @@ ActiveRecord::Schema.define(:version => 20130427214521) do
     t.string  "cultivation_image"
   end
 
-  create_table "services", :force => true do |t|
-    t.string  "uid"
-    t.string  "provider"
-    t.integer "user_id"
-  end
-
   create_table "sessions", :force => true do |t|
     t.string "session_id"
     t.text   "data"
   end
 
   create_table "sponsors", :force => true do |t|
-    t.string "payment_type"
-    t.string "name"
-    t.string "card_number"
-    t.date   "card_expiration"
-    t.string "cvc"
-    t.string "email"
-    t.string "phone"
+    t.string  "payment_type"
+    t.string  "name"
+    t.string  "card_number"
+    t.string  "cvc"
+    t.string  "email"
+    t.string  "phone"
+    t.integer "month"
+    t.integer "year_card"
+    t.string  "token"
   end
 
   create_table "sponsorship_benefits", :force => true do |t|
     t.string   "name"
     t.integer  "sponsorship_level_id"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
+    t.integer  "project_id"
+    t.boolean  "status",               :default => false
   end
 
   create_table "sponsorship_levels", :force => true do |t|
@@ -131,12 +132,11 @@ ActiveRecord::Schema.define(:version => 20130427214521) do
     t.integer  "funding_goal"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
-    t.integer  "project_id"
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "email",                  :default => "",                           :null => false
+    t.string   "encrypted_password",     :default => "",                           :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -157,7 +157,10 @@ ActiveRecord::Schema.define(:version => 20130427214521) do
     t.string   "organization"
     t.text     "mission"
     t.boolean  "subscribed"
-    t.string   "avatar"
+    t.string   "avatar",                 :default => "/images/default-avatar.png"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "confirmation_token"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
