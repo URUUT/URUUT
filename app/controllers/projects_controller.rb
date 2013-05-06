@@ -85,6 +85,9 @@ end
   end
 
   @sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits) 
+  if !@project.website.empty?
+    @project.website.sub(/^https?\:\/\//, '')
+  end
   @project.update_attributes!(params[:project])
 
   if @project.save
