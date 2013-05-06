@@ -35,7 +35,17 @@ group :production do
   gem 'sass-rails',   '~> 3.2.3'
 end
 
-group :development, :staging, :test do
+group :staging do
+  gem 'mysql2', '~> 0.3.11'
+  gem 'erb2haml'
+  gem 'rb-fsevent', '~> 0.9.1'
+  gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'rails_best_practices'
+end
+
+group :development, :test do
   gem 'mysql2', '~> 0.3.11'
   gem 'erb2haml'
   gem 'rb-fsevent', '~> 0.9.1'
