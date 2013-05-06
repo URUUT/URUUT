@@ -2,10 +2,10 @@
   .funding-info
     .container
       .span8
-        %h4.title= @project.title
+        %h4.title= @project.project_title
         %span.location #{@project.city}, #{@project.state}
         %hr
-        %p.short-desc= @project.short_description
+        %p.short-desc= @project.title
         %h6{:style => "color:#403e37;font-family:'Proxima Nova Semi';display:inline-block;margin:0;letter-spacing:normal;"} SHARE:
         = image_tag "fb-count.png", :style => "margin-right:20px;"
         = image_tag "tw-count.png", :style => "margin-right:20px;"
@@ -62,9 +62,8 @@
                 = link_to @project.website do
                   %span{:style => "color:#403e37;font:italic 12px/12px georgia, serif;text-transform:none;letter-spacing:normal;text-decoration:underline;", :target => "_blank"}= @project.website
 
-
       %h4.title{:style => 'margin-top:50px;'} PROJECT SPONSORS
-      = link_to "#assets", :class => 'btn', :style => 'background:#3f403b;padding:10px;margin-top:10px;' do
+      = link_to new_project_sponsor_path(@project.id), :class => 'btn', :style => 'margin-top:10px;'  do
         Become A Sponsor
         %span
 
@@ -139,7 +138,7 @@
         %h4{:style => "display:inline-block;color:#70bf4c;letter-spacing:2px;"}= @project.title
 
       %h4.title{:style => 'margin-top:50px;'} Business Partners
-      = link_to "#assets", :class => 'btn', :style => 'margin-top:10px;' do
+      = link_to new_project_sponsor_path(@project.id), :class => 'btn', :style => 'margin-top:10px;' do
         Become A Sponsor
         %span
 

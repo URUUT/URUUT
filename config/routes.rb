@@ -1,8 +1,8 @@
 Crowdfund::Application.routes.draw do
-  match '/users/auth/:provider/callback', to: 'services#create'
+  # match '/users/auth/:provider/callback', to: 'services#create'
 
-  # devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations" }
-  devise_for :users, :controllers => { :registrations => "registrations" }
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations" }
+  # devise_for :users, :controllers => { :registrations => "registrations" }
   resources :users, :only => [:show]
 
   get "contacts/new"
@@ -23,25 +23,11 @@ Crowdfund::Application.routes.draw do
 
   match "browse/projects" => "pages#index"
 
-  # get "pages/discover"
-  # get "pages/categories"
-  # post "pages/contact"
-  # get "pages/contact"
-  # get "pages/how_it_works"
-  # get "pages/terms"
-  # get "pages/about"
-  # get "pages/home"
-  # get "pages/faqs"
-  # get "pages/thank_you"
-
-  # get "projects/add_desc"
    get "projects/save_image"
    post "projects/save_image"
-#
-#   post "projects/add_perk"
-#   post "projects/get_perk"
-#   post "projects/update_perk"
-#   post "projects/delete_perk"
+   get "projects/:project_id/sponsors/:id/confirmation" => "sponsors#confirmation", as: "confirmation"
+   get "purchase" => "payments#purchase"
+
    post "projects/submit_project"
 
    get "projects/stripe_update"
@@ -52,27 +38,30 @@ Crowdfund::Application.routes.draw do
    post "admin/approve"
 
   resources :admin do
-  #  get 'unapproved', :on => :collection
-  #  post 'admin/approve', :on => :collection
   end
 
   resources :s3_uploads
-  resources :projects
+  #resources :projects
+  namespace :project_admin do
+    resources :projects
+  end
   resources :donations do
     get "thank_you", :on => :collection
   end
   resources :projects do
     get "add_desc", :on => :collection
-   # get "save_image", :on => :collection
-   # get "stripe_update", :on => :collection
-   # post "save_image", :on => :collection
     post "add_perk", :on => :collection
     post "get_perk", :on => :collection
     post "update_perk", :on => :collection
     post "delete_perk", :on => :collection
-   # post "submit_project", :on => :collection
-    resources :sponsors
+    put "edit", :on => :collection
+    resources :sponsors do
+      get :get_sponsorship_levels
+      get :confirm_sponsor
+    end
   end
+  
+  resources :projects
 
   resources :project_steps
   resources :donation_steps
@@ -96,6 +85,7 @@ Crowdfund::Application.routes.draw do
     get 'home', :on => :collection
     get "faqs", :on => :collection
     get "thank_you", :on => :collection
+    get "privacy", :on => :collection
   end
 
   root to: "pages#home"

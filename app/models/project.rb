@@ -14,6 +14,7 @@ class Project < ActiveRecord::Base
   has_many :galleries
   has_many :project_sponsors
   has_many :sponsorship_levels
+  has_many :sponsorship_benefits
 
   accepts_nested_attributes_for :perks, allow_destroy: true
   accepts_nested_attributes_for :galleries, allow_destroy: true
@@ -32,7 +33,7 @@ class Project < ActiveRecord::Base
 
   def self.get_sponsor_token
     if :current_user
-      Stripe.api_key = "sk_0EJjKro10y6bBBYfyZnCRgM2w8HOB"
+      Stripe.api_key = API_KEY
 
     end
   end

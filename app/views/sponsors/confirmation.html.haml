@@ -1,0 +1,83 @@
+.container
+  .row-fluid{style: "margin-top: 30px;"}
+    .span8
+      %h4.title{:style => "border-bottom: 6px solid #48C94C; padding-bottom: 10px;"} Review Your Sponsorship
+      %p.normal-font By confirming your project sponsorship, you agree to Uruut.com's privacy policy and terms of use
+      .project-location
+        %h5 PROJECT NAME
+        %h4{:style => "color: #48C94C;"}= @project.project_title
+        %div{:style => 'font-family:"Proxima Nova";  margin-bottom: 15px;'}
+          = image_tag "marker.jpg", :class => 'marker', :style => 'float:none;'
+          = @project.address
+          = @project.city
+          = @project.state
+          = @project.zip
+
+    .span4.sidebar.pull-right
+      %h4 PAYMENT INFORMATION
+      .well
+        %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;font-family:'Proxima Nova';"}
+        -if @sponsor.payment_type.eql? "Wire Transfer"
+          %p.normal-font Please confirm we have your contact information correct so we can contact you to arrage for your preferred method of payment.
+          %h6.green-font Preferred payment method
+          %p.normal-font= @sponsor.payment_type
+          %h6.green-font Contact Name
+          %p.normal-font= @sponsor.name
+          %h6.green-font Contact Email
+          %p.normal-font= @sponsor.email
+          %h6.green-font Contact Phone Number
+          %p.normal-font= @sponsor.phone
+          %h6.green-font Payment Amount
+          %p.normal-font #{number_to_currency(@sponsorship_level.cost, precision: 0)}
+          %div{:style => "height: 80px; width: 100%;"}
+            = link_to "CONFIRM", project_sponsor_confirm_sponsor_path(@project.id, @sponsor.id), :class => "btn confirm-button", :id => "project-submit"
+        -else
+          %h5 Payment using
+          %p.normal-font= @sponsor.payment_type
+          %h5 Payment Amount
+          %p.normal-font #{number_to_currency(@sponsorship_level.cost, precision: 0)}
+          %div{:style => "height: 80px; width: 100%;"}
+            = link_to "CONFIRM", purchase_path(project_id: @project.id, sponsor_id: @sponsor.id), :class => "btn confirm-button", :id => "project-submit"
+
+    .span8.well{style: "margin-left: 0;"}
+      .span12{:style => "background-color: #f5f5f5; margin-left: 0px;"}
+        .pull-left{:style => "width: 250px; height: 300px; border-right: solid 1px #d3d3d3;"}
+          %h4 SPONSORSHIP AMOUNT
+          %p.normal-font=link_to "change", edit_project_sponsor_path(@project.id, @sponsor.id), class: "green-font"
+          %h1.cost-level #{number_to_currency(@sponsorship_level.cost, precision: 0)}
+        .pull-right{:style => "width: 320px;"}
+          = label_tag :project_sponsor_name do
+            SPONSORSHIP LEVEL
+            = link_to "change", edit_project_sponsor_path(@project.id, @sponsor.id), class: "green-font"
+          %h3 #{@sponsorship_level.name.upcase} SPONSOR
+          %p.normal-font= truncate(@sponsorship_level.description, lenght: 200)
+          .sponsorship-level-details
+            - @sponsorship_level.sponsorship_benefits.each do |benefit|
+              %p.normal-font - #{benefit.name}
+      %h5 SPONSOR INFORMATION
+      %div
+        %h3.green-font
+          =@project_sponsor.name
+      %div
+        %h5 LOGO
+        = image_tag @project_sponsor.logo.thumb.url, style: "height:100px; width: 100px; border: solid 1px #e5e5e5; background: #f9f9f9;"
+      %div
+        = label_tag :project_sponsor_name do
+          %h5 MISSION STATEMENT / ABOUT*
+          = link_to "change", edit_project_sponsor_path(@project.id, @sponsor.id), class: "green-font"
+        %p.normal-font= @project_sponsor.mission
+
+.project-id{:style => "display: none;"}
+  = @project.id
+
+%script{:src => "http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"}
+%script{:src => "http://maps.stamen.com/js/tile.stamen.js?v1.2.1"}
+
+:javascript
+  $(document).ready(function(){
+    $(".confirm-button").click(function(){
+      $(this).attr("disabled", "disabled");
+      $(this).text("processing....");
+    });
+  });
+/ $.get("/projects/" + projectId + "/sponsors/" + this.value + "/get_sponsorship_levels.js")

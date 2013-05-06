@@ -9,11 +9,11 @@ class RegistrationsController < Devise::RegistrationsController
     if successfully_updated
       # Sign in the user bypassing validation in case his password changed
       sign_in @user, :bypass => true
-      if params[:user][:avatar]
-        render json: { :path => (@user.errors.empty? ? @user.avatar_url : "#failed#") }
-      else
+      # if params[:user][:avatar]
+#         render json: { :path => (@user.errors.empty? ? @user.avatar : "#failed#") }
+#       else
         redirect_to @user
-      end
+      # end
     else
       render "edit"
     end
