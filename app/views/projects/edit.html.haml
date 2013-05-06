@@ -1,3 +1,73 @@
+-#
+    .breadcrumb-container
+      %ul.breadcrumbs
+        %li.sponsor-info
+          = link_to "/projects/#{@project.id}/edit#sponsor-info" do
+            %span.steps Step 1
+            %span.title RUUTS
+            %span.description Basic Information
+            %span.border
+
+        %li.project-details
+          = link_to "/projects/#{@project.id}/edit#project-details" do
+            %span.steps Step 2
+            %span.title STORY
+            %span.description Project Details
+            %span.border
+
+        %li.perks
+          = link_to "/projects/#{@project.id}/edit#perks" do
+            %span.steps Step 3
+            %span.title PERKS
+            %span.description Donor Rewards
+            %span.border
+
+        %li.sponsorship
+          = link_to "/projects/#{@project.id}/edit#sponsorship" do
+            %span.steps Step 4
+            %span.title Sponsors
+            %span.description Sponsorship Details
+            %span.border
+
+        %li.assets
+          = link_to "/projects/#{@project.id}/edit#assets" do
+            %span.steps Step 5
+            %span.title VISUALS
+            %span.description Project Page Setup
+            %span.border
+
+        %li.submit
+          = link_to 'submit' do
+            %span.steps Get Ruuted
+            %span.title Submit
+            %span.description Submit Your Project for Approval
+
+    = render "projects/wizard/sponsor_info", :project => @project
+    = render "projects/wizard/project_details", :project => @project
+    = render "projects/wizard/perks", :project => @project
+    = render "projects/wizard/sponsorship", :project => @project
+    = render "projects/wizard/assets", :project => @project
+
+    /* Each tip is set within this <ol>. */
+    /* This creates the order the tips are displayed */
+    %ol{:id => "uruutTour"}
+      /* data-id needs to be the same as the parent it will attach to */
+      %li{"data-class" => "pick-cover-photo"}
+        %p This is some content...
+        %p Here is some more...
+
+    %script{:src => "http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"}
+    %script{:src => "http://maps.stamen.com/js/tile.stamen.js?v1.2.1"}
+    = javascript_include_tag "projects"
+    :javascript
+
+      getPerkProjectUrl = "#{get_perk_projects_url}";
+      submitUrl = "#{projects_submit_project_url}";
+      projectId = #{@project.id};
+      projectPath = '#{project_path(@project.id)}';
+      thankYouUrl = "#{thank_you_pages_url}";
+      window.projectId = projectId
+
 .breadcrumb-container
   %ul.breadcrumbs
     %li.sponsor-info
@@ -41,12 +111,550 @@
         %span.title Submit
         %span.description Submit Your Project for Approval
 
-= render "projects/wizard/sponsor_info", :project => @project
-= render "projects/wizard/project_details", :project => @project
-= render "projects/wizard/perks", :project => @project
-= render "projects/wizard/sponsorship", :project => @project
-= render "projects/wizard/assets", :project => @project
-					
+.step-container{"data-id" => "sponsor-info"}
+  = form_for(@project, :html => {:class => "sponsor-info span8 well", :multipart => true}) do |f|
+
+    - if @project.errors.any?
+      #errorExplanation
+        %h2 #{pluralize(@project.errors.count, "error")}
+        %ul
+          - @project.errors.full_messages.each do |msg|
+            %li #{msg}
+
+    %h4.title
+      YOUR RUUTS
+      %span.italic (Basic Information)
+
+    %div
+      = f.label :organization, "Organization/Business Name*"
+      = f.text_field :organization, :required => true, :size => 45
+
+    %div
+      = f.label :address , "STREET ADDRESS*"
+      = f.text_field :address, :required => true, :size => 45
+
+    %div.inline
+      = f.label :city
+      = f.text_field :city, :required => true, :size => 17
+
+    %div.inline{:style => "margin-left:18px;"}
+      = f.label :state
+      = f.select :state, options_for_select(us_states, @project.state), :required => true, :style => "width:140px;"
+
+    %div.inline{:style => "margin-left:18px;"}
+      = f.label :zip, "Zipcode"
+      = f.text_field :zip, :required => true, :size => 3
+
+    %div
+      = f.label :website do
+        WEBSITE ADDRESS
+        %span.italic (Format: http://www.mysite.com)
+      = f.text_field :website, :required => true, :placeholder => "http://makethisgrey.now", :size => 45
+
+    %div.inline
+      = f.label :twitter_handle, "Twitter Account"
+      = f.text_field :twitter_handle, :required => true, :size => 15
+
+    %div.inline{:style => "margin-left:24px;"}
+      = f.label :facebook_page, "Facebook Page"
+      = f.text_field :facebook_page, :required => true, :size => 17
+
+    %div
+      = link_to "https://connect.stripe.com/oauth/authorize?response_type=code&client_id=#{ENV['STRIPE_CLIENT_ID']}", :target => "_blank", :class => "stripe-connect" do
+        %span Connect with Stripe
+
+      %input{:type => 'hidden', :value => "#{@connected}", :id => "connected", :required => true}
+
+    %div
+      = f.submit "Save And Continue", :class => "btn", :id => "project-submit"
+
+  .span4{:style => "margin-top:155px;"}
+    %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
+    .well.info
+      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Your Ruuts
+      %p First, we are so thrilled ot have you on URUUT!
+
+      %p The process of bulding your project is simple and easy. We will walk you through each step and offer handy tips to make your project a success. For a more detailed guide on how to build and run a successful project,  take a look at our handy Project Guide (pdf).
+
+      %p The first steps are Your Ruuts - which is your basic information - go ahead and get started! Don’t worry if you get stuck - you can come back anytime to edit your project.
+
+.step-container{"data-id" => "project-details"}
+  = form_for(@project, :html => {:class => "span8 well", :multipart => true}) do |f|
+
+    %h4.title
+      YOUR STORY
+      %span.italic (Basic Information)
+
+    - if @project.errors.any?
+      #errorExplanation
+        %h2 #{pluralize(@project.errors.count, "error")}
+        %ul
+          - @project.errors.full_messages.each do |msg|
+            %li #{msg}
+
+    = f.label :project_title do
+      PROJECT TITLE*
+      %span.italic (Ex. Dunwoody City Park Fountain)
+    = f.text_field :project_title, :required => true, :size => 45
+
+    = f.label :goal do
+      FUNDING GOAL*
+      %span.italic (must be at least $XXXX)
+    = f.text_field :goal, :required => true, :size => 45
+
+    = f.label :duration do
+      CAMPAIGN LENGTH*
+      %span.italic (max 45 days)
+    = f.select :duration, options_for_select(project_length, @project.duration), :required => true, :size => 17
+
+    / = f.label :category do
+    /   CATEGORY*
+    /   %span.italic (max 45 days)
+    / = f.select :category, options_for_select(project_category, @project.category), :required => true, :size => 17
+
+    = f.label :title do
+      CAMPAIGN HEADLINE*
+      %span.italic (XX characters remaing)
+    = f.text_field :title, :required => true, :size => 45
+
+    = f.label :story, "YOUR STORY*"
+    = f.text_area :story, :required => true, :style => "height:330px;width:585px;"
+
+    = f.label :about, "TELL US ABOUT YOUR PROJECT*"
+    = f.text_area :about, :required => true, :style => "height:330px;width:585px;"
+    %div
+      = f.submit "Save And Continue", :class => "btn", :id => "project-submit"
+
+
+  .span4{:style => "margin-top:155px;"}
+    %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
+    .well.info
+      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} FUNDING GOAL
+      %p How much do you want to raise on URUUT?
+
+      %p Remember to keep in mind the cost of a campaign and perks fulfillment. We suggest you add 10% to the amount you need to raise. This will cover URUUT’s 5% fee, our payment providers 3% fee and any potential extras.
+
+      %p Also, URUUT is an all-or-nothing funding platform. That means you have to hit the goal you set in order to get any of the funding you raise. Try to choose something attainable based on your personal and social networks.
+
+      %p Take the amount you want to raise and divide it by 100. Or 50. Do you think you’ll be able to reach that many people in your personal and professional networks to get to your goal?
+
+      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} CAMPAIGN HEADLINE
+      %p A short and sweet summary of your project. This is the text that will appear on the browse page and should be a brief description of who you are and why you're here. Try to avoid using words like "help" and "need".
+      %p.bold Examples include:
+      %ul
+        %li Build a shady nook to sip your coffee when you fund our project.
+        %li Homemade, ready-to-serve dipping sauces. From Brooklyn with love.
+        %li We're launching a new fall collection: sourced locally and creating jobs in New York.
+
+      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} YOUR STORY
+      %pTell the world why they should invest in you. Include some background information about you and your business partners (if any), how long you’ve been in business, why the neighborhood should invest in you and why you’re raising funds on URUUT.
+
+      %p If you want to add any images to your story, you can do so at the final step.
+
+      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} TELL US ABOUT YOUR PROJECT
+      %p Give us a description of your project. What are you looking to raise funding for? Be specific! Your investors will care about how you use their money.
+
+      %p Remember, URUUT is for specific business projects, like capital improvements or equipment, not a source of working capital to pay rent or make ends meet.
+
+      %p It’s helpful to include some more specific descriptions of the rewards you’re offering too. Don’t feel like you need to put everything in right away -- you can go back and edit this before activating your campaign!
+
+      %p If you want to add any images to your project description, you can do so at the final step.
+
+.step-container{"data-id" => "perks"}
+  = form_for(@project, :html => {:class => "span8 well", :multipart => true}) do |f|
+
+    %h4.title
+      SEEDER PERKS
+      %span.italic (Rewards for your donors)
+
+    - if @project.errors.any?
+      #errorExplanation
+        %h2 #{pluralize(@project.errors.count, "error")}
+        %ul
+          - @project.errors.full_messages.each do |msg|
+            %li #{msg}
+
+    %fieldset{:style => "position:relative"}
+      .perk-container
+        .perk
+          %div.inline
+            = label_tag "Name"
+            = text_field_tag "perk-name", '', :size => 18
+
+          %div.inline{:style => "margin-left:20px;"}
+            = label_tag "Amount"
+            = text_field_tag "perk-amount", '', :size => 17
+
+          %div
+            = label_tag "Description"
+            = text_area_tag "perk-description", '', :size => "85x30"
+
+          %input{:type => 'hidden', :value => "", :id => "perk-id"}
+
+
+      %a.add-perk.btn{:href => "#"} SAVE PERK & ADD MORE
+      %a.update-perk.btn{:href => "#"} UPDATE PERK
+
+
+    %div
+      = f.submit "Save And Continue", :class => "btn", :id => "project-submit", :style => "left: 175px;position: relative;"
+
+
+  .span4{:style => "margin-top:155px;"}
+    %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
+    .well.info
+      - unless @perks.blank?
+        %h5{:style => "color:#70bf4c;margin-bottom:10px;"} CURRENT PERKS
+        - @perks.each do |p|
+          %div.created-perk
+            %h6= get_currency(p.amount)
+            %h6= p.name
+            %p{:style => "width:268px;word-wrap: break-word;"}= p.description
+            %input{:type => 'hidden', :value => "#{p.id}", :id => "perk-#{p.id}"}
+            %a{:class => "perk-edit", :style => "color:#70bf4c;"} edit
+            |
+            %a{:class => "perk-delete", :style => "color:#70bf4c;"} delete
+
+      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} SEEDER PERKS
+      %p Funding on URUUT is made in exchange for payment in kind: goods, services, special benefits or other perks. Offer something valuable for the funds. No T-shirts and shout-outs for $100.
+
+      %p Perks could include a house account for your investors, discounted goods or services, special lessons or workshops, or a private party just for seeders. Be creative!
+      %p The most common amounts invested are between $25-$100. We suggest you offer some good value perks at a low cost for casual investors who might not know your organization well, and a handful of high end rewards that are likely to appeal to your inner circle or die-hard fans.
+      %p If you’re having a hard time thinking about some great perks, check out our Project Guide or just let us know and we can help you.
+
+.step-container{"data-id" => "sponsorship"}
+  = form_for(@project, :html => {:class => "span8 well", :multipart => true}) do |f|
+
+    %h4.title
+      SPONSORSHIP DETAILS
+      %span.italic (Benefits For Project Sponsors)
+
+    - if @project.errors.any?
+      #errorExplanation
+        %h2 #{pluralize(@project.errors.count, "error")}
+        %ul
+          - @project.errors.full_messages.each do |msg|
+            %li #{msg}
+
+    %div
+      %h6{:style => "color:#70bf4c"}
+        PLATINUM LEVEL SPONSORSHIP*
+        %span{:style => "font-size:10px;color:#b6b6b4;letter-spacing:normal;"} (industry-specific exclusivity)
+        %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;"} (1 AVAILABLE)
+    .cf
+      .span3.left{:style => "text-align:left;color:#464646;"}
+        %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0;"} Cost
+        %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0"}
+          - if @project.goal
+            = number_to_currency(@project.goal.gsub(/,/, '').to_i * 0.70, :precision => 0)
+        %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (70% of funding goal)
+      .span9.left{:style => "text-align:left;color:#464646;"}
+        %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
+          Platinum Level Sponsorship includes priority logo placement, a link to the sponsor’s website, and the company / foundation’s mission statement on your project page. Platinum Sponsors gain industry exclusivity for project sponsors. In addition to these benefits select suggested benefits or create custom benefits for platinum level sponsors from the checklist below.
+          %span{:style =>  "color:#b6b6b4;font-style:italic;"}
+            (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
+        %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"} SUGGESTED BENEFITS:
+        %div#platinum-box
+          %div#existing-checkbox
+
+            -if @project.sponsorship_benefits.empty?
+              -SponsorshipBenefit::SPONSORSHIP_BENEFITS.each do |key, value|
+                -if key.eql? 1
+                  -value.each_with_index do |benefit|
+                    %div.checkbox.default
+                      = check_box_tag "platinum[#{benefit[:id]}]"
+                      %span#name= benefit[:desc]
+                      %span.edit-benefit.italic.green-font select to edit
+                      = text_field_tag "platinum[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field", style: "width: 320px !important; display: none;"
+            -else
+              -@project.sponsorship_benefits.where(sponsorship_level_id: 1).each_with_index do |benefit, index|
+                %div.checkbox.default
+                  = hidden_field_tag "platinum[id_#{index + 1}]", benefit.id
+                  = check_box_tag "platinum[#{index + 1}]", nil, benefit.status
+                  %span#name= benefit.name
+                  %span.edit-benefit.italic.green-font select to edit
+                  = text_field_tag "platinum[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
+
+          %div#custom-checkbox
+            %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 20px;"} CREATE COSTUM BENEFITS:
+            %div.checkbox.add_checkbox
+              = check_box_tag "add_platinum",nil,false, class: "box_platinum_benefits"
+              = text_field_tag "platinum[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -30px; !important; width: 80% !important", class: "platinum_benefits add_benefits"
+              = hidden_field_tag "platinum_count", nil, id: "platinum-count"
+          %span.green-font.normal-font.add-another + Add Another
+    %hr
+
+    %div
+      %h6{:style => "color:#70bf4c"}
+        Gold LEVEL SPONSORSHIP*
+        %span{:style => "font-size:10px;color:#b6b6b4;letter-spacing:normal;"} (industry-specific exclusivity)
+        %span{:style => "font-size:10px;color:#403e37"} (3 AVAILABLE)
+    .cf
+      .span3.left{:style => "text-align:left;color:#464646;"}
+        %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0;"} Cost
+        %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0"}
+          -if @project.goal
+            = number_to_currency(@project.goal.gsub(/,/, '').to_i * 0.15, :precision => 0)
+        %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (15% of funding goal)
+      .span9.left{:style => "text-align:left;color:#464646;"}
+        %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
+          Gold Level Sponsorship includes includes placement of a large sized logo and a link to the sponsor’s website on your project page. Gold Sponsors gain industry exclusivity for project sponsors. In addition to these benefits select suggested benefits or create custom benefits for gold level sponsors from the checklist below.
+          %span{:style =>  "color:#b6b6b4;font-style:italic;"}
+            (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
+        %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"} SUGGESTED BENEFITS:
+        %div#gold-box
+          %div#existing-checkbox
+            -if @project.sponsorship_benefits.empty?
+              -SponsorshipBenefit::SPONSORSHIP_BENEFITS.each do |key, value|
+                -if key.eql? 2
+                  -value.each_with_index do |benefit|
+                    %div.checkbox.default
+                      = check_box_tag "gold[#{benefit[:id]}]"
+                      %span#name= benefit[:desc]
+                      %span.edit-benefit.italic.green-font select to edit
+                      = text_field_tag "gold[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field", style: "width: 320px !important; display: none;"
+            -else
+              -@project.sponsorship_benefits.where(sponsorship_level_id: 2).each_with_index do |benefit, index|
+                %div.checkbox.default
+                  = hidden_field_tag "gold[id_#{index + 1}]", benefit.id
+                  = check_box_tag "gold[#{index + 1}]", nil, benefit.status
+                  %span#name= benefit.name
+                  %span.edit-benefit.italic.green-font select to edit
+                  = text_field_tag "gold[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
+
+          %div#custom-checkbox
+            %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 20px;"} CREATE COSTUM BENEFITS:
+            %div.checkbox.add_checkbox
+              = check_box_tag "add_gold",nil,false, class: "box_gold_benefits"
+              = text_field_tag "gold[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -30px; !important; width: 80% !important", class: "gold_benefits add_benefits"
+              = hidden_field_tag "gold_count", nil, id: "gold-count"
+          %span.green-font.normal-font.add-another + Add Another
+
+    %hr
+
+    %div
+      %h6{:style => "color:#70bf4c"}
+        Silver LEVEL SPONSORSHIP*
+        %span{:style => "font-size:10px;color:#403e37"} (5 AVAILABLE)
+    .cf
+      .span3.left{:style => "text-align:left;color:#464646;"}
+        %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0;"} Cost
+        %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0"}
+          -if @project.goal
+            = number_to_currency(@project.goal.gsub(/,/, '').to_i * 0.05, :precision => 0)
+        %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (5% of funding goal)
+      .span9.left{:style => "text-align:left;color:#464646;"}
+        %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
+          Silver Level Sponsorship includes includes placement of a medium sized logo and a link to the sponsor’s website on your project page. In addition to these benefits, select suggested benefits or create custom benefits for silver level sponsors from the checklist below.
+          %span{:style =>  "color:#b6b6b4;font-style:italic;"}
+            (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
+        %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"} SUGGESTED BENEFITS:
+        %div#silver-box
+          %div#existing-checkbox
+
+            -if @project.sponsorship_benefits.empty?
+              -SponsorshipBenefit::SPONSORSHIP_BENEFITS.each do |key, value|
+                -if key.eql? 3
+                  -value.each_with_index do |benefit|
+                    %div.checkbox.default
+                      = check_box_tag "silver[#{benefit[:id]}]"
+                      %span#name= benefit[:desc]
+                      %span.edit-benefit.italic.green-font select to edit
+                      = text_field_tag "silver[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field", style: "width: 320px !important; display: none;"
+            -else
+              -@project.sponsorship_benefits.where(sponsorship_level_id: 3).each_with_index do |benefit, index|
+                %div.checkbox.default
+                  = hidden_field_tag "silver[id_#{index + 1}]", benefit.id
+                  = check_box_tag "silver[#{index + 1}]", nil, benefit.status
+                  %span#name= benefit.name
+                  %span.edit-benefit.italic.green-font select to edit
+                  = text_field_tag "silver[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
+
+          %div#custom-checkbox
+            %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 20px;"} CREATE COSTUM BENEFITS:
+            %div.checkbox.add_checkbox
+              = check_box_tag "add_silver",nil,false, class: "box_silver_benefits"
+              = text_field_tag "silver[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -30px; !important; width: 80% !important", class: "silver_benefits add_benefits"
+              = hidden_field_tag "silver_count", nil, id: "silver-count"
+          %span.green-font.normal-font.add-another + Add Another
+        / %div.checkbox
+        /   = check_box_tag "Test"
+        /   Profile of your company on our website with photo.
+        / %div.checkbox
+        /   = check_box_tag "Test"
+        /   Monthly plug on social media leading up to the project and the month after the project has been complete.
+        / %div.checkbox
+        /   = check_box_tag "Test"
+        /   Five tickets to VIP Gala Event.
+
+    %hr
+
+    %div
+      %h6{:style => "color:#70bf4c;"}
+        Bronze LEVEL SPONSORSHIP*
+    .cf
+      .span3.left{:style => "text-align:left;color:#464646;"}
+        %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0;"} Cost
+        %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0"} $1,500
+      .span9.left{:style => "text-align:left;color:#464646;"}
+        %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"} Bronze Level Sponsorship includes business / foundation name listing and a link to the sponsor’s website on your project page. In addition to these benefits, you can create custom benefits for bronze level sponsors below.
+        %div#bronze-box
+          %div#existing-checkbox
+
+            -if @project.sponsorship_benefits.empty?
+              -SponsorshipBenefit::SPONSORSHIP_BENEFITS.each do |key, value|
+                -if key.eql? 4
+                  -value.each_with_index do |benefit|
+                    %div.checkbox.default
+                      = check_box_tag "bronze[#{benefit[:id]}]"
+                      %span#name= benefit[:desc]
+                      %span.edit-benefit.italic.green-font select to edit
+                      = text_field_tag "bronze[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field", style: "width: 320px !important; display: none;"
+            -else
+              -@project.sponsorship_benefits.where(sponsorship_level_id: 4).each_with_index do |benefit, index|
+                %div.checkbox.default
+                  = hidden_field_tag "bronze[id_#{index + 1}]", benefit.id
+                  = check_box_tag "bronze[#{index + 1}]", nil, benefit.status
+                  %span#name= benefit.name
+                  %span.edit-benefit.italic.green-font select to edit
+                  = text_field_tag "bronze[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
+
+          %div#custom-checkbox
+            %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 20px;"} CREATE COSTUM BENEFITS:
+            %div.checkbox.add_checkbox
+              = check_box_tag "add_bronze", nil,false, class: "box_bronze_benefits"
+              = text_field_tag "bronze[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -30px; !important; width: 80% !important", class: "bronze_benefits add_benefits"
+              = hidden_field_tag "bronze_count", nil, id: "bronze-count"
+          %span.green-font.normal-font.add-another + Add Another
+        / %div.checkbox
+        /   = check_box_tag "Test"
+        /   Lorem ipsum dolor sit amet.
+    %hr
+    %div
+      = f.submit "Save And Continue", :class => "btn", :id => "project-submit", :style => "position: relative;display:block;margin:0 auto;"
+
+
+  .span4{:style => "margin-top:155px;"}
+    %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
+    .well.info
+      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} SPONSORSHIP DETAILS
+      %p URUUT’s Partner-Funding depends not only individual contributors, but sponsorship from businesses and foundations.
+
+      %p There are 4 different levels of sponsorship, with different benefits for each level. Use the checklists to define what each sponsor level includes. Blah blah blah, this is terrible writing, need to have someone actually write this before launch.
+
+.step-container{"data-id" => "assets"}
+  = form_for(@project, :html => {:multipart => true}) do |f|
+    - if @project.large_image
+      #large_image{:style => "background-image: url(#{@project.large_image}); -webkit-background-size: cover; background-size: cover;"}
+        %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => ENV['FILEPICKER_API'], 'data-fp-button-class' => 'coverphoto btn', 'onchange' => 'updateCover(event)', :style => 'left:50%'}
+        = render "funding_info"
+
+    - else
+      #large_image
+        %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => ENV['FILEPICKER_API'], 'data-fp-button-class' => 'coverphoto btn pick-cover-photo', 'onchange' => 'updateCover(event)', :style => 'left:50%'}
+
+        = render "funding_info"
+
+    .show-content
+      .span8
+        %h4.title Where We're Ruuted
+        .map-container
+          #map{:style => "width:100%;height:300px;"}
+            %div{:style => "height:179px;"}
+            #map-details
+              .project-location
+                %h4= @project.title
+                %div
+                  = image_tag "marker.jpg", :class => 'marker'
+                  = @project.address
+                  = @project.city
+                  = @project.state
+                  = @project.zip
+                %div
+                  %h6
+                    WEB:
+                    = link_to @project.website do
+                      %span{:style => "color:#403e37;font:italic 12px/12px georgia, serif;text-transform:none;letter-spacing:normal;text-decoration:underline;", :target => "_blank"}= @project.website
+
+        %h4.title{:style => 'margin-top:50px;'} PROJECT SPONSORS
+        = link_to "#assets", :class => 'btn', :style => 'background:#3f403b;padding:10px;margin-top:10px;' do
+          Become A Sponsor
+          %span
+
+        %h4.title{:style => 'margin-top:50px;'}
+          Planting Seeds
+          %span (About)
+
+        #content_container
+          #planting_seeds
+            - if @project.seed_image
+              = image_tag "#{@project.seed_image}"
+            - else
+              %input{:type => 'filepicker', :name => 'planting_seed_image', 'data-fp-button-text' => '', 'data-fp-apikey' => ENV['FILEPICKER_API'], 'data-fp-button-class' => 'planting-seed-image', 'onchange' => 'updatePlantingSeedImage(event)'}
+            %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.about
+
+          %hr
+
+          #cultivation
+            .span3.ending
+              %h4.title
+                CULTIVATION
+                %br
+                %span (Project Details)
+
+                %h6{:style => "text-align:center;color:#55554d !important;font-family:'Proxima Nova';margin-top:15px;"} Funding Ends
+                %div{:style => "background:#b6b6b4;padding:25px;border-radius:500px;"}
+                  %span{:style => 'display:block;text-align:center;font:normal 22px/22px "Proxima Nova Semi";color:#fff;text-transform:uppercase;letter-spacing:5px;'}= (Date.today + (@project.duration).to_i.days).strftime("%b")
+                  %span{:style => 'display:block;text-align:center;font:normal 72px/72px "Proxima Nova Semi";color:#fff;text-transform:uppercase;margin-top:5px'}= (Date.today + (@project.duration).to_i.days).strftime("%d")
+                %h6{:style => "text-align:center;color:#55554d !important;font-family:'Proxima Nova';margin-top:40px;margin-bottom:0;"} Project Goal
+                %h2{:style => "text-align:center;color:#b6b6b4;font-family:'Proxima Nova Semi';margin-top:0;"}= number_to_currency(@project.goal, :precision => 0)
+
+            .span9.details
+              - if @project.cultivation_image
+                = image_tag "#{@project.cultivation_image}"
+              - else
+                %input{:type => 'filepicker', :name => 'cultivation_image', 'data-fp-button-text' => '', 'data-fp-apikey' => ENV['FILEPICKER_API'], 'data-fp-button-class' => 'cultivation-image', 'onchange' => 'updateCultivationImage(event)'}
+              %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.story
+
+      .span4.sidebar
+        %h4 BECOME A SPONSOR
+        .well
+          %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;font-family:'Proxima Nova';"} PROJECT SPONSORSHIP
+          %p{:style => "font:normal 12px/18px 'Proxima Nova', arial, sans-serif;color:#403e37;margin-bottom:40px;"} We can’t do this alone. Do your part, by becoming a project sponsor. URUUT Partner-Funding depends on individual contributors as well as project sponsorship from businesses and corporate and family foundations. Click the button below to get more details and become a project sponsor.
+          = link_to "#", :class => 'btn', :style => 'margin-top:10px;' do
+            Become A Sponsor
+            %span
+
+        %h4.title{:style => 'margin-top:50px;'} Seeder Perks
+        %ul.perks
+          -if @perks
+            - @perks.each do |p|
+              %li.perk
+                %h3= p.name
+                %p.description= p.description
+                %ul
+                  %li
+                    %h6 SEED
+                    %p.amount $#{p.amount.to_i}
+                  %li.fund-button
+                    %a{:href => "#assets", :class => "fund btn"} Fund Now #{image_tag('arrow.png')}
+
+        %h4.title{:style => 'margin-top:50px;'}
+          Planter
+          %span (Project Organizer)
+        .planter
+          = image_tag(get_gravatar(current_user.email, 100), :style => "display:inline-block;margin-right:20px;width:100px;height:100px;")
+          %h4{:style => "display:inline-block;color:#70bf4c;letter-spacing:2px;"}= @project.title
+
+        %h4.title{:style => 'margin-top:50px;'} Business Partners
+        = link_to "#assets", :class => 'btn', :style => 'margin-top:10px;' do
+          Become A Sponsor
+          %span
+
+        %h4.title{:style => 'margin-top:50px;'}
+          Seeders (0)
+          %span (Project Funders)
+
 /* Each tip is set within this <ol>. */
 /* This creates the order the tips are displayed */
 %ol{:id => "uruutTour"}
@@ -57,12 +665,333 @@
 
 %script{:src => "http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"}
 %script{:src => "http://maps.stamen.com/js/tile.stamen.js?v1.2.1"}
-= javascript_include_tag "projects"
 :javascript
-		
-  getPerkProjectUrl = "#{get_perk_projects_url}";
-  submitUrl = "#{projects_submit_project_url}";
-  projectId = #{@project.id};
-  projectPath = '#{project_path(@project.id)}';
-  thankYouUrl = "#{thank_you_pages_url}";
-  window.projectId = projectId
+  var getHash = function() {
+    if(window.location.hash) {
+      $('.step-container').each(function(){
+        $(this).hide();
+      });
+
+      $('.breadcrumbs li').each(function(){
+        $(this).removeClass('active');
+      })
+
+      var hashVal = window.location.hash.split("#")[1];
+      console.log(hashVal);
+      if(hashVal == 'sponsor-info') {
+        $("[data-id='" + hashVal + "']").show();
+        $('.breadcrumbs li[class*="' + hashVal + '"]').addClass('active');
+      }
+      if(hashVal == 'project-details') {
+        $("[data-id='" + hashVal + "']").show();
+        $('li.' + hashVal).addClass('active');
+      }
+      if(hashVal == 'perks') {
+        $("[data-id='" + hashVal + "']").show();
+        $('.breadcrumbs li[class*="' + hashVal + '"]').addClass('active');
+      }
+      if(hashVal == 'sponsorship') {
+        $("[data-id='" + hashVal + "']").show();
+        $('.breadcrumbs li[class*="' + hashVal + '"]').addClass('active');
+      }
+      if(hashVal == 'assets') {
+        $("[data-id='" + hashVal + "']").show();
+        $('.breadcrumbs li[class*="' + hashVal + '"]').addClass('active');
+      }
+    }else{
+      window.location.href = "/projects/#{@project.id}/edit#sponsor-info";
+      window.location.reload(true);
+    }
+  }
+
+  $(function(){
+    $("#large_image").delegate('.pick-cover-photo', 'load', function() {
+      $("#uruutTour").joyride({
+        autoStart : true,
+        'tipLocation': 'bottom'
+      });
+    })
+    var map = L.map('map').setView([51.505, -0.09], 13);
+    getHash();
+    $(window).on('hashchange', function() {
+      getHash();
+      // window.location.reload(true);
+    });
+
+    $('.breadcrumbs li').hover(function() {
+      $(this).addClass('active');
+    }, function() {
+      var hash = window.location.hash.split("#")[1];
+      if($(this).hasClass(hash)){
+        $(this).addClass('active');
+      }else{
+        $(this).removeClass('active');
+      }
+    });
+
+   $('.step-container').on('form', 'submit', function() {
+     console.log("form submitted");
+     return $(this).h5Validate();
+   });
+
+   $('.step-container[data-id="sponsor-info"] form').on('submit', function(e){
+     if($('#connected').val() == 'true') {
+      e.preventDefault();
+      var data = $(this).serialize();
+      $.ajax({
+        type: 'POST',
+        url: '#{project_path(@project.id)}',
+        data: data
+      }).done(function(data){
+        console.log("Success???");
+        console.log(data);
+        window.location.href = '/projects/' + data + '/edit#project-details';
+        window.location.reload(true);
+        localStorage.clear();
+      })
+     }else{
+       alert("Connect with Stripe, please.");
+       return false;
+     }
+    })
+
+    $('.step-container[data-id="project-details"] form').on('submit', function(e){
+      e.preventDefault();
+      console.log("prevent worked");
+      var data = $(this).serialize();
+      console.log(data);
+      $.ajax({
+        type: 'POST',
+        url: '#{project_path(@project.id)}',
+        data: data
+      }).done(function(data){
+        console.log("Success???");
+        window.location.href = '/projects/' + data + '/edit#perks';
+        window.location.reload(true);
+      })
+    })
+
+    $('.step-container[data-id="perks"] form').on('submit', function(e){
+      e.preventDefault();
+      console.log("prevent worked");
+      var data = $(this).serialize();
+      console.log(data);
+      $.ajax({
+        type: 'POST',
+        url: '#{project_path(@project.id)}',
+        data: data
+      }).done(function(data){
+        console.log("Success???");
+        window.location.href = '/projects/' + data + '/edit#sponsorship';
+        window.location.reload(true);
+      })
+    })
+
+    $('.step-container[data-id="sponsorship"] form').on('submit', function(e){
+      e.preventDefault();
+      console.log("prevent worked");
+      var data = $(this).serialize();
+      console.log(data);
+      $.ajax({
+        type: 'POST',
+        url: '#{project_path(@project.id)}',
+        data: data
+      }).done(function(data){
+        console.log("Success???");
+        window.location.href = '/projects/' + data + '/edit#assets';
+        window.location.reload(true);
+      })
+    })
+
+    $('.add-perk').on('click', function(e) {
+      e.preventDefault();
+      console.log(document.location.hostname);
+      var name = $('#perk-name').val();
+      var amount = $('#perk-amount').val();
+      var description = $('#perk-description').val();
+      var project = #{@project.id};
+      var data = {name: name, amount: amount, description: description, project: project};
+      $.ajax({
+        type: 'POST',
+        url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/add_perk',
+        data: data
+      }).done(function(data) {
+        console.log(data);
+        window.location.reload(true);
+      }).error(function(error) {
+        console.log(error);
+      });
+    })
+
+    $('.update-perk').on('click', function(e) {
+      e.preventDefault();
+      var name = $('#perk-name').val();
+      var amount = $('#perk-amount').val();
+      var description = $('#perk-description').val();
+      var perk_id = $('#perk-id').val();
+      var data = {name: name, amount: amount, description: description, id: perk_id};
+      $.ajax({
+        type: 'POST',
+        url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/update_perk',
+        data: data
+      }).done(function(data) {
+        console.log(data);
+        window.location.reload(true);
+      });
+    })
+
+    $('.perk-delete').on('click', function(e) {
+      e.preventDefault();
+      var perk_id = $(this).parent().find('input[type=hidden]').val();
+      console.log(perk_id);
+      var data = {id: perk_id};
+      $.ajax({
+        type: 'POST',
+        url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/delete_perk',
+        data: data
+      }).done(function(data) {
+        console.log(data);
+        window.location.reload(true);
+      });
+    })
+
+    $('.created-perk .perk-edit').on('click', function() {
+      $.ajax({
+        type: 'POST',
+        url: '#{get_perk_projects_url}',
+        data: {id: $(this).parent().find('input[type=hidden]').val()}
+      }).done(function(data) {
+        $('#perk-name').val(data.name);
+        $('#perk-amount').val(data.amount);
+        $('#perk-description').val(data.description);
+        $('#perk-id').val(data.id)
+        $('.add-perk').hide();
+        $('.update-perk').show();
+      });
+    });
+
+    $('li.submit a').click(function(event) {
+      event.preventDefault();
+      console.log(#{@project.id})
+      $.ajax({
+        type:'POST',
+        url: '#{projects_submit_project_url}',
+        data: {id: #{@project.id}}
+      }).done(function(data) {
+        if(data == "successful") {
+          window.location.href = "#{thank_you_pages_url}";
+        }
+      })
+    })
+
+    $('.stripe-connect').click(function() {
+      localStorage.setItem('organization', $('#project_organization').val());
+      localStorage.setItem('address', $('#project_address').val());
+      localStorage.setItem('city', $('#project_city').val());
+      localStorage.setItem('state', $('#project_state').val());
+      localStorage.setItem('zip', $('#project_zip').val());
+      localStorage.setItem('website', $('#project_website').val());
+      localStorage.setItem('twitter_handle', $('#project_twitter_handle').val());
+      localStorage.setItem('facebook_page', $('#project_facebook_page').val());
+    });
+
+    if(localStorage.getItem('organization')) {
+      $('#project_organization').val(localStorage.getItem('organization'));
+    }
+
+    if(localStorage.getItem('address')) {
+      $('#project_address').val(localStorage.getItem('address'));
+    }
+
+    if(localStorage.getItem('city')) {
+      $('#project_city').val(localStorage.getItem('city'));
+    }
+
+    if(localStorage.getItem('state')) {
+      $('#project_state').val(localStorage.getItem('state'));
+    }
+
+    if(localStorage.getItem('zip')) {
+      $('#project_zip').val(localStorage.getItem('zip'));
+    }
+
+    if(localStorage.getItem('website')) {
+      $('#project_website').val(localStorage.getItem('website'));
+    }
+
+    if(localStorage.getItem('twitter_handle')) {
+      $('#project_twitter_handle').val(localStorage.getItem('twitter_handle'));
+    }
+
+    if(localStorage.getItem('facebook_page')) {
+      $('#project_facebook_page').val(localStorage.getItem('facebook_page'));
+    }
+
+  });
+
+  var platinumSum = $('#platinum-box').children().children('.default').length;
+  var goldSum = $('#gold-box').children().children('.default').length;
+  var silverSum = $('#silver-box').children().children('.default').length;
+  var bronzeSum = $('#bronze-box').children().children('.default').length;
+
+  $("#platinum-count").val(platinumSum + 1);
+  $(".platinum_benefits").attr("name", "platinum[info_" + (platinumSum + 1) + "]");
+  $(".platinum_benefits").attr("id", "platinum_info_" + (platinumSum + 1));
+  $(".box_platinum_benefits").attr("name", "platinum[" + (platinumSum + 1) + "]");
+  $(".box_platinum_benefits").attr("id", "platinum_" + (platinumSum + 1));
+
+  $("#gold-count").val(goldSum + 1);
+  $(".gold_benefits").attr("name", "gold[info_" + (goldSum + 1) + "]");
+  $(".gold_benefits").attr("id", "gold_info_" + (goldSum + 1));
+  $(".box_gold_benefits").attr("name", "gold[" + (goldSum + 1) + "]");
+  $(".box_gold_benefits").attr("id", "gold_" + (goldSum + 1));
+
+  $("#silver-count").val(silverSum + 1);
+  $(".silver_benefits").attr("name", "silver[info_" + (silverSum + 1) + "]");
+  $(".silver_benefits").attr("id", "silver_info_" + (silverSum + 1));
+  $(".box_gold_benefits").attr("name", "silver[" + (silverSum + 1) + "]");
+  $(".box_gold_benefits").attr("id", "silver_" + (silverSum + 1));
+
+  $("#bronze-count").val(bronzeSum);
+  $(".bronze_benefits").attr("name", "bronze[info_" + (bronzeSum + 1) + "]");
+  $(".bronze_benefits").attr("id", "bronze_info_" + (bronzeSum + 1));
+  $(".box_gold_benefits").attr("name", "bronze[" + (bronzeSum + 1) + "]");
+  $(".box_gold_benefits").attr("id", "bronze_" + (bronzeSum + 1));
+
+  $(".edit-benefit").click(function() {
+    var nameBenefits = $(this).parent().children("#name");
+    var fieldBenefits = $(this).parent().children(".edit-text-field");
+    console.log(c = this)
+    if($(this).text() == "select to edit"){
+      nameBenefits.hide();
+      fieldBenefits.show();
+      fieldBenefits.attr("style", "margin-top:-25px; width: 320px !important;");
+      $(this).text("save");
+      $(this).addClass("btn");
+      $(this).attr("style", "position: relative; top: 70px !important; margin-left: 5px");
+      $(this).removeClass("green-font");
+    }else{
+      nameBenefits.text($(this).parent().find(".edit-text-field").val());
+      nameBenefits.show();
+      fieldBenefits.hide();
+      $(this).removeClass("btn");
+      $(this).removeAttr("style", "position: relative; top: 70px !important; margin-left: 5px");
+      $(this).addClass("edit-benefit italic green-font");
+      $(this).text("select to edit")
+    }
+  });
+
+  $(function() {
+    $(".add-another").click(function(e) {
+      var divCore = $(this).parent().children("#custom-checkbox");
+      var checkFieldP = $(this).parent().children("#custom-checkbox").children(".checkbox").children(".add_benefits");
+      var checkboxName = checkFieldP.attr("id").split("_")[0];
+      var checkboxVal = checkFieldP.attr("id").split("_")[2];
+      var countCheckbox = parseInt(checkboxVal) + 1;
+
+      $("#"+ checkboxName +"-count").val(countCheckbox);
+      $('<div class="checkbox default"><input id="'+ checkboxName + '_' + countCheckbox + '" type="checkbox" value="1" name="'+ checkboxName +'['+ countCheckbox +']"><input id="'+ checkboxName + '_info_'+ countCheckbox +'" class="" type="text" style="margin-top: -33px; width: 80% !important;" placeholder="Create your costum benefit here..." name="'+ checkboxName + '[info_'+countCheckbox+']"></div>').appendTo(divCore);
+      countCheckbox++;
+      return false;
+    })
+  });
