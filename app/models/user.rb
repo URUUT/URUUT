@@ -22,14 +22,14 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
   validates_presence_of :name
-  validate :minimum_image_size
+  # validate :minimum_image_size
   # validates_uniqueness_of :name, :email, :case_sensitive => false
 
   has_many :services, :dependent => :destroy
   has_many :projects, :dependent => :destroy
   has_many :donations
 
-  mount_uploader :avatar, AvatarUploader
+  # mount_uploader :avatar, AvatarUploader
 
   def self.create_with_omniauth(info)
     create(name: info['name'])
@@ -81,13 +81,22 @@ class User < ActiveRecord::Base
   end
 
   def self.new_with_session(params, session)
-    super.tap do |user|
-      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
-        user.email = data["email"] if user.email.blank?
-      elsif data = session["devise.twitter_data"]
-        user.name = data["name"] if user.name.blank?
+    if session["devise.user_attributes"]
+      new(session["devise.user_attributes"], :without_protection => true) do |user|
+        user.attributes = params
+        user.services.build(:provider => session["devise.provider"], :uid => session["devise.uid"])
+        user.valid?
       end
+    else
+      super
     end
+    #super.tap do |user|
+    #  if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+    #    user.email = data["email"] if user.email.blank?
+    #  elsif data = session["devise.twitter_data"]
+    #    user.name = data["name"] if user.name.blank?
+    #  end
+    #end
   end
   
   def email_required?
@@ -95,7 +104,7 @@ class User < ActiveRecord::Base
   end
 
   def password_required?
-    super && provider.blank?
+    false
   end
 
   def projects_funded
@@ -119,10 +128,10 @@ class User < ActiveRecord::Base
     WelcomeMailer.welcome_confirmation(self).deliver
   end
 
-  def minimum_image_size
-    if self.avatar_upload_width && self.avatar_upload_height && (self.avatar_upload_width < 200 || self.avatar_upload_height < 200)
-      errors.add :avatar, "Image should be at least 200px x 200px"
-    end
-  end
+  # def minimum_image_size
+#     if self.avatar_upload_width && self.avatar_upload_height && (self.avatar_upload_width < 200 || self.avatar_upload_height < 200)
+#       errors.add :avatar, "Image should be at least 200px x 200px"
+#     end
+#   end
 
 end

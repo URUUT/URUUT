@@ -52,15 +52,6 @@ class ProjectsController < ApplicationController
     render :layout => 'landing'
   end
 
-	# def update
-#     redirect_to project_steps_path
-		# @project = Project.find(params[:id])
-#     if @project.update_attributes(params[:project])
-#       flash[:notice] = "Successfully updated project."
-#       redirect_to project_steps_path
-#     end
-  # end
-
   def update
     @project = Project.find(params[:id])
     sponsorship_benefits = []
@@ -97,6 +88,9 @@ class ProjectsController < ApplicationController
   end
 
   @sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits) 
+  if !@project.website.empty?
+    @project.website.sub(/^https?\:\/\//, '')
+  end
   @project.update_attributes!(params[:project])
   if @project.save
     if params[:commit].eql? "Save Updates"

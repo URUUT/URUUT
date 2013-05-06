@@ -13,5 +13,4 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
-//= require jquery.h5validate
-//= require_tree .
+//= require_tree ./global

@@ -15,23 +15,48 @@
 
 %ul.pull-right.right.logged-in
   - if user_signed_in?
-    %li.signed-in
-      %a
-        = image_tag(current_user.avatar_url(:thumb), :class => "img-circle avatar-thumb")
+    %li.signed-in.dropdown
+      %a.dropdown-toggle{'data-toggle' => 'dropdown'}
+        = image_tag "#{current_user.avatar}", :class => "img-circle avatar-thumb"
         = current_user.name
-        = image_tag 'down-arrow.png', :class => "down"
-      %div.dropdown
-        %div
-          %h5 My Account
-          %ul
-            %li
-              = link_to 'Profile', current_user
-            %li
-              = link_to 'Logout', destroy_user_session_path
+        = image_tag 'down-arrow.png'
+      %div.dropdown-menu
+        %ul
+          %li
+            = link_to 'My Profile', current_user
+          %li
+            = link_to 'Edit Account Settings', edit_user_registration_path
+          %li
+            = link_to 'Logout', destroy_user_session_path
   - else
-    %li
-      = link_to "Log In", user_session_path
+    %li.dropdown
+      = link_to "Log In", "#", :class => "dropdown-toggle", 'data-toggle' => 'dropdown'
       %span.or or
       = link_to "Sign Up", new_user_registration_path, :class => "sign-up-link"
+      %div.log-in.dropdown-menu
+        %ul
+          %li
+            %h5 Account Log In
+            = form_tag user_session_path do
+              = text_field_tag 'user[email]', nil, :placeholder => "Your Email"
+              = password_field_tag 'user[password]', nil, :placeholder => "Your Password"
+              %div
+                = check_box_tag 'user[remember_me]'
+                = label_tag 'user[remember_me]', 'Remember me'
+              %button.btn 
+                Log in
+                %span
+
+            %hr
+            %h5 FACEBOOK LOG IN
+            %p It’s fast and easy.
+            = link_to user_omniauth_authorize_path(:facebook) do
+              = image_tag 'fb-180.png'
+            %p
+              We’ll never post anything
+              %br
+              without permission.
 
   -#%input{:type => "search", :placeholder => "Search"}
+
+= javascript_include_tag "pages"
