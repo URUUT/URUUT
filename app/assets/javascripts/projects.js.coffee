@@ -89,12 +89,15 @@ $ ->
   $(".add-another").click (e)->
     divCore = $(this).parent().children("#custom-checkbox")
     checkFieldP = $(this).parent().children("#custom-checkbox").children(".checkbox").children(".add_benefits")
+    console.log checkFieldP
     checkboxName = checkFieldP.attr("id").split("_")[0]
+    console.log checkboxName
     checkboxVal = checkFieldP.attr("id").split("_")[2]
+    console.log checkboxVal
     countCheckbox = parseInt(checkboxVal) + 1
 
-    $("#"+ checkboxName +"-count").val(countCheckbox)
-    $('<div class="checkbox default"><input id="'+ checkboxName + '_' + countCheckbox + '" type="checkbox" value="1" name="'+ checkboxName +'['+ countCheckbox +']"><input id="'+ checkboxName + '_info_'+ countCheckbox +'" class="" type="text" style="margin-top: -33px width: 80% !important" placeholder="Create your costum benefit here..." name="'+ checkboxName + '[info_'+countCheckbox+']"></div>').appendTo(divCore)
+    $("#" + checkboxName + "-count").val(countCheckbox)
+    $('<div class="checkbox default"><input id="' + checkboxName + '_' + countCheckbox + '" type="checkbox" value="1" name="' + checkboxName + '[' + countCheckbox + ']"><input id="' + checkboxName + '_info_' + countCheckbox + '" class="" type="text" style="margin-top: -33px width: 80% !important" placeholder="Create your costum benefit here..." name="' + checkboxName + '[info_' + countCheckbox + ']"></div>').appendTo(divCore)
     countCheckbox++
     return false
 		
