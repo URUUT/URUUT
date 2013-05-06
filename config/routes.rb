@@ -36,6 +36,8 @@ Crowdfund::Application.routes.draw do
   # get "projects/add_desc"
    get "projects/save_image"
    post "projects/save_image"
+   post "galleries/save_image"
+   delete "galleries/delete_photo"
    get "projects/:project_id/sponsors/:id/confirmation" => "sponsors#confirmation", as: "confirmation"
    get "purchase" => "payments#purchase"
 #
@@ -58,7 +60,8 @@ Crowdfund::Application.routes.draw do
   end
 
   resources :s3_uploads
-  resources :projects
+  # resources :projects
+  resources :galleries
   namespace :project_admin do
     resources :projects
   end

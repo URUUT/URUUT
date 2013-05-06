@@ -55,18 +55,31 @@
             %a{:href => "#tabs-3"} STORY VISUAL
           %li
             %a{:href => "#tabs-4"} PROJECT UPDATES
-        #tabs-1{style: "height: 1000px;"}
-          %h2.title My Project Cover Photo
-          = form_for(@project, html: {class: "sponsor-info span10 well", style: "margin-top: 0;", multipart: true}) do |f|
-            - if @project.errors.any?
-              #errorExplanation
-                %h2 #{pluralize(@project.errors.count, "error")}
-                %ul
-                  - @project.errors.full_messages.each do |msg|
-                    %li #{msg}
-            %div.pull-left{style: "min-width: 350px; max-width: 350px;margin-right: 20px;"}
-              #large_image{style: "background-image: url(#{@project.large_image}); -webkit-background-size: cover; background-size: cover;"}
-                %input{type: 'filepicker', name: 'large_image', 'data-fp-button-text' => 'CHANGE COVER PHOTO', 'data-fp-apikey' => "ArmO0TLVTkyCaJkQmBNfqz", 'data-fp-button-class' => 'coverphoto coverphoto2 btn', 'onchange' => 'updateCover(event)', style: ''}
+        #tabs-1{style: "height: 1200px;"}
+          %div{style: "height: 800px; width: auto;"}
+            %h2.title My Project Cover Photo
+            = form_for(@project, html: {class: "sponsor-info span10 well", style: "margin-top: 0;", multipart: true}) do |f|
+              - if @project.errors.any?
+                #errorExplanation
+                  %h2 #{pluralize(@project.errors.count, "error")}
+                  %ul
+                    - @project.errors.full_messages.each do |msg|
+                      %li #{msg}
+              %div.pull-left{style: "min-width: 350px; max-width: 350px;margin-right: 20px;"}
+                #large_image{style: "background-image: url(#{@project.large_image}); -webkit-background-size: cover; background-size: cover;"}
+                  %input{type: 'filepicker', name: 'large_image', 'data-fp-button-text' => 'CHANGE COVER PHOTO', 'data-fp-apikey' => "ArmO0TLVTkyCaJkQmBNfqz", 'data-fp-button-class' => 'coverphoto coverphoto2 btn', 'onchange' => 'updateCoverPhoto(event)', style: ''}
+          %div{style: "height: auto; width: auto;"}
+            %h2.title My Project Photo Gallery
+            = form_for(@gallery, html: {class: "sponsor-info span10 well", style: "margin-top: 0;margin-left: 0;", multipart: true}) do |f|
+              %input{type: 'filepicker', name: 'gallery', id: "project-submit" ,'data-fp-button-text' => 'ADD A NEW PHOTO', 'data-fp-apikey' => "ArmO0TLVTkyCaJkQmBNfqz", 'data-fp-button-class' => 'pull-left btn', 'onchange' => 'updateGallery(event)', style: ''}
+            #galleryPicture
+              - @picture_gallery.each do |image|
+                .span3{style: "margin-left:0;"}
+                  .span9.float-none
+                    = image_tag image.gallery_file_name, class: "img-polaroid", style: "width:150px;height:120px;"
+                  %br/
+                  = link_to "delete photo", gallery_path(image.id), class: "green-font", style: "margin-left:20px", method: 'DELETE'
+            %div{style: "clear: both;"}
 
         #tabs-2{style: "height: 1000px;"}
           %h2.title My Project Details
@@ -113,6 +126,41 @@
 
 %script{:src => "http://code.jquery.com/ui/1.10.2/jquery-ui.js"}
 :javascript
+  var updateCoverPhoto = function(event){
+    console.log(event.fpfile.url);
+    var largeImage = event.fpfile.url;
+
+    $.ajax({
+      url: '/projects/save_image',
+      method: 'POST',
+      data: {
+        large_image: largeImage
+        }
+    }).done(function(){
+      console.log("finished");
+      $('#large_image').css('background-image','url(' + largeImage + ')');
+    });
+  }
+  var updateGallery = function(event){
+    console.log(event.fpfile.url);
+    var pictureImage = event.fpfile.url;
+    var pictureSize = event.fpfile.size;
+    var pictureType = event.fpfile.type;
+
+    $.ajax({
+      url: '/galleries/save_image',
+      method: 'POST',
+      data: {
+        gallery: pictureImage
+        },
+      success: function(data){
+        console.log(data);
+        $('#galleryPicture').append("<div class='span3' style='margin-left:0;'><div class='span9 float-none margin-auto'><img src=" + pictureImage + " class='img-polaroid' style='width:150px;height:120px;' ><br/><a href='/galleries/" + data.image_id + " class='green-font' data-method='DELETE' style='margin-left:20px'>delete photo</p></div></div></div>");
+      }
+
+    });
+  }
+
   $(function() {
     $( "#pages" ).tabs();
     $("#tabs, #subtabs").tabs();
