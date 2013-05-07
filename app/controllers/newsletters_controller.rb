@@ -1,7 +1,9 @@
 class NewslettersController < ApplicationController
 
   def create
-    render :json => { :created => true }
+    newsletter = Newsletter.new(params[:newsletter])
+
+    render :json => { :created => newsletter.save }
   end
 
 end
