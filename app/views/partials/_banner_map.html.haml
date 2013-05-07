@@ -1,19 +1,21 @@
 .full-width.texture
   .container
-    %div
-      = image_tag "mag-glass.png"
-      %h3 DISCOVER PROJECTS
-    .category.dropdown
-      %label PROJECT CATEGORY:
-      %select{:id => "category"}
-        %option All Categories
-        %option Test
-    .location.dropdown
-      %label PROJECT LOCATION:
-      %select{:id => "location"}
-        %option All cities
-        - Project.all_cities.each do |city|
-          %option= city
-    .keyword.dropdown
-      %label KEYWORD SEARCH
-      %input{:type => 'search', :id => 'keyword', :placeholder => "Keyword..."}
+    = form_tag "#", method: "get", class: "project-filter" do
+      %div
+        = image_tag "mag-glass.png"
+        %h3 DISCOVER PROJECTS
+      .category.dropdown
+        %label PROJECT CATEGORY:
+        %select{:id => "category", :name => "category"}
+          %option All Categories
+          %option Test
+      .location.dropdown
+        %label PROJECT LOCATION:
+        %select{:id => "location", :name => "city"}
+          %option All cities
+          - Project.all_cities.each do |city|
+            %option= city
+      .keyword.dropdown
+        %label KEYWORD SEARCH
+        %input{:type => 'search', :id => 'keyword', :name => "keyword", :placeholder => "Keyword..."}
+
