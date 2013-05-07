@@ -15,6 +15,12 @@ $ ->
       else
         $("#email-sign-up-error").show()
 
+  submit_filter_form = ->
+    $("form.project-filter").submit()
+
+  $("form.project-filter #location").bind "change", submit_filter_form
+  $("form.project-filter #category").bind "change", submit_filter_form
+
 	geocoder = ''
 	address = ''
 	map = ''
