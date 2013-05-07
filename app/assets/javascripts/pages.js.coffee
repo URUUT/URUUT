@@ -64,3 +64,11 @@ $ ->
 		$(this).addClass('active')
 	,->
 		$(this).removeClass('active')
+
+
+  $("#email-sign-up")
+    .bind "ajax:error", (event, xhr, status, error) ->
+      alert status
+
+    .bind "ajax:success", (event, data, status, xhr) ->
+      alert status
