@@ -14,27 +14,41 @@ getHash = ->
     console.log hashVal
     if hashVal == 'sponsor-info' 
       $("[data-id='" + hashVal + "']").show()
+      stopJoyride()
       $('.breadcrumbs li[class*="' + hashVal + '"]').addClass('active')
   
     if hashVal == 'project-details' 
-      $("[data-id='" + hashVal + "']").show()
+      $("[data-id='" + hashVal + "']").show() 
+      stopJoyride()
       $('li.' + hashVal).addClass('active')
   
     if hashVal == 'perks'
       $("[data-id='" + hashVal + "']").show()
+      stopJoyride()
       $('.breadcrumbs li[class*="' + hashVal + '"]').addClass('active')
   
     if hashVal == 'sponsorship' 
       $("[data-id='" + hashVal + "']").show()
+      stopJoyride()
       $('.breadcrumbs li[class*="' + hashVal + '"]').addClass('active')
   
     if hashVal == 'assets' 
       $("[data-id='" + hashVal + "']").show()
+      startJoyride()
       $('.breadcrumbs li[class*="' + hashVal + '"]').addClass('active')
      
   else
     window.location.href = "/projects/" + projectId + "/edit#sponsor-info"
     window.location.reload(true)
+		
+startJoyride = ->      
+  $('#uruutTour').joyride({autoStart : true})
+  $('.quit-tour').click (e) ->
+    e.preventDefault()
+    stopJoyride()
+		
+stopJoyride = ->
+  $('#uruutTour').joyride('destroy')
 
 $ ->
   $('#stepDesc1').click ->
@@ -301,6 +315,7 @@ $ ->
       data: data
     .done (data) ->
       console.log "Success???"
+      console.log data
       window.location.href = '/projects/' + data + '/edit#assets'
       window.location.reload(true)
 			
