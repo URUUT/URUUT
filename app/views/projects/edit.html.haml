@@ -51,15 +51,23 @@
 /* This creates the order the tips are displayed */
 %ol{:id => "uruutTour"}
   /* data-id needs to be the same as the parent it will attach to */
-  %li{"data-class" => "pick-cover-photo"}
-    %p This is some content...
-    %p Here is some more...
+  %li{"data-class" => "pick-cover-photo", "data-options" => "tipLocation:right"}
+    %h4 CHOOSE A COVER PHOTO
+    %p The cover photo is the large splash image that appears on your page. The dimensions should be at least 1600 x 546 pixels. It’s a big photo and a great opportunity to give your page a striking, eye-catching look. Choose something that reflects your organization, project, and personality.
+    %a{:href => "#", :class => "button small quit-tour"} Quit Tour
+  %li{"data-id" => "planting_seeds", "data-options" => "tipLocation:top"}
+    %h4 ADD PHOTOS
+    %p Add photos into your story section by clicking on the placeholder images. If you need more, you can add them to a gallery section from your dashboard once your project as been approved.
+    %a{:href => "#", :class => "button small quit-tour"} Quit Tour
+  %li{"data-class" => "submit", "data-button" => "Quit Tour", "data-options" => "tipLocation:bottom"}
+    %h4 SUBMIT
+    %p When you're ready, click here to submit for approval. You're only required to add a cover photo.
 
 %script{:src => "http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"}
 %script{:src => "http://maps.stamen.com/js/tile.stamen.js?v1.2.1"}
 = javascript_include_tag "projects"
 :javascript
-		
+  
   getPerkProjectUrl = "#{get_perk_projects_url}";
   submitUrl = "#{projects_submit_project_url}";
   projectId = #{@project.id};

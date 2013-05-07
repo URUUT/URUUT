@@ -17,8 +17,10 @@ class ProjectsController < ApplicationController
     session[:connected] = ''
  #    @project.perks.build
  #    @project.galleries.build
- render :layout => 'landing'
-end
+   client = Bitly.client
+   logger.debug(client)
+   render :layout => 'landing'
+ end
 
 def create
   @project = Project.new(params[:project])
@@ -84,10 +86,7 @@ end
     end
   end
 
-  @sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits) 
-  if !@project.website.empty?
-    @project.website.sub(/^https?\:\/\//, '')
-  end
+  @sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits)
   @project.update_attributes!(params[:project])
 
   if @project.save
