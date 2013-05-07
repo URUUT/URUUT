@@ -31,6 +31,10 @@ class Project < ActiveRecord::Base
 
   #process_in_background :image
 
+  def self.all_cities
+    self.select(:city).uniq.all.each.map { |p| p.city }
+  end
+
   def self.get_sponsor_token
     if :current_user
       Stripe.api_key = API_KEY
