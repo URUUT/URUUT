@@ -52,7 +52,16 @@
       %li
         = link_to "","http://www.facebook.com/get.ruuted", :class => "fb"
         = link_to "","http://www.twitter.com/uruut", :class => "tw"
-				
+
+    %ul
+      %li
+        %h6 Sign up for URUUT news
+        = form_for user_registration_path(User.new), :html => { :class => "email-sign-up" } do |f|
+          %div
+            = f.email_field :email, :placeholder => "enter email address"
+            %button.btn{:type => "submit"}
+              %span
+
 .copyright
   .container
     %p
