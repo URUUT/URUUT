@@ -35,9 +35,9 @@
     %ul
       %li
         %h6 Sign up for URUUT news
-        = form_tag "#", :class => "email-sign-up" do |f|
+        = form_for Newsletter.new, :remote => true, :html => { :id => "email-sign-up" } do |f|
           %div
-            = email_field_tag "email", "", :placeholder => "enter email address"
+            = f.email_field "email", :placeholder => "enter email address"
             %button.btn{:type => "submit"}
               %span
 
