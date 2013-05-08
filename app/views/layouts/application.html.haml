@@ -7,22 +7,33 @@
     %meta{:content => "", :name => "description"}
     %meta{:content => "", :name => "author"}
     = stylesheet_link_tag  "default/application", "trontastic/jquery-ui-1.8.22.custom.css", "http://cdn.leafletjs.com/leaflet-0.5/leaflet.css", "http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css", :media => "all"
-    = javascript_include_tag "http://code.jquery.com/jquery-1.9.1.js", "http://code.jquery.com/ui/1.10.2/jquery-ui.js", "application", "jquery.payment", :media => "all"
+    = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js", "application", "https://js.stripe.com/v1/", :media => "all"
     = filepicker_js_include_tag
     = javascript_tag do
-      Stripe.setPublishableKey(=STRIPE_PUBLIC_KEY);
+      Stripe.setPublishableKey("#{STRIPE_PUBLIC_KEY}");
 
     = csrf_meta_tags
     = yield(:head)
   %body{:class => "#{controller_name} #{action_name}"}
     #fb-root
       :javascript
+        window.fbAsyncInit = function() {
+          // init the FB JS SDK
+          FB.init({
+            appId      : '406604396088865',                        // App ID from the app dashboard
+            channelUrl : '//127.0.0.1:8080/channel.html', // Channel file for x-domain comms
+            status     : true,                                 // Check Facebook Login status
+            xfbml      : true                                  // Look for social plugins on the page
+          });
+
+          // Additional initialization code such as adding Event Listeners goes here
+        };
 
         (function(d, s, id) {
           var js, fjs = d.getElementsByTagName(s)[0];
           if (d.getElementById(id)) return;
           js = d.createElement(s); js.id = id;
-          js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=517310951621035";
+          js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=406604396088865";
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
 
@@ -34,23 +45,25 @@
           = render 'layouts/navigation'
 
       .container
-        = render 'layouts/messages'
-        = yield
+        .row
+          = render 'layouts/messages'
+          = yield
       #push
     = render 'partials/footer'
+= javascript_include_tag "pages"
 
 :javascript
   if(window.opener) {
     window.opener.location.reload(true);
     window.close()
   }
-
-  $('.social-login a').click(function(e) {
-    e.preventDefault();
-    var ahref = $(this).attr('href');
-    console.log(ahref);
-    window.open(ahref,'_blank', 'height=500,width=500,location=no,menubar=no');
-  })
+	
+  //$('.social-login a').click(function(e) {
+  //  e.preventDefault();
+  //  var ahref = $(this).attr('href');
+  //  console.log(ahref);
+  //  window.open(ahref,'_blank', 'height=500,width=500,location=no,menubar=no');
+  //})
 	
   $('.stripe-connect').click(function(e) {
     e.preventDefault();
@@ -106,6 +119,22 @@
       console.log("finished");
       $('.cultivation-image').remove();
       $('#cultivation .details').prepend('<div class="cultivation-image"><img src="' + cultivationImage + '"</div>');
+    });
+  }
+	
+  var updateAvatar = function(event) {
+    console.log(event.fpfile.url);
+    var avatarImage = event.fpfile.url + '/convert?w=100&h=100&fit=crop';
+
+    console.log(avatarImage);
+    $('#user_avatar').val(avatarImage);
+    $('#avatar-img').attr('src', avatarImage);
+  }
+	
+  var updateProgressbar = function(id, value) {
+    console.log(id);
+    $('.progressbar' + id).progressbar({
+      value: value
     });
   }
 

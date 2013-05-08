@@ -7,8 +7,9 @@
     %meta{:content => "", :name => "description"}
     %meta{:content => "", :name => "author"}
     = stylesheet_link_tag    "default/application", "trontastic/jquery-ui-1.8.22.custom.css", "http://cdn.leafletjs.com/leaflet-0.5/leaflet.css", :media => "all"
-    = javascript_include_tag "application", "https://js.stripe.com/v1/"
+    = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js", "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js", "application", "https://js.stripe.com/v1/", :media => "all"
     = filepicker_js_include_tag
+    = javascript_include_tag "pages"
     = javascript_tag do
       Stripe.setPublishableKey('pk_test_WRrfoQLUDkpGHAxCmOY0Y6ud');
 
@@ -18,11 +19,23 @@
     #fb-root
       :javascript
 
+        window.fbAsyncInit = function() {
+          // init the FB JS SDK
+          FB.init({
+            appId      : '406604396088865',                        // App ID from the app dashboard
+            channelUrl : '//127.0.0.1:8080/channel.html', // Channel file for x-domain comms
+            status     : true,                                 // Check Facebook Login status
+            xfbml      : true                                  // Look for social plugins on the page
+          });
+
+          // Additional initialization code such as adding Event Listeners goes here
+        };
+
         (function(d, s, id) {
           var js, fjs = d.getElementsByTagName(s)[0];
           if (d.getElementById(id)) return;
           js = d.createElement(s); js.id = id;
-          js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=517310951621035";
+          js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=406604396088865";
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
 
@@ -50,6 +63,14 @@
     }).done(function(){
       console.log("finished");
       $('#large_image').css('background-image','url(' + largeImage + ')');
+    });
+  }
+	
+  var updateProgressbar = function(id, value) {
+    console.log(id);
+    console.log(value);
+    $('.progressbar' + id).progressbar({
+      value: value
     });
   }
 

@@ -1,3 +1,73 @@
+-#
+    .breadcrumb-container
+      %ul.breadcrumbs
+        %li.sponsor-info
+          = link_to "/projects/#{@project.id}/edit#sponsor-info" do
+            %span.steps Step 1
+            %span.title RUUTS
+            %span.description Basic Information
+            %span.border
+
+        %li.project-details
+          = link_to "/projects/#{@project.id}/edit#project-details" do
+            %span.steps Step 2
+            %span.title STORY
+            %span.description Project Details
+            %span.border
+
+        %li.perks
+          = link_to "/projects/#{@project.id}/edit#perks" do
+            %span.steps Step 3
+            %span.title PERKS
+            %span.description Donor Rewards
+            %span.border
+
+        %li.sponsorship
+          = link_to "/projects/#{@project.id}/edit#sponsorship" do
+            %span.steps Step 4
+            %span.title Sponsors
+            %span.description Sponsorship Details
+            %span.border
+
+        %li.assets
+          = link_to "/projects/#{@project.id}/edit#assets" do
+            %span.steps Step 5
+            %span.title VISUALS
+            %span.description Project Page Setup
+            %span.border
+
+        %li.submit
+          = link_to 'submit' do
+            %span.steps Get Ruuted
+            %span.title Submit
+            %span.description Submit Your Project for Approval
+
+    = render "projects/wizard/sponsor_info", :project => @project
+    = render "projects/wizard/project_details", :project => @project
+    = render "projects/wizard/perks", :project => @project
+    = render "projects/wizard/sponsorship", :project => @project
+    = render "projects/wizard/assets", :project => @project
+
+    /* Each tip is set within this <ol>. */
+    /* This creates the order the tips are displayed */
+    %ol{:id => "uruutTour"}
+      /* data-id needs to be the same as the parent it will attach to */
+      %li{"data-class" => "pick-cover-photo"}
+        %p This is some content...
+        %p Here is some more...
+
+    %script{:src => "http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"}
+    %script{:src => "http://maps.stamen.com/js/tile.stamen.js?v1.2.1"}
+    = javascript_include_tag "projects"
+    :javascript
+
+      getPerkProjectUrl = "#{get_perk_projects_url}";
+      submitUrl = "#{projects_submit_project_url}";
+      projectId = #{@project.id};
+      projectPath = '#{project_path(@project.id)}';
+      thankYouUrl = "#{thank_you_pages_url}";
+      window.projectId = projectId
+
 .breadcrumb-container
   %ul.breadcrumbs
     %li.sponsor-info
@@ -136,7 +206,7 @@
       CAMPAIGN LENGTH*
       %span.italic (max 45 days)
     = f.select :duration, options_for_select(project_length, @project.duration), :required => true, :size => 17
-		
+
     / = f.label :category do
     /   CATEGORY*
     /   %span.italic (max 45 days)
@@ -244,7 +314,7 @@
             %a{:class => "perk-edit", :style => "color:#70bf4c;"} edit
             |
             %a{:class => "perk-delete", :style => "color:#70bf4c;"} delete
-		
+
       %h5{:style => "color:#70bf4c;margin-bottom:10px;"} SEEDER PERKS
       %p Funding on URUUT is made in exchange for payment in kind: goods, services, special benefits or other perks. Offer something valuable for the funds. No T-shirts and shout-outs for $100.
 
@@ -279,8 +349,8 @@
             = number_to_currency(@project.goal.gsub(/,/, '').to_i * 0.70, :precision => 0)
         %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (70% of funding goal)
       .span9.left{:style => "text-align:left;color:#464646;"}
-        %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"} 
-          Platinum Level Sponsorship includes priority logo placement, a link to the sponsor’s website, and the company / foundation’s mission statement on your project page. Platinum Sponsors gain industry exclusivity for project sponsors. In addition to these benefits select suggested benefits or create custom benefits for platinum level sponsors from the checklist below. 
+        %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
+          Platinum Level Sponsorship includes priority logo placement, a link to the sponsor’s website, and the company / foundation’s mission statement on your project page. Platinum Sponsors gain industry exclusivity for project sponsors. In addition to these benefits select suggested benefits or create custom benefits for platinum level sponsors from the checklist below.
           %span{:style =>  "color:#b6b6b4;font-style:italic;"}
             (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
         %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"} SUGGESTED BENEFITS:
@@ -327,8 +397,8 @@
             = number_to_currency(@project.goal.gsub(/,/, '').to_i * 0.15, :precision => 0)
         %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (15% of funding goal)
       .span9.left{:style => "text-align:left;color:#464646;"}
-        %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"} 
-          Gold Level Sponsorship includes includes placement of a large sized logo and a link to the sponsor’s website on your project page. Gold Sponsors gain industry exclusivity for project sponsors. In addition to these benefits select suggested benefits or create custom benefits for gold level sponsors from the checklist below. 
+        %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
+          Gold Level Sponsorship includes includes placement of a large sized logo and a link to the sponsor’s website on your project page. Gold Sponsors gain industry exclusivity for project sponsors. In addition to these benefits select suggested benefits or create custom benefits for gold level sponsors from the checklist below.
           %span{:style =>  "color:#b6b6b4;font-style:italic;"}
             (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
         %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"} SUGGESTED BENEFITS:
@@ -374,8 +444,8 @@
             = number_to_currency(@project.goal.gsub(/,/, '').to_i * 0.05, :precision => 0)
         %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (5% of funding goal)
       .span9.left{:style => "text-align:left;color:#464646;"}
-        %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"} 
-          Silver Level Sponsorship includes includes placement of a medium sized logo and a link to the sponsor’s website on your project page. In addition to these benefits, select suggested benefits or create custom benefits for silver level sponsors from the checklist below. 
+        %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
+          Silver Level Sponsorship includes includes placement of a medium sized logo and a link to the sponsor’s website on your project page. In addition to these benefits, select suggested benefits or create custom benefits for silver level sponsors from the checklist below.
           %span{:style =>  "color:#b6b6b4;font-style:italic;"}
             (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
         %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"} SUGGESTED BENEFITS:
@@ -416,9 +486,9 @@
         / %div.checkbox
         /   = check_box_tag "Test"
         /   Five tickets to VIP Gala Event.
-        
+
     %hr
-		
+
     %div
       %h6{:style => "color:#70bf4c;"}
         Bronze LEVEL SPONSORSHIP*
@@ -468,7 +538,7 @@
     %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
     .well.info
       %h5{:style => "color:#70bf4c;margin-bottom:10px;"} SPONSORSHIP DETAILS
-      %p URUUT’s Partner-Funding depends not only individual contributors, but sponsorship from businesses and foundations. 
+      %p URUUT’s Partner-Funding depends not only individual contributors, but sponsorship from businesses and foundations.
 
       %p There are 4 different levels of sponsorship, with different benefits for each level. Use the checklists to define what each sponsor level includes. Blah blah blah, this is terrible writing, need to have someone actually write this before launch.
 
@@ -478,7 +548,7 @@
       #large_image{:style => "background-image: url(#{@project.large_image}); -webkit-background-size: cover; background-size: cover;"}
         %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => ENV['FILEPICKER_API'], 'data-fp-button-class' => 'coverphoto btn', 'onchange' => 'updateCover(event)', :style => 'left:50%'}
         = render "funding_info"
-      
+
     - else
       #large_image
         %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => ENV['FILEPICKER_API'], 'data-fp-button-class' => 'coverphoto btn pick-cover-photo', 'onchange' => 'updateCover(event)', :style => 'left:50%'}
@@ -505,7 +575,7 @@
                     WEB:
                     = link_to @project.website do
                       %span{:style => "color:#403e37;font:italic 12px/12px georgia, serif;text-transform:none;letter-spacing:normal;text-decoration:underline;", :target => "_blank"}= @project.website
-										
+
         %h4.title{:style => 'margin-top:50px;'} PROJECT SPONSORS
         = link_to "#assets", :class => 'btn', :style => 'background:#3f403b;padding:10px;margin-top:10px;' do
           Become A Sponsor
@@ -514,7 +584,7 @@
         %h4.title{:style => 'margin-top:50px;'}
           Planting Seeds
           %span (About)
-								
+
         #content_container
           #planting_seeds
             - if @project.seed_image
@@ -522,16 +592,16 @@
             - else
               %input{:type => 'filepicker', :name => 'planting_seed_image', 'data-fp-button-text' => '', 'data-fp-apikey' => ENV['FILEPICKER_API'], 'data-fp-button-class' => 'planting-seed-image', 'onchange' => 'updatePlantingSeedImage(event)'}
             %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.about
-						
+
           %hr
 
           #cultivation
             .span3.ending
               %h4.title
-                CULTIVATION 
+                CULTIVATION
                 %br
                 %span (Project Details)
-								
+
                 %h6{:style => "text-align:center;color:#55554d !important;font-family:'Proxima Nova';margin-top:15px;"} Funding Ends
                 %div{:style => "background:#b6b6b4;padding:25px;border-radius:500px;"}
                   %span{:style => 'display:block;text-align:center;font:normal 22px/22px "Proxima Nova Semi";color:#fff;text-transform:uppercase;letter-spacing:5px;'}= (Date.today + (@project.duration).to_i.days).strftime("%b")
@@ -584,14 +654,22 @@
         %h4.title{:style => 'margin-top:50px;'}
           Seeders (0)
           %span (Project Funders)
-					
+
 /* Each tip is set within this <ol>. */
 /* This creates the order the tips are displayed */
 %ol{:id => "uruutTour"}
   /* data-id needs to be the same as the parent it will attach to */
-  %li{"data-class" => "pick-cover-photo"}
-    %p This is some content...
-    %p Here is some more...
+  %li{"data-class" => "pick-cover-photo", "data-options" => "tipLocation:right"}
+    %h4 CHOOSE A COVER PHOTO
+    %p The cover photo is the large splash image that appears on your page. The dimensions should be at least 1600 x 546 pixels. It’s a big photo and a great opportunity to give your page a striking, eye-catching look. Choose something that reflects your organization, project, and personality.
+    %a{:href => "#", :class => "button small quit-tour"} Quit Tour
+  %li{"data-id" => "planting_seeds", "data-options" => "tipLocation:top"}
+    %h4 ADD PHOTOS
+    %p Add photos into your story section by clicking on the placeholder images. If you need more, you can add them to a gallery section from your dashboard once your project as been approved.
+    %a{:href => "#", :class => "button small quit-tour"} Quit Tour
+  %li{"data-class" => "submit", "data-button" => "Quit Tour", "data-options" => "tipLocation:bottom"}
+    %h4 SUBMIT
+    %p When you're ready, click here to submit for approval. You're only required to add a cover photo.
 
 %script{:src => "http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"}
 %script{:src => "http://maps.stamen.com/js/tile.stamen.js?v1.2.1"}
@@ -732,7 +810,7 @@
         window.location.reload(true);
       })
     })
-		
+
     $('.add-perk').on('click', function(e) {
       e.preventDefault();
       console.log(document.location.hostname);
@@ -769,7 +847,7 @@
         window.location.reload(true);
       });
     })
-		
+
     $('.perk-delete').on('click', function(e) {
       e.preventDefault();
       var perk_id = $(this).parent().find('input[type=hidden]').val();
@@ -784,13 +862,13 @@
         window.location.reload(true);
       });
     })
-		
+
     $('.created-perk .perk-edit').on('click', function() {
       $.ajax({
         type: 'POST',
         url: '#{get_perk_projects_url}',
         data: {id: $(this).parent().find('input[type=hidden]').val()}
-      }).done(function(data) { 
+      }).done(function(data) {
         $('#perk-name').val(data.name);
         $('#perk-amount').val(data.amount);
         $('#perk-description').val(data.description);
@@ -799,7 +877,7 @@
         $('.update-perk').show();
       });
     });
-		
+
     $('li.submit a').click(function(event) {
       event.preventDefault();
       console.log(#{@project.id})
@@ -813,7 +891,7 @@
         }
       })
     })
-		
+
     $('.stripe-connect').click(function() {
       localStorage.setItem('organization', $('#project_organization').val());
       localStorage.setItem('address', $('#project_address').val());
@@ -824,39 +902,39 @@
       localStorage.setItem('twitter_handle', $('#project_twitter_handle').val());
       localStorage.setItem('facebook_page', $('#project_facebook_page').val());
     });
-		
+
     if(localStorage.getItem('organization')) {
       $('#project_organization').val(localStorage.getItem('organization'));
     }
-		
+
     if(localStorage.getItem('address')) {
       $('#project_address').val(localStorage.getItem('address'));
     }
-		
+
     if(localStorage.getItem('city')) {
       $('#project_city').val(localStorage.getItem('city'));
     }
-		
+
     if(localStorage.getItem('state')) {
       $('#project_state').val(localStorage.getItem('state'));
     }
-		
+
     if(localStorage.getItem('zip')) {
       $('#project_zip').val(localStorage.getItem('zip'));
     }
-		
+
     if(localStorage.getItem('website')) {
       $('#project_website').val(localStorage.getItem('website'));
     }
-		
+
     if(localStorage.getItem('twitter_handle')) {
       $('#project_twitter_handle').val(localStorage.getItem('twitter_handle'));
     }
-		
+
     if(localStorage.getItem('facebook_page')) {
       $('#project_facebook_page').val(localStorage.getItem('facebook_page'));
     }
-		
+
   });
 
   var platinumSum = $('#platinum-box').children().children('.default').length;
@@ -925,3 +1003,10 @@
       return false;
     })
   });
+
+  getPerkProjectUrl = "#{get_perk_projects_url}";
+  submitUrl = "#{projects_submit_project_url}";
+  projectId = #{@project.id};
+  projectPath = '#{project_path(@project.id)}';
+  thankYouUrl = "#{thank_you_pages_url}";
+  window.projectId = projectId
