@@ -70,6 +70,7 @@ Crowdfund::Application.routes.draw do
   resources :donation_steps
 
   resources :services, :only => [:index, :create, :destroy]
+  resources :newsletters, :only => [:create]
   #resources :services do
   #  get "index", :on => :collection
   #  get "create", :on => :collection
@@ -89,6 +90,7 @@ Crowdfund::Application.routes.draw do
     get "faqs", :on => :collection
     get "thank_you", :on => :collection
     get "privacy", :on => :collection
+    get "funding_sources", :on => :collection
   end
 
   root to: "pages#home"

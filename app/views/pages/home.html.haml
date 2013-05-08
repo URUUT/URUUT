@@ -7,7 +7,7 @@
 				Sign Up Now
 				%span
 		%h5 
-			= link_to "#" do
+			= link_to "#partner", :class => 'learn-more' do
 				Learn More
 				%span
 %section.full-width.description
@@ -21,7 +21,7 @@
 		/ 	What is it?
 		/ 	%span
 			
-%section.full-width.partner
+%section.full-width.partner#partner
 	.container
 		.marketing.float-left
 			%h3 A NEW KIND OF CROWDFUNDING PLATFORM.
@@ -39,7 +39,7 @@
 			.content
 				%h5 Business Sponsors
 				%p Uruut offers you the opportunity to sponsor projects that associate your brand with high-impact local, regional and national projects.
-				.btn
+				= link_to funding_sources_pages_path, :class => "btn" do
 					learn more
 					%span
 		.graphic-2
@@ -47,7 +47,7 @@
 			.content
 				%h5 Individual CONTRIBUTORS
 				%p Uruut offers you the opportunity to support projects you value, offering perks in exchange for contributions.
-				.btn
+				= link_to funding_sources_pages_path, :class => "btn" do
 					learn more
 					%span
 		.graphic-3
@@ -55,7 +55,7 @@
 			.content
 				%h5 NON-PROFIT Foundations
 				%p For corporate and family foundations, Uruut offers you an easy, functional platform to screen, search and provide matching grant dollars to projects and causes relevant to your mission.
-				.btn
+				= link_to funding_sources_pages_path, :class => "btn" do
 					learn more
 					%span
 					
@@ -109,3 +109,10 @@
 		window.opener.location.reload(true);
 		window.close()
 	}
+	$(function() {
+		$('.learn-more').click(function() {
+			$('html, body').animate({
+				scrollTop: $("#partner").offset().top
+			}, 750);
+		});
+	})
