@@ -1307,6 +1307,43 @@ div[id^='step'] {
       text-transform:uppercase;}}}
 			
 .projects.show {
+	.fb-count {
+		background:url(image-path('fb-count.png')) top left no-repeat;
+		display:inline-block;
+		height:30px;
+		margin-left:20px;
+		margin-right:20px;
+		vertical-align:middle;
+		width:80px;
+		span {
+			font:normal 18px/30px arial, helvetica, sans-serif;
+			margin-left: 53px;
+		}
+	}
+	.tw-count {
+		background:url(image-path('tw-count.png')) top left no-repeat;
+		display:inline-block;
+		height:30px;
+		margin-right:20px;
+		vertical-align:middle;
+		width:80px;
+		span {
+			font:normal 18px/30px arial, helvetica, sans-serif;
+			margin-left: 53px;
+		}
+	}
+	.bitly-link {
+		background:url(image-path('bitly-link.png')) top left no-repeat;
+		display:inline-block;
+		height:30px;
+		margin-right:20px;
+		vertical-align:middle;
+		width:162px;
+		span {
+			font:normal 18px/30px arial, helvetica, sans-serif;
+			margin-left: 45px;
+		}
+	}
 	.show-content {
 		margin-top: 585px;}
 	.funding-info {
