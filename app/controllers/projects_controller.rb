@@ -17,7 +17,9 @@ class ProjectsController < ApplicationController
     session[:connected] = ''
  #    @project.perks.build
  #    @project.galleries.build
-   render :layout => 'landing'
+    client = Bitly.client
+    logger.debug(client)
+    render :layout => 'landing'
   end
 
   def create
@@ -51,15 +53,6 @@ class ProjectsController < ApplicationController
     session[:current_project] = @project.id
     render :layout => 'landing'
   end
-
-	# def update
-#     redirect_to project_steps_path
-		# @project = Project.find(params[:id])
-#     if @project.update_attributes(params[:project])
-#       flash[:notice] = "Successfully updated project."
-#       redirect_to project_steps_path
-#     end
-  # end
 
   def update
     @project = Project.find(params[:id])
@@ -96,7 +89,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  @sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits) 
+  @sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits)
   @project.update_attributes!(params[:project])
   if @project.save
     if params[:commit].eql? "Save Updates"
@@ -193,6 +186,21 @@ def submit_project
       format.text { render :text => "successful" }
     end
   end
+end
+
+def update_image
+  @project = Project.find_by_id(session[:current_project])
+  image = params[:status].eql?("seed_image") ? 'seed_image' : 'cultivation_image'
+  @project.update_attribute(image.to_sym, params[:image])
+  render json: { project_id: @project.id }
+end
+
+def delete_image
+  @project = Project.find(params[:id])
+  params[:type].eql?("seed_image") ? @project.seed_image = nil : @project.cultivation_image = nil
+  @project.save!
+
+  redirect_to :back
 end
 
 end

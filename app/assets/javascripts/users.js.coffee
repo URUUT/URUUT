@@ -1,3 +1,10 @@
+window.updateAvatar = (event)->
+  console.log event.fpfile.url
+  avatarImage = event.fpfile.url
+  console.log avatarImage
+  $('#user_avatar').val(avatarImage)
+  $('img#avatar-img').attr('src', avatarImage + '/convert?w=100&h=100&fit=crop')
+
 $ ->
   $('#projects-created').selectbox();
   $('#projects-funded').selectbox();
@@ -14,10 +21,12 @@ $ ->
   wrapper = $('<div/>').css({height:0,width:0,'overflow':'hidden'})
   file_input = $('#avatar-hide').wrap(wrapper)
 
-  file_input.change ->
-    $this = $(this)
-    $('#avatar-file').text($this.val)
+  # file_input.change ->
+  #   $this = $(this)
+  #   $('#avatar-file').text($this.val)
+  # 
+  # $('#avatar-file').click ->
+  #   file_input.click()
 
-  $('#avatar-file').click ->
-    file_input.click()
+		
 

@@ -1,0 +1,17 @@
+Total score (lower is better) = 356
+
+1) Similar code found in :defs (mass = 128)
+  app/models/service.rb:34
+  app/models/user.rb:67
+
+2) Similar code found in :defs (mass = 96)
+  app/models/service.rb:5
+  app/models/user.rb:38
+
+3) Similar code found in :defs (mass = 92)
+  app/models/service.rb:19
+  app/models/user.rb:52
+
+4) Similar code found in :call (mass = 40)
+  app/controllers/projects_controller.rb:67
+  app/controllers/projects_controller.rb:71

@@ -1,7 +1,7 @@
 .full-width.banner
   .container
     .span4
-      = image_tag(@user.avatar_url, :class => "img-circle avatar")
+      = image_tag "#{@user.avatar}", :class => "img-circle avatar"
 
       %h4.user-name= @user.name
       - if @is_current
@@ -65,7 +65,7 @@
         = link_to "edit", edit_user_registration_path, :class => "green"
     .well.info
       %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Profile image
-      %p= image_tag(@user.avatar_url)
+      %p= image_tag "#{@user.avatar}"
 
       %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Name
       %p= @user.name
@@ -83,5 +83,5 @@
       - if @is_current
         %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Email preference
         %p
-          = #{(@user.subscribed ? "" : "Not")}
+          = @user.subscribed ? "" : "Not"
           Subscribed

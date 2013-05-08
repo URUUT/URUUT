@@ -38,7 +38,7 @@ Crowdfund::Application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
 
-  # config.action_mailer.default_url_options = { host: "127.0.0.1:8080" }
+  config.action_mailer.default_url_options = { host: "http://108.166.91.218:4040/" }
 
   config.action_mailer.smtp_settings = {
     address: "smtp.gmail.com",
@@ -46,8 +46,8 @@ Crowdfund::Application.configure do
     domain: "gmail.com",
     authentication: "plain",
     enable_starttls_auto: :true,
-    user_name: "chad.bartels",
-    password: "Porous2010"
+    user_name: ENV['GMAIL_USER'],
+    password: ENV['GMAIL_PASSWORD']
   }
 
   Paperclip.options[:command_path] = "/usr/local/Cellar/imagemagick/6.7.1-1/bin"
