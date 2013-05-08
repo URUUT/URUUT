@@ -16,9 +16,7 @@ class ProjectsController < ApplicationController
     session[:current_project] = ''
     session[:connected] = ''
  #    @project.perks.build
- #    @project.galleries.build
-   client = Bitly.client
-   logger.debug(client)
+ #    @project.galleries.build   
    render :layout => 'landing'
  end
 
@@ -88,6 +86,12 @@ end
 
   @sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits)
   @project.update_attributes!(params[:project])
+  
+  if @project.bitly.blank?
+    bitly = Bitly.client
+    page_url = bitly.shorten("#{request.scheme}://#{request.host_with_port}/projects/#{@project.id}")
+    @project.bitly = page_url.short_url
+  end
 
   if @project.save
     respond_to do |format|
