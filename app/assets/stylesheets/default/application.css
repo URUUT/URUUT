@@ -74,6 +74,11 @@ label {
   font-size: 18px !important;
 }
 
+.image_seed_warp, .action_button {
+  width: 100%;
+  height:auto;
+}
+
 .stripe-connect.light-blue {
   background: #b5c3d8;
   background-image: -webkit-linear-gradient(#b5c3d8, #9cabc2);
