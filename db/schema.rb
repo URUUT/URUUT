@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130502211958) do
+ActiveRecord::Schema.define(:version => 20130507145855) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -43,6 +43,21 @@ ActiveRecord::Schema.define(:version => 20130502211958) do
     t.integer  "gallery_file_size"
     t.datetime "gallery_updated_at"
     t.integer  "project_id"
+  end
+
+  create_table "identities", :force => true do |t|
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "token"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "newsletters", :force => true do |t|
+    t.string   "email"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "perks", :force => true do |t|
@@ -96,6 +111,12 @@ ActiveRecord::Schema.define(:version => 20130502211958) do
     t.integer "ready_for_approval"
     t.string  "seed_image"
     t.string  "cultivation_image"
+  end
+
+  create_table "services", :force => true do |t|
+    t.string  "uid"
+    t.string  "provider"
+    t.integer "user_id"
   end
 
   create_table "sessions", :force => true do |t|

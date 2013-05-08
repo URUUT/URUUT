@@ -45,5 +45,9 @@ class PagesController < ApplicationController
   def about
     render :layout => "landing"
   end
+  
+  def funding_sources
+    render :layout => "landing"
+  end
 
 end
