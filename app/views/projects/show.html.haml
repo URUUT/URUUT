@@ -13,8 +13,9 @@
         .fb-count
           %span 
         .tw-count
-          %span 0
+          %span
         .bitly-link
+        - if @project.bitly
           %span= @project.bitly.sub(/http:\/\//, '')
 
       .span4
