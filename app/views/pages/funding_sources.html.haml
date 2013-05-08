@@ -1,0 +1,57 @@
+.full-width.hero
+  .container
+    .marketing.float-left
+      %h3 FUNDING SOURCES
+      %h2 3 is greater than 1.
+      %p You’ve always heard that 2 is greater than 1. Uruut’s PartnerFundingSM wants to take that idea to the next level. Unlike other crowdfunding platforms, Uruut is optimized to capture funding from 3 different sources. Expand here on the benefits of having 3 funding sources over only individuals funding projects. Talk about how there is no reason to exclude businesses and foundations from funding project in their communities, because they are part of their community and it’s everyone’s responsibility to make their community a better place.
+    .pie-chart.float-right
+      = image_tag "pie-chart.png"
+
+.full-width.need-to-know.cf
+  .container
+    %div.cf
+      = image_tag 'magnifying-glass.png'
+      %div 
+        %h3 INDIVIDUAL CONTRIBUTORS
+        %h2 It Starts With U
+        %p As members of the community in which you care so deeply about our platform provides you with a great way to be actively involved and engaged in your community. As simple as searching for and contributing to the projects you want to see become a reality. Then share with those around you and in no time at all that park you wanted to see become a reality is there for you to enjoy.
+    %div.cf
+      = image_tag 'magic-hat.png'
+      %div
+        %h3 Business Sponsors
+        %h2 Subheadline For This Section
+        %p You are either part of the community or care enough to support a community. Your brand is a key part of your success. Aligning your brand to key community projects helps both the communities you support as well as your brand. We make it simple and provide a platform that is easy to search by project category and in a few clicks align your brand to those projects.
+    %div.cf
+      = image_tag 'bull-horn.png'
+      %div
+        %h3 CHARITABLE FOUNDATION PARTNERS
+        %h2 Subheadline For This Section
+        %p Everyday you make your mark by supporting critical causes aligning to your foundation's mission. Groups rely on you for your support while at the same time you can't provide dollars to everyone who asks, as much as you'd like to. We provide your organization another tool to support these key projects in the cases where you can’t provide as much as you might like. Matching and challenge grants are a key part of your strategy and Uruut provides a platform to search for and support key projects. We also provide a platform for your key constituents to help raise the portion of dollars required, pre match. Uruut becomes the bridge to help your constituents reach their target goals.
+
+.full-width.create-project
+  .container
+    %h2 
+      Connect. Cooperate. 
+      %span Take Action.
+    = link_to new_project_path, :class => "btn get-funded" do
+      Get Funded
+      %span
+    
+    = link_to browse_projects_path, :class => "btn fund-projects" do
+      Fund Projects
+      %span
+
+:javascript
+  $(function(){
+    $('.btn.create').click(function(){
+      $.ajax({
+        type: 'POST',
+        url: '#{projects_path}',
+        data: ''
+      }).done(function(data){
+        console.log("Success???");
+        console.log(data);
+        window.location.href = '/projects/' + data + '/edit#sponsor-info';
+      })
+    })
+  })

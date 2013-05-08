@@ -2855,6 +2855,96 @@ form[id*=project] {
 		padding:35px 0 70px;
   }
 }
+
+.funding_sources {
+	.hero {
+		background: url(image-path('bg-tile.jpg')) top left repeat;
+		padding:70px 0 70px;
+		.container {
+			.marketing {
+				margin-left:0;
+				width:50%;}
+			div {
+				display:inline-block;
+				margin-left:120px;
+				position:relative;
+				vertical-align:middle;
+				h2 {
+					color:#fff;
+					font-family:'Proxima Nova';
+					line-height:100%;
+					margin:10px 0 0;
+					text-transform:none;}
+				h3 {
+					color:#70bf4c;
+					line-height:100%;
+					margin:0;}
+				p {
+					color:#b6b6b4;
+					font-family:'Proxima Nova';
+					font-size:14px;
+					margin-top:30px;}
+				.btn {
+					background:#70bf4c;
+					border-radius:4px;
+					box-shadow:1px 1px 2px rgba(0,0,0,0.45);
+					color:#fff;
+					display:block;
+					font-size:18px;
+					left:0;
+					margin:25px 0 0;
+					padding:22px 0;
+					width:220px;
+			    span {
+						background:url(image-path('plain-arrow.png')) top left no-repeat;
+						display:inline-block;
+						height:14px;
+						margin-left:3px;
+						vertical-align:-1px;
+						width:13px;}}}}}
+	.need-to-know {
+		padding:70px 0 0;
+		.container {
+			border-bottom:1px solid #f5f5f5;
+			div {
+				margin-bottom:40px;
+				img {
+					float:left;
+					margin-right:95px;
+				}
+				div {
+					float:left;
+					width:670px;
+					h3 {
+						color:#70bf4c;
+						line-height:100%;
+						margin:0;
+					}
+					h2 {
+						margin:0 0 20px;
+						text-transform:none;
+					}
+					p {
+						color:#b6b6b4;
+						font:normal 14px/24px "Proxima Nova";
+					}
+				}
+			}
+		}
+	}
+  .create-project {
+		padding:45px 0;
+  	h2 {
+			display:inline-block;
+  		text-transform:none;
+			span {
+				color:#70bf4c;
+			}
+  	}
+		.get-funded {
+			background:#403e37;
+		}
+  }}
 			
 .projects.new {
 	.hero {

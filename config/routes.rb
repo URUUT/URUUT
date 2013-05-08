@@ -87,6 +87,7 @@ Crowdfund::Application.routes.draw do
     get "faqs", :on => :collection
     get "thank_you", :on => :collection
     get "privacy", :on => :collection
+    get "funding_sources", :on => :collection
   end
 
   root to: "pages#home"
