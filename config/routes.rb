@@ -25,10 +25,13 @@ Crowdfund::Application.routes.draw do
 
    get "projects/save_image"
    post "projects/save_image"
+   post "projects/update_image"
    post "galleries/save_image"
    delete "galleries/delete_photo"
+   delete "projects/:id/delete_image" => "projects#delete_image", as: "delete_image"
    get "projects/:project_id/sponsors/:id/confirmation" => "sponsors#confirmation", as: "confirmation"
    get "purchase" => "payments#purchase"
+
 
    post "projects/submit_project"
 
