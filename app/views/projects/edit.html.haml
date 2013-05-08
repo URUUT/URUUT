@@ -1,72 +1,72 @@
--#
-    .breadcrumb-container
-      %ul.breadcrumbs
-        %li.sponsor-info
-          = link_to "/projects/#{@project.id}/edit#sponsor-info" do
-            %span.steps Step 1
-            %span.title RUUTS
-            %span.description Basic Information
-            %span.border
+/ -#
+/   .breadcrumb-container
+/     %ul.breadcrumbs
+/       %li.sponsor-info
+/         = link_to "/projects/#{@project.id}/edit#sponsor-info" do
+/           %span.steps Step 1
+/           %span.title RUUTS
+/           %span.description Basic Information
+/           %span.border
 
-        %li.project-details
-          = link_to "/projects/#{@project.id}/edit#project-details" do
-            %span.steps Step 2
-            %span.title STORY
-            %span.description Project Details
-            %span.border
+/       %li.project-details
+/         = link_to "/projects/#{@project.id}/edit#project-details" do
+/           %span.steps Step 2
+/           %span.title STORY
+/           %span.description Project Details
+/           %span.border
 
-        %li.perks
-          = link_to "/projects/#{@project.id}/edit#perks" do
-            %span.steps Step 3
-            %span.title PERKS
-            %span.description Donor Rewards
-            %span.border
+/       %li.perks
+/         = link_to "/projects/#{@project.id}/edit#perks" do
+/           %span.steps Step 3
+/           %span.title PERKS
+/           %span.description Donor Rewards
+/           %span.border
 
-        %li.sponsorship
-          = link_to "/projects/#{@project.id}/edit#sponsorship" do
-            %span.steps Step 4
-            %span.title Sponsors
-            %span.description Sponsorship Details
-            %span.border
+/       %li.sponsorship
+/         = link_to "/projects/#{@project.id}/edit#sponsorship" do
+/           %span.steps Step 4
+/           %span.title Sponsors
+/           %span.description Sponsorship Details
+/           %span.border
 
-        %li.assets
-          = link_to "/projects/#{@project.id}/edit#assets" do
-            %span.steps Step 5
-            %span.title VISUALS
-            %span.description Project Page Setup
-            %span.border
+/       %li.assets
+/         = link_to "/projects/#{@project.id}/edit#assets" do
+/           %span.steps Step 5
+/           %span.title VISUALS
+/           %span.description Project Page Setup
+/           %span.border
 
-        %li.submit
-          = link_to 'submit' do
-            %span.steps Get Ruuted
-            %span.title Submit
-            %span.description Submit Your Project for Approval
+/       %li.submit
+/         = link_to 'submit' do
+/           %span.steps Get Ruuted
+/           %span.title Submit
+/           %span.description Submit Your Project for Approval
 
-    = render "projects/wizard/sponsor_info", :project => @project
-    = render "projects/wizard/project_details", :project => @project
-    = render "projects/wizard/perks", :project => @project
-    = render "projects/wizard/sponsorship", :project => @project
-    = render "projects/wizard/assets", :project => @project
+/     = render "projects/wizard/sponsor_info", :project => @project
+/     = render "projects/wizard/project_details", :project => @project
+/     = render "projects/wizard/perks", :project => @project
+/     = render "projects/wizard/sponsorship", :project => @project
+/     = render "projects/wizard/assets", :project => @project
 
-    /* Each tip is set within this <ol>. */
-    /* This creates the order the tips are displayed */
-    %ol{:id => "uruutTour"}
-      /* data-id needs to be the same as the parent it will attach to */
-      %li{"data-class" => "pick-cover-photo"}
-        %p This is some content...
-        %p Here is some more...
+/     /* Each tip is set within this <ol>. */
+/     /* This creates the order the tips are displayed */
+/     %ol{:id => "uruutTour"}
+/       /* data-id needs to be the same as the parent it will attach to */
+/       %li{"data-class" => "pick-cover-photo"}
+/         %p This is some content...
+/         %p Here is some more...
 
-    %script{:src => "http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"}
-    %script{:src => "http://maps.stamen.com/js/tile.stamen.js?v1.2.1"}
-    = javascript_include_tag "projects"
-    :javascript
+/     %script{:src => "http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"}
+/     %script{:src => "http://maps.stamen.com/js/tile.stamen.js?v1.2.1"}
+/     = javascript_include_tag "projects"
+/     :javascript
 
-      getPerkProjectUrl = "#{get_perk_projects_url}";
-      submitUrl = "#{projects_submit_project_url}";
-      projectId = #{@project.id};
-      projectPath = '#{project_path(@project.id)}';
-      thankYouUrl = "#{thank_you_pages_url}";
-      window.projectId = projectId
+/       getPerkProjectUrl = "#{get_perk_projects_url}";
+/       submitUrl = "#{projects_submit_project_url}";
+/       projectId = #{@project.id};
+/       projectPath = '#{project_path(@project.id)}';
+/       thankYouUrl = "#{thank_you_pages_url}";
+/       window.projectId = projectId
 
 .breadcrumb-container
   %ul.breadcrumbs
@@ -381,6 +381,7 @@
               = check_box_tag "add_platinum",nil,false, class: "box_platinum_benefits"
               = text_field_tag "platinum[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -30px; !important; width: 80% !important", class: "platinum_benefits add_benefits"
               = hidden_field_tag "platinum_count", nil, id: "platinum-count"
+              %span.pull-right.save_new_benefit.btn{style: "margin-top:-65px; left:-20px"} Save
           %span.green-font.normal-font.add-another + Add Another
     %hr
 
@@ -428,6 +429,7 @@
               = check_box_tag "add_gold",nil,false, class: "box_gold_benefits"
               = text_field_tag "gold[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -30px; !important; width: 80% !important", class: "gold_benefits add_benefits"
               = hidden_field_tag "gold_count", nil, id: "gold-count"
+              %span.pull-right.save_new_benefit.btn{style: "margin-top:-65px; left:-20px"} Save
           %span.green-font.normal-font.add-another + Add Another
 
     %hr
@@ -476,6 +478,7 @@
               = check_box_tag "add_silver",nil,false, class: "box_silver_benefits"
               = text_field_tag "silver[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -30px; !important; width: 80% !important", class: "silver_benefits add_benefits"
               = hidden_field_tag "silver_count", nil, id: "silver-count"
+              %span.pull-right.save_new_benefit.btn{style: "margin-top:-65px; left:-20px"} Save
           %span.green-font.normal-font.add-another + Add Another
         / %div.checkbox
         /   = check_box_tag "Test"
@@ -525,6 +528,7 @@
               = check_box_tag "add_bronze", nil,false, class: "box_bronze_benefits"
               = text_field_tag "bronze[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -30px; !important; width: 80% !important", class: "bronze_benefits add_benefits"
               = hidden_field_tag "bronze_count", nil, id: "bronze-count"
+              %span.pull-right.save_new_benefit.btn{style: "margin-top:-65px; left:-20px"} Save
           %span.green-font.normal-font.add-another + Add Another
         / %div.checkbox
         /   = check_box_tag "Test"
@@ -942,67 +946,105 @@
   var silverSum = $('#silver-box').children().children('.default').length;
   var bronzeSum = $('#bronze-box').children().children('.default').length;
 
-  $("#platinum-count").val(platinumSum + 1);
+   $("#platinum-count").val(platinumSum + 1);
   $(".platinum_benefits").attr("name", "platinum[info_" + (platinumSum + 1) + "]");
   $(".platinum_benefits").attr("id", "platinum_info_" + (platinumSum + 1));
   $(".box_platinum_benefits").attr("name", "platinum[" + (platinumSum + 1) + "]");
   $(".box_platinum_benefits").attr("id", "platinum_" + (platinumSum + 1));
-
+   
   $("#gold-count").val(goldSum + 1);
   $(".gold_benefits").attr("name", "gold[info_" + (goldSum + 1) + "]");
   $(".gold_benefits").attr("id", "gold_info_" + (goldSum + 1));
   $(".box_gold_benefits").attr("name", "gold[" + (goldSum + 1) + "]");
   $(".box_gold_benefits").attr("id", "gold_" + (goldSum + 1));
-
+   
   $("#silver-count").val(silverSum + 1);
   $(".silver_benefits").attr("name", "silver[info_" + (silverSum + 1) + "]");
   $(".silver_benefits").attr("id", "silver_info_" + (silverSum + 1));
   $(".box_gold_benefits").attr("name", "silver[" + (silverSum + 1) + "]");
   $(".box_gold_benefits").attr("id", "silver_" + (silverSum + 1));
-
+   
   $("#bronze-count").val(bronzeSum);
   $(".bronze_benefits").attr("name", "bronze[info_" + (bronzeSum + 1) + "]");
   $(".bronze_benefits").attr("id", "bronze_info_" + (bronzeSum + 1));
   $(".box_gold_benefits").attr("name", "bronze[" + (bronzeSum + 1) + "]");
   $(".box_gold_benefits").attr("id", "bronze_" + (bronzeSum + 1));
 
-  $(".edit-benefit").click(function() {
-    var nameBenefits = $(this).parent().children("#name");
-    var fieldBenefits = $(this).parent().children(".edit-text-field");
-    console.log(c = this)
-    if($(this).text() == "select to edit"){
-      nameBenefits.hide();
-      fieldBenefits.show();
-      fieldBenefits.attr("style", "margin-top:-25px; width: 320px !important;");
-      $(this).text("save");
-      $(this).addClass("btn");
-      $(this).attr("style", "position: relative; top: 70px !important; margin-left: 5px");
-      $(this).removeClass("green-font");
-    }else{
-      nameBenefits.text($(this).parent().find(".edit-text-field").val());
-      nameBenefits.show();
-      fieldBenefits.hide();
-      $(this).removeClass("btn");
-      $(this).removeAttr("style", "position: relative; top: 70px !important; margin-left: 5px");
-      $(this).addClass("edit-benefit italic green-font");
-      $(this).text("select to edit")
-    }
+  $(document).ready(function() {
+    addNewBenefit();
+    editBenefit();
+    addAnotherNewBenefit();
+    removeAnotherBenefit();
   });
 
-  $(function() {
-    $(".add-another").click(function(e) {
+  var editBenefit = function() {
+    $(".edit-benefit").bind("click", function() {
+      var nameBenefits = $(this).parent().children("#name");
+      var fieldBenefits = $(this).parent().children(".edit-text-field");
+      console.log(c = this)
+      if($(this).text() == "select to edit"){
+        nameBenefits.hide();
+        fieldBenefits.show();
+        fieldBenefits.attr("style", "margin-top:-25px; width: 320px !important;");
+        $(this).text("save");
+        $(this).addClass("btn");
+        $(this).attr("style", "position: relative; top: 70px !important; margin-left: 5px");
+        $(this).removeClass("green-font");
+      }else{
+        nameBenefits.text($(this).parent().find(".edit-text-field").val());
+        nameBenefits.show();
+        fieldBenefits.hide();
+        $(this).removeClass("btn");
+        $(this).removeAttr("style", "position: relative; top: 70px !important; margin-left: 5px");
+        $(this).addClass("edit-benefit italic green-font");
+        $(this).text("select to edit")
+      }
+    });
+  }
+
+  var addAnotherNewBenefit = function(){
+    $(".add-another").bind("click", function(e) {
       var divCore = $(this).parent().children("#custom-checkbox");
-      var checkFieldP = $(this).parent().children("#custom-checkbox").children(".checkbox").children(".add_benefits");
+      var checkFieldP = $(this).parent().children("#existing-checkbox").children(".checkbox").last().children().first();
       var checkboxName = checkFieldP.attr("id").split("_")[0];
-      var checkboxVal = checkFieldP.attr("id").split("_")[2];
+      var checkboxVal = checkFieldP.attr("id").split("_")[1];
       var countCheckbox = parseInt(checkboxVal) + 1;
 
       $("#"+ checkboxName +"-count").val(countCheckbox);
-      $('<div class="checkbox default"><input id="'+ checkboxName + '_' + countCheckbox + '" type="checkbox" value="1" name="'+ checkboxName +'['+ countCheckbox +']"><input id="'+ checkboxName + '_info_'+ countCheckbox +'" class="" type="text" style="margin-top: -33px; width: 80% !important;" placeholder="Create your costum benefit here..." name="'+ checkboxName + '[info_'+countCheckbox+']"></div>').appendTo(divCore);
+      $("<div class='checkbox default'><input id='"+ checkboxName + "_" + countCheckbox + "' type='checkbox' value='1' name='"+ checkboxName +"["+ countCheckbox +"]''><input id='"+ checkboxName + "_info_"+ countCheckbox +"' class='"+checkboxName+"_benefits add_benefits' type='text' style='margin-top: -33px; width: 80% !important;' placeholder='Create your costum benefit here...' name='"+ checkboxName + "[info_"+countCheckbox+"]'><span class='save_new_benefit pull-right btn' style='margin-top:-79px; left:-20px'>Save</span><span class='remove-another pull-right btn' style='margin-top:-51px;'>Remove</span></div>").appendTo(divCore);
       countCheckbox++;
+      addNewBenefit();
+      removeAnotherBenefit();
       return false;
+    });
+  }
+
+  var removeAnotherBenefit = function(){
+    $(".remove-another").bind("click", function(){
+      $(this).parent().remove();
     })
-  });
+  }
+
+  var addNewBenefit = function(){
+    $(".save_new_benefit").bind("click", function(){
+      var divCore = $(this).parent().parent().parent().children("#existing-checkbox");
+      var benefits = divCore.children().children("input").last();
+      var benefitsValue = $(this).parent().children(".add_benefits").val();
+      var boxName = benefits.attr("id").split("_")[0];
+      var boxValue = benefits.attr("id").split("_")[2];
+      var boxLength = parseInt(boxValue) + 1;
+
+      if(benefitsValue){
+        $("<div class='checkbox default'><input id='"+boxName+"_"+boxLength+"' type='checkbox' name='"+boxName+"["+boxLength+"]' checked='checked'><span id='name'>"+benefitsValue+"</span><span class='edit-benefit italic green-font'>select to edit</span><input id='"+ boxName +"_info_"+ boxLength+"' class='edit-text-field' type='text' value='"+benefitsValue+"' style='width: 320px !important; display: none;' name='"+boxName+"[info_"+boxLength+"]'></div>").appendTo(divCore);
+        boxLength++;
+        $(this).parent().remove();
+        editBenefit();
+        return false;
+      }else{
+        alert("sorry you can't add new benefits because the field is blank!");
+      }
+    });
+  }
 
   getPerkProjectUrl = "#{get_perk_projects_url}";
   submitUrl = "#{projects_submit_project_url}";
