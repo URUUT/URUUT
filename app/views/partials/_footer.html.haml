@@ -4,38 +4,17 @@
       %li
         = link_to browse_projects_path do
           %h6 Fund Projects
-      %li &nbsp;
       %li
         = link_to new_project_path do
           %h6 Get Funding
       %li
-        = link_to "#" do
-          %p Overview
-      %li
-        = link_to new_project_path do
-          %p Create Your Project
-    
-    %ul
-      %li
         = link_to about_pages_path do
           %h6 About URUUT
       %li
-        = link_to about_pages_path do
-          %p About Us
-      %li
-        = link_to "#" do
-          %p How It Works
-      %li
-        = link_to "#" do
-          %p Our Team
-      %li
-        = link_to "#" do
-          %p Sponsorship
-    
-    %ul
-      %li
         = link_to contact_pages_path do
           %h6 Contact
+
+    %ul
       %li
         = link_to faqs_pages_path do
           %h6 FAQ
@@ -52,7 +31,18 @@
       %li
         = link_to "","http://www.facebook.com/get.ruuted", :class => "fb"
         = link_to "","http://www.twitter.com/uruut", :class => "tw"
-				
+
+    %ul
+      %li
+        %h6 Sign up for URUUT news
+        = form_for Newsletter.new, :remote => true, :html => { :id => "email-sign-up" } do |f|
+          %div
+            = f.email_field "email", :placeholder => "enter email address"
+            %button.btn{:type => "submit"}
+              %span
+          %div#email-sign-up-error
+            %p Please check your email
+
 .copyright
   .container
     %p

@@ -3,6 +3,18 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
+  $("#email-sign-up")
+    .bind "ajax:error", (event, xhr, status, error) ->
+      alert "error #{status}"
+
+    .bind "ajax:success", (event, data, status, xhr) ->
+      if data.created
+        new_content = "<h3>You're great!</h3>"
+        $("#email-sign-up").fadeOut 1000, ->
+          $("#email-sign-up").empty().append(new_content).fadeIn()
+      else
+        $("#email-sign-up-error").show()
+
 	geocoder = ''
 	address = ''
 	map = ''
@@ -11,7 +23,7 @@ $ ->
 	window.getLocation = $.getJSON userLocation, (data)->
 		console.log(data)
 
-	$('.down').click ->
+  $('.down').click ->
 		$('.dropdown').toggle()
 		
 	$('ul.nav li').hover ->

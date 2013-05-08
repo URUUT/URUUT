@@ -67,6 +67,7 @@ Crowdfund::Application.routes.draw do
   resources :donation_steps
 
   resources :services, :only => [:index, :create, :destroy]
+  resources :newsletters, :only => [:create]
   #resources :services do
   #  get "index", :on => :collection
   #  get "create", :on => :collection
