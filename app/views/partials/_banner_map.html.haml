@@ -17,4 +17,5 @@
     = form_tag browse_projects_path, method: "get", class: "project-keywords" do
       .keyword.dropdown
         %label KEYWORD SEARCH
-        %input{:type => 'search', :id => 'keyword', :name => "keyword", :placeholder => "Keyword..."}
+        %input{:type => 'search', :id => 'keyword', :name => "keyword", :placeholder => "Keyword...",
+          :value => params[:keyword]}
