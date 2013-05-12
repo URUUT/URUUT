@@ -2,10 +2,9 @@ class PagesController < ApplicationController
   skip_before_filter :set_previous_page
 
   def index
-  	@projects = Project.where("live = 1 AND ready_for_approval = 0").by_city(params[:city]).all
+  	@projects = Project.where("live = 1 AND ready_for_approval = 0").by_city(params[:city]).by_category(params[:category]).all
+    @ending = Project.by_city(params[:city]).by_category(params[:category]).order(:duration).all
     logger.debug(@projects)
-    @ending = Project.by_city(params[:city]).order(:duration).all
-    #@ending = Project.find(:all, :order => "duration")
     render :layout => 'landing'
   end
 

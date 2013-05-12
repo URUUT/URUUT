@@ -31,12 +31,17 @@ class Project < ActiveRecord::Base
 
   #process_in_background :image
 
-  def self.all_cities
-    select(:city).uniq.pluck(:city)
+  # Select unique values of some field, e.g. cities and categories
+  def self.unique_values_of(type)
+    select(type).uniq.pluck(type)
   end
 
   def self.by_city(city)
-    city == "All cities" ? where("") : where("city = ?", city)
+    city.downcase == "all cities" ? where("") : where("city = ?", city)
+  end
+
+  def self.by_category(category)
+    category.downcase == "all categories" ? where("") : where("category = ?", category)
   end
 
   def self.get_sponsor_token
