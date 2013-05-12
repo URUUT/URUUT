@@ -1,0 +1,5 @@
+- Project.unique_values_of(type).each do |item|
+  - if item == params[type]
+    %option{:selected => true}= item
+  - else
+    %option= item
