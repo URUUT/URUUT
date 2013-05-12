@@ -4,7 +4,7 @@ class PagesController < ApplicationController
 
   def index
     if params[:keyword]
-      @projects = Project.where("title LIKE ?", "%#{params[:keyword]}%").page(params[:page]).per(1)
+      @projects = Project.where("title LIKE :keyword OR description LIKE :keyword", :keyword => "%#{params[:keyword]}%").page(params[:page]).per(1)
     else
       @projects = Project.where("live = 1 AND ready_for_approval = 0").by_city(params[:city]).
           by_category(params[:category]).all
