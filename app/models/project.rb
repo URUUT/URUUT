@@ -37,11 +37,11 @@ class Project < ActiveRecord::Base
   end
 
   def self.by_city(city)
-    city.downcase == "all cities" ? where("") : where("city = ?", city)
+    (city && city.downcase != "all cities") ? where("city = ?", city) : where("")
   end
 
   def self.by_category(category)
-    category.downcase == "all categories" ? where("") : where("category = ?", category)
+    (category && category.downcase != "all categories") ? where("category = ?", category) : where("")
   end
 
   def self.get_sponsor_token

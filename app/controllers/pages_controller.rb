@@ -1,11 +1,16 @@
 class PagesController < ApplicationController
+  layout "landing", :except => [:discover, :contact, :contact_send, :how_it_works]
   skip_before_filter :set_previous_page
 
   def index
-  	@projects = Project.where("live = 1 AND ready_for_approval = 0").by_city(params[:city]).by_category(params[:category]).all
-    @ending = Project.by_city(params[:city]).by_category(params[:category]).order(:duration).all
+    if params[:keyword]
+      @projects = Project.where("title LIKE ?", "%#{params[:keyword]}%").page(params[:page]).per(1)
+    else
+      @projects = Project.where("live = 1 AND ready_for_approval = 0").by_city(params[:city]).
+          by_category(params[:category]).all
+      @ending = Project.by_city(params[:city]).by_category(params[:category]).order(:duration).all
+    end
     logger.debug(@projects)
-    render :layout => 'landing'
   end
 
   def discover

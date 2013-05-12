@@ -1,0 +1,8 @@
+.recent.clearfix
+  .container
+    %p.sections
+      = image_tag 'featured-success-icon.png'
+      Current
+    = render "project", :projects => @projects
+    %div
+      = paginate(@projects)
