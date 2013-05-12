@@ -1,6 +1,6 @@
 .full-width.texture
   .container
-    = form_tag "#", method: "get", class: "project-filter" do
+    = form_tag browse_projects_path, method: "get", class: "project-filter" do
       %div
         = image_tag "mag-glass.png"
         %h3 DISCOVER PROJECTS
@@ -14,6 +14,7 @@
         %select{:id => "location", :name => "city"}
           %option All cities
           = render "partials/project_filters", :type => :city
+    = form_tag browse_projects_path, method: "get", class: "project-keywords" do
       .keyword.dropdown
         %label KEYWORD SEARCH
         %input{:type => 'search', :id => 'keyword', :name => "keyword", :placeholder => "Keyword..."}
