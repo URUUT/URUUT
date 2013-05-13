@@ -49,7 +49,11 @@ Crowdfund::Application.routes.draw do
   resources :galleries
 
   namespace :project_admin do
-    resources :projects
+    resources :projects do
+      get "messages"
+      get "overview"
+      get "manage"
+    end
   end
   resources :donations do
     get "thank_you", :on => :collection
