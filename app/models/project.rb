@@ -44,6 +44,10 @@ class Project < ActiveRecord::Base
     (category && category.downcase != "all categories") ? where("category = ?", category) : where("")
   end
 
+  def self.by_keyword(keyword)
+    where("city LIKE :keyword OR state LIKE :keyword OR title LIKE :keyword OR description LIKE :keyword OR organization LIKE :keyword", :keyword => "%#{keyword}%")
+  end
+
   def self.get_sponsor_token
     if :current_user
       Stripe.api_key = API_KEY
