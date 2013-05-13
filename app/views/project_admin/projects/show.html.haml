@@ -1,3 +1,26 @@
+= stylesheet_link_tag "admin_project"
+
+#fb-root
+:javascript
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/id_ID/all.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  window.fbAsyncInit = function() {
+    FB.init({
+    appId : '128236094027667', // App ID
+  });
+
+    // showCommentBox();
+  };
+
+  filepicker.setKey('ArmO0TLVTkyCaJkQmBNfqz'); // hardcode because js from flipicker can't called, please set your own
+
+
 .full-width.banner
   .container
     .span3
@@ -23,41 +46,17 @@
 			
 .cf
 
-#pages{:style => "margin-top:200px;"}
-  %ul
-    %li
-      = link_to "Project Overview", "#tabs-1"
-    %li
-      = link_to "Manage Project", "#tabs-2"
-    %li
-      = link_to "Project Funders", "#tabs-3"
-    %li
-      = link_to "Project Messages", "#tabs-4"
-			
-  #tabs-1.cf
-    .span8
-      %h3 Funding Tracker
-      %p Chart goes here
-      %h3 Funding Breakdown By Day
-      %p Breakdown goes here
-    .span4
-      %h3 Funding Sources
-      %p Chart goes here
-  #tabs-2
-    %span4
-    %span8
-      %h3 My Project Cover Photo
-      %p Add ability to change cover photo here
-      %h3 My Project Photo Gallery
-      %p Add photo gallery and upload here
-  #tabs-3
-    Test 3
-  #tabs-4
-    Test 4
-		
-		
-%script{:src => "http://code.jquery.com/ui/1.10.2/jquery-ui.js"}
-:javascript
-  $(function() {
-    $( "#pages" ).tabs();
-  });
+.menu-project
+  .container
+    %ul
+      %li{:style => "margin-left: 0"}
+        = link_to "Project Overview", project_admin_project_overview_path(@project.id), remote: true
+      %li
+        = link_to "Manage Project", project_admin_project_manage_path(@project.id), remote: true
+      %li
+        = link_to "Project Funders", "#tabs-3"
+      %li
+        = link_to "Project Messages", project_admin_project_messages_path(@project.id), remote: true
+
+.main-content{:style => "margin-top:200px;"}
+  = render "overview"
