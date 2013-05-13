@@ -4,6 +4,8 @@ class SponsorsController < ApplicationController
 
   def new
     @sponsor = Sponsor.new
+    @selected_level = SponsorshipLevel.find(params[:sponsorship_level]) if params[:sponsorship_level]
+    session[:connected] = ''
     render :layout => 'landing'
   end
 
@@ -29,8 +31,7 @@ class SponsorsController < ApplicationController
   def create
     current_user = :current_user
     Stripe.api_key = "sk_test_XF9K5nq63HTSmTK1ZMiW6tvw"
-    sponsor = params[:sponsor]
-    sponsor_name = sponsor[:payment_type].eql?("Wire Transfer") ? sponsor[:name] : sponsor[:card_name]
+    sponsor_name = params[:sponsor][:payment_type].eql?("Wire Transfer") ? params[:sponsor][:name] : params[:sponsor][:card_name]
     cost = SponsorshipLevel.find(params[:project_sponsor][:level_id]).cost
     params[:sponsor][:name] = sponsor_name
 
