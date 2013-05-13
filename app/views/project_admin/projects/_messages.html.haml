@@ -1,0 +1,13 @@
+.container.messages-page
+  .row-fluid
+    .span3.pull-left
+      %div{:style => "margin-top: 60px"}
+      %div{:class => "well info"}
+        %h3{:class => "menu-messages"}
+          = link_to "PROJECT PAGE MESSAGES", "#"
+        %h3{:class => "menu-messages"}
+          = link_to "POST TO SOCIAL MEDIA", "#"
+        %h3{:class => "menu-messages"}
+          = link_to "EMAILS", "#"
+    .span9.pull-right
+      = render "messages_comments"
