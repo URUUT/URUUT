@@ -7,9 +7,16 @@
         %hr
         %p.short-desc= @project.title
         %h6{:style => "color:#403e37;font-family:'Proxima Nova Semi';display:inline-block;margin:0;letter-spacing:normal;"} SHARE:
-        = image_tag "fb-count.png", :class => "fb-share", :style => "margin-right:20px;"
-        = image_tag "tw-count.png", :class => "tw-share", :style => "margin-right:20px;"
-        = image_tag "bitly-link.png", :style => "margin-right:20px;"
+        / = image_tag "fb-count.png", :class => "fb-share", :style => "margin-right:20px;"
+        / = image_tag "tw-count.png", :class => "tw-share", :style => "margin-right:20px;"
+        / = image_tag "bitly-link.png", :style => "margin-right:20px;"
+        .fb-count
+          %span 
+        .tw-count
+          %span
+        .bitly-link
+        - if @project.bitly
+          %span= @project.bitly.sub(/http:\/\//, '')
 
       .span4
         .progress-container
@@ -201,6 +208,7 @@
       url: "http://graph.facebook.com/fql?q=select%20%20like_count%20from%20link_stat%20where%20url=%22#{root_url}projects/#{@project.id}%22"
     }).done(function(data) {
       console.log(data.data[0].like_count);
+      $('.fb-count span').text(data.data[0].like_count);
     }); 
   }
 
@@ -211,6 +219,7 @@
       url: "http://urls.api.twitter.com/1/urls/count.json?url=#{root_url}projects/#{@project.id}"
     }).done(function(data) {
       console.log(data.count);
+      $('.tw-count span').text(data.count);
     });
   }
 
@@ -265,7 +274,7 @@
       $(show).show();
     });
 		
-    $('.fb-share').click(function() {
+    $('.fb-count').click(function() {
       console.log("#{root_url}projects/#{@project.id}")
       var publish = {
         method: 'feed',
@@ -295,7 +304,7 @@
       FB.ui(publish, callback);
     });
 		
-    $('.tw-share').click(function(e) {
+    $('.tw-count').click(function(e) {
       e.preventDefault();
       var width  = 575,
           height = 400,
