@@ -2,21 +2,6 @@
 
 #fb-root
 :javascript
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/id_ID/all.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-
-  window.fbAsyncInit = function() {
-    FB.init({
-    appId : '128236094027667', // App ID
-  });
-
-    // showCommentBox();
-  };
 
   filepicker.setKey('ArmO0TLVTkyCaJkQmBNfqz'); // hardcode because js from flipicker can't called, please set your own
 
@@ -50,13 +35,13 @@
   .container
     %ul
       %li{:style => "margin-left: 0"}
-        = link_to "Project Overview", project_admin_project_overview_path(@project.id), remote: true
+        = link_to "Project Overview", "#"
       %li
-        = link_to "Manage Project", project_admin_project_manage_path(@project.id), remote: true
+        = link_to "Manage Project", project_admin_project_manage_path(@project.id), class: "sub-menu-project manage", remote: true
       %li
         = link_to "Project Funders", "#tabs-3"
       %li
-        = link_to "Project Messages", project_admin_project_messages_path(@project.id), remote: true
+        = link_to "Project Messages", project_admin_project_messages_path(@project.id), class: "sub-menu-project messages", remote: true
 
 .main-content{:style => "margin-top:200px;"}
   = render "overview"

@@ -1,0 +1,1 @@
+= select_tag "email_recepient", options_for_select(current_user.contacts.map { |contact| [contact.email, contact.email] } ), :required => true, :include_blank => "From My Contact List"

@@ -3,13 +3,13 @@
     .span3.pull-left
       %div{:style => "margin-top: 60px"}
       %div{:class => "well info"}
-        %h3{:class => "menu-messages"}
-          = link_to "COVER PHOTO & GALLERY", "#"
-        %h3{:class => "menu-messages"}
-          = link_to "PROJECT DETAILS", "#"
-        %h3{:class => "menu-messages"}
-          = link_to "STORY VISUAL", "#"
-        %h3{:class => "menu-messages"}
+        %h3{:class => "menu-messages cover", :style => "background: #81C263"}
+          = link_to "COVER PHOTO & GALLERY", project_admin_project_cover_photo_and_gallery_path(@project.id), remote: true
+        %h3{:class => "menu-messages detail"}
+          = link_to "PROJECT DETAILS", project_admin_project_detail_path(@project.id), remote: true
+        %h3{:class => "menu-messages visual"}
+          = link_to "STORY VISUAL", project_admin_project_visual_path(@project.id), remote: true
+        %h3{:class => "menu-messages update"}
           = link_to "PROJECT UPDATES", "#"
-    .span9.pull-right
+    .span9.pull-right.content-manage-project
       = render "manage_photos"
