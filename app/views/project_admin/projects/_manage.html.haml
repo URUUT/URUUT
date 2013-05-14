@@ -1,0 +1,15 @@
+.container.messages-page
+  .row-fluid
+    .span3.pull-left
+      %div{:style => "margin-top: 60px"}
+      %div{:class => "well info"}
+        %h3{:class => "menu-messages"}
+          = link_to "COVER PHOTO & GALLERY", "#"
+        %h3{:class => "menu-messages"}
+          = link_to "PROJECT DETAILS", "#"
+        %h3{:class => "menu-messages"}
+          = link_to "STORY VISUAL", "#"
+        %h3{:class => "menu-messages"}
+          = link_to "PROJECT UPDATES", "#"
+    .span9.pull-right
+      = render "manage_photos"
