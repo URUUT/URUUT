@@ -4,76 +4,38 @@
     = form_for(@contact, :as => :post, :url => send_email_project_admin_projects_path, html: {remote: true}) do |f|
       %div.pull-left
         = label_tag "EMAIL RECEPIENT", nil, class: "green-font"
-        = select_tag "sponsor_level", options_for_select(@sponsorship_levels.map { |sponsor| [sponsor.name, sponsor.id] }), prompt: "Import based on sponsor level", onchange: "get_emails_based_on_category()", class: "span7"
-        %a.cs_import.btn{style: "margin-left: 6%"} Add Contacts
-        %div.textarea-recepient
-          %textarea#contact_list{:style => "width:445px;height:24px", :name => "email_recepient"}
-          = hidden_field_tag 'email_temp'
+        %span.select-recepient
+          = select_tag "email_recepient", options_for_select(current_user.contacts.map { |contact| [contact.email, contact.email] } ), :required => true, :prompt => "From My Contact List"
+        %a{href: "#add-email", role: "button", class: "btn", "data-toggle" => "modal"} Add Contact
       %div.pull-left
         = f.label :email_content , "EMAIL HEADER PHOTO*", class: "green-font"
-        %div{:style => "display: block; background: #AFABAB; width: 491px; height: 300px; margin-bottom: 16px;", :class => "email-header-priview"}
+        %div{:style => "display: block; background: #AFABAB; width: 495px; height: 300px; margin-bottom: 16px;", :class => "email-header-priview"}
         %button{:id => "email-header-button"} CHANGE
         = hidden_field_tag 'email_header'
       %div.pull-left{:style => "margin-top: 10px"}
         = f.label :email_content , "EMAIL CONTENT", class: "green-font"
-        = f.text_area :email_content, :required => true, style: "width: 458px; height: 298px;"
+        = f.text_area :email_content, :required => true, style: "width: 495px; height: 298px;"
       %div.pull-left
         = f.submit "SEND EMAIL", :class => "btn", :id => "project-submit"
 
+
+#add-email.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel Add new email to your contact
+    = form_tag add_contact_project_admin_projects_path, method: :post, remote: true do
+      .modal-body.form-add-email
+        = email_field_tag("email")
+      .modal-footer
+        %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
+        = submit_tag("Save changes", class: "btn btn-primary")
+
 :javascript
-
-  var owner_email, owner_first_name, owner_last_name;
-  var appendInTextarea = false;
-  var emailSep = ", ";
-  function populateTextarea(contacts, source, owner) {
-    var contact, name, email, entry;
-    var emails = [];
-    var textarea = document.getElementById('contact_list');
-
-    for (var i = 0; i < contacts.length; i++) {
-      contact = contacts[i];
-      name = contact.fullName();
-      email = contact.selectedEmail();
-      entry = name + "<" + email +">";
-      if (emails.indexOf(entry) < 0) {
-        emails.push(entry);
-      }
-    }
-
-    var email_content = $("#email_temp").val();
-    if ( $("#email_temp").val().slice(-1) != "," && $("#email_temp").val() != "" ){
-      email_content = $("#email_temp").val() + " ,";
-    }
-    $("#contact_list").val("");
-    $("#email_temp").val("");
-
-    $("#contact_list").val( email_content + emails.join(emailSep) );
-  }
-
   var cover = document.getElementById('email-header-button');
   cover.type="filepicker";
   cover.onchange = function(e){
     var largeImage = e.fpfile.url;
-    $('.email-header-priview').attr("style", "").html("<img src='"+largeImage+"/convert?fit=scale&height=298&width=491'>");
+    $('.email-header-priview').attr("style", "").html("<img src='"+largeImage+"/convert?fit=scale&height=298&width=495'>");
     $("#email_header").val(largeImage);
   };
   filepicker.constructWidget(cover);
-
-  function moveCurrentValue(contacts, source, owner) {
-    $("#email_temp").val( $("#contact_list").val() );
-  }
-
-  var csPageOptions = {
-    domain_key:"3E6CHQNSGA7WFNM7ATLZ",
-    textarea_id:"contact_list",
-    beforeDisplayContacts: moveCurrentValue,
-    afterSubmitContacts:populateTextarea
-  };
-
-  var get_emails_based_on_category = function (){
-    $.ajax({
-      url: "/project_admin/projects/email_based_on_sponsor_level?level_id="+$("#sponsor_level").val()
-    });
-  };
-
-%script{:src => "https://api.cloudsponge.com/address_books.js"}
