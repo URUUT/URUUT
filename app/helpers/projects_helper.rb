@@ -36,6 +36,7 @@ module ProjectsHelper
 			#['pets','pets'],
 			#['miscellaneous','miscellaneous']
       #['Animal / Pets],
+      ['Select Category'],
       ['Art / Culture'],
       ['Athletic / Sports'],
       ['Education / Schools'],
@@ -50,6 +51,29 @@ module ProjectsHelper
       ['Walkability / Bike / Paths']
 		]
 	end
+  
+  def project_org_type
+    [
+      ['Select Org Type'],
+      ['School'],
+      ['Church'],
+      ['Municipal'],
+      ['Member'],
+      ['Foundation'],
+      ['Other Civic']
+    ]
+  end
+  
+  def project_org_class
+    [
+      ['Select Org Class'],
+      ['501(c)(3)'],
+      ['501(c)(4)'],
+      ['501(c)(6)'],
+      ['501(c)(7)'],
+      ['170(c)(1)']
+    ]
+  end
 
   def project_duration(duration)
     if !duration.nil?

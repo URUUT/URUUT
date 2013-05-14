@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130507145855) do
+ActiveRecord::Schema.define(:version => 20130514053212) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -75,9 +75,11 @@ ActiveRecord::Schema.define(:version => 20130507145855) do
     t.string  "name"
     t.integer "project_id"
     t.integer "sponsor_id"
-    t.string  "payment",    :default => "Unpaid"
-    t.string  "status",     :default => "Unconfirmed"
+    t.string  "payment",                  :default => "Unpaid"
+    t.string  "status",                   :default => "Unconfirmed"
     t.integer "level_id"
+    t.string  "card_type",  :limit => 20
+    t.string  "card_last4", :limit => 20
   end
 
   create_table "projects", :force => true do |t|
@@ -111,6 +113,8 @@ ActiveRecord::Schema.define(:version => 20130507145855) do
     t.integer "ready_for_approval"
     t.string  "seed_image"
     t.string  "cultivation_image"
+    t.string  "organization_type"
+    t.string  "organization_classification"
   end
 
   create_table "services", :force => true do |t|
@@ -125,15 +129,11 @@ ActiveRecord::Schema.define(:version => 20130507145855) do
   end
 
   create_table "sponsors", :force => true do |t|
-    t.string  "payment_type"
-    t.string  "name"
-    t.string  "card_number"
-    t.string  "cvc"
-    t.string  "email"
-    t.string  "phone"
-    t.integer "month"
-    t.integer "year_card"
-    t.string  "token"
+    t.string "payment_type"
+    t.string "name"
+    t.string "email"
+    t.string "phone"
+    t.string "token"
   end
 
   create_table "sponsorship_benefits", :force => true do |t|

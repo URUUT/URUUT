@@ -175,7 +175,7 @@ def delete_perk
 end
 
 def submit_project
-  logger.debug(params[:id])
+  logger.debug("ID was: #{params[:id]}")
   project = Project.find_by_id(params[:id])
   project.ready_for_approval = 1
   if project.save!
