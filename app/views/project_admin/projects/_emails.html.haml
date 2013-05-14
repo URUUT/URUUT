@@ -1,0 +1,42 @@
+%h2.title SEND PROJECT EMAIL
+.well.pull-left.span9
+  %div.pull-left.form-send-message
+    = form_for(@contact, :as => :post, :url => send_email_project_admin_projects_path, html: {remote: true}) do |f|
+      %div.pull-left
+        = label_tag "EMAIL RECEPIENT", nil, class: "green-font"
+        %span.select-recepient
+          = select_tag "email_recepient", options_for_select(current_user.contacts.map { |contact| [contact.email, contact.email] } ), :required => true, :prompt => "From My Contact List"
+        %a{href: "#add-email", role: "button", class: "btn", "data-toggle" => "modal"} Add Contact
+      %div.pull-left
+        = f.label :email_content , "EMAIL HEADER PHOTO*", class: "green-font"
+        %div{:style => "display: block; background: #AFABAB; width: 495px; height: 300px; margin-bottom: 16px;", :class => "email-header-priview"}
+        %button{:id => "email-header-button"} CHANGE
+        = hidden_field_tag 'email_header'
+      %div.pull-left{:style => "margin-top: 10px"}
+        = f.label :email_content , "EMAIL CONTENT", class: "green-font"
+        = f.text_area :email_content, :required => true, style: "width: 495px; height: 298px;"
+      %div.pull-left
+        = f.submit "SEND EMAIL", :class => "btn", :id => "project-submit"
+
+
+#add-email.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel Add new email to your contact
+    = form_tag add_contact_project_admin_projects_path, method: :post, remote: true do
+      .modal-body.form-add-email
+        = email_field_tag("email")
+      .modal-footer
+        %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
+        = submit_tag("Save changes", class: "btn btn-primary")
+
+:javascript
+
+  var cover = document.getElementById('email-header-button');
+  cover.type="filepicker";
+  cover.onchange = function(e){
+    var largeImage = e.fpfile.url;
+    $('.email-header-priview').attr("style", "").html("<img src='"+largeImage+"/convert?fit=scale&height=298&width=495'>");
+    $("#email_header").val(largeImage);
+  };
+  filepicker.constructWidget(cover);
