@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  after_create :send_welcome_email
+  # after_create :send_welcome_email
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -25,8 +25,13 @@ class User < ActiveRecord::Base
   # validate :minimum_image_size
   # validates_uniqueness_of :name, :email, :case_sensitive => false
 
-  has_many :services, :dependent => :destroy
-  has_many :projects, :dependent => :destroy
+  with_options dependent: :destroy do |user|
+    user.has_many :services
+    user.has_many :projects
+    user.has_many :contacts
+  end
+
+
   has_many :donations
 
   # mount_uploader :avatar, AvatarUploader
@@ -98,7 +103,7 @@ class User < ActiveRecord::Base
     #  end
     #end
   end
-  
+
   def email_required?
     super && provider.blank?
   end
