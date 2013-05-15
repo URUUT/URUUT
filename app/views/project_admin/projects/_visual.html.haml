@@ -1,35 +1,37 @@
-%h4.title{style: 'margin-top:32px;'}
-  Planting Seeds
-  %span (About)
+%h2.title STORY VISUALS
+.well{:style => "float:left; width:100%"}
+  %h4
+    Planting Seeds
+    %span (About)
+  #content_container
+  #planting_seeds
+    .image_warp
+      - if @project.seed_image
+        = image_tag "#{@project.seed_image}", id: "seed_image", class: "seed_image", "data-project-id" => @project.id
+    .action_button{style: "#{'margin-top: 23px;' if @project.seed_image}"}
+      %button{:id => "new-seed"} ADD NEW PHOTO
+      = link_to "Delete Photo", delete_image_path(@project.id, type: "seed_image"), class: "btn delete_photo", method: 'DELETE', style: "display: #{'none' unless @project.seed_image}"
+    %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.about
+  %hr
+  #cultivation
+    .span3.ending
+      %h4
+        CULTIVATION
+        %br
+        %span (Project Details)
 
-#content_container
-#planting_seeds
-  .image_warp
-    - if @project.seed_image
-      = image_tag "#{@project.seed_image}", id: "seed_image", class: "seed_image", "data-project-id" => @project.id
-  .action_button{style: "#{'margin-top: 23px;' if @project.seed_image}"}
-    %button{:id => "new-seed"} ADD NEW PHOTO
-    = link_to "Delete Photo", delete_image_path(@project.id, type: "seed_image"), class: "btn delete_photo", method: 'DELETE', style: "display: #{'none' unless @project.seed_image}"
-  %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.about
-%hr
-#cultivation
-  .span3.ending
-    %h4.title
-      CULTIVATION
-      %br
-      %span (Project Details)
-
-      %h6{:style => "text-align:center;color:#55554d !important;font-family:'Proxima Nova';margin-top:15px;"} Funding Ends
-      %div{:style => "background:#b6b6b4;padding:25px;border-radius:500px;"}
-        %span{:style => 'display:block;text-align:center;font:normal 22px/22px "Proxima Nova Semi";color:#fff;text-transform:uppercase;letter-spacing:5px;'}= (Date.today + (@project.duration).to_i.days).strftime("%b")
-        %span{:style => 'display:block;text-align:center;font:normal 72px/72px "Proxima Nova Semi";color:#fff;text-transform:uppercase;margin-top:5px'}= (Date.today + (@project.duration).to_i.days).strftime("%d")
-      %h6{:style => "text-align:center;color:#55554d !important;font-family:'Proxima Nova';margin-top:40px;margin-bottom:0;"} Project Goal
-      %h2{:style => "text-align:center;color:#b6b6b4;font-family:'Proxima Nova Semi';margin-top:0;"}= number_to_currency(@project.goal, precision: 0)
-  .span9.details
-    %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.story
-    = image_tag "#{@project.cultivation_image}" if @project.cultivation_image
-
-
+        %h6{:style => "text-align:center;color:#55554d !important;font-family:'Proxima Nova';margin-top:15px;"} Funding Ends
+        %div{:style => "background:#b6b6b4;padding:25px;border-radius:500px;"}
+          %span{:style => 'display:block;text-align:center;font:normal 22px/22px "Proxima Nova Semi";color:#fff;text-transform:uppercase;letter-spacing:5px;'}= (Date.today + (@project.duration).to_i.days).strftime("%b")
+          %span{:style => 'display:block;text-align:center;font:normal 72px/72px "Proxima Nova Semi";color:#fff;text-transform:uppercase;margin-top:5px'}= (Date.today + (@project.duration).to_i.days).strftime("%d")
+        %h6{:style => "text-align:center;color:#55554d !important;font-family:'Proxima Nova';margin-top:40px;margin-bottom:0;"} Project Goal
+        %h2{:style => "text-align:center;color:#b6b6b4;font-family:'Proxima Nova Semi';margin-top:0;"}= number_to_currency(@project.goal, precision: 0)
+    .span9.details
+      %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.story
+      .cultivation-image-content
+        = image_tag "#{@project.cultivation_image}" if @project.cultivation_image
+      %button{:id => "new-cultivation"} ADD NEW PHOTO
+      = link_to "Delete Photo", delete_image_path(@project.id, type: "cultivation"), class: "btn delete_photo", method: 'DELETE', style: "display: #{'none' unless @project.cultivation_image}"
 
 %script{:src => "http://code.jquery.com/ui/1.10.2/jquery-ui.js"}
 :javascript
@@ -51,11 +53,31 @@
       success: function(data){
         $('#seed_image').remove();
         $('.delete_photo').show();
-        $('.image_warp').append("<div class='image_wrap'><img src=" + seedImage + " id='seed_image' data-project-id="+ data.project_id +"></div>");
+        $('.image_warp').html("<div class='image_wrap'><img src=" + seedImage + " id='seed_image' data-project-id="+ data.project_id +"></div>");
       }
     });
   };
   filepicker.constructWidget(cover);
+
+  var cultivation = document.getElementById('new-cultivation');
+  cultivation.type="filepicker";
+  cultivation.onchange = function(e){
+    var seedImage = event.fpfile.url;
+
+    $.ajax({
+      url: '/projects/update_image?status=cultivation',
+      method: 'POST',
+      data: {
+        image: seedImage
+        },
+      success: function(data){
+        $('#seed_image').remove();
+        $('.delete_photo').show();
+        $('.cultivation-image-content').html("<div class='image_wrap'><img src=" + seedImage + " id='seed_image' data-project-id="+ data.project_id +"></div>");
+      }
+    });
+  };
+  filepicker.constructWidget(cultivation);
 
 
 
