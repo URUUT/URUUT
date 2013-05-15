@@ -1,14 +1,14 @@
 %div
   %h2.title MY PROJECT COVER PHOTO
-  .image-cover-content.well{:style => "float:left"}
+  .image-cover-content.well{:style => "float:left; width:100%"}
     %div.pull-left
       .cover-content
         .cover-content-image
-          = filepicker_image_tag @project.large_image, width: 672, height: 300, fit: 'scale'
+          = filepicker_image_tag @project.large_image, width: 672, height: 300, fit: 'scale' if @project.large_image
         %button{:id => "project-submit"} CHANGE
 
   %h2.title MY PROJECT PHOTO GALLERY
-  .images-content.well{:style => "float:left"}
+  .images-content.well{:style => "float:left; width:100%"}
     #galleryPicture
       - @project.galleries.each do |image|
         .list-image.pull-left{:style => "width: 30%; margin-left: 2%; margin-top: 2%" }
