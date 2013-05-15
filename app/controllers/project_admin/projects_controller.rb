@@ -80,4 +80,4 @@ class ProjectAdmin::ProjectsController < ApplicationController
 
 
 end
->>>>>>> 76c236a... add tab page function
+
