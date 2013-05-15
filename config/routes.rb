@@ -53,6 +53,16 @@ Crowdfund::Application.routes.draw do
       get "messages"
       get "overview"
       get "manage"
+      get "detail"
+      get "visual"
+      get "cover_photo_and_gallery"
+      get "post_to_social_media"
+      get "emails_page"
+
+      collection do
+        get "email_based_on_sponsor_level"
+        post "send_email"
+      end
     end
   end
   resources :donations do
