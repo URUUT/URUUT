@@ -5,6 +5,7 @@ class ProjectSponsor < ActiveRecord::Base
 
   belongs_to :project
   belongs_to :sponsor
+  belongs_to :sponsorship_level, foreign_key: :level_id
 
   validates :name, :logo, :mission, :level_id, presence: true
 
