@@ -5,8 +5,8 @@
       %div.pull-left
         = label_tag "EMAIL RECEPIENT", nil, class: "green-font"
         %span.select-recepient
-          = select_tag "email_recepient", options_for_select(current_user.contacts.map { |contact| [contact.email, contact.email] } ), :required => true, :prompt => "From My Contact List"
-        %a{href: "#add-email", role: "button", class: "btn", "data-toggle" => "modal"} Add Contact
+          %textarea#contact_list{:style => "width:317px;height:24px", :name => "email_recepient"}
+        %a.cs_import Add from Address Book
       %div.pull-left
         = f.label :email_content , "EMAIL HEADER PHOTO*", class: "green-font"
         %div{:style => "display: block; background: #AFABAB; width: 495px; height: 300px; margin-bottom: 16px;", :class => "email-header-priview"}
@@ -31,7 +31,6 @@
         = submit_tag("Save changes", class: "btn btn-primary")
 
 :javascript
-
   var cover = document.getElementById('email-header-button');
   cover.type="filepicker";
   cover.onchange = function(e){
@@ -40,3 +39,10 @@
     $("#email_header").val(largeImage);
   };
   filepicker.constructWidget(cover);
+
+  var csPageOptions = {
+    domain_key:"3E6CHQNSGA7WFNM7ATLZ",
+    textarea_id:"contact_list"
+  };
+
+%script{:src => "https://api.cloudsponge.com/address_books.js"}

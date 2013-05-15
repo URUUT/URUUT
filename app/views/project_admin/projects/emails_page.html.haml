@@ -1,0 +1,57 @@
+= stylesheet_link_tag "admin_project"
+
+#fb-root
+:javascript
+
+  filepicker.setKey('ArmO0TLVTkyCaJkQmBNfqz'); // hardcode because js from flipicker can't called, please set your own
+
+
+.full-width.banner
+  .container
+    .span3
+      %h4.white-text= @project.title
+      %h5 #{@project.city}, #{@project.state}
+
+    .span3
+      %h6 Current Amount Funded
+      %h2= number_to_currency(amount_funded(@project.id), :precision => 0)
+      of #{number_to_currency(@project.goal, :precision => 0)}
+
+    .span2
+      %h6.white-text Project Sponsors
+      %h2= @sponsor_count
+
+    .span2
+      %h6.white-text Individual Contributions
+      %h2= @donations.count
+
+    .span2
+      %h6.white-text Days Remaining
+      / %h2 #{time_left(@project.duration, @project.approval_date)}
+
+.cf
+
+.menu-project
+  .container
+    %ul
+      %li{:style => "margin-left: 0"}
+        = link_to "Project Overview", "#"
+      %li
+        = link_to "Manage Project", project_admin_project_manage_path(@project.id), class: "sub-menu-project manage", remote: true
+      %li
+        = link_to "Project Funders", "#tabs-3"
+      %li
+        = link_to "Project Messages", project_admin_project_messages_path(@project.id), class: "sub-menu-project messages", style: "color: #000", remote: true
+
+.main-content{:style => "margin-top:200px;"}
+  .container.messages-page
+    .row-fluid
+      .span3.pull-left
+        %div{:style => "margin-top: 60px"}
+        %div{:class => "well info"}
+          %h3{:class => "menu-messages social-media"}
+            = link_to "POST TO SOCIAL MEDIA", project_admin_project_post_to_social_media_path(@project.id), remote: true
+          %h3{:class => "menu-messages emails", :style => "background: #81C263"}
+            = link_to "EMAILS", project_admin_project_emails_page_path(@project.id)
+      .span9.pull-right.messages-content
+        = render "emails"

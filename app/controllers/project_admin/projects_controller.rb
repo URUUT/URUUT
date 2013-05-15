@@ -2,7 +2,7 @@ class ProjectAdmin::ProjectsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :set_project_ajax, except: [:index, :update, :show, :add_contact, :send_email]
 
-  respond_to :js, except: [:index, :update, :show]
+  respond_to :js, except: [:index, :update, :show, :emails_page]
   layout false, :only => "stripe_update"
 
   def index
@@ -14,18 +14,12 @@ class ProjectAdmin::ProjectsController < ApplicationController
     @donations = Donation.find_all_by_project_id(@project.id)
     sponsors = ProjectSponsor.find_by_project_id(@project.id)
     @sponsor_count = sponsors.nil? ? 0 : sponsors.count
-<<<<<<< HEAD
-    logger.debug(@sponsor_count)
-    logger.debug(@project)
-    logger.debug(@donations)
-  end
 
-end
-=======
+    subheader
   end
 
   def update
-    asd
+
   end
 
   def messages; end
@@ -56,6 +50,9 @@ end
 
   def emails_page
     @contact = Contact.new
+    @need_doctype = true
+
+    subheader
   end
 
   def add_contact
@@ -72,6 +69,13 @@ end
   def set_project_ajax
     @project = Project.find(params[:project_id])
     session[:current_project] = @project.id
+  end
+
+  def subheader
+    @donations = Donation.find_all_by_project_id(@project.id)
+    # sponsors = ProjectSponsor.find_by_project_id(@project.id)
+    sponsors = ProjectSponsor.where(@project.id)
+    @sponsor_count = sponsors.nil? ? 0 : sponsors.count
   end
 
 
