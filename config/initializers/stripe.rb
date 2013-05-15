@@ -1,9 +1,9 @@
-API_KEY = "sk_test_VpCit4b4YmZzlItS0Z9oBDlJ"
-STRIPE_PUBLIC_KEY = "pk_test_TjJ8AY0vlqBFrOWuhAvPR2br"
+API_KEY = ENV["STRIPE_KEY"]
+STRIPE_PUBLIC_KEY = ENV["STRIPE_PUB_KEY"]
 
 Rails.configuration.stripe = {
-  :publishable_key => "pk_test_BTNPlS59UIPJC5Fnp7CR9It6",
-  :secret_key      => "sk_test_Ydpgzl4aX7paVEPDaChNSP5Z"
+  :publishable_key => STRIPE_PUBLIC_KEY,
+  :secret_key      => API_KEY
 }
 
 Stripe.api_key = Rails.configuration.stripe[:secret_key]

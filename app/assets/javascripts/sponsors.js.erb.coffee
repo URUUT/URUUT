@@ -69,9 +69,10 @@ edit_sponsor =
 
 
 $ ->
+	console.log "Current Project is: " + project_pub_key
 	$('#new_sponsor #project-submit').on 'click', (event) ->
     event.preventDefault()
-    Stripe.setPublishableKey('pk_test_WRrfoQLUDkpGHAxCmOY0Y6ud');
+    Stripe.setPublishableKey(project_pub_key);
     if $('#card_number').val() == ''
       $('#new_sponsor')[0].submit()
     else

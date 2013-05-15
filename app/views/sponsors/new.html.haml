@@ -116,6 +116,8 @@
 
 = javascript_include_tag "sponsors"
 :javascript
+  project_token = "#{@project.project_token}"
+  project_pub_key = "#{@project.publishable_key}"
   $(function(){
 	
     $("#sponsor_payment_type").change(function(){
