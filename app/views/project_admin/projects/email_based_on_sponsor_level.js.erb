@@ -1,0 +1,8 @@
+if ( $("#contact_list").val() == "" ){
+  var emails = "<%= @emails %>";
+}
+else{
+  var emails = ",<%= @emails %>";
+}
+
+$("#contact_list").val( $("#contact_list").val() + emails );
