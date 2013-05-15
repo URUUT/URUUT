@@ -1,6 +1,7 @@
 class ProjectAdmin::ProjectsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :set_project_ajax, except: [:index, :update, :show, :add_contact, :send_email]
+  before_filter :set_project_ajax, except: [:index, :update, :show,
+    :send_email, :email_based_on_sponsor_level]
 
   respond_to :js, except: [:index, :update, :show, :emails_page]
   layout false, :only => "stripe_update"
@@ -47,17 +48,17 @@ class ProjectAdmin::ProjectsController < ApplicationController
   def emails_page
     @contact = Contact.new
     @need_doctype = true
+    level_ids = @project.project_sponsors.map(&:level_id).uniq
+    @sponsorship_levels = SponsorshipLevel.where("id IN (?)", level_ids)
 
     subheader
   end
 
-  def add_contact
-    @email_exists = true
-
-    if current_user.contacts.where(email: params[:email]).empty?
-      @email_exists = false
-      current_user.contacts.create(email: params[:email])
-    end
+  def email_based_on_sponsor_level
+    project = Project.find(session[:current_project])
+    emails = project.project_sponsors.joins(:sponsor).where("level_id = ?", params[:level_id]).pluck(:email)
+    emails.reject!(&:empty?)
+    @emails = emails.join(",")
   end
 
   private
