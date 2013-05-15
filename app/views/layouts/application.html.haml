@@ -1,3 +1,5 @@
+- if @need_doctype
+  !!!
 %html
   %head
     %meta{:charset => "utf-8"}
@@ -63,14 +65,14 @@
     window.opener.location.reload(true);
     window.close()
   }
-	
+
   //$('.social-login a').click(function(e) {
   //  e.preventDefault();
   //  var ahref = $(this).attr('href');
   //  console.log(ahref);
   //  window.open(ahref,'_blank', 'height=500,width=500,location=no,menubar=no');
   //})
-	
+
   $('.stripe-connect').click(function(e) {
     e.preventDefault();
     var ahref = $(this).attr('href');
@@ -113,7 +115,7 @@
       $('#planting_seeds').prepend('<div class="seed-image"><img src="' + plantingSeedImage + '"</div>');
     });
   }
-	
+
   var updateCultivationImage = function(event) {
     console.log(event.fpfile.url);
     var cultivationImage = event.fpfile.url;
@@ -130,7 +132,7 @@
       $('#cultivation .details').prepend('<div class="cultivation-image"><img src="' + cultivationImage + '"</div>');
     });
   }
-	
+
   var updateAvatar = function(event) {
     console.log(event.fpfile.url);
     var avatarImage = event.fpfile.url + '/convert?w=100&h=100&fit=crop';
@@ -139,7 +141,7 @@
     $('#user_avatar').val(avatarImage);
     $('#avatar-img').attr('src', avatarImage);
   }
-	
+
   var updateProgressbar = function(id, value) {
     console.log(id);
     $('.progressbar' + id).progressbar({
