@@ -17,6 +17,8 @@
         .bitly-link
           - if @project.bitly
             %span= @project.bitly.sub(/http:\/\//, '')
+						
+        %p= link_to "Contact Project Creator", "mailto:#{User.find(@project.user_id).email}"
 
       .span4
         .progress-container
