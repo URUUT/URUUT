@@ -6,6 +6,8 @@ class Project < ActiveRecord::Base
     :perks_attributes, :galleries_attributes, :status, :organization, :website, :twitter_handle, :facebook_page,
     :story, :about, :large_image, :seed_image, :cultivation_image, :ready_for_approval, :organization_type, :organization_classification
 
+  attr_accessor :sponsorship_permisson
+
   #validates :title, :short_description, :description, :presence => true, :if => :active?
   #validates :image, :address, :city, :state, :zip, :neighborhood, :duration, :goal, :presence => true, :if => :active_or_step1?
 
