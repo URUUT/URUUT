@@ -360,11 +360,16 @@ label {
 .pages.home {
   height:100%;
   padding:0;}
-
 .pages {
 	.texture {
 		background: url(image-path('bg-tile.jpg')) top left repeat;
 		padding:20px 0;
+        form {
+            display:inline;
+        }
+        form.project-keywords {
+            margin-left: 20px;
+        }
 		img {
 			margin-left:10px;
 			vertical-align:middle;
@@ -1708,6 +1713,7 @@ ul.perks {
 //    text-decoration:underline;}}
 
 form.registration-edit {
+  font-family:"Proxima Nova Semi", arial, sans-serif;
   label {
     color:#70bf4c;
   }
@@ -1746,7 +1752,6 @@ form.registration-edit {
       background:#70bf4c;
     }
   }
-
   .switch {
     width: 80px;
     height: 30px;
@@ -1843,7 +1848,6 @@ form.registration-edit {
     color: #82a06a;
     text-shadow: 0 1px 0 #afcb9b, 0 -1px 0 #6b8659;
   }
-
 }
 
 .user-name {

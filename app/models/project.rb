@@ -31,6 +31,23 @@ class Project < ActiveRecord::Base
 
   #process_in_background :image
 
+  # Select unique values of some field, e.g. cities and categories
+  def self.unique_values_of(type)
+    select(type).uniq.pluck(type)
+  end
+
+  def self.by_city(city)
+    (city && city.downcase != "all cities") ? where("city = ?", city) : where("")
+  end
+
+  def self.by_category(category)
+    (category && category.downcase != "all categories") ? where("category = ?", category) : where("")
+  end
+
+  def self.by_keyword(keyword)
+    where("city LIKE :keyword OR state LIKE :keyword OR title LIKE :keyword OR description LIKE :keyword OR organization LIKE :keyword", :keyword => "%#{keyword}%")
+  end
+
   def self.get_sponsor_token
     if :current_user
       Stripe.api_key = API_KEY
