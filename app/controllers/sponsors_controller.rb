@@ -4,8 +4,8 @@ class SponsorsController < ApplicationController
 
   def new
     @sponsor = Sponsor.new
-    @selected_level = SponsorshipLevel.find(params[:sponsorship_level]) if params[:sponsorship_level]
-    session[:connected] = ''
+    @project = Project.find(params[:project_id])
+    logger.debug(@project.to_yaml)
     render :layout => 'landing'
   end
 
@@ -29,17 +29,30 @@ class SponsorsController < ApplicationController
   end
 
   def create
-    current_user = :current_user
-    Stripe.api_key = "sk_test_XF9K5nq63HTSmTK1ZMiW6tvw"
-    sponsor_name = params[:sponsor][:payment_type].eql?("Wire Transfer") ? params[:sponsor][:name] : params[:sponsor][:card_name]
+    # current_user = :current_user
+    sponsor = params[:sponsor]
+    sponsor_name = sponsor[:payment_type].eql?("Wire Transfer") ? sponsor[:name] : sponsor[:card_name]
     cost = SponsorshipLevel.find(params[:project_sponsor][:level_id]).cost
     params[:sponsor][:name] = sponsor_name
+    token = params[:token]
 
+    logger.debug(sponsor)
+    logger.debug(sponsor_name)
+    logger.debug(cost)
+    logger.debug(session[:current_user])
+    logger.debug(:project_id)
     @sponsor = Sponsor.new(params[:sponsor])
     @sponsor.save(validate: false)
-    @project_sponsor = ProjectSponsor.create(params[:project_sponsor])
+    logger.debug
+    @project_sponsor = ProjectSponsor.new(params[:project_sponsor])
+    #@project_sponsor.save!
+    #logger.debug(@project_sponsor)
     @project_sponsor.update_attributes({cost: cost, project_id: params[:project_id], sponsor_id: @sponsor.id,
-                                      level_id: params[:project_sponsor][:level_id], card_token: params[:stripeToken]})
+                                      level_id: params[:project_sponsor][:level_id], card_token: token})
+
+    session[:project_sponsor] = @project_sponsor
+
+    logger.debug("Project Sponsors: #{session[:project_sponsor].to_yaml}")
 
     # charge = Stripe::Charge.create({:amount => cost, :currency => "usd", :card => params[:stripeToken]});
 
@@ -56,6 +69,7 @@ class SponsorsController < ApplicationController
   def confirmation
     @sponsor = Sponsor.find(params[:id])
     @project_sponsor = @project.project_sponsors.find_by_sponsor_id(@sponsor.id)
+    logger.debug(@project_sponsor)
     @sponsorship_level = SponsorshipLevel.find(@project_sponsor.level_id)
   end
 

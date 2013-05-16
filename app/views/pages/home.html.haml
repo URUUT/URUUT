@@ -110,7 +110,8 @@
 		window.close()
 	}
 	$(function() {
-		$('.learn-more').click(function() {
+		$('.learn-more').click(function(e) {
+			e.preventDefault();
 			$('html, body').animate({
 				scrollTop: $("#partner").offset().top
 			}, 750);

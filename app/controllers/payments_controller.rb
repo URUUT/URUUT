@@ -4,30 +4,31 @@ class PaymentsController < ApplicationController
     project = Project.find(params[:project_id])
     sponsor = Sponsor.find(params[:sponsor_id])
     project_sponsor = project.project_sponsors.find_by_sponsor_id(sponsor.id)
-
-    credit_card = ActiveMerchant::Billing::CreditCard.new(
-      :type               => "visa",
-      :number             => sponsor.card_number,
-      :verification_value => sponsor.cvc,
-      :month              => sponsor.month,
-      :year               => sponsor.year_card,
-      :first_name         => sponsor.name.split(" ")[0],
-      :last_name          => sponsor.name.split(" ")[1] || ""
-      )
-
-    if credit_card.valid?
-    # or gateway.purchase to do both authorize and capture
-      response = GATEWAY.authorize(project_sponsor.cost, credit_card, :ip => request.remote_ip)
-      if response.success?
-        GATEWAY.capture(project_sponsor.cost, response.authorization)
-        project_sponsor.update_attributes({payment: "Paid", status: "Confirmed"})
-        redirect_to project_url(project.id), notice: "Thanks, you successfully registered as a sponsor in project #{project.project_title}"
-      else
-        redirect_to :back, alert: "Sorry your creditcard is expired."
-      end
-    else
-      redirect_to :back, alert: "Sorry your creditcard is expired."
+    card_token = project_sponsor.card_token
+    amount = (project_sponsor.cost * 100).to_i
+    fee = (amount * 0.06).to_i
+    access_token = project.project_token
+    
+    logger.debug(amount)
+    logger.debug(access_token)
+    
+    Stripe.api_key = access_token
+    
+    begin
+      charge = Stripe::Charge.create({
+        :amount => amount, # amount in cents, again
+        :currency => "usd",
+        :card => card_token,
+        :description => project_sponsor.name,
+        :application_fee => fee
+      },
+      access_token)
+    rescue Stripe::CardError => e
+      # The card has been declined
+      logger.debug(e)
     end
+    redirect_to root_url
+    
   end
 
 end
