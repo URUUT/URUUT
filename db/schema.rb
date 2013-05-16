@@ -13,6 +13,13 @@
 
 ActiveRecord::Schema.define(:version => 20130515055010) do
 
+  create_table "contacts", :force => true do |t|
+    t.string   "email"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
     t.integer  "attempts",   :default => 0

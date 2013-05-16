@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  layout "landing", :except => [:discover, :contact, :contact_send, :how_it_works]
+  layout "application", :except => [:index]
   skip_before_filter :set_previous_page
 
   def index
