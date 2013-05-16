@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  layout "application", :except => [:index]
+  layout "application", :except => [:index, :discover]
   skip_before_filter :set_previous_page
 
   def index
