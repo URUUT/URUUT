@@ -1,43 +1,18 @@
 = render "partials/banner_map"
 
-.recent.clearfix
-	.container
-		%p.sections
-			= image_tag "recent-project-icon.png"
-			CURRENT PROJECTS
-			
-			= link_to "View All", "#", :class => 'view-all'
-  
-		= render "project", :projects => @projects
+- if params[:keyword]
+  = render "results_keyword"
+- else
+  = render "results_filter"
 
-.ending-soon.clearfix
-	.container
-		%p.sections
-			= image_tag 'ending-soon-icon.png'
-			Projects Ending Soon
-			
-			= link_to "View All", "#", :class => 'view-all'
-
-			= render "project", :projects => @ending
-
-.featured-success.clearfix
-	.container
-		%p.sections
-			= image_tag 'featured-success-icon.png'
-			Featured Success
-			
-			= link_to "View All", "#", :class => 'view-all'
-
-		= render "project", :projects => @featured
-	
 .clearfix
 
-	%script{:src => "http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"}
-	%script{:src => "http://maps.stamen.com/js/tile.stamen.js?v1.2.1"}
+  %script{:src => "http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"}
+  %script{:src => "http://maps.stamen.com/js/tile.stamen.js?v1.2.1"}
 
 :javascript
-	$(function(){
-		// var map = L.map('map').setView([33.7489, -84.3881], 11);
-		// L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png').addTo(map);
-		// L.marker([33.7489, -84.3881]).addTo(map).bindPopup('<h4>Welcome to URUUT</h4>').openPopup();
-	});
+    $(function(){
+        // var map = L.map('map').setView([33.7489, -84.3881], 11);
+        // L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png').addTo(map);
+        // L.marker([33.7489, -84.3881]).addTo(map).bindPopup('<h4>Welcome to URUUT</h4>').openPopup();
+    });

@@ -21,7 +21,7 @@ Crowdfund::Application.routes.draw do
 
   get "users/profile"
 
-  match "browse/projects" => "pages#index"
+  match "browse/projects" => "pages#index", :as => "browse_projects"
 
    get "projects/save_image"
    post "projects/save_image"
