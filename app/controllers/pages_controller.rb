@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
-  layout "application", :except => [:index, :discover]
+  layout "application", :except => [:index, :discover, :about]
+  layout "landing", :only => [:index, :discover, :about]
   skip_before_filter :set_previous_page
 
   def index
@@ -42,18 +43,6 @@ class PagesController < ApplicationController
 
   def how_it_works
     # session[:previous_page] = request.referer
-  end
-
-  def home
-    render :layout => "landing"
-  end
-
-  def about
-    render :layout => "landing"
-  end
-  
-  def funding_sources
-    render :layout => "landing"
   end
 
 end
