@@ -15,8 +15,8 @@
         .tw-count
           %span
         .bitly-link
-        - if @project.bitly
-          %span= @project.bitly.sub(/http:\/\//, '')
+          - if @project.bitly
+            %span= @project.bitly.sub(/http:\/\//, '')
 
       .span4
         .progress-container
