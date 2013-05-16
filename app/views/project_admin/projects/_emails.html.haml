@@ -4,7 +4,8 @@
     = form_for(@contact, :as => :post, :url => send_email_project_admin_projects_path, html: {remote: true}) do |f|
       %div.pull-left
         = label_tag "EMAIL RECEPIENT", nil, class: "green-font"
-        = select_tag "sponsor_level", options_for_select(@sponsorship_levels.map { |sponsor| [sponsor.name, sponsor.id] }), prompt: "Import based on sponsor level", onchange: "get_emails_based_on_category()", class: "span7"
+        %div.span5
+          = select_tag "sponsor_level", options_for_select(@sponsorship_levels.map { |sponsor| [sponsor.name, sponsor.id] }), prompt: "Import based on sponsor level", onchange: "get_emails_based_on_category()"
         %a.cs_import.btn{style: "margin-left: 6%"} Add Contacts
         %div.textarea-recepient
           %textarea#contact_list{:style => "width:445px;height:24px", :name => "email_recepient"}
