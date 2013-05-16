@@ -37,7 +37,10 @@
         %h6 Sign up for URUUT news
         = form_for Newsletter.new, :remote => true, :html => { :id => "email-sign-up" } do |f|
           %div
-            = f.email_field "email", :placeholder => "enter email address"
+            - if @need_doctype
+              = f.email_field "email", :placeholder => "enter email address", :style => "height: 17px"
+            - else
+              = f.email_field "email", :placeholder => "enter email address"
             %button.btn{:type => "submit"}
               %span
           %div#email-sign-up-error
@@ -49,6 +52,6 @@
       = image_tag 'footer-logo.png'
       &copy;
       = Date.today.strftime('%Y')
-      URUUT. 
+      URUUT.
       %span.italic
         All Rights Reserved.

@@ -54,7 +54,13 @@
     = render 'partials/footer'
 = javascript_include_tag "pages"
 
+/ - unless @project.id.nil?
+/   %script
+/     project_id = #{@project.id};
+/     console.log("Project Id: #{@project.id}");
+
 :javascript
+	
   if(window.opener) {
     window.opener.location.reload(true);
     window.close()
@@ -71,7 +77,10 @@
     e.preventDefault();
     var ahref = $(this).attr('href');
     console.log(ahref);
-    window.open(ahref,'_blank', 'height=500,width=500,location=no,menubar=no');
+    console.log($('#connected').val());
+    if($('#connected').val() !== 'true') {
+      window.open(ahref,'_blank', 'height=500,width=500,location=no,menubar=no');
+    }
   })
 
   var updateCover = function(event){
@@ -144,10 +153,7 @@
     $('form fieldset p a').addClass('btn');
     $('form [id*="edit_project"]').h5Validate();
     $('form [id*="new_project"]').h5Validate();
-    $('#project_state').selectbox();
-    $('#project_duration').selectbox();
-    $('.pages #category').selectbox();
-    $('.pages #location').selectbox();
+    $('select').selectbox();
 
     $('.coverphoto').bind('change', function(event){
       console.log("Hello Close");
