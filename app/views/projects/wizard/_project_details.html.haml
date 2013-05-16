@@ -22,15 +22,16 @@
       %span.italic (must be at least $XXXX)
     = f.text_field :goal, :required => true, :size => 45
 
-    = f.label :duration do
-      CAMPAIGN LENGTH*
-      %span.italic (max 45 days)
-    = f.select :duration, options_for_select(project_length, @project.duration), :required => true, :size => 17
+    %div.inline
+      = f.label :duration do
+        CAMPAIGN LENGTH*
+        %span.italic (max 45 days)
+      = f.select :duration, options_for_select(project_length, @project.duration), :required => true, :size => 17
 		
-    / = f.label :category do
-    /   CATEGORY*
-    /   %span.italic (max 45 days)
-    / = f.select :category, options_for_select(project_category, @project.category), :required => true, :size => 17
+    %div.inline{:style => "margin-left:20px;"}
+      = f.label :category do
+        CATEGORY*
+      = f.select :category, options_for_select(project_categories, @project.category), :required => true, :size => 17
 
     = f.label :title do
       CAMPAIGN HEADLINE*
