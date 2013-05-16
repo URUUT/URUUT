@@ -111,8 +111,12 @@ end
 def stripe_update
   code = params[:code]
   client = OAuth2::Client.new(ENV['STRIPE_CLIENT_ID'], ENV['STRIPE_KEY'], :site => "https://connect.stripe.com/oauth/authorize")
+  logger.debug(client.to_yaml)
   token = client.auth_code.get_token(code, :headers => {'Authorization' => "Bearer #{ENV['STRIPE_KEY']}"})
+  logger.debug(token.params['stripe_publishable_key'])
+  
   project = Project.find(session[:current_project])
+  project.publishable_key = token.params['stripe_publishable_key']
   project.project_token = token.token
   project.save!
 
@@ -183,7 +187,7 @@ def delete_perk
 end
 
 def submit_project
-  logger.debug(params[:id])
+  logger.debug("ID was: #{params[:id]}")
   project = Project.find_by_id(params[:id])
   project.ready_for_approval = 1
   if project.save!

@@ -51,10 +51,20 @@ stopJoyride = ->
   $('#uruutTour').joyride('destroy')
 
 $ ->
+
+  if $('#connected').val() == ""
+    localStorage.clear()
+		
   $('#stepDesc1').click ->
     console.log "clicked"
     $('#step0').hide()
     $('#step1').show()	
+		
+  if $('#connected').val() == "true"
+    $(".stripe-connect img").attr('src', "/assets/stripe-connected.png")
+    $(".stripe-connect").attr('href', '')
+    $(".stripe-connect").click (e) ->
+      e.preventDefault()
   
   #
   # Saving form values in local storage when connecting to stripe to deal with
@@ -70,6 +80,9 @@ $ ->
     localStorage.setItem('website', $('#project_website').val())
     localStorage.setItem('twitter_handle', $('#project_twitter_handle').val())
     localStorage.setItem('facebook_page', $('#project_facebook_page').val())
+    localStorage.setItem('org_type', $('#project_organization_type').val())
+    localStorage.setItem('org_class', $('#project_organization_classification').val())
+    localStorage.setItem('project_id', project_id)
 
   if localStorage.getItem('organization') != 'undefined'
     console.log localStorage.getItem('organization')
@@ -95,6 +108,12 @@ $ ->
 
   if localStorage.getItem('facebook_page') != 'undefined'
     $('#project_facebook_page').val(localStorage.getItem('facebook_page'))
+		
+  if localStorage.getItem('org_type') != 'undefined'
+    $('#project_organization_type').val(localStorage.getItem('org_type'))
+		
+  if localStorage.getItem('org_class') != 'undefined'
+    $('#project_organization_classification').val(localStorage.getItem('org_class'))
 
   #
   # Add another perk for sponsors
