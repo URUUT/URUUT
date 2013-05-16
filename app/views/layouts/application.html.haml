@@ -60,7 +60,7 @@
 /     console.log("Project Id: #{@project.id}");
 
 :javascript
-	
+
   if(window.opener) {
     window.opener.location.reload(true);
     window.close()
@@ -111,7 +111,7 @@
         }
     }).done(function(){
       console.log("finished");
-      $('.planting-seed-image').remove();
+      $('.seed-image-priview').remove();
       $('#planting_seeds').prepend('<div class="seed-image"><img src="' + plantingSeedImage + '"</div>');
     });
   }
@@ -127,9 +127,7 @@
         cultivation_image: cultivationImage
         }
     }).done(function(){
-      console.log("finished");
-      $('.cultivation-image').remove();
-      $('#cultivation .details').prepend('<div class="cultivation-image"><img src="' + cultivationImage + '"</div>');
+      $('.cultivation-image-priview').html('<img src="' + cultivationImage + '" />');
     });
   }
 

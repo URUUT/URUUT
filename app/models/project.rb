@@ -3,8 +3,8 @@ class Project < ActiveRecord::Base
 
   attr_accessible :category, :description, :duration, :goal, :address, :project_title,
     :city, :state, :zip, :neighborhood, :title, :image, :video, :tags, :live, :short_description,
-    :perks_attributes, :galleries_attributes, :status, :organization, :website, :twitter_handle, :facebook_page,
-    :story, :about, :large_image, :seed_image, :cultivation_image, :ready_for_approval, :organization_type, :organization_classification
+    :perks_attributes, :galleries_attributes, :status, :organization, :website, :twitter_handle, :facebook_page, :seed_video,
+    :story, :about, :large_image, :seed_image, :cultivation_image, :ready_for_approval, :organization_type, :organization_classification, :cultivation_video
 
   attr_accessor :sponsorship_permisson
 
