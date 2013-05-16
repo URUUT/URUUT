@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   layout "application", :except => [:index, :discover, :about]
-  layout "landing", :only => [:index, :discover, :about]
+  layout "landing", :only => [:index, :discover, :about, :home]
   skip_before_filter :set_previous_page
 
   def index
