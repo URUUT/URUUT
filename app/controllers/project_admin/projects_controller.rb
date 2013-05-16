@@ -75,5 +75,4 @@ class ProjectAdmin::ProjectsController < ApplicationController
     @sponsor_count = sponsors.nil? ? 0 : sponsors.count
   end
 
-
 end
