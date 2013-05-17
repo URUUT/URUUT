@@ -11,13 +11,13 @@
         / = image_tag "tw-count.png", :class => "tw-share", :style => "margin-right:20px;"
         / = image_tag "bitly-link.png", :style => "margin-right:20px;"
         .fb-count
-          %span 
+          %span
         .tw-count
           %span
         .bitly-link
           - if @project.bitly
             %span= @project.bitly.sub(/http:\/\//, '')
-						
+
         %p= link_to "Contact Project Creator", "mailto:#{User.find(@project.user_id).email}"
 
       .span4
@@ -83,19 +83,19 @@
               - value.sort.each do |project_sponsor|
                 -if project_sponsor.level_id.eql? 1
                   .span4.margin-auto.float-none
-                    = image_tag(project_sponsor.logo_url, class: "img-polaroid", style: "width:200px;height:170px;")
+                    //= image_tag(project_sponsor.logo_url, class: "img-polaroid", style: "width:200px;height:170px;")
                     %br/
                     %h5.green-font{style: "text-align: center;"}= project_sponsor.name
                 -elsif project_sponsor.level_id.eql? 2
                   .span4{style: "margin-left:0;"}
                     .span9.float-none.margin-auto
-                      = image_tag(project_sponsor.logo_url, class: "img-polaroid", style: "width:150px;height:120px;")
+                      //= image_tag(project_sponsor.logo_url, class: "img-polaroid", style: "width:150px;height:120px;")
                     %br/
                     %h5.green-font{style: "text-align: center;"}= project_sponsor.name
                 -elsif project_sponsor.level_id.eql? 3
                   .span2.margin-auto{style: "width: 19.5%;"}
                     .span9.margin-auto.float-none
-                      = image_tag(project_sponsor.logo_url, class: "img-polaroid", style: "width:100px;height:80px;")
+                      //= image_tag(project_sponsor.logo_url, class: "img-polaroid", style: "width:100px;height:80px;")
                     %br/
                     %p.green-font.normal-font.text-center= project_sponsor.name.upcase
 
@@ -211,7 +211,7 @@
     }).done(function(data) {
       console.log(data.data[0].like_count);
       $('.fb-count span').text(data.data[0].like_count);
-    }); 
+    });
   }
 
   var getTwCount = function() {
@@ -275,7 +275,7 @@
       $(this).parent('li').addClass('active');
       $(show).show();
     });
-		
+
     $('.fb-count').click(function() {
       console.log("#{root_url}projects/#{@project.id}")
       var publish = {
@@ -294,7 +294,7 @@
         ],
         user_message_prompt: 'Share your thoughts about RELL'
       };
-      
+
       function callback(response) {
         if (response && response.post_id) {
           console.log('Post was published.');
@@ -302,10 +302,10 @@
           console.log('Post was not published.');
         }
       }
-      
+
       FB.ui(publish, callback);
     });
-		
+
     $('.tw-count').click(function(e) {
       e.preventDefault();
       var width  = 575,
@@ -321,5 +321,5 @@
 
       window.open(url, 'twitter', opts);
     })
-		
+
   });

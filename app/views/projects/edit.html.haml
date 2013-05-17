@@ -611,7 +611,7 @@
           %hr
 
           #cultivation
-            .span3.ending
+            .span2.ending
               %h4.title
                 CULTIVATION
                 %br
@@ -624,7 +624,7 @@
                 %h6{:style => "text-align:center;color:#55554d !important;font-family:'Proxima Nova';margin-top:40px;margin-bottom:0;"} Project Goal
                 %h2{:style => "text-align:center;color:#b6b6b4;font-family:'Proxima Nova Semi';margin-top:0;"}= number_to_currency(@project.goal, :precision => 0)
 
-            .span9.details
+            .span5.details
               - if @project.cultivation_image
                 = image_tag "#{@project.cultivation_image}"
               - else
