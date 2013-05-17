@@ -24,12 +24,12 @@
       %div
         = f.label :email
         = f.email_field :email
-      .row{:style => "margin-left:0px;"}
-        .span6
+      .row
+        .span5
           %div
             = f.label :password
             = f.password_field :password, :autocomplete => "off", :class => "input-mini"
-        .span6
+        .span5
           %div
             = f.label :password_confirmation, "Re-type password"
             = f.password_field :password_confirmation

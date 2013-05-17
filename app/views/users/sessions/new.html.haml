@@ -19,7 +19,11 @@
       = button_tag(type: 'submit', class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:left;") do
         Sign In
         = image_tag('arrow.png')
+    %div
+      - if devise_mapping.recoverable? && controller_name != 'passwords'
+        = link_to "Forgot your password?", new_password_path(resource_name)
 
-  = render "devise/shared/links"
+
+  / = render "devise/shared/links"
 
 = render "social-login"
