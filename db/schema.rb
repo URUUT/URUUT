@@ -11,7 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130507145855) do
+ActiveRecord::Schema.define(:version => 20130518160859) do
+
+  create_table "badges", :force => true do |t|
+    t.string "name"
+    t.string "description"
+    t.string "icon"
+  end
+
+  add_index "badges", ["name"], :name => "index_badges_on_name"
+
+  create_table "badgings", :force => true do |t|
+    t.boolean  "seen",         :default => false
+    t.integer  "badge_id"
+    t.integer  "subject_id"
+    t.string   "subject_type"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+  end
+
+  add_index "badgings", ["seen"], :name => "index_badgings_on_seen"
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
