@@ -76,5 +76,6 @@ gem 'activemerchant', :require => 'active_merchant'
 gem 'simple_form'
 gem 'wicked'
 gem 'validates_email_format_of'
+gem 'badgeable_active_record'
 #gem 'jquery-fileupload-rails'
 #gem 'whenever', require: false
