@@ -21,6 +21,10 @@ module Merit
     include Merit::BadgeRulesMethods
 
     def initialize
+
+      grant_on ["donations#create", "donations#update"], :badge => "Project donation" do |donation|
+        donation.customer_token.present?
+      end
       # If it creates user, grant badge
       # Should be "current_user" after registration for badge to be granted.
       # grant_on 'users#create', :badge => 'just-registered', :to => :itself
