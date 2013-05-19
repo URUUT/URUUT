@@ -4,3 +4,7 @@ $ ->
       You may still receive one-time emails based on your use of the site, such as confirmations for your contributions."
     placement: "top"
     trigger: "hover"
+
+  $('.badge-wrapper .profile-badge').popover
+    placement: "top"
+    trigger: "hover"
