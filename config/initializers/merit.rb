@@ -15,15 +15,21 @@ end
 
 Merit::Badge.create!({
   :id => 1,
-  :name => "Project creation",
-  :description => "d"
+  :name => "Sign-up badge",
+  :custom_fields => { :image => "http://placehold.it/100x100" }
+})
+Merit::Badge.create!({
+  :id => 2,
+  :name => "Project creation badge",
+  :custom_fields => { :image => "http://placehold.it/100x100" }
 })
 
 Merit::Badge.create!({
-  :id => 2,
-  :name => "Project donation",
-  :description => "dd"
+  :id => 3,
+  :name => "Project donation badge",
+  :custom_fields => { :image => "http://placehold.it/100x100" }
 })
+
 # Create application badges (uses https://github.com/norman/ambry)
 # Merit::Badge.create!({
 #   id: 1,
