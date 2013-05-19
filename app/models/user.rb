@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   after_create :send_welcome_email
+  after_create :assign_default_badge
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -129,6 +130,10 @@ class User < ActiveRecord::Base
 
   def send_welcome_email
     WelcomeMailer.welcome_confirmation(self).deliver
+  end
+
+  def assign_default_badge
+    self.add_badge(1)
   end
 
   # def minimum_image_size

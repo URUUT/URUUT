@@ -22,6 +22,7 @@ module Merit
 
     def initialize
 
+      grant_on "projects#create", :badge => "Project creation"
       grant_on ["donations#create", "donations#update"], :badge => "Project donation" do |donation|
         donation.customer_token.present?
       end
