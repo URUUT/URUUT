@@ -9,7 +9,9 @@
     %meta{:content => "", :name => "description"}
     %meta{:content => "", :name => "author"}
     = stylesheet_link_tag  "default/application", "trontastic/jquery-ui-1.8.22.custom.css", "http://cdn.leafletjs.com/leaflet-0.5/leaflet.css", "http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css", :media => "all"
+    = stylesheet_link_tag "image_select/jquery.Jcrop.min"
     = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js", "application", "https://js.stripe.com/v1/", :media => "all"
+    = javascript_include_tag "jquery.Jcrop.min"
     = filepicker_js_include_tag
     = javascript_tag do
       Stripe.setPublishableKey("#{STRIPE_PUBLIC_KEY}");
@@ -95,9 +97,42 @@
         }
     }).done(function(){
       console.log("finished");
-      $('#large_image').css('background-image','url(' + largeImage + ')').css('-webkit-background-size', 'cover').css('-moz-background-size', 'cover').css('background-size', 'cover');
+      $("body").animate({ scrollTop: 0 }, "slow");
+      $('<img />').attr('src', largeImage).load(function() {
+        $('#large_image').css('background-image','url(' + largeImage + ')').css('-webkit-background-size', '100% 100%').css('-moz-background-size', '100% 100%').css('background-size', '100% 100%');
+        var img = new Image;
+        img.src = $('#large_image').css('background-image').replace(/url\(|\)$/ig, "");
+        console.log(img.width);
+        if ( img.width >= 1600 )
+        {
+          $(".coverphoto").hide();
+          $("#url_image").val(largeImage);
+          $("#image-priview").append('<img id="cover-priview" src="' + largeImage + '"/>');
+
+          $('#cover-priview').Jcrop({
+            aspectRatio: 1,
+            onChange: showCoords,
+            onSelect: showCoords,
+            allowSelect: false,
+            },function(){
+              jcrop_api = this;
+              jcrop_api.setSelect([362,0,904,542]);
+          });
+
+          $(".action-convert").show();
+        }
+      });
     });
   }
+
+  var showCoords = function showCoords(c)
+    {
+      console.log(c);
+      $("#y_position").val(c.y);
+      $('#x_position').val(c.x);
+      $('#width_after').val(c.w);
+      $("#height_after").val(c.h);
+    };
 
   var updatePlantingSeedImage = function(event) {
     console.log(event.fpfile.url);
