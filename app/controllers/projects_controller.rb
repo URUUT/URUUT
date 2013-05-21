@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
   require "net/http"
   require "uri"
 
-  before_filter :authenticate_user!, :only => [:index, :new, :create, :edit, :update]
+  before_filter :authenticate_user!, :only => [:index, :create, :edit, :update]
 
   layout false, :only => "stripe_update"
 
