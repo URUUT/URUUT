@@ -10,23 +10,29 @@ body {
 /* Default styles for the container */
 .joyride-tip-guide {
   position: absolute;
-  background: #000;
-  background: rgba(0,0,0,0.8);
+  background: #fff;
+  box-shadow:0 0 4px rgba(0,0,0,0.5);
   display: none;
-  color: #fff;
-  width: 300px;
+  color: #403e37;
+  width: 400px;
   z-index: 101;
   top: 0; /* keeps the page from scrolling when calculating position */
   left: 0;
   font-family: "HelveticaNeue", "Helvetica Neue", "Helvetica", Helvetica, Arial, Lucida, sans-serif;
   font-weight: normal;
-     -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-          border-radius: 4px;
+     -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+          border-radius: 2px;
 }
 
 .joyride-content-wrapper {
-  padding: 10px 10px 15px 15px;
+  font:normal 12px/19px 'Proxima Nova';
+  padding: 25px 10px 25px 15px;
+}
+
+.joyride-content-wrapper h5 {
+	color:#70bf4c !important;
+	margin-bottom:10px !important;
 }
 
 /* Mobile */
@@ -63,8 +69,7 @@ body {
   border-bottom-color so here we set the border-color
   and override the top,left,right colors below.
   */
-  border-color: #000;
-  border-color: rgba(0,0,0,0.8);
+  border-color: #fff;
   border-top-color: transparent !important;
   border-left-color: transparent !important;
   border-right-color: transparent !important;
@@ -80,8 +85,7 @@ body {
   border-top-color so here we set the border-color
   and override the bottom,left,right colors below.
   */
-  border-color: #000;
-  border-color: rgba(0,0,0,0.8) !important;
+  border-color: #fff;
   border-bottom-color: transparent !important;
   border-left-color: transparent !important;
   border-right-color: transparent !important;
@@ -90,8 +94,7 @@ body {
 }
 
 .joyride-tip-guide span.joyride-nub.right {
-  border-color: #000;
-  border-color: rgba(0,0,0,0.8) !important;
+  border-color: #fff;
   border-top-color: transparent !important;
   border-right-color: transparent !important;
   border-bottom-color: transparent !important;
@@ -102,8 +105,7 @@ body {
 }
 
 .joyride-tip-guide span.joyride-nub.left {
-  border-color: #000;
-  border-color: rgba(0,0,0,0.8) !important;
+  border-color: #fff;
   border-top-color: transparent !important;
   border-left-color: transparent !important;
   border-bottom-color: transparent !important;
@@ -114,8 +116,7 @@ body {
 }
 
 .joyride-tip-guide span.joyride-nub.top-right {
-  border-color: #000;
-  border-color: rgba(0,0,0,0.8);
+  border-color: #fff;
   border-top-color: transparent !important;
   border-left-color: transparent !important;
   border-right-color: transparent !important;
@@ -155,7 +156,7 @@ body {
 
 /* Button Style */
 .joyride-tip-guide .joyride-next-tip {
-  width: auto;
+/*  width: auto;
   padding: 6px 18px 4px;
   font-size: 13px;
   text-decoration: none;
@@ -175,7 +176,34 @@ body {
           border-radius: 2px;
   -webkit-box-shadow: 0px 1px 0px rgba(255,255,255,0.3) inset;
      -moz-box-shadow: 0px 1px 0px rgba(255,255,255,0.3) inset;
-          box-shadow: 0px 1px 0px rgba(255,255,255,0.3) inset;
+          box-shadow: 0px 1px 0px rgba(255,255,255,0.3) inset;*/
+	background:none;
+	background:#3f403b;
+	border:none;
+	border-radius:0;
+	box-shadow:none;
+	color:#fff;
+	font:normal 13px/13px "Proxima Nova", arial, sans-serif;
+	letter-spacing:2px;
+	padding:10px 25px;
+	position:relative;
+	text-shadow:none;
+	text-transform:uppercase;
+}
+
+.joyride-quit {
+	background:none;
+	background:#3f403b;
+	border:none !important;
+	border-radius:0;
+	box-shadow:none;
+	color:#fff;
+	font:normal 13px/13px "Proxima Nova", arial, sans-serif;
+	letter-spacing:2px;
+	padding:10px 25px;
+	position:relative;
+	text-shadow:none;
+	text-transform:uppercase;
 }
 
 .joyride-next-tip:hover {

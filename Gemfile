@@ -31,12 +31,12 @@ group :assets do
 end
 
 group :production do
-  gem 'mysql2', '~> 0.3.11'
+  gem 'pg'
   gem 'sass-rails',   '~> 3.2.3'
 end
 
 group :staging do
-  gem 'mysql2', '~> 0.3.11'
+  gem 'pg'
   gem 'erb2haml'
   gem 'rb-fsevent', '~> 0.9.1'
   gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git'
@@ -46,7 +46,7 @@ group :staging do
 end
 
 group :development, :test do
-  gem 'mysql2', '~> 0.3.11'
+  gem 'pg'
   gem 'erb2haml'
   gem 'rb-fsevent', '~> 0.9.1'
   gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git'
