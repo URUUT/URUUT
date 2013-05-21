@@ -16,4 +16,8 @@ module SponsorsHelper
     sponsorship_levels_active.flatten
   end
 
+  def default_result(sponsorship_level, selected_level=nil)
+    selected_level ? @selected_level : @sponsorship_levels.first
+  end
+
 end
