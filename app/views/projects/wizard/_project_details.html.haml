@@ -27,7 +27,7 @@
         CAMPAIGN LENGTH*
         %span.italic (max 45 days)
       = f.select :duration, options_for_select(project_length, @project.duration), :required => true, :size => 17
-		
+
     %div.inline{:style => "margin-left:20px;"}
       = f.label :category do
         CATEGORY*
