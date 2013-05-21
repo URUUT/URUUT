@@ -40,7 +40,7 @@
       .span12{:style => "background-color: #f5f5f5; margin-left: 0px;"}
         .pull-left{:style => "width: 250px; height: 500px; border-right: solid 1px #d3d3d3;"}
           %h4 SPONSORSHIP COST
-          %h1.cost-level.green-font #{number_to_currency(@sponsorship_levels.first.cost, precision: 0)}
+          %h1.cost-level.green-font #{number_to_currency(default_result(@sponsorship_levels.first, @selected_level).cost, precision: 0)}
         .pull-right{:style => "width: 320px;"}
           = label_tag :project_sponsor_name do
             CHOOSE YOUR SPONSORSHIP LEVEL
@@ -49,8 +49,8 @@
           %br/
           %h5 SPONSORSHIP DETAILS
           .sponsorship-level-details
-            %h3.green-font #{@sponsorship_levels.first.name.upcase} sponsor
-            - @sponsorship_levels.first.sponsorship_benefits.each do |benefit|
+            %h3.green-font #{default_result(@sponsorship_levels.first, @selected_level).name.upcase} sponsor
+            - default_result(@sponsorship_levels.first, @selected_level).sponsorship_benefits.each do |benefit|
               %p.normal-font - #{benefit.name}
       %h4 SPONSOR INFORMATION
       %div
@@ -71,6 +71,25 @@
           %span.italic (max 45 days)
         = f.select :payment_type, options_for_select(Sponsor::PAYMENT), :id => "payment_type", required: true, :size => 17
       %div#credit-card{:style => "float: left;"}
+<<<<<<< HEAD
+        %div
+          = f.label :card_name, "NAME AS IT APPERS ON CARD*", class: "green-font"
+          = text_field_tag :card_name,nil , :size => 40, required: true, label: false, class: "card-input"
+        %div{:style => "float: left;"}
+          = f.label :card_number, "CARD NUMBER*", class: "green-font"
+          = text_field_tag :card_number,nil , :size => 40, required: true, label: false, class: "card-input", :"data-stripe" => "number"
+        %div{:style => "float: left; margin-right: 60px;"}
+          = f.label :cvc, "CVC*", class: "green-font"
+          = text_field_tag :cvc,nil, :size => 5, required: true, label: false, class: "card-input", :"data-stripe" => "cvc"
+        %div{:style => "float: left; width: 340px;"}
+          = f.label :card_expiration, "CARD EXPIRATION (MM/YYYY)*", class: "green-font"
+          = text_field_tag :month,nil, :style => "float: left; margin-right: 15px;", size: "4", required: true, label: false, class: "card-input", :"data-stripe" => "exp-month"
+          = text_field_tag :year_card,nil, :style => "float: left;", size: "4", required: true, label: false, class: "card-input", :"data-stripe" => "exp-year"
+          = link_to "https://connect.stripe.com/oauth/authorize?response_type=code&client_id=#{ENV['STRIPE_CLIENT_ID']}", :target => "_blank", :class => "stripe-connect" do
+            %span Connect with Stripe
+
+          %input{:type => 'hidden', :value => "#{@connected}", :id => "connected", :required => true}
+=======
         = hidden_field_tag :token
         = hidden_field_tag 'project_sponsor[card_type]'
         = hidden_field_tag 'project_sponsor[card_last4]'
@@ -97,6 +116,7 @@
         #stripe_error
           %noscript JavaScript is not enabled and is required for this form. First enable it in your web browser settings.
       
+>>>>>>> e79a49775fd62fed453dd38a999865ec678594a7
       %div#wire-transfer{:style => "display: none; float: left;"}
         %div
           = f.label :name, "CONTACT NAME*", class: "green-font"
@@ -113,13 +133,69 @@
 
 .project-id{:style => "display: none;"}
   = @project.id
+  #selected_level{level_id: (@selected_level.id if @selected_level)}
 
 = javascript_include_tag "sponsors"
 :javascript
+<<<<<<< HEAD
+  $(document).ready(function(){
+    var selectedLevel = parseInt($('#selected_level').attr("level_id"));
+    $("#project_sponsor_level_id option[value='"+ selectedLevel +"']").attr("selected", "selected");
+    Stripe.setPublishableKey('pk_test_BTNPlS59UIPJC5Fnp7CR9It6');
+    $(function($) {
+      $('#new_sponsor').submit(function(event) {
+        var $form = $(this);
+
+        Stripe.createToken($form, stripeResponseHandler);
+        return false;
+      });
+    });
+    var stripeResponseHandler = function(status, response) {
+      var $form = $('#new_sponsor');
+
+      if (response.error) {
+        $form.find('.payment-errors').text(response.error.message);
+        $form.find('button').prop('disabled', false);
+      } else {
+        var token = response.id;
+        $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+        $form.get(0).submit();
+      }
+    };
+
+    $('#new_sponsor').on('submit', function(e){
+     if($('#connected').val() == 'true') {
+      e.preventDefault();
+      var data = $(this).serialize();
+      $.ajax({
+        type: 'POST',
+        url: '#{project_path(@project.id)}',
+        data: data,
+        beforeSend: function (xhr) {
+          $form.find('button').prop('disabled', true),
+          $form.find('button').attr("style", "padding-left: 50px;")
+          $("#submit-progress").show();
+          $('input.card-input').payment('formatCardNumber');
+        }
+      }).done(function(data){
+        console.log("Success???");
+        console.log(data);
+        window.location.href = '/projects/' + data + '/sponsors/new';
+        window.location.reload(true);
+        localStorage.clear();
+      })
+     }else{
+       alert("Connect with Stripe, please.");
+       return false;
+     }
+    })
+
+=======
   project_token = "#{@project.project_token}"
   project_pub_key = "#{@project.publishable_key}"
   $(function(){
 	
+>>>>>>> e79a49775fd62fed453dd38a999865ec678594a7
     $("#sponsor_payment_type").change(function(){
       if(this.value == "Credit Card"){
         $("#wire-transfer").hide();

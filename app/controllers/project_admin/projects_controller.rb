@@ -9,7 +9,7 @@ class ProjectAdmin::ProjectsController < ApplicationController
   def index
     @projects = Project.find(params[:id])
   end
-  
+
   def show
     @project = Project.find(params[:id])
     subheader
@@ -76,4 +76,3 @@ class ProjectAdmin::ProjectsController < ApplicationController
   end
 
 end
-

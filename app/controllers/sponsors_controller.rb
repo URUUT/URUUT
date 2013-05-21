@@ -35,7 +35,7 @@ class SponsorsController < ApplicationController
     cost = SponsorshipLevel.find(params[:project_sponsor][:level_id]).cost
     params[:sponsor][:name] = sponsor_name
     token = params[:token]
-    
+
     logger.debug(sponsor)
     logger.debug(sponsor_name)
     logger.debug(cost)
@@ -49,9 +49,9 @@ class SponsorsController < ApplicationController
     #logger.debug(@project_sponsor)
     @project_sponsor.update_attributes({cost: cost, project_id: params[:project_id], sponsor_id: @sponsor.id,
                                       level_id: params[:project_sponsor][:level_id], card_token: token})
-    
+
     session[:project_sponsor] = @project_sponsor
-    
+
     logger.debug("Project Sponsors: #{session[:project_sponsor].to_yaml}")
 
     # charge = Stripe::Charge.create({:amount => cost, :currency => "usd", :card => params[:stripeToken]});
