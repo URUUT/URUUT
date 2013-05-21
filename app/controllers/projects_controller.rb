@@ -114,7 +114,7 @@ def stripe_update
   logger.debug(client.to_yaml)
   token = client.auth_code.get_token(code, :headers => {'Authorization' => "Bearer #{ENV['STRIPE_KEY']}"})
   logger.debug(token.params['stripe_publishable_key'])
-  
+
   project = Project.find(session[:current_project])
   project.publishable_key = token.params['stripe_publishable_key']
   project.project_token = token.token
@@ -127,6 +127,18 @@ def stripe_update
     session[:connected] = ""
   end
   redirect_to "/projects/#{project.id}/edit#sponsor-info"
+end
+
+def save_video
+  @project = Project.find_by_id(session[:current_project])
+  if params[:video_type].eql?("seed")
+    @project.seed_video = params[:video_link]
+  else
+    @project.cultivation_video = params[:video_link]
+  end
+
+  @project.save
+  respond_to :js
 end
 
 def save_image
