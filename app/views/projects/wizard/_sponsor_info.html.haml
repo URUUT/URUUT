@@ -61,7 +61,7 @@
         = image_tag "stripe-connect.png"
         
 
-      %input{:type => 'hidden', :value => "#{@connected}", :id => "connected"}
+      %input{:type => 'hidden', :value => "#{@connected}", :id => "connected", :required => true}
 
         %div
           = f.submit "Save And Continue", :class => "btn", :id => "project-submit"
