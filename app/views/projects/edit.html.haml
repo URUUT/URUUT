@@ -46,7 +46,7 @@
 = render "projects/wizard/perks", :project => @project
 = render "projects/wizard/sponsorship", :project => @project
 = render "projects/wizard/assets", :project => @project
-					
+
 /* Each tip is set within this <ol>. */
 /* This creates the order the tips are displayed */
 %ol{:id => "uruutTour"}
@@ -67,7 +67,107 @@
 %script{:src => "http://maps.stamen.com/js/tile.stamen.js?v1.2.1"}
 = javascript_include_tag "projects"
 :javascript
-  
+
+  $(".seed-form").on("click", function(){
+    $("#video_type").val("seed");
+    $(".title-form-video").text("Add youtube video for seed video");
+    $("#save-video").modal("show");
+  });
+
+  $(".cultivation-form").on("click", function(){
+    $("#video_type").val("cultivation");
+    $(".title-form-video").text("Add youtube video for cultivation video");
+    $("#save-video").modal("show");
+  });
+
+  var changeProjectPermission = function(){
+    if ( $("#project_sponsorship_permisson").val() == "no" ){
+      $(".sponsorship-true").hide();
+      $(".sponsorship-false").show();
+    }
+    else{
+      $(".sponsorship-false").hide();
+      $(".sponsorship-true").show();
+    }
+  };
+
+  $(document).ready(function() {
+    addNewBenefit();
+    editBenefit();
+    addAnotherNewBenefit();
+    removeAnotherBenefit();
+  });
+
+  var editBenefit = function() {
+    $(".edit-benefit").bind("click", function() {
+      var nameBenefits = $(this).parent().children("#name");
+      var fieldBenefits = $(this).parent().children(".edit-text-field");
+      console.log(c = this)
+      if($(this).text() == "select to edit"){
+        nameBenefits.hide();
+        fieldBenefits.show();
+        fieldBenefits.attr("style", "margin-top:-25px; width: 320px !important;");
+        $(this).text("save");
+        $(this).addClass("btn");
+        $(this).attr("style", "position: relative; top: 70px !important; margin-left: 5px");
+        $(this).removeClass("green-font");
+      }else{
+        nameBenefits.text($(this).parent().find(".edit-text-field").val());
+        nameBenefits.show();
+        fieldBenefits.hide();
+        $(this).removeClass("btn");
+        $(this).removeAttr("style", "position: relative; top: 70px !important; margin-left: 5px");
+        $(this).addClass("edit-benefit italic green-font");
+        $(this).text("select to edit")
+      }
+    });
+  }
+
+  var addAnotherNewBenefit = function(){
+    $(".add-another").bind("click", function(e) {
+      var divCore = $(this).parent().children("#custom-checkbox");
+      var checkFieldP = $(this).parent().children("#existing-checkbox").children(".checkbox").last().children().first();
+      var checkboxName = checkFieldP.attr("id").split("_")[0];
+      var checkboxVal = checkFieldP.attr("id").split("_")[1];
+      var countCheckbox = parseInt(checkboxVal) + 1;
+
+      $("#"+ checkboxName +"-count").val(countCheckbox);
+      $("<div class='checkbox default'><input id='"+ checkboxName + "_" + countCheckbox + "' type='checkbox' value='1' name='"+ checkboxName +"["+ countCheckbox +"]''><input id='"+ checkboxName + "_info_"+ countCheckbox +"' class='"+checkboxName+"_benefits add_benefits' type='text' style='margin-top: -33px; width: 80% !important;' placeholder='Create your costum benefit here...' name='"+ checkboxName + "[info_"+countCheckbox+"]'><span class='save_new_benefit pull-right btn' style='margin-top:-79px; left:-20px'>Save</span><span class='remove-another pull-right btn' style='margin-top:-51px;'>Remove</span></div>").appendTo(divCore);
+      countCheckbox++;
+      addNewBenefit();
+      removeAnotherBenefit();
+      return false;
+    });
+  }
+
+  var removeAnotherBenefit = function(){
+    $(".remove-another").bind("click", function(){
+      $(this).parent().remove();
+    })
+  }
+
+  var addNewBenefit = function(){
+    $(".save_new_benefit").bind("click", function(){
+      var divCore = $(this).parent().parent().parent().children("#existing-checkbox");
+      var benefits = divCore.children().children("input").last();
+      var benefitsValue = $(this).parent().children(".add_benefits").val();
+      var boxName = benefits.attr("id").split("_")[0];
+      var boxValue = benefits.attr("id").split("_")[2];
+      var boxLength = parseInt(boxValue) + 1;
+
+      if(benefitsValue){
+        $("<div class='checkbox default'><input id='"+boxName+"_"+boxLength+"' type='checkbox' name='"+boxName+"["+boxLength+"]' checked='checked'><span id='name'>"+benefitsValue+"</span><span class='edit-benefit italic green-font'>select to edit</span><input id='"+ boxName +"_info_"+ boxLength+"' class='edit-text-field' type='text' value='"+benefitsValue+"' style='width: 320px !important; display: none;' name='"+boxName+"[info_"+boxLength+"]'></div>").appendTo(divCore);
+        boxLength++;
+        $(this).parent().remove();
+        editBenefit();
+        return false;
+      }else{
+        alert("sorry you can't add new benefits because the field is blank!");
+      }
+    });
+  }
+
+
   getPerkProjectUrl = "#{get_perk_projects_url}";
   submitUrl = "#{projects_submit_project_url}";
   projectId = #{@project.id};
