@@ -3,31 +3,32 @@
 #fb-root
 :javascript
 
-  filepicker.setKey('ArmO0TLVTkyCaJkQmBNfqz'); // hardcode because js from flipicker can't called, please set your own
+  / filepicker.setKey('ArmO0TLVTkyCaJkQmBNfqz'); // hardcode because js from flipicker can't called, please set your own
+
 
 .full-width.banner
   .container
     .span3
-      %h4.white-text= @project.title
+      %h3= @project.title
       %h5 #{@project.city}, #{@project.state}
-
+    
     .span3
       %h6 Current Amount Funded
       %h2= number_to_currency(amount_funded(@project.id), :precision => 0)
       of #{number_to_currency(@project.goal, :precision => 0)}
 
     .span2
-      %h6.white-text Project Sponsors
+      %h5 Project Sponsors
       %h2= @sponsor_count
-
+			
     .span2
-      %h6.white-text Individual Contributions
+      %h5 Individual Contributions
       %h2= @donations.count
-
+	
     .span2
-      %h6.white-text Days Remaining
-      / %h2 #{time_left(@project.duration, @project.approval_date)}
-
+      %h5 Days Remaining
+      %h2 #{time_left(@project.duration, @project.approval_date)}
+			
 .cf
 
 .menu-project
