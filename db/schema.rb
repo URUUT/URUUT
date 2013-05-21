@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130515055010) do
+ActiveRecord::Schema.define(:version => 20130517061657) do
 
   create_table "contacts", :force => true do |t|
     t.string   "email"
@@ -82,11 +82,9 @@ ActiveRecord::Schema.define(:version => 20130515055010) do
     t.string  "name"
     t.integer "project_id"
     t.integer "sponsor_id"
-    t.string  "payment",                  :default => "Unpaid"
-    t.string  "status",                   :default => "Unconfirmed"
+    t.string  "payment",    :default => "Unpaid"
+    t.string  "status",     :default => "Unconfirmed"
     t.integer "level_id"
-    t.string  "card_type",  :limit => 20
-    t.string  "card_last4", :limit => 20
   end
 
   create_table "projects", :force => true do |t|
@@ -137,11 +135,15 @@ ActiveRecord::Schema.define(:version => 20130515055010) do
   end
 
   create_table "sponsors", :force => true do |t|
-    t.string "payment_type"
-    t.string "name"
-    t.string "email"
-    t.string "phone"
-    t.string "token"
+    t.string  "payment_type"
+    t.string  "name"
+    t.string  "card_number"
+    t.string  "cvc"
+    t.string  "email"
+    t.string  "phone"
+    t.integer "month"
+    t.integer "year_card"
+    t.string  "token"
   end
 
   create_table "sponsorship_benefits", :force => true do |t|
@@ -174,7 +176,7 @@ ActiveRecord::Schema.define(:version => 20130515055010) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.string   "name"
+    t.string   "first_name"
     t.string   "website"
     t.string   "city"
     t.string   "state"
@@ -190,6 +192,7 @@ ActiveRecord::Schema.define(:version => 20130515055010) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "confirmation_token"
+    t.string   "last_name"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

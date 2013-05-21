@@ -18,7 +18,8 @@
     %li.signed-in.dropdown
       %a.dropdown-toggle{'data-toggle' => 'dropdown'}
         = image_tag "#{current_user.avatar}", :class => "img-circle avatar-thumb"
-        = current_user.name
+        = current_user.first_name
+        = current_user.last_name
         = image_tag 'down-arrow.png'
       %div.dropdown-menu
         %ul
