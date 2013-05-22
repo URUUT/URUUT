@@ -8,7 +8,7 @@ class ProjectsController < ApplicationController
   layout false, :only => "stripe_update"
 
   def index
-    @projects = Project.find_all_by_user_id(current_sponsor.id)
+    @projects = Project.find_all_by_user_id(current_user.id)
   end
 
   def new
