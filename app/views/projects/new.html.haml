@@ -39,7 +39,7 @@
 		$('.btn.create').click(function(){
 			$.ajax({
 				type: 'POST',
-				url: '#{projects_path}'
+				url: "#{projects_path}"
 			}).done(function(data){
 				console.log(data);
 				<!-- window.location.href = '/projects/' + data + '/edit#sponsor-info'; -->
