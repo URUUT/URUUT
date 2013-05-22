@@ -25,13 +25,8 @@ Crowdfund::Application.routes.draw do
 
    get "projects/save_image"
    post "projects/save_image"
-   post "projects/update_image"
-   post "galleries/save_image"
-   delete "galleries/delete_photo"
-   delete "projects/:id/delete_image" => "projects#delete_image", as: "delete_image"
    get "projects/:project_id/sponsors/:id/confirmation" => "sponsors#confirmation", as: "confirmation"
    get "purchase" => "payments#purchase"
-
 
    post "projects/submit_project"
 
@@ -46,8 +41,7 @@ Crowdfund::Application.routes.draw do
   end
 
   resources :s3_uploads
-  resources :galleries
-
+  #resources :projects
   namespace :project_admin do
     resources :projects do
       get "messages"
@@ -81,7 +75,7 @@ Crowdfund::Application.routes.draw do
       get :confirm_sponsor
     end
   end
-
+  
   resources :projects
 
   resources :project_steps
