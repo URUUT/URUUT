@@ -25,7 +25,7 @@ def create
   @project.user_id = current_user.id
   if @project.save
     respond_to do |format|
-      format.js { render :js => @project.id }
+      format.json { render :json => @project.id }
     end
   end
 end
