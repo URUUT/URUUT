@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
   require "net/http"
   require "uri"
 
-  before_filter :authenticate_user!, :only => [:index, :new, :create, :edit, :update]
+  before_filter :authenticate_user!, :only => [:index, :create, :edit, :update]
 
   layout false, :only => "stripe_update"
 
@@ -16,43 +16,43 @@ class ProjectsController < ApplicationController
     session[:current_project] = ''
     session[:connected] = ''
  #    @project.perks.build
- #    @project.galleries.build
-    client = Bitly.client
-    logger.debug(client)
-    render :layout => 'landing'
-  end
+ #    @project.galleries.build   
+   render :layout => 'landing'
+ end
 
-  def create
-    @project = Project.new(params[:project])
-    @project.user_id = current_user.id
-    if @project.save
-      respond_to do |format|
-        format.js { render :js => @project.id }
-      end
+def create
+  @project = Project.new(params[:project])
+  @project.user_id = current_user.id
+  if @project.save
+    respond_to do |format|
+      format.js { render :js => @project.id }
     end
   end
+end
 
-  def edit
-    @project = Project.find(params[:id])
-    session[:current_project] = @project.id
-    logger.debug("Current session id is: #{session[:current_project]}")
-    @project.update_attributes!(params[:project])
-    @perks = Perk.where("project_id = ?", @project.id)
-    @connected = session[:connected]
-    logger.debug(@connected)
-  end
+def edit
+  @project = Project.find(params[:id])
+  session[:current_project] = @project.id
+  logger.debug("Current session id is: #{session[:current_project]}")
+  @project.update_attributes!(params[:project])
+  @perks = Perk.where("project_id = ?", @project.id)
+  @connected = session[:connected]
+  logger.debug(@connected)
+end
 
-  def show
-    @project = Project.find(params[:id])
-    sort_sponsorships = @project.project_sponsors.sort_by {|ps| ps.level_id}
-    @project_sponsors = sort_sponsorships.group_by {|sponsor| sponsor.level_id}
-    @sponsorship_levels = SponsorshipLevel.all
-    @donation = Donation.where("project_id = ?", @project.id)
-    @perks = Perk.where("project_id = ?", @project.id)
-    @user = User.find(@project.user_id)
-    session[:current_project] = @project.id
-    render :layout => 'landing'
+def show
+  @project = Project.find(params[:id])
+  @sponsorships = @project.sponsorship_benefits
+  @sponsorships.each do |s|
+    logger.debug(s.name)
+    logger.debug(SponsorshipBenefit.find(s.sponsorship_level_id))
   end
+  @donation = Donation.where("project_id = ?", @project.id)
+  @perks = Perk.where("project_id = ?", @project.id)
+  @user = User.find(@project.user_id)
+  session[:current_project] = @project.id
+  render :layout => 'landing'
+end
 
   def update
     @project = Project.find(params[:id])
@@ -82,16 +82,17 @@ class ProjectsController < ApplicationController
   SponsorshipBenefit::SPONSORSHIP_BENEFITS.each do |key, value|
 
     case key
-    when 1 then sponsorship_benefits += sponsorship_benefit_level("platinum", value, key)
-    when 2 then sponsorship_benefits += sponsorship_benefit_level("gold", value, key)
-    when 3 then sponsorship_benefits += sponsorship_benefit_level("silver", value, key)
-    when 4 then sponsorship_benefits += sponsorship_benefit_level("bronze", value, key)
+      when 1 then sponsorship_benefits += sponsorship_benefit_level("platinum", value, key)
+      when 2 then sponsorship_benefits += sponsorship_benefit_level("gold", value, key)
+      when 3 then sponsorship_benefits += sponsorship_benefit_level("silver", value, key)
+      when 4 then sponsorship_benefits += sponsorship_benefit_level("bronze", value, key)
     end
+    
   end
 
   @sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits)
   @project.update_attributes!(params[:project])
-
+  
   if @project.bitly.blank?
     bitly = Bitly.client
     page_url = bitly.shorten("#{request.scheme}://#{request.host_with_port}/projects/#{@project.id}")
@@ -99,9 +100,6 @@ class ProjectsController < ApplicationController
   end
 
   if @project.save
-    if params[:commit].eql? "Save Updates"
-      redirect_to :back
-    end
     respond_to do |format|
       format.js { render :js => @project.id }
     end
@@ -209,21 +207,6 @@ def submit_project
       format.text { render :text => "successful" }
     end
   end
-end
-
-def update_image
-  @project = Project.find_by_id(session[:current_project])
-  image = params[:status].eql?("seed_image") ? 'seed_image' : 'cultivation_image'
-  @project.update_attribute(image.to_sym, params[:image])
-  render json: { project_id: @project.id }
-end
-
-def delete_image
-  @project = Project.find(params[:id])
-  params[:type].eql?("seed_image") ? @project.seed_image = nil : @project.cultivation_image = nil
-  @project.save!
-
-  redirect_to :back
 end
 
 end

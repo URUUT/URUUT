@@ -3,9 +3,8 @@
     - if @project.large_image
       #large_image{:style => "background-image: url(#{@project.large_image}); -webkit-background-size: cover; background-size: cover;"}
         .div{style: "height: 546px;", id: "image-priview"}
-          %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => 'ArmO0TLVTkyCaJkQmBNfqz', 'data-fp-button-class' => 'coverphoto btn', 'onchange' => 'updateCover(event)', :style => 'left:50%'}
+          %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => ENV['FILEPICKER_API'], 'data-fp-button-class' => 'coverphoto btn', 'onchange' => 'updateCover(event)', :style => 'left:50%'}
           = render "funding_info"
-
     - else
       #large_image
         %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => 'ArmO0TLVTkyCaJkQmBNfqz', 'data-fp-button-class' => 'coverphoto btn pick-cover-photo', 'onchange' => 'updateCover(event)', :style => 'left:50%'}

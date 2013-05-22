@@ -3,7 +3,8 @@
     .span4
       = image_tag "#{@user.avatar}", :class => "img-circle avatar"
 
-      %h4.user-name= @user.name
+      %h4.user-name 
+        #{@user.first_name} #{@user.last_name}
       - if @is_current
         = link_to "not you? click here to logout", destroy_user_session_path, :class => "green"
 
@@ -68,7 +69,8 @@
       %p= image_tag "#{@user.avatar}"
 
       %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Name
-      %p= @user.name
+      %p
+        #{@user.first_name} #{@user.last_name}
 
       - if @is_current
         %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Email address
