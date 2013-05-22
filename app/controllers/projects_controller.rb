@@ -42,6 +42,11 @@ end
 
 def show
   @project = Project.find(params[:id])
+  @sponsorships = @project.sponsorship_benefits
+  @sponsorships.each do |s|
+    logger.debug(s.name)
+    logger.debug(SponsorshipBenefit.find(s.sponsorship_level_id))
+  end
   @donation = Donation.where("project_id = ?", @project.id)
   @perks = Perk.where("project_id = ?", @project.id)
   @user = User.find(@project.user_id)
@@ -77,11 +82,12 @@ end
   SponsorshipBenefit::SPONSORSHIP_BENEFITS.each do |key, value|
 
     case key
-    when 1 then sponsorship_benefits += sponsorship_benefit_level("platinum", value, key)
-    when 2 then sponsorship_benefits += sponsorship_benefit_level("gold", value, key)
-    when 3 then sponsorship_benefits += sponsorship_benefit_level("silver", value, key)
-    when 4 then sponsorship_benefits += sponsorship_benefit_level("bronze", value, key)
+      when 1 then sponsorship_benefits += sponsorship_benefit_level("platinum", value, key)
+      when 2 then sponsorship_benefits += sponsorship_benefit_level("gold", value, key)
+      when 3 then sponsorship_benefits += sponsorship_benefit_level("silver", value, key)
+      when 4 then sponsorship_benefits += sponsorship_benefit_level("bronze", value, key)
     end
+    
   end
 
   @sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits)
