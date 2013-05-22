@@ -41,10 +41,8 @@
 				type: 'POST',
 				url: "#{projects_path}"
 			}).done(function(data){
-				console.log(data);
-				<!-- window.location.href = '/projects/' + data + '/edit#sponsor-info'; -->
+				window.location.href = '/projects/' + data + '/edit#sponsor-info';
 			}).error(function(data) {
-				console.log(data)
 				$('.modal').remove();
 				$('body').append('<div class="modal hide fade" style="text-align:center;padding:50px;"><button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="position:absolute;top:10px;right:20px;">×</button><h5 style="margin-bottom:20px;">' + data.responseText + '</h5><a href="/users/sign_in" class="btn">Sign In <span></span></a> <span style="font:italic 12px/21px georgia, serif;margin:0 10px;">or</span> <a href="/users/sign_up" class="btn">Sign Up <span></span></a></div>');
 				$('.modal').modal();
