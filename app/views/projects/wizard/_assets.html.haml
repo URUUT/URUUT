@@ -3,7 +3,7 @@
     - if @project.large_image
       #large_image{:style => "background-image: url(#{@project.large_image}); -webkit-background-size: cover; background-size: cover;"}
         .div{style: "height: 546px;", id: "image-priview"}
-          %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => ENV['FILEPICKER_API'], 'data-fp-button-class' => 'coverphoto btn', 'onchange' => 'updateCover(event)', :style => 'left:50%'}
+          %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => 'ArmO0TLVTkyCaJkQmBNfqz', 'data-fp-button-class' => 'coverphoto btn', 'onchange' => 'updateCover(event)', :style => 'left:50%'}
           = render "funding_info"
     - else
       #large_image
@@ -157,15 +157,16 @@
     var fpfile = { url: $("#url_image").val(), mimetype: 'image/jpeg', isWriteable: true };
     console.log("Converting...");
     filepicker.convert(fpfile,
-      {crop: [$("#x_position").val(), $("#y_position").val(), $("#width_after").val(), $("#height_after").val()], quality: 50},
+      {crop: [$("#x_position").val(), $("#y_position").val(), 1600, 546]},
       {},
       function(new_FPFile){
+        $(".save-image").button('reset');
         console.log(new_FPFile.url);
-        $(".coverphoto").show();
+        $(".coverphoto, .funding-info").show();
         jcrop_api.destroy();
         $(".action-convert").hide();
         $("#cover-priview").remove();
-        $('#large_image').css('background-image','url(' + new_FPFile.url + ')').css('-webkit-background-size', '100% 100%').css('-moz-background-size', '100% 100%').css('background-size', '100% 100%');
+        $('#large_image').css('background-image','url(' + new_FPFile.url + ')').css('-webkit-background-size', 'cover').css('-moz-background-size', 'cover').css('background-size', 'cover');
         $.ajax({
             url: '/projects/save_image',
             method: 'POST',
@@ -174,6 +175,7 @@
       },
       function(FPError){
         console.log(FPError);
+        $(".save-image").button('reset');
       }
     );
   });

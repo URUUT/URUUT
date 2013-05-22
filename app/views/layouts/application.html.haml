@@ -88,51 +88,58 @@
   var updateCover = function(event){
     console.log(event.fpfile.url);
     var largeImage = event.fpfile.url;
+    console.log("finished");
+    $("body").animate({ scrollTop: 0 }, "slow");
+    $('<img />').attr('src', largeImage).load(function() {
+      $('#large_image').css('background-image','url(' + largeImage + ')').css('-webkit-background-size', 'cover').css('-moz-background-size', 'cover').css('background-size', 'cover');
+      var img = new Image;
+      img.src = $('#large_image').css('background-image').replace(/url\(|\)$/ig, "");
+      console.log(img.width);
+      if ( img.width >= 1600 )
+      {
+        $.ajax({
+          url: '/projects/save_image',
+          method: 'POST',
+          data: { large_image: largeImage }
+        });
+        $(".coverphoto").hide();
+        $("#url_image").val(largeImage);
+        $("#image-priview").append('<div style="margin: 0 auto; width: 900px;"><img id="cover-priview" src="' + largeImage + '"/></div>');
 
-    $.ajax({
-      url: '/projects/save_image',
-      method: 'POST',
-      data: {
-        large_image: largeImage
-        }
-    }).done(function(){
-      console.log("finished");
-      $("body").animate({ scrollTop: 0 }, "slow");
-      $('<img />').attr('src', largeImage).load(function() {
-        $('#large_image').css('background-image','url(' + largeImage + ')').css('-webkit-background-size', '100% 100%').css('-moz-background-size', '100% 100%').css('background-size', '100% 100%');
-        var img = new Image;
-        img.src = $('#large_image').css('background-image').replace(/url\(|\)$/ig, "");
-        console.log(img.width);
-        if ( img.width >= 1600 )
-        {
-          $(".coverphoto").hide();
-          $("#url_image").val(largeImage);
-          $("#image-priview").append('<img id="cover-priview" src="' + largeImage + '"/>');
+        var w = $("#cover-priview").width();
+        var h = $("#cover-priview").height();
 
-          $('#cover-priview').Jcrop({
-            aspectRatio: 1,
-            onChange: showCoords,
-            onSelect: showCoords,
-            allowSelect: false,
-            },function(){
-              jcrop_api = this;
-              jcrop_api.setSelect([362,0,904,542]);
-          });
+        $(".funding-info").hide();
 
-          $(".action-convert").show();
-        }
-      });
+        $('#cover-priview').Jcrop({
+          onChange: showCoords,
+          onSelect: showCoords,
+          allowSelect: false,
+          allowResize: false,
+          boxWidth: 900,
+          setSelect: [ 0, 1, parseInt(w), parseInt(h) ],
+          aspectRatio: 1 / 1
+          },function(){
+            jcrop_api = this;
+        });
+
+        $(".action-convert").show();
+      }
+      else{
+        alert("image width for cover should be more than 1600px");
+      }
     });
   }
 
-  var showCoords = function showCoords(c)
-    {
-      console.log(c);
-      $("#y_position").val(c.y);
-      $('#x_position').val(c.x);
-      $('#width_after').val(c.w);
-      $("#height_after").val(c.h);
-    };
+  function showCoords(coords)
+  {
+    var w = $("#cover-priview").width();
+    var ratio = parseInt(w) / parseInt(w);
+    $('#x_position').val(Math.round(coords.x * ratio));
+    $("#y_position").val(Math.round(coords.y * ratio));
+    $('#width_after').val(Math.round(coords.w * ratio));
+    $("#height_after").val(Math.round(coords.h * ratio));
+  };
 
   var updatePlantingSeedImage = function(event) {
     console.log(event.fpfile.url);
