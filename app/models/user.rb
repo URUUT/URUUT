@@ -33,9 +33,9 @@ class User < ActiveRecord::Base
   end
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
-    user = User.where(:provider => auth.provider, :uid => auth.uid).first
-    unless user
-      begin    
+    begin
+      user = User.where(:provider => auth.provider, :uid => auth.uid).first
+      unless user    
         user = User.create(  first_name:auth.extra.raw_info.name.to_s.split(' ')[0],
                              last_name: auth.extra.raw_info.name.to_s.split(' ')[1],
                              provider:auth.provider,
@@ -45,9 +45,9 @@ class User < ActiveRecord::Base
                              token:auth.credentials.token
                              )
         end
-      rescue ActiveRecord::RecordNotUnique
-        logger.debug("User already exists")
-      end
+    rescue => detail
+      logger.debug(detail)
+    end
     user
   end
 
