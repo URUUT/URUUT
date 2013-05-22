@@ -10,7 +10,7 @@ class ProjectMailer < ActionMailer::Base
     user = User.find_by_id(project.user_id)
     logger.debug(user)
 
-    @name = user.name
+    @name = user.first_name + user.last_name
     @email = user.email
     @project_title = project.title
 

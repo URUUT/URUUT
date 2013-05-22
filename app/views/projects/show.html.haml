@@ -84,6 +84,9 @@
         #planting_seeds
           - if @project.seed_image
             = image_tag "#{@project.seed_image}"
+          - if @project.seed_video
+            - video_seed = @project.seed_video.gsub("watch?v=", "embed/")
+            %iframe{:height => "413", :src => video_seed, :width => "620"}
           %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.about
 
         %hr
@@ -105,6 +108,9 @@
           .span9.details
             - if @project.cultivation_image
               = image_tag "#{@project.cultivation_image}"
+            - if @project.cultivation_video
+              - cultivation_video = @project.cultivation_video.gsub("watch?v=", "embed/")
+              %iframe{:height => "310", :src => cultivation_video, :width => "380"}
             %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.story
 
       -#%hr
