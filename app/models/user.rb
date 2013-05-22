@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :remember_me, :city, :state, :zip,
                   :neighborhood, :provider, :uid, :token, :organization, :mission, :subscribed, :avatar
+                  
   attr_accessor :avatar_upload_width, :avatar_upload_height
   # attr_accessible :title, :body
 
@@ -34,16 +35,19 @@ class User < ActiveRecord::Base
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
     unless user
-            
-      user = User.create(  first_name:auth.extra.raw_info.name.to_s.split(' ')[0],
-                           last_name: auth.extra.raw_info.name.to_s.split(' ')[1],
-                           provider:auth.provider,
-                           uid:auth.uid,
-                           email:auth.info.email,
-                           password:Devise.friendly_token[0,20],
-                           token:auth.credentials.token
-                           )
-    end
+      begin    
+        user = User.create(  first_name:auth.extra.raw_info.name.to_s.split(' ')[0],
+                             last_name: auth.extra.raw_info.name.to_s.split(' ')[1],
+                             provider:auth.provider,
+                             uid:auth.uid,
+                             email:auth.info.email,
+                             password:Devise.friendly_token[0,20],
+                             token:auth.credentials.token
+                             )
+        end
+      rescue ActiveRecord::RecordNotUnique
+        logger.debug("User already exists")
+      end
     user
   end
 
