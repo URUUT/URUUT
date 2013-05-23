@@ -1,9 +1,7 @@
 class Project < ActiveRecord::Base
   belongs_to :user
 
-  before_save do
-    self.city = self.city.downcase
-  end
+  before_save :downcase_city
 
   attr_accessible :category, :description, :duration, :goal, :address, :project_title, :sponsorship_permisson,
     :city, :state, :zip, :neighborhood, :title, :image, :video, :tags, :live, :short_description,
@@ -67,6 +65,12 @@ class Project < ActiveRecord::Base
 
   def self.send_confirmation_email(project)
     ProjectMailer.project_confirmation(project).deliver
+  end
+
+  def downcase_city
+    unless self.city.nil?
+      self.city.downcase!
+    end
   end
 
 end

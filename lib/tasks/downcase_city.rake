@@ -1,8 +1,6 @@
 task :downcase_city => :environment do
-	cities = Project.city.all
-	logger.debug(cities.size)
+	cities = Project.pluck(:city)
 	cities.each do |c|
-		c.downcase
+		c.downcase!
 	end
-	cities.save :validate => "false"
 end
