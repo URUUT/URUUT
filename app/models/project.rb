@@ -35,7 +35,7 @@ class Project < ActiveRecord::Base
 
   # Select unique values of some field, e.g. cities and categories
   def self.unique_values_of(type)
-    select(type).map{|i| i.downcase}.uniq.pluck(type)
+    self.select(type).uniq.pluck(type)
   end
 
   def self.by_city(city)
