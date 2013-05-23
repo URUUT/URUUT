@@ -1,119 +1,125 @@
 %section.full-width.green-description
-	.container
-		%h1 Giving you the power to CREATE A better community.
-		%h2 Every community has great projects that can’t get off the ground. But with Uruut, yours can be different. Your park needs a new playground? Uruut it. Need a new library? Uruut it. Senior center? Bike path? Dog park? Uruut it. That’s why we’re here – to help you build the community you deserve.
-		.btn.brown
-			= link_to new_user_registration_path do
-				Sign Up Now
-				%span
-		%h5 
-			= link_to "#partner", :class => 'learn-more' do
-				Learn More
-				%span
+  .container
+    %h1 Giving you the power to CREATE A better community.
+    %h2 Every community has great projects that can’t get off the ground. But with Uruut, yours can be different. Your park needs a new playground? Uruut it. Need a new library? Uruut it. Senior center? Bike path? Dog park? Uruut it. That’s why we’re here – to help you build the community you deserve.
+    .btn.brown
+      = link_to "#{user_signed_in? ? 'javascript:void(0)' : new_user_registration_path}", class: "#{'error-sign-up' if user_signed_in?}" do
+        Sign Up Now
+        %span
+    %h5
+      = link_to "#partner", :class => 'learn-more' do
+        Learn More
+        %span
 %section.full-width.description
-	.container
-		/ %h2 Crowdfunding to date has been about only individuals coming together to raise money. Until now.
-		/ %h1 Introducing URUUT Partner-Funding<sup>SM</sup>
-		/ .btn.brown
-		/ 	Sign Up
-		/ 	%span
-		/ .btn 
-		/ 	What is it?
-		/ 	%span
-			
+  .container
+
 %section.full-width.partner#partner
-	.container
-		.marketing.float-left
-			%h3 A NEW KIND OF CROWDFUNDING PLATFORM.
-			%h2 Unlike others, Uruut is the only one specifically designed to make your contributions go further—much further—by also capturing business and foundation funding and putting it all to work right where you live.
-		.pie-chart.float-right
-			= image_tag "pie-chart.png"
-			
+  .container
+    .marketing.float-left
+      %h3 A NEW KIND OF CROWDFUNDING PLATFORM.
+      %h2 Unlike others, Uruut is the only one specifically designed to make your contributions go further—much further—by also capturing business and foundation funding and putting it all to work right where you live.
+    .pie-chart.float-right
+      = image_tag "pie-chart.png"
+
 %section.full-width.better
-	.container
-		%h3 WHAT MAKES URUUT BETTER?
-		%h2 Greater chance for funding success. Bottom line.
-		%p With three different sources for funding, projects have a much greater chance of reaching their funding goal.
-		.graphic-1
-			= image_tag "suitcase.png"
-			.content
-				%h5 Business Sponsors
-				%p Uruut offers you the opportunity to sponsor projects that associate your brand with high-impact local, regional and national projects.
-				= link_to funding_sources_pages_path, :class => "btn" do
-					learn more
-					%span
-		.graphic-2
-			= image_tag "individual.png"
-			.content
-				%h5 Individual CONTRIBUTORS
-				%p Uruut offers you the opportunity to support projects you value, offering perks in exchange for contributions.
-				= link_to funding_sources_pages_path, :class => "btn" do
-					learn more
-					%span
-		.graphic-3
-			= image_tag "family.png"
-			.content
-				%h5 NON-PROFIT Foundations
-				%p For corporate and family foundations, Uruut offers you an easy, functional platform to screen, search and provide matching grant dollars to projects and causes relevant to your mission.
-				= link_to funding_sources_pages_path, :class => "btn" do
-					learn more
-					%span
-					
+  .container
+    %h3 WHAT MAKES URUUT BETTER?
+    %h2 Greater chance for funding success. Bottom line.
+    %p With three different sources for funding, projects have a much greater chance of reaching their funding goal.
+    .graphic-1
+      = image_tag "suitcase.png"
+      .content
+        %h5 Business Sponsors
+        %p Uruut offers you the opportunity to sponsor projects that associate your brand with high-impact local, regional and national projects.
+        = link_to funding_sources_pages_path, :class => "btn" do
+          learn more
+          %span
+    .graphic-2
+      = image_tag "individual.png"
+      .content
+        %h5 Individual CONTRIBUTORS
+        %p Uruut offers you the opportunity to support projects you value, offering perks in exchange for contributions.
+        = link_to funding_sources_pages_path, :class => "btn" do
+          learn more
+          %span
+    .graphic-3
+      = image_tag "family.png"
+      .content
+        %h5 NON-PROFIT Foundations
+        %p For corporate and family foundations, Uruut offers you an easy, functional platform to screen, search and provide matching grant dollars to projects and causes relevant to your mission.
+        = link_to funding_sources_pages_path, :class => "btn" do
+          learn more
+          %span
+
 %section.full-width.transparency
-	.container
-		%h3 ACCOUNTABILITY & TRANSPARENCY
-		%h2 Other crowdfunding platforms essentially say, “OK, the project is funded. Our job is done.”
-		.float-left
-			= image_tag "laptop.jpg"
-		.marketing.float-left 
-			%p This is a foreign sentiment to us. While others disengage after a project has been funded, for Uruut getting a project funded is just the beginning. We regard accountability and transparency as an absolute necessity, because you should know exactly how your resources are being spent, and that promises are being kept. So we’ve built a robust application to provide insight into post-funding budget and project status.
-				
+  .container
+    %h3 ACCOUNTABILITY & TRANSPARENCY
+    %h2 Other crowdfunding platforms essentially say, “OK, the project is funded. Our job is done.”
+    .float-left
+      = image_tag "laptop.jpg"
+    .marketing.float-left
+      %p This is a foreign sentiment to us. While others disengage after a project has been funded, for Uruut getting a project funded is just the beginning. We regard accountability and transparency as an absolute necessity, because you should know exactly how your resources are being spent, and that promises are being kept. So we’ve built a robust application to provide insight into post-funding budget and project status.
+
 %section.full-width.who-should-use
-	.container
-		%h3 WHO IS URUUT FOR?
-		%h2 Anyone who wants to raise their odds of fundraising success.
-		%p While URUUT is open to many types of projects, we specialize in working with the following:
-		.graphic-1
-			= image_tag "municipalities.png"
-			.content
-				%h5 Municipalities
-				%p Cities and local jurisdictions looking to form public/private partnerships and need funding for underfunded or zero funded projects and programs.
+  .container
+    %h3 WHO IS URUUT FOR?
+    %h2 Anyone who wants to raise their odds of fundraising success.
+    %p While URUUT is open to many types of projects, we specialize in working with the following:
+    .graphic-1
+      = image_tag "municipalities.png"
+      .content
+        %h5 Municipalities
+        %p Cities and local jurisdictions looking to form public/private partnerships and need funding for underfunded or zero funded projects and programs.
 
-		.graphic-2
-			= image_tag "member-organizations.png"
-			.content
-				%h5 Member Organizations
-				%p Chambers of Commerce, local leadership organizations, PTAs, and others who need a helping hand with community oriented initiatives.
+    .graphic-2
+      = image_tag "member-organizations.png"
+      .content
+        %h5 Member Organizations
+        %p Chambers of Commerce, local leadership organizations, PTAs, and others who need a helping hand with community oriented initiatives.
 
-		.graphic-3
-			= image_tag "non-profits.png"
-			.content
-				%h5 CIVIC ORGANIZATIONS
-				%p Community focused civic organizations who are looking to expand their reach and are seeking greater transparency.
+    .graphic-3
+      = image_tag "non-profits.png"
+      .content
+        %h5 CIVIC ORGANIZATIONS
+        %p Community focused civic organizations who are looking to expand their reach and are seeking greater transparency.
 
 %section.full-width.make-it-happen
-	.container
-		%h2 
-			Connect. Cooperate. 
-			%span{:style => "color:#70bf4c;"} Take Action
-		= link_to new_project_path, :class => "btn brown" do 
-			Get Funded
-			%span
-			
-		= link_to home_pages_path, :class => "btn" do 
-			Fund Projects
-			%span
-			
+  .container
+    %h2
+      Connect. Cooperate.
+      %span{:style => "color:#70bf4c;"} Take Action
+    = link_to new_project_path, :class => "btn brown" do
+      Get Funded
+      %span
+
+    = link_to home_pages_path, :class => "btn" do
+      Fund Projects
+      %span
+
+%section#error-sign.modal.hide.fade
+  .modal-header{style: "height: 17px;"}
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+  .modal-body
+    %p
+      Thank you for your interest. I appears you are already signed on.
+    %p
+      If you reached this message in error please #{link_to "contact us", contact_pages_path}
+
+
 :javascript
-	if(window.opener) {
-		window.opener.location.reload(true);
-		window.close()
-	}
-	$(function() {
-		$('.learn-more').click(function(e) {
-			e.preventDefault();
-			$('html, body').animate({
-				scrollTop: $("#partner").offset().top
-			}, 750);
-		});
-	})
+  if(window.opener) {
+    window.opener.location.reload(true);
+    window.close()
+  }
+  $(function() {
+    $('.learn-more').click(function(e) {
+      e.preventDefault();
+      $('html, body').animate({
+        scrollTop: $("#partner").offset().top
+      }, 750);
+    });
+
+    $(".error-sign-up").click(function(){
+      $("#error-sign").modal("show");
+    })
+  })
