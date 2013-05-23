@@ -8,7 +8,7 @@ class ProjectsController < ApplicationController
   layout false, :only => "stripe_update"
 
   def index
-    @projects = Project.find_all_by_user_id(current_sponsor.id)
+    @projects = Project.find_all_by_user_id(current_user.id)
   end
 
   def new
@@ -25,7 +25,7 @@ def create
   @project.user_id = current_user.id
   if @project.save
     respond_to do |format|
-      format.js { render :js => @project.id }
+      format.json { render :json => @project.id }
     end
   end
 end

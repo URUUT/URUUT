@@ -1,33 +1,30 @@
-- @projects.each do |p|
-  %div.project{:style => "width:230px;height:380px;padding:10px;float:left;margin:0 20px 20px 0;overflow:hidden;"}
-    .location
-      %span{:style => "float:left;text-transform:capitalize;"}
-        = p.city + ", "
-        = p.state
-      = image_tag "marker.jpg", :style => "float:right;"
-    = image_tag("#{p.image.url(:original)}", :style => "width:230px !important;height:125px !important;margin-bottom:15px;")
-
-    %h3{:style => "width:230px;word-wrap:break-word;text-transform:capitalize;"}
-      = link_to p.title, project_path(p.id)
-    %p= truncate_html(clean_data(p.description), :length => 50)
-
-    %h5 Funded:
-    %p{:style => "margin-bottom:5px;"}
-      = number_to_currency(amount_funded(p.id), :precision => 0)
-      of
-      = get_currency(p.goal)
-
-    %div{:style => "height:20px;margin-bottom:5px;", :class => "progressbar#{p.id}"}
-    %h5{:style => "display:inline-block"} Time Left
-    %p{:style => "display:inline-block"} #{time_left(p.duration, p.approval_date).to_i} Days
-
-    - if current_user
-      - if p.user_id == current_user.id
-        = link_to "Edit Project", edit_project_url(p.id)
-    :javascript
-      $('.progressbar#{p.id}').progressbar({
-      value: #{percent_funded(p.id)}
-      });
-
-- else
-  %h3 Sorry, No Projects To Show
+/ - @projects.each do |p|
+/   %div.project{:style => "width:230px;height:380px;padding:10px;float:left;margin:0 20px 20px 0;overflow:hidden;"}
+/     .location
+/       %span{:style => "float:left;text-transform:capitalize;"}
+/         = p.city + ", "
+/         = p.state
+/       = image_tag "marker.jpg", :style => "float:right;"
+/     = image_tag("#{p.image.url(:original)}", :style => "width:230px !important;height:125px !important;margin-bottom:15px;")
+/ 
+/     %h3{:style => "width:230px;word-wrap:break-word;text-transform:capitalize;"}
+/       = link_to p.title, project_path(p.id)
+/     %p= truncate_html(clean_data(p.description), :length => 50)
+/ 
+/     %h5 Funded:
+/     %p{:style => "margin-bottom:5px;"}
+/       = number_to_currency(amount_funded(p.id), :precision => 0)
+/       of
+/       = get_currency(p.goal)
+/ 
+/     %div{:style => "height:20px;margin-bottom:5px;", :class => "progressbar#{p.id}"}
+/     %h5{:style => "display:inline-block"} Time Left
+/     %p{:style => "display:inline-block"} #{time_left(p.duration, p.approval_date).to_i} Days
+/ 
+/     - if current_user
+/       - if p.user_id == current_user.id
+/         = link_to "Edit Project", edit_project_url(p.id)
+/     :javascript
+/       $('.progressbar#{p.id}').progressbar({
+/       value: #{percent_funded(p.id)}
+/       });
