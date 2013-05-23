@@ -10,7 +10,8 @@ class PagesController < ApplicationController
     else
       @projects = Project.where("live = 1 AND ready_for_approval = 0").by_city(params[:city]).
           by_category(params[:category]).all
-      @ending = Project.by_city(params[:city]).by_category(params[:category]).order(:duration).all
+      @ending = Project.where("live = 1 AND ready_for_approval = 0").by_city(params[:city]).
+          by_category(params[:category]).order(:duration).all
     end
     logger.debug(@projects)
   end
