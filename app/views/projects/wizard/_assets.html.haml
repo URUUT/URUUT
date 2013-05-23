@@ -3,11 +3,11 @@
     - if @project.large_image
       #large_image{:style => "background-image: url(#{@project.large_image}); -webkit-background-size: cover; background-size: cover;"}
         .div{style: "height: 546px;", id: "image-priview"}
-          %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => 'ArmO0TLVTkyCaJkQmBNfqz', 'data-fp-button-class' => 'coverphoto btn', 'onchange' => 'updateCover(event)', :style => 'left:50%'}
+          %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => ENV['FILEPICKER_API'], 'data-fp-button-class' => 'coverphoto btn', 'onchange' => 'updateCover(event)', :style => 'left:50%'}
           = render "funding_info"
     - else
       #large_image
-        %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => 'ArmO0TLVTkyCaJkQmBNfqz', 'data-fp-button-class' => 'coverphoto btn pick-cover-photo', 'onchange' => 'updateCover(event)', :style => 'left:50%'}
+        %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => ENV['FILEPICKER_API'], 'data-fp-button-class' => 'coverphoto btn pick-cover-photo', 'onchange' => 'updateCover(event)', :style => 'left:50%'}
 
         = render "funding_info"
 
@@ -18,6 +18,7 @@
       = hidden_field_tag "width_after"
       = hidden_field_tag "height_after"
       .action.pull-right
+        %a.btn.change-image{href: "javascript:void(0)"} Change cover photo
         %a.btn.save-image{href: "javascript:void(0)"} Save Images
 
     .show-content
@@ -52,19 +53,27 @@
 
         #content_container
           #planting_seeds
-            - if !@project.seed_image.blank?
-              = image_tag "#{@project.seed_image}"
-            - elsif !@project.seed_video.blank?
+            - if !@project.seed_video.blank?
               - video_seed = @project.seed_video.gsub("watch?v=", "embed/")
-              %iframe{:height => "413", :src => video_seed, :width => "620"}
+              .seed-content
+                %iframe{:height => "413", :src => video_seed, :width => "620"}
+            - elsif  !@project.seed_image.blank?
+              .seed-content
+                = image_tag "#{@project.seed_image}"
             - else
-              %div.seed-image-priview{:style => "background: #C4B8B8; width: 100%; height: 414px"}
-                %div.pull-left{style: "margin-left: 37%; margin-top: 100px"}
-                  %input{:type => 'filepicker', :name => 'planting_seed_image', 'data-fp-button-text' => 'ADD A PHOTO', 'data-fp-apikey' => ENV['FILEPICKER_API'], 'data-fp-button-class' => 'btn', 'onchange' => 'updatePlantingSeedImage(event)'}
-                %div.pull-left{style: "margin-left: -14%; margin-top: 194px"}
-                  %p{style: "color: #FFF"} OR
-                %div.pull-left{style: "margin-left: 37%; margin-top: 39px"}
-                  = link_to "ADD A VIDEO", "javascript:void(0)", class: "btn seed-form"
+              %div.seed-content{:style => "background: #C4B8B8; width: 100%; height: 414px"}
+                .seed-action-container
+                  %div.pull-left{style: "margin-left: 37%; margin-top: 100px"}
+                    %input{:type => 'filepicker', :name => 'planting_seed_image', 'data-fp-button-text' => 'ADD A PHOTO', 'data-fp-apikey' => 'ArmO0TLVTkyCaJkQmBNfqz', 'data-fp-button-class' => 'btn', 'onchange' => 'updatePlantingSeedImage(event)'}
+                  %div.pull-left{style: "margin-left: -14%; margin-top: 194px"}
+                    %p{style: "color: #FFF"} OR
+                  %div.pull-left{style: "margin-left: 37%; margin-top: 39px"}
+                    = link_to "ADD A VIDEO", "javascript:void(0)", class: "btn seed-form"
+
+
+            .seed-action-container{style: action_image(@project.seed_image, @project.seed_video)}
+              %input{:type => 'filepicker', :name => 'planting_seed_image', 'data-fp-button-text' => 'UPLOAD NEW PHOTO', 'data-fp-apikey' => 'ArmO0TLVTkyCaJkQmBNfqz', 'data-fp-button-class' => 'btn', 'onchange' => 'updatePlantingSeedImage(event)'}
+              = link_to "UPLOAD NEW VIDEO", "javascript:void(0)", class: "btn seed-form"
             %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.about
 
           %hr
@@ -85,19 +94,26 @@
 
             .span5.details
               .cultivation-image-priview
-                - if !@project.cultivation_image.blank?
-                  = image_tag "#{@project.cultivation_image}"
-                - elsif !@project.cultivation_video.blank?
+                - if !@project.cultivation_video.blank?
                   - cultivation_video = @project.cultivation_video.gsub("watch?v=", "embed/")
-                  %iframe{:height => "310", :src => cultivation_video, :width => "380"}
+                  .cultivation-content
+                    %iframe{:height => "310", :src => cultivation_video, :width => "380"}
+                - elsif  !@project.cultivation_image.blank?
+                  .cultivation-content
+                    = image_tag "#{@project.cultivation_image}"
                 - else
-                  %div.seed-image-priview{:style => "background: #C4B8B8; width: 100%; height: 310px"}
-                    %div.pull-left{style: "margin-left: 30%; margin-top: 55px"}
-                      %input{:type => 'filepicker', :name => 'cultivation_image', 'data-fp-button-text' => 'ADD A PHOTO', 'data-fp-apikey' => ENV['FILEPICKER_API'], 'data-fp-button-class' => 'btn', 'onchange' => 'updateCultivationImage(event)'}
-                    %div.pull-left{style: "margin-left: -21%; margin-top: 132px"}
-                      %p{style: "color: #FFF"} OR
-                    %div.pull-left{style: "margin-left: 32%; margin-top: 53px"}
-                      = link_to "ADD A VIDEO", "javascript:void(0)", class: "btn cultivation-form"
+                  %div.cultivation-content{:style => "background: #C4B8B8; width: 100%; height: 310px"}
+                    .cultivation-action-container
+                      %div.pull-left{style: "margin-left: 30%; margin-top: 55px"}
+                        %input{:type => 'filepicker', :name => 'cultivation_image', 'data-fp-button-text' => 'ADD A PHOTO', 'data-fp-apikey' => 'ArmO0TLVTkyCaJkQmBNfqz', 'data-fp-button-class' => 'btn', 'onchange' => 'updateCultivationImage(event)'}
+                      %div.pull-left{style: "margin-left: -21%; margin-top: 132px"}
+                        %p{style: "color: #FFF"} OR
+                      %div.pull-left{style: "margin-left: 32%; margin-top: 53px"}
+                        = link_to "ADD A VIDEO", "javascript:void(0)", class: "btn cultivation-form"
+
+                .cultivation-action-container{style: action_image(@project.cultivation_image, @project.cultivation_video)}
+                  %input{:type => 'filepicker', :name => 'cultivation_image', 'data-fp-button-text' => 'UPLOAD NEW PHOTO', 'data-fp-apikey' => 'ArmO0TLVTkyCaJkQmBNfqz', 'data-fp-button-class' => 'btn', 'onchange' => 'updateCultivationImage(event)'}
+                  = link_to "UPLOAD NEW VIDEO", "javascript:void(0)", class: "btn cultivation-form"
 
               %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.story
 
@@ -152,7 +168,13 @@
       %input{:type => "submit", :value => "Submit video"}
 
 :javascript
+
+  $(".change-image").click(function(){
+    $(".coverphoto").click();
+  });
+
   $(".save-image").click(function(){
+    $(".change-image").button("loading");
     $(this).button('loading');
     var fpfile = { url: $("#url_image").val(), mimetype: 'image/jpeg', isWriteable: true };
     console.log("Converting...");
@@ -161,6 +183,7 @@
       {},
       function(new_FPFile){
         $(".save-image").button('reset');
+        $(".change-image").button("reset");
         console.log(new_FPFile.url);
         $(".coverphoto, .funding-info").show();
         jcrop_api.destroy();
@@ -176,6 +199,7 @@
       function(FPError){
         console.log(FPError);
         $(".save-image").button('reset');
+        $(".change-image").button("reset");
       }
     );
   });
