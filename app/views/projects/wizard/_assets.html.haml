@@ -53,11 +53,11 @@
 
         #content_container
           #planting_seeds
-            - if !@project.seed_video.blank?
+            - if @project.seed_mime_type.eql?("video") and !@project.seed_video.blank?
               - video_seed = @project.seed_video.gsub("watch?v=", "embed/")
               .seed-content
                 %iframe{:height => "413", :src => video_seed, :width => "620"}
-            - elsif  !@project.seed_image.blank?
+            - elsif @project.seed_mime_type.eql?("image") and !@project.seed_image.blank?
               .seed-content
                 = image_tag "#{@project.seed_image}"
             - else
@@ -94,13 +94,13 @@
 
             .span5.details
               .cultivation-image-priview
-                - if !@project.cultivation_video.blank?
+                - if @project.cultivation_mime_type.eql?("video") and !@project.cultivation_video.blank?
                   - cultivation_video = @project.cultivation_video.gsub("watch?v=", "embed/")
                   .cultivation-content
                     %iframe{:height => "310", :src => cultivation_video, :width => "380"}
-                - elsif  !@project.cultivation_image.blank?
+                - elsif @project.cultivation_mime_type.eql?("image") and !@project.cultivation_image.blank?
                   .cultivation-content
-                    = image_tag "#{@project.cultivation_image}"
+                    = image_tag "#{@project.cultivation_image}", style: "float:left; width: 380px; height: 310px;"
                 - else
                   %div.cultivation-content{:style => "background: #C4B8B8; width: 100%; height: 310px"}
                     .cultivation-action-container
