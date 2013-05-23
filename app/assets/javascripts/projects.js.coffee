@@ -264,6 +264,7 @@ $ ->
       data: 
         id: projectId
     .done (data) ->
+      console.log data
       if data == "successful"
         window.location.href = thankYouUrl
 				
