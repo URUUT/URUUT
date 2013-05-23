@@ -265,8 +265,8 @@ $ ->
         id: projectId
     .done (data) ->
       console.log data
-      # if data == "successful"
-      #   window.location.href = thankYouUrl
+      if data == 1
+        window.location.href = thankYouUrl
 				
   #
   # Project Wizard Form Submit
