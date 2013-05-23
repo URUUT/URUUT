@@ -103,8 +103,9 @@
           data: { large_image: largeImage }
         });
         $(".coverphoto").hide();
+        $(".div-image-priview").remove();
         $("#url_image").val(largeImage);
-        $("#image-priview").append('<div style="margin: 0 auto; width: 900px;"><img id="cover-priview" src="' + largeImage + '"/></div>');
+        $("#image-priview").append('<div class="div-image-priview" style="margin: 0 auto; width: 900px;"><img id="cover-priview" src="' + largeImage + '"/></div>');
 
         var w = $("#cover-priview").width();
         var h = $("#cover-priview").height();
@@ -148,13 +149,11 @@
     $.ajax({
       url: '/projects/save_image',
       method: 'POST',
-      data: {
-        seed_image: plantingSeedImage
-        }
+      data: { seed_image: plantingSeedImage }
     }).done(function(){
       console.log("finished");
-      $('.seed-image-priview').remove();
-      $('#planting_seeds').prepend('<div class="seed-image"><img src="' + plantingSeedImage + '"</div>');
+      $(".seed-action-container").show();
+      $('.seed-content').attr("style", "width: 100%").html('<img src="' + plantingSeedImage + '" style="float:left; width:100%" />');
     });
   }
 
@@ -165,11 +164,10 @@
     $.ajax({
       url: '/projects/save_image',
       method: 'POST',
-      data: {
-        cultivation_image: cultivationImage
-        }
+      data: { cultivation_image: cultivationImage }
     }).done(function(){
-      $('.cultivation-image-priview').html('<img src="' + cultivationImage + '" />');
+      $(".cultivation-action-container").show();
+      $('.cultivation-content').attr("style", "width: 100%").html('<img src="' + cultivationImage + '" style="float:left; width:100%" />');
     });
   }
 
