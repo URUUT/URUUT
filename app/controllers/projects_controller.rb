@@ -204,7 +204,7 @@ def submit_project
     logger.debug("Saving!!!")
     respond_to do |format|
       Project.send_confirmation_email(project)
-      format.json { render :json => "successful" }
+      format.json { render :json => project }
     end
   end
 end
