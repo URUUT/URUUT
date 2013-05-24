@@ -22,7 +22,8 @@ Crowdfund::Application.routes.draw do
   get "users/profile"
 
   match "browse/projects" => "pages#index", :as => "browse_projects"
-
+  match "search/projects" => "pages#search", :as => "search_projects"
+  
    get "projects/save_image"
    post "projects/save_image"
    get "projects/:project_id/sponsors/:id/confirmation" => "sponsors#confirmation", as: "confirmation"
