@@ -91,82 +91,268 @@
     }
   };
 
-  $(document).ready(function() {
-    addNewBenefit();
-    editBenefit();
-    addAnotherNewBenefit();
-    removeAnotherBenefit();
-  });
+  var getHash = function() {
+    if(window.location.hash) {
+      $('.step-container').each(function(){
+        $(this).hide();
+      });
 
-  var editBenefit = function() {
-    $(".edit-benefit").bind("click", function() {
-      var nameBenefits = $(this).parent().children("#name");
-      var fieldBenefits = $(this).parent().children(".edit-text-field");
-      console.log(c = this)
-      if($(this).text() == "select to edit"){
-        nameBenefits.hide();
-        fieldBenefits.show();
-        fieldBenefits.attr("style", "margin-top:-25px; width: 320px !important;");
-        $(this).text("save");
-        $(this).addClass("btn");
-        $(this).attr("style", "position: relative; top: 70px !important; margin-left: 5px");
-        $(this).removeClass("green-font");
-      }else{
-        nameBenefits.text($(this).parent().find(".edit-text-field").val());
-        nameBenefits.show();
-        fieldBenefits.hide();
-        $(this).removeClass("btn");
-        $(this).removeAttr("style", "position: relative; top: 70px !important; margin-left: 5px");
-        $(this).addClass("edit-benefit italic green-font");
-        $(this).text("select to edit")
+      $('.breadcrumbs li').each(function(){
+        $(this).removeClass('active');
+      })
+
+      var hashVal = window.location.hash.split("#")[1];
+      console.log(hashVal);
+      if(hashVal == 'sponsor-info') {
+        $("[data-id='" + hashVal + "']").show();
+        $('.breadcrumbs li[class*="' + hashVal + '"]').addClass('active');
       }
-    });
+      if(hashVal == 'project-details') {
+        $("[data-id='" + hashVal + "']").show();
+        $('li.' + hashVal).addClass('active');
+      }
+      if(hashVal == 'perks') {
+        $("[data-id='" + hashVal + "']").show();
+        $('.breadcrumbs li[class*="' + hashVal + '"]').addClass('active');
+      }
+      if(hashVal == 'sponsorship') {
+        $("[data-id='" + hashVal + "']").show();
+        $('.breadcrumbs li[class*="' + hashVal + '"]').addClass('active');
+      }
+      if(hashVal == 'assets') {
+        $("[data-id='" + hashVal + "']").show();
+        $('.breadcrumbs li[class*="' + hashVal + '"]').addClass('active');
+      }
+    }else{
+      window.location.href = "/projects/#{@project.id}/edit#sponsor-info";
+      window.location.reload(true);
+    }
   }
 
-  var addAnotherNewBenefit = function(){
-    $(".add-another").bind("click", function(e) {
-      var divCore = $(this).parent().children("#custom-checkbox");
-      var checkFieldP = $(this).parent().children("#existing-checkbox").children(".checkbox").last().children().first();
-      var checkboxName = checkFieldP.attr("id").split("_")[0];
-      var checkboxVal = checkFieldP.attr("id").split("_")[1];
-      var countCheckbox = parseInt(checkboxVal) + 1;
-
-      $("#"+ checkboxName +"-count").val(countCheckbox);
-      $("<div class='checkbox default'><input id='"+ checkboxName + "_" + countCheckbox + "' type='checkbox' value='1' name='"+ checkboxName +"["+ countCheckbox +"]''><input id='"+ checkboxName + "_info_"+ countCheckbox +"' class='"+checkboxName+"_benefits add_benefits' type='text' style='margin-top: -33px; width: 80% !important;' placeholder='Create your costum benefit here...' name='"+ checkboxName + "[info_"+countCheckbox+"]'><span class='save_new_benefit pull-right btn' style='margin-top:-79px; left:-20px'>Save</span><span class='remove-another pull-right btn' style='margin-top:-51px;'>Remove</span></div>").appendTo(divCore);
-      countCheckbox++;
-      addNewBenefit();
-      removeAnotherBenefit();
-      return false;
-    });
-  }
-
-  var removeAnotherBenefit = function(){
-    $(".remove-another").bind("click", function(){
-      $(this).parent().remove();
+  $(function(){
+    $("#large_image").delegate('.pick-cover-photo', 'load', function() {
+      $("#uruutTour").joyride({
+        autoStart : true,
+        'tipLocation': 'bottom'
+      });
     })
-  }
+    var map = L.map('map').setView([51.505, -0.09], 13);
+    getHash();
+    $(window).on('hashchange', function() {
+      getHash();
+      // window.location.reload(true);
+    });
 
-  var addNewBenefit = function(){
-    $(".save_new_benefit").bind("click", function(){
-      var divCore = $(this).parent().parent().parent().children("#existing-checkbox");
-      var benefits = divCore.children().children("input").last();
-      var benefitsValue = $(this).parent().children(".add_benefits").val();
-      var boxName = benefits.attr("id").split("_")[0];
-      var boxValue = benefits.attr("id").split("_")[2];
-      var boxLength = parseInt(boxValue) + 1;
-
-      if(benefitsValue){
-        $("<div class='checkbox default'><input id='"+boxName+"_"+boxLength+"' type='checkbox' name='"+boxName+"["+boxLength+"]' checked='checked'><span id='name'>"+benefitsValue+"</span><span class='edit-benefit italic green-font'>select to edit</span><input id='"+ boxName +"_info_"+ boxLength+"' class='edit-text-field' type='text' value='"+benefitsValue+"' style='width: 320px !important; display: none;' name='"+boxName+"[info_"+boxLength+"]'></div>").appendTo(divCore);
-        boxLength++;
-        $(this).parent().remove();
-        editBenefit();
-        return false;
+    $('.breadcrumbs li').hover(function() {
+      $(this).addClass('active');
+    }, function() {
+      var hash = window.location.hash.split("#")[1];
+      if($(this).hasClass(hash)){
+        $(this).addClass('active');
       }else{
-        alert("sorry you can't add new benefits because the field is blank!");
+        $(this).removeClass('active');
       }
     });
-  }
 
+   $('.step-container').on('form', 'submit', function() {
+     console.log("form submitted");
+     return $(this).h5Validate();
+   });
+
+   $('.step-container[data-id="sponsor-info"] form').on('submit', function(e){
+     if($('#connected').val() == 'true') {
+      e.preventDefault();
+      var data = $(this).serialize();
+      $.ajax({
+        type: 'POST',
+        url: '#{project_path(@project.id)}',
+        data: data
+      }).done(function(data){
+        console.log("Success???");
+        console.log(data);
+        window.location.href = '/projects/' + data + '/edit#project-details';
+        window.location.reload(true);
+        localStorage.clear();
+      })
+     }else{
+       alert("Connect with Stripe, please.");
+       return false;
+     }
+    })
+
+    $('.step-container[data-id="project-details"] form').on('submit', function(e){
+      e.preventDefault();
+      console.log("prevent worked");
+      var data = $(this).serialize();
+      console.log(data);
+      $.ajax({
+        type: 'POST',
+        url: '#{project_path(@project.id)}',
+        data: data
+      }).done(function(data){
+        console.log("Success???");
+        window.location.href = '/projects/' + data + '/edit#perks';
+        window.location.reload(true);
+      })
+    })
+
+    $('.step-container[data-id="perks"] form').on('submit', function(e){
+      e.preventDefault();
+      console.log("prevent worked");
+      var data = $(this).serialize();
+      console.log(data);
+      $.ajax({
+        type: 'POST',
+        url: '#{project_path(@project.id)}',
+        data: data
+      }).done(function(data){
+        console.log("Success???");
+        window.location.href = '/projects/' + data + '/edit#sponsorship';
+        window.location.reload(true);
+      })
+    })
+
+    $('.step-container[data-id="sponsorship"] form').on('submit', function(e){
+      e.preventDefault();
+      console.log("prevent worked");
+      var data = $(this).serialize();
+      console.log(data);
+      $.ajax({
+        type: 'POST',
+        url: '#{project_path(@project.id)}',
+        data: data
+      }).done(function(data){
+        console.log("Success???");
+        window.location.href = '/projects/' + data + '/edit#assets';
+        window.location.reload(true);
+      })
+    })
+
+    $('.add-perk').on('click', function(e) {
+      e.preventDefault();
+      console.log(document.location.hostname);
+      var name = $('#perk-name').val();
+      var amount = $('#perk-amount').val();
+      var description = $('#perk-description').val();
+      var project = #{@project.id};
+      var data = {name: name, amount: amount, description: description, project: project};
+      $.ajax({
+        type: 'POST',
+        url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/add_perk',
+        data: data
+      }).done(function(data) {
+        console.log(data);
+        window.location.reload(true);
+      }).error(function(error) {
+        console.log(error);
+      });
+    })
+
+    $('.update-perk').on('click', function(e) {
+      e.preventDefault();
+      var name = $('#perk-name').val();
+      var amount = $('#perk-amount').val();
+      var description = $('#perk-description').val();
+      var perk_id = $('#perk-id').val();
+      var data = {name: name, amount: amount, description: description, id: perk_id};
+      $.ajax({
+        type: 'POST',
+        url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/update_perk',
+        data: data
+      }).done(function(data) {
+        console.log(data);
+        window.location.reload(true);
+      });
+    })
+
+    $('.perk-delete').on('click', function(e) {
+      e.preventDefault();
+      var perk_id = $(this).parent().find('input[type=hidden]').val();
+      console.log(perk_id);
+      var data = {id: perk_id};
+      $.ajax({
+        type: 'POST',
+        url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/delete_perk',
+        data: data
+      }).done(function(data) {
+        console.log(data);
+        window.location.reload(true);
+      });
+    })
+
+    $('.created-perk .perk-edit').on('click', function() {
+      $.ajax({
+        type: 'POST',
+        url: '#{get_perk_projects_url}',
+        data: {id: $(this).parent().find('input[type=hidden]').val()}
+      }).done(function(data) {
+        $('#perk-name').val(data.name);
+        $('#perk-amount').val(data.amount);
+        $('#perk-description').val(data.description);
+        $('#perk-id').val(data.id)
+        $('.add-perk').hide();
+        $('.update-perk').show();
+      });
+    });
+
+    $('li.submit a').click(function(event) {
+      event.preventDefault();
+      console.log(#{@project.id})
+      $.ajax({
+        type:'POST',
+        url: '#{projects_submit_project_url}',
+        data: {id: #{@project.id}}
+      }).done(function(data) {
+        if(data == "successful") {
+          window.location.href = "#{thank_you_pages_url}";
+        }
+      })
+    })
+
+    $('.stripe-connect').click(function() {
+      localStorage.setItem('organization', $('#project_organization').val());
+      localStorage.setItem('address', $('#project_address').val());
+      localStorage.setItem('city', $('#project_city').val());
+      localStorage.setItem('state', $('#project_state').val());
+      localStorage.setItem('zip', $('#project_zip').val());
+      localStorage.setItem('website', $('#project_website').val());
+      localStorage.setItem('twitter_handle', $('#project_twitter_handle').val());
+      localStorage.setItem('facebook_page', $('#project_facebook_page').val());
+    });
+
+    if(localStorage.getItem('organization')) {
+      $('#project_organization').val(localStorage.getItem('organization'));
+    }
+
+    if(localStorage.getItem('address')) {
+      $('#project_address').val(localStorage.getItem('address'));
+    }
+
+    if(localStorage.getItem('city')) {
+      $('#project_city').val(localStorage.getItem('city'));
+    }
+
+    if(localStorage.getItem('state')) {
+      $('#project_state').val(localStorage.getItem('state'));
+    }
+
+    if(localStorage.getItem('zip')) {
+      $('#project_zip').val(localStorage.getItem('zip'));
+    }
+
+    if(localStorage.getItem('website')) {
+      $('#project_website').val(localStorage.getItem('website'));
+    }
+
+    if(localStorage.getItem('twitter_handle')) {
+      $('#project_twitter_handle').val(localStorage.getItem('twitter_handle'));
+    }
+
+    if(localStorage.getItem('facebook_page')) {
+      $('#project_facebook_page').val(localStorage.getItem('facebook_page'));
+    }
+
+  });
 
   getPerkProjectUrl = "#{get_perk_projects_url}";
   submitUrl = "#{projects_submit_project_url}";

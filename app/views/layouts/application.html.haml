@@ -9,7 +9,9 @@
     %meta{:content => "", :name => "description"}
     %meta{:content => "", :name => "author"}
     = stylesheet_link_tag  "default/application", "trontastic/jquery-ui-1.8.22.custom.css", "http://cdn.leafletjs.com/leaflet-0.5/leaflet.css", "http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css", :media => "all"
+    = stylesheet_link_tag "image_select/jquery.Jcrop.min"
     = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js", "application", "https://js.stripe.com/v1/", :media => "all"
+    = javascript_include_tag "jquery.Jcrop.min"
     = filepicker_js_include_tag
     = javascript_tag do
       Stripe.setPublishableKey("#{STRIPE_PUBLIC_KEY}");
@@ -86,18 +88,58 @@
   var updateCover = function(event){
     console.log(event.fpfile.url);
     var largeImage = event.fpfile.url;
-
-    $.ajax({
-      url: '/projects/save_image',
-      method: 'POST',
-      data: {
-        large_image: largeImage
-        }
-    }).done(function(){
-      console.log("finished");
+    console.log("finished");
+    $("body").animate({ scrollTop: 0 }, "slow");
+    $('<img />').attr('src', largeImage).load(function() {
       $('#large_image').css('background-image','url(' + largeImage + ')').css('-webkit-background-size', 'cover').css('-moz-background-size', 'cover').css('background-size', 'cover');
+      var img = new Image;
+      img.src = $('#large_image').css('background-image').replace(/url\(|\)$/ig, "");
+      console.log(img.width);
+      if ( img.width >= 1600 )
+      {
+        $.ajax({
+          url: '/projects/save_image',
+          method: 'POST',
+          data: { large_image: largeImage }
+        });
+        $(".coverphoto").hide();
+        $("#url_image").val(largeImage);
+        $("#image-priview").append('<div style="margin: 0 auto; width: 900px;"><img id="cover-priview" src="' + largeImage + '"/></div>');
+
+        var w = $("#cover-priview").width();
+        var h = $("#cover-priview").height();
+
+        $(".funding-info").hide();
+
+        $('#cover-priview').Jcrop({
+          onChange: showCoords,
+          onSelect: showCoords,
+          allowSelect: false,
+          allowResize: false,
+          boxWidth: 900,
+          setSelect: [ 0, 1, parseInt(w), parseInt(h) ],
+          aspectRatio: 1 / 1
+          },function(){
+            jcrop_api = this;
+        });
+
+        $(".action-convert").show();
+      }
+      else{
+        alert("image width for cover should be more than 1600px");
+      }
     });
   }
+
+  function showCoords(coords)
+  {
+    var w = $("#cover-priview").width();
+    var ratio = parseInt(w) / parseInt(w);
+    $('#x_position').val(Math.round(coords.x * ratio));
+    $("#y_position").val(Math.round(coords.y * ratio));
+    $('#width_after').val(Math.round(coords.w * ratio));
+    $("#height_after").val(Math.round(coords.h * ratio));
+  };
 
   var updatePlantingSeedImage = function(event) {
     console.log(event.fpfile.url);
