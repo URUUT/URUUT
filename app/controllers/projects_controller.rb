@@ -99,10 +99,11 @@ if @project.bitly.blank?
   @project.bitly = page_url.short_url
 end
 
-if @project.save
-  respond_to do |format|
-    format.js { render :js => @project.id }
-  end
+  if @project.save
+    respond_to do |format|
+      format.json { render :json => @project.id }
+    end
+
 end
 end
 
@@ -207,7 +208,7 @@ def submit_project
     logger.debug("Saving!!!")
     respond_to do |format|
       Project.send_confirmation_email(project)
-      format.text { render :text => "successful" }
+      format.json { render :json => project.ready_for_approval }
     end
   end
 end

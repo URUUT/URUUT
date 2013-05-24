@@ -1,6 +1,8 @@
 class Project < ActiveRecord::Base
   belongs_to :user
 
+  before_save :downcase_city
+
   attr_accessible :category, :description, :duration, :goal, :address, :project_title, :sponsorship_permisson,
     :city, :state, :zip, :neighborhood, :title, :image, :video, :tags, :live, :short_description,
     :perks_attributes, :galleries_attributes, :status, :organization, :website, :twitter_handle, :facebook_page, :seed_video,
@@ -34,7 +36,7 @@ class Project < ActiveRecord::Base
 
   # Select unique values of some field, e.g. cities and categories
   def self.unique_values_of(type)
-    select(type).uniq.pluck(type)
+    self.select(type).uniq.pluck(type)
   end
 
   def self.by_city(city)
@@ -62,6 +64,12 @@ class Project < ActiveRecord::Base
 
   def self.send_confirmation_email(project)
     ProjectMailer.project_confirmation(project).deliver
+  end
+
+  def downcase_city
+    unless self.city.nil?
+      self.city.downcase!
+    end
   end
 
 end
