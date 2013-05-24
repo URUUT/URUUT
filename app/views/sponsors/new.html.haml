@@ -135,11 +135,10 @@
 
 = javascript_include_tag "sponsors"
 :javascript
-  project_token = "#{@project.project_token}"
-  project_pub_key = "#{@project.publishable_key}"
+  project_token = "#{@project.project_token}";
+  project_pub_key = "#{@project.publishable_key}";
+  
   $(function(){
-
-  $(document).ready(function(){
     var selectedLevel = parseInt($('#selected_level').attr("level_id"));
     $("#project_sponsor_level_id option[value='"+ selectedLevel +"']").attr("selected", "selected");
     Stripe.setPublishableKey('pk_test_BTNPlS59UIPJC5Fnp7CR9It6');
