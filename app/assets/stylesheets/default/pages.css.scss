@@ -331,6 +331,14 @@ label {
 		vertical-align:-1px;
 		width:9px;
 	}}
+	
+.selectbox-wrapper {
+	ul {
+		li {
+			text-transform:capitalize;
+		}
+	}
+}
 
 .no-hover {
 	span {
@@ -1917,7 +1925,8 @@ input.selectbox {
 	background:#fff url(image-path('select-back.png')) 97% center no-repeat;
 	cursor:pointer;
 	width:140px !important;
-	position:relative;}
+	position:relative;
+	text-transform:capitalize;}
 
 .selectbox-wrapper {
 	border-bottom-right-radius:3px;
@@ -1939,6 +1948,7 @@ input.selectbox {
 			font:bold 24px/24px arial, helvetica, sans-serif;
 			list-style-type:none;
 			margin-bottom:19px;
+			text-transform:capitalize;
 			width:135px;}}}
 
 .breadcrumb-container {
