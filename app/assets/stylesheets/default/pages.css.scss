@@ -1519,6 +1519,26 @@ a.green {
   font-style:italic;
 }
 
+.badge-wrapper {
+  padding-left:20px;
+  .popover-title {
+    display:none;
+  }
+  .popover-content {
+    color: #70bf4c;
+    font:bold 14px "Proxima Nova", arial, sans-serif;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    text-align:center;
+  }
+  .profile-badge {
+    width:75px;
+    height:75px;
+    margin-right:10px;
+    margin-bottom:15px;
+  }
+}
+
 .donation_steps {
   font-family:'Proxima Nova';
 

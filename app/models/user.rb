@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :remember_me, :city, :state, :zip,
                   :neighborhood, :provider, :uid, :token, :organization, :mission, :subscribed, :avatar
                   
+  after_create :send_welcome_email
+  after_create :assign_default_badge
+                  
   attr_accessor :avatar_upload_width, :avatar_upload_height
   # attr_accessible :title, :body
 
@@ -25,6 +28,9 @@ class User < ActiveRecord::Base
 
 
   has_many :donations
+
+  # Badging
+  has_merit
 
   # mount_uploader :avatar, AvatarUploader
 
@@ -94,6 +100,10 @@ class User < ActiveRecord::Base
 
   def send_welcome_email
     WelcomeMailer.welcome_confirmation(self).deliver
+  end
+
+  def assign_default_badge
+    self.add_badge(1)
   end
 
   # def minimum_image_size
