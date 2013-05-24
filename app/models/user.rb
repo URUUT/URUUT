@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
   validates_presence_of :first_name
-   validates_presence_of :last_name
+  validates_presence_of :last_name
   # validate :minimum_image_size
   # validates_uniqueness_of :name, :email, :case_sensitive => false
 
