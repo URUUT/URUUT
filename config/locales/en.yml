@@ -2,4 +2,11 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              taken: "is already taken, we are sorry. Please select another email address."
   hello: "Hello world"
