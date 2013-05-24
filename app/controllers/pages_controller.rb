@@ -4,16 +4,11 @@ class PagesController < ApplicationController
   skip_before_filter :set_previous_page
 
   def index
-    if params[:keyword]
-      @projects = Project.by_keyword(params[:keyword]).page(params[:page]).per(1)
-      #@projects = Project.where("title LIKE :keyword OR description LIKE :keyword", :keyword => "%#{params[:keyword]}%").page(params[:page]).per(1)
-    else
-      @projects = Project.where("live = 1 AND ready_for_approval = 0").by_city(params[:city]).
-          by_category(params[:category]).all
-      @ending = Project.where("live = 1 AND ready_for_approval = 0").by_city(params[:city]).
-          by_category(params[:category]).order(:duration).all
-    end
-    logger.debug(@projects)
+    projects_list
+  end
+
+  def search
+    projects_list
   end
 
   def discover
@@ -44,6 +39,19 @@ class PagesController < ApplicationController
 
   def how_it_works
     # session[:previous_page] = request.referer
+  end
+
+  private
+  def projects_list
+    if params[:keyword]
+      @projects = Project.by_keyword(params[:keyword]).page(params[:page]).per(1)
+      #@projects = Project.where("title LIKE :keyword OR description LIKE :keyword", :keyword => "%#{params[:keyword]}%").page(params[:page]).per(1)
+    else
+      @projects = Project.where("live = 1 AND ready_for_approval = 0").by_city(params[:city]).
+        by_category(params[:category]).all
+      @ending = Project.by_city(params[:city]).by_category(params[:category]).order(:duration).all
+    end
+    logger.debug(@projects)
   end
 
 end
