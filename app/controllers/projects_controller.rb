@@ -16,9 +16,9 @@ class ProjectsController < ApplicationController
     session[:current_project] = ''
     session[:connected] = ''
  #    @project.perks.build
- #    @project.galleries.build   
-   render :layout => 'landing'
- end
+ #    @project.galleries.build
+ render :layout => 'landing'
+end
 
 def create
   @project = Project.new(params[:project])
@@ -54,56 +54,63 @@ def show
   render :layout => 'landing'
 end
 
-  def update
-    @project = Project.find(params[:id])
-    sponsorship_benefits = []
+def update
+  @project = Project.find(params[:id])
+  sponsorship_benefits = []
 
-    def sponsorship_benefit_level(level, benefit, key)
-     data = []
-     1.upto(params["#{level}_count"].to_i) do |x|
-      count = if !benefit[x - 1].blank?
-        !benefit[x - 1][:id].blank? ? benefit[x - 1][:id] : x
-      else
-        x
+  def sponsorship_benefit_level(level, benefit, key)
+   data = []
+   1.upto(params["#{level}_count"].to_i) do |x|
+    count = if !benefit[x - 1].blank?
+      !benefit[x - 1][:id].blank? ? benefit[x - 1][:id] : x
+    else
+      x
+    end
+    status = params["#{level}"]["#{count}"] ? 1 : 0
+    if @project.sponsorship_benefits.blank? || params["#{level}"]["id_#{count}"].nil?
+      unless params["#{level}"]["info_#{count}"].blank?
+        data <<  {name: params["#{level}"]["info_#{count}"],sponsorship_level_id: key, project_id: @project.id, status: status}
       end
-      status = params["#{level}"]["#{count}"] ? 1 : 0
-      if @project.sponsorship_benefits.blank? || params["#{level}"]["id_#{count}"].nil?
-        unless params["#{level}"]["info_#{count}"].blank?
-          data <<  {name: params["#{level}"]["info_#{count}"],sponsorship_level_id: key, project_id: @project.id, status: status}
-        end
-     else
-        sponsorship_benefit = SponsorshipBenefit.find(params[level]["id_#{count}"])
-        sponsorship_benefit.update_attributes({name: params["#{level}"]["info_#{count}"],sponsorship_level_id: key, project_id: @project.id, status: status})
-     end
+    else
+      sponsorship_benefit = SponsorshipBenefit.find(params[level]["id_#{count}"])
+      sponsorship_benefit.update_attributes({name: params["#{level}"]["info_#{count}"],sponsorship_level_id: key, project_id: @project.id, status: status})
     end
-    data
+  end
+  data
+end
+
+SponsorshipBenefit::SPONSORSHIP_BENEFITS.each do |key, value|
+
+  case key
+  when 1 then sponsorship_benefits += sponsorship_benefit_level("platinum", value, key)
+  when 2 then sponsorship_benefits += sponsorship_benefit_level("gold", value, key)
+  when 3 then sponsorship_benefits += sponsorship_benefit_level("silver", value, key)
+  when 4 then sponsorship_benefits += sponsorship_benefit_level("bronze", value, key)
   end
 
-  SponsorshipBenefit::SPONSORSHIP_BENEFITS.each do |key, value|
+end
 
-    case key
-      when 1 then sponsorship_benefits += sponsorship_benefit_level("platinum", value, key)
-      when 2 then sponsorship_benefits += sponsorship_benefit_level("gold", value, key)
-      when 3 then sponsorship_benefits += sponsorship_benefit_level("silver", value, key)
-      when 4 then sponsorship_benefits += sponsorship_benefit_level("bronze", value, key)
-    end
-    
-  end
-
-  @sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits)
-  @project.update_attributes!(params[:project])
-  
-  if @project.bitly.blank?
-    bitly = Bitly.client
-    page_url = bitly.shorten("#{request.scheme}://#{request.host_with_port}/projects/#{@project.id}")
-    @project.bitly = page_url.short_url
-  end
-
+<<<<<<< HEAD
   if @project.save
     respond_to do |format|
       format.json { render :json => @project.id }
     end
+=======
+@sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits)
+@project.update_attributes!(params[:project])
+
+if @project.bitly.blank?
+  bitly = Bitly.client
+  page_url = bitly.shorten("#{request.scheme}://#{request.host_with_port}/projects/#{@project.id}")
+  @project.bitly = page_url.short_url
+end
+
+if @project.save
+  respond_to do |format|
+    format.js { render :js => @project.id }
+>>>>>>> 90cf09cd92dca03357b96a2d2c23944e666be4c5
   end
+end
 end
 
 def stripe_update
@@ -131,8 +138,10 @@ def save_video
   @project = Project.find_by_id(session[:current_project])
   if params[:video_type].eql?("seed")
     @project.seed_video = params[:video_link]
+    @project.seed_mime_type = "video"
   else
     @project.cultivation_video = params[:video_link]
+    @project.cultivation_mime_type = "video"
   end
 
   @project.save
@@ -145,13 +154,14 @@ def save_image
    @project.large_image = params[:large_image]
  elsif params[:seed_image]
    @project.seed_image = params[:seed_image]
- elsif params[:cultivation_image]
+   @project.seed_mime_type = "image"
+ else
   @project.cultivation_image = params[:cultivation_image]
+  @project.cultivation_mime_type = "image"
 end
 
-if @project.save
-  render :nothing => true
-end
+
+render :nothing => true if @project.save
 end
 
 def add_perk
