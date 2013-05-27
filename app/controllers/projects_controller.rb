@@ -16,9 +16,9 @@ class ProjectsController < ApplicationController
     session[:current_project] = ''
     session[:connected] = ''
  #    @project.perks.build
- #    @project.galleries.build   
-   render :layout => 'landing'
- end
+ #    @project.galleries.build
+ render :layout => 'landing'
+end
 
 def create
   @project = Project.new(params[:project])
@@ -54,56 +54,56 @@ def show
   render :layout => 'landing'
 end
 
-  def update
-    @project = Project.find(params[:id])
-    sponsorship_benefits = []
+def update
+  @project = Project.find(params[:id])
+  sponsorship_benefits = []
 
-    def sponsorship_benefit_level(level, benefit, key)
-     data = []
-     1.upto(params["#{level}_count"].to_i) do |x|
-      count = if !benefit[x - 1].blank?
-        !benefit[x - 1][:id].blank? ? benefit[x - 1][:id] : x
-      else
-        x
+  def sponsorship_benefit_level(level, benefit, key)
+   data = []
+   1.upto(params["#{level}_count"].to_i) do |x|
+    count = if !benefit[x - 1].blank?
+      !benefit[x - 1][:id].blank? ? benefit[x - 1][:id] : x
+    else
+      x
+    end
+    status = params["#{level}"]["#{count}"] ? 1 : 0
+    if @project.sponsorship_benefits.blank? || params["#{level}"]["id_#{count}"].nil?
+      unless params["#{level}"]["info_#{count}"].blank?
+        data <<  {name: params["#{level}"]["info_#{count}"],sponsorship_level_id: key, project_id: @project.id, status: status}
       end
-      status = params["#{level}"]["#{count}"] ? 1 : 0
-      if @project.sponsorship_benefits.blank? || params["#{level}"]["id_#{count}"].nil?
-        unless params["#{level}"]["info_#{count}"].blank?
-          data <<  {name: params["#{level}"]["info_#{count}"],sponsorship_level_id: key, project_id: @project.id, status: status}
-        end
-     else
-        sponsorship_benefit = SponsorshipBenefit.find(params[level]["id_#{count}"])
-        sponsorship_benefit.update_attributes({name: params["#{level}"]["info_#{count}"],sponsorship_level_id: key, project_id: @project.id, status: status})
-     end
-    end
-    data
-  end
-
-  SponsorshipBenefit::SPONSORSHIP_BENEFITS.each do |key, value|
-
-    case key
-      when 1 then sponsorship_benefits += sponsorship_benefit_level("platinum", value, key)
-      when 2 then sponsorship_benefits += sponsorship_benefit_level("gold", value, key)
-      when 3 then sponsorship_benefits += sponsorship_benefit_level("silver", value, key)
-      when 4 then sponsorship_benefits += sponsorship_benefit_level("bronze", value, key)
-    end
-    
-  end
-
-  @sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits)
-  @project.update_attributes!(params[:project])
-  
-  if @project.bitly.blank?
-    bitly = Bitly.client
-    page_url = bitly.shorten("#{request.scheme}://#{request.host_with_port}/projects/#{@project.id}")
-    @project.bitly = page_url.short_url
-  end
-
-  if @project.save
-    respond_to do |format|
-      format.js { render :js => @project.id }
+    else
+      sponsorship_benefit = SponsorshipBenefit.find(params[level]["id_#{count}"])
+      sponsorship_benefit.update_attributes({name: params["#{level}"]["info_#{count}"],sponsorship_level_id: key, project_id: @project.id, status: status})
     end
   end
+  data
+end
+
+SponsorshipBenefit::SPONSORSHIP_BENEFITS.each do |key, value|
+
+  case key
+  when 1 then sponsorship_benefits += sponsorship_benefit_level("platinum", value, key)
+  when 2 then sponsorship_benefits += sponsorship_benefit_level("gold", value, key)
+  when 3 then sponsorship_benefits += sponsorship_benefit_level("silver", value, key)
+  when 4 then sponsorship_benefits += sponsorship_benefit_level("bronze", value, key)
+  end
+
+end
+
+@sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits)
+@project.update_attributes!(params[:project])
+
+if @project.bitly.blank?
+  bitly = Bitly.client
+  page_url = bitly.shorten("#{request.scheme}://#{request.host_with_port}/projects/#{@project.id}")
+  @project.bitly = page_url.short_url
+end
+
+if @project.save
+  respond_to do |format|
+    format.js { render :js => @project.id }
+  end
+end
 end
 
 def stripe_update
@@ -160,12 +160,13 @@ def add_perk
   perk.amount = params[:amount]
   perk.description = params[:description]
   perk.project_id = params[:project]
+  perk.perks_available = params[:perks_available]
+  perk.limit = params[:limit].eql?("yes") ? true : false
   if perk.save!
     respond_to do |format|
       format.text { render :text => "Success" }
-	#format.js { render :js => perk.id }
-end
-end
+    end
+  end
 end
 
 def get_perk
