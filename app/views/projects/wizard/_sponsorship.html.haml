@@ -17,9 +17,10 @@
       %p One of the things that makes Uruut different from other crowd-funding platforms is the ability for businesses and foundations to sponsor projects. While we believe business and foundation sponsorship are the best way to help you reach your goal, you are not required to allow them.
 
     %div
-
       %h6{:style => "color:#70bf4c"} ALLOW PROJECT SPONSORSHIPS?
-      = f.select :sponsorship_permisson, options_for_select({ "Yes" => "yes", "No" => "no" }, "yes"), {}, {:onchange => "changeProjectPermission()"}
+      .span2{style: "margin-left: 0"}
+        = f.select :sponsorship_permission, options_for_select({ "Yes" => "yes", "No" => "no" }, "yes"), {}, {:onchange => "changeProjectPermission()"}
+    .clearfix
 
     %div.sponsorship-true
       %div
@@ -272,6 +273,17 @@
     addAnotherNewBenefit();
     removeAnotherBenefit();
   });
+
+  var changeProjectPermission = function(){
+    if ( $("#project_sponsorship_permission").val() == "no" ){
+      $(".sponsorship-true").hide();
+      $(".sponsorship-false").show();
+    }
+    else{
+      $(".sponsorship-false").hide();
+      $(".sponsorship-true").show();
+    }
+  };
 
   var editBenefit = function() {
     $(".edit-benefit").bind("click", function() {
