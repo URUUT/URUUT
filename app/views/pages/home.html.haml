@@ -13,6 +13,16 @@
 %section.full-width.description
   .container
 
+    / %h2 Crowdfunding to date has been about only individuals coming together to raise money. Until now.
+    / %h1 Introducing URUUT Partner-Funding<sup>SM</sup>
+    / .btn.brown
+    /   Sign Up
+    /   %span
+    / .btn
+    /   What is it?
+    /   %span
+
+
 %section.full-width.partner#partner
   .container
     .marketing.float-left
@@ -96,6 +106,7 @@
       Fund Projects
       %span
 
+
 %section#error-sign.modal.hide.fade
   .modal-header{style: "height: 17px;"}
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
@@ -121,5 +132,6 @@
 
     $(".error-sign-up").click(function(){
       $("#error-sign").modal("show");
+
     })
   })

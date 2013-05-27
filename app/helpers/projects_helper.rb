@@ -51,7 +51,7 @@ module ProjectsHelper
       ['Walkability / Bike / Paths']
 		]
 	end
-  
+
   def project_org_type
     [
       ['Select Org Type'],
@@ -63,7 +63,7 @@ module ProjectsHelper
       ['Other Civic']
     ]
   end
-  
+
   def project_org_class
     [
       ['Select Org Class'],
@@ -84,6 +84,14 @@ module ProjectsHelper
   def stored_content
     content_for :description do
       "This is some text"
+    end
+  end
+
+  def action_image(image, video)
+    if !image.blank? or !video.blank?
+      ""
+    else
+      "display:none"
     end
   end
 

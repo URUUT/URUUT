@@ -50,6 +50,7 @@ GEM
       i18n (~> 0.6)
       multi_json (~> 1.0)
     addressable (2.3.4)
+    ambry (0.3.1)
     arel (3.0.2)
     awesome_print (1.1.0)
     aws-sdk (1.9.3)
@@ -162,6 +163,8 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    merit (1.6.1)
+      ambry (~> 0.3.0)
     mime-types (1.23)
     mini_magick (3.5.0)
       subexec (~> 0.2.1)
@@ -327,6 +330,7 @@ DEPENDENCIES
   heroku
   jquery-rails
   kaminari
+  merit
   mini_magick
   oauth2
   omniauth
