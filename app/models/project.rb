@@ -34,7 +34,7 @@ class Project < ActiveRecord::Base
 
   # Select unique values of some field, e.g. cities and categories
   def self.unique_values_of(type)
-    select(type).uniq.pluck(type)
+    self.select(type).uniq.pluck(type)
   end
 
   def self.by_city(city)
@@ -62,6 +62,12 @@ class Project < ActiveRecord::Base
 
   def self.send_confirmation_email(project)
     ProjectMailer.project_confirmation(project).deliver
+  end
+
+  def downcase_city
+    unless self.city.nil?
+      self.city.downcase!
+    end
   end
 
 end
