@@ -15,11 +15,11 @@ $ ->
       else
         $("#email-sign-up-error").show()
 
-  submit_filter_form = ->
-    $("form.project-filter").submit()
+  # submit_filter_form = ->
+  #   $("form.project-filter").submit()
 
-  $("form.project-filter #location").bind "change", submit_filter_form
-  $("form.project-filter #category").bind "change", submit_filter_form
+  # $("form.project-filter #location").bind "change", submit_filter_form
+  # $("form.project-filter #category").bind "change", submit_filter_form
 
 	geocoder = ''
 	address = ''
@@ -31,27 +31,27 @@ $ ->
 
   $('.down').click ->
 		$('.dropdown').toggle()
-		
+
 	$('ul.nav li').hover ->
-		$(this).children('div').css('display', 'block') 
+		$(this).children('div').css('display', 'block')
 	,->
 		$(this).children('div').css('display', 'none')
 
 	# $('#duration').datepicker({altField: '#project_duration', altFormat: 'yy-mm-dd'})
-	
+
 	$('#project_description').redactor()
-	
-	
+
+
 	$("div.project div.location img").click ->
 	  console.log "hello"
-		
+
 	initialize = ->
 			geocoder = new google.maps.Geocoder()
 			mapOptions =
 				center: new google.maps.LatLng(-34.397, 150.644)
 				zoom: 8
 				mapTypeId: google.maps.MapTypeId.ROADMAP
-	
+
 			canvas = document.getElementById("map_canvas")
 			map = new google.maps.Map(canvas, mapOptions)
 		codeAddress = ->
@@ -74,10 +74,10 @@ $ ->
 		initialize()
 		codeAddress()
 		$("#myMap").modal()
-	
+
   desc = $(".short-description:visible").text().length
   console.log(desc)
-	
+
 	$('.breadcrumbs li').hover ->
 		$(this).addClass('active')
 	,->
