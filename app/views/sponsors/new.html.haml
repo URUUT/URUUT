@@ -35,7 +35,7 @@
               SPONSOR
               %span
 
-    = form_for(@sponsor, :url => project_sponsors_path, :html => {:class => "span8 well", :style => "margin-left: 0;"}) do |f|
+    = form_for(@sponsor, :url => project_sponsors_path, :html => {:class => "span8 well", :style => "margin-left: 0;", multipart: true, method: 'POST'}) do |f|
       .payment-errors
       .span12{:style => "background-color: #f5f5f5; margin-left: 0px;"}
         .pull-left{:style => "width: 250px; height: 500px; border-right: solid 1px #d3d3d3;"}
@@ -71,13 +71,14 @@
           %span.italic (max 45 days)
         = f.select :payment_type, options_for_select(Sponsor::PAYMENT), :id => "payment_type", required: true, :size => 17
 
+
       ///////////////////////////////////////////////////////
       /                                                     /
       / Do not change this credit card form as it is set up /
       / the way that stripe needs it and is working         /
       /                                                     /
-      ///////////////////////////////////////////////////////	  
-	  
+      ///////////////////////////////////////////////////////
+
       %div#credit-card{:style => "float: left;"}
         = hidden_field_tag :token
         = hidden_field_tag 'project_sponsor[card_type]'
@@ -108,7 +109,7 @@
       %div#wire-transfer{:style => "display: none; float: left;"}
         %div
           = f.label :name, "CONTACT NAME*", class: "green-font"
-          / = f.text_field :name, :size => 40, label: false, class: "transfer-input"
+          = f.text_field :name, :size => 40, label: false, class: "transfer-input"
         %div
           = f.label :email, "CONTACT EMAIL*", class: "green-font"
           = f.text_field :email, :size => 40, label: false, class: "transfer-input"
@@ -122,11 +123,10 @@
 .project-id{:style => "display: none;"}
   = @project.id
 
-= javascript_include_tag "sponsors"
 :javascript
   project_token = "#{@project.project_token}";
   project_pub_key = "#{@project.publishable_key}";
-  
+
   $(function(){
     var selectedLevel = parseInt($('#selected_level').attr("level_id"));
     $("#project_sponsor_level_id option[value='"+ selectedLevel +"']").attr("selected", "selected");
@@ -191,6 +191,17 @@
         $(".card-input").removeAttr("required");
         $(".transfer-input").attr("required", "required");
       }
+    });
+
+    $('.stripe-connect').click(function() {
+      localStorage.setItem('organization', $('#project_organization').val());
+      localStorage.setItem('address', $('#project_address').val());
+      localStorage.setItem('city', $('#project_city').val());
+      localStorage.setItem('state', $('#project_state').val());
+      localStorage.setItem('zip', $('#project_zip').val());
+      localStorage.setItem('website', $('#project_website').val());
+      localStorage.setItem('twitter_handle', $('#project_twitter_handle').val());
+      localStorage.setItem('facebook_page', $('#project_facebook_page').val());
     });
 
     function updateCutdown() {
