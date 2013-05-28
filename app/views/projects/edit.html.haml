@@ -1,3 +1,11 @@
+:css
+  input[type="text"], input[type="email"], input[type="date"], input[type="password"] {
+    width: 100% !important;
+  }
+  .green-font{
+    color:#70bf4c;
+  };
+
 .breadcrumb-container
   %ul.breadcrumbs
     %li.sponsor-info
@@ -79,17 +87,6 @@
     $(".title-form-video").text("Add youtube video for cultivation video");
     $("#save-video").modal("show");
   });
-
-  var changeProjectPermission = function(){
-    if ( $("#project_sponsorship_permisson").val() == "no" ){
-      $(".sponsorship-true").hide();
-      $(".sponsorship-false").show();
-    }
-    else{
-      $(".sponsorship-false").hide();
-      $(".sponsorship-true").show();
-    }
-  };
 
   var getHash = function() {
     if(window.location.hash) {
@@ -226,73 +223,6 @@
         window.location.href = '/projects/' + data + '/edit#assets';
         window.location.reload(true);
       })
-    })
-
-    $('.add-perk').on('click', function(e) {
-      e.preventDefault();
-      console.log(document.location.hostname);
-      var name = $('#perk-name').val();
-      var amount = $('#perk-amount').val();
-      var description = $('#perk-description').val();
-      var project = #{@project.id};
-      var data = {name: name, amount: amount, description: description, project: project};
-      $.ajax({
-        type: 'POST',
-        url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/add_perk',
-        data: data
-      }).done(function(data) {
-        console.log(data);
-        window.location.reload(true);
-      }).error(function(error) {
-        console.log(error);
-      });
-    })
-
-    $('.update-perk').on('click', function(e) {
-      e.preventDefault();
-      var name = $('#perk-name').val();
-      var amount = $('#perk-amount').val();
-      var description = $('#perk-description').val();
-      var perk_id = $('#perk-id').val();
-      var data = {name: name, amount: amount, description: description, id: perk_id};
-      $.ajax({
-        type: 'POST',
-        url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/update_perk',
-        data: data
-      }).done(function(data) {
-        console.log(data);
-        window.location.reload(true);
-      });
-    })
-
-    $('.perk-delete').on('click', function(e) {
-      e.preventDefault();
-      var perk_id = $(this).parent().find('input[type=hidden]').val();
-      console.log(perk_id);
-      var data = {id: perk_id};
-      $.ajax({
-        type: 'POST',
-        url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/delete_perk',
-        data: data
-      }).done(function(data) {
-        console.log(data);
-        window.location.reload(true);
-      });
-    })
-
-    $('.created-perk .perk-edit').on('click', function() {
-      $.ajax({
-        type: 'POST',
-        url: '#{get_perk_projects_url}',
-        data: {id: $(this).parent().find('input[type=hidden]').val()}
-      }).done(function(data) {
-        $('#perk-name').val(data.name);
-        $('#perk-amount').val(data.amount);
-        $('#perk-description').val(data.description);
-        $('#perk-id').val(data.id)
-        $('.add-perk').hide();
-        $('.update-perk').show();
-      });
     });
 
     $('li.submit a').click(function(event) {
@@ -357,6 +287,6 @@
   getPerkProjectUrl = "#{get_perk_projects_url}";
   submitUrl = "#{projects_submit_project_url}";
   projectId = #{@project.id};
-  projectPath = '#{project_path(@project.id)}';
+  projectPath = "#{project_path(@project.id)}";
   thankYouUrl = "#{thank_you_pages_url}";
   window.projectId = projectId
