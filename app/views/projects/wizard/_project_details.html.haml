@@ -22,28 +22,28 @@
     = f.label :project_title, class: "green-font" do
       PROJECT TITLE*
       %span.italic{style: "color: #000"} (Ex. Dunwoody City Park Fountain)
-    = f.text_field :project_title, :required => true, :size => 45
+    = f.text_field :project_title, :required => true, class: "span8"
 
     = f.label :goal, class: "green-font" do
       FUNDING GOAL*
       %span.italic{style: "color: #000"} (must be at least $XXXX)
-    = f.text_field :goal, :required => true, :size => 45
+    = f.text_field :goal, :required => true, class: "span8"
 
     %div.inline
       = f.label :duration, class: "green-font" do
         CAMPAIGN LENGTH*
         %span.italic{style: "color: #000"} (max 45 days)
-      = f.select :duration, options_for_select(project_length, @project.duration), :required => true, :size => 17
+      = f.select :duration, options_for_select(project_length, @project.duration), :required => true
 
-    %div.inline{:style => "margin-left:20px;"}
+    %div.inline{:style => "margin-left:25px;"}
       = f.label :category, class: "green-font" do
         CATEGORY*
-      = f.select :category, options_for_select(project_categories, @project.category), :required => true, :size => 17
+      = f.select :category, options_for_select(project_categories, @project.category), :required => true
 
     = f.label :title, class: "green-font" do
       CAMPAIGN HEADLINE*
       %span.italic{style: "color: #000"} (XX characters remaing)
-    = f.text_field :title, :required => true, :size => 45
+    = f.text_field :title, :required => true, class: "span8"
 
     = f.label :story, "YOUR STORY*", class: "green-font"
     = f.text_area :story, :required => true, :style => "height:330px;width:617px;"
