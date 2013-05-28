@@ -70,51 +70,40 @@
           PREFERRED PAYMENT METHOD*
           %span.italic (max 45 days)
         = f.select :payment_type, options_for_select(Sponsor::PAYMENT), :id => "payment_type", required: true, :size => 17
+
+      ///////////////////////////////////////////////////////
+      /                                                     /
+      / Do not change this credit card form as it is set up /
+      / the way that stripe needs it and is working         /
+      /                                                     /
+      ///////////////////////////////////////////////////////	  
+	  
       %div#credit-card{:style => "float: left;"}
-
-        %div
-          = f.label :card_name, "NAME AS IT APPERS ON CARD*", class: "green-font"
-          = text_field_tag :card_name,nil , :size => 40, required: true, label: false, class: "card-input"
-        %div{:style => "float: left;"}
-          = f.label :card_number, "CARD NUMBER*", class: "green-font"
-          = text_field_tag :card_number,nil , :size => 40, required: true, label: false, class: "card-input", :"data-stripe" => "number"
-        %div{:style => "float: left; margin-right: 60px;"}
-          = f.label :cvc, "CVC*", class: "green-font"
-          = text_field_tag :cvc,nil, :size => 5, required: true, label: false, class: "card-input", :"data-stripe" => "cvc"
-        %div{:style => "float: left; width: 340px;"}
-          = f.label :card_expiration, "CARD EXPIRATION (MM/YYYY)*", class: "green-font"
-          = text_field_tag :month,nil, :style => "float: left; margin-right: 15px;", size: "4", required: true, label: false, class: "card-input", :"data-stripe" => "exp-month"
-          = text_field_tag :year_card,nil, :style => "float: left;", size: "4", required: true, label: false, class: "card-input", :"data-stripe" => "exp-year"
-          = link_to "https://connect.stripe.com/oauth/authorize?response_type=code&client_id=#{ENV['STRIPE_CLIENT_ID']}", :target => "_blank", :class => "stripe-connect" do
-            %span Connect with Stripe
-
-          %input{:type => 'hidden', :value => "#{@connected}", :id => "connected", :required => true}
-
-        / = hidden_field_tag :token
-      /   = hidden_field_tag 'project_sponsor[card_type]'
-      /   = hidden_field_tag 'project_sponsor[card_last4]'
-      /   = hidden_field_tag 'project_sponsor[project_id]', @project.id
-      /   - if @sponsor.token.present?
-      /     Credit card has been provided.
-      /   - else
-      /     .field.name
-      /       = label_tag "NAME AS IT APPEARS ON CARD*"
-      /       = text_field_tag nil, current_user, name: "sponsor[card_name]"
-      /     .field.card-number
-      /       = label_tag :card_number, "Credit Card Number"
-      /       = text_field_tag :card_number, nil, name: nil
-      /     .field.ccv
-      /       = label_tag :card_code, "CVV*"
-      /       = text_field_tag :card_code, nil, name: nil
-      /     .field.expiration
-      /       = label_tag :card_month, "CARD EXPIRATION (MM/YYYY)*"
-      /       / = select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
-      /       / = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}
-      /       = text_field_tag nil, nil, {name: nil, id: "card_month"}
-      /       = text_field_tag nil, nil, {name: nil, id: "card_year"}
-      /     .cf
-      /   #stripe_error
-      /     %noscript JavaScript is not enabled and is required for this form. First enable it in your web browser settings.
+        = hidden_field_tag :token
+        = hidden_field_tag 'project_sponsor[card_type]'
+        = hidden_field_tag 'project_sponsor[card_last4]'
+        = hidden_field_tag 'project_sponsor[project_id]', @project.id
+        - if @sponsor.token.present?
+          Credit card has been provided.
+        - else
+          .field.name
+            = label_tag "NAME AS IT APPEARS ON CARD*"
+            = text_field_tag nil, current_user, name: "sponsor[card_name]"
+          .field.card-number
+            = label_tag :card_number, "Credit Card Number"
+            = text_field_tag :card_number, nil, name: nil
+          .field.ccv
+            = label_tag :card_code, "CVV*"
+            = text_field_tag :card_code, nil, name: nil
+          .field.expiration
+            = label_tag :card_month, "CARD EXPIRATION (MM/YYYY)*"
+            / = select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
+            / = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}
+            = text_field_tag nil, nil, {name: nil, id: "card_month"}
+            = text_field_tag nil, nil, {name: nil, id: "card_year"}
+          .cf
+        #stripe_error
+          %noscript JavaScript is not enabled and is required for this form. First enable it in your web browser settings.
 
       %div#wire-transfer{:style => "display: none; float: left;"}
         %div

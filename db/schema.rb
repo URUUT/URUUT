@@ -11,14 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130517061657) do
-
-  create_table "contacts", :force => true do |t|
-    t.string   "email"
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
+ActiveRecord::Schema.define(:version => 20130524172035) do
 
   create_table "badges_sashes", :force => true do |t|
     t.integer  "badge_id"
@@ -30,6 +23,13 @@ ActiveRecord::Schema.define(:version => 20130517061657) do
   add_index "badges_sashes", ["badge_id", "sash_id"], :name => "index_badges_sashes_on_badge_id_and_sash_id"
   add_index "badges_sashes", ["badge_id"], :name => "index_badges_sashes_on_badge_id"
   add_index "badges_sashes", ["sash_id"], :name => "index_badges_sashes_on_sash_id"
+
+  create_table "contacts", :force => true do |t|
+    t.string   "email"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -128,6 +128,8 @@ ActiveRecord::Schema.define(:version => 20130517061657) do
     t.string  "payment",    :default => "Unpaid"
     t.string  "status",     :default => "Unconfirmed"
     t.integer "level_id"
+    t.string  "card_type"
+    t.integer "card_last4"
   end
 
   create_table "projects", :force => true do |t|
@@ -166,6 +168,8 @@ ActiveRecord::Schema.define(:version => 20130517061657) do
     t.string  "publishable_key"
     t.string  "seed_video"
     t.string  "cultivation_video"
+    t.string  "seed_mime_type",              :default => "image"
+    t.string  "cultivation_mime_type",       :default => "image"
   end
 
   create_table "sashes", :force => true do |t|

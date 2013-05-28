@@ -34,6 +34,8 @@ class SponsorsController < ApplicationController
     sponsor_name = sponsor[:payment_type].eql?("Wire Transfer") ? sponsor[:name] : sponsor[:card_name]
     cost = SponsorshipLevel.find(params[:project_sponsor][:level_id]).cost
     params[:sponsor][:name] = sponsor_name
+    card_type = params[:project_sponsor][:card_type]
+    last4 = params[:project_sponsor][:card_last4]
     token = params[:token]
     
     logger.debug(sponsor)
@@ -48,7 +50,7 @@ class SponsorsController < ApplicationController
     #@project_sponsor.save!
     #logger.debug(@project_sponsor)
     @project_sponsor.update_attributes({cost: cost, project_id: params[:project_id], sponsor_id: @sponsor.id,
-                                      level_id: params[:project_sponsor][:level_id], card_token: token})
+                                      level_id: params[:project_sponsor][:level_id], card_token: token, card_type: card_type, card_last4: last4})
     
     session[:project_sponsor] = @project_sponsor
     
