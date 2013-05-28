@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
-  layout "application", :except => [:index, :discover, :about]
-  layout "landing", :only => [:index, :discover, :about, :home]
+  layout "application", :except => [:index, :discover, :about, :contact]
+  layout "landing", :only => [:index, :discover, :about, :home, :funding_sources]
   skip_before_filter :set_previous_page
 
   def index
@@ -10,7 +10,8 @@ class PagesController < ApplicationController
     else
       @projects = Project.where("live = 1 AND ready_for_approval = 0").by_city(params[:city]).
           by_category(params[:category]).all
-      @ending = Project.by_city(params[:city]).by_category(params[:category]).order(:duration).all
+      @ending = Project.where("live = 1 AND ready_for_approval = 0").by_city(params[:city]).
+          by_category(params[:category]).order(:duration).all
     end
     logger.debug(@projects)
   end

@@ -3,9 +3,13 @@
   = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => "well"}) do |f|
     = devise_error_messages!
 
-    %div
-      = f.label :name
-      = f.text_field :name, :size => 45
+    %div.inline
+      = f.label :first_name
+      = f.text_field :first_name, :size => 17
+	  
+    %div.inline{:style => "margin-left:20px;"}
+      = f.label :last_name
+      = f.text_field :last_name, :size => 17
 
     %div
       = f.label :email
@@ -16,7 +20,7 @@
         = f.label :password
         = f.password_field :password, :size => 17
 
-      %div.inline{:style => "margin-left:25px;"}
+      %div.inline{:style => "margin-left:20px;"}
         = f.label :password_confirmation
         = f.password_field :password_confirmation, :size => 17
 

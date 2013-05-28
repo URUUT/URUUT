@@ -8,12 +8,12 @@ class PaymentsController < ApplicationController
     amount = (project_sponsor.cost * 100).to_i
     fee = (amount * 0.06).to_i
     access_token = project.project_token
-    
+
     logger.debug(amount)
     logger.debug(access_token)
-    
+
     Stripe.api_key = access_token
-    
+
     begin
       charge = Stripe::Charge.create({
         :amount => amount, # amount in cents, again
@@ -27,8 +27,8 @@ class PaymentsController < ApplicationController
       # The card has been declined
       logger.debug(e)
     end
-    redirect_to root_url
-    
+    redirect_to thank_you_for_sponsor_url(project.id, sponsor.id)
+
   end
 
 end

@@ -3,7 +3,8 @@
     .span4
       = image_tag "#{@user.avatar}", :class => "img-circle avatar"
 
-      %h4.user-name= @user.name
+      %h4.user-name 
+        #{@user.first_name} #{@user.last_name}
       - if @is_current
         = link_to "not you? click here to logout", destroy_user_session_path, :class => "green"
 
@@ -52,10 +53,9 @@
 
   .span4
     %h3.title{:style => "margin-bottom:5px;"} #{who(:whose)} badges
-    .well.info
-      %p How much do you want to raise on URUUT?
-
-      %p Remember to keep in mind the cost of a campaign and perks fulfillment. We suggest you add 10% to the amount you need to raise. This will cover URUUT’s 5% fee, our payment providers 3% fee and any potential extras.
+    .well.info.badge-wrapper
+      - @user.badges.each do |badge|
+        = image_tag badge.custom_fields[:image], :class => "profile-badge img-circle", :data => { :content => badge.name }
 
     %div{:style => "margin-top:-20px;margin-bottom:5px;float:left;"}
       %h3.title #{who(:whose)} information
@@ -68,7 +68,8 @@
       %p= image_tag "#{@user.avatar}"
 
       %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Name
-      %p= @user.name
+      %p
+        #{@user.first_name} #{@user.last_name}
 
       - if @is_current
         %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Email address
