@@ -3,7 +3,7 @@
     %h1 Giving you the power to CREATE A better community.
     %h2 Every community has great projects that can’t get off the ground. But with Uruut, yours can be different. Your park needs a new playground? Uruut it. Need a new library? Uruut it. Senior center? Bike path? Dog park? Uruut it. That’s why we’re here – to help you build the community you deserve.
     .btn.brown
-      = link_to "#{user_signed_in? ? 'javascript:void(0)' : new_user_registration_path }", class: "#{'error-sign-up-button' if user_signed_in?}" do
+      = link_to "#{user_signed_in? ? 'javascript:void(0)' : new_user_registration_path}", class: "#{'error-sign-up' if user_signed_in?}" do
         Sign Up Now
         %span
     %h5
@@ -12,6 +12,7 @@
         %span
 %section.full-width.description
   .container
+
     / %h2 Crowdfunding to date has been about only individuals coming together to raise money. Until now.
     / %h1 Introducing URUUT Partner-Funding<sup>SM</sup>
     / .btn.brown
@@ -20,6 +21,7 @@
     / .btn
     /   What is it?
     /   %span
+
 
 %section.full-width.partner#partner
   .container
@@ -104,8 +106,9 @@
       Fund Projects
       %span
 
-#error-sign-up.modal.hide.fade
-  .modal-header{style: "height:20px"}
+
+%section#error-sign.modal.hide.fade
+  .modal-header{style: "height: 17px;"}
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
   .modal-body
     %p
@@ -127,7 +130,8 @@
       }, 750);
     });
 
-    $(".error-sign-up-button").click(function(){
-      $("#error-sign-up").modal("show");
+    $(".error-sign-up").click(function(){
+      $("#error-sign").modal("show");
+
     })
   })
