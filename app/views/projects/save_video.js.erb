@@ -1,0 +1,10 @@
+<% video = params[:video_link].gsub("watch?v=", "embed/") %>
+<% if params[:video_type].eql?("seed") %>
+$(".seed-action-container").show();
+$(".seed-content").html("<iframe width='620' height='413' src='<%= video %>'></iframe>");
+<% else %>
+$(".cultivation-action-container").show();
+$(".cultivation-content").html("<iframe width='380' height='310' src='<%= video %>'></iframe>");
+<% end %>
+$("#video_type").val("");
+$("#save-video").modal("hide");

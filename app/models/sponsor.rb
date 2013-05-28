@@ -8,7 +8,7 @@ class Sponsor < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :payment_type,
-                  :card_expiration , :phone, :org_name, :mission, :card_name
+                  :phone, :org_name, :mission, :card_name
 
   attr_accessor :card_name
   # attr_accessible :title, :body

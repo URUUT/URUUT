@@ -264,7 +264,8 @@ $ ->
       data: 
         id: projectId
     .done (data) ->
-      if data == "successful"
+      console.log data
+      if data == 1
         window.location.href = thankYouUrl
 				
   #
@@ -276,6 +277,7 @@ $ ->
     return $(this).h5Validate()
 	
   $('.step-container[data-id="sponsor-info"] form').on 'submit', (e) ->
+    console.log projectPath
     if $('#connected').val() == 'true'
      e.preventDefault()
      data = $(this).serialize()
@@ -284,8 +286,6 @@ $ ->
        url: projectPath
        data: data
      .done (data) ->
-       console.log "Success???"
-       console.log data 
        window.location.href = '/projects/' + data + '/edit#project-details'
        window.location.reload(true)
        localStorage.clear()
