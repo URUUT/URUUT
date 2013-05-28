@@ -2,12 +2,7 @@
   .funding-info
     .container
       .span8
-        .row
-          .span7
-            %h4.title= @project.project_title
-          .span1.text-right
-            - if @project.organization_classification.eql?("170(c)(1)") or @project.organization_classification.eql?("501(c)(3)")
-              = image_tag 'td-logo-black.png', :class => "pull-right"
+        %h4.title= @project.project_title
         %span.location #{@project.city}, #{@project.state}
         %hr
         %p.short-desc= @project.title
@@ -80,30 +75,6 @@
       = link_to new_project_sponsor_path(@project.id), :class => 'btn', :style => 'margin-top:10px;'  do
         Become A Sponsor
         %span
-
-      #contect_container
-        #planting_seeds{style: "margin-top: -25px;"}
-          - @project_sponsors.each do |key, value|
-            .span12{style: "margin-left: 0px;"}
-              %h5= "#{show_title(key)} LEVEL SPONSORS"
-              - value.sort.each do |project_sponsor|
-                -if project_sponsor.level_id.eql? 1
-                  .span4.margin-auto.float-none
-                    //= image_tag(project_sponsor.logo_url, class: "img-polaroid", style: "width:200px;height:170px;")
-                    %br/
-                    %h5.green-font{style: "text-align: center;"}= project_sponsor.name
-                -elsif project_sponsor.level_id.eql? 2
-                  .span4{style: "margin-left:0;"}
-                    .span9.float-none.margin-auto
-                      //= image_tag(project_sponsor.logo_url, class: "img-polaroid", style: "width:150px;height:120px;")
-                    %br/
-                    %h5.green-font{style: "text-align: center;"}= project_sponsor.name
-                -elsif project_sponsor.level_id.eql? 3
-                  .span2.margin-auto{style: "width: 19.5%;"}
-                    .span9.margin-auto.float-none
-                      //= image_tag(project_sponsor.logo_url, class: "img-polaroid", style: "width:100px;height:80px;")
-                    %br/
-                    %p.green-font.normal-font.text-center= project_sponsor.name.upcase
 
       %h4.title{:style => 'margin-top:50px;'}
         Planting Seeds
