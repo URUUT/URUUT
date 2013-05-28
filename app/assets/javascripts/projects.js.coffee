@@ -364,3 +364,56 @@ $ ->
   getHash()
   $(window).on 'hashchange', ->
     getHash()
+	
+  $('.benefit-edit').click (event) ->
+    event.preventDefault()
+    $(this).hide()
+    original = $(this).parent().find($('input:checkbox'))
+    origLabel = $(this).parent().find('label')
+    editable = $(this).parent().find($('.benefit-editable'))
+    update = $(this).parent().find('.update')
+    origLabel.hide()
+    $(update).show()
+    $(editable).attr('value', $(original).val())
+
+  $('#custom-checkbox').delegate '.save', 'click', ->
+    console.log $(this)
+    original = $(this).parent().parent().find($('input:checkbox')) 
+    origLabel = $(this).parent().parent().find('label')
+    newContent = $(this).parent().find($('.benefit-editable')).val()
+    console.log newContent
+    $(original).val(newContent)
+    $(origLabel).text(newContent)
+    $(this).parent().hide()
+    $(origLabel).show()
+	
+  $('#existing-checkbox').delegate '.save', 'click', ->
+    console.log $(this)
+    original = $(this).parent().parent().find($('input:checkbox')) 
+    origLabel = $(this).parent().parent().find('label')
+    newContent = $(this).parent().find($('.benefit-editable')).val()
+    console.log newContent
+    $(original).val(newContent)
+    $(origLabel).text(newContent)
+    $(this).parent().hide()
+    $(origLabel).show()
+	
+$('.update').delegate '.cancel', 'click', ->
+    origLabel = $(this).parent().parent().find('label')
+    update= $(this).parent()
+    editBenefit = $(this).parent().parent().find('.benefit-edit')
+    $(update).hide()
+    $(origLabel).show();
+    $(editBenefit).show();
+	
+$('#custom-checkbox').delegate '.add-benefit', 'click', ->
+    newElement = '<div class="checkbox add_checkbox">' +
+                 '<input id="sponsorship_benefits_:platinum_" name="sponsorship_benefits[:platinum][]" type="checkbox" value="1">' +
+                 '<label></label>' +
+                 '<div class="update">' +
+                 '<input class="benefit-editable" placeholder="Create Custom Benefit" type="text">' +
+                 '<div class="save">Save</div>' +
+                 '<div class="cancel">Cancel</div>' +
+                 '</div>' +
+                 '</div>'
+    $(this).before(newElement)
