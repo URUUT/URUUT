@@ -62,30 +62,33 @@
         .perk-container
           .perk
             .row
-              .span4
-                = label_tag "perk-amount", class: "green-font" do
-                  SEED AMOUNT*
-                  %span.italic{style: "color: #000"} (full $ amounts only)
-                = text_field_tag "perk-amount", ''
-              .span4
-                = label_tag "perk-name", class: "green-font" do
-                  PERK TITLE*
-                  %span.italic.title-count{style: "color: #000"}
-                = text_field_tag "perk-name", ''
+              .span8
+                .row
+                  .span4
+                    = label_tag "perk-amount", class: "green-font" do
+                      SEED AMOUNT*
+                      %span.italic{style: "color: #000; font-size: 10px;"} (full $ amounts only)
+                    = text_field_tag "perk-amount", '', class: "span4"
+                  .span4
+                    = label_tag "perk-name", class: "green-font" do
+                      PERK TITLE*
+                      %span.italic.title-count{style: "color: #000; font-size: 10px;"}
+                    = text_field_tag "perk-name", '', class: "span4"
 
             %div
               = label_tag "perk-description", class: "green-font" do
                 Description*
-                %span.italic.desc-count{style: "color: #000"}
-              = text_area_tag "perk-description", nil, style: "height:120px;width:617px;"
+                %span.italic.desc-count{style: "color: #000; font-size: 10px;"}
+              = text_area_tag "perk-description", nil, style: "height:120px;width:605px;"
 
             .row.perk-view
               .span2
-                = label_tag "limit_perk", "LIMIT # AVAILABLE", class: "green-font"
+                %div{style: "font-size: 10px;"}
+                  = label_tag "limit_perk", "LIMIT # AVAILABLE", class: "green-font"
                 = select_tag "limit_perk", options_for_select({ "Yes" => "yes", "No" => "no" }, "yes")
-              .span5.offset1
+              .span5
                 = label_tag "perk_available", "HOW MANY OF THIS PERK ARE AVAILABLE", class: "green-font"
-                = text_field_tag "perk_available", ''
+                = text_field_tag "perk_available", '', class: "span6"
 
             %input{:type => 'hidden', :value => "", :id => "perk-id"}
 

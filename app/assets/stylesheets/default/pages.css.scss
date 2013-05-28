@@ -393,6 +393,7 @@ label {
 			margin-right:20px;
 			margin-top:20px;
 			position:relative;
+      vertical-align: middle;
 			/*width:300px;*/
 			label {
 				color:#b6b6b4;
@@ -491,17 +492,20 @@ label {
         }
       }
       #keyword {
-        border-radius: 5px 0 0 5px;
+        -webkit-border-radius: 5px 0 0 5px !important;
+        -moz-border-radius: 5px 0 0 5px !important;
+        border-radius: 5px 0 0 5px !important;
+        margin: -9px 0 0 0;
         box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
         color:#555;
         font: bold 24px/24px arial, helvetica, sans-serif;
-        height: 44px;
+        height: 54px;
         width: 240px;
       }
       #keyword + .btns {
         border-radius:0 5px 5px 0;
-        margin-left:-5px;
-        margin-top:-10px;
+        margin-left:239px;
+        margin-top:-54px;
         padding:0;
         height:54px;
         width:45px;
@@ -1956,6 +1960,14 @@ form.registration-edit {
 
 #project_sponsorship_permission_input{
   width:140px !important;
+}
+
+#category_input{
+  margin-top: 10px;
+}
+
+#location_input{
+  margin-top: 10px;
 }
 
 #project_category_container {
