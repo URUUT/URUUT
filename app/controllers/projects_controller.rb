@@ -15,6 +15,7 @@ class ProjectsController < ApplicationController
     @project = Project.new
     session[:current_project] = ''
     session[:connected] = ''
+
     #    @project.perks.build
     #    @project.galleries.build
     render :layout => 'landing'
@@ -99,6 +100,7 @@ class ProjectsController < ApplicationController
       @project.bitly = page_url.short_url
     end
 
+
     if @project.save
       respond_to do |format|
         format.js { render :js => @project.id }
@@ -153,6 +155,20 @@ class ProjectsController < ApplicationController
       @project.cultivation_mime_type = "image"
     end
 
+    def add_perk
+      perk = Perk.new
+      perk.name = params[:name]
+      perk.amount = params[:amount]
+      perk.description = params[:description]
+      perk.project_id = params[:project]
+      perk.perks_available = params[:perks_available]
+      perk.limit = params[:limit].eql?("yes") ? true : false
+      if perk.save!
+        respond_to do |format|
+          format.text { render :text => "Success" }
+        end
+      end
+    end
 
     render :nothing => true if @project.save
   end

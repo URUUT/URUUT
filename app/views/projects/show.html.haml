@@ -2,7 +2,12 @@
   .funding-info
     .container
       .span8
-        %h4.title= @project.project_title
+        .row
+          .span7
+            %h4.title= @project.project_title
+          .span1.text-right
+            - if @project.organization_classification.eql?("170(c)(1)") or @project.organization_classification.eql?("501(c)(3)")
+              = image_tag 'td-logo-black.png', :class => "pull-right"
         %span.location #{@project.city}, #{@project.state}
         %hr
         %p.short-desc= @project.title
