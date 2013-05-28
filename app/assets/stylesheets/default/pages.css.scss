@@ -393,6 +393,7 @@ label {
 			margin-right:20px;
 			margin-top:20px;
 			position:relative;
+      vertical-align: middle;
 			/*width:300px;*/
 			label {
 				color:#b6b6b4;
@@ -1956,6 +1957,14 @@ form.registration-edit {
 
 #project_sponsorship_permission_input{
   width:140px !important;
+}
+
+#category_input{
+  margin-top: 10px;
+}
+
+#location_input{
+  margin-top: 10px;
 }
 
 #project_category_container {
