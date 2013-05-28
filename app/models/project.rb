@@ -1,7 +1,7 @@
 class Project < ActiveRecord::Base
   belongs_to :user
 
-  # before_save :downcase_city
+  before_save :downcase_city
 
   attr_accessible :category, :description, :duration, :goal, :address, :project_title, :sponsorship_permisson,
     :city, :state, :zip, :neighborhood, :title, :image, :video, :tags, :live, :short_description,
