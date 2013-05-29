@@ -52,6 +52,22 @@ form.edit_project, form.new_project {
   color: #70bf4c;
   font-size: 10px !important;
 }
+
+.green-font-big{
+  color: #70bf4c;
+  font-size: 25px !important;
+}
+
+.green-font-medium{
+  color: #70bf4c;
+  font-size: 15px !important;
+}
+
+.change{
+  line-height: 30px;
+  margin: 6px 0;
+  display: inline-block;
+}
 /*
  *form.edit_project fieldset legend, form.new_project fieldset legend {
  *  display:none;
