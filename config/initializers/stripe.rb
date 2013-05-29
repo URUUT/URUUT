@@ -1,5 +1,5 @@
-API_KEY = ENV["STRIPE_KEY"]
-STRIPE_PUBLIC_KEY = ENV["STRIPE_PUB_KEY"]
+API_KEY = "pk_test_BTNPlS59UIPJC5Fnp7CR9It6'"
+STRIPE_PUBLIC_KEY = "sk_test_Ydpgzl4aX7paVEPDaChNSP5Z"
 
 Rails.configuration.stripe = {
   :publishable_key => STRIPE_PUBLIC_KEY,
