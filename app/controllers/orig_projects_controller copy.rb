@@ -15,7 +15,6 @@ class ProjectsController < ApplicationController
     @project = Project.new
     session[:current_project] = ''
     session[:connected] = ''
-
     #    @project.perks.build
     #    @project.galleries.build
     render :layout => 'landing'
@@ -33,7 +32,6 @@ class ProjectsController < ApplicationController
 
   def edit
     @project = Project.find(params[:id])
-    @benefits = SponsorshipBenefit.where(:project_id => @project.id)
     session[:current_project] = @project.id
     logger.debug("Current session id is: #{session[:current_project]}")
     @project.update_attributes!(params[:project])
@@ -58,17 +56,43 @@ class ProjectsController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
-    sb_cost = @project.goal.to_i * 0.70
-    sb_platinum = params[:sponsorship_benefits]
-    SponsorshipBenefit.where(:project_id => @project.id).destroy_all
-    sb_platinum.each do |k, v|
-      v.each do |value|
-        @sponsors = SponsorshipBenefit.new(:project_id => @project.id, :sponsorship_level => k, :name => "#{value}", :cost => sb_cost)
-        @sponsors.save!
+    sb_platinum = params[:platinum]
+    logger.debug("platinum is now: #{sb_platinum}")
+    sponsorship_benefits = []
+
+    def sponsorship_benefit_level(level, benefit, key)
+      data = []
+      1.upto(params["#{level}_count"].to_i) do |x|
+        count = if !benefit[x - 1].blank?
+          !benefit[x - 1][:id].blank? ? benefit[x - 1][:id] : x
+        else
+          x
+        end
+        status = params["#{level}"]["#{count}"] ? 1 : 0
+        if @project.sponsorship_benefits.blank? || params["#{level}"]["id_#{count}"].nil?
+          unless params["#{level}"]["info_#{count}"].blank?
+            data <<  {name: params["#{level}"]["info_#{count}"],sponsorship_level_id: key, project_id: @project.id, status: status}
+          end
+        else
+          sponsorship_benefit = SponsorshipBenefit.find(params[level]["id_#{count}"])
+          sponsorship_benefit.update_attributes({name: params["#{level}"]["info_#{count}"],sponsorship_level_id: key, project_id: @project.id, status: status})
+        end
       end
+      data
     end
-    
-    # @sponsorship_benefits = SponsorshipBenefit.create(sb_platinum)
+
+    SponsorshipBenefit::SPONSORSHIP_BENEFITS.each do |key, value|
+
+      case key
+      when 1 then sponsorship_benefits += sponsorship_benefit_level("platinum", value, key)
+      when 2 then sponsorship_benefits += sponsorship_benefit_level("gold", value, key)
+      when 3 then sponsorship_benefits += sponsorship_benefit_level("silver", value, key)
+      when 4 then sponsorship_benefits += sponsorship_benefit_level("bronze", value, key)
+      end
+
+    end
+
+    @sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits)
     @project.update_attributes!(params[:project])
 
     if @project.bitly.blank?
@@ -76,7 +100,6 @@ class ProjectsController < ApplicationController
       page_url = bitly.shorten("#{request.scheme}://#{request.host_with_port}/projects/#{@project.id}")
       @project.bitly = page_url.short_url
     end
-
 
     if @project.save
       respond_to do |format|
@@ -132,20 +155,6 @@ class ProjectsController < ApplicationController
       @project.cultivation_mime_type = "image"
     end
 
-    def add_perk
-      perk = Perk.new
-      perk.name = params[:name]
-      perk.amount = params[:amount]
-      perk.description = params[:description]
-      perk.project_id = params[:project]
-      perk.perks_available = params[:perks_available]
-      perk.limit = params[:limit].eql?("yes") ? true : false
-      if perk.save!
-        respond_to do |format|
-          format.text { render :text => "Success" }
-        end
-      end
-    end
 
     render :nothing => true if @project.save
   end
