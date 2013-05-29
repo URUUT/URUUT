@@ -1,3 +1,11 @@
+:css
+  input[type="text"], input[type="email"], input[type="date"], input[type="password"] {
+    width: 100% !important;
+  }
+  .green-font{
+    color:#70bf4c;
+  };
+
 .breadcrumb-container
   %ul.breadcrumbs
     %li.sponsor-info
@@ -53,19 +61,20 @@
 %ol{:id => "uruutTour"}
   /* data-id needs to be the same as the parent it will attach to */
   %li{"data-class" => "pick-cover-photo", "data-options" => "tipLocation:right"}
-    %h4 CHOOSE A COVER PHOTO
+    %h5 CHOOSE A COVER PHOTO
     %p The cover photo is the large splash image that appears on your page. The dimensions should be at least 1600 x 546 pixels. It’s a big photo and a great opportunity to give your page a striking, eye-catching look. Choose something that reflects your organization, project, and personality.
-    %a{:href => "#", :class => "button small quit-tour"} Quit Tour
+    %a{:href => "#", :class => "button small quit-tour joyride-quit"} Quit Tour
   %li{"data-id" => "planting_seeds", "data-options" => "tipLocation:top"}
-    %h4 ADD PHOTOS
+    %h5 ADD PHOTOS
     %p Add photos into your story section by clicking on the placeholder images. If you need more, you can add them to a gallery section from your dashboard once your project as been approved.
-    %a{:href => "#", :class => "button small quit-tour"} Quit Tour
+    %a{:href => "#", :class => "button small quit-tour joyride-quit"} Quit Tour
   %li{"data-class" => "submit", "data-button" => "Quit Tour", "data-options" => "tipLocation:bottom"}
-    %h4 SUBMIT
+    %h5 SUBMIT
     %p When you're ready, click here to submit for approval. You're only required to add a cover photo.
 
 %script{:src => "http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"}
 %script{:src => "http://maps.stamen.com/js/tile.stamen.js?v1.2.1"}
+= javascript_include_tag "projects"
 :javascript
 
   $(".seed-form").on("click", function(){
@@ -80,16 +89,6 @@
     $("#save-video").modal("show");
   });
 
-  var changeProjectPermission = function(){
-    if ( $("#project_sponsorship_permisson").val() == "no" ){
-      $(".sponsorship-true").hide();
-      $(".sponsorship-false").show();
-    }
-    else{
-      $(".sponsorship-false").hide();
-      $(".sponsorship-true").show();
-    }
-  };
   var getHash = function() {
     if(window.location.hash) {
       $('.step-container').each(function(){
@@ -225,73 +224,6 @@
         window.location.href = '/projects/' + data + '/edit#assets';
         window.location.reload(true);
       })
-    })
-
-    $('.add-perk').on('click', function(e) {
-      e.preventDefault();
-      console.log(document.location.hostname);
-      var name = $('#perk-name').val();
-      var amount = $('#perk-amount').val();
-      var description = $('#perk-description').val();
-      var project = #{@project.id};
-      var data = {name: name, amount: amount, description: description, project: project};
-      $.ajax({
-        type: 'POST',
-        url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/add_perk',
-        data: data
-      }).done(function(data) {
-        console.log(data);
-        window.location.reload(true);
-      }).error(function(error) {
-        console.log(error);
-      });
-    })
-
-    $('.update-perk').on('click', function(e) {
-      e.preventDefault();
-      var name = $('#perk-name').val();
-      var amount = $('#perk-amount').val();
-      var description = $('#perk-description').val();
-      var perk_id = $('#perk-id').val();
-      var data = {name: name, amount: amount, description: description, id: perk_id};
-      $.ajax({
-        type: 'POST',
-        url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/update_perk',
-        data: data
-      }).done(function(data) {
-        console.log(data);
-        window.location.reload(true);
-      });
-    })
-
-    $('.perk-delete').on('click', function(e) {
-      e.preventDefault();
-      var perk_id = $(this).parent().find('input[type=hidden]').val();
-      console.log(perk_id);
-      var data = {id: perk_id};
-      $.ajax({
-        type: 'POST',
-        url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/delete_perk',
-        data: data
-      }).done(function(data) {
-        console.log(data);
-        window.location.reload(true);
-      });
-    })
-
-    $('.created-perk .perk-edit').on('click', function() {
-      $.ajax({
-        type: 'POST',
-        url: '#{get_perk_projects_url}',
-        data: {id: $(this).parent().find('input[type=hidden]').val()}
-      }).done(function(data) {
-        $('#perk-name').val(data.name);
-        $('#perk-amount').val(data.amount);
-        $('#perk-description').val(data.description);
-        $('#perk-id').val(data.id)
-        $('.add-perk').hide();
-        $('.update-perk').show();
-      });
     });
 
     $('li.submit a').click(function(event) {
@@ -353,114 +285,9 @@
 
   });
 
-  var platinumSum = $('#platinum-box').children().children('.default').length;
-  var goldSum = $('#gold-box').children().children('.default').length;
-  var silverSum = $('#silver-box').children().children('.default').length;
-  var bronzeSum = $('#bronze-box').children().children('.default').length;
-
-   $("#platinum-count").val(platinumSum + 1);
-  $(".platinum_benefits").attr("name", "platinum[info_" + (platinumSum + 1) + "]");
-  $(".platinum_benefits").attr("id", "platinum_info_" + (platinumSum + 1));
-  $(".box_platinum_benefits").attr("name", "platinum[" + (platinumSum + 1) + "]");
-  $(".box_platinum_benefits").attr("id", "platinum_" + (platinumSum + 1));
-
-  $("#gold-count").val(goldSum + 1);
-  $(".gold_benefits").attr("name", "gold[info_" + (goldSum + 1) + "]");
-  $(".gold_benefits").attr("id", "gold_info_" + (goldSum + 1));
-  $(".box_gold_benefits").attr("name", "gold[" + (goldSum + 1) + "]");
-  $(".box_gold_benefits").attr("id", "gold_" + (goldSum + 1));
-
-  $("#silver-count").val(silverSum + 1);
-  $(".silver_benefits").attr("name", "silver[info_" + (silverSum + 1) + "]");
-  $(".silver_benefits").attr("id", "silver_info_" + (silverSum + 1));
-  $(".box_gold_benefits").attr("name", "silver[" + (silverSum + 1) + "]");
-  $(".box_gold_benefits").attr("id", "silver_" + (silverSum + 1));
-
-  $("#bronze-count").val(bronzeSum);
-  $(".bronze_benefits").attr("name", "bronze[info_" + (bronzeSum + 1) + "]");
-  $(".bronze_benefits").attr("id", "bronze_info_" + (bronzeSum + 1));
-  $(".box_gold_benefits").attr("name", "bronze[" + (bronzeSum + 1) + "]");
-  $(".box_gold_benefits").attr("id", "bronze_" + (bronzeSum + 1));
-
-  $(document).ready(function() {
-    addNewBenefit();
-    editBenefit();
-    addAnotherNewBenefit();
-    removeAnotherBenefit();
-  });
-
-  var editBenefit = function() {
-    $(".edit-benefit").bind("click", function() {
-      var nameBenefits = $(this).parent().children("#name");
-      var fieldBenefits = $(this).parent().children(".edit-text-field");
-      console.log(c = this)
-      if($(this).text() == "select to edit"){
-        nameBenefits.hide();
-        fieldBenefits.show();
-        fieldBenefits.attr("style", "margin-top:-25px; width: 320px !important;");
-        $(this).text("save");
-        $(this).addClass("btn");
-        $(this).attr("style", "position: relative; top: 70px !important; margin-left: 5px");
-        $(this).removeClass("green-font");
-      }else{
-        nameBenefits.text($(this).parent().find(".edit-text-field").val());
-        nameBenefits.show();
-        fieldBenefits.hide();
-        $(this).removeClass("btn");
-        $(this).removeAttr("style", "position: relative; top: 70px !important; margin-left: 5px");
-        $(this).addClass("edit-benefit italic green-font");
-        $(this).text("select to edit")
-      }
-    });
-  }
-
-  var addAnotherNewBenefit = function(){
-    $(".add-another").bind("click", function(e) {
-      var divCore = $(this).parent().children("#custom-checkbox");
-      var checkFieldP = $(this).parent().children("#existing-checkbox").children(".checkbox").last().children().first();
-      var checkboxName = checkFieldP.attr("id").split("_")[0];
-      var checkboxVal = checkFieldP.attr("id").split("_")[1];
-      var countCheckbox = parseInt(checkboxVal) + 1;
-
-      $("#"+ checkboxName +"-count").val(countCheckbox);
-      $("<div class='checkbox default'><input id='"+ checkboxName + "_" + countCheckbox + "' type='checkbox' value='1' name='"+ checkboxName +"["+ countCheckbox +"]''><input id='"+ checkboxName + "_info_"+ countCheckbox +"' class='"+checkboxName+"_benefits add_benefits' type='text' style='margin-top: -33px; width: 80% !important;' placeholder='Create your costum benefit here...' name='"+ checkboxName + "[info_"+countCheckbox+"]'><span class='save_new_benefit pull-right btn' style='margin-top:-79px; left:-20px'>Save</span><span class='remove-another pull-right btn' style='margin-top:-51px;'>Remove</span></div>").appendTo(divCore);
-      countCheckbox++;
-      addNewBenefit();
-      removeAnotherBenefit();
-      return false;
-    });
-  }
-
-  var removeAnotherBenefit = function(){
-    $(".remove-another").bind("click", function(){
-      $(this).parent().remove();
-    })
-  }
-
-  var addNewBenefit = function(){
-    $(".save_new_benefit").bind("click", function(){
-      var divCore = $(this).parent().parent().parent().children("#existing-checkbox");
-      var benefits = divCore.children().children("input").last();
-      var benefitsValue = $(this).parent().children(".add_benefits").val();
-      var boxName = benefits.attr("id").split("_")[0];
-      var boxValue = benefits.attr("id").split("_")[2];
-      var boxLength = parseInt(boxValue) + 1;
-
-      if(benefitsValue){
-        $("<div class='checkbox default'><input id='"+boxName+"_"+boxLength+"' type='checkbox' name='"+boxName+"["+boxLength+"]' checked='checked'><span id='name'>"+benefitsValue+"</span><span class='edit-benefit italic green-font'>select to edit</span><input id='"+ boxName +"_info_"+ boxLength+"' class='edit-text-field' type='text' value='"+benefitsValue+"' style='width: 320px !important; display: none;' name='"+boxName+"[info_"+boxLength+"]'></div>").appendTo(divCore);
-        boxLength++;
-        $(this).parent().remove();
-        editBenefit();
-        return false;
-      }else{
-        alert("sorry you can't add new benefits because the field is blank!");
-      }
-    });
-  }
-
   getPerkProjectUrl = "#{get_perk_projects_url}";
   submitUrl = "#{projects_submit_project_url}";
   projectId = #{@project.id};
-  projectPath = '#{project_path(@project.id)}';
+  projectPath = "#{project_path(@project.id)}";
   thankYouUrl = "#{thank_you_pages_url}";
   window.projectId = projectId

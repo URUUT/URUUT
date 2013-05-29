@@ -18,7 +18,9 @@
 
     %div
       %h6{:style => "color:#70bf4c"} ALLOW PROJECT SPONSORSHIPS?
-      = f.select :sponsorship_permisson, options_for_select({ "Yes" => "yes", "No" => "no" }, "yes"), {}, {:onchange => "changeProjectPermission()"}
+      .span2{style: "margin-left: 0"}
+        = f.select :sponsorship_permission, options_for_select({ "Yes" => "yes", "No" => "no" }, "yes"), {}, {:onchange => "changeProjectPermission()"}
+    .clearfix
 
     %div.sponsorship-true
       %div
@@ -67,7 +69,7 @@
                 = text_field_tag "platinum[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -30px; !important; width: 80% !important", class: "platinum_benefits add_benefits"
                 = hidden_field_tag "platinum_count", nil, id: "platinum-count"
                 %span.pull-right.save_new_benefit.btn{style: "margin-top:-65px; left:-20px"} Save
-            %span.green-font.normal-font.add-another + Add Another
+            %span.green-font.normal-font.add-another.add-platinum{style: "display:none" } + Add Another
       %hr
 
       %div
@@ -115,7 +117,7 @@
                 = text_field_tag "gold[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -30px; !important; width: 80% !important", class: "gold_benefits add_benefits"
                 = hidden_field_tag "gold_count", nil, id: "gold-count"
                 %span.pull-right.save_new_benefit.btn{style: "margin-top:-65px; left:-20px"} Save
-            %span.green-font.normal-font.add-another + Add Another
+            %span.green-font.normal-font.add-another.add-gold{style: "display:none" } + Add Another
 
       %hr
 
@@ -164,7 +166,7 @@
                 = text_field_tag "silver[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -30px; !important; width: 80% !important", class: "silver_benefits add_benefits"
                 = hidden_field_tag "silver_count", nil, id: "silver-count"
                 %span.pull-right.save_new_benefit.btn{style: "margin-top:-65px; left:-20px"} Save
-            %span.green-font.normal-font.add-another + Add Another
+            %span.green-font.normal-font.add-another.add-silver{style: "display:none" } + Add Another
           / %div.checkbox
           /   = check_box_tag "Test"
           /   Profile of your company on our website with photo.
@@ -214,7 +216,7 @@
                 = text_field_tag "bronze[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -30px; !important; width: 80% !important", class: "bronze_benefits add_benefits"
                 = hidden_field_tag "bronze_count", nil, id: "bronze-count"
                 %span.pull-right.save_new_benefit.btn{style: "margin-top:-65px; left:-20px"} Save
-            %span.green-font.normal-font.add-another + Add Another
+            %span.green-font.normal-font.add-another.add-bronze{style: "display:none" } + Add Another
           / %div.checkbox
           /   = check_box_tag "Test"
           /   Lorem ipsum dolor sit amet.
@@ -224,7 +226,6 @@
 
     %div.sponsorship-false{:style => "display:none"}
       = link_to "CONTINUE TO STEP 5", "/projects/#{@project.id}/edit#assets", class: "btn", id: "project-submit", style: "position: relative;display:block;margin:0 auto;width:33%"
-
   .span4{:style => "margin-top:155px;"}
     %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
     .well.info
@@ -232,3 +233,164 @@
       %p URUUT’s Partner-Funding depends not only individual contributors, but sponsorship from businesses and foundations.
 
       %p There are 4 different levels of sponsorship, with different benefits for each level. Use the checklists to define what each sponsor level includes. Blah blah blah, this is terrible writing, need to have someone actually write this before launch.
+
+
+:javascript
+
+  var platinumSum = $('#platinum-box').children().children('.default').length;
+  var goldSum = $('#gold-box').children().children('.default').length;
+  var silverSum = $('#silver-box').children().children('.default').length;
+  var bronzeSum = $('#bronze-box').children().children('.default').length;
+
+  $("#platinum-count").val(platinumSum + 1);
+  $(".platinum_benefits").attr("name", "platinum[info_" + (platinumSum + 1) + "]");
+  $(".platinum_benefits").attr("id", "platinum_info_" + (platinumSum + 1));
+  $(".box_platinum_benefits").attr("name", "platinum[" + (platinumSum + 1) + "]");
+  $(".box_platinum_benefits").attr("id", "platinum_" + (platinumSum + 1));
+
+  $("#gold-count").val(goldSum + 1);
+  $(".gold_benefits").attr("name", "gold[info_" + (goldSum + 1) + "]");
+  $(".gold_benefits").attr("id", "gold_info_" + (goldSum + 1));
+  $(".box_gold_benefits").attr("name", "gold[" + (goldSum + 1) + "]");
+  $(".box_gold_benefits").attr("id", "gold_" + (goldSum + 1));
+
+  $("#silver-count").val(silverSum + 1);
+  $(".silver_benefits").attr("name", "silver[info_" + (silverSum + 1) + "]");
+  $(".silver_benefits").attr("id", "silver_info_" + (silverSum + 1));
+  $(".box_gold_benefits").attr("name", "silver[" + (silverSum + 1) + "]");
+  $(".box_gold_benefits").attr("id", "silver_" + (silverSum + 1));
+
+  $("#bronze-count").val(bronzeSum);
+  $(".bronze_benefits").attr("name", "bronze[info_" + (bronzeSum + 1) + "]");
+  $(".bronze_benefits").attr("id", "bronze_info_" + (bronzeSum + 1));
+  $(".box_gold_benefits").attr("name", "bronze[" + (bronzeSum + 1) + "]");
+  $(".box_gold_benefits").attr("id", "bronze_" + (bronzeSum + 1));
+
+
+  $(document).ready(function() {
+    addNewBenefit();
+    editBenefit();
+    addAnotherNewBenefit();
+    removeAnotherBenefit();
+  });
+
+  var changeProjectPermission = function(){
+    if ( $("#project_sponsorship_permission").val() == "no" ){
+      $(".sponsorship-true").hide();
+      $(".sponsorship-false").show();
+    }
+    else{
+      $(".sponsorship-false").hide();
+      $(".sponsorship-true").show();
+    }
+  };
+
+  var editBenefit = function() {
+    $(".edit-benefit").bind("click", function() {
+      var nameBenefits = $(this).parent().children("#name");
+      var fieldBenefits = $(this).parent().children(".edit-text-field");
+      console.log(c = this)
+      if($(this).text() == "select to edit"){
+        nameBenefits.hide();
+        fieldBenefits.show();
+        fieldBenefits.attr("style", "margin-top:-25px; width: 320px !important;");
+        $(this).text("save");
+        $(this).addClass("btn");
+        $(this).attr("style", "position: relative; top: 70px !important; margin-left: 5px");
+        $(this).removeClass("green-font");
+      }else{
+        nameBenefits.text($(this).parent().find(".edit-text-field").val());
+        nameBenefits.show();
+        fieldBenefits.hide();
+        $(this).removeClass("btn");
+        $(this).removeAttr("style", "position: relative; top: 70px !important; margin-left: 5px");
+        $(this).addClass("edit-benefit italic green-font");
+        $(this).text("select to edit")
+      }
+    });
+  }
+
+  var addAnotherNewBenefit = function(){
+    $(".add-another").bind("click", function(e) {
+      var divCore = $(this).parent().children("#custom-checkbox");
+      var fieldP = $(this).parent().children("#existing-checkbox").children(".checkbox");
+
+      if ( fieldP.length > 0 ){
+        var checkFieldP = fieldP.last().children().first();
+        var checkboxName = checkFieldP.attr("id").split("_")[0];
+        var checkboxVal = checkFieldP.attr("id").split("_")[1];
+        var countCheckbox = parseInt(checkboxVal) + 1;
+      }
+      else{
+        var checkboxName = $(this).parent().attr("id").split("-")[0];
+        var countCheckbox = 1;
+      }
+
+      switch (checkboxName)
+        {
+          case 'platinum': $(".add-platinum").hide(); break;
+          case 'gold': $(".add-gold").hide(); break;
+          case 'silver': $(".add-silver").hide(); break;
+          case 'bronze' : $(".add-bronze").hide(); break;
+        }
+
+      $("#"+ checkboxName +"-count").val(countCheckbox);
+      $("<div class='checkbox default'><input id='"+ checkboxName + "_" + countCheckbox + "' type='checkbox' value='1' name='"+ checkboxName +"[id_"+ countCheckbox +"]''><input id='"+ checkboxName + "_info_"+ countCheckbox +"' class='"+checkboxName+"_benefits add_benefits' type='text' style='margin-top: -33px; width: 80% !important;' placeholder='Create your costum benefit here...' name='"+ checkboxName + "[info_"+countCheckbox+"]'><span class='save_new_benefit pull-right btn' style='margin-top:-79px; left:-20px'>Save</span><span class='remove-another pull-right btn' style='margin-top:-51px;'>Remove</span></div>").appendTo(divCore);
+      countCheckbox++;
+      addNewBenefit();
+      removeAnotherBenefit();
+      return false;
+    });
+  }
+
+  var removeAnotherBenefit = function(){
+    $(".remove-another").bind("click", function(){
+      var boxName = $(this).parent().parent().parent().attr("id").split("-")[0];
+      switch (boxName)
+        {
+          case 'platinum': $(".add-platinum").show(); break;
+          case 'gold': $(".add-gold").show(); break;
+          case 'silver': $(".add-silver").show(); break;
+          case 'bronze' : $(".add-bronze").show(); break;
+        }
+      $(this).parent().remove();
+    })
+  }
+
+  var addNewBenefit = function(){
+    $(".save_new_benefit").bind("click", function(){
+      var divCore = $(this).parent().parent().parent().children("#existing-checkbox");
+      var benefitsValue = $(this).parent().children(".add_benefits").val();
+
+      if ( divCore.children().children("input").length > 0 ){
+        var benefits = divCore.children().children("input").last();
+        var boxName = benefits.attr("id").split("_")[0];
+        var boxValue = benefits.attr("id").split("_")[2];
+        var boxLength = parseInt(boxValue) + 1;
+      }
+      else{
+        var boxName = $(this).parent().parent().parent().attr("id").split("-")[0];
+        var boxLength = 1;
+      }
+
+      if(benefitsValue){
+        $("<div class='checkbox default'><input id='"+boxName+"_"+boxLength+"' type='checkbox' name='"+boxName+"["+boxLength+"]' checked='checked'><span id='name'>"+benefitsValue+"</span> <span class='edit-benefit italic green-font'>select to edit</span><input id='"+ boxName +"_info_"+ boxLength+"' class='edit-text-field' type='text' value='"+benefitsValue+"' style='width: 320px !important; display: none;' name='"+boxName+"[info_"+boxLength+"]'></div>").appendTo(divCore);
+        boxLength++;
+
+        switch (boxName)
+        {
+          case 'platinum': $(".add-platinum").show(); break;
+          case 'gold': $(".add-gold").show(); break;
+          case 'silver': $(".add-silver").show(); break;
+          case 'bronze' : $(".add-bronze").show(); break;
+        }
+
+        $(this).parent().remove();
+        $(".edit-benefit").unbind("click");
+        editBenefit();
+        return false;
+      }else{
+        alert("sorry you can't add new benefits because the field is blank!");
+      }
+    });
+  }

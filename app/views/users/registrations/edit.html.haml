@@ -18,9 +18,12 @@
                 %strong Note:
                 Logo files should be at least 200px x 200px jpeg, gif or png files
 
-      %div
-        = f.label :name
-        = f.text_field :name
+      %div.inline
+        = f.label :first_name
+        = f.text_field :first_name
+      %div.inline
+        = f.label :last_name
+        = f.text_field :last_name
       %div
         = f.label :email
         = f.email_field :email
