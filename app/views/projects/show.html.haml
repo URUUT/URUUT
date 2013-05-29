@@ -1,8 +1,13 @@
-#large_image{:style => "background:url(#{@project.large_image})"}
+#large_image{:style => "background:url(#{@project.large_image}/convert?w=1600&h=546&fit=crop&align=center); background-size: cover"}
   .funding-info
     .container
       .span8
-        %h4.title= @project.project_title
+        .row
+          .span7
+            %h4.title= @project.project_title
+          .span1.text-right
+            - if @project.organization_classification.eql?("170(c)(1)") or @project.organization_classification.eql?("501(c)(3)")
+              = image_tag 'td-logo-black.png', :class => "pull-right"
         %span.location #{@project.city}, #{@project.state}
         %hr
         %p.short-desc= @project.title
@@ -11,13 +16,13 @@
         / = image_tag "tw-count.png", :class => "tw-share", :style => "margin-right:20px;"
         / = image_tag "bitly-link.png", :style => "margin-right:20px;"
         .fb-count
-          %span 
+          %span
         .tw-count
           %span
         .bitly-link
           - if @project.bitly
             %span= @project.bitly.sub(/http:\/\//, '')
-						
+
         %p= link_to "Contact Project Creator", "mailto:#{User.find(@project.user_id).email}"
 
       .span4
@@ -72,9 +77,10 @@
                   %span{:style => "color:#403e37;font:italic 12px/12px georgia, serif;text-transform:none;letter-spacing:normal;text-decoration:underline;", :target => "_blank"}= @project.website
 
       %h4.title{:style => 'margin-top:50px;'} PROJECT SPONSORS
-      = link_to new_project_sponsor_path(@project.id), class: 'btn', style: 'left:220px;position:relative;top:-55px;'  do
+      = link_to new_project_sponsor_path(@project.id), :class => 'btn', :style => 'margin-top:10px;'  do
         Become A Sponsor
         %span
+
       #contect_container
         #planting_seeds{style: "margin-top: -25px;"}
           - @project_sponsors.each do |key, value|
@@ -83,19 +89,19 @@
               - value.sort.each do |project_sponsor|
                 -if project_sponsor.level_id.eql? 1
                   .span4.margin-auto.float-none
-                    = image_tag(project_sponsor.logo_url, class: "img-polaroid", style: "width:200px;height:170px;")
+                    //= image_tag(project_sponsor.logo_url, class: "img-polaroid", style: "width:200px;height:170px;")
                     %br/
                     %h5.green-font{style: "text-align: center;"}= project_sponsor.name
                 -elsif project_sponsor.level_id.eql? 2
                   .span4{style: "margin-left:0;"}
                     .span9.float-none.margin-auto
-                      = image_tag(project_sponsor.logo_url, class: "img-polaroid", style: "width:150px;height:120px;")
+                      //= image_tag(project_sponsor.logo_url, class: "img-polaroid", style: "width:150px;height:120px;")
                     %br/
                     %h5.green-font{style: "text-align: center;"}= project_sponsor.name
                 -elsif project_sponsor.level_id.eql? 3
                   .span2.margin-auto{style: "width: 19.5%;"}
                     .span9.margin-auto.float-none
-                      = image_tag(project_sponsor.logo_url, class: "img-polaroid", style: "width:100px;height:80px;")
+                      //= image_tag(project_sponsor.logo_url, class: "img-polaroid", style: "width:100px;height:80px;")
                     %br/
                     %p.green-font.normal-font.text-center= project_sponsor.name.upcase
 
@@ -107,6 +113,9 @@
         #planting_seeds
           - if @project.seed_image
             = image_tag "#{@project.seed_image}"
+          - if @project.seed_video
+            - video_seed = @project.seed_video.gsub("watch?v=", "embed/")
+            %iframe{:height => "413", :src => video_seed, :width => "620"}
           %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.about
 
         %hr
@@ -128,6 +137,9 @@
           .span9.details
             - if @project.cultivation_image
               = image_tag "#{@project.cultivation_image}"
+            - if @project.cultivation_video
+              - cultivation_video = @project.cultivation_video.gsub("watch?v=", "embed/")
+              %iframe{:height => "310", :src => cultivation_video, :width => "380"}
             %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.story
 
       -#%hr
@@ -147,25 +159,6 @@
         = link_to new_project_sponsor_path(@project.id), :class => 'btn', :style => 'margin-top:10px;' do
           Become A Sponsor
           %span
-
-      %h4 SPONSORSHIP LEVELS
-      .well
-        -@sponsorship_levels.each_with_index do |sponsorship_level, idx|
-          - if (idx + 1) > 1
-            %div{:style => "margin: 20px 0px; border-top: solid 1px #a1a1a1; position: relative;"}
-          %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;font-family:'Proxima Nova';"}
-            = sponsorship_level.name.upcase
-          %p.normal-font
-            =sponsorship_level.description
-          - sponsorship_level.sponsorship_benefits.each do |benefit|
-            %p.normal-font - #{benefit.name}
-          %div{:style => "height: 80px; width: 100%;"}
-            .pull-left
-              %h5 COST
-              %h3{style: "margin-top:-20px;"}= number_to_currency(sponsorship_level.cost, precision: 0)
-            =link_to new_project_sponsor_path(@project.id, sponsorship_level: sponsorship_level.id), class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-#{sponsorship_level.id}", :"sponsor-id" => "#{sponsorship_level.id}" do
-              SPONSOR
-              %span
 
       %h4.title{:style => 'margin-top:50px;'} Seeder Perks
       %ul.perks
@@ -211,7 +204,7 @@
     }).done(function(data) {
       console.log(data.data[0].like_count);
       $('.fb-count span').text(data.data[0].like_count);
-    }); 
+    });
   }
 
   var getTwCount = function() {
@@ -275,7 +268,7 @@
       $(this).parent('li').addClass('active');
       $(show).show();
     });
-		
+
     $('.fb-count').click(function() {
       console.log("#{root_url}projects/#{@project.id}")
       var publish = {
@@ -294,7 +287,7 @@
         ],
         user_message_prompt: 'Share your thoughts about RELL'
       };
-      
+
       function callback(response) {
         if (response && response.post_id) {
           console.log('Post was published.');
@@ -302,10 +295,10 @@
           console.log('Post was not published.');
         }
       }
-      
+
       FB.ui(publish, callback);
     });
-		
+
     $('.tw-count').click(function(e) {
       e.preventDefault();
       var width  = 575,
@@ -321,5 +314,5 @@
 
       window.open(url, 'twitter', opts);
     })
-		
+
   });
