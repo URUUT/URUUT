@@ -71,21 +71,25 @@
           %span.italic (max 45 days)
         = f.select :payment_type, options_for_select(Sponsor::PAYMENT), :id => "payment_type", required: true, :size => 17
       %div#credit-card{:style => "float: left;"}
-        %div
-          = f.label :card_name, "NAME AS IT APPERS ON CARD*", class: "green-font"
-          = f.text_field :card_name, :size => 40, required: true, label: false, class: "card-input"
-        %div{:style => "float: left;"}
-          = f.label :card_number, "CARD NUMBER*", class: "green-font"
-          = f.text_field :card_number, :size => 40, required: true, label: false, class: "card-input", :"data-stripe" => "number"
-        %div{:style => "float: left; margin-right: 60px;"}
-          = f.label :cvc, "CVC*", class: "green-font"
-          = f.text_field :cvc, :size => 5, required: true, label: false, class: "card-input", :"data-stripe" => "cvc"
-        %div{:style => "float: left; width: 340px;"}
-          = f.label :card_expiration, "CARD EXPIRATION (MM/YYYY)*", class: "green-font"
-          = f.text_field :month, :style => "float: left; margin-right: 15px;", size: "4", required: true, label: false, class: "card-input", :"data-stripe" => "exp-month"
-          = f.text_field :year_card, :style => "float: left;", size: "4", required: true, label: false, class: "card-input", :"data-stripe" => "exp-year"
-        = link_to "https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_1kjvzNoI5Jbkcb1RTv4vtoxljRUueUNZ", :target => "_blank", :class => "stripe-connect light-blue" do
-          %span Connect with Stripe
+        .field.name
+          = label_tag :card_name, class: "green-font" do
+            NAME AS IT APPEARS ON CARD*
+          = text_field_tag nil, user_signed_in? ? current_user.first_name.capitalize : "" , name: "sponsor[card_name]", class: "span12"
+        .field.card-number
+          = label_tag :card_number, class: "green-font" do
+            Credit Card Number
+          = text_field_tag :card_number, nil, name: nil, class: "span12"
+        .field.ccv.span4
+          = label_tag :card_code, class: "green-font" do
+            CVV*
+          = text_field_tag :card_code, nil, name: nil, class: "span10"
+        .field.expiration.span6
+          = label_tag :card_month, class: "green-font" do
+            CARD EXPIRATION (MM/YYYY)*
+          / = select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
+          / = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}
+          = text_field_tag nil, nil, {name: nil, id: "card_month", class: "span3"}
+          = text_field_tag nil, nil, {name: nil, id: "card_year", class: "span5"}
 
         %input{:type => 'hidden', :value => "#{@connected}", :id => "connected", :required => true}
       %div#wire-transfer{:style => "display: none; float: left;"}
