@@ -43,74 +43,33 @@
           %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"} SUGGESTED BENEFITS:
           %div#platinum-box
             %div#existing-checkbox
-              %div.checkbox.default
-                %div
-                  = check_box_tag 'sponsorship_benefits[platinum][]', 'Recognition plaque on project site'
-                  = label_tag "Recognition plaque on project site"
-                  %div.update
-                    %input{:type => "text", :class => 'benefit-editable'}
-                    .save Save
-                    .cancel Cancel
-                  = link_to "Select To Edit", "#", :class => 'benefit-edit'
-				
-                %div
-                  = check_box_tag 'sponsorship_benefits[platinum][]', 'Platinum Sponsor mention on all media press releases and in community newsletter'
-                  = label_tag "Platinum Sponsor mention on all media press releases and in community newsletter"
-                  %div.update
-                    %input{:type => "text", :class => 'benefit-editable'}
-                    .save Save
-                    .cancel Cancel
-                  = link_to "Select To Edit", "#", :class => 'benefit-edit'
-				  
-                %div
-                  = check_box_tag 'sponsorship_benefits[platinum][]', 'Recognition plaque on project site'
-                  = label_tag "Recognition plaque on project site"
-                  %div.update
-                    %input{:type => "text", :class => 'benefit-editable'}
-                    .save Save
-                    .cancel Cancel
-                  = link_to "Select To Edit", "#", :class => 'benefit-edit'
-				
-                %div
-                  = check_box_tag 'sponsorship_benefits[platinum][]', 'Profile of your company on our website with photo'
-                  = label_tag "Profile of your company on our website with photo"
-                  %div.update
-                    %input{:type => "text", :class => 'benefit-editable'}
-                    .save Save
-                    .cancel Cancel
-                  = link_to "Select To Edit", "#", :class => 'benefit-edit'
-				 
-                %div
-                  = check_box_tag 'sponsorship_benefits[platinum][]', 'Monthly plug on social media leading up to the project and the month after the project has been complete.'
-                  = label_tag "Monthly plug on social media leading up to the project and the month after the project has been complete."
-                  %div.update
-                    %input{:type => "text", :class => 'benefit-editable'}
-                    .save Save
-                    .cancel Cancel
-                  = link_to "Select To Edit", "#", :class => "benefit-edit"
 
-                - unless @benefits.nil?
-                  - @benefits.uniq.each do |benefit|
-                    %div
-                      = check_box_tag 'sponsorship_benefits[platinum][]', benefit.name
-                      = label_tag "#{benefit.name}"
-                      %div.update
-                        %input{:type => "text", :class => 'benefit-editable'}
-                        .save Save
-                        .cancel Cancel
-                      = link_to "Select To Edit", "#", :class => 'benefit-edit'
+              -if @project.sponsorship_benefits.empty?
+                -SponsorshipBenefit::SPONSORSHIP_BENEFITS.each do |key, value|
+                  -if key.eql? 1
+                    -value.each_with_index do |benefit|
+                      %div.checkbox.default
+                        = check_box_tag "platinum[#{benefit[:id]}]"
+                        %span#name= benefit[:desc]
+                        %span.edit-benefit.italic.green-font select to edit
+                        = text_field_tag "platinum[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field", style: "width: 320px !important; display: none;"
+              -else
+                -@project.sponsorship_benefits.where(sponsorship_level_id: 1).each_with_index do |benefit, index|
+                  %div.checkbox.default
+                    = hidden_field_tag "platinum[id_#{index + 1}]", benefit.id
+                    = check_box_tag "platinum[#{index + 1}]", nil, benefit.status
+                    %span#name= benefit.name
+                    %span.edit-benefit.italic.green-font select to edit
+                    = text_field_tag "platinum[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
 
             %div#custom-checkbox
-              %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 20px;"} CREATE CUSTOM BENEFITS:
+              %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 20px;"} CREATE COSTUM BENEFITS:
               %div.checkbox.add_checkbox
-                = check_box_tag 'sponsorship_benefits[platinum][]'
-                = label_tag
-                %div.update
-                  %input{:type => "text", :placeholder => "Create Custom Benefit", :class => 'benefit-editable'}
-                  .save Save
-                  .cancel Cancel
-                
-              .add-benefit+ Add Another
+                = check_box_tag "add_platinum",nil,false, class: "box_platinum_benefits"
+                = text_field_tag "platinum[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -30px; !important; width: 80% !important", class: "platinum_benefits add_benefits"
+                = hidden_field_tag "platinum_count", nil, id: "platinum-count"
+                %span.pull-right.save_new_benefit.btn{style: "margin-top:-65px; left:-20px"} Save
+            %span.green-font.normal-font.add-another.add-platinum{style: "display:none" } + Add Another
       %hr
 
       %div
@@ -138,7 +97,7 @@
                   -if key.eql? 2
                     -value.each_with_index do |benefit|
                       %div.checkbox.default
-                        = check_box_tag "gold[#{benefit[:id]}]",false
+                        = check_box_tag "gold[#{benefit[:id]}]"
                         %span#name= benefit[:desc]
                         %span.edit-benefit.italic.green-font select to edit
                         = text_field_tag "gold[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field", style: "width: 320px !important; display: none;"
