@@ -52,7 +52,7 @@
                     .save Save
                     .cancel Cancel
                   = link_to "Select To Edit", "#", :class => 'benefit-edit'
-				
+
                 %div
                   = check_box_tag 'sponsorship_benefits[platinum][]', 'Platinum Sponsor mention on all media press releases and in community newsletter'
                   = label_tag "Platinum Sponsor mention on all media press releases and in community newsletter"
@@ -61,7 +61,7 @@
                     .save Save
                     .cancel Cancel
                   = link_to "Select To Edit", "#", :class => 'benefit-edit'
-				  
+
                 %div
                   = check_box_tag 'sponsorship_benefits[platinum][]', 'Recognition plaque on project site'
                   = label_tag "Recognition plaque on project site"
@@ -70,7 +70,7 @@
                     .save Save
                     .cancel Cancel
                   = link_to "Select To Edit", "#", :class => 'benefit-edit'
-				
+
                 %div
                   = check_box_tag 'sponsorship_benefits[platinum][]', 'Profile of your company on our website with photo'
                   = label_tag "Profile of your company on our website with photo"
@@ -79,7 +79,7 @@
                     .save Save
                     .cancel Cancel
                   = link_to "Select To Edit", "#", :class => 'benefit-edit'
-				 
+
                 %div
                   = check_box_tag 'sponsorship_benefits[platinum][]', 'Monthly plug on social media leading up to the project and the month after the project has been complete.'
                   = label_tag "Monthly plug on social media leading up to the project and the month after the project has been complete."
@@ -109,7 +109,7 @@
                   %input{:type => "text", :placeholder => "Create Custom Benefit", :class => 'benefit-editable'}
                   .save Save
                   .cancel Cancel
-                
+
               .add-benefit+ Add Another
       %hr
 
@@ -155,7 +155,7 @@
               %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 20px;"} CREATE COSTUM BENEFITS:
               %div.checkbox.add_checkbox
                 = check_box_tag "add_gold",nil,false, class: "box_gold_benefits"
-                = text_field_tag "gold[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -30px; !important; width: 80% !important", class: "gold_benefits add_benefits"
+                = text_field_tag "gold[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -18px; !important; width: 80% !important", class: "gold_benefits add_benefits"
                 = hidden_field_tag "gold_count", nil, id: "gold-count"
                 %span.pull-right.save_new_benefit.btn{style: "margin-top:-65px; left:-20px"} Save
             %span.green-font.normal-font.add-another.add-gold{style: "display:none" } + Add Another
@@ -204,7 +204,7 @@
               %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 20px;"} CREATE COSTUM BENEFITS:
               %div.checkbox.add_checkbox
                 = check_box_tag "add_silver",nil,false, class: "box_silver_benefits"
-                = text_field_tag "silver[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -30px; !important; width: 80% !important", class: "silver_benefits add_benefits"
+                = text_field_tag "silver[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -18px; !important; width: 80% !important", class: "silver_benefits add_benefits"
                 = hidden_field_tag "silver_count", nil, id: "silver-count"
                 %span.pull-right.save_new_benefit.btn{style: "margin-top:-65px; left:-20px"} Save
             %span.green-font.normal-font.add-another.add-silver{style: "display:none" } + Add Another
@@ -254,7 +254,7 @@
               %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 20px;"} CREATE COSTUM BENEFITS:
               %div.checkbox.add_checkbox
                 = check_box_tag "add_bronze", nil,false, class: "box_bronze_benefits"
-                = text_field_tag "bronze[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -30px; !important; width: 80% !important", class: "bronze_benefits add_benefits"
+                = text_field_tag "bronze[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -18px; !important; width: 80% !important", class: "bronze_benefits add_benefits"
                 = hidden_field_tag "bronze_count", nil, id: "bronze-count"
                 %span.pull-right.save_new_benefit.btn{style: "margin-top:-65px; left:-20px"} Save
             %span.green-font.normal-font.add-another.add-bronze{style: "display:none" } + Add Another
