@@ -1,0 +1,12 @@
+$(".perk-name").text("<%= @perk.name %>");
+$(".perk-amount").text("<%= number_to_currency(@perk.amount, :precision => 0) %>");
+$(".perk-description").text("<%= @perk.description.to_s.html_safe %>");
+
+$(".perk").attr("style", "");
+$(".change-fund").attr("style", "");
+$(".seed-amount").attr("style", "");
+$(".perk-name-other").attr("style", "");
+$("#perk-name-other-<%= @perk.id %>").attr("style", "color: #000");
+$("#amount-id-<%= @perk.id %>").attr("style", "background: #70BF4C");
+$("#perk-id-<%= @perk.id %>").attr("style", "background: #70BF4C");
+$("#button-fund-<%= @perk.id %>").attr("style", "background: green");
