@@ -14,6 +14,11 @@ class DonationsController < ApplicationController
     logger.debug(@project.title)
 	end
 
+  def change_perk
+    @perk = Perk.find(params[:id])
+    session[:perk_id] = @perk.id
+  end
+
 	def create
     @donation = Donation.new(params[:donation])
 

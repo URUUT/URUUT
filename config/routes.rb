@@ -64,6 +64,7 @@ Crowdfund::Application.routes.draw do
   end
   resources :donations do
     get "thank_you", :on => :collection
+    get "change_perk", :on => :member
   end
   resources :projects do
     get "add_desc", :on => :collection
@@ -78,7 +79,7 @@ Crowdfund::Application.routes.draw do
       get :confirm_sponsor
     end
   end
-  
+
   resources :projects
 
   resources :project_steps
