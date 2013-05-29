@@ -39,12 +39,14 @@
       .payment-errors
       .span12{:style => "background-color: #f5f5f5; margin-left: 0px;"}
         .pull-left{:style => "width: 250px; height: 500px; border-right: solid 1px #d3d3d3;"}
-          %h4 SPONSORSHIP COST
-          %h1.cost-level.green-font #{number_to_currency(@sponsorship_levels.first.cost, precision: 0)}
+          %h4{:style => "font-size: 10;"} SPONSORSHIP COST
+          %h1.cost-level.green-font-big #{number_to_currency(@sponsorship_levels.first.cost, precision: 0)}
         .pull-right{:style => "width: 320px;"}
           = label_tag :project_sponsor_name do
             CHOOSE YOUR SPONSORSHIP LEVEL
-          = select :project_sponsor, :level_id, options_for_select(@sponsorship_levels.map {|level| ["#{level.name} Level", level.id]}), required: true, size: 17, class: "selectbox"
+          .selectParent
+            = select :project_sponsor, :level_id, options_for_select(@sponsorship_levels.map {|level| ["#{level.name} Level", level.id]}), required: true, class: "selectbox"
+
           = image_tag "3.gif", id: "loading", style: "display: none; margin: -3px 0 10px 10px;"
           %br/
           %h5 SPONSORSHIP DETAILS
@@ -55,7 +57,7 @@
       %h4 SPONSOR INFORMATION
       %div
         = f.label :name, "Business OR ORGANIZATION NAME*", class: "green-font"
-        = text_field :project_sponsor, :name, required: true, :size => 40, label: false
+        = text_field :project_sponsor, :name, required: true, label: false, class: "span12"
       %div
         = f.label :mission, class: "green-font" do
           BUSINESS OR ORGANIZATION'S LOGO*
@@ -64,12 +66,13 @@
         = f.label :mission, class: "green-font" do
           MISSION STATEMENT / ABOUT*
           %span.cutdown.italic
-        = text_area :project_sponsor, :mission, maxlength: 275, required: true, :style => "height: 186px; width: 602px;", label: false, class: "mission", placeholder: "Tell your story here ..."
+        = text_area :project_sponsor, :mission, maxlength: 275, required: true, :style => "height: 186px; width: 595px;", label: false, class: "mission", placeholder: "Tell your story here ..."
       %div{:style => "border-top: solid 1px #a5a5a5; padding-top: 25px"}
-        = f.label :payment_type do
+        = f.label :payment_type, class: "green-font" do
           PREFERRED PAYMENT METHOD*
           %span.italic (max 45 days)
-        = f.select :payment_type, options_for_select(Sponsor::PAYMENT), :id => "payment_type", required: true, :size => 17
+          .selectParent.parentWide
+            = f.select :payment_type, options_for_select(Sponsor::PAYMENT), :id => "payment_type", required: true, :size => 17
 
 
       ///////////////////////////////////////////////////////
@@ -79,7 +82,7 @@
       /                                                     /
       ///////////////////////////////////////////////////////
 
-      %div#credit-card{:style => "float: left;"}
+      %div#credit-card
         = hidden_field_tag :token
         = hidden_field_tag 'project_sponsor[card_type]'
         = hidden_field_tag 'project_sponsor[card_last4]'
@@ -88,25 +91,29 @@
           Credit card has been provided.
         - else
           .field.name
-            = label_tag "NAME AS IT APPEARS ON CARD*"
-            = text_field_tag nil, current_user, name: "sponsor[card_name]"
+            = label_tag :card_name, class: "green-font" do
+              NAME AS IT APPEARS ON CARD*
+            = text_field_tag nil, current_user.first_name.capitalize, name: "sponsor[card_name]", class: "span12"
           .field.card-number
-            = label_tag :card_number, "Credit Card Number"
-            = text_field_tag :card_number, nil, name: nil
-          .field.ccv
-            = label_tag :card_code, "CVV*"
-            = text_field_tag :card_code, nil, name: nil
-          .field.expiration
-            = label_tag :card_month, "CARD EXPIRATION (MM/YYYY)*"
+            = label_tag :card_number, class: "green-font" do
+              Credit Card Number
+            = text_field_tag :card_number, nil, name: nil, class: "span12"
+          .field.ccv.span4
+            = label_tag :card_code, class: "green-font" do
+              CVV*
+            = text_field_tag :card_code, nil, name: nil, class: "span10"
+          .field.expiration.span6
+            = label_tag :card_month, class: "green-font" do
+              CARD EXPIRATION (MM/YYYY)*
             / = select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
             / = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}
-            = text_field_tag nil, nil, {name: nil, id: "card_month"}
-            = text_field_tag nil, nil, {name: nil, id: "card_year"}
+            = text_field_tag nil, nil, {name: nil, id: "card_month", class: "span3"}
+            = text_field_tag nil, nil, {name: nil, id: "card_year", class: "span5"}
           .cf
         #stripe_error
           %noscript JavaScript is not enabled and is required for this form. First enable it in your web browser settings.
 
-      %div#wire-transfer{:style => "display: none; float: left;"}
+      %div#wire-transfer{:style => "display: none;"}
         %div
           = f.label :name, "CONTACT NAME*", class: "green-font"
           = f.text_field :name, :size => 40, label: false, class: "transfer-input"
@@ -116,7 +123,7 @@
         %div
           = f.label :phone, "CONTACT PHONE NUMBER*", class: "green-font"
           = f.text_field :phone, :size => 25, type: "text", label: false, class: "transfer-input"
-      %div{:style => "float: right;"}
+      %div{:style => "border-top: solid 1px #a5a5a5; padding-top: 25px"}
         = image_tag "3.gif", id: "submit-progress", style: "display: none; float: left; position: relative; top: 32px; margin-right: -40px; margin-left: 15px; z-index: 9999;"
         = f.button :submit, class: "btn pull-right", id: "project-submit"
 
