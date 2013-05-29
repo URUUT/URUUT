@@ -5,7 +5,7 @@ class SponsorsController < ApplicationController
   def new
     @sponsor = Sponsor.new
     @project = Project.find(params[:project_id])
-    logger.debug(@sponsorship_levels)
+    logger.debug(@project.to_yaml)
     render :layout => 'landing'
   end
 
