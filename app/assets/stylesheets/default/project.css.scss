@@ -13,3 +13,74 @@
 
 #uvw-dialog-powered-by {
 	display:none; }
+	
+#existing-checkbox {	
+	.save, .cancel {
+		display:inline-block;
+		font:italic 11px/11px 'Georgia', georgia, serif;
+		margin:0 5px;
+	}
+	.checkbox {
+		input[type=checkbox] {
+			float: left;
+			margin-right:5px;
+			position: relative;
+			vertical-align: top !important;
+		}
+		label {
+			color:#464646;
+			display:inline-block;
+			font:normal 12px/17px 'Proxima Nova Semi' !important;
+			margin:0 0 20px;
+			max-width:80%;
+			width:80%;
+		}
+		.update {
+			display:none;
+			input {
+				display:inline-block;
+				max-width:80%;
+				width:80% !important;
+			}
+		}
+		.benefit-edit {
+			display:inline-block;
+			font:italic 11px/11px 'Georgia', georgia, serif;
+			margin-left:10px;
+			position:relative;
+			vertical-align: middle;
+		}
+	}
+}
+
+#custom-checkbox {
+	.save, .cancel {
+		display:inline-block;
+		font:italic 11px/11px 'Georgia', georgia, serif;
+		margin:0 5px;
+	}
+	.checkbox {
+		.update {
+			display:block;
+			input {
+				display:inline-block;
+				max-width:80%;
+				width:80% !important;
+			}
+		}
+		input[type=checkbox] {
+			float: left;
+			margin-right:5px;
+			position: relative;
+			vertical-align: top !important;
+		}
+		label {
+			color:#464646;
+			display:none;
+			font:normal 12px/17px 'Proxima Nova Semi' !important;
+			margin:0 0 20px;
+			max-width:80%;
+			width:80%;
+		}
+	}
+}
