@@ -1,0 +1,9 @@
+.recent.clearfix
+  .container
+    %p.sections
+      = image_tag "recent-project-icon.png"
+      PROJECTS
+
+      = link_to "View All", "#", :class => 'view-all'
+
+    = render "project", :projects => @projects

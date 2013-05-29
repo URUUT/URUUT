@@ -3,11 +3,11 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :omniauthable,
-         :recoverable, :rememberable, :trackable
+    :recoverable, :rememberable, :trackable
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :remember_me, :city, :state, :zip,
-                  :neighborhood, :provider, :uid, :token, :organization, :mission, :subscribed, :avatar
+    :neighborhood, :provider, :uid, :token, :organization, :mission, :subscribed, :avatar
                   
   after_create :send_welcome_email
   after_create :assign_default_badge
@@ -39,18 +39,22 @@ class User < ActiveRecord::Base
   end
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
-    user = User.where(:provider => auth.provider, :uid => auth.uid).first
-    
-    unless user    
-      user = User.create(  first_name:auth.extra.raw_info.name.to_s.split(' ')[0],
-                           last_name: auth.extra.raw_info.name.to_s.split(' ')[1],
-                           provider:auth.provider,
-                           uid:auth.uid,
-                           email:auth.info.email,
-                           password:Devise.friendly_token[0,20],
-                           token:auth.credentials.token
-                           )
+    user = User.where(:provider => auth.provider.to_s, :uid => auth.uid.to_s).first
+    unless user
+      user = User.where(:email => auth.info.email).first
+      unless user
+        user = User.create(first_name:auth.extra.raw_info.name.to_s.split(' ')[0],
+          last_name: auth.extra.raw_info.name.to_s.split(' ')[1],
+          provider:auth.provider,
+          uid:auth.uid,
+          email:auth.info.email,
+          password:Devise.friendly_token[0,20],
+          token:auth.credentials.token
+        )
+      else
+        user.update_attributes({provider: auth.provider,uid: auth.uid})
       end
+    end
     user
   end
 
@@ -91,7 +95,7 @@ class User < ActiveRecord::Base
 
   def most_funded_city
     project = Project.select("projects.city, SUM(donations.amount) as city_sum").joins(:donations).
-        where("donations.user_id = ?", self.id).group("projects.city").order("city_sum DESC").first
+      where("donations.user_id = ?", self.id).group("projects.city").order("city_sum DESC").first
     # Return an empty string if user has no donations
     project.present? ? project.city : ""
   end
@@ -107,9 +111,9 @@ class User < ActiveRecord::Base
   end
 
   # def minimum_image_size
-#     if self.avatar_upload_width && self.avatar_upload_height && (self.avatar_upload_width < 200 || self.avatar_upload_height < 200)
-#       errors.add :avatar, "Image should be at least 200px x 200px"
-#     end
-#   end
+  #     if self.avatar_upload_width && self.avatar_upload_height && (self.avatar_upload_width < 200 || self.avatar_upload_height < 200)
+  #       errors.add :avatar, "Image should be at least 200px x 200px"
+  #     end
+  #   end
 
 end
