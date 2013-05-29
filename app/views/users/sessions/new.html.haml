@@ -5,11 +5,11 @@
 
     %div
       = f.label :email
-      = f.email_field :email, :size => 45
+      = f.email_field :email, class: "span7"
 
     %div.inline
       = f.label :password
-      = f.password_field :password, :size => 45
+      = f.password_field :password, class: "span7"
 
     - if devise_mapping.rememberable?
       %div

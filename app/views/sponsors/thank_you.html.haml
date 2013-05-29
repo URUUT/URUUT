@@ -4,7 +4,7 @@
       %h4.title THANK YOU!
       .well{style: "margin-left: 0;"}
         %h4{:style => "color: #48C94C;"} Congratulations!
-        %p You are now an official sponsor to . Now it's
+        %p You are now an official sponsor to #{@project.title}. Now it's
         %div
           = link_to image_tag("fb-share.png",style: "width: 150px"), "javascript:shareFb()", style: "margin-left: 2%"
           = link_to image_tag("tw-share.png", style: "width: 150px"), "https://twitter.com/share", "data-url" => root_url, "target" => "blank", style: "margin-left: 2%"
@@ -59,7 +59,7 @@
 
 
   var csPageOptions = {
-    domain_key:"3E6CHQNSGA7WFNM7ATLZ",
+    domain_key:"3E6CHQNSGA7WFNM7ATLZ", // default for 127.0.0.1, please change it
     textarea_id:"contact_list",
     afterSubmitContacts:sendEmail
   };
