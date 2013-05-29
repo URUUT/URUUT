@@ -1,7 +1,6 @@
 class SponsorshipBenefit < ActiveRecord::Base
-  attr_accessible :name, :sponsorship_level_id, :project_id, :status
+  attr_accessible :name, :sponsorship_level, :project_id, :cost
 
-  belongs_to :sponsorship_level
   belongs_to :project
 
   SPONSORSHIP_BENEFITS = {1 => [{ id: 1,  desc: "Recognition plaque on project site."},
