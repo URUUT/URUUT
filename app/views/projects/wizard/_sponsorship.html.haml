@@ -51,7 +51,7 @@
                     %input{:type => "text", :class => 'benefit-editable'}
                     .save Save
                     .cancel Cancel
-                  = link_to "Select To Edit", "#", :class => 'benefit-edit'
+
 
                 %div
                   = check_box_tag 'sponsorship_benefits[platinum][]', 'Platinum Sponsor mention on all media press releases and in community newsletter'
@@ -60,7 +60,7 @@
                     %input{:type => "text", :class => 'benefit-editable'}
                     .save Save
                     .cancel Cancel
-                  = link_to "Select To Edit", "#", :class => 'benefit-edit'
+
 
                 %div
                   = check_box_tag 'sponsorship_benefits[platinum][]', 'Recognition plaque on project site'
@@ -69,7 +69,7 @@
                     %input{:type => "text", :class => 'benefit-editable'}
                     .save Save
                     .cancel Cancel
-                  = link_to "Select To Edit", "#", :class => 'benefit-edit'
+
 
                 %div
                   = check_box_tag 'sponsorship_benefits[platinum][]', 'Profile of your company on our website with photo'
@@ -78,7 +78,7 @@
                     %input{:type => "text", :class => 'benefit-editable'}
                     .save Save
                     .cancel Cancel
-                  = link_to "Select To Edit", "#", :class => 'benefit-edit'
+
 
                 %div
                   = check_box_tag 'sponsorship_benefits[platinum][]', 'Monthly plug on social media leading up to the project and the month after the project has been complete.'
@@ -87,7 +87,7 @@
                     %input{:type => "text", :class => 'benefit-editable'}
                     .save Save
                     .cancel Cancel
-                  = link_to "Select To Edit", "#", :class => "benefit-edit"
+
 
                 - unless @benefits.nil?
                   - @benefits.uniq.each do |benefit|
@@ -98,19 +98,16 @@
                         %input{:type => "text", :class => 'benefit-editable'}
                         .save Save
                         .cancel Cancel
-                      = link_to "Select To Edit", "#", :class => 'benefit-edit'
+
 
             %div#custom-checkbox
-              %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 20px;"} CREATE CUSTOM BENEFITS:
+              %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 20px;"} CREATE COSTUM BENEFITS:
               %div.checkbox.add_checkbox
-                = check_box_tag 'sponsorship_benefits[platinum][]'
-                = label_tag
-                %div.update
-                  %input{:type => "text", :placeholder => "Create Custom Benefit", :class => 'benefit-editable'}
-                  .save Save
-                  .cancel Cancel
-
-              .add-benefit+ Add Another
+                = check_box_tag "add_plantinum",nil,false, class: "box_platinum_benefits"
+                = text_field_tag "platinum[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -18px; !important; width: 80% !important", class: "platinum_benefits add_benefits"
+                = hidden_field_tag "platinum_count", nil, id: "gold-count"
+                %span.pull-right.save_new_benefit.btn{style: "margin-top:-65px; left:-20px"} Save
+            %span.green-font.normal-font.add-another.add-platinum{style: "display:none" } + Add Another
       %hr
 
       %div
@@ -376,7 +373,7 @@
         }
 
       $("#"+ checkboxName +"-count").val(countCheckbox);
-      $("<div class='checkbox default'><input id='"+ checkboxName + "_" + countCheckbox + "' type='checkbox' value='1' name='"+ checkboxName +"[id_"+ countCheckbox +"]''><input id='"+ checkboxName + "_info_"+ countCheckbox +"' class='"+checkboxName+"_benefits add_benefits' type='text' style='margin-top: -33px; width: 80% !important;' placeholder='Create your costum benefit here...' name='"+ checkboxName + "[info_"+countCheckbox+"]'><span class='save_new_benefit pull-right btn' style='margin-top:-79px; left:-20px'>Save</span><span class='remove-another pull-right btn' style='margin-top:-51px;'>Remove</span></div>").appendTo(divCore);
+      $("<div class='checkbox default'><input id='"+ checkboxName + "_" + countCheckbox + "' type='checkbox' value='1' name='"+ checkboxName +"[id_"+ countCheckbox +"]''><input id='"+ checkboxName + "_info_"+ countCheckbox +"' class='"+checkboxName+"_benefits add_benefits' type='text' style='margin-top: -18px; width: 80% !important;' placeholder='Create your costum benefit here...' name='"+ checkboxName + "[info_"+countCheckbox+"]'><span class='save_new_benefit pull-right btn' style='margin-top:-79px; left:-20px'>Save</span><span class='remove-another pull-right btn' style='margin-top:-51px;'>Remove</span></div>").appendTo(divCore);
       countCheckbox++;
       addNewBenefit();
       removeAnotherBenefit();
