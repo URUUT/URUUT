@@ -57,7 +57,6 @@ class ProjectsController < ApplicationController
   def update
     @project = Project.find(params[:id])
     sponsorship_benefits = []
-
     def sponsorship_benefit_level(level, benefit, key)
       data = []
       1.upto(params["#{level}_count"].to_i) do |x|
@@ -67,13 +66,22 @@ class ProjectsController < ApplicationController
           x
         end
         status = params["#{level}"]["#{count}"] ? 1 : 0
+        if level.eql?("platinum")
+          cost = 0.3 * @project.goal.to_i
+        elsif level.eql?("gold")
+          cost = 0.1 * @project.goal.to_i
+        elsif level.eql?("silver")
+          cost = 0.04 * @project.goal.to_i
+        else
+          cost = 0.005 * @project.goal.to_i
+        end
         if @project.sponsorship_benefits.blank? || params["#{level}"]["id_#{count}"].nil?
           unless params["#{level}"]["info_#{count}"].blank?
-            data <<  {name: params["#{level}"]["info_#{count}"],sponsorship_level_id: key, project_id: @project.id, status: status}
+            data <<  {name: params["#{level}"]["info_#{count}"],sponsorship_level_id: key, project_id: @project.id, status: status, cost: cost}
           end
         else
           sponsorship_benefit = SponsorshipBenefit.find(params[level]["id_#{count}"])
-          sponsorship_benefit.update_attributes({name: params["#{level}"]["info_#{count}"],sponsorship_level_id: key, project_id: @project.id, status: status})
+          sponsorship_benefit.update_attributes({name: params["#{level}"]["info_#{count}"],sponsorship_level_id: key, project_id: @project.id, status: status, cost: cost})
         end
       end
       data
@@ -93,11 +101,11 @@ class ProjectsController < ApplicationController
     @sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits)
     @project.update_attributes!(params[:project])
 
-    if @project.bitly.blank?
-      bitly = Bitly.client
-      page_url = bitly.shorten("#{request.scheme}://#{request.host_with_port}/projects/#{@project.id}")
-      @project.bitly = page_url.short_url
-    end
+    # if @project.bitly.blank?
+    #   bitly = Bitly.client
+    #   page_url = bitly.shorten("#{request.scheme}://#{request.host_with_port}/projects/#{@project.id}")
+    #   @project.bitly = page_url.short_url
+    # end
     if @project.save
       respond_to do |format|
         format.json { render :json => @project.id }

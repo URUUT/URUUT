@@ -1,5 +1,5 @@
 class SponsorshipBenefit < ActiveRecord::Base
-  attr_accessible :name, :sponsorship_level_id, :project_id, :status
+  attr_accessible :name, :sponsorship_level_id, :project_id, :status, :cost
 
   belongs_to :project
 
