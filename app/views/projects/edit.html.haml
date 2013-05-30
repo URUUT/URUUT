@@ -150,7 +150,7 @@
    });
 
    $('.step-container[data-id="sponsor-info"] form').on('submit', function(e){
-     if($('#connected').val() == 'true') {
+     if ( $('#connected').val() ) {
       e.preventDefault();
       var data = $(this).serialize();
       $.ajax({

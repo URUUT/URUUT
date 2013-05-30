@@ -16,6 +16,7 @@ class ProjectsController < ApplicationController
     session[:current_project] = ''
     session[:connected] = ''
 
+
     #    @project.perks.build
     #    @project.galleries.build
     render :layout => 'landing'
