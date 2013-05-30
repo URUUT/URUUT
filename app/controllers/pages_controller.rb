@@ -7,6 +7,10 @@ class PagesController < ApplicationController
     projects_list
   end
 
+  def home
+    session[:connected] = params[:code]
+  end
+
   def search
     projects_list
   end

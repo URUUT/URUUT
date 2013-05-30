@@ -33,8 +33,8 @@
           %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0;"} Cost
           %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0"}
             - if @project.goal
-              = number_to_currency(@project.goal.gsub(/,/, '').to_i * 0.70, :precision => 0)
-          %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (70% of funding goal)
+              = number_to_currency(@project.goal.gsub(/,/, '').to_i * 0.30, :precision => 0)
+          %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (30% of funding goal)
         .span9.left{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
             Platinum Level Sponsorship includes priority logo placement, a link to the sponsor’s website, and the company / foundation’s mission statement on your project page. Platinum Sponsors gain industry exclusivity for project sponsors. In addition to these benefits select suggested benefits or create custom benefits for platinum level sponsors from the checklist below.
@@ -81,8 +81,8 @@
           %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0;"} Cost
           %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0"}
             -if @project.goal
-              = number_to_currency(@project.goal.gsub(/,/, '').to_i * 0.15, :precision => 0)
-          %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (15% of funding goal)
+              = number_to_currency(@project.goal.gsub(/,/, '').to_i * 0.10, :precision => 0)
+          %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (10% of funding goal)
         .span9.left{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
             Gold Level Sponsorship includes includes placement of a large sized logo and a link to the sponsor’s website on your project page. Gold Sponsors gain industry exclusivity for project sponsors. In addition to these benefits select suggested benefits or create custom benefits for gold level sponsors from the checklist below.
@@ -129,8 +129,8 @@
           %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0;"} Cost
           %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0"}
             -if @project.goal
-              = number_to_currency(@project.goal.gsub(/,/, '').to_i * 0.05, :precision => 0)
-          %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (5% of funding goal)
+              = number_to_currency(@project.goal.gsub(/,/, '').to_i * 0.04, :precision => 0)
+          %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (4% of funding goal)
         .span9.left{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
             Silver Level Sponsorship includes includes placement of a medium sized logo and a link to the sponsor’s website on your project page. In addition to these benefits, select suggested benefits or create custom benefits for silver level sponsors from the checklist below.
