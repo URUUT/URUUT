@@ -15,8 +15,10 @@ class DonationsController < ApplicationController
 	end
 
   def change_perk
-    @perk = Perk.find(params[:id])
-    session[:perk_id] = @perk.id
+    if !params[:id].eql?("custom")
+      @perk = Perk.find(params[:id])
+      session[:perk_id] = @perk.id
+    end
   end
 
 	def create
