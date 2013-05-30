@@ -234,4 +234,11 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def set_perk_permission
+    session[:status_permission_perk] = params["status"]
+    respond_to do |format|
+        format.text { render :text => "Success" }
+    end
+  end
+
 end
