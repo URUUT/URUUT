@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name
   validates_presence_of :last_name
   # validate :minimum_image_size
-  # validates_uniqueness_of :name, :email, :case_sensitive => false
+  validates_uniqueness_of :email, :case_sensitive => false
 
   with_options dependent: :destroy do |user|
     user.has_many :services
