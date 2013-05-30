@@ -82,11 +82,11 @@
 
       #content_container
         #planting_seeds
-          - if @project.seed_image
-            = image_tag "#{@project.seed_image}"
-          - if @project.seed_video
+          - if @project.seed_mime_type.eql?("video") and !@project.seed_video.blank?
             - video_seed = @project.seed_video.gsub("watch?v=", "embed/")
             %iframe{:height => "413", :src => video_seed, :width => "620"}
+          - elsif @project.seed_mime_type.eql?("image") and !@project.seed_image.blank?
+            = image_tag "#{@project.seed_image}", style: "float:left; width:100%"
           %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.about
 
         %hr
@@ -106,11 +106,11 @@
               %h2{:style => "text-align:center;color:#b6b6b4;font-family:'Proxima Nova Semi';margin-top:0;"}= number_to_currency(@project.goal, :precision => 0)
 
           .span9.details
-            - if @project.cultivation_image
-              = image_tag "#{@project.cultivation_image}"
-            - if @project.cultivation_video
+            - if @project.cultivation_mime_type.eql?("video") and !@project.cultivation_video.blank?
               - cultivation_video = @project.cultivation_video.gsub("watch?v=", "embed/")
               %iframe{:height => "310", :src => cultivation_video, :width => "380"}
+            - elsif @project.cultivation_mime_type.eql?("image") and !@project.cultivation_image.blank?
+              = image_tag "#{@project.cultivation_image}", style: "float:left; width:100%"
             %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.story
 
       -#%hr
@@ -137,6 +137,8 @@
           - @perks.each do |p|
             %li.perk
               %h3= p.name
+              - if p.limit
+                %p= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} Available)"
               %p.description= p.description
               %ul
                 %li
