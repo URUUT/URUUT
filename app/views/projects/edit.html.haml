@@ -36,7 +36,7 @@
         %span.border
 
     %li.submit
-      = link_to 'submit' do
+      = link_to 'submit', class: "submit-finish-project" do
         %span.steps Get Ruuted
         %span.title Submit
         %span.description Submit Your Project for Approval
@@ -68,6 +68,10 @@
 %script{:src => "http://maps.stamen.com/js/tile.stamen.js?v1.2.1"}
 
 :javascript
+
+  $(".submit-finish-project").on("click", function(){
+    window.location.href = "#{new_project_url}";
+  });
 
   $(".seed-form").on("click", function(){
     $("#video_type").val("seed");
