@@ -4,29 +4,29 @@ module ProjectsHelper
     endDate = Date.parse(startDate) + endDate.to_i.days
     finalDate = endDate - Date.today
     return finalDate.to_i
-	end
+  end
 
-	def vidUrl(oldUrl)
-		uri = URI(oldUrl)
-		scheme = uri.scheme
-		path = uri.path
-		host = uri.host
-		addition = 'embed'
-		newUrl = '#{scheme}://www.youtube.com/#{addition}#{path}'
-		return newUrl
-	end
+  def vidUrl(oldUrl)
+    uri = URI(oldUrl)
+    scheme = uri.scheme
+    path = uri.path
+    host = uri.host
+    addition = 'embed'
+    newUrl = '#{scheme}://www.youtube.com/#{addition}#{path}'
+    return newUrl
+  end
 
-	def project_title(id)
-		project = Project.find(id)
-		return project.title
-	end
+  def project_title(id)
+    project = Project.find(id)
+    return project.title
+  end
 
-	def current_project
-		session[:current_project]
-	end
+  def current_project
+    session[:current_project]
+  end
 
-	def project_categories
-		[
+  def project_categories
+    [
 			#['parks & recreation','parks & recreation'],
 			#['neighborhood','neighborhood'],
 			#['cleanup/beautification','cleanup & beautification'],
@@ -49,8 +49,8 @@ module ProjectsHelper
       ['Technology'],
       ['Transit / Transportation'],
       ['Walkability / Bike / Paths']
-		]
-	end
+    ]
+  end
 
   def project_org_type
     [
@@ -93,6 +93,14 @@ module ProjectsHelper
     else
       "display:none"
     end
+  end
+
+  def campaign_days_left(campaign_deadline)
+    (campaign_deadline.to_date - Time.now.to_date).to_i
+  end
+
+  def default_perk
+    ["10", "25", "50", "100", "250"]
   end
 
 end
