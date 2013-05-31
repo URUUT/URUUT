@@ -335,7 +335,7 @@
 
       $("#"+ checkboxName +"-count").val(countCheckbox);
       $("<div class='checkbox default'><input id='"+ checkboxName + "_" + countCheckbox + "' type='checkbox' value='1' name='"+ checkboxName +"[id_"+ countCheckbox +"]''><input id='"+ checkboxName + "_info_"+ countCheckbox +"' class='"+checkboxName+"_benefits add_benefits' type='text' style='margin-top: -18px; width: 80% !important;' placeholder='Create your costum benefit here...' name='"+ checkboxName + "[info_"+countCheckbox+"]'><span class='save_new_benefit pull-right btn' style='margin-top:-79px; left:-20px'>Save</span><span class='remove-another pull-right btn' style='margin-top:-51px;'>Remove</span></div>").appendTo(divCore);
-      $("#"+checkboxName+"-count").val(parseInt($("#gold-count").val())+1)
+      $("#"+checkboxName+"-count").val(parseInt($("#"+checkboxName+"-count").val())+1)
       countCheckbox++;
       addNewBenefit();
       removeAnotherBenefit();
