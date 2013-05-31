@@ -102,11 +102,12 @@ class ProjectsController < ApplicationController
     @sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits)
     @project.update_attributes!(params[:project])
 
-    # if @project.bitly.blank?
-    #   bitly = Bitly.client
-    #   page_url = bitly.shorten("#{request.scheme}://#{request.host_with_port}/projects/#{@project.id}")
-    #   @project.bitly = page_url.short_url
-    # end
+    if @project.bitly.blank?
+      bitly = Bitly.client
+      page_url = bitly.shorten("#{request.scheme}://#{request.host_with_port}/projects/#{@project.id}")
+      @project.bitly = page_url.short_url
+    end
+    
     if @project.save
       respond_to do |format|
         format.json { render :json => @project.id }
