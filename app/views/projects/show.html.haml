@@ -89,22 +89,6 @@
           %a{:href => "#gallery"} Galery
       #content_container.tab-content
         #planting_seeds.tab-pane.active
-          %p
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas scelerisque erat et erat pharetra vitae hendrerit justo condimentum. Etiam lectus sem, congue et convallis sed, consequat sit amet justo. Nam mattis eleifend quam sit amet venenatis. Fusce et magna at mauris adipiscing hendrerit vel eget augue. Sed ut dignissim nisi. Nam felis purus, aliquet non pulvinar in, condimentum id lectus. Nulla facilisi. Proin ultricies est id leo placerat molestie.
-          %img{:src => "kid.jpg"}/
-          %p
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas scelerisque erat et erat pharetra vitae hendrerit justo condimentum. Etiam lectus sem, congue et convallis sed, consequat sit amet justo. Nam mattis eleifend quam sit amet venenatis. Fusce et magna at mauris adipiscing hendrerit vel eget augue. Sed ut dignissim nisi. Nam felis purus, aliquet non pulvinar in, condimentum id lectus. Nulla facilisi. Proin ultricies est id leo placerat molestie. Integer molestie interdum nisi non sollicitudin. Etiam eu mauris in metus rutrum commodo. Morbi et aliquet eros. Praesent ac tellus nec augue dignissim eleifend luctus eu est. Praesent sem nisi, pharetra vitae tincidunt nec, aliquam aliquet odio. Phasellus iaculis egestas arcu, et tincidunt magna pharetra quis. Suspendisse potenti.
-        #growth.tab-pane
-          Growth
-        #gallery.tab-pane
-          Gallery
-
-      %h4.title{:style => 'margin-top:50px;'}
-        Planting Seeds
-        %span (About)
-
-      #content_container
-        #planting_seeds
           - if @project.seed_mime_type.eql?("video") and !@project.seed_video.blank?
             - video_seed = @project.seed_video.gsub("watch?v=", "embed/")
             %iframe{:height => "413", :src => video_seed, :width => "620"}
@@ -112,9 +96,9 @@
             = image_tag "#{@project.seed_image}", style: "float:left; width:100%"
           %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.about
 
+      %hr
 
-        %hr
-
+      #content_container
         #cultivation
           .span3.ending
             %h4.title
