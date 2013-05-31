@@ -2,12 +2,7 @@
   .funding-info
     .container
       .span8
-        .row
-          .span7
-            %h4.title= @project.project_title
-          .span1.text-right
-            - if @project.organization_classification.eql?("170(c)(1)") or @project.organization_classification.eql?("501(c)(3)")
-              = image_tag 'td-logo-black.png', :class => "pull-right"
+        %h4.title= @project.project_title
         %span.location #{@project.city}, #{@project.state}
         %hr
         %p.short-desc= @project.title
@@ -26,7 +21,7 @@
         %p= link_to "Contact Project Creator", "mailto:#{User.find(@project.user_id).email}"
 
       .span4
-        .progress-container
+        .progress-container.span2.offset1
           = image_tag 'seed.png', :class => "seed"
           %div
             %span Seed Funds Pledged
@@ -81,41 +76,17 @@
         Become A Sponsor
         %span
 
-      #contect_container
-        #planting_seeds{style: "margin-top: -25px;"}
-          - @project_sponsors.each do |key, value|
-            .span12{style: "margin-left: 0px;"}
-              %h5= "#{show_title(key)} LEVEL SPONSORS"
-              - value.sort.each do |project_sponsor|
-                -if project_sponsor.level_id.eql? 1
-                  .span4.margin-auto.float-none
-                    //= image_tag(project_sponsor.logo_url, class: "img-polaroid", style: "width:200px;height:170px;")
-                    %br/
-                    %h5.green-font{style: "text-align: center;"}= project_sponsor.name
-                -elsif project_sponsor.level_id.eql? 2
-                  .span4{style: "margin-left:0;"}
-                    .span9.float-none.margin-auto
-                      //= image_tag(project_sponsor.logo_url, class: "img-polaroid", style: "width:150px;height:120px;")
-                    %br/
-                    %h5.green-font{style: "text-align: center;"}= project_sponsor.name
-                -elsif project_sponsor.level_id.eql? 3
-                  .span2.margin-auto{style: "width: 19.5%;"}
-                    .span9.margin-auto.float-none
-                      //= image_tag(project_sponsor.logo_url, class: "img-polaroid", style: "width:100px;height:80px;")
-                    %br/
-                    %p.green-font.normal-font.text-center= project_sponsor.name.upcase
-
       %h4.title{:style => 'margin-top:50px;'}
         Planting Seeds
         %span (About)
 
       #content_container
         #planting_seeds
-          - if @project.seed_image
-            = image_tag "#{@project.seed_image}"
-          - if @project.seed_video
+          - if @project.seed_mime_type.eql?("video") and !@project.seed_video.blank?
             - video_seed = @project.seed_video.gsub("watch?v=", "embed/")
             %iframe{:height => "413", :src => video_seed, :width => "620"}
+          - elsif @project.seed_mime_type.eql?("image") and !@project.seed_image.blank?
+            = image_tag "#{@project.seed_image}", style: "float:left; width:100%"
           %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.about
 
         %hr
@@ -135,11 +106,11 @@
               %h2{:style => "text-align:center;color:#b6b6b4;font-family:'Proxima Nova Semi';margin-top:0;"}= number_to_currency(@project.goal, :precision => 0)
 
           .span9.details
-            - if @project.cultivation_image
-              = image_tag "#{@project.cultivation_image}"
-            - if @project.cultivation_video
+            - if @project.cultivation_mime_type.eql?("video") and !@project.cultivation_video.blank?
               - cultivation_video = @project.cultivation_video.gsub("watch?v=", "embed/")
               %iframe{:height => "310", :src => cultivation_video, :width => "380"}
+            - elsif @project.cultivation_mime_type.eql?("image") and !@project.cultivation_image.blank?
+              = image_tag "#{@project.cultivation_image}", style: "float:left; width:100%"
             %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.story
 
       -#%hr
@@ -166,6 +137,8 @@
           - @perks.each do |p|
             %li.perk
               %h3= p.name
+              - if p.limit
+                %p= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} Available)"
               %p.description= p.description
               %ul
                 %li
@@ -182,6 +155,9 @@
         %h4{:style => "display:inline-block;color:#70bf4c;letter-spacing:2px;"}= @project.title
 
       %h4.title{:style => 'margin-top:50px;'} Business Partners
+      %div
+        - @project.project_sponsors.each do |project_sponsor|
+          = image_tag(project_sponsor.logo, class: "small-picture")
       = link_to new_project_sponsor_path(@project.id), :class => 'btn', :style => 'margin-top:10px;' do
         Become A Sponsor
         %span

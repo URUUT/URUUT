@@ -4,18 +4,21 @@
       %div
         = image_tag "mag-glass.png"
         %h3 DISCOVER PROJECTS
-      .category.dropdown
-        %label PROJECT CATEGORY:
-        %select{:id => "category", :name => "category"}
-          %option All Categories
-          = render "partials/project_filters", :type => :category
-      .location.dropdown
-        %label PROJECT LOCATION:
-        %select{:id => "location", :name => "city"}
-          %option All cities
-          = render "partials/project_filters", :type => :city
-    = form_tag search_projects_path, method: "get", class: "project-keywords" do
-      .keyword.dropdown
-        %label KEYWORD SEARCH
-        %input{:type => 'search', :id => 'keyword', :name => "keyword", :placeholder => "Keyword...",
-          :value => params[:keyword]}
+      .span12
+        .row
+          .category.dropdown
+            %label PROJECT CATEGORY:
+            %select{:id => "category", :name => "category"}
+              %option All Categories
+              = render "partials/project_filters", :type => :category
+          .location.dropdown
+            %label PROJECT LOCATION:
+            %select{:id => "location", :name => "city"}
+              %option All cities
+              = render "partials/project_filters", :type => :city
+          .keyword.dropdown{style: "margin-top: 4px;"}
+            %label{style: "margin-top: 0;margin-bottom: 20px;"} KEYWORD SEARCH
+            %input{:type => 'text', :id => 'keyword', :name => "keyword", :placeholder => "Keyword...",
+              :value => params[:keyword]}
+              %button.btn.btns{:type => "submit"}
+                %span

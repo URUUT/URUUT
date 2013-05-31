@@ -139,7 +139,7 @@ input[type=password] {
 	font:bold 24px/24px arial, helvetica, sans-serif;
 	height:54px;
 	padding:19px;
-	width:auto !important;
+	/*width:auto !important;*/
 }
 
 input[type=submit] {
@@ -332,6 +332,11 @@ label {
 		width:9px;
 	}}
 
+.small-picture{
+  width: 50px;
+  height: 50px;
+}
+
 .selectbox-wrapper {
 	ul {
 		li {
@@ -393,7 +398,8 @@ label {
 			margin-right:20px;
 			margin-top:20px;
 			position:relative;
-			width:300px;
+      vertical-align: middle;
+			/*width:300px;*/
 			label {
 				color:#b6b6b4;
 			}
@@ -491,17 +497,20 @@ label {
         }
       }
       #keyword {
-        border-radius: 5px 0 0 5px;
+        -webkit-border-radius: 5px 0 0 5px !important;
+        -moz-border-radius: 5px 0 0 5px !important;
+        border-radius: 5px 0 0 5px !important;
+        margin: -9px 0 0 0;
         box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
         color:#555;
         font: bold 24px/24px arial, helvetica, sans-serif;
-        height: 44px;
+        height: 54px;
         width: 240px;
       }
       #keyword + .btns {
         border-radius:0 5px 5px 0;
-        margin-left:-5px;
-        margin-top:-10px;
+        margin-left:239px;
+        margin-top:-54px;
         padding:0;
         height:54px;
         width:45px;
@@ -1923,22 +1932,47 @@ form.registration-edit {
 
 #project_duration_input {
 	font:bold 24px/24px arial, helvetica, sans-serif;
-	width:278px !important;
+	width:290px !important;
 }
 
 #project_category_input {
 	font:bold 24px/24px arial, helvetica, sans-serif;
-	width:278px !important;
+	width:290px !important;
 }
 
 #project_organization_type_input {
 	font:bold 24px/24px arial, helvetica, sans-serif;
-	width:278px !important;
+	width:290px !important;
 }
 
 #project_organization_classification_input {
 	font:bold 24px/24px arial, helvetica, sans-serif;
-	width:278px !important;
+	width:290px !important;
+}
+
+#project_state_input{
+  font:bold 24px/24px arial, helvetica, sans-serif;
+  width:140px !important;
+}
+
+#project_perk_permission_input{
+  width:140px !important;
+}
+
+#limit_perk_input{
+  width:140px !important;
+}
+
+#project_sponsorship_permission_input{
+  width:140px !important;
+}
+
+#category_input{
+  margin-top: 10px;
+}
+
+#location_input{
+  margin-top: 10px;
 }
 
 #project_category_container {
@@ -1971,7 +2005,7 @@ form.registration-edit {
 input.selectbox {
 	background:#fff url(image-path('select-back.png')) 97% center no-repeat;
 	cursor:pointer;
-	width:140px !important;
+	/*width:290px !important;*/
 	position:relative;
 	text-transform:capitalize;}
 

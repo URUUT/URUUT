@@ -9,6 +9,7 @@ class DonationStepsController < ApplicationController
       @card_type = session[:card_type]
       @card_last4 = session[:card_last4]
       @perk = Perk.find(session[:perk_id])
+      @need_doctype = true
       render_wizard
     else
       redirect_to root_path

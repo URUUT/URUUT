@@ -14,6 +14,13 @@ class DonationsController < ApplicationController
     logger.debug(@project.title)
 	end
 
+  def change_perk
+    if !params[:id].eql?("custom")
+      @perk = Perk.find(params[:id])
+      session[:perk_id] = @perk.id
+    end
+  end
+
 	def create
     @donation = Donation.new(params[:donation])
 
