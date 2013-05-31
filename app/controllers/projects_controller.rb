@@ -99,6 +99,10 @@ class ProjectsController < ApplicationController
 
     end
 
+    unless params[:project][:duration].blank?
+      params[:project][:campaign_deadline] = params[:project][:duration].to_i.days.from_now.to_time
+    end
+
     @sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits)
     @project.update_attributes!(params[:project])
 
