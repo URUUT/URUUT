@@ -5,11 +5,14 @@
     %p.congratulations
       You are now an official contributor to #{@project.title}! Now it's time to spread the word.
 
-    %p 
-    Facebook 
-    Twitter 
-    Email 
-    #{@project.bitly}
+    %p
+    %div
+      = link_to image_tag("fb-share.png",style: "width: 150px"), "javascript:shareFb()", style: "margin-left: 2%"
+      = link_to image_tag("tw-share.png", style: "width: 150px"), "https://twitter.com/share", "data-url" => root_url, "target" => "blank", style: "margin-left: 2%"
+      = link_to image_tag("ml-share.png", style: "width: 150px"), "javascript:void(0)", style: "margin-left: 2%", class: "cs_import"
+      %span.link-short{:style => "padding: 18px; border: 2px solid ECECF0; font-weight:bolder; font-size: 14px; margin-left: 2%"}
+        = @project.bitly
+      %textarea#contact_list{:style => "display:none", :name => "email_recepient"}
 
   .span4
     %h3.title Details
@@ -25,3 +28,47 @@
       %p.grey
         %strong Estimated Delivery:
         October 2013
+
+
+:javascript
+  var project_id = "#{@project.id}";
+  var shareFb = function(){
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + location.href, 'sharer', 'width=626,height=436');
+    };
+
+  var owner_email, owner_first_name, owner_last_name;
+  var appendInTextarea = false;
+  var emailSep = ", ";
+  function sendEmail(contacts, source, owner) {
+    var contact, name, email, entry;
+    var emails = [];
+    var textarea = document.getElementById('contact_list');
+
+    for (var i = 0; i < contacts.length; i++) {
+      contact = contacts[i];
+      name = contact.fullName();
+      email = contact.selectedEmail();
+      entry = name + "<" + email +">";
+      if (emails.indexOf(entry) < 0) {
+        emails.push(entry);
+      }
+    }
+
+    $("#contact_list").val("");
+
+    $.ajax({
+      type: "POST",
+      url: "/share_email_by_sponsor",
+      data: {emails: emails.join(emailSep), project_id: project_id}
+    })
+
+  }
+
+
+  var csPageOptions = {
+    domain_key:"3E6CHQNSGA7WFNM7ATLZ", // default for 127.0.0.1, please change it
+    textarea_id:"contact_list",
+    afterSubmitContacts:sendEmail
+  };
+
+%script{:src => "https://api.cloudsponge.com/address_books.js"}

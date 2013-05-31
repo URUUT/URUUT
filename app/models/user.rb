@@ -8,17 +8,17 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :remember_me, :city, :state, :zip,
     :neighborhood, :provider, :uid, :token, :organization, :mission, :subscribed, :avatar
-                  
-  after_create :send_welcome_email
+
+  # after_create :send_welcome_email
   after_create :assign_default_badge
-                  
+
   attr_accessor :avatar_upload_width, :avatar_upload_height
   # attr_accessible :title, :body
 
   validates_presence_of :first_name
   validates_presence_of :last_name
   # validate :minimum_image_size
-  # validates_uniqueness_of :name, :email, :case_sensitive => false
+  validates_uniqueness_of :email, :case_sensitive => false
 
   with_options dependent: :destroy do |user|
     user.has_many :services

@@ -23,7 +23,7 @@ Crowdfund::Application.routes.draw do
 
   match "browse/projects" => "pages#index", :as => "browse_projects"
   match "search/projects" => "pages#search", :as => "search_projects"
-  
+
    get "projects/save_image"
    post "projects/save_image"
    get "projects/:project_id/sponsors/:id/confirmation" => "sponsors#confirmation", as: "confirmation"
@@ -65,9 +65,11 @@ Crowdfund::Application.routes.draw do
   end
   resources :donations do
     get "thank_you", :on => :collection
+    get "change_perk", :on => :member
   end
   resources :projects do
     get "add_desc", :on => :collection
+    get "set_perk_permission", :on => :collection
     post "add_perk", :on => :collection
     post "save_video", :on => :collection
     post "get_perk", :on => :collection
@@ -79,7 +81,7 @@ Crowdfund::Application.routes.draw do
       get :confirm_sponsor
     end
   end
-  
+
   resources :projects
 
   resources :project_steps

@@ -14,50 +14,50 @@
 
     %div
       = f.label :organization, "Organization/Business Name*"
-      = f.text_field :organization, :required => true, :size => 45
+      = f.text_field :organization, :required => true, class: "span8"
 
     %div.inline
       = f.label :organization_type, "Organization Type*"
-      = f.select :organization_type, options_for_select(project_org_type, @project.organization_type), :required => true, :size => 17
+      = f.select :organization_type, options_for_select(project_org_type, @project.organization_type), :required => true
 
     %div.inline{:style => "margin-left:20px;"}
       = f.label :organization_class, "How Are You Organized?*"
-      = f.select :organization_classification, options_for_select(project_org_class, @project.organization_classification), :required => true, :size => 17
+      = f.select :organization_classification, options_for_select(project_org_class, @project.organization_classification), :required => true
 
     %div
       = f.label :address , "STREET ADDRESS*"
-      = f.text_field :address, :required => true, :size => 45
+      = f.text_field :address, :required => true, class: "span8"
 
     %div.inline
       = f.label :city
-      = f.text_field :city, :required => true, :size => 17
+      = f.text_field :city, :required => true, class: "span4"
 
-    %div.inline{:style => "margin-left:18px;"}
+    %div.inline{:style => "margin-left:25px;"}
       = f.label :state
-      = f.select :state, options_for_select(us_states, project.state), :required => true, :style => "width:140px;"
+      = f.select :state, options_for_select(us_states, project.state), :required => true
 
-    %div.inline{:style => "margin-left:18px;"}
+    %div.inline{:style => "margin-left:25px;"}
       = f.label :zip, "Zipcode"
-      = f.text_field :zip, :required => true, :size => 3
+      = f.text_field :zip, :required => true, class: "span2"
 
     %div
       = f.label :website do
         WEBSITE ADDRESS
         %span.italic (Format: www.mysite.com)
-      = f.text_field :website, :required => true, :size => 39
+      = f.text_field :website, :required => true, class: "span8"
 
     %div.inline
       = f.label :twitter_handle, "Twitter Account"
-      = f.text_field :twitter_handle, :required => true, :size => 15
+      = f.text_field :twitter_handle, :required => true, class: "span4"
 
-    %div.inline{:style => "margin-left:24px;"}
+    %div.inline{:style => "margin-left:30px;"}
       = f.label :facebook_page, "Facebook Page"
-      = f.text_field :facebook_page, :required => true, :size => 17
+      = f.text_field :facebook_page, :required => true, class: "span4"
 
     %div
       = label_tag "Payment With Stripe"
       %p{:style => "font:normal 13px/19px 'Proxima Nova';"} An account with Stripe, our payment provider, is required for processing credit card transactions and receiving funds. If you already have an account, you can sign in as a returning customer.
-      = link_to "https://connect.stripe.com/oauth/authorize?scope=read_write&response_type=code&client_id=#{ENV['STRIPE_CLIENT_ID']}", :target => "_blank", :class => "stripe-connect" do
+      = link_to "https://connect.stripe.com/oauth/authorize?scope=read_only&response_type=code&client_id=ca_0nuMjzTruvR2hOSuHDJSlxzeA7q4h5ai", :target => "_blank", :class => "stripe-connect" do
         = image_tag "stripe-connect.png"
 
 

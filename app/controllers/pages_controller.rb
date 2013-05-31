@@ -7,6 +7,10 @@ class PagesController < ApplicationController
     projects_list
   end
 
+  def home
+    session[:connected] = params[:code]
+  end
+
   def search
     projects_list
   end
@@ -43,14 +47,15 @@ class PagesController < ApplicationController
 
   private
   def projects_list
-    if params[:keyword]
-      @projects = Project.by_keyword(params[:keyword]).page(params[:page]).per(1)
-      #@projects = Project.where("title LIKE :keyword OR description LIKE :keyword", :keyword => "%#{params[:keyword]}%").page(params[:page]).per(1)
-    else
-      @projects = Project.where("live = 1 AND ready_for_approval = 0").by_city(params[:city]).
-        by_category(params[:category]).all
-      @ending = Project.by_city(params[:city]).by_category(params[:category]).order(:duration).all
-    end
+    # if params[:keyword]
+    #   @projects = Project.by_keyword(params[:keyword]).page(params[:page]).per(1)
+    #   #@projects = Project.where("title LIKE :keyword OR description LIKE :keyword", :keyword => "%#{params[:keyword]}%").page(params[:page]).per(1)
+    # else
+    #   @projects = Project.where("live = 1 AND ready_for_approval = 0").by_city(params[:city]).
+    #     by_category(params[:category]).all
+    #   @ending = Project.by_city(params[:city]).by_category(params[:category]).order(:duration).all
+    # end
+    @projects = Project.where("city ILIKE :keyword OR category ILIKE :keyword AND live = 1 AND ready_for_approval = 0", :keyword=> "%#{params[:keyword]}%").by_city(params[:city]).by_category(params[:category])
     logger.debug(@projects)
   end
 

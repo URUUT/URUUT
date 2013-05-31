@@ -15,6 +15,10 @@ legend.heading {
   /*display:none;*/
 }
 
+.cultivation-image{
+  width: 440px;
+}
+
 .project-details {
 	margin:15px 0;
 	li {
@@ -36,7 +40,7 @@ legend.heading {
       letter-spacing:1px;
       margin-top:-5px;
       position:relative;
-			top:0; 
+			top:0;
       width:35px;}
 		div {
 			height:20px;
@@ -48,6 +52,26 @@ form.edit_project, form.new_project {
 	width:570px;
 }
 
+.green-font{
+  color: #70bf4c;
+  font-size: 10px !important;
+}
+
+.green-font-big{
+  color: #70bf4c;
+  font-size: 25px !important;
+}
+
+.green-font-medium{
+  color: #70bf4c;
+  font-size: 15px !important;
+}
+
+.change{
+  line-height: 30px;
+  margin: 6px 0;
+  display: inline-block;
+}
 /*
  *form.edit_project fieldset legend, form.new_project fieldset legend {
  *  display:none;
@@ -62,14 +86,14 @@ form.edit_project fieldset label, form.new_project fieldset label {
 form.edit_project input[type=submit] {
   /*display:none;*/
 }
-	
+
 form {
 	input[type=text], input[type=email], input[type=password]  {
 		display:block;
 		margin-bottom:15px;}
 	ul.pager {
 		display:inline-block;}}
-		
+
 #steps {
 	display:block;
 	margin:-15px auto 50px;
@@ -94,17 +118,17 @@ form {
         border-top: 50px solid transparent; /* Go big on the size, and let overflow hide */
         border-bottom: 50px solid transparent;
         border-left: 30px solid #5ea240;}}
-		&:after { 
-			content: " "; 
-			display: block; 
-			width: 0; 
+		&:after {
+			content: " ";
+			display: block;
+			width: 0;
 			height: 0;
 			border-top: 50px solid transparent;           /* Go big on the size, and let overflow hide */
 			border-bottom: 50px solid transparent;
 			border-left: 30px solid #dfdfdf;
 			position: absolute;
 			top: 50%;
-			margin-top: -50px; 
+			margin-top: -50px;
 			left: 100%;
 			z-index: 2;}
 		&:before {
@@ -124,17 +148,17 @@ form {
 		&.current {
 			background:#70bf4c;
 			color:#fff;
-			&:after { 
-				content: " "; 
-				display: block; 
-				width: 0; 
+			&:after {
+				content: " ";
+				display: block;
+				width: 0;
 				height: 0;
 				border-top: 50px solid transparent;           /* Go big on the size, and let overflow hide */
 				border-bottom: 50px solid transparent;
 				border-left: 30px solid #70bf4c;
 				position: absolute;
 				top: 50%;
-				margin-top: -50px; 
+				margin-top: -50px;
 				left: 100%;
 				z-index: 2;}
 			&:before {
@@ -159,7 +183,7 @@ form {
       text-transform:uppercase;
 			&:before {
 				content:':';}}}}
-				
+
 p[id*='commands'] {
 	margin-top:20px;
 	text-align:right;
