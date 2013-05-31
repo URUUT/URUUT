@@ -18,11 +18,11 @@
       .well{:style => "border:1px solid #e9e9e9;padding:0;margin-top:20px;"}
         %div{:style => "float:left;padding-left:20px;display:inline-block;height:115px;width:212px;border-right:1px solid #e9e9e9;margin-right:20px;"}
           %h6{:style => "line-height:100%;margin-bottom:10px;margin-top:20px;margin-bottom:15px;"} Seed Amount
-          .choiced-perk{style: "display:none"}
-            = text_field_tag :custom_amount
-          %span.perk-amount{:style => "font-size:52px;color:#70bf4c;font-family:'Proxima Nova Bold';line-height:100%"}= number_to_currency(@perk_amount, :precision => 0)
-        %div.perk-info-choiced{:style => "float:left;display:inline-block;width:340px;padding-right:20px;height:auto"}
-          .choiced-perk{style: "display:none"}
+          .choiced-perk{style: "#{"display:none" if !@perk_name.eql?("custom")}"}
+            = text_field_tag :custom_amount, "#{@perk_amount if @perk_name.eql?("custom")}"
+          %span.perk-amount{:style => "font-size:52px;color:#70bf4c;font-family:'Proxima Nova Bold';line-height:100%; #{"display:none" if @perk_name.eql?("custom")}"}= number_to_currency(@perk_amount, :precision => 0)
+        %div.perk-info-choiced{:style => "float:left;display:inline-block;width:340px;padding-right:20px;height:auto;"}
+          .choiced-perk{style: "#{"display:none" if !@perk_name.eql?("custom")}"}
             %h6{:style => "line-height:100%;margin-bottom:10px;margin-top:20px"} Choose your perk
             -if @project.perk_permission
               = select_tag :perk_type, options_for_select(@project.perks.map{ |perk| [perk.name, perk.amount.to_i] }), {style: "width: 100%; height: 58px", :onchange => 'changeAmount()'}
@@ -48,15 +48,22 @@
           -unless @project.perks.blank?
             - @project.perks.each do |p|
               %li.perk{style: "#{"background: #70BF4C" if @perk.id.eql?(p.id)}", id: "perk-id-#{p.id}"}
-                %h3.perk-name-other{style: "#{"color: #000" if @perk.id.eql?(p.id)}", id: "perk-name-other-#{p.id}"}
-                  = p.name
+                %h3.perk-name-other{style: "#{"color: #000" if @perk.id.eql?(p.id)}", id: "perk-name-other-#{p.id}"}= p.name
+                - if p.limit
+                  %p= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} Available)"
                 %p.description= p.description
                 %ul
                   %li.seed-amount{style: "#{"background: #70BF4C" if @perk.id.eql?(p.id)}", id: "amount-id-#{p.id}"}
                     %h6 SEED
                     %p.amount $#{p.amount.to_i}
                   %li.fund-button
-                    %a{:class => "fund btn change-fund", "perk-id" => "#{p.id}", style: "#{"background: green" if @perk.id.eql?(p.id)}", id: "button-fund-#{p.id}"} Fund Now #{image_tag('arrow.png')}
+                    - if p.limit
+                      - if p.perks_available.to_i.zero?
+                        %a{:class => "fund btn"} Fund Now #{image_tag('arrow.png')}
+                      -else
+                        %a{:class => "fund btn change-fund", "perk-id" => "#{p.id}", style: "#{"background: green" if @perk.id.eql?(p.id)}", id: "button-fund-#{p.id}"} Fund Now #{image_tag('arrow.png')}
+                    -else
+                      %a{:class => "fund btn change-fund", "perk-id" => "#{p.id}", style: "#{"background: green" if @perk.id.eql?(p.id)}", id: "button-fund-#{p.id}"} Fund Now #{image_tag('arrow.png')}
         -else
           - default_perk.each_with_index do |perk_amount, index|
             - index += 1
@@ -73,15 +80,15 @@
                 %li.fund-button
                   %a{:class => "fund btn change-fund", "perk-id" => "default", style: "#{"background: green" if @perk_amount.eql?(perk_amount)}", "amount" => "#{perk_amount}", "level" => "#{index}", id: "button-fund-#{index}"} Fund Now #{image_tag('arrow.png')}
 
-        %li.perk{id: "perk-id-custom"}
-          %h3.perk-name-other{id: "perk-name-other"}
+        %li.perk{id: "perk-id-custom", style: "#{"background: #70BF4C" if @perk_name.eql?("custom")}"}
+          %h3.perk-name-other{style: "#{"color: #000" if @perk_name.eql?("custom")}", id: "perk-name-other"}
             CHOOSE YOUR PERK
           %p.description With this option you choose the amount to seed and which perk you receive. (Perk egibility based on donation amount)
           %ul
-            %li.seed-amount{id: "amount-id-custom"}
+            %li.seed-amount{id: "amount-id-custom", style: "#{"background: #70BF4C" if @perk_name.eql?("custom")}"}
               %h6 AMOUNT TO SEED
-              %p.amount= text_field_tag :custom_seed
-          %a{:class => "fund btn change-fund", "perk-id" => "custom", id: "button-fund-custom"} Fund Now #{image_tag('arrow.png')}
+              %p.amount= text_field_tag :custom_seed, "#{@perk_amount if @perk_name.eql?("custom")}"
+          %a{style: "#{"background: green" if @perk_name.eql?("custom")}", :class => "fund btn change-fund", "perk-id" => "custom", id: "button-fund-custom"} Fund Now #{image_tag('arrow.png')}
 
 :javascript
   $(".change-fund").click(function(){

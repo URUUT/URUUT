@@ -35,6 +35,7 @@ Crowdfund::Application.routes.draw do
    post "projects/submit_project"
 
    get "projects/stripe_update"
+   get "default_perk_donations" => "donations#default_perk"
 
   post "#{Rails.root}/public/images/"
 
