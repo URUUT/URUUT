@@ -462,6 +462,7 @@
           availability -= 1;
           $('.'+boxName+'-availibility').attr("data-available", availability);
           $('.'+boxName+'-availibility').html("("+availability+" AVAILABLE)");
+          $("#"+boxName+"-count").val(parseInt($("#"+boxName+"-count").val())+1)
           return false;
         }else{
           alert("sorry you can't add new benefits because the field is blank!");

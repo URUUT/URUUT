@@ -14,6 +14,8 @@ class DonationsController < ApplicationController
 
   def default_perk
     @donation = Donation.new
+    @perk = Perk.new
+    @perk.id = params[:amount]
     @perk_name = params[:name].to_s
     @perk_amount = params[:amount]
     @perk_description = params[:description]
