@@ -33,84 +33,42 @@
           %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0;"} Cost
           %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0"}
             - if @project.goal
-              = number_to_currency(@project.goal.gsub(/,/, '').to_i * 0.70, :precision => 0)
-          %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (70% of funding goal)
+              = number_to_currency(@project.goal.gsub(/,/, '').to_i * 0.30, :precision => 0)
+          %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (30% of funding goal)
         .span9.left{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
-            Platinum Level Sponsorship includes priority logo placement, a link to the sponsor’s website, and the company / foundation’s mission statement on your project page. Platinum Sponsors gain industry exclusivity for project sponsors. In addition to these benefits select suggested benefits or create custom benefits for platinum level sponsors from the checklist below.
+            Platinum Level Sponsorship includes priority logo placement, a link to the sponsorâ€™s website, and the company / foundationâ€™s mission statement on your project page. Platinum Sponsors gain industry exclusivity for project sponsors. In addition to these benefits select suggested benefits or create custom benefits for platinum level sponsors from the checklist below.
             %span{:style =>  "color:#b6b6b4;font-style:italic;"}
-              (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
+              (Suggested benefits should be used as a guide and can be customized to meet your projectâ€™s specific needs.)
           %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"} SUGGESTED BENEFITS:
           %div#platinum-box
             %div#existing-checkbox
-              %div.checkbox.default
-                %div
-                  = check_box_tag 'sponsorship_benefits[platinum][]', 'Recognition plaque on project site'
-                  = label_tag "Recognition plaque on project site"
-                  %div.update
-                    %input{:type => "text", :class => 'benefit-editable'}
-                    .save Save
-                    .cancel Cancel
-                  = link_to "Select To Edit", "#", :class => 'benefit-edit'
-				
-                %div
-                  = check_box_tag 'sponsorship_benefits[platinum][]', 'Platinum Sponsor mention on all media press releases and in community newsletter'
-                  = label_tag "Platinum Sponsor mention on all media press releases and in community newsletter"
-                  %div.update
-                    %input{:type => "text", :class => 'benefit-editable'}
-                    .save Save
-                    .cancel Cancel
-                  = link_to "Select To Edit", "#", :class => 'benefit-edit'
-				  
-                %div
-                  = check_box_tag 'sponsorship_benefits[platinum][]', 'Recognition plaque on project site'
-                  = label_tag "Recognition plaque on project site"
-                  %div.update
-                    %input{:type => "text", :class => 'benefit-editable'}
-                    .save Save
-                    .cancel Cancel
-                  = link_to "Select To Edit", "#", :class => 'benefit-edit'
-				
-                %div
-                  = check_box_tag 'sponsorship_benefits[platinum][]', 'Profile of your company on our website with photo'
-                  = label_tag "Profile of your company on our website with photo"
-                  %div.update
-                    %input{:type => "text", :class => 'benefit-editable'}
-                    .save Save
-                    .cancel Cancel
-                  = link_to "Select To Edit", "#", :class => 'benefit-edit'
-				 
-                %div
-                  = check_box_tag 'sponsorship_benefits[platinum][]', 'Monthly plug on social media leading up to the project and the month after the project has been complete.'
-                  = label_tag "Monthly plug on social media leading up to the project and the month after the project has been complete."
-                  %div.update
-                    %input{:type => "text", :class => 'benefit-editable'}
-                    .save Save
-                    .cancel Cancel
-                  = link_to "Select To Edit", "#", :class => "benefit-edit"
+              -if @project.sponsorship_benefits.empty?
+                -SponsorshipBenefit::SPONSORSHIP_BENEFITS.each do |key, value|
+                  -if key.eql? 1
+                    -value.each_with_index do |benefit|
+                      %div.checkbox.default
+                        = check_box_tag "platinum[#{benefit[:id]}]",false, class: "sponsor_checkbox"
+                        %span#name= benefit[:desc]
+                        %span.edit-benefit.italic.green-font select to edit
+                        = text_field_tag "platinum[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field", style: "width: 320px !important; display: none;"
+              -else
+                -@project.sponsorship_benefits.where(sponsorship_level_id: 1).each_with_index do |benefit, index|
+                  %div.checkbox.default
+                    = hidden_field_tag "platinum[id_#{index + 1}]", benefit.id
+                    = check_box_tag "platinum[#{index + 1}]", nil, benefit.status, class: "sponsor_checkbox"
+                    %span#name= benefit.name
+                    %span.edit-benefit.italic.green-font select to edit
+                    = text_field_tag "platinum[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
 
-                - unless @benefits.nil?
-                  - @benefits.uniq.each do |benefit|
-                    %div
-                      = check_box_tag 'sponsorship_benefits[platinum][]', benefit.name
-                      = label_tag "#{benefit.name}"
-                      %div.update
-                        %input{:type => "text", :class => 'benefit-editable'}
-                        .save Save
-                        .cancel Cancel
-                      = link_to "Select To Edit", "#", :class => 'benefit-edit'
-
+              = hidden_field_tag "platinum_count", nil, id: "platinum-count"
             %div#custom-checkbox
-              %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 20px;"} CREATE CUSTOM BENEFITS:
+              %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 20px;"} CREATE COSTUM BENEFITS:
               %div.checkbox.add_checkbox
-                = check_box_tag 'sponsorship_benefits[platinum][]'
-                = label_tag
-                %div.update
-                  %input{:type => "text", :placeholder => "Create Custom Benefit", :class => 'benefit-editable'}
-                  .save Save
-                  .cancel Cancel
-                
-              .add-benefit+ Add Another
+                = check_box_tag "add_platinum",nil,false, class: "box_gold_benefits"
+                = text_field_tag "platinum[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -18px; !important; width: 80% !important", class: "gold_benefits add_benefits"
+                %span.pull-right.save_new_benefit.btn{style: "margin-top:-65px; left:-20px"} Save
+            %span.green-font.normal-font.add-another.add-platinum{style: "display:none" } + Add Another
       %hr
 
       %div
@@ -123,13 +81,13 @@
           %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0;"} Cost
           %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0"}
             -if @project.goal
-              = number_to_currency(@project.goal.gsub(/,/, '').to_i * 0.15, :precision => 0)
-          %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (15% of funding goal)
+              = number_to_currency(@project.goal.gsub(/,/, '').to_i * 0.10, :precision => 0)
+          %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (10% of funding goal)
         .span9.left{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
-            Gold Level Sponsorship includes includes placement of a large sized logo and a link to the sponsor’s website on your project page. Gold Sponsors gain industry exclusivity for project sponsors. In addition to these benefits select suggested benefits or create custom benefits for gold level sponsors from the checklist below.
+            Gold Level Sponsorship includes includes placement of a large sized logo and a link to the sponsorâ€™s website on your project page. Gold Sponsors gain industry exclusivity for project sponsors. In addition to these benefits select suggested benefits or create custom benefits for gold level sponsors from the checklist below.
             %span{:style =>  "color:#b6b6b4;font-style:italic;"}
-              (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
+              (Suggested benefits should be used as a guide and can be customized to meet your projectâ€™s specific needs.)
           %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"} SUGGESTED BENEFITS:
           %div#gold-box
             %div#existing-checkbox
@@ -151,12 +109,12 @@
                     %span.edit-benefit.italic.green-font select to edit
                     = text_field_tag "gold[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
 
+              = hidden_field_tag "gold_count", nil, id: "gold-count"
             %div#custom-checkbox
               %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 20px;"} CREATE COSTUM BENEFITS:
               %div.checkbox.add_checkbox
                 = check_box_tag "add_gold",nil,false, class: "box_gold_benefits"
-                = text_field_tag "gold[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -30px; !important; width: 80% !important", class: "gold_benefits add_benefits"
-                = hidden_field_tag "gold_count", nil, id: "gold-count"
+                = text_field_tag "gold[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -18px; !important; width: 80% !important", class: "gold_benefits add_benefits"
                 %span.pull-right.save_new_benefit.btn{style: "margin-top:-65px; left:-20px"} Save
             %span.green-font.normal-font.add-another.add-gold{style: "display:none" } + Add Another
 
@@ -171,13 +129,13 @@
           %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0;"} Cost
           %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0"}
             -if @project.goal
-              = number_to_currency(@project.goal.gsub(/,/, '').to_i * 0.05, :precision => 0)
-          %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (5% of funding goal)
+              = number_to_currency(@project.goal.gsub(/,/, '').to_i * 0.04, :precision => 0)
+          %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (4% of funding goal)
         .span9.left{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
-            Silver Level Sponsorship includes includes placement of a medium sized logo and a link to the sponsor’s website on your project page. In addition to these benefits, select suggested benefits or create custom benefits for silver level sponsors from the checklist below.
+            Silver Level Sponsorship includes includes placement of a medium sized logo and a link to the sponsorâ€™s website on your project page. In addition to these benefits, select suggested benefits or create custom benefits for silver level sponsors from the checklist below.
             %span{:style =>  "color:#b6b6b4;font-style:italic;"}
-              (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
+              (Suggested benefits should be used as a guide and can be customized to meet your projectâ€™s specific needs.)
           %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"} SUGGESTED BENEFITS:
           %div#silver-box
             %div#existing-checkbox
@@ -200,12 +158,12 @@
                     %span.edit-benefit.italic.green-font select to edit
                     = text_field_tag "silver[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
 
+              = hidden_field_tag "silver_count", nil, id: "silver-count"
             %div#custom-checkbox
               %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 20px;"} CREATE COSTUM BENEFITS:
               %div.checkbox.add_checkbox
                 = check_box_tag "add_silver",nil,false, class: "box_silver_benefits"
-                = text_field_tag "silver[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -30px; !important; width: 80% !important", class: "silver_benefits add_benefits"
-                = hidden_field_tag "silver_count", nil, id: "silver-count"
+                = text_field_tag "silver[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -18px; !important; width: 80% !important", class: "silver_benefits add_benefits"
                 %span.pull-right.save_new_benefit.btn{style: "margin-top:-65px; left:-20px"} Save
             %span.green-font.normal-font.add-another.add-silver{style: "display:none" } + Add Another
           / %div.checkbox
@@ -228,7 +186,7 @@
           %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0;"} Cost
           %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0"} $1,500
         .span9.left{:style => "text-align:left;color:#464646;"}
-          %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"} Bronze Level Sponsorship includes business / foundation name listing and a link to the sponsor’s website on your project page. In addition to these benefits, you can create custom benefits for bronze level sponsors below.
+          %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"} Bronze Level Sponsorship includes business / foundation name listing and a link to the sponsorâ€™s website on your project page. In addition to these benefits, you can create custom benefits for bronze level sponsors below.
           %div#bronze-box
             %div#existing-checkbox
 
@@ -250,12 +208,12 @@
                     %span.edit-benefit.italic.green-font select to edit
                     = text_field_tag "bronze[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
 
+              = hidden_field_tag "bronze_count", nil, id: "bronze-count"
             %div#custom-checkbox
               %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 20px;"} CREATE COSTUM BENEFITS:
               %div.checkbox.add_checkbox
                 = check_box_tag "add_bronze", nil,false, class: "box_bronze_benefits"
-                = text_field_tag "bronze[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -30px; !important; width: 80% !important", class: "bronze_benefits add_benefits"
-                = hidden_field_tag "bronze_count", nil, id: "bronze-count"
+                = text_field_tag "bronze[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -18px; !important; width: 80% !important", class: "bronze_benefits add_benefits"
                 %span.pull-right.save_new_benefit.btn{style: "margin-top:-65px; left:-20px"} Save
             %span.green-font.normal-font.add-another.add-bronze{style: "display:none" } + Add Another
           / %div.checkbox
@@ -271,7 +229,7 @@
     %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
     .well.info
       %h5{:style => "color:#70bf4c;margin-bottom:10px;"} SPONSORSHIP DETAILS
-      %p URUUT’s Partner-Funding depends not only individual contributors, but sponsorship from businesses and foundations.
+      %p URUUTâ€™s Partner-Funding depends not only individual contributors, but sponsorship from businesses and foundations.
 
       %p There are 4 different levels of sponsorship, with different benefits for each level. Use the checklists to define what each sponsor level includes. Blah blah blah, this is terrible writing, need to have someone actually write this before launch.
 
@@ -376,7 +334,8 @@
         }
 
       $("#"+ checkboxName +"-count").val(countCheckbox);
-      $("<div class='checkbox default'><input id='"+ checkboxName + "_" + countCheckbox + "' type='checkbox' value='1' name='"+ checkboxName +"[id_"+ countCheckbox +"]''><input id='"+ checkboxName + "_info_"+ countCheckbox +"' class='"+checkboxName+"_benefits add_benefits' type='text' style='margin-top: -33px; width: 80% !important;' placeholder='Create your costum benefit here...' name='"+ checkboxName + "[info_"+countCheckbox+"]'><span class='save_new_benefit pull-right btn' style='margin-top:-79px; left:-20px'>Save</span><span class='remove-another pull-right btn' style='margin-top:-51px;'>Remove</span></div>").appendTo(divCore);
+      $("<div class='checkbox default'><input id='"+ checkboxName + "_" + countCheckbox + "' type='checkbox' value='1' name='"+ checkboxName +"[id_"+ countCheckbox +"]''><input id='"+ checkboxName + "_info_"+ countCheckbox +"' class='"+checkboxName+"_benefits add_benefits' type='text' style='margin-top: -18px; width: 80% !important;' placeholder='Create your costum benefit here...' name='"+ checkboxName + "[info_"+countCheckbox+"]'><span class='save_new_benefit pull-right btn' style='margin-top:-79px; left:-20px'>Save</span><span class='remove-another pull-right btn' style='margin-top:-51px;'>Remove</span></div>").appendTo(divCore);
+      $("#"+checkboxName+"-count").val(parseInt($("#gold-count").val())+1)
       countCheckbox++;
       addNewBenefit();
       removeAnotherBenefit();
