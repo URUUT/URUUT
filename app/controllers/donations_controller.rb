@@ -3,7 +3,6 @@ class DonationsController < ApplicationController
   layout "landing"
 
 	def new
-    logger.debug(session[:current_project])
 		@donation = Donation.new
     @perk = Perk.find(params[:perk])
     @perk_name = params[:name].to_s
@@ -11,13 +10,29 @@ class DonationsController < ApplicationController
     @perk_description = params[:description]
     @project = Project.find(session[:current_project])
     session[:perk_id] = params[:perk]
-    logger.debug(@project.title)
 	end
+
+  def default_perk
+    @donation = Donation.new
+    @perk_name = params[:name].to_s
+    @perk_amount = params[:amount]
+    @perk_description = params[:description]
+    @project = Project.find(session[:current_project])
+
+    render :new
+  end
 
   def change_perk
     if !params[:id].eql?("custom")
-      @perk = Perk.find(params[:id])
-      session[:perk_id] = @perk.id
+      if params["amount"].blank?
+        @perk = Perk.find(params[:id])
+        session[:perk_id] = @perk.id
+      else
+        @perk = Perk.new
+        @perk.id = params["level"]
+        @perk.amount = params["amount"]
+        @perk.description = "You will receive #{@perk.amount} Uruut Reward Points when you seed $#{@perk.amount}"
+      end
     end
   end
 

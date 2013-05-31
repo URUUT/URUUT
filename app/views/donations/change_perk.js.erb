@@ -16,10 +16,11 @@ $("#amount-id-<%= @perk.id %>").attr("style", "background: #70BF4C");
 $("#perk-id-<%= @perk.id %>").attr("style", "background: #70BF4C");
 $("#button-fund-<%= @perk.id %>").attr("style", "background: green");
 
-<% if params[:id].eql?("custom") and !params[:custom_seed].blank? %>
+<% elsif params[:id].eql?("custom") and !params[:custom_seed].blank? %>
 $("#perk-name-other").attr("style", "color: #000");
 $("#amount-id-custom").attr("style", "background: #70BF4C");
 $("#button-fund-custom").attr("style", "background: green");
+$("#perk-id-custom").attr("style", "background: #70BF4C");
 
 $("#custom_amount").val("<%= params[:custom_seed] %>");
 $("#amount").val("<%= params[:custom_seed] %>");
