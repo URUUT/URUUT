@@ -27,7 +27,7 @@
         %h6{:style => "color:#70bf4c"}
           PLATINUM LEVEL SPONSORSHIP*
           %span{:style => "font-size:10px;color:#b6b6b4;letter-spacing:normal;"} (industry-specific exclusivity)
-          %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;"} (1 AVAILABLE)
+          %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;", class: "platinum-availibility"} (1 AVAILABLE)
       .cf
         .span3.left{:style => "text-align:left;color:#464646;"}
           %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0;"} Cost
@@ -37,19 +37,18 @@
           %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (30% of funding goal)
         .span9.left{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
-
             Platinum Level Sponsorship includes priority logo placement, a link to the sponsor’s website, and the company / foundation’s mission statement on your project page. Platinum Sponsors gain industry exclusivity for project sponsors. In addition to these benefits select suggested benefits or create custom benefits for platinum level sponsors from the checklist below.
             %span{:style =>  "color:#b6b6b4;font-style:italic;"}
               (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
           %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"} SUGGESTED BENEFITS:
-          %div#platinum-box
-            %div#existing-checkbox
+          %div#platinum-box{data:{max: "1", type: "platinum"}}
+            %div#platinum-checkbox.existing-checkbox
               -if @project.sponsorship_benefits.empty?
                 -SponsorshipBenefit::SPONSORSHIP_BENEFITS.each do |key, value|
                   -if key.eql? 1
                     -value.each_with_index do |benefit|
                       %div.checkbox.default
-                        = check_box_tag "platinum[#{benefit[:id]}]",false, class: "sponsor_checkbox"
+                        = check_box_tag "platinum[#{benefit[:id]}]", '1', false, class: "sponsor_checkbox"
                         %span#name= benefit[:desc]
                         %span.edit-benefit.italic.green-font select to edit
                         = text_field_tag "platinum[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field", style: "width: 320px !important; display: none;"
@@ -66,9 +65,9 @@
             %div#custom-checkbox
               %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 20px;"} CREATE COSTUM BENEFITS:
               %div.checkbox.add_checkbox
-                = check_box_tag "add_platinum",nil,false, class: "box_gold_benefits"
-                = text_field_tag "platinum[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -18px; !important; width: 80% !important", class: "gold_benefits add_benefits"
-                %span.pull-right.save_new_benefit.btn{style: "margin-top:-65px; left:-20px"} Save
+                = check_box_tag "add_platinum",nil,false, class: "box_platinum_benefits"
+                = text_field_tag "platinum[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -18px; !important; width: 80% !important", class: "platinum_benefits add_benefits"
+                %span.pull-right.save_new_benefit.btn{style: "margin-top:-65px; left:-20px", data:{type: "platinum"}} Save
             %span.green-font.normal-font.add-another.add-platinum{style: "display:none" } + Add Another
       %hr
 
@@ -76,7 +75,7 @@
         %h6{:style => "color:#70bf4c"}
           Gold LEVEL SPONSORSHIP*
           %span{:style => "font-size:10px;color:#b6b6b4;letter-spacing:normal;"} (industry-specific exclusivity)
-          %span{:style => "font-size:10px;color:#403e37"} (3 AVAILABLE)
+          %span{:style => "font-size:10px;color:#403e37", class: "gold-availibility"} (3 AVAILABLE)
       .cf
         .span3.left{:style => "text-align:left;color:#464646;"}
           %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0;"} Cost
@@ -86,19 +85,18 @@
           %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (10% of funding goal)
         .span9.left{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
-
             Gold Level Sponsorship includes includes placement of a large sized logo and a link to the sponsor’s website on your project page. Gold Sponsors gain industry exclusivity for project sponsors. In addition to these benefits select suggested benefits or create custom benefits for gold level sponsors from the checklist below.
             %span{:style =>  "color:#b6b6b4;font-style:italic;"}
               (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
           %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"} SUGGESTED BENEFITS:
-          %div#gold-box
-            %div#existing-checkbox
+          %div#gold-box{data:{max: "3", type: "gold"}}
+            %div#gold-checkbox.existing-checkbox
               -if @project.sponsorship_benefits.empty?
                 -SponsorshipBenefit::SPONSORSHIP_BENEFITS.each do |key, value|
                   -if key.eql? 2
                     -value.each_with_index do |benefit|
                       %div.checkbox.default
-                        = check_box_tag "gold[#{benefit[:id]}]",false
+                        = check_box_tag "gold[#{benefit[:id]}]", '1', false, class: "sponsor_checkbox"
                         %span#name= benefit[:desc]
                         %span.edit-benefit.italic.green-font select to edit
                         = text_field_tag "gold[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field", style: "width: 320px !important; display: none;"
@@ -106,7 +104,7 @@
                 -@project.sponsorship_benefits.where(sponsorship_level_id: 2).each_with_index do |benefit, index|
                   %div.checkbox.default
                     = hidden_field_tag "gold[id_#{index + 1}]", benefit.id
-                    = check_box_tag "gold[#{index + 1}]", nil, benefit.status
+                    = check_box_tag "gold[#{index + 1}]", nil, benefit.status, class: "sponsor_checkbox"
                     %span#name= benefit.name
                     %span.edit-benefit.italic.green-font select to edit
                     = text_field_tag "gold[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
@@ -117,7 +115,7 @@
               %div.checkbox.add_checkbox
                 = check_box_tag "add_gold",nil,false, class: "box_gold_benefits"
                 = text_field_tag "gold[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -18px; !important; width: 80% !important", class: "gold_benefits add_benefits"
-                %span.pull-right.save_new_benefit.btn{style: "margin-top:-65px; left:-20px"} Save
+                %span.pull-right.save_new_benefit.btn{style: "margin-top:-65px; left:-20px", data:{type: "gold"}} Save
             %span.green-font.normal-font.add-another.add-gold{style: "display:none" } + Add Another
 
       %hr
@@ -125,7 +123,7 @@
       %div
         %h6{:style => "color:#70bf4c"}
           Silver LEVEL SPONSORSHIP*
-          %span{:style => "font-size:10px;color:#403e37"} (5 AVAILABLE)
+          %span{:style => "font-size:10px;color:#403e37", class: "silver-availibility"} (5 AVAILABLE)
       .cf
         .span3.left{:style => "text-align:left;color:#464646;"}
           %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0;"} Cost
@@ -135,20 +133,19 @@
           %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (4% of funding goal)
         .span9.left{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
-
             Silver Level Sponsorship includes includes placement of a medium sized logo and a link to the sponsor’s website on your project page. In addition to these benefits, select suggested benefits or create custom benefits for silver level sponsors from the checklist below.
             %span{:style =>  "color:#b6b6b4;font-style:italic;"}
               (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
           %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"} SUGGESTED BENEFITS:
-          %div#silver-box
-            %div#existing-checkbox
+          %div#silver-box{data:{max: "5", type: "silver"}}
+            %div#silver-checkbox.existing-checkbox
 
               -if @project.sponsorship_benefits.empty?
                 -SponsorshipBenefit::SPONSORSHIP_BENEFITS.each do |key, value|
                   -if key.eql? 3
                     -value.each_with_index do |benefit|
                       %div.checkbox.default
-                        = check_box_tag "silver[#{benefit[:id]}]"
+                        = check_box_tag "silver[#{benefit[:id]}]", '1', false, class: "sponsor_checkbox"
                         %span#name= benefit[:desc]
                         %span.edit-benefit.italic.green-font select to edit
                         = text_field_tag "silver[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field", style: "width: 320px !important; display: none;"
@@ -156,7 +153,7 @@
                 -@project.sponsorship_benefits.where(sponsorship_level_id: 3).each_with_index do |benefit, index|
                   %div.checkbox.default
                     = hidden_field_tag "silver[id_#{index + 1}]", benefit.id
-                    = check_box_tag "silver[#{index + 1}]", nil, benefit.status
+                    = check_box_tag "silver[#{index + 1}]", nil, benefit.status, class: "sponsor_checkbox"
                     %span#name= benefit.name
                     %span.edit-benefit.italic.green-font select to edit
                     = text_field_tag "silver[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
@@ -167,7 +164,7 @@
               %div.checkbox.add_checkbox
                 = check_box_tag "add_silver",nil,false, class: "box_silver_benefits"
                 = text_field_tag "silver[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -18px; !important; width: 80% !important", class: "silver_benefits add_benefits"
-                %span.pull-right.save_new_benefit.btn{style: "margin-top:-65px; left:-20px"} Save
+                %span.pull-right.save_new_benefit.btn{style: "margin-top:-65px; left:-20px", data:{type: "silver"}} Save
             %span.green-font.normal-font.add-another.add-silver{style: "display:none" } + Add Another
           / %div.checkbox
           /   = check_box_tag "Test"
@@ -191,7 +188,7 @@
         .span9.left{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"} Bronze Level Sponsorship includes business / foundation name listing and a link to the sponsor’s website on your project page. In addition to these benefits, you can create custom benefits for bronze level sponsors below.
           %div#bronze-box
-            %div#existing-checkbox
+            %div#bronze-checkbox.existing-checkbox
 
               -if @project.sponsorship_benefits.empty?
                 -SponsorshipBenefit::SPONSORSHIP_BENEFITS.each do |key, value|
@@ -268,13 +265,77 @@
   $(".box_gold_benefits").attr("name", "bronze[" + (bronzeSum + 1) + "]");
   $(".box_gold_benefits").attr("id", "bronze_" + (bronzeSum + 1));
 
-
   $(document).ready(function() {
     addNewBenefit();
     editBenefit();
     addAnotherNewBenefit();
     removeAnotherBenefit();
+    if ($('#platinum-checkbox').children().find("input[type='checkbox']:checked").length >= 1) {
+      $('.platinum-availibility').html("(0 AVAILABLE)");
+      $('.platinum-availibility').attr("data-available", "0");
+    }
+    else{
+      $('.platinum-availibility').html("(1 AVAILABLE)");
+      $('.platinum-availibility').attr("data-available", "1");
+    }
+
+    var goldLength = $('#gold-checkbox').children().find("input[type='checkbox']:checked").length;
+    if (goldLength > 0) {
+      $('.gold-availibility').html("("+(3-goldLength)+" AVAILABLE)");
+      $('.gold-availibility').attr("data-available", (3-goldLength));
+    }
+    else{
+      $('.gold-availibility').html("(3 AVAILABLE)");
+      $('.gold-availibility').attr("data-available", "3");
+    }
+
+    var silverLength = $('#silver-checkbox').children().find("input[type='checkbox']:checked").length;
+    if (silverLength > 0) {
+      $('.silver-availibility').html("("+(5-silverLength)+" AVAILABLE)");
+      $('.silver-availibility').attr("data-available", (5-silverLength));
+    }
+    else{
+      $('.silver-availibility').html("(5 AVAILABLE)");
+      $('.silver-availibility').attr("data-available", "5");
+    }
+
+    $(".sponsor_checkbox").bind("click", function(e){
+      var maxSponsor = parseInt($(this).parent().parent().parent().attr('data-max'));
+      var sponsorType = $(this).parent().parent().parent().attr('data-type');
+      var thisCheckbox = $(this);
+      var availability = parseInt($('.'+sponsorType+'-availibility').attr('data-available'));
+      if ($('#'+sponsorType+'-checkbox').children().find("input[type='checkbox']:checked").length > maxSponsor) {
+        alert("You Can't Add Another Sponsor");
+        $(this).click();
+        $('.'+sponsorType+'-availibility').attr("data-available", availability);
+        $('.'+sponsorType+'-availibility').html("("+availability+" AVAILABLE)");
+      }
+      else{
+        if (thisCheckbox.is(':checked')) {
+          availability -= 1;
+          $('.'+sponsorType+'-availibility').attr("data-available", availability);
+          $('.'+sponsorType+'-availibility').html("("+availability+" AVAILABLE)");
+        }
+        else{
+          availability += 1;
+          $('.'+sponsorType+'-availibility').attr("data-available", availability);
+          $('.'+sponsorType+'-availibility').html("("+availability+" AVAILABLE)");
+        };
+      }
+      // if ($(this).is(':checked')) {
+      //   var availability = parseInt($('.platinum-availibility').attr('data-available')) - 1;
+      //   $('.platinum-availibility').attr("data-available", availability);
+      //   $('.platinum-availibility').html("(0 AVAILABLE)");
+      // }
+      // else {
+      //   var availability = parseInt($('.platinum-availibility').attr('data-available')) + 1;
+      //   $('.platinum-availibility').attr("data-available", availability);
+      //   $('.platinum-availibility').html("(0 AVAILABLE)");
+      // }
+    });
   });
+
+
 
   var changeProjectPermission = function(){
     if ( $("#project_sponsorship_permission").val() == "no" ){
@@ -315,7 +376,7 @@
   var addAnotherNewBenefit = function(){
     $(".add-another").bind("click", function(e) {
       var divCore = $(this).parent().children("#custom-checkbox");
-      var fieldP = $(this).parent().children("#existing-checkbox").children(".checkbox");
+      var fieldP = $(this).parent().children(".existing-checkbox").children(".checkbox");
 
       if ( fieldP.length > 0 ){
         var checkFieldP = fieldP.last().children().first();
@@ -337,7 +398,7 @@
         }
 
       $("#"+ checkboxName +"-count").val(countCheckbox);
-      $("<div class='checkbox default'><input id='"+ checkboxName + "_" + countCheckbox + "' type='checkbox' value='1' name='"+ checkboxName +"[id_"+ countCheckbox +"]''><input id='"+ checkboxName + "_info_"+ countCheckbox +"' class='"+checkboxName+"_benefits add_benefits' type='text' style='margin-top: -18px; width: 80% !important;' placeholder='Create your costum benefit here...' name='"+ checkboxName + "[info_"+countCheckbox+"]'><span class='save_new_benefit pull-right btn' style='margin-top:-79px; left:-20px'>Save</span><span class='remove-another pull-right btn' style='margin-top:-51px;'>Remove</span></div>").appendTo(divCore);
+      $("<div class='checkbox default'><input id='"+ checkboxName + "_" + countCheckbox + "' type='checkbox' value='1' name='"+ checkboxName +"[id_"+ countCheckbox +"]''><input id='"+ checkboxName + "_info_"+ countCheckbox +"' class='"+checkboxName+"_benefits add_benefits' type='text' style='margin-top: -18px; width: 80% !important;' placeholder='Create your costum benefit here...' name='"+ checkboxName + "[info_"+countCheckbox+"]'><span class='save_new_benefit pull-right btn' style='margin-top:-79px; left:-20px' data-type='"+checkboxName+"' >Save</span><span class='remove-another pull-right btn' style='margin-top:-51px;'>Remove</span></div>").appendTo(divCore);
       $("#"+checkboxName+"-count").val(parseInt($("#"+checkboxName+"-count").val())+1)
       countCheckbox++;
       addNewBenefit();
@@ -356,44 +417,55 @@
           case 'silver': $(".add-silver").show(); break;
           case 'bronze' : $(".add-bronze").show(); break;
         }
+      $("#"+boxName+"-count").val(parseInt($("#"+checkboxName+"-count").val())-1)
       $(this).parent().remove();
     })
   }
 
   var addNewBenefit = function(){
     $(".save_new_benefit").bind("click", function(){
-      var divCore = $(this).parent().parent().parent().children("#existing-checkbox");
-      var benefitsValue = $(this).parent().children(".add_benefits").val();
-
-      if ( divCore.children().children("input").length > 0 ){
-        var benefits = divCore.children().children("input").last();
-        var boxName = benefits.attr("id").split("_")[0];
-        var boxValue = benefits.attr("id").split("_")[2];
-        var boxLength = parseInt(boxValue) + 1;
+      var dataType = $(this).attr("data-type");
+      if ($("."+dataType+"-availibility").attr('data-available') == "0"){
+        alert("You Can't Add Another Sponsor");
       }
       else{
-        var boxName = $(this).parent().parent().parent().attr("id").split("-")[0];
-        var boxLength = 1;
-      }
+        var divCore = $(this).parent().parent().parent().children(".existing-checkbox");
+        var benefitsValue = $(this).parent().children(".add_benefits").val();
 
-      if(benefitsValue){
-        $("<div class='checkbox default'><input id='"+boxName+"_"+boxLength+"' type='checkbox' name='"+boxName+"["+boxLength+"]' checked='checked'><span id='name'>"+benefitsValue+"</span> <span class='edit-benefit italic green-font'>select to edit</span><input id='"+ boxName +"_info_"+ boxLength+"' class='edit-text-field' type='text' value='"+benefitsValue+"' style='width: 320px !important; display: none;' name='"+boxName+"[info_"+boxLength+"]'></div>").appendTo(divCore);
-        boxLength++;
-
-        switch (boxName)
-        {
-          case 'platinum': $(".add-platinum").show(); break;
-          case 'gold': $(".add-gold").show(); break;
-          case 'silver': $(".add-silver").show(); break;
-          case 'bronze' : $(".add-bronze").show(); break;
+        if ( divCore.children().children("input").length > 0 ){
+          var benefits = divCore.children().children("input").last();
+          var boxName = benefits.attr("id").split("_")[0];
+          var boxValue = benefits.attr("id").split("_")[2];
+          var boxLength = parseInt(boxValue) + 1;
+        }
+        else{
+          var boxName = $(this).parent().parent().parent().attr("id").split("-")[0];
+          var boxLength = 1;
         }
 
-        $(this).parent().remove();
-        $(".edit-benefit").unbind("click");
-        editBenefit();
-        return false;
-      }else{
-        alert("sorry you can't add new benefits because the field is blank!");
+        if(benefitsValue){
+          $("<div class='checkbox default'><input id='"+boxName+"_"+boxLength+"' type='checkbox' name='"+boxName+"["+boxLength+"]' checked='checked'><span id='name'>"+benefitsValue+"</span> <span class='edit-benefit italic green-font'>select to edit</span><input id='"+ boxName +"_info_"+ boxLength+"' class='edit-text-field' type='text' value='"+benefitsValue+"' style='width: 320px !important; display: none;' name='"+boxName+"[info_"+boxLength+"]'></div>").appendTo(divCore);
+          boxLength++;
+
+          switch (boxName)
+          {
+            case 'platinum': $(".add-platinum").show(); break;
+            case 'gold': $(".add-gold").show(); break;
+            case 'silver': $(".add-silver").show(); break;
+            case 'bronze' : $(".add-bronze").show(); break;
+          }
+
+          $(this).parent().remove();
+          $(".edit-benefit").unbind("click");
+          editBenefit();
+          var availability = parseInt($('.'+boxName+'-availibility').attr('data-available'));
+          availability -= 1;
+          $('.'+boxName+'-availibility').attr("data-available", availability);
+          $('.'+boxName+'-availibility').html("("+availability+" AVAILABLE)");
+          return false;
+        }else{
+          alert("sorry you can't add new benefits because the field is blank!");
+        }
       }
     });
   }
