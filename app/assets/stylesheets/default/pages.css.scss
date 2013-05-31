@@ -1096,12 +1096,12 @@ nav.navbar-inner {
 
 div[class*='progressbar']{
   border-radius:0;
-	border:1px solid #fff;
+  border:1px solid #fff;
   background:url(image-path('progress-bar-back.png')) top left repeat;
-	display:block;
+  display:block;
   height:16px;
-  margin:12px auto;
-	width:258px;}
+  margin:5px auto;
+  width:258px;}
 
 h5.time-left {
   display:inline-block;}
@@ -1768,11 +1768,13 @@ ul.perks {
   color:#fff;
   font:normal 11px/11px "Proxima Nova", arial, sans-serif;
   letter-spacing:1px;
+  margin-left:0;
   div {
     p {
       color:#413f37;
       display:block;
       font:normal 32px/32px "Proxima Nova Semi", arial, sans-serif;
+	  margin-bottom:3px;
       margin-top:5px;}}}
 
 .ui-progressbar-value {
