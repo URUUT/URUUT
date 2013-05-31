@@ -191,15 +191,11 @@ ActiveRecord::Schema.define(:version => 20130528052919) do
   end
 
   create_table "sponsors", :force => true do |t|
-    t.string  "payment_type"
-    t.string  "name"
-    t.string  "card_number"
-    t.string  "cvc"
-    t.string  "email"
-    t.string  "phone"
-    t.integer "month"
-    t.integer "year_card"
-    t.string  "token"
+    t.string "payment_type"
+    t.string "name"
+    t.string "email"
+    t.string "phone"
+    t.string "token"
   end
 
   create_table "sponsorship_benefits", :force => true do |t|
