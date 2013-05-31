@@ -35,6 +35,7 @@ Crowdfund::Application.routes.draw do
    post "projects/submit_project"
 
    get "projects/stripe_update"
+   get "default_perk_donations" => "donations#default_perk"
 
   post "#{Rails.root}/public/images/"
 
@@ -69,7 +70,6 @@ Crowdfund::Application.routes.draw do
   end
   resources :projects do
     get "add_desc", :on => :collection
-    get "set_perk_permission", :on => :collection
     post "add_perk", :on => :collection
     post "save_video", :on => :collection
     post "get_perk", :on => :collection

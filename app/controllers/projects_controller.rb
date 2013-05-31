@@ -47,6 +47,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     sort_sponsorships = @project.project_sponsors.sort_by {|ps| ps.level_id}
     @project_sponsors = sort_sponsorships.group_by {|sponsor| sponsor.level_id}
+    @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
     @sponsorship_levels = SponsorshipLevel.all
     @donation = Donation.where("project_id = ?", @project.id)
     @perks = Perk.where("project_id = ?", @project.id)
@@ -99,15 +100,18 @@ class ProjectsController < ApplicationController
 
     end
 
+    unless params[:project][:duration].blank?
+      params[:project][:campaign_deadline] = params[:project][:duration].to_i.days.from_now.to_time
+    end
+
     @sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits)
     @project.update_attributes!(params[:project])
 
-    if @project.bitly.blank?
-      bitly = Bitly.client
-      page_url = bitly.shorten("#{request.scheme}://#{request.host_with_port}/projects/#{@project.id}")
-      @project.bitly = page_url.short_url
-    end
-
+    # if @project.bitly.blank?
+    #   bitly = Bitly.client
+    #   page_url = bitly.shorten("#{request.scheme}://#{request.host_with_port}/projects/#{@project.id}")
+    #   @project.bitly = page_url.short_url
+    # end
     if @project.save
       respond_to do |format|
         format.json { render :json => @project.id }
@@ -162,7 +166,13 @@ class ProjectsController < ApplicationController
       @project.cultivation_mime_type = "image"
     end
 
-    def add_perk
+    render :nothing => true if @project.save
+  end
+
+  def add_perk
+    perk_permission = params[:perk_permission].eql?("yes") ? true : false
+    Project.update(params[:project], perk_permission: perk_permission)
+    unless perk_permission.eql?(false) && params[:name].blank?
       perk = Perk.new
       perk.name = params[:name]
       perk.amount = params[:amount]
@@ -170,27 +180,10 @@ class ProjectsController < ApplicationController
       perk.project_id = params[:project]
       perk.perks_available = params[:perks_available]
       perk.limit = params[:limit].eql?("yes") ? true : false
-      if perk.save!
-        respond_to do |format|
-          format.text { render :text => "Success" }
-        end
-      end
+      perk.save!
     end
-
-    render :nothing => true if @project.save
-  end
-
-  def add_perk
-    perk = Perk.new
-    perk.name = params[:name]
-    perk.amount = params[:amount]
-    perk.description = params[:description]
-    perk.project_id = params[:project]
-    if perk.save!
-      respond_to do |format|
-        format.text { render :text => "Success" }
-        #format.js { render :js => perk.id }
-      end
+    respond_to do |format|
+      format.text { render :text => "Success" }
     end
   end
 
@@ -235,10 +228,4 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def set_perk_permission
-    session[:status_permission_perk] = params["status"]
-    respond_to do |format|
-        format.text { render :text => "Success" }
-    end
-  end
 end

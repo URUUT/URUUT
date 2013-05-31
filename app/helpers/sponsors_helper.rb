@@ -20,4 +20,29 @@ module SponsorsHelper
     selected_level ? @selected_level : @sponsorship_levels.first
   end
 
+  def availability(sponsors, level)
+    number_of_sponsor = sponsors.where(level_id: level).count
+
+    if level.eql?(1)
+      if number_of_sponsor < 1
+        1
+      else
+        0
+      end
+    elsif level.eql?(2)
+      if number_of_sponsor < 3
+        3 - number_of_sponsor
+      else
+        0
+      end
+    elsif level.eql?(3)
+      if number_of_sponsor < 5
+        5 - number_of_sponsor
+      else
+        0
+      end
+    end
+
+  end
+
 end

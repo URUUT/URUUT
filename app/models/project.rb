@@ -4,9 +4,10 @@ class Project < ActiveRecord::Base
   attr_accessible :category, :description, :duration, :goal, :address, :project_title, :sponsorship_permission,
     :city, :state, :zip, :neighborhood, :title, :image, :video, :tags, :live, :short_description,:perk_permission,
     :perks_attributes, :galleries_attributes, :status, :organization, :website, :twitter_handle, :facebook_page, :seed_video,
-    :story, :about, :large_image, :seed_image, :cultivation_image, :ready_for_approval, :organization_type, :organization_classification, :cultivation_video
+    :story, :about, :large_image, :seed_image, :cultivation_image, :ready_for_approval, :organization_type,
+    :organization_classification, :cultivation_video, :campaign_deadline
 
-  attr_accessor :sponsorship_permission, :perk_permission
+  attr_accessor :sponsorship_permission
   #validates :title, :short_description, :description, :presence => true, :if => :active?
   #validates :image, :address, :city, :state, :zip, :neighborhood, :duration, :goal, :presence => true, :if => :active_or_step1?
 
