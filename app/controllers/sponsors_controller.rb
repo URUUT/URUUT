@@ -124,7 +124,7 @@ class SponsorsController < ApplicationController
     project_sponsor = ProjectSponsor.find_by_project_id(params[:project_id])
     project_sponsor.update_attribute(:status, "confirmed")
 
-    redirect_to project_url(params[:project_id]), notice: "Great! you have successfully registered as a sponsor"
+    redirect_to thank_you_for_sponsor_url(params[:project_id], @sponsor.id), notice: "Great! you have successfully registered as a sponsor"
   end
 
   def share_email
