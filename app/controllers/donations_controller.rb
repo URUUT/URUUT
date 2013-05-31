@@ -31,6 +31,7 @@ class DonationsController < ApplicationController
         @perk = Perk.new
         @perk.id = params["level"]
         @perk.amount = params["amount"]
+        @perk.name = "Level #{@perk.id}"
         @perk.description = "You will receive #{@perk.amount} Uruut Reward Points when you seed $#{@perk.amount}"
       end
     end
@@ -42,6 +43,9 @@ class DonationsController < ApplicationController
     if @donation.save
       session.merge!(:donation_id => @donation.id, :card_token => @donation.token, :card_type => @donation.card_type,
         :card_last4 => @donation.card_last4)
+      session[:perk_type] = params[:perk_type]
+      session[:payment_amount] = params[:donation][:amount]
+      session[:project_id_of_perk_selected] = params[:donation][:project_id]
       redirect_to donation_steps_path
     else
       render :new
