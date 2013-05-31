@@ -47,6 +47,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     sort_sponsorships = @project.project_sponsors.sort_by {|ps| ps.level_id}
     @project_sponsors = sort_sponsorships.group_by {|sponsor| sponsor.level_id}
+    @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
     @sponsorship_levels = SponsorshipLevel.all
     @donation = Donation.where("project_id = ?", @project.id)
     @perks = Perk.where("project_id = ?", @project.id)

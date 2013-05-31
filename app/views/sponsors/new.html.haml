@@ -18,22 +18,54 @@
     .span4.sidebar.pull-right
       %h4 SPONSORSHIP LEVELS
       .well
-        -@sponsorship_levels.each_with_index do |sponsorship_level, idx|
-          - if (idx + 1) > 1
-            %div{:style => "margin: 20px 0px; border-top: solid 1px #a1a1a1; position: relative;"}
-          %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;font-family:'Proxima Nova';"}
-            = sponsorship_level.name.upcase
-          %p.normal-font
-            =sponsorship_level.description
-          - sponsorship_level.sponsorship_benefits.each do |benefit|
-            %p.normal-font - #{benefit.name}
-          %div{:style => "height: 80px; width: 100%;"}
-            .pull-left
-              %h5 COST
-              %h3{style: "margin-top:-20px;"}= number_to_currency(sponsorship_level.cost, precision: 0)
-            %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-#{sponsorship_level.id}", :"sponsor-id" => "#{sponsorship_level.id}"}
-              SPONSOR
-              %span
+        %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;font-family:'Proxima Nova';"}
+          Platinum #{availability(@project.project_sponsors, 1)} of 1 Available
+        %p.normal-font
+        - @sponsorship_benefits[1].each do |benefit|
+          %p.normal-font - #{benefit.name}
+        %div{:style => "height: 80px; width: 100%;"}
+          .pull-left
+            %h5 COST
+            %h3{style: "margin-top:-20px;"}= number_to_currency((@project.goal.to_i * 0.3), precision: 0)
+          %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-1", :"sponsor-id" => "1"}
+            SPONSOR
+            %span
+        %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;font-family:'Proxima Nova';"}
+          Gold #{availability(@project.project_sponsors, 2)} of 3 Available
+        %p.normal-font
+        - @sponsorship_benefits[2].each do |benefit|
+          %p.normal-font - #{benefit.name}
+        %div{:style => "height: 80px; width: 100%;"}
+          .pull-left
+            %h5 COST
+            %h3{style: "margin-top:-20px;"}= number_to_currency((@project.goal.to_i * 0.1), precision: 0)
+          %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-2", :"sponsor-id" => "2"}
+            SPONSOR
+            %span
+        %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;font-family:'Proxima Nova';"}
+          Silver #{availability(@project.project_sponsors, 3)} of 5 Available
+        %p.normal-font
+        - @sponsorship_benefits[1].each do |benefit|
+          %p.normal-font - #{benefit.name}
+        %div{:style => "height: 80px; width: 100%;"}
+          .pull-left
+            %h5 COST
+            %h3{style: "margin-top:-20px;"}= number_to_currency((@project.goal.to_i * 0.04), precision: 0)
+          %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-3", :"sponsor-id" => "3"}
+            SPONSOR
+            %span
+        %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;font-family:'Proxima Nova';"}
+          Bronze
+        %p.normal-font
+        - @sponsorship_benefits[1].each do |benefit|
+          %p.normal-font - #{benefit.name}
+        %div{:style => "height: 80px; width: 100%;"}
+          .pull-left
+            %h5 COST
+            %h3{style: "margin-top:-20px;"}= number_to_currency((@project.goal.to_i * 0.005), precision: 0)
+          %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-4", :"sponsor-id" => "4"}
+            SPONSOR
+            %span
 
     = form_for(@sponsor, :url => project_sponsors_path, :html => {:class => "span8 well", :style => "margin-left: 0;", multipart: true, method: 'POST'}) do |f|
       - logger.debug(@sponsorship_levels)
@@ -41,19 +73,19 @@
       .span12{:style => "background-color: #f5f5f5; margin-left: 0px;"}
         .pull-left{:style => "width: 250px; height: 500px; border-right: solid 1px #d3d3d3;"}
           %h4{:style => "font-size: 10;"} SPONSORSHIP COST
-          %h1.cost-level.green-font-big #{number_to_currency(@sponsorship_levels.first.cost, precision: 0)}
+          %h1.cost-level.green-font-big #{number_to_currency(@cost, precision: 0)}
         .pull-right{:style => "width: 320px;"}
           = label_tag :project_sponsor_name do
             CHOOSE YOUR SPONSORSHIP LEVEL
           .selectParent
-            = select :project_sponsor, :level_id, options_for_select(@sponsorship_levels.map {|level| ["#{level.name} Level", level.id]}), required: true, class: "selectbox"
+            = select :project_sponsor, :level_id, options_for_select(@sponsorship_levels.map {|level| ["#{level.name} Level", level.id]}, session[:level_id]), class: "selectbox"
 
           = image_tag "3.gif", id: "loading", style: "display: none; margin: -3px 0 10px 10px;"
           %br/
           %h5 SPONSORSHIP DETAILS
           .sponsorship-level-details
-            %h3.green-font #{@sponsorship_levels.first.name.upcase} sponsor
-            - @sponsorship_levels.first.sponsorship_benefits.each do |benefit|
+            %h3.green-font #{@level} sponsor
+            - @first_benefits.each do |benefit|
               %p.normal-font - #{benefit.name}
       %h4 SPONSOR INFORMATION
       %div
