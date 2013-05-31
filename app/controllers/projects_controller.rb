@@ -44,11 +44,9 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
-    @sponsorships = @project.sponsorship_benefits.where("project_id = ? AND status = ?", @project.id, "t")
-    @sponsorships.each do |s|
-      logger.debug(s.name)
-      logger.debug(SponsorshipBenefit.find(s.sponsorship_level_id))
-    end
+    sort_sponsorships = @project.project_sponsors.sort_by {|ps| ps.level_id}
+    @project_sponsors = sort_sponsorships.group_by {|sponsor| sponsor.level_id}
+    @sponsorship_levels = SponsorshipLevel.all
     @donation = Donation.where("project_id = ?", @project.id)
     @perks = Perk.where("project_id = ?", @project.id)
     @user = User.find(@project.user_id)
@@ -76,11 +74,9 @@ class ProjectsController < ApplicationController
       page_url = bitly.shorten("#{request.scheme}://#{request.host_with_port}/projects/#{@project.id}")
       @project.bitly = page_url.short_url
     end
-
-
     if @project.save
       respond_to do |format|
-        format.js { render :js => @project.id }
+        format.json { render :json => @project.id }
       end
     end
   end

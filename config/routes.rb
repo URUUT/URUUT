@@ -1,7 +1,7 @@
 Crowdfund::Application.routes.draw do
   # match '/users/auth/:provider/callback', to: 'services#create'
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations" }
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations"}
   # devise_for :users, :controllers => { :registrations => "registrations" }
   resources :users, :only => [:show]
 
@@ -22,7 +22,8 @@ Crowdfund::Application.routes.draw do
   get "users/profile"
 
   match "browse/projects" => "pages#index", :as => "browse_projects"
-
+  match "search/projects" => "pages#search", :as => "search_projects"
+  
    get "projects/save_image"
    post "projects/save_image"
    get "projects/:project_id/sponsors/:id/confirmation" => "sponsors#confirmation", as: "confirmation"
