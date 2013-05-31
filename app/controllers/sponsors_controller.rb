@@ -27,6 +27,11 @@ class SponsorsController < ApplicationController
         @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[4]
         @cost = @project.goal.to_i * 0.005
         session[:level_id] = 4
+      else
+        @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[1]
+        @cost = @project.goal.to_i * 0.3
+        @level = "Platinum"
+        session[:level_id] = 1
     end
 
     @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
