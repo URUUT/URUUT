@@ -26,6 +26,9 @@ Crowdfund::Application.routes.draw do
 
    get "projects/save_image"
    post "projects/save_image"
+   post "projects/update_image"
+   delete "galleries/delete_photo"
+   delete "projects/:id/delete_image" => "projects#delete_image", as: "delete_image"
    get "projects/:project_id/sponsors/:id/confirmation" => "sponsors#confirmation", as: "confirmation"
    get "purchase" => "payments#purchase"
    get "projects/:project_id/sponsors/:sponsor_id/thank_you" => "sponsors#thank_you", as: "thank_you_for_sponsor"
@@ -57,6 +60,7 @@ Crowdfund::Application.routes.draw do
       get "cover_photo_and_gallery"
       get "post_to_social_media"
       get "emails_page"
+      get "project_founder"
 
       collection do
         get "email_based_on_sponsor_level"
