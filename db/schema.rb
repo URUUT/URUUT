@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130528052919) do
+ActiveRecord::Schema.define(:version => 20130601114049) do
 
   create_table "badges_sashes", :force => true do |t|
     t.integer  "badge_id"
@@ -48,11 +48,14 @@ ActiveRecord::Schema.define(:version => 20130528052919) do
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "donations", :force => true do |t|
-    t.integer "user_id"
-    t.integer "project_id"
-    t.float   "amount"
-    t.string  "customer_token"
-    t.string  "email"
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.float    "amount"
+    t.string   "customer_token"
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "perk_name"
   end
 
   create_table "galleries", :force => true do |t|
@@ -120,58 +123,70 @@ ActiveRecord::Schema.define(:version => 20130528052919) do
   end
 
   create_table "project_sponsors", :force => true do |t|
-    t.string  "card_token"
-    t.float   "cost"
-    t.text    "logo"
-    t.text    "mission"
-    t.string  "name"
-    t.integer "project_id"
-    t.integer "sponsor_id"
-    t.string  "payment",    :default => "Unpaid"
-    t.string  "status",     :default => "Unconfirmed"
-    t.integer "level_id"
-    t.string  "card_type"
-    t.integer "card_last4"
+    t.string   "card_token"
+    t.float    "cost"
+    t.text     "logo"
+    t.text     "mission"
+    t.string   "name"
+    t.integer  "project_id"
+    t.integer  "sponsor_id"
+    t.string   "payment",    :default => "Unpaid"
+    t.string   "status",     :default => "Unconfirmed"
+    t.integer  "level_id"
+    t.string   "card_type"
+    t.integer  "card_last4"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "project_updates", :force => true do |t|
+    t.integer  "project_id"
+    t.string   "title"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "projects", :force => true do |t|
-    t.string  "title"
-    t.text    "description"
-    t.string  "location"
-    t.string  "duration"
-    t.string  "goal"
-    t.string  "category"
-    t.integer "user_id"
-    t.integer "deleted"
-    t.string  "address"
-    t.string  "city"
-    t.string  "state"
-    t.string  "zip"
-    t.string  "neighborhood"
-    t.integer "live"
-    t.text    "short_description"
-    t.string  "bitly"
-    t.string  "project_token"
-    t.string  "status"
-    t.string  "website"
-    t.string  "facebook_page"
-    t.string  "twitter_handle"
-    t.string  "organization"
-    t.string  "large_image"
-    t.text    "story"
-    t.text    "about"
-    t.string  "approval_date"
-    t.string  "project_title"
-    t.integer "ready_for_approval"
-    t.string  "seed_image"
-    t.string  "cultivation_image"
-    t.string  "organization_type"
-    t.string  "organization_classification"
-    t.string  "publishable_key"
-    t.string  "seed_video"
-    t.string  "cultivation_video"
-    t.string  "seed_mime_type",              :default => "image"
-    t.string  "cultivation_mime_type",       :default => "image"
+    t.string   "title"
+    t.text     "description"
+    t.string   "location"
+    t.string   "duration"
+    t.string   "goal"
+    t.string   "category"
+    t.integer  "user_id"
+    t.integer  "deleted"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.string   "neighborhood"
+    t.integer  "live"
+    t.text     "short_description"
+    t.string   "bitly"
+    t.string   "project_token"
+    t.string   "status"
+    t.string   "website"
+    t.string   "facebook_page"
+    t.string   "twitter_handle"
+    t.string   "organization"
+    t.string   "large_image"
+    t.text     "story"
+    t.text     "about"
+    t.string   "approval_date"
+    t.string   "project_title"
+    t.integer  "ready_for_approval"
+    t.string   "seed_image"
+    t.string   "cultivation_image"
+    t.string   "organization_type"
+    t.string   "organization_classification"
+    t.string   "publishable_key"
+    t.string   "seed_video"
+    t.string   "cultivation_video"
+    t.string   "seed_mime_type",              :default => "image"
+    t.string   "cultivation_mime_type",       :default => "image"
+    t.boolean  "perk_permission"
+    t.datetime "campaign_deadline"
   end
 
   create_table "sashes", :force => true do |t|
@@ -191,15 +206,11 @@ ActiveRecord::Schema.define(:version => 20130528052919) do
   end
 
   create_table "sponsors", :force => true do |t|
-    t.string  "payment_type"
-    t.string  "name"
-    t.string  "card_number"
-    t.string  "cvc"
-    t.string  "email"
-    t.string  "phone"
-    t.integer "month"
-    t.integer "year_card"
-    t.string  "token"
+    t.string "payment_type"
+    t.string "name"
+    t.string "email"
+    t.string "phone"
+    t.string "token"
   end
 
   create_table "sponsorship_benefits", :force => true do |t|

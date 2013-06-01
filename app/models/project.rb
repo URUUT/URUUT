@@ -11,9 +11,13 @@ class Project < ActiveRecord::Base
   #validates :title, :short_description, :description, :presence => true, :if => :active?
   #validates :image, :address, :city, :state, :zip, :neighborhood, :duration, :goal, :presence => true, :if => :active_or_step1?
 
-  has_many :donations, dependent: :destroy
-  has_many :perks
-  has_many :galleries
+  with_options dependent: :destroy do |project|
+    project.has_many :donations
+    project.has_many :perks
+    project.has_many :galleries
+    project.has_many :project_updates
+  end
+
   has_many :project_sponsors
   has_many :sponsorship_levels
   has_many :sponsorship_benefits
