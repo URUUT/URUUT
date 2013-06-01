@@ -3,12 +3,12 @@
     - if @project.large_image
       #large_image{:style => "background-image: url(#{@project.large_image}); -webkit-background-size: cover; background-size: cover;"}
         .div{style: "height: 546px;", id: "image-priview"}
-          %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => ENV['FILEPICKER_API'], 'data-fp-button-class' => 'coverphoto btn', 'onchange' => 'updateCover(event)', :style => 'left:50%'}
+          %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => 'ArmO0TLVTkyCaJkQmBNfqz', 'data-fp-button-class' => 'coverphoto btn', 'onchange' => 'updateCover(event)', :style => 'left:50%'}
           = render "funding_info"
     - else
       #large_image
         .div{style: "height: 546px;", id: "image-priview"}
-          %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => ENV['FILEPICKER_API'], 'data-fp-button-class' => 'coverphoto btn pick-cover-photo', 'onchange' => 'updateCover(event)', :style => 'left:50%'}
+          %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => 'ArmO0TLVTkyCaJkQmBNfqz', 'data-fp-button-class' => 'coverphoto btn pick-cover-photo', 'onchange' => 'updateCover(event)', :style => 'left:50%'}
 
         = render "funding_info"
 
@@ -65,7 +65,7 @@
               %div.seed-content{:style => "background: #C4B8B8; width: 100%; height: 414px"}
                 .seed-action-container
                   %div.pull-left{style: "margin-left: 37%; margin-top: 100px"}
-                    %input{:type => 'filepicker', :name => 'planting_seed_image', 'data-fp-button-text' => 'ADD A PHOTO', 'data-fp-apikey' => ENV['FILEPICKER_API'], 'data-fp-button-class' => 'btn', 'onchange' => 'updatePlantingSeedImage(event)'}
+                    %input{:type => 'filepicker', :name => 'planting_seed_image', 'data-fp-button-text' => 'ADD A PHOTO', 'data-fp-apikey' => 'ArmO0TLVTkyCaJkQmBNfqz', 'data-fp-button-class' => 'btn', 'onchange' => 'updatePlantingSeedImage(event)'}
                   %div.pull-left{style: "margin-left: -14%; margin-top: 194px"}
                     %p{style: "color: #FFF"} OR
                   %div.pull-left{style: "margin-left: 37%; margin-top: 39px"}
@@ -113,7 +113,7 @@
                         = link_to "ADD A VIDEO", "javascript:void(0)", class: "btn cultivation-form"
 
                 .cultivation-action-container{style: action_image(@project.cultivation_image, @project.cultivation_video)}
-                  %input{:type => 'filepicker', :name => 'cultivation_image', 'data-fp-button-text' => 'UPLOAD NEW PHOTO', 'data-fp-apikey' => ENV['FILEPICKER_API'], 'data-fp-button-class' => 'btn', 'onchange' => 'updateCultivationImage(event)'}
+                  %input{:type => 'filepicker', :name => 'cultivation_image', 'data-fp-button-text' => 'UPLOAD NEW PHOTO', 'data-fp-apikey' => 'ArmO0TLVTkyCaJkQmBNfqz', 'data-fp-button-class' => 'btn', 'onchange' => 'updateCultivationImage(event)'}
                   = link_to "UPLOAD NEW VIDEO", "javascript:void(0)", class: "btn cultivation-form"
 
               %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.story
