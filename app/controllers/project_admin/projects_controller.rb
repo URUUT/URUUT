@@ -29,6 +29,10 @@ class ProjectAdmin::ProjectsController < ApplicationController
 
   def visual; end
 
+  def project_update
+    @project = Project.find(params[:project_id])
+  end
+
   def cover_photo_and_gallery; end
 
   def post_to_social_media; end
