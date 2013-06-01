@@ -13,6 +13,17 @@ class ProjectAdmin::ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     subheader
+    @fundings = []
+
+    @donations.each do |sponsor|
+      sponsor.type_founder = "individual"
+      @fundings << sponsor
+    end unless @donations.empty?
+
+    @sponsors.each do |sponsor|
+      sponsor.type_founder = "sponsor"
+      @fundings << sponsor
+    end unless @sponsors.empty?
   end
 
   def update
@@ -108,8 +119,8 @@ class ProjectAdmin::ProjectsController < ApplicationController
   def subheader
     @donations = Donation.find_all_by_project_id(@project.id)
     # sponsors = ProjectSponsor.find_by_project_id(@project.id)
-    sponsors = ProjectSponsor.where(project_id: @project.id)
-    @sponsor_count = sponsors.nil? ? 0 : sponsors.count
+    @sponsors = ProjectSponsor.where(project_id: @project.id)
+    @sponsor_count = @sponsors.nil? ? 0 : @sponsors.count
   end
 
 end
