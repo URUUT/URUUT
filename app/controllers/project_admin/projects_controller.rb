@@ -1,7 +1,7 @@
 class ProjectAdmin::ProjectsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :set_project_ajax, except: [:index, :update, :show,
-    :send_email, :email_based_on_sponsor_level]
+    :send_email, :email_based_on_sponsor_level, :project_update, :process_project_update]
 
   respond_to :js, except: [:index, :update, :show, :emails_page]
   layout false, :only => "stripe_update"
@@ -30,7 +30,15 @@ class ProjectAdmin::ProjectsController < ApplicationController
   def visual; end
 
   def project_update
-    @project = Project.find(params[:project_id])
+    @project_update = ProjectUpdate.new
+    session[:current_project] = params[:project_id]
+  end
+
+  def process_project_update
+    params[:project_update][:project_id] = session[:current_project]
+    project_update = ProjectUpdate.new(params[:project_update])
+    project_update.save
+    @alert = "Project successfully updated"
   end
 
   def cover_photo_and_gallery; end

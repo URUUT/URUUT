@@ -67,6 +67,7 @@ Crowdfund::Application.routes.draw do
       collection do
         get "email_based_on_sponsor_level"
         post "send_email"
+        post "process_project_update"
       end
     end
   end
