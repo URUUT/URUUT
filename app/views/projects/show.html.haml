@@ -25,14 +25,14 @@
           = image_tag 'seed.png', :class => "seed"
           %div
             %span Seed Funds Pledged
-            - if @donation && @donation.length == 0
+            - if totalsponsor(@project).eql?(0)
               %p $0
             - else
-              - totalDonated = 0
-              - if @donation
-                - @donation.each do |d|
-                  - totalDonated += d.amount
-              %p= number_to_currency(totalDonated, :precision => 0)
+              / - totalDonated = 0
+              / - if @donation
+              /   - @donation.each do |d|
+              /     - totalDonated += d.amount
+              %p= number_to_currency(totalsponsor(@project), :precision => 0)
 
         #progressbar
 
@@ -76,7 +76,7 @@
         Become A Sponsor
         %span
 
-      %ul#myTab.nav.nav-tabs.tab-nav
+      %ul#myTab1.tab-nav
         %li.active
           %a{:href => "#planting_seeds"}
             Planting Seeds
@@ -95,6 +95,10 @@
           - elsif @project.seed_mime_type.eql?("image") and !@project.seed_image.blank?
             = image_tag "#{@project.seed_image}", style: "float:left; width:100%"
           %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.about
+        #growth.tab-pane
+          Jancuk
+        #gallery.tab-pane
+          Jancuk 2
 
       %hr
 
@@ -140,7 +144,7 @@
           %span
 
       .sidebar-tab
-      %ul#myTab2.nav.nav-tabs.tab-nav
+      %ul#myTab2.tab-nav
         %li.active
           %a{:href => "#perks"} Perks
         %li
@@ -301,6 +305,15 @@
   }
 
   $(function(){
+    $('#myTab1 a').click(function (e) {
+      e.preventDefault();
+      $(this).tab('show');
+    });
+
+    $('#myTab2 a').click(function (e) {
+      e.preventDefault();
+      $(this).tab('show');
+    });
     getFbCount();
     getTwCount();
     var activeTab = $('.nav-tabs li.active a').attr('href');
@@ -333,7 +346,7 @@
 
 
     $( "#progressbar" ).progressbar({
-      value: #{percent_funded(@project.id)}
+      value: #{percentage_sponsor(@project)}
     });
 
     $('.nav-tabs li a').click(function(e){
