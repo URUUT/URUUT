@@ -33,13 +33,14 @@ class DonationsController < ApplicationController
         @perk = Perk.new
         @perk.id = params["level"]
         @perk.amount = params["amount"]
-        @perk.name = "Level #{@perk.id}"
+        @perk.name = "LEVEL #{@perk.id}"
         @perk.description = "You will receive #{@perk.amount} Uruut Reward Points when you seed $#{@perk.amount}"
       end
     end
   end
 
 	def create
+    params[:donation][:created_at] = Time.now.to_date
     @donation = Donation.new(params[:donation])
 
     if @donation.save
