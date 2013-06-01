@@ -1,0 +1,19 @@
+$('.menu-messages').attr('style', '');
+$('.main-content').html("<%=j render :partial => 'founder' %>");
+
+<% if params[:type].eql?("sponsor") %>
+$(".sponsor-type").attr("style", "background: #81C263");
+$(".founder-all").attr('style', '');
+var header = "PROJECT SPONSORS";
+<% elsif params[:type].eql?("individual") %>
+$(".individuals-type").attr("style", "background: #81C263");
+$(".founder-all").attr('style', '');
+var header = "INDIVIDUAL CONTRIBUTORS";
+<% end %>
+
+<% if params[:type].blank?  %>
+$(".founder-all").attr("style", "background: #81C263");
+var header = "ALL PROJECT FUNDERS";
+<% end %>
+
+$(".project-founder").text(header);

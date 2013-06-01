@@ -3,7 +3,7 @@
 #fb-root
 :javascript
 
-  / filepicker.setKey('ArmO0TLVTkyCaJkQmBNfqz'); // hardcode because js from flipicker can't called, please set your own
+  filepicker.setKey('ArmO0TLVTkyCaJkQmBNfqz'); // hardcode because js from flipicker can't called, please set your own
 
 
 .full-width.banner
@@ -11,7 +11,7 @@
     .span3
       %h3= @project.title
       %h5 #{@project.city}, #{@project.state}
-    
+
     .span3
       %h6 Current Amount Funded
       %h2= number_to_currency(amount_funded(@project.id), :precision => 0)
@@ -20,15 +20,15 @@
     .span2
       %h5 Project Sponsors
       %h2= @sponsor_count
-			
+
     .span2
       %h5 Individual Contributions
       %h2= @donations.count
-	
+
     .span2
       %h5 Days Remaining
       %h2 #{time_left(@project.duration, @project.approval_date)}
-			
+
 .cf
 
 .menu-project
@@ -39,7 +39,7 @@
       %li
         = link_to "Manage Project", project_admin_project_manage_path(@project.id), class: "sub-menu-project manage", remote: true
       %li
-        = link_to "Project Funders", "#tabs-3"
+        = link_to "Project Funders", project_admin_project_project_founder_path(@project.id), class: "sub-menu-project founder", remote: true
       %li
         = link_to "Project Messages", project_admin_project_messages_path(@project.id), class: "sub-menu-project messages", remote: true
 

@@ -81,4 +81,26 @@ module ApplicationHelper
     return ENV['STRIPE_PUB_KEY']
   end
 
+  def project_sponsor_by_level(project)
+    gold_sponsors, silver_sponsors, bronze_sponsors, platinum_sponsors = [], [], [], []
+    project.project_sponsors.each do |sponsor|
+      if sponsor.level_id.eql?(1)
+        platinum_sponsors << sponsor
+      elsif sponsor.level_id.eql?(2)
+        gold_sponsors << sponsor
+      elsif sponsor.level_id.eql?(3)
+        silver_sponsors << sponsor
+      elsif sponsor.level_id.eql?(4)
+        bronze_sponsors << sponsor
+      end
+    end
+    sponsors = {
+      "PLATINUM" => platinum_sponsors,
+      "GOLD" => gold_sponsors,
+      "SILVER" => silver_sponsors,
+      "BRONZE" => bronze_sponsors
+    }
+    sponsors
+  end
+
 end
