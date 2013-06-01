@@ -21,7 +21,6 @@
       / = label_tag :amount, "Amount to Donate"
       = hidden_field_tag :amount, @perk_amount, name: "donation[amount]"
       = hidden_field_tag :perk_permission_type, @project.perk_permission ? "custom" : "default" , name: "perk_type"
-      = hidden_field_tag :perk_name, @perk_name.blank? ? "custom" : @perk_name, name: "perk_name"
     .field.name
       = label_tag "NAME AS IT APPEARS ON CARD*"
       = text_field_tag nil, [current_user.first_name, current_user.last_name].join(" "), name: nil
