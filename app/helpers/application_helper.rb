@@ -21,6 +21,27 @@ module ApplicationHelper
 		# return total_funded
 	end
 
+  def percentage_sponsor(project)
+    donation = Donation.where("project_id = ?", project.id)
+    total_funded = 0.0
+    donation.each do |d|
+      total_funded = total_funded + d.amount.to_f
+    end
+    total_funded += project.project_sponsors.sum(:cost)
+    percentage = (total_funded/project.goal.to_i).round(2) * 100
+    return percentage
+  end
+
+  def totalsponsor(project)
+    donation = Donation.where("project_id = ?", project.id)
+    total_funded = 0.0
+    donation.each do |d|
+      total_funded = total_funded + d.amount.to_f
+    end
+    total_funded += project.project_sponsors.sum(:cost)
+    return total_funded
+  end
+
 	def amount_funded(id)
 		project = Project.find(id)
 		donation = Donation.where("project_id = ?", id)
@@ -55,7 +76,7 @@ module ApplicationHelper
     amount = amount.to_s.gsub(/,/, '').to_f
     number_to_currency(amount, :precision => 0)
   end
-  
+
   def stripe_pub_key
     return ENV['STRIPE_PUB_KEY']
   end

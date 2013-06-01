@@ -3,7 +3,7 @@
     .span4
       = image_tag "#{@user.avatar}", :class => "img-circle avatar"
 
-      %h4.user-name 
+      %h4.user-name
         #{@user.first_name} #{@user.last_name}
       - if @is_current
         = link_to "not you? click here to logout", destroy_user_session_path, :class => "green"
