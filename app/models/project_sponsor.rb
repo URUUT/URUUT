@@ -1,7 +1,10 @@
 class ProjectSponsor < ActiveRecord::Base
   mount_uploader :logo, LogoUploader
 
-  attr_accessible :card_token, :cost, :logo, :mission, :name, :project_id, :sponsor_id, :level_id, :payment, :status, :card_type, :card_last4
+  attr_accessible :card_token, :cost, :logo, :mission, :name, :project_id,
+  :sponsor_id, :level_id, :payment, :status, :card_type, :card_last4, :created_at
+
+  attr_accessor :type_founder
 
   belongs_to :project
   belongs_to :sponsor

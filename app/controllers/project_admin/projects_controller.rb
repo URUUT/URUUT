@@ -33,6 +33,31 @@ class ProjectAdmin::ProjectsController < ApplicationController
 
   def post_to_social_media; end
 
+  def project_founder
+    @project = Project.find(params[:project_id])
+
+    if params[:type].blank?
+      @founders = []
+      @project.project_sponsors.each do |sponsor|
+        sponsor.type_founder = "sponsor"
+        @founders << sponsor
+      end unless @project.project_sponsors.empty?
+
+      @project.donations.each do |sponsor|
+        sponsor.type_founder = "individual"
+        @founders << sponsor
+      end unless @project.donations.empty?
+      @all = true
+    else
+      @founders = if params[:type].eql?("individual")
+        @project.donations
+      else
+        @project.project_sponsors
+      end
+      @all = false
+    end
+  end
+
   def send_email
     @error_messages = []
 
