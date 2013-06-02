@@ -13,7 +13,7 @@
       - @project.galleries.each do |image|
         .list-image.pull-left{:style => "width: 30%; margin-left: 2%; margin-top: 2%" }
           = filepicker_image_tag image.gallery_file_name, width: 216, height: 216, fit: 'scale'
-          = link_to "delete photo", gallery_path(image.id), class: "green-font", style: "margin-left:20px", method: 'DELETE'
+          = link_to "delete photo", delete_photo_path(image.id), class: "green-font image-delete-button", style: "margin-left:20px", method: 'DELETE', remote: true
     %div{:style => "float:left; width: 100%"}
       %button{:id => "new-photo"} ADD NEW PHOTO
 
@@ -21,9 +21,12 @@
 
 %script{:src => "http://code.jquery.com/ui/1.10.2/jquery-ui.js"}
 :javascript
-  $('.delete_photo').click(function(){
-    $('#seed_image').hide();
-  });
+  var deleteImages = function (){
+    $('.image-delete-button').click(function(){
+      $(this).parent().remove();
+    });
+  }
+  deleteImages();
 
   var cover = document.getElementById('project-submit');
   cover.type="filepicker";
@@ -54,8 +57,8 @@
         gallery: pictureImage
         },
       success: function(data){
-        console.log(data);
-        $('#galleryPicture').append("<div class='list-image pull-left' style='width: 30%; margin-left: 2%; margin-top: 2%'><img src=" + pictureImage + "/convert?fit=scale&height=216&width=216><a href='/galleries/" + data.image_id + " class='green-font' data-method='DELETE' style='margin-left:20px'>delete photo</p></div></div></div>");
+        $('#galleryPicture').append("<div class='list-image pull-left' style='width: 30%; margin-left: 2%; margin-top: 2%'><img src=" + pictureImage + "/convert?fit=scale&height=216&width=216><a href='/galleries/delete_photo/" + data.image_id + "' class='green-font image-delete-button' data-method='DELETE' style='margin-left:20px' data-remote='true'>delete photo</p></div></div></div>");
+        deleteImages();
       }
     });
   };

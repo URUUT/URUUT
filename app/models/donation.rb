@@ -1,11 +1,12 @@
 class Donation < ActiveRecord::Base
-  attr_accessible :amount, :project_id, :customer_token, :user_id, :email, :token, :card_last4, :card_type
-  attr_accessor :token, :card_last4, :card_type
+  attr_accessible :amount, :project_id, :customer_token, :user_id, :email, :token,
+  :card_last4, :created_at, :card_type, :perk_name
+  attr_accessor :token, :card_last4, :card_type, :type_founder
 
   belongs_to :project
   belongs_to :user
 
-  default_scope { where("customer_token IS NOT NULL") }
+  # default_scope { where("customer_token IS NOT NULL") }
 
   def save_with_payment
     logger.debug(token)

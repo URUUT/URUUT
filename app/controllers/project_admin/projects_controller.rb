@@ -1,7 +1,7 @@
 class ProjectAdmin::ProjectsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :set_project_ajax, except: [:index, :update, :show,
-    :send_email, :email_based_on_sponsor_level]
+    :send_email, :email_based_on_sponsor_level, :project_update, :process_project_update]
 
   respond_to :js, except: [:index, :update, :show, :emails_page]
   layout false, :only => "stripe_update"
@@ -13,6 +13,17 @@ class ProjectAdmin::ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     subheader
+    @fundings = []
+
+    @donations.each do |sponsor|
+      sponsor.type_founder = "individual"
+      @fundings << sponsor
+    end unless @donations.empty?
+
+    @sponsors.each do |sponsor|
+      sponsor.type_founder = "sponsor"
+      @fundings << sponsor
+    end unless @sponsors.empty?
   end
 
   def update
@@ -29,9 +40,46 @@ class ProjectAdmin::ProjectsController < ApplicationController
 
   def visual; end
 
+  def project_update
+    @project_update = ProjectUpdate.new
+    session[:current_project] = params[:project_id]
+  end
+
+  def process_project_update
+    params[:project_update][:project_id] = session[:current_project]
+    project_update = ProjectUpdate.new(params[:project_update])
+    project_update.save
+    @alert = "Project successfully updated"
+  end
+
   def cover_photo_and_gallery; end
 
   def post_to_social_media; end
+
+  def project_founder
+    @project = Project.find(params[:project_id])
+
+    if params[:type].blank?
+      @founders = []
+      @project.project_sponsors.each do |sponsor|
+        sponsor.type_founder = "sponsor"
+        @founders << sponsor
+      end unless @project.project_sponsors.empty?
+
+      @project.donations.each do |sponsor|
+        sponsor.type_founder = "individual"
+        @founders << sponsor
+      end unless @project.donations.empty?
+      @all = true
+    else
+      @founders = if params[:type].eql?("individual")
+        @project.donations
+      else
+        @project.project_sponsors
+      end
+      @all = false
+    end
+  end
 
   def send_email
     @error_messages = []
@@ -71,8 +119,8 @@ class ProjectAdmin::ProjectsController < ApplicationController
   def subheader
     @donations = Donation.find_all_by_project_id(@project.id)
     # sponsors = ProjectSponsor.find_by_project_id(@project.id)
-    sponsors = ProjectSponsor.where(project_id: @project.id)
-    @sponsor_count = sponsors.nil? ? 0 : sponsors.count
+    @sponsors = ProjectSponsor.where(project_id: @project.id)
+    @sponsor_count = @sponsors.nil? ? 0 : @sponsors.count
   end
 
 end

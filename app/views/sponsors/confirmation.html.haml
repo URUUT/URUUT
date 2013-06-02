@@ -29,7 +29,7 @@
           %h6.green-font Contact Phone Number
           %p.normal-font= @sponsor.phone
           %h6.green-font Payment Amount
-          %p.normal-font #{number_to_currency(@sponsorship_level.cost, precision: 0)}
+          %p.normal-font #{number_to_currency(@cost, precision: 0)}
           %div{:style => "height: 80px; width: 100%;"}
             = link_to "CONFIRM", project_sponsor_confirm_sponsor_path(@project.id, @sponsor.id), :class => "btn confirm-button", :id => "project-submit"
         -else
@@ -41,7 +41,7 @@
           %p.normal-font= @sponsor.name
           %h5{:style => "color: #70bf4c;"}
             Payment Amount
-          %p.normal-font #{number_to_currency(@sponsorship_level.cost, precision: 0)}
+          %p.normal-font #{number_to_currency(@cost, precision: 0)}
           %div{:style => "height: 80px; width: 100%;"}
             = link_to "CONFIRM", purchase_path(project_id: @project.id, sponsor_id: @sponsor.id), :class => "btn confirm-button", :id => "project-submit"
 
@@ -52,7 +52,7 @@
             %h4 SPONSORSHIP AMOUNT
             =link_to "Change", edit_project_sponsor_path(@project.id, @sponsor.id), class: "green-font"
           %h1.cost-level{:style => "color: #70bf4c;"}
-            #{number_to_currency(@sponsorship_level.cost, precision: 0)}
+            #{number_to_currency(@cost, precision: 0)}
         .pull-right{:style => "width: 320px;"}
           = label_tag :project_sponsor_name do
             %h4.span8 SPONSORSHIP LEVEL
@@ -61,7 +61,7 @@
             #{@sponsorship_level.name.upcase} SPONSOR
           %p.normal-font= truncate(@sponsorship_level.description, lenght: 200)
           .sponsorship-level-details
-            - @sponsorship_level.sponsorship_benefits.each do |benefit|
+            - @benefits.each do |benefit|
               %p.normal-font - #{benefit.name}
       %h5 SPONSOR NAME
       %div

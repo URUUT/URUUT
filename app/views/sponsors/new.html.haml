@@ -261,7 +261,8 @@
     $(".sponsor-change").click(function(){
       var projectId = parseInt($(".project-id").text());
       var sponsorId = parseInt($(this).attr("sponsor-id"));
-      $("#project_sponsor_level_id option").removeAttr("selected").removeAttr("selected");
+      // $("#project_sponsor_level_id option").removeAttr("selected").removeAttr("selected");
+      $("#project_sponsor_level_id option").removeAttr("selected");
       $("#project_sponsor_level_id option[value='"+ sponsorId +"']").attr("selected", "selected");
       $.ajax({
         url: "/projects/" + projectId + "/sponsors/" + sponsorId + "/get_sponsorship_levels.js",

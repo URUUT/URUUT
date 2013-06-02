@@ -1,0 +1,61 @@
+%div
+  %h2.title.project-founder ALL PROJECT FUNDERS
+  .project-funder.well{:style => "float:left"}
+    - if @all
+      %table.table.table-striped
+        - @founders.sort_by{ |f| f.updated_at }.each do |founder|
+          - if founder.type_founder.eql?("sponsor")
+            %tr
+              %td= image_tag founder.logo, style: "width: 80px"
+              %td= founder.name
+              %td= "$#{founder.cost}"
+              %td= "#{founder.sponsorship_level.name} sponsor"
+              %td= founder.updated_at.strftime("%m/%d")
+          - else
+            %tr
+              %td= "no images"
+              %td= [founder.user.first_name, founder.user.last_name].join(" ")
+              %td= "$#{founder.amount}"
+              %td= founder.perk_name
+              %td= founder.updated_at.strftime("%m/%d")
+
+    - else
+      -if params[:type].eql?("individual")
+        - @founders.group_by{ |p| p.perk_name  }.each do |perk_name, founders|
+          %div= "PERK : #{perk_name} (#{founders.count})"
+          %table.table.table-striped
+            - founders.each do |founder|
+              %tr
+                %td= "no images"
+                %td= [founder.user.first_name, founder.user.last_name].join(" ")
+                %td= "$#{founder.amount}"
+                %td= perk_name
+                %td= founder.updated_at.strftime("%m/%d")
+      - else
+        - sponsors = project_sponsor_by_level(@project)
+        - sponsors.each do |sponsor_level, sponsors|
+          %div= "#{sponsor_level} LEVEL SPONSORS (#{sponsors.count})"
+          - if sponsors.blank?
+            %p No Sponsors at this level
+          - else
+            %table.table.table-striped
+              - sponsors.each do |sponsor|
+                %tr
+                  %td= image_tag sponsor.logo, style: "width: 80px"
+                  %td= sponsor.name
+                  %td= "$#{sponsor.cost}"
+                  %td= "#{sponsor.sponsorship_level.name} sponsor"
+                  %td= sponsor.updated_at.strftime("%m/%d")
+
+
+
+
+
+
+
+
+
+
+
+
+
