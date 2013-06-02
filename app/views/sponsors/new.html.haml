@@ -5,9 +5,10 @@
 .container
   .row-fluid
     .span8
-      %h4.title{:style => "border-bottom: 6px solid #48C94C; padding-bottom: 10px;"} CHECKOUT
+      %h4.title CHECKOUT
       .project-location
-        %h4{:style => "color: #48C94C;"}= @project.project_title
+        %h4.label-green
+          = @project.project_title
         %div{:style => 'font-family:"Proxima Nova";  margin-bottom: 15px;'}
           = image_tag "marker.jpg", :class => 'marker', :style => 'float:none;'
           = @project.address

@@ -249,7 +249,10 @@
               %a.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "button-seed-custom"} Fund Now
         #sponsorship.tab-pane
           .seed-level
-            %h3 PLATINUM
+            %h3
+              PLATINUM
+              %span.small-heading
+                (#{availability(@project.project_sponsors, 1)} of 1 available)
             %p
               -if @sponsorship_benefits.include?(1)
                 -@sponsorship_benefits[1].each do |benefit|
@@ -264,7 +267,10 @@
                 Sponsor
                 %span
           .seed-level
-            %h3 GOLD
+            %h3
+              GOLD
+              %span.small-heading
+                (#{availability(@project.project_sponsors, 2)} of 3 available)
             %p
               -if @sponsorship_benefits.include?(2)
                 -@sponsorship_benefits[2].each do |benefit|
@@ -279,7 +285,10 @@
                 Sponsor
                 %span
           .seed-level
-            %h3 SILVER
+            %h3
+              SILVER
+              %span.small-heading
+                (#{availability(@project.project_sponsors, 3)} of 5 available)
             %p
               -if @sponsorship_benefits.include?(3)
                 -@sponsorship_benefits[3].each do |benefit|
@@ -320,7 +329,7 @@
       %h4.title{:style => 'margin-top:50px;'} PROJECT SPONSOR
       %div
         BRONZE LEVEL SPONSOR
-        %div
+        %div.project-sponsors-link
           - if @project_sponsors.include?(3)
             - @project_sponsors[3].each do |sponsor|
               = link_to(sponsor.name, recognize_url(sponsor.site), target: "_blank")
