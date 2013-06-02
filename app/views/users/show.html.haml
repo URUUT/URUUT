@@ -3,27 +3,30 @@
     .span4
       = image_tag "#{@user.avatar}", :class => "img-circle avatar"
 
-      %h4.user-name
-        #{@user.first_name} #{@user.last_name}
-      - if @is_current
-        = link_to "not you? click here to logout", destroy_user_session_path, :class => "green"
+      .user-name-wrapper
+        %h4.user-name
+          #{@user.first_name} #{@user.last_name}
+        - if @is_current
+          = link_to "not you? click here to logout", destroy_user_session_path, :class => "green"
 
     .span2.vertical-center
-      %h6 Projects Funded
-      %h3= @user.projects_funded.all.count
+      .bordered-left
+        %h6 Projects Funded
+        %h3= @user.projects_funded.all.count
 
     .span6.vertical-center
-      - if @is_current
-        %h6 Total Amount Funded
-        %h3= number_to_currency(@user.amount_funded, :precision => 0)
-      - else
-        %h6 Most funded city
-        %h3= @user.most_funded_city
+      .bordered-left
+        - if @is_current
+          %h6 Total Amount Funded
+          %h3= number_to_currency(@user.amount_funded, :precision => 0)
+        - else
+          %h6 Most funded city
+          %h3= @user.most_funded_city
 
 .cf
 .row{:style => "margin-top:160px;margin-left:-20px;"}
   .span8
-    %h3
+    %h3.tittle
       - if @is_current
         Projects I've Created
       - else
@@ -31,25 +34,27 @@
     %div
       .projects-created.dropdown-list
         %label Project status:
-        %select{:id => "projects-created"}
+        %select{:id => "projects-created", style: "width: 236px;"}
           %option Funding Active
           %option Funding Completed
 
-    = render "pages/project", :projects => @projects_created
-    .cf
-    = paginate @projects_created, :param_name => "created_page"
+    %div
+      = render "pages/project", :projects => @projects_created
+      .cf
+      = paginate @projects_created, :param_name => "created_page"
 
     - if @is_current
-      %h3 Projects I've Funded
+      %h3.tittle Projects I've Funded
       %div
         .projects-funded.dropdown-list
           %label Project status:
-          %select{:id => "projects-funded"}
+          %select{:id => "projects-funded", style: "width: 236px;"}
             %option Funding Active
             %option Funding Completed
-      = render "project", :projects => @projects_funded
-      .cf
-      = paginate @projects_funded, :param_name => "funded_page"
+      %div
+        = render "project", :projects => @projects_funded
+        .cf
+        = paginate @projects_funded, :param_name => "funded_page"
 
   .span4
     %h3.title{:style => "margin-bottom:5px;"} #{who(:whose)} badges
@@ -64,25 +69,27 @@
         %i.icon-eye-close
         = link_to "edit", edit_user_registration_path, :class => "green"
     .well.info
-      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Profile image
-      %p= image_tag "#{@user.avatar}"
+      %h5 Profile image
+      %p= image_tag "#{@user.avatar}", :class => "profile-img img-polaroid"
 
-      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Name
+      %h5 Name
       %p
         #{@user.first_name} #{@user.last_name}
 
       - if @is_current
-        %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Email address
+        %h5 Email address
         %p= @user.email
 
-        %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Business or organization name
+        %h5 Business or organization name
         %p= @user.organization
 
-      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Mission statement / about
+      %h5 Mission statement / about
       %p= @user.mission
 
       - if @is_current
-        %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Email preference
+        %h5 Email preference
         %p
           = @user.subscribed ? "" : "Not"
           Subscribed
+
+
