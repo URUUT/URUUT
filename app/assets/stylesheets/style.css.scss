@@ -60,6 +60,10 @@ $light-brown: #53544b;
   -o-transform:      rotate($deg);
 }
 // ========================================= //
+body{
+  font-family: 'Proxima Nova', sans-serif;
+}
+
 .btn{
   font-family: 'Proxima Nova Semi', sans-serif;
   span{
@@ -373,7 +377,7 @@ h3, h4, h5{
       margin: 20px 0;
 
       h5{
-        
+
         a, a:visited{
           color: $green2;
         }
@@ -648,7 +652,7 @@ h1, h2, h3, h4{
 
 .well{
   &.info{
-    font-family: 'Proxima Nova Semi', sans-serif;
+    /*font-family: 'Proxima Nova Semi', sans-serif;*/
     color: lighten($grey, 30%);
     font-size: 13px;
     line-height: 14px;
@@ -856,5 +860,39 @@ form {
   }
 }
 
+.label-green{
+  color: $green2 !important;
+}
 
+ul.nav{
+
+  &> li{
+    &.active{
+
+      &> a{
+        background-color: transparent !important;
+        color: $green2 !important;
+      }
+    }
+  }
+}
+
+#project_goal, input[id*="amount"] {
+  background: white url('dollar.png') top left no-repeat !important;
+}
+
+.link-short{
+  padding: 9px 19px;
+  width: 150px - 40px;
+  height: 56px - 20px;
+  border: 1px solid $light-grey;
+  background: #fff;
+  @include border-radius(3px);
+  display: block;
+  float: left;
+}
+
+.well-half{
+  width: (600px / 2) - 20px;
+}
 
