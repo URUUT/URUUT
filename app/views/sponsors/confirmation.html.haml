@@ -2,11 +2,14 @@
   .row-fluid{style: "margin-top: 30px;"}
     .span8
       %h4.title{:style => "border-bottom: 6px solid #48C94C; padding-bottom: 10px;"} Review Your Sponsorship
-      %p.normal-font By confirming your project sponsorship, you agree to Uruut.com's privacy policy and terms of use
+      %p.normal-font
+        By confirming your project sponsorship, you agree to Uruut.com's
+        %a{:href => "#"} privacy policy
+        and
+        %a{:href => "#"} terms of use
       .project-location
-        %h5.green-font-big
-          = @project.title
-        %h4{:style => "color: #48C94C;"}= @project.project_title
+        %h4.label-green
+          = @project.project_title
         %div{:style => 'font-family:"Proxima Nova";  margin-bottom: 15px;'}
           = image_tag "marker.jpg", :class => 'marker', :style => 'float:none;'
           = @project.address
@@ -19,7 +22,7 @@
       .well
         %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;font-family:'Proxima Nova';"}
         -if @sponsor.payment_type.eql? "Wire Transfer"
-          %p.normal-font Please confirm we have your contact information correct so we can contact you to arrage for your preferred method of payment.
+          %p.subtext Please confirm we have your contact information correct so we can contact you to arrage for your preferred method of payment.
           %h6.green-font Preferred payment method
           %p.normal-font= @sponsor.payment_type
           %h6.green-font Contact Name

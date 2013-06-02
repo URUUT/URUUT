@@ -38,19 +38,41 @@ class User < ActiveRecord::Base
     create(name: info['name'])
   end
 
-  def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
+  def self.find_for_social_oauth(auth, signed_in_resource=nil, type)
     user = User.where(:provider => auth.provider.to_s, :uid => auth.uid.to_s).first
     unless user
       user = User.where(:email => auth.info.email).first
       unless user
-        user = User.create(first_name:auth.extra.raw_info.name.to_s.split(' ')[0],
-          last_name: auth.extra.raw_info.name.to_s.split(' ')[1],
-          provider:auth.provider,
-          uid:auth.uid,
-          email:auth.info.email,
-          password:Devise.friendly_token[0,20],
-          token:auth.credentials.token
-        )
+        if type.eql?("facebook")
+          user = User.create(
+            first_name:auth.extra.raw_info.name.to_s.split(' ')[0],
+            last_name: auth.extra.raw_info.name.to_s.split(' ')[1],
+            provider:auth.provider,
+            uid:auth.uid,
+            email:auth.info.email,
+            password:Devise.friendly_token[0,20],
+            token:auth.credentials.token
+          )
+        elsif type.eql?("linkedln")
+          user = User.create(
+            first_name:auth.info.name.to_s.split(' ')[0],
+            last_name: auth.info.name.to_s.split(' ')[1],
+            provider:auth.provider,
+            uid:auth.uid,
+            email:auth.info.email,
+            password:Devise.friendly_token[0,20],
+            token:auth.credentials.token
+          )
+        else
+          user = User.create(
+            first_name: auth['info']['name'].to_s.split(" ")[0],
+            last_name: auth['info']['name'].to_s.split(" ")[1],
+            provider:auth.provider,
+            uid:auth.uid,
+            email: "#{auth.info.nickname}@uruut.com",
+            password:Devise.friendly_token[0,20],
+            token:auth.credentials.token)
+        end
       else
         user.update_attributes({provider: auth.provider,uid: auth.uid})
       end

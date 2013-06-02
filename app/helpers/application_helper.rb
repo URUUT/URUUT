@@ -4,6 +4,18 @@ module ApplicationHelper
 		session[:current_project]
 	end
 
+  def recognize_url(url)
+    if url.include?("http://") or url.include?("https://")
+      url
+    else
+      "http://#{url}"
+    end
+  end
+
+  def strip_url(url)
+    url.sub(/^https?\:\/\//, '').sub(/^www./,'')
+  end
+
 	def percent_funded(id)
 		project = Project.find(id)
 		donation = Donation.where("project_id = ?", id)

@@ -9,10 +9,10 @@
   = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => "well"}) do |f|
     = devise_error_messages!
     .row
-      .span3
+      .span3.well-half
         = f.label :first_name
         = f.text_field :first_name
-      .span3
+      .span3.well-half
         = f.label :last_name
         = f.text_field :last_name
 
@@ -22,11 +22,11 @@
 
     - unless session["devise.provider"] && session["devise.uid"]
       .row
-        .span3
+        .span3.well-half
           = f.label :password
           = f.password_field :password
 
-        .span3
+        .span3.well-half
           = f.label :password_confirmation
           = f.password_field :password_confirmation
 

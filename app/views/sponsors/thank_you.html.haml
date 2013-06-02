@@ -4,12 +4,12 @@
       %h4.title THANK YOU!
       .well{style: "margin-left: 0;"}
         %h4{:style => "color: #48C94C;"} Congratulations!
-        %p You are now an official sponsor to #{@project.title}. Now it's
+        %p You are now an official sponsor to #{@project.title}. Now it's time to spread the word
         %div
-          = link_to image_tag("fb-share.png",style: "width: 150px"), "javascript:shareFb()", style: "margin-left: 2%"
-          = link_to image_tag("tw-share.png", style: "width: 150px"), "https://twitter.com/share", "data-url" => root_url, "target" => "blank", style: "margin-left: 2%"
-          = link_to image_tag("ml-share.png", style: "width: 150px"), "javascript:void(0)", style: "margin-left: 2%", class: "cs_import"
-          %span.link-short{:style => "padding: 18px; border: 2px solid ECECF0; font-weight:bolder; font-size: 14px; margin-left: 2%"}
+          = link_to image_tag("fb-share.png",style: "width: 150px"), "javascript:shareFb()", style: "display: block; float: left;"
+          = link_to image_tag("tw-share.png", style: "width: 150px"), "https://twitter.com/share", "data-url" => root_url, "target" => "blank", style: "margin-left: 2%; display: block; float: left;"
+          = link_to image_tag("ml-share.png", style: "width: 150px"), "javascript:void(0)", style: "margin-left: 2%; display: block; float: left;", class: "cs_import"
+          %span.link-short{:style => "font-weight:bolder; font-size: 14px; margin-left: 2%"}
             = @project.bitly
           %textarea#contact_list{:style => "display:none", :name => "email_recepient"}
     .span3.pull-right.messages-content
