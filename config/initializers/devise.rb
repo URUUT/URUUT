@@ -232,7 +232,7 @@ Devise.setup do |config|
   require "omniauth-facebook"
   require "omniauth-twitter"
   require "omniauth-linkedin"
-  config.omniauth :facebook, ENV['FACEBOOK_KEY'], ENV['FACEBOOK_SECRET']
-  config.omniauth :twitter, ENV['TWITTER_KEY'], ENV['TWITTER_SECRET'], :display => 'popup'
-  config.omniauth :linkedin, ENV['LINKEDIN_KEY'], ENV['LINKEDIN_SECRET']
+  config.omniauth :facebook, "200463576771076", "384fd5a67e2b6a0f974b92698dd84322", :strategy_class => OmniAuth::Strategies::Facebook, :client_options => {:ssl => {:ca_path => '/etc/ssl/certs'}}
+  config.omniauth :twitter, "x8UwXe6EMggJMyyy2UySg", "95wNdcDrilT0rx9vXes7vB1ex81WaWPiClSfG7paM2w", :strategy_class => OmniAuth::Strategies::Twitter, :client_options => {:ssl => {:ca_path => '/etc/ssl/certs'}}
+  config.omniauth :linkedin, "nrkfrl2tufbv", "K9V75CRGCaL8rwhJ", :strategy_class => OmniAuth::Strategies::LinkedIn, :client_options => {:ssl => {:ca_path => '/etc/ssl/certs'}}
 end

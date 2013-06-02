@@ -1,9 +1,113 @@
+= javascript_include_tag "highchart/highcharts"
+= javascript_include_tag "highchart/theme/grid"
+
+:javascript
+  $(function () {
+    $('.chart-pie').highcharts({
+      chart: {
+          plotBackgroundColor: null,
+          plotBorderWidth: null,
+          borderColor: null,
+          plotShadow: false
+      },
+      legend: {
+        enabled: false
+      },
+      title: {
+          text: null
+      },
+      tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage}%</b>',
+        percentageDecimals: 1
+      },
+      plotOptions: {
+          pie: {
+              allowPointSelect: true,
+              cursor: 'pointer',
+              dataLabels: {
+                  enabled: false
+              },
+              showInLegend: true
+          }
+      },
+      series: [{
+          type: 'pie',
+          name: 'Browser share',
+          data: [
+              ['Firefox',   45.0],
+              ['IE',       26.8],
+              {
+                  name: 'Chrome',
+                  y: 12.8,
+                  sliced: true,
+                  selected: true
+              },
+              ['Safari',    8.5],
+              ['Opera',     6.2],
+              ['Others',   0.7]
+          ]
+      }]
+    });
+
+    $('.chart-bar').highcharts({
+      chart: {
+          type: 'area',
+          borderColor: null,
+      },
+      legend: {
+        enabled: false
+      },
+      title: {
+          text: null
+      },
+      xAxis: {
+          type: 'datetime'
+      },
+      yAxis: {
+          title: { text: 'Dollars' },
+          labels: {
+                    formatter: function() {
+                        return '$'+this.value;
+                    }
+                  }
+      },
+      tooltip: {
+          pointFormat: '{series.name} produced <b>{point.y:,.0f}</b><br/>warheads in {point.x}'
+      },
+      plotOptions: {
+          area: {
+              pointStart: 1940,
+              marker: {
+                  enabled: false,
+                  symbol: 'circle',
+                  radius: 2,
+                  states: {
+                      hover: {
+                          enabled: true
+                      }
+                  }
+              }
+          }
+      },
+      series: [{
+          name: 'USA',
+          pointInterval: #{1.day * 1000},
+          pointStart: #{@project.updated_at.to_i * 1000},
+          pointEnd: #{@project.campaign_deadline.to_i * 1000},
+          data: #{@project.amount_per_day.inspect}
+      }]
+    });
+  });
+
+
+
 .container.overview-page
   .row-fluid
     .span8.pull-left
       %h2.title FUNDING TRACKER
       .well.info
-        %p Lorem ipsum dolor amet
+        .chart-bar
+
       %h2.title FUNDING BREAKDOWN BY DAY
       .well.info
         %table.table.table-striped
@@ -17,10 +121,10 @@
             - founders.each do |founder|
               - if founder.type_founder.eql?("individual")
                 - individual_count += 1
-                - amount = founder.amount.to_i
+                - amount += founder.amount.to_i
               - else
                 - sponsors_count += 1
-                - amount = founder.cost.to_i
+                - amount += founder.cost.to_i
 
             %tr
               %td= date.strftime("%m/%d/%Y")
@@ -30,4 +134,4 @@
     .span4.pull-right
       %h2.title FUNDING SOURCES
       %div{:class => "well info"}
-        %p Lorem ipsum dolor amet
+        .chart-pie

@@ -4,6 +4,8 @@ $grey: #464646;
 $green: #48c94c;
 $green2: #70bf4c;
 $light-green: #bee0b4;
+$brown: #403e37;
+$light-brown: #53544b;
 
 @mixin cleared($clr: both){
   &:before, &:after {
@@ -58,10 +60,110 @@ $light-green: #bee0b4;
   -o-transform:      rotate($deg);
 }
 // ========================================= //
+body{
+  font-family: 'Proxima Nova', sans-serif;
+}
+
 .btn{
+  font-family: 'Proxima Nova Semi', sans-serif;
   span{
     display: inline-block !important;
   }
+}
+
+p{
+
+  &.subtext{
+    font-family: 'Proxima Nova Semi', sans-serif;
+  }
+
+  a{
+    color: $green2;
+    text-decoration: underline;
+
+    &:hover{
+      text-decoration: none;
+    }
+  }
+}
+
+#large_image{
+  position: relative;
+  top: 0;
+  display: block;
+}
+
+.projects{
+  &.show{
+    .show-content{
+      margin-top: 20px;
+    }
+  }
+}
+
+.tooltip{
+
+  &.top{
+    .tooltip-arrow{
+      border-top-color: #fff;
+    }
+  }
+  .tooltip-inner{
+    background-color: #fff;
+    color: $green2;
+    @include box-shadow(0 2px 2px rgba(0,0,0, 0.25));
+  }
+}
+
+.platinum-level-container{
+  padding: 20px 0;
+  background: $light-brown;
+  color: $light-grey;
+  font-family: 'Proxima Nova', sans-serif;
+
+  .sponsor-logo{
+    float: left;
+    height: 100px;
+    width: 100px;
+  }
+
+  .sponsor-info{
+    margin-left: 120px;
+    padding-top: 20px;
+    border-right: 1px solid $brown;
+    padding-right: 10px;
+    min-height: 90px;
+  }
+
+  h3{
+    color: #fff;
+    margin: 0;
+    font-family: 'Proxima Nova', sans-serif;
+    line-height: 20px;
+    font-size: 16px;
+    letter-spacing: 3px;
+  }
+
+  h4, h5{
+    color: $light-grey;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+
+  a{
+    color: $green2;
+    font-style: italic;
+    text-decoration: underline;
+
+    &:hover{
+      text-decoration: none;
+    }
+  }
+}
+
+img.cc-type{
+  height: 20px;
+  @include border-radius(2px);
 }
 
 
@@ -71,7 +173,7 @@ $light-green: #bee0b4;
 
 .tab-nav{
   margin: 0 !important;
-  border-bottom: 5px solid #48c94c;
+  border-bottom: 5px solid $green2;
   margin-top: 20px !important;
   @include cleared;
 
@@ -94,7 +196,7 @@ $light-green: #bee0b4;
       text-transform: uppercase;
 
       &:hover{
-        color: $green !important;
+        color: $green2 !important;
       }
 
       span{
@@ -125,75 +227,109 @@ $light-green: #bee0b4;
 
 }
 
+h3, h4, h5{
+
+  span.small-heading{
+    color: $grey;
+    display: inline;
+    font-size: 12px;
+    font-family: 'Proxima Nova Semi', sans-serif;
+    letter-spacing: 0;
+  }
+}
 
 
 .seed-level{
   background: $super-light-grey;
   border-bottom: 1px solid $light-grey;
   padding: 10px 20px 20px 20px;
+  font-family: 'Proxima Nova', sans-serif;
 
-  &:hover, .active{
-    background: $light-green;
-    
-    h3, h4, h5, .amount-percentage{
-      color: $grey;
+  /*p{
+
+    &.subtext{
+      font-family: 'Proxima Nova Semi', sans-serif;
     }
 
-    .description{
-      color: $grey !important;
+    a{
+      color: $green2;
+      text-decoration: underline;
+
+      &:hover{
+        text-decoration: none;
+      }
+    }
+    }*/
+
+    &:hover, .active{
+      background: $light-green;
+
+      h3, h4, h5, .amount-percentage{
+        color: $grey;
+      }
+
+      .description{
+        color: $grey !important;
+      }
+
+      .btn{
+       font-family: 'Proxima Nova Semi', arial, sans-serif;
+
+       &:hover{
+        background: $green2;
+      }
+    }
+  }
+
+
+  h3{
+    margin: 0;
+    margin-top: 10px;
+    line-height: 20px;
+  }
+
+  h3, h4, h5{
+    color: $green2;
+  }
+
+  .seed-num{
+    float: left;
+  }
+
+  textarea, .textarea input[type="text"]{
+    width: 100%;
+    @include border-radius(0);
+    @include box-shadow(none);
+    resize: none;
+    background: #fff url('dollar.png') no-repeat left center;
+    padding-left: 40px;
+    font-size: 36px;
+  }
+
+  .seed-num{
+    font-family: 'Proxima Nova Semi', sans-serif;
+    text-transform: uppercase;
+
+    .amount{
+      font-size: 20px;
     }
 
-    .btn{
-     font-family: 'Proxima Nova Semi', arial, sans-serif;
+    .amount-percentage{
+      font-size: 10px;
+      font-style: italic;
+      color: $light-grey;
+    }
 
-     &:hover{
-      background: $green2;
+    & + .btn{
+      margin-top: 12px;
     }
   }
 }
 
-h3{
-  margin: 0;
-  margin-top: 10px;
-  line-height: 20px;
-}
-
-h3, h4, h5{
-  color: $green;
-}
-
-.seed-num{
-  float: left;
-}
-
-textarea, .textarea input[type="text"]{
-  width: 100%;
-  @include border-radius(0);
-  @include box-shadow(none);
-  resize: none;
-  background: #fff url('dollar.png') no-repeat left center;
-  padding-left: 40px;
-  font-size: 36px;
-}
-
-.seed-num{
-  font-family: 'Proxima Nova Semi', sans-serif;
-  text-transform: uppercase;
-
-  .amount{
-    font-size: 20px;
-  }
-
-  .amount-percentage{
-    font-size: 10px;
-    font-style: italic;
-    color: $light-grey;
-  }
-
-  & + .btn{
-    margin-top: 12px;
-  }
-}
+.amount-percentage{
+  font-size: 10px;
+  font-style: italic;
+  color: $light-grey;
 }
 
 .tab-pane{
@@ -208,7 +344,7 @@ textarea, .textarea input[type="text"]{
   margin-bottom: 40px;
 
   h5{
-    color: $green;
+    color: $green2;
     margin-bottom: 0;
 
     & + span{
@@ -240,6 +376,20 @@ textarea, .textarea input[type="text"]{
       cursor: pointer;
       margin: 20px 0;
 
+      h5{
+
+        a, a:visited{
+          color: $green2;
+        }
+
+        & + a, & + a:visited{
+          font-size: 10px;
+          line-height: 12px;
+          color: $grey;
+          font-style: italic;
+        }
+      }
+
       img{
         height: 100px;
         width: 100px;
@@ -266,9 +416,20 @@ textarea, .textarea input[type="text"]{
         line-height: 15px;
         margin-bottom: 5px;
 
+        a, a:visited{
+          color: $green2;
+        }
+
         & + span{
           font-size: 10px;
           line-height: 12px;
+        }
+
+        & + a, & + a:visited{
+          font-size: 10px;
+          line-height: 12px;
+          color: $grey;
+          font-style: italic;
         }
       }
     }
@@ -300,7 +461,7 @@ textarea, .textarea input[type="text"]{
     & + h4{
      margin-top: 20px !important;
      margin-left: 110px;
-     color: $green;
+     color: $green2;
    }
  }
 }
@@ -491,7 +652,7 @@ h1, h2, h3, h4{
 
 .well{
   &.info{
-    font-family: 'Proxima Nova Semi', sans-serif;
+    /*font-family: 'Proxima Nova Semi', sans-serif;*/
     color: lighten($grey, 30%);
     font-size: 13px;
     line-height: 14px;
@@ -556,7 +717,182 @@ h1, h2, h3, h4{
   }
 }
 
+.project-sponsors-link{
+  a{
+    color: $grey;
+    font-style: italic;
+    text-decoration: underline;
 
+    &:hover{
+      text-decoration: none;
+    }
 
+    &:after{
+      content: ',';
+    }
+  }
+}
 
+form {
+
+  .name {
+    width:100%;
+
+    input[type=text] {
+      width:100% !important;
+      padding-left: 60px;
+      background: #fff url('blank-ava.png') no-repeat left center;
+    }
+  }
+
+  .email{
+    width: 100%;
+
+    input[type="text"], input[type="email"]{
+      width: 100%;
+      padding-left: 60px;
+      background: #fff url('form-email.png') no-repeat left center;
+    }
+  }
+
+  .phone{
+    width: 50%;
+
+    input[type="text"], input[type="number"]{
+      width: 100%;
+      padding-left: 60px;
+      background: #fff url('form-phone2.png') no-repeat left center;
+    }
+  }
+
+  .card-number {
+    width:100%;
+
+    input[type=text] {
+      width:100% !important;
+      padding-left: 60px;
+      background: #fff url('credit-card.png') no-repeat left center;
+    }
+  }
+
+  .ccv {
+    display:inline-block;
+    float:left;
+
+    width:33%;
+
+    input[type=text] {
+      width:120px !important;
+      padding-left: 60px;
+      background: #fff url('sharp.png') no-repeat left center;
+    }
+  }
+
+  .expiration {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display:inline-block;
+    float:left;
+    padding-left:20px;
+    width:66%;
+
+    input[type=text]#card_month {
+      display:inline-block;
+      width:70px !important;
+    }
+
+    input[type=text]#card_year {
+      display:inline-block;
+      width:100px !important;
+    }
+  }
+
+  .actions {
+
+    p {
+      float:left;
+      width:50%;
+    }
+
+    button {
+      float:right;
+    }
+  }
+}
+
+.pic-upload{
+  margin-left: 120px;
+  width: 220px;
+  font-family: 'Proxima Nova', sans-serif;
+  color: $light-grey;
+  position: relative;
+
+  .upload-btn{
+    position: relative;
+    text-align: center;
+    background: $green2;
+    margin-bottom: 10px;
+    padding: 10px 0;
+    @include border-radius(5px);
+
+    &:hover{
+      background: lighten($green2, 10%);
+      
+      .btn{
+        color: #fff;
+      }
+    }
+
+    .btn{
+      background: transparent;
+      display: block;
+    }
+
+    input[type="file"]{
+      position: absolute;
+      opacity: 0;
+      top: 0;
+      left: 0;
+      height: 100%;
+      cursor: pointer;
+    }
+  }
+}
+
+.label-green{
+  color: $green2 !important;
+}
+
+ul.nav{
+
+  &> li{
+    &.active{
+
+      &> a{
+        background-color: transparent !important;
+        color: $green2 !important;
+      }
+    }
+  }
+}
+
+#project_goal, input[id*="amount"] {
+  background: white url('dollar.png') top left no-repeat !important;
+}
+
+.link-short{
+  padding: 9px 19px;
+  width: 150px - 40px;
+  height: 56px - 20px;
+  border: 1px solid $light-grey;
+  background: #fff;
+  @include border-radius(3px);
+  display: block;
+  float: left;
+}
+
+.well-half{
+  width: (600px / 2) - 20px;
+}
 
