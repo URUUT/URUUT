@@ -4,6 +4,8 @@ $grey: #464646;
 $green: #48c94c;
 $green2: #70bf4c;
 $light-green: #bee0b4;
+$brown: #403e37;
+$light-brown: #53544b;
 
 @mixin cleared($clr: both){
   &:before, &:after {
@@ -59,8 +61,69 @@ $light-green: #bee0b4;
 }
 // ========================================= //
 .btn{
+  font-family: 'Proxima Nova Semi', sans-serif;
   span{
     display: inline-block !important;
+  }
+}
+
+#large_image{
+  position: relative;
+  top: 0;
+  display: block;
+}
+
+.projects{
+  &.show{
+    .show-content{
+      margin-top: 20px;
+    }
+  }
+}
+
+.platinum-level-container{
+  padding: 20px 0;
+  background: $light-brown;
+  color: $light-grey;
+  font-family: 'Proxima Nova', sans-serif;
+
+  .sponsor-logo{
+    float: left;
+    height: 100px;
+    width: 100px;
+  }
+
+  .sponsor-info{
+    margin-left: 120px;
+    padding-top: 20px;
+    border-right: 1px solid $brown;
+    padding-right: 10px;
+    min-height: 90px;
+  }
+
+  h3{
+    color: #fff;
+    margin: 0;
+    font-family: 'Proxima Nova', sans-serif;
+    line-height: 20px;
+    font-size: 16px;
+    letter-spacing: 3px;
+  }
+
+  h4, h5{
+    color: $light-grey;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+
+  a{
+    color: $green2;
+    font-style: italic;
+    text-decoration: underline;
+
+    &:hover{
+      text-decoration: none;
+    }
   }
 }
 
@@ -71,7 +134,7 @@ $light-green: #bee0b4;
 
 .tab-nav{
   margin: 0 !important;
-  border-bottom: 5px solid #48c94c;
+  border-bottom: 5px solid $green2;
   margin-top: 20px !important;
   @include cleared;
 
@@ -94,7 +157,7 @@ $light-green: #bee0b4;
       text-transform: uppercase;
 
       &:hover{
-        color: $green !important;
+        color: $green2 !important;
       }
 
       span{
@@ -131,6 +194,33 @@ $light-green: #bee0b4;
   background: $super-light-grey;
   border-bottom: 1px solid $light-grey;
   padding: 10px 20px 20px 20px;
+  font-family: 'Proxima Nova', sans-serif;
+
+  h3, h4, h5{
+
+    span{
+      color: $grey;
+      display: inline;
+      font-size: 11px;
+      letter-spacing: 0;
+    }
+  }
+
+  p{
+
+    &.subtext{
+      font-family: 'Proxima Nova Semi', sans-serif;
+    }
+
+    a{
+      color: $green2;
+      text-decoration: underline;
+
+      &:hover{
+        text-decoration: none;
+      }
+    }
+  }
 
   &:hover, .active{
     background: $light-green;
@@ -159,7 +249,7 @@ h3{
 }
 
 h3, h4, h5{
-  color: $green;
+  color: $green2;
 }
 
 .seed-num{
@@ -208,7 +298,7 @@ textarea, .textarea input[type="text"]{
   margin-bottom: 40px;
 
   h5{
-    color: $green;
+    color: $green2;
     margin-bottom: 0;
 
     & + span{
@@ -300,7 +390,7 @@ textarea, .textarea input[type="text"]{
     & + h4{
      margin-top: 20px !important;
      margin-left: 110px;
-     color: $green;
+     color: $green2;
    }
  }
 }
@@ -552,6 +642,22 @@ h1, h2, h3, h4{
 
     h2, h3, h4{
       color: #fff;
+    }
+  }
+}
+
+.project-sponsors-link{
+  a{
+    color: $grey;
+    font-style: italic;
+    text-decoration: underline;
+
+    &:hover{
+      text-decoration: none;
+    }
+
+    &:after{
+      content: ',';
     }
   }
 }
