@@ -40,7 +40,6 @@ class DonationsController < ApplicationController
   end
 
 	def create
-    params[:donation][:created_at] = Time.now.to_date
     params[:donation][:perk_name] = params[:perk_name]
     @donation = Donation.new(params[:donation])
 
