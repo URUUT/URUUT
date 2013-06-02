@@ -56,6 +56,14 @@
         .cf
         = paginate @projects_funded, :param_name => "funded_page"
 
+  -if @user.projects.where(ready_for_approval: 1).count > 0
+    .span4
+      %h3.title MY Pending Projects
+      .well.info.badge-wrapper
+        - @user.projects.where(ready_for_approval: 1).each do |project|
+          %h5
+            = project.title
+
   .span4
     %h3.title{:style => "margin-bottom:5px;"} #{who(:whose)} badges
     .well.info.badge-wrapper

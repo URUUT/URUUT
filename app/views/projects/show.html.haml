@@ -8,9 +8,9 @@
             %h5
               Platinum Level Sponsor
             %h3
-              - @project_sponsors[1].last.name
-            %a.sponsor-link{:href => "#"}
-              www.sponsor-link.org
+              = @project_sponsors[1].last.name
+            - unless @project_sponsors[1].last.site.nil?
+              = link_to(strip_url(@project_sponsors[1].last.site), recognize_url(@project_sponsors[1].last.site), target: "_blank")
         .span4
           %p
           = @project_sponsors[1].last.mission
@@ -106,20 +106,24 @@
           %h4 Gold Level Sponsors
           - if @project_sponsors.include?(2)
             - @project_sponsors[2].each do |sponsor|
-              %a.sponsor
-                = image_tag(sponsor.logo, class: "img-polaroid")
+              .sponsor
+                = link_to(image_tag(sponsor.logo, class: "img-polaroid"), recognize_url(sponsor.site), target: "_blank")
                 %h5
-                  = sponsor.name
+                  = link_to(sponsor.name, recognize_url(sponsor.site), target: "_blank", style: "color: #70bf4c;")
+                - unless sponsor.site.nil?
+                  = link_to(strip_url(sponsor.site), recognize_url(sponsor.site), target: "_blank", style: "color: #000;")
           -else
             Not Have Gold Sponsor Yet
         .silver-level
           %h4 Silver Level Sponsors
           - if @project_sponsors.include?(3)
             - @project_sponsors[3].each do |sponsor|
-              %a.sponsor
-                = image_tag(sponsor.logo, class: "img-polaroid")
+              .sponsor
+                = link_to(image_tag(sponsor.logo, class: "img-polaroid"), recognize_url(sponsor.site), target: "_blank")
                 %h5
-                  = sponsor.name
+                  = link_to(sponsor.name, recognize_url(sponsor.site), target: "_blank", style: "color: #70bf4c;")
+                - unless sponsor.site.nil?
+                  = link_to(strip_url(sponsor.site), recognize_url(sponsor.site), target: "_blank", style: "color: #000;")
           -else
             Not Have Silver Sponsor Yet
 
@@ -319,7 +323,7 @@
         %div
           - if @project_sponsors.include?(3)
             - @project_sponsors[3].each do |sponsor|
-              = sponsor.name
+              = link_to(sponsor.name, recognize_url(sponsor.site), target: "_blank")
           -else
             Not Have Bronze Sponsor Yet
         %div{style: "margin-top: 5px;"}
@@ -327,11 +331,11 @@
             Become A Sponsor
             %span
 
-      %h4.title{:style => 'margin-top:50px;'} Business Partners(#{@project.donations.count})
-      %div
+      %h4.title{:style => 'margin-top:50px;'}Partners(#{@project.donations.count})
+      %div.business
         - @project.donations.each do |donation|
           = image_tag donation.user.avatar, style: "width: 27px; height:27px;"
-      = link_to new_project_sponsor_path(@project.id), :class => 'btn', :style => 'margin-top:10px;' do
+      = link_to new_project_sponsor_path(@project.id), :class => 'btn more', :style => 'margin-top:10px;' do
         Show More
         %span
 
@@ -347,6 +351,12 @@
       window.location.href = "/default_perk_donations?amount="+ $("#custom_seed").val() +"&name=custom"
     });
   });
+
+  $('.more').on("click", function(){
+    $.ajax({
+
+    });
+  })
 
   var getFbCount = function() {
     $.ajax({
