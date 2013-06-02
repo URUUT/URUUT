@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130531040756) do
+ActiveRecord::Schema.define(:version => 20130601114049) do
 
   create_table "badges_sashes", :force => true do |t|
     t.integer  "badge_id"
@@ -48,11 +48,14 @@ ActiveRecord::Schema.define(:version => 20130531040756) do
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "donations", :force => true do |t|
-    t.integer "user_id"
-    t.integer "project_id"
-    t.float   "amount"
-    t.string  "customer_token"
-    t.string  "email"
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.float    "amount"
+    t.string   "customer_token"
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "perk_name"
   end
 
   create_table "galleries", :force => true do |t|
@@ -120,18 +123,28 @@ ActiveRecord::Schema.define(:version => 20130531040756) do
   end
 
   create_table "project_sponsors", :force => true do |t|
-    t.string  "card_token"
-    t.float   "cost"
-    t.text    "logo"
-    t.text    "mission"
-    t.string  "name"
-    t.integer "project_id"
-    t.integer "sponsor_id"
-    t.string  "payment",    :default => "Unpaid"
-    t.string  "status",     :default => "Unconfirmed"
-    t.integer "level_id"
-    t.string  "card_type"
-    t.integer "card_last4"
+    t.string   "card_token"
+    t.float    "cost"
+    t.text     "logo"
+    t.text     "mission"
+    t.string   "name"
+    t.integer  "project_id"
+    t.integer  "sponsor_id"
+    t.string   "payment",    :default => "Unpaid"
+    t.string   "status",     :default => "Unconfirmed"
+    t.integer  "level_id"
+    t.string   "card_type"
+    t.integer  "card_last4"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "project_updates", :force => true do |t|
+    t.integer  "project_id"
+    t.string   "title"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "projects", :force => true do |t|

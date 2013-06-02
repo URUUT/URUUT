@@ -4,28 +4,46 @@
 .sidebar-tab {
   font-family: 'Proxima Nova', sans-serif;
 }
-.nav.nav-tabs.tab-nav {
+.tab-nav {
   margin: 0 !important;
+  border-bottom: 5px solid #48c94c;
+  margin-top: 20px;
 }
-.nav.nav-tabs.tab-nav li {
+.tab-nav:before,
+.tab-nav:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.tab-nav:after {
+  clear: both;
+}
+.tab-nav li {
   width: auto;
   border: 1px solid transparent;
   padding: 0 !important;
+  list-style: none;
+  float: left;
 }
-.nav.nav-tabs.tab-nav li a {
+.tab-nav li a {
   color: #b2b2b2 !important;
-  padding: 0 20px !important;
+  padding: 20px !important;
   line-height: 59px !important;
   font-family: 'Proxima Nova Semi', sans-serif;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-shadow: 0 0 0 !important;
+  text-transform: uppercase;
 }
-.nav.nav-tabs.tab-nav li a:hover {
+.tab-nav li a:hover {
   color: #48c94c !important;
 }
-.nav.nav-tabs.tab-nav li a span {
+.tab-nav li a span {
   font-style: italic;
   text-transform: Capitalize;
 }
-.nav.nav-tabs.tab-nav li.active {
+.tab-nav li.active {
   border: none !important;
   background: #f8f8f8 !important;
   border-top: 1px solid #eaeaea !important;
@@ -35,10 +53,10 @@
   margin-bottom: 0;
   cursor: pointer !important;
 }
-.nav.nav-tabs.tab-nav li.active span {
+.tab-nav li.active span {
   display: inline;
 }
-.nav.nav-tabs.tab-nav li.active a {
+.tab-nav li.active a {
   color: #464646 !important;
 }
 .seed-level {
@@ -74,6 +92,12 @@
 }
 .seed-level .seed-num .amount {
   font-size: 24px;
+}
+.tab-pane {
+  display: none !important;
+}
+.tab-pane.active {
+  display: block !important;
 }
 .project-sponsors {
   margin-bottom: 40px;
@@ -144,4 +168,8 @@
 .project-sponsors .silver-level .sponsor h5  + span {
   font-size: 10px;
   line-height: 12px;
+}
+.tax-deductible{
+  width: 20px;
+  height: 20px;
 }

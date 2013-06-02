@@ -108,14 +108,39 @@ class SponsorsController < ApplicationController
   def confirmation
     @sponsor = Sponsor.find(params[:id])
     @project_sponsor = @project.project_sponsors.find_by_sponsor_id(@sponsor.id)
-    logger.debug(@project_sponsor)
+    @benefits = @project.sponsorship_benefits.where(status: true, sponsorship_level_id: @project_sponsor.level_id )
     @sponsorship_level = SponsorshipLevel.find(@project_sponsor.level_id)
+    case @project_sponsor.level_id
+    when 1
+      @cost = @project.goal.to_i * 0.3
+    when 2
+      @cost = @project.goal.to_i * 0.1
+    when 3
+      @cost = @project.goal.to_i * 0.04
+    when 4
+      @cost = @project.goal.to_i * 0.005
+    end
   end
 
   def thank_you
     @project = Project.find(params[:project_id])
     project_sponsor = @project.project_sponsors.where(project_id: @project.id, sponsor_id: params[:sponsor_id]).first
-    @sponsorship_level = SponsorshipLevel.find(project_sponsor.level_id)
+    # @sponsorship_level = SponsorshipLevel.find(project_sponsor.level_id)
+    @benefits = @project.sponsorship_benefits.where(sponsorship_level_id: project_sponsor.level_id)
+    case project_sponsor.level_id
+    when 1
+      @cost = @project.goal.to_i * 0.3
+      @level = "Platinum"
+    when 2
+      @cost = @project.goal.to_i * 0.1
+      @level = "Gold"
+    when 3
+      @cost = @project.goal.to_i * 0.04
+      @level = "Silver"
+    when 4
+      @cost = @project.goal.to_i * 0.005
+      @level = "Bronze"
+    end
     @need_doctype = true
   end
 
@@ -142,7 +167,17 @@ class SponsorsController < ApplicationController
   def create_sponsor
     sponsor = params[:sponsor]
     sponsor_name = sponsor[:payment_type].eql?("Wire Transfer") ? sponsor[:name] : sponsor[:card_name]
-    cost = SponsorshipLevel.find(params[:project_sponsor][:level_id]).cost
+    project = Project.find(params[:project_id])
+    case params[:project_sponsor][:level_id]
+    when "1"
+      cost = project.goal.to_i * 0.3
+    when "2"
+      cost = project.goal.to_i * 0.1
+    when "3"
+      cost = project.goal.to_i * 0.04
+    when "4"
+      cost = project.goal.to_i * 0.005
+    end
     params[:sponsor][:name] = sponsor_name
     card_type = params[:project_sponsor][:card_type]
     last4 = params[:project_sponsor][:card_last4]
@@ -153,7 +188,8 @@ class SponsorsController < ApplicationController
     @project_sponsor = ProjectSponsor.new(params[:project_sponsor])
     @project_sponsor.save!
     @project_sponsor.update_attributes({cost: cost, project_id: params[:project_id], sponsor_id: @sponsor.id,
-                                      level_id: params[:project_sponsor][:level_id], card_token: token, card_type: card_type, card_last4: last4})
+                                      level_id: params[:project_sponsor][:level_id], card_token: token,
+                                      created_at: Time.now.to_date, card_type: card_type, card_last4: last4, })
 
     session[:project_sponsor] = @project_sponsor
     redirect_to confirmation_url(params[:project_id], @sponsor.id)

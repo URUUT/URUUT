@@ -21,6 +21,27 @@ module ApplicationHelper
 		# return total_funded
 	end
 
+  def percentage_sponsor(project)
+    donation = Donation.where("project_id = ?", project.id)
+    total_funded = 0.0
+    donation.each do |d|
+      total_funded = total_funded + d.amount.to_f
+    end
+    total_funded += project.project_sponsors.sum(:cost)
+    percentage = (total_funded/project.goal.to_i).round(2) * 100
+    return percentage
+  end
+
+  def totalsponsor(project)
+    donation = Donation.where("project_id = ?", project.id)
+    total_funded = 0.0
+    donation.each do |d|
+      total_funded = total_funded + d.amount.to_f
+    end
+    total_funded += project.project_sponsors.sum(:cost)
+    return total_funded
+  end
+
 	def amount_funded(id)
 		project = Project.find(id)
 		donation = Donation.where("project_id = ?", id)
@@ -55,9 +76,31 @@ module ApplicationHelper
     amount = amount.to_s.gsub(/,/, '').to_f
     number_to_currency(amount, :precision => 0)
   end
-  
+
   def stripe_pub_key
     return ENV['STRIPE_PUB_KEY']
+  end
+
+  def project_sponsor_by_level(project)
+    gold_sponsors, silver_sponsors, bronze_sponsors, platinum_sponsors = [], [], [], []
+    project.project_sponsors.each do |sponsor|
+      if sponsor.level_id.eql?(1)
+        platinum_sponsors << sponsor
+      elsif sponsor.level_id.eql?(2)
+        gold_sponsors << sponsor
+      elsif sponsor.level_id.eql?(3)
+        silver_sponsors << sponsor
+      elsif sponsor.level_id.eql?(4)
+        bronze_sponsors << sponsor
+      end
+    end
+    sponsors = {
+      "PLATINUM" => platinum_sponsors,
+      "GOLD" => gold_sponsors,
+      "SILVER" => silver_sponsors,
+      "BRONZE" => bronze_sponsors
+    }
+    sponsors
   end
 
 end

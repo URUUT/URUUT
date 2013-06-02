@@ -2,7 +2,7 @@ class Project < ActiveRecord::Base
   belongs_to :user
 
   attr_accessible :category, :description, :duration, :goal, :address, :project_title, :sponsorship_permission,
-    :city, :state, :zip, :neighborhood, :title, :image, :video, :tags, :live, :short_description,:perk_permission,
+    :city, :state, :zip, :neighborhood, :title, :image, :video, :tags, :live, :short_description, :perk_permission,
     :perks_attributes, :galleries_attributes, :status, :organization, :website, :twitter_handle, :facebook_page, :seed_video,
     :story, :about, :large_image, :seed_image, :cultivation_image, :ready_for_approval, :organization_type,
     :organization_classification, :cultivation_video, :campaign_deadline
@@ -11,9 +11,13 @@ class Project < ActiveRecord::Base
   #validates :title, :short_description, :description, :presence => true, :if => :active?
   #validates :image, :address, :city, :state, :zip, :neighborhood, :duration, :goal, :presence => true, :if => :active_or_step1?
 
-  has_many :donations, dependent: :destroy
-  has_many :perks
-  has_many :galleries
+  with_options dependent: :destroy do |project|
+    project.has_many :donations
+    project.has_many :perks
+    project.has_many :galleries
+    project.has_many :project_updates
+  end
+
   has_many :project_sponsors
   has_many :sponsorship_levels
   has_many :sponsorship_benefits
