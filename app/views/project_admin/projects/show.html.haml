@@ -35,7 +35,7 @@
   .container
     %ul
       %li{:style => "margin-left: 0"}
-        = link_to "Project Overview", "#"
+        = link_to "Project Overview", project_admin_project_path(@project.id), class: "sub-menu-project"
       %li
         = link_to "Manage Project", project_admin_project_manage_path(@project.id), class: "sub-menu-project manage", remote: true
       %li
