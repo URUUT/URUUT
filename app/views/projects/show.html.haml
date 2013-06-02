@@ -91,10 +91,11 @@
               = @project.state
               = @project.zip
             %div
-              %h6
+              .fb-like{"data-href" => "http://www.facebook.com/#{@project.facebook_page}", "data-layout" => "button_count", "data-send" => "false", "data-show-faces" => "false", "data-width" => "450"}
+              %a.twitter-follow-button{"data-show-count" => "false", :href => "https://twitter.com/#{@project.twitter_handle}"} Follow
+              %span
                 WEB:
-                = link_to @project.website do
-                  %span{:style => "color:#403e37;font:italic 12px/12px georgia, serif;text-transform:none;letter-spacing:normal;text-decoration:underline;", :target => "_blank"}= @project.website
+                = link_to(strip_url(@project.website), recognize_url(@project.website), target: "_blank")
 
       %h4.title{:style => 'margin-top:50px;'}
         PROJECT SPONSORS
@@ -352,6 +353,16 @@
 %script{:src => "http://maps.stamen.com/js/tile.stamen.js?v1.2.1"}
 
 :javascript
+
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=143792535805526";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 
   $("#button-seed-custom").on("click", function(){
     $.ajax({

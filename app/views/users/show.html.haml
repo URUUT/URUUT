@@ -5,7 +5,7 @@
 
       .user-name-wrapper
         %h4.user-name
-          #{@user.first_name} #{@user.last_name}
+          =truncate(@user.first_name, :length => 14)
         - if @is_current
           = link_to "not you? click here to logout", destroy_user_session_path, :class => "green"
 
