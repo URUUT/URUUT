@@ -27,17 +27,6 @@ class Project < ActiveRecord::Base
 
   scope :live, where("live = 1")
 
-  has_attached_file :image
-    #:styles => {
-      #:thumb=> "100x100#",
-      #:medium=> "280x124#" }
-     #:storage => :file,
-     #:s3_credentials => "#{Rails.root}/config/s3.yml",
-     #:path => "/public/images/:id/:style/:filename"
-
-  #process_in_background :image
-
-  # Select unique values of some field, e.g. cities and categories
   def self.unique_values_of(type)
     self.select(type).uniq.pluck(type)
   end
@@ -59,6 +48,38 @@ class Project < ActiveRecord::Base
       Stripe.api_key = API_KEY
 
     end
+  end
+
+  def amount_per_day
+    donations = self.donations
+    sponsors = self.project_sponsors
+    fundings = []
+
+    donations.each do |sponsor|
+      sponsor.type_founder = "individual"
+      fundings << sponsor
+    end unless donations.empty?
+
+    sponsors.each do |sponsor|
+      sponsor.type_founder = "sponsor"
+      fundings << sponsor
+    end unless sponsors.empty?
+
+    amount_by_date = []
+
+    fundings.group_by{ |p| p.updated_at.to_date  }.each do |date, founders|
+      individual_count, sponsors_count, amount = 0, 0, 0
+      founders.each do |founder|
+        if founder.type_founder.eql?("individual")
+          amount += founder.amount.to_i
+        else
+          amount += founder.cost.to_i
+        end
+      end
+      amount_by_date << amount
+    end
+
+    amount_by_date
   end
 
   def printTest
