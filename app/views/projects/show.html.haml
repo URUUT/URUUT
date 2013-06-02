@@ -148,7 +148,12 @@
             = image_tag "#{@project.seed_image}", style: "float:left; width:100%"
           %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.about
         #growth.tab-pane
-          Jancuk
+          - @project.project_updates.each do |update|
+            %div
+              = update.title
+              %br
+              = update.content
+            %hr
         #gallery.tab-pane
           - @project.galleries.each do |gallery|
             %div{style: "margin-bottom: 20px"}
@@ -345,7 +350,7 @@
       %div.business
         - @project.donations.each do |donation|
           = image_tag donation.user.avatar, style: "width: 27px; height:27px;"
-      = link_to new_project_sponsor_path(@project.id), :class => 'btn more', :style => 'margin-top:10px;' do
+      = link_to "javascript:void(0)", :class => 'btn more', :style => 'margin-top:10px;' do
         Show More
         %span
 
