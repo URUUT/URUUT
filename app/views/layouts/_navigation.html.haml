@@ -9,7 +9,7 @@
       Get Funding
   %li
     = link_to about_pages_path do
-      About URUUT  
+      About URUUT
   -#%li
     -#= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
 
@@ -44,10 +44,10 @@
               %div
                 = check_box_tag 'user[remember_me]'
                 = label_tag 'user[remember_me]', 'Remember me'
-              %button.btn 
+              %button.btn
                 Log in
                 %span
-								
+
             %p= link_to "Forgot your password?", "/users/password/new", :style => "font: italic 12px/15px 'Georgia', georgia, serif !important;text-transform:none;"
 
             %hr

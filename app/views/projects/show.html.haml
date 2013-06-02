@@ -120,7 +120,9 @@
         #growth.tab-pane
           Jancuk
         #gallery.tab-pane
-          Jancuk 2
+          - @project.galleries.each do |gallery|
+            %div{style: "margin-bottom: 20px"}
+              = image_tag(gallery.gallery_file_name)
 
       %hr
 
