@@ -1,6 +1,6 @@
 class SponsorsController < ApplicationController
 
-  before_filter :project_id, except: [:create, :thank_you, :share_email, :new]
+  before_filter :project_id, except: [:create, :thank_you, :share_email]
 
   def new
     @sponsor = Sponsor.new
@@ -33,13 +33,6 @@ class SponsorsController < ApplicationController
         @level = "Platinum"
         session[:level_id] = 1
     end
-    @sponsorship_levels = SponsorshipLevel.all
-    platinum = @project.project_sponsors.where(level_id: 1).count
-    gold = @project.project_sponsors.where(level_id: 2).count
-    silver = @project.project_sponsors.where(level_id: 3).count
-    @sponsorship_levels.delete_if{|level| level.name.eql?("Platinum")} if platinum >= 1
-    @sponsorship_levels.delete_if{|level| level.name.eql?("Gold")} if gold >= 3
-    @sponsorship_levels.delete_if{|level| level.name.eql?("Silver")} if silver >= 5
     @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
     logger.debug(@sponsorship_levels)
     render :layout => 'landing'
@@ -47,13 +40,37 @@ class SponsorsController < ApplicationController
 
   def edit
     @sponsor = Sponsor.find(params[:id])
-    @project_sponsor = @sponsor.project_sponsors.first
+    @project = Project.find(params[:project_id])
+    @project_sponsor = @sponsor.project_sponsors.find_by_project_id(params[:project_id])
+    @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
+    case @project_sponsor.level_id
+      when 1
+        @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[1]
+        @cost = @project.goal.to_i * 0.3
+        @level = "Platinum"
+        session[:level_id] = 1
+      when 2
+        @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[2]
+        @cost = @project.goal.to_i * 0.1
+        @level = "Gold"
+        session[:level_id] = 2
+      when 3
+        @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[3]
+        @cost = @project.goal.to_i * 0.04
+        @level = "Silver"
+        session[:level_id] = 3
+      when 4
+        @level = "Bronze"
+        @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[4]
+        @cost = @project.goal.to_i * 0.005
+        session[:level_id] = 4
+    end
     render :layout => 'landing'
   end
 
   def update
     @sponsor = Sponsor.find(params[:id])
-    @project_sponsor = @sponsor.project_sponsors.first
+    @project_sponsor = @sponsor.project_sponsors.find_by_project_id(params[:project_id])
     sponsor = params[:sponsor]
     sponsor_name = sponsor[:payment_type].eql?("Wire Transfer") ? sponsor[:name] : sponsor[:card_name]
     cost = SponsorshipLevel.find(params[:project_sponsor][:level_id]).cost
