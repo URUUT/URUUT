@@ -1,18 +1,38 @@
 %h2.title STORY VISUALS
 .well{:style => "float:left; width:100%"}
-  %h4
-    Planting Seeds
-    %span (About)
-  #content_container
-  #planting_seeds
-    .image_warp
-      - if @project.seed_image
-        = image_tag "#{@project.seed_image}", id: "seed_image", class: "seed_image", "data-project-id" => @project.id
-    .action_button{style: "#{'margin-top: 23px;' if @project.seed_image}"}
-      %button{:id => "new-seed"} ADD NEW PHOTO
-      = link_to "Delete Photo", delete_image_path(@project.id, type: "seed_image"), class: "btn delete_photo", method: 'DELETE', style: "display: #{'none' unless @project.seed_image}"
-    %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.about
-  %hr
+
+  %ul#myTab3.tab-nav
+    %li.active
+      %a{:href => "#planting_seeds"}
+        Planting Seeds
+        %span (About)
+    %li
+      %a{:href => "#growth"}
+        Growth
+        %span (Updates)
+    %li
+      %a{:href => "#gallery"} Galery
+
+  / %ul#myTab3.tab-nav
+  /   %li
+  / %h4
+  /   Planting Seeds
+  /   %span (About)
+  #content_container.tab-content
+    #planting_seeds.tab-pane.active
+      .image_warp
+        - if @project.seed_image
+          = image_tag "#{@project.seed_image}", id: "seed_image", class: "seed_image", "data-project-id" => @project.id
+        .action_button{style: "#{'' if @project.seed_image}"}
+          %button{:id => "new-seed"} ADD NEW PHOTO
+          = link_to "Delete Photo", delete_image_path(@project.id, type: "seed_image"), class: "btn delete_photo", method: 'DELETE', style: "display: #{'none' unless @project.seed_image}"
+      %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.about
+    #growth.tab-pane
+      growth
+    #gallery.tab-pane
+      gallery
+
+  %hr{:style => "background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
   #cultivation
     .span3.ending
       %h4
@@ -30,8 +50,9 @@
       %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.story
       .cultivation-image-content
         = image_tag "#{@project.cultivation_image}" if @project.cultivation_image
-      %button{:id => "new-cultivation"} ADD NEW PHOTO
-      = link_to "Delete Photo", delete_image_path(@project.id, type: "cultivation"), class: "btn delete_photo", method: 'DELETE', style: "display: #{'none' unless @project.cultivation_image}"
+        .action_button
+          %button{:id => "new-cultivation"} ADD NEW PHOTO
+          = link_to "Delete Photo", delete_image_path(@project.id, type: "cultivation"), class: "btn delete_photo", method: 'DELETE', style: "display: #{'none' unless @project.cultivation_image}"
 
 %script{:src => "http://code.jquery.com/ui/1.10.2/jquery-ui.js"}
 :javascript

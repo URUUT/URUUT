@@ -1,19 +1,19 @@
 %div
-  %h2.title MY PROJECT COVER PHOTO
-  .image-cover-content.well{:style => "float:left; width:100%"}
-    %div.pull-left
+  %h3.tittle MY PROJECT COVER PHOTO
+  .image-cover-content{:style => "float:left; width:100%"}
+    %div
       .cover-content
         .cover-content-image
           = filepicker_image_tag @project.large_image, width: 672, height: 300, fit: 'scale' if @project.large_image
         %button{:id => "project-submit"} CHANGE
 
-  %h2.title MY PROJECT PHOTO GALLERY
-  .images-content.well{:style => "float:left; width:100%"}
-    #galleryPicture
+  %h3.tittle MY PROJECT PHOTO GALLERY
+  .images-content{:style => "float:left; width:100%"}
+    #galleryPicture.clearfix
       - @project.galleries.each do |image|
-        .list-image.pull-left{:style => "width: 30%; margin-left: 2%; margin-top: 2%" }
+        .list-image.pull-left
           = filepicker_image_tag image.gallery_file_name, width: 216, height: 216, fit: 'scale'
-          = link_to "delete photo", delete_photo_path(image.id), class: "green-font image-delete-button", style: "margin-left:20px", method: 'DELETE', remote: true
+          = link_to "delete photo", delete_photo_path(image.id), class: "image-delete-button", style: "margin-left:20px", method: 'DELETE', remote: true
     %div{:style => "float:left; width: 100%"}
       %button{:id => "new-photo"} ADD NEW PHOTO
 
