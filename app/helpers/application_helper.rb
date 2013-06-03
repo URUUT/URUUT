@@ -12,6 +12,10 @@ module ApplicationHelper
     end
   end
 
+  def check_availibility(project, level)
+    total_sponsor = project.project_sponsors.where(level_id: level).count
+  end
+
   def strip_url(url)
     url.sub(/^https?\:\/\//, '').sub(/^www./,'')
   end
