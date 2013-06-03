@@ -6,7 +6,7 @@ class Donation < ActiveRecord::Base
   belongs_to :project
   belongs_to :user
 
-  # default_scope { where("customer_token IS NOT NULL") }
+  default_scope { where(confirmed: true) }
 
   def save_with_payment
     logger.debug(token)
