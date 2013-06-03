@@ -29,6 +29,10 @@
       .span8
         %h4.title= @project.project_title
         %span.location #{@project.city}, #{@project.state}
+        %span
+          - if @project.organization_classification.eql?("170(c)(1)") || @project.organization_classification.eql?("501(c)(3)")
+            %span.pull-right
+              = image_tag 'td-logo-black.png', class: "tax-deductible", "data-toggle" => "tooltip", title: "Donation Are Tax Deductable"
         %hr
         %p.short-desc= @project.title
         %h6{:style => "color:#403e37;font-family:'Proxima Nova Semi';display:inline-block;margin:0;letter-spacing:normal;"} SHARE:
@@ -99,13 +103,13 @@
 
       %h4.title{:style => 'margin-top:50px;'}
         PROJECT SPONSORS
-        = link_to new_project_sponsor_path(@project.id), :class => 'btn', :style => 'margin-top: -10px;'  do
-          Become A Sponsor
         %span
       .project-sponsors
+        = link_to new_project_sponsor_path(@project.id), :class => 'btn', :style => 'margin-top: -10px;'  do
+          Become A Sponsor
         .gold-level
-          %h4 Gold Level Sponsors
           - if @project_sponsors.include?(2)
+            %h4 Gold Level Sponsors
             - @project_sponsors[2].each do |sponsor|
               .sponsor
                 = link_to(image_tag(sponsor.logo, class: "img-polaroid"), recognize_url(sponsor.site), target: "_blank")
@@ -113,11 +117,9 @@
                   = link_to(sponsor.name, recognize_url(sponsor.site), target: "_blank", style: "color: #70bf4c;")
                 - unless sponsor.site.nil?
                   = link_to(strip_url(sponsor.site), recognize_url(sponsor.site), target: "_blank", style: "color: #000;")
-          -else
-            Not Have Gold Sponsor Yet
         .silver-level
-          %h4 Silver Level Sponsors
           - if @project_sponsors.include?(3)
+            %h4 Silver Level Sponsors
             - @project_sponsors[3].each do |sponsor|
               .sponsor
                 = link_to(image_tag(sponsor.logo, class: "img-polaroid"), recognize_url(sponsor.site), target: "_blank")
@@ -125,20 +127,20 @@
                   = link_to(sponsor.name, recognize_url(sponsor.site), target: "_blank", style: "color: #70bf4c;")
                 - unless sponsor.site.nil?
                   = link_to(strip_url(sponsor.site), recognize_url(sponsor.site), target: "_blank", style: "color: #000;")
-          -else
-            Not Have Silver Sponsor Yet
 
       %ul#myTab1.tab-nav
         %li.active
           %a{:href => "#planting_seeds"}
             Planting Seeds
             %span (About)
-        %li
-          %a{:href => "#growth"}
-            Growth
-            %span (Updates)
-        %li
-          %a{:href => "#gallery"} Galery
+        - unless @project.project_updates.empty?
+          %li
+            %a{:href => "#growth"}
+              Growth
+              %span (Updates)
+        - unless @project.galleries.empty?
+          %li
+            %a{:href => "#gallery"} Galery
       #content_container.tab-content
         #planting_seeds.tab-pane.active
           - if @project.seed_mime_type.eql?("video") and !@project.seed_video.blank?
@@ -147,17 +149,19 @@
           - elsif @project.seed_mime_type.eql?("image") and !@project.seed_image.blank?
             = image_tag "#{@project.seed_image}", style: "float:left; width:100%"
           %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.about
-        #growth.tab-pane
-          - @project.project_updates.each do |update|
-            %div
-              = update.title
-              %br
-              = update.content
-            %hr
-        #gallery.tab-pane
-          - @project.galleries.each do |gallery|
-            %div{style: "margin-bottom: 20px"}
-              = image_tag(gallery.gallery_file_name)
+        - unless @project.project_updates.empty?
+          #growth.tab-pane
+            - @project.project_updates.each do |update|
+              %div
+                = update.title
+                %br
+                = update.content
+              %hr
+        - unless @project.galleries.empty?
+          #gallery.tab-pane
+            - @project.galleries.each do |gallery|
+              %div{style: "margin-bottom: 20px"}
+                = image_tag(gallery.gallery_file_name)
 
       %hr
 
@@ -269,9 +273,14 @@
                 %div COST
                 .amount
                   = number_to_currency(@project.goal.to_i * 0.3)
-              %a.btn.pull-right{:href => "/projects/#{@project.id}/sponsors/new?level=platinum"}
-                Sponsor
-                %span
+              - if check_availibility(@project, 1) < 1
+                %a.btn.pull-right{:href => "/projects/#{@project.id}/sponsors/new?level=platinum"}
+                  Sponsor
+                  %span
+              - else
+                %a.btn.pull-right{:href => "javascript:void(0)"}
+                  Sponsor
+                  %span
           .seed-level
             %h3
               GOLD
@@ -287,9 +296,14 @@
                 %div COST
                 .amount
                   = number_to_currency(@project.goal.to_i * 0.1)
-              %a.btn.pull-right{:href => "/projects/#{@project.id}/sponsors/new?level=gold"}
-                Sponsor
-                %span
+              - if check_availibility(@project, 2) < 3
+                %a.btn.pull-right{:href => "/projects/#{@project.id}/sponsors/new?level=gold"}
+                  Sponsor
+                  %span
+              - else
+                %a.btn.pull-right{:href => "javascript:void(0)"}
+                  Sponsor
+                  %span
           .seed-level
             %h3
               SILVER
@@ -305,9 +319,14 @@
                 %div COST
                 .amount
                   = number_to_currency(@project.goal.to_i * 0.04)
-              %a.btn.pull-right{:href => "/projects/#{@project.id}/sponsors/new?level=silver"}
-                Sponsor
-                %span
+              - if check_availibility(@project, 3) < 5
+                %a.btn.pull-right{:href => "/projects/#{@project.id}/sponsors/new?level=silver"}
+                  Sponsor
+                  %span
+              - else
+                %a.btn.pull-right{:href => "javascript:void(0)"}
+                  Sponsor
+                  %span
           .seed-level
             %h3 BRONZE
             %p
