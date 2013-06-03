@@ -108,28 +108,30 @@
         %span
       .project-sponsors
         - if !@project_sponsors.include?(2) && !@project_sponsors.include?(3)
-          = link_to new_project_sponsor_path(@project.id), :class => 'btn', :style => 'margin-top: -10px;'  do
+          = link_to new_project_sponsor_path(@project.id), :class => 'btn' do
             Become A Sponsor
-        .gold-level
-          - if @project_sponsors.include?(2)
-            %h4 Gold Level Sponsors
-            - @project_sponsors[2].each do |sponsor|
-              .sponsor
-                = link_to(image_tag(sponsor.logo, class: "img-polaroid"), recognize_url(sponsor.site), target: "_blank")
-                %h5
-                  = link_to(sponsor.name, recognize_url(sponsor.site), target: "_blank", style: "color: #70bf4c;")
-                - unless sponsor.site.nil?
-                  = link_to(strip_url(sponsor.site), recognize_url(sponsor.site), target: "_blank", style: "color: #000;")
-        .silver-level
-          - if @project_sponsors.include?(3)
-            %h4 Silver Level Sponsors
-            - @project_sponsors[3].each do |sponsor|
-              .sponsor
-                = link_to(image_tag(sponsor.logo, class: "img-polaroid"), recognize_url(sponsor.site), target: "_blank")
-                %h5
-                  = link_to(sponsor.name, recognize_url(sponsor.site), target: "_blank", style: "color: #70bf4c;")
-                - unless sponsor.site.nil?
-                  = link_to(strip_url(sponsor.site), recognize_url(sponsor.site), target: "_blank", style: "color: #000;")
+        - if @project_sponsors.include?(2)
+          .gold-level
+            - if @project_sponsors.include?(2)
+              %h4 Gold Level Sponsors
+              - @project_sponsors[2].each do |sponsor|
+                .sponsor
+                  = link_to(image_tag(sponsor.logo, class: "img-polaroid"), recognize_url(sponsor.site), target: "_blank")
+                  %h5
+                    = link_to(sponsor.name, recognize_url(sponsor.site), target: "_blank", style: "color: #70bf4c;")
+                  - unless sponsor.site.nil?
+                    = link_to(strip_url(sponsor.site), recognize_url(sponsor.site), target: "_blank", style: "color: #000;")
+        - if @project_sponsors.include?(3)
+          .silver-level
+            - if @project_sponsors.include?(3)
+              %h4 Silver Level Sponsors
+              - @project_sponsors[3].each do |sponsor|
+                .sponsor
+                  = link_to(image_tag(sponsor.logo, class: "img-polaroid"), recognize_url(sponsor.site), target: "_blank")
+                  %h5
+                    = link_to(sponsor.name, recognize_url(sponsor.site), target: "_blank", style: "color: #70bf4c;")
+                  - unless sponsor.site.nil?
+                    = link_to(strip_url(sponsor.site), recognize_url(sponsor.site), target: "_blank", style: "color: #000;")
 
       %ul#myTab1.tab-nav
         %li.active
@@ -355,16 +357,17 @@
         %h4= @project.title
 
       %h4.title{:style => 'margin-top:50px;'} PROJECT SPONSOR
-      %div
-        BRONZE LEVEL SPONSOR
-        %div.project-sponsors-link
-          - if @project_sponsors.include?(3)
-            - @project_sponsors[3].each do |sponsor|
-              = link_to(sponsor.name, recognize_url(sponsor.site), target: "_blank")
-        %div{style: "margin-top: 5px;"}
-          %a.btn{:href => "/projects/#{@project.id}/sponsors/new?level=bronze"}
-            Become A Sponsor
-            %span
+      - if @project_sponsors.include?(4)
+        %div
+          BRONZE LEVEL SPONSOR
+          %div.project-sponsors-link
+            - if @project_sponsors.include?(4)
+              - @project_sponsors[4].each do |sponsor|
+                = link_to(sponsor.name, recognize_url(sponsor.site), target: "_blank")
+      %div{style: "margin-top: 5px;"}
+        %a.btn{:href => "/projects/#{@project.id}/sponsors/new?level=bronze"}
+          Become A Sponsor
+          %span
 
       %h4.title{:style => 'margin-top:50px;'}Partners(#{@project.donations.count})
       %div.business
