@@ -1,6 +1,6 @@
 class SponsorsController < ApplicationController
 
-  before_filter :project_id, except: [:create, :thank_you, :share_email]
+  before_filter :project_id, except: [:create, :thank_you, :share_email, :new]
 
   def new
     @sponsor = Sponsor.new
@@ -33,7 +33,13 @@ class SponsorsController < ApplicationController
         @level = "Platinum"
         session[:level_id] = 1
     end
-
+    @sponsorship_levels = SponsorshipLevel.all
+    platinum = @project.project_sponsors.where(level_id: 1).count
+    gold = @project.project_sponsors.where(level_id: 2).count
+    silver = @project.project_sponsors.where(level_id: 3).count
+    @sponsorship_levels.delete_if{|level| level.name.eql?("Platinum")} if platinum >= 1
+    @sponsorship_levels.delete_if{|level| level.name.eql?("Gold")} if gold >= 3
+    @sponsorship_levels.delete_if{|level| level.name.eql?("Silver")} if silver >= 5
     @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
     logger.debug(@sponsorship_levels)
     render :layout => 'landing'
@@ -162,6 +168,12 @@ class SponsorsController < ApplicationController
   def project_id
     @project = Project.find(params[:project_id])
     @sponsorship_levels = SponsorshipLevel.all
+    platinum = @project.project_sponsors.where(level_id: 1).count
+    gold = @project.project_sponsors.where(level_id: 2).count
+    silver = @project.project_sponsors.where(level_id: 3).count
+    @sponsorship_levels.delete_if{|level| level.name.eql?("Platinum")} if platinum >= 1
+    @sponsorship_levels.delete_if{|level| level.name.eql?("Gold")} if gold >= 3
+    @sponsorship_levels.delete_if{|level| level.name.eql?("Silver")} if silver >= 5
   end
 
   def create_sponsor
@@ -185,11 +197,11 @@ class SponsorsController < ApplicationController
 
     @sponsor = Sponsor.new(params[:sponsor])
     @sponsor.save(validate: false)
-    @project_sponsor = ProjectSponsor.create(params[:project_sponsor])
+    @project_sponsor = ProjectSponsor.new(params[:project_sponsor])
+    @project_sponsor.save!
     @project_sponsor.update_attributes({cost: cost, project_id: params[:project_id], sponsor_id: @sponsor.id,
                                       level_id: params[:project_sponsor][:level_id], card_token: token,
-                                      created_at: Time.now.to_date, card_type: card_type, card_last4: last4, })
-
+                                      created_at: Time.now.to_date, card_type: card_type, card_last4: last4, sponsor_type: params[:type] })
     session[:project_sponsor] = @project_sponsor
     redirect_to confirmation_url(params[:project_id], @sponsor.id)
   end

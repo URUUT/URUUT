@@ -1,5 +1,5 @@
 class Sponsor < ActiveRecord::Base
-  PAYMENT = ["Credit Card", "Wire Transfer"]
+  PAYMENT = ["Credit Card", "Wire Transfer/Check"]
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
