@@ -68,7 +68,7 @@ class Project < ActiveRecord::Base
     amount_by_date = []
 
     fundings.group_by{ |p| p.updated_at.to_date  }.each do |date, founders|
-      individual_count, sponsors_count, amount = 0, 0, 0
+      amount = 0
       founders.each do |founder|
         if founder.type_founder.eql?("individual")
           amount += founder.amount.to_i
@@ -84,6 +84,55 @@ class Project < ActiveRecord::Base
 
   def printTest
     logger.debug("Test Crap")
+  end
+
+  def all_funding_by_project(page_num)
+    fundings = populate_funding_by_project
+    total_data = []
+
+    fundings.group_by{ |p| p.updated_at.to_date  }.each { |funding| total_data << funding }
+    Kaminari.paginate_array(total_data).page(page_num).per(25)
+  end
+
+  def total_funding_by_project
+    fundings = populate_funding_by_project
+    total_amout, individual_amount, business_amount, foundation_amount = 0, 0, 0, 0
+
+    fundings.each do |funding|
+      if funding.type_founder.eql?("individual")
+        individual_amount += funding.amount.to_i
+        total_amout += funding.amount.to_i
+      else
+        if funding.sponsor_type.eql?("Foundation")
+          foundation_amount += funding.cost.to_i
+        else
+          business_amount += funding.cost.to_i
+        end
+        total_amout += funding.cost.to_i
+      end
+    end
+
+    fundings_data = {
+      total_amount: total_amout,
+      individual_amount: individual_amount,
+      business_amount: business_amount,
+      foundation_amount: foundation_amount
+    }
+    fundings_data
+  end
+
+  def populate_funding_by_project
+    fundings = []
+    self.donations.each do |sponsor|
+      sponsor.type_founder = "individual"
+      fundings << sponsor
+    end unless self.donations.empty?
+
+    self.project_sponsors.each do |sponsor|
+      sponsor.type_founder = "sponsor"
+      fundings << sponsor
+    end unless self.project_sponsors.empty?
+    fundings
   end
 
   def self.send_confirmation_email(project)

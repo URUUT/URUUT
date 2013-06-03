@@ -4,6 +4,7 @@ class ProjectAdmin::ProjectsController < ApplicationController
     :send_email, :email_based_on_sponsor_level, :project_update, :process_project_update]
 
   respond_to :js, except: [:index, :update, :show, :emails_page]
+  has_scope :page, :default => 1
   layout false, :only => "stripe_update"
 
   def index
@@ -13,17 +14,8 @@ class ProjectAdmin::ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     subheader
-    @fundings = []
-
-    @donations.each do |sponsor|
-      sponsor.type_founder = "individual"
-      @fundings << sponsor
-    end unless @donations.empty?
-
-    @sponsors.each do |sponsor|
-      sponsor.type_founder = "sponsor"
-      @fundings << sponsor
-    end unless @sponsors.empty?
+    @fundings = @project.all_funding_by_project(params[:page])
+    @total_fundings = @project.total_funding_by_project
   end
 
   def update
