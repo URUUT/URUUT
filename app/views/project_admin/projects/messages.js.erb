@@ -1,0 +1,7 @@
+$(".admin-menu li").removeClass("active");
+$(".messages").parent().addClass("active");
+
+$('.sub-menu-project').removeClass('active');
+$('.messages').addClass('active').append("<div class='arrow'></div>").append('<div class="arrow"></div>');;
+
+$('.main-content').html("<%=j render 'messages' %>");

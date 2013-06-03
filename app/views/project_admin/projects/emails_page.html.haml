@@ -35,7 +35,8 @@
   .container
     %ul
       %li{:style => "margin-left: 0"}
-        = link_to "Project Overview", "#"
+        = link_to "Project Overview", project_admin_project_path(@project.id), class: "sub-menu-project"
+        .nav-arrow
       %li
         = link_to "Manage Project", project_admin_project_manage_path(@project.id), class: "sub-menu-project manage", remote: true
       %li
@@ -51,7 +52,8 @@
         %div{:class => "well info"}
           %h3{:class => "menu-messages social-media"}
             = link_to "POST TO SOCIAL MEDIA", project_admin_project_post_to_social_media_path(@project.id), remote: true
-          %h3{:class => "menu-messages emails", :style => "background: #81C263"}
+          %h3{:class => "menu-messages emails active"}
             = link_to "EMAILS", project_admin_project_emails_page_path(@project.id)
+            .arrow
       .span9.pull-right.messages-content
         = render "emails"

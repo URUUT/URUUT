@@ -33,8 +33,8 @@
 
 .menu-project
   .container
-    %ul.clearfix
-      %li{:style => "margin-left: 0"}
+    %ul.clearfix.admin-menu
+      %li.active{:style => "margin-left: 0"}
         = link_to "Project Overview", project_admin_project_path(@project.id), class: "sub-menu-project"
         .nav-arrow
       %li

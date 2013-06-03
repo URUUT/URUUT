@@ -1,4 +1,4 @@
-$('.menu-messages').attr('style', '');
-$('.update').attr('style', 'background: #81C263');
+$('.menu-messages').removeClass('active');
+$('.update').addClass('active').append("<div class='arrow'></div>").append('<div class="arrow"></div>');
 
 $(".content-manage-project").html("<%=j render 'project_update' %>");
