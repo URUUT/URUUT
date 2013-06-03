@@ -50,21 +50,6 @@
     = render 'partials/footer'
 
 :javascript
-  var updateCover = function(event){
-    console.log(event.fpfile.url);
-    var largeImage = event.fpfile.url;
-
-    $.ajax({
-      url: '/projects/save_image',
-      method: 'PUT',
-      data: {
-        large_image: largeImage
-        }
-    }).done(function(){
-      console.log("finished");
-      $('#large_image').css('background-image','url(' + largeImage + ')');
-    });
-  }
 
   var updateProgressbar = function(id, value) {
     console.log(id);
