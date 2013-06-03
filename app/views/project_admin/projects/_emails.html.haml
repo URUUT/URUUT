@@ -1,24 +1,32 @@
 %h2.title SEND PROJECT EMAIL
-.well.pull-left.span9
-  %div.pull-left.form-send-message
+.well.clearfix
+  %div.form-send-message.clearfix
     = form_for(@contact, :as => :post, :url => send_email_project_admin_projects_path, html: {remote: true}) do |f|
-      %div.pull-left
-        = label_tag "EMAIL RECEPIENT", nil, class: "green-font"
-        = select_tag "sponsor_level", options_for_select(@sponsorship_levels.map { |sponsor| [sponsor.name, sponsor.id] }), prompt: "Import based on sponsor level", onchange: "get_emails_based_on_category()", class: "span7"
-        %a.cs_import.btn{style: "margin-left: 6%"} Add Contacts
-        %div.textarea-recepient
-          %textarea#contact_list{:style => "width:445px;height:24px", :name => "email_recepient"}
-          = hidden_field_tag 'email_temp'
-      %div.pull-left
-        = f.label :email_content , "EMAIL HEADER PHOTO*", class: "green-font"
-        %div{:style => "display: block; background: #AFABAB; width: 491px; height: 300px; margin-bottom: 16px;", :class => "email-header-priview"}
-        %button{:id => "email-header-button"} CHANGE
-        = hidden_field_tag 'email_header'
-      %div.pull-left{:style => "margin-top: 10px"}
-        = f.label :email_content , "EMAIL CONTENT", class: "green-font"
-        = f.text_area :email_content, :required => true, style: "width: 458px; height: 298px;"
-      %div.pull-left
-        = f.submit "SEND EMAIL", :class => "btn", :id => "project-submit"
+      .clearfix
+        .pull-left
+          = label_tag "EMAIL RECEPIENT", nil, class: "label-green"
+          .selectParents
+            = select_tag "sponsor_level", options_for_select(@sponsorship_levels.map { |sponsor| [sponsor.name, sponsor.id] }), prompt: "Import based on sponsor level", onchange: "get_emails_based_on_category()", class: ""
+        .pull-left
+          %a.cs_import.btn{style: "margin-left: 6%; margin-top: 20px;"} Add Contacts
+
+      %div.textarea-recepient
+        %textarea#contact_list{:style => "width:637px;height:24px", :name => "email_recepient"}
+        = hidden_field_tag 'email_temp'
+
+      %div
+        = f.label :email_content , "EMAIL HEADER PHOTO*", class: "label-green"
+
+        %div{:style => "display: block; background: #AFABAB; width: 100%; height: 300px; margin-bottom: 16px; position: relative", :class => "email-header-priview"}
+          .action_button
+            %button{:id => "email-header-button"} CHANGE
+            = hidden_field_tag 'email_header'
+      %div{:style => "margin-top: 10px"}
+        = f.label :email_content , "EMAIL CONTENT", class: "label-green"
+        = f.text_area :email_content, :required => true, style: "width: 637px; height: 298px;"
+      %hr{:style => "margin-top: 20px; margin-bottom: 20px; background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
+      %div
+        = f.submit "SEND EMAIL", :class => "btn", :id => "project-submit", :style => "border-radius: 5px;"
 
 :javascript
 

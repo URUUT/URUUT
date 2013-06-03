@@ -3,8 +3,9 @@
     .span3.pull-left
       %div{:style => "margin-top: 60px"}
       %div{:class => "well info"}
-        %h3{:class => "menu-messages social-media", :style => "background: #81C263"}
+        %h3{:class => "menu-messages social-media active"}
           = link_to "POST TO SOCIAL MEDIA", project_admin_project_post_to_social_media_path(@project.id), remote: true
+          .arrow
         %h3{:class => "menu-messages emails"}
           = link_to "EMAILS", project_admin_project_emails_page_path(@project.id)
     .span9.pull-right.messages-content

@@ -131,13 +131,20 @@
         .chart-pie
 
         .percentage
-          %div
-            %div BUSINESS SPONSORS
-            .amount= "#{count_percentage(@total_fundings[:total_amount], @total_fundings[:business_amount])} - #{@total_fundings[:business_amount]}"
-          %div
-            %div FOUNDATION SPONSORS
-            .amount= "#{count_percentage(@total_fundings[:total_amount], @total_fundings[:foundation_amount])} - #{@total_fundings[:foundation_amount]}"
-          %div
-            %div INDIVIDUAL CONTRIBUTORS
-            .amount= "#{count_percentage(@total_fundings[:total_amount], @total_fundings[:individual_amount])} - #{@total_fundings[:individual_amount]}"
+        %ul.chart-legend
+          %li
+            .color.business
+            .legend-info
+              %h5 Business Sponsors
+              %h4= "#{count_percentage(@total_fundings[:total_amount], @total_fundings[:business_amount])} - #{@total_fundings[:business_amount]}"
+          %li
+            .color.foundation
+            .legend-info
+              %h5 Business Sponsors
+              %h4= "#{count_percentage(@total_fundings[:total_amount], @total_fundings[:foundation_amount])} - #{@total_fundings[:foundation_amount]}"
+          %li
+            .color.individual
+            .legend-info
+              %h5 Business Sponsors
+              %h4= "#{count_percentage(@total_fundings[:total_amount], @total_fundings[:individual_amount])} - #{@total_fundings[:individual_amount]}"
 

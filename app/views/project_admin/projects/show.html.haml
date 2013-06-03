@@ -9,25 +9,47 @@
 .full-width.banner
   .container
     .span3
-      %h3= @project.title
-      %h5 #{@project.city}, #{@project.state}
+      %div{:style => "border-right: 1px solid #464646"}
+        %h4.project-tittle
+          = @project.title
+        %h5.project-location
+          #{@project.city}, #{@project.state}
 
     .span3
-      %h6 Current Amount Funded
-      %h2= number_to_currency(amount_funded(@project.id), :precision => 0)
-      of #{number_to_currency(@project.goal, :precision => 0)}
+      %div{:style => "border-right: 1px solid #464646"}
+        %h6
+          Current Amount Funded
+        %h2.highlighted-value
+          = number_to_currency(amount_funded(@project.id), :precision => 0)
+        .of-italic
+          of #{number_to_currency(@project.goal, :precision => 0)}
 
     .span2
-      %h5 Project Sponsors
-      %h2= @sponsor_count
+      %div{:style => "border-right: 1px solid #464646"}
+        %h6
+          Project
+          %br
+          Sponsors
+        %h2.highlighted-value
+          = @sponsor_count
 
     .span2
-      %h5 Individual Contributions
-      %h2= @donations.count
+      %div{:style => "border-right: 1px solid #464646"}
+        %h6
+          Individual
+          %br
+          Contributions
+        %h2.highlighted-value
+          = @donations.count
 
     .span2
-      %h5 Days Remaining
-      %h2 #{time_left(@project.duration, @project.approval_date)}
+      %div{:style => ""}
+        %h6
+          Days
+          %br
+          Remaining
+        %h2.highlighted-value
+          #{time_left(@project.duration, @project.approval_date)}
 
 .cf
 

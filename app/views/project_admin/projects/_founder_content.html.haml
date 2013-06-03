@@ -1,6 +1,6 @@
 %div
   %h2.title.project-founder ALL PROJECT FUNDERS
-  .project-funder.well{:style => "float:left"}
+  .project-funder.well
     - if @all
       %table.table.table-striped
         - @founders.sort_by{ |f| f.updated_at }.each do |founder|
@@ -46,16 +46,3 @@
                   %td= "$#{sponsor.cost}"
                   %td= "#{sponsor.sponsorship_level.name} sponsor"
                   %td= sponsor.updated_at.strftime("%m/%d")
-
-
-
-
-
-
-
-
-
-
-
-
-
