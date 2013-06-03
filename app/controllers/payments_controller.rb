@@ -3,6 +3,7 @@ class PaymentsController < ApplicationController
   def purchase
     project = Project.find(params[:project_id])
     sponsor = Sponsor.find(params[:sponsor_id])
+    sponsor.update_attributes(confirmed: true)
     # project_sponsor = project.project_sponsors.find_by_sponsor_id(sponsor.id)
     # card_token = project_sponsor.card_token
     # amount = (project_sponsor.cost * 100).to_i
