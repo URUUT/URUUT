@@ -21,7 +21,7 @@
           %span{:style => "font-size:52px;color:#70bf4c;font-family:'Proxima Nova Bold';line-height:100%"}= number_to_currency(@donation.amount, :precision => 0)
         %div{:style => "float:left;display:inline-block;width:340px;padding-right:20px;height:auto"}
           %h6{:style => "line-height:100%;margin-bottom:10px;margin-top:20px"} Your Perk
-          %h3{:style => 'font-size:20px; color:#70bf4c;line-height:100%;margin:0;'}= @perk.name
+          %h3{:style => 'font-size:20px; color:#70bf4c;line-height:100%;margin:0;'}= @donation.perk_name
           %span{:style => "font-size:12px;font-family:'Proxima Nova';"}= @perk.description
         .cf
 
@@ -35,6 +35,9 @@
           = @card_type
           ending in
           %strong= @card_last4
+          = link_to "Change", edit_donation_path(@donation)
+          / %a.green-link
+          /   Change
       %div
         %h5 Payment amount
         = number_to_currency(@donation.amount, :precision => 0)
