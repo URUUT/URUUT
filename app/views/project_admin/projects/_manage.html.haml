@@ -3,8 +3,9 @@
     .span3.pull-left
       %div{:style => "margin-top: 60px"}
       %div{:class => "well info"}
-        %h3{:class => "menu-messages cover", :style => "background: #81C263"}
+        %h3{:class => "menu-messages cover active"}
           = link_to "COVER PHOTO & GALLERY", project_admin_project_cover_photo_and_gallery_path(@project.id), remote: true
+          .arrow
         %h3{:class => "menu-messages detail"}
           = link_to "PROJECT DETAILS", project_admin_project_detail_path(@project.id), remote: true
         %h3{:class => "menu-messages visual"}
