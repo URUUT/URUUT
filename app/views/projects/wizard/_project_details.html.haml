@@ -22,7 +22,8 @@
     = f.label :project_title, class: "green-font" do
       PROJECT TITLE*
       %span.italic{style: "color: #000"} (Ex. Dunwoody City Park Fountain)
-    = f.text_field :project_title, :required => true, class: "span8"
+      %span.italic.project-title-remaining{style: "color: #000"}
+    = f.text_field :project_title, maxlength: 35, :required => true, class: "span8 project-title"
 
     = f.label :goal, class: "green-font" do
       FUNDING GOAL*
@@ -42,8 +43,8 @@
 
     = f.label :title, class: "green-font" do
       CAMPAIGN HEADLINE*
-      %span.italic{style: "color: #000"} (XX characters remaing)
-    = f.text_field :title, :required => true, class: "span8"
+      %span.italic.campaign-remaining{style: "color: #000"}
+    = f.text_field :title, maxlength: 150, :required => true, class: "span8 campaign-headline"
 
     = f.label :story, "YOUR STORY*", class: "green-font"
     = f.text_area :story, :required => true, :style => "height:330px;width:617px;"
@@ -90,3 +91,22 @@
       %p It’s helpful to include some more specific descriptions of the rewards you’re offering too. Don’t feel like you need to put everything in right away -- you can go back and edit this before activating your campaign!
 
       %p If you want to add any images to your project description, you can do so at the final step.
+
+
+:javascript
+  function updateCutdownCampaign() {
+    var remaining = 150 - jQuery('.campaign-headline').val().length;
+    jQuery('.campaign-remaining').text('(' + remaining + ' characters remaining.)');
+  };
+
+  function updateCutdownTitle() {
+    var remaining = 35 - jQuery('.project-title').val().length;
+    jQuery('.project-title-remaining').text('(' + remaining + ' characters remaining.)');
+  };
+
+  updateCutdownCampaign();
+  updateCutdownTitle();
+  $('.campaign-headline').change(updateCutdownCampaign);
+  $('.campaign-headline').keyup(updateCutdownCampaign);
+  $('.project-title').change(updateCutdownTitle);
+  $('.project-title').keyup(updateCutdownTitle);
