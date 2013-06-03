@@ -38,7 +38,7 @@
       %span.italic (Rewards for your donors)
 
     .perk-view
-      %h5.green-font{:style => "margin-bottom:10px;"} PERKS ON URUUT
+      %h5.label-green{:style => "margin-bottom:10px;"} PERKS ON URUUT
       %p
         Every dollar funded by donors on Uruut is rewarded dollar with Uruut Reward Points. Using customized Seeder Perks for your donors is not required.
       %p
@@ -65,18 +65,18 @@
               .span8
                 .row
                   .span4
-                    = label_tag "perk-amount", class: "green-font" do
+                    = label_tag "perk-amount", class: "label-green" do
                       SEED AMOUNT*
                       %span.italic{style: "color: #000; font-size: 10px;"} (full $ amounts only)
                     = text_field_tag "perk-amount", '', class: "span4"
                   .span4
-                    = label_tag "perk-name", class: "green-font" do
+                    = label_tag "perk-name", class: "label-green" do
                       PERK TITLE*
                       %span.italic.title-count{style: "color: #000; font-size: 10px;"}
                     = text_field_tag "perk-name", '', class: "span4"
 
             %div
-              = label_tag "perk-description", class: "green-font" do
+              = label_tag "perk-description", class: "label-green" do
                 Description*
                 %span.italic.desc-count{style: "color: #000; font-size: 10px;"}
               = text_area_tag "perk-description", nil, style: "height:120px;width:605px;"
@@ -84,10 +84,10 @@
             .row.perk-view
               .span2
                 %div{style: "font-size: 10px;"}
-                  = label_tag "limit_perk", "LIMIT # AVAILABLE", class: "green-font"
+                  = label_tag "limit_perk", "LIMIT # AVAILABLE", class: "label-green"
                 = select_tag "limit_perk", options_for_select({ "Yes" => "yes", "No" => "no" }, "yes")
               .span5
-                = label_tag "perk_available", "HOW MANY OF THIS PERK ARE AVAILABLE", class: "green-font"
+                = label_tag "perk_available", "HOW MANY OF THIS PERK ARE AVAILABLE", class: "label-green"
                 = text_field_tag "perk_available", '', class: "span6"
 
             %input{:type => 'hidden', :value => "", :id => "perk-id"}
@@ -99,6 +99,8 @@
           = f.submit "Save And Continue", :class => "btn project-save-continue", :id => "project-submit", :style => "position: relative;"
 
       %a.update-perk{:href => "#"} UPDATE PERK
+
+    %hr#line{:style => "margin-left: -20px; margin-right: -20px; background: #e0e0e0;"}
 
     %div.perk-false{style: "#{@project.perk_permission ? 'display:none' : '' }"}
       = link_to "CONTINUE TO STEP 4", "/projects/#{@project.id}/edit#sponsorship", class: "btn project-save-continue", id: "project-submit", style: "position: relative;display:block;margin:0 auto;width:35%"
@@ -149,10 +151,12 @@
     if ( $("#project_perk_permission").val() == "no" ){
       $(".perk-true").hide();
       $(".perk-false").show();
+      $('#line').show()
     }
     else{
       $(".perk-false").hide();
       $(".perk-true").show();
+      $('#line').hide()
     }
   };
 

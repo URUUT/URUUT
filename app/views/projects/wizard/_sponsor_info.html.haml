@@ -13,49 +13,50 @@
       %span.italic (Basic Information)
 
     %div
-      = f.label :organization, "Organization/Business Name*"
+      = f.label :organization, "Organization/Business Name*", class: "label-green"
       = f.text_field :organization, :required => true, class: "span8"
 
     %div.inline
-      = f.label :organization_type, "Organization Type*"
+      = f.label :organization_type, "Organization Type*", class: "label-green"
       = f.select :organization_type, options_for_select(project_org_type, @project.organization_type), :required => true
 
     %div.inline{:style => "margin-left:20px;"}
-      = f.label :organization_class, "How Are You Organized?*"
+      = f.label :organization_class, "How Are You Organized?*", class: "label-green"
       = f.select :organization_classification, options_for_select(project_org_class, @project.organization_classification), :required => true
 
     %div
-      = f.label :address , "STREET ADDRESS*"
+      = f.label :address , "STREET ADDRESS*", class: "label-green"
       = f.text_field :address, :required => true, class: "span8"
 
     %div.inline
-      = f.label :city
+      = f.label :city, class: "label-green"
       = f.text_field :city, :required => true, class: "span4"
 
     %div.inline{:style => "margin-left:25px;"}
-      = f.label :state
+      = f.label :state, class: "label-green"
       = f.select :state, options_for_select(us_states, project.state), :required => true
 
     %div.inline{:style => "margin-left:25px;"}
-      = f.label :zip, "Zipcode"
+      = f.label :zip, "Zipcode", class: "label-green"
       = f.text_field :zip, :required => true, class: "span2"
 
     %div
-      = f.label :website do
+      = f.label :website, :class => "label-green" do
         WEBSITE ADDRESS
         %span.italic (Format: www.mysite.com)
       = f.text_field :website, :required => true, class: "span8"
 
     %div.inline
-      = f.label :twitter_handle, "Twitter Account"
+      = f.label :twitter_handle, "Twitter Account", class: "label-green"
       = f.text_field :twitter_handle, :required => true, class: "span4"
 
     %div.inline{:style => "margin-left:30px;"}
-      = f.label :facebook_page, "Facebook Page"
+      = f.label :facebook_page, "Facebook Page", class: "label-green"
       = f.text_field :facebook_page, :required => true, class: "span4"
 
     %div
-      = label_tag "Payment With Stripe"
+      %p.label-green{:style => "font: bold 12px/12px 'Proxima Nova', arial, sans-serif;text-transform: uppercase;"}
+        Payment With Stripe
       %p{:style => "font:normal 13px/19px 'Proxima Nova';"} An account with Stripe, our payment provider, is required for processing credit card transactions and receiving funds. If you already have an account, you can sign in as a returning customer.
       = link_to "https://connect.stripe.com/oauth/authorize?scope=read_only&response_type=code&client_id=ca_0nuMjzTruvR2hOSuHDJSlxzeA7q4h5ai", :target => "_blank", :class => "stripe-connect" do
         = image_tag "stripe-connect.png"

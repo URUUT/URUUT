@@ -98,6 +98,13 @@ a.green-link{
 
 .projects{
 
+  &.edit{
+
+    form.sponsor-info{
+      margin-top: 190px;
+    }
+  }
+
   &.show{
 
     .show-content{
@@ -1049,7 +1056,7 @@ iframe.twitter-follow-button{
   }
 }
 
-.image_warp, .cultivation-image-content{
+.image_warp, .cultivation-image-content, .email-header-priview{
   position: relative;
   /*height: 500px;*/
   overflow: hidden;
@@ -1086,8 +1093,8 @@ iframe.twitter-follow-button{
 
     }
 
-    button[type="button"]{
-      border-right: 1px solid $light-grey !important;
+    .btn{
+      border-left: 1px solid $light-grey !important;
     }
   }
 }
@@ -1141,9 +1148,106 @@ form.sponsor-info{
   margin-top: 0;
 }
 
+#sponsor_level_input{
+  height: 56px - 38px;
+  width: 455px !important;
+}
 
+#sponsor_level_container{
+  ul{
+    width: 100%;
 
+    & > li{
+      width: 100%;
+    }
+  }
+}
 
+.cs_import.btn{
+  background: $green2 url('mail-btn.png') no-repeat center left;
+  padding-left: 60px;
+  padding-right: 10px;
+  @include border-radius(5px);
+  text-align: left;
+  font-size: 16px;
+  letter-spacing: 1px;
+  line-height: 18px;
+  text-transform: capitalize;
+}
 
+ul.chart-legend{
+
+  margin: 0;
+  margin-top: 20px;
+
+  & > li{
+    list-style: none;
+    display: block;
+    margin-bottom: 20px;
+    @include cleared;
+
+    .color{
+      height: 40px;
+      width: 40px;
+      background: $grey;
+      float: left;
+
+      &.business{
+        background: $green2;
+      }
+      &.foundation{
+        background: $light-grey;
+      }
+      &.individual{
+        background: $grey;
+      }
+    }
+
+    .legend-info{
+      margin-left: 50px;
+    }
+
+    h4{
+      color: $light-grey !important;
+      margin: 0;
+    }
+
+    h5{
+      color: $grey !important;
+      margin: 0;
+    }
+  }
+}
+
+.banner{
+  padding-top: 20px;
+
+  h2, h3, h4, h5, h6{
+    margin: 0;
+  }
+
+  .project-tittle{
+    color: $green2;
+  }
+
+  .project-location{
+    color: #fff;
+  }
+
+  .of-italic{
+    color: #ccc;
+    font-family: 'Georgia', serif;
+    font-style: italic;
+  }
+
+  .highlighted-value{
+    color: $green2;
+    font-size: 28px;
+  }
+}
+
+.step-container div.checkbox input[type=checkbox]{
+  float: left;
+}
 
 
