@@ -104,12 +104,12 @@
 .container.overview-page
   .row-fluid
     .span8.pull-left
-      %h2.title FUNDING TRACKER
-      .well.info
+      %h2.tittle FUNDING TRACKER
+      .info
         .chart-bar
 
-      %h2.title FUNDING BREAKDOWN BY DAY
-      .well.info
+      %h2.tittle FUNDING BREAKDOWN BY DAY
+      .info
         %table.table.table-striped
           %tr
             %th Date
@@ -132,6 +132,7 @@
               %td= individual_count
               %td= sponsors_count
     .span4.pull-right
-      %h2.title FUNDING SOURCES
+      %h2.title{:style =>"margin-bottom: 5px;"}
+        FUNDING SOURCES
       %div{:class => "well info"}
         .chart-pie
