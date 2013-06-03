@@ -106,7 +106,7 @@ p{
 .tooltip{
 
   &.top{
-    
+
     .tooltip-arrow{
       border-top-color: #fff;
     }
@@ -851,6 +851,7 @@ form {
     .btn{
       background: transparent;
       display: block;
+      width: 100%;
     }
 
     input[type="file"]{
@@ -866,6 +867,10 @@ form {
 
 .label-green{
   color: $green2 !important;
+
+  span{
+    color: $grey !important;
+  }
 }
 
 ul.nav{
@@ -899,4 +904,62 @@ ul.nav{
 .well-half{
   width: (600px / 2) - 20px;
 }
+
+.menu-project{
+
+  ul{
+    & > li{
+      position: relative;
+
+      a{
+        font-family: 'Proxima Nova', sans-serif;
+        font-size: 14px;
+        letter-spacing: 2px;
+      }
+
+      .nav-arrow{
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+        bottom: 10px;
+        left: 50%;
+        margin-left: -15px;
+        border-top-color: $green2;
+        border-width: 15px 15px 0;
+      }
+
+      &.active{
+        a{
+          color: $grey;
+        }
+      }
+    }
+  }
+}
+
+.selectParent{
+
+  #type{
+    font: bold 24px/24px arial, helvetica, sans-serif;
+    width: 110%;
+    background: transparent;
+    height: 65px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    padding: 19px;
+  }
+}
+
+
+
+
+
+
+
+
+
 
