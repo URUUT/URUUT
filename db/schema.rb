@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130601114049) do
+ActiveRecord::Schema.define(:version => 20130602063323) do
 
   create_table "badges_sashes", :force => true do |t|
     t.integer  "badge_id"
@@ -137,6 +137,7 @@ ActiveRecord::Schema.define(:version => 20130601114049) do
     t.integer  "card_last4"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "site"
   end
 
   create_table "project_updates", :force => true do |t|
@@ -187,6 +188,8 @@ ActiveRecord::Schema.define(:version => 20130601114049) do
     t.string   "cultivation_mime_type",       :default => "image"
     t.boolean  "perk_permission"
     t.datetime "campaign_deadline"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "sashes", :force => true do |t|
