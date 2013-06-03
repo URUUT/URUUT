@@ -96,7 +96,7 @@ module ProjectsHelper
   end
 
   def campaign_days_left(campaign_deadline)
-    (campaign_deadline.to_date - Time.now.to_date).to_i
+    (campaign_deadline.to_date - updated_at.to_date).to_i
   end
 
   def default_perk
