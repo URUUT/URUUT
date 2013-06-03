@@ -1,4 +1,4 @@
-= form_for @donation do |f|
+= form_for(@donation, :url => donation_path) do |f|
   - if @donation.errors.any?
     .error_messages
       %h2
@@ -7,20 +7,49 @@
       %ul
         - @donation.errors.full_messages.each do |msg|
           %li= msg
-  .field
-    = label_tag :amount, "Amount to Donate"
-    = text_field_tag :amount, nil, name: "donation[amount]"
-  .field
-    = label_tag :card_number, "Credit Card Number"
-    = text_field_tag :card_number, nil, name: nil
-  .field
-    = label_tag :card_code, "Security Code on Card (CVV)"
-    = text_field_tag :card_code, nil, name: nil
-  .field
-    = label_tag :card_month, "Card Expiration"
-    = select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
-    = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}
+  / = f.hidden_field :plan_id
+  = f.hidden_field :token
+  = f.hidden_field :card_type
+  = f.hidden_field :card_last4
+  = f.hidden_field :email, :value => "#{current_user.email}"
+  = f.hidden_field :user_id, :value => "#{current_user.id}"
+  = f.hidden_field :project_id, :value => "#{current_project}"
+  - if @donation.token.present?
+    Credit card has been provided.
+  - else
+    .field
+      / = label_tag :amount, "Amount to Donate"
+      = hidden_field_tag :amount, @donation.amount, name: "donation[amount]"
+      = hidden_field_tag :perk_permission_type, @project.perk_permission ? "custom" : "default" , name: "perk_type"
+      = hidden_field_tag :perk_name, @donation.perk_name
+    .field.name
+      = label_tag "NAME AS IT APPEARS ON CARD*"
+      = text_field_tag nil, [current_user.first_name, current_user.last_name].join(" "), name: nil
+    .field.card-number
+      = label_tag :card_number, "Credit Card Number"
+      = text_field_tag :card_number, nil, name: nil
+    .field.ccv
+      = label_tag :card_code, "CVV*"
+      = text_field_tag :card_code, nil, name: nil
+    .field.expiration
+      = label_tag :card_month, "CARD EXPIRATION (MM/YYYY)*"
+      / = select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
+      / = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}
+      = text_field_tag nil, nil, {name: nil, id: "card_month"}
+      = text_field_tag nil, nil, {name: nil, id: "card_year"}
+    .cf
   #stripe_error
     %noscript JavaScript is not enabled and is required for this form. First enable it in your web browser settings.
+
   .actions
-    = f.submit "Contribute", :id => "donate"
+    %hr
+    %p{:style => "font:normal 12px/18px 'Proxima Nova';color:#b6b6b4"}
+      %span{:style => "Proxima Nova Bold"}
+        Note:
+      Your card will not be charged when you make your investment! You will only be charged if this campaign reaches its funding goal. All transactions are processed through a secure third-party payment processor.
+    = button_tag :type => 'submit', :id => "donate", :class => "btn" do
+      Contribute
+      %span
+    .cf
+
+= javascript_include_tag "donations"

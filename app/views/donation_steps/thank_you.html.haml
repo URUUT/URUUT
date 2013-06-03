@@ -1,31 +1,25 @@
-.container.donations{:style => "margin-top:30px;"}
-  .span8
-    %h3.title Thank you
-    %h2.green Congratulations!
-    %p.congratulations
-      You are now an official contributor to #{@project.title}! Now it's time to spread the word.
-
-    %p
-    %div
-      = link_to image_tag("fb-share.png",style: "width: 150px"), "javascript:shareFb()", style: "margin-left: 2%"
-      = link_to image_tag("tw-share.png", style: "width: 150px"), "https://twitter.com/share", "data-url" => root_url, "target" => "blank", style: "margin-left: 2%"
-      = link_to image_tag("ml-share.png", style: "width: 150px"), "javascript:void(0)", style: "margin-left: 2%", class: "cs_import"
-      %span.link-short{:style => "padding: 18px; border: 2px solid ECECF0; font-weight:bolder; font-size: 14px; margin-left: 2%"}
-        = @project.bitly
-      %textarea#contact_list{:style => "display:none", :name => "email_recepient"}
-
-  .span4
-    %h3.title Details
-    .well.green-headered{:style => "border:none;"}
+.container
+  .row-fluid{style: "margin-top: 30px;"}
+    .span9
+      %h4.tittle{style: "padding-bottom: 10px;"} THANK YOU!
+      %h4.label-green Congratulations!
+      %p You are now an official sponsor to #{@project.title}. Now it's time to spread the word
       %div
-        %h5 Payment amount
-        = number_to_currency(@donation.amount, :precision => 0)
-      %div
-        %h5 Your perk
-        %p
-          %strong= @perk.name
+        = link_to image_tag("fb-share.png",style: "width: 150px"), "javascript:shareFb()", style: "display: block; float: left;"
+        = link_to image_tag("tw-share.png", style: "width: 150px"), "https://twitter.com/share", "data-url" => root_url, "target" => "blank", style: "margin-left: 2%; display: block; float: left;"
+        = link_to image_tag("ml-share.png", style: "width: 150px"), "javascript:void(0)", style: "margin-left: 2%; display: block; float: left;", class: "cs_import"
+        %span.link-short{:style => "font-weight:bolder; font-size: 14px; margin-left: 2%"}
+          = @project.bitly
+
+    .span3.pull-right.messages-content
+      %h4.title Details
+      .well.pull-left{style: "margin-left: 0;"}
+        %h5.label-green Payment amount
+        %p #{number_to_currency(@donation.amount, :precision => 0)}
+        %br
+        %h5.label-green Your perk
+        %h6= @perk.name
         %p= @perk.description
-
 
 :javascript
   var project_id = "#{@project.id}";

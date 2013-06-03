@@ -65,15 +65,19 @@ class DonationsController < ApplicationController
 
 	def edit
 		@donation = Donation.unscoped.find(params[:id])
+    @project = @donation.project
 		@donation.save!
 	end
 
 	def update
 		@donation = Donation.unscoped.find(params[:id])
+    session[:card_last4] = params[:donation][:card_last4]
+    session[:card_type] = params[:donation][:card_type]
+    params[:donation][:perk_name] = params[:perk_name]
 		if @donation.update_attributes(params[:donation])
 			flash[:notice] = "Successfully updated donation."
 		end
-		redirect_to project_path(@donation.project_id)
+		redirect_to donation_steps_path
 	end
 
 end
