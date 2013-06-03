@@ -123,6 +123,8 @@
             BUSINESS OR ORGANIZATION'S LOGO*
           = file_field :project_sponsor, :logo, required: true, label: false
         %div
+          = select_tag :type, options_for_select(["Foundation", "Business"])
+        %div
           = f.label :site, "Website*", class: "green-font"
           = text_field :project_sponsor, :site, required: true, label: false, class: "span12"
         %div
@@ -130,7 +132,7 @@
             MISSION STATEMENT / ABOUT*
             %span.cutdown.italic
           = text_area :project_sponsor, :mission, maxlength: 275, required: true, :style => "height: 186px; width: 595px;", label: false, class: "mission", placeholder: "Tell your story here ..."
-
+          project_sponsors
         %h3 Payent Information
         .well
           %div

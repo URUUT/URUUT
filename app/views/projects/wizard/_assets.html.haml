@@ -1,5 +1,5 @@
 .step-container{"data-id" => "assets"}
-  = form_for(@project, :html => {:multipart => true, style: "margin-top: -60;" }) do |f|
+  = form_for(@project, :html => {:multipart => true }) do |f|
     - if @project.large_image
       #large_image{:style => "background-image: url(#{@project.large_image}); -webkit-background-size: cover; background-size: cover;"}
         .div{style: "height: 546px;", id: "image-priview"}
@@ -23,7 +23,7 @@
         %a.btn.save-image{href: "javascript:void(0)"} Save Images
 
     .show-content
-      .span8{style: "margin-top: -280px;"}
+      .span8
         %h4.title Where We're Ruuted
         .map-container
           #map{:style => "width:100%;height:300px;"}
@@ -118,7 +118,7 @@
 
               %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.story
 
-      .span4.sidebar{style: "margin-top: -280;"}
+      .span4.sidebar
         %h4 BECOME A SPONSOR
         .well
           %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;font-family:'Proxima Nova';"} PROJECT SPONSORSHIP

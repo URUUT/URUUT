@@ -6,7 +6,7 @@ class Donation < ActiveRecord::Base
   belongs_to :project
   belongs_to :user
 
-  # default_scope { where("customer_token IS NOT NULL") }
+  default_scope { where(confirmed: true) }
 
   def save_with_payment
     logger.debug(token)
@@ -14,6 +14,7 @@ class Donation < ActiveRecord::Base
     Stripe.api_key = "sk_test_XF9K5nq63HTSmTK1ZMiW6tvw"
     customer = Stripe::Customer.create(description: email, card: token)
     self.customer_token = customer.id
+    self.confirmed = true
     save!
 
   rescue Stripe::InvalidRequestError => e

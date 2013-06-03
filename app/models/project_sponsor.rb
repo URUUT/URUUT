@@ -13,4 +13,6 @@ class ProjectSponsor < ActiveRecord::Base
   validates :name, :logo, :mission, :level_id, presence: true
 
   validates_length_of :mission, maximum: 275
+
+  default_scope { where(confirmed: true) }
 end
