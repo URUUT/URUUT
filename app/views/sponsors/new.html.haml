@@ -150,7 +150,7 @@
           = image_tag "arthur.png", :class => "img-polaroid pull-left logo-company"
           .pic-upload
             .upload-btn
-              %input{:type => 'filepicker', :name => 'project_sponsor_logo', 'data-fp-button-text' => 'ADD A PHOTO', 'data-fp-apikey' => 'ArmO0TLVTkyCaJkQmBNfqz', 'data-fp-button-class' => 'btn', 'onchange' => 'updateSponsorLogo(event)'}
+              %input{:type => 'filepicker', :name => 'project_sponsor_logo', 'data-fp-button-text' => 'UPLOAD', 'data-fp-apikey' => 'ArmO0TLVTkyCaJkQmBNfqz', 'data-fp-button-class' => 'btn', 'onchange' => 'updateSponsorLogo(event)'}
                 %span
 
               / = file_field :project_sponsor, :logo, required: true, label: false
