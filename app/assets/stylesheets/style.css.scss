@@ -2,7 +2,7 @@ $super-light-grey: #f5f5f5;
 $light-grey: #b2b2b2;
 $grey: #464646;
 $green: #48c94c;
-$green2: #70bf4c;
+$green2: #81C263; /* #70bf4c;*/
 $light-green: #bee0b4;
 $brown: #403e37;
 $light-brown: #53544b;
@@ -99,6 +99,13 @@ p{
       position: relative;
       top: 0;
       display: block;
+
+      .funding-info{
+
+        a{
+          color: #fff;
+        }
+      }
     }
   }
 }
@@ -444,6 +451,11 @@ h3, h4, h5{
 .tax-deductible{
   width: 20px;
   height: 20px;
+
+  &.deductable-black{
+    width: 30px;
+    height: 30px;
+  }
 }
 
 .progress-container{
@@ -906,15 +918,16 @@ ul.nav{
 }
 
 .menu-project{
+  background: $green2;
 
   ul{
     & > li{
       position: relative;
 
       a{
-        font-family: 'Proxima Nova', sans-serif;
-        font-size: 14px;
-        letter-spacing: 2px;
+        /*font-family: 'Proxima Nova', sans-serif !important;*/
+        font-size: 13px !important;
+        letter-spacing: 2px !important;
       }
 
       .nav-arrow{
@@ -923,16 +936,21 @@ ul.nav{
         height: 0;
         border-color: transparent;
         border-style: solid;
-        bottom: 10px;
+        bottom: -25px;
         left: 50%;
         margin-left: -15px;
         border-top-color: $green2;
         border-width: 15px 15px 0;
+        display: none;
       }
 
       &.active{
         a{
-          color: $grey;
+          color: $grey !important;
+        }
+
+        .nav-arrow{
+          display: block;
         }
       }
     }
@@ -954,7 +972,110 @@ ul.nav{
   }
 }
 
+iframe.twitter-follow-button{
+  display: block;
+  float: left;
+  margin-left: 10px;
+}
 
+.menu-messages{
+  position: relative;
+
+  .arrow{
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    top: 0;
+    right: -15px;
+    border-left-color: $green2;
+    border-width: 20px 0 20px 15px;
+    display: none;
+  }
+
+  &.active{
+    margin-left: -19px;
+    margin-right: -19px;
+    padding-left: 19px;
+    background: $green2;
+    @include box-shadow(0 1px 2px rgba(0,0,0,0.5));
+
+    a{
+      color: #fff !important;
+      @include text-shadow(0 2px 1px rgba(0,0,0,0.3));
+    }
+
+    .arrow{
+      display: block;
+    }
+  }
+}
+
+.cover-content, .images-content{
+
+  margin-bottom: 40px;
+  padding-bottom: 30px;
+
+  button[type="button"]{
+    background: $green2;
+    @include border-radius(5px);
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.45);
+    color: #fff;
+    font-size: 18px;
+    margin-top: 10px;
+    padding: 20px 30px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.45);
+    width: auto !important;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+}
+
+.cover-content{
+  border-bottom: 1px solid $light-grey;
+}
+
+.cover-content-image{
+
+  img{
+    width: 100%;
+  }
+}
+
+.images-content{
+
+
+  .list-image{
+    display: block;
+    float: left;
+    width: 31%;
+    margin-left: 2%;
+    margin-top: 20px;
+
+    img{
+      width: 100%;
+    }
+
+    .image-delete-button{
+      font-family: 'Georgia', serif;
+      font-style: italic;
+      color: $green2;
+      text-transform: capitalize;
+      margin-top: 10px;
+      text-decoration: underline;
+
+      &:hover{
+        text-decoration: none;
+      }
+    }
+
+    &:first-child{
+      margin-left: 0;
+    }
+  }
+}
 
 
 
