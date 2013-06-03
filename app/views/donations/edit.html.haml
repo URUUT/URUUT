@@ -1,3 +1,111 @@
-%h1 Edit Your Contribution #{image_tag('secure_payment_logo.png')}
+.full-width.hero
+  .container
+    = image_tag "thank-u.png"
+    .headline
+      %h2 Your donations help make our dreams reality.
+      %p Continue to the checkout process below to confirm your funding amount and perk, then enter your payment information
 
-= render "form"
+.container
+  .span8
+    %h3.title CHECKOUT
+    .donation
+      %h3{:style => 'color:#70bf4c;line-height:100%;margin:20px 0 0;'}
+        = @project.title
+      %p
+        = image_tag "marker.jpg"
+        %span{:style => "font:bold 12px/12px 'Proxima Nova Bold';text-transform:uppercase;"}
+          #{@project.city}, #{@project.state}
+
+      .well{:style => "border:1px solid #e9e9e9;padding:0;margin-top:20px;"}
+        %div{:style => "float:left;padding-left:20px;display:inline-block;height:115px;width:212px;border-right:1px solid #e9e9e9;margin-right:20px;"}
+          %h6{:style => "line-height:100%;margin-bottom:10px;margin-top:20px;margin-bottom:15px;"} Seed Amount
+          .choiced-perk.amount{style: "#{"display:none" if !@perk_name.eql?("custom")}"}
+            = text_field_tag :custom_amount, "#{@perk_amount if @perk_name.eql?("custom")}" , {style: "width: 95%; color: #70bf4c; background: #fff url('/assets/dollar-green.png') no-repeat left center"}
+          %span.perk-amount{:style => "font-size:52px;color:#70bf4c;font-family:'Proxima Nova Bold';line-height:100%; #{"display:none" if @perk_name.eql?("custom")}"}= number_to_currency(@donation.amount, :precision => 0)
+        %div.perk-info-choiced{:style => "float:left;display:inline-block;width:340px;padding-right:20px;height:auto;"}
+          .choiced-perk{style: "#{"display:none" if !@perk_name.eql?("custom")}"}
+            %h6{:style => "line-height:100%;margin-bottom:10px;margin-top:20px"} Choose your perk
+            -if @project.perk_permission
+              = select_tag :perk_type, options_for_select(@project.perks.map{ |perk| [perk.name, perk.amount.to_i] }), {style: "width: 100%; height: 58px", :onchange => 'changeAmount()'}
+            -else
+              = select_tag :perk_type, options_for_select(default_perk.each_with_index.map{ |amount, index| ["LEVEL #{index+1}", amount] }), {style: "width: 100%; height: 58px", :onchange => 'changeAmount()'}
+            %p{:style => "font-size:12px;font-family:'Proxima Nova';text-align:left;color:#b6b6b4;margin:0;font-style: italic"} (Perk eligibility based on donation amount.)
+
+          %h6{:style => "line-height:100%;margin-bottom:0px;margin-top:20px"} Your Selected Perk
+          %h3.perk-name{:style => 'font-size:20px; color:#70bf4c;line-height:100%;margin:0;'}= @donation.perk_name
+          %span.perk-description{:style => "font-size:12px;font-family:'Proxima Nova';"}= @perk_description
+        .cf
+        %p.checkout-continue-subtext Continue to payment information below or choose a different seed amount/perk from the right.
+
+      %h3 Payment Information
+      .well
+        = render "edit"
+
+  .span4
+    %h3.title OTHER PERKS
+    .well{:style => "border:none; padding: 0;"}
+      %ul.perks
+        -if @project.perk_permission
+          -unless @project.perks.blank?
+            - @project.perks.each do |p|
+              %li.perk.clearfix{style: "#{"background: #bee0b4" if @perk.id.eql?(p.id)}", id: "perk-id-#{p.id}"}
+                %h3.perk-name-other{style: "#{"color: #000" if @perk.id.eql?(p.id)}", id: "perk-name-other-#{p.id}"}= p.name
+                - if p.limit
+                  %p= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} Available)"
+                %p.description= p.description
+                %ul
+                  %li.seed-amount{style: "#{"background: #bee0b4" if @perk.id.eql?(p.id)}", id: "amount-id-#{p.id}"}
+                    %h6 SEED
+                    %p.amount $#{p.amount.to_i}
+                  %li.fund-button
+                    - if p.limit
+                      - if p.perks_available.to_i.zero?
+                        %a{:class => "fund btn pull-right"} Fund Now #{image_tag('arrow.png')}
+                      -else
+                        %a{:class => "fund btn change-fund pull-right", "perk-id" => "#{p.id}", style: "#{"background: #70bf4c" if @perk.id.eql?(p.id)}", id: "button-fund-#{p.id}"} Fund Now #{image_tag('arrow.png')}
+                    -else
+                      %a{:class => "fund btn change-fund pull-right", "perk-id" => "#{p.id}", style: "#{"background: #70bf4c" if @perk.id.eql?(p.id)}", id: "button-fund-#{p.id}"} Fund Now #{image_tag('arrow.png')}
+        -else
+          - default_perk.each_with_index do |perk_amount, index|
+            - index += 1
+            - name = "LEVEL #{index}"
+            - description = "You will receive #{perk_amount} Uruut Reward Points when you seed $#{perk_amount}"
+            %li.perk.clearfix{style: "#{"background: #bee0b4" if @perk_amount.eql?(perk_amount)}", id: "perk-id-#{index}"}
+              %h3.perk-name-other{style: "#{"color: #000" if @perk_amount.eql?(perk_amount)}", id: "perk-name-other-#{index}"}
+                = name
+              %p.description= description
+              %ul
+                %li.seed-amount{style: "#{"background: #bee0b4" if @perk_amount.eql?(perk_amount)}", id: "amount-id-#{index}"}
+                  %h6 SEED
+                  %p.amount $#{perk_amount}
+                %li.fund-button
+                  %a{:class => "fund btn change-fund", "perk-id" => "default", style: "#{"background: #70bf4c" if @perk_amount.eql?(perk_amount)}", "amount" => "#{perk_amount}", "level" => "#{index}", id: "button-fund-#{index}"} Fund Now #{image_tag('arrow.png')}
+
+        %li.perk.clearfix{id: "perk-id-custom", style: "#{"background: #bee0b4" if @perk_name.eql?("custom")}"}
+          %h3.perk-name-other{style: "#{"color: #000" if @perk_name.eql?("custom")}", id: "perk-name-other"}
+            CHOOSE YOUR PERK
+          %p.description With this option you choose the amount to seed and which perk you receive. (Perk egibility based on donation amount)
+          %ul
+            %li.seed-amount{id: "amount-id-custom", style: "#{"background: #bee0b4" if @perk_name.eql?("custom")}"}
+              %h6 AMOUNT TO SEED
+              %p.amount= text_field_tag :custom_seed, "#{@perk_amount if @perk_name.eql?("custom")}" , {style: "width: 100%;"}
+          %a{style: "#{"background: #70bf4c" if @perk_name.eql?("custom")}", :class => "fund btn change-fund pull-right", "perk-id" => "custom", id: "button-fund-custom"} Fund Now #{image_tag('arrow.png')}
+
+:javascript
+  $(".change-fund").click(function(){
+    if ( $(this).attr("perk-id") == "default" ){
+      $.ajax({
+        url: "/donations/"+$(this).attr("perk-id")+"/change_perk.js?amount="+$(this).attr("amount")+"&level="+$(this).attr("level")+"&custom_seed="+$("#custom_seed").val()
+      });
+    }
+    else{
+      $.ajax({
+        url: "/donations/"+$(this).attr("perk-id")+"/change_perk.js?custom_seed="+$("#custom_seed").val()
+      });
+    }
+  });
+
+  var changeAmount = function(){
+    $("#amount").val($("#perk_type").val());
+    $("#custom_amount").val($("#perk_type").val());
+  };
