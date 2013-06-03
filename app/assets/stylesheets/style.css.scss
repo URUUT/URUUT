@@ -87,6 +87,15 @@ p{
   }
 }
 
+a.green-link{
+  color: $green2;
+  text-decoration: underline;
+
+  &:hover{
+    text-decoration: none;
+  }
+}
+
 .projects{
 
   &.show{
@@ -552,6 +561,10 @@ h1, h2, h3, h4{
   }
 }
 
+h3.tittle{
+  padding-bottom: 10px;
+}
+
 .project-admin-panel{
 
   font-family: 'Proxima Nova', sans-serif;
@@ -667,6 +680,9 @@ h1, h2, h3, h4{
 }
 
 .well{
+
+  border-top-color: $green2;
+
   &.info{
     /*font-family: 'Proxima Nova Semi', sans-serif;*/
     color: lighten($grey, 30%);
@@ -1023,7 +1039,7 @@ iframe.twitter-follow-button{
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.45);
     color: #fff;
     font-size: 18px;
-    margin-top: 10px;
+    margin-top: 20px;
     padding: 20px 30px;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.45);
     width: auto !important;
@@ -1033,8 +1049,51 @@ iframe.twitter-follow-button{
   }
 }
 
+.image_warp, .cultivation-image-content{
+  position: relative;
+  /*height: 500px;*/
+  overflow: hidden;
+
+  .action_button{
+    background: #fff;
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    padding: 10px 20px;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+    button[type="button"], .btn{
+      background: transparent;
+      color: $green2;
+      font-family: 'Georgia', serif;
+      font-style: italic;
+      text-decoration: underline;
+      text-transform: capitalize;
+      font-size: 13px;
+      line-height: 20px;
+      border: none;
+      letter-spacing: 0;
+      padding: 0 10px;
+
+      &:hover{
+        text-decoration: none;
+      }
+
+    }
+
+    button[type="button"]{
+      border-right: 1px solid $light-grey !important;
+    }
+  }
+}
+
 .cover-content{
-  border-bottom: 1px solid $light-grey;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .cover-content-image{
@@ -1077,6 +1136,10 @@ iframe.twitter-follow-button{
   }
 }
 
+
+form.sponsor-info{
+  margin-top: 0;
+}
 
 
 
