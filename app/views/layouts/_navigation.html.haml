@@ -8,7 +8,7 @@
     = link_to "/projects/new", style: "#{"color: #70BF4C !important" if session[:page_active].eql?("funding")}" do
       Get Funding
   %li
-    = link_to about_pages_path do
+    = link_to about_pages_path, style: "#{"color: #70BF4C !important" if session[:page_active].eql?("about") }" do
       About URUUT
   -#%li
     -#= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
