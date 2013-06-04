@@ -208,7 +208,8 @@
       url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/add_perk',
       data: data
     }).done(function(data) {
-      window.location = 'http://' + document.location.hostname + ":" + document.location.port + '/projects/'+ project +'/edit#sponsorship';
+      window.location.href = 'http://' + document.location.hostname + ":" + document.location.port + '/projects/'+ project +'/edit#sponsorship';
+      window.location.reload(true);
     });
   });
 
