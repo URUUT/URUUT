@@ -25,7 +25,11 @@ class SponsorsController < ApplicationController
       when 'bronze'
         @level = "Bronze"
         @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[4]
-        @cost = @project.goal.to_i * 0.005
+        if (@project.goal.to_i * 0.1) >= 500
+          @cost = 500
+        else
+          @cost = @project.goal.to_i * 0.1
+        end
         session[:level_id] = 4
       else
         @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[1]
@@ -62,7 +66,11 @@ class SponsorsController < ApplicationController
       when 4
         @level = "Bronze"
         @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[4]
-        @cost = @project.goal.to_i * 0.005
+        if (@project.goal.to_i * 0.1) >= 500
+          @cost = 500
+        else
+          @cost = @project.goal.to_i * 0.1
+        end
         session[:level_id] = 4
     end
     render :layout => 'landing'
@@ -72,8 +80,23 @@ class SponsorsController < ApplicationController
     @sponsor = Sponsor.find(params[:id])
     @project_sponsor = @sponsor.project_sponsors.find_by_project_id(params[:project_id])
     sponsor = params[:sponsor]
+    project = Project.find(params[:project_id])
     sponsor_name = sponsor[:payment_type].eql?("Wire Transfer") ? sponsor[:name] : sponsor[:card_name]
     cost = SponsorshipLevel.find(params[:project_sponsor][:level_id]).cost
+    case params[:project_sponsor][:level_id]
+      when "1"
+        cost = project.goal.to_i * 0.3
+      when "2"
+        cost = project.goal.to_i * 0.1
+      when "3"
+        cost = project.goal.to_i * 0.04
+      when "4"
+        if project.goal.to_i * 0.1 >= 500
+          cost = 500
+        else
+          cost = project.goal.to_i * 0.1
+        end
+    end
     params[:sponsor][:name] = sponsor_name
     @sponsor.update_attributes(params[:sponsor])
     @project_sponsor.update_attributes(params[:project_sponsor].merge({cost: cost, project_id: params[:project_id], sponsor_id: @sponsor.id,
@@ -122,7 +145,11 @@ class SponsorsController < ApplicationController
     when "3"
       @cost = project.goal.to_i * 0.04
     when "4"
-      @cost = project.goal.to_i * 0.005
+      if project.goal.to_i * 0.1 >= 500
+        @cost = 500
+      else
+        @cost = project.goal.to_i * 0.1
+      end
     end
 
     respond_to :js
@@ -141,7 +168,11 @@ class SponsorsController < ApplicationController
     when 3
       @cost = @project.goal.to_i * 0.04
     when 4
-      @cost = @project.goal.to_i * 0.005
+      if @project.goal.to_i * 0.1 >= 500
+        @cost = 500
+      else
+        @cost = project.goal.to_i * 0.1
+      end
     end
   end
 
@@ -161,7 +192,11 @@ class SponsorsController < ApplicationController
       @cost = @project.goal.to_i * 0.04
       @level = "Silver"
     when 4
-      @cost = @project.goal.to_i * 0.005
+      if @project.goal.to_i * 0.1 >= 500
+        @cost = 500
+      else
+        @cost = @project.goal.to_i * 0.1
+      end
       @level = "Bronze"
     end
     @need_doctype = true
@@ -205,7 +240,11 @@ class SponsorsController < ApplicationController
     when "3"
       cost = project.goal.to_i * 0.04
     when "4"
-      cost = project.goal.to_i * 0.005
+      if project.goal.to_i * 0.1 >= 500
+        cost = 500
+      else
+        cost = project.goal.to_i * 0.1
+      end
     end
     params[:sponsor][:name] = sponsor_name
     card_type = params[:project_sponsor][:card_type]
