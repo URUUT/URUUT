@@ -128,6 +128,11 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def skip_sponsor
+    session[:step] = "fourth"
+    redirect_to :back
+  end
+
   def stripe_update
     code = params[:code]
     client = OAuth2::Client.new(ENV['STRIPE_CLIENT_ID'], ENV['STRIPE_KEY'], :site => "https://connect.stripe.com/oauth/authorize")

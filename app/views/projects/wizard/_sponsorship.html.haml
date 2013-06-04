@@ -234,7 +234,7 @@
         = f.submit "Save And Continue", :class => "btn", :id => "project-submit", :style => "position: relative;display:block;margin:0 auto;"
 
     %div.sponsorship-false{:style => "display:none"}
-      = link_to "CONTINUE TO STEP 5", "/projects/#{@project.id}/edit#assets", class: "btn", id: "project-submit", style: "position: relative;display:block;margin:0 auto;width:35%"
+      = link_to "CONTINUE TO STEP 5", "/projects/#{@project.id}/edit#assets", class: "btn skip-step", id: "project-submit", style: "position: relative;display:block;margin:0 auto;width:35%"
   .span4{:style => "margin-top:155px;"}
     %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
     .well.info
@@ -274,6 +274,18 @@
   $(".bronze_benefits").attr("id", "bronze_info_" + (bronzeSum + 1));
   $(".box_gold_benefits").attr("name", "bronze[" + (bronzeSum + 1) + "]");
   $(".box_gold_benefits").attr("id", "bronze_" + (bronzeSum + 1));
+
+  $(".skip-step").on("click", function(){
+    var project_id = #{@project.id};
+    $.ajax({
+      type: "GET",
+      url: "/skip_sponsor"
+    }).done(function(data){
+      console.log("Success???");
+      window.location.href = '/projects/' + project_id + '/edit#assets';
+      window.location.reload(true);
+    });
+  })
 
   $(document).ready(function() {
     addNewBenefit();
