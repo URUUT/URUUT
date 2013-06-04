@@ -148,12 +148,14 @@ class ProjectsController < ApplicationController
   end
 
   def save_video
+    link_video = generate_video_link(params[:video_link])
+
     @project = Project.find_by_id(session[:current_project])
     if params[:video_type].eql?("seed")
-      @project.seed_video = params[:video_link]
+      @project.seed_video = link_video
       @project.seed_mime_type = "video"
     else
-      @project.cultivation_video = params[:video_link]
+      @project.cultivation_video = link_video
       @project.cultivation_mime_type = "video"
     end
 
@@ -260,6 +262,19 @@ class ProjectsController < ApplicationController
       else
       "project"
       end
+  end
+
+  def generate_video_link(link)
+    link_data = link.split("//")
+
+    if link_data[1][0].eql?("m")
+      video_code = link_data[1].split("&")
+      url = "http://" + video_code[0][2..-1]
+    else
+      url = link
+    end
+
+    url
   end
 
 end
