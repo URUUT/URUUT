@@ -278,6 +278,8 @@
                 %div COST
                 .amount
                   = number_to_currency(@project.goal.to_i * 0.3)
+                .amount-percentage
+                  (30% of funding goals)
               - if check_availibility(@project, 1) < 1
                 %a.btn.pull-right{:href => "/projects/#{@project.id}/sponsors/new?level=platinum"}
                   Sponsor
@@ -301,6 +303,8 @@
                 %div COST
                 .amount
                   = number_to_currency(@project.goal.to_i * 0.1)
+                .amount-percentage
+                  (10% of funding goals)
               - if check_availibility(@project, 2) < 3
                 %a.btn.pull-right{:href => "/projects/#{@project.id}/sponsors/new?level=gold"}
                   Sponsor
@@ -324,6 +328,8 @@
                 %div COST
                 .amount
                   = number_to_currency(@project.goal.to_i * 0.04)
+                .amount-percentage
+                  (4% of funding goals)
               - if check_availibility(@project, 3) < 5
                 %a.btn.pull-right{:href => "/projects/#{@project.id}/sponsors/new?level=silver"}
                   Sponsor
@@ -343,7 +349,10 @@
               .seed-num
                 %div COST
                 .amount
-                  = number_to_currency(@project.goal.to_i * 0.005)
+                  - if (@project.goal.to_i * 0.1) >= 500
+                    = number_to_currency(500)
+                  - else
+                    = number_to_currency(@project.goal.to_i * 0.1)
               %a.btn.pull-right{:href => "/projects/#{@project.id}/sponsors/new?level=bronze"}
                 Sponsor
                 %span
@@ -356,7 +365,7 @@
         = image_tag @user.avatar
         %h4= @project.title
 
-      %h4.title{:style => 'margin-top:50px;'} PROJECT SPONSOR
+      %h4.title{:style => 'margin-top:50px;'} PROJECT SPONSORS
       - if @project_sponsors.include?(4)
         %div
           BRONZE LEVEL SPONSOR
@@ -371,11 +380,12 @@
 
       %h4.title{:style => 'margin-top:50px;'}Partners(#{@project.donations.count})
       %div.business
-        - @project.donations.each do |donation|
+        - @project.donations.limit(20).each do |donation|
           = image_tag donation.user.avatar, style: "width: 27px; height:27px;"
-      = link_to "javascript:void(0)", :class => 'btn more', :style => 'margin-top:10px;' do
-        Show More
-        %span
+      - if @project.donations.count > 20
+        = link_to more_donators_donation_path(@project.id), :class => 'btn more', :style => 'margin-top:10px;', remote: true do
+          Show More
+          %span
 
 %script{:src => "http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"}
 %script{:src => "http://maps.stamen.com/js/tile.stamen.js?v1.2.1"}

@@ -36,10 +36,10 @@ $light-brown: #53544b;
 }
 
 @mixin transition ($transition) {
-  -webkit-transition: $transition;  
+  -webkit-transition: $transition;
   -moz-transition:    $transition;
-  -ms-transition:     $transition; 
-  -o-transition:      $transition;  
+  -ms-transition:     $transition;
+  -o-transition:      $transition;
 }
 @mixin transform($string){
   -webkit-transform: $string;
@@ -96,7 +96,25 @@ a.green-link{
   }
 }
 
+h1, h2, h3, h4, h5{
+  span.subtittle{
+    font: normal 11px/11px "Georgia", georgia, serif;
+    font-style: italic;
+    text-transform: none;
+  }
+}
+
 .projects{
+
+  &.edit, &.new{
+    .btn{
+      background: $green2;
+
+      &.black-btn{
+        background: $grey;
+      }
+    }
+  }
 
   &.edit{
 
@@ -265,6 +283,31 @@ h3, h4, h5{
   }
 }
 
+.perks{
+  .perk{
+    &:hover, .active{
+      background: $light-green;
+
+      h3, h4, h5, .amount-percentage{
+        color: $grey;
+      }
+
+      .description{
+        color: $grey !important;
+      }
+
+      .btn{
+        font-family: 'Proxima Nova Semi', arial, sans-serif;
+
+        &:hover{
+          background: $green2;
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
 
 .seed-level{
   background: $super-light-grey;
@@ -304,6 +347,7 @@ h3, h4, h5{
 
        &:hover{
         background: $green2;
+        color: #fff;
       }
     }
   }
@@ -345,6 +389,8 @@ h3, h4, h5{
       font-size: 10px;
       font-style: italic;
       color: $light-grey;
+      text-transform: capitalize;
+      font-family: 'Georgia', serif;
     }
 
     & + .btn{
@@ -357,6 +403,8 @@ h3, h4, h5{
   font-size: 10px;
   font-style: italic;
   color: $light-grey;
+  text-transform: capitalize;
+  font-family: 'Georgia', serif;
 }
 
 .tab-pane{
@@ -592,7 +640,7 @@ h3.tittle{
   -moz-border-radius-bottomleft: 5px;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
-  
+
   &, a{
     color: #fff;
   }
@@ -643,14 +691,27 @@ h3.tittle{
 }
 
 .badge-wrapper{
+  @include cleared;
+
   .profile-badge{
     width: 72px;
     height: 72px;
-    border: 3px solid #fff;
+    padding: 3px;
+    /*border: 3px solid #fff;*/
+    border: none;
     margin-right: 9px;
+    @include border-radius(500px);
+    background: #fff;
+    float: left;
+    text-align: center;
+
+    img{
+      width: 72px;
+      height: 72px;
+    }
 
     &:hover{
-      border-color: $green2;
+      background: $green2;
     }
 
     &:nth-child(3n){
@@ -666,14 +727,27 @@ h3.tittle{
 }
 
 .banner{
+  @include cleared;
 
-  img.avatar{
-    height: 100px;
-    width: 100px;
+  .avatar{
+    height: 97px;
+    width: 97px;
+    padding: 3px;
+    background: #fff;
+    float: left;
+    @include border-radius(500px);
+
+    img{
+      width: 97px;
+      height: 97px;
+    }
   }
 
   .user-name-wrapper{
     float: left;
+    margin-left: 10px;
+    margin-top: 40px;
+    width: 187px;
   }
 
   .bordered-left{
@@ -702,7 +776,7 @@ h3.tittle{
       margin-bottom: 3px;
       font-size: 12px;
       line-height: 14px;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
     }
 
     .profile-img{
@@ -877,7 +951,7 @@ form {
 
     &:hover{
       background: lighten($green2, 10%);
-      
+
       .btn{
         color: #fff;
       }
@@ -926,18 +1000,23 @@ ul.nav{
 }
 
 .link-short{
-  padding: 9px 19px;
-  width: 150px - 40px;
-  height: 56px - 20px;
+  padding: 20px 19px 10px 19px;
+  width: 175px;
+  height: 56px - 30px;
   border: 1px solid $light-grey;
-  background: #fff;
+  background: #e0e0e0;
   @include border-radius(3px);
   display: block;
   float: left;
+  font-size: 20px !important;
 }
 
 .well-half{
   width: (600px / 2) - 20px;
+}
+
+.sponsor-placement{
+  width: 190px;
 }
 
 .menu-project{
@@ -946,11 +1025,53 @@ ul.nav{
   ul{
     & > li{
       position: relative;
+      height: 20px;
 
       a{
         /*font-family: 'Proxima Nova', sans-serif !important;*/
-        font-size: 13px !important;
+        font-size: 12px !important;
         letter-spacing: 2px !important;
+        padding-left: 30px;
+      }
+
+      &.overview{
+        a{
+          background: url('project_admin_overview.png') no-repeat bottom left;
+        }
+
+        &.active a{
+          background: url('project_admin_overview_active.png') no-repeat bottom left;
+        }
+      }
+
+      &.manage{
+        a{
+          background: url('project_admin_manage.png') no-repeat bottom left;
+        }
+
+        &.active a{
+          background: url('project_admin_manage_active.png') no-repeat bottom left;
+        }
+      }
+
+      &.funder{
+        a{
+          background: url('project_admin_funder.png') no-repeat bottom left;
+        }
+
+        &.active a{
+          background: url('project_admin_funder_active.png') no-repeat bottom left;
+        }
+      }
+
+      &.message{
+        a{
+          background: url('project_admin_message.png') no-repeat bottom left;
+        }
+
+        &.active a{
+          background: url('project_admin_message_active.png') no-repeat bottom left;
+        }
       }
 
       .nav-arrow{
@@ -1003,6 +1124,7 @@ iframe.twitter-follow-button{
 
 .menu-messages{
   position: relative;
+  letter-spacing: 1px;
 
   .arrow{
     position: absolute;
@@ -1232,6 +1354,7 @@ ul.chart-legend{
 
   .project-location{
     color: #fff;
+    font-size: 13px;
   }
 
   .of-italic{
@@ -1249,5 +1372,172 @@ ul.chart-legend{
 .step-container div.checkbox input[type=checkbox]{
   float: left;
 }
+
+ul.breadcrumbs{
+
+  & > li{
+
+    .description{
+      letter-spacing: 0;
+    }
+
+    &.highlighted{
+      background: #70bf4c;
+
+      .title{
+        color: #fff;
+      }
+
+      .description{
+        padding-right: 30px;
+      }
+    }
+  }
+}
+
+.funding ul li{
+  &.days-left{
+    margin-top: 0;
+
+    p{
+      padding-top: 10px;
+    }
+  }
+
+  &.funded{
+    font-size: 14px;
+
+    p{
+      padding-top: 10px;
+    }
+  }
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+  background-image: url("glyphicons-halflings.png");
+}
+
+.faqs{
+
+  .fixed{
+
+    dt{
+      text-transform: capitalize;
+      font-size: 12px;
+      padding: 0 15px;
+    }
+  }
+}
+
+.signed-in{
+  cursor: pointer;
+
+  ul{
+    & > li{
+      margin: 0 -19px;
+      padding: 0 19px;
+
+
+      &:last-child:hover a{
+        color: #fff !important;
+      }
+
+      &:hover{
+        background: $light-green;
+      }
+    }
+  }
+}
+
+.selectbox-wrapper{
+  ul{
+    & > li{
+      margin: 0 -19px;
+      padding: 9px 19px 10px 19px;
+
+      &:hover{
+        background: $light-green !important;
+      }
+    }
+  }
+}
+
+footer div ul li a{
+  &.lkd {
+    background: url("linkedin_footer.png") center no-repeat;
+    display: inline-block;
+    height: 12px;
+    width: 13px;
+    margin-left: 5px;
+  }
+
+  &.gplus {
+    background: url("gplus_footer.png") center no-repeat;
+    display: inline-block;
+    height: 12px;
+    width: 13px;
+    margin-left: 5px;
+  }
+}
+
+#flash_alert{
+  width: 900px;
+  margin: 0 auto;
+  background: #70bf4c;
+  color: #fff;
+  padding: 20px;
+  font-family: 'Georgia', serif;
+  font-size: 13px;
+  letter-spacing: 1px;
+  font-style: italic;
+  -webkit-border-bottom-right-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-radius-bottomright: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.sponsors{
+
+  .hero{
+
+    img {
+      display: inline-block;
+      margin-left: 100px;
+      margin-right: 40px;
+      position: relative;
+      vertical-align: middle;
+    }
+
+    .headline {
+      display: inline-block;
+      max-width: 540px;
+      position: relative;
+      vertical-align: middle;
+
+
+      h2{
+        color: #70bf4c;
+        font-family: 'Proxima Nova';
+        letter-spacing: normal;
+        margin: 0;
+        text-transform: none;
+      }
+
+      p{
+        color: #fff;
+        font: normal 14px/24px 'Proxima Nova';
+      }
+    }
+  }
+}
+
+
+
+
+
+
 
 

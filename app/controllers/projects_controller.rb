@@ -4,6 +4,7 @@ class ProjectsController < ApplicationController
   require "uri"
 
   before_filter :authenticate_user!, :only => [:index, :create, :edit, :update]
+  before_filter :set_session_page
 
   layout false, :only => "stripe_update"
 
@@ -34,7 +35,8 @@ class ProjectsController < ApplicationController
 
   def edit
     @project = Project.find(params[:id])
-    @benefits = SponsorshipBenefit.where(:project_id => @project.id)
+    sort_sponsorships = @project.project_sponsors.sort_by {|ps| ps.level_id}
+    @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
     session[:current_project] = @project.id
     logger.debug("Current session id is: #{session[:current_project]}")
     @project.update_attributes!(params[:project])
@@ -75,7 +77,11 @@ class ProjectsController < ApplicationController
         elsif level.eql?("silver")
           cost = 0.04 * @project.goal.to_i
         else
-          cost = 0.005 * @project.goal.to_i
+          if @project.goal.to_i * 0.1 >= 500
+            cost = 500
+          else
+            cost = 0.1 * @project.goal.to_i
+          end
         end
         if @project.sponsorship_benefits.blank? || params["#{level}"]["id_#{count}"].nil?
           unless params["#{level}"]["info_#{count}"].blank?
@@ -104,19 +110,27 @@ class ProjectsController < ApplicationController
       params[:project][:campaign_deadline] = params[:project][:duration].to_i.days.from_now.to_time
     end
 
+    session[:step] = params[:step]
+
     @sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits)
     @project.update_attributes!(params[:project])
 
-    # if @project.bitly.blank?
-    #   bitly = Bitly.client
-    #   page_url = bitly.shorten("#{request.scheme}://#{request.host_with_port}/projects/#{@project.id}")
-    #   @project.bitly = page_url.short_url
-    # end
+    if @project.bitly.blank?
+      bitly = Bitly.client
+      page_url = bitly.shorten("#{request.scheme}://#{request.host_with_port}/projects/#{@project.id}")
+      @project.bitly = page_url.short_url
+    end
+
     if @project.save
       respond_to do |format|
         format.json { render :json => @project.id }
       end
     end
+  end
+
+  def skip_sponsor
+    session[:step] = "fourth"
+    redirect_to :back
   end
 
   def stripe_update
@@ -141,17 +155,19 @@ class ProjectsController < ApplicationController
   end
 
   def save_video
+    link_video = generate_video_link(params[:video_link])
+
     @project = Project.find_by_id(session[:current_project])
     if params[:video_type].eql?("seed")
-      @project.seed_video = params[:video_link]
+      @project.seed_video = link_video
       @project.seed_mime_type = "video"
     else
-      @project.cultivation_video = params[:video_link]
+      @project.cultivation_video = link_video
       @project.cultivation_mime_type = "video"
     end
 
     @project.save
-    respond_to :js
+    redirect_to "/projects/#{@project.id}/edit#assets"
   end
 
   def save_image
@@ -170,6 +186,7 @@ class ProjectsController < ApplicationController
   end
 
   def add_perk
+    session[:step] = params[:step]
     perk_permission = params[:perk_permission].eql?("yes") ? true : false
     Project.update(params[:project], perk_permission: perk_permission)
     unless perk_permission.eql?(false) && params[:name].blank?
@@ -223,6 +240,7 @@ class ProjectsController < ApplicationController
     project.approval_date = Date.today.strftime("%F")
     if project.save!
       logger.debug("Saving!!!")
+      session[:step] = nil
       respond_to do |format|
         # Project.send_confirmation_email(project)
         format.json { render :json => project.ready_for_approval }
@@ -243,6 +261,29 @@ class ProjectsController < ApplicationController
     @project.save!
 
     redirect_to :back
+  end
+
+  private
+
+  def set_session_page
+    session[:page_active] = if action_name.eql?("edit") or action_name.eql?("new")
+      "funding"
+      else
+      "project"
+      end
+  end
+
+  def generate_video_link(link)
+    link_data = link.split("//")
+
+    if link_data[1][0].eql?("m")
+      video_code = link_data[1].split("&")
+      url = "http://" + video_code[0][2..-1]
+    else
+      url = link
+    end
+
+    url
   end
 
 end
