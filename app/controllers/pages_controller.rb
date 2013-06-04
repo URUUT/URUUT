@@ -2,6 +2,7 @@ class PagesController < ApplicationController
   layout "application", :except => [:index, :discover, :about, :contact]
   layout "landing", :only => [:index, :discover, :about, :home, :funding_sources]
   skip_before_filter :set_previous_page
+  before_filter :set_session_page
 
   def index
     projects_list
@@ -57,6 +58,12 @@ class PagesController < ApplicationController
     # end
     @projects = Project.where("city ILIKE :keyword OR category ILIKE :keyword AND live = 1 AND ready_for_approval = 0", :keyword=> "%#{params[:keyword]}%").by_city(params[:city]).by_category(params[:category])
     logger.debug(@projects)
+  end
+
+  private
+
+  def set_session_page
+    session[:page_active] = action_name.eql?("about") ? "about" : "project"
   end
 
 end

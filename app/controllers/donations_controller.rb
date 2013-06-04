@@ -1,5 +1,6 @@
 class DonationsController < ApplicationController
 	before_filter :authenticate_user!
+  before_filter :set_session_page
   layout "landing"
 
 	def new
@@ -74,10 +75,21 @@ class DonationsController < ApplicationController
     session[:card_last4] = params[:donation][:card_last4]
     session[:card_type] = params[:donation][:card_type]
     params[:donation][:perk_name] = params[:perk_name]
+    current_user.update_attribute(uruut_point: session[:payment_amount])
 		if @donation.update_attributes(params[:donation])
 			flash[:notice] = "Successfully updated donation."
 		end
 		redirect_to donation_steps_path
 	end
+
+  def more_donators
+    @donators = Donation.where(project_id: params[:id])
+  end
+
+  private
+
+  def set_session_page
+    session[:page_active] = "project"
+  end
 
 end

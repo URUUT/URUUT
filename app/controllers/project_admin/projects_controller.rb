@@ -16,6 +16,11 @@ class ProjectAdmin::ProjectsController < ApplicationController
     subheader
     @fundings = @project.all_funding_by_project(params[:page])
     @total_fundings = @project.total_funding_by_project
+
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   def update

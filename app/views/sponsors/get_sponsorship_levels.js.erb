@@ -1,2 +1,3 @@
 $(".sponsorship-level-details").html("<%=j render 'sponsorship_level'%>");
 $(".cost-level").html("<%= number_to_currency(@cost, precision: 0) %>");
+$('.sponsor-placement').attr('src', "<%= @image %>");
