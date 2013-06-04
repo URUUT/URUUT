@@ -98,6 +98,12 @@ a.green-link{
 
 .projects{
 
+  &.edit, &.new{
+    .btn{
+      background: $green2;
+    }
+  }
+
   &.edit{
 
     form.sponsor-info{
@@ -1248,6 +1254,28 @@ ul.chart-legend{
 
 .step-container div.checkbox input[type=checkbox]{
   float: left;
+}
+
+ul.breadcrumbs{
+
+  & > li{
+
+    .description{
+      letter-spacing: 0;
+    }
+
+    &.highlighted{
+      background: #70bf4c;
+
+      .title{
+        color: #fff;
+      }
+
+      .description{
+        padding-right: 30px;
+      }
+    }
+  }
 }
 
 
