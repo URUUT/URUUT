@@ -1,5 +1,6 @@
 class DonationsController < ApplicationController
 	before_filter :authenticate_user!
+  before_filter :set_session_page
   layout "landing"
 
 	def new
@@ -82,6 +83,12 @@ class DonationsController < ApplicationController
 
   def more_donators
     @donators = Donation.where(project_id: params[:id])
+  end
+
+  private
+
+  def set_session_page
+    session[:page_active] = "project"
   end
 
 end

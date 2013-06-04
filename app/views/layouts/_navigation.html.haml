@@ -3,9 +3,9 @@
 
 %ul.nav
   %li
-    = link_to "Fund Projects", browse_projects_path
+    = link_to "Fund Projects", browse_projects_path, style: "#{"color: #70BF4C !important" if session[:page_active].eql?("project")}"
   %li
-    = link_to "/projects/new" do
+    = link_to "/projects/new", style: "#{"color: #70BF4C !important" if session[:page_active].eql?("funding")}" do
       Get Funding
   %li
     = link_to about_pages_path do
