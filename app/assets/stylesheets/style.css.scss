@@ -36,10 +36,10 @@ $light-brown: #53544b;
 }
 
 @mixin transition ($transition) {
-  -webkit-transition: $transition;  
+  -webkit-transition: $transition;
   -moz-transition:    $transition;
-  -ms-transition:     $transition; 
-  -o-transition:      $transition;  
+  -ms-transition:     $transition;
+  -o-transition:      $transition;
 }
 @mixin transform($string){
   -webkit-transform: $string;
@@ -640,7 +640,7 @@ h3.tittle{
   -moz-border-radius-bottomleft: 5px;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
-  
+
   &, a{
     color: #fff;
   }
@@ -951,7 +951,7 @@ form {
 
     &:hover{
       background: lighten($green2, 10%);
-      
+
       .btn{
         color: #fff;
       }
@@ -1001,7 +1001,7 @@ ul.nav{
 
 .link-short{
   padding: 20px 19px 10px 19px;
-  width: 150px - 40px;
+  width: 175px;
   height: 56px - 30px;
   border: 1px solid $light-grey;
   background: #e0e0e0;
@@ -1469,6 +1469,7 @@ footer div ul li a{
     display: inline-block;
     height: 12px;
     width: 13px;
+    margin-left: 5px;
   }
 
   &.gplus {
@@ -1476,6 +1477,7 @@ footer div ul li a{
     display: inline-block;
     height: 12px;
     width: 13px;
+    margin-left: 5px;
   }
 }
 
@@ -1496,6 +1498,46 @@ footer div ul li a{
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
 }
+
+.sponsors{
+
+  .hero{
+
+    img {
+      display: inline-block;
+      margin-left: 100px;
+      margin-right: 40px;
+      position: relative;
+      vertical-align: middle;
+    }
+
+    .headline {
+      display: inline-block;
+      max-width: 540px;
+      position: relative;
+      vertical-align: middle;
+
+
+      h2{
+        color: #70bf4c;
+        font-family: 'Proxima Nova';
+        letter-spacing: normal;
+        margin: 0;
+        text-transform: none;
+      }
+
+      p{
+        color: #fff;
+        font: normal 14px/24px 'Proxima Nova';
+      }
+    }
+  }
+}
+
+
+
+
+
 
 
 
