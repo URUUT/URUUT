@@ -293,7 +293,7 @@
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
     %h3.title-form-video
-  = form_tag save_video_projects_path, method: :post, remote: true do
+  = form_tag save_video_projects_path, method: :post do
     .modal-body
       = url_field_tag "video_link", nil, placeholder: "youtube_url"
       = hidden_field_tag "video_type"
