@@ -329,11 +329,10 @@ $ ->
     data = $(this).serialize()
     console.log data
     $.ajax
-      type: 'POST'
+      type: "POST"
       url: projectPath
       data: data
     .done (data) ->
-      console.log "Success???"
       console.log data
       window.location.href = '/projects/' + data + '/edit#assets'
       window.location.reload(true)

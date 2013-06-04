@@ -221,14 +221,16 @@
       var data = $(this).serialize();
       console.log(data);
       $.ajax({
-        type: 'POST',
-        url: '#{project_path(@project.id)}',
+        type: "POST",
+        url: "#{project_path(@project.id)}",
         data: data
       }).done(function(data){
-        console.log("Success???");
+        console.log(data);
         window.location.href = '/projects/' + data + '/edit#assets';
         window.location.reload(true);
-      })
+      }).error(function(data) {
+        console.log(data);
+      });
     });
 
     /* $('li.submit a').click(function(event) {
