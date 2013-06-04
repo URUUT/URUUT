@@ -35,7 +35,8 @@ class ProjectsController < ApplicationController
 
   def edit
     @project = Project.find(params[:id])
-    @benefits = SponsorshipBenefit.where(:project_id => @project.id)
+    sort_sponsorships = @project.project_sponsors.sort_by {|ps| ps.level_id}
+    @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
     session[:current_project] = @project.id
     logger.debug("Current session id is: #{session[:current_project]}")
     @project.update_attributes!(params[:project])
@@ -76,7 +77,11 @@ class ProjectsController < ApplicationController
         elsif level.eql?("silver")
           cost = 0.04 * @project.goal.to_i
         else
-          cost = 0.005 * @project.goal.to_i
+          if @project.goal.to_i * 0.1 >= 500
+            cost = 500
+          else
+            cost = 0.1 * @project.goal.to_i
+          end
         end
         if @project.sponsorship_benefits.blank? || params["#{level}"]["id_#{count}"].nil?
           unless params["#{level}"]["info_#{count}"].blank?
