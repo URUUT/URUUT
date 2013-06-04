@@ -343,7 +343,10 @@
               .seed-num
                 %div COST
                 .amount
-                  = number_to_currency(@project.goal.to_i * 0.005)
+                  - if (@project.goal.to_i * 0.1) >= 500
+                    = number_to_currency(500)
+                  - else
+                    = number_to_currency(@project.goal.to_i * 0.1)
               %a.btn.pull-right{:href => "/projects/#{@project.id}/sponsors/new?level=bronze"}
                 Sponsor
                 %span

@@ -109,7 +109,10 @@
         .clearfix
           .pull-left
             %h5{style: "margin-bottom: 0;"} COST
-            %h3{style: "margin: 0;line-height: 20px;"}= number_to_currency((@project.goal.to_i * 0.005), precision: 0)
+            - if (@project.goal.to_i * 0.1) >= 500
+              %h3{style: "margin: 0;line-height: 20px;"}= number_to_currency(500)
+            - else
+              %h3{style: "margin: 0;line-height: 20px;"}= number_to_currency((@project.goal.to_i * 0.1), precision: 0)
           %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-4", :"sponsor-id" => "4"}
             SPONSOR
             %span
