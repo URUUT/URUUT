@@ -1463,6 +1463,39 @@ ul.breadcrumbs{
   }
 }
 
+footer div ul li a{
+  &.lkd {
+    background: url("linkedin_footer.png") center no-repeat;
+    display: inline-block;
+    height: 12px;
+    width: 13px;
+  }
+
+  &.gplus {
+    background: url("gplus_footer.png") center no-repeat;
+    display: inline-block;
+    height: 12px;
+    width: 13px;
+  }
+}
+
+#flash_alert{
+  width: 900px;
+  margin: 0 auto;
+  background: #70bf4c;
+  color: #fff;
+  padding: 20px;
+  font-family: 'Georgia', serif;
+  font-size: 13px;
+  letter-spacing: 1px;
+  font-style: italic;
+  -webkit-border-bottom-right-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-radius-bottomright: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
 
 
 

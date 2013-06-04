@@ -75,6 +75,7 @@ class DonationsController < ApplicationController
     session[:card_last4] = params[:donation][:card_last4]
     session[:card_type] = params[:donation][:card_type]
     params[:donation][:perk_name] = params[:perk_name]
+    current_user.update_attribute(uruut_point: session[:payment_amount])
 		if @donation.update_attributes(params[:donation])
 			flash[:notice] = "Successfully updated donation."
 		end

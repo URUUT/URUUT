@@ -1,6 +1,6 @@
 .span8{:style => "margin-top:35px;"}
   %h4 Login
-  = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "well"}) do |f|
+  = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "well clearfix"}) do |f|
     = devise_error_messages!
 
     %div
@@ -12,10 +12,18 @@
       = f.password_field :password, class: "span7"
 
     - if devise_mapping.rememberable?
-      %div
-        = f.check_box :remember_me, :style => "display:inline-block;"
-        = f.label :remember_me, :style => "display:inline-block;vertical-align:-3px;"
-    %div.inline
+      .clearfix{:style => "padding-bottom: 10px;"}
+
+        %div{:style => "float: left;"}
+          = f.check_box :remember_me, :style => "display:inline-block;"
+          = f.label :remember_me, :style => "display:inline-block;vertical-align:-3px;"
+        %div{:style => "float: left; margin-left: 40px; height: 19px; padding-top: 5px;"}
+          - if devise_mapping.recoverable? && controller_name != 'passwords'
+            = link_to "Forgot your password?", new_password_path(resource_name), class: "green-link"
+
+    %hr{:style => "background: #e0e0e0; margin-left: -19px; margin-right: -19px; margin-bottom: 10px"}
+
+    %div.clearfix{:style => "text-align: center"}
       = button_tag(type: 'submit', class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:left;") do
         Sign In
         = image_tag('arrow.png')
