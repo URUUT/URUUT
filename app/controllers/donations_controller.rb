@@ -80,4 +80,8 @@ class DonationsController < ApplicationController
 		redirect_to donation_steps_path
 	end
 
+  def more_donators
+    @donators = Donation.where(project_id: params[:id])
+  end
+
 end
