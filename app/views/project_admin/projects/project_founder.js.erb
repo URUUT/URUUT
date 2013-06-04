@@ -1,19 +1,23 @@
-$('.sub-menu-project').attr('style', '');
-$('.founder').attr('style', 'color: #000');
+$(".admin-menu li").removeClass("active");
+$(".founder").parent().addClass("active");
+
 $('.main-content').html("<%=j render :partial => 'founder' %>");
 
 <% if params[:type].eql?("sponsor") %>
-$(".sponsor-type").attr("style", "background: #81C263");
-$(".founder-all").attr('style', '');
+$(".founder-all").attr("style", "");
+$(".menu-messages").removeClass('active');
+$(".sponsor-type").addClass('active').append("<div class='arrow'></div>").append('<div class="arrow"></div>');
 var header = "PROJECT SPONSORS";
 <% elsif params[:type].eql?("individual") %>
-$(".individuals-type").attr("style", "background: #81C263");
-$(".founder-all").attr('style', '');
+$(".menu-messages").removeClass('active');
+$(".individuals-type").addClass('active').append("<div class='arrow'></div>").append('<div class="arrow"></div>');
+$(".founder-all").attr("style", "");
 var header = "INDIVIDUAL CONTRIBUTORS";
 <% end %>
 
 <% if params[:type].blank?  %>
-$(".founder-all").attr("style", "background: #81C263");
+$(".menu-messages").removeClass('active');
+$(".founder-all").addClass('active').append("<div class='arrow'></div>").append('<div class="arrow"></div>');
 var header = "ALL PROJECT FUNDERS";
 <% end %>
 

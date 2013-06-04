@@ -23,6 +23,7 @@ gem 'bitly'
 gem 'filepicker-rails'
 gem 'heroku'
 gem 'therubyracer'
+gem 'has_scope'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -56,7 +57,7 @@ group :development, :test do
   # gem 'meta_request'
   # gem 'annotate'
   # gem 'bullet'
-  # gem 'debugger'
+  gem 'debugger'
   # gem 'flay'
   # gem 'hirb'
   # gem 'lol_dba'

@@ -1,20 +1,20 @@
 %div
   %h2.title POST A MESSAGE TO SOCIAL MEDIA
-  .post-to-social.well{:style => "float:left"}
-    %div.row
+  .post-to-social.well
+    %div.clearfix
       .span6
-        %span
+        %h4.label-green{:style => "margin-bottom: 0;"}
           FACEBOOK
         %p Post a message on your facebook page
         = link_to image_tag("fb-post.png"), "javascript:shareFb()"
       .span6
-        %span
+        %h4.label-green{:style => "margin-bottom: 0;"}
           TWITTER
         %p Tweet to your Twitter followers
         = link_to image_tag("tw-post.png"), "https://twitter.com/share", "data-url" => root_url, "target" => "blank"
-    %div.row
-      .span6
-        %span
+    %div.clearfix
+      %div
+        %h4.label-green{:style => "margin-bottom: 0;"}
           LINKEDIN
         %p Post a message on Linkedin
         = link_to image_tag("li-post.png"), "https://www.linkedin.com/cws/share?url=#{root_url}"

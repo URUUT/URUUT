@@ -34,17 +34,9 @@
           type: 'pie',
           name: 'Browser share',
           data: [
-              ['Firefox',   45.0],
-              ['IE',       26.8],
-              {
-                  name: 'Chrome',
-                  y: 12.8,
-                  sliced: true,
-                  selected: true
-              },
-              ['Safari',    8.5],
-              ['Opera',     6.2],
-              ['Others',   0.7]
+              ['BUSINESS SPONSORS', #{count_percentage(@total_fundings[:total_amount], @total_fundings[:business_amount]).split("%").first } ],
+              ['FOUNDATION SPONSORS', #{count_percentage(@total_fundings[:total_amount], @total_fundings[:foundation_amount]).split("%").first} ],
+              ['INDIVIDUAL CONTRIBUTORS', #{count_percentage(@total_fundings[:total_amount], @total_fundings[:individual_amount]).split("%").first} ]
           ]
       }]
     });
@@ -104,19 +96,19 @@
 .container.overview-page
   .row-fluid
     .span8.pull-left
-      %h2.title FUNDING TRACKER
-      .well.info
+      %h2.tittle FUNDING TRACKER
+      .info
         .chart-bar
 
-      %h2.title FUNDING BREAKDOWN BY DAY
-      .well.info
+      %h2.tittle FUNDING BREAKDOWN BY DAY
+      .info
         %table.table.table-striped
           %tr
             %th Date
             %th Total Funding For Day
             %th Individual Contributors
             %th Sponsors
-          - @fundings.group_by{ |p| p.updated_at.to_date  }.each do |date, founders|
+          - @fundings.each do |date, founders|
             - individual_count, sponsors_count, amount = 0, 0, 0
             - founders.each do |founder|
               - if founder.type_founder.eql?("individual")
@@ -125,13 +117,34 @@
               - else
                 - sponsors_count += 1
                 - amount += founder.cost.to_i
-
             %tr
               %td= date.strftime("%m/%d/%Y")
-              %td= amount
+              %td= "$#{amount.round(2)}"
               %td= individual_count
               %td= sponsors_count
+
+        = paginate @fundings
     .span4.pull-right
-      %h2.title FUNDING SOURCES
+      %h2.title{:style =>"margin-bottom: 5px;"}
+        FUNDING SOURCES
       %div{:class => "well info"}
         .chart-pie
+
+        .percentage
+        %ul.chart-legend
+          %li
+            .color.business
+            .legend-info
+              %h5 Business Sponsors
+              %h4= "#{count_percentage(@total_fundings[:total_amount], @total_fundings[:business_amount])} - #{@total_fundings[:business_amount]}"
+          %li
+            .color.foundation
+            .legend-info
+              %h5 Business Sponsors
+              %h4= "#{count_percentage(@total_fundings[:total_amount], @total_fundings[:foundation_amount])} - #{@total_fundings[:foundation_amount]}"
+          %li
+            .color.individual
+            .legend-info
+              %h5 Business Sponsors
+              %h4= "#{count_percentage(@total_fundings[:total_amount], @total_fundings[:individual_amount])} - #{@total_fundings[:individual_amount]}"
+
