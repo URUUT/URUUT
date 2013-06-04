@@ -110,6 +110,8 @@ class ProjectsController < ApplicationController
       params[:project][:campaign_deadline] = params[:project][:duration].to_i.days.from_now.to_time
     end
 
+    session[:step] = params[:step]
+
     @sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits)
     @project.update_attributes!(params[:project])
 
@@ -179,6 +181,7 @@ class ProjectsController < ApplicationController
   end
 
   def add_perk
+    session[:step] = params[:step]
     perk_permission = params[:perk_permission].eql?("yes") ? true : false
     Project.update(params[:project], perk_permission: perk_permission)
     unless perk_permission.eql?(false) && params[:name].blank?
@@ -232,6 +235,7 @@ class ProjectsController < ApplicationController
     project.approval_date = Date.today.strftime("%F")
     if project.save!
       logger.debug("Saving!!!")
+      session[:step] = nil
       respond_to do |format|
         # Project.send_confirmation_email(project)
         format.json { render :json => project.ready_for_approval }

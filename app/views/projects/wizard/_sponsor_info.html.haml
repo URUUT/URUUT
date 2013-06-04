@@ -54,6 +54,8 @@
       = f.label :facebook_page, "Facebook Page", class: "label-green"
       = f.text_field :facebook_page, :required => true, class: "span4"
 
+    = hidden_field_tag "step", "first"
+
     %div
       %p.label-green{:style => "font: bold 12px/12px 'Proxima Nova', arial, sans-serif;text-transform: uppercase;"}
         Payment With Stripe
