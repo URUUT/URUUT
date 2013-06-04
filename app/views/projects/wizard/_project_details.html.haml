@@ -54,6 +54,8 @@
 
     %hr{:style => "background: #e0e0e0; margin: 0 -19px"}
 
+    = hidden_field_tag "step", "second"
+
     %div
       = f.submit "Save And Continue", :class => "btn", :id => "project-submit"
 

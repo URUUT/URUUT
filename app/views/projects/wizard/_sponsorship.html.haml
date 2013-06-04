@@ -229,6 +229,7 @@
           /   = check_box_tag "Test"
           /   Lorem ipsum dolor sit amet.
       %hr{:style => "background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
+      = hidden_field_tag "step", "fourth"
       %div
         = f.submit "Save And Continue", :class => "btn", :id => "project-submit", :style => "position: relative;display:block;margin:0 auto;"
 

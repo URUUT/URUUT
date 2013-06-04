@@ -1,5 +1,6 @@
 .step-container{"data-id" => "assets"}
   = form_for(@project, :html => {:multipart => true }) do |f|
+    = hidden_field_tag "step", "last"
     - if @project.large_image
       #large_image{:style => "background-image: url(#{@project.large_image}); -webkit-background-size: cover; background-size: cover;"}
         .div{style: "height: 546px;", id: "image-priview"}

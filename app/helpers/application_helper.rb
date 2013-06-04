@@ -20,18 +20,18 @@ module ApplicationHelper
     url.sub(/^https?\:\/\//, '').sub(/^www./,'')
   end
 
-	def percent_funded(id)
-		project = Project.find(id)
-		donation = Donation.where("project_id = ?", id)
-		total_funded = 0.0
-		donation.each do |d|
-			total_funded = total_funded + d.amount.to_f
-		end
-    project_goal = project.goal.to_s.gsub(/,/, '').to_f
+  def percent_funded(id)
+    project = Project.find(id)
+    donation = Donation.where("project_id = ?", id)
+    total_funded = 0.0
+    donation.each do |d|
+     total_funded = total_funded + d.amount.to_f
+   end
+   project_goal = project.goal.to_s.gsub(/,/, '').to_f
 
-		percentage = total_funded/project_goal
+   percentage = total_funded/project_goal
 
-		return percentage.round(2) * 100
+   return percentage.round(2) * 100
 		# return total_funded
 		# return percentage
 		# return total_funded
@@ -58,13 +58,13 @@ module ApplicationHelper
     return total_funded
   end
 
-	def amount_funded(id)
-		project = Project.find(id)
-		donation = Donation.where("project_id = ?", id)
-		total_funded = 0.0
-		donation.each do |d|
-			total_funded = total_funded + d.amount.to_f
-		end
+  def amount_funded(id)
+    project = Project.find(id)
+    donation = Donation.where("project_id = ?", id)
+    total_funded = 0.0
+    donation.each do |d|
+     total_funded = total_funded + d.amount.to_f
+   end
 		# percentage = total_funded/project.goal
 
 		# return percentage.round(2) * 100
@@ -122,6 +122,40 @@ module ApplicationHelper
   def count_percentage(total, amount)
     percentage = amount.to_f / total.to_f * 100.0
     return "#{percentage.to_s[0..3]} %"
+  end
+
+  def wizard_link(step, project)
+    if step.eql?("sponsor_info")
+      if session[:step].eql?("first")
+        "/projects/#{project.id}/edit#sponsor-info"
+      else
+        "javascript:void(0)"
+      end
+    elsif step.eql?("project_details")
+      if session[:step].eql?("second") or session[:step].eql?("first")
+        "/projects/#{project.id}/edit#project-details"
+      else
+        "javascript:void(0)"
+      end
+    elsif step.eql?("perks")
+      if session[:step].eql?("third") or session[:step].eql?("second")
+        "/projects/#{project.id}/edit#perks"
+      else
+        "javascript:void(0)"
+      end
+    elsif step.eql?("sponsorship")
+      if session[:step].eql?("fourth") or session[:step].eql?("third")
+        "/projects/#{project.id}/edit#sponsorship"
+      else
+        "javascript:void(0)"
+      end
+    elsif step.eql?("assets")
+      if session[:step].eql?("last") or session[:step].eql?("fourth")
+        "/projects/#{project.id}/edit#assets"
+      else
+        "javascript:void(0)"
+      end
+    end
   end
 
 end
