@@ -1,7 +1,8 @@
 .full-width.banner
   .container
     .span4
-      = image_tag "#{@user.avatar}", :class => "img-circle avatar"
+      .avatar
+        = image_tag "#{@user.avatar}", :class => "img-circle"
 
       .user-name-wrapper
         %h4.user-name
@@ -68,7 +69,8 @@
     %h3.title{:style => "margin-bottom:5px;"} #{who(:whose)} badges
     .well.info.badge-wrapper
       - @user.badges.each do |badge|
-        = image_tag badge.custom_fields[:image], :class => "profile-badge img-circle", :data => { :content => badge.name }
+        .profile-badge
+          = image_tag badge.custom_fields[:image], :class => "img-circle", :data => { :content => badge.name }
 
     %div{:style => "margin-top:-20px;margin-bottom:5px;float:left;"}
       %h3.title #{who(:whose)} information
