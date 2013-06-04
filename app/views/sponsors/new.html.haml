@@ -125,13 +125,13 @@
             %h4 SPONSORSHIP COST
             %h1.cost-level.label-green-big.label-green #{number_to_currency(@cost, precision: 0)}
             - if session[:level_id].eql?(1)
-              = image_tag "platinum-placement.png", class: "sponsor-placement"
+              = image_tag "platinum-placement.png", class: "sponsor-placement platinum"
             - elsif session[:level_id].eql?(2)
-              = image_tag "gold-placement.png", class: "sponsor-placement"
+              = image_tag "gold-placement.png", class: "sponsor-placement gold"
             - elsif session[:level_id].eql?(3)
-              = image_tag "silver-placement.png", class: "sponsor-placement"
+              = image_tag "silver-placement.png", class: "sponsor-placement silver"
             -else
-              = image_tag "bronze-placement.png", class: "sponsor-placement"
+              = image_tag "bronze-placement.png", class: "sponsor-placement bronze"
 
           .pull-right{:style => "width: 320px;"}
             = label_tag :project_sponsor_name do
@@ -146,8 +146,9 @@
               %h2{:style => "color: #70bf4c"}
                 #{@level} sponsor
               %ul.normal-font
-                - @first_benefits.each do |benefit|
-                  %li #{benefit.name}
+                - if !@first_benefits.nil?
+                  - @first_benefits.each do |benefit|
+                    %li #{benefit.name}
 
       %h4 SPONSOR INFORMATION
       .well
@@ -258,6 +259,15 @@
     $("#project_sponsor_level_id option[value='"+ selectedLevel +"']").attr("selected", "selected");
 
     Stripe.setPublishableKey('pk_test_BTNPlS59UIPJC5Fnp7CR9It6');
+
+    $('.sponsor-placement').hide();
+    switch ($('#project_sponsor_level_id').val())
+    {
+      case '1': $(".platinum").show(); break;
+      case '2': $(".gold").show(); break;
+      case '3': $(".silver").show(); break;
+      case '4' : $(".bronze").show(); break;
+    }
 
     var processCard = function() {
       var card;
