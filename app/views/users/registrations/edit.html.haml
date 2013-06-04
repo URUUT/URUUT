@@ -7,7 +7,7 @@
 
       %div
         = f.label :avatar, "Profile image "
-        = f.hidden_field :avatar, :value => ""
+        = f.hidden_field :avatar, :value => current_user.avatar
         .row{:style => "margin-left:0px;margin-bottom:10px;"}
           .span2
             = image_tag "#{current_user.avatar}", :id => "avatar-img"
