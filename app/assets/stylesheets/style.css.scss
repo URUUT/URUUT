@@ -96,11 +96,23 @@ a.green-link{
   }
 }
 
+h1, h2, h3, h4, h5{
+  span.subtittle{
+    font: normal 11px/11px "Georgia", georgia, serif;
+    font-style: italic;
+    text-transform: none;
+  }
+}
+
 .projects{
 
   &.edit, &.new{
     .btn{
       background: $green2;
+
+      &.black-btn{
+        background: $grey;
+      }
     }
   }
 
@@ -649,14 +661,27 @@ h3.tittle{
 }
 
 .badge-wrapper{
+  @include cleared;
+
   .profile-badge{
     width: 72px;
     height: 72px;
-    border: 3px solid #fff;
+    padding: 3px;
+    /*border: 3px solid #fff;*/
+    border: none;
     margin-right: 9px;
+    @include border-radius(500px);
+    background: #fff;
+    float: left;
+    text-align: center;
+
+    img{
+      width: 72px;
+      height: 72px;
+    }
 
     &:hover{
-      border-color: $green2;
+      background: $green2;
     }
 
     &:nth-child(3n){
@@ -672,14 +697,27 @@ h3.tittle{
 }
 
 .banner{
+  @include cleared;
 
-  img.avatar{
-    height: 100px;
-    width: 100px;
+  .avatar{
+    height: 97px;
+    width: 97px;
+    padding: 3px;
+    background: #fff;
+    float: left;
+    @include border-radius(500px);
+
+    img{
+      width: 97px;
+      height: 97px;
+    }
   }
 
   .user-name-wrapper{
     float: left;
+    margin-left: 10px;
+    margin-top: 40px;
+    width: 187px;
   }
 
   .bordered-left{
@@ -708,7 +746,7 @@ h3.tittle{
       margin-bottom: 3px;
       font-size: 12px;
       line-height: 14px;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
     }
 
     .profile-img{
@@ -1278,4 +1316,26 @@ ul.breadcrumbs{
   }
 }
 
+.funding ul li{
+  &.days-left{
+    margin-top: 0;
+
+    p{
+      padding-top: 10px;
+    }
+  }
+
+  &.funded{
+    font-size: 14px;
+
+    p{
+      padding-top: 10px;
+    }
+  }
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+  background-image: url("glyphicons-halflings.png");
+}
 
