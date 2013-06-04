@@ -90,7 +90,7 @@ class Project < ActiveRecord::Base
     fundings = populate_funding_by_project
     total_data = []
 
-    fundings.group_by{ |p| p.updated_at.to_date  }.each { |funding| total_data << funding }
+    fundings.group_by{ |p| p.updated_at.to_date  }.sort {|x,y| y <=> x }.each { |funding| total_data << funding }
     Kaminari.paginate_array(total_data).page(page_num).per(25)
   end
 
