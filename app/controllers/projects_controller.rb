@@ -4,6 +4,7 @@ class ProjectsController < ApplicationController
   require "uri"
 
   before_filter :authenticate_user!, :only => [:index, :create, :edit, :update]
+  before_filter :set_session_page
 
   layout false, :only => "stripe_update"
 
@@ -243,6 +244,16 @@ class ProjectsController < ApplicationController
     @project.save!
 
     redirect_to :back
+  end
+
+  private
+
+  def set_session_page
+    session[:page_active] = if action_name.eql?("edit") or action_name.eql?("new")
+      "funding"
+      else
+      "project"
+      end
   end
 
 end

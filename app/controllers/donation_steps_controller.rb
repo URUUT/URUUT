@@ -1,6 +1,7 @@
 class DonationStepsController < ApplicationController
   include Wicked::Wizard
   steps :confirmation, :thank_you
+  before_filter :set_session_page
 
   def show
     if session[:donation_id]
@@ -51,6 +52,12 @@ class DonationStepsController < ApplicationController
     else
       redirect_to wizard_path(:confirmation)
     end
+  end
+
+  private
+
+  def set_session_page
+    session[:page_active] = "project"
   end
 
 end
