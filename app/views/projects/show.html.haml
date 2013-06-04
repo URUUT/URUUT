@@ -374,11 +374,12 @@
 
       %h4.title{:style => 'margin-top:50px;'}Partners(#{@project.donations.count})
       %div.business
-        - @project.donations.each do |donation|
+        - @project.donations.limit(20).each do |donation|
           = image_tag donation.user.avatar, style: "width: 27px; height:27px;"
-      = link_to "javascript:void(0)", :class => 'btn more', :style => 'margin-top:10px;' do
-        Show More
-        %span
+      - if @project.donations.count > 20
+        = link_to more_donators_donation_path(@project.id), :class => 'btn more', :style => 'margin-top:10px;', remote: true do
+          Show More
+          %span
 
 %script{:src => "http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"}
 %script{:src => "http://maps.stamen.com/js/tile.stamen.js?v1.2.1"}
