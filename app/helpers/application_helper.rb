@@ -12,6 +12,10 @@ module ApplicationHelper
     end
   end
 
+  def check_availibility(project, level)
+    total_sponsor = project.project_sponsors.where(level_id: level).count
+  end
+
   def strip_url(url)
     url.sub(/^https?\:\/\//, '').sub(/^www./,'')
   end
@@ -113,6 +117,11 @@ module ApplicationHelper
       "BRONZE" => bronze_sponsors
     }
     sponsors
+  end
+
+  def count_percentage(total, amount)
+    percentage = amount.to_f / total.to_f * 100.0
+    return "#{percentage.to_s[0..3]} %"
   end
 
 end

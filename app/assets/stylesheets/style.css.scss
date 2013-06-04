@@ -2,7 +2,7 @@ $super-light-grey: #f5f5f5;
 $light-grey: #b2b2b2;
 $grey: #464646;
 $green: #48c94c;
-$green2: #70bf4c;
+$green2: #81C263; /* #70bf4c;*/
 $light-green: #bee0b4;
 $brown: #403e37;
 $light-brown: #53544b;
@@ -87,7 +87,23 @@ p{
   }
 }
 
+a.green-link{
+  color: $green2;
+  text-decoration: underline;
+
+  &:hover{
+    text-decoration: none;
+  }
+}
+
 .projects{
+
+  &.edit{
+
+    form.sponsor-info{
+      margin-top: 190px;
+    }
+  }
 
   &.show{
 
@@ -99,6 +115,13 @@ p{
       position: relative;
       top: 0;
       display: block;
+
+      .funding-info{
+
+        a{
+          color: #fff;
+        }
+      }
     }
   }
 }
@@ -106,7 +129,7 @@ p{
 .tooltip{
 
   &.top{
-    
+
     .tooltip-arrow{
       border-top-color: #fff;
     }
@@ -444,6 +467,11 @@ h3, h4, h5{
 .tax-deductible{
   width: 20px;
   height: 20px;
+
+  &.deductable-black{
+    width: 30px;
+    height: 30px;
+  }
 }
 
 .progress-container{
@@ -538,6 +566,10 @@ h1, h2, h3, h4{
     padding-bottom: 5px;
     margin-bottom: 20px;
   }
+}
+
+h3.tittle{
+  padding-bottom: 10px;
 }
 
 .project-admin-panel{
@@ -655,6 +687,9 @@ h1, h2, h3, h4{
 }
 
 .well{
+
+  border-top-color: $green2;
+
   &.info{
     /*font-family: 'Proxima Nova Semi', sans-serif;*/
     color: lighten($grey, 30%);
@@ -851,6 +886,7 @@ form {
     .btn{
       background: transparent;
       display: block;
+      width: 100%;
     }
 
     input[type="file"]{
@@ -866,6 +902,10 @@ form {
 
 .label-green{
   color: $green2 !important;
+
+  span{
+    color: $grey !important;
+  }
 }
 
 ul.nav{
@@ -899,4 +939,315 @@ ul.nav{
 .well-half{
   width: (600px / 2) - 20px;
 }
+
+.menu-project{
+  background: $green2;
+
+  ul{
+    & > li{
+      position: relative;
+
+      a{
+        /*font-family: 'Proxima Nova', sans-serif !important;*/
+        font-size: 13px !important;
+        letter-spacing: 2px !important;
+      }
+
+      .nav-arrow{
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+        bottom: -25px;
+        left: 50%;
+        margin-left: -15px;
+        border-top-color: $green2;
+        border-width: 15px 15px 0;
+        display: none;
+      }
+
+      &.active{
+        a{
+          color: $grey !important;
+        }
+
+        .nav-arrow{
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+.selectParent{
+
+  #type{
+    font: bold 24px/24px arial, helvetica, sans-serif;
+    width: 110%;
+    background: transparent;
+    height: 65px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    padding: 19px;
+  }
+}
+
+iframe.twitter-follow-button{
+  display: block;
+  float: left;
+  margin-left: 10px;
+}
+
+.menu-messages{
+  position: relative;
+
+  .arrow{
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    top: 0;
+    right: -15px;
+    border-left-color: $green2;
+    border-width: 20px 0 20px 15px;
+    display: none;
+  }
+
+  &.active{
+    margin-left: -19px;
+    margin-right: -19px;
+    padding-left: 19px;
+    background: $green2;
+    @include box-shadow(0 1px 2px rgba(0,0,0,0.5));
+
+    a{
+      color: #fff !important;
+      @include text-shadow(0 2px 1px rgba(0,0,0,0.3));
+    }
+
+    .arrow{
+      display: block;
+    }
+  }
+}
+
+.cover-content, .images-content{
+
+  margin-bottom: 40px;
+  padding-bottom: 30px;
+
+  button[type="button"]{
+    background: $green2;
+    @include border-radius(5px);
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.45);
+    color: #fff;
+    font-size: 18px;
+    margin-top: 20px;
+    padding: 20px 30px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.45);
+    width: auto !important;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+}
+
+.image_warp, .cultivation-image-content, .email-header-priview{
+  position: relative;
+  /*height: 500px;*/
+  overflow: hidden;
+
+  .action_button{
+    background: #fff;
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    padding: 10px 20px;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+    button[type="button"], .btn{
+      background: transparent;
+      color: $green2;
+      font-family: 'Georgia', serif;
+      font-style: italic;
+      text-decoration: underline;
+      text-transform: capitalize;
+      font-size: 13px;
+      line-height: 20px;
+      border: none;
+      letter-spacing: 0;
+      padding: 0 10px;
+
+      &:hover{
+        text-decoration: none;
+      }
+
+    }
+
+    .btn{
+      border-left: 1px solid $light-grey !important;
+    }
+  }
+}
+
+.cover-content{
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.cover-content-image{
+
+  img{
+    width: 100%;
+  }
+}
+
+.images-content{
+
+
+  .list-image{
+    display: block;
+    float: left;
+    width: 31%;
+    margin-left: 2%;
+    margin-top: 20px;
+
+    img{
+      width: 100%;
+    }
+
+    .image-delete-button{
+      font-family: 'Georgia', serif;
+      font-style: italic;
+      color: $green2;
+      text-transform: capitalize;
+      margin-top: 10px;
+      text-decoration: underline;
+
+      &:hover{
+        text-decoration: none;
+      }
+    }
+
+    &:first-child{
+      margin-left: 0;
+    }
+  }
+}
+
+
+form.sponsor-info{
+  margin-top: 0;
+}
+
+#sponsor_level_input{
+  height: 56px - 38px;
+  width: 455px !important;
+}
+
+#sponsor_level_container{
+  ul{
+    width: 100%;
+
+    & > li{
+      width: 100%;
+    }
+  }
+}
+
+.cs_import.btn{
+  background: $green2 url('mail-btn.png') no-repeat center left;
+  padding-left: 60px;
+  padding-right: 10px;
+  @include border-radius(5px);
+  text-align: left;
+  font-size: 16px;
+  letter-spacing: 1px;
+  line-height: 18px;
+  text-transform: capitalize;
+}
+
+ul.chart-legend{
+
+  margin: 0;
+  margin-top: 20px;
+
+  & > li{
+    list-style: none;
+    display: block;
+    margin-bottom: 20px;
+    @include cleared;
+
+    .color{
+      height: 40px;
+      width: 40px;
+      background: $grey;
+      float: left;
+
+      &.business{
+        background: $green2;
+      }
+      &.foundation{
+        background: $light-grey;
+      }
+      &.individual{
+        background: $grey;
+      }
+    }
+
+    .legend-info{
+      margin-left: 50px;
+    }
+
+    h4{
+      color: $light-grey !important;
+      margin: 0;
+    }
+
+    h5{
+      color: $grey !important;
+      margin: 0;
+    }
+  }
+}
+
+.banner{
+  padding-top: 20px;
+
+  h2, h3, h4, h5, h6{
+    margin: 0;
+  }
+
+  .project-tittle{
+    color: $green2;
+  }
+
+  .project-location{
+    color: #fff;
+  }
+
+  .of-italic{
+    color: #ccc;
+    font-family: 'Georgia', serif;
+    font-style: italic;
+  }
+
+  .highlighted-value{
+    color: $green2;
+    font-size: 28px;
+  }
+}
+
+.step-container div.checkbox input[type=checkbox]{
+  float: left;
+}
+
 

@@ -4,10 +4,13 @@
       %div{:style => "margin-top: 60px"}
       %div{:class => "well info"}
         %h3{:class => "menu-messages founder-all", :style => "background: #81C263"}
-          = link_to "ALL PROJECT FUNDERS", project_admin_project_project_founder_path(@project.id), remote: true
+          = link_to "ALL PROJECT FUNDERS", project_admin_project_project_founder_path(@project.id), remote: true, style: "font-size: 10px"
+          .arrow
         %h3{:class => "menu-messages sponsor-type"}
-          = link_to "PROJECT SPONSORS", "/project_admin/projects/#{@project.id}/project_founder?type=sponsor", remote: true
+          = link_to "PROJECT SPONSORS", "/project_admin/projects/#{@project.id}/project_founder?type=sponsor", remote: true, style: "font-size: 10px"
+          .arrow
         %h3{:class => "menu-messages individuals-type"}
-          = link_to "INDIVIDUAL CONTRIBUTORS", "/project_admin/projects/#{@project.id}/project_founder?type=individual", remote: true
+          = link_to "INDIVIDUAL CONTRIBUTORS", "/project_admin/projects/#{@project.id}/project_founder?type=individual", remote: true, style: "font-size: 10px"
+          .arrow
     .span9.pull-right.founder-content
       = render "founder_content"

@@ -1,11 +1,22 @@
 = javascript_include_tag "https://js.stripe.com/v2/"
+
+:javascript
+  function updateSponsorLogo (event) {
+    console.log(event.fpfile.url);
+    var logoImage = event.fpfile.url;
+
+    $('.logo-company').attr('src', logoImage)
+    $('.logo-company').attr('style', 'width: 100px')
+    $("#project_sponsor_logo").val(logoImage)
+  }
+
 .full-width.hero
   .container
     %h2 This is a placeholder
 .container
   .row-fluid
     .span8
-      %h4.title CHECKOUT
+      %h4.tittle{:style => "padding-bottom: 10px;"} CHECKOUT
       .project-location
         %h4.label-green
           = @project.project_title
@@ -34,9 +45,14 @@
             %h3{style: "margin: 0;line-height: 20px;"}= number_to_currency((@project.goal.to_i * 0.3), precision: 0)
             .amount-percentage
               (30% of Funding Goal)
-          %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-1", :"sponsor-id" => "1"}
-            SPONSOR
-            %span
+          - if check_availibility(@project, 1) < 1
+            %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-1", :"sponsor-id" => "1"}
+              SPONSOR
+              %span
+          -else
+            %a.btn.pull-right{:href => "javascript:void(0)", style: "display: block; margin-top: 10px;"}
+              Sponsor
+              %span
         %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;font-family:'Proxima Nova';"}
           Gold
           %span.small-heading
@@ -52,9 +68,14 @@
             %h3{style: "margin: 0;line-height: 20px;"}= number_to_currency((@project.goal.to_i * 0.1), precision: 0)
             .amount-percentage
               (10% of Funding Goal)
-          %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-2", :"sponsor-id" => "2"}
-            SPONSOR
-            %span
+          - if check_availibility(@project, 2) < 3
+            %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-2", :"sponsor-id" => "2"}
+              SPONSOR
+              %span
+          -else
+            %a.btn.pull-right{:href => "javascript:void(0)", style: "display: block; margin-top: 10px;"}
+              Sponsor
+              %span
         %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;font-family:'Proxima Nova';"}
           Silver
           %span.small-heading
@@ -70,9 +91,14 @@
             %h3{style: "margin: 0;line-height: 20px;"}= number_to_currency((@project.goal.to_i * 0.04), precision: 0)
             .amount-percentage
               (4% of Funding Goal)
-          %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-3", :"sponsor-id" => "3"}
-            SPONSOR
-            %span
+          - if check_availibility(@project, 2) < 3
+            %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-3", :"sponsor-id" => "3"}
+              SPONSOR
+              %span
+          - else
+            %a.btn.pull-right{:href => "javascript:void(0)", style: "display: block; margin-top: 10px;"}
+              Sponsor
+              %span
         %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;font-family:'Proxima Nova';"}
           Bronze
         %ul.normal-font
@@ -89,12 +115,12 @@
             %span
 
     = form_for(@sponsor, :url => project_sponsors_path, :html => {:class => "span8", :style => "margin-left: 0;", multipart: true, method: 'POST'}) do |f|
-      .well.clearfix
+      .well.clearfix{:style => "border-top: none;"}
         .payment-errors
         .span12{:style => "background-color: #f5f5f5; margin-left: 0px;"}
           .pull-left{:style => "width: 250px; height: 500px; border-right: solid 1px #d3d3d3;"}
-            %h4{:style => "font-size: 10;"} SPONSORSHIP COST
-            %h1.cost-level.green-font-big #{number_to_currency(@cost, precision: 0)}
+            %h4 SPONSORSHIP COST
+            %h1.cost-level.label-green-big.label-green #{number_to_currency(@cost, precision: 0)}
             = image_tag "platinum-placement.png"
 
           .pull-right{:style => "width: 320px;"}
@@ -116,85 +142,99 @@
       %h4 SPONSOR INFORMATION
       .well
         %div
-          = f.label :name, "Business OR ORGANIZATION NAME*", class: "green-font"
+          = f.label :name, "Business OR ORGANIZATION NAME*", class: "label-green"
           = text_field :project_sponsor, :name, required: true, label: false, class: "span12"
         %div.clearfix{:style => "margin-bottom: 10px;"}
-          = f.label :mission, class: "green-font" do
+          = f.label :mission, class: "label-green" do
             BUSINESS OR ORGANIZATION'S LOGO*
-          = file_field :project_sponsor, :logo, required: true, label: false
+          = image_tag "arthur.png", :class => "img-polaroid pull-left logo-company"
+          .pic-upload
+            .upload-btn
+              %input{:type => 'filepicker', :name => 'project_sponsor_logo', 'data-fp-button-text' => 'UPLOAD', 'data-fp-apikey' => 'ArmO0TLVTkyCaJkQmBNfqz', 'data-fp-button-class' => 'btn', 'onchange' => 'updateSponsorLogo(event)'}
+                %span
+
+              / = file_field :project_sponsor, :logo, required: true, label: false
+            %p
+              %span
+                Note:
+              Logo file should be at least 200px x 200px jpeg, gif, or png files.
+          = text_field :project_sponsor, :logo, required: true, label: false, type: "hidden"
         %div
-          = select_tag :type, options_for_select(["Foundation", "Business"])
+          = label_tag :sponsor_type, "Sponsor Type*", class: "label-green"
+          / = select_tag :type, options_for_select(["Foundation", "Business"])
+          .selectParent.parentWide.clearfix{:style => "margin-bottom: 10px;"}
+            = select_tag :type, options_for_select(["Foundation", "Business"]), class: "selectbox"
         %div
-          = f.label :site, "Website*", class: "green-font"
+          = f.label :site, "Website*", class: "label-green"
           = text_field :project_sponsor, :site, required: true, label: false, class: "span12"
         %div
-          = f.label :mission, class: "green-font" do
+          = f.label :mission, class: "label-green" do
             MISSION STATEMENT / ABOUT*
             %span.cutdown.italic
           = text_area :project_sponsor, :mission, maxlength: 275, required: true, :style => "height: 186px; width: 595px;", label: false, class: "mission", placeholder: "Tell your story here ..."
-          project_sponsors
-        %h3 Payent Information
-        .well
+
+      %h3 Payment Information
+      .well
+        %div
+          = f.label :payment_type, class: "label-green" do
+            PREFERRED PAYMENT METHOD*
+            %span.italic (max 45 days)
+            .selectParent.parentWide.clearfix{:style => "margin-bottom: 10px;"}
+              = f.select :payment_type, options_for_select(Sponsor::PAYMENT), :id => "payment_type", required: true, :size => 17
+
+
+        ///////////////////////////////////////////////////////
+        /                                                     /
+        / Do not change this credit card form as it is set up /
+        / the way that stripe needs it and is working         /
+        /                                                     /
+        ///////////////////////////////////////////////////////
+
+        %div#credit-card
+          = hidden_field_tag :token
+          = hidden_field_tag 'project_sponsor[card_type]'
+          = hidden_field_tag 'project_sponsor[card_last4]'
+          = hidden_field_tag 'project_sponsor[project_id]', @project.id
+          - if @sponsor.token.present?
+            Credit card has been provided.
+          - else
+            .field.name
+              = label_tag :card_name, class: "label-green" do
+                NAME AS IT APPEARS ON CARD*
+              = text_field_tag nil, user_signed_in? ? current_user.first_name.capitalize : "" , name: "sponsor[card_name]", class: "span12"
+            .field.card-number
+              = label_tag :card_number, class: "label-green" do
+                Credit Card Number
+              = text_field_tag :card_number, nil, name: nil, class: "span12"
+            .field.ccv.span4
+              = label_tag :card_code, class: "label-green" do
+                CVV*
+              = text_field_tag :card_code, nil, name: nil, class: "span10"
+            .field.expiration.span6
+              = label_tag :card_month, class: "label-green" do
+                CARD EXPIRATION (MM/YYYY)*
+              / = select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
+              / = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}
+              = text_field_tag nil, nil, {name: nil, id: "card_month", class: "span3"}
+              = text_field_tag nil, nil, {name: nil, id: "card_year", class: "span5"}
+            .cf
+          #stripe_error
+            %noscript JavaScript is not enabled and is required for this form. First enable it in your web browser settings.
+
+        %div#wire-transfer{:style => "display: none;"}
           %div
-            = f.label :payment_type, class: "green-font" do
-              PREFERRED PAYMENT METHOD*
-              %span.italic (max 45 days)
-              .selectParent.parentWide
-                = f.select :payment_type, options_for_select(Sponsor::PAYMENT), :id => "payment_type", required: true, :size => 17
-
-
-      ///////////////////////////////////////////////////////
-      /                                                     /
-      / Do not change this credit card form as it is set up /
-      / the way that stripe needs it and is working         /
-      /                                                     /
-      ///////////////////////////////////////////////////////
-
-      %div#credit-card
-        = hidden_field_tag :token
-        = hidden_field_tag 'project_sponsor[card_type]'
-        = hidden_field_tag 'project_sponsor[card_last4]'
-        = hidden_field_tag 'project_sponsor[project_id]', @project.id
-        - if @sponsor.token.present?
-          Credit card has been provided.
-        - else
-          .field.name
-            = label_tag :card_name, class: "green-font" do
-              NAME AS IT APPEARS ON CARD*
-            = text_field_tag nil, user_signed_in? ? current_user.first_name.capitalize : "" , name: "sponsor[card_name]", class: "span12"
-          .field.card-number
-            = label_tag :card_number, class: "green-font" do
-              Credit Card Number
-            = text_field_tag :card_number, nil, name: nil, class: "span12"
-          .field.ccv.span4
-            = label_tag :card_code, class: "green-font" do
-              CVV*
-            = text_field_tag :card_code, nil, name: nil, class: "span10"
-          .field.expiration.span6
-            = label_tag :card_month, class: "green-font" do
-              CARD EXPIRATION (MM/YYYY)*
-            / = select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
-            / = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}
-            = text_field_tag nil, nil, {name: nil, id: "card_month", class: "span3"}
-            = text_field_tag nil, nil, {name: nil, id: "card_year", class: "span5"}
-          .cf
-        #stripe_error
-          %noscript JavaScript is not enabled and is required for this form. First enable it in your web browser settings.
-
-      %div#wire-transfer{:style => "display: none;"}
-        %div
-          = f.label :name, "CONTACT NAME*", class: "green-font"
-          = f.text_field :name, :size => 40, label: false, class: "transfer-input"
-        %div
-          = f.label :email, "CONTACT EMAIL*", class: "green-font"
-          = f.text_field :email, :size => 40, label: false, class: "transfer-input"
-        %div
-          = f.label :phone, "CONTACT PHONE NUMBER*", class: "green-font"
-          = f.text_field :phone, :size => 25, type: "text", label: false, class: "transfer-input"
-      %div{:style => "border-top: solid 1px #a5a5a5; padding-top: 25px", :class => "clearfix"}
-        = image_tag "3.gif", id: "submit-progress", style: "display: none; float: left; position: relative; top: 32px; margin-right: -40px; margin-left: 15px; z-index: 9999;"
-        = f.button :submit, class: "btn pull-right", id: "project-submit"
-        %a.error-message
+            = f.label :name, "CONTACT NAME*", class: "label-green"
+            = f.text_field :name, :size => 40, label: false, class: "transfer-input"
+          %div
+            = f.label :email, "CONTACT EMAIL*", class: "label-green"
+            = f.text_field :email, :size => 40, label: false, class: "transfer-input"
+          %div
+            = f.label :phone, "CONTACT PHONE NUMBER*", class: "label-green"
+            = f.text_field :phone, :size => 25, type: "text", label: false, class: "transfer-input"
+        %div{:style => "border-top: solid 1px #a5a5a5; padding-top: 25px", :class => "clearfix"}
+          = image_tag "3.gif", id: "submit-progress", style: "display: none; float: left; position: relative; top: 32px; margin-right: -40px; margin-left: 15px; z-index: 9999;"
+          = f.button :submit, class: "btn pull-right", id: "project-submit"
+          %a.error-message
 
 .project-id{:style => "display: none;"}
   = @project.id
