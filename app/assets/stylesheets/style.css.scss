@@ -283,6 +283,31 @@ h3, h4, h5{
   }
 }
 
+.perks{
+  .perk{
+    &:hover, .active{
+      background: $light-green;
+
+      h3, h4, h5, .amount-percentage{
+        color: $grey;
+      }
+
+      .description{
+        color: $grey !important;
+      }
+
+      .btn{
+        font-family: 'Proxima Nova Semi', arial, sans-serif;
+
+        &:hover{
+          background: $green2;
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
 
 .seed-level{
   background: $super-light-grey;
@@ -322,6 +347,7 @@ h3, h4, h5{
 
        &:hover{
         background: $green2;
+        color: #fff;
       }
     }
   }
@@ -363,6 +389,8 @@ h3, h4, h5{
       font-size: 10px;
       font-style: italic;
       color: $light-grey;
+      text-transform: capitalize;
+      font-family: 'Georgia', serif;
     }
 
     & + .btn{
@@ -375,6 +403,8 @@ h3, h4, h5{
   font-size: 10px;
   font-style: italic;
   color: $light-grey;
+  text-transform: capitalize;
+  font-family: 'Georgia', serif;
 }
 
 .tab-pane{
@@ -970,14 +1000,15 @@ ul.nav{
 }
 
 .link-short{
-  padding: 9px 19px;
+  padding: 20px 19px 10px 19px;
   width: 150px - 40px;
-  height: 56px - 20px;
+  height: 56px - 30px;
   border: 1px solid $light-grey;
-  background: #fff;
+  background: #e0e0e0;
   @include border-radius(3px);
   display: block;
   float: left;
+  font-size: 20px !important;
 }
 
 .well-half{
@@ -994,12 +1025,53 @@ ul.nav{
   ul{
     & > li{
       position: relative;
+      height: 20px;
 
       a{
         /*font-family: 'Proxima Nova', sans-serif !important;*/
         font-size: 12px !important;
         letter-spacing: 2px !important;
         padding-left: 30px;
+      }
+
+      &.overview{
+        a{
+          background: url('project_admin_overview.png') no-repeat bottom left;
+        }
+
+        &.active a{
+          background: url('project_admin_overview_active.png') no-repeat bottom left;
+        }
+      }
+
+      &.manage{
+        a{
+          background: url('project_admin_manage.png') no-repeat bottom left;
+        }
+
+        &.active a{
+          background: url('project_admin_manage_active.png') no-repeat bottom left;
+        }
+      }
+
+      &.funder{
+        a{
+          background: url('project_admin_funder.png') no-repeat bottom left;
+        }
+
+        &.active a{
+          background: url('project_admin_funder_active.png') no-repeat bottom left;
+        }
+      }
+
+      &.message{
+        a{
+          background: url('project_admin_message.png') no-repeat bottom left;
+        }
+
+        &.active a{
+          background: url('project_admin_message_active.png') no-repeat bottom left;
+        }
       }
 
       .nav-arrow{
@@ -1052,7 +1124,7 @@ iframe.twitter-follow-button{
 
 .menu-messages{
   position: relative;
-  letter-spacing: 1;
+  letter-spacing: 1px;
 
   .arrow{
     position: absolute;
@@ -1345,4 +1417,52 @@ ul.breadcrumbs{
 [class*=" icon-"] {
   background-image: url("glyphicons-halflings.png");
 }
+
+.faqs{
+
+  .fixed{
+
+    dt{
+      text-transform: capitalize;
+      font-size: 12px;
+      padding: 0 15px;
+    }
+  }
+}
+
+.signed-in{
+  cursor: pointer;
+
+  ul{
+    & > li{
+      margin: 0 -19px;
+      padding: 0 19px;
+
+
+      &:last-child:hover a{
+        color: #fff !important;
+      }
+
+      &:hover{
+        background: $light-green;
+      }
+    }
+  }
+}
+
+.selectbox-wrapper{
+  ul{
+    & > li{
+      margin: 0 -19px;
+      padding: 9px 19px 10px 19px;
+
+      &:hover{
+        background: $light-green !important;
+      }
+    }
+  }
+}
+
+
+
 
