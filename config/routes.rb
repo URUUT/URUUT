@@ -47,6 +47,8 @@ Crowdfund::Application.routes.draw do
    get "admin/unapproved"
    post "admin/approve"
 
+   get "/skip_sponsor" => "projects#skip_sponsor"
+
   resources :admin do
   end
 
