@@ -984,6 +984,10 @@ ul.nav{
   width: (600px / 2) - 20px;
 }
 
+.sponsor-placement{
+  width: 190px;
+}
+
 .menu-project{
   background: $green2;
 
@@ -993,8 +997,9 @@ ul.nav{
 
       a{
         /*font-family: 'Proxima Nova', sans-serif !important;*/
-        font-size: 13px !important;
+        font-size: 12px !important;
         letter-spacing: 2px !important;
+        padding-left: 30px;
       }
 
       .nav-arrow{
@@ -1047,6 +1052,7 @@ iframe.twitter-follow-button{
 
 .menu-messages{
   position: relative;
+  letter-spacing: 1;
 
   .arrow{
     position: absolute;
@@ -1276,6 +1282,7 @@ ul.chart-legend{
 
   .project-location{
     color: #fff;
+    font-size: 13px;
   }
 
   .of-italic{

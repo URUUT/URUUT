@@ -140,11 +140,15 @@ class SponsorsController < ApplicationController
     case params[:sponsor_id]
     when "1"
       @cost = project.goal.to_i * 0.3
+      @image = "/assets/platinum-placement.png"
     when "2"
       @cost = project.goal.to_i * 0.1
+      @image = "/assets/gold-placement.png"
     when "3"
       @cost = project.goal.to_i * 0.04
+      @image = "/assets/silver-placement.png"
     when "4"
+      @image = "/assets/bronze-placement.png"
       if project.goal.to_i * 0.1 >= 500
         @cost = 500
       else
