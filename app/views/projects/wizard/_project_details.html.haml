@@ -51,6 +51,9 @@
 
     = f.label :about, "TELL US ABOUT YOUR PROJECT*", class: "label-green"
     = f.text_area :about, :required => true, :style => "height:330px;width:617px;"
+
+    %hr{:style => "background: #e0e0e0; margin: 0 -19px"}
+
     %div
       = f.submit "Save And Continue", :class => "btn", :id => "project-submit"
 
