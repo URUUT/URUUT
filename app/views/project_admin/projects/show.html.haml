@@ -9,14 +9,14 @@
 .full-width.banner
   .container
     .span3
-      %div{:style => "border-right: 1px solid #464646"}
+      %div{:style => "border-right: 1px solid #464646; height: 75px;"}
         %h4.project-tittle
           = @project.title
         %h5.project-location
           #{@project.city}, #{@project.state}
 
     .span3
-      %div{:style => "border-right: 1px solid #464646"}
+      %div{:style => "border-right: 1px solid #464646; height: 75px;"}
         %h6
           Current Amount Funded
         %h2.highlighted-value
@@ -25,7 +25,7 @@
           of #{number_to_currency(@project.goal, :precision => 0)}
 
     .span2
-      %div{:style => "border-right: 1px solid #464646"}
+      %div{:style => "border-right: 1px solid #464646; height: 75px;"}
         %h6
           Project
           %br
@@ -34,7 +34,7 @@
           = @sponsor_count
 
     .span2
-      %div{:style => "border-right: 1px solid #464646"}
+      %div{:style => "border-right: 1px solid #464646; height: 75px;"}
         %h6
           Individual
           %br
@@ -56,16 +56,16 @@
 .menu-project
   .container
     %ul.clearfix.admin-menu
-      %li.active{:style => "margin-left: 0"}
+      %li.overview.active{:style => "margin-left: 0"}
         = link_to "Project Overview", project_admin_project_path(@project.id), class: "sub-menu-project"
         .nav-arrow
-      %li
+      %li.manage
         = link_to "Manage Project", project_admin_project_manage_path(@project.id), class: "sub-menu-project manage", remote: true
         .nav-arrow
-      %li
+      %li.funder
         = link_to "Project Funders", project_admin_project_project_founder_path(@project.id), class: "sub-menu-project founder", remote: true
         .nav-arrow
-      %li
+      %li.message
         = link_to "Project Messages", project_admin_project_messages_path(@project.id), class: "sub-menu-project messages", remote: true
         .nav-arrow
 
