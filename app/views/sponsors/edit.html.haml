@@ -43,8 +43,6 @@
           .pull-left
             %h5{style: "margin-bottom: 0;"} COST
             %h3{style: "margin: 0;line-height: 20px;"}= number_to_currency((@project.goal.to_i * 0.3), precision: 0)
-            .amount-percentage
-              (30% of Funding Goal)
           - if check_availibility(@project, 1) < 1
             %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-1", :"sponsor-id" => "1"}
               SPONSOR
@@ -66,8 +64,6 @@
           .pull-left
             %h5{style: "margin-bottom: 0;"} COST
             %h3{style: "margin: 0;line-height: 20px;"}= number_to_currency((@project.goal.to_i * 0.1), precision: 0)
-            .amount-percentage
-              (10% of Funding Goal)
           - if check_availibility(@project, 2) < 3
             %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-2", :"sponsor-id" => "2"}
               SPONSOR
@@ -89,8 +85,6 @@
           .pull-left
             %h5{style: "margin-bottom: 0;"} COST
             %h3{style: "margin: 0;line-height: 20px;"}= number_to_currency((@project.goal.to_i * 0.04), precision: 0)
-            .amount-percentage
-              (4% of Funding Goal)
           - if check_availibility(@project, 2) < 3
             %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-3", :"sponsor-id" => "3"}
               SPONSOR
@@ -121,7 +115,10 @@
           .pull-left{:style => "width: 250px; height: 500px; border-right: solid 1px #d3d3d3;"}
             %h4 SPONSORSHIP COST
             %h1.cost-level.label-green-big.label-green #{number_to_currency(@cost, precision: 0)}
-            = image_tag "platinum-placement.png"
+            = image_tag "platinum-placement.png", class: "sponsor-placement platinum"
+            = image_tag "gold-placement.png", class: "sponsor-placement gold"
+            = image_tag "silver-placement.png", class: "sponsor-placement silver"
+            = image_tag "bronze-placement.png", class: "sponsor-placement bronze"
 
           .pull-right{:style => "width: 320px;"}
             = label_tag :project_sponsor_name do
@@ -136,8 +133,9 @@
               %h2{:style => "color: #70bf4c"}
                 #{@level} sponsor
               %ul.normal-font
-                - @first_benefits.each do |benefit|
-                  %li #{benefit.name}
+                - unless @first_benefits.nil?
+                  - @first_benefits.each do |benefit|
+                    %li #{benefit.name}
 
       %h4 SPONSOR INFORMATION
       .well
@@ -260,6 +258,15 @@
       console.log("tes");
       Stripe.createToken(card, handleStripeResponse);
     };
+
+    $('.sponsor-placement').hide();
+      switch ($('#project_sponsor_level_id').val())
+      {
+        case '1': $(".platinum").show(); break;
+        case '2': $(".gold").show(); break;
+        case '3': $(".silver").show(); break;
+        case '4' : $(".bronze").show(); break;
+      }
 
     var handleStripeResponse = function(status, response) {
       if (status === 200) {
