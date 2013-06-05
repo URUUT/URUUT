@@ -1,5 +1,6 @@
 %h2.title My Project Details
-= form_for(@project, html: {class: "sponsor-info span12 margin-auto well", multipart: true}) do |f|
+= form_for(@project, html: {class: "sponsor-info span12 margin-auto well", multipart: true}, remote: true) do |f|
+  .message-content
   %div.clearfix{:style => "margin-bottom: 20px;"}
     %div.pull-left{style: "min-width: 350px; max-width: 350px;margin-right: 20px;"}
       = f.label :goal, "Funding Goal", class: "label-green"
