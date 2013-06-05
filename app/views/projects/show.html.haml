@@ -23,60 +23,63 @@
             Become A Sponsor
             %span
 
-#large_image{:style => "background:url(#{@project.large_image}/convert?w=1600&h=546&fit=crop&align=center); background-size: 100% 100%"}
-  .funding-info
-    .container
-      .span8
-        %h4.title= @project.project_title
-        %span.location #{@project.city}, #{@project.state}
-        %span.pull-right{:style => "margin-top: -20px"}
-          - if @project.organization_classification.eql?("170(c)(1)") || @project.organization_classification.eql?("501(c)(3)")
-            = image_tag 'td-logo-black.png', class: "tax-deductible deductable-black", "data-toggle" => "tooltip", title: "Donation Are Tax Deductable"
-        %hr
-        %p.short-desc= @project.title
-        %h6{:style => "color:#403e37;font-family:'Proxima Nova Semi';display:inline-block;margin:0;letter-spacing:normal;"} SHARE:
-        / = image_tag "fb-count.png", :class => "fb-share", :style => "margin-right:20px;"
-        / = image_tag "tw-count.png", :class => "tw-share", :style => "margin-right:20px;"
-        / = image_tag "bitly-link.png", :style => "margin-right:20px;"
-        .fb-count
-          %span
-        .tw-count
-          %span
-        .bitly-link
-          - if @project.bitly
-            %span= @project.bitly.sub(/http:\/\//, '')
+- if !@project.large_image.blank?
+  #large_image{:style => "background:url(#{@project.large_image}/convert?w=1600&h=546&fit=crop&align=center); background-size: 100% 100%"}
+- else
+  #large_image
+    .funding-info
+      .container
+        .span8
+          %h4.title= @project.project_title
+          %span.location #{@project.city}, #{@project.state}
+          %span.pull-right{:style => "margin-top: -20px"}
+            - if @project.organization_classification.eql?("170(c)(1)") || @project.organization_classification.eql?("501(c)(3)")
+              = image_tag 'td-logo-black.png', class: "tax-deductible deductable-black", "data-toggle" => "tooltip", title: "Donation Are Tax Deductable"
+          %hr
+          %p.short-desc= @project.title
+          %h6{:style => "color:#403e37;font-family:'Proxima Nova Semi';display:inline-block;margin:0;letter-spacing:normal;"} SHARE:
+          / = image_tag "fb-count.png", :class => "fb-share", :style => "margin-right:20px;"
+          / = image_tag "tw-count.png", :class => "tw-share", :style => "margin-right:20px;"
+          / = image_tag "bitly-link.png", :style => "margin-right:20px;"
+          .fb-count
+            %span
+          .tw-count
+            %span
+          .bitly-link
+            - if @project.bitly
+              %span= @project.bitly.sub(/http:\/\//, '')
 
-        %p= link_to "Contact Project Creator", "mailto:#{User.find(@project.user_id).email}"
+          %p= link_to "Contact Project Creator", "mailto:#{User.find(@project.user_id).email}"
 
-      .span4
-        .progress-container.span3.offset1
-          = image_tag 'seed.png', :class => "seed"
-          %div
-            %span Seed Funds Pledged
-            - if totalsponsor(@project).eql?(0)
-              %p $0
-            - else
-              / - totalDonated = 0
-              / - if @donation
-              /   - @donation.each do |d|
-              /     - totalDonated += d.amount
-              %p= number_to_currency(totalsponsor(@project), :precision => 0)
+        .span4
+          .progress-container.span3.offset1
+            = image_tag 'seed.png', :class => "seed"
+            %div
+              %span Seed Funds Pledged
+              - if totalsponsor(@project).eql?(0)
+                %p $0
+              - else
+                / - totalDonated = 0
+                / - if @donation
+                /   - @donation.each do |d|
+                /     - totalDonated += d.amount
+                %p= number_to_currency(totalsponsor(@project), :precision => 0)
 
-        #progressbar
+          #progressbar
 
-        .project-details.cf
-          %span.small
-            Project
-            %br
-            Goal
-          .amount= number_to_currency(@project.goal, :precision => 0)
-
-          .days-left
+          .project-details.cf
             %span.small
-              Days
+              Project
               %br
-              Left
-            .amount= campaign_days_left(@project)
+              Goal
+            .amount= number_to_currency(@project.goal, :precision => 0)
+
+            .days-left
+              %span.small
+                Days
+                %br
+                Left
+              .amount= campaign_days_left(@project)
 
 .container
   .row-fluid.show-content
@@ -96,7 +99,7 @@
             %div
               .fb-like{:style => "display: block; float: left; margin-left: 5px;", "data-href" => "http://www.facebook.com/#{@project.facebook_page}", "data-layout" => "button_count", "data-send" => "false", "data-show-faces" => "false", "data-width" => "450"}
               %a.twitter-follow-button{:style => "display: block; float: left; margin-left: 10px;", "data-show-count" => "false", :href => "https://twitter.com/#{@project.twitter_handle}"} Follow
-              %span.label-green
+              %span.label-green{:style => "margin-left: 10px;"}
                 WEB:
                 = link_to(strip_url(@project.website), recognize_url(@project.website), target: "_blank", :style => "font-style: italic; text-decoration: underline; color: #3f403b; font-family: 'Georgia', serif;")
 
@@ -120,7 +123,7 @@
                   %h5
                     = link_to(sponsor.name, recognize_url(sponsor.site), target: "_blank", style: "color: #70bf4c;")
                   - unless sponsor.site.nil?
-                    = link_to(strip_url(sponsor.site), recognize_url(sponsor.site), target: "_blank", style: "color: #000;")
+                    = link_to(strip_url(sponsor.site), recognize_url(sponsor.site), target: "_blank", style: "")
         - if @project_sponsors.include?(3)
           .silver-level
             - if @project_sponsors.include?(3)
@@ -131,7 +134,7 @@
                   %h5
                     = link_to(sponsor.name, recognize_url(sponsor.site), target: "_blank", style: "color: #70bf4c;")
                   - unless sponsor.site.nil?
-                    = link_to(strip_url(sponsor.site), recognize_url(sponsor.site), target: "_blank", style: "color: #000;")
+                    = link_to(strip_url(sponsor.site), recognize_url(sponsor.site), target: "_blank", style: "")
 
       %ul#myTab1.tab-nav
         %li.active
@@ -145,7 +148,7 @@
               %span (Updates)
         - unless @project.galleries.empty?
           %li
-            %a{:href => "#gallery"} Galery
+            %a{:href => "#gallery"} Gallery
       #content_container.tab-content
         #planting_seeds.tab-pane.active
           - if @project.seed_mime_type.eql?("video") and !@project.seed_video.blank?
@@ -153,7 +156,7 @@
             %iframe{:height => "413", :src => video_seed, :width => "620"}
           - elsif @project.seed_mime_type.eql?("image") and !@project.seed_image.blank?
             = image_tag "#{@project.seed_image}", style: "float:left; width:100%"
-          %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.about
+          %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.story
         - unless @project.project_updates.empty?
           #growth.tab-pane
             - @project.project_updates.each do |update|
@@ -191,7 +194,7 @@
               %iframe{:height => "310", :src => cultivation_video, :width => "380"}
             - elsif @project.cultivation_mime_type.eql?("image") and !@project.cultivation_image.blank?
               = image_tag "#{@project.cultivation_image}", style: "float:left; width:100%"
-            %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.story
+            %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.about
 
       -#%hr
       -#.comments
@@ -229,9 +232,9 @@
                   %p.description= p.description
                   .clearfix
                     .seed-num
-                      %div Seed
+                      / %div Seed
                       .amount
-                        %p.amount $#{p.amount.to_i}
+                        $#{p.amount.to_i}
                     - if p.limit
                       - link = p.perks_available.to_i.zero? ? "javascript:void(0)" : "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}"
                       %a.btn.pull-right{:href => "#{link}", :class => "fund btn"} Fund Now
@@ -247,9 +250,9 @@
                 %p{style: "height: auto; font-style: italic; margin: 5px 0; overflow: hidden; text-overflow:ellipsis;"}= description
                 .clearfix
                   .seed-num
-                    %div Seed
+                    / %div Seed
                     .amount
-                      %p.amount $#{perk}
+                      $#{perk}
                   %a.btn.pull-right{:href => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}", :class => "fund btn"} Fund Now #{image_tag('arrow.png')}
 
           .seed-level{id: "perk-id-custom"}
@@ -259,7 +262,7 @@
             .clearfix
               .seed-num
                 .amount
-                %h5{style: "color: #48C94C"} AMOUNT TO SEED
+                %h5 AMOUNT TO SEED
                 .textarea.seed-amount= text_field_tag :custom_seed, nil, style: "width: 100%"
               %a.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "button-seed-custom"} Fund Now
         #sponsorship.tab-pane
@@ -275,7 +278,6 @@
                   %span
             .clearfix
               .seed-num
-                %div COST
                 .amount
                   = number_to_currency(@project.goal.to_i * 0.3)
               - if check_availibility(@project, 1) < 1
@@ -298,7 +300,6 @@
                   %span
             .clearfix
               .seed-num
-                %div COST
                 .amount
                   = number_to_currency(@project.goal.to_i * 0.1)
               - if check_availibility(@project, 2) < 3
@@ -321,7 +322,6 @@
                   %span
             .clearfix
               .seed-num
-                %div COST
                 .amount
                   = number_to_currency(@project.goal.to_i * 0.04)
               - if check_availibility(@project, 3) < 5
@@ -341,9 +341,11 @@
                   %span
             .clearfix
               .seed-num
-                %div COST
                 .amount
-                  = number_to_currency(@project.goal.to_i * 0.005)
+                  - if (@project.goal.to_i * 0.1) >= 500
+                    = number_to_currency(500)
+                  - else
+                    = number_to_currency(@project.goal.to_i * 0.1)
               %a.btn.pull-right{:href => "/projects/#{@project.id}/sponsors/new?level=bronze"}
                 Sponsor
                 %span
@@ -354,9 +356,9 @@
         %span (Project Organizer)
       .planter
         = image_tag @user.avatar
-        %h4= @project.title
+        %h4= @project.organization
 
-      %h4.title{:style => 'margin-top:50px;'} PROJECT SPONSOR
+      %h4.title{:style => 'margin-top:50px;'} PROJECT SPONSORS
       - if @project_sponsors.include?(4)
         %div
           BRONZE LEVEL SPONSOR
@@ -371,11 +373,12 @@
 
       %h4.title{:style => 'margin-top:50px;'}Partners(#{@project.donations.count})
       %div.business
-        - @project.donations.each do |donation|
-          = image_tag donation.user.avatar, style: "width: 27px; height:27px;"
-      = link_to "javascript:void(0)", :class => 'btn more', :style => 'margin-top:10px;' do
-        Show More
-        %span
+        - @project.donations.limit(20).each do |donation|
+          = image_tag donation.user.avatar, style: "width: 27px; height:27px; margin-bottom: 5px;"
+      - if @project.donations.count > 20
+        = link_to more_donators_donation_path(@project.id), :class => 'btn more', :style => 'margin-top:10px;', remote: true do
+          Show More
+          %span
 
 %script{:src => "http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"}
 %script{:src => "http://maps.stamen.com/js/tile.stamen.js?v1.2.1"}
@@ -399,12 +402,6 @@
       window.location.href = "/default_perk_donations?amount="+ $("#custom_seed").val() +"&name=custom"
     });
   });
-
-  $('.more').on("click", function(){
-    $.ajax({
-
-    });
-  })
 
   var getFbCount = function() {
     $.ajax({
