@@ -117,7 +117,7 @@
                   %input{:type => 'filepicker', :name => 'cultivation_image', 'data-fp-button-text' => 'UPLOAD NEW PHOTO', 'data-fp-apikey' => 'ArmO0TLVTkyCaJkQmBNfqz', 'data-fp-button-class' => 'btn', 'onchange' => 'updateCultivationImage(event)'}
                   = link_to "UPLOAD NEW VIDEO", "javascript:void(0)", class: "btn cultivation-form"
 
-              %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.story
+              %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.about
 
       .span4.sidebar
         %h4 BECOME A SPONSOR
