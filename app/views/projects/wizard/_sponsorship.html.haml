@@ -201,11 +201,11 @@
               -if !@project.sponsorship_benefits.empty?
                 -@project.sponsorship_benefits.where(sponsorship_level_id: 4).each_with_index do |benefit, index|
                   %div.checkbox.default
-                    = hidden_field_tag "bronze[id_#{index + 1}]", benefit.id
-                    = check_box_tag "bronze[#{index + 1}]", nil, benefit.status
+                    = hidden_field_tag "custom[id_#{index + 1}]", benefit.id
+                    = check_box_tag "custom[#{index + 1}]", nil, benefit.status
                     %span#name= benefit.name
                     %span.edit-benefit.italic.label-green select to edit
-                    = text_field_tag "bronze[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
+                    = text_field_tag "custom[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
                 / -SponsorshipBenefit::SPONSORSHIP_BENEFITS.each do |key, value|
                 /   -if key.eql? 4
                 /     -value.each_with_index do |benefit|
