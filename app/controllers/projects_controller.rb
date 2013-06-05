@@ -122,7 +122,6 @@ class ProjectsController < ApplicationController
 
     if @project.save
       respond_to do |format|
-        format.js
         format.json { render :json => @project.id }
       end
     end
