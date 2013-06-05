@@ -184,7 +184,6 @@
         %div
           = f.label :payment_type, class: "label-green" do
             PREFERRED PAYMENT METHOD*
-            %span.italic (max 45 days)
             .selectParent.parentWide.clearfix{:style => "margin-bottom: 10px;"}
               = f.select :payment_type, options_for_select(Sponsor::PAYMENT), :id => "payment_type", required: true, :size => 17
 
