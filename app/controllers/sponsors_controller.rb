@@ -182,7 +182,7 @@ class SponsorsController < ApplicationController
 
   def thank_you
     @project = Project.find(params[:project_id])
-    project_sponsor = @project.project_sponsors.where(project_id: @project.id, sponsor_id: params[:sponsor_id]).first
+    project_sponsor = @project.project_sponsors.where(sponsor_id: params[:sponsor_id]).first
     # @sponsorship_level = SponsorshipLevel.find(project_sponsor.level_id)
     @benefits = @project.sponsorship_benefits.where(sponsorship_level_id: project_sponsor.level_id)
     case project_sponsor.level_id
