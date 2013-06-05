@@ -399,11 +399,18 @@ h3, h4, h5{
   }
 }
 
+#perks{
+  .amount{
+    font-size: 24px;
+    margin-top: 12px;
+  }
+}
+
 .amount-percentage{
   font-size: 10px;
   font-style: italic;
   color: $light-grey;
-  text-transform: capitalize;
+  text-transform: initial;
   font-family: 'Georgia', serif;
 }
 
@@ -458,10 +465,12 @@ h3, h4, h5{
         }
 
         & + a, & + a:visited{
-          font-size: 10px;
+          font-size: 12px;
           line-height: 12px;
           color: $grey;
           font-style: italic;
+          text-decoration: underline;
+          font-family: 'Georgia', serif;
         }
       }
 
@@ -489,7 +498,7 @@ h3, h4, h5{
       h5{
         font-size: 11px;
         line-height: 15px;
-        margin-bottom: 5px;
+        margin-bottom: 0;
 
         a, a:visited{
           color: $green2;
@@ -505,6 +514,8 @@ h3, h4, h5{
           line-height: 12px;
           color: $grey;
           font-style: italic;
+          text-decoration: underline;
+          font-family: 'Georgia', serif;
         }
       }
     }
@@ -616,8 +627,14 @@ h1, h2, h3, h4{
   }
 }
 
-h3.tittle{
-  padding-bottom: 10px;
+h3, h4{
+  &.tittle{
+    padding-bottom: 10px;
+  }
+}
+
+h5{
+  letter-spacing: 1px;
 }
 
 .project-admin-panel{
@@ -996,7 +1013,7 @@ ul.nav{
 }
 
 #project_goal, input[id*="amount"] {
-  background: white url('dollar.png') top left no-repeat !important;
+  background: white url('dollar.png') no-repeat top left !important;
 }
 
 .link-short{
@@ -1534,7 +1551,13 @@ footer div ul li a{
   }
 }
 
+#map-details .project-location{
+  width: auto;
+}
 
+.projects.show .funding-info p.short-desc, .projects.edit .funding-info p.short-desc{
+  height: auto;
+}
 
 
 

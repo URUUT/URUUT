@@ -32,7 +32,7 @@
       },
       series: [{
           type: 'pie',
-          name: 'Browser share',
+          name: 'Funding share',
           data: [
               ['BUSINESS SPONSORS', #{count_percentage(@total_fundings[:total_amount], @total_fundings[:business_amount]).split("%").first } ],
               ['FOUNDATION SPONSORS', #{count_percentage(@total_fundings[:total_amount], @total_fundings[:foundation_amount]).split("%").first} ],
