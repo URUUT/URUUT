@@ -64,15 +64,16 @@
 
               = hidden_field_tag "platinum_count", nil, id: "platinum-count"
             %div#custom-checkbox
-              %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 20px;"} CREATE COSTUM BENEFITS:
+              %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 20px;"} CREATE CUSTOM BENEFITS:
               %div.checkbox.add_checkbox
                 = check_box_tag "add_platinum",nil,false, class: "box_platinum_benefits"
-                = text_field_tag "platinum[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -18px; !important; width: 100% !important", class: "platinum_benefits add_benefits"
+                = text_field_tag "platinum[]", nil, placeholder: "Create your custom benefit here....", style: "margin-top: -18px; !important; width: 100% !important", class: "platinum_benefits add_benefits"
                 .clearfix
                   .cleafix
                   %span.save_new_benefit.pull-right.btn{style: "margin-top:-10px;"} save
             %span.label-green.normal-font.add-another.add-platinum{style: "display:none" } + Add Another
-      %hr
+
+      %hr{:style => "background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
 
       %div
         %h6{:style => "color:#70bf4c"}
@@ -114,16 +115,16 @@
 
               = hidden_field_tag "gold_count", nil, id: "gold-count"
             %div#custom-checkbox
-              %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 20px;"} CREATE COSTUM BENEFITS:
+              %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 20px;"} CREATE CUSTOM BENEFITS:
               %div.checkbox.add_checkbox
                 = check_box_tag "add_gold",nil,false, class: "box_gold_benefits"
-                = text_field_tag "gold[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -18px; !important; width: 100% !important", class: "gold_benefits add_benefits"
+                = text_field_tag "gold[]", nil, placeholder: "Create your custom benefit here....", style: "margin-top: -18px; !important; width: 100% !important", class: "gold_benefits add_benefits"
                 .clearfix
                   .cleafix
                   %span.save_new_benefit.pull-right.btn{style: "margin-top:-10px;"} save
             %span.label-green.normal-font.add-another.add-gold{style: "display:none" } + Add Another
 
-      %hr
+      %hr{:style => "background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
 
       %div
         %h6{:style => "color:#70bf4c"}
@@ -165,10 +166,10 @@
 
               = hidden_field_tag "silver_count", nil, id: "silver-count"
             %div#custom-checkbox
-              %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 20px;"} CREATE COSTUM BENEFITS:
+              %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 20px;"} CREATE CUSTOM BENEFITS:
               %div.checkbox.add_checkbox
                 = check_box_tag "add_silver",nil,false, class: "box_silver_benefits"
-                = text_field_tag "silver[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -18px; !important; width: 100% !important", class: "silver_benefits add_benefits"
+                = text_field_tag "silver[]", nil, placeholder: "Create your custom benefit here....", style: "margin-top: -18px; !important; width: 100% !important", class: "silver_benefits add_benefits"
                 .cleafix
                   .cleafix
                   %span.save_new_benefit.pull-right.btn{style: "margin-top:-10px;"} save
@@ -183,7 +184,7 @@
           /   = check_box_tag "Test"
           /   Five tickets to VIP Gala Event.
 
-      %hr
+      %hr{:style => "background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
 
       %div
         %h6{:style => "color:#70bf4c;"}
@@ -197,42 +198,43 @@
           %div#bronze-box
             %div#bronze-checkbox.existing-checkbox
 
-              -if @project.sponsorship_benefits.empty?
-                -SponsorshipBenefit::SPONSORSHIP_BENEFITS.each do |key, value|
-                  -if key.eql? 4
-                    -value.each_with_index do |benefit|
-                      %div.checkbox.default
-                        = check_box_tag "bronze[#{benefit[:id]}]"
-                        %span#name= benefit[:desc]
-                        %span.edit-benefit.italic.label-green select to edit
-                        = text_field_tag "bronze[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field", style: "width: 320px !important; display: none;"
-              -else
+              -if !@project.sponsorship_benefits.empty?
                 -@project.sponsorship_benefits.where(sponsorship_level_id: 4).each_with_index do |benefit, index|
                   %div.checkbox.default
-                    = hidden_field_tag "bronze[id_#{index + 1}]", benefit.id
-                    = check_box_tag "bronze[#{index + 1}]", nil, benefit.status
+                    = hidden_field_tag "custom[id_#{index + 1}]", benefit.id
+                    = check_box_tag "custom[#{index + 1}]", nil, benefit.status
                     %span#name= benefit.name
                     %span.edit-benefit.italic.label-green select to edit
-                    = text_field_tag "bronze[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
+                    = text_field_tag "custom[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
+                / -SponsorshipBenefit::SPONSORSHIP_BENEFITS.each do |key, value|
+                /   -if key.eql? 4
+                /     -value.each_with_index do |benefit|
+                /       %div.checkbox.default
+                /         = check_box_tag "bronze[#{benefit[:id]}]"
+                /         %span#name= benefit[:desc]
+                /         %span.edit-benefit.italic.label-green select to edit
+                /         = text_field_tag "bronze[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field", style: "width: 320px !important; display: none;"
+              / -else
 
-              = hidden_field_tag "bronze_count", nil, id: "bronze-count"
+              = hidden_field_tag "custom_count", nil, id: "custom-count"
             %div#custom-checkbox
-              %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 20px;"} CREATE COSTUM BENEFITS:
+              %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 20px;"} CREATE CUSTOM BENEFITS:
               %div.checkbox.add_checkbox
                 = check_box_tag "add_bronze", nil,false, class: "box_bronze_benefits"
-                = text_field_tag "bronze[]", nil, placeholder: "Create your costum benefit here....", style: "margin-top: -18px; !important; width: 100% !important", class: "bronze_benefits add_benefits"
+                = text_field_tag "bronze[]", nil, placeholder: "Create your custom benefit here....", style: "margin-top: -18px; !important; width: 100% !important", class: "bronze_benefits add_benefits"
                 .cleafix
                   %span.save_new_benefit.pull-right.btn{style: "margin-top:-10px;"} save
             %span.label-green.normal-font.add-another.add-bronze{style: "display:none" } + Add Another
           / %div.checkbox
           /   = check_box_tag "Test"
           /   Lorem ipsum dolor sit amet.
-      %hr
+      %hr{:style => "background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
+      = hidden_field_tag "step", "fourth"
       %div
         = f.submit "Save And Continue", :class => "btn", :id => "project-submit", :style => "position: relative;display:block;margin:0 auto;"
 
     %div.sponsorship-false{:style => "display:none"}
-      = link_to "CONTINUE TO STEP 5", "/projects/#{@project.id}/edit#assets", class: "btn", id: "project-submit", style: "position: relative;display:block;margin:0 auto;width:33%"
+      = link_to "CONTINUE TO STEP 5", "/projects/#{@project.id}/edit#assets", class: "btn skip-step", id: "project-submit", style: "position: relative;display:block;margin:0 auto;width:35%"
   .span4{:style => "margin-top:155px;"}
     %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
     .well.info
@@ -267,11 +269,23 @@
   $(".box_gold_benefits").attr("name", "silver[" + (silverSum + 1) + "]");
   $(".box_gold_benefits").attr("id", "silver_" + (silverSum + 1));
 
-  $("#bronze-count").val(bronzeSum);
+  $("#custom-count").val(1);
   $(".bronze_benefits").attr("name", "bronze[info_" + (bronzeSum + 1) + "]");
   $(".bronze_benefits").attr("id", "bronze_info_" + (bronzeSum + 1));
   $(".box_gold_benefits").attr("name", "bronze[" + (bronzeSum + 1) + "]");
   $(".box_gold_benefits").attr("id", "bronze_" + (bronzeSum + 1));
+
+  $(".skip-step").on("click", function(){
+    var project_id = #{@project.id};
+    $.ajax({
+      type: "GET",
+      url: "/skip_sponsor"
+    }).done(function(data){
+      console.log("Success???");
+      window.location.href = '/projects/' + project_id + '/edit#assets';
+      window.location.reload(true);
+    });
+  })
 
   $(document).ready(function() {
     addNewBenefit();
@@ -405,10 +419,10 @@
           case 'bronze' : $(".add-bronze").hide(); break;
         }
 
-      $("#"+ checkboxName +"-count").val(countCheckbox);
-      $("<div class='checkbox default'><input id='"+ checkboxName + "_" + countCheckbox + "' type='checkbox' value='1' name='"+ checkboxName +"[id_"+ countCheckbox +"]''><input id='"+ checkboxName + "_info_"+ countCheckbox +"' class='"+checkboxName+"_benefits add_benefits' type='text' style='margin-top: -18px; width: 100% !important;' placeholder='Create your costum benefit here...' name='"+ checkboxName + "[info_"+countCheckbox+"]'><span><span class='save_new_benefit pull-right btn' style='margin-top:-19px; left:0px' data-type='"+checkboxName+"' >Save</span></span><span class='remove-another pull-right btn' style='margin-top:-19px; left: -5px;'>Remove</span></div>").appendTo(divCore);
+      // $("#"+ checkboxName +"-count").val(countCheckbox);
+      $("<div class='checkbox default'><input id='"+ checkboxName + "_" + countCheckbox + "' type='checkbox' value='1' name='"+ checkboxName +"[id_"+ countCheckbox +"]''><input id='"+ checkboxName + "_info_"+ countCheckbox +"' class='"+checkboxName+"_benefits add_benefits' type='text' style='margin-top: -18px; width: 100% !important;' placeholder='Create your custom benefit here...' name='"+ checkboxName + "[info_"+countCheckbox+"]'><span><span class='save_new_benefit pull-right btn' style='margin-top:-19px; left:0px' data-type='"+checkboxName+"' >Save</span></span><span class='remove-another pull-right btn' style='margin-top:-19px; left: -5px;'>Remove</span></div>").appendTo(divCore);
       $("#"+checkboxName+"-count").val(parseInt($("#"+checkboxName+"-count").val())+1)
-      countCheckbox++;
+      // countCheckbox++;
       addNewBenefit();
       removeAnotherBenefit();
       return false;
@@ -441,6 +455,7 @@
 
         if ( divCore.children().children("input").length > 0 ){
           var benefits = divCore.children().children("input").last();
+          // console.log(benefits);
           var boxName = benefits.attr("id").split("_")[0];
           var boxValue = benefits.attr("id").split("_")[2];
           var boxLength = parseInt(boxValue) + 1;
@@ -453,13 +468,13 @@
         if(benefitsValue){
           $("<div class='checkbox default'><input id='"+boxName+"_"+boxLength+"' type='checkbox' name='"+boxName+"["+boxLength+"]' checked='checked'><span id='name'>"+benefitsValue+"</span> <span class='edit-benefit italic green-font'>select to edit</span><input id='"+ boxName +"_info_"+ boxLength+"' class='edit-text-field' type='text' value='"+benefitsValue+"' style='width: 320px !important; display: none;' name='"+boxName+"[info_"+boxLength+"]'></div>").appendTo(divCore);
           boxLength++;
-
           switch (boxName)
           {
             case 'platinum': $(".add-platinum").show(); break;
             case 'gold': $(".add-gold").show(); break;
             case 'silver': $(".add-silver").show(); break;
             case 'bronze' : $(".add-bronze").show(); break;
+            case 'custom': $(".add-bronze").show(); break;
           }
 
           $(this).parent().parent().remove();

@@ -1681,7 +1681,7 @@ a.green {
 ul.perks {
   margin:-10px 0 0;
   padding:0;
-  li {
+  & > li {
     background:#f8f8f8;
     border-bottom:1px solid #e9e9e9;
     list-style-type:none;

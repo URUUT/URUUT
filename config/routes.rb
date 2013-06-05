@@ -47,6 +47,8 @@ Crowdfund::Application.routes.draw do
    get "admin/unapproved"
    post "admin/approve"
 
+   get "/skip_sponsor" => "projects#skip_sponsor"
+
   resources :admin do
   end
 
@@ -75,6 +77,7 @@ Crowdfund::Application.routes.draw do
   resources :donations do
     get "thank_you", :on => :collection
     get "change_perk", :on => :member
+    get "more_donators", :on => :member
   end
   resources :projects do
     get "add_desc", :on => :collection

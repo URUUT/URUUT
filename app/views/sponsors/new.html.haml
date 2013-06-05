@@ -12,7 +12,10 @@
 
 .full-width.hero
   .container
-    %h2 This is a placeholder
+    = image_tag "thank-u.png"
+    .headline
+      %h2= @project.title
+      %p Your donations help make our dreams reality.
 .container
   .row-fluid
     .span8
@@ -41,10 +44,7 @@
               = benefit.name
         .clearfix{:style => "margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #ccc"}
           .pull-left
-            %h5{style: "margin-bottom: 0;"} COST
             %h3{style: "margin: 0;line-height: 20px;"}= number_to_currency((@project.goal.to_i * 0.3), precision: 0)
-            .amount-percentage
-              (30% of Funding Goal)
           - if check_availibility(@project, 1) < 1
             %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-1", :"sponsor-id" => "1"}
               SPONSOR
@@ -64,10 +64,8 @@
         / %div{:style => "height: 80px; width: 100%;"}
         .clearfix{:style => "margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #ccc"}
           .pull-left
-            %h5{style: "margin-bottom: 0;"} COST
             %h3{style: "margin: 0;line-height: 20px;"}= number_to_currency((@project.goal.to_i * 0.1), precision: 0)
             .amount-percentage
-              (10% of Funding Goal)
           - if check_availibility(@project, 2) < 3
             %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-2", :"sponsor-id" => "2"}
               SPONSOR
@@ -87,10 +85,8 @@
         / %div{:style => "height: 80px; width: 100%;"}
         .clearfix{:style => "margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #ccc"}
           .pull-left
-            %h5{style: "margin-bottom: 0;"} COST
             %h3{style: "margin: 0;line-height: 20px;"}= number_to_currency((@project.goal.to_i * 0.04), precision: 0)
             .amount-percentage
-              (4% of Funding Goal)
           - if check_availibility(@project, 2) < 3
             %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-3", :"sponsor-id" => "3"}
               SPONSOR
@@ -108,8 +104,10 @@
         /%div{:style => "height: 80px; width: 100%;"}
         .clearfix
           .pull-left
-            %h5{style: "margin-bottom: 0;"} COST
-            %h3{style: "margin: 0;line-height: 20px;"}= number_to_currency((@project.goal.to_i * 0.005), precision: 0)
+            - if (@project.goal.to_i * 0.1) >= 500
+              %h3{style: "margin: 0;line-height: 20px;"}= number_to_currency(500)
+            - else
+              %h3{style: "margin: 0;line-height: 20px;"}= number_to_currency((@project.goal.to_i * 0.1), precision: 0)
           %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-4", :"sponsor-id" => "4"}
             SPONSOR
             %span
@@ -121,7 +119,10 @@
           .pull-left{:style => "width: 250px; height: 500px; border-right: solid 1px #d3d3d3;"}
             %h4 SPONSORSHIP COST
             %h1.cost-level.label-green-big.label-green #{number_to_currency(@cost, precision: 0)}
-            = image_tag "platinum-placement.png"
+            = image_tag "platinum-placement.png", class: "sponsor-placement platinum"
+            = image_tag "gold-placement.png", class: "sponsor-placement gold"
+            = image_tag "silver-placement.png", class: "sponsor-placement silver"
+            = image_tag "bronze-placement.png", class: "sponsor-placement bronze"
 
           .pull-right{:style => "width: 320px;"}
             = label_tag :project_sponsor_name do
@@ -136,8 +137,9 @@
               %h2{:style => "color: #70bf4c"}
                 #{@level} sponsor
               %ul.normal-font
-                - @first_benefits.each do |benefit|
-                  %li #{benefit.name}
+                - if !@first_benefits.nil?
+                  - @first_benefits.each do |benefit|
+                    %li #{benefit.name}
 
       %h4 SPONSOR INFORMATION
       .well
@@ -147,7 +149,7 @@
         %div.clearfix{:style => "margin-bottom: 10px;"}
           = f.label :mission, class: "label-green" do
             BUSINESS OR ORGANIZATION'S LOGO*
-          = image_tag "arthur.png", :class => "img-polaroid pull-left logo-company"
+          = image_tag "white.png", :class => "img-polaroid pull-left logo-company"
           .pic-upload
             .upload-btn
               %input{:type => 'filepicker', :name => 'project_sponsor_logo', 'data-fp-button-text' => 'UPLOAD', 'data-fp-apikey' => 'ArmO0TLVTkyCaJkQmBNfqz', 'data-fp-button-class' => 'btn', 'onchange' => 'updateSponsorLogo(event)'}
@@ -178,7 +180,6 @@
         %div
           = f.label :payment_type, class: "label-green" do
             PREFERRED PAYMENT METHOD*
-            %span.italic (max 45 days)
             .selectParent.parentWide.clearfix{:style => "margin-bottom: 10px;"}
               = f.select :payment_type, options_for_select(Sponsor::PAYMENT), :id => "payment_type", required: true, :size => 17
 
@@ -201,7 +202,7 @@
             .field.name
               = label_tag :card_name, class: "label-green" do
                 NAME AS IT APPEARS ON CARD*
-              = text_field_tag nil, user_signed_in? ? current_user.first_name.capitalize : "" , name: "sponsor[card_name]", class: "span12"
+              = text_field_tag nil, user_signed_in? ? "#{current_user.first_name.capitalize} #{current_user.last_name.capitalize}" : "" , name: "sponsor[card_name]", class: "span12"
             .field.card-number
               = label_tag :card_number, class: "label-green" do
                 Credit Card Number
@@ -248,6 +249,15 @@
     $("#project_sponsor_level_id option[value='"+ selectedLevel +"']").attr("selected", "selected");
 
     Stripe.setPublishableKey('pk_test_BTNPlS59UIPJC5Fnp7CR9It6');
+
+    $('.sponsor-placement').hide();
+    switch ($('#project_sponsor_level_id').val())
+    {
+      case '1': $(".platinum").show(); break;
+      case '2': $(".gold").show(); break;
+      case '3': $(".silver").show(); break;
+      case '4' : $(".bronze").show(); break;
+    }
 
     var processCard = function() {
       var card;
