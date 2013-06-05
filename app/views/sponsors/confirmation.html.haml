@@ -38,13 +38,24 @@
         -else
           %h5{:style => "color: #70bf4c;"}
             Preferred Payment Method
-          %p.normal-font= @sponsor.payment_type
+          %p.normal-font
+            = @sponsor.payment_type
+            = link_to "change", edit_project_sponsor_path(@project.id, @sponsor.id), class: "green-font"
           %h5{:style => "color: #70bf4c;"}
             Contact Name
-          %p.normal-font= @sponsor.name
+          %p.normal-font
+            = @sponsor.name
+            = link_to "change", edit_project_sponsor_path(@project.id, @sponsor.id), class: "green-font"
           %h5{:style => "color: #70bf4c;"}
-            Payment Amount
-          %p.normal-font #{number_to_currency(@cost, precision: 0)}
+            Contact Email
+          %p.normal-font
+            = @sponsor.email
+            = link_to "change", edit_project_sponsor_path(@project.id, @sponsor.id), class: "green-font"
+          %h5{:style => "color: #70bf4c;"}
+            Contact Phone Number
+          %p.normal-font
+            = @sponsor.phone
+            = link_to "change", edit_project_sponsor_path(@project.id, @sponsor.id), class: "green-font"
           %div{:style => "height: 80px; width: 100%;"}
             = link_to "CONFIRM", purchase_path(project_id: @project.id, sponsor_id: @sponsor.id), :class => "btn confirm-button", :id => "project-submit"
 
