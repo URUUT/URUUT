@@ -275,7 +275,6 @@
                   %span
             .clearfix
               .seed-num
-                %div COST
                 .amount
                   = number_to_currency(@project.goal.to_i * 0.3)
                 .amount-percentage
@@ -300,7 +299,6 @@
                   %span
             .clearfix
               .seed-num
-                %div COST
                 .amount
                   = number_to_currency(@project.goal.to_i * 0.1)
                 .amount-percentage
@@ -325,7 +323,6 @@
                   %span
             .clearfix
               .seed-num
-                %div COST
                 .amount
                   = number_to_currency(@project.goal.to_i * 0.04)
                 .amount-percentage
@@ -347,7 +344,6 @@
                   %span
             .clearfix
               .seed-num
-                %div COST
                 .amount
                   - if (@project.goal.to_i * 0.1) >= 500
                     = number_to_currency(500)
@@ -363,7 +359,7 @@
         %span (Project Organizer)
       .planter
         = image_tag @user.avatar
-        %h4= @project.title
+        %h4= @project.organization
 
       %h4.title{:style => 'margin-top:50px;'} PROJECT SPONSORS
       - if @project_sponsors.include?(4)
