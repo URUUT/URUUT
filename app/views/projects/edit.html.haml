@@ -69,6 +69,8 @@
 
 :javascript
 
+  var connect = '#{session[:connected]}';
+
   $(".submit-finish-project").on("click", function(){
     // window.location.href = "#{new_project_url}";
     event.preventDefault();
@@ -165,6 +167,13 @@
       // window.location.reload(true);
     });
 
+    if ( connect != null ){
+      $('.stripe-connect img').attr('src', '/assets/stripe-connected.png');
+    }
+    else{
+      $('.stripe-connect img').attr('src', '/assets/stripe-connect.png');
+    }
+
     $('.breadcrumbs li').hover(function() {
       $(this).addClass('active');
     }, function() {
@@ -182,7 +191,7 @@
    });
 
    $('.step-container[data-id="sponsor-info"] form').on('submit', function(e){
-     if ( $('#connected').val() ) {
+     if ( connect != null ) {
       e.preventDefault();
       var data = $(this).serialize();
       $.ajax({
