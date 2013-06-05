@@ -277,8 +277,6 @@
               .seed-num
                 .amount
                   = number_to_currency(@project.goal.to_i * 0.3)
-                .amount-percentage
-                  (30% of funding goals)
               - if check_availibility(@project, 1) < 1
                 %a.btn.pull-right{:href => "/projects/#{@project.id}/sponsors/new?level=platinum"}
                   Sponsor
@@ -301,8 +299,6 @@
               .seed-num
                 .amount
                   = number_to_currency(@project.goal.to_i * 0.1)
-                .amount-percentage
-                  (10% of funding goals)
               - if check_availibility(@project, 2) < 3
                 %a.btn.pull-right{:href => "/projects/#{@project.id}/sponsors/new?level=gold"}
                   Sponsor
@@ -325,8 +321,6 @@
               .seed-num
                 .amount
                   = number_to_currency(@project.goal.to_i * 0.04)
-                .amount-percentage
-                  (4% of funding goals)
               - if check_availibility(@project, 3) < 5
                 %a.btn.pull-right{:href => "/projects/#{@project.id}/sponsors/new?level=silver"}
                   Sponsor
