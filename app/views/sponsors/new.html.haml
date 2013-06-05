@@ -123,14 +123,10 @@
           .pull-left{:style => "width: 250px; height: 500px; border-right: solid 1px #d3d3d3;"}
             %h4 SPONSORSHIP COST
             %h1.cost-level.label-green-big.label-green #{number_to_currency(@cost, precision: 0)}
-            - if session[:level_id].eql?(1)
-              = image_tag "platinum-placement.png", class: "sponsor-placement platinum"
-            - elsif session[:level_id].eql?(2)
-              = image_tag "gold-placement.png", class: "sponsor-placement gold"
-            - elsif session[:level_id].eql?(3)
-              = image_tag "silver-placement.png", class: "sponsor-placement silver"
-            -else
-              = image_tag "bronze-placement.png", class: "sponsor-placement bronze"
+            = image_tag "platinum-placement.png", class: "sponsor-placement platinum"
+            = image_tag "gold-placement.png", class: "sponsor-placement gold"
+            = image_tag "silver-placement.png", class: "sponsor-placement silver"
+            = image_tag "bronze-placement.png", class: "sponsor-placement bronze"
 
           .pull-right{:style => "width: 320px;"}
             = label_tag :project_sponsor_name do
