@@ -76,7 +76,7 @@
             .seed-action-container{style: action_image(@project.seed_image, @project.seed_video)}
               %input{:type => 'filepicker', :name => 'planting_seed_image', 'data-fp-button-text' => 'UPLOAD NEW PHOTO', 'data-fp-apikey' => 'ArmO0TLVTkyCaJkQmBNfqz', 'data-fp-button-class' => 'btn', 'onchange' => 'updatePlantingSeedImage(event)'}
               = link_to "UPLOAD NEW VIDEO", "javascript:void(0)", class: "btn seed-form"
-            %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.about
+            %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.story
 
           %hr
 
