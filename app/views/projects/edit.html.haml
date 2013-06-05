@@ -167,7 +167,7 @@
       // window.location.reload(true);
     });
 
-    if ( connect != null ){
+    if ( connect.length > 0 ){
       $('.stripe-connect img').attr('src', '/assets/stripe-connected.png');
     }
     else{
@@ -191,7 +191,7 @@
    });
 
    $('.step-container[data-id="sponsor-info"] form').on('submit', function(e){
-     if ( connect != null ) {
+     if ( connect.length > 0 ) {
       e.preventDefault();
       var data = $(this).serialize();
       $.ajax({
