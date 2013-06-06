@@ -14,13 +14,10 @@
         %textarea#contact_list{:style => "width:637px;height:24px", :name => "email_recepient"}
         = hidden_field_tag 'email_temp'
 
-      %div
-        = f.label :email_content , "EMAIL HEADER PHOTO*", class: "label-green"
+      %div{:style => "margin-top: 10px"}
+        = f.label :subject , "MESSAGE SUBJECT", class: "label-green"
+        = f.text_field :subject, :required => true, class: "span8"
 
-        %div{:style => "display: block; background: #AFABAB; width: 100%; height: 300px; margin-bottom: 16px; position: relative", :class => "email-header-priview"}
-          .action_button
-            %button{:id => "email-header-button"} CHANGE
-            = hidden_field_tag 'email_header'
       %div{:style => "margin-top: 10px"}
         = f.label :email_content , "EMAIL CONTENT", class: "label-green"
         = f.text_area :email_content, :required => true, style: "width: 637px; height: 298px;"
@@ -57,15 +54,6 @@
 
     $("#contact_list").val( email_content + emails.join(emailSep) );
   }
-
-  var cover = document.getElementById('email-header-button');
-  cover.type="filepicker";
-  cover.onchange = function(e){
-    var largeImage = e.fpfile.url;
-    $('.email-header-priview').attr("style", "").html("<img src='"+largeImage+"/convert?fit=scale&height=298&width=491'>");
-    $("#email_header").val(largeImage);
-  };
-  filepicker.constructWidget(cover);
 
   function moveCurrentValue(contacts, source, owner) {
     $("#email_temp").val( $("#contact_list").val() );

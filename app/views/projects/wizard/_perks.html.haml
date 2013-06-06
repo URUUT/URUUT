@@ -14,7 +14,7 @@
   }
   .save-new-perk{
     top: 36px;
-    padding: 14px 90px;
+    padding: 13px;
   }
   .update-perk{
     bottom: 0;
@@ -79,7 +79,7 @@
               = label_tag "perk-description", class: "label-green" do
                 Description*
                 %span.italic.desc-count{style: "color: #000; font-size: 10px;"}
-              = text_area_tag "perk-description", nil, style: "height:120px;width:605px;"
+              = text_area_tag "perk-description", nil, style: "height:120px;width:605px;", maxlength: 140
 
             .row.perk-view
               .span2
@@ -96,9 +96,9 @@
 
       .row
         .span4
-          %a.save-new-perk{:href => "#"} SAVE PERK
+          %a.save-new-perk{:href => "#"} Save Perk & Add More
         .span4{style: "margin-left: 0"}
-          = f.submit "Save And Continue", :class => "btn project-save-continue", :id => "project-submit", :style => "position: relative;"
+          = f.submit "Save Perk & Continue", :class => "btn project-save-continue", :id => "project-submit", :style => "position: relative;"
 
       %a.update-perk{:href => "#"} UPDATE PERK
 
