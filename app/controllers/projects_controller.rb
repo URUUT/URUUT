@@ -41,7 +41,6 @@ class ProjectsController < ApplicationController
     logger.debug("Current session id is: #{session[:current_project]}")
     @project.update_attributes!(params[:project])
     @perks = Perk.where("project_id = ?", @project.id)
-    @connected = session[:connected]
     logger.debug(@connected)
   end
 
@@ -101,7 +100,7 @@ class ProjectsController < ApplicationController
       when 1 then sponsorship_benefits += sponsorship_benefit_level("platinum", value, key)
       when 2 then sponsorship_benefits += sponsorship_benefit_level("gold", value, key)
       when 3 then sponsorship_benefits += sponsorship_benefit_level("silver", value, key)
-      when 4 then sponsorship_benefits += sponsorship_benefit_level("bronze", value, key)
+      when 4 then sponsorship_benefits += sponsorship_benefit_level("custom", value, key)
       end
 
     end

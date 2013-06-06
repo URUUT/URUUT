@@ -56,7 +56,7 @@
         %span
   .span4
     %h3.title{:style => "margin-bottom:5px;"} My badges
-    .well.info
-      %p How much do you want to raise on URUUT?
-
-      %p Remember to keep in mind the cost of a campaign and perks fulfillment. We suggest you add 10% to the amount you need to raise. This will cover URUUT’s 5% fee, our payment providers 3% fee and any potential extras.
+    .well.info.badge-wrapper
+      - @user.badges.each do |badge|
+        .profile-badge
+          = image_tag badge.custom_fields[:image], :class => "img-circle", :data => { :content => badge.name }

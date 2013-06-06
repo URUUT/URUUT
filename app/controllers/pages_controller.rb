@@ -63,7 +63,11 @@ class PagesController < ApplicationController
   private
 
   def set_session_page
-    session[:page_active] = action_name.eql?("about") ? "about" : "project"
-  end
+    session[:page_active] = if action_name.eql?("about")
+      "about"
+    else
+      action_name.eql?("home") ? "home" : "project"
+   end
+ end
 
 end

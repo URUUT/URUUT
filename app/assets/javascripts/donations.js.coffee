@@ -56,9 +56,9 @@ edit_subscription =
   handleStripeResponse: (status, response) ->
     if status == 200
       $('input#donation_token').attr('value', response.id)
-      $('input#donation_last4').attr('value', response.card.last4)
+      $('input#donation_card_last4').attr('value', response.card.last4)
       $('input#donation_card_type').attr('value', response.card.type)
-      $('#edit_donation')[0].submit()
+      $('.edit_donation')[0].submit()
       # return false
     else
       console.log response
@@ -71,15 +71,21 @@ $ ->
 	$('#new_donation #donate').on 'click', (event) ->
     event.preventDefault()
     Stripe.setPublishableKey('pk_test_WRrfoQLUDkpGHAxCmOY0Y6ud')
-    if $('#card_number').val() == ''
-      $('#new_donation')[0].submit()
+    if $(".choiced-perk").attr("style") isnt "display:none" and $("#custom_amount").val() is "0"
+      alert "You Can't Input 0 For Seed Amount"
     else
-      new_subscription.setupForm()
+      if $('#card_number').val() == ''
+        $('#new_donation')[0].submit()
+      else
+        new_subscription.setupForm()
 
-  $('#edit_donation #donate').on 'click', (event) ->
+  $('.edit_donation #donate').on 'click', (event) ->
     event.preventDefault()
     Stripe.setPublishableKey('pk_test_WRrfoQLUDkpGHAxCmOY0Y6ud')
-    if $('#card_number').val() == ''
-      $('#edit_donation')[0].submit()
+    if $(".choiced-perk").attr("style") isnt "display:none" and $("#custom_amount").val() is "0"
+      alert "You Can't Input 0 For Seed Amount"
     else
-      edit_subscription.setupForm()
+      if $('#card_number').val() == ''
+        $('.edit_donation')[0].submit()
+      else
+        edit_subscription.setupForm()

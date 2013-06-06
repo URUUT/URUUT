@@ -63,13 +63,10 @@
       = link_to "https://connect.stripe.com/oauth/authorize?scope=read_only&response_type=code&client_id=#{STRIPE_CLIENT_ID}", :target => "_blank", :class => "stripe-connect" do
         = image_tag "stripe-connect.png"
 
+      %hr{:style => "background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
 
-      %input{:type => 'hidden', :value => "#{@connected}", :id => "connected", :required => true}
-
-        %hr{:style => "background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
-
-        %div
-          = f.submit "Save And Continue", :class => "btn", :id => "project-submit"
+      %div
+        = f.submit "Save And Continue", :class => "btn", :id => "project-submit"
 
   .span4{:style => "margin-top:155px;"}
     %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE

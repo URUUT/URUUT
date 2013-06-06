@@ -27,13 +27,13 @@
 
     = f.label :goal, class: "label-green" do
       FUNDING GOAL*
-      %span.italic{style: "color: #000"} (must be at least $XXXX)
+      %span.italic{style: "color: #000"}
     = f.text_field :goal, :required => true, class: "span8"
 
     %div.inline
       = f.label :duration, class: "label-green" do
         CAMPAIGN LENGTH*
-        %span.italic{style: "color: #000"} (max 45 days)
+        %span.italic{style: "color: #000"} (max 90 days)
       = f.select :duration, options_for_select(project_length, @project.duration), :required => true
 
     %div.inline{:style => "margin-left:25px;"}
