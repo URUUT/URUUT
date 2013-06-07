@@ -78,6 +78,7 @@
                 %br
                 Left
               .amount= campaign_days_left(@project)
+
 - else
   #large_image
     .funding-info
@@ -270,20 +271,22 @@
       .sidebar-tab
       %ul#myTab2.tab-nav
         %li.active
-          %a{:href => "#perks"} Perks
+          %a{:href => "#perks"} Donation
         %li
-          %a{:href => "#sponsorship"} Sponsorship
+          %a{:href => "#sponsorship"} Sponsor
       .tab-content
         #perks.tab-pane.active
           -if @project.perk_permission
             -if @perks
               - @perks.each do |p|
                 .seed-level
-                  %h3= p.name
-                  - if p.limit
-                    %p= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} Available)"
-                  %p.description= p.description
-                  .clearfix
+                  %h3{style: "font-size: 20px;"}
+                    LEVEL 1
+                  %div
+                    %p
+                      You will receive #{p.amount.to_i} Uruut Reward Points when you seed $#{p.amount.to_i}.
+
+                  .clearfix{style: "margin-top: 20px;"}
                     .seed-num
                       / %div Seed
                       .amount
@@ -332,7 +335,7 @@
             .clearfix
               .seed-num
                 .amount
-                  = number_to_currency(@project.goal.to_i * 0.3)
+                  = number_to_currency(@project.goal.to_i * 0.3, precision: 0)
               - if check_availibility(@project, 1) < 1
                 %a.btn.pull-right{:href => "/projects/#{@project.id}/sponsors/new?level=platinum"}
                   Sponsor
@@ -354,7 +357,7 @@
             .clearfix
               .seed-num
                 .amount
-                  = number_to_currency(@project.goal.to_i * 0.1)
+                  = number_to_currency(@project.goal.to_i * 0.1, precision: 0)
               - if check_availibility(@project, 2) < 3
                 %a.btn.pull-right{:href => "/projects/#{@project.id}/sponsors/new?level=gold"}
                   Sponsor
@@ -376,7 +379,7 @@
             .clearfix
               .seed-num
                 .amount
-                  = number_to_currency(@project.goal.to_i * 0.04)
+                  = number_to_currency(@project.goal.to_i * 0.04, precision: 0)
               - if check_availibility(@project, 3) < 5
                 %a.btn.pull-right{:href => "/projects/#{@project.id}/sponsors/new?level=silver"}
                   Sponsor
@@ -396,9 +399,9 @@
               .seed-num
                 .amount
                   - if (@project.goal.to_i * 0.1) >= 500
-                    = number_to_currency(500)
+                    = number_to_currency(500, precision: 0)
                   - else
-                    = number_to_currency(@project.goal.to_i * 0.1)
+                    = number_to_currency(@project.goal.to_i * 0.1, precision: 0)
               %a.btn.pull-right{:href => "/projects/#{@project.id}/sponsors/new?level=bronze"}
                 Sponsor
                 %span
@@ -527,6 +530,19 @@
     $( "#progressbar" ).progressbar({
       value: #{percentage_sponsor(@project)}
     });
+
+    $('.progress-container').attr('style', 'margin-left: ' + (#{percentage_sponsor(@project)} - 4)
+  + '%');
+
+    console.log(#{percentage_sponsor(@project)} + "persentasi");
+    if(#{percentage_sponsor(@project)} >= 50){
+      $('img.seed').attr('style','float: right');
+      console.log(#{percentage_sponsor(@project)} + "float right");
+
+      $('.progress-container').attr('style', 'margin-left: ' + (#{percentage_sponsor(@project)} - 64)
+  + '%');
+    }
+
     $('#progressbar > div').css({ 'background': '#3f403b' });
 
     $('.nav-tabs li a').click(function(e){
