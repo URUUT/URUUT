@@ -208,8 +208,8 @@ class SponsorsController < ApplicationController
 
   def confirm_sponsor
     @sponsor = Sponsor.find(params[:sponsor_id])
-    project_sponsor = ProjectSponsor.find_by_project_id(params[:project_id])
-    project_sponsor.update_attributes(status: "confirmed")
+    project_sponsor = ProjectSponsor.unscoped.where(project_id: params[:project_id], sponsor_id: @sponsor.id).last
+    project_sponsor.update_attributes(status: "confirmed", confirmed: true)
 
     redirect_to thank_you_for_sponsor_url(params[:project_id], @sponsor.id), notice: "Great! you have successfully registered as a sponsor"
   end
@@ -257,7 +257,7 @@ class SponsorsController < ApplicationController
 
     @sponsor = Sponsor.new(params[:sponsor])
     @sponsor.save(validate: false)
-    @project_sponsor = ProjectSponsor.new(params[:project_sponsor])
+    @project_sponsor = ProjectSponsor.create(params[:project_sponsor])
     @project_sponsor.confirmed = false
     @project_sponsor.save!
     @project_sponsor.update_attributes({cost: cost, project_id: params[:project_id], sponsor_id: @sponsor.id,
