@@ -14,12 +14,17 @@
     .span3.pull-right.messages-content
       %h4.title Details
       .well.pull-left{style: "margin-left: 0;"}
-        %h5.label-green Payment amount
+        %h5.label-green{style: "margin-bottom: 0;"} Payment amount
         %p #{number_to_currency(@donation.amount, :precision => 0)}
         %br
-        %h5.label-green Your perk
-        %h6= @perk.name
+        %h5.label-green{style: "margin-bottom: 0;"} Your perk
+        %h6{style: "margin: 0;"}
+          = @perk.name
         %p= @perk.description
+        %p{style: "color: #e0e0e0; font-size: 11px;"}
+          %span{style: "font-family: 'Proxima Nova Semi', sans-serif;"}
+            Estimated delivery : 
+          13 October 2013
 
 :javascript
   var project_id = "#{@project.id}";
