@@ -37,11 +37,10 @@
           Platinum
           %span.small-heading
             #{availability(@project.project_sponsors, 1)} of 1 Available
-        %ul.normal-font
-        - if @sponsorship_benefits.include?(1)
-          - @sponsorship_benefits[1].each do |benefit|
-            %li
-              = benefit.name
+        %ul.normal-font.dashed-list
+          - if @sponsorship_benefits.include?(1)
+            - @sponsorship_benefits[1].each do |benefit|
+              %li #{benefit.name}
         .clearfix{:style => "margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #ccc"}
           .pull-left
             %h3{style: "margin: 0;line-height: 20px;"}= number_to_currency((@project.goal.to_i * 0.3), precision: 0)
@@ -57,10 +56,10 @@
           Gold
           %span.small-heading
             #{availability(@project.project_sponsors, 2)} of 3 Available
-        %ul.normal-font
-        - if @sponsorship_benefits.include?(2)
-          - @sponsorship_benefits[2].each do |benefit|
-            %li #{benefit.name}
+        %ul.normal-font.dashed-list
+          - if @sponsorship_benefits.include?(2)
+            - @sponsorship_benefits[2].each do |benefit|
+              %li #{benefit.name}
         / %div{:style => "height: 80px; width: 100%;"}
         .clearfix{:style => "margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #ccc"}
           .pull-left
@@ -78,10 +77,10 @@
           Silver
           %span.small-heading
             #{availability(@project.project_sponsors, 3)} of 5 Available
-        %ul.normal-font
-        - if @sponsorship_benefits.include?(4)
-          - @sponsorship_benefits[3].each do |benefit|
-            %li #{benefit.name}
+        %ul.normal-font.dashed-list
+          - if @sponsorship_benefits.include?(4)
+            - @sponsorship_benefits[3].each do |benefit|
+              %li #{benefit.name}
         / %div{:style => "height: 80px; width: 100%;"}
         .clearfix{:style => "margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #ccc"}
           .pull-left
@@ -97,15 +96,16 @@
               %span
         %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;font-family:'Proxima Nova';"}
           Bronze
-        %ul.normal-font
-        - if @sponsorship_benefits.include?(4)
-          - @sponsorship_benefits[4].each do |benefit|
-            %li #{benefit.name}
+        %ul.normal-font.dashed-list
+          - if @sponsorship_benefits.include?(4)
+            - @sponsorship_benefits[4].each do |benefit|
+              %li #{benefit.name}
         /%div{:style => "height: 80px; width: 100%;"}
         .clearfix
           .pull-left
             - if (@project.goal.to_i * 0.1) >= 500
-              %h3{style: "margin: 0;line-height: 20px;"}= number_to_currency(500)
+              %h3{style: "margin: 0;line-height: 20px;"}
+                = number_to_currency((500), precision: 0)
             - else
               %h3{style: "margin: 0;line-height: 20px;"}= number_to_currency((@project.goal.to_i * 0.1), precision: 0)
           %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-4", :"sponsor-id" => "4"}
@@ -136,7 +136,7 @@
             .sponsorship-level-details
               %h2{:style => "color: #70bf4c"}
                 #{@level} sponsor
-              %ul.normal-font
+              %ul.normal-font.dashed-list
                 - if !@first_benefits.nil?
                   - @first_benefits.each do |benefit|
                     %li #{benefit.name}
@@ -223,16 +223,17 @@
             %noscript JavaScript is not enabled and is required for this form. First enable it in your web browser settings.
 
         %div#wire-transfer{:style => "display: none;"}
-          %div
+          %div.name
             = f.label :name, "CONTACT NAME*", class: "label-green"
             = f.text_field :name, :size => 40, label: false, class: "transfer-input"
-          %div
+          %div.email
             = f.label :email, "CONTACT EMAIL*", class: "label-green"
             = f.text_field :email, :size => 40, label: false, class: "transfer-input"
-          %div
+          %div.phone
             = f.label :phone, "CONTACT PHONE NUMBER*", class: "label-green"
             = f.text_field :phone, :size => 25, type: "text", label: false, class: "transfer-input"
-        %div{:style => "border-top: solid 1px #a5a5a5; padding-top: 25px", :class => "clearfix"}
+        %hr{style: "margin-left: -19px; margin-right: -19px; background: #e0e0e0;"}
+        %div{:style => "padding-top: 25px", :class => "clearfix"}
           = image_tag "3.gif", id: "submit-progress", style: "display: none; float: left; position: relative; top: 32px; margin-right: -40px; margin-left: 15px; z-index: 9999;"
           = f.button :submit, class: "btn pull-right", id: "project-submit"
           %a.error-message

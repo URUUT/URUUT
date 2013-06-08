@@ -14,14 +14,14 @@
     .span3.pull-right.messages-content
       %h4.title DETAILS
       .well.pull-left{style: "margin-left: 0;"}
-        %h5.label-green PAYMENT AMOUNT
+        %h5.label-green{style: "margin-bottom: 0;"} PAYMENT AMOUNT
         %p #{number_to_currency(@cost, precision: 0)}
         %br
-        %h5.label-green YOUR BENEFITS
-        %h6 #{@level} SPONSOR
-        %ul{:style => "margin: 0"}
-        - @benefits.each do |benefit|
-          %li #{benefit.name}
+        %h5.label-green{style: "margin-bottom: 0;"} YOUR BENEFITS
+        %h6{style: "margin: 0;"} #{@level} SPONSOR
+        %ul.dashed-list
+          - @benefits.each do |benefit|
+            %li #{benefit.name}
 
 :javascript
   var project_id = "#{@project.id}";
