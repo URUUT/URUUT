@@ -299,7 +299,7 @@
       = url_field_tag "video_link", nil, placeholder: "youtube_url"
       = hidden_field_tag "video_type"
     .modal-footer
-      %input{:type => "submit", :value => "Submit video"}
+      %input{:type => "submit", :value => "Submit video", onClick: "$(this).button('loading')"}
 
 :javascript
 
