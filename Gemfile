@@ -24,6 +24,7 @@ gem 'filepicker-rails'
 gem 'heroku'
 gem 'therubyracer'
 gem 'has_scope'
+gem 'youtube_it'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
