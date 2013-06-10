@@ -5,6 +5,6 @@ $ ->
     placement: "top"
     trigger: "hover"
 
-  $('.badge-wrapper .profile-badge').popover
+  $('.badge-wrapper .profile-badge .img-circle').popover
     placement: "top"
     trigger: "hover"
