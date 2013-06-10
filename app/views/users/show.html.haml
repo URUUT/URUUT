@@ -66,6 +66,14 @@
             = project.title
 
   .span4
+    -unless @pending_projects.empty?
+      %h3 My Pending Projects
+      .well
+        %ul{:style => "list-style: none; margin-left: 0;"}
+          - @pending_projects.each do |pending_project|
+            %li
+              = link_to pending_project.title, project_path(pending_project.id), class: "green-link", style: "text-transform: capitalize;"
+
     %h3.title{:style => "margin-bottom:5px;"} #{who(:whose)} badges
     .well.info.badge-wrapper
       - @user.badges.each do |badge|

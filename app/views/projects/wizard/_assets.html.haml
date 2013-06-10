@@ -142,125 +142,162 @@
         /           %li.fund-button
         /             %a{:href => "#assets", :class => "fund btn"} Fund Now #{image_tag('arrow.png')}
 
-        %ul#myTab4.tab-nav
-          %li.active
-            %a{:href => "#perks"} Donate
-          %li
-            %a{:href => "#sponsorship"} Sponsor
-        .tab-content
-          #perks.tab-pane.active
-            -if @project.perk_permission
-              -if @perks
-                - @perks.each do |p|
+        - if @project.sponsor_permission
+          %ul#myTab4.tab-nav
+            %li.active
+              %a{:href => "#perks"} Donate
+            %li
+              %a{:href => "#sponsorship"} Sponsor
+          .tab-content
+            #perks.tab-pane.active
+              -if @project.perk_permission
+                -if @perks
+                  - @perks.each do |p|
+                    .seed-level
+                      %h3{style: "font-size: 20px;"}
+                        = p.name
+                      - if p.limit
+                        %p= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} Available)"
+                      %p.description= p.description
+                      .clearfix
+                        .seed-num
+                          .amount
+                            %p.amount $#{p.amount.to_i}
+                        %a.black-btn.btn.pull-right{:href => "javascript:void(0)"} Fund Now #{image_tag('arrow.png')}
+              -else
+                - default_perk.each_with_index do |perk, index|
+                  - index += 1
+                  - name = "LEVEL #{index}"
+                  - description = "You will receive #{perk} Uruut Reward Points when you seed $#{perk}"
                   .seed-level
-                    %h3{style: "font-size: 20px;"}
-                      = p.name
-                    - if p.limit
-                      %p= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} Available)"
-                    %p.description= p.description
+                    %h3= name
+                    %p{style: "height: auto; margin: 5px 0; overflow: hidden; text-overflow:ellipsis;"}= description
                     .clearfix
                       .seed-num
                         .amount
-                          %p.amount $#{p.amount.to_i}
+                          %p.amount $#{perk}
                       %a.black-btn.btn.pull-right{:href => "javascript:void(0)"} Fund Now #{image_tag('arrow.png')}
-            -else
-              - default_perk.each_with_index do |perk, index|
-                - index += 1
-                - name = "LEVEL #{index}"
-                - description = "You will receive #{perk} Uruut Reward Points when you seed $#{perk}"
+
+              .seed-level{id: "perk-id-custom"}
+                %h3.perk-name-other{id: "perk-name-other-custom"}
+                  CHOOSE YOUR PERK
+                %p With this option you choose the amount to seed, you will receive 1 Uruut Reward Point for each dollar you seed.
+                .clearfix
+                  .seed-num
+                    .amount
+                    %h5 AMOUNT TO SEED
+                    .textarea.seed-amount= text_field_tag :custom_seed, nil, style: "width: 100%"
+                  %a.black-btn.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "button-seed-custom"} Fund Now
+
+            #sponsorship.tab-pane
+              .seed-level
+                %h3
+                  PLATINUM
+                  %span.small-heading
+                    (1 of 1 available)
+                %p
+                  -if @sponsorship_benefits.include?(1)
+                    -@sponsorship_benefits[1].each do |benefit|
+                      =benefit.name
+                      %span
+                .clearfix
+                  .seed-num
+                    .amount
+                      = number_to_currency(@project.goal.to_i * 0.3)
+                  %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
+                    Sponsor
+                    %span
+              .seed-level
+                %h3
+                  GOLD
+                  %span.small-heading
+                    (3 of 3 available)
+                %p
+                  -if @sponsorship_benefits.include?(2)
+                    -@sponsorship_benefits[2].each do |benefit|
+                      =benefit.name
+                      %span
+                .clearfix
+                  .seed-num
+                    .amount
+                      = number_to_currency(@project.goal.to_i * 0.1)
+                  %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
+                    Sponsor
+                    %span
+              .seed-level
+                %h3
+                  SILVER
+                  %span.small-heading
+                    (5 of 5 available)
+                %p
+                  -if @sponsorship_benefits.include?(3)
+                    -@sponsorship_benefits[3].each do |benefit|
+                      =benefit.name
+                      %span
+                .clearfix
+                  .seed-num
+                    .amount
+                      = number_to_currency(@project.goal.to_i * 0.04)
+                  %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
+                    Sponsor
+                    %span
+              .seed-level
+                %h3 BRONZE
+                %p
+                  -if @sponsorship_benefits.include?(4)
+                    -@sponsorship_benefits[4].each do |benefit|
+                      =benefit.name
+                      %span
+                .clearfix
+                  .seed-num
+                    .amount
+                      - if (@project.goal.to_i * 0.1) >= 500
+                        = number_to_currency(500)
+                      - else
+                        = number_to_currency(@project.goal.to_i * 0.1)
+                  %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
+                    Sponsor
+                    %span
+        - else
+          %h4.tittle{style: "margin-bottom: 0;"} Donation
+          -if @project.perk_permission
+            -if @perks
+              - @perks.each do |p|
                 .seed-level
-                  %h3= name
-                  %p{style: "height: auto; margin: 5px 0; overflow: hidden; text-overflow:ellipsis;"}= description
+                  %h3{style: "font-size: 20px;"}
+                    = p.name
+                  - if p.limit
+                    %p= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} Available)"
+                  %p.description= p.description
                   .clearfix
                     .seed-num
                       .amount
-                        %p.amount $#{perk}
+                        %p.amount $#{p.amount.to_i}
                     %a.black-btn.btn.pull-right{:href => "javascript:void(0)"} Fund Now #{image_tag('arrow.png')}
+          -else
+            - default_perk.each_with_index do |perk, index|
+              - index += 1
+              - name = "LEVEL #{index}"
+              - description = "You will receive #{perk} Uruut Reward Points when you seed $#{perk}"
+              .seed-level
+                %h3= name
+                %p{style: "height: auto; margin: 5px 0; overflow: hidden; text-overflow:ellipsis;"}= description
+                .clearfix
+                  .seed-num
+                    .amount
+                      %p.amount $#{perk}
+                  %a.black-btn.btn.pull-right{:href => "javascript:void(0)"} Fund Now #{image_tag('arrow.png')}
 
-            .seed-level{id: "perk-id-custom"}
-              %h3.perk-name-other{id: "perk-name-other-custom"}
-                CHOOSE YOUR PERK
-              %p With this option you choose the amount to seed, you will receive 1 Uruut Reward Point for each dollar you seed.
-              .clearfix
-                .seed-num
-                  .amount
-                  %h5 AMOUNT TO SEED
-                  .textarea.seed-amount= text_field_tag :custom_seed, nil, style: "width: 100%"
-                %a.black-btn.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "button-seed-custom"} Fund Now
-
-          #sponsorship.tab-pane
-            .seed-level
-              %h3
-                PLATINUM
-                %span.small-heading
-                  (1 of 1 available)
-              %p
-                -if @sponsorship_benefits.include?(1)
-                  -@sponsorship_benefits[1].each do |benefit|
-                    =benefit.name
-                    %span
-              .clearfix
-                .seed-num
-                  %div COST
-                  .amount
-                    = number_to_currency(@project.goal.to_i * 0.3)
-                %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
-                  Sponsor
-                  %span
-            .seed-level
-              %h3
-                GOLD
-                %span.small-heading
-                  (3 of 3 available)
-              %p
-                -if @sponsorship_benefits.include?(2)
-                  -@sponsorship_benefits[2].each do |benefit|
-                    =benefit.name
-                    %span
-              .clearfix
-                .seed-num
-                  %div COST
-                  .amount
-                    = number_to_currency(@project.goal.to_i * 0.1)
-                %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
-                  Sponsor
-                  %span
-            .seed-level
-              %h3
-                SILVER
-                %span.small-heading
-                  (5 of 5 available)
-              %p
-                -if @sponsorship_benefits.include?(3)
-                  -@sponsorship_benefits[3].each do |benefit|
-                    =benefit.name
-                    %span
-              .clearfix
-                .seed-num
-                  %div COST
-                  .amount
-                    = number_to_currency(@project.goal.to_i * 0.04)
-                %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
-                  Sponsor
-                  %span
-            .seed-level
-              %h3 BRONZE
-              %p
-                -if @sponsorship_benefits.include?(4)
-                  -@sponsorship_benefits[4].each do |benefit|
-                    =benefit.name
-                    %span
-              .clearfix
-                .seed-num
-                  %div COST
-                  .amount
-                    - if (@project.goal.to_i * 0.1) >= 500
-                      = number_to_currency(500)
-                    - else
-                      = number_to_currency(@project.goal.to_i * 0.1)
-                %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
-                  Sponsor
-                  %span
+          .seed-level{id: "perk-id-custom"}
+            %h3.perk-name-other{id: "perk-name-other-custom"}
+              CHOOSE YOUR PERK
+            %p With this option you choose the amount to seed, you will receive 1 Uruut Reward Point for each dollar you seed.
+            .clearfix
+              .seed-num
+                .amount
+                %h5 AMOUNT TO SEED
+                .textarea.seed-amount= text_field_tag :custom_seed, nil, style: "width: 100%"
+              %a.black-btn.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "button-seed-custom"} Fund Now
 
         %h4.title{:style => 'margin-top:50px;'}
           Planter
