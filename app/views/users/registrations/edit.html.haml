@@ -18,29 +18,38 @@
                 %strong Note:
                 Logo files should be at least 200px x 200px jpeg, gif or png files
 
-      %div.inline
+      %div.inline.well-half
         = f.label :first_name
         = f.text_field :first_name
-      %div.inline
+      %div.inline.well-half{style: "margin-left: 19px;"}
         = f.label :last_name
         = f.text_field :last_name
       %div
         = f.label :email
         = f.email_field :email
-      .row
-        .span5
-          %div
-            = f.label :password
-            = f.password_field :password, :autocomplete => "off", :class => "input-mini"
-        .span5
-          %div
-            = f.label :password_confirmation, "Re-type password"
-            = f.password_field :password_confirmation
+
+      %div.inline.well-half
+        / = f.label :password
+        %h5.label-green{style: "margin-bottom: 0;"}
+          Password
+          %span.italic{style: "font-size: 11px; letter-spacing: 0;"}
+            (Must be at least 6 characters long)
+        = f.password_field :password, :autocomplete => "off", :class => "input-mini"
+      %div.inline.well-half{style: "margin-left: 19px;"}
+        = f.label :password_confirmation, "Re-type password"
+        = f.password_field :password_confirmation
+
       %div
-        = f.label :organization, "Business or organization name"
+        %h5.label-green{style: "margin-bottom: 0;"}
+          Business or Organization Name
+          %span.italic{style: "font-size: 11px; letter-spacing: 0;"}
+            (If Applicable)
         = f.text_field :organization
       %div
-        = f.label :mission, "Mission statement / about"
+        %h5.label-green{style: "margin-bottom: 0;"}
+          Mission Statement / About
+          %span.italic{style: "font-size: 11px; letter-spacing: 0;"}
+            (275 characters remaining)
         = f.text_area :mission, :rows => 4
       = f.label :subscribed, "Email subscriptions"
       %div.switch.newsletter-popover{:style => "float:left;margin-right:10px;"}
