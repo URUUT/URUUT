@@ -31,7 +31,9 @@ class ProjectAdmin::ProjectsController < ApplicationController
 
   def overview; end
 
-  def manage; end
+  def manage
+    @galleries = @project.galleries.page(params[:page]).per(25)
+  end
 
   def detail; end
 
@@ -49,7 +51,9 @@ class ProjectAdmin::ProjectsController < ApplicationController
     @alert = "Project successfully updated"
   end
 
-  def cover_photo_and_gallery; end
+  def cover_photo_and_gallery
+    @galleries = @project.galleries.page(params[:page]).per(25)
+  end
 
   def post_to_social_media; end
 
@@ -57,22 +61,13 @@ class ProjectAdmin::ProjectsController < ApplicationController
     @project = Project.find(params[:project_id])
 
     if params[:type].blank?
-      @founders = []
-      @project.project_sponsors.each do |sponsor|
-        sponsor.type_founder = "sponsor"
-        @founders << sponsor
-      end unless @project.project_sponsors.empty?
-
-      @project.donations.each do |sponsor|
-        sponsor.type_founder = "individual"
-        @founders << sponsor
-      end unless @project.donations.empty?
+      @founders = @project.founders(params[:page])
       @all = true
     else
       @founders = if params[:type].eql?("individual")
-        @project.donations
+        @project.donations.page(params[:page]).per(25)
       else
-        @project.project_sponsors
+        @project.project_sponsors.page(params[:page]).per(25)
       end
       @all = false
     end

@@ -1,0 +1,18 @@
+%table.table.table-striped
+  - @founders.each do |founder|
+    - if founder.type_founder.eql?("sponsor")
+      %tr
+        %td= image_tag "#{founder.logo}/convert?fit=scale&height=37&width=37"
+        %td= founder.name
+        %td= "$#{founder.cost}"
+        %td= "#{founder.sponsorship_level.name} sponsor"
+        %td= founder.updated_at.strftime("%m/%d")
+    - else
+      %tr
+        %td= image_tag avatar_project_admin(founder.user.avatar), style: "width:37px"
+        %td= [founder.user.first_name, founder.user.last_name].join(" ")
+        %td= "$#{founder.amount}"
+        %td= founder.perk_name
+        %td= founder.updated_at.strftime("%m/%d")
+
+= paginate @founders, remote: true
