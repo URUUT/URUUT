@@ -12,7 +12,7 @@
       %h3.label-green{:style => 'line-height:100%;margin:20px 0 0;'} CITY OF DUNWOODY RECREATION CENTER
       %p
         = image_tag "marker.jpg"
-        %span{:style => "font:bold 12px/12px 'Proxima Nova Bold';text-transform:uppercase;"}
+        %span{:style => "font:bold 11px/12px 'Proxima Nova Bold';text-transform:uppercase;"}
           48 Perimeter Center East, dUNWOODY, GA 30346
 
       .well{:style => "border:1px solid #e9e9e9;padding:0;margin-top:20px;"}
@@ -32,7 +32,7 @@
 
           %h6{:style => "line-height:100%;margin-bottom:0px;margin-top:20px"} Your Selected Perk
           %h3.perk-name.label-green{:style => 'font-size:20px; line-height:100%;margin:0;'}= @perk_name
-          %span.perk-description{:style => "font-size:12px;font-family:'Proxima Nova';"}= @perk_description
+          %span.perk-description = @perk_description
         .cf
         %p.checkout-continue-subtext Continue to payment information below or choose a different seed amount/perk from the right.
 

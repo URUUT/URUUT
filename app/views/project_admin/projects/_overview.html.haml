@@ -103,29 +103,8 @@
         .chart-bar
 
       %h2.tittle FUNDING BREAKDOWN BY DAY
-      .info
-        %table.table.table-striped
-          %tr
-            %th Date
-            %th Total Funding For Day
-            %th Individual Contributors
-            %th Sponsors
-          - @fundings.each do |date, founders|
-            - individual_count, sponsors_count, amount = 0, 0, 0
-            - founders.each do |founder|
-              - if founder.type_founder.eql?("individual")
-                - individual_count += 1
-                - amount += founder.amount.to_i
-              - else
-                - sponsors_count += 1
-                - amount += founder.cost.to_i
-            %tr
-              %td= date.strftime("%m/%d/%Y")
-              %td= "$#{amount.round(2)}"
-              %td= individual_count
-              %td= sponsors_count
-
-        = paginate @fundings
+      .info.info-table
+        = render "founding_table"
     .span4.pull-right
       %h2.title{:style =>"margin-bottom: 5px;"}
         FUNDING SOURCES
@@ -137,16 +116,16 @@
           %li
             .color.business
             .legend-info
-              %h5 Business Sponsors
+              %h5 BUSINESS SPONSORS
               %h4= "#{count_percentage(@total_fundings[:total_amount], @total_fundings[:business_amount])} - #{@total_fundings[:business_amount]}"
           %li
             .color.foundation
             .legend-info
-              %h5 Business Sponsors
+              %h5 FOUNDATION SPONSORS
               %h4= "#{count_percentage(@total_fundings[:total_amount], @total_fundings[:foundation_amount])} - #{@total_fundings[:foundation_amount]}"
           %li
             .color.individual
             .legend-info
-              %h5 Business Sponsors
+              %h5 INDIVIDUAL CONTRIBUTORS
               %h4= "#{count_percentage(@total_fundings[:total_amount], @total_fundings[:individual_amount])} - #{@total_fundings[:individual_amount]}"
 

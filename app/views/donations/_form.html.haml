@@ -23,16 +23,16 @@
       = hidden_field_tag :perk_permission_type, @project.perk_permission ? "custom" : "default" , name: "perk_type"
       = hidden_field_tag :perk_name, @perk_name
     .field.name
-      = label_tag "NAME AS IT APPEARS ON CARD*"
+      = label_tag "NAME AS IT APPEARS ON CARD*", nil, class: "label-green"
       = text_field_tag nil, [current_user.first_name, current_user.last_name].join(" "), name: nil
     .field.card-number
-      = label_tag :card_number, "Credit Card Number"
+      = label_tag :card_number, "Credit Card Number", class: "label-green"
       = text_field_tag :card_number, nil, name: nil
     .field.ccv
-      = label_tag :card_code, "CVV*"
+      = label_tag :card_code, "CVV*", class: "label-green"
       = text_field_tag :card_code, nil, name: nil
     .field.expiration
-      = label_tag :card_month, "CARD EXPIRATION (MM/YYYY)*"
+      = label_tag :card_month, "CARD EXPIRATION (MM/YYYY)*", class: "label-green"
       / = select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
       / = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}
       = text_field_tag nil, nil, {name: nil, id: "card_month"}
