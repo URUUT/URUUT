@@ -100,7 +100,7 @@ class ProjectsController < ApplicationController
       when 1 then sponsorship_benefits += sponsorship_benefit_level("platinum", value, key)
       when 2 then sponsorship_benefits += sponsorship_benefit_level("gold", value, key)
       when 3 then sponsorship_benefits += sponsorship_benefit_level("silver", value, key)
-      when 4 then sponsorship_benefits += sponsorship_benefit_level("custom", value, key)
+      when 4 then sponsorship_benefits += sponsorship_benefit_level("custom", value, key) if params[:custom].present?
       end
 
     end
