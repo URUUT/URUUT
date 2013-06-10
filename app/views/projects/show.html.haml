@@ -25,6 +25,59 @@
 
 - if !@project.large_image.blank?
   #large_image{:style => "background:url(#{@project.large_image}/convert?w=1600&h=546&fit=crop&align=center); background-size: 100% 100%"}
+    .funding-info
+      .container
+        .span8
+          %h4.title= @project.project_title
+          %span.location #{@project.city}, #{@project.state}
+          %span.pull-right{:style => "margin-top: -20px"}
+            - if @project.organization_classification.eql?("170(c)(1)") || @project.organization_classification.eql?("501(c)(3)")
+              = image_tag 'td-logo-black.png', class: "tax-deductible deductable-black", "data-toggle" => "tooltip", title: "Donations Are Tax Deductable"
+          %hr
+          %p.short-desc= @project.title
+          %h6{:style => "color:#403e37;font-family:'Proxima Nova Semi';display:inline-block;margin:0;letter-spacing:normal;"} SHARE:
+          / = image_tag "fb-count.png", :class => "fb-share", :style => "margin-right:20px;"
+          / = image_tag "tw-count.png", :class => "tw-share", :style => "margin-right:20px;"
+          / = image_tag "bitly-link.png", :style => "margin-right:20px;"
+          .fb-count
+            %span
+          .tw-count
+            %span
+          .bitly-link
+            - if @project.bitly
+              %span= @project.bitly.sub(/http:\/\//, '')
+
+          %p= link_to "Contact Project Creator", "mailto:#{User.find(@project.user_id).email}"
+
+        .span4
+          .progress-container.span3.offset1
+            = image_tag 'seed.png', :class => "seed"
+            %div
+              %span Seed Funds Pledged
+              - if totalsponsor(@project).eql?(0)
+                %p $0
+              - else
+                / - totalDonated = 0
+                / - if @donation
+                /   - @donation.each do |d|
+                /     - totalDonated += d.amount
+                %p= number_to_currency(totalsponsor(@project), :precision => 0)
+
+          #progressbar
+
+          .project-details.cf
+            %span.small
+              Project
+              %br
+              Goal
+            .amount= number_to_currency(@project.goal, :precision => 0)
+
+            .days-left
+              %span.small
+                Days
+                %br
+                Left
+              .amount= campaign_days_left(@project)
 - else
   #large_image
     .funding-info
