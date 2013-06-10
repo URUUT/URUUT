@@ -94,6 +94,12 @@ class Project < ActiveRecord::Base
     Kaminari.paginate_array(total_data).page(page_num).per(25)
   end
 
+  def founders(page_num)
+    fundings = populate_funding_by_project
+    total_data= fundings.sort {|x,y| x.created_at <=> y.created_at }
+    Kaminari.paginate_array(total_data).page(page_num).per(25)
+  end
+
   def total_funding_by_project
     fundings = populate_funding_by_project
     total_amout, individual_amount, business_amount, foundation_amount = 0, 0, 0, 0
