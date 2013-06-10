@@ -165,18 +165,22 @@
   };
 
   var validatePerk = function(){
-    if ($('#perk-name').val() == "" || $('#perk-amount').val() == "" || $('#perk-description').val() == "") {
-      for (var i = 0; i < $('.required').length; i++){
-        if ($('.required')[i].value == ""){
-          $('#' + $('.required')[i].id).addClass('error-validated-field');
-        } else {
-          $('#' + $('.required')[i].id).removeClass('error-validated-field');
+    if ($('#project_perk_permission_input').val() == "Yes") {
+      if ($('#perk-name').val() == "" || $('#perk-amount').val() == "" || $('#perk-description').val() == "") {
+        for (var i = 0; i < $('.required').length; i++){
+          if ($('.required')[i].value == ""){
+            $('#' + $('.required')[i].id).addClass('error-validated-field');
+          } else {
+            $('#' + $('.required')[i].id).removeClass('error-validated-field');
+          }
         }
-      }
-      return false;
+        return false;
+      } else {
+        return true;
+      };
     } else {
       return true;
-    };
+    }
   };
 
   $('.save-new-perk').on('click', function(e) {
