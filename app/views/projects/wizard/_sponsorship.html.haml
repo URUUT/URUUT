@@ -19,7 +19,7 @@
     %div
       %h6{:style => "color:#70bf4c"} ALLOW PROJECT SPONSORSHIPS?
       .span2{style: "margin-left: 0"}
-        = f.select :sponsorship_permission, options_for_select({ "Yes" => "yes", "No" => "no" }, "yes"), {}, {:onchange => "changeProjectPermission()"}
+        = f.select :sponsorship_permission, options_for_select({ "Yes" => "yes", "No" => "no" }, @project.sponsor_permission), {}, {:onchange => "changeProjectPermission()"}
     .clearfix
 
     %div.sponsorship-true
@@ -61,6 +61,8 @@
                     %span#name= benefit.name
                     %span.edit-benefit.italic.label-green select to edit
                     = text_field_tag "platinum[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
+              %a.italic.green-link.check-all{:href => "javascript:void(0)", data:{target: "platinum-checkbox"}}
+                (Check All That Apply)
 
               = hidden_field_tag "platinum_count", nil, id: "platinum-count"
             %div#custom-checkbox
@@ -112,6 +114,8 @@
                     %span#name= benefit.name
                     %span.edit-benefit.italic.label-green select to edit
                     = text_field_tag "gold[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
+              %a.italic.green-link.check-all{:href => "javascript:void(0)", data:{target: "gold-checkbox"}}
+                (Check All That Apply)
 
               = hidden_field_tag "gold_count", nil, id: "gold-count"
             %div#custom-checkbox
@@ -163,6 +167,8 @@
                     %span#name= benefit.name
                     %span.edit-benefit.italic.label-green select to edit
                     = text_field_tag "silver[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
+              %a.italic.green-link.check-all{:href => "javascript:void(0)", data:{target: "silver-checkbox"}}
+                (Check All That Apply)
 
               = hidden_field_tag "silver_count", nil, id: "silver-count"
             %div#custom-checkbox
@@ -292,6 +298,19 @@
     editBenefit();
     addAnotherNewBenefit();
     removeAnotherBenefit();
+    $(".check-all").click(function(){
+      var id = $(this).attr("data-target");
+        $("#"+id).find(".sponsor_checkbox").click();
+    })
+
+    if ( $("#project_sponsorship_permission").val() == "no" ){
+      $(".sponsorship-true").hide();
+      $(".sponsorship-false").show();
+    }
+    else{
+      $(".sponsorship-false").hide();
+      $(".sponsorship-true").show();
+    }
     // if ($('#platinum-checkbox').children().find("input[type='checkbox']:checked").length >= 1) {
     //   $('.platinum-availibility').html("(0 AVAILABLE)");
     //   $('.platinum-availibility').attr("data-available", "0");
