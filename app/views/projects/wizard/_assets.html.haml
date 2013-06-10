@@ -354,9 +354,11 @@
     $(".change-image").button("loading");
     $(this).button('loading');
     var fpfile = { url: $("#url_image").val(), mimetype: 'image/jpeg', isWriteable: true };
+    var newImage = new Image();
+    newImage.src = $("#url_image").val();
     console.log("Converting...");
     filepicker.convert(fpfile,
-      {crop: [$("#x_position").val(), $("#y_position").val(), 1600, 546]},
+      {crop: [$("#x_position").val(), $("#y_position").val(), newImage.width, newImage.height]},
       {},
       function(new_FPFile){
         $(".save-image").button('reset');
