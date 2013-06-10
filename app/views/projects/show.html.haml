@@ -34,7 +34,7 @@
           %span.location #{@project.city}, #{@project.state}
           %span.pull-right{:style => "margin-top: -20px"}
             - if @project.organization_classification.eql?("170(c)(1)") || @project.organization_classification.eql?("501(c)(3)")
-              = image_tag 'td-logo-black.png', class: "tax-deductible deductable-black", "data-toggle" => "tooltip", title: "Donation Are Tax Deductable"
+              = image_tag 'td-logo-black.png', class: "tax-deductible deductable-black", "data-toggle" => "tooltip", title: "Donations Are Tax Deductable"
           %hr
           %p.short-desc= @project.title
           %h6{:style => "color:#403e37;font-family:'Proxima Nova Semi';display:inline-block;margin:0;letter-spacing:normal;"} SHARE:
@@ -166,10 +166,10 @@
                 = update.content
               %hr
         - unless @project.galleries.empty?
-          #gallery.tab-pane
+          #gallery.tab-pane.clearfix
             - @project.galleries.each do |gallery|
-              %div{style: "margin-bottom: 20px"}
-                = image_tag(gallery.gallery_file_name)
+              %a.thumb-link{:href => gallery.gallery_file_name, :rel => "prettyPhoto"}
+                = image_tag(gallery.gallery_file_name, class: "gallery-thumb")
 
       %hr
 
@@ -218,7 +218,7 @@
         .sidebar-tab
         %ul#myTab2.tab-nav
           %li.active
-            %a{:href => "#perks"} Donation
+            %a{:href => "#perks"} Donate
           %li
             %a{:href => "#sponsorship"} Sponsor
         .tab-content
@@ -451,6 +451,10 @@
     }).done(function(data) {
       window.location.href = "/default_perk_donations?amount="+ $("#custom_seed").val() +"&name=custom"
     });
+  });
+
+  $(document).ready(function(){
+    $("a[rel^='prettyPhoto']").prettyPhoto();
   });
 
   var getFbCount = function() {
