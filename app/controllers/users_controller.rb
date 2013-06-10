@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 
     @projects_created = @user.projects.live.page(params[:created_page]).per(2)
     @projects_funded = @user.projects_funded.live.page(params[:funded_page]).per(2)
+    @pending_projects = @user.projects.where(live: 0)
   end
 
   def profile
