@@ -277,6 +277,7 @@ GEM
     simple_form (2.1.0)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
+    simple_oauth (0.2.0)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -314,6 +315,13 @@ GEM
     wicked (0.6.0)
       activesupport (>= 3.0.7)
       rails (>= 3.0.7)
+    youtube_it (2.2.1)
+      builder
+      faraday (~> 0.8)
+      nokogiri (~> 1.5.2)
+      oauth (~> 0.4.4)
+      oauth2 (~> 0.6)
+      simple_oauth (>= 0.1.5)
 
 PLATFORMS
   ruby
@@ -363,3 +371,4 @@ DEPENDENCIES
   unicorn
   validates_email_format_of
   wicked
+  youtube_it
