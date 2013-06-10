@@ -134,8 +134,13 @@
 
   function showCoords(coords)
   {
+    // get original image resolution info
+    var image = new Image();
+    image.src = $("#cover-priview").attr('src');
+
     var w = $("#cover-priview").width();
-    var ratio = parseInt(w) / parseInt(w);
+    var wOriginal = image.width;
+    var ratio = parseInt(wOriginal) / parseInt(w);
     $('#x_position').val(Math.round(coords.x * ratio));
     $("#y_position").val(Math.round(coords.y * ratio));
     $('#width_after').val(Math.round(coords.w * ratio));
