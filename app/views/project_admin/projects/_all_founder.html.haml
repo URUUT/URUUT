@@ -3,16 +3,16 @@
     - if founder.type_founder.eql?("sponsor")
       %tr
         %td= image_tag "#{founder.logo}/convert?fit=scale&height=37&width=37"
-        %td= founder.name
+        %td= truncate(founder.name, length: 17)
         %td= "$#{founder.cost}"
-        %td= "#{founder.sponsorship_level.name} sponsor"
+        %td= truncate("#{founder.sponsorship_level.name} sponsor", length: 17)
         %td= founder.updated_at.strftime("%m/%d")
     - else
       %tr
         %td= image_tag avatar_project_admin(founder.user.avatar), style: "width:37px"
-        %td= [founder.user.first_name, founder.user.last_name].join(" ")
+        %td= truncate([founder.user.first_name, founder.user.last_name].join(" "), length: 17)
         %td= "$#{founder.amount}"
-        %td= founder.perk_name
+        %td= truncate(founder.perk_name, length: 17)
         %td= founder.updated_at.strftime("%m/%d")
 
 = paginate @founders, remote: true
