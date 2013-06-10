@@ -2,9 +2,18 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$green2: #70bf4c;
+$green2: #81C263;
 $light-green: #bee0b4;
 
+@font-face {
+  font-family: 'Proxima Nova Light';
+  src: font-url('proximanova-light-webfont.eot');
+  src: font-url('proximanova-light-webfont.eot?#iefix') format('embedded-opentype'),
+  font-url('proximanova-light-webfont.woff') format('woff'),
+  font-url('proximanova-light-webfont.ttf') format('truetype'),
+  font-url('proximanova-ligt-webfont.svg#proxima_nova_rglight') format('svg');
+  font-weight: normal;
+  font-style: normal;}
 
 @font-face {
   font-family: 'Proxima Nova';
@@ -1195,9 +1204,7 @@ h5.time-left {
     text-shadow:none;
     text-transform:uppercase;}}
 
-#project_goal, input[id*='amount'] {
-  background:#fff url(image-path('dollar.png')) top left no-repeat;
-  padding-left:30px;}
+
 
 textarea[id*='perk'] {
   height:138px;
@@ -1859,7 +1866,7 @@ form.registration-edit {
     top: -18px; right: -18px; bottom: -18px; left: -18px;
     border-radius: inherit;
     background: #eee; /* Fallback */
-    background: linear-gradient(#e5e7e6, #eee);
+    background: linear-gradient(#e0e0e0, #eee);
     box-shadow: 0 1px 0 rgba(255,255,255,0.5);
     -webkit-filter: blur(1px); /* Smooth trick */
     filter: blur(1px); /* Future-proof */
@@ -1867,14 +1874,14 @@ form.registration-edit {
   .switch label i {
     display: block;
     height: 100%;
-    width: 60%;
+    width: 38%;
     position: absolute;
     left: 0;
     top: 0;
     z-index: 2;
     border-radius: inherit;
     background: #b2ac9e; /* Fallback */
-    background: linear-gradient(#f7f2f6, #b2ac9e);
+    background: linear-gradient(#fff, #eee);
     box-shadow:
       inset 0 1px 0 white,
       0 0 8px rgba(0,0,0,0.3),
@@ -1883,19 +1890,19 @@ form.registration-edit {
   .switch label i:after {
     content: "";
     position: absolute;
-    left: 15%;
+    left: 25%;
     top: 25%;
-    width: 70%;
+    width: 50%;
     height: 50%;
-    background: #d2cbc3; /* Fallback */
-    background: linear-gradient(#cbc7bc, #d2cbc3);
+    background: rgb(204, 204, 204); /* Fallback */
+    background: linear-gradient(rgb(204, 204, 204), rgb(245, 245, 245));
     border-radius: inherit;
   }
   .switch label i:before {
     content: "off";
     position: absolute;
     top: 50%;
-    right: -65%;
+    right: -115%;
     margin-top: -6px;
     color: #666; /* Fallback */
     color: rgba(0,0,0,0.4);
@@ -1904,10 +1911,10 @@ form.registration-edit {
     font-family: Helvetica, Arial, sans-serif;
     font-size: 12px;
     text-transform: uppercase;
-    text-shadow: 0 1px 0 #bcb8ae, 0 -1px 0 #97958e;
+    text-shadow: 0 1px 0 rgb(189, 189, 189), 0 -1px 0 rgb(148, 148, 148);
   }
   .switch input:checked ~ label { /* Background */
-    background: #9abb82;
+    background: #81C263;
   }
 
   .switch input:checked ~ label i { /* Toggle */
@@ -1918,8 +1925,8 @@ form.registration-edit {
   .switch input:checked ~ label i:before { /* On/off */
     content: "on";
     right: 100%;
-    color: #82a06a;
-    text-shadow: 0 1px 0 #afcb9b, 0 -1px 0 #6b8659;
+    color: #fff;
+    text-shadow: 0 1px 0 darken(#81C263, 20%), 0 -1px 0 lighten(#81C263, 10%);
   }
 }
 
@@ -2186,7 +2193,7 @@ form[id*=project] {
 			text-transform:uppercase;}
 		h2 {
 			color:#fff;
-			font-family: 'Proxima Nova';
+			font-family: 'Proxima Nova Light';
 			font-weight:normal;
 			letter-spacing:1px;
 			line-height:40px;
@@ -2301,7 +2308,7 @@ form[id*=project] {
 			width:550px;
 			h2 {
 				color:#b6b6b4;
-				font-family: 'Proxima Nova';
+				font-family: 'Proxima Nova Light';
 				letter-spacing:normal;
 				line-height:30px;
 				margin-top:0;
@@ -2571,7 +2578,7 @@ form[id*=project] {
 			display:inline-block;
 			float:left;
 			padding:0 25px;
-			width:33%;
+			width:25%;
 			img {
 				display:block;
 				margin:30px auto 15px;
@@ -2580,7 +2587,8 @@ form[id*=project] {
 				color:#403e37;
 				line-height:200%;}
 			h2 {
-				margin-bottom:0;}
+				margin-bottom:0;
+				letter-spacing: 1px;}
 			.title {
 				color:#70bf4c;
 				font-family:'Proxima Nova';
@@ -2976,7 +2984,7 @@ form[id*=project] {
 			vertical-align:middle;
 			p {
 				color:#fff;
-				font:normal 14px/24px 'Proxima Nova';}
+				font:normal 14px/24px 'Proxima Nova Light';}
 			h2 {
 				color:#70bf4c;
 				font-family:'Proxima Nova';
