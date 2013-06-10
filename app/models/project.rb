@@ -5,7 +5,7 @@ class Project < ActiveRecord::Base
     :city, :state, :zip, :neighborhood, :title, :image, :video, :tags, :live, :short_description, :perk_permission,
     :perks_attributes, :galleries_attributes, :status, :organization, :website, :twitter_handle, :facebook_page, :seed_video,
     :story, :about, :large_image, :seed_image, :cultivation_image, :ready_for_approval, :organization_type,
-    :organization_classification, :cultivation_video, :campaign_deadline
+    :organization_classification, :cultivation_video, :campaign_deadline, :sponsor_permission
 
   attr_accessor :sponsorship_permission
   #validates :title, :short_description, :description, :presence => true, :if => :active?
@@ -84,12 +84,6 @@ class Project < ActiveRecord::Base
 
   def printTest
     logger.debug("Test Crap")
-  end
-
-  def founders(page_num)
-    fundings = populate_funding_by_project
-    founders_data = fundings.sort{ |x,y| y.updated_at <=> x.updated_at }
-    Kaminari.paginate_array(founders_data).page(page_num).per(25)
   end
 
   def all_funding_by_project(page_num)
