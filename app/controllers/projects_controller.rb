@@ -273,16 +273,9 @@ class ProjectsController < ApplicationController
   end
 
   def generate_video_link(link)
-    link_data = link.split("//")
-
-    if link_data[1][0].eql?("m")
-      video_code = link_data[1].split("&")
-      url = "http://" + video_code[0][2..-1]
-    else
-      url = link
-    end
-
-    url
+    youtube_client = YouTubeIt::Client.new
+    video_data = youtube_client.video_by(link)
+    video_data.player_url
   end
 
 end
