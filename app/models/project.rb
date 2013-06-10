@@ -86,6 +86,13 @@ class Project < ActiveRecord::Base
     logger.debug("Test Crap")
   end
 
+  def founders(page_num)
+    fundings = populate_funding_by_project
+    total_data = fundings.sort {|x,y| y.created_at <=> x.created_at }
+
+    Kaminari.paginate_array(total_data).page(page_num).per(25)
+  end
+
   def all_funding_by_project(page_num)
     fundings = populate_funding_by_project
     total_data = []
