@@ -1630,6 +1630,10 @@ footer div ul li a{
   height: auto;
 }
 
+.error-validated-field {
+  border-color: red !important;
+}
+
 body.pages.contact{
   #flash_notice{
     display: none;
@@ -1641,7 +1645,6 @@ body.pages.contact{
   a{
     color: $green2;
     text-decoration: underline;
-
     &:hover{
       text-decoration: none;
     }
