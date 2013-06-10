@@ -158,4 +158,9 @@ module ApplicationHelper
     end
   end
 
+  def avatar_project_admin(avatar_link)
+    avatar_link = "default-user.png" if avatar_link.eql?("/images/default-avatar.png")
+    avatar_link
+  end
+
 end
