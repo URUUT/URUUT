@@ -274,11 +274,10 @@
                 PLATINUM
                 %span.small-heading
                   (#{availability(@project.project_sponsors, 1)} of 1 available)
-              %p
+              %ul.normal-font.dashed-list
                 -if @sponsorship_benefits.include?(1)
                   -@sponsorship_benefits[1].each do |benefit|
-                    =benefit.name
-                    %span
+                    %li= benefit.name
               .clearfix
                 .seed-num
                   .amount
@@ -296,11 +295,10 @@
                 GOLD
                 %span.small-heading
                   (#{availability(@project.project_sponsors, 2)} of 3 available)
-              %p
+              %ul.normal-font.dashed-list
                 -if @sponsorship_benefits.include?(2)
                   -@sponsorship_benefits[2].each do |benefit|
-                    =benefit.name
-                    %span
+                    %li=benefit.name
               .clearfix
                 .seed-num
                   .amount
@@ -318,11 +316,10 @@
                 SILVER
                 %span.small-heading
                   (#{availability(@project.project_sponsors, 3)} of 5 available)
-              %p
+              %ul.normal-font.dashed-list
                 -if @sponsorship_benefits.include?(3)
                   -@sponsorship_benefits[3].each do |benefit|
-                    =benefit.name
-                    %span
+                    %li= benefit.name
               .clearfix
                 .seed-num
                   .amount
@@ -337,10 +334,10 @@
                     %span
             .seed-level
               %h3 BRONZE
-              %p
+              %ul.normal-font.dashed-list
                 -if @sponsorship_benefits.include?(4)
                   -@sponsorship_benefits[4].each do |benefit|
-                    =benefit.name
+                    %li= benefit.name
                     %span
               .clearfix
                 .seed-num
