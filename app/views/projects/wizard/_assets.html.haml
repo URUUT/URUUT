@@ -351,6 +351,7 @@
   });
 
   $(".save-image").click(function(){
+    $('#cropInstruction').remove();
     $(".change-image").button("loading");
     $(this).button('loading');
     var fpfile = { url: $("#url_image").val(), mimetype: 'image/jpeg', isWriteable: true };
