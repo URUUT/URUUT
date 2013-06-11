@@ -71,6 +71,42 @@
 
   var connect = '#{session[:connected]}';
 
+  var updateOrganizedTypeInfo = function(){
+    $.ajax({
+      type: 'POST',
+      url: '/update_sponsor_info',
+      data: {
+        id: '#{@project.id}',
+        type: "organized_type",
+        data_value: $("#project_organization_type").val()
+      }
+    });
+  }
+
+  var updateOrganizedInfo = function(){
+    $.ajax({
+      type: 'POST',
+      url: '/update_sponsor_info',
+      data: {
+        id: '#{@project.id}',
+        type: "organized",
+        data_value: $("#project_organization_classification").val()
+      }
+    });
+  }
+
+  var updateStateInfo = function(){
+    $.ajax({
+      type: 'POST',
+      url: '/update_sponsor_info',
+      data: {
+        id: '#{@project.id}',
+        type: "state",
+        data_value: $("#project_state").val()
+      }
+    });
+  }
+
   $(".submit-finish-project").on("click", function(){
     // window.location.href = "#{new_project_url}";
     event.preventDefault();
@@ -274,6 +310,7 @@
         }
       })
     }) */
+
 
     $('.stripe-connect').click(function() {
       localStorage.setItem('organization', $('#project_organization').val());
