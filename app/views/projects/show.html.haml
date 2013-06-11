@@ -410,7 +410,7 @@
             - @perks.each do |p|
               .seed-level
                 %h3{style: "font-size: 20px;"}
-                  LEVEL 1
+                  = p.name
                 %div
                   %p
                     You will receive #{p.amount.to_i} Uruut Reward Points when you seed $#{p.amount.to_i}.
@@ -419,7 +419,7 @@
                   .seed-num
                     / %div Seed
                     .amount
-                      $#{p.amount.to_i}
+                      = number_to_currency(p.amount.to_i, precision: 0)
                   - if p.limit
                     - link = p.perks_available.to_i.zero? ? "javascript:void(0)" : "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}"
                     %a.btn.pull-right{:href => "#{link}", :class => "fund btn"} Fund Now
@@ -437,7 +437,7 @@
                 .seed-num
                   / %div Seed
                   .amount
-                    $#{perk}
+                    = number_to_currency(perk, precision: 0)
                 %a.btn.pull-right{:href => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}", :class => "fund btn"} Fund Now #{image_tag('arrow.png')}
 
           .seed-level{id: "perk-id-custom"}
