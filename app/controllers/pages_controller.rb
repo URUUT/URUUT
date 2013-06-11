@@ -56,7 +56,7 @@ class PagesController < ApplicationController
     #     by_category(params[:category]).all
     #   @ending = Project.by_city(params[:city]).by_category(params[:category]).order(:duration).all
     # end
-    @projects = Project.where("city ILIKE :keyword OR category ILIKE :keyword AND live = 1 AND ready_for_approval = 0", :keyword=> "%#{params[:keyword]}%").by_city(params[:city]).by_category(params[:category])
+    @projects = Project.where("title ILIKE :keyword OR city ILIKE :keyword OR category ILIKE :keyword AND live = 1 AND ready_for_approval = 0", :keyword=> "%#{params[:keyword]}%").by_city(params[:city]).by_category(params[:category])
     logger.debug(@projects)
   end
 
