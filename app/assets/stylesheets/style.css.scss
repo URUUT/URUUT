@@ -1560,7 +1560,7 @@ footer div ul li a{
   }
 }
 
-#flash_alert{
+#flash_alert, body.sessions #flash_notice{
   width: 900px;
   margin: 0 auto;
   background: #70bf4c;
