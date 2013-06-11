@@ -6,7 +6,7 @@
         .pull-left
           = label_tag "EMAIL RECEPIENT", nil, class: "label-green"
           .selectParents
-            = select_tag "sponsor_level", options_for_select(@sponsorship_levels.map { |sponsor| [sponsor.name, sponsor.id] }), prompt: "Import based on sponsor level", onchange: "get_emails_based_on_category()", class: ""
+            = select_tag "sponsor_level", options_for_select(@list_recepients), prompt: "Choice sponsor level or perk", onchange: "get_emails_based_on_category()", class: ""
         .pull-left
           %a.cs_import.btn{style: "margin-left: 6%; margin-top: 20px;"} Add Contacts
 

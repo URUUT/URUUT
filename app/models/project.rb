@@ -50,6 +50,17 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def list_recepient
+    data = []
+    level_ids = self.project_sponsors.map(&:level_id).uniq
+    perk_names = self.donations.map(&:perk_name).uniq
+    sponsorship_levels = SponsorshipLevel.where("id IN (?)", level_ids).uniq
+
+    sponsorship_levels.map { |sponsor| [sponsor.name, sponsor.id] }.each { |sponsor| data << sponsor }
+    perk_names.map { |sponsor| [sponsor, sponsor] }.each { |sponsor| data << sponsor }
+    data
+  end
+
   def amount_per_day
     donations = self.donations
     sponsors = self.project_sponsors
