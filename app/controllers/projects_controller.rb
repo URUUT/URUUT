@@ -112,8 +112,13 @@ class ProjectsController < ApplicationController
     session[:step] = params[:step]
 
     @sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits)
+    params[:project][:goal] = params[:project][:goal].gsub(",", "") if !params[:project][:goal].nil?
+    if !params[:project][:sponsorship_permission].nil? && params[:project][:sponsorship_permission].eql?("yes")
+      params[:project][:sponsorship_permission] = true
+    elsif !params[:project][:sponsorship_permission].nil? && params[:project][:sponsorship_permission].eql?("no")
+      params[:project][:sponsorship_permission] = false
+    end
     @project.update_attributes!(params[:project])
-
     if @project.bitly.blank?
       bitly = Bitly.client
       page_url = bitly.shorten("#{request.scheme}://#{request.host_with_port}/projects/#{@project.id}")
