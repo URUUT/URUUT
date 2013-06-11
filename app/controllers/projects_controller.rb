@@ -128,6 +128,21 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def update_sponsor_info
+    case params[:type]
+    when "state"
+      Project.update(params[:id].to_i, state: params[:data_value])
+    when "organized_type"
+      Project.update(params[:id].to_i, organization_type: params[:data_value])
+    else
+      Project.update(params[:id].to_i, organization_classification: params[:data_value])
+    end
+
+    respond_to do |format|
+      format.text { render :text => "Success" }
+    end
+  end
+
   def skip_sponsor
     session[:step] = "fourth"
     redirect_to :back
