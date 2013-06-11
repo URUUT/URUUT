@@ -51,6 +51,18 @@ Crowdfund::Application.configure do
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
 
+  config.action_mailer.default_url_options = { host: "www.uruut.41studio.com" }
+
+
+  config.action_mailer.smtp_settings = {
+    address: "smtp.mandrillapp.com",
+    port: 587,
+    domain: "localhost",
+    enable_starttls_auto: :true,
+    user_name: "bayu@41studio.com",
+    password: "17n2GO_shDLagdJvFbB9kw"
+  }
+
   # Enable threaded mode
   # config.threadsafe!
 
