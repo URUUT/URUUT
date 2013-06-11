@@ -184,7 +184,7 @@ class SponsorsController < ApplicationController
     @project = Project.find(params[:project_id])
     project_sponsor = @project.project_sponsors.unscoped.where(sponsor_id: params[:sponsor_id]).first
     # @sponsorship_level = SponsorshipLevel.find(project_sponsor.level_id)
-    @benefits = @project.sponsorship_benefits.where(sponsorship_level_id: project_sponsor.level_id)
+    @benefits = @project.sponsorship_benefits.where(status: true, sponsorship_level_id: project_sponsor.level_id )
     case project_sponsor.level_id
     when 1
       @cost = @project.goal.to_i * 0.3
