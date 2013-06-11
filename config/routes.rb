@@ -38,6 +38,7 @@ Crowdfund::Application.routes.draw do
    post "share_email_by_sponsor" => "sponsors#share_email"
 
    post "projects/submit_project"
+   post "update_sponsor_info" => "projects#update_sponsor_info"
 
    get "projects/stripe_update"
    get "default_perk_donations" => "donations#default_perk"
