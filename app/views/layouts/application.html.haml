@@ -87,7 +87,8 @@
 
   var updateCover = function(event){
     console.log(event.fpfile.url);
-    var largeImage = event.fpfile.url;
+    var largeImage = event.fpfile.url,
+    current_bg = $('#large_image').css('background-image');
     console.log("finished");
     $("body").animate({ scrollTop: 0 }, "slow");
     $('<img />').attr('src', largeImage).load(function() {
@@ -105,7 +106,9 @@
         $(".coverphoto").hide();
         $(".div-image-priview").remove();
         $("#url_image").val(largeImage);
-        $("#image-priview").append('<div id="cropInstruction" style="text-align: center; background: gray"><h2>Drag box for crop image</h2></div><div class="div-image-priview" style="margin: 0 auto; width: 900px;"><img id="cover-priview" src="' + largeImage + '"/></div>');
+        $("#cropInstruction").remove();
+        $("#image-priview").append('<div class="div-image-priview" style="margin: 0 auto; width: 900px;"><img id="cover-priview" src="' + largeImage + '"/></div>');
+        $("#image-priview").prepend('<div id="cropInstruction" style="text-align: center; background: gray; display: inline-block; width: 100%;"><h2>Drag to crop cover image</h2></div>');
 
         var w = $("#cover-priview").width();
         var h = $("#cover-priview").height();
@@ -127,8 +130,8 @@
         $(".action-convert").show();
       }
       else{
-        alert("image width for cover should be more than 1600px");
-        $('#large_image').css('background-image', '');
+        $('#large_image').css('background-image', current_bg);
+        $("#image-priview").prepend('<div id="cropInstruction" style="text-align: center; background: gray; position: absolute; width: 100%;"><h2>image width for cover should be more than 1600px</h2></div>');
       }
     });
   }
