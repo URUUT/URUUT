@@ -8,28 +8,28 @@
         %span.border
 
     %li.project-details
-      = link_to "#{ wizard_link("project_details", @project) }", class: "wizard-link project-details-link", "wizard-type" => "project_detail" do
+      = link_to "#{ wizard_link("project_details", @project) }", class: "wizard-link project-details-link", "wizard-type" => "#{"project_detail" if ["first", "second", "third", "fourth", "last"].include? session[:step]}" do
         %span.steps Step 2
         %span.title STORY
         %span.description Project Details
         %span.border
 
     %li.perks
-      = link_to "#{ wizard_link("perks", @project) }", class: "wizard-link perks-link", "wizard-type" => "perks" do
+      = link_to "#{ wizard_link("perks", @project) }", class: "wizard-link perks-link", "wizard-type" => "#{ "perks" if ["second", "third", "fourth", "last"].include? session[:step]}" do
         %span.steps Step 3
         %span.title PERKS
         %span.description Donor Rewards
         %span.border
 
     %li.sponsorship
-      = link_to "#{ wizard_link("sponsorship", @project) }", class: "wizard-link sponsorship-link", "wizard-type" => "sponsorship" do
+      = link_to "#{ wizard_link("sponsorship", @project) }", class: "wizard-link sponsorship-link", "wizard-type" => "#{"sponsorship" if ["third", "fourth", "last"].include? session[:step]}" do
         %span.steps Step 4
         %span.title Sponsors
         %span.description Sponsorship Details
         %span.border
 
     %li.assets
-      = link_to "#{ wizard_link("assets", @project) }", class: "wizard-link assets-link", "wizard-type" => "assets" do
+      = link_to "#{ wizard_link("assets", @project) }", class: "wizard-link assets-link", "wizard-type" => "#{"assets" if ["fourth", "last"].include? session[:step]}" do
         %span.steps Step 5
         %span.title VISUALS
         %span.description Project Page Setup
