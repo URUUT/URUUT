@@ -101,7 +101,9 @@ a.green-link{
   }
 }
 
-h1, h2, h3, h4, h5{
+h1, h2, h3, h4, h5, h6{
+  font-weight: 400;
+
   span.subtittle{
     font: normal 11px/11px "Georgia", georgia, serif;
     font-style: italic;
@@ -602,7 +604,25 @@ h3, h4, h5{
   }
 }
 
-.donations{
+.donations, .projects{
+
+  .hero{
+
+    .headline {
+
+
+
+      h2{
+        font-family: 'Proxima Nova Light';
+
+      }
+
+      p{
+        font: normal 14px/24px 'Proxima Nova Light';
+        letter-spacing: 1px;
+      }
+    }
+  }
 
   footer{
 
@@ -618,7 +638,7 @@ h3, h4, h5{
   border-top:1px solid #e9e9e9;
   padding:10px 20px;
   font-size:12px;
-  font-family:'Proxima Nova';
+  font-family:'Proxima Nova Light', sans-serif;
   text-align:center;
   color: $light-grey;
   margin:0;
@@ -1560,7 +1580,7 @@ footer div ul li a{
   }
 }
 
-#flash_alert, body.sessions #flash_notice{
+#flash_alert, .session #flash_notice{
   width: 900px;
   margin: 0 auto;
   background: #70bf4c;
@@ -1608,7 +1628,7 @@ footer div ul li a{
 
       h2{
         color: #70bf4c;
-        font-family: 'Proxima Nova';
+        font-family: 'Proxima Nova Light';
         letter-spacing: normal;
         margin: 0;
         text-transform: none;
@@ -1616,7 +1636,8 @@ footer div ul li a{
 
       p{
         color: #fff;
-        font: normal 14px/24px 'Proxima Nova';
+        font: normal 14px/24px 'Proxima Nova Light';
+        letter-spacing: 1px;
       }
     }
   }
@@ -1650,6 +1671,31 @@ body.pages.contact{
 
 .dropdown-menu{
   margin-top: 0;
+
+  .drop-wrapper{
+    position: relative;
+  }
+
+  .dropdown-arrow{
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    top: -35px;
+    right: 10px;
+    margin-left: -15px;
+    border-bottom-color: #fff;
+    border-width: 0 15px 15px;
+    display: block;
+  }
+
+  &.log-in{
+    .dropdown-arrow{
+      top: -45px;
+      right: 70px;
+    }
+  }
 
   /* add arrow*/
 }
