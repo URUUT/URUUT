@@ -3,7 +3,7 @@
     .span9
       %h4.tittle{style: "padding-bottom: 10px;"} THANK YOU!
       %h4.label-green Congratulations!
-      %p You are now an official sponsor to #{@project.title}. Now it's time to spread the word
+      %p{:style => "letter-spacing: 1px;"} You are now an official sponsor to #{@project.title}. Now it's time to spread the word
       %div
         = link_to image_tag("fb-share.png",style: "width: 150px"), "javascript:shareFb()", style: "display: block; float: left;"
         = link_to image_tag("tw-share.png", style: "width: 150px"), "https://twitter.com/share", "data-url" => root_url, "target" => "blank", style: "margin-left: 2%; display: block; float: left;"
@@ -16,14 +16,13 @@
       .well.pull-left{style: "margin-left: 0;"}
         %h5.label-green{style: "margin-bottom: 0;"} Payment amount
         %p #{number_to_currency(@donation.amount, :precision => 0)}
-        %br
         %h5.label-green{style: "margin-bottom: 0;"} Your perk
         %h6{style: "margin: 0;"}
           = @perk.name
         %p= @perk.description
         %p{style: "color: #e0e0e0; font-size: 11px;"}
           %span{style: "font-family: 'Proxima Nova Semi', sans-serif;"}
-            Estimated delivery : 
+            Estimated delivery :
           13 October 2013
 
 :javascript
