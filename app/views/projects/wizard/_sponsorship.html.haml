@@ -19,7 +19,7 @@
     %div
       %h6{:style => "color:#70bf4c"} ALLOW PROJECT SPONSORSHIPS?
       .span2{style: "margin-left: 0"}
-        = f.select :sponsorship_permission, options_for_select({ "Yes" => "yes", "No" => "no" }, @project.sponsor_permission), {}, {:onchange => "changeProjectPermission()"}
+        = f.select :sponsorship_permission, options_for_select({ "Yes" => true, "No" => false }, @project.sponsor_permission), {}, {:onchange => "changeProjectPermission()"}
     .clearfix
 
     %div.sponsorship-true
@@ -303,7 +303,7 @@
         $("#"+id).find(".sponsor_checkbox").click();
     })
 
-    if ( $("#project_sponsorship_permission").val() == "no" ){
+    if ( $("#project_sponsorship_permission").val() == "false" ){
       $(".sponsorship-true").hide();
       $(".sponsorship-false").show();
     }
@@ -379,7 +379,7 @@
 
 
   var changeProjectPermission = function(){
-    if ( $("#project_sponsorship_permission").val() == "no" ){
+    if ( $("#project_sponsorship_permission").val() == "false" ){
       $(".sponsorship-true").hide();
       $(".sponsorship-false").show();
     }
