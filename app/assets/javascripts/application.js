@@ -14,3 +14,13 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree ./global
+
+$(document).ready(function(){
+  for (var i=0;i<$('input[id*="amount"]').length;i++) {
+    var elm = $('input[id*="amount"]')[i],
+    tmp_id = elm.id;
+
+    elm.id = "this-is-temporary";
+    elm.id = tmp_id;
+  }
+});
