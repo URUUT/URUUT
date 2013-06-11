@@ -15,7 +15,7 @@
         - amount += founder.cost.to_i
     %tr
       %td= date.strftime("%m/%d/%Y")
-      %td= "$#{amount.round(2)}"
+      %td= "#{number_to_currency(amount, precision: 0)}"
       %td= individual_count
       %td= sponsors_count
 
