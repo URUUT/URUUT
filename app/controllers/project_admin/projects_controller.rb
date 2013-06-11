@@ -87,17 +87,22 @@ class ProjectAdmin::ProjectsController < ApplicationController
   end
 
   def emails_page
+    @project = Project.find(params[:project_id])
     @contact = Contact.new
     @need_doctype = true
-    level_ids = @project.project_sponsors.map(&:level_id).uniq
-    @sponsorship_levels = SponsorshipLevel.where("id IN (?)", level_ids)
+    @list_recepients = @project.list_recepient
 
     subheader
   end
 
   def email_based_on_sponsor_level
     project = Project.find(session[:current_project])
-    emails = project.project_sponsors.joins(:sponsor).where("level_id = ?", params[:level_id]).pluck(:email)
+    if params[:level_id].to_i.to_s == params[:level_id]
+      emails = project.project_sponsors.joins(:sponsor).where("level_id = ?", params[:level_id]).uniq.pluck(:email)
+    else
+      emails = project.donations.where("perk_name = ?", params[:level_id]).uniq.pluck(:email)
+    end
+
     emails.reject!(&:empty?)
     @emails = emails.join(",")
   end

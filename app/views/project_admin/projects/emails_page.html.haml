@@ -55,14 +55,17 @@
 
 .menu-project
   .container
-    %ul
-      %li{:style => "margin-left: 0"}
+    %ul.clearfix.admin-menu
+      %li.overview{:style => "margin-left: 0"}
         = link_to "Project Overview", project_admin_project_path(@project.id), class: "sub-menu-project"
-      %li
+        .nav-arrow
+      %li.manage
         = link_to "Manage Project", project_admin_project_manage_path(@project.id), class: "sub-menu-project manage", remote: true
-      %li
+        .nav-arrow
+      %li.funder
         = link_to "Project Funders", project_admin_project_project_founder_path(@project.id), class: "sub-menu-project founder", remote: true
-      %li.active
+        .nav-arrow
+      %li.message.active
         = link_to "Project Messages", project_admin_project_messages_path(@project.id), class: "sub-menu-project messages", style: "color: #000", remote: true
         .nav-arrow
 
