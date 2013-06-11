@@ -3,6 +3,9 @@
     .span8
       %h4.title= @project.title
       %span.location #{@project.city}, #{@project.state}
+      %span.pull-right{:style => "margin-top: -20px"}
+        - if @project.organization_classification.eql?("170(c)(1)") || @project.organization_classification.eql?("501(c)(3)")
+          = image_tag 'td-logo-black.png', class: "tax-deductible deductable-black", "data-toggle" => "tooltip", title: "Donations Are Tax Deductable"
       %hr
       %p.short-desc{:style => "font:normal 12px/18px 'Proxima Nova';"}= @project.about
 

@@ -347,6 +347,11 @@
     $(".coverphoto").click();
   });
 
+  $('.tax-deductible').tooltip({
+        placement: "top",
+        trigger: "hover"
+      });
+
   $(".save-image").click(function(){
     $('#cropInstruction').remove();
     $(".change-image").button("loading");
