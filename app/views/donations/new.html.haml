@@ -52,7 +52,7 @@
                 %h3.perk-name-other{style: "#{"color: #000" if @perk.id.eql?(p.id)}", id: "perk-name-other-#{p.id}"}= p.name
                 - if p.limit
                   %p= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} Available)"
-                %p.description= p.description
+                %p= p.description
                 %ul
                   %li.seed-amount{style: "#{"background: #bee0b4" if @perk.id.eql?(p.id)}", id: "amount-id-#{p.id}"}
                     %h6 SEED
@@ -73,7 +73,7 @@
             %li.perk.clearfix{style: "#{"background: #bee0b4" if @perk_amount.eql?(perk_amount)}", id: "perk-id-#{index}"}
               %h3.perk-name-other{style: "#{"color: #000" if @perk_amount.eql?(perk_amount)}", id: "perk-name-other-#{index}"}
                 = name
-              %p.description= description
+              %p= description
               %ul
                 %li.seed-amount{style: "#{"background: #bee0b4" if @perk_amount.eql?(perk_amount)}", id: "amount-id-#{index}"}
                   %h6 SEED
@@ -84,7 +84,7 @@
         %li.perk.clearfix{id: "perk-id-custom", style: "#{"background: #bee0b4" if @perk_name.eql?("custom")}"}
           %h3.perk-name-other{style: "#{"color: #000" if @perk_name.eql?("custom")}", id: "perk-name-other"}
             CHOOSE YOUR PERK
-          %p.description With this option you choose the amount to seed and which perk you receive. (Perk egibility based on donation amount)
+          %p With this option you choose the amount to seed and which perk you receive. (Perk egibility based on donation amount)
           %ul
             %li.seed-amount{id: "amount-id-custom", style: "#{"background: #bee0b4" if @perk_name.eql?("custom")}"}
               %h6 AMOUNT TO SEED

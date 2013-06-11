@@ -3,7 +3,7 @@
     .span9
       %h4.tittle THANK YOU!
       %h4.label-green Congratulations!
-      %p You are now an official sponsor to #{@project.title}. Now it's time to spread the word
+      %p{:style => "letter-spacing: 1px;"} You are now an official sponsor to #{@project.title}. Now it's time to spread the word
       %div
         = link_to image_tag("fb-share.png",style: "width: 150px"), "javascript:shareFb()", style: "display: block; float: left;"
         = link_to image_tag("tw-share.png", style: "width: 150px"), "https://twitter.com/share", "data-url" => root_url, "target" => "blank", style: "margin-left: 2%; display: block; float: left;"
@@ -16,7 +16,6 @@
       .well.pull-left{style: "margin-left: 0;"}
         %h5.label-green{style: "margin-bottom: 0;"} PAYMENT AMOUNT
         %p #{number_to_currency(@cost, precision: 0)}
-        %br
         %h5.label-green{style: "margin-bottom: 0;"} YOUR BENEFITS
         %h6{style: "margin: 0;"} #{@level} SPONSOR
         %ul.dashed-list
