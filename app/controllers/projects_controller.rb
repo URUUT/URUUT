@@ -113,11 +113,7 @@ class ProjectsController < ApplicationController
 
     @sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits)
     params[:project][:goal] = params[:project][:goal].gsub(",", "") if !params[:project][:goal].nil?
-    if !params[:project][:sponsorship_permission].nil? && params[:project][:sponsorship_permission].eql?("yes")
-      params[:project][:sponsorship_permission] = true
-    elsif !params[:project][:sponsorship_permission].nil? && params[:project][:sponsorship_permission].eql?("no")
-      params[:project][:sponsorship_permission] = false
-    end
+    params[:project][:sponsor_permission] = params[:project][:sponsorship_permission] if !params[:project][:sponsorship_permission].nil?
     @project.update_attributes!(params[:project])
     if @project.bitly.blank?
       bitly = Bitly.client
