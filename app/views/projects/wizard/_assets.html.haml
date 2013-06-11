@@ -195,11 +195,10 @@
                   PLATINUM
                   %span.small-heading
                     (1 of 1 available)
-                %p
+                %ul.normal-font.dashed-list
                   -if @sponsorship_benefits.include?(1)
                     -@sponsorship_benefits[1].each do |benefit|
-                      =benefit.name
-                      %span
+                      %li= benefit.name
                 .clearfix
                   .seed-num
                     .amount
@@ -212,11 +211,10 @@
                   GOLD
                   %span.small-heading
                     (3 of 3 available)
-                %p
+                %ul.normal-font.dashed-list
                   -if @sponsorship_benefits.include?(2)
                     -@sponsorship_benefits[2].each do |benefit|
-                      =benefit.name
-                      %span
+                      %li= benefit.name
                 .clearfix
                   .seed-num
                     .amount
@@ -229,10 +227,10 @@
                   SILVER
                   %span.small-heading
                     (5 of 5 available)
-                %p
+                %ul.normal-font.dashed-list
                   -if @sponsorship_benefits.include?(3)
                     -@sponsorship_benefits[3].each do |benefit|
-                      =benefit.name
+                      %li= benefit.name
                       %span
                 .clearfix
                   .seed-num
@@ -243,11 +241,10 @@
                     %span
               .seed-level
                 %h3 BRONZE
-                %p
+                %ul.normal-font.dashed-list
                   -if @sponsorship_benefits.include?(4)
                     -@sponsorship_benefits[4].each do |benefit|
-                      =benefit.name
-                      %span
+                      %li= benefit.name
                 .clearfix
                   .seed-num
                     .amount
@@ -351,6 +348,7 @@
   });
 
   $(".save-image").click(function(){
+    $('#cropInstruction').remove();
     $(".change-image").button("loading");
     $(this).button('loading');
     var fpfile = { url: $("#url_image").val(), mimetype: 'image/jpeg', isWriteable: true };
