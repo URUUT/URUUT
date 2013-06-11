@@ -48,7 +48,8 @@
                 Log in
                 %span
 
-            %p= link_to "Forgot your password?", "/users/password/new", :style => "font: italic 12px/15px 'Georgia', georgia, serif !important;text-transform:none;"
+            %a{"data-toggle" => "modal", :href => "#forgotModal", :role => "button", style: "font: italic 12px/15px 'Georgia', georgia, serif !important;text-transform:none;"}
+              Forgot your password?
 
             %hr
             %h5 FACEBOOK LOG IN
@@ -61,5 +62,21 @@
               without permission.
 
   -#%input{:type => "search", :placeholder => "Search"}
+#forgotModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "width: 440px;"}
+  .modal-header{:style => "border-bottom: none;"}
+    %button.close.label-green{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button", :style => "font-family: 'Proxima Nova', sans-serif; font-size: 12px;opacity: 1;"}
+      Close X
+    %h3#myModalLabel.tittle{:style => "margin-bottom: 0;"} FORGOT YOUR PASSWORD?
+  .modal-body{:style => "padding-top: 0; font-size: 13px; letter-spacing: 1px;"}
+    %p Enter the email address you used when you signed up and we'll send you instructions to reset your password.
+    %p For security reasons, we do NOT store your password. So rest assured that we will never send your password via email.
+
+
+    = form_for(:user, :as => :user, :url => password_path(:user), :html => { :method => :post }, style: "margin-top: 20px;") do |f|
+      .email
+        %h4.label-green Email Address
+        = f.email_field :email
+      %div{:style => "text-align: center"}
+        = f.submit "Reset My Password", class: "btn", style: "background: #81C263; border-radius: 5px; padding-top: 20px; padding-bottom: 20px;"
 
 = javascript_include_tag "pages"
