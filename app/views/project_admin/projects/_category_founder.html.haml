@@ -6,7 +6,7 @@
         %tr
           %td= image_tag avatar_project_admin(founder.user.avatar), style: "width:37px"
           %td= truncate([founder.user.first_name, founder.user.last_name].join(" "), length: 17)
-          %td= "$#{founder.amount}"
+          %td= "#{number_to_currency(founder.amount, precision: 0)}"
           %td= truncate(perk_name, length: 17)
           %td= founder.updated_at.strftime("%m/%d")
 - else
@@ -21,7 +21,7 @@
           %tr
             %td= image_tag "#{sponsor.logo}/convert?fit=scale&height=37&width=37"
             %td= truncate(sponsor.name, length: 17)
-            %td= "$#{sponsor.cost}"
+            %td= "#{number_to_currency(sponsor.cost, precision: 0)}"
             %td= truncate("#{sponsor.sponsorship_level.name} sponsor", length: 17)
             %td= sponsor.updated_at.strftime("%m/%d")
 
