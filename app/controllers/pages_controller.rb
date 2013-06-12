@@ -56,7 +56,20 @@ class PagesController < ApplicationController
     #     by_category(params[:category]).all
     #   @ending = Project.by_city(params[:city]).by_category(params[:category]).order(:duration).all
     # end
-    @projects = Project.where("title ILIKE :keyword OR city ILIKE :keyword OR category ILIKE :keyword AND live = 1 AND ready_for_approval = 0", :keyword=> "%#{params[:keyword]}%").by_city(params[:city]).by_category(params[:category])
+    query = []
+
+    fields = %w{
+      title description location duration goal category address city state
+      zip neighborhood short_description website facebook_page twitter_handle
+      organization story about project_title organization_type
+      organization_classification
+    }
+
+    fields.each do |field|
+      query << "#{field} ILIKE :keyword"
+    end
+
+    @projects = Project.where("#{query.join(" OR ")} AND live = 1 AND ready_for_approval = 0", :keyword=> "%#{params[:keyword]}%").by_city(params[:city]).by_category(params[:category])
     logger.debug(@projects)
   end
 
