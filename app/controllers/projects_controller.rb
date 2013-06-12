@@ -271,15 +271,14 @@ class ProjectsController < ApplicationController
     @project = Project.find_by_id(session[:current_project])
     image = params[:status].eql?("seed_image") ? 'seed_image' : 'cultivation_image'
     @project.update_attribute(image.to_sym, params[:image])
-    render json: { project_id: @project.id }
+    render nothing: true
   end
 
   def delete_image
     @project = Project.find(params[:id])
     params[:type].eql?("seed_image") ? @project.seed_image = nil : @project.cultivation_image = nil
     @project.save!
-
-    redirect_to :back
+    render nothing: true
   end
 
   private
