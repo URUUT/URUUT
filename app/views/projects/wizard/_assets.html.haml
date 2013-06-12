@@ -336,7 +336,71 @@
     .modal-footer
       %input{:type => "submit", :value => "Submit video", onClick: "$(this).text('loading')"}
 
+= javascript_include_tag "//code.jquery.com/ui/1.10.3/jquery-ui.js"
+
 :javascript
+
+  var updateCover = function(event){
+    console.log(event.fpfile.url);
+    var largeImage = event.fpfile.url,
+    current_bg = $('#large_image').css('background-image');
+    console.log("finished");
+    $("body").animate({ scrollTop: 0 }, "slow");
+    $('<img />').attr('src', largeImage).load(function() {
+      var largeImageObj = new Image;
+      largeImageObj.src = largeImage;
+      console.log(largeImageObj.width);
+      if ( largeImageObj.width >= 1600 )
+      {
+        $.ajax({
+          url: '/projects/save_image',
+          method: 'POST',
+          data: { large_image: largeImage }
+        });
+        $(".coverphoto").hide();
+        $(".div-image-priview").remove();
+        $("#url_image").val(largeImage);
+        $("#image-priview").hide();
+
+        $(".funding-info").hide();
+
+        var dragImg = new Image;
+        dragImg.src = largeImage;
+
+        $('#large_image img').remove();
+        $('#large_image').append(dragImg);
+        $('#large_image').append('<span class="drag-instructions">Drag to Reposition</span>');
+
+        $('#large_image img').draggable({
+          axis: 'y',
+          drag: function(event, ui) {
+            var bottom = $(this).parent().height() - $(this).height();
+            if(ui.position.top > 0) {
+              ui.position.top = 0;
+            }
+
+            if(ui.position.top < bottom) {
+              ui.position.top = bottom;
+            }
+          },
+          stop: function(event, ui) {
+            var w = $('#large_image img').width();
+            var wOriginal = largeImageObj.width;
+            var ratio = parseInt(wOriginal) / parseInt(w);
+            $('#y_position').val(Math.round(Math.abs(ui.position.top * ratio)));
+          }
+        });
+
+        $('#large_image').css('background-image','');
+
+        $(".action-convert").show();
+      }
+      else{
+        $('#large_image').css('background-image', current_bg);
+        $("#image-priview").prepend('<div id="cropInstruction" style="text-align: center; background: gray; position: absolute; width: 100%;"><h2>image width for cover should be more than 1600px</h2></div>');
+      }
+    });
+  }
 
   $(function(){
     $('#myTab4 a').click(function (e) {
