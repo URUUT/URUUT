@@ -25,6 +25,7 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(params[:project])
+    @project.live = 0
     @project.user_id = current_user.id
     if @project.save
       respond_to do |format|
