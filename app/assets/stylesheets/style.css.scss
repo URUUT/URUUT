@@ -349,6 +349,7 @@ h3, h4, h5{
 
   p{
     margin-bottom: 5px;
+    text-align: justify;
   }
 
   /*p{
@@ -1059,6 +1060,7 @@ form {
 .dashed-list{
   list-style-image: url('dash.png');
   margin-left: 17px;
+  text-align: justify;
 }
 
 .label-green{
@@ -1193,7 +1195,7 @@ ul.nav{
 .selectParent{
 
   .styledSelect, #type{
-    font: bold 24px/24px arial, helvetica, sans-serif;
+    font: 24px/24px arial, helvetica, sans-serif;
     width: 110%;
     background: transparent;
     height: 65px;
@@ -1267,6 +1269,47 @@ iframe.twitter-follow-button{
   }
 }
 
+#planting_seeds, .cultivation-image-priview{
+  position: relative;
+
+  .seed-action-container, .cultivation-action-container{
+    background: #fff;
+    position: absolute;
+    left: 20px;
+    bottom: 0;
+    padding: 10px 20px;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+    button[type="button"], .btn{
+      background: transparent;
+      color: $green2;
+      font-family: 'Georgia', serif;
+      font-style: italic;
+      text-decoration: underline;
+      text-transform: capitalize;
+      font-size: 13px;
+      line-height: 20px;
+      border: none;
+      letter-spacing: 0;
+      padding: 0 10px;
+
+      &:hover{
+        text-decoration: none;
+      }
+    }
+
+    button[type="button"]{
+      background: transparent url('pencil-green.png') no-repeat left center;
+      padding-left: 15px;
+    }
+  }
+}
+
 .image_warp, .cultivation-image-content, .email-header-priview{
   position: relative;
   /*height: 500px;*/
@@ -1302,6 +1345,11 @@ iframe.twitter-follow-button{
         text-decoration: none;
       }
 
+    }
+
+    button[type="button"]{
+      background: transparent url('pencil-green.png') no-repeat left center;
+      padding-left: 15px;
     }
 
     .btn{
@@ -1746,3 +1794,4 @@ body.pages.contact{
   position:absolute;
   top:50%;
 }
+

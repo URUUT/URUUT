@@ -150,7 +150,7 @@ input[type=password] {
   border-radius:5px;
 	box-shadow:1px 1px 1px rgba(0,0,0,0.5);
 	font:bold 24px/24px arial, helvetica, sans-serif;
-	height:54px;
+	height:54px !important;
 	padding:19px;
 	/*width:auto !important;*/
 }
@@ -496,7 +496,7 @@ label {
         background:transparent;
         left:0;
         padding:0;
-        top:75px;
+        top:105px;
         width:100%;
         ul {
           box-sizing:border-box;
@@ -1190,7 +1190,7 @@ h5.time-left {
   input[type=text], textarea {
     margin-bottom:25px;}
   label {
-    font:bold 12px/12px "Proxima Nova", arial, sans-serif;
+    font: 12px/12px "Proxima Nova", arial, sans-serif;
     text-transform:uppercase;}
   .btn{
     background:none;
@@ -1198,7 +1198,7 @@ h5.time-left {
     box-shadow:none;
     border-radius:0;
     color:#fff;
-    font:bold 11px/11px "Proxima Nova", arial, sans-serif;
+    font: 11px/11px "Proxima Nova", arial, sans-serif;
     letter-spacing:2px;
     padding:8px 20px;
     text-shadow:none;
@@ -1221,7 +1221,7 @@ textarea[id*='perk'] {
 
 .remove {
   color:#413E37;
-  font:bold 12px/12px "Proxima Nova", arial, sans-serif;
+  font: 12px/12px "Proxima Nova", arial, sans-serif;
   letter-spacing:2px;
   position:absolute;
   right:40px;
@@ -1235,7 +1235,7 @@ textarea[id*='perk'] {
 	border-radius: 0;
 	color: #fff;
 	display: block;
-	font: bold 16px/16px "Proxima Nova Semi", arial, sans-serif;
+	font: 16px/16px "Proxima Nova Semi", arial, sans-serif;
 	margin: 20px auto 0;
 	padding: 14px 24px 15;
 	text-shadow: none;
@@ -1254,7 +1254,7 @@ div[id^='step'] {
   background:#70bf4c;
   border-radius:0;
   display:block;
-  font:bold 16px/16px "Proxima Nova Semi", arial, sans-serif;
+  font: 16px/16px "Proxima Nova Semi", arial, sans-serif;
 	letter-spacing:2px;
   margin:20px auto 0;
   padding:15px 24px;
@@ -1341,7 +1341,7 @@ div[id^='step'] {
       padding:0;
       text-transform:uppercase;}
     span.location {
-      font: bold 12px/12px "Proxima Nova Semi", arial, sans-serif;
+      font: 12px/12px "Proxima Nova Semi", arial, sans-serif;
       text-transform:uppercase;}
     hr {
       margin:8px 0;
@@ -1578,7 +1578,7 @@ a.green {
   }
   .popover-content {
     color: #70bf4c;
-    font:bold 14px "Proxima Nova", arial, sans-serif;
+    font: 14px "Proxima Nova", arial, sans-serif;
     text-transform:uppercase;
     letter-spacing:1px;
     text-align:center;
@@ -1699,7 +1699,7 @@ ul.perks {
     padding:20px;
     h3 {
       color:#70bf4c;
-      font:bold 20px/20px "Proxima Nova Semi", arial, sans-serif;
+      font: 20px/20px "Proxima Nova Semi", arial, sans-serif;
       letter-spacing:2px;
       margin:0;}
     p.description {
@@ -1738,11 +1738,11 @@ ul.perks {
           text-shadow:none;
           text-transform:uppercase;}
         h6 {
-          font:bold 12px/12px "Proxima Nova Semi", arial, sans-serif;
+          font: 12px/12px "Proxima Nova Semi", arial, sans-serif;
           letter-spacing:2px;
           margin-bottom:3px;}
         p.amount {
-          font:bold 24px/24px "Proxima Nova Semi", arial, sans-serif;
+          font: 24px/24px "Proxima Nova Semi", arial, sans-serif;
           margin-bottom:0;}}}}}
 
 .planter {
@@ -2023,7 +2023,7 @@ input.selectbox {
 	cursor:pointer;
 	/*width:290px !important;*/
 	position:relative;
-  padding-right: 77px;
+  padding-right: 77px !important;
 	text-transform:capitalize;}
 
 .selectbox-wrapper {
