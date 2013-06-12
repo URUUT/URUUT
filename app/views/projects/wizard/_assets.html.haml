@@ -422,7 +422,7 @@
   });
 
   $(".save-image").click(function(){
-    $('#cropInstruction').remove();
+    $('.drag-instructions').remove();
     $(".change-image").text("loading");
     $(this).text("loading");
     var fpfile = { url: $("#url_image").val(), mimetype: 'image/jpeg', isWriteable: true };
