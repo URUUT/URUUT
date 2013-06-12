@@ -92,6 +92,14 @@ p{
   }
 }
 
+input[type=text],
+input[type=email],
+input[type=date],
+input[type=password] {
+  height: 64px;
+  padding: 14px 19px;
+}
+
 a.green-link{
   color: $green2;
   text-decoration: underline;
@@ -1061,6 +1069,7 @@ form {
   }
 }
 
+
 ul.nav{
 
   &> li{
@@ -1075,7 +1084,7 @@ ul.nav{
 }
 
 #project_goal, input[id*="amount"] {
-  background: white url('dollar.png') no-repeat top left !important;
+  background: white url('dollar.png') no-repeat center left;
   padding-left: 30px;
 }
 
@@ -1183,7 +1192,7 @@ ul.nav{
 
 .selectParent{
 
-  #type{
+  .styledSelect, #type{
     font: bold 24px/24px arial, helvetica, sans-serif;
     width: 110%;
     background: transparent;
@@ -1496,6 +1505,12 @@ ul.breadcrumbs{
 [class^="icon-"],
 [class*=" icon-"] {
   background-image: url("glyphicons-halflings.png");
+}
+
+.choiced-perk.amount input[type="text"]{
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  margin-top: -4px;
 }
 
 .faqs, .privacy{

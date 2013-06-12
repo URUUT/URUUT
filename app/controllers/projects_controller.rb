@@ -41,7 +41,7 @@ class ProjectsController < ApplicationController
     session[:current_project] = @project.id
     logger.debug("Current session id is: #{session[:current_project]}")
     @project.update_attributes!(params[:project])
-    @perks = Perk.where("project_id = ?", @project.id)
+    @perks = Perk.where("project_id = ?", @project.id).order(:amount)
     logger.debug(@connected)
   end
 
@@ -52,7 +52,7 @@ class ProjectsController < ApplicationController
     @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
     @sponsorship_levels = SponsorshipLevel.all
     @donation = Donation.where("project_id = ?", @project.id)
-    @perks = Perk.where("project_id = ?", @project.id)
+    @perks = Perk.where("project_id = ?", @project.id).order(:amount)
     @user = User.find(@project.user_id)
     session[:current_project] = @project.id
     render :layout => 'landing'
