@@ -148,11 +148,25 @@ input[type=email],
 input[type=date],
 input[type=password] {
   border-radius:5px;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+  box-shadow:1px 1px 1px rgba(0,0,0,0.5);
+  font:bold 24px/24px arial, helvetica, sans-serif;
+  height:54px;
+  padding:19px;
+  /*width:auto !important;*/
+=======
+>>>>>>> fixed stylesheet
 	box-shadow:1px 1px 1px rgba(0,0,0,0.5);
 	font:bold 24px/24px arial, helvetica, sans-serif;
 	height:54px !important;
 	padding:19px;
 	/*width:auto !important;*/
+<<<<<<< HEAD
+=======
+>>>>>>> fixed stylesheet
+>>>>>>> fixed stylesheet
 }
 
 input[type=submit] {
@@ -1255,7 +1269,11 @@ div[id^='step'] {
   border-radius:0;
   display:block;
   font: 16px/16px "Proxima Nova Semi", arial, sans-serif;
+<<<<<<< HEAD
 	letter-spacing:2px;
+=======
+  letter-spacing:2px;
+>>>>>>> fixed stylesheet
   margin:20px auto 0;
   padding:15px 24px;
   text-shadow:none;
@@ -2023,7 +2041,11 @@ input.selectbox {
 	cursor:pointer;
 	/*width:290px !important;*/
 	position:relative;
+<<<<<<< HEAD
   padding-right: 77px !important;
+=======
+  	padding-right: 77px !important;
+>>>>>>> fixed stylesheet
 	text-transform:capitalize;}
 
 .selectbox-wrapper {
