@@ -25,7 +25,7 @@
               %span
 
 - if !@project.large_image.blank?
-  #large_image{:style => "background:url(#{@project.large_image}/convert?w=1600&h=546&fit=crop&align=center); background-size: 100% 100%"}
+  #large_image{:style => "background:url(#{@project.large_image}); background-size: cover"}
     .funding-info
       .container
         .span8
@@ -80,7 +80,7 @@
                 Left
               .amount= campaign_days_left(@project)
 - else
-  #large_image
+  #large_image{:style => "background:url(#{@project.large_image}); background-size: cover"}
     .funding-info
       .container
         .span8
