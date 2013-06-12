@@ -1,0 +1,10 @@
+facebook:
+  api_key: "200463576771076"
+  secret_key: "384fd5a67e2b6a0f974b92698dd84322"
+
+twitter:
+  consumer_key: "PEOJMeVXnbbEtkByrYR6A"
+  consumer_secret: "iVM2MEBtxGHQDNjTF1ZdMURj5LHlzyVars3ozCeVc"
+
+stripe:
+  client_id: "ca_1wox9lrMz2Cvzt7psvWyHZ6qh8Eb4J87"

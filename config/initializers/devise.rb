@@ -232,8 +232,8 @@ Devise.setup do |config|
   require "omniauth-facebook"
   require "omniauth-twitter"
   require "omniauth-linkedin"
-  config.omniauth :facebook, ENV["FACEBOOK_KEY"], ENV["FACEBOOK_SECRET"], :strategy_class => OmniAuth::Strategies::Facebook, :client_options => {:ssl => {:ca_path => '/etc/ssl/certs'}}
-  # config.omniauth :twitter, "x8UwXe6EMggJMyyy2UySg", "95wNdcDrilT0rx9vXes7vB1ex81WaWPiClSfG7paM2w", :strategy_class => OmniAuth::Strategies::Twitter, :client_options => {:ssl => {:ca_path => '/etc/ssl/certs'}}
-#   config.omniauth :linkedin, "nrkfrl2tufbv", "K9V75CRGCaL8rwhJ", :strategy_class => OmniAuth::Strategies::LinkedIn, :client_options => {:ssl => {:ca_path => '/etc/ssl/certs'}}
+  config.omniauth :facebook, Settings.facebook.api_key, Settings.facebook.secret_key, :strategy_class => OmniAuth::Strategies::Facebook, :client_options => {:ssl => {:ca_path => '/etc/ssl/certs'}}
+  config.omniauth :twitter, Settings.twitter.consumer_key, Settings.twitter.consumer_secret, :strategy_class => OmniAuth::Strategies::Twitter, :client_options => {:ssl => {:ca_path => '/etc/ssl/certs'}}
+  config.omniauth :linkedin, "nrkfrl2tufbv", "K9V75CRGCaL8rwhJ", :strategy_class => OmniAuth::Strategies::LinkedIn, :client_options => {:ssl => {:ca_path => '/etc/ssl/certs'}}
 end
 
