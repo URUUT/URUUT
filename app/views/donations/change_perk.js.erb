@@ -25,6 +25,8 @@ $("#amount-id-custom").attr("style", "background: #70BF4C");
 $("#button-fund-custom").attr("style", "background: green");
 $("#perk-id-custom").attr("style", "background: #70BF4C");
 $("#perk_name").val("custom");
+$(".perk-name").text("Custom");
+$(".perk-description").text("");
 
 <% if @perks.blank? %>
   $(".selectParent").hide();
