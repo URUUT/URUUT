@@ -282,10 +282,14 @@
                 - @perks.each do |p|
                   .seed-level
                     %h3{style: "font-size: 20px;"}
-                      LEVEL 1
+                      = p.name
                     %div
+                      - if p.limit
+                        %p.subtext{style:"text-transform: uppercase; font-size: 12px; letter-spacing: 1px;"}= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of 100 Available)"
                       %p
-                        You will receive #{p.amount.to_i} Uruut Reward Points when you seed $#{p.amount.to_i}.
+                        When you seed #{number_to_currency(p.amount.to_i, precision: 0)}, you will receive an official #{@project.title} #{p.name}
+                      %p.subtext
+                        Uruut Reward Points: #{p.amount.to_i}
 
                     .clearfix{style: "margin-top: 20px;"}
                       .seed-num
@@ -412,8 +416,12 @@
                 %h3{style: "font-size: 20px;"}
                   = p.name
                 %div
+                  - if p.limit
+                    %p.subtext{style:"text-transform: uppercase; font-size: 12px; letter-spacing: 1px;"}= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of 100 Available)"
                   %p
-                    You will receive #{p.amount.to_i} Uruut Reward Points when you seed $#{p.amount.to_i}.
+                    When you seed #{number_to_currency(p.amount.to_i, precision: 0)}, you will receive an official #{@project.title} #{p.name}
+                  %p.subtext
+                    Uruut Reward Points: #{p.amount.to_i}
 
                 .clearfix{style: "margin-top: 20px;"}
                   .seed-num
