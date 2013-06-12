@@ -11,12 +11,13 @@
   /   %span (About)
   #content_container.tab-content
     #planting_seeds.tab-pane.active
-      .image_warp
+      .image_warp.image_wrap_cover
         - if @project.seed_image
-          = image_tag "#{@project.seed_image}", id: "seed_image", class: "seed_image", "data-project-id" => @project.id
+          .planting-seeds-main-content
+            = image_tag "#{@project.seed_image}", id: "seed_image_cultivation", class: "seed_image", "data-project-id" => @project.id
         .action_button{style: "#{'' if @project.seed_image}"}
           %button{:id => "new-seed"} ADD NEW PHOTO
-          = link_to "Delete Photo", delete_image_path(@project.id, type: "seed_image"), class: "btn delete_photo", method: 'DELETE', style: "display: #{'none' unless @project.seed_image}"
+          = link_to "Delete Photo", delete_image_path(@project.id, type: "seed_image"), class: "btn delete_photo_planting", method: 'DELETE', style: "display: #{'none' unless @project.seed_image}", remote: true
       %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.about
     #growth.tab-pane
       growth
@@ -40,15 +41,20 @@
     .span9.details
       %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.story
       .cultivation-image-content
-        = image_tag "#{@project.cultivation_image}" if @project.cultivation_image
+        .cultivation-image-main-content
+          = image_tag "#{@project.cultivation_image}", class: "cultivation_image" if @project.cultivation_image
         .action_button
           %button{:id => "new-cultivation"} ADD NEW PHOTO
-          = link_to "Delete Photo", delete_image_path(@project.id, type: "cultivation"), class: "btn delete_photo", method: 'DELETE', style: "display: #{'none' unless @project.cultivation_image}"
+          = link_to "Delete Photo", delete_image_path(@project.id, type: "cultivation"), class: "btn delete_photo_cultivation", method: 'DELETE', style: "display: #{'none' unless @project.cultivation_image}", remote: true
 
 %script{:src => "http://code.jquery.com/ui/1.10.2/jquery-ui.js"}
 :javascript
-  $('.delete_photo').click(function(){
-    $('#seed_image').hide();
+  $('.delete_photo_planting').click(function(){
+    $('#seed_image_cultivation').remove();
+  });
+
+  $('.delete_photo_cultivation').click(function(){
+    $('.cultivation-image-content').remove();
   });
 
   var cover = document.getElementById('new-seed');
@@ -57,7 +63,7 @@
     var seedImage = event.fpfile.url;
 
     $.ajax({
-      url: '/projects/update_image?status=seed_image',
+      url: '/update_image?status=seed_image',
       method: 'POST',
       data: {
         image: seedImage
@@ -65,7 +71,7 @@
       success: function(data){
         $('#seed_image').remove();
         $('.delete_photo').show();
-        $('.image_warp').html("<div class='image_wrap'><img src=" + seedImage + " id='seed_image' data-project-id="+ data.project_id +"></div>");
+        $('.planting-seeds-main-content').html("<img src=" + seedImage + " id='seed_image_cultivation' data-project-id="+ data +">");
       }
     });
   };
@@ -77,7 +83,7 @@
     var seedImage = event.fpfile.url;
 
     $.ajax({
-      url: '/projects/update_image?status=cultivation',
+      url: '/update_image?status=cultivation',
       method: 'POST',
       data: {
         image: seedImage
@@ -85,7 +91,7 @@
       success: function(data){
         $('#seed_image').remove();
         $('.delete_photo').show();
-        $('.cultivation-image-content').html("<div class='image_wrap'><img src=" + seedImage + " id='seed_image' data-project-id="+ data.project_id +"></div>");
+        $('.cultivation-image-main-content').html("<img src=" + seedImage + " data-project-id="+ data.project_id +">");
       }
     });
   };
