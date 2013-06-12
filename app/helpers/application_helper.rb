@@ -120,8 +120,13 @@ module ApplicationHelper
   end
 
   def count_percentage(total, amount)
-    percentage = amount.to_f / total.to_f * 100.0
-    return "#{percentage.to_s[0..3]} %"
+    total_precentage = if total.to_i.eql?(0) and amount.to_i.eql?(0)
+      0
+    else
+      percentage = amount.to_f / total.to_f * 100.0
+      percentage.to_s[0..3]
+    end
+    return "#{total_precentage} %"
   end
 
   def wizard_link(step, project)
