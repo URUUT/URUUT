@@ -25,6 +25,7 @@ gem 'heroku'
 gem 'therubyracer'
 gem 'has_scope'
 gem 'youtube_it'
+gem 'rails_config'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
