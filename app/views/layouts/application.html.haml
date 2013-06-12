@@ -24,8 +24,7 @@
         window.fbAsyncInit = function() {
           // init the FB JS SDK
           FB.init({
-            appId      : "#{FACEBOOK_KEY}",                        // App ID from the app dashboard
-            channelUrl : '//127.0.0.1:8080/channel.html', // Channel file for x-domain comms
+            appId      : "200463576771076",                        // App ID from the app dashboard
             status     : true,                                 // Check Facebook Login status
             xfbml      : true                                  // Look for social plugins on the page
           });
@@ -37,7 +36,7 @@
           var js, fjs = d.getElementsByTagName(s)[0];
           if (d.getElementById(id)) return;
           js = d.createElement(s); js.id = id;
-          js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=#{FACEBOOK_KEY}";
+          js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=200463576771076";
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
 
