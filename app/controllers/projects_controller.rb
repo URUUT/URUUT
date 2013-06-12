@@ -5,6 +5,7 @@ class ProjectsController < ApplicationController
 
   before_filter :authenticate_user!, :only => [:index, :create, :edit, :update]
   before_filter :set_session_page
+  before_filter :set_session_wizard, only: [:new, :create]
 
   layout false, :only => "stripe_update"
 
