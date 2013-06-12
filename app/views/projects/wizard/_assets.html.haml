@@ -334,7 +334,7 @@
       = url_field_tag "video_link", nil, placeholder: "youtube_url"
       = hidden_field_tag "video_type"
     .modal-footer
-      %input{:type => "submit", :value => "Submit video", onClick: "$(this).button('loading')"}
+      %input{:type => "submit", :value => "Submit video", onClick: "$(this).text('loading')"}
 
 :javascript
 
@@ -356,21 +356,22 @@
 
   $(".save-image").click(function(){
     $('#cropInstruction').remove();
-    $(".change-image").button("loading");
-    $(this).button('loading');
+    $(".change-image").text("loading");
+    $(this).text("loading");
+    ('loading');
     var fpfile = { url: $("#url_image").val(), mimetype: 'image/jpeg', isWriteable: true };
     var newImage = new Image();
     newImage.src = $("#url_image").val();
     console.log("Converting...");
     filepicker.convert(fpfile,
-      {crop: [$("#x_position").val(), $("#y_position").val(), newImage.width, newImage.height]},
+      {crop: [0, $("#y_position").val(), newImage.width, newImage.height]},
       {},
       function(new_FPFile){
-        $(".save-image").button('reset');
-        $(".change-image").button("reset");
+        $(".save-image").text('reset');
+        $(".change-image").text("reset");
         console.log(new_FPFile.url);
         $(".coverphoto, .funding-info").show();
-        jcrop_api.destroy();
+        $('#large_image img').remove();
         $(".action-convert").hide();
         $("#cover-priview").remove();
         $('#large_image').css('background-image','url(' + new_FPFile.url + ')').css('-webkit-background-size', 'cover').css('-moz-background-size', 'cover').css('background-size', 'cover');
@@ -379,11 +380,15 @@
             method: 'POST',
             data: { large_image: new_FPFile.url }
           });
+        $("#image-priview").show();
+        $('.drag-instructions').remove();
+        $(".save-image").text('Save Images');
+        $(".change-image").text("Change cover photo");
       },
       function(FPError){
         console.log(FPError);
-        $(".save-image").button('reset');
-        $(".change-image").button("reset");
+        $(".save-image").text('reset');
+        $(".change-image").text("reset");
       }
     );
   });
