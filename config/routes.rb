@@ -26,7 +26,7 @@ Crowdfund::Application.routes.draw do
 
    get "projects/save_image"
    post "projects/save_image"
-   post "projects/update_image"
+   get "update_image" => "projects#update_image"
    post "galleries/save_image"
    get "galleries/save_image"
    delete "galleries/delete_photo/:id" => "galleries#destroy", as: "delete_photo"
