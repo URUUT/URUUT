@@ -1,6 +1,6 @@
 class DonationsController < ApplicationController
 	before_filter :authenticate_user!
-  before_filter :set_session_page
+  before_filter :set_session_page, :set_session_wizard
   layout "landing"
 
 	def new
