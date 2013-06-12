@@ -1735,3 +1735,14 @@ body.pages.contact{
   border-color: red !important;
 }
 
+.drag-instructions {
+  background:rgba(84, 97, 133, .4);
+  color:#fff;
+  font:600 12px/12px 'lucida grande', tahoma, verdana, arial, sans-serif;
+  left:50%;
+  margin-left:-75px;
+  margin-top:-13px;
+  padding:7px 15px 7px 15px;
+  position:absolute;
+  top:50%;
+}
