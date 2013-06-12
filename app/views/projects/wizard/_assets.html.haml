@@ -373,12 +373,13 @@
 
         var dragImg = new Image;
         dragImg.src = largeImage;
+        dragImg.id = "dragImg"
 
-        $('#large_image img').remove();
+        $('.ui-draggable').remove();
         $('#large_image').append(dragImg);
         $('#large_image').append('<span class="drag-instructions">Drag to Reposition</span>');
 
-        $('#large_image img').draggable({
+        $('#dragImg').draggable({
           axis: 'y',
           drag: function(event, ui) {
             var bottom = $(this).parent().height() - $(this).height();
@@ -391,7 +392,7 @@
             }
           },
           stop: function(event, ui) {
-            var w = $('#large_image img').width();
+            var w = $('.ui-draggable').width();
             var wOriginal = largeImageObj.width;
             var ratio = parseInt(wOriginal) / parseInt(w);
             $('#y_position').val(Math.round(Math.abs(ui.position.top * ratio)));
@@ -424,7 +425,6 @@
     $('#cropInstruction').remove();
     $(".change-image").text("loading");
     $(this).text("loading");
-    ('loading');
     var fpfile = { url: $("#url_image").val(), mimetype: 'image/jpeg', isWriteable: true };
     var newImage = new Image();
     newImage.src = $("#url_image").val();
@@ -437,7 +437,7 @@
         $(".change-image").text("reset");
         console.log(new_FPFile.url);
         $(".coverphoto, .funding-info").show();
-        $('#large_image img').remove();
+        $('.ui-draggable').remove();
         $(".action-convert").hide();
         $("#cover-priview").remove();
         $('#large_image').css('background-image','url(' + new_FPFile.url + ')').css('-webkit-background-size', 'cover').css('-moz-background-size', 'cover').css('background-size', 'cover');
@@ -447,14 +447,13 @@
             data: { large_image: new_FPFile.url }
           });
         $("#image-priview").show();
-        $('.drag-instructions').remove();
         $(".save-image").text('Save Images');
         $(".change-image").text("Change cover photo");
       },
       function(FPError){
         console.log(FPError);
-        $(".save-image").text('reset');
-        $(".change-image").text("reset");
+        $(".save-image").text('Save Images');
+        $(".change-image").text("Change cover photo");
       }
     );
   });
