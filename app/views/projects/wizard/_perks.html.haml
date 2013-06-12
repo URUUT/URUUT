@@ -59,7 +59,7 @@
             %li #{msg}
     %div.perk-true{style: "#{@project.perk_permission ? '' : 'display:none' }"}
       %hr{style: "margin-top: 0; margin-left: -19px; margin-right: -19px; background: #e0e0e0;"}
-      %h4{style: "margin-bottom: 20px;"} Perk #1
+      %h4{style: "margin-bottom: 20px;"} Perk ##{@project.perks.count + 1}
       %fieldset{:style => "position:relative"}
         .perk-container
           .perk
