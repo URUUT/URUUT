@@ -6,7 +6,7 @@
         %h4.label-green{:style => "margin-bottom: 0;"}
           FACEBOOK
         %p Post a message on your facebook page
-        = link_to image_tag("fb-post.png"), "javascript:shareFb()"
+        = link_to image_tag("fb-post.png"), "javascript:postToFeed()"
       .span6
         %h4.label-green{:style => "margin-bottom: 0;"}
           TWITTER
@@ -20,9 +20,25 @@
         = link_to image_tag("li-post.png"), "https://www.linkedin.com/cws/share?url=#{root_url}"
 
 :javascript
-  var shareFb = function(){
-    window.open('https://www.facebook.com/sharer/sharer.php?u=#{project_url(@project.id)}', 'sharer', 'width=626,height=436');
+
+  function postToFeed() {
+
+    // calling the API ...
+    var obj = {
+      method: 'feed',
+      redirect_uri: '#',
+      link: '#{project_url(@project.id)}',
+      picture: 'http://fbrell.com/f8.jpg',
+      name: '#{@project.title}',
+      caption: '#{@project.category}',
+      description: 'Like making a difference in the community? Check out this great project I found on @URUUT.  You can help fund it, or set up a project of your own to Get RUUTed!'
     };
+
+    function callback(response) {
+    }
+
+    FB.ui(obj, callback);
+  }
 
   $('.tw-share').click(function(e) {
     e.preventDefault();
@@ -38,4 +54,4 @@
                  ',left='   + left;
 
     window.open(url, 'twitter', opts);
-  })
+  });
