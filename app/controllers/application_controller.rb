@@ -1,7 +1,5 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  #before_filter :set_previous_page
-
   layout :layout_by_resource
 
   def after_sign_in_path_for(resource)
@@ -12,16 +10,11 @@ class ApplicationController < ActionController::Base
   protected
 
   def layout_by_resource
-    # if root_url
- #      "landing"
- #    else
-      "application"
-    # end
+   "application"
   end
 
-  def set_previous_page
-    session[:previous_page] = request.fullpath
-    logger.debug "#{session[:previous_page]}"
+  def set_session_wizard
+    session[:step] = nil
   end
 
 end

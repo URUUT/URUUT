@@ -3,6 +3,7 @@ class PagesController < ApplicationController
   layout "landing", :only => [:index, :discover, :about, :home, :funding_sources]
   skip_before_filter :set_previous_page
   before_filter :set_session_page
+  before_filter :set_session_wizard, except: :home
 
   def index
     projects_list
@@ -10,6 +11,7 @@ class PagesController < ApplicationController
 
   def home
     session[:connected] = params[:code]
+    session[:step] = true
   end
 
   def search
