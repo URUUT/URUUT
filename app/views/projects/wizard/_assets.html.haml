@@ -336,6 +336,13 @@
     .modal-footer
       %input{:type => "submit", :value => "Submit video", onClick: "$(this).text('loading')"}
 
+:javascript
+
+  $('.tax-deductible').tooltip({
+      placement: "top",
+      trigger: "hover"
+    });
+
 = javascript_include_tag "//code.jquery.com/ui/1.10.3/jquery-ui.js"
 
 :javascript
@@ -412,11 +419,6 @@
   $(".change-image").click(function(){
     $(".coverphoto").click();
   });
-
-  $('.tax-deductible').tooltip({
-        placement: "top",
-        trigger: "hover"
-      });
 
   $(".save-image").click(function(){
     $('#cropInstruction').remove();
