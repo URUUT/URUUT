@@ -151,7 +151,7 @@ input[type=password] {
   border-radius:5px;
 	box-shadow:1px 1px 1px rgba(0,0,0,0.5);
 	font:bold 24px/24px arial, helvetica, sans-serif;
-	height:54px !important;
+	height:54px;
 	padding:19px;
 	/*width:auto !important;*/
 }
@@ -292,7 +292,7 @@ label {
 						border-radius:0;
 						box-shadow:none;
 						font:italic 12px/15px 'Georgia', georgia, serif;
-						height:30px !important;
+						height:30px;
 						margin-bottom:5px;
 						max-width:180px;
 						padding:15px 10px;
@@ -302,7 +302,7 @@ label {
 						border-radius:0;
 						box-shadow:none;
 						font:italic 12px/15px 'Georgia', georgia, serif;
-						height:30px !important;
+						height:30px;
 						margin-bottom:10px;
 						max-width:180px;
 						padding:15px 10px;
@@ -723,7 +723,7 @@ footer {
     }
     input {
       display:inline;
-      height:40px !important;
+      height:40px;
     }
     input[type=email] {
       border-radius:5px 0 0 5px;
@@ -2026,7 +2026,7 @@ input.selectbox {
 	cursor:pointer;
 	/*width:290px !important;*/
 	position:relative;
-  	padding-right: 77px !important;
+  	padding-right: 77px;
 	text-transform:capitalize;}
 
 .selectbox-wrapper {
