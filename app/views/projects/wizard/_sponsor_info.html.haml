@@ -60,8 +60,7 @@
       %p.label-green{:style => "font: bold 12px/12px 'Proxima Nova', arial, sans-serif;text-transform: uppercase;"}
         Payment With Stripe
       %p{:style => "font:normal 13px/19px 'Proxima Nova';"} An account with Stripe, our payment provider, is required for processing credit card transactions and receiving funds. If you already have an account, you can sign in as a returning customer.
-      = link_to "https://connect.stripe.com/oauth/authorize?scope=read_only&response_type=code&client_id=#{STRIPE_CLIENT_ID}", :target => "_blank", :class => "stripe-connect" do
-
+      = link_to "https://connect.stripe.com/oauth/authorize?scope=read_only&response_type=code&client_id=#{Settings.stripe.client_id}", :target => "_blank", :class => "stripe-connect" do
         = image_tag "stripe-connect.png"
 
       %hr{:style => "background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}

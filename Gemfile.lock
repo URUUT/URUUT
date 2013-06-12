@@ -245,6 +245,8 @@ GEM
       erubis
       i18n
       ruby-progressbar
+    rails_config (0.3.3)
+      activesupport (>= 3.0)
     railties (3.2.11)
       actionpack (= 3.2.11)
       activesupport (= 3.2.11)
@@ -360,6 +362,7 @@ DEPENDENCIES
   rails (= 3.2.11)
   rails-dev-boost!
   rails_best_practices
+  rails_config
   rb-fsevent (~> 0.9.1)
   sass-rails (~> 3.2.3)
   simple_form
