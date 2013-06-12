@@ -448,16 +448,16 @@
                     = number_to_currency(perk, precision: 0)
                 %a.btn.pull-right{:href => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}", :class => "fund btn"} Fund Now #{image_tag('arrow.png')}
 
-          .seed-level{id: "perk-id-custom"}
-            %h3.perk-name-other{id: "perk-name-other-custom"}
-              CHOOSE YOUR PERK
-            %p With this option you choose the amount to seed, you will receive 1 Uruut Reward Point for each dollar you seed.
-            .clearfix
-              .seed-num
-                .amount
-                %h5 AMOUNT TO SEED
-                .textarea.seed-amount= text_field_tag :custom_seed, nil, style: "width: 100%"
-              %a.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "button-seed-custom"} Fund Now
+        .seed-level{id: "perk-id-custom"}
+          %h3.perk-name-other{id: "perk-name-other-custom"}
+            CHOOSE YOUR PERK
+          %p With this option you choose the amount to seed, you will receive 1 Uruut Reward Point for each dollar you seed.
+          .clearfix
+            .seed-num
+              .amount
+              %h5 AMOUNT TO SEED
+              .textarea.seed-amount= text_field_tag :custom_seed, nil, style: "width: 100%"
+            %a.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "button-seed-custom"} Fund Now
 
 
       %h4.title{:style => 'margin-top:50px;'}
