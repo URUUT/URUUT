@@ -5,7 +5,7 @@
       %h4.label-green Congratulations!
       %p{:style => "letter-spacing: 1px;"} You are now an official sponsor to #{@project.title}. Now it's time to spread the word
       %div
-        = link_to image_tag("fb-share.png",style: "width: 150px"), "javascript:postToFeed()", style: "display: block; float: left;"
+        = link_to image_tag("fb-share.png",style: "width: 150px"), "https://www.facebook.com/dialog/feed?app_id=#{Settings.facebook.api_key}&link=#{project_url(@project.id)}&picture=http://fbrell.com/f8.jpg&name=#{url_encode(@project.title)}&caption=#{url_encode(@project.category)}&description=#{url_encode("Our company is RUUTing for this community project and you should, too. Join us by becoming a sponsor or by making a donation on @URUUT's collaborative funding platform. Together we can make a difference in our community")}&redirect_uri=#{root_url}", style: "display: block; float: left;", target: "_blank"
         = image_tag "tw-share.png", style: "width: 150px; margin-left: 2%; display: block; float: left; cursor: pointer", class: "tw-share"
         = link_to image_tag("ml-share.png", style: "width: 150px"), "javascript:void(0)", style: "margin-left: 2%; display: block; float: left;", class: "cs_import"
         %span.link-short{:style => "font-weight:bolder; font-size: 14px; margin-left: 2%"}
