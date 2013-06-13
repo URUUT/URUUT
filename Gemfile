@@ -26,6 +26,7 @@ gem 'therubyracer'
 gem 'has_scope'
 gem 'youtube_it'
 gem 'rails_config'
+gem 'easy_roles'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
