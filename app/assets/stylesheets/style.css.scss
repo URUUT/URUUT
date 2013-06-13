@@ -74,6 +74,20 @@ body{
   span{
     display: inline-block !important;
   }
+
+  &.big-btn{
+    @include border-radius(3px);
+    padding: 25px 40px;
+  }
+
+  &.green-btn{
+    background: $green2;
+
+    &:hover{
+      color: #fff;
+      background: lighten($green2, 10%);
+    }
+  }
 }
 
 p{
@@ -116,6 +130,36 @@ h1, h2, h3, h4, h5, h6{
     font: normal 11px/11px "Georgia", georgia, serif;
     font-style: italic;
     text-transform: none;
+  }
+}
+
+.simplepage-img, .simplepage-wrapper{
+  margin-top: 100px;
+}
+
+.simplepage-img{
+  text-align: center;
+}
+
+.simplepage-wrapper{
+  h3{
+    font-family: 'Proxima Nova', sans-serif;
+    margin: 0;
+    line-height: 20px;
+  }
+
+  h2{
+    font-family: 'Proxima Nova Light', sans-serif;
+    margin: 0;
+    text-transform: initial;
+    line-height: 40px;
+  }
+
+  p{
+    font-family: 'Proxima Nova Light', sans-serif;
+    color: $light-grey;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
   }
 }
 

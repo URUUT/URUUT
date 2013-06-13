@@ -1,14 +1,21 @@
-%h2 Change your password
-= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f|
-  = devise_error_messages!
-  = f.hidden_field :reset_password_token
-  %div
-    = f.label :password, "New password"
-    %br/
-    = f.password_field :password
-  %div
-    = f.label :password_confirmation, "Confirm new password"
-    %br/
-    = f.password_field :password_confirmation
-  %div= f.submit "Change my password"
-= render "devise/shared/links"
+.span8{:style => "margin-top:35px;"}
+  %h4 Change your password
+  = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put , :class => "well clearfix"}) do |f|
+    = devise_error_messages!
+    = f.hidden_field :reset_password_token
+    %div
+      = f.label :password, "New password"
+      %br/
+      = f.password_field :password, :style => "width: 100%"
+    %div
+      = f.label :password_confirmation, "Confirm new password"
+      %br/
+      = f.password_field :password_confirmation, :style => "width: 100%"
+
+    %hr{:style => "background: #e0e0e0; margin-left: -19px; margin-right: -19px; margin-bottom: 10px"}
+
+    %div.clearfix{:style => "text-align: center"}
+      = f.submit "Change My Password", class: "btn green-btn big-btn"
+
+.span4
+  = render "users/sessions/social-login"
