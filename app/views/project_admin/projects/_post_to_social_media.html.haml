@@ -20,25 +20,24 @@
         = link_to image_tag("li-post.png"), "https://www.linkedin.com/cws/share?url=#{root_url}"
 
 :javascript
+  // function postToFeed() {
 
-  function postToFeed() {
+  //   // calling the API ...
+  //   var obj = {
+  //     method: 'feed',
+  //     redirect_uri: '#',
+  //     link: '#{project_url(@project.id)}',
+  //     picture: 'http://fbrell.com/f8.jpg',
+  //     name: '#{url_encode(@project.title)}',
+  //     caption: '#{@project.category}',
+  //     description: 'Like making a difference in the community? Check out this great project I found on @URUUT.  You can help fund it, or set up a project of your own to Get RUUTed!'
+  //   };
 
-    // calling the API ...
-    var obj = {
-      method: 'feed',
-      redirect_uri: '#',
-      link: '#{project_url(@project.id)}',
-      picture: 'http://fbrell.com/f8.jpg',
-      name: '#{url_encode(@project.title)}',
-      caption: '#{@project.category}',
-      description: 'Like making a difference in the community? Check out this great project I found on @URUUT.  You can help fund it, or set up a project of your own to Get RUUTed!'
-    };
+  //   function callback(response) {
+  //   }
 
-    function callback(response) {
-    }
-
-    FB.ui(obj, callback);
-  }
+  //   FB.ui(obj, callback);
+  // }
 
   $('.tw-share').click(function(e) {
     e.preventDefault();
