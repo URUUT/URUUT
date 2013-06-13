@@ -22,7 +22,17 @@ class DonationsController < ApplicationController
     @perk_amount = params[:amount]
     @perk_description = params[:description]
     @project = Project.find(session[:current_project])
-    @perks = @project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i] }
+    if params[:amount].blank?
+      @perks = @project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i] }
+    else
+      perks = @project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i] }
+      @perks = []
+      perks.each do |perk|
+        if perk[1].to_f <= params[:amount].to_f
+          @perks.push(perk)
+        end
+      end
+    end
     render :new
   end
 
