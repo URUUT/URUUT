@@ -79,7 +79,7 @@
           %span.small-heading
             #{availability(@project.project_sponsors, 3)} of 5 Available
         %ul.normal-font.dashed-list
-          - if @sponsorship_benefits.include?(4)
+          - if @sponsorship_benefits.include?(3)
             - @sponsorship_benefits[3].each do |benefit|
               %li #{benefit.name}
         / %div{:style => "height: 80px; width: 100%;"}
