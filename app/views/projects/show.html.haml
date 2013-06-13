@@ -393,6 +393,7 @@
             .seed-level
               %h3 BRONZE
               %ul.normal-font.dashed-list
+                %li Text mention on project page
                 -if @sponsorship_benefits.include?(4)
                   -@sponsorship_benefits[4].each do |benefit|
                     %li= benefit.name
