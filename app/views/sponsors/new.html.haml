@@ -5,9 +5,10 @@
     console.log(event.fpfile.url);
     var logoImage = event.fpfile.url;
 
-    $('.logo-company').attr('src', logoImage)
-    $('.logo-company').attr('style', 'width: 100px')
-    $("#project_sponsor_logo").val(logoImage)
+    $('.logo-company').attr('src', logoImage);
+    $('.logo-company').attr('style', 'position: absolute; top: 5; ;left: 5; width: 100px');
+    $('#project_sponsor_logo').hide();
+    $("#project_sponsor_logo").val(logoImage);
   }
 
 .full-width.hero
