@@ -1,7 +1,9 @@
 class ProjectAdmin::ProjectsController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :set_project, only: :show
   before_filter :set_project_ajax, except: [:index, :update, :show,
     :send_email, :email_based_on_sponsor_level, :project_update, :process_project_update]
+
 
   respond_to :js, except: [:index, :update, :show, :emails_page]
   has_scope :page, :default => 1
@@ -12,7 +14,6 @@ class ProjectAdmin::ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.find(params[:id])
     subheader
     @fundings = @project.all_funding_by_project(params[:page])
     @total_fundings = @project.total_funding_by_project
@@ -109,9 +110,15 @@ class ProjectAdmin::ProjectsController < ApplicationController
 
   private
 
+  def set_project
+    @project = Project.find(params[:id])
+    admin_required!
+  end
+
   def set_project_ajax
     @project = Project.find(params[:project_id])
     session[:current_project] = @project.id
+    admin_required!
   end
 
   def subheader
@@ -119,6 +126,15 @@ class ProjectAdmin::ProjectsController < ApplicationController
     # sponsors = ProjectSponsor.find_by_project_id(@project.id)
     @sponsors = ProjectSponsor.where(project_id: @project.id)
     @sponsor_count = @sponsors.nil? ? 0 : @sponsors.count
+  end
+
+  def admin_required!
+     unless current_user.is_admin?
+      unless @project.user.id.eql?(current_user.id)
+       flash[:error] = "Sorry, you don't have right permision to accessing page."
+       redirect_to root_url and return false
+      end
+     end
   end
 
 end
