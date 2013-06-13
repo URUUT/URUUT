@@ -22,44 +22,48 @@
         = current_user.last_name
         = image_tag 'down-arrow.png'
       %div.dropdown-menu
-        %ul
-          %li
-            = link_to 'My Profile', current_user
-          %li
-            = link_to 'Edit Account Settings', edit_user_registration_path
-          %li
-            = link_to 'Logout', destroy_user_session_path
+        .drop-wrapper
+          .dropdown-arrow
+          %ul
+            %li
+              = link_to 'My Profile', current_user
+            %li
+              = link_to 'Edit Account Settings', edit_user_registration_path
+            %li
+              = link_to 'Logout', destroy_user_session_path
   - else
     %li.dropdown
       = link_to "Log In", "#", :class => "dropdown-toggle", 'data-toggle' => 'dropdown'
       %span.or or
       = link_to "Sign Up", new_user_registration_path, :class => "sign-up-link"
       %div.log-in.dropdown-menu
-        %ul
-          %li
-            %h5 Account Log In
-            = form_tag user_session_path do
-              = text_field_tag 'user[email]', nil, :placeholder => "Your Email"
-              = password_field_tag 'user[password]', nil, :placeholder => "Your Password"
-              %div
-                = check_box_tag 'user[remember_me]'
-                = label_tag 'user[remember_me]', 'Remember me'
-              %button.btn
-                Log in
-                %span
+        .drop-wrapper
+          .dropdown-arrow
+          %ul
+            %li
+              %h5 Account Log In
+              = form_tag user_session_path do
+                = text_field_tag 'user[email]', nil, :placeholder => "Your Email"
+                = password_field_tag 'user[password]', nil, :placeholder => "Your Password"
+                %div
+                  = check_box_tag 'user[remember_me]'
+                  = label_tag 'user[remember_me]', 'Remember me'
+                %button.btn
+                  Log in
+                  %span
 
-            %a{"data-toggle" => "modal", :href => "#forgotModal", :role => "button", style: "font: italic 12px/15px 'Georgia', georgia, serif !important;text-transform:none;"}
-              Forgot your password?
+              %a{"data-toggle" => "modal", :href => "#forgotModal", :role => "button", style: "font: italic 12px/15px 'Georgia', georgia, serif !important;text-transform:none;"}
+                Forgot your password?
 
-            %hr
-            %h5 FACEBOOK LOG IN
-            %p It’s fast and easy.
-            = link_to user_omniauth_authorize_path(:facebook) do
-              = image_tag 'fb-180.png'
-            %p
-              We’ll never post anything
-              %br
-              without permission.
+              %hr
+              %h5 FACEBOOK LOG IN
+              %p It’s fast and easy.
+              = link_to user_omniauth_authorize_path(:facebook) do
+                = image_tag 'fb-180.png'
+              %p
+                We’ll never post anything
+                %br
+                without permission.
 
   -#%input{:type => "search", :placeholder => "Search"}
 #forgotModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "width: 440px;"}
