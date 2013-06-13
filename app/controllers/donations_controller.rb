@@ -25,7 +25,11 @@ class DonationsController < ApplicationController
     if params[:amount].blank?
       @perks = @project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i] }
     else
-      perks = @project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i] }
+      if @project.perk_permission
+        perks = @project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i] }
+      else
+        perks = DEFAULT_PERK
+      end
       @perks = []
       perks.each do |perk|
         if perk[1].to_f <= params[:amount].to_f
