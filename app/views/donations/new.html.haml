@@ -27,7 +27,7 @@
             %h6{:style => "line-height:100%;margin-bottom:10px;margin-top:20px"} Choose your perk
             .selectParent
               -if @project.perk_permission
-                = select_tag :perk_type, options_for_select(@perks), {class: "styledSelect"}
+                = select_tag :perk_type, options_for_select(@perks), {:onchange => 'changeAmount(this)', class: "styledSelect"}
               -else
                 = select_tag :perk_type, options_for_select(@perks), {:onchange => 'changeAmount()', class: "styledSelect"}
             .none-perks{style: "display:none"}
@@ -107,8 +107,10 @@
     }
   });
 
-  var changeAmount = function(){
+  var changeAmount = function(selectedOpt){
+    var text = selectedOpt.options[selectedOpt.selectedIndex].text;
     $(".perk-info-choiced").show();
-    $("#amount").val($("#perk_type").val());
-    $("#custom_amount").val($("#perk_type").val());
+    $("#perk_name").val(text);
+    // $("#amount").val($("#perk_type").val());
+    // $("#custom_amount").val($("#perk_type").val());
   };
