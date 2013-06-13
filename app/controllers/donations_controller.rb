@@ -18,11 +18,11 @@ class DonationsController < ApplicationController
   def default_perk
     @donation = Donation.new
     @perk = Perk.new
-    @perk.id = params[:amount]
     @perk_name = params[:name].to_s
     @perk_amount = params[:amount].gsub(",", "").to_i
     @perk_description = params[:description]
     @project = Project.find(session[:current_project])
+    session[:perk_id] = "custom_donate"
     if params[:amount].blank?
       @perks = @project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i] }
     else
