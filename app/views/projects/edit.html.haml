@@ -111,17 +111,21 @@
     });
   }
 
-  $(".submit-finish-project").on("click", function(){
-    // window.location.href = "#{new_project_url}";
+  $(".submit-finish-project").on("click", function(event){
     event.preventDefault();
-    console.log(#{@project.id})
-    $.ajax({
-      type:'POST',
-      url: '#{projects_submit_project_url}',
-      data: {id: #{@project.id}}
-    }).done(function(data) {
-      window.location.href = "#{thank_you_pages_url}";
-    })
+    if ($('#large_image').attr('data-image') == "true") {
+      // window.location.href = "#{new_project_url}";
+      console.log(#{@project.id})
+      $.ajax({
+        type:'POST',
+        url: '#{projects_submit_project_url}',
+        data: {id: #{@project.id}}
+      }).done(function(data) {
+        window.location.href = "#{thank_you_pages_url}";
+      });
+    } else {
+      alert("Please Choose Cover Image");
+    }
   });
 
   $(".wizard-link").on("click", function(){
