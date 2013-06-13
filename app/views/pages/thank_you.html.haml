@@ -1,2 +1,17 @@
-%h1 Thank You For Submitting Your Project
-%h5 We'll contact you within 72 hours to inform you of your approval status.
+.span5
+  .simplepage-img
+    = image_tag "submission-success.png"
+.span7
+  .simplepage-wrapper
+    %h3.label-green
+      You Did It!
+    %h2
+      Your project was successfully submitted.
+    %p
+      We'll contact you within 72 hours to inform you of your approval status.
+
+    = link_to current_user, class: "btn green-btn big-btn" do
+      My Profile
+      %span
+
+
