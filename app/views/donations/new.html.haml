@@ -29,7 +29,7 @@
               -if @project.perk_permission
                 = select_tag :perk_type, options_for_select(@perks), {class: "styledSelect"}
               -else
-                = select_tag :perk_type, options_for_select(default_perk.each_with_index.map{ |amount, index| ["LEVEL #{index+1}", amount] }), {:onchange => 'changeAmount()', class: "styledSelect"}
+                = select_tag :perk_type, options_for_select(@perks), {:onchange => 'changeAmount()', class: "styledSelect"}
             .none-perks{style: "display:none"}
             %p{:style => "font-size:12px;font-family:'Proxima Nova';text-align:left;color:#b6b6b4;margin:0;font-style: italic"} (Perk eligibility based on donation amount.)
 
