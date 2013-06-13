@@ -113,6 +113,16 @@ class ProjectsController < ApplicationController
 
     session[:step] = params[:step]
 
+    if session[:step].eql?("first")
+      @project.step = "/projects/#{@project.id}/edit#project-details"
+    elsif session[:step].eql?("second")
+      @project.step = "/projects/#{@project.id}/edit#perks"
+    elsif session[:step].eql?("third")
+      @project.step = "/projects/#{@project.id}/edit#sponsorship"
+    else session[:step].eql?("fourth")
+      @project.step = "/projects/#{@project.id}/edit#assets"
+    end
+
     @sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits)
     params[:project][:goal] = params[:project][:goal].gsub(",", "") if !params[:project][:goal].nil?
     params[:project][:sponsor_permission] = params[:project][:sponsorship_permission] if !params[:project][:sponsorship_permission].nil?

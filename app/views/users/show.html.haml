@@ -73,9 +73,15 @@
           - @pending_projects.each do |pending_project|
             %li
               - if pending_project.title.blank?
-                = link_to "Project Started on #{pending_project.created_at.strftime(format='%_m/%d/%C')}", project_path(pending_project.id), class: "green-link", style: "text-transform: capitalize;"
+                - if !pending_project.step.blank?
+                  = link_to "Project Started on #{pending_project.created_at.strftime(format='%_m/%d/%C')}", pending_project.step, class: "green-link", style: "text-transform: capitalize;"
+                -else
+                  = link_to "Project Started on #{pending_project.created_at.strftime(format='%_m/%d/%C')}", "/projects/#{pending_project.id}/edit#sponsor-info", class: "green-link", style: "text-transform: capitalize;"
               -else
-                = link_to pending_project.title, project_path(pending_project.id), class: "green-link", style: "text-transform: capitalize;"
+                - if !pending_project.step.blank?
+                  = link_to pending_project.title, pending_project.step, class: "green-link", style: "text-transform: capitalize;"
+                - else
+                  = link_to pending_project.title, "/projects/#{pending_project.id}/edit#sponsor-info", class: "green-link", style: "text-transform: capitalize;"
 
     %h3.title{:style => "margin-bottom:5px;"} #{who(:whose)} badges
     .well.info.badge-wrapper
