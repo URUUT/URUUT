@@ -6,6 +6,7 @@ class ProjectsController < ApplicationController
   before_filter :authenticate_user!, :only => [:index, :create, :edit, :update]
   before_filter :set_session_page
   before_filter :set_session_wizard, only: [:new, :create]
+  before_filter :admin_required!, only: [:edit, :update, :delete_image]
 
   layout false, :only => "stripe_update"
 
@@ -36,14 +37,11 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    @project = Project.find(params[:id])
     sort_sponsorships = @project.project_sponsors.sort_by {|ps| ps.level_id}
     @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
     session[:current_project] = @project.id
-    logger.debug("Current session id is: #{session[:current_project]}")
     @project.update_attributes!(params[:project])
     @perks = Perk.where("project_id = ?", @project.id).order(:amount)
-    logger.debug(@connected)
   end
 
   def show
@@ -51,16 +49,15 @@ class ProjectsController < ApplicationController
     sort_sponsorships = @project.project_sponsors.sort_by {|ps| ps.level_id}
     @project_sponsors = sort_sponsorships.group_by {|sponsor| sponsor.level_id}
     @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
-    @sponsorship_levels = SponsorshipLevel.all
-    @donation = Donation.where("project_id = ?", @project.id)
-    @perks = Perk.where("project_id = ?", @project.id).order(:amount)
-    @user = User.find(@project.user_id)
+    @perks = @project.perks.order(:amount)
+    # @sponsorship_levels = SponsorshipLevel.all
+    # @donation = Donation.where("project_id = ?", @project.id)
+    # @user = User.find(@project.user_id)
     session[:current_project] = @project.id
     render :layout => 'landing'
   end
 
   def update
-    @project = Project.find(params[:id])
     sponsorship_benefits = []
     def sponsorship_benefit_level(level, benefit, key)
       data = []
@@ -285,7 +282,6 @@ class ProjectsController < ApplicationController
   end
 
   def delete_image
-    @project = Project.find(params[:id])
     params[:type].eql?("seed_image") ? @project.seed_image = nil : @project.cultivation_image = nil
     @project.save!
     render nothing: true
@@ -305,6 +301,16 @@ class ProjectsController < ApplicationController
     youtube_client = YouTubeIt::Client.new
     video_data = youtube_client.video_by(link)
     video_data.player_url.gsub('&feature=youtube_gdata_player', '')
+  end
+
+  def admin_required!
+    @project = Project.find(params[:id])
+     unless current_user.is_admin?
+      unless @project.user.id.eql?(current_user.id)
+       flash[:error] = "Sorry, you don't have right permision to accessing page."
+       redirect_to root_url and return false
+      end
+     end
   end
 
 end
