@@ -151,18 +151,19 @@
         %div.clearfix{:style => "margin-bottom: 10px;"}
           = f.label :mission, class: "label-green" do
             BUSINESS OR ORGANIZATION'S LOGO*
-          = image_tag "white.png", :class => "img-polaroid pull-left logo-company"
-          .pic-upload
-            .upload-btn
-              %input{:type => 'filepicker', :name => 'project_sponsor_logo', 'data-fp-button-text' => 'UPLOAD', 'data-fp-apikey' => 'ArmO0TLVTkyCaJkQmBNfqz', 'data-fp-button-class' => 'btn', 'onchange' => 'updateSponsorLogo(event)'}
-                %span
+          %div{:style => "position: relative;"}
+            = image_tag "white.png", :class => "img-polaroid pull-left logo-company", :style => "position: relative; z-index: 10;"
+            .pic-upload
+              .upload-btn
+                %input{:type => 'filepicker', :name => 'project_sponsor_logo', 'data-fp-button-text' => 'UPLOAD', 'data-fp-apikey' => 'ArmO0TLVTkyCaJkQmBNfqz', 'data-fp-button-class' => 'btn', 'onchange' => 'updateSponsorLogo(event)'}
+                  %span
 
-              / = file_field :project_sponsor, :logo, required: true, label: false
-            %p
-              %span
-                Note:
-              Logo file should be at least 200px x 200px jpeg, gif, or png files.
-          = text_field :project_sponsor, :logo, required: true, label: false, type: "hidden"
+                / = file_field :project_sponsor, :logo, required: true, label: false
+              %p
+                %span
+                  Note:
+                Logo file should be at least 200px x 200px jpeg, gif, or png files.
+            = text_field :project_sponsor, :logo, required: true, label: false, type: "", :style => "position: absolute; top: 5; ;left: 5; width: 100px;"
         %div
           = label_tag :sponsor_type, "Sponsor Type*", class: "label-green"
           / = select_tag :type, options_for_select(["Foundation", "Business"])
