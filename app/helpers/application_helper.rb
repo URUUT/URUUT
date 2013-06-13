@@ -5,10 +5,14 @@ module ApplicationHelper
 	end
 
   def recognize_url(url)
-    if url.include?("http://") or url.include?("https://")
-      url
+    if url.nil?
+      nil
     else
-      "http://#{url}"
+      if url.include?("http://") or url.include?("https://")
+        url
+      else
+        "http://#{url}"
+      end
     end
   end
 
@@ -17,7 +21,7 @@ module ApplicationHelper
   end
 
   def strip_url(url)
-    url.sub(/^https?\:\/\//, '').sub(/^www./,'')
+    url.sub(/^https?\:\/\//, '').sub(/^www./,'') rescue nil
   end
 
   def percent_funded(id)
