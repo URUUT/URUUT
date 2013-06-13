@@ -41,8 +41,8 @@ $(".perk-description").text("");
   <% end %>
 <% end %>
 
-$("#custom_amount").val("<%= params[:custom_seed] %>");
-$("#amount").val("<%= params[:custom_seed] %>");
+$("#custom_amount").val("<%= params[:custom_seed].gsub(",", "") %>");
+$("#amount").val("<%= params[:custom_seed].gsub(",", "") %>");
 $(".choiced-perk").show();
 $(".perk-amount").hide();
 <% end %>

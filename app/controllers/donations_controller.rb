@@ -7,7 +7,7 @@ class DonationsController < ApplicationController
 		@donation = Donation.new
     @perk = Perk.find(params[:perk])
     @perk_name = params[:name].to_s
-    @perk_amount = params[:amount]
+    @perk_amount = params[:amount].gsub(",", "").to_i
     @perk_description = params[:description]
     @project = Project.find(session[:current_project])
     @perks = @project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i] }
@@ -19,7 +19,7 @@ class DonationsController < ApplicationController
     @perk = Perk.new
     @perk.id = params[:amount]
     @perk_name = params[:name].to_s
-    @perk_amount = params[:amount]
+    @perk_amount = params[:amount].gsub(",", "").to_i
     @perk_description = params[:description]
     @project = Project.find(session[:current_project])
     if params[:amount].blank?
@@ -32,7 +32,7 @@ class DonationsController < ApplicationController
       end
       @perks = []
       perks.each do |perk|
-        if perk[1].to_f <= params[:amount].to_f
+        if perk[1].to_f <= params[:amount].gsub(",", "").to_f
           @perks.push(perk)
         end
       end
@@ -48,12 +48,12 @@ class DonationsController < ApplicationController
       else
         @perk = Perk.new
         @perk.id = params["level"]
-        @perk.amount = params["amount"]
+        @perk.amount = params["amount"].gsub(",", "")
         project = Project.find(params["project_id"])
         perks = project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i] }
         @perks = []
         perks.each do |perk|
-          if perk[1].to_f <= params["amount"].to_f
+          if perk[1].to_f <= params["amount"].gsub(",", "").to_f
             @perks.push(perk)
           end
         end
@@ -63,12 +63,12 @@ class DonationsController < ApplicationController
     else
       @perk = Perk.new
       @perk.id = params["level"]
-      @perk.amount = params["custom_seed"]
+      @perk.amount = params["custom_seed"].gsub(",", "")
       project = Project.find(params["project_id"])
       perks = project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i] }
       @perks = []
       perks.each do |perk|
-        if perk[1].to_f <= params["custom_seed"].to_f
+        if perk[1].to_f <= params["custom_seed"].gsub(",", "").to_f
           @perks.push(perk)
         end
       end
