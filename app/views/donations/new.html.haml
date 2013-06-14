@@ -94,7 +94,6 @@
 
   $(document).ready(function(){
     var perkStatus = "#{@perks.blank?}";
-    alert(perkStatus);
     var point = "#{@donation.amount.to_i}";
     var amount = "#{number_to_currency(@donation.amount, precision: 0)}";
     var theText = "#{@perk_name_selected}";
