@@ -2,7 +2,6 @@
 
 :javascript
   function updateSponsorLogo (event) {
-    console.log(event.fpfile.url);
     var logoImage = event.fpfile.url;
 
     $('.logo-company').attr('src', logoImage);
@@ -157,7 +156,7 @@
             = image_tag "white.png", :class => "img-polaroid pull-left logo-company", :style => "position: relative; z-index: 10;"
             .pic-upload
               .upload-btn
-                %input{:type => 'filepicker', :name => 'project_sponsor_logo', 'data-fp-button-text' => 'UPLOAD', 'data-fp-apikey' => 'ArmO0TLVTkyCaJkQmBNfqz', 'data-fp-button-class' => 'btn', 'onchange' => 'updateSponsorLogo(event)'}
+                %input{:type => 'filepicker', :name => 'project_sponsor_logo', 'data-fp-button-text' => 'UPLOAD', 'data-fp-apikey' => Settings.filepicker.api_key, 'data-fp-button-class' => 'btn', 'onchange' => 'updateSponsorLogo(event)', 'data-fp-mimetypes' => 'image/*', 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA,INSTAGRAM'}
                   %span
 
                 / = file_field :project_sponsor, :logo, required: true, label: false

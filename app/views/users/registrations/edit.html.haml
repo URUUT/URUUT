@@ -13,7 +13,7 @@
             = image_tag "#{current_user.avatar}", :id => "avatar-img"
           .span4
             #avatar-file
-              %input{:type => 'filepicker', :name => 'avatar', 'data-fp-button-text' => 'Upload', 'data-fp-apikey' => 'ArmO0TLVTkyCaJkQmBNfqz', 'data-fp-button-class' => 'avatar btn', 'onchange' => 'updateAvatar(event)'}
+              %input{:type => 'filepicker', :name => 'avatar', 'data-fp-button-text' => 'Upload', 'data-fp-apikey' => Settings.filepicker.api_key, 'data-fp-button-class' => 'avatar btn', 'onchange' => 'updateAvatar(event)', 'data-fp-mimetypes' => 'image/*', 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA,INSTAGRAM'}
               %p.note
                 %strong Note:
                 Logo files should be at least 200px x 200px jpeg, gif or png files
