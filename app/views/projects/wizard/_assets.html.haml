@@ -30,7 +30,7 @@
           #map{:style => "width:100%;height:300px"}
           #map-details
             .project-location
-              %h4= @project.project_title
+              %h4= @project.organization
               %div{:style => 'font-family:"Proxima Nova"'}
                 = image_tag "marker.jpg", :class => 'marker', :style => 'float:none;'
                 = @project.address
