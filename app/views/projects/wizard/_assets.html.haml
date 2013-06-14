@@ -352,7 +352,7 @@
 
   var updateCover = function(event){
     $('.drag-instructions').remove();
-    $('.coverphoto').html("Geting photo <img src='/assets/3.gif'/>");
+    $('.coverphoto').html("Uploading Photo <img src='/assets/3.gif'/>");
     console.log(event.fpfile.url);
     var largeImage = event.fpfile.url,
     current_bg = $('#large_image').css('background-image');
@@ -427,6 +427,7 @@
 
   $(".save-image").click(function(){
   $("#cropInstruction").remove();
+    $('.coverphoto').html("CHOOSE A COVER PHOTO");
     $('.drag-instructions').remove();
     $(".change-image").text("loading");
     $(this).text("loading");
