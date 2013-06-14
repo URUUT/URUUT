@@ -7,7 +7,7 @@ class Project < ActiveRecord::Base
     :story, :about, :large_image, :seed_image, :cultivation_image, :ready_for_approval, :organization_type,
     :organization_classification, :cultivation_video, :campaign_deadline, :sponsor_permission, :step
 
-  attr_accessor :sponsorship_permission
+  attr_accessor :sponsorship_permission, :perk_type
   #validates :title, :short_description, :description, :presence => true, :if => :active?
   #validates :image, :address, :city, :state, :zip, :neighborhood, :duration, :goal, :presence => true, :if => :active_or_step1?
 
