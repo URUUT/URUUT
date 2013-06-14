@@ -77,7 +77,7 @@
           %span.small-heading
             #{availability(@project.project_sponsors, 3)} of 5 Available
         %ul.normal-font
-        - if @sponsorship_benefits.include?(4)
+        - if @sponsorship_benefits.include?(3)
           - @sponsorship_benefits[3].each do |benefit|
             %li #{benefit.name}
         / %div{:style => "height: 80px; width: 100%;"}
@@ -148,7 +148,7 @@
           = image_tag @project_sponsor.logo, :class => "img-polaroid pull-left logo-company", style: "width: 100px;"
           .pic-upload
             .upload-btn
-              %input{:type => 'filepicker', :name => 'project_sponsor_logo', 'data-fp-button-text' => 'ADD A PHOTO', 'data-fp-apikey' => 'ArmO0TLVTkyCaJkQmBNfqz', 'data-fp-button-class' => 'btn', 'onchange' => 'updateSponsorLogo(event)'}
+              %input{:type => 'filepicker', :name => 'project_sponsor_logo', 'data-fp-button-text' => 'UPLOAD', 'data-fp-apikey' => 'ArmO0TLVTkyCaJkQmBNfqz', 'data-fp-button-class' => 'btn', 'onchange' => 'updateSponsorLogo(event)'}
                 %span
 
               / = file_field :project_sponsor, :logo, required: true, label: false
