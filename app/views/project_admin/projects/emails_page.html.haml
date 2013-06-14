@@ -20,7 +20,7 @@
         %h6
           Current Amount Funded
         %h2.highlighted-value
-          = number_to_currency(amount_funded(@project.id), :precision => 0)
+          = number_to_currency(@total_fundings[:total_amount], :precision => 0)
         .of-italic
           of #{number_to_currency(@project.goal, :precision => 0)}
 
