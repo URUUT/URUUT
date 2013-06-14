@@ -290,7 +290,7 @@ class ProjectsController < ApplicationController
 
   def destroy
     Project.find(params[:id]).destroy
-    redirect_to current_user, notice: "Delete successfully"
+    redirect_to current_user, notice: "You have successfully deleted your project"
   end
 
   private
