@@ -90,7 +90,7 @@ body{
   }
 }
 
-p{
+p, ul li{
 
   &.subtext{
     font-family: 'Proxima Nova Semi', sans-serif;
@@ -101,6 +101,14 @@ p{
     text-decoration: underline;
 
     &:hover{
+      text-decoration: none;
+    }
+  }
+}
+
+header, footer{
+  ul li{
+    a{
       text-decoration: none;
     }
   }
@@ -1691,7 +1699,7 @@ footer div ul li a{
   }
 }
 
-#flash_alert, .sessions #flash_notice, body.users #flash_notice{
+#flash_alert, .sessions #flash_notice, .users.show #flash_notice{
   width: 900px;
   margin: 0 auto;
   background: #70bf4c;
@@ -1715,6 +1723,13 @@ footer div ul li a{
     &:hover{
       text-decoration: none;
     }
+  }
+}
+
+body.users.show{
+  #flash_notice{
+    margin-top: -20px;
+    margin-left: 20px;
   }
 }
 
@@ -1832,13 +1847,33 @@ body.pages.contact{
 }
 
 .drag-instructions {
-  background:rgba(84, 97, 133, .4);
-  color:#fff;
-  font:600 12px/12px 'lucida grande', tahoma, verdana, arial, sans-serif;
-  left:50%;
-  margin-left:-75px;
-  margin-top:-13px;
-  padding:7px 15px 7px 15px;
-  position:absolute;
-  top:50%;
+  background: rgba(84, 97, 133, 0.4);
+  color: #fff;
+  font: 600 12px/12px 'lucida grande', tahoma, verdana, arial, sans-serif;
+  left: 45%;
+  margin-left: -75px;
+  margin-top: -13px;
+  padding: 7px 15px 7px 15px;
+  position: absolute;
+  top: 30%;
+  text-align: center;
 }
+
+.full-width.transparency{
+  h2{
+    width: 580px;
+    margin: 0 auto;
+    margin-bottom: 25px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
