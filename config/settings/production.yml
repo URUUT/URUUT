@@ -8,3 +8,6 @@ twitter:
 
 stripe:
   client_id: "ca_1kjvzNoI5Jbkcb1RTv4vtoxljRUueUNZ"
+
+filepicker:
+  api_key: "ArmO0TLVTkyCaJkQmBNfqz"
