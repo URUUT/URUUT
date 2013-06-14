@@ -153,8 +153,12 @@ class DonationsController < ApplicationController
         @perks.push(perk)
       end
     end
-    @perk_name_selected = @perks.last[0]
-		@donation.save!
+    if @perks.blank?
+      @perk_name_selected = "Custom"
+    else
+      @perk_name_selected = @perks.last[0]
+		end
+    @donation.save!
 	end
 
   def set_new_perk
