@@ -21,13 +21,13 @@ Merit::Badge.create!({
 Merit::Badge.create!({
   :id => 2,
   :name => "Project creation badge",
-  :custom_fields => { :image => "/assets/badge_project.png" }
+  :custom_fields => { :image => "/assets/created_a_project.png" }
 })
 
 Merit::Badge.create!({
   :id => 3,
   :name => "Project donation badge",
-  :custom_fields => { :image => "/assets/badge_donate.png" }
+  :custom_fields => { :image => "/assets/contributed_to_project.png" }
 })
 
 # Create application badges (uses https://github.com/norman/ambry)
