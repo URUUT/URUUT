@@ -25,98 +25,104 @@
           %h3= @user.most_funded_city
 
 .cf
-.row{:style => "margin-top:160px;margin-left:-20px;"}
-  .span8
-    %h3.tittle
-      - if @is_current
-        Projects I've Created
-      - else
-        Their projects
-    %div
-      .projects-created.dropdown-list
-        %label Project status:
-        %select{:id => "projects-created", style: "width: 236px;"}
-          %option Funding Active
-          %option Funding Completed
-
-    %div
-      = render "pages/project", :projects => @projects_created
-      .cf
-      = paginate @projects_created, :param_name => "created_page"
-
-    - if @is_current
-      %h3.tittle Projects I've Funded
+.div{:style => "margin-top:140px;margin-left:-20px;"}
+  .row#main-row
+    .span8
+      %h3.tittle
+        - if @is_current
+          Projects I've Created
+        - else
+          Their projects
       %div
-        .projects-funded.dropdown-list
+        .projects-created.dropdown-list
           %label Project status:
-          %select{:id => "projects-funded", style: "width: 236px;"}
+          %select{:id => "projects-created", style: "width: 236px;"}
             %option Funding Active
             %option Funding Completed
+
       %div
-        = render "project", :projects => @projects_funded
+        = render "pages/project", :projects => @projects_created
         .cf
-        = paginate @projects_funded, :param_name => "funded_page"
+        = paginate @projects_created, :param_name => "created_page"
 
-  -if @user.projects.where(ready_for_approval: 1).count > 0
+      - if @is_current
+        %h3.tittle Projects I've Funded
+        %div
+          .projects-funded.dropdown-list
+            %label Project status:
+            %select{:id => "projects-funded", style: "width: 236px;"}
+              %option Funding Active
+              %option Funding Completed
+        %div
+          = render "project", :projects => @projects_funded
+          .cf
+          = paginate @projects_funded, :param_name => "funded_page"
+
+    -if @user.projects.where(ready_for_approval: 1).count > 0
+      .span4
+        %h3.title MY Pending Projects
+        .well.info.badge-wrapper
+          - @user.projects.where(ready_for_approval: 1).each do |project|
+            %h5
+              = project.title
+
     .span4
-      %h3.title MY Pending Projects
-      .well.info.badge-wrapper
-        - @user.projects.where(ready_for_approval: 1).each do |project|
-          %h5
-            = project.title
-
-  .span4
-    -unless @pending_projects.empty?
-      %h3 My Pending Projects
-      .well
-        %ul{:style => "list-style: none; margin-left: 0;"}
-          - @pending_projects.each do |pending_project|
-            %li
-              - if pending_project.title.blank?
-                - if !pending_project.step.blank?
-                  = link_to "Project Started on #{pending_project.created_at.strftime(format='%_m/%d/%C')}", pending_project.step, class: "green-link", style: "text-transform: capitalize;"
+      -unless @pending_projects.empty?
+        %h3 My Pending Projects
+        .well
+          %ul{:style => "list-style: none; margin-left: 0;"}
+            - @pending_projects.each do |pending_project|
+              %li
+                - if pending_project.title.blank?
+                  - if !pending_project.step.blank?
+                    = link_to "Project Started on #{pending_project.created_at.strftime(format='%_m/%d/%C')}", pending_project.step, class: "green-link", style: "text-transform: capitalize;"
+                  -else
+                    = link_to "Project Started on #{pending_project.created_at.strftime(format='%_m/%d/%C')}", "/projects/#{pending_project.id}/edit#sponsor-info", class: "green-link", style: "text-transform: capitalize;"
                 -else
-                  = link_to "Project Started on #{pending_project.created_at.strftime(format='%_m/%d/%C')}", "/projects/#{pending_project.id}/edit#sponsor-info", class: "green-link", style: "text-transform: capitalize;"
-              -else
-                - if !pending_project.step.blank?
-                  = link_to pending_project.title, pending_project.step, class: "green-link", style: "text-transform: capitalize;"
-                - else
-                  = link_to pending_project.title, "/projects/#{pending_project.id}/edit#sponsor-info", class: "green-link", style: "text-transform: capitalize;"
+                  - if !pending_project.step.blank?
+                    = link_to pending_project.title, pending_project.step, class: "green-link", style: "text-transform: capitalize;"
+                  - else
+                    = link_to pending_project.title, "/projects/#{pending_project.id}/edit#sponsor-info", class: "green-link", style: "text-transform: capitalize;"
+                = link_to "Delete", project_path(pending_project), {method: :delete, confirm: 'Are you sure?'}
 
-    %h3.title{:style => "margin-bottom:5px;"} #{who(:whose)} badges
-    .well.info.badge-wrapper
-      - @user.badges.each do |badge|
-        .profile-badge
-          = image_tag badge.custom_fields[:image], :class => "img-circle", :data => { :content => badge.name }
+      %h3.title{:style => "margin-bottom:5px;"} #{who(:whose)} badges
+      .well.info.badge-wrapper
+        - @user.badges.each do |badge|
+          .profile-badge
+            = image_tag badge.custom_fields[:image], :class => "img-circle", :data => { :content => badge.name }
 
-    %div{:style => "margin-top:-20px;margin-bottom:5px;float:left;"}
-      %h3.title #{who(:whose)} information
-    %div{:style => "text-align:right;"}
-      %p
-        %i.icon-pencil
-        = link_to "edit", edit_user_registration_path, :class => "green"
-    .well.info
-      %h5 Profile image
-      %p= image_tag "#{@user.avatar}", :class => "profile-img img-polaroid"
-
-      %h5 Name
-      %p
-        #{@user.first_name} #{@user.last_name}
-
-      - if @is_current
-        %h5 Email address
-        %p= @user.email
-
-        %h5 Business or organization name
-        %p= @user.organization
-
-      %h5 Mission statement / about
-      %p= @user.mission
-
-      - if @is_current
-        %h5 Email preference
+      %div{:style => "margin-top:-20px;margin-bottom:5px;float:left;"}
+        %h3.title #{who(:whose)} information
+      %div{:style => "text-align:right;"}
         %p
-          = @user.subscribed ? "" : "Not"
-          Subscribed
+          %i.icon-pencil
+          = link_to "edit", edit_user_registration_path, :class => "green"
+      .well.info
+        %h5 Profile image
+        %p= image_tag "#{@user.avatar}", :class => "profile-img img-polaroid"
 
+        %h5 Name
+        %p
+          #{@user.first_name} #{@user.last_name}
+
+        - if @is_current
+          %h5 Email address
+          %p= @user.email
+
+          %h5 Business or organization name
+          %p= @user.organization
+
+        %h5 Mission statement / about
+        %p= @user.mission
+
+        - if @is_current
+          %h5 Email preference
+          %p
+            = @user.subscribed ? "" : "Not"
+            Subscribed
+
+:javascript
+  $(function(){
+    $("#main-row").prepend($("#flash_notice"))
+    })
 
