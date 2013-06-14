@@ -89,6 +89,7 @@ class ProjectAdmin::ProjectsController < ApplicationController
 
   def emails_page
     @project = Project.find(params[:project_id])
+    @total_fundings = @project.total_funding_by_project
     @contact = Contact.new
     @need_doctype = true
     @list_recepients = @project.list_recepient
