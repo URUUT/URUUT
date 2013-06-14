@@ -94,14 +94,14 @@
 
   $(document).ready(function(){
     var perkStatus = "#{@perks.blank?}";
-    var point = "#{@donation.amount.to_i}";
-    var amount = "#{number_to_currency(@donation.amount, precision: 0)}";
+    var point = "#{@perk_amount.to_i}";
+    var amount = "#{number_to_currency(@perk_amount, precision: 0)}";
     var theText = "#{@perk_name_selected}";
     $("#perk_type option:contains(" + theText + ")").attr('selected', 'selected');
     $('#new_sponsor').validate();
     $("#perk_name").val(theText);
 
-    if (perkStatus == true){
+    if (perkStatus == "true"){
       $(".selectParent").hide();
       $(".none-perks").show();
       $(".none-perks").html("You will receive "+ point + " uruut reward points when you seed "+ amount)
