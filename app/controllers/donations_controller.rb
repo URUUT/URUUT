@@ -37,8 +37,15 @@ class DonationsController < ApplicationController
           @perks.push(perk)
         end
       end
-      @perk_name_selected = @perks.last[0]
-      if @project.perk_permission
+      if @perks.blank?
+        @perk_name_selected = "Custom"
+      else
+        @perk_name_selected = @perks.last[0]
+      end
+
+      if @perks.blank?
+        session[:perk_id] = "Custom"
+      elsif @project.perk_permission
         session[:perk_id] = @perks.last[2]
       else
         session[:perk_id] = @perks.last[0]
@@ -93,8 +100,15 @@ class DonationsController < ApplicationController
           @perks.push(perk)
         end
       end
-      @perk_name_selected = @perks.last[0]
-      if project.perk_permission
+      if @perks.blank?
+        @perk_name_selected = "Custom"
+      else
+        @perk_name_selected = @perks.last[0]
+      end
+
+      if @perks.blank?
+        session[:perk_id] = "Custom"
+      elsif project.perk_permission
         session[:perk_id] = @perks.last[2]
       else
         session[:perk_id] = @perks.last[0]
