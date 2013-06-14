@@ -26,10 +26,7 @@
           .choiced-perk{style: "#{"display:none" if !@perk_name.eql?("custom")}"}
             %h6{:style => "line-height:100%;margin-bottom:10px;margin-top:20px"} Choose your perk
             .selectParent
-              -if @project.perk_permission
-                = select_tag :perk_type, options_for_select(@perks), {:onchange => 'changeAmount(this)', class: "styledSelect"}
-              -else
-                = select_tag :perk_type, options_for_select(@perks), {:onchange => 'changeAmount()', class: "styledSelect"}
+              = select_tag :perk_type, options_for_select(@perks), {:onchange => 'changeAmount(this)', class: "styledSelect"}
             .none-perks{style: "display:none"}
             %p{:style => "font-size:12px;font-family:'Proxima Nova';text-align:left;color:#b6b6b4;margin:0;font-style: italic"} (Perk eligibility based on donation amount.)
 
@@ -94,6 +91,13 @@
           %a{style: "#{"background: #81C263" if @perk_name.eql?("custom")}", :class => "fund btn change-fund pull-right", "perk-id" => "custom", id: "button-fund-custom"} Fund Now #{image_tag('arrow.png')}
 
 :javascript
+
+  $(document).ready(function(){
+    var theText = "#{@perk_name_selected}";
+    $("#perk_type option:contains(" + theText + ")").attr('selected', 'selected');
+    $('#new_sponsor').validate();
+  })
+
   $(".change-fund").click(function(){
     if ( $(this).attr("perk-id") == "default" ){
       $.ajax({
@@ -108,9 +112,13 @@
   });
 
   var changeAmount = function(selectedOpt){
+    var projectId = '#{@project.id}';
     var text = selectedOpt.options[selectedOpt.selectedIndex].text;
     $(".perk-info-choiced").show();
     $("#perk_name").val(text);
+    $.ajax({
+      url: "/set_new_perk?perk_name="+text+"&project_id="+projectId
+    });
     // $("#amount").val($("#perk_type").val());
     // $("#custom_amount").val($("#perk_type").val());
   };
