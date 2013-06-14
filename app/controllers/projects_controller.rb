@@ -287,6 +287,11 @@ class ProjectsController < ApplicationController
     render nothing: true
   end
 
+  def destroy
+    Project.find(params[:id]).destroy
+    redirect_to current_user, notice: "Delete successfully"
+  end
+
   private
 
   def set_session_page
