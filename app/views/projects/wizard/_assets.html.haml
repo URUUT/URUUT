@@ -351,12 +351,14 @@
 :javascript
 
   var updateCover = function(event){
+    $('.coverphoto').html("Geting photo <img src='/assets/3.gif'/>");
     console.log(event.fpfile.url);
     var largeImage = event.fpfile.url,
     current_bg = $('#large_image').css('background-image');
     console.log("finished");
     $("body").animate({ scrollTop: 0 }, "slow");
     $('<img />').attr('src', largeImage).load(function() {
+      $('.coverphoto').html("CHOOSE A COVER PHOTO");
       var largeImageObj = new Image;
       largeImageObj.src = largeImage;
       console.log(largeImageObj.width);
@@ -377,7 +379,7 @@
 
         $('.ui-draggable').remove();
         $('#large_image').prepend(dragImg);
-        $('#large_image').append('<span class="drag-instructions">Drag to Reposition</span>');
+        $('#large_image').append('<span class="drag-instructions">Drag to Reposition<br/><br/><b>Click save below right once positioned</b></span>');
 
         $('#dragImg').draggable({
           axis: 'y',
