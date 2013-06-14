@@ -19,6 +19,8 @@ Crowdfund::Application.routes.draw do
 
   get "image/new"
 
+  get "set_new_perk" => "donations#set_new_perk"
+
   get "users/profile"
 
   match "browse/projects" => "pages#index", :as => "browse_projects"
