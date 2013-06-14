@@ -50,6 +50,7 @@ class ProjectsController < ApplicationController
     @project_sponsors = sort_sponsorships.group_by {|sponsor| sponsor.level_id}
     @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
     @perks = @project.perks.order(:amount)
+    session[:current_project] = @project.id
     # @sponsorship_levels = SponsorshipLevel.all
     # @donation = Donation.where("project_id = ?", @project.id)
     # @user = User.find(@project.user_id)
