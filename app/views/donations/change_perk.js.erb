@@ -1,9 +1,12 @@
+var theText = "<%= @perk_name_selected %>";
+
 $(".perk").attr("style", "");
 $(".selectParent").show();
 $(".none-perks").hide();
 $(".change-fund").attr("style", "");
 $(".seed-amount").attr("style", "");
 $(".perk-name-other").attr("style", "");
+$("#perk_type option:contains(" + theText + ")").attr('selected', 'selected');
 
 <% if !params[:id].eql?("custom") %>
 $(".choiced-perk").hide();
@@ -39,6 +42,7 @@ $(".perk-description").text("");
   <% @perks.each do |perk| %>
     $("#perk_type").append('<option value="<%= perk[1] %>"><%= perk[0] %></option>')
   <% end %>
+  $("#perk_type option:contains(" + theText + ")").attr('selected', 'selected');
 <% end %>
 
 $("#custom_amount").val("<%= params[:custom_seed].gsub(",", "") %>");
