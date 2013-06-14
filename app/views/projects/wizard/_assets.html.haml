@@ -351,6 +351,7 @@
 :javascript
 
   var updateCover = function(event){
+    $('.drag-instructions').remove();
     $('.coverphoto').html("Geting photo <img src='/assets/3.gif'/>");
     console.log(event.fpfile.url);
     var largeImage = event.fpfile.url,
@@ -407,7 +408,8 @@
       }
       else{
         $('#large_image').css('background-image', current_bg);
-        $("#image-priview").prepend('<div id="cropInstruction" style="text-align: center; background: gray; position: absolute; width: 100%;"><h2>image width for cover should be more than 1600px</h2></div>');
+        $('.drag-instructions').remove();
+        $("#large_image").append('<span class="drag-instructions" style="width: 300px;"><b>image width for cover should be more than 1600px</b></span>');
       }
     });
   }
