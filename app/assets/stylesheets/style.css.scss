@@ -1345,7 +1345,7 @@ iframe.twitter-follow-button{
       border: none;
       letter-spacing: 0;
       padding: 0 10px;
-      
+
       &:hover{
         text-decoration: none;
       }
@@ -1691,7 +1691,7 @@ footer div ul li a{
   }
 }
 
-#flash_alert, .sessions #flash_notice{
+#flash_alert, .sessions #flash_notice, body.users #flash_notice{
   width: 900px;
   margin: 0 auto;
   background: #70bf4c;
