@@ -246,6 +246,8 @@
   = @project.id
 
 :javascript
+  $('#new_sponsor').validate();
+
   project_token = "#{@project.project_token}";
   project_pub_key = "#{@project.publishable_key}";
 
