@@ -256,6 +256,13 @@
 
     Stripe.setPublishableKey('pk_test_BTNPlS59UIPJC5Fnp7CR9It6');
 
+
+    if ($('#project_sponsor_logo').val() !== ""){
+      $(".logo-company").attr('src', $('#project_sponsor_logo').val());
+      $('.logo-company').attr('style', 'position: absolute; top: 5; ;left: 5; width: 100px');
+      $('#project_sponsor_logo').hide();
+    }
+
     $('.sponsor-placement').hide();
     switch ($('#project_sponsor_level_id').val())
     {
