@@ -370,16 +370,13 @@
         $(".coverphoto").hide();
         $(".div-image-priview").remove();
         $("#url_image").val(largeImage);
-        $("#image-priview").hide();
-
-        $(".funding-info").hide();
 
         var dragImg = new Image;
         dragImg.src = largeImage;
         dragImg.id = "dragImg"
 
         $('.ui-draggable').remove();
-        $('#large_image').append(dragImg);
+        $('#large_image').prepend(dragImg);
         $('#large_image').append('<span class="drag-instructions">Drag to Reposition</span>');
 
         $('#dragImg').draggable({
@@ -440,7 +437,7 @@
         $(".save-image").text('reset');
         $(".change-image").text("reset");
         console.log(new_FPFile.url);
-        $(".coverphoto, .funding-info").show();
+        $(".coverphoto").show();
         $('.ui-draggable').remove();
         $(".action-convert").hide();
         $("#cover-priview").remove();
@@ -451,7 +448,6 @@
             method: 'POST',
             data: { large_image: new_FPFile.url }
           });
-        $("#image-priview").show();
         $(".save-image").text('Save Images');
         $(".change-image").text("Change cover photo");
       },
