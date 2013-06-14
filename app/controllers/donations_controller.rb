@@ -22,12 +22,12 @@ class DonationsController < ApplicationController
     @perk_amount = params[:amount].gsub(",", "").to_i
     @perk_description = params[:description]
     @project = Project.find(session[:current_project])
-    session[:perk_id] = "custom_donate"
     if params[:amount].blank?
       @perks = @project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i] }
+      session[:perk_id] = "custom_donate"
     else
       if @project.perk_permission
-        perks = @project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i] }
+        perks = @project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i, perk.id] }
       else
         perks = DEFAULT_PERK
       end
@@ -36,6 +36,12 @@ class DonationsController < ApplicationController
         if perk[1].to_f <= params[:amount].gsub(",", "").to_f
           @perks.push(perk)
         end
+      end
+      @perk_name_selected = @perks.last[0]
+      if @project.perk_permission
+        session[:perk_id] = @perks.last[2]
+      else
+        session[:perk_id] = @perks.last[0]
       end
     end
     render :new
@@ -51,12 +57,22 @@ class DonationsController < ApplicationController
         @perk.id = params["level"]
         @perk.amount = params["amount"].gsub(",", "")
         project = Project.find(params["project_id"])
-        perks = project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i] }
+        if project.perk_permission
+          perks = project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i, perk.id] }
+        else
+          perks = DEFAULT_PERK
+        end
         @perks = []
         perks.each do |perk|
           if perk[1].to_f <= params["amount"].gsub(",", "").to_f
             @perks.push(perk)
           end
+        end
+        @perk_name_selected = @perks.last[0]
+        if project.perk_permission
+          session[:perk_id] = @perks.last[2]
+        else
+          session[:perk_id] = @perks.last[0]
         end
         @perk.name = "LEVEL #{@perk.id}"
         @perk.description = "You will receive #{@perk.amount} Uruut Reward Points when you seed $#{@perk.amount}"
@@ -66,12 +82,22 @@ class DonationsController < ApplicationController
       @perk.id = params["level"]
       @perk.amount = params["custom_seed"].gsub(",", "")
       project = Project.find(params["project_id"])
-      perks = project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i] }
+      if project.perk_permission
+        perks = project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i, perk.id] }
+      else
+        perks = DEFAULT_PERK
+      end
       @perks = []
       perks.each do |perk|
         if perk[1].to_f <= params["custom_seed"].gsub(",", "").to_f
           @perks.push(perk)
         end
+      end
+      @perk_name_selected = @perks.last[0]
+      if project.perk_permission
+        session[:perk_id] = @perks.last[2]
+      else
+        session[:perk_id] = @perks.last[0]
       end
       @perk.name = "LEVEL #{@perk.id}"
       @perk.description = "You will receive #{@perk.amount} Uruut Reward Points when you seed $#{@perk.amount}"
@@ -106,8 +132,26 @@ class DonationsController < ApplicationController
 	def edit
 		@donation = Donation.unscoped.find(params[:id])
     @project = @donation.project
+    perks = @project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i, perk.id] }
+    @perks = []
+    perks.each do |perk|
+      if perk[1].to_f <= @donation.amount.to_f
+        @perks.push(perk)
+      end
+    end
+    @perk_name_selected = @perks.last[0]
 		@donation.save!
 	end
+
+  def set_new_perk
+    perk = Perk.where(name: params[:perk_name], project_id: params[:project_id])
+    if perk.empty?
+      session[:perk_id] = params[:perk_name]
+    else
+      session[:perk_id] = perk.first.id
+    end
+    render nothing: true
+  end
 
 	def update
 		@donation = Donation.unscoped.find(params[:id])
