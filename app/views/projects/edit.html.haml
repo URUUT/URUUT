@@ -135,15 +135,19 @@
     switch (currentLink)
     {
       case 'assets':
+        $("#uruutTour").joyride("destroy");
         $(".sponsorship-link").attr("href", "/projects/#{@project.id}/edit#sponsorship");
         break;
       case 'sponsorship':
+        $("#uruutTour").joyride("destroy");
         $(".perks-link").attr("href", "/projects/#{@project.id}/edit#perks");
         break;
       case 'perks':
+        $("#uruutTour").joyride("destroy");
         $(".project-details-link").attr("href", "/projects/#{@project.id}/edit#project-details");
         break;
       case 'project_detail':
+        $("#uruutTour").joyride("destroy");
         $(".sponsor-info-link").attr("href", "/projects/#{@project.id}/edit#sponsor-info");
         break;
     }
@@ -201,15 +205,27 @@
 
   $(function(){
 
-    var step = '#{session[:step]}'
+    var step = '#{session[:step]}';
+    var wizardPath = $(location).attr("href").split("#")[1];
 
     if (step == "fourth"){
       $(window).load(function(){
-        $("#uruutTour").joyride({
-          autoStart : true,
-          'tipLocation': 'bottom'
-        });
+        if ( wizardPath != "assets" )
+        {
+          $("#uruutTour").joyride("destroy");
+        }
+        else{
+          $("#uruutTour").joyride({
+            autoStart : true,
+            'tipLocation': 'bottom'
+          });
+        }
       });
+    }
+
+    if ( wizardPath != "assets" )
+    {
+      $("#uruutTour").joyride("destroy");
     }
 
     getHash();
