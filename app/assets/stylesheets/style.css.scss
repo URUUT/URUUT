@@ -1879,12 +1879,13 @@ body.pages.contact{
   }
 }
 
-.action-convert .action{
+/*.action-convert .action{*/
+.save-btn{
   @include cleared;
 
   button[type="button"], .btn{
-    background: rgba(255, 255, 255, 0.9);
-    color: $green2;
+    background: rgba(255, 255, 255, 0.9) !important;
+    color: $green2 !important;
     font-family: 'Georgia', serif;
     font-style: italic;
     text-decoration: underline;
