@@ -124,7 +124,7 @@
         window.location.href = "#{thank_you_pages_url}";
       });
     } else {
-      alert("Please Choose Cover Image");
+      $('html, body').animate({ scrollTop: 0 }, 'slow', alert("Please Choose Cover Image"));
     }
   });
 
