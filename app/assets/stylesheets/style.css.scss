@@ -90,7 +90,7 @@ body{
   }
 }
 
-p, ul li{
+p{
 
   &.subtext{
     font-family: 'Proxima Nova Semi', sans-serif;
@@ -100,7 +100,7 @@ p, ul li{
     color: $green2;
     text-decoration: underline;
 
-    &:hover{
+    &:hover, &.btn{
       text-decoration: none;
     }
   }
@@ -212,6 +212,12 @@ h1, h2, h3, h4, h5, h6{
         }
       }
     }
+  }
+}
+
+#large_image{
+  .funding-info{
+    z-index: 2;
   }
 }
 
@@ -1849,14 +1855,20 @@ body.pages.contact{
 .drag-instructions {
   background: rgba(84, 97, 133, 0.4);
   color: #fff;
-  font: 600 12px/12px 'lucida grande', tahoma, verdana, arial, sans-serif;
+  font: 400 16px/18px 'Proxima Nova Light', sans-serif;
   left: 45%;
-  margin-left: -75px;
+  margin-left: -115px;
   margin-top: -13px;
   padding: 7px 15px 7px 15px;
   position: absolute;
   top: 30%;
   text-align: center;
+  letter-spacing: 1;
+
+  b{
+    font-weight: normal;
+
+  }
 }
 
 .full-width.transparency{
@@ -1867,6 +1879,46 @@ body.pages.contact{
   }
 }
 
+.action-convert .action{
+  @include cleared;
+
+  button[type="button"], .btn{
+    background: rgba(255, 255, 255, 0.9);
+    color: $green2;
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    text-decoration: underline;
+    text-transform: capitalize;
+    font-size: 13px;
+    line-height: 20px;
+    border: none;
+    letter-spacing: 0;
+    padding: 7px 20px;
+    display: block;
+    float: left;
+
+    &:hover{
+      text-decoration: none;
+    }
+
+    &:first-child{
+      -webkit-border-top-left-radius: 5px;
+      -moz-border-radius-topleft: 5px;
+      border-top-left-radius: 5px;
+    }
+
+    &:last-child{
+      -webkit-border-top-right-radius: 5px;
+      -moz-border-radius-topright: 5px;
+      border-top-right-radius: 5px;
+    }
+  }
+
+  button[type="button"]{
+    background: transparent url('pencil-green.png') no-repeat left center;
+    padding-left: 15px;
+  }
+}
 
 
 
