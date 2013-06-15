@@ -4,7 +4,7 @@
     = form_for(@contact, :as => :post, :url => send_email_project_admin_projects_path, html: {remote: true}) do |f|
       .clearfix
         .pull-left
-          = label_tag "EMAIL RECEPIENT", nil, class: "label-green"
+          = label_tag "EMAIL RECEPIENT*", nil, class: "label-green"
           .selectParents
             = select_tag "sponsor_level", options_for_select(@list_recepients), prompt: "Choice sponsor level or perk", onchange: "get_emails_based_on_category()", class: ""
         .pull-left
@@ -15,11 +15,11 @@
         = hidden_field_tag 'email_temp'
 
       %div{:style => "margin-top: 10px"}
-        = f.label :subject , "MESSAGE SUBJECT", class: "label-green"
+        = f.label :subject , "MESSAGE SUBJECT*", class: "label-green"
         = f.text_field :subject, :required => true, class: "span8"
 
       %div{:style => "margin-top: 10px"}
-        = f.label :email_content , "EMAIL CONTENT", class: "label-green"
+        = f.label :email_content , "EMAIL CONTENT*", class: "label-green"
         = f.text_area :email_content, :required => true, style: "width: 637px; height: 298px;"
       %hr{:style => "margin-top: 20px; margin-bottom: 20px; background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
       %div
