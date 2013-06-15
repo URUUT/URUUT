@@ -31,7 +31,7 @@ class DonationStepsController < ApplicationController
         @perk = Perk.new
         @perk.name = @donation.perk_name
         @perk.amount = @donation.amount
-        @perk.description = "You will receive #{@perk.amount.to_i} Uruut Reward Points when you seed #{@perk.amount.to_i}"
+        @perk.description = "You will receive #{@perk.amount.to_i} Uruut Reward Points when you seed $#{@perk.amount.to_i}"
         # @perk = Perk.where(id: session[:perk_id])
         # if @perk.empty?
         #   @perk = Perk.new
