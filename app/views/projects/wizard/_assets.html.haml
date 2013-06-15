@@ -10,7 +10,6 @@
       #large_image{data: {image: 'false'}}
         .div{style: "height: 546px;", id: "image-priview"}
           %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => Settings.filepicker.api_key, 'data-fp-button-class' => 'coverphoto btn pick-cover-photo', 'onchange' => 'updateCover(event)', :style => 'left:50%', 'data-fp-mimetypes' => 'image/*', 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA,INSTAGRAM'}
-
         = render "funding_info"
 
     .span12.action-convert{style: "margin-top: 484px; display:none"}
@@ -19,9 +18,6 @@
       = hidden_field_tag "y_position"
       = hidden_field_tag "width_after"
       = hidden_field_tag "height_after"
-      .action.pull-right
-        %a.btn.change-image{href: "javascript:void(0)"} Change cover photo
-        %a.btn.save-image{href: "javascript:void(0)"} Save Images
 
     .show-content.clearfix
       .span8
@@ -350,6 +346,8 @@
 
 :javascript
 
+  $('.save-btn').hide();
+
   var updateCover = function(event){
     $('.drag-instructions').remove();
     $('.coverphoto').html("Uploading Photo <img src='/assets/3.gif'/>");
@@ -382,6 +380,8 @@
         $('#large_image').prepend(dragImg);
         $('#large_image').append('<span class="drag-instructions">Drag to Reposition<br/><br/><b>Click save below right once positioned</b></span>');
 
+        $("#y_position").val(0);
+
         $('#dragImg').draggable({
           axis: 'y',
           drag: function(event, ui) {
@@ -403,10 +403,12 @@
         });
 
         $('#large_image').css('background-image','');
-
+        $('#dragImg').css('position', 'absolute')
+        $('.save-btn').show();
         $(".action-convert").show();
       }
       else{
+        $('.save-btn').hide();
         $('#large_image').css('background-image', current_bg);
         $('.drag-instructions').remove();
         $("#large_image").append('<span class="drag-instructions" style="width: 300px;"><b>image width for cover should be more than 1600px</b></span>');
@@ -426,7 +428,7 @@
   });
 
   $(".save-image").click(function(){
-  $("#cropInstruction").remove();
+    $("#cropInstruction").remove();
     $('.coverphoto').html("CHOOSE A COVER PHOTO");
     $('.drag-instructions').remove();
     $(".change-image").text("loading");
@@ -435,6 +437,7 @@
     var newImage = new Image();
     newImage.src = $("#url_image").val();
     console.log("Converting...");
+    console.log([0, $("#y_position").val(), newImage.width, newImage.height]);
     filepicker.convert(fpfile,
       {crop: [0, $("#y_position").val(), newImage.width, newImage.height]},
       {},
@@ -455,6 +458,7 @@
           });
         $(".save-image").text('Save Images');
         $(".change-image").text("Change cover photo");
+        $('.save-btn').hide();
       },
       function(FPError){
         console.log(FPError);
