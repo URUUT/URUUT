@@ -28,15 +28,18 @@ class DonationStepsController < ApplicationController
 
         @perk.description = "You will receive #{session[:payment_amount]} Uruut Reward Points when you seed $#{session[:payment_amount]}"
       else
-        @perk = Perk.where(id: session[:perk_id])
-        puts session[:perk_id]
-        if @perk.empty?
-          @perk = Perk.new
-          @perk.name = "Custom"
-          @perk.amount = session[:payment_amount]
-        else
-          @perk = @perk.first
-        end
+        @perk = Perk.new
+        @perk.name = @donation.perk_name
+        @perk.amount = @donation.amount
+        @perk.description = "You will receive #{@perk.amount} Uruut Reward Points when you seed $#{@perk.amount}"
+        # @perk = Perk.where(id: session[:perk_id])
+        # if @perk.empty?
+        #   @perk = Perk.new
+        #   @perk.name = "Custom"
+        #   @perk.amount = session[:payment_amount]
+        # else
+        #   @perk = @perk.first
+        # end
       end
       render_wizard
     else
