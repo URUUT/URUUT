@@ -172,4 +172,8 @@ module ApplicationHelper
     avatar_link
   end
 
+  def get_interval_chart(project)
+    interval = project.duration.to_i < 45 ? 1 : 5
+  end
+
 end
