@@ -1,33 +1,33 @@
 .span8
   %h2 CONTACT US
   %p We want to hear from you! Send us anything and we'll get back to you ASAP.
-  
+
   - if flash[:notice]
     .flash
       %h3= flash[:notice]
-  
+
   %hr
 
   = form_for :pages, :url => {:action => "contact_send"} do |f|
-  
+
     %div
-      = f.label :name
+      = f.label :name, "Name*"
       = f.text_field :name, :size => ""
 
     %div
-      = f.label :email
+      = f.label :email, "Email*"
       = f.text_field :email, :size => ""
 
     %div
-      = f.label :subject
+      = f.label :subject, "Subject*"
       = f.text_field :subject, :size => ""
 
     %div
-      = f.label :message
+      = f.label :message, "Message*"
       = f.text_area :message, :cols => ""
-			
+
     %hr
-			
+
     %div
       = button_tag(type: 'submit', class: "btn") do
         Submit
@@ -38,12 +38,12 @@
   .well
     %h4 WE’RE HERE TO HELP
     %p Have a question or need help? Our FAQs can help you get answers to your questions fast and easy.
-		
+
     %hr
-		
+
     %h4 STAY CONNECTED
     %p For the latest news on Uruut follow us on Twitter and Like Us on Facebook.
-		
+
     = link_to "https://twitter.com/intent/follow?original_referer=http%3A%2F%2Furuut.com%2Fcontact&region=follow_link&screen_name=uruut&tw_p=followbutton&variant=2.0", :class => "twitter-button" do
       = image_tag "twitter-button.png"
 
