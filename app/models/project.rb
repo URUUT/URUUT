@@ -68,8 +68,8 @@ class Project < ActiveRecord::Base
       amount_by_date = []
       self.created_at.to_date.upto(Time.now.to_date).each do |date|
         amount = 0
-        amount += self.donations.where("created_at > ? AND created_at < ?", date.at_beginning_of_day, date.end_of_day).sum(:amount)
-        amount += self.project_sponsors.where("created_at > ? AND created_at < ?", date.at_beginning_of_day, date.end_of_day).sum(:cost)
+        amount += self.donations.where("updated_at > ? AND updated_at < ?", date.at_beginning_of_day, date.end_of_day).sum(:amount)
+        amount += self.project_sponsors.where("updated_at > ? AND updated_at < ?", date.at_beginning_of_day, date.end_of_day).sum(:cost)
         amount_by_date << amount
       end
     end
