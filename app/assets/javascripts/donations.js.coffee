@@ -30,9 +30,9 @@ new_subscription =
       # return false
     else
       console.log response
-      return false
       $('#stripe_error').text(response.error.message)
       $('input[type=submit]').attr('disabled', false)
+      return false
 
 edit_subscription =
   setupForm: ->
@@ -62,9 +62,9 @@ edit_subscription =
       # return false
     else
       console.log response
-      return false
       $('#stripe_error').text(response.error.message)
       $('input[type=submit]').attr('disabled', false)
+      return false
 
 
 $ ->
@@ -74,9 +74,9 @@ $ ->
     if $(".choiced-perk").attr("style") isnt "display:none" and $("#custom_amount").val() is "0"
       alert "You Can't Input 0 For Seed Amount"
     else
-      if $('#card_number').val() == ''
-        $('#new_donation')[0].submit()
-      else
+      # if $('#card_number').val() == ''
+        # $('#new_donation')[0].submit()
+      # else
         new_subscription.setupForm()
 
   $('.edit_donation #donate').on 'click', (event) ->
@@ -85,7 +85,7 @@ $ ->
     if $(".choiced-perk").attr("style") isnt "display:none" and $("#custom_amount").val() is "0"
       alert "You Can't Input 0 For Seed Amount"
     else
-      if $('#card_number').val() == ''
-        $('.edit_donation')[0].submit()
-      else
+      # if $('#card_number').val() == ''
+      #   $('.edit_donation')[0].submit()
+      # else
         edit_subscription.setupForm()
