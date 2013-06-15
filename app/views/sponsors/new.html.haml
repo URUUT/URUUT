@@ -209,7 +209,7 @@
               = text_field_tag nil, user_signed_in? ? "#{current_user.first_name.capitalize} #{current_user.last_name.capitalize}" : "" , name: "sponsor[card_name]", class: "span12"
             .field.card-number
               = label_tag :card_number, class: "label-green" do
-                Credit Card Number
+                Credit Card Number*
               = text_field_tag :card_number, nil, name: nil, class: "span12"
             .field.ccv.span4
               = label_tag :card_code, class: "label-green" do
