@@ -62,31 +62,11 @@ class Project < ActiveRecord::Base
   end
 
   def amount_per_day
-    donations = self.donations
-    sponsors = self.project_sponsors
-    fundings = []
-
-    donations.each do |sponsor|
-      sponsor.type_founder = "individual"
-      fundings << sponsor
-    end unless donations.empty?
-
-    sponsors.each do |sponsor|
-      sponsor.type_founder = "sponsor"
-      fundings << sponsor
-    end unless sponsors.empty?
-
     amount_by_date = []
-
-    fundings.group_by{ |p| p.updated_at.to_date  }.each do |date, founders|
+    self.created_at.to_date.upto(Time.now.to_date).each do |date|
       amount = 0
-      founders.each do |founder|
-        if founder.type_founder.eql?("individual")
-          amount += founder.amount.to_i
-        else
-          amount += founder.cost.to_i
-        end
-      end
+      amount += self.donations.where("created_at > ? AND created_at < ?", date.at_beginning_of_day, date.end_of_day).sum(:amount)
+      amount += self.project_sponsors.where("created_at > ? AND created_at < ?", date.at_beginning_of_day, date.end_of_day).sum(:cost)
       amount_by_date << amount
     end
 
