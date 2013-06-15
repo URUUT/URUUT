@@ -262,7 +262,7 @@ class SponsorsController < ApplicationController
     @project_sponsor.save!
     @project_sponsor.update_attributes({cost: cost, project_id: params[:project_id], sponsor_id: @sponsor.id,
                                       level_id: params[:project_sponsor][:level_id], card_token: token,
-                                      created_at: Time.now.to_date, card_type: card_type, card_last4: last4, sponsor_type: params[:type] })
+                                      card_type: card_type, card_last4: last4, sponsor_type: params[:type] })
     session[:project_sponsor] = @project_sponsor
     redirect_to confirmation_url(params[:project_id], @sponsor.id)
   end
