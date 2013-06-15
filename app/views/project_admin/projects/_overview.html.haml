@@ -57,6 +57,7 @@
           showLastLabel: true,
           endOnTick: true,
           max: 30,
+          min: 1,
           tickInterval: #{get_interval_chart(@project)}
       },
       yAxis: {
@@ -87,7 +88,6 @@
           }
       },
       series: [{
-          pointStart: 1,
           name: 'Funding',
           data: #{@project.amount_per_day.inspect}
       }]
