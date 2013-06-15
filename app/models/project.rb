@@ -63,7 +63,7 @@ class Project < ActiveRecord::Base
 
   def amount_per_day
     if self.donations.blank? and self.project_sponsors.blank?
-      amount_by_date = [0]
+      amount_by_date = ""
     else
       amount_by_date = []
       self.created_at.to_date.upto(Time.now.to_date).each do |date|
