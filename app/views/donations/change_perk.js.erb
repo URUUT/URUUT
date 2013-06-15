@@ -1,12 +1,18 @@
 var theText = "<%= @perk_name_selected %>";
+var perkPermission = "#{@project.perk_permission}"
 
 $(".perk").attr("style", "");
-$(".selectParent").show();
 $(".none-perks").hide();
 $(".change-fund").attr("style", "");
 $(".seed-amount").attr("style", "");
 $(".perk-name-other").attr("style", "");
 $("#perk_type option:contains(" + theText + ")").attr('selected', 'selected');
+
+<% if @project.perk_permission %>
+  $(".selectParent").show();
+<% else %>
+  $(".selectParent").hide();
+<% end %>
 
 <% if !params[:id].eql?("custom") %>
   $(".choiced-perk").hide();
@@ -45,7 +51,11 @@ $("#perk_type option:contains(" + theText + ")").attr('selected', 'selected');
     $(".none-perks").show();
     $(".none-perks").html("You will receive <%= @perk.amount.to_i %> uruut reward points when you seed <%= number_to_currency(@perk.amount, precision: 0) %>");
   <% else %>
-    $(".selectParent").show();
+    <% if @project.perk_permission %>
+      $(".selectParent").show();
+    <% else %>
+      $(".selectParent").hide();
+    <% end %>
     $(".none-perks").hide();
     $("#perk_type").html('');
     <% @perks.each do |perk| %>
