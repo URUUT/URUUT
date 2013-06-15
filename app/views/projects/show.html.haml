@@ -297,10 +297,10 @@
                         .amount
                           $#{p.amount.to_i}
                       - if p.limit
-                        - link = p.perks_available.to_i.zero? ? "javascript:void(0)" : "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}"
+                        - link = p.perks_available.to_i.zero? ? "javascript:void(0)" : "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}"
                         %a.btn.pull-right{:href => "#{link}", :class => "fund btn"} Fund Now
                       - else
-                        %a.btn.pull-right{:href => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}"} Fund Now
+                        %a.btn.pull-right{:href => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}"} Fund Now
             -else
               - default_perk.each_with_index do |perk, index|
                 - index += 1
@@ -314,7 +314,7 @@
                       / %div Seed
                       .amount
                         $#{perk}
-                    %a.btn.pull-right{:href => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}", :class => "fund btn"} Fund Now #{image_tag('arrow.png')}
+                    %a.btn.pull-right{:href => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "fund btn"} Fund Now #{image_tag('arrow.png')}
 
             .seed-level{id: "perk-id-custom"}
               %h3.perk-name-other{id: "perk-name-other-custom"}
@@ -430,10 +430,10 @@
                     .amount
                       = number_to_currency(p.amount.to_i, precision: 0)
                   - if p.limit
-                    - link = p.perks_available.to_i.zero? ? "javascript:void(0)" : "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}"
+                    - link = p.perks_available.to_i.zero? ? "javascript:void(0)" : "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}"
                     %a.btn.pull-right{:href => "#{link}", :class => "fund btn"} Fund Now
                   - else
-                    %a.btn.pull-right{:href => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}"} Fund Now
+                    %a.btn.pull-right{:href => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}"} Fund Now
         -else
           - default_perk.each_with_index do |perk, index|
             - index += 1
@@ -447,7 +447,7 @@
                   / %div Seed
                   .amount
                     = number_to_currency(perk, precision: 0)
-                %a.btn.pull-right{:href => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}", :class => "fund btn"} Fund Now #{image_tag('arrow.png')}
+                %a.btn.pull-right{:href => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "fund btn"} Fund Now #{image_tag('arrow.png')}
 
         .seed-level{id: "perk-id-custom"}
           %h3.perk-name-other{id: "perk-name-other-custom"}
@@ -508,9 +508,9 @@
 
   $("#button-seed-custom").on("click", function(){
     $.ajax({
-      url: "/default_perk_donations?amount="+ $("#custom_seed").val() +"&name=custom"
+      url: "/default_perk_donations?amount="+ $("#custom_seed").val() +"&name=custom&project_id=#{@project.id}"
     }).done(function(data) {
-      window.location.href = "/default_perk_donations?amount="+ $("#custom_seed").val() +"&name=custom"
+      window.location.href = "/default_perk_donations?amount="+ $("#custom_seed").val() +"&name=custom&project_id=#{@project.id}"
     });
   });
 
