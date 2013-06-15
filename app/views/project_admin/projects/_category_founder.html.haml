@@ -1,6 +1,6 @@
 -if params[:type].eql?("individual")
   - @founders.group_by{ |p| p.perk_name  }.each do |perk_name, founders|
-    %div= "PERK : #{perk_name} (#{founders.count})"
+    %div.label-green= "PERK : #{perk_name} (#{founders.count})"
     %table.table.table-striped
       - founders.each do |founder|
         %tr
@@ -12,7 +12,7 @@
 - else
   - sponsors = project_sponsor_by_level(@project)
   - sponsors.each do |sponsor_level, sponsors|
-    %div= "#{sponsor_level} LEVEL SPONSORS (#{sponsors.count})"
+    %div.label-green= "#{sponsor_level} LEVEL SPONSORS (#{sponsors.count})"
     - if sponsors.blank?
       %p No Sponsors at this level
     - else
