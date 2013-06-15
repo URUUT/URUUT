@@ -14,7 +14,8 @@ body {
   box-shadow:0 0 4px rgba(0,0,0,0.5);
   display: none;
   color: #403e37;
-  width: 400px;
+  max-width: 400px;
+  margin-right: 10px;
   z-index: 101;
   top: 0; /* keeps the page from scrolling when calculating position */
   left: 0;
@@ -109,7 +110,7 @@ body {
   border-top-color: transparent !important;
   border-left-color: transparent !important;
   border-bottom-color: transparent !important;
-  top: 22px;
+  top: 3px;
   left: -28px;
   right: auto;
   bottom: none;
@@ -150,7 +151,7 @@ body {
   border-bottom: dotted 1px rgba(255,255,255,0.6);
 }
 .joyride-tip-guide a:hover {
-  color: rgba(255,255,255,0.8);
+  color: #5f5f5f;
   border-bottom: none;
 }
 
@@ -192,7 +193,7 @@ body {
 	text-transform:uppercase;
 }
 
-.joyride-quit {
+.joyride-quit, .joyride-close-tip.close-tip-custom{
 	background:none;
 	background:#3f403b;
 	border:none !important;
@@ -208,17 +209,20 @@ body {
 	text-transform:uppercase;
 }
 
+.joyride-close-tip.close-tip-custom{
+  position: relative;
+  top: inherit;
+  color: #fff !important;
+}
+
+.joyride-quit:hover{
+  background: #5f5f5f;
+  color: #fff !important;
+}
+
 .joyride-next-tip:hover {
   color: rgb(255,255,255) !important;
-  border: solid 1px rgb(0,60,180) !important;
-  background: rgb(43,128,255);
-  background: -moz-linear-gradient(top, rgb(43,128,255) 0%, rgb(29,102,211) 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(43,128,255)), color-stop(100%,rgb(29,102,211)));
-  background: -webkit-linear-gradient(top, rgb(43,128,255) 0%,rgb(29,102,211) 100%);
-  background: -o-linear-gradient(top, rgb(43,128,255) 0%,rgb(29,102,211) 100%);
-  background: -ms-linear-gradient(top, rgb(43,128,255) 0%,rgb(29,102,211) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2b80ff', endColorstr='#1d66d3',GradientType=0 );
-  background: linear-gradient(top, rgb(43,128,255) 0%,rgb(29,102,211) 100%);
+  background: #5f5f5f !important;
 }
 
 .joyride-timer-indicator-wrap {
