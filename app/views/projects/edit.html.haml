@@ -1,3 +1,5 @@
+= javascript_include_tag "global/jquery.joyride-2.0.3"
+
 .breadcrumb-container
   %ul.breadcrumbs
     %li.sponsor-info
@@ -124,7 +126,7 @@
         window.location.href = "#{thank_you_pages_url}";
       });
     } else {
-      $('html, body').animate({ scrollTop: 0 }, 'slow', alert("Please Choose Cover Image"));
+      alert("Please Choose Cover Image");
     }
   });
 
@@ -198,12 +200,17 @@
   }
 
   $(function(){
-    $("#large_image").delegate('.pick-cover-photo', 'load', function() {
-      $("#uruutTour").joyride({
-        autoStart : true,
-        'tipLocation': 'bottom'
+
+    var step = '#{session[:step]}'
+
+    if (step == "fourth"){
+      $(window).load(function(){
+        $("#uruutTour").joyride({
+          autoStart : true,
+          'tipLocation': 'bottom'
+        });
       });
-    })
+    }
 
     getHash();
     $(window).on('hashchange', function() {
