@@ -17,7 +17,7 @@
             = image_tag "#{@project.seed_image}", id: "seed_image_cultivation", class: "seed_image", "data-project-id" => @project.id
         .action_button{style: "#{'' if @project.seed_image}"}
           %button{:id => "new-seed"} ADD NEW PHOTO
-          = link_to "Delete Photo", delete_image_path(@project.id, type: "seed_image"), class: "btn delete_photo_planting", method: 'DELETE', style: "display: #{'none' unless @project.seed_image}", remote: true
+          = link_to '<i class="icon-trash icon-green"></i> Delete Photo'.html_safe, delete_image_path(@project.id, type: "seed_image"), class: "btn delete_photo_planting", method: 'DELETE', style: "display: #{'none' unless @project.seed_image}", remote: true
       %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.about
     #growth.tab-pane
       growth
@@ -45,7 +45,7 @@
           = image_tag "#{@project.cultivation_image}", class: "cultivation_image" if @project.cultivation_image
         .action_button
           %button{:id => "new-cultivation"} ADD NEW PHOTO
-          = link_to "Delete Photo", delete_image_path(@project.id, type: "cultivation"), class: "btn delete_photo_cultivation", method: 'DELETE', style: "display: #{'none' unless @project.cultivation_image}", remote: true
+          = link_to '<i class="icon-trash icon-green"></i> Delete Photo'.html_safe, delete_image_path(@project.id, type: "cultivation"), class: "btn delete_photo_cultivation", method: 'DELETE', style: "display: #{'none' unless @project.cultivation_image}", remote: true
 
 %script{:src => "http://code.jquery.com/ui/1.10.2/jquery-ui.js"}
 :javascript
