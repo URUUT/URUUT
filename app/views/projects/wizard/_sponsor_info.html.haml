@@ -29,29 +29,29 @@
       = f.text_field :address, :required => true, class: "span8"
 
     %div.inline
-      = f.label :city, class: "label-green"
+      = f.label :city, "CITY*", class: "label-green"
       = f.text_field :city, :required => true, class: "span4"
 
     %div.inline{:style => "margin-left:25px;"}
-      = f.label :state, class: "label-green"
+      = f.label :state,"STATE*", class: "label-green"
       = f.select :state, options_for_select(us_states, @project.state), {:required => true}, {:onchange => "updateStateInfo()"}
 
     %div.inline{:style => "margin-left:25px;"}
-      = f.label :zip, "Zipcode", class: "label-green"
+      = f.label :zip, "Zipcode*", class: "label-green"
       = f.text_field :zip, :required => true, class: "span2"
 
     %div
       = f.label :website, :class => "label-green" do
-        WEBSITE ADDRESS
+        WEBSITE ADDRESS*
         %span.italic (Format: www.mysite.com)
       = f.text_field :website, :required => true, class: "span8"
 
     %div.inline
-      = f.label :twitter_handle, "Twitter Account", class: "label-green"
+      = f.label :twitter_handle, "Twitter Account*", class: "label-green"
       = f.text_field :twitter_handle, :required => true, class: "span4"
 
     %div.inline{:style => "margin-left:30px;"}
-      = f.label :facebook_page, "Facebook Page", class: "label-green"
+      = f.label :facebook_page, "Facebook Page*", class: "label-green"
       = f.text_field :facebook_page, :required => true, class: "span4"
 
     = hidden_field_tag "step", "first"
