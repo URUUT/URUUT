@@ -12,7 +12,7 @@
           %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => Settings.filepicker.api_key, 'data-fp-button-class' => 'coverphoto btn pick-cover-photo', 'onchange' => 'updateCover(event)', :style => 'left:50%', 'data-fp-mimetypes' => 'image/*', 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA,INSTAGRAM'}
         = render "funding_info"
 
-    .span12.action-convert{style: "margin-top: 484px; display:none"}
+    .span12.action-convert{style: "margin-top: 276px; display:none"}
       = hidden_field_tag "url_image"
       = hidden_field_tag "x_position"
       = hidden_field_tag "y_position"
