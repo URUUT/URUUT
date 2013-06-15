@@ -46,18 +46,9 @@
 
   $('.tw-share').click(function(e) {
     e.preventDefault();
-    var width  = 575,
-        height = 400,
-        left   = ($(window).width()  - width)  / 2,
-        top    = ($(window).height() - height) / 2,
-        url    = "http://twitter.com/share?url=#{project_url(@project.id)}&text=Our%20company%20is%20RUUTing%20for%20this%20community%20project%20on%20%40URUUT%20and%20you%20should%2C%20too.%20Join%20us%20in%20becoming%20a%20sponsor%20or%20make%20a%20donation%3A%20%2E&hashtags=GetRUUTed",
-        opts   = 'status=1' +
-                 ',width='  + width  +
-                 ',height=' + height +
-                 ',top='    + top    +
-                 ',left='   + left;
+    var url = "http://twitter.com/share?url=#{project_url(@project.id)}&text=Our%20company%20is%20RUUTing%20for%20this%20community%20project%20on%20%40URUUT%20and%20you%20should%2C%20too.%20Join%20us%20in%20becoming%20a%20sponsor%20or%20make%20a%20donation%3A%20%2E&hashtags=GetRUUTed";
 
-    window.open(url, 'twitter', opts);
+    window.open(url);
   });
 
   var owner_email, owner_first_name, owner_last_name;
