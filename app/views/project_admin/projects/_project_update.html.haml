@@ -3,11 +3,11 @@
 = form_for(@project_update, url: process_project_update_project_admin_projects_path, html: {class: "sponsor-info span12 margin-auto well"}, method: :post, remote: true) do |f|
   %div.margin-auto{:style => "margin-bottom: 20px;"}
     = f.label :title, class: "label-green" do
-      NEW PROJECT UPDATE TITLE
+      NEW PROJECT UPDATE TITLE*
       %span.cutdown.italic
     = f.text_area :title, maxlength: 150, :required => true, class: "headline", style: "width: 640px; height: 80px;"
   %div.margin-auto{:style => "margin-bottom: 20px;"}
-    = f.label :content , "NEW PROJECT UPDATE CONTENT", class: "label-green"
+    = f.label :content , "NEW PROJECT UPDATE CONTENT*", class: "label-green"
     = f.text_area :content, :required => true, style: "width: 640px; height: 298px;"
 
   %hr{:style => "background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
