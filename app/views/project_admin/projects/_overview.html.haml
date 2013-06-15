@@ -53,7 +53,11 @@
           text: null
       },
       xAxis: {
-          type: 'datetime'
+          type: 'linear',
+          showLastLabel: true,
+          endOnTick: true,
+          max: 30,
+          tickInterval: #{get_interval_chart(@project)}
       },
       yAxis: {
           title: { text: 'Dollars' },
@@ -65,14 +69,13 @@
       },
       tooltip: {
           formatter: function () {
-            return Highcharts.dateFormat("%B %e %Y", this.x) + ': ' + '$' + Highcharts.numberFormat(this.y, 2);
+            return '$' + Highcharts.numberFormat(this.y, 2);
           }
       },
       plotOptions: {
           area: {
-              pointStart: 1940,
               marker: {
-                  enabled: false,
+                  enabled: true,
                   symbol: 'circle',
                   radius: 2,
                   states: {
@@ -84,10 +87,8 @@
           }
       },
       series: [{
+          pointStart: 1,
           name: 'Funding',
-          pointInterval: #{1.day * 1000},
-          pointStart: #{@project.updated_at.to_i * 1000},
-          pointEnd: #{@project.campaign_deadline.to_i * 1000},
           data: #{@project.amount_per_day.inspect}
       }]
     });
