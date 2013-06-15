@@ -6,7 +6,7 @@
         %h4.label-green{:style => "margin-bottom: 0;"}
           FACEBOOK
         %p Post a message on your facebook page
-        = link_to image_tag("fb-post.png"), "https://www.facebook.com/dialog/feed?app_id=#{Settings.facebook.api_key}&link=#{project_url(@project.id)}&picture=http://fbrell.com/f8.jpg&name=#{url_encode(@project.title)}&caption=#{url_encode(@project.category)}&description=#{url_encode("Like making a difference in the community? Check out this great project I found on @URUUT.  You can help fund it, or set up a project of your own to Get RUUTed!")}&redirect_uri=#{project_admin_project_url(@project.id)}"
+        = link_to image_tag("fb-post.png"), "https://www.facebook.com/dialog/feed?app_id=#{Settings.facebook.api_key}&link=#{project_url(@project.id)}&picture=http://fbrell.com/f8.jpg&name=#{url_encode(@project.title)}&caption=#{url_encode(@project.category)}&description=#{url_encode("Like making a difference in the community? Check out this great project I found on @URUUT.  You can help fund it, or set up a project of your own to Get RUUTed!")}&redirect_uri=#{project_admin_project_url(@project.id)}", target: "_blank"
       .span6
         %h4.label-green{:style => "margin-bottom: 0;"}
           TWITTER
@@ -17,7 +17,7 @@
         %h4.label-green{:style => "margin-bottom: 0;"}
           LINKEDIN
         %p Post a message on Linkedin
-        = link_to image_tag("li-post.png"), "https://www.linkedin.com/cws/share?url=#{root_url}"
+        = link_to image_tag("li-post.png"), "https://www.linkedin.com/cws/share?url=#{project_url(@project.id)}", target: "_blank"
 
 :javascript
   // function postToFeed() {
@@ -41,16 +41,7 @@
 
   $('.tw-share').click(function(e) {
     e.preventDefault();
-    var width  = 575,
-        height = 400,
-        left   = ($(window).width()  - width)  / 2,
-        top    = ($(window).height() - height) / 2,
-        url    = "http://twitter.com/share?url=#{project_url(@project.id)}&text=I%20Like%20making%20a%20difference%20in%20the%20community?%20Check%20out%20this%20great%20project%20I%20found%20on%20@URUUT%20%2E%20&hashtags=GetRUUTed",
-        opts   = 'status=1' +
-                 ',width='  + width  +
-                 ',height=' + height +
-                 ',top='    + top    +
-                 ',left='   + left;
+    var url    = "http://twitter.com/share?url=#{project_url(@project.id)}&text=I%20Like%20making%20a%20difference%20in%20the%20community?%20Check%20out%20this%20great%20project%20I%20found%20on%20@URUUT%20%2E%20&hashtags=GetRUUTed";
 
-    window.open(url, 'twitter', opts);
+    window.open(url);
   });
