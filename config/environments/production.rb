@@ -51,7 +51,7 @@ Crowdfund::Application.configure do
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
 
-  config.action_mailer.default_url_options = { host: "uruut.41studio.com" }
+  config.action_mailer.default_url_options = { host: ENV["MAIL_HOST"] }
 
 
   config.action_mailer.smtp_settings = {
@@ -59,8 +59,8 @@ Crowdfund::Application.configure do
     port: 587,
     domain: "localhost",
     enable_starttls_auto: :true,
-    user_name: "bayu@41studio.com",
-    password: "17n2GO_shDLagdJvFbB9kw"
+    user_name: ENV["MANDRILL_USER"],
+    password: ENV["MANDRILL_PASSWORD"]
   }
 
   # Enable threaded mode
@@ -76,8 +76,5 @@ Crowdfund::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
-
-  FACEBOOK_KEY="517310951621035"
-  FACEBOOK_SECRET="d47245ebf8b7a2c433b2aeb8c6c39ec7"
 
 end
