@@ -2,10 +2,10 @@ class Project < ActiveRecord::Base
   belongs_to :user
 
   attr_accessible :category, :description, :duration, :goal, :address, :project_title, :sponsorship_permission,
-    :city, :state, :zip, :neighborhood, :title, :image, :video, :tags, :live, :short_description, :perk_permission,
-    :perks_attributes, :galleries_attributes, :status, :organization, :website, :twitter_handle, :facebook_page, :seed_video,
-    :story, :about, :large_image, :seed_image, :cultivation_image, :ready_for_approval, :organization_type,
-    :organization_classification, :cultivation_video, :campaign_deadline, :sponsor_permission, :step
+  :city, :state, :zip, :neighborhood, :title, :image, :video, :tags, :live, :short_description, :perk_permission,
+  :perks_attributes, :galleries_attributes, :status, :organization, :website, :twitter_handle, :facebook_page, :seed_video,
+  :story, :about, :large_image, :seed_image, :cultivation_image, :ready_for_approval, :organization_type,
+  :organization_classification, :cultivation_video, :campaign_deadline, :sponsor_permission, :step
 
   attr_accessor :sponsorship_permission, :perk_type
   #validates :title, :short_description, :description, :presence => true, :if => :active?
@@ -62,12 +62,16 @@ class Project < ActiveRecord::Base
   end
 
   def amount_per_day
-    amount_by_date = []
-    self.created_at.to_date.upto(Time.now.to_date).each do |date|
-      amount = 0
-      amount += self.donations.where("created_at > ? AND created_at < ?", date.at_beginning_of_day, date.end_of_day).sum(:amount)
-      amount += self.project_sponsors.where("created_at > ? AND created_at < ?", date.at_beginning_of_day, date.end_of_day).sum(:cost)
-      amount_by_date << amount
+    if self.donations.blank? and self.project_sponsors.blank?
+      amount_by_date = [0]
+    else
+      amount_by_date = []
+      self.created_at.to_date.upto(Time.now.to_date).each do |date|
+        amount = 0
+        amount += self.donations.where("created_at > ? AND created_at < ?", date.at_beginning_of_day, date.end_of_day).sum(:amount)
+        amount += self.project_sponsors.where("created_at > ? AND created_at < ?", date.at_beginning_of_day, date.end_of_day).sum(:cost)
+        amount_by_date << amount
+      end
     end
 
     amount_by_date
