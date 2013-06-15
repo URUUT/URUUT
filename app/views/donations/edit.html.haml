@@ -33,6 +33,8 @@
           %h6{:style => "line-height:100%;margin-bottom:0px;margin-top:20px"} Your Selected Perk
           %h3.perk-name{:style => 'font-size:20px; color:#70bf4c;line-height:100%;margin:0;'}= @donation.perk_name
           %span.perk-description{:style => "font-size:12px;font-family:'Proxima Nova';"}
+          %p.description-custom
+            You will receive #{@donation.amount} uruut reward points when you seed #{number_to_currency(@donation.amount, precision: 0)}
         .cf
         %p.checkout-continue-subtext Continue to payment information below or choose a different seed amount/perk from the right.
 
