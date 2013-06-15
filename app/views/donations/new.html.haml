@@ -32,7 +32,9 @@
 
           %h6{:style => "line-height:100%;margin-bottom:0px;margin-top:20px"} Your Selected Perk
           %h3.perk-name.label-green{:style => 'font-size:20px; line-height:100%;margin:0;'}= @perk_name
-          %span.perk-description= @perk_description
+          %p.perk-description= @perk_description
+          %p.description-custom
+            You will receive #{@perk_amount} uruut reward points when you seed #{number_to_currency(@perk_amount, precision: 0)}
         .cf
         %p.checkout-continue-subtext Continue to payment information below or choose a different seed amount/perk from the right.
 
@@ -94,6 +96,7 @@
 
   $(document).ready(function(){
     var perkStatus = "#{@perks.blank?}";
+    var perkPermission = "#{@project.perk_permission}"
     var point = "#{@perk_amount.to_i}";
     var amount = "#{number_to_currency(@perk_amount, precision: 0)}";
     var theText = "#{@perk_name_selected}";
@@ -105,10 +108,16 @@
       $(".selectParent").hide();
       $(".none-perks").show();
       $(".none-perks").html("You will receive "+ point + " uruut reward points when you seed "+ amount)
+      $(".description-custom").hide();
     }
     else{
       $(".selectParent").show();
       $(".none-perks").hide();
+      $(".description-custom").show();
+    }
+
+    if (perkPermission == "false"){
+      $(".description-custom").hide();
     }
   })
 
