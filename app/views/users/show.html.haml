@@ -92,6 +92,27 @@
           .profile-badge
             = image_tag badge.custom_fields[:image], :class => "img-circle", :data => { :content => badge.name }
 
+  .span4
+    %h3.title{:style => "margin-bottom:5px;"} #{who(:whose)} badges
+    .well.info.badge-wrapper
+      - @user.badges.each do |badge|
+        .profile-badge
+          = image_tag badge.custom_fields[:image], :class => "img-circle", :data => { :content => badge.name }
+
+    %div{:style => "margin-top:-20px;margin-bottom:5px;float:left;"}
+      %h3.title #{who(:whose)} information
+    %div{:style => "text-align:right;"}
+      %p
+        %i.icon-pencil
+        = link_to "edit", edit_user_registration_path, :class => "green"
+    .well.info
+      %h5 Profile image
+      %p= image_tag "#{@user.avatar}", :class => "profile-img img-polaroid"
+
+      %h5 Name
+      %p
+        #{@user.first_name} #{@user.last_name}
+		
       %div{:style => "margin-top:-20px;margin-bottom:5px;float:left;"}
         %h3.title #{who(:whose)} information
       %div{:style => "text-align:right;"}
