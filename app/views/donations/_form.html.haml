@@ -26,7 +26,8 @@
       = label_tag "NAME AS IT APPEARS ON CARD*", nil, class: "label-green"
       = text_field_tag nil, [current_user.first_name, current_user.last_name].join(" "), name: nil
     .field.card-number
-      = label_tag :card_number, "Credit Card Number*", class: "label-green"
+
+      = label_tag :card_number, "Credit Card Number", class: "label-green"
       = text_field_tag :card_number, nil, name: nil
     .field.ccv
       = label_tag :card_code, "CVV*", class: "label-green"

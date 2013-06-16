@@ -25,6 +25,7 @@
               %span
 
 - if !@project.large_image.blank?
+<<<<<<< HEAD
   #large_image{:style => "background:url(#{@project.large_image}); background-size: cover"}
     .funding-info
       .container
@@ -80,6 +81,9 @@
                 %br
                 Left
               .amount= campaign_days_left(@project)
+=======
+  #large_image{:style => "background:url(#{@project.large_image}/convert?w=1600&h=546&fit=crop&align=center); background-size: 100% 100%"}
+>>>>>>> Fixed rebase conflict
 - else
   #large_image{:style => "background:url(#{@project.large_image}); background-size: cover"}
     .funding-info
@@ -418,6 +422,7 @@
           -if @perks
             - @perks.each do |p|
               .seed-level
+<<<<<<< HEAD
                 %h3{style: "font-size: 20px;"}
                   = p.name
                 %div
@@ -429,6 +434,11 @@
                     Uruut Reward Points: #{p.amount.to_i}
 
                 .clearfix{style: "margin-top: 20px;"}
+=======
+                %h3= name
+                %p{style: "height: auto; margin: 5px 0; overflow: hidden; text-overflow:ellipsis;"}= description
+                .clearfix
+>>>>>>> Fixed rebase conflict
                   .seed-num
                     / %div Seed
                     .amount
