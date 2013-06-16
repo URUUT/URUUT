@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130603021311) do
+ActiveRecord::Schema.define(:version => 20130613070242) do
 
   create_table "badges_sashes", :force => true do |t|
     t.integer  "badge_id"
@@ -193,6 +193,8 @@ ActiveRecord::Schema.define(:version => 20130603021311) do
     t.datetime "campaign_deadline"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "sponsor_permission",          :default => true
+    t.string   "step"
   end
 
   create_table "sashes", :force => true do |t|
@@ -263,13 +265,15 @@ ActiveRecord::Schema.define(:version => 20130603021311) do
     t.string   "organization"
     t.text     "mission"
     t.boolean  "subscribed"
-    t.string   "avatar",                 :default => "/images/default-avatar.png"
+    t.string   "avatar",                 :default => "/assets/default-avatar.png"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "confirmation_token"
     t.string   "last_name"
     t.integer  "sash_id"
     t.integer  "level",                  :default => 0
+    t.integer  "uruut_point",            :default => 0
+    t.string   "roles",                  :default => "--- []"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
