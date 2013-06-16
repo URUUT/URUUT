@@ -33,7 +33,7 @@
     .span4.sidebar.pull-right
       %h4 SPONSORSHIP LEVELS
       .well
-        %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;font-family:'Proxima Nova';"}
+        %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;"}
           Platinum
           %span.small-heading
             #{availability(@project.project_sponsors, 1)} of 1 Available
@@ -41,9 +41,9 @@
           - if @sponsorship_benefits.include?(1)
             - @sponsorship_benefits[1].each do |benefit|
               %li #{benefit.name}
-        .clearfix{:style => "margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #ccc"}
+        .clearfix{:style => "margin-left: -19px; margin-right: -19px; padding: 0 19px; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #e0e0e0"}
           .pull-left
-            %h3{style: "margin: 0;line-height: 20px;"}= number_to_currency((@project.goal.to_i * 0.3), precision: 0)
+            %h3{style: "margin: 0; margin-top: 20px; line-height: 20px;"}= number_to_currency((@project.goal.to_i * 0.3), precision: 0)
           - if check_availibility(@project, 1) < 1
             %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-1", :"sponsor-id" => "1"}
               SPONSOR
@@ -52,7 +52,7 @@
             %a.btn.pull-right{:href => "javascript:void(0)", style: "display: block; margin-top: 10px;"}
               Sponsor
               %span
-        %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;font-family:'Proxima Nova';"}
+        %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;"}
           Gold
           %span.small-heading
             #{availability(@project.project_sponsors, 2)} of 3 Available
@@ -61,9 +61,9 @@
             - @sponsorship_benefits[2].each do |benefit|
               %li #{benefit.name}
         / %div{:style => "height: 80px; width: 100%;"}
-        .clearfix{:style => "margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #ccc"}
+        .clearfix{:style => "margin-left: -19px; margin-right: -19px; padding: 0 19px; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #e0e0e0"}
           .pull-left
-            %h3{style: "margin: 0;line-height: 20px;"}= number_to_currency((@project.goal.to_i * 0.1), precision: 0)
+            %h3{style: "margin: 0; margin-top: 20px; line-height: 20px;"}= number_to_currency((@project.goal.to_i * 0.1), precision: 0)
             .amount-percentage
           - if check_availibility(@project, 2) < 3
             %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-2", :"sponsor-id" => "2"}
@@ -73,7 +73,7 @@
             %a.btn.pull-right{:href => "javascript:void(0)", style: "display: block; margin-top: 10px;"}
               Sponsor
               %span
-        %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;font-family:'Proxima Nova';"}
+        %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;"}
           Silver
           %span.small-heading
             #{availability(@project.project_sponsors, 3)} of 5 Available
@@ -82,9 +82,9 @@
             - @sponsorship_benefits[3].each do |benefit|
               %li #{benefit.name}
         / %div{:style => "height: 80px; width: 100%;"}
-        .clearfix{:style => "margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #ccc"}
+        .clearfix{:style => "margin-left: -19px; margin-right: -19px; padding: 0 19px; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #e0e0e0"}
           .pull-left
-            %h3{style: "margin: 0;line-height: 20px;"}= number_to_currency((@project.goal.to_i * 0.04), precision: 0)
+            %h3{style: "margin: 0; margin-top: 20px; line-height: 20px;"}= number_to_currency((@project.goal.to_i * 0.04), precision: 0)
             .amount-percentage
           - if check_availibility(@project, 2) < 3
             %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-3", :"sponsor-id" => "3"}
@@ -94,7 +94,7 @@
             %a.btn.pull-right{:href => "javascript:void(0)", style: "display: block; margin-top: 10px;"}
               Sponsor
               %span
-        %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;font-family:'Proxima Nova';"}
+        %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;"}
           Bronze
         %ul.normal-font.dashed-list
           - if @sponsorship_benefits.include?(4)
@@ -104,7 +104,7 @@
         .clearfix
           .pull-left
             - if (@project.goal.to_i * 0.1) >= 500
-              %h3{style: "margin: 0;line-height: 20px;"}
+              %h3{style: "margin: 0; margin-top: 20px; line-height: 20px;"}
                 = number_to_currency((500), precision: 0)
             - else
               %h3{style: "margin: 0;line-height: 20px;"}= number_to_currency((@project.goal.to_i * 0.1), precision: 0)
@@ -113,10 +113,10 @@
             %span
 
     = form_for(@sponsor, :url => project_sponsors_path, :html => {:class => "span8", :style => "margin-left: 0;", multipart: true, method: 'POST'}) do |f|
-      .well.clearfix{:style => "border-top: none;"}
+      .well.clearfix{:style => "border-top: none; padding-bottom: 0; border: 1px solid #e0e0e0;"}
         .payment-errors
         .span12{:style => "background-color: #f5f5f5; margin-left: 0px;"}
-          .pull-left{:style => "width: 250px; height: 500px; border-right: solid 1px #d3d3d3;"}
+          .pull-left{:style => "width: 250px; height: 500px; border-right: solid 1px #d3d3d3; margin-top: -19px; padding-top: 19px;"}
             %h4 SPONSORSHIP COST
             %h1.cost-level.label-green-big.label-green #{number_to_currency(@cost, precision: 0)}
             = image_tag "platinum-placement.png", class: "sponsor-placement platinum"
@@ -140,6 +140,8 @@
                 - if !@first_benefits.nil?
                   - @first_benefits.each do |benefit|
                     %li #{benefit.name}
+        .span12{:style => "margin: 0 -19px; padding: 0 19px; border-top: 1px solid #d3d3d3; width: 632px;"}
+          %p.checkout-continue-subtext{:style => "border-top: none;"} Continue to payment information below or choose a different seed amount/perk from the right.
 
       %h4 SPONSOR INFORMATION
       .well
@@ -232,10 +234,10 @@
           %div.phone
             = f.label :phone, "CONTACT PHONE NUMBER*", class: "label-green"
             = f.text_field :phone, :size => 25, type: "text", label: false, class: "transfer-input"
-        %hr{style: "margin-left: -19px; margin-right: -19px; background: #e0e0e0;"}
-        %div{:style => "padding-top: 25px", :class => "clearfix"}
+        %hr{style: "margin-left: -19px; margin-right: -19px; margin-bottom: 0; background: #e0e0e0;"}
+        %div{:style => "padding-top: 10px", :class => "clearfix"}
           = image_tag "3.gif", id: "submit-progress", style: "display: none; float: left; position: relative; top: 32px; margin-right: -40px; margin-left: 15px; z-index: 9999;"
-          = f.button :submit, class: "btn pull-right", id: "project-submit"
+          = f.button :submit, class: "btn pull-right", id: "project-submit", style: "margin-top: 0;"
           %a.error-message
 
 .project-id{:style => "display: none;"}

@@ -58,6 +58,8 @@
           - @project.errors.full_messages.each do |msg|
             %li #{msg}
     %div.perk-true{style: "#{@project.perk_permission ? '' : 'display:none' }"}
+      %hr{style: "margin-top: 0; margin-left: -19px; margin-right: -19px; background: #e0e0e0;"}
+      %h4{style: "margin-bottom: 20px;"} Perk #1
       %fieldset{:style => "position:relative"}
         .perk-container
           .perk
@@ -98,7 +100,7 @@
         .span4
           %a.save-new-perk{:href => "#"} Save Perk & Add More
         .span4{style: "margin-left: 0"}
-          = f.submit "Save Perk & Continue", :class => "btn project-save-continue", :id => "project-submit", :style => "position: relative;"
+          = f.submit "Save Perk & Continue", :class => "btn project-save-continue", :id => "project-submit", :style => "position: relative;padding: 15px 28px;"
 
       %a.update-perk{:href => "#"} UPDATE PERK
 
