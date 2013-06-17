@@ -24,6 +24,14 @@ module ApplicationHelper
     url.sub(/^https?\:\/\//, '').sub(/^www./,'') rescue nil
   end
 
+  def amount_converter(amount)
+    if amount.to_s.length > 7
+      number_to_currency(number_to_human(amount), precision: 3)
+    else
+      number_to_currency(amount, precision: 0)
+    end
+  end
+
   def percent_funded(id)
     project = Project.find(id)
     donation = Donation.where("project_id = ?", id)

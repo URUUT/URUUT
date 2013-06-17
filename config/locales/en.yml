@@ -10,3 +10,14 @@ en:
             email:
               taken: "is already taken, we are sorry. Please select another email address."
   hello: "Hello world"
+
+  number:
+    human:
+      decimal_units:
+        format: "%n%u"
+        units:
+          unit: ""
+          million: M
+          billion: B
+          trillion: T
+          quadrillion: Q
