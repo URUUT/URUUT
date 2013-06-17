@@ -3,8 +3,14 @@ class ApplicationController < ActionController::Base
   layout :layout_by_resource
 
   def after_sign_in_path_for(resource)
-    logger.debug(request.referrer)
-    return root_url
+    sign_in_url = url_for(:action => 'new', :controller => 'sessions', :only_path => false, :protocol => 'http')
+    if request.referer == sign_in_url
+      super
+    else
+      stored_location_for(resource) || request.referer || root_path
+    end
+    # logger.debug(request.referrer)
+    # return root_url
   end
 
   protected
