@@ -5,7 +5,7 @@
       .cover-content
         .cover-content-image
           = filepicker_image_tag @project.large_image, width: 672, height: 300, fit: 'scale' if @project.large_image
-        %button{:id => "project-submit"} CHANGE
+        %button{:id => "project-submit", type: "filepicker"} CHANGE
 
   %h3.tittle MY PROJECT PHOTO GALLERY
   .images-content{:style => "float:left; width:100%"}
@@ -17,7 +17,7 @@
       .clearfix
       = paginate @galleries, remote: true
     %div{:style => "float:left; width: 100%"}
-      %button{:id => "new-photo"} ADD NEW PHOTO
+      %button{:id => "new-photo", type: "filepicker"} ADD NEW PHOTO
 
 
 

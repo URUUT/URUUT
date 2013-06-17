@@ -31,6 +31,9 @@
 				.btn.btn-danger{:style => "background:#a81221;"}
 					Deny
 
+
+= paginate @unapproved_projects
+
 :javascript
 	$(function(){
 		$('.btn-success').click(function(){
