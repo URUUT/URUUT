@@ -31,7 +31,7 @@
                 =link_to "Change", edit_project_sponsor_path(@project.id, @sponsor.id), class: "green-font"
 
               %span{:style => "font-size:52px;color:#70bf4c;font-family:'Proxima Nova Bold';line-height:100%"}
-                #{number_to_currency(@cost, precision: 0)}
+                #{amount_converter(@cost)}
 
             %div{:style => "float:left;display:inline-block;width:340px;padding-right:20px;height:auto"}
               %h5{:style => "margin-bottom: 5px;"}
