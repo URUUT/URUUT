@@ -262,9 +262,10 @@ class ProjectsController < ApplicationController
   def submit_project
     logger.debug("ID was: #{params[:id]}")
     project = Project.find_by_id(params[:id])
-    project.ready_for_approval = 0
-    project.live = 1
-    project.approval_date = Date.today.strftime("%F")
+    # project.ready_for_approval = 0
+    # project.live = 1
+    # project.approval_date = Date.today.strftime("%F")
+    project.ready_for_approval = 1
     if project.save!
       logger.debug("Saving!!!")
       session[:step] = nil
