@@ -136,23 +136,12 @@
 
   $(".wizard-link").on("click", function(){
     var currentLink = $(this).attr("wizard-type")
-    switch (currentLink)
-    {
-      case 'assets':
-        $(".sponsorship-link").attr("href", "/projects/#{@project.id}/edit#sponsorship");
-        break;
-      case 'sponsorship':
-        $("#uruutTour").joyride("destroy");
-        $(".perks-link").attr("href", "/projects/#{@project.id}/edit#perks");
-        break;
-      case 'perks':
-        $("#uruutTour").joyride("destroy");
-        $(".project-details-link").attr("href", "/projects/#{@project.id}/edit#project-details");
-        break;
-      case 'project_detail':
-        $("#uruutTour").joyride("destroy");
-        $(".sponsor-info-link").attr("href", "/projects/#{@project.id}/edit#sponsor-info");
-        break;
+
+    if ( currentLink == "assets" ){
+      $(".sponsorship-link").attr("href", "/projects/#{@project.id}/edit#sponsorship");
+    }
+    else{
+      $("#uruutTour").joyride("destroy");
     }
   });
 
