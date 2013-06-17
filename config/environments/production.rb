@@ -59,8 +59,8 @@ Crowdfund::Application.configure do
     port: 587,
     domain: "localhost",
     enable_starttls_auto: :true,
-    user_name: "bayu@41studio.com",
-    password: "17n2GO_shDLagdJvFbB9kw"
+    user_name: "cbartels@uruut.com",
+    password: "X_qjTmeLBAl4BZ1H5IbL7Q"
   }
 
   # Enable threaded mode
