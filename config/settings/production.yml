@@ -1,13 +1,13 @@
 facebook:
-  api_key: "660487220634633"
-  secret_key: "bf356feb1ad0abb12b8020f12e818b24"
+  api_key: "<%= ENV['FACEBOOK_KEY'] %>"
+  secret_key: "<%= ENV['FACEBOOK_SECRET'] %>"
 
 twitter:
-  consumer_key: "o54pPP5xdNd1qDjKG8NhHA"
-  consumer_secret: "HgLYjeERRcXwa9YXTQcSgxslGUkXjoLPzYpDp1FSM"
+  consumer_key: "<%= ENV['TWITTER_KEY'] %>"
+  consumer_secret: "<%= ENV['TWITTER_SECRET'] %>"
 
 stripe:
-  client_id: "ca_1kjvzNoI5Jbkcb1RTv4vtoxljRUueUNZ"
+  client_id: "<%= ENV['STRIPE_CLIENT_ID'] %>"
 
 filepicker:
-  api_key: "ArmO0TLVTkyCaJkQmBNfqz"
+  api_key: "<%= ENV['FILEPICKER_API'] %>"
