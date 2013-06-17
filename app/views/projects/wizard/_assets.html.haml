@@ -89,7 +89,7 @@
                 %h6{:style => "text-align:center;color:#55554d !important;font-family:'Proxima Nova';margin-top:40px;margin-bottom:0;"} Project Goal
                 %h2{:style => "text-align:center;color:#b6b6b4;font-family:'Proxima Nova Semi';margin-top:0;"}= number_to_currency(@project.goal, :precision => 0)
 
-            .span5.details{:style => "width: 400px"}
+            .span5.details#cultivation-step{:style => "width: 400px"}
               .cultivation-image-priview
                 - if @project.cultivation_mime_type.eql?("video") and !@project.cultivation_video.blank?
                   - cultivation_video = @project.cultivation_video.gsub("watch?v=", "embed/")
