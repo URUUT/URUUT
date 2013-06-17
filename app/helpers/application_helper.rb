@@ -151,31 +151,27 @@ module ApplicationHelper
 
   def wizard_link(step, project)
     if step.eql?("sponsor_info")
-      if session[:step].eql?("first")
-        "/projects/#{project.id}/edit#sponsor-info"
-      else
-        "javascript:void(0)"
-      end
+      "/projects/#{project.id}/edit#sponsor-info"
     elsif step.eql?("project_details")
-      if session[:step].eql?("second") or session[:step].eql?("first")
+      if ["first", "second", "third", "fourth", "last"].include? session[:step]
         "/projects/#{project.id}/edit#project-details"
       else
         "javascript:void(0)"
       end
     elsif step.eql?("perks")
-      if session[:step].eql?("third") or session[:step].eql?("second")
+      if ["second", "third", "fourth", "last"].include? session[:step]
         "/projects/#{project.id}/edit#perks"
       else
         "javascript:void(0)"
       end
     elsif step.eql?("sponsorship")
-      if session[:step].eql?("fourth") or session[:step].eql?("third")
+      if ["third", "fourth", "last"].include? session[:step]
         "/projects/#{project.id}/edit#sponsorship"
       else
         "javascript:void(0)"
       end
     elsif step.eql?("assets")
-      if session[:step].eql?("last") or session[:step].eql?("fourth")
+      if ["fourth", "last"].include? session[:step]
         "/projects/#{project.id}/edit#assets"
       else
         "javascript:void(0)"
