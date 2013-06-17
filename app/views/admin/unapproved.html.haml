@@ -18,20 +18,13 @@
 	%tbody
 	- @unapproved_projects.each do |project|
 		%tr
-			%td
-				= project.id
-			%td
-				= project.title
-			%td
-				= project.description
-			%td
-				= project.duration
-			%td
-				= project.website
-			%td
-				= project.facebook_page
-			%td
-				= project.twitter_handle
+			%td= link_to project.id, "/projects/#{project.id}/edit#assets"
+			%td= link_to project.title, "/projects/#{project.id}/edit#assets"
+			%td= link_to project.description, "/projects/#{project.id}/edit#assets"
+			%td= link_to project.duration, "/projects/#{project.id}/edit#assets"
+			%td= link_to project.website, "/projects/#{project.id}/edit#assets"
+			%td= link_to project.facebook_page, "/projects/#{project.id}/edit#assets"
+			%td= link_to project.twitter_handle, "/projects/#{project.id}/edit#assets"
 			%td
 				.btn.btn-success{:style => "background:#70bf4c;"}
 					Approve
