@@ -1,6 +1,7 @@
 class SponsorsController < ApplicationController
 
   before_filter :project_id, except: [:create, :thank_you, :share_email]
+  before_filter :authenticate_user!
 
   def new
     @sponsor = Sponsor.new
