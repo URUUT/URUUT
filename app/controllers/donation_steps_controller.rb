@@ -22,11 +22,13 @@ class DonationStepsController < ApplicationController
           @perk.name = "Level 3"
         when "100"
           @perk.name = "Level 4"
-        else
+        when "250"
           @perk.name = "Level 5"
+        else
+          @perk.name = "Custom"
         end
 
-        @perk.description = "You will receive #{session[:payment_amount]} Uruut Reward Points when you seed $#{session[:payment_amount]}"
+        @perk.description = "You will receive #{session[:payment_amount].to_i} Uruut Reward Points when you seed $#{session[:payment_amount].to_i}"
       else
         @perk = Perk.new
         @perk.name = @donation.perk_name

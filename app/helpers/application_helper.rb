@@ -32,6 +32,14 @@ module ApplicationHelper
     end
   end
 
+  def amount_converter_field(amount)
+    if amount.to_s.length > 7
+      number_to_human(amount)
+    else
+      amount
+    end
+  end
+
   def percent_funded(id)
     project = Project.find(id)
     donation = Donation.where("project_id = ?", id)

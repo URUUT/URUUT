@@ -177,6 +177,18 @@ class DonationsController < ApplicationController
     session[:card_last4] = params[:donation][:card_last4]
     session[:card_type] = params[:donation][:card_type]
     params[:donation][:perk_name] = params[:perk_name]
+    unit = params[:donation][:amount].last
+    case unit
+      when "M"
+        params[:donation][:amount] = params[:donation][:amount].to_i * 1000000
+      when "B"
+        params[:donation][:amount] = params[:donation][:amount].to_i * 1000000000
+      when "T"
+        params[:donation][:amount] = params[:donation][:amount].to_i * 1000000000000
+      when "Q"
+        params[:donation][:amount] = params[:donation][:amount].to_i * 1000000000000000
+    end
+    session[:payment_amount] = params[:donation][:amount]
     current_user.update_attributes(uruut_point: session[:payment_amount])
 		if @donation.update_attributes(params[:donation])
 			flash[:notice] = "Successfully updated donation."

@@ -21,7 +21,7 @@
           %h6{:style => "line-height:100%;margin-bottom:10px;margin-top:20px;margin-bottom:15px;"} Seed Amount
           .choiced-perk.amount{style: "#{"display:none" if !session[:perk_type].eql?("custom")}"}
             = text_field_tag :custom_amount, "#{@donation.amount.to_i if session[:perk_type].eql?("custom")}" , {style: "width: 95%; color: #70bf4c; background: #fff url('/assets/dollar-green.png') no-repeat left center", readonly: true}
-          %span.perk-amount{:style => "font-size:52px;color:#70bf4c;font-family:'Proxima Nova Bold';line-height:100%; #{"display:none" if session[:perk_type].eql?("custom")}"}= number_to_currency(@donation.amount, :precision => 0)
+          %span.perk-amount{:style => "font-size:52px;color:#70bf4c;font-family:'Proxima Nova Bold';line-height:100%; #{"display:none" if session[:perk_type].eql?("custom")}"}= amount_converter_field(@donation.amount)
         %div.perk-info-choiced{:style => "float:left;display:inline-block;width:340px;padding-right:20px;height:auto;"}
           .choiced-perk{style: "#{"display:none" if !session[:perk_type].eql?("custom")}"}
             %h6{:style => "line-height:100%;margin-bottom:10px;margin-top:20px"} Choose your perk
