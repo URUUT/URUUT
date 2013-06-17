@@ -288,7 +288,7 @@
                       - if p.limit
                         %p.subtext{style:"text-transform: uppercase; font-size: 12px; letter-spacing: 1px;"}= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of 100 Available)"
                       %p
-                        When you seed #{number_to_currency(p.amount.to_i, precision: 0)}, you will receive an official #{@project.title} #{p.name}
+                        When you seed #{amount_converter(p.amount.to_i)}, you will receive an official #{@project.title} #{p.name}
                       %p.subtext
                         Uruut Reward Points: #{p.amount.to_i}
 
@@ -296,7 +296,7 @@
                       .seed-num
                         / %div Seed
                         .amount
-                          $#{p.amount.to_i}
+                          = amount_converter(p.amount.to_i)
                       - if p.limit && p.perks_available.to_i.zero?
                         .pull-right{style: "font-style: italic;"}
                           Not Available
@@ -317,7 +317,7 @@
                     .seed-num
                       / %div Seed
                       .amount
-                        $#{perk}
+                        =amount_converter(perk)
                     %a.btn.pull-right{:href => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "fund btn"} Fund Now #{image_tag('arrow.png')}
 
             .seed-level{id: "perk-id-custom"}
@@ -424,7 +424,7 @@
                   - if p.limit
                     %p.subtext{style:"text-transform: uppercase; font-size: 12px; letter-spacing: 1px;"}= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of 100 Available)"
                   %p
-                    When you seed #{number_to_currency(p.amount.to_i, precision: 0)}, you will receive an official #{@project.title} #{p.name}
+                    When you seed #{amount_converter(p.amount.to_i)}, you will receive an official #{@project.title} #{p.name}
                   %p.subtext
                     Uruut Reward Points: #{p.amount.to_i}
 
@@ -432,7 +432,7 @@
                   .seed-num
                     / %div Seed
                     .amount
-                      = number_to_currency(p.amount.to_i, precision: 0)
+                      = amount_converter(p.amount.to_i)
                   - if p.limit && p.perks_available.to_i.zero?
                     .pull-right{style: "font-style: italic;"}
                       Not Available
@@ -453,7 +453,7 @@
                 .seed-num
                   / %div Seed
                   .amount
-                    = number_to_currency(perk, precision: 0)
+                    = amount_converter(perk)
                 %a.btn.pull-right{:href => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "fund btn"} Fund Now #{image_tag('arrow.png')}
 
         .seed-level{id: "perk-id-custom"}
