@@ -78,7 +78,7 @@ class ProjectAdmin::ProjectsController < ApplicationController
     @error_messages = []
 
     @error_messages << "email can't be blank" if params[:email_recepient].blank?
-    @error_messages << "email header can't be blank" if params[:email_header].blank?
+    @error_messages << "email subject can't be blank" if params[:post]["subject"].blank?
     @error_messages << "email content can't be blank" if params[:post]["email_content"].blank?
 
     if @error_messages.blank?
