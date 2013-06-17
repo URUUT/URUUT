@@ -62,6 +62,10 @@
     %h5 ADD PHOTOS
     %p Add photos into your story section by clicking on the placeholder images. If you need more, you can add them to a gallery section from your dashboard once your project as been approved.
     %a{:href => "#", :class => "button small quit-tour joyride-close-tip close-tip-custom"} Quit Tour
+  %li{"data-id" => "cultivation-step", "data-options" => "tipLocation:top"}
+    %h5 ADD PHOTOS
+    %p Add photos into your story section by clicking on the placeholder images. If you need more, you can add them to a gallery section from your dashboard once your project as been approved.
+    %a{:href => "#", :class => "button small quit-tour joyride-close-tip close-tip-custom"} Quit Tour
   %li{"data-class" => "submit", "data-button" => "Quit Tour", "data-options" => "tipLocation:bottom"}
     %h5 SUBMIT
     %p When you're ready, click here to submit for approval. You're only required to add a cover photo.
@@ -135,7 +139,6 @@
     switch (currentLink)
     {
       case 'assets':
-        $("#uruutTour").joyride("destroy");
         $(".sponsorship-link").attr("href", "/projects/#{@project.id}/edit#sponsorship");
         break;
       case 'sponsorship':
@@ -200,6 +203,9 @@
       if(hashVal == 'assets') {
         $("[data-id='" + hashVal + "']").show();
         $('.breadcrumbs li[class*="' + hashVal + '"]').addClass('active');
+        $("#uruutTour").joyride();
+        $(".joyride-tip-guide .joyride-next-tip").eq(2).attr("onclick", "javascript: $('.submit').addClass('active') ");
+        $(".joyride-tip-guide .joyride-next-tip").eq(3).attr("onclick", "javascript: $('.submit').removeClass('active') ");
       }
     }else{
       window.location.href = "/projects/#{@project.id}/edit#sponsor-info";
@@ -220,9 +226,10 @@
         }
         else{
           $("#uruutTour").joyride({
-            autoStart : true,
-            'tipLocation': 'bottom'
+            autoStart : true
           });
+          $(".joyride-tip-guide .joyride-next-tip").eq(2).attr("onclick", "javascript: $('.submit').addClass('active') ");
+          $(".joyride-tip-guide .joyride-next-tip").eq(3).attr("onclick", "javascript: $('.submit').removeClass('active') ");
         }
       });
     }
