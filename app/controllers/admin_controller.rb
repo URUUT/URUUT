@@ -1,5 +1,7 @@
 class AdminController < ApplicationController
-  http_basic_authenticate_with :name => "frodo", :password => "thering"
+  # http_basic_authenticate_with :name => "frodo", :password => "thering"
+  before_filter :authenticate_user!, :admin_required!
+  skip_before_filter :verify_authenticity_token
   layout :layout_by_resource
 
   def unapproved
@@ -29,5 +31,13 @@ class AdminController < ApplicationController
 
   def layout_by_resource
     'admin'
+  end
+
+  private
+  def admin_required!
+    unless current_user.is_admin?
+      flash[:error] = "Sorry, you don't have right permision to accessing page."
+      redirect_to root_url and return false
+    end
   end
 end
