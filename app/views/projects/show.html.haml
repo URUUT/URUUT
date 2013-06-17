@@ -302,7 +302,7 @@
                           Not Available
                           %span
                       - elsif p.limit && !p.perks_available.to_i.zero?
-                        %a.btn.pull-right{:href => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", :class => "fund btn"} #{button}
+                        %a.btn.pull-right{:href => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", :class => "fund btn"} Fund Now
                       - else
                         %a.btn.pull-right{:href => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}"} Fund Now
             -else
