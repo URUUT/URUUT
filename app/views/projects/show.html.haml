@@ -71,7 +71,8 @@
               Project
               %br
               Goal
-            .amount= number_to_currency(@project.goal, :precision => 0)
+            .amount
+              = amount_converter(@project.goal)
 
             .days-left
               %span.small
@@ -126,7 +127,7 @@
               Project
               %br
               Goal
-            .amount= number_to_currency(@project.goal, :precision => 0)
+            .amount= amount_converter(@project.goal)
 
             .days-left
               %span.small
@@ -342,7 +343,7 @@
               .clearfix
                 .seed-num
                   .amount
-                    = number_to_currency(@project.goal.to_i * 0.3, precision: 0)
+                    = amount_converter(@project.goal.to_i * 0.3)
                 - if check_availibility(@project, 1) < 1
                   %a.btn.pull-right{:href => "/projects/#{@project.id}/sponsors/new?level=platinum"}
                     Sponsor
@@ -363,7 +364,7 @@
               .clearfix
                 .seed-num
                   .amount
-                    = number_to_currency(@project.goal.to_i * 0.1, precision: 0)
+                    = amount_converter(@project.goal.to_i * 0.1)
                 - if check_availibility(@project, 2) < 3
                   %a.btn.pull-right{:href => "/projects/#{@project.id}/sponsors/new?level=gold"}
                     Sponsor
@@ -384,7 +385,7 @@
               .clearfix
                 .seed-num
                   .amount
-                    = number_to_currency(@project.goal.to_i * 0.04, precision: 0)
+                    = amount_converter(@project.goal.to_i * 0.04)
                 - if check_availibility(@project, 3) < 5
                   %a.btn.pull-right{:href => "/projects/#{@project.id}/sponsors/new?level=silver"}
                     Sponsor
