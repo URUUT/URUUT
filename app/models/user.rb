@@ -48,6 +48,7 @@ class User < ActiveRecord::Base
     unless user
       user = User.where(:email => auth.info.email).first
       unless user
+        password = Devise.friendly_token[0,20]
         if type.eql?("facebook")
           user = User.create(
             first_name:auth.extra.raw_info.name.to_s.split(' ')[0],
@@ -55,7 +56,8 @@ class User < ActiveRecord::Base
             provider:auth.provider,
             uid:auth.uid,
             email:auth.info.email,
-            password:Devise.friendly_token[0,20],
+            password:password,
+            password_confirmation:password,
             token:auth.credentials.token
           )
         elsif type.eql?("linkedln")
@@ -65,7 +67,8 @@ class User < ActiveRecord::Base
             provider:auth.provider,
             uid:auth.uid,
             email:auth.info.email,
-            password:Devise.friendly_token[0,20],
+            password:password,
+            password_confirmation:password,
             token:auth.credentials.token
           )
         else
@@ -75,7 +78,8 @@ class User < ActiveRecord::Base
             provider:auth.provider,
             uid:auth.uid,
             email: "#{auth.info.nickname}@uruut.com",
-            password:Devise.friendly_token[0,20],
+            password:password,
+            password_confirmation:password,
             token:auth.credentials.token)
         end
       else
