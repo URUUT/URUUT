@@ -34,7 +34,7 @@
             - if @donation
               - @donation.each do |d|
                 - totalDonated += d.amount
-            %p= number_to_currency(totalDonated, :precision => 0)
+            %p= amount_converter(totalDonated)
 
       #progressbar
 
@@ -43,7 +43,7 @@
           Project
           %br
           Goal
-        .amount= number_to_currency(@project.goal, :precision => 0)
+        .amount= amount_converter(@project.goal)
 
         .days-left
           %span.small

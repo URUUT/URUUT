@@ -87,7 +87,7 @@
                   %span{:style => 'display:block;text-align:center;font:normal 22px/22px "Proxima Nova Semi";color:#fff;text-transform:uppercase;letter-spacing:5px;'}= (Date.today + (@project.duration).to_i.days).strftime("%b")
                   %span{:style => 'display:block;text-align:center;font:normal 72px/72px "Proxima Nova Semi";color:#fff;text-transform:uppercase;margin-top:5px'}= (Date.today + (@project.duration).to_i.days).strftime("%d")
                 %h6{:style => "text-align:center;color:#55554d !important;font-family:'Proxima Nova';margin-top:40px;margin-bottom:0;"} Project Goal
-                %h2{:style => "text-align:center;color:#b6b6b4;font-family:'Proxima Nova Semi';margin-top:0;"}= number_to_currency(@project.goal, :precision => 0)
+                %h2{:style => "text-align:center;color:#b6b6b4;font-family:'Proxima Nova Semi';margin-top:0;"}= amount_converter(@project.goal)
 
             .span5.details#cultivation-step{:style => "width: 400px"}
               .cultivation-image-priview
@@ -155,7 +155,7 @@
                       .clearfix
                         .seed-num
                           .amount
-                            %p.amount $#{p.amount.to_i}
+                            %p.amount #{amount_converter(p.amount.to_i)}
                         %a.black-btn.btn.pull-right{:href => "javascript:void(0)"} Fund Now #{image_tag('arrow.png')}
               -else
                 - default_perk.each_with_index do |perk, index|
@@ -168,7 +168,7 @@
                     .clearfix
                       .seed-num
                         .amount
-                          %p.amount $#{perk}
+                          %p.amount #{amount_converter(perk)}
                       %a.black-btn.btn.pull-right{:href => "javascript:void(0)"} Fund Now #{image_tag('arrow.png')}
 
               .seed-level{id: "perk-id-custom"}
@@ -195,7 +195,7 @@
                 .clearfix
                   .seed-num
                     .amount
-                      = number_to_currency(@project.goal.to_i * 0.3)
+                      = amount_converter(@project.goal.to_i * 0.3)
                   %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
                     Sponsor
                     %span
@@ -211,7 +211,7 @@
                 .clearfix
                   .seed-num
                     .amount
-                      = number_to_currency(@project.goal.to_i * 0.1)
+                      = amount_converter(@project.goal.to_i * 0.1)
                   %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
                     Sponsor
                     %span
@@ -228,7 +228,7 @@
                 .clearfix
                   .seed-num
                     .amount
-                      = number_to_currency(@project.goal.to_i * 0.04)
+                      = amount_converter(@project.goal.to_i * 0.04)
                   %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
                     Sponsor
                     %span
@@ -243,9 +243,9 @@
                   .seed-num
                     .amount
                       - if (@project.goal.to_i * 0.1) >= 500
-                        = number_to_currency(500)
+                        = amount_converter(500)
                       - else
-                        = number_to_currency(@project.goal.to_i * 0.1)
+                        = amount_converter(@project.goal.to_i * 0.1)
                   %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
                     Sponsor
                     %span
@@ -264,7 +264,7 @@
                     .seed-num
                       .amount
                         %p.amount
-                          = number_to_currency(p.amount.to_i, precision: 0)
+                          = amount_converter(p.amount.to_i)
                     %a.black-btn.btn.pull-right{:href => "javascript:void(0)"} Fund Now #{image_tag('arrow.png')}
           -else
             - default_perk.each_with_index do |perk, index|
@@ -278,7 +278,7 @@
                   .seed-num
                     .amount
                       %p.amount
-                        = number_to_currency(perk, precision: 0)
+                        = amount_converter(perk)
                   %a.black-btn.btn.pull-right{:href => "javascript:void(0)"} Fund Now #{image_tag('arrow.png')}
 
           .seed-level{id: "perk-id-custom"}
