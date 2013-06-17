@@ -5,18 +5,14 @@ class AdminController < ApplicationController
   layout :layout_by_resource
 
   def unapproved
-    @unapproved_projects = Project.where(:ready_for_approval => 1)
+    @unapproved_projects = Project.where(:ready_for_approval => 1).page(params[:page]).per(20)
     logger.debug(@unapproved_projects)
   end
 
   def approve
-    data = params['approved']
-    id = params['id']
-    logger.debug(data)
-    logger.debug(id)
-    if data == "true"
+    if params['approved'] == "true"
       newData = "Success"
-      project = Project.find_by_id(id)
+      project = Project.find_by_id(params['id'])
       project.live = 1
       project.ready_for_approval = 0
       project.approval_date = Date.today
