@@ -62,7 +62,7 @@
                 / - if @donation
                 /   - @donation.each do |d|
                 /     - totalDonated += d.amount
-                %p= number_to_currency(totalsponsor(@project), :precision => 0)
+                %p= amount_converter(totalsponsor(@project))
 
           #progressbar
 
@@ -118,7 +118,7 @@
                 / - if @donation
                 /   - @donation.each do |d|
                 /     - totalDonated += d.amount
-                %p= number_to_currency(totalsponsor(@project), :precision => 0)
+                %p= amount_converter(totalsponsor(@project))
 
           #progressbar
 
