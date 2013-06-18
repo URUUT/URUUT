@@ -424,7 +424,7 @@
         }
 
         if(benefitsValue){
-          $("<div class='checkbox default'><input id='"+boxName+"_"+boxLength+"' type='checkbox' name='"+boxName+"["+boxLength+"]' checked='checked'><span id='name'>"+benefitsValue+"</span> <span class='edit-benefit italic green-font'>select to edit</span><input id='"+ boxName +"_info_"+ boxLength+"' class='edit-text-field' type='text' value='"+benefitsValue+"' style='width: 320px !important; display: none;' name='"+boxName+"[info_"+boxLength+"]'></div>").appendTo($(this).parent().parent().parent());
+          $("<div class='checkbox default'><input id='"+boxName+"_"+boxLength+"' type='checkbox' name='"+boxName+"["+boxLength+"]' checked='checked'><span id='name'>"+benefitsValue+"</span> <span class='edit-benefit italic label-green'>select to edit</span><input id='"+ boxName +"_info_"+ boxLength+"' class='edit-text-field' type='text' value='"+benefitsValue+"' style='width: 320px !important; display: none;' name='"+boxName+"[info_"+boxLength+"]'></div>").appendTo($(this).parent().parent().parent());
           boxLength++;
           switch (boxName)
           {
