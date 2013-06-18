@@ -17,10 +17,10 @@ class Project < ActiveRecord::Base
     project.has_many :galleries
     project.has_many :project_updates
     project.has_many :project_sponsors
-    project.has_many :sponsorship_levels
     project.has_many :sponsorship_benefits
   end
 
+  has_many :sponsorship_levels
   accepts_nested_attributes_for :perks, allow_destroy: true
   accepts_nested_attributes_for :galleries, allow_destroy: true
 
