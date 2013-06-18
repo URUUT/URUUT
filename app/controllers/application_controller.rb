@@ -5,15 +5,17 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     begin
       sign_in_url = url_for(:action => 'new', :controller => 'sessions', :only_path => false, :protocol => 'http')
-      if request.referer == sign_in_url
+      if session[:path] == "project_new"
         project = Project.new
         project.user_id = resource.id
         project.save
+        session[:path] == ""
         edit_project_path(project.id)
+      elsif request.referer == sign_in_url
+        root_url
       else
         stored_location_for(resource) || request.referer || root_path ||  request.env['omniauth.origin']
       end
-      # logger.debug(request.referrer)
       # return root_url
     rescue
       super
