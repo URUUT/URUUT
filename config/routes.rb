@@ -84,6 +84,7 @@ Crowdfund::Application.routes.draw do
   end
   resources :projects do
     get "add_desc", :on => :collection
+    get "set_perk_to_false", :on => :collection
     post "add_perk", :on => :collection
     post "save_video", :on => :collection
     post "get_perk", :on => :collection

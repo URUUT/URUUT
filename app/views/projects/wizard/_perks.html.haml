@@ -59,7 +59,9 @@
             %li #{msg}
     %div.perk-true{style: "#{@project.perk_permission ? '' : 'display:none' }"}
       %hr{style: "margin-top: 0; margin-left: -19px; margin-right: -19px; background: #e0e0e0;"}
-      %h4{style: "margin-bottom: 20px;"} Perk ##{@project.perks.count + 1}
+      %h4{style: "margin-bottom: 20px;"}
+        Perk #
+        %span.count-perk{style: "margin-left: -1%"} #{@project.perks.count + 1}
       %fieldset{:style => "position:relative"}
         .perk-container
           .perk
@@ -107,7 +109,7 @@
     %hr#line{:style => "margin-left: -20px; margin-right: -20px; background: #e0e0e0;"}
 
     %div.perk-false{style: "#{@project.perk_permission ? 'display:none' : '' }"}
-      = link_to "CONTINUE TO STEP 4", "/projects/#{@project.id}/edit#sponsorship", class: "btn project-save-continue", id: "project-submit", style: "position: relative;display:block;margin:0 auto;width:35%"
+      = link_to "CONTINUE TO STEP 4", "/projects/#{@project.id}/edit#sponsorship", class: "btn skip-perk", id: "project-submit", style: "position: relative;display:block;margin:0 auto;width:35%"
 
   .span4{:style => "margin-top:155px;"}
     %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
@@ -116,8 +118,8 @@
         %h5{:style => "color:#70bf4c;margin-bottom:10px;"} CURRENT PERKS
         .list-perk
           - @perks.each do |p|
-            %div.created-perk
-              %h6= get_currency(p.amount)
+            %div.created-perk{id: "perk-item-#{p.id}"}
+              %h6= amount_converter(p.amount)
               %h6= p.name
               %p{:style => "width:268px;word-wrap: break-word;"}= p.description
               %input{:type => 'hidden', :value => "#{p.id}", :id => "perk-#{p.id}"}
@@ -125,7 +127,7 @@
               |
               %a{:class => "perk-delete", :style => "color:#70bf4c; cursor: pointer"} delete
 
-      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} SEEDER PERKS
+      %h5{:style => "color:#70bf4c;margin-bottom:10px; margin-top: 30px"} SEEDER PERKS
       %p Funding on URUUT is made in exchange for payment in kind: goods, services, special benefits or other perks. Offer something valuable for the funds. No T-shirts and shout-outs for $100.
 
       %p Perks could include a house account for your investors, discounted goods or services, special lessons or workshops, or a private party just for seeders. Be creative!
@@ -134,6 +136,98 @@
 
 
 :javascript
+
+  var convertAmount = function(amount){
+    amount = accounting.formatMoney(amount, "$", 0);
+    amountSplit = amount.split(",");
+    if ( amountSplit.length < 3 ){
+      return amount;
+    }
+    else{
+      switch (amountSplit.length)
+        {
+          case 3: return amountSplit[0]+ "M"; break;
+          case 4: return amountSplit[0]+ "B"; break;
+          case 5: return amountSplit[0]+ "T"; break;
+          case 6: return amountSplit[0]+ "Q"; break;
+        }
+    }
+  };
+
+  var actionEditButton = function(){
+    $('.update-perk').on('click', function(e) {
+      e.preventDefault();
+      var name = $('#perk-name').val();
+      var amount = $('#perk-amount').val();
+      var description = $('#perk-description').val();
+      var perk_id = $('#perk-id').val();
+      var data = {
+        name: name,
+        amount: amount,
+        description: description,
+        id: perk_id
+      };
+      $.ajax({
+        type: 'POST',
+        url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/update_perk',
+        data: data
+      }).done(function(data) {
+        $(".perk-true").show();
+        $(".perk-false").hide();
+        $('#perk-name').val("");
+        $('#perk-amount').val("");
+        $('#perk-description').val("");
+        $('#perk-id').val("");
+        $('.save-new-perk, #project-submit, .perk-view').show();
+        $('.update-perk').hide();
+        var updatedPerk = '<div class="created-perk" id="perk-item-'+ perk_id +'"><h6>'+ convertAmount(amount ) +'</h6><h6>'+ name +'</h6><p style="width:268px;word-wrap: break-word;">'+ description +'</p><input id="perk-'+perk_id+'" type="hidden" value="'+perk_id+'"><a class="perk-edit" style="color:#70bf4c; cursor: pointer">edit</a> | <a class="perk-delete" style="color:#70bf4c; cursor: pointer">delete</a></div>';
+        $("#perk-item-"+ perk_id +"").html(updatedPerk);
+        actionEditButton(); actionDeleteButton(); actionButton();
+      });
+    })
+  }
+
+  var actionDeleteButton = function(){
+    $('.perk-delete').on('click', function(e) {
+      e.preventDefault();
+      var perk_id = $(this).parent().find('input[type=hidden]').val();
+      var data = {id: perk_id};
+      $.ajax({
+        type: 'POST',
+        url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/delete_perk',
+        data: data
+      }).done(function(data) {
+        $("#perk-item-"+ perk_id +"").remove();
+        $(".count-perk").text( parseInt($(".count-perk").text()) - 1 );
+      });
+    })
+  }
+
+  var actionButton = function(){
+    $('.created-perk .perk-edit').on('click', function() {
+      $.ajax({
+        type: 'POST',
+        url: '#{get_perk_projects_url}',
+        data: {id: $(this).parent().find('input[type=hidden]').val()}
+      }).done(function(data) {
+        $(".perk-true").show();
+        $(".perk-false").hide();
+        $('#perk-name').val(data.name);
+        $('#perk-amount').val(data.amount);
+        $('#perk-description').val(data.description);
+        $('#perk-id').val(data.id)
+        $('.save-new-perk, #project-submit, .perk-view').hide();
+        $('.update-perk').show();
+      });
+    });
+  }
+
+  $(document).ready(function(){
+    actionButton();
+    actionDeleteButton();
+    actionEditButton()
+  });
+
   function updateCountTitle() {
     var remaining = 30 - jQuery('#perk-name').val().length;
     jQuery('.title-count').text('(' + remaining + ' characters remaining.)');
@@ -183,10 +277,23 @@
     }
   };
 
+  $(".skip-perk").on("click", function(){
+    $(this).text("LOADING..");
+    var project_id = #{@project.id};
+    $.ajax({
+        type: 'GET',
+        url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/set_perk_to_false?id='+project_id
+    }).done(function(id) {
+      window.location.href = 'http://' + document.location.hostname + ":" + document.location.port + '/projects/'+ project +'/edit#sponsorship';
+      $(this).text("CONTINUE TO STEP 4");
+    });
+  });
+
   $('.save-new-perk').on('click', function(e) {
     e.preventDefault();
     if (validatePerk()) {
-      console.log(document.location.hostname);
+      $("input.project-save-continue").val("LOADING..");
+      $(this).text("LOADING..");
       var name = $('#perk-name').val();
       var amount = $('#perk-amount').val();
       var description = $('#perk-description').val();
@@ -205,8 +312,15 @@
         type: 'POST',
         url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/add_perk',
         data: data
-      }).done(function(data) {
-        window.location.reload(true);
+      }).done(function(id) {
+        // window.location.reload(true);
+        var newPerk = '<div class="created-perk" id="perk-item-'+ id +'"><h6>'+ convertAmount(amount ) +'</h6><h6>'+ name +'</h6><p style="width:268px;word-wrap: break-word;">'+ description +'</p><input id="perk-'+id+'" type="hidden" value="'+id+'"><a class="perk-edit" style="color:#70bf4c; cursor: pointer">edit</a> | <a class="perk-delete" style="color:#70bf4c; cursor: pointer">delete</a></div>';
+        $(".list-perk").append(newPerk);
+        $("input.project-save-continue").val("SAVE PERK & CONTINUE");
+        $(".save-new-perk").text("SAVE PERK & ADD MORE");
+        $('#perk-name').val(""); $('#perk-amount').val(""); $('#perk-description').val("");
+        $(".count-perk").text( parseInt($(".count-perk").text()) + 1 );
+        actionEditButton(); actionDeleteButton(); actionButton();
       });
     } else {
       alert('Required field is empty');
@@ -217,7 +331,8 @@
   $('.project-save-continue').on('click', function(e) {
     e.preventDefault();
     if (validatePerk()) {
-      console.log(document.location.hostname);
+      $("input.project-save-continue").val("LOADING..");
+      $(this).text("LOADING..");
       var name = $('#perk-name').val();
       var amount = $('#perk-amount').val();
       var description = $('#perk-description').val();
@@ -237,65 +352,18 @@
         type: 'POST',
         url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/add_perk',
         data: data
-      }).done(function(data) {
+      }).done(function(id) {
+        var newPerk = '<div class="created-perk" id="perk-item-'+ id +'"><h6>'+ convertAmount(amount ) +'</h6><h6>'+ name +'</h6><p style="width:268px;word-wrap: break-word;">'+ description +'</p><input id="perk-'+id+'" type="hidden" value="'+id+'"><a class="perk-edit" style="color:#70bf4c; cursor: pointer">edit</a> | <a class="perk-delete" style="color:#70bf4c; cursor: pointer">delete</a></div>';
+        $(".list-perk").append(newPerk);
+        $("input.project-save-continue").val("SAVE PERK & CONTINUE");
+        $(".save-new-perk").text("SAVE PERK & ADD MORE");
+        $('#perk-name').val(""); $('#perk-amount').val(""); $('#perk-description').val("");
+        $(".count-perk").text( parseInt($(".count-perk").text()) + 1 );
+        actionEditButton(); actionDeleteButton(); actionButton();
         window.location.href = 'http://' + document.location.hostname + ":" + document.location.port + '/projects/'+ project +'/edit#sponsorship';
-        window.location.reload(true);
+
       });
     } else {
       alert('Required field is empty');
     }
-  });
-
-  $('.update-perk').on('click', function(e) {
-    e.preventDefault();
-    var name = $('#perk-name').val();
-    var amount = $('#perk-amount').val();
-    var description = $('#perk-description').val();
-    var perk_id = $('#perk-id').val();
-    var data = {
-      name: name,
-      amount: amount,
-      description: description,
-      id: perk_id
-    };
-    $.ajax({
-      type: 'POST',
-      url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/update_perk',
-      data: data
-    }).done(function(data) {
-      console.log(data);
-      window.location.reload(true);
-    });
-  })
-
-  $('.perk-delete').on('click', function(e) {
-    e.preventDefault();
-    var perk_id = $(this).parent().find('input[type=hidden]').val();
-    console.log(perk_id);
-    var data = {id: perk_id};
-    $.ajax({
-      type: 'POST',
-      url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/delete_perk',
-      data: data
-    }).done(function(data) {
-      console.log(data);
-      window.location.reload(true);
-    });
-  })
-
-  $('.created-perk .perk-edit').on('click', function() {
-    $.ajax({
-      type: 'POST',
-      url: '#{get_perk_projects_url}',
-      data: {id: $(this).parent().find('input[type=hidden]').val()}
-    }).done(function(data) {
-      $(".perk-true").show();
-      $(".perk-false").hide();
-      $('#perk-name').val(data.name);
-      $('#perk-amount').val(data.amount);
-      $('#perk-description').val(data.description);
-      $('#perk-id').val(data.id)
-      $('.save-new-perk, #project-submit, .perk-view').hide();
-      $('.update-perk').show();
-    });
   });
