@@ -28,8 +28,10 @@ class RegistrationsController < Devise::RegistrationsController
         project.save
         session[:path] == ""
         edit_project_path(project.id)
+      elsif session[:path] == "sponsor_new"
+        new_project_sponsor_url
       elsif request.referer == sign_up_url
-        root_url
+        super
       else
         stored_location_for(resource) || request.referer || root_path ||  request.env['omniauth.origin']
       end

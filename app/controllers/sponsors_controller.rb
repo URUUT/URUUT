@@ -6,7 +6,7 @@ class SponsorsController < ApplicationController
   def new
     @sponsor = Sponsor.new
     @project = Project.find(params[:project_id])
-
+    session[:path] = "sponsor_new"
     case params[:level]
       when 'platinum'
         @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[1]
