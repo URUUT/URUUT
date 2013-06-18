@@ -317,6 +317,7 @@
         window.location.href = '/projects/' + data + '/edit#assets';
         $(".assets-link").attr("href", "/projects/" + data +"/edit#assets");
         $('.step-container[data-id="sponsorship"] form input#project-submit').val("SAVE AND COUNTINUE");
+        window.location.reload(true);
       })
     });
 
