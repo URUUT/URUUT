@@ -23,7 +23,7 @@ body {
   box-shadow:0 0 4px rgba(0,0,0,0.5);
   display: none;
   color: #fff;
-  max-width: 400px;
+  max-width: 430px;
   margin-right: 10px;
   z-index: 101;
   top: 0; /* keeps the page from scrolling when calculating position */
@@ -38,6 +38,7 @@ body {
 .joyride-content-wrapper {
   font:normal 12px/19px 'Proxima Nova';
   padding: 25px 10px 25px 15px;
+  position: relative;
 }
 
 .joyride-content-wrapper h5 {
@@ -126,7 +127,7 @@ body {
 }
 
 .joyride-tip-guide span.joyride-nub.top-right {
-  border-color: #fff;
+  border-color: rgba(64, 62, 55, 0.95);
   border-top-color: transparent !important;
   border-left-color: transparent !important;
   border-right-color: transparent !important;
@@ -154,6 +155,11 @@ body {
   font-size: 14px;
   line-height: 18px;
 }
+
+.joyride-tip-guide p {
+  margin-bottom: 30px;
+}
+
 .joyride-tip-guide a {
   color: rgb(255,255,255);
   text-decoration: none;
@@ -197,7 +203,9 @@ body {
 	letter-spacing:2px;
 	margin-left:10px;
 	padding:10px 25px;
-	position:relative;
+	position:absolute;
+  right: 10px;
+  bottom: 10px;
 	text-shadow:none;
 	text-transform:uppercase;
 }
@@ -213,15 +221,18 @@ body {
 	letter-spacing:2px;
 	margin-left:10px;
 	padding:10px 25px;
-	position:relative;
 	text-shadow:none;
 	text-transform:uppercase;
+  position: absolute;
+  right: 110px;
+  bottom: 10px;
 }
 
 .joyride-close-tip.close-tip-custom{
-  position: relative;
+  /*position: relative;*/
   top: inherit;
   color: #fff !important;
+  margin-left: 170px;
 }
 
 .joyride-quit:hover, .joyride-close-tip.close-tip-custom:hover{
