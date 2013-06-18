@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   private
 
   def check_user
-    unless current_user.id.eql? params[:id]
+    unless !current_user.id.eql?(params[:id])
       flash[:error] = "Sorry, you don't have right permision to accessing page."
       redirect_to root_url and return false
     end
