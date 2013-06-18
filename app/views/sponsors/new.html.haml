@@ -120,6 +120,7 @@
           .pull-left{:style => "width: 250px; height: 500px; border-right: solid 1px #d3d3d3; margin-top: -19px; padding-top: 19px;"}
             %h4 SPONSORSHIP COST
             %h1.cost-level.label-green-big.label-green #{amount_converter(@cost)}
+            = image_tag "3.gif", id: "loading", style: "display: none; position: absolute; margin: 150px 0 0 80px;"
             = image_tag "platinum-placement.png", class: "sponsor-placement platinum"
             = image_tag "gold-placement.png", class: "sponsor-placement gold"
             = image_tag "silver-placement.png", class: "sponsor-placement silver"
@@ -131,7 +132,6 @@
             .selectParent
               = select :project_sponsor, :level_id, options_for_select(@sponsorship_levels.map {|level| ["#{level.name} Level", level.id]}, session[:level_id]), class: "selectbox"
 
-            = image_tag "3.gif", id: "loading", style: "display: none; margin: -3px 0 10px 10px;"
             %br/
             %h5 SPONSORSHIP DETAILS
             .sponsorship-level-details
