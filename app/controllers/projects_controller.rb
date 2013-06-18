@@ -30,6 +30,7 @@ class ProjectsController < ApplicationController
     @project = Project.new(params[:project])
     @project.live = 0
     @project.user_id = current_user.id
+    @project.perk_permission = false
     if @project.save
       respond_to do |format|
         format.json { render :json => @project.id }
@@ -154,6 +155,11 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def set_perk_to_false
+    Project.update(params[:id], perk_permission: false)
+    render nothing: true
+  end
+
   def skip_sponsor
     session[:step] = "fourth"
     redirect_to :back
@@ -218,17 +224,13 @@ class ProjectsController < ApplicationController
     perk_permission = params[:perk_permission].eql?("yes") ? true : false
     Project.update(params[:project], perk_permission: perk_permission)
     unless perk_permission.eql?(false) && params[:name].blank?
-      perk = Perk.new
-      perk.name = params[:name]
-      perk.amount = params[:amount]
-      perk.description = params[:description]
-      perk.project_id = params[:project]
-      perk.perks_available = params[:perks_available]
-      perk.limit = params[:limit].eql?("yes") ? true : false
-      perk.save!
+      limit_status = params[:limit].eql?("yes") ? true : false
+      perk = Perk.create(name: params[:name], amount: params[:amount],
+                  description: params[:description], project_id: params[:project],
+                  perks_available: params[:perks_available], limit: limit_status)
     end
     respond_to do |format|
-      format.text { render :text => "Success" }
+      format.json { render :json => perk.id }
     end
   end
 
@@ -240,7 +242,7 @@ class ProjectsController < ApplicationController
   end
 
   def update_perk
-    perk = Perk.find_by_id(params[:id])
+    perk = Perk.find(params[:id])
     perk.name = params[:name]
     perk.amount = params[:amount]
     perk.description = params[:description]
@@ -252,8 +254,7 @@ class ProjectsController < ApplicationController
   end
 
   def delete_perk
-    perk = Perk.find_by_id(params[:id])
-    if perk.destroy
+    if Perk.find(params[:id]).destroy
       respond_to do |format|
         format.json { render :json => {destroy: true} }
       end

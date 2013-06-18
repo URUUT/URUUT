@@ -1,5 +1,5 @@
 .step-container{"data-id" => "sponsor-info"}
-  = form_for(project, :html => {:class => "sponsor-info span8 well", :multipart => true}) do |f|
+  = form_for(project, :html => {:class => "sponsor-info span8 well"}) do |f|
 
     - if project.errors.any?
       #errorExplanation

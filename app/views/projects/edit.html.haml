@@ -1,4 +1,5 @@
 = javascript_include_tag "global/jquery.joyride-2.0.3"
+= javascript_include_tag "accounting.min"
 
 .breadcrumb-container
   %ul.breadcrumbs
@@ -120,8 +121,6 @@
   $(".submit-finish-project").on("click", function(event){
     event.preventDefault();
     if ($('#large_image').attr('data-image') == "true") {
-      // window.location.href = "#{new_project_url}";
-      console.log(#{@project.id})
       $.ajax({
         type:'POST',
         url: '#{projects_submit_project_url}',
@@ -168,7 +167,6 @@
       })
 
       var hashVal = window.location.hash.split("#")[1];
-      console.log(hashVal);
       if(hashVal == 'sponsor-info') {
         $("#uruutTour").joyride("destroy");
         $("[data-id='" + hashVal + "']").show();
@@ -253,23 +251,22 @@
     });
 
    $('.step-container').on('form', 'submit', function() {
-     console.log("form submitted");
      return $(this).h5Validate();
    });
 
    $('.step-container[data-id="sponsor-info"] form').on('submit', function(e){
      if ( connect.length > 0 ) {
       e.preventDefault();
+      $('.step-container[data-id="sponsor-info"] form input#project-submit').val("LOADING..");
       var data = $(this).serialize();
       $.ajax({
         type: 'POST',
         url: '#{project_path(@project.id)}',
         data: data
       }).done(function(data){
-        console.log("Success???");
-        console.log(data);
         window.location.href = '/projects/' + data + '/edit#project-details';
-        window.location.reload(true);
+        $(".project-details-link").attr("href", "/projects/" + data +"/edit#project-details");
+        $('.step-container[data-id="sponsor-info"] form input#project-submit').val("SAVE AND COUNTINUE");
         localStorage.clear();
       })
      }else{
@@ -280,49 +277,46 @@
 
     $('.step-container[data-id="project-details"] form').on('submit', function(e){
       e.preventDefault();
-      console.log("prevent worked");
+      $('.step-container[data-id="project-details"] form input#project-submit').val("LOADING..");
       var data = $(this).serialize();
-      console.log(data);
       $.ajax({
         type: 'POST',
         url: '#{project_path(@project.id)}',
         data: data
       }).done(function(data){
-        console.log("Success???");
         window.location.href = '/projects/' + data + '/edit#perks';
-        window.location.reload(true);
+        $(".perks-link").attr("href", "/projects/" + data +"/edit#perks");
+        $('.step-container[data-id="project-details"] form input#project-submit').val("SAVE AND COUNTINUE");
       })
     })
 
-    $('.step-container[data-id="perks"] form').on('submit', function(e){
-      e.preventDefault();
-      console.log("prevent worked");
-      var data = $(this).serialize();
-      console.log(data);
-      $.ajax({
-        type: 'POST',
-        url: '#{project_path(@project.id)}',
-        data: data
-      }).done(function(data){
-        console.log("Success???");
-        window.location.href = '/projects/' + data + '/edit#sponsorship';
-        window.location.reload(true);
-      })
-    })
+    // $('.step-container[data-id="perks"] form').on('submit', function(e){
+    //   e.preventDefault();
+    //   $('.step-container[data-id="perks"] form input#project-submit').val("LOADING..");
+    //   var data = $(this).serialize();
+    //   $.ajax({
+    //     type: 'POST',
+    //     url: '#{project_path(@project.id)}',
+    //     data: data
+    //   }).done(function(data){
+    //     window.location.href = '/projects/' + data + '/edit#sponsorship';
+    //     $(".sponsorship-link").attr("href", "/projects/" + data +"/edit#sponsorship");
+    //     $('.step-container[data-id="perks"] form input#project-submit').val("SAVE AND COUNTINUE");
+    //   });
+    // })
 
     $('.step-container[data-id="sponsorship"] form').on('submit', function(e){
       e.preventDefault();
-      console.log("prevent worked");
+      $('.step-container[data-id="sponsorship"] form input#project-submit').val("LOADING..");
       var data = $(this).serialize();
-      console.log(data);
       $.ajax({
         type: 'POST',
         url: '#{project_path(@project.id)}',
         data: data
       }).done(function(data){
-        console.log("Success???");
         window.location.href = '/projects/' + data + '/edit#assets';
-        window.location.reload(true);
+        $(".assets-link").attr("href", "/projects/" + data +"/edit#assets");
+        $('.step-container[data-id="sponsorship"] form input#project-submit').val("SAVE AND COUNTINUE");
       })
     });
 
