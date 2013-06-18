@@ -114,9 +114,9 @@
   .span4{:style => "margin-top:155px;"}
     %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
     .well.info
-      - unless @perks.blank?
-        %h5{:style => "color:#70bf4c;margin-bottom:10px;"} CURRENT PERKS
-        .list-perk
+      .user-perks
+        - unless @perks.blank?
+          %h5.title-current-perk{:style => "color:#70bf4c;margin-bottom:10px;"} CURRENT PERKS
           - @perks.each do |p|
             %div.created-perk{id: "perk-item-#{p.id}"}
               %h6= amount_converter(p.amount)
@@ -198,6 +198,9 @@
         data: data
       }).done(function(data) {
         $("#perk-item-"+ perk_id +"").remove();
+        if ( $(".created-perk").length < 1 ){
+          $(".title-current-perk").remove();
+        }
         $(".count-perk").text( parseInt($(".count-perk").text()) - 1 );
       });
     })
@@ -314,8 +317,15 @@
         data: data
       }).done(function(id) {
         // window.location.reload(true);
-        var newPerk = '<div class="created-perk" id="perk-item-'+ id +'"><h6>'+ convertAmount(amount ) +'</h6><h6>'+ name +'</h6><p style="width:268px;word-wrap: break-word;">'+ description +'</p><input id="perk-'+id+'" type="hidden" value="'+id+'"><a class="perk-edit" style="color:#70bf4c; cursor: pointer">edit</a> | <a class="perk-delete" style="color:#70bf4c; cursor: pointer">delete</a></div>';
-        $(".list-perk").append(newPerk);
+        if ( $(".created-perk").length < 1 ){
+          $(".title-current-perk").remove();
+          var newPerk = '<h5 style="color:#70bf4c;margin-bottom:10px;" class="title-current-perk">CURRENT PERKS</h5><div class="created-perk" id="perk-item-'+ id +'"><h6>'+ convertAmount(amount ) +'</h6><h6>'+ name +'</h6><p style="width:268px;word-wrap: break-word;">'+ description +'</p><input id="perk-'+id+'" type="hidden" value="'+id+'"><a class="perk-edit" style="color:#70bf4c; cursor: pointer">edit</a> | <a class="perk-delete" style="color:#70bf4c; cursor: pointer">delete</a></div>';
+          $(".user-perks").append(newPerk);
+        }
+        else{
+          var newPerk = '<div class="created-perk" id="perk-item-'+ id +'"><h6>'+ convertAmount(amount ) +'</h6><h6>'+ name +'</h6><p style="width:268px;word-wrap: break-word;">'+ description +'</p><input id="perk-'+id+'" type="hidden" value="'+id+'"><a class="perk-edit" style="color:#70bf4c; cursor: pointer">edit</a> | <a class="perk-delete" style="color:#70bf4c; cursor: pointer">delete</a></div>';
+          $(".user-perks").append(newPerk);
+        }
         $("input.project-save-continue").val("SAVE PERK & CONTINUE");
         $(".save-new-perk").text("SAVE PERK & ADD MORE");
         $('#perk-name').val(""); $('#perk-amount').val(""); $('#perk-description').val("");
