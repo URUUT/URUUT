@@ -141,6 +141,7 @@ h1, h2, h3, h4, h5, h6{
   }
 }
 
+<<<<<<< HEAD
 .simplepage-img, .simplepage-wrapper{
   margin-top: 100px;
 }
@@ -171,6 +172,8 @@ h1, h2, h3, h4, h5, h6{
   }
 }
 
+=======
+>>>>>>> modify stylesheet
 .project{
   position: static;
 }
@@ -407,7 +410,10 @@ h3, h4, h5{
 
   p{
     margin-bottom: 5px;
+<<<<<<< HEAD
     text-align: justify;
+=======
+>>>>>>> modify stylesheet
   }
 
   /*p{
@@ -1118,7 +1124,10 @@ form {
 .dashed-list{
   list-style-image: url('dash.png');
   margin-left: 17px;
+<<<<<<< HEAD
   text-align: justify;
+=======
+>>>>>>> modify stylesheet
 }
 
 .label-green{
@@ -1144,7 +1153,11 @@ ul.nav{
 }
 
 #project_goal, input[id*="amount"] {
+<<<<<<< HEAD
   background: white url('dollar.png') no-repeat center left;
+=======
+  background: white url('dollar.png') no-repeat top left !important;
+>>>>>>> modify stylesheet
   padding-left: 30px;
 }
 
@@ -1617,12 +1630,15 @@ ul.breadcrumbs{
   background-image: url("glyphicons-halflings.png");
 }
 
+<<<<<<< HEAD
 .choiced-perk.amount input[type="text"]{
   border-radius: 5px;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
   margin-top: -4px;
 }
 
+=======
+>>>>>>> modify stylesheet
 .faqs, .privacy{
 
   .span8 ul li{
@@ -1730,6 +1746,7 @@ footer div ul li a{
       text-decoration: none;
     }
   }
+<<<<<<< HEAD
 }
 
 body.users.show{
@@ -1737,6 +1754,8 @@ body.users.show{
     margin-top: -20px;
     margin-left: 20px;
   }
+=======
+>>>>>>> modify stylesheet
 }
 
 .sponsors{
@@ -1852,6 +1871,7 @@ body.pages.contact{
   border-color: red !important;
 }
 
+<<<<<<< HEAD
 .drag-instructions {
   background: rgba(84, 97, 133, 0.4);
   color: #fff;
@@ -1926,7 +1946,30 @@ body.pages.contact{
 
 
 
+=======
+body.pages.contact{
+  #flash_notice{
+    display: none;
+  }
+}
 
+.pagination{
+
+  a{
+    color: $green2;
+    text-decoration: underline;
+    &:hover{
+      text-decoration: none;
+    }
+  }
+}
+
+.dropdown-menu{
+  margin-top: 0;
+>>>>>>> modify stylesheet
+
+  /* add arrow*/
+}
 
 
 
