@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   skip_before_filter :set_previous_page
+  before_filter :authenticate_user!, :check_user
 
   def show
     @user = User.find(params[:id])
@@ -14,5 +15,14 @@ class UsersController < ApplicationController
     # @projects = Project.where("user_id = ?", current_user.id).page(params[:page]).per(2)
     @projects_created = current_user.projects.page(params[:page]).per(2)
     @projects_funded = current_user.projects_funded.page(params[:page]).per(2)
+  end
+
+  private
+
+  def check_user
+    unless current_user.id.eql? params[:id]
+      flash[:error] = "Sorry, you don't have right permision to accessing page."
+      redirect_to root_url and return false
+    end
   end
 end
