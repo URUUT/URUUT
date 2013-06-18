@@ -236,9 +236,6 @@ Devise.setup do |config|
   config.omniauth :facebook, Settings.facebook.api_key, Settings.facebook.secret_key, :strategy_class => OmniAuth::Strategies::Facebook, :client_options => {:ssl => {:ca_path => '/etc/ssl/certs'}}
   config.omniauth :twitter, Settings.twitter.consumer_key, Settings.twitter.consumer_secret, :strategy_class => OmniAuth::Strategies::Twitter, :client_options => {:ssl => {:ca_path => '/etc/ssl/certs'}}
   # config.omniauth :linkedin, "nrkfrl2tufbv", "K9V75CRGCaL8rwhJ", :strategy_class => OmniAuth::Strategies::LinkedIn, :client_options => {:ssl => {:ca_path => '/etc/ssl/certs'}}
-<<<<<<< HEAD
-
-=======
->>>>>>> Replaced settings with env variables
+  
 end
 
