@@ -3,6 +3,7 @@ class ProjectsController < ApplicationController
   require "net/http"
   require "uri"
 
+  before_filter :session_path, only: :create
   before_filter :authenticate_user!, :only => [:index, :create, :edit, :update]
   before_filter :set_session_page
   before_filter :set_session_wizard, only: [:new, :create]
@@ -308,6 +309,10 @@ class ProjectsController < ApplicationController
     youtube_client = YouTubeIt::Client.new
     video_data = youtube_client.video_by(link)
     video_data.player_url.gsub('&feature=youtube_gdata_player', '')
+  end
+
+  def session_path
+    session[:path] = "project_new"
   end
 
   def admin_required!
