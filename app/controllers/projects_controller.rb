@@ -162,9 +162,9 @@ class ProjectsController < ApplicationController
 
   def skip_sponsor
     session[:step] = "fourth"
-    redirect_to :back
     project = Project.find(session[:current_project])
     project.update_attributes(sponsor_permission: false)
+    render nothing: true
   end
 
   def stripe_update

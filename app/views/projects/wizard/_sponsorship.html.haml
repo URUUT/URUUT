@@ -291,9 +291,7 @@
       type: "GET",
       url: "/skip_sponsor"
     }).done(function(data){
-      console.log("Success???");
       window.location.href = '/projects/' + project_id + '/edit#assets';
-      window.location.reload(true);
     });
   })
 
@@ -315,69 +313,6 @@
       $(".sponsorship-false").hide();
       $(".sponsorship-true").show();
     }
-    // if ($('#platinum-checkbox').children().find("input[type='checkbox']:checked").length >= 1) {
-    //   $('.platinum-availibility').html("(0 AVAILABLE)");
-    //   $('.platinum-availibility').attr("data-available", "0");
-    // }
-    // else{
-    //   $('.platinum-availibility').html("(1 AVAILABLE)");
-    //   $('.platinum-availibility').attr("data-available", "1");
-    // }
-
-    // var goldLength = $('#gold-checkbox').children().find("input[type='checkbox']:checked").length;
-    // if (goldLength > 0) {
-    //   $('.gold-availibility').html("("+(3-goldLength)+" AVAILABLE)");
-    //   $('.gold-availibility').attr("data-available", (3-goldLength));
-    // }
-    // else{
-    //   $('.gold-availibility').html("(3 AVAILABLE)");
-    //   $('.gold-availibility').attr("data-available", "3");
-    // }
-
-    // var silverLength = $('#silver-checkbox').children().find("input[type='checkbox']:checked").length;
-    // if (silverLength > 0) {
-    //   $('.silver-availibility').html("("+(5-silverLength)+" AVAILABLE)");
-    //   $('.silver-availibility').attr("data-available", (5-silverLength));
-    // }
-    // else{
-    //   $('.silver-availibility').html("(5 AVAILABLE)");
-    //   $('.silver-availibility').attr("data-available", "5");
-    // }
-
-    // $(".sponsor_checkbox").bind("click", function(e){
-    //   var maxSponsor = parseInt($(this).parent().parent().parent().attr('data-max'));
-    //   var sponsorType = $(this).parent().parent().parent().attr('data-type');
-    //   var thisCheckbox = $(this);
-    //   var availability = parseInt($('.'+sponsorType+'-availibility').attr('data-available'));
-    //   if ($('#'+sponsorType+'-checkbox').children().find("input[type='checkbox']:checked").length > maxSponsor) {
-    //     alert("You Can't Add Another Sponsor");
-    //     $(this).click();
-    //     $('.'+sponsorType+'-availibility').attr("data-available", availability);
-    //     $('.'+sponsorType+'-availibility').html("("+availability+" AVAILABLE)");
-    //   }
-    //   else{
-    //     if (thisCheckbox.is(':checked')) {
-    //       availability -= 1;
-    //       $('.'+sponsorType+'-availibility').attr("data-available", availability);
-    //       $('.'+sponsorType+'-availibility').html("("+availability+" AVAILABLE)");
-    //     }
-    //     else{
-    //       availability += 1;
-    //       $('.'+sponsorType+'-availibility').attr("data-available", availability);
-    //       $('.'+sponsorType+'-availibility').html("("+availability+" AVAILABLE)");
-    //     };
-    //   }
-    //   // if ($(this).is(':checked')) {
-    //   //   var availability = parseInt($('.platinum-availibility').attr('data-available')) - 1;
-    //   //   $('.platinum-availibility').attr("data-available", availability);
-    //   //   $('.platinum-availibility').html("(0 AVAILABLE)");
-    //   // }
-    //   // else {
-    //   //   var availability = parseInt($('.platinum-availibility').attr('data-available')) + 1;
-    //   //   $('.platinum-availibility').attr("data-available", availability);
-    //   //   $('.platinum-availibility').html("(0 AVAILABLE)");
-    //   // }
-    // });
   });
 
 
