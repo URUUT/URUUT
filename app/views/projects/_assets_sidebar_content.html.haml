@@ -1,0 +1,171 @@
+- if @project.sponsor_permission
+  %h4 BECOME A SPONSOR
+  .well
+    %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;font-family:'Proxima Nova';"} PROJECT SPONSORSHIP
+    %p{:style => "font:normal 12px/18px 'Proxima Nova', arial, sans-serif;color:#403e37;margin-bottom:40px;"} We can’t do this alone. Do your part, by becoming a project sponsor. URUUT Partner-Funding depends on individual contributors as well as project sponsorship from businesses and corporate and family foundations. Click the button below to get more details and become a project sponsor.
+    = link_to "javascript:void(0)", :class => 'black-btn btn', :style => 'margin-top:10px;' do
+      Become A Sponsor
+      %span
+
+  %ul#myTab4.tab-nav
+    %li.active
+      %a{:href => "#perks"} Donate
+    %li
+      %a{:href => "#sponsorship"} Sponsor
+  .tab-content
+    #perks.tab-pane.active
+      -if @project.perk_permission
+        -if @perks
+          - @perks.each do |p|
+            .seed-level
+              %h3{style: "font-size: 20px;"}
+                = p.name
+              - if p.limit
+                %p= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} Available)"
+              %p.description= p.description
+              .clearfix
+                .seed-num
+                  .amount
+                    %p.amount #{amount_converter(p.amount.to_i)}
+                %a.black-btn.btn.pull-right{:href => "javascript:void(0)"} Fund Now #{image_tag('arrow.png')}
+      -else
+        - default_perk.each_with_index do |perk, index|
+          - index += 1
+          - name = "LEVEL #{index}"
+          - description = "You will receive #{perk} Uruut Reward Points when you seed $#{perk}"
+          .seed-level
+            %h3= name
+            %p{style: "height: auto; margin: 5px 0; overflow: hidden; text-overflow:ellipsis;"}= description
+            .clearfix
+              .seed-num
+                .amount
+                  %p.amount #{amount_converter(perk)}
+              %a.black-btn.btn.pull-right{:href => "javascript:void(0)"} Fund Now #{image_tag('arrow.png')}
+
+      .seed-level{id: "perk-id-custom"}
+        %h3.perk-name-other{id: "perk-name-other-custom"}
+          CHOOSE YOUR PERK
+        %p With this option you choose the amount to seed, you will receive 1 Uruut Reward Point for each dollar you seed.
+        .clearfix
+          .seed-num
+            .amount
+            %h5 AMOUNT TO SEED
+            .textarea.seed-amount= text_field_tag :custom_seed, nil, style: "width: 100%"
+          %a.black-btn.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "button-seed-custom"} Fund Now
+
+    #sponsorship.tab-pane
+      .seed-level.platinum-level
+        %h3
+          PLATINUM
+          %span.small-heading
+            (1 of 1 available)
+        %ul.normal-font.dashed-list
+          -if @sponsorship_benefits.include?(1)
+            -@sponsorship_benefits[1].each do |benefit|
+              %li= benefit.name
+        .clearfix
+          .seed-num
+            .amount
+              = amount_converter(@project.goal.to_i * 0.3)
+          %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
+            Sponsor
+            %span
+      .seed-level.gold-level
+        %h3
+          GOLD
+          %span.small-heading
+            (3 of 3 available)
+        %ul.normal-font.dashed-list
+          -if @sponsorship_benefits.include?(2)
+            -@sponsorship_benefits[2].each do |benefit|
+              %li= benefit.name
+        .clearfix
+          .seed-num
+            .amount
+              = amount_converter(@project.goal.to_i * 0.1)
+          %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
+            Sponsor
+            %span
+      .seed-level.silver-level
+        %h3
+          SILVER
+          %span.small-heading
+            (5 of 5 available)
+        %ul.normal-font.dashed-list
+          -if @sponsorship_benefits.include?(3)
+            -@sponsorship_benefits[3].each do |benefit|
+              %li= benefit.name
+              %span
+        .clearfix
+          .seed-num
+            .amount
+              = amount_converter(@project.goal.to_i * 0.04)
+          %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
+            Sponsor
+            %span
+      .seed-level.bronze-level
+        %h3 BRONZE
+        %ul.normal-font.dashed-list
+          %li Text mention on project page
+          -if @sponsorship_benefits.include?(4)
+            -@sponsorship_benefits[4].each do |benefit|
+              %li= benefit.name
+        .clearfix
+          .seed-num
+            .amount
+              - if (@project.goal.to_i * 0.1) >= 500
+                = amount_converter(500)
+              - else
+                = amount_converter(@project.goal.to_i * 0.1)
+          %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
+            Sponsor
+            %span
+- else
+  %h4.tittle.wizard-data-donation{style: "margin-bottom: 0;"} Donation
+  -if @project.perk_permission
+    -if @perks
+      - @perks.each do |p|
+        .seed-level
+          %h3{style: "font-size: 20px;"}
+            = p.name
+          - if p.limit
+            %p= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} Available)"
+          %p.description= p.description
+          .clearfix
+            .seed-num
+              .amount
+                %p.amount
+                  = amount_converter(p.amount.to_i)
+            %a.black-btn.btn.pull-right{:href => "javascript:void(0)"} Fund Now #{image_tag('arrow.png')}
+  -else
+    - default_perk.each_with_index do |perk, index|
+      - index += 1
+      - name = "LEVEL #{index}"
+      - description = "You will receive #{perk} Uruut Reward Points when you seed $#{perk}"
+      .seed-level
+        %h3= name
+        %p{style: "height: auto; margin: 5px 0; overflow: hidden; text-overflow:ellipsis;"}= description
+        .clearfix
+          .seed-num
+            .amount
+              %p.amount
+                = amount_converter(perk)
+          %a.black-btn.btn.pull-right{:href => "javascript:void(0)"} Fund Now #{image_tag('arrow.png')}
+
+  .seed-level{id: "perk-id-custom"}
+    %h3.perk-name-other{id: "perk-name-other-custom"}
+      CHOOSE YOUR PERK
+    %p With this option you choose the amount to seed, you will receive 1 Uruut Reward Point for each dollar you seed.
+    .clearfix
+      .seed-num
+        .amount
+        %h5 AMOUNT TO SEED
+        .textarea.seed-amount= text_field_tag :custom_seed, nil, style: "width: 100%"
+      %a.black-btn.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "button-seed-custom"} Fund Now
+
+
+:javascript
+  $('#myTab4 a').on("click", function (e) {
+    e.preventDefault();
+    $(this).tab('show');
+  });

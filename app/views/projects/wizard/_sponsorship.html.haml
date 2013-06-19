@@ -180,15 +180,6 @@
                   .cleafix
                   %span.save_new_benefit.pull-right.btn{style: "margin-top:-10px;"} save
             %span.label-green.normal-font.add-another.add-silver{style: "display:none" } + Add Another
-          / %div.checkbox
-          /   = check_box_tag "Test"
-          /   Profile of your company on our website with photo.
-          / %div.checkbox
-          /   = check_box_tag "Test"
-          /   Monthly plug on social media leading up to the project and the month after the project has been complete.
-          / %div.checkbox
-          /   = check_box_tag "Test"
-          /   Five tickets to VIP Gala Event.
 
       %hr{:style => "background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
 
@@ -216,15 +207,6 @@
                     %span#name= benefit.name
                     %span.edit-benefit.italic.label-green select to edit
                     = text_field_tag "custom[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
-                / -SponsorshipBenefit::SPONSORSHIP_BENEFITS.each do |key, value|
-                /   -if key.eql? 4
-                /     -value.each_with_index do |benefit|
-                /       %div.checkbox.default
-                /         = check_box_tag "bronze[#{benefit[:id]}]"
-                /         %span#name= benefit[:desc]
-                /         %span.edit-benefit.italic.label-green select to edit
-                /         = text_field_tag "bronze[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field", style: "width: 320px !important; display: none;"
-              / -else
 
               = hidden_field_tag "custom_count", nil, id: "custom-count"
             %div#custom-checkbox
@@ -235,9 +217,7 @@
                 .cleafix
                   %span.save_new_benefit.pull-right.btn{style: "margin-top:-10px;"} save
             %span.label-green.normal-font.add-another.add-bronze{style: "display:none" } + Add Another
-          / %div.checkbox
-          /   = check_box_tag "Test"
-          /   Lorem ipsum dolor sit amet.
+
       %hr{:style => "background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
       = hidden_field_tag "step", "fourth"
       %div
@@ -292,7 +272,7 @@
       url: "/skip_sponsor"
     }).done(function(data){
       window.location.href = '/projects/' + project_id + '/edit#assets';
-      window.location.reload(true);
+      $(".assets-link").attr("href", "/projects/" + project_id +"/edit#perks");
     });
   })
 

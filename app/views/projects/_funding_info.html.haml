@@ -9,13 +9,13 @@
 .funding-info
   .container
     .span8
-      %h4.title= @project.project_title
-      %span.location #{@project.city}, #{@project.state}
-      %span.pull-right{:style => "margin-top: -20px"}
+      %h4.title.wizard-data-title= @project.project_title
+      %span.location.wizard-data-location #{@project.city}, #{@project.state}
+      %span.pull-right.wizard-data-td-mark{:style => "margin-top: -20px"}
         - if @project.organization_classification.eql?("170(c)(1)") || @project.organization_classification.eql?("501(c)(3)")
           = image_tag 'td-logo-black.png', class: "tax-deductible deductable-black", "data-toggle" => "tooltip", title: "Donations Are Tax Deductable"
       %hr
-      %p.short-desc{:style => "font:normal 12px/18px 'Proxima Nova';"}= @project.title
+      %p.short-desc.wizard-data-description{:style => "font:normal 12px/18px 'Proxima Nova';"}= @project.title
 
       %h6{:style => "color:#403e37;font-family:'Proxima Nova Semi';display:inline-block;margin:0;letter-spacing:normal;"} SHARE:
       = image_tag "fb-count.png", :class => "fb-share", :style => "margin-right:20px;"
@@ -43,11 +43,11 @@
           Project
           %br
           Goal
-        .amount= amount_converter(@project.goal)
+        .amount.wizard-data-amount= amount_converter(@project.goal)
 
         .days-left
           %span.small
             Days
             %br
             Left
-          .amount= @project.duration
+          .amount.wizard-data-duration= @project.duration
