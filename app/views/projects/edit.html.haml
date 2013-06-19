@@ -136,7 +136,6 @@
 
   $(".wizard-link").on("click", function(){
     var currentLink = $(this).attr("wizard-type")
-
     if ( currentLink == "assets" ){
       $(".sponsorship-link").attr("href", "/projects/#{@project.id}/edit#sponsorship");
     }

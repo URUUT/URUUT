@@ -25,7 +25,6 @@
               %span
 
 - if !@project.large_image.blank?
-<<<<<<< HEAD
   #large_image{:style => "background:url(#{@project.large_image}); background-size: cover"}
     .funding-info
       .container
@@ -266,7 +265,7 @@
         %h4 BECOME A SPONSOR
         .well
           %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;font-family:'Proxima Nova';"} PROJECT SPONSORSHIP
-          %p{:style => "font:normal 12px/18px 'Proxima Nova', arial, sans-serif;color:#403e37;margin-bottom:40px;"} We can’t do this alone. Do your part, by becoming a project sponsor. URUUT Partner-Funding depends on individual contributors as well as project sponsorship from businesses and corporate and family foundations. Click the button below to get more details and become a project sponsor.
+          %p{:style => "font:normal 12px/18px 'Proxima Nova', arial, sans-serif;color:#403e37;margin-bottom:40px;"} We canâ€™t do this alone. Do your part, by becoming a project sponsor. URUUT Partner-Funding depends on individual contributors as well as project sponsorship from businesses and corporate and family foundations. Click the button below to get more details and become a project sponsor.
           = link_to new_project_sponsor_path(@project.id), :class => 'btn', :style => 'margin-top:10px;' do
             Become A Sponsor
             %span
@@ -292,6 +291,7 @@
                         When you seed #{amount_converter(p.amount.to_i)}, you will receive an official #{@project.title} #{p.name}
                       %p.subtext
                         Uruut Reward Points: #{p.amount.to_i}
+
                     .clearfix{style: "margin-top: 20px;"}
                       .seed-num
                         / %div Seed
@@ -351,7 +351,6 @@
                 - else
                   .pull-right{style: "margin-top: 24px; font-style: italic;"}
                     Not Available
-
                     %span
             .seed-level
               %h3
@@ -586,7 +585,7 @@
         });
 
         L.tileLayer('http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {
-          attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
+          attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery Â© <a href="http://cloudmade.com">CloudMade</a>'
         }).addTo(map);
 
         L.marker([latitude,longitude], {icon:uruutIcon}).addTo(map)
