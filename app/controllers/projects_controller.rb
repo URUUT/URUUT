@@ -43,7 +43,7 @@ class ProjectsController < ApplicationController
     @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
     session[:current_project] = @project.id
     @project.update_attributes!(params[:project])
-    @perks = Perk.where("project_id = ?", @project.id).order(:amount)
+    @perks = @project.perks.order(:amount)
   end
 
   def show
@@ -52,10 +52,6 @@ class ProjectsController < ApplicationController
     @project_sponsors = sort_sponsorships.group_by {|sponsor| sponsor.level_id}
     @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
     @perks = @project.perks.order(:amount)
-    session[:current_project] = @project.id
-    # @sponsorship_levels = SponsorshipLevel.all
-    # @donation = Donation.where("project_id = ?", @project.id)
-    # @user = User.find(@project.user_id)
     session[:current_project] = @project.id
     render :layout => 'landing'
   end
@@ -134,8 +130,16 @@ class ProjectsController < ApplicationController
     end
 
     if @project.save
-      respond_to do |format|
-        format.json { render :json => @project.id }
+      if params[:step].eql?("fourth")
+        @perks = @project.perks.order(:amount)
+        @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
+        respond_to do |format|
+          format.js { render action: "skip_sponsor.js.erb" }
+        end
+      else
+        respond_to do |format|
+          format.json { render :json => @project.id }
+        end
       end
     end
   end
@@ -156,15 +160,19 @@ class ProjectsController < ApplicationController
   end
 
   def set_perk_to_false
+    session[:step] = "third"
     Project.update(params[:id], perk_permission: false)
     render nothing: true
   end
 
   def skip_sponsor
     session[:step] = "fourth"
-    project = Project.find(session[:current_project])
-    project.update_attributes(sponsor_permission: false)
-    render nothing: true
+    @project = Project.find(session[:current_project])
+    @project.update_attributes(sponsor_permission: false)
+    @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
+    @perks = @project.perks.order(:amount)
+
+    respond_to :js
   end
 
   def stripe_update
@@ -230,6 +238,7 @@ class ProjectsController < ApplicationController
                   perks_available: params[:perks_available], limit: limit_status)
     end
     respond_to do |format|
+
       format.json { render :json => perk.id }
     end
   end
@@ -262,14 +271,12 @@ class ProjectsController < ApplicationController
   end
 
   def submit_project
-    logger.debug("ID was: #{params[:id]}")
     project = Project.find_by_id(params[:id])
     # project.ready_for_approval = 0
     # project.live = 1
     # project.approval_date = Date.today.strftime("%F")
     project.ready_for_approval = 1
     if project.save!
-      logger.debug("Saving!!!")
       session[:step] = nil
       respond_to do |format|
         # Project.send_confirmation_email(project)
@@ -294,6 +301,21 @@ class ProjectsController < ApplicationController
   def destroy
     Project.find(params[:id]).destroy
     redirect_to current_user, notice: "You have successfully deleted your project"
+  end
+
+  def update_content_assets_tab
+    @project = Project.find(params[:id])
+    @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
+    @perks = @project.perks.order(:amount)
+
+    respond_to do |format|
+      format.js { render action: "skip_sponsor.js.erb" }
+    end
+  end
+
+  def update_td_mark
+    @project = Project.find(params[:id])
+    respond_to :js
   end
 
   private
