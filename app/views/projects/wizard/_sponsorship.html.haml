@@ -66,10 +66,10 @@
 
               = hidden_field_tag "platinum_count", nil, id: "platinum-count"
             %div#custom-checkbox
-              %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 20px;"} CREATE CUSTOM BENEFITS:
+              %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 10px;"} CREATE CUSTOM BENEFITS:
               %div.checkbox.add_checkbox
                 = check_box_tag "add_platinum",nil,false, class: "box_platinum_benefits"
-                = text_field_tag "platinum[]", nil, placeholder: "Create your custom benefit here....", style: "margin-top: -18px; !important; width: 100% !important", class: "platinum_benefits add_benefits"
+                = text_field_tag "platinum[]", nil, placeholder: "Create your custom benefit here....", style: "width: 100% !important", class: "platinum_benefits add_benefits"
                 .clearfix
                   .cleafix
                   %span.save_new_benefit.pull-right.btn{style: "margin-top:-10px;"} save
@@ -119,10 +119,10 @@
 
               = hidden_field_tag "gold_count", nil, id: "gold-count"
             %div#custom-checkbox
-              %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 20px;"} CREATE CUSTOM BENEFITS:
+              %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 10px;"} CREATE CUSTOM BENEFITS:
               %div.checkbox.add_checkbox
                 = check_box_tag "add_gold",nil,false, class: "box_gold_benefits"
-                = text_field_tag "gold[]", nil, placeholder: "Create your custom benefit here....", style: "margin-top: -18px; !important; width: 100% !important", class: "gold_benefits add_benefits"
+                = text_field_tag "gold[]", nil, placeholder: "Create your custom benefit here....", style: "width: 100% !important", class: "gold_benefits add_benefits"
                 .clearfix
                   .cleafix
                   %span.save_new_benefit.pull-right.btn{style: "margin-top:-10px;"} save
@@ -172,10 +172,10 @@
 
               = hidden_field_tag "silver_count", nil, id: "silver-count"
             %div#custom-checkbox
-              %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 20px;"} CREATE CUSTOM BENEFITS:
+              %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 10px;"} CREATE CUSTOM BENEFITS:
               %div.checkbox.add_checkbox
                 = check_box_tag "add_silver",nil,false, class: "box_silver_benefits"
-                = text_field_tag "silver[]", nil, placeholder: "Create your custom benefit here....", style: "margin-top: -18px; !important; width: 100% !important", class: "silver_benefits add_benefits"
+                = text_field_tag "silver[]", nil, placeholder: "Create your custom benefit here....", style: "width: 100% !important", class: "silver_benefits add_benefits"
                 .cleafix
                   .cleafix
                   %span.save_new_benefit.pull-right.btn{style: "margin-top:-10px;"} save
@@ -210,10 +210,10 @@
 
               = hidden_field_tag "custom_count", nil, id: "custom-count"
             %div#custom-checkbox
-              %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 20px;"} CREATE CUSTOM BENEFITS:
+              %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 10px;"} CREATE CUSTOM BENEFITS:
               %div.checkbox.add_checkbox
                 = check_box_tag "add_bronze", nil,false, class: "box_bronze_benefits"
-                = text_field_tag "bronze[]", nil, placeholder: "Create your custom benefit here....", style: "margin-top: -18px; !important; width: 100% !important", class: "bronze_benefits add_benefits"
+                = text_field_tag "bronze[]", nil, placeholder: "Create your custom benefit here....", style: "width: 100% !important", class: "bronze_benefits add_benefits"
                 .cleafix
                   %span.save_new_benefit.pull-right.btn{style: "margin-top:-10px;"} save
             %span.label-green.normal-font.add-another.add-bronze{style: "display:none" } + Add Another
@@ -359,7 +359,7 @@
         }
 
       // $("#"+ checkboxName +"-count").val(countCheckbox);
-      $("<div class='checkbox default'><input id='"+ checkboxName + "_" + countCheckbox + "' type='checkbox' value='1' name='"+ checkboxName +"[id_"+ countCheckbox +"]''><input id='"+ checkboxName + "_info_"+ countCheckbox +"' class='"+checkboxName+"_benefits add_benefits' type='text' style='margin-top: -18px; width: 100% !important;' placeholder='Create your custom benefit here...' name='"+ checkboxName + "[info_"+countCheckbox+"]'><span><span class='save_new_benefit pull-right btn' style='margin-top:-19px; left:0px' data-type='"+checkboxName+"' >Save</span></span><span class='remove-another pull-right btn' style='margin-top:-19px; left: -5px;'>Remove</span></div>").appendTo(divCore);
+      $("<div class='checkbox default'><input id='"+ checkboxName + "_" + countCheckbox + "' type='checkbox' value='1' name='"+ checkboxName +"[id_"+ countCheckbox +"]''><input id='"+ checkboxName + "_info_"+ countCheckbox +"' class='"+checkboxName+"_benefits add_benefits' type='text' style='width: 100% !important;' placeholder='Create your custom benefit here...' name='"+ checkboxName + "[info_"+countCheckbox+"]'><span><span class='save_new_benefit pull-right btn' style='margin-top:-19px; left:0px' data-type='"+checkboxName+"' >Save</span></span><span class='remove-another pull-right btn' style='margin-top:-19px; left: -5px;'>Remove</span></div>").appendTo(divCore);
       $("#"+checkboxName+"-count").val(parseInt($("#"+checkboxName+"-count").val())+1)
       // countCheckbox++;
       addNewBenefit();
