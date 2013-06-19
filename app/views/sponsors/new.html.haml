@@ -49,8 +49,8 @@
               SPONSOR
               %span
           -else
-            %a.btn.pull-right{:href => "javascript:void(0)", style: "display: block; margin-top: 10px;"}
-              Sponsor
+            .pull-right{style: "font-style: italic; margin-top:20px;"}
+              Not Available
               %span
         %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;"}
           Gold
@@ -70,8 +70,8 @@
               SPONSOR
               %span
           -else
-            %a.btn.pull-right{:href => "javascript:void(0)", style: "display: block; margin-top: 10px;"}
-              Sponsor
+            .pull-right{style: "font-style: italic; margin-top:20px;"}
+              Not Available
               %span
         %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;"}
           Silver
@@ -86,13 +86,13 @@
           .pull-left
             %h3{style: "margin: 0; margin-top: 20px; line-height: 20px;"}= amount_converter(@project.goal.to_i * 0.04)
             .amount-percentage
-          - if check_availibility(@project, 2) < 3
+          - if check_availibility(@project, 3) < 5
             %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-3", :"sponsor-id" => "3"}
               SPONSOR
               %span
           - else
-            %a.btn.pull-right{:href => "javascript:void(0)", style: "display: block; margin-top: 10px;"}
-              Sponsor
+            .pull-right{style: "font-style: italic; margin-top:20px;"}
+              Not Available
               %span
         %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;"}
           Bronze
