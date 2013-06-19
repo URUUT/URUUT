@@ -1254,17 +1254,26 @@ ul.nav{
 }
 
 .selectParent{
+  height: 54px;
+  margin-bottom: 25px;
 
   .styledSelect, #type{
-    font: 24px/24px arial, helvetica, sans-serif;
-    width: 110%;
+    font: bold 24px/24px arial, helvetica, sans-serif;
+    width: 100%;
     background: transparent;
-    height: 65px;
+    height: 54px;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     border: none;
     padding: 19px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .styledSelect.smallText{
+    font-size: 18px;
+    line-height: 20px;
   }
 }
 
@@ -1736,9 +1745,27 @@ footer div ul li a{
 }
 
 body.users.show{
+
   #flash_notice{
     margin-top: -20px;
     margin-left: 20px;
+  }
+
+  .dropdown-list{
+
+    .selectParent{
+      display: inline-block;
+      height: 54px;
+      margin-bottom: 20px;
+      width: 236px;
+      border: 1px solid $light-grey;
+
+      .styledSelect{
+        width: 236px;
+        font-size: 18px;
+        line-height: 20px;
+      }
+    }
   }
 }
 
@@ -1937,7 +1964,18 @@ body.pages.contact{
   margin-bottom: 10px;
 }
 
+body.pages.index{
+  .full-width{
+    .selectParent{
+      width: 300px;
+      
 
+      .styledSelect{
+        width: 300px;
+      }
+    }
+  }
+}
 
 
 

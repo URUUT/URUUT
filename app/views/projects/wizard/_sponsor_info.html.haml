@@ -18,11 +18,13 @@
 
     %div.inline
       = f.label :organization_type, "Organization Type*", class: "label-green"
-      = f.select :organization_type, options_for_select(project_org_type, @project.organization_type), {:required => true}, {:onchange => "updateOrganizedTypeInfo()" }
+      .selectParent{style: "width: 290px;"}
+        = f.select :organization_type, options_for_select(project_org_type, @project.organization_type), {:required => true}, {:onchange => "updateOrganizedTypeInfo()", class: "styledSelect" }
 
     %div.inline{:style => "margin-left:20px;"}
       = f.label :organization_class, "How Are You Organized?*", class: "label-green"
-      = f.select :organization_classification, options_for_select(project_org_class, @project.organization_classification), {:required => true}, {:onchange => "updateOrganizedInfo()"}
+      .selectParent{style: "width: 290px;"}
+        = f.select :organization_classification, options_for_select(project_org_class, @project.organization_classification), {:required => true}, {:onchange => "updateOrganizedInfo()", class: "styledSelect"}
 
     %div
       = f.label :address , "STREET ADDRESS*", class: "label-green"
@@ -34,7 +36,8 @@
 
     %div.inline{:style => "margin-left:25px;"}
       = f.label :state,"STATE*", class: "label-green"
-      = f.select :state, options_for_select(us_states, @project.state), {:required => true}, {:onchange => "updateStateInfo()"}
+      .selectParent{style: "width: 140px"}
+        = f.select :state, options_for_select(us_states, @project.state), {:required => true}, {:onchange => "updateStateInfo()", class: "styledSelect"}
 
     %div.inline{:style => "margin-left:25px;"}
       = f.label :zip, "Zipcode*", class: "label-green"
