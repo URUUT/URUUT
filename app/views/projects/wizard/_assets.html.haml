@@ -408,6 +408,12 @@
       e.preventDefault();
       $(this).tab('show');
     });
+
+    $("#uruutTour").joyride({
+      autoStart : true
+    });
+    $(".joyride-tip-guide .joyride-next-tip").eq(2).attr("onclick", "javascript: $('.submit').addClass('active') ");
+    $(".joyride-tip-guide .joyride-next-tip").eq(3).attr("onclick", "javascript: $('.submit').removeClass('active') ");
   });
 
   $(".change-image").click(function(){
@@ -423,8 +429,6 @@
     var fpfile = { url: $("#url_image").val(), mimetype: 'image/jpeg', isWriteable: true };
     var newImage = new Image();
     newImage.src = $("#url_image").val();
-    console.log("Converting...");
-    console.log([0, $("#y_position").val(), newImage.width, newImage.height]);
     filepicker.convert(fpfile,
       {crop: [0, $("#y_position").val(), newImage.width, newImage.height]},
       {},
