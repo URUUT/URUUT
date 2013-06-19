@@ -19,7 +19,8 @@
     %div
       %h6{:style => "color:#70bf4c"} ALLOW PROJECT SPONSORSHIPS?
       .span2{style: "margin-left: 0"}
-        = f.select :sponsorship_permission, options_for_select({ "Yes" => true, "No" => false }, @project.sponsor_permission), {}, {:onchange => "changeProjectPermission()"}
+        .selectParent{style: "width: 140px;"}
+          = f.select :sponsorship_permission, options_for_select({ "Yes" => true, "No" => false }, @project.sponsor_permission), {}, {:onchange => "changeProjectPermission()", class: "styledSelect"}
     .clearfix
 
     %div.sponsorship-true

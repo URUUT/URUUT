@@ -8,15 +8,17 @@
         .row
           .category.dropdown
             %label PROJECT CATEGORY:
-            %select{:id => "category", :name => "category"}
-              %option All Categories
-              = render "partials/project_filters", :type => :category
+            %section.selectParent
+              %select{:id => "category", :name => "category", class: "styledSelect"}
+                %option All Categories
+                = render "partials/project_filters", :type => :category
           .location.dropdown
             %label PROJECT LOCATION:
-            %select{:id => "location", :name => "city"}
-              %option All cities
-              = render "partials/project_filters", :type => :city
-          .keyword.dropdown{style: "margin-top: 4px;"}
+            %section.selectParent
+              %select{:id => "location", :name => "city", class: "styledSelect"}
+                %option All cities
+                = render "partials/project_filters", :type => :city
+          .keyword.dropdown{style: "margin-top: 14px;"}
             %label{style: "margin-top: 0;margin-bottom: 20px;"} KEYWORD SEARCH
             %input{:type => 'text', :id => 'keyword', :name => "keyword", :placeholder => "Keyword...",
               :value => params[:keyword]}

@@ -46,7 +46,8 @@
 
       %h6{:style => "color:#70bf4c"} USE CUSTOM SEEDER PERKS?
       .span2{style: "margin-left: 0"}
-        = f.select :perk_permission, options_for_select({ "Yes" => "yes", "No" => "no" }, @project.perk_permission.eql?(true) ? "yes" : "no"), {}, {:onchange => "changePerkPermission()"}
+        .selectParent{style: "width: 140px;"}
+          = f.select :perk_permission, options_for_select({ "Yes" => "yes", "No" => "no" }, @project.perk_permission.eql?(true) ? "yes" : "no"), {}, {:onchange => "changePerkPermission()", class: "styledSelect"}
 
     .clearfix
 
@@ -89,7 +90,8 @@
               .span2
                 %div{style: "font-size: 10px;"}
                   = label_tag "limit_perk", "LIMIT # AVAILABLE", class: "label-green"
-                = select_tag "limit_perk", options_for_select({ "Yes" => "yes", "No" => "no" }, "yes")
+                .selectParent{style: "width: 140px;"}
+                  = select_tag "limit_perk", options_for_select({ "Yes" => "yes", "No" => "no" }, "yes"), class: "styledSelect"
               .span5
                 = label_tag "perk_available", "HOW MANY OF THIS PERK ARE AVAILABLE", class: "label-green"
                 = text_field_tag "perk_available", '', class: "span6"

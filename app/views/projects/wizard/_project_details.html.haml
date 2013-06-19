@@ -28,12 +28,14 @@
       = f.label :duration, class: "label-green" do
         CAMPAIGN LENGTH*
         %span.italic{style: "color: #000"} (max 90 days)
-      = f.select :duration, options_for_select(project_length, @project.duration), :required => true
+      .selectParent{style: "width: 290px;"}
+        = f.select :duration, options_for_select(project_length, @project.duration), {}, :required => true, class: "styledSelect"
 
     %div.inline{:style => "margin-left:25px;"}
       = f.label :category, class: "label-green" do
         CATEGORY*
-      = f.select :category, options_for_select(project_categories, @project.category), :required => true
+      .selectParent{style: "width: 290px;"}
+        = f.select :category, options_for_select(project_categories, @project.category), {}, :required => true, class: "styledSelect"
 
     = f.label :title, class: "label-green" do
       CAMPAIGN HEADLINE*
