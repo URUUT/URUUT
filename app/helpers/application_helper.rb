@@ -188,4 +188,12 @@ module ApplicationHelper
     interval = project.duration.to_i < 45 ? 1 : 5
   end
 
+  def show_td_mark(project)
+    if project.organization_classification.eql?("170(c)(1)") || project.organization_classification.eql?("501(c)(3)")
+      "display: block"
+    else
+      "display:none"
+    end
+  end
+
 end

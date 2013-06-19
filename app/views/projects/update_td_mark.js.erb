@@ -1,1 +1,5 @@
-$(".wizard-data-td-mark").html("<%=j render 'td_mark_content' %>");
+<% if @project.organization_classification.eql?("170(c)(1)") || @project.organization_classification.eql?("501(c)(3)") %>
+$(".deductable-black").show();
+<% else %>
+$(".deductable-black").hide();
+<% end %>
