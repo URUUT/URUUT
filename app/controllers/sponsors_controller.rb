@@ -33,10 +33,27 @@ class SponsorsController < ApplicationController
         end
         session[:level_id] = 4
       else
-        @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[1]
-        @cost = @project.goal.to_i * 0.3
-        @level = "Platinum"
-        session[:level_id] = 1
+        level_sponsor = @sponsorship_levels.first.id
+        @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[level_sponsor]
+        case level_sponsor
+          when 1
+            @cost = @project.goal.to_i * 0.3
+            @level = "Platinum"
+          when 2
+            @cost = @project.goal.to_i * 0.1
+            @level = "Gold"
+          when 3
+            @cost = @project.goal.to_i * 0.04
+            @level = "Silver"
+          when 4
+            @level = "Bronze"
+            if (@project.goal.to_i * 0.1) >= 500
+              @cost = 500
+            else
+              @cost = @project.goal.to_i * 0.1
+            end
+        end
+        session[:level_id] = level_sponsor
     end
     @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
     logger.debug(@sponsorship_levels)
