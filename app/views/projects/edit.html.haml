@@ -39,7 +39,7 @@
         %span.border
 
     %li.submit
-      = link_to "javascript:void(0)", class: "#{"submit-finish-project" if session[:step].eql?("fourth") }" do
+      = link_to "javascript:void(0)", class: "submit-finish-project #{"submit-finish-project" if session[:step].eql?("fourth") }" do
         %span.steps Get Ruuted
         %span.title Submit
         %span.description Submit Your Project for Approval
