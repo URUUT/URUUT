@@ -287,7 +287,7 @@
         url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/update_content_assets_tab?id='+project_id
       });
       $(".skip-perk").text("CONTINUE TO STEP 4");
-      window.location.href = 'http://' + document.location.hostname + ":" + document.location.port + '/projects/'+ project +'/edit#sponsorship';
+      window.location.href = 'http://' + document.location.hostname + ":" + document.location.port + '/projects/'+ project_id +'/edit#sponsorship';
     });
   });
 
@@ -331,6 +331,7 @@
         $("input.project-save-continue").val("SAVE PERK & CONTINUE");
         $(".save-new-perk").text("SAVE PERK & ADD MORE");
         $('#perk-name').val(""); $('#perk-amount').val(""); $('#perk-description').val("");
+        $("#perk_available").val("");
         $(".count-perk").text( parseInt($(".count-perk").text()) + 1 );
         actionEditButton(); actionDeleteButton(); actionButton();
       });
@@ -374,6 +375,7 @@
         $("input.project-save-continue").val("SAVE PERK & CONTINUE");
         $(".save-new-perk").text("SAVE PERK & ADD MORE");
         $('#perk-name').val(""); $('#perk-amount').val(""); $('#perk-description').val("");
+        $("#perk_available").val("");
         $(".count-perk").text( parseInt($(".count-perk").text()) + 1 );
         actionEditButton(); actionDeleteButton(); actionButton();
         window.location.href = 'http://' + document.location.hostname + ":" + document.location.port + '/projects/'+ project +'/edit#sponsorship';
