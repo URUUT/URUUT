@@ -18,7 +18,7 @@
               %select{:id => "location", :name => "city", class: "styledSelect"}
                 %option All cities
                 = render "partials/project_filters", :type => :city
-          .keyword.dropdown{style: "margin-top: 14px;"}
+          .keyword.dropdown{style: "margin-top: -12px;"}
             %label{style: "margin-top: 0;margin-bottom: 20px;"} KEYWORD SEARCH
             %input{:type => 'text', :id => 'keyword', :name => "keyword", :placeholder => "Keyword...",
               :value => params[:keyword]}
