@@ -91,7 +91,6 @@
         - @user.badges.each do |badge|
           .profile-badge
             = image_tag badge.custom_fields[:image], :class => "img-circle", :data => { :content => badge.name }
-
   .span4
     -unless @pending_projects.empty?
       %h3 My Pending Projects
@@ -141,7 +140,7 @@
 
           %h5 Business or organization name
           %p= @user.organization
-
+		  
         %h5 Mission statement / about
         %p= @user.mission
 

@@ -122,20 +122,6 @@
               Become A Sponsor
               %span
 
-        / %h4.title{:style => 'margin-top:50px;'} Seeder Perks
-        / %ul.perks
-        /   -if @perks
-        /     - @perks.each do |p|
-        /       %li.perk
-        /         %h3= p.name
-        /         %p.description= p.description
-        /         %ul
-        /           %li
-        /             %h6 SEED
-        /             %p.amount $#{p.amount.to_i}
-        /           %li.fund-button
-        /             %a{:href => "#assets", :class => "fund btn"} Fund Now #{image_tag('arrow.png')}
-
         - if @project.sponsor_permission
           %ul#myTab4.tab-nav
             %li.active
@@ -388,7 +374,6 @@
                     .amount
                       %p.amount $#{perk}
                   %a.black-btn.btn.pull-right{:href => "javascript:void(0)"} Fund Now #{image_tag('arrow.png')}
-
           .seed-level{id: "perk-id-custom"}
             %h3.perk-name-other{id: "perk-name-other-custom"}
               CHOOSE YOUR PERK
@@ -441,7 +426,6 @@
       = hidden_field_tag "video_type"
     .modal-footer
       %input{:type => "submit", :value => "Submit video", onClick: "$(this).button('loading')"}
-
 :javascript
 
   $('.tax-deductible').tooltip({
@@ -451,9 +435,6 @@
 
 = javascript_include_tag "//code.jquery.com/ui/1.10.3/jquery-ui.js"
 = javascript_include_tag "jquery.ui.touch-punch.min"
-
-:javascript
-
   $('.save-btn').hide();
 
   var updateCover = function(event){

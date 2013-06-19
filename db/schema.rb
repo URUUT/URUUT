@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130613070242) do
+ActiveRecord::Schema.define(:version => 20130617071748) do
 
   create_table "badges_sashes", :force => true do |t|
     t.integer  "badge_id"
@@ -229,7 +229,7 @@ ActiveRecord::Schema.define(:version => 20130613070242) do
     t.integer  "project_id"
     t.boolean  "status",               :default => false
     t.string   "sponsorship_level"
-    t.integer  "cost"
+    t.float    "cost",                 :default => 0.0
   end
 
   create_table "sponsorship_levels", :force => true do |t|
