@@ -313,6 +313,11 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def update_td_mark
+    @project = Project.find(params[:id])
+    respond_to :js
+  end
+
   private
 
   def set_session_page
