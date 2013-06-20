@@ -86,6 +86,7 @@ Crowdfund::Application.routes.draw do
     get "more_donators", :on => :member
   end
   resources :projects do
+    get :get_complete_project, on: :collection
     get "add_desc", :on => :collection
     get "set_perk_to_false", :on => :collection
     get "update_content_assets_tab", :on => :collection
