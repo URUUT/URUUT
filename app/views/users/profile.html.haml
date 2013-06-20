@@ -39,7 +39,7 @@
               %option Funding Active
               %option Funding Completed
 
-      %div
+      #project-create
         = render "pages/project", :projects => @projects_created
         .cf
         = paginate @projects_created, :param_name => "created_page"
@@ -82,4 +82,23 @@
   $(function(){
     $("#main-row").prepend($("#flash_notice"))
     })
+
+  $(document).ready(function() {
+    $('#projects-created').change(function(){
+        // if ($(this).val() == "Funding Completed"){
+        //   $('.project-create .success').parent().addClass("success");
+        // }
+        // else{
+        //   $(".project-create").removeClass("success");
+        // }
+        var status = $(this).val();
+        $.ajax({
+          url: "/projects/get_complete_project",
+          data: {
+              user_id: "#{@user.id}",
+              status: status
+            }
+        })
+      })
+  })
 
