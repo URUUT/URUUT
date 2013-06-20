@@ -124,9 +124,8 @@ class ProjectAdmin::ProjectsController < ApplicationController
 
   def subheader
     @donations = Donation.find_all_by_project_id(@project.id)
-    # sponsors = ProjectSponsor.find_by_project_id(@project.id)
     @sponsors = ProjectSponsor.where(project_id: @project.id)
-    @sponsor_count = @sponsors.nil? ? 0 : @sponsors.count
+    @sponsor_count = @sponsors.empty? ? 0 : @sponsors.count
   end
 
   def admin_required!
