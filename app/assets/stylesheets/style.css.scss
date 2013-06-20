@@ -90,7 +90,12 @@ body{
   }
 }
 
+ul li{
+  word-wrap: break-word;
+}
+
 p{
+  word-wrap: break-word;
 
   &.subtext{
     font-family: 'Proxima Nova Semi', sans-serif;
@@ -653,8 +658,12 @@ h3, h4, h5{
 
     & + h4{
      margin-top: 20px !important;
-     margin-left: 110px;
+     /*margin-left: 110px;*/
      color: $green2;
+     float: left;
+     width: 180px;
+     word-wrap: break-word;
+     overflow: hidden;
    }
  }
 }
