@@ -492,7 +492,7 @@
       %h4.title{:style => 'margin-top:50px;'}Partners(#{@project.donations.count})
       %div.business
         - @project.donations.limit(20).each do |donation|
-          = image_tag donation.user.avatar, style: "width: 27px; height:27px; margin-bottom: 5px;"
+          = link_to(image_tag(donation.user.avatar, style: "width: 27px; height:27px; margin-bottom: 5px;"), profile_path(donation.user.id))
       - if @project.donations.count > 20
         = link_to more_donators_donation_path(@project.id), :class => 'btn more', :style => 'margin-top:10px;', remote: true do
           Show More
