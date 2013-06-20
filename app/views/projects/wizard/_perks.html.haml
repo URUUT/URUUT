@@ -62,7 +62,11 @@
       %hr{style: "margin-top: 0; margin-left: -19px; margin-right: -19px; background: #e0e0e0;"}
       %h4{style: "margin-bottom: 20px;"}
         Perk #
-        %span.count-perk{style: "margin-left: -1%"} #{@project.perks.count + 1}
+        %span.count-perk{style: "margin-left: -1%"}
+          #{@project.perks.count + 1}
+        %span.pull-right
+          .req-legend
+            *Required
       %fieldset{:style => "position:relative"}
         .perk-container
           .perk

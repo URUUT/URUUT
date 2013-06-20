@@ -1,5 +1,7 @@
 %h2.title SEND PROJECT EMAIL
 .well.clearfix
+  .req-legend
+    *Required
   %div.form-send-message.clearfix
     = form_for(@contact, :as => :post, :url => send_email_project_admin_projects_path, html: {remote: true}) do |f|
       .clearfix{style: "margin-bottom: 20px;"}
@@ -8,7 +10,7 @@
           .selectParent
             = select_tag "sponsor_level", options_for_select(@list_recepients), prompt: "Choose sponsor level or perk", onchange: "get_emails_based_on_category()", class: "styledSelect", style: "width: 100%; padding-right: 55px;"
         .pull-left
-          %a.cs_import.btn{style: "margin-left: 6%; margin-top: 20px;"} Add Contacts
+          %a.cs_import.btn{style: "margin-left: 6%; margin-top: 17px;"} Add Contacts
 
       %div.textarea-recepient
         %textarea#contact_list{:style => "width:637px;height:24px", :name => "email_recepient"}

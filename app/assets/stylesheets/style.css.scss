@@ -1746,7 +1746,7 @@ footer div ul li a{
 }
 
 .users.show, .users.profile{
-  
+
  .project:nth-child(even) {
     margin-right: 0;
   }
@@ -1824,6 +1824,15 @@ body.users.show, body.users.profile{
 body.pages.contact{
   #flash_notice{
     display: none;
+  }
+
+  footer{
+    .new_newsletter{
+      #newsletter_email + .btn{
+        display: inline-block !important;
+        margin-bottom: 0;
+      }
+    }
   }
 }
 
@@ -1968,11 +1977,14 @@ body.pages.contact{
   color: $green2;
   font-family: 'Georgia', serif;
   font-style: italic;
-  text-transform: uppercase;
   margin-bottom: 10px;
+  text-transform: initial;
+  font-size: 13px;
+  line-height: 19px;
+  letter-spacing: 0;
 }
 
-body.pages.index{
+body.pages.index, body.pages.search{
   .full-width{
     .selectParent{
       width: 300px;
