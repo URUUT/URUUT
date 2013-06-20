@@ -8,6 +8,9 @@
   %h4 Create an account
   = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => "well"}) do |f|
     = devise_error_messages!
+
+    .req-legend
+      *Required
     .row
       .span3.well-half
         = f.label :first_name, "First Name*", class: "label-green"

@@ -13,6 +13,9 @@
           - @project.errors.full_messages.each do |msg|
             %li #{msg}
 
+    .req-legend
+      *Required
+      
     = f.label :project_title, class: "label-green" do
       PROJECT TITLE*
       %span.italic{style: "color: #000"} (Ex. Dunwoody City Park Fountain)
