@@ -1258,7 +1258,7 @@ ul.nav{
   margin-bottom: 25px;
 
   .styledSelect, #type{
-    font: bold 24px/24px arial, helvetica, sans-serif;
+    font: bold 24px/40px arial, helvetica, sans-serif;
     width: 100%;
     background: transparent;
     height: 54px;
@@ -1273,7 +1273,7 @@ ul.nav{
   }
 
   .styledSelect.smallText{
-    font-size: 18px;
+    font-size: 16px;
     line-height: 20px;
   }
 }
@@ -1763,7 +1763,7 @@ body.users.show{
 
       .styledSelect{
         width: 236px;
-        font-size: 18px;
+        font-size: 16px;
         line-height: 20px;
       }
     }
