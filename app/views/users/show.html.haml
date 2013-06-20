@@ -116,10 +116,13 @@
             = @user.subscribed ? "" : "Not"
             Subscribed
 
+
 :javascript
-  $(function(){
-    $("#main-row").prepend($("#flash_notice"))
-    })
+
+  $(".banner").ready(function(){
+    $("#main-row").prepend($("#flash_notice"));
+    $("#flash_notice").show();
+  });
 
   $(document).ready(function() {
     $('#projects-created').change(function(){
