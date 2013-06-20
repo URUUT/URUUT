@@ -653,8 +653,12 @@ h3, h4, h5{
 
     & + h4{
      margin-top: 20px !important;
-     margin-left: 110px;
+     /*margin-left: 110px;*/
      color: $green2;
+     float: left;
+     width: 180px;
+     word-wrap: break-word;
+     overflow: hidden;
    }
  }
 }
