@@ -22,3 +22,7 @@
 every '1 * * * *' do
   runner "Project.print_test"
 end
+
+every '1 0 * * *' do
+  command "echo 'you can use raw cron syntax too'"
+end
