@@ -76,7 +76,7 @@ class Project < ActiveRecord::Base
     amount_by_date
   end
 
-  def printTest
+  def print_test
     logger.debug("Test Crap")
   end
 

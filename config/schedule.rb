@@ -18,3 +18,7 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
+
+every '1 * * * *' do
+  runner "Project.print_test"
+end
