@@ -49,6 +49,6 @@ Crowdfund::Application.configure do
     password: "aoNGZ1rulN3ICprygmwKbw"
   }
 
-  Paperclip.options[:command_path] = "/usr/local/Cellar/imagemagick/6.7.1-1/bin"
+  # Paperclip.options[:command_path] = "/usr/local/Cellar/imagemagick/6.7.1-1/bin"
   RailsDevelopmentBoost.async = false if defined?(RailsDevelopmentBoost) 
 end

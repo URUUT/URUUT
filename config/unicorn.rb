@@ -4,6 +4,9 @@ preload_app true
 #listen 4040
 
 before_fork do |server, worker|
+  
+  @sidekiq_pid ||= spawn("bundle exec sidekiq -c 2")
+  
   # Replace with MongoDB or whatever
   if defined?(ActiveRecord::Base)
     ActiveRecord::Base.connection.disconnect!
@@ -30,5 +33,12 @@ after_fork do |server, worker|
   if defined?(Resque)
     Resque.redis = ENV['REDIS_URI']
     Rails.logger.info('Connected to Redis')
+  end
+  
+  Sidekiq.configure_client do |config|
+    config.redis = { :size => 1 }
+  end
+  Sidekiq.configure_server do |config|
+    config.redis = { :size => 5 }
   end
 end

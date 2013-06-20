@@ -51,7 +51,7 @@ Crowdfund::Application.configure do
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
 
-  config.action_mailer.default_url_options = { host: "uruut.41studio.com" }
+  config.action_mailer.default_url_options = { host: "0.0.0.0:8080" }
 
 
   config.action_mailer.smtp_settings = {
