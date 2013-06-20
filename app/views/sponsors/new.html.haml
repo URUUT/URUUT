@@ -146,6 +146,8 @@
 
       %h4 SPONSOR INFORMATION
       .well
+        .req-legend
+          *Required
         %div
           = f.label :name, "Business OR ORGANIZATION NAME*", class: "label-green"
           = text_field :project_sponsor, :name, required: true, label: false, class: "span12"
@@ -181,6 +183,8 @@
 
       %h3 Payment Information
       .well
+        .req-legend
+          *Required
         %div
           = f.label :payment_type, class: "label-green" do
             PREFERRED PAYMENT METHOD*
