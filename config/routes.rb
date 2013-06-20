@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Crowdfund::Application.routes.draw do
   # match '/users/auth/:provider/callback', to: 'services#create'
 
@@ -127,6 +129,8 @@ Crowdfund::Application.routes.draw do
     get "privacy", :on => :collection
     get "funding_sources", :on => :collection
   end
+  
+  mount Sidekiq::Web => '/sidekiq'
 
   root to: "pages#home"
 

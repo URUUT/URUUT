@@ -279,7 +279,7 @@ class ProjectsController < ApplicationController
     if project.save!
       session[:step] = nil
       respond_to do |format|
-        # Project.send_confirmation_email(project)
+        Project.delay.send_confirmation_email(project)
         format.json { render :json => project.ready_for_approval }
       end
     end
