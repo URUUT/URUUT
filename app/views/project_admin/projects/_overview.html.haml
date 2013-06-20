@@ -56,7 +56,7 @@
           type: 'linear',
           showLastLabel: true,
           endOnTick: true,
-          max: 30,
+          max: #{@project.duration.to_i},
           tickInterval: #{get_interval_chart(@project)}
       },
       yAxis: {
