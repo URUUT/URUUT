@@ -1745,7 +1745,14 @@ footer div ul li a{
   }
 }
 
-body.users.show{
+.users.show, .users.profile{
+  
+ .project:nth-child(even) {
+    margin-right: 0;
+  }
+}
+
+body.users.show, body.users.profile{
 
   #flash_notice{
     margin-top: -20px;
