@@ -39,7 +39,7 @@
               %option Funding Active
               %option Funding Completed
 
-      %div
+      #project-create
         = render "pages/project", :projects => @projects_created
         .cf
         = paginate @projects_created, :param_name => "created_page"
