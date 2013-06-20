@@ -1,0 +1,20 @@
+var div = $("#project-create")
+
+div.html("<%=j render 'pages/project', :projects => @projects_created %>");
+div.append("<div class='cf'></div>");
+div.append("<%=j paginate @projects_created, :param_name => 'created_page' %>");
+
+$('.tax-deductible').tooltip({
+  placement: "top",
+  trigger: "hover"
+});
+
+$(".pagination").find('a').each(function(){
+  var href = $($(this)).attr('href').replace("get_complete_project", "<%= @user.id %>");
+  var splitUrl = href.split("?")[0];
+  href = href.replace(splitUrl, window.location);
+  href = href + "&status=<%= params[:status] %>"
+  $($(this)).attr('href', href)
+});
+
+$('.project-create .success').parent().addClass("success");
