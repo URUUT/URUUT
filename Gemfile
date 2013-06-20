@@ -82,4 +82,4 @@ gem 'wicked'
 gem 'validates_email_format_of'
 gem 'merit'
 #gem 'jquery-fileupload-rails'
-#gem 'whenever', require: false
+gem 'whenever', require: false
