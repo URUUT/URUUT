@@ -3,7 +3,9 @@ Crowdfund::Application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations"}
   # devise_for :users, :controllers => { :registrations => "registrations" }
-  resources :users, :only => [:show]
+  resources :users, :only => [:show] do
+    get :get_complete_project, on: :collection
+  end
 
   get "contacts/new"
 
@@ -21,7 +23,8 @@ Crowdfund::Application.routes.draw do
 
   get "set_new_perk" => "donations#set_new_perk"
 
-  get "users/profile"
+  # get "users/profile"
+  get "users/:user_id/profile" => "users#profile", as: "profile"
 
   match "browse/projects" => "pages#index", :as => "browse_projects"
   match "search/projects" => "pages#search", :as => "search_projects"
