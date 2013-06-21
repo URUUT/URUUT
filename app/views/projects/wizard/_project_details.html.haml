@@ -15,7 +15,7 @@
 
     .req-legend
       *Required
-      
+
     = f.label :project_title, class: "label-green" do
       PROJECT TITLE*
       %span.italic{style: "color: #000"} (Ex. Dunwoody City Park Fountain)
@@ -25,7 +25,7 @@
     = f.label :goal, class: "label-green" do
       FUNDING GOAL*
       %span.italic{style: "color: #000"}
-    = f.text_field :goal, :required => true, class: "span8"
+    = f.number_field :goal, :required => true, class: "span8"
 
     %div.inline
       = f.label :duration, class: "label-green" do
