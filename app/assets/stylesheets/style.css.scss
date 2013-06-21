@@ -412,24 +412,8 @@ h3, h4, h5{
 
   p{
     margin-bottom: 5px;
-    text-align: justify;
+    text-align: left;
   }
-
-  /*p{
-
-    &.subtext{
-      font-family: 'Proxima Nova Semi', sans-serif;
-    }
-
-    a{
-      color: $green2;
-      text-decoration: underline;
-
-      &:hover{
-        text-decoration: none;
-      }
-    }
-    }*/
 
     &:hover, .active{
       background: $light-green;
@@ -1590,8 +1574,12 @@ ul.chart-legend{
   }
 }
 
-.step-container div.checkbox input[type=checkbox]{
-  float: left;
+.step-container div.checkbox{
+  word-wrap: break-word;
+
+  input[type=checkbox]{
+    float: left;
+  }
 }
 
 ul.breadcrumbs{
@@ -2006,6 +1994,49 @@ body.pages.index, body.pages.search{
   }
 }
 
+.modal{
+  width: 460px;
+  left: 53%;
+  
+  .close{
+    color: $green2;
+    opacity: 1;
+    font-size: 10px;
+  }
 
+  .tittle{
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+
+  .modal-header{
+    border-bottom: none;
+  }
+
+  .modal-body{
+    font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 1;
+  }
+  
+  .modal-footer{
+    background: transparent;
+    border-top: none;
+
+    .btn{
+      width: 47.5%;
+      display: block;
+      float: left;
+      margin-left: 5%;
+      font-size: 13px;
+      padding: 10px;
+      border-radius: 5px;
+
+      &:first-child{
+        margin-left: 0;
+      }
+    }
+  }
+}
 
 
