@@ -80,7 +80,9 @@
                     = link_to pending_project.project_title, pending_project.step, class: "green-link", style: "text-transform: capitalize;"
                   - else
                     = link_to pending_project.project_title, "/projects/#{pending_project.id}/edit#sponsor-info", class: "green-link", style: "text-transform: capitalize;"
-                = link_to '<i class="icon-trash icon-green"></i>'.html_safe, project_path(pending_project), {method: :delete, confirm: 'Are you sure?', :style => "float: right;"}
+                = link_to '<i class="icon-trash icon-green"></i>'.html_safe, "#deleteModal", :data => {:toggle=>"modal"}, :style => "float: right;"
+                / %a{:href => "#deleteModal",}
+                /   %i.icon-trash.icon-green
 
       %h3.title #{who(:whose)} badges
       .well.info.badge-wrapper
@@ -117,6 +119,17 @@
           %p
             = @user.subscribed ? "" : "Not"
             Subscribed
+
+
+#deleteModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Close X
+    %h3#myModalLabel.tittle Delete Pending Project?
+  .modal-body
+    %p Are you sure you want to delete the pending project <project name>?
+  .modal-footer
+    %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Cancel
+    %button.btn Yes, Delete Project
 
 
 :javascript
