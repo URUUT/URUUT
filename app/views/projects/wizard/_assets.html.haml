@@ -39,6 +39,9 @@
                   WEB:
                   - unless @project.website.nil?
                     = link_to(strip_url(@project.website), recognize_url(@project.website), target: "_blank", :style => "font-style: italic; text-decoration: underline; color: #3f403b; font-family: 'Georgia', serif;")
+                %span{style: "margin-left: 10px"}
+                = image_tag "message-green.png"
+                = link_to "Contact Us", "mailto:#{User.find(@project.user_id).email}", target: "_blank", :style => "font-style: italic; text-decoration: underline; color: #3f403b; font-family: 'Georgia', serif;"
         - if @project.sponsor_permission
           %h4.title{:style => 'margin-top:50px;'} PROJECT SPONSORS
           = link_to "javascript:void(0)", :class => 'btn', :style => 'background:#3f403b;padding:10px;margin-top:10px;' do
@@ -139,7 +142,7 @@
                           = p.name
                         - if p.limit
                           %p= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} Available)"
-                        %p.description= p.description
+                        %p= p.description
                         .clearfix
                           .seed-num
                             .amount
@@ -247,7 +250,7 @@
                       = p.name
                     - if p.limit
                       %p= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} Available)"
-                    %p.description= p.description
+                    %p= p.description
                     .clearfix
                       .seed-num
                         .amount
