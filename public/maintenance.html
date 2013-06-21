@@ -13,94 +13,17 @@
 		<div class="container">
 			<h1 class="logo pull-left">
 				<a href="/">Home</a>
-			</h1>
-			<ul class="nav">
-				<li>
-					<a href="/browse/projects">Fund Projects</a>
-				</li>
-				<li>
-					<a href="/projects/new" style="">Get Funding
-					</a>
-				</li>
-				<li>
-					<a href="/pages/about" style="">About URUUT
-					</a>
-				</li>
-			</ul>
-			<ul class="pull-right right logged-in">
-				<li class="dropdown" style="display: inline-block;">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Log In</a>
-					<span class="or">or</span>
-					<a href="/users/sign_up" class="sign-up-link">Sign Up</a>
-					<div class="log-in dropdown-menu">
-						<div class="drop-wrapper">
-							<div class="dropdown-arrow"></div>
-							<ul>
-								<li>
-									<h5>Account Log In</h5>
-									<form accept-charset="UTF-8" action="/users/sign_in" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="fZOgaaiaYAVrjLnGlIriFVjGuAt9RyOIeobRfUyD2mA="></div>
-										<input id="user_email" name="user[email]" placeholder="Your Email" type="text" style="height: 18px !important; padding: 6px; width: 162px !important;">
-										<input id="user_password" name="user[password]" placeholder="Your Password" type="password" style="height: 18px !important; padding: 6px; width: 162px !important;">
-										<div>
-											<input id="user_remember_me" name="user[remember_me]" type="checkbox" value="1">
-											<label for="user_remember_me">Remember me</label>
-										</div>
-										<button class="btn">
-											Log in
-											<span></span>
-										</button>
-									</form>
-									<a data-toggle="modal" href="#forgotModal" role="button" style="font: italic 12px/15px 'Georgia', georgia, serif !important;text-transform:none;">
-										Forgot your password?
-									</a>
-									<hr>
-									<h5>FACEBOOK LOG IN</h5>
-									<p>It's fast and easy.</p>
-									<a href="/users/auth/facebook"><img alt="Fb-180" src="../app/assets/images/fb-180.png">
-									</a>
-									<p>
-										We'll never post anything
-										<br>
-										without permission.
-									</p>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</li>
-			</ul>
-			<div aria-hidden="true" aria-labelledby="myModalLabel" class="modal hide fade" id="forgotModal" role="dialog" style="width: 440px;" tabindex="-1">
-				<div class="modal-header" style="border-bottom: none;">
-					<button aria-hidden="true" class="close label-green" data-dismiss="modal" style="font-family: 'Proxima Nova', sans-serif; font-size: 12px;opacity: 1;" type="button">
-						Close X
-					</button>
-					<h3 class="tittle" id="myModalLabel" style="margin-bottom: 0;">FORGOT YOUR PASSWORD?</h3>
-				</div>
-				<div class="modal-body" style="padding-top: 0; font-size: 13px; letter-spacing: 1px;">
-					<p>Enter the email address you used when you signed up and we'll send you instructions to reset your password.</p>
-					<p>For security reasons, we do NOT store your password. So rest assured that we will never send your password via email.</p>
-					<form accept-charset="UTF-8" action="/users/password" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="fZOgaaiaYAVrjLnGlIriFVjGuAt9RyOIeobRfUyD2mA="></div>
-						<div class="email">
-							<h4 class="label-green">Email Address</h4>
-							<input id="user_email" name="user[email]" size="30" type="email">
-						</div>
-						<div style="text-align: center">
-							<input class="btn" name="commit" style="background: #81C263; border-radius: 5px; padding-top: 20px; padding-bottom: 20px;" type="submit" value="Reset My Password">
-						</div>
-					</form>
-				</div>
-			</div>
-			<script src="/assets/pages.js" type="text/javascript"></script>
+			</h1>			
 		</div>
 	</header>
 
 
 
-	<div class="container" style="min-height: 700px;">
+	<div id="containerMain" class="container" style="min-height: 700px;">
 		<div class="row">
 			<div class="span5">
 				<div class="simplepage-img">
-					<img src="/assets/maintenance.png"/>
+					<img src="../app/assets/images/maintenance.png"/>
 				</div>
 			</div>
 			<div class="span7">
@@ -124,73 +47,6 @@
 		</div>
 	</div>
 
-
-
-
-	<footer>
-		<div class="container cf">
-			<ul>
-				<li>
-					<a href="/browse/projects"><h6>Fund Projects</h6>
-					</a>
-				</li>
-				<li>
-					<a href="/projects/new"><h6>Get Funding</h6>
-					</a>
-				</li>
-				<li>
-					<a href="/pages/about"><h6>About URUUT</h6>
-					</a>
-				</li>
-				<li>
-					<a href="/pages/contact"><h6>Contact</h6>
-					</a>
-				</li>
-			</ul>
-			<ul>
-				<li>
-					<a href="/pages/faqs"><h6>FAQ</h6>
-					</a>
-				</li>
-				<li>
-					<a href="/pages/privacy"><h6>Privacy Policy</h6>
-					</a>
-				</li>
-				<li>
-					<a href="/pages/terms"><h6>Terms of Use</h6>
-					</a>
-				</li>
-			</ul>
-			<ul>
-				<li>
-					<h6>Find Us On</h6>
-				</li>
-				<li>
-					<a href="http://www.facebook.com/get.ruuted" class="fb" target="_blank"></a>
-					<a href="http://www.twitter.com/uruut" class="tw" target="_blank"></a>
-					<a href="http://www.linkedin.com/company/uruut" class="lkd" target="_blank"></a>
-					<a href="https://plus.google.com/114477089797728702899/posts" class="gplus" target="_blank"></a>
-				</li>
-			</ul>
-			<ul>
-				<li>
-					<h6>Sign up for URUUT news</h6>
-					<form accept-charset="UTF-8" action="/newsletters" class="new_newsletter" data-remote="true" id="email-sign-up" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="fZOgaaiaYAVrjLnGlIriFVjGuAt9RyOIeobRfUyD2mA="></div>
-						<div>
-							<input id="newsletter_email" name="newsletter[email]" placeholder="enter email address" size="30" type="email" style="height: 18px !important;">
-							<button class="btn" type="submit">
-								<span></span>
-							</button>
-						</div>
-						<div id="email-sign-up-error">
-							<p>Please check your email</p>
-						</div>
-					</form>
-				</li>
-			</ul>
-		</div>
-	</footer>
-
 	<div class="copyright">
 		<div class="container">
 			<p>
@@ -201,13 +57,19 @@
 				<span class="italic">
 					All Rights Reserved.
 				</span>
+				<a href="http://www.facebook.com/get.ruuted" class="fb" target="_blank" style="margin-left: 40px;"></a>
+				<a href="http://www.twitter.com/uruut" class="tw" target="_blank"></a>
+				<a href="http://www.linkedin.com/company/uruut" class="lkd" target="_blank"></a>
+				<a href="https://plus.google.com/114477089797728702899/posts" class="gplus" target="_blank"></a>
 			</p>
+
 		</div>
 	</div>
 
 	<script type="text/javascript">
 	$(document).ready(function(){
-
+		var $heiight = $(window).height() - 105;
+		$('#containerMain').attr('style', 'min-height: ' + $heiight + 'px;');
 	});
 
 	</script>
