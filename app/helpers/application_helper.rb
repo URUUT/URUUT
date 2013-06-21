@@ -197,7 +197,7 @@ module ApplicationHelper
   end
 
   def message_style(controller_name, action_name)
-    if controller_name.eql?("users") and action_name.eql?("show")
+    if ( controller_name.eql?("users") and action_name.eql?("show") ) or ( controller_name.eql?("users") and action_name.eql?("profile") )
       "display:none"
     else
       "display:block"
