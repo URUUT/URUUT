@@ -123,13 +123,13 @@
 
 #deleteModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-header
-    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Close X
+    %button.close.closes{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Close X
     %h3#myModalLabel.tittle Delete Pending Project?
   .modal-body
     %p Are you sure you want to delete the pending project <project name>?
   .modal-footer
     %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Cancel
-    %button.btn Yes, Delete Project
+    %a.btn Yes, Delete Project
 
 
 :javascript
