@@ -74,9 +74,6 @@ GEM
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
-    carrierwave (0.8.0)
-      activemodel (>= 3.2.0)
-      activesupport (>= 3.2.0)
     celluloid (0.14.1)
       timers (>= 1.0.0)
     code_analyzer (0.3.1)
@@ -348,7 +345,6 @@ DEPENDENCIES
   binding_of_caller
   bitly
   capistrano
-  carrierwave
   coffee-rails (~> 3.2.1)
   daemons
   debugger
