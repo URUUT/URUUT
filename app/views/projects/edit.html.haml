@@ -143,6 +143,7 @@
         url: '#{projects_submit_project_url}',
         data: {id: #{@project.id}}
       }).done(function(data) {
+        localStorage.clear();
         window.location.href = "#{thank_you_pages_url}";
       });
     } else {
