@@ -402,6 +402,8 @@
       }
       else{
         $('.new-save-btn').hide();
+        $(".loader-cover").hide();
+        $(".coverphoto").show();
         $('#large_image').css('background-image', current_bg);
         $('.drag-instructions').remove();
         $("#large_image").append('<span class="drag-instructions" style="width: 300px;"><b>image width for cover should be more than 1600px</b></span>');
