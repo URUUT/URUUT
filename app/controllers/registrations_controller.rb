@@ -30,6 +30,8 @@ class RegistrationsController < Devise::RegistrationsController
         edit_project_path(project.id)
       elsif session[:path] == "sponsor_new"
         new_project_sponsor_url
+      elsif session[:path]
+        session[:path]
       elsif request.referer == sign_up_url
         super
       else

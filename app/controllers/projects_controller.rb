@@ -324,6 +324,11 @@ class ProjectsController < ApplicationController
     respond_to :js
   end
 
+  def set_previous_path_for_registration
+    session[:path] = params[:url]
+    redirect_to new_user_registration_url
+  end
+
   private
 
   def set_session_page
