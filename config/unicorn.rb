@@ -5,7 +5,7 @@ preload_app true
 
 before_fork do |server, worker|
   
-  @sidekiq_pid ||= spawn("bundle exec sidekiq -c 2")
+  #@sidekiq_pid ||= spawn("bundle exec sidekiq -c 2")
   
   # Replace with MongoDB or whatever
   if defined?(ActiveRecord::Base)
