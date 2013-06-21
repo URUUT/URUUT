@@ -29,20 +29,21 @@
 .span12{:style => "margin-top:160px"}
   .row#main-row
     .span8
-      %h3.tittle
-        Their projects
-      %div
-        .projects-created.dropdown-list
-          %label Project status:
-          .selectParent
-            %select.styledSelect{:id => "projects-created"}
-              %option Funding Active
-              %option Funding Completed
+      -unless @projects_created.blank?
+        %h3.tittle
+          Their projects
+        %div
+          .projects-created.dropdown-list
+            %label Project status:
+            .selectParent
+              %select.styledSelect{:id => "projects-created"}
+                %option Funding Active
+                %option Funding Completed
 
-      #project-create
-        = render "pages/project", :projects => @projects_created
-        .cf
-        = paginate @projects_created, :param_name => "created_page"
+        #project-create
+          = render "pages/project", :projects => @projects_created
+          .cf
+          = paginate @projects_created, :param_name => "created_page"
 
     .span4
 
