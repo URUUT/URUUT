@@ -35,7 +35,6 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
-  gem 'turbo-sprockets-rails3'
 end
 
 group :production do
@@ -87,5 +86,6 @@ gem 'validates_email_format_of'
 gem 'merit'
 #gem 'jquery-fileupload-rails'
 gem 'sidekiq'
+gem 'whenever'
 gem 'slim', '>= 1.1.0'
 gem 'sinatra', '>= 1.3.0', :require => nil

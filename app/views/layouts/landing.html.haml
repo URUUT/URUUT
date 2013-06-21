@@ -22,7 +22,7 @@
         window.fbAsyncInit = function() {
           // init the FB JS SDK
           FB.init({
-            appId      : "#{FACEBOOK_KEY}",                        // App ID from the app dashboard
+            appId      : "#{Settings.facebook.api_key}",                        // App ID from the app dashboard
             channelUrl : '', // Channel file for x-domain comms
             status     : true,                                 // Check Facebook Login status
             xfbml      : true                                  // Look for social plugins on the page
@@ -35,7 +35,7 @@
           var js, fjs = d.getElementsByTagName(s)[0];
           if (d.getElementById(id)) return;
           js = d.createElement(s); js.id = id;
-          js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=#{FACEBOOK_KEY}";
+          js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=#{Settings.facebook.api_key}";
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
 

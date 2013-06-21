@@ -29,6 +29,6 @@ production:
   encoding: unicode
   database: uruut_production
   host: 127.0.0.1
-  pool: 15
+  pool: 5
   username: <%= ENV['POSTGRES_USER'] %>
   password: <%= ENV['POSTGRES_PASS'] %>
