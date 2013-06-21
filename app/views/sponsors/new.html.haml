@@ -250,7 +250,22 @@
   = @project.id
 
 :javascript
-  $('#new_sponsor').validate();
+  $('#new_sponsor').validate({
+    rules: {
+      "sponsor[email]":{
+        required: true,
+        email: true
+      },
+      "project_sponsor[site]":{
+        required: true,
+        url: true
+      },
+      "sponsor[phone]":{
+        required: true,
+        number: true
+      }
+    }
+  });
 
   project_token = "#{@project.project_token}";
   project_pub_key = "#{@project.publishable_key}";

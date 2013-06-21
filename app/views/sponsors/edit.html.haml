@@ -42,7 +42,7 @@
         .clearfix{:style => "margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #ccc"}
           .pull-left
             %h5{style: "margin-bottom: 0;"} COST
-            %h3{style: "margin: 0;line-height: 20px;"}= number_to_currency((@project.goal.to_i * 0.3), precision: 0)
+            %h3{style: "margin: 0;line-height: 20px;"}= amount_converter((@project.goal.to_i * 0.3))
           - if check_availibility(@project, 1) < 1
             %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-1", :"sponsor-id" => "1"}
               SPONSOR
@@ -63,7 +63,7 @@
         .clearfix{:style => "margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #ccc"}
           .pull-left
             %h5{style: "margin-bottom: 0;"} COST
-            %h3{style: "margin: 0;line-height: 20px;"}= number_to_currency((@project.goal.to_i * 0.1), precision: 0)
+            %h3{style: "margin: 0;line-height: 20px;"}= amount_converter((@project.goal.to_i * 0.1))
           - if check_availibility(@project, 2) < 3
             %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-2", :"sponsor-id" => "2"}
               SPONSOR
@@ -84,7 +84,7 @@
         .clearfix{:style => "margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #ccc"}
           .pull-left
             %h5{style: "margin-bottom: 0;"} COST
-            %h3{style: "margin: 0;line-height: 20px;"}= number_to_currency((@project.goal.to_i * 0.04), precision: 0)
+            %h3{style: "margin: 0;line-height: 20px;"}= amount_converter((@project.goal.to_i * 0.04))
           - if check_availibility(@project, 2) < 3
             %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-3", :"sponsor-id" => "3"}
               SPONSOR
@@ -103,7 +103,7 @@
         .clearfix
           .pull-left
             %h5{style: "margin-bottom: 0;"} COST
-            %h3{style: "margin: 0;line-height: 20px;"}= number_to_currency((@project.goal.to_i * 0.005), precision: 0)
+            %h3{style: "margin: 0;line-height: 20px;"}= amount_converter((@project.goal.to_i * 0.005))
           %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-4", :"sponsor-id" => "4"}
             SPONSOR
             %span
@@ -114,7 +114,7 @@
         .span12{:style => "background-color: #f5f5f5; margin-left: 0px;"}
           .pull-left{:style => "width: 250px; height: 500px; border-right: solid 1px #d3d3d3;"}
             %h4 SPONSORSHIP COST
-            %h1.cost-level.label-green-big.label-green #{number_to_currency(@cost, precision: 0)}
+            %h1.cost-level.label-green-big.label-green #{amount_converter(@cost)}
             = image_tag "platinum-placement.png", class: "sponsor-placement platinum"
             = image_tag "gold-placement.png", class: "sponsor-placement gold"
             = image_tag "silver-placement.png", class: "sponsor-placement silver"
@@ -238,6 +238,24 @@
   = @project.id
 
 :javascript
+
+  $('#edit_sponsor_#{@sponsor.id}').validate({
+    rules: {
+      "sponsor[email]":{
+        required: true,
+        email: true
+      },
+      "project_sponsor[site]":{
+        required: true,
+        url: true
+      },
+      "sponsor[phone]":{
+        required: true,
+        number: true
+      }
+    }
+  });
+
   project_token = "#{@project.project_token}";
   project_pub_key = "#{@project.publishable_key}";
 
@@ -281,7 +299,7 @@
       }
     };
 
-    $('#new_sponsor').on('submit', function(e){
+    $('#edit_sponsor_#{@sponsor.id}').on('submit', function(e){
       if ( $("#sponsor_payment_type").val() == "Credit Card") {
         if ( $('#card_number').length ){
           processCard();
