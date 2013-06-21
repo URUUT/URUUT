@@ -122,9 +122,16 @@ header, footer{
 input[type=text],
 input[type=email],
 input[type=date],
-input[type=password] {
+input[type=password],
+input[type=number] {
   height: 64px;
   padding: 14px 19px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 a.green-link{

@@ -146,7 +146,8 @@ h6 {
 input[type=text],
 input[type=email],
 input[type=date],
-input[type=password] {
+input[type=password],
+input[type=number] {
   border-radius:5px;
 	box-shadow:1px 1px 1px rgba(0,0,0,0.5);
 	font:bold 24px/24px arial, helvetica, sans-serif;
@@ -1187,7 +1188,7 @@ h5.time-left {
 }
 
 .projects.edit, .projects.new {
-  input[type=text], textarea {
+  input[type=text], textarea, input[type=number] {
     margin-bottom:25px;}
   label {
     font: 12px/12px "Proxima Nova", arial, sans-serif;
