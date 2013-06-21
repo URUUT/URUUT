@@ -1,6 +1,10 @@
 # config/initializers/sidekiq.rb
-if Rails.env.production? || Rails.env.staging?
-  Sidekiq.configure_client do |config|
-    config.redis = { :size => 1}
-  end
+require 'sidekiq'
+
+Sidekiq.configure_client do |config|
+  config.redis = { :size => 1 }
+end
+
+Sidekiq.configure_server do |config|
+  config.redis = { :size => 6 }
 end
