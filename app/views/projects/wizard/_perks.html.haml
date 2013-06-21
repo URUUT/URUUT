@@ -95,7 +95,7 @@
                 %div{style: "font-size: 10px;"}
                   = label_tag "limit_perk", "LIMIT # AVAILABLE", class: "label-green"
                 .selectParent{style: "width: 140px;"}
-                  = select_tag "limit_perk", options_for_select({ "Yes" => "yes", "No" => "no" }, "yes"), class: "styledSelect"
+                  = select_tag "limit_perk", options_for_select({ "Yes" => "yes", "No" => "no" }, "no"), class: "styledSelect"
               .span5
                 = label_tag "perk_available", "HOW MANY OF THIS PERK ARE AVAILABLE", class: "label-green"
                 = text_field_tag "perk_available", '', class: "span6"
