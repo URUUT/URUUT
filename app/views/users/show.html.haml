@@ -71,16 +71,29 @@
             - @pending_projects.each do |pending_project|
               %li
                 - if pending_project.project_title.blank?
+                  - title = "Project Started on #{pending_project.created_at.strftime(format='%_m/%d/%C')}"
                   - if !pending_project.step.blank?
                     = link_to "Project Started on #{pending_project.created_at.strftime(format='%_m/%d/%C')}", pending_project.step, class: "green-link", style: "text-transform: capitalize;"
                   -else
                     = link_to "Project Started on #{pending_project.created_at.strftime(format='%_m/%d/%C')}", "/projects/#{pending_project.id}/edit#sponsor-info", class: "green-link", style: "text-transform: capitalize;"
                 -else
+                  - title = pending_project.project_title
                   - if !pending_project.step.blank?
                     = link_to pending_project.project_title, pending_project.step, class: "green-link", style: "text-transform: capitalize;"
                   - else
                     = link_to pending_project.project_title, "/projects/#{pending_project.id}/edit#sponsor-info", class: "green-link", style: "text-transform: capitalize;"
-                = link_to '<i class="icon-trash icon-green"></i>'.html_safe, "#deleteModal", :data => {:toggle=>"modal"}, :style => "float: right;"
+                = link_to '<i class="icon-trash icon-green delete"></i>'.html_safe, "#deleteModal#{pending_project.id}", data: {toggle:"modal", title: pending_project.title }, :style => "float: right;"
+                .modal.hide.fade{id: "deleteModal#{pending_project.id}","aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+                  .modal-header
+                    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Close X
+                    %h3#myModalLabel.tittle Delete Pending Project?
+                  .modal-body
+                    %p
+                      = "Are you sure you want to delete the pending project #{title}?"
+                  .modal-footer
+                    %a.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Cancel
+                    = link_to "Yes, Delete Project", project_path(pending_project), method: :delete, class: "btn"
+
                 / %a{:href => "#deleteModal",}
                 /   %i.icon-trash.icon-green
 
@@ -120,18 +133,6 @@
             = @user.subscribed ? "" : "Not"
             Subscribed
 
-
-#deleteModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-  .modal-header
-    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Close X
-    %h3#myModalLabel.tittle Delete Pending Project?
-  .modal-body
-    %p Are you sure you want to delete the pending project <project name>?
-  .modal-footer
-    %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Cancel
-    %button.btn Yes, Delete Project
-
-
 :javascript
 
   $(".banner").ready(function(){
@@ -140,6 +141,12 @@
   });
 
   $(document).ready(function() {
+
+    // $(".delete").click(function () {
+    //     $('.proj-name').text($(this).data('title'));
+    //     $('#deleteModal').modal('show');
+    // });
+
     $('#projects-created').change(function(){
         // if ($(this).val() == "Funding Completed"){
         //   $('.project-create .success').parent().addClass("success");
