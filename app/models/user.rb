@@ -125,7 +125,7 @@ class User < ActiveRecord::Base
   end
 
   def most_funded_city
-    donation = user.donations.order("created_at DESC").first
+    donation = self.donations.order("created_at DESC").first
     donation.nil? ? "" : donation.project.city
   end
 
