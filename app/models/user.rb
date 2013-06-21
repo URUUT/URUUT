@@ -125,10 +125,8 @@ class User < ActiveRecord::Base
   end
 
   def most_funded_city
-    project = Project.select("projects.city, SUM(donations.amount) as city_sum").joins(:donations).
-      where("donations.user_id = ?", self.id).group("projects.city").order("city_sum DESC").first
-    # Return an empty string if user has no donations
-    project.present? ? project.city : ""
+    donation = self.donations.order("created_at DESC").first
+    donation.nil? ? "" : donation.project.city
   end
 
   private
