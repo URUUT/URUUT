@@ -32,7 +32,7 @@ class AdminController < ApplicationController
   private
   def admin_required!
     unless current_user.is_admin?
-      flash[:error] = "Sorry, you don't have right permision to accessing page."
+      flash[:error] = "Sorry, you don't have the right permissions to access this page."
       redirect_to root_url and return false
     end
   end
