@@ -89,6 +89,7 @@ Crowdfund::Application.routes.draw do
     get :get_complete_project, on: :collection
     get "add_desc", :on => :collection
     get "set_previous_path_for_registration", :on => :collection
+    get "set_previous_path_for_registration_perk", :on => :collection
     get "set_perk_to_false", :on => :collection
     get "update_content_assets_tab", :on => :collection
     get "update_td_mark", :on => :collection
