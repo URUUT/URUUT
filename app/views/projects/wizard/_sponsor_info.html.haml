@@ -21,12 +21,12 @@
     %div.inline
       = f.label :organization_type, "Organization Type*", class: "label-green"
       .selectParent{style: "width: 290px;"}
-        = f.select :organization_type, options_for_select(project_org_type, @project.organization_type), {:required => true}, {:onchange => "updateOrganizedTypeInfo()", class: "styledSelect" }
+        = f.select :organization_type, options_for_select(project_org_type, @project.organization_type), {:include_blank => 'Select Org Type'}, {:onchange => "updateOrganizedTypeInfo()", class: "styledSelect", required: true}
 
     %div.inline{:style => "margin-left:20px;"}
       = f.label :organization_class, "How Are You Organized?*", class: "label-green"
       .selectParent{style: "width: 290px;"}
-        = f.select :organization_classification, options_for_select(project_org_class, @project.organization_classification), {:required => true}, {:onchange => "updateOrganizedInfo()", class: "styledSelect"}
+        = f.select :organization_classification, options_for_select(project_org_class, @project.organization_classification), {:include_blank => 'Select Org Class'}, {:onchange => "updateOrganizedInfo()", class: "styledSelect", required: true}
 
     %div
       = f.label :address , "STREET ADDRESS*", class: "label-green"
