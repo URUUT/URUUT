@@ -1143,12 +1143,20 @@ ul.nav{
   }
 }
 
-#project_goal, input[id*="amount"] {
+#project_goal{
   background-color: #fff;
-  background-image: url('dollar.png');
+  background-image: url('dollar-grey.png');
   background-repeat: no-repeat;
   background-position: center left;
-  padding-left: 30px;
+  padding-left: 35px;
+}
+
+input[id*="amount"] {
+  background-color: #fff;
+  background-image: url('dollar-grey.png');
+  background-repeat: no-repeat;
+  background-position: center left;
+  padding-left: 35px;
 }
 
 .link-short{
@@ -1904,17 +1912,18 @@ body.pages.contact{
 }
 
 .drag-instructions {
-  background: rgba(84, 97, 133, 0.4);
+  background: rgba(0, 0, 0, 0.4) url('drag-icon.png') no-repeat 4% 50%;
   color: #fff;
-  font: 400 16px/18px 'Proxima Nova Light', sans-serif;
+  font: 400 16px/18px 'Proxima Nova', sans-serif;
   left: 45%;
   margin-left: -115px;
   margin-top: -13px;
-  padding: 7px 15px 7px 15px;
+  padding: 15px 25px 11px 40px;
   position: absolute;
   top: 30%;
   text-align: center;
   letter-spacing: 1;
+  @include border-radius(5px);
 
   b{
     font-weight: normal;
@@ -2046,4 +2055,18 @@ body.pages.index, body.pages.search{
   }
 }
 
+.action.new-save-btn{
+  margin-top: 210px;
+  text-align: center;
+  @include cleared;
+
+  .btn{
+    width: 70px;
+    margin-left: 10px;
+
+    &:first-child{
+      margin-left: 0;
+    }
+  }
+}
 
