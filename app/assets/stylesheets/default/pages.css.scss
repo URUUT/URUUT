@@ -1399,15 +1399,24 @@ div[id^='step'] {
 		}
 	}
 	.bitly-link {
-		background:url(image-path('bitly-link.png')) top left no-repeat;
-		display:inline-block;
-		height:30px;
-		margin-right:20px;
-		vertical-align:middle;
-		width:162px;
+		background:url(image-path('bitly-bg.png')) top left repeat;
+		display: inline-block;
+		height: 28px;
+		border: 1px solid #fff;
+		margin-right: 20px;
+		vertical-align: middle;
+		padding-right: 5px;
+
 		span {
-			font:normal 18px/30px arial, helvetica, sans-serif;
-			margin-left: 37px;
+			background: url(image-path('bitly.png')) center left no-repeat;
+			margin-top: -1px;
+			margin-bottom: -1px;
+			margin-left: -1px;
+			font: normal 18px/30px arial, helvetica, sans-serif;
+			padding-left: 37px;
+			height: 30px;
+			display: block;
+			min-width: 125px;
 		}
 	}
 	.show-content {
