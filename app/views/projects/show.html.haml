@@ -47,6 +47,8 @@
           .bitly-link
             - if @project.bitly
               %span= @project.bitly.sub(/http:\/\//, '')
+            - else
+              %span
 
           / %p= link_to "Contact Project Creator", "mailto:#{User.find(@project.user_id).email}"
 
