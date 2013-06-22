@@ -58,7 +58,6 @@ module UsersHelper
 
 	def project_length
 	    [
-        ["Select One"],
         [30],
         [45],
         [60],
