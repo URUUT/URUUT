@@ -329,6 +329,11 @@ class ProjectsController < ApplicationController
     redirect_to new_user_registration_url
   end
 
+  def set_previous_path_for_registration_perk
+    session[:path] = URI.escape(CGI::unescape params[:url])
+    redirect_to new_user_registration_url
+  end
+
   private
 
   def set_session_page
