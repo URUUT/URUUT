@@ -52,12 +52,13 @@
             (275 characters remaining)
         = f.text_area :mission, :rows => 4
       = f.label :subscribed, "Email subscriptions"
-      %div.switch.newsletter-popover{:style => "float:left;margin-right:10px;", "data-trigger" => "hover"}
-        = f.check_box :subscribed
-        %label
-          %i
-      %div{:style => "margin-top:11px;"}
-        %h5.newsletter-popover Uruut Recurring Emails
+      .clearfix
+        %div.switch.newsletter-popover{:style => "float:left;margin-right:10px;", "data-trigger" => "hover"}
+          = f.check_box :subscribed
+          %label
+            %i
+        %div{:style => "float: left;"}
+          %h5.newsletter-popover Uruut Recurring Emails
 
       %hr
       %button.btn.btn-primary{:type => "submit"}
