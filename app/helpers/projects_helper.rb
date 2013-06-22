@@ -36,7 +36,6 @@ module ProjectsHelper
 			#['pets','pets'],
 			#['miscellaneous','miscellaneous']
       #['Animal / Pets],
-      ['Select Category'],
       ['Art / Culture'],
       ['Athletic / Sports'],
       ['Education / Schools'],
@@ -54,7 +53,6 @@ module ProjectsHelper
 
   def project_org_type
     [
-      ['Select Org Type'],
       ['School'],
       ['Church'],
       ['Municipal'],
@@ -66,7 +64,6 @@ module ProjectsHelper
 
   def project_org_class
     [
-      ['Select Org Class'],
       ['501(c)(3)'],
       ['501(c)(4)'],
       ['501(c)(6)'],
