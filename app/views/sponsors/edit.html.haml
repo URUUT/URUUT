@@ -111,7 +111,7 @@
             SPONSOR
             %span
 
-    = form_for(@sponsor, :url => project_sponsor_path, :html => {:class => "span8", :style => "margin-left: 0;", multipart: true, method: 'PUT'}) do |f|
+    = form_for(@sponsor, :url => project_sponsor_path, :html => {:class => "span8 edit-sponsor", :style => "margin-left: 0;", multipart: true, method: 'PUT'}) do |f|
       .well.clearfix{:style => "border-top: none; padding-bottom: 0; border: 1px solid #e0e0e0;"}
         .payment-errors
         .span12{:style => "background-color: #f5f5f5; margin-left: 0px;"}
@@ -327,7 +327,7 @@
         $('input#token').attr('value', response.id);
         $('input#project_sponsor_card_last4').attr('value', response.card.last4);
         $('input#project_sponsor_card_type').attr('value', response.card.type);
-        $('#new_sponsor')[0].submit();
+        $('.edit-sponsor')[0].submit();
       } else {
         $(".error-message").text(response.error.message);
         return $('input[type=submit]').attr('disabled', false);
