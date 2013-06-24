@@ -28,11 +28,12 @@
 :javascript
   $(function(){
     $("#category, #location").on("change", function(){
-      $(".loader").fadeIn();
+      $(".project-all-content").html("");
+      $(".loader").fadeIn("fast");
       $.ajax({
         url: "/pages/search_category_or_location?category=" + $("#category").val() + "&city=" + $("#location").val()
       }).done(function(data) {
-        $(".loader").fadeOut();
+        $(".loader").fadeOut("fast");
       });
     });
   });
