@@ -87,6 +87,7 @@ Crowdfund::Application.routes.draw do
   end
   resources :projects do
     get :get_complete_project, on: :collection
+    get :get_complete_project_public, on: :collection
     get "add_desc", :on => :collection
     get "set_previous_path_for_registration", :on => :collection
     get "set_previous_path_for_registration_perk", :on => :collection
