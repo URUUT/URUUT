@@ -25,6 +25,11 @@ class AdminController < ApplicationController
     end
   end
 
+  def deny
+    project = Project.find(params[:id]).destroy
+    redirect_to admin_unapproved_url
+  end
+
   def layout_by_resource
     'admin'
   end
