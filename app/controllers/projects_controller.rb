@@ -3,6 +3,7 @@ class ProjectsController < ApplicationController
   require "net/http"
   require "uri"
 
+  skip_before_filter :verify_authenticity_token, only: :add_perk
   before_filter :session_path, only: :create
   before_filter :authenticate_user!, :only => [:index, :create, :edit, :update]
   before_filter :set_session_page
