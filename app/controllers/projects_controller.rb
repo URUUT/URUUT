@@ -233,6 +233,12 @@ class ProjectsController < ApplicationController
     @projects_created = @user.projects.where("campaign_deadline #{comparison} ? AND live = 1", Time.now).order("updated_at DESC").page(params[:created_page]).per(2)
   end
 
+  def get_complete_project_public
+    @user = User.find(params[:user_id])
+    comparison = params[:status].eql?("Funding Active") ? ">" : "<"
+    @projects_created = @user.projects.where("campaign_deadline #{comparison} ? AND live = 1", Time.now).order("updated_at DESC").page(params[:created_page]).per(2)
+  end
+
   def add_perk
     session[:step] = params[:step]
     perk_permission = params[:perk_permission].eql?("yes") ? true : false
