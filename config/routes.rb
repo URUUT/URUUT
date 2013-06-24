@@ -120,6 +120,7 @@ Crowdfund::Application.routes.draw do
   #end
 
   resources :pages do
+    get "search_category_or_location", :on => :collection
     get "discover", :on => :collection
     get "categories", :on => :collection
     post "contact", :on => :collection
