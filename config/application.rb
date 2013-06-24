@@ -11,7 +11,6 @@ end
 
 module Crowdfund
   class Application < Rails::Application
-    STRIPE_PUB_KEY = ENV['STRIPE_PUB_KEY']
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -59,7 +58,7 @@ module Crowdfund
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
-    config.assets.initialize_on_precompile = false
+    config.assets.initialize_on_precompile = true
     # config.assets.precompile += %w( active_admin.css.scss )
     config.logger = Logger.new(STDOUT)
     config.assets.paths << "#{Rails.root}/app/assets/fonts"

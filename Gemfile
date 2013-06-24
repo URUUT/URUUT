@@ -27,6 +27,7 @@ gem 'has_scope'
 gem 'youtube_it'
 gem 'rails_config'
 gem 'easy_roles'
+gem 'newrelic_rpm'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
