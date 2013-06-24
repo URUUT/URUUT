@@ -119,7 +119,10 @@ class ProjectsController < ApplicationController
       @project.step = "/projects/#{@project.id}/edit#assets"
     end
 
-    @sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits)
+    if !sponsorship_benefits.blank?
+      SponsorshipBenefit.where(project_id: params[:project][:id]).destroy_all
+      @sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits)
+    end
     params[:project][:goal] = params[:project][:goal].gsub(",", "") if !params[:project][:goal].nil?
     params[:project][:sponsor_permission] = params[:project][:sponsorship_permission] if !params[:project][:sponsorship_permission].nil?
     @project.update_attributes!(params[:project])
