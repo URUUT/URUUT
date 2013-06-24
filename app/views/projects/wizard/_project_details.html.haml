@@ -20,36 +20,36 @@
       PROJECT TITLE*
       %span.italic{style: "color: #000"} (Ex. Dunwoody City Park Fountain)
       %span.italic.project-title-remaining{style: "color: #000"}
-    = f.text_field :project_title, maxlength: 35, :required => true, class: "span8 project-title"
+    = f.text_field :project_title, maxlength: 35, class: "span8 project-title required"
 
     = f.label :goal, class: "label-green" do
       FUNDING GOAL*
       %span.italic{style: "color: #000"}
-    = f.number_field :goal, :required => true, class: "span8"
+    = f.number_field :goal, class: "span8 required"
 
     %div.inline
       = f.label :duration, class: "label-green" do
         CAMPAIGN LENGTH*
         %span.italic{style: "color: #000"} (max 90 days)
       .selectParent{style: "width: 290px;"}
-        = f.select :duration, options_for_select(project_length, @project.duration), {:include_blank => 'Select One'}, :required => true, class: "styledSelect"
+        = f.select :duration, options_for_select(project_length, @project.duration), {:include_blank => 'Select One'}, class: "styledSelect required"
 
     %div.inline{:style => "margin-left:25px;"}
       = f.label :category, class: "label-green" do
         CATEGORY*
       .selectParent{style: "width: 290px;"}
-        = f.select :category, options_for_select(project_categories, @project.category), {:include_blank => 'Select Category'}, :required => true, class: "styledSelect"
+        = f.select :category, options_for_select(project_categories, @project.category), {:include_blank => 'Select Category'}, class: "styledSelect required"
 
     = f.label :title, class: "label-green" do
       CAMPAIGN HEADLINE*
       %span.italic.campaign-remaining{style: "color: #000"}
-    = f.text_field :title, maxlength: 150, :required => true, class: "span8 campaign-headline"
+    = f.text_field :title, maxlength: 150, class: "span8 campaign-headline required"
 
     = f.label :story, "YOUR STORY*", class: "label-green"
-    = f.text_area :story, :required => true, :style => "height:330px;width:617px;", placeholder: "Tell us the story of your organization here..."
+    = f.text_area :story, :style => "height:330px;width:617px;", placeholder: "Tell us the story of your organization here...", class: "required"
 
     = f.label :about, "TELL US ABOUT YOUR PROJECT*", class: "label-green"
-    = f.text_area :about, :required => true, :style => "height:330px;width:617px;", placeholder: "Fill us in on the details of your project here..."
+    = f.text_area :about, :style => "height:330px;width:617px;", placeholder: "Fill us in on the details of your project here...", class: "required"
 
     %hr{:style => "background: #e0e0e0; margin: 0 -19px"}
 
