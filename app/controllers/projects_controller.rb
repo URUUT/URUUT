@@ -120,8 +120,8 @@ class ProjectsController < ApplicationController
       @project.step = "/projects/#{@project.id}/edit#assets"
     end
 
-    if !sponsorship_benefits.blank?
-      SponsorshipBenefit.where(project_id: params[:project][:id]).destroy_all
+    unless sponsorship_benefits.blank?
+      SponsorshipBenefit.where(project_id: params[:id]).destroy_all
       @sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits)
     end
     params[:project][:goal] = params[:project][:goal].gsub(",", "") if !params[:project][:goal].nil?
