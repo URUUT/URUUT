@@ -56,6 +56,7 @@ Crowdfund::Application.routes.draw do
    get "/skip_sponsor" => "projects#skip_sponsor"
 
   resources :admin do
+    get "deny", :on => :member
   end
 
   resources :s3_uploads
