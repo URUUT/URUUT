@@ -77,18 +77,18 @@
                     = label_tag "perk-amount", class: "label-green" do
                       SEED AMOUNT*
                       %span.italic{style: "color: #000; font-size: 10px;"} (full $ amounts only)
-                    = number_field_tag "perk-amount",'', class: "span4 required"
+                    = number_field_tag "perk-amount",'', class: "span4 required_perks"
                   .span4
                     = label_tag "perk-name", class: "label-green" do
                       PERK TITLE*
                       %span.italic.title-count{style: "color: #000; font-size: 10px;"}
-                    = text_field_tag "perk-name", '', class: "span4 required"
+                    = text_field_tag "perk-name", '', class: "span4 required_perks"
 
             %div
               = label_tag "perk-description", class: "label-green" do
                 Description*
                 %span.italic.desc-count{style: "color: #000; font-size: 10px;"}
-              = text_area_tag "perk-description", nil, style: "height:120px;width:605px;", maxlength: 140, class: :required, placeholder: "All the details on what your seeders will receive for this perk..."
+              = text_area_tag "perk-description", nil, style: "height:120px;width:605px;", maxlength: 140, class: :required_perks, placeholder: "All the details on what your seeders will receive for this perk..."
 
             .row.perk-view
               .span2
@@ -262,11 +262,11 @@
   var validatePerk = function(){
     if ($('#project_perk_permission').val() == "yes") {
       if ($('#perk-name').val() == "" || $('#perk-amount').val() == "" || $('#perk-description').val() == "") {
-        for (var i = 0; i < $('.required').length; i++){
-          if ($('.required')[i].value == ""){
-            $('#' + $('.required')[i].id).addClass('error-validated-field');
+        for (var i = 0; i < $('.required_perks').length; i++){
+          if ($('.required_perks')[i].value == ""){
+            $('#' + $('.required_perks')[i].id).addClass('error-validated-field');
           } else {
-            $('#' + $('.required')[i].id).removeClass('error-validated-field');
+            $('#' + $('.required_perks')[i].id).removeClass('error-validated-field');
           }
         }
         return false;
