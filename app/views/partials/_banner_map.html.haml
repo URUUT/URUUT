@@ -24,3 +24,18 @@
               :value => params[:keyword]}
               %button.btn.btns{:type => "submit"}
                 %span
+
+:javascript
+  $(function(){
+    $("#category").on("change", function(){
+      $.ajax({
+        url: "/pages/search_category_or_location?category=" + $(this).val() + "&city=" + $("#location").val()
+      });
+    });
+
+    $("#location").on("change", function(){
+      $.ajax({
+        url: "/pages/search_category_or_location?city=" + $(this).val() + "&category="+ $("#category").val()
+      })
+    });
+  });

@@ -3,7 +3,8 @@
     %p.sections
       = image_tag 'featured-success-icon.png'
       Projects
-    = render "project", :projects => @projects
+    .project-all
+      = render "project", :projects => @projects
     .cf
     %div
       = paginate(@projects)
