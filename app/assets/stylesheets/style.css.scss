@@ -1570,6 +1570,8 @@ ul.chart-legend{
 
   .project-tittle{
     color: $green2;
+    word-wrap: break-word;
+    overflow: hidden;
   }
 
   .project-location{
