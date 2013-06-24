@@ -353,11 +353,11 @@
     var validateDetail = function(){
       if ( $('#project_project_title').val() == "" || $("#project_goal").val() == "" || $('#project_duration').val() == "" || $('#project_category').val() == "" || $('#project_title').val() == "" || $('#project_story').val() == "" || $('#project_about').val() == "" )
         {
-          for (var i = 0; i < $('.required').length; i++){
-            if ($('.required')[i].value == ""){
-              $('#' + $('.required')[i].id).addClass('error-validated-field');
+          for (var i = 0; i < $('.required_detail').length; i++){
+            if ($('.required_detail')[i].value == ""){
+              $('#' + $('.required_detail')[i].id).addClass('error-validated-field');
             } else {
-              $('#' + $('.required')[i].id).removeClass('error-validated-field');
+              $('#' + $('.required_detail')[i].id).removeClass('error-validated-field');
             }
           }
             return false;
