@@ -6,6 +6,10 @@
 
       = link_to "View All", "#", :class => 'view-all'
     .project-all
+      .loader{:style => "margin-left: 45%; font-weight: bold; font-size: 16px; display:none"}
+        Loading..
+        %br
+        = image_tag "3.gif", style: "margin-left: 3%"
       = render "project", :projects => @projects
 
 //.ending-soon.clearfix

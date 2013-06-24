@@ -27,15 +27,12 @@
 
 :javascript
   $(function(){
-    $("#category").on("change", function(){
+    $("#category, #location").on("change", function(){
+      $(".loader").fadeIn();
       $.ajax({
-        url: "/pages/search_category_or_location?category=" + $(this).val() + "&city=" + $("#location").val()
+        url: "/pages/search_category_or_location?category=" + $("#category").val() + "&city=" + $("#location").val()
+      }).done(function(data) {
+        $(".loader").fadeOut();
       });
-    });
-
-    $("#location").on("change", function(){
-      $.ajax({
-        url: "/pages/search_category_or_location?city=" + $(this).val() + "&category="+ $("#category").val()
-      })
     });
   });
