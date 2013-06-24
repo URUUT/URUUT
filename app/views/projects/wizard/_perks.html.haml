@@ -158,12 +158,12 @@
       };
       $.ajax({
         type: 'POST',
-        url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/update_perk',
+        url: 'https://' + document.location.hostname + ":" + document.location.port + '/projects/update_perk',
         data: data
       }).done(function(data) {
         $.ajax({
           type: 'GET',
-          url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/update_content_assets_tab?id='+project
+          url: 'https://' + document.location.hostname + ":" + document.location.port + '/projects/update_content_assets_tab?id='+project
         });
         $(".perk-true").show();
         $(".perk-false").hide();
@@ -188,12 +188,12 @@
       var project = #{@project.id};
       $.ajax({
         type: 'POST',
-        url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/delete_perk',
+        url: 'https://' + document.location.hostname + ":" + document.location.port + '/projects/delete_perk',
         data: data
       }).done(function(data) {
         $.ajax({
           type: 'GET',
-          url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/update_content_assets_tab?id='+project
+          url: 'https://' + document.location.hostname + ":" + document.location.port + '/projects/update_content_assets_tab?id='+project
         });
         $("#perk-item-"+ perk_id +"").remove();
         if ( $(".created-perk").length < 1 ){
@@ -283,11 +283,11 @@
     var project_id = #{@project.id};
     $.ajax({
         type: 'GET',
-        url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/set_perk_to_false?id='+project_id
+        url: 'https://' + document.location.hostname + ":" + document.location.port + '/projects/set_perk_to_false?id='+project_id
     }).done(function(id) {
       $.ajax({
         type: 'GET',
-        url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/update_content_assets_tab?id='+project_id
+        url: 'https://' + document.location.hostname + ":" + document.location.port + '/projects/update_content_assets_tab?id='+project_id
       });
       $(".skip-perk").text("CONTINUE TO STEP 4");
       window.location.href = 'http://' + document.location.hostname + ":" + document.location.port + '/projects/'+ project_id +'/edit#sponsorship';
@@ -315,12 +315,12 @@
       };
       $.ajax({
         type: 'POST',
-        url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/add_perk',
+        url: 'https://' + document.location.hostname + ":" + document.location.port + '/projects/add_perk',
         data: data
       }).done(function(id) {
         $.ajax({
           type: 'GET',
-          url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/update_content_assets_tab?id='+project
+          url: 'https://' + document.location.hostname + ":" + document.location.port + '/projects/update_content_assets_tab?id='+project
         });
         if ( $(".created-perk").length < 1 ){
           $(".title-current-perk").remove();
@@ -366,12 +366,12 @@
       };
       $.ajax({
         type: 'POST',
-        url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/add_perk',
+        url: 'https://' + document.location.hostname + ":" + document.location.port + '/projects/add_perk',
         data: data
       }).done(function(id) {
         $.ajax({
           type: 'GET',
-          url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/update_content_assets_tab?id='+project
+          url: 'https://' + document.location.hostname + ":" + document.location.port + '/projects/update_content_assets_tab?id='+project
         });
         var newPerk = '<div class="created-perk" id="perk-item-'+ id +'"><h6>'+ convertAmount(amount ) +'</h6><h6>'+ name +'</h6><p style="width:268px;word-wrap: break-word;">'+ description +'</p><input id="perk-'+id+'" type="hidden" value="'+id+'"><a class="perk-edit" style="color:#70bf4c; cursor: pointer">edit</a> | <a class="perk-delete" style="color:#70bf4c; cursor: pointer">delete</a></div>';
         $(".list-perk").append(newPerk);
@@ -381,7 +381,7 @@
         $("#perk_available").val("");
         $(".count-perk").text( parseInt($(".count-perk").text()) + 1 );
         actionEditButton(); actionDeleteButton(); actionButton();
-        window.location.href = 'http://' + document.location.hostname + ":" + document.location.port + '/projects/'+ project +'/edit#sponsorship';
+        window.location.href = 'https://' + document.location.hostname + ":" + document.location.port + '/projects/'+ project +'/edit#sponsorship';
 
       });
     } else {
