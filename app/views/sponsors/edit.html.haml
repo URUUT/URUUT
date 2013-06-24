@@ -204,7 +204,7 @@
             .field.name
               = label_tag :card_name, class: "label-green" do
                 NAME AS IT APPEARS ON CARD*
-              = text_field_tag nil, user_signed_in? ? current_user.first_name.capitalize : "" , name: "sponsor[card_name]", class: "span12"
+              = text_field_tag nil, user_signed_in? ? current_user.first_name.capitalize : "" , name: "sponsor[card_name]", class: "span12", id: "name"
             .field.card-number
               = label_tag :card_number, class: "label-green" do
                 Credit Card Number*
@@ -278,6 +278,36 @@
         expMonth: $('#card_month').val(),
         expYear: $('#card_year').val()
       };
+      if ($('#card_number').val() == ""){
+        $('#card_number').addClass('error-validated-field');
+      }
+      else{
+        $('#card_number').removeClass('error-validated-field');
+      }
+      if ($('#card_code').val() == ""){
+        $('#card_code').addClass('error-validated-field');
+      }
+      else{
+        $('#card_code').removeClass('error-validated-field');
+      }
+      if ($('#card_month').val() == ""){
+        $('#card_month').addClass('error-validated-field');
+      }
+      else{
+        $('#card_month').removeClass('error-validated-field');
+      }
+      if ($('#card_year').val() == ""){
+        $('#card_year').addClass('error-validated-field');
+      }
+      else{
+        $('#card_year').removeClass('error-validated-field');
+      }
+      if ($('#name').val() == ""){
+        $('#name').addClass('error-validated-field');
+      }
+      else{
+        $('#name').removeClass('error-validated-field');
+      }
       console.log("tes");
       Stripe.createToken(card, handleStripeResponse);
     };
