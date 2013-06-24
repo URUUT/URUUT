@@ -99,6 +99,15 @@
     }
   };
 
+  var validDigits = function(n){
+    if (n.replace(/[^\d,]+/g, '').length == n.length){
+      return true
+    }
+    else{
+      return false
+    }
+  };
+
   var updateOrganizedTypeInfo = function(){
     $.ajax({
       type: 'POST',
@@ -351,6 +360,12 @@
     })
 
     var validateDetail = function(){
+      if ( !validDigits($("#project_goal").val()) ) {
+        $("#project_goal").addClass('error-validated-field');
+        alert("The Field Contain Unprohibited Value");
+        return false;
+      }
+
       if ( $('#project_project_title').val() == "" || $("#project_goal").val() == "" || $('#project_duration').val() == "" || $('#project_category').val() == "" || $('#project_title').val() == "" || $('#project_story').val() == "" || $('#project_about').val() == "" )
         {
           for (var i = 0; i < $('.required_detail').length; i++){

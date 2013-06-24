@@ -129,6 +129,7 @@
   })
 
   $(".change-fund").click(function(){
+    $("#custom_seed").val() = $("#custom_seed").val().replace(/[^\d,]+/g, '');
     if ( $(this).attr("perk-id") == "default" ){
       $.ajax({
         url: "/donations/"+$(this).attr("perk-id")+"/change_perk.js?amount="+$(this).attr("amount")+"&level="+$(this).attr("level")+"&custom_seed="+$("#custom_seed").val()+"&project_id=#{@project.id}"

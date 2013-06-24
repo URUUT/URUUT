@@ -77,7 +77,7 @@
                     = label_tag "perk-amount", class: "label-green" do
                       SEED AMOUNT*
                       %span.italic{style: "color: #000; font-size: 10px;"} (full $ amounts only)
-                    = number_field_tag "perk-amount",'', class: "span4 required_perks"
+                    = text_field_tag "perk-amount",'', class: "span4 required_perks"
                   .span4
                     = label_tag "perk-name", class: "label-green" do
                       PERK TITLE*
@@ -142,6 +142,16 @@
 
 
 :javascript
+
+  var validDigits = function(n){
+    if (n.replace(/[^\d,]+/g, '').length == n.length){
+      return true
+    }
+    else{
+      return false
+    }
+  };
+
   var actionEditButton = function(){
     $('.update-perk').on('click', function(e) {
       e.preventDefault();
@@ -260,6 +270,12 @@
   };
 
   var validatePerk = function(){
+    if ( !validDigits($("#perk-amount").val()) ) {
+      $("#perk-amount").addClass('error-validated-field');
+      alert("The Field Contain Unprohibited Value");
+      return false;
+    }
+
     if ($('#project_perk_permission').val() == "yes") {
       if ($('#perk-name').val() == "" || $('#perk-amount').val() == "" || $('#perk-description').val() == "") {
         for (var i = 0; i < $('.required_perks').length; i++){
