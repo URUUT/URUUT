@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130601114049) do
+ActiveRecord::Schema.define(:version => 20130617071748) do
 
   create_table "badges_sashes", :force => true do |t|
     t.integer  "badge_id"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(:version => 20130601114049) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "perk_name"
+    t.boolean  "confirmed",      :default => false
   end
 
   create_table "galleries", :force => true do |t|
@@ -130,13 +131,16 @@ ActiveRecord::Schema.define(:version => 20130601114049) do
     t.string   "name"
     t.integer  "project_id"
     t.integer  "sponsor_id"
-    t.string   "payment",    :default => "Unpaid"
-    t.string   "status",     :default => "Unconfirmed"
+    t.string   "payment",      :default => "Unpaid"
+    t.string   "status",       :default => "Unconfirmed"
     t.integer  "level_id"
     t.string   "card_type"
     t.integer  "card_last4"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "site"
+    t.boolean  "confirmed",    :default => false
+    t.string   "sponsor_type"
   end
 
   create_table "project_updates", :force => true do |t|
@@ -187,6 +191,10 @@ ActiveRecord::Schema.define(:version => 20130601114049) do
     t.string   "cultivation_mime_type",       :default => "image"
     t.boolean  "perk_permission"
     t.datetime "campaign_deadline"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "sponsor_permission",          :default => true
+    t.string   "step"
   end
 
   create_table "sashes", :force => true do |t|
@@ -221,7 +229,7 @@ ActiveRecord::Schema.define(:version => 20130601114049) do
     t.integer  "project_id"
     t.boolean  "status",               :default => false
     t.string   "sponsorship_level"
-    t.integer  "cost"
+    t.float    "cost",                 :default => 0.0
   end
 
   create_table "sponsorship_levels", :force => true do |t|
@@ -257,13 +265,15 @@ ActiveRecord::Schema.define(:version => 20130601114049) do
     t.string   "organization"
     t.text     "mission"
     t.boolean  "subscribed"
-    t.string   "avatar",                 :default => "/images/default-avatar.png"
+    t.string   "avatar",                 :default => "/assets/default-avatar.png"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "confirmation_token"
     t.string   "last_name"
     t.integer  "sash_id"
     t.integer  "level",                  :default => 0
+    t.integer  "uruut_point",            :default => 0
+    t.string   "roles",                  :default => "--- []"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
