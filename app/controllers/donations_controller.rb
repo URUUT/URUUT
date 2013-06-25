@@ -19,7 +19,7 @@ class DonationsController < ApplicationController
     @donation = Donation.new
     @perk = Perk.new
     @perk_name = params[:name].to_s
-    @perk_amount = params[:amount].gsub(",", "").to_i
+    @perk_amount = params[:amount].gsub(",", "").gsub(/[^\d,]+/, '').to_i
     @perk_description = params[:description]
     @project = Project.find(params[:project_id])
     if params[:amount].blank?
