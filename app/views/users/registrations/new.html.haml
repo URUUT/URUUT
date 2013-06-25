@@ -48,3 +48,25 @@
   / = render "devise/shared/links"
 
 = render "social-login"
+
+:javascript
+  $('#new_user').validate({
+    rules: {
+      "user[email]":{
+        required: true,
+        email: true
+      },
+      "user[first_name]":{
+        required: true,
+      },
+      "user[last_name]":{
+        required: true,
+      },
+      "user[password]":{
+        required: true,
+      },
+      "user[password_confirmation]":{
+        required: true,
+      }
+    }
+  });
