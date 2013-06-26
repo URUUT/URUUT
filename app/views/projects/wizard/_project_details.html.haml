@@ -98,6 +98,13 @@
 
 
 :javascript
+
+  $(function(){
+    if ($("#project_category :selected").text().length > 17){
+      $("#project_category :selected").text(truncText($("#project_category :selected").text(), 15, "..."))
+    }
+  });
+
   function updateCutdownCampaign() {
     var remaining = 150 - jQuery('.campaign-headline').val().length;
     jQuery('.campaign-remaining').text('(' + remaining + ' characters remaining.)');
@@ -107,6 +114,16 @@
     var remaining = 35 - jQuery('.project-title').val().length;
     jQuery('.project-title-remaining').text('(' + remaining + ' characters remaining.)');
   };
+
+  $("#project_category").on('change',function(){
+    var length = $("#project_category option").length;
+    for (var i = 1; i < length; i++){
+      $("#project_category option")[i].text = $("#project_category option")[i].value
+    }
+    if ($("#project_category :selected").text().length > 17){
+      $("#project_category :selected").text(truncText($("#project_category :selected").text(), 15, "..."))
+    }
+  })
 
   updateCutdownCampaign();
   updateCutdownTitle();

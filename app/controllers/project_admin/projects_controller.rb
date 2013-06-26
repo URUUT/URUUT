@@ -33,7 +33,7 @@ class ProjectAdmin::ProjectsController < ApplicationController
   def overview; end
 
   def manage
-    @galleries = @project.galleries.page(params[:page]).per(25)
+    @galleries = @project.galleries.page(params[:page]).per(6)
   end
 
   def detail; end
@@ -53,7 +53,7 @@ class ProjectAdmin::ProjectsController < ApplicationController
   end
 
   def cover_photo_and_gallery
-    @galleries = @project.galleries.page(params[:page]).per(25)
+    @galleries = @project.galleries.page(params[:page]).per(6)
   end
 
   def post_to_social_media; end

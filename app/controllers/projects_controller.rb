@@ -49,12 +49,18 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
+    @images = @project.galleries.page(params[:page]).per(6)
     sort_sponsorships = @project.project_sponsors.sort_by {|ps| ps.level_id}
     @project_sponsors = sort_sponsorships.group_by {|sponsor| sponsor.level_id}
     @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
     @perks = @project.perks.order(:amount)
     session[:current_project] = @project.id
     render :layout => 'landing'
+  end
+
+  def show_more_image
+    @project = Project.find(params[:id])
+    @images = @project.galleries.page(params[:page]).per(6)
   end
 
   def update
@@ -213,7 +219,7 @@ class ProjectsController < ApplicationController
     end
 
     @project.save
-    redirect_to "/projects/#{@project.id}/edit#assets"
+    # redirect_to "/projects/#{@project.id}/edit#assets"
   end
 
   def save_image
