@@ -15,3 +15,20 @@ Total score (lower is better) = 356
 4) Similar code found in :call (mass = 40)
   app/controllers/projects_controller.rb:67
   app/controllers/projects_controller.rb:71
+
+
+      / %hr
+
+    / %h6 LOG IN WITH TWITTER
+    / %p It’s fast and easy.
+    / = link_to user_omniauth_authorize_path(:twitter) do
+    /   = image_tag('tw-login.png')
+    / %p.grey We'll never post anything without permission.
+
+    / %hr
+
+    / %h6 LOG IN WITH LINKEDIN
+    / %p It’s fast and easy.
+    / = link_to user_omniauth_authorize_path(:linkedin) do
+    /   = image_tag('li-login.png')
+    / %p.grey We'll never post anything without permission

@@ -24,7 +24,7 @@
       = hidden_field_tag :perk_name, @donation.perk_name
     .field.name
       = label_tag "NAME AS IT APPEARS ON CARD*"
-      = text_field_tag nil, [current_user.first_name, current_user.last_name].join(" "), name: nil
+      = text_field_tag nil, [current_user.first_name, current_user.last_name].join(" "), name: nil, id: "name"
     .field.card-number
       = label_tag :card_number, "Credit Card Number"
       = text_field_tag :card_number, nil, name: nil

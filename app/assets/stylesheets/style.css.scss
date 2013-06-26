@@ -1,6 +1,6 @@
 $super-light-grey: #f5f5f5;
 $light-grey: #b2b2b2;
-$grey: #464646;
+$grey: #403e37;
 $green: #48c94c;
 $green2: #81C263; /* #70bf4c;*/
 $light-green: #bee0b4;
@@ -90,7 +90,12 @@ body{
   }
 }
 
+ul li{
+  word-wrap: break-word;
+}
+
 p{
+  word-wrap: break-word;
 
   &.subtext{
     font-family: 'Proxima Nova Semi', sans-serif;
@@ -117,9 +122,16 @@ header, footer{
 input[type=text],
 input[type=email],
 input[type=date],
-input[type=password] {
+input[type=password],
+input[type=number] {
   height: 64px;
   padding: 14px 19px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 a.green-link{
@@ -407,92 +419,76 @@ h3, h4, h5{
 
   p{
     margin-bottom: 5px;
-    text-align: justify;
+    text-align: left;
   }
 
-  /*p{
+  &:hover, .active{
+    background: $light-green;
 
-    &.subtext{
-      font-family: 'Proxima Nova Semi', sans-serif;
+    h3, h4, h5, .amount-percentage{
+      color: $grey;
     }
 
-    a{
-      color: $green2;
-      text-decoration: underline;
-
-      &:hover{
-        text-decoration: none;
-      }
-    }
-    }*/
-
-    &:hover, .active{
-      background: $light-green;
-
-      h3, h4, h5, .amount-percentage{
-        color: $grey;
-      }
-
-      .description{
-        color: $grey !important;
-      }
-
-      .btn{
-       font-family: 'Proxima Nova Semi', arial, sans-serif;
-
-       &:hover{
-        background: $green2;
-        color: #fff;
-      }
-    }
-  }
-
-
-  h3{
-    margin: 0;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    line-height: 20px;
-  }
-
-  h3, h4, h5{
-    color: $green2;
-  }
-
-  .seed-num{
-    float: left;
-  }
-
-  textarea, .textarea input[type="text"]{
-    width: 100%;
-    @include border-radius(0);
-    @include box-shadow(none);
-    resize: none;
-    background: #fff url('dollar.png') no-repeat left center;
-    padding-left: 40px;
-    font-size: 36px;
-  }
-
-  .seed-num{
-    font-family: 'Proxima Nova Semi', sans-serif;
-    text-transform: uppercase;
-
-    .amount{
-      font-size: 20px;
+    .description{
+      color: $grey !important;
     }
 
-    .amount-percentage{
-      font-size: 10px;
-      font-style: italic;
-      color: $light-grey;
-      text-transform: capitalize;
-      font-family: 'Georgia', serif;
-    }
+    .btn{
+     font-family: 'Proxima Nova Semi', arial, sans-serif;
 
-    & + .btn{
-      margin-top: 12px;
+     &:hover{
+      background: $green2;
+      color: #fff;
     }
   }
+}
+
+
+h3{
+  margin: 0;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  line-height: 20px;
+}
+
+h3, h4, h5{
+  color: $green2;
+}
+
+.seed-num{
+  float: left;
+}
+
+textarea, .textarea input[type="text"]{
+  width: 100%;
+  @include border-radius(0);
+  @include box-shadow(none);
+  resize: none;
+  background: #fff url('dollar.png') no-repeat left center;
+  padding-left: 40px;
+  font-size: 36px;
+}
+
+.seed-num{
+  font-family: 'Proxima Nova Semi', sans-serif;
+  text-transform: uppercase;
+
+  .amount{
+    font-size: 20px;
+  }
+
+  .amount-percentage{
+    font-size: 10px;
+    font-style: italic;
+    color: $light-grey;
+    text-transform: capitalize;
+    font-family: 'Georgia', serif;
+  }
+
+  & + .btn{
+    margin-top: 12px;
+  }
+}
 }
 
 #perks{
@@ -653,8 +649,12 @@ h3, h4, h5{
 
     & + h4{
      margin-top: 20px !important;
-     margin-left: 110px;
+     margin-left: 15px;
      color: $green2;
+     float: left;
+     width: 185px;
+     word-wrap: break-word;
+     overflow: hidden;
    }
  }
 }
@@ -1143,12 +1143,20 @@ ul.nav{
   }
 }
 
-#project_goal, input[id*="amount"] {
+#project_goal{
   background-color: #fff;
-  background-image: url('dollar.png');
+  background-image: url('dollar-grey.png');
   background-repeat: no-repeat;
   background-position: center left;
-  padding-left: 30px;
+  padding-left: 35px;
+}
+
+input[id*="amount"] {
+  background-color: #fff;
+  background-image: url('dollar-grey.png');
+  background-repeat: no-repeat;
+  background-position: center left;
+  padding-left: 35px;
 }
 
 .link-short{
@@ -1258,7 +1266,7 @@ ul.nav{
   margin-bottom: 25px;
 
   .styledSelect, #type{
-    font: bold 24px/24px arial, helvetica, sans-serif;
+    font: bold 24px/40px arial, helvetica, sans-serif;
     width: 100%;
     background: transparent;
     height: 54px;
@@ -1273,7 +1281,7 @@ ul.nav{
   }
 
   .styledSelect.smallText{
-    font-size: 18px;
+    font-size: 16px;
     line-height: 20px;
   }
 }
@@ -1562,6 +1570,8 @@ ul.chart-legend{
 
   .project-tittle{
     color: $green2;
+    word-wrap: break-word;
+    overflow: hidden;
   }
 
   .project-location{
@@ -1581,8 +1591,12 @@ ul.chart-legend{
   }
 }
 
-.step-container div.checkbox input[type=checkbox]{
-  float: left;
+.step-container div.checkbox{
+  word-wrap: break-word;
+
+  input[type=checkbox]{
+    float: left;
+  }
 }
 
 ul.breadcrumbs{
@@ -1745,7 +1759,14 @@ footer div ul li a{
   }
 }
 
-body.users.show{
+.users.show, .users.profile{
+
+ .project:nth-child(even) {
+  margin-right: 0;
+}
+}
+
+body.users.show, body.users.profile{
 
   #flash_notice{
     margin-top: -20px;
@@ -1763,7 +1784,7 @@ body.users.show{
 
       .styledSelect{
         width: 236px;
-        font-size: 18px;
+        font-size: 16px;
         line-height: 20px;
       }
     }
@@ -1817,6 +1838,15 @@ body.users.show{
 body.pages.contact{
   #flash_notice{
     display: none;
+  }
+
+  footer{
+    .new_newsletter{
+      #newsletter_email + .btn{
+        display: inline-block !important;
+        margin-bottom: 0;
+      }
+    }
   }
 }
 
@@ -1879,22 +1909,33 @@ body.pages.contact{
   }
 }
 
-.error-validated-field {
-  border-color: red !important;
+form{
+  input, textarea, select{
+    &.error-validated-field, &.error {
+      border: 1px solid red !important;
+    }
+  }
+
+  select{
+    &.error-validated-field, &.error{
+      /*margin-top: -1px;*/
+    }
+  }
 }
 
 .drag-instructions {
-  background: rgba(84, 97, 133, 0.4);
+  background: rgba(0, 0, 0, 0.4) url('drag-icon.png') no-repeat 4% 50%;
   color: #fff;
-  font: 400 16px/18px 'Proxima Nova Light', sans-serif;
+  font: 400 16px/18px 'Proxima Nova', sans-serif;
   left: 45%;
   margin-left: -115px;
   margin-top: -13px;
-  padding: 7px 15px 7px 15px;
+  padding: 15px 25px 11px 40px;
   position: absolute;
   top: 30%;
   text-align: center;
   letter-spacing: 1;
+  @include border-radius(5px);
 
   b{
     font-weight: normal;
@@ -1961,11 +2002,14 @@ body.pages.contact{
   color: $green2;
   font-family: 'Georgia', serif;
   font-style: italic;
-  text-transform: uppercase;
   margin-bottom: 10px;
+  text-transform: initial;
+  font-size: 13px;
+  line-height: 19px;
+  letter-spacing: 0;
 }
 
-body.pages.index{
+body.pages.index, body.pages.search{
   .full-width{
     .selectParent{
       width: 300px;
@@ -1978,6 +2022,70 @@ body.pages.index{
   }
 }
 
+.modal{
+  width: 460px;
+  left: 53%;
+  
+  .closes{
+    color: $green2;
+    opacity: 1;
+    font-size: 10px;
+  }
 
+  .tittle{
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
 
+  .modal-header{
+    border-bottom: none;
+  }
 
+  .modal-body{
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 1;
+  }
+  
+  .modal-footer{
+    background: transparent;
+    border-top: none;
+
+    .btn{
+      width: 47.5%;
+      display: block;
+      float: left;
+      margin-left: 5%;
+      font-size: 13px;
+      padding: 10px 0;
+      border-radius: 5px;
+
+      &:first-child{
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+.action.new-save-btn{
+  margin-top: 210px;
+  text-align: center;
+  @include cleared;
+
+  .btn{
+    width: 70px;
+    margin-left: 10px;
+
+    &:first-child{
+      margin-left: 0;
+    }
+  }
+}
+
+input, select, textarea{
+  &:invalid{
+    border-color: transparent !important;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5) !important;
+    color: $grey !important;
+  }
+}

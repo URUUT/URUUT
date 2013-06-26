@@ -85,7 +85,12 @@ body {
   border-left-color: transparent !important;
   border-right-color: transparent !important;
   top: -28px;
+  left: 215px;
   bottom: none;
+}
+
+.joyride-nub.top + .joyride-content-wrapper {
+  width: 295px;
 }
 
 .joyride-tip-guide span.joyride-nub.bottom {

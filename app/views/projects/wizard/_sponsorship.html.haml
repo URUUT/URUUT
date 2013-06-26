@@ -42,7 +42,11 @@
             Platinum Level Sponsorship includes priority logo placement, a link to the sponsor’s website, and the company / foundation’s mission statement on your project page. Platinum Sponsors gain industry exclusivity for project sponsors. In addition to these benefits, select suggested benefits or create custom benefits for platinum level sponsors from the checklist below. (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
             %span{:style =>  "color:#b6b6b4;font-style:italic;"}
               (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
-          %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"} SUGGESTED BENEFITS:
+          %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"}
+            SUGGESTED BENEFITS
+            %span.italic
+              (Check All That Apply)
+            \:
           %div#platinum-box{data:{max: "1", type: "platinum"}}
             %div#platinum-checkbox.existing-checkbox
               -if @project.sponsorship_benefits.empty?
@@ -62,8 +66,8 @@
                     %span#name= benefit.name
                     %span.edit-benefit.italic.label-green select to edit
                     = text_field_tag "platinum[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
-              %a.italic.green-link.check-all{:href => "javascript:void(0)", data:{target: "platinum-checkbox"}}
-                (Check All That Apply)
+              / %a.italic.green-link.check-all{:href => "javascript:void(0)", data:{target: "platinum-checkbox"}}
+              /   (Check All That Apply)
 
               = hidden_field_tag "platinum_count", nil, id: "platinum-count"
             %div#custom-checkbox
@@ -95,7 +99,11 @@
             Gold Level Sponsorship includes placement of a large logo and a link to the sponsor’s website on your project page. Gold Sponsors gain industry exclusivity for project sponsors. In addition to these benefits, select suggested benefits or create custom benefits for gold level sponsors from the checklist below. (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
             %span{:style =>  "color:#b6b6b4;font-style:italic;"}
               (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
-          %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"} SUGGESTED BENEFITS:
+          %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"}
+            SUGGESTED BENEFITS
+            %span.italic
+              (Check All That Apply)
+            \:
           %div#gold-box{data:{max: "3", type: "gold"}}
             %div#gold-checkbox.existing-checkbox
               -if @project.sponsorship_benefits.empty?
@@ -115,8 +123,8 @@
                     %span#name= benefit.name
                     %span.edit-benefit.italic.label-green select to edit
                     = text_field_tag "gold[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
-              %a.italic.green-link.check-all{:href => "javascript:void(0)", data:{target: "gold-checkbox"}}
-                (Check All That Apply)
+              / %a.italic.green-link.check-all{:href => "javascript:void(0)", data:{target: "gold-checkbox"}}
+              /   (Check All That Apply)
 
               = hidden_field_tag "gold_count", nil, id: "gold-count"
             %div#custom-checkbox
@@ -147,7 +155,11 @@
             Silver Level Sponsorship includes placement of a medium-sized logo and a link to the sponsor’s website on your project page. In addition to these benefits, select suggested benefits or create custom benefits for silver level sponsors from the checklist below. (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
             %span{:style =>  "color:#b6b6b4;font-style:italic;"}
               (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
-          %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"} SUGGESTED BENEFITS:
+          %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"}
+            SUGGESTED BENEFITS
+            %span.italic
+              (Check All That Apply)
+            \:
           %div#silver-box{data:{max: "5", type: "silver"}}
             %div#silver-checkbox.existing-checkbox
 
@@ -168,8 +180,8 @@
                     %span#name= benefit.name
                     %span.edit-benefit.italic.label-green select to edit
                     = text_field_tag "silver[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
-              %a.italic.green-link.check-all{:href => "javascript:void(0)", data:{target: "silver-checkbox"}}
-                (Check All That Apply)
+              / %a.italic.green-link.check-all{:href => "javascript:void(0)", data:{target: "silver-checkbox"}}
+              /   (Check All That Apply)
 
               = hidden_field_tag "silver_count", nil, id: "silver-count"
             %div#custom-checkbox

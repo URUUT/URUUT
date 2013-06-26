@@ -22,7 +22,7 @@
                 = p.name
               - if p.limit
                 %p= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} Available)"
-              %p.description= p.description
+              %p= p.description
               .clearfix
                 .seed-num
                   .amount
@@ -130,7 +130,7 @@
             = p.name
           - if p.limit
             %p= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} Available)"
-          %p.description= p.description
+          %p= p.description
           .clearfix
             .seed-num
               .amount

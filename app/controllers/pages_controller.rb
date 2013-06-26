@@ -18,9 +18,14 @@ class PagesController < ApplicationController
     projects_list
   end
 
+  def search_category_or_location
+    projects_list
+    respond_to :js
+  end
+
   def discover
   	@cat = params[:category]
-    @category = Project.where("live = true and deleted = false and category = '#{@cat}'").page(params[:page]).per(9)
+    @category = Project.where("live = true AND deleted = false AND category = '#{@cat}'").page(params[:page]).per(9)
     @projects = Project.where('live = true AND deleted = false').page(params[:page]).per(9)
   end
 
@@ -72,7 +77,6 @@ class PagesController < ApplicationController
     end
 
     @projects = Project.where("#{query.join(" OR ")} AND live = 1 AND ready_for_approval = 0", :keyword=> "%#{params[:keyword]}%").by_city(params[:city]).by_category(params[:category])
-    logger.debug(@projects)
   end
 
   private

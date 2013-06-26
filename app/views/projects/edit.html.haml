@@ -67,7 +67,7 @@
     %h5 ADD PHOTOS
     %p Add photos into your story section by clicking on the placeholder images. If you need more, you can add them to a gallery section from your dashboard once your project as been approved.
     %a{:href => "#", :class => "button small quit-tour joyride-close-tip close-tip-custom"} Quit Tour
-  %li{"data-class" => "submit", "data-button" => "Quit Tour", "data-options" => "tipLocation:bottom"}
+  %li{"data-class" => "assets", "data-button" => "Quit Tour", "data-options" => "tipLocation:bottom"}
     %h5 SUBMIT
     %p When you're ready, click here to submit for approval. You're only required to add a cover photo.
 
@@ -96,6 +96,15 @@
           case 5: return amountSplit[0]+ "T"; break;
           case 6: return amountSplit[0]+ "Q"; break;
         }
+    }
+  };
+
+  var validDigits = function(n){
+    if (n.replace(/[^\d,]+/g, '').length == n.length){
+      return true
+    }
+    else{
+      return false
     }
   };
 
@@ -143,6 +152,7 @@
         url: '#{projects_submit_project_url}',
         data: {id: #{@project.id}}
       }).done(function(data) {
+        localStorage.clear();
         window.location.href = "#{thank_you_pages_url}";
       });
     } else {
@@ -230,6 +240,7 @@
         }
         else{
           $("#uruutTour").joyride({
+            'tipLocation': 'top',
             autoStart : true
           });
           $(".joyride-tip-guide .joyride-next-tip").eq(2).attr("onclick", "javascript: $('.submit').addClass('active') ");
@@ -271,80 +282,130 @@
      return $(this).h5Validate();
    });
 
+  var validateSponsor = function(){
+    if ( $('#project_organization').val() == "" || $("#project_organization_type").val() == "" || $('#project_organization_classification').val() == "" || $('#project_address').val() == "" || $('#project_city').val() == "" || $('#project_zip').val() == "" || $('#project_website').val() == "" || $('#project_twitter_handle').val() == "" || $('#project_facebook_page').val() == "")
+      {
+        for (var i = 0; i < $('.required').length; i++){
+          if ($('.required')[i].value == ""){
+            $('#' + $('.required')[i].id).addClass('error-validated-field');
+          } else {
+            $('#' + $('.required')[i].id).removeClass('error-validated-field');
+          }
+        }
+          return false;
+      }
+    else {
+      return true;
+    };
+  };
+
    $('.step-container[data-id="sponsor-info"] form').on('submit', function(e){
      if ( connect.length > 0 ) {
       e.preventDefault();
-      $('.step-container[data-id="sponsor-info"] form input#project-submit').val("LOADING..");
-      var data = $(this).serialize();
-      var project = #{@project.id};
-      $.ajax({
-        type: 'POST',
-        url: '#{project_path(@project.id)}',
-        data: data
-      }).done(function(data){
+      if (validateSponsor()){
+        $('.step-container[data-id="sponsor-info"] form input#project-submit').val("LOADING..");
+        var data = $(this).serialize();
+        var project = #{@project.id};
         $.ajax({
-          type: 'GET',
-          url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/update_td_mark?id='+project
-        });
-        $(".project-details-link").attr("href", "/projects/" + data +"/edit#project-details");
-        $('.step-container[data-id="sponsor-info"] form input#project-submit').val("SAVE AND COUNTINUE");
-        $(".wizard-data-location").text( $("#project_city").val() + ", "+ $("#project_state").val() );
-        $(".wizard-data-all-location").text( $("#project_address").val() + " "+ $("#project_city").val() + " " + $("#project_state").val() + " " + $("#project_zip").val() );
-        $(".wizard-data-organization").text( $("#project_organization").val() );
-        localStorage.clear();
+          type: 'POST',
+          url: '#{project_path(@project.id)}',
+          data: data
+        }).done(function(data){
+          $.ajax({
+            type: 'GET',
+            url: 'https://' + document.location.hostname + ":" + document.location.port + '/projects/update_td_mark?id='+project
+          });
+          $(".project-details-link").attr("href", "/projects/" + data +"/edit#project-details");
+          $('.step-container[data-id="sponsor-info"] form input#project-submit').val("SAVE AND COUNTINUE");
+          $(".wizard-data-location").text( $("#project_city").val() + ", "+ $("#project_state").val() );
+          $(".wizard-data-all-location").text( $("#project_address").val() + " "+ $("#project_city").val() + " " + $("#project_state").val() + " " + $("#project_zip").val() );
+          $(".wizard-data-organization").text( $("#project_organization").val() );
+          localStorage.clear();
 
-        var userLocation = 'http://maps.googleapis.com/maps/api/geocode/json?address='+ $("#project_address").val() +','+ $("#project_city").val() +','+ $("#project_state").val()+'&sensor=false';
+          var userLocation = 'http://maps.googleapis.com/maps/api/geocode/json?address='+ $("#project_address").val() +','+ $("#project_city").val() +','+ $("#project_state").val()+'&sensor=false';
 
-        $.ajax({
-          url: userLocation,
-          success: function(data) {
-            console.log(data.results[0].geometry.location.lat);
-            var latitude = data.results[0].geometry.location.lat;
-            var longitude = data.results[0].geometry.location.lng;
-            var map = L.map('map', {
-              scrollWheelZoom: false
-            }).setView([latitude,longitude], 11);
+          $.ajax({
+            url: userLocation,
+            success: function(data) {
+              console.log(data.results[0].geometry.location.lat);
+              var latitude = data.results[0].geometry.location.lat;
+              var longitude = data.results[0].geometry.location.lng;
+              var map = L.map('map', {
+                scrollWheelZoom: false
+              }).setView([latitude,longitude], 11);
 
-            var uruutIcon = L.icon({
-              iconUrl: '#{image_path("map-icon.png")}',
-              iconSize:     [36, 52]
-            });
+              var uruutIcon = L.icon({
+                iconUrl: '#{image_path("map-icon.png")}',
+                iconSize:     [36, 52]
+              });
 
-            L.tileLayer('http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {
-              attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
-            }).addTo(map);
+              L.tileLayer('http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {
+                attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
+              }).addTo(map);
 
-            L.marker([latitude,longitude], {icon:uruutIcon}).addTo(map)
-          }
-        });
+              L.marker([latitude,longitude], {icon:uruutIcon}).addTo(map)
+            }
+          });
 
-        window.location.href = '/projects/' + data + '/edit#project-details';
-      })
+          window.location.href = '/projects/' + data + '/edit#project-details';
+        })
+      }
+      else {
+        alert('Required field is empty');
+      }
      }else{
        alert("Connect with Stripe, please.");
        return false;
      }
     })
 
+    var validateDetail = function(){
+      if ( !validDigits($("#project_goal").val()) ) {
+        $("#project_goal").addClass('error-validated-field');
+        alert("The Field Contain Unprohibited Value");
+        return false;
+      }
+
+      if ( $('#project_project_title').val() == "" || $("#project_goal").val() == "" || $('#project_duration').val() == "" || $('#project_category').val() == "" || $('#project_title').val() == "" || $('#project_story').val() == "" || $('#project_about').val() == "" )
+        {
+          for (var i = 0; i < $('.required_detail').length; i++){
+            if ($('.required_detail')[i].value == ""){
+              $('#' + $('.required_detail')[i].id).addClass('error-validated-field');
+            } else {
+              $('#' + $('.required_detail')[i].id).removeClass('error-validated-field');
+            }
+          }
+            return false;
+        }
+      else {
+        return true;
+      };
+    };
+
     $('.step-container[data-id="project-details"] form').on('submit', function(e){
       e.preventDefault();
-      $('.step-container[data-id="project-details"] form input#project-submit').val("LOADING..");
-      var data = $(this).serialize();
-      $.ajax({
-        type: 'POST',
-        url: '#{project_path(@project.id)}',
-        data: data
-      }).done(function(data){
-        $(".perks-link").attr("href", "/projects/" + data +"/edit#perks");
-        $('.step-container[data-id="project-details"] form input#project-submit').val("SAVE AND COUNTINUE");
-        $(".wizard-data-title").text( $("#project_project_title").val() );
-        $(".wizard-data-story").text( $("#project_story").val() );
-        $(".wizard-data-about").text( $("#project_about").val() );
-        $(".wizard-data-description").text( $("#project_title").val() );
-        $(".wizard-data-duration").text( $("#project_duration").val() );
-        $(".wizard-data-amount").text( convertAmount($("#project_goal").val()) );
-        window.location.href = '/projects/' + data + '/edit#perks';
-      })
+      if (validateDetail()){
+        $('.step-container[data-id="project-details"] form input#project-submit').val("LOADING..");
+        var data = $(this).serialize();
+        $.ajax({
+          type: 'POST',
+          url: '#{project_path(@project.id)}',
+          data: data
+        }).done(function(data){
+          $(".perks-link").attr("href", "/projects/" + data +"/edit#perks");
+          $('.step-container[data-id="project-details"] form input#project-submit').val("SAVE AND COUNTINUE");
+          $(".wizard-data-title").text( $("#project_project_title").val() );
+          $(".wizard-data-story").text( $("#project_story").val() );
+          $(".wizard-data-about").text( $("#project_about").val() );
+          $(".wizard-data-description").text( $("#project_title").val() );
+          $(".wizard-data-duration").text( $("#project_duration").val() );
+          $(".wizard-data-amount").text( convertAmount($("#project_goal").val()) );
+          window.location.href = '/projects/' + data + '/edit#perks';
+        });
+      }
+      else{
+        alert('Required field is empty');
+      }
     })
 
     // $('.step-container[data-id="perks"] form').on('submit', function(e){
@@ -372,6 +433,10 @@
         url: '#{project_path(@project.id)}',
         data: data
       }).done(function(data){
+        $.ajax({
+          type: 'GET',
+          url: 'https://' + document.location.hostname + ":" + document.location.port + '/projects/update_content_assets_tab?id='+projectId
+        });
         $(".assets-link").attr("href", "/projects/" + projectId +"/edit#assets");
         $('.step-container[data-id="sponsorship"] form input#project-submit').val("SAVE AND COUNTINUE");
         window.location.href = '/projects/' + projectId + '/edit#assets';

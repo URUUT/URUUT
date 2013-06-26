@@ -25,7 +25,7 @@ module ApplicationHelper
   end
 
   def amount_converter(amount)
-    if amount.to_i.to_s.length > 7
+    if amount.to_i.to_s.length > 5
       number_to_currency(number_to_human(amount), precision: 3)
     else
       number_to_currency(amount, precision: 0)
@@ -33,7 +33,7 @@ module ApplicationHelper
   end
 
   def amount_converter_field(amount)
-    if amount.to_s.length > 7
+    if amount.to_s.length > 5
       number_to_human(amount)
     else
       amount
@@ -193,6 +193,14 @@ module ApplicationHelper
       "display: block"
     else
       "display:none"
+    end
+  end
+
+  def message_style(controller_name, action_name)
+    if ( controller_name.eql?("users") and action_name.eql?("show") ) or ( controller_name.eql?("users") and action_name.eql?("profile") )
+      "display:none"
+    else
+      "display:block"
     end
   end
 

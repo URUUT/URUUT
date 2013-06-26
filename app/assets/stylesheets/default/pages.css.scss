@@ -146,7 +146,8 @@ h6 {
 input[type=text],
 input[type=email],
 input[type=date],
-input[type=password] {
+input[type=password],
+input[type=number] {
   border-radius:5px;
 	box-shadow:1px 1px 1px rgba(0,0,0,0.5);
 	font:bold 24px/24px arial, helvetica, sans-serif;
@@ -1009,6 +1010,8 @@ nav.navbar-inner {
   overflow:hidden;
   padding:10px;
   width:260px;
+  word-wrap: break-word;
+
   h4 {
     width:260px;
     word-wrap:break-word;
@@ -1187,7 +1190,7 @@ h5.time-left {
 }
 
 .projects.edit, .projects.new {
-  input[type=text], textarea {
+  input[type=text], textarea, input[type=number] {
     margin-bottom:25px;}
   label {
     font: 12px/12px "Proxima Nova", arial, sans-serif;
@@ -1398,15 +1401,24 @@ div[id^='step'] {
 		}
 	}
 	.bitly-link {
-		background:url(image-path('bitly-link.png')) top left no-repeat;
-		display:inline-block;
-		height:30px;
-		margin-right:20px;
-		vertical-align:middle;
-		width:162px;
+		background:url(image-path('bitly-bg.png')) top left repeat;
+		display: inline-block;
+		height: 28px;
+		border: 1px solid #fff;
+		margin-right: 20px;
+		vertical-align: middle;
+		padding-right: 5px;
+
 		span {
-			font:normal 18px/30px arial, helvetica, sans-serif;
-			margin-left: 37px;
+			background: url(image-path('bitly.png')) center left no-repeat;
+			margin-top: -1px;
+			margin-bottom: -1px;
+			margin-left: -1px;
+			font: normal 18px/30px arial, helvetica, sans-serif;
+			padding-left: 37px;
+			height: 30px;
+			display: block;
+			min-width: 125px;
 		}
 	}
 	.show-content {

@@ -18,7 +18,26 @@ new_subscription =
       cvc: $('#card_code').val()
       expMonth: $('#card_month').val()
       expYear: $('#card_year').val()
-
+    if $("#card_number").val() is ""
+      $("#card_number").addClass "error-validated-field"
+    else
+      $("#card_number").removeClass "error-validated-field"
+    if $("#card_code").val() is ""
+      $("#card_code").addClass "error-validated-field"
+    else
+      $("#card_code").removeClass "error-validated-field"
+    if $("#card_month").val() is ""
+      $("#card_month").addClass "error-validated-field"
+    else
+      $("#card_month").removeClass "error-validated-field"
+    if $("#card_year").val() is ""
+      $("#card_year").addClass "error-validated-field"
+    else
+      $("#card_year").removeClass "error-validated-field"
+    if $("#name").val() is ""
+      $("#name").addClass "error-validated-field"
+    else
+      $("#name").removeClass "error-validated-field"
     Stripe.createToken(card, new_subscription.handleStripeResponse)
 
   handleStripeResponse: (status, response) ->
@@ -50,7 +69,26 @@ edit_subscription =
       cvc: $('#card_code').val()
       expMonth: $('#card_month').val()
       expYear: $('#card_year').val()
-
+    if $("#card_number").val() is ""
+      $("#card_number").addClass "error-validated-field"
+    else
+      $("#card_number").removeClass "error-validated-field"
+    if $("#card_code").val() is ""
+      $("#card_code").addClass "error-validated-field"
+    else
+      $("#card_code").removeClass "error-validated-field"
+    if $("#card_month").val() is ""
+      $("#card_month").addClass "error-validated-field"
+    else
+      $("#card_month").removeClass "error-validated-field"
+    if $("#card_year").val() is ""
+      $("#card_year").addClass "error-validated-field"
+    else
+      $("#card_year").removeClass "error-validated-field"
+    if $("#name").val() is ""
+      $("#name").addClass "error-validated-field"
+    else
+      $("#name").removeClass "error-validated-field"
     Stripe.createToken(card, edit_subscription.handleStripeResponse)
 
   handleStripeResponse: (status, response) ->

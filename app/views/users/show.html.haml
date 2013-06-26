@@ -29,37 +29,39 @@
 .span12{:style => "margin-top:160px"}
   .row#main-row
     .span8
-      %h3.tittle
-        - if @is_current
-          Projects I've Created
-        - else
-          Their projects
-      %div
-        .projects-created.dropdown-list
-          %label Project status:
-          .selectParent
-            %select.styledSelect{:id => "projects-created"}
-              %option Funding Active
-              %option Funding Completed
-
-      %div
-        = render "pages/project", :projects => @projects_created
-        .cf
-        = paginate @projects_created, :param_name => "created_page"
-
-      - if @is_current
-        %h3.tittle Projects I've Funded
+      -unless @projects_created.blank?
+        %h3.tittle
+          - if @is_current
+            Projects I've Created
+          - else
+            Their projects
         %div
-          .projects-funded.dropdown-list
+          .projects-created.dropdown-list
             %label Project status:
             .selectParent
-              %select.styledSelect{:id => "projects-funded"}
+              %select.styledSelect{:id => "projects-created"}
                 %option Funding Active
                 %option Funding Completed
-        %div
-          = render "project", :projects => @projects_funded
+
+        #project-create
+          = render "pages/project", :projects => @projects_created
           .cf
-          = paginate @projects_funded, :param_name => "funded_page"
+          = paginate @projects_created, :param_name => "created_page"
+
+      -unless @projects_funded.blank?
+        - if @is_current
+          %h3.tittle Projects I've Funded
+          %div
+            .projects-funded.dropdown-list
+              %label Project status:
+              .selectParent
+                %select.styledSelect{:id => "projects-funded"}
+                  %option Funding Active
+                  %option Funding Completed
+          #project-fund
+            = render "project", :projects => @projects_funded
+            .cf
+            = paginate @projects_funded, :param_name => "funded_page"
 
     .span4
       -unless @pending_projects.empty?
@@ -69,16 +71,31 @@
             - @pending_projects.each do |pending_project|
               %li
                 - if pending_project.project_title.blank?
+                  - title = "Project Started on #{pending_project.created_at.strftime(format='%_m/%d/%C')}"
                   - if !pending_project.step.blank?
                     = link_to "Project Started on #{pending_project.created_at.strftime(format='%_m/%d/%C')}", pending_project.step, class: "green-link", style: "text-transform: capitalize;"
                   -else
                     = link_to "Project Started on #{pending_project.created_at.strftime(format='%_m/%d/%C')}", "/projects/#{pending_project.id}/edit#sponsor-info", class: "green-link", style: "text-transform: capitalize;"
                 -else
+                  - title = pending_project.project_title
                   - if !pending_project.step.blank?
                     = link_to pending_project.project_title, pending_project.step, class: "green-link", style: "text-transform: capitalize;"
                   - else
                     = link_to pending_project.project_title, "/projects/#{pending_project.id}/edit#sponsor-info", class: "green-link", style: "text-transform: capitalize;"
-                = link_to '<i class="icon-trash icon-green"></i>'.html_safe, project_path(pending_project), {method: :delete, confirm: 'Are you sure?', :style => "float: right;"}
+                = link_to '<i class="icon-trash icon-green delete"></i>'.html_safe, "#deleteModal#{pending_project.id}", data: {toggle:"modal", title: pending_project.title }, :style => "float: right;"
+                .modal.hide.fade{id: "deleteModal#{pending_project.id}","aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+                  .modal-header
+                    %button.close.closes{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Close X
+                    %h3#myModalLabel.tittle Delete Pending Project?
+                  .modal-body
+                    %p
+                      = "Are you sure you want to delete the pending project #{title}?"
+                  .modal-footer
+                    %a.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Cancel
+                    = link_to "Yes, Delete Project", project_path(pending_project), method: :delete, class: "btn"
+
+                / %a{:href => "#deleteModal",}
+                /   %i.icon-trash.icon-green
 
       %h3.title #{who(:whose)} badges
       .well.info.badge-wrapper
@@ -117,7 +134,34 @@
             Subscribed
 
 :javascript
-  $(function(){
-    $("#main-row").prepend($("#flash_notice"))
-    })
+
+  $(".banner").ready(function(){
+    $("#main-row").prepend($("#flash_notice"));
+    $("#flash_notice").show();
+  });
+
+  $(document).ready(function() {
+
+    // $(".delete").click(function () {
+    //     $('.proj-name').text($(this).data('title'));
+    //     $('#deleteModal').modal('show');
+    // });
+
+    $('#projects-created').change(function(){
+        // if ($(this).val() == "Funding Completed"){
+        //   $('.project-create .success').parent().addClass("success");
+        // }
+        // else{
+        //   $(".project-create").removeClass("success");
+        // }
+        var status = $(this).val();
+        $.ajax({
+          url: "/projects/get_complete_project",
+          data: {
+              user_id: "#{@user.id}",
+              status: status
+            }
+        })
+      })
+  })
 

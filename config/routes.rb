@@ -5,7 +5,9 @@ Crowdfund::Application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations"}
   # devise_for :users, :controllers => { :registrations => "registrations" }
-  resources :users, :only => [:show]
+  resources :users, :only => [:show] do
+    get :get_complete_project, on: :collection
+  end
 
   get "contacts/new"
 
@@ -23,7 +25,8 @@ Crowdfund::Application.routes.draw do
 
   get "set_new_perk" => "donations#set_new_perk"
 
-  get "users/profile"
+  # get "users/profile"
+  get "users/:user_id/profile" => "users#profile", as: "profile"
 
   match "browse/projects" => "pages#index", :as => "browse_projects"
   match "search/projects" => "pages#search", :as => "search_projects"
@@ -55,6 +58,7 @@ Crowdfund::Application.routes.draw do
    get "/skip_sponsor" => "projects#skip_sponsor"
 
   resources :admin do
+    get "deny", :on => :member
   end
 
   resources :s3_uploads
@@ -85,7 +89,11 @@ Crowdfund::Application.routes.draw do
     get "more_donators", :on => :member
   end
   resources :projects do
+    get :get_complete_project, on: :collection
+    get :get_complete_project_public, on: :collection
     get "add_desc", :on => :collection
+    get "set_previous_path_for_registration", :on => :collection
+    get "set_previous_path_for_registration_perk", :on => :collection
     get "set_perk_to_false", :on => :collection
     get "update_content_assets_tab", :on => :collection
     get "update_td_mark", :on => :collection
@@ -115,6 +123,7 @@ Crowdfund::Application.routes.draw do
   #end
 
   resources :pages do
+    get "search_category_or_location", :on => :collection
     get "discover", :on => :collection
     get "categories", :on => :collection
     post "contact", :on => :collection

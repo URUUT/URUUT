@@ -1,52 +1,52 @@
 %table.table.table-striped
-	%thead
-		%tr
-			%th
-				ID
-			%th
-				Title
-			%th
-				Description
-			%th
-				Duration
-			%th
-				Website
-			%th
-				Facebook
-			%th
-				Twitter
-	%tbody
-	- @unapproved_projects.each do |project|
-		%tr
-			%td= link_to project.id, "/projects/#{project.id}/edit#assets"
-			%td= link_to project.title, "/projects/#{project.id}/edit#assets"
-			%td= link_to project.description, "/projects/#{project.id}/edit#assets"
-			%td= link_to project.duration, "/projects/#{project.id}/edit#assets"
-			%td= link_to project.website, "/projects/#{project.id}/edit#assets"
-			%td= link_to project.facebook_page, "/projects/#{project.id}/edit#assets"
-			%td= link_to project.twitter_handle, "/projects/#{project.id}/edit#assets"
-			%td
-				.btn.btn-success{:style => "background:#70bf4c;"}
-					Approve
-				.btn.btn-danger{:style => "background:#a81221;"}
-					Deny
+  %thead
+    %tr
+      %th
+        ID
+      %th
+        Title
+      %th
+        Description
+      %th
+        Duration
+      %th
+        Website
+      %th
+        Facebook
+      %th
+        Twitter
+  %tbody
+  - @unapproved_projects.each do |project|
+    %tr
+      %td= link_to project.id, "/projects/#{project.id}/edit#assets"
+      %td= link_to project.title, "/projects/#{project.id}/edit#assets"
+      %td= link_to project.description, "/projects/#{project.id}/edit#assets"
+      %td= link_to project.duration, "/projects/#{project.id}/edit#assets"
+      %td= link_to project.website, "/projects/#{project.id}/edit#assets"
+      %td= link_to project.facebook_page, "/projects/#{project.id}/edit#assets"
+      %td= link_to project.twitter_handle, "/projects/#{project.id}/edit#assets"
+      %td
+      %td
+        .btn.btn-success{:style => "background:#70bf4c;"}
+          Approve
+        = link_to "Deny", deny_admin_path(project.id), class: "btn btn-danger", style: "background:#a81221;"
 
 
 = paginate @unapproved_projects
 
 :javascript
-	$(function(){
-		$('.btn-success').click(function(){
-			var id = $.trim($(this).parent().parent().find('td:first').text());
-			$.ajax({
-				type: "POST",
-				url: 'http://' + document.location.host + '/admin/approve',
-				data: {approved:'true', id: id}
-			}).done(function(html) {
-			  var data = $.parseJSON(html);
-				if(data === 'Success'){
-					location.reload();
-				}
-			});
-		});
-	});
+  $(function(){
+    $('.btn-success').click(function(){
+      var id = $.trim($(this).parent().parent().find('td:first').text());
+      $.ajax({
+        type: "POST",
+        url: 'https://' + document.location.host + '/admin/approve',
+        data: {approved:'true', id: id}
+      }).done(function(html) {
+        var data = $.parseJSON(html);
+        if(data === 'Success'){
+          location.reload();
+        }
+      });
+    });
+  });
