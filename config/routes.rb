@@ -95,6 +95,7 @@ Crowdfund::Application.routes.draw do
     get "set_perk_to_false", :on => :collection
     get "update_content_assets_tab", :on => :collection
     get "update_td_mark", :on => :collection
+    get "show_more_image", :on => :member
     post "add_perk", :on => :collection
     post "save_video", :on => :collection
     post "get_perk", :on => :collection
