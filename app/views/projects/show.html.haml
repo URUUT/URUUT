@@ -726,33 +726,28 @@
       $(show).show();
     });
 
-    $('.fb-count').click(function() {
-      console.log("#{root_url}projects/#{@project.id}")
-      var publish = {
-        method: 'feed',
-        name: "#{@project.project_title}",
-        description: "Like making a difference in the community? Check out this great project I found on @URUUT.  You can help fund it, or set up a project of your own to Get RUUTed!",
-        caption: "#{@project.organization}",
-        link: "#{root_url}projects/#{@project.id}",
-        picture: "#{@project.large_image}",
-        actions: [
-          {
-            name: "#{@project.project_title}",
-            link: "#{root_url}projects/#{@project.id}"
-          }
-        ]
-      };
+    // $('.fb-count').click(function() {
+    //   console.log("#{root_url}projects/#{@project.id}")
+    //   var publish = {
+    //     method: 'feed',
+    //     redirect_uri: '#{project_url(@project.id)}',
+    //     name: "#{@project.project_title}",
+    //     description: "Like making a difference in the community? Check out this great project I found on @URUUT.  You can help fund it, or set up a project of your own to Get RUUTed!",
+    //     caption: "#{@project.organization}",
+    //     link: "#{project_url(@project.id)}",
+    //     picture: "#{@project.large_image}"
+    //   };
 
-      function callback(response) {
-        if (response && response.post_id) {
-          console.log('Post was published.');
-        } else {
-          console.log('Post was not published.');
-        }
-      }
+    //   function callback(response) {
+    //     if (response && response.post_id) {
+    //       console.log('Post was published.');
+    //     } else {
+    //       console.log('Post was not published.');
+    //     }
+    //   }
 
-      FB.ui(publish, callback);
-    });
+    //   FB.ui(publish, callback);
+    // });
 
     $('.tw-count').click(function(e) {
       e.preventDefault();
