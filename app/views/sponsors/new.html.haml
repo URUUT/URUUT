@@ -146,6 +146,8 @@
 
       %h4 SPONSOR INFORMATION
       .well
+        .req-legend
+          *Required
         %div
           = f.label :name, "Business OR ORGANIZATION NAME*", class: "label-green"
           = text_field :project_sponsor, :name, required: true, label: false, class: "span12"
@@ -181,6 +183,8 @@
 
       %h3 Payment Information
       .well
+        .req-legend
+          *Required
         %div
           = f.label :payment_type, class: "label-green" do
             PREFERRED PAYMENT METHOD*
@@ -206,22 +210,22 @@
             .field.name
               = label_tag :card_name, class: "label-green" do
                 NAME AS IT APPEARS ON CARD*
-              = text_field_tag nil, user_signed_in? ? "#{current_user.first_name.capitalize} #{current_user.last_name.capitalize}" : "" , name: "sponsor[card_name]", class: "span12"
+              = text_field_tag nil, user_signed_in? ? "#{current_user.first_name.capitalize} #{current_user.last_name.capitalize}" : "" , name: "sponsor[card_name]", class: "span12 required_data", id: "name"
             .field.card-number
               = label_tag :card_number, class: "label-green" do
                 Credit Card Number*
-              = text_field_tag :card_number, nil, name: nil, class: "span12"
+              = text_field_tag :card_number, nil, name: nil, class: "span12 required_data"
             .field.ccv.span4
               = label_tag :card_code, class: "label-green" do
                 CVV*
-              = text_field_tag :card_code, nil, name: nil, class: "span10"
+              = text_field_tag :card_code, nil, name: nil, class: "span10 required_data"
             .field.expiration.span6
               = label_tag :card_month, class: "label-green" do
                 CARD EXPIRATION (MM/YYYY)*
               / = select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
               / = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}
-              = text_field_tag nil, nil, {name: nil, id: "card_month", class: "span3"}
-              = text_field_tag nil, nil, {name: nil, id: "card_year", class: "span5"}
+              = text_field_tag nil, nil, {name: nil, id: "card_month", class: "span3 required_data"}
+              = text_field_tag nil, nil, {name: nil, id: "card_year", class: "span5 required_data"}
             .cf
           #stripe_error
             %noscript JavaScript is not enabled and is required for this form. First enable it in your web browser settings.
@@ -246,7 +250,22 @@
   = @project.id
 
 :javascript
-  $('#new_sponsor').validate();
+  $('#new_sponsor').validate({
+    rules: {
+      "sponsor[email]":{
+        required: true,
+        email: true
+      },
+      "project_sponsor[site]":{
+        required: true,
+        url: true
+      },
+      "sponsor[phone]":{
+        required: true,
+        number: true
+      }
+    }
+  });
 
   project_token = "#{@project.project_token}";
   project_pub_key = "#{@project.publishable_key}";
@@ -281,6 +300,36 @@
         expMonth: $('#card_month').val(),
         expYear: $('#card_year').val()
       };
+      if ($('#card_number').val() == ""){
+        $('#card_number').addClass('error-validated-field');
+      }
+      else{
+        $('#card_number').removeClass('error-validated-field');
+      }
+      if ($('#card_code').val() == ""){
+        $('#card_code').addClass('error-validated-field');
+      }
+      else{
+        $('#card_code').removeClass('error-validated-field');
+      }
+      if ($('#card_month').val() == ""){
+        $('#card_month').addClass('error-validated-field');
+      }
+      else{
+        $('#card_month').removeClass('error-validated-field');
+      }
+      if ($('#card_year').val() == ""){
+        $('#card_year').addClass('error-validated-field');
+      }
+      else{
+        $('#card_year').removeClass('error-validated-field');
+      }
+      if ($('#name').val() == ""){
+        $('#name').addClass('error-validated-field');
+      }
+      else{
+        $('#name').removeClass('error-validated-field');
+      }
       console.log("tes");
       Stripe.createToken(card, handleStripeResponse);
     };

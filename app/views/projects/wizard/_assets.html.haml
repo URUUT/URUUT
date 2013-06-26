@@ -3,11 +3,19 @@
     = hidden_field_tag "step", "last"
     - if !@project.large_image.blank?
       #large_image{:style => "background-image: url(#{@project.large_image}); -webkit-background-size: cover; background-size: cover;", data: {image: 'true'}}
+        .div.loader-cover.container{style: "display:none"}
+          .content-loader{style: "margin-top: 150px; margin-left: 49%;"}
+            .loader-image{style: "margin-left: -3%; font-weight: bolder;"} LOADING
+            = image_tag "3.gif"
         .div{style: "height: 546px;", id: "image-priview"}
           %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => Settings.filepicker.api_key, 'data-fp-button-class' => 'coverphoto btn', 'onchange' => 'updateCover(event)', :style => 'left:50%', 'data-fp-mimetypes' => 'image/*', 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA,INSTAGRAM'}
           = render "funding_info"
     - else
       #large_image{data: {image: 'false'}}
+        .div.loader-cover.container{style: "display:none"}
+          .content-loader{style: "margin-top: 150px; margin-left: 49%;"}
+            .loader-image{style: "margin-left: -3%; font-weight: bolder;"} LOADING
+            = image_tag "3.gif"
         .div{style: "height: 546px;", id: "image-priview"}
           %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => Settings.filepicker.api_key, 'data-fp-button-class' => 'coverphoto btn pick-cover-photo', 'onchange' => 'updateCover(event)', :style => 'left:50%', 'data-fp-mimetypes' => 'image/*', 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA,INSTAGRAM'}
           = render "funding_info"
@@ -39,6 +47,9 @@
                   WEB:
                   - unless @project.website.nil?
                     = link_to(strip_url(@project.website), recognize_url(@project.website), target: "_blank", :style => "font-style: italic; text-decoration: underline; color: #3f403b; font-family: 'Georgia', serif;")
+                %span{style: "margin-left: 10px"}
+                = image_tag "message-green.png"
+                = link_to "Contact Us", "mailto:#{User.find(@project.user_id).email}", target: "_blank", :style => "font-style: italic; text-decoration: underline; color: #3f403b; font-family: 'Georgia', serif;"
         - if @project.sponsor_permission
           %h4.title{:style => 'margin-top:50px;'} PROJECT SPONSORS
           = link_to "javascript:void(0)", :class => 'btn', :style => 'background:#3f403b;padding:10px;margin-top:10px;' do
@@ -139,7 +150,7 @@
                           = p.name
                         - if p.limit
                           %p= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} Available)"
-                        %p.description= p.description
+                        %p= p.description
                         .clearfix
                           .seed-num
                             .amount
@@ -247,7 +258,7 @@
                       = p.name
                     - if p.limit
                       %p= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} Available)"
-                    %p.description= p.description
+                    %p= p.description
                     .clearfix
                       .seed-num
                         .amount
@@ -285,10 +296,10 @@
           %span (Project Organizer)
         .planter
           -if current_user.avatar.blank?
-            = image_tag(get_gravatar(current_user.email, 100), :style => "display:inline-block;margin-right:20px;width:100px;height:100px;")
+            = image_tag(get_gravatar(current_user.email, 100))
           -else
-            = image_tag current_user.avatar, :style => "display:inline-block;margin-right:20px;width:100px;height:100px;"
-          %h4.wizard-data-organization{:style => "color:#70bf4c;letter-spacing:2px;"}= @project.organization
+            = image_tag current_user.avatar
+          %h4.wizard-data-organization{:style => "letter-spacing:2px;"}= @project.organization
 
         - if @project.sponsor_permission
           %h4.title{:style => 'margin-top:50px;'} Project Sponsors
@@ -334,33 +345,27 @@
       trigger: "hover"
     });
 
-= javascript_include_tag "//code.jquery.com/ui/1.10.3/jquery-ui.js"
+= javascript_include_tag "http://code.jquery.com/ui/1.10.3/jquery-ui.js"
 = javascript_include_tag "jquery.ui.touch-punch.min"
 
 :javascript
-
-  $('.save-btn').hide();
+  $('.new-save-btn').hide();
 
   var updateCover = function(event){
     $('.drag-instructions').remove();
-    $('.coverphoto').html("Uploading Photo <img src='/assets/3.gif'/>");
-    console.log(event.fpfile.url);
+    $('#large_image').css('background', 'none');
+    $(".loader-cover").show();
+    // $('.coverphoto').html("Uploading Photo <img src='/assets/3.gif'/>");
     var largeImage = event.fpfile.url,
     current_bg = $('#large_image').css('background-image');
-    console.log("finished");
     $("body").animate({ scrollTop: 0 }, "slow");
     $('<img />').attr('src', largeImage).load(function() {
       $('.coverphoto').html("CHOOSE A COVER PHOTO");
       var largeImageObj = new Image;
       largeImageObj.src = largeImage;
-      console.log(largeImageObj.width);
       if ( largeImageObj.width >= 1600 )
       {
-        $.ajax({
-          url: '/projects/save_image',
-          method: 'POST',
-          data: { large_image: largeImage }
-        });
+        $(".loader-cover").hide();
         $(".coverphoto").hide();
         $(".div-image-priview").remove();
         $("#url_image").val(largeImage);
@@ -371,7 +376,7 @@
 
         $('.ui-draggable').remove();
         $('#large_image').prepend(dragImg);
-        $('#large_image').append('<span class="drag-instructions">Drag to Reposition<br/><br/><b>Click save below right once positioned</b></span>');
+        $('#large_image').append('<span class="drag-instructions">DRAG TO REPOSITION COVER PHOTO</span>');
 
         $("#y_position").val(0);
 
@@ -397,11 +402,13 @@
 
         $('#large_image').css('background-image','');
         $('#dragImg').css('position', 'absolute')
-        $('.save-btn').show();
+        $('.new-save-btn').show();
         $(".action-convert").show();
       }
       else{
-        $('.save-btn').hide();
+        $('.new-save-btn').hide();
+        $(".loader-cover").hide();
+        $(".coverphoto").show();
         $('#large_image').css('background-image', current_bg);
         $('.drag-instructions').remove();
         $("#large_image").append('<span class="drag-instructions" style="width: 300px;"><b>image width for cover should be more than 1600px</b></span>');
@@ -422,15 +429,31 @@
     $(".joyride-tip-guide .joyride-next-tip").eq(3).attr("onclick", "javascript: $('.submit').removeClass('active') ");
   });
 
-  $(".change-image").click(function(){
-    $(".coverphoto").click();
+  $(".cancel-image").click(function(){
+    $(".coverphoto").show();
+    $('.drag-instructions').remove();
+    $("#cropInstruction").remove();
+    $('.ui-draggable').remove();
+    $(".action-convert").hide();
+    $("#cover-priview").remove();
+    $(".save-image").text('SAVE');
+    $(".cancel-image").text("CANCEL");
+    $('.new-save-btn').hide();
+
+    if(localStorage.getItem('cover_url')) {
+      $('#large_image').css('background-image','url(' + localStorage.getItem('cover_url') + ')').css('-webkit-background-size', 'cover').css('-moz-background-size', 'cover').css('background-size', 'cover');
+      $('#large_image').attr('data-image', 'true');
+    }else{
+      $('#large_image').css('background', '#DDD url("/assets/cover-photo.png") top center no-repeat');
+    }
+
   });
 
   $(".save-image").click(function(){
     $("#cropInstruction").remove();
     $('.coverphoto').html("CHOOSE A COVER PHOTO");
     $('.drag-instructions').remove();
-    $(".change-image").text("loading");
+    $(".cancel-image").text("loading");
     $(this).text("loading");
     var fpfile = { url: $("#url_image").val(), mimetype: 'image/jpeg', isWriteable: true };
     var newImage = new Image();
@@ -440,27 +463,26 @@
       {},
       function(new_FPFile){
         $(".save-image").text('reset');
-        $(".change-image").text("reset");
-        console.log(new_FPFile.url);
+        $(".cancel-image").text("reset");
         $(".coverphoto").show();
         $('.ui-draggable').remove();
         $(".action-convert").hide();
         $("#cover-priview").remove();
         $('#large_image').css('background-image','url(' + new_FPFile.url + ')').css('-webkit-background-size', 'cover').css('-moz-background-size', 'cover').css('background-size', 'cover');
-        $('#large_image').attr('data-image', 'true')
+        $('#large_image').attr('data-image', 'true');
+        localStorage.setItem('cover_url', new_FPFile.url);
         $.ajax({
             url: '/projects/save_image',
             method: 'POST',
             data: { large_image: new_FPFile.url }
           });
-        $(".save-image").text('Save Images');
-        $(".change-image").text("Change cover photo");
-        $('.save-btn').hide();
+        $(".save-image").text('SAVE');
+        $(".cancel-image").text("CANCEL");
+        $('.new-save-btn').hide();
       },
       function(FPError){
-        console.log(FPError);
-        $(".save-image").text('Save Images');
-        $(".change-image").text("Change cover photo");
+        $(".save-image").text('SAVE');
+        $(".cancel-image").text("CANCEL");
       }
     );
   });

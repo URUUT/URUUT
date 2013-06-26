@@ -12,7 +12,10 @@
 
 .full-width.hero
   .container
-    %h2 This is a placeholder
+    = image_tag "thank-u.png"
+    .headline
+      %h2 Thanks for becoming a project sponsor.
+      %p Continue to the ceckout process below to confirm your sponsorship level, enter sponsor information, and choose your payment method.
 .container
   .row-fluid
     .span8
@@ -34,15 +37,15 @@
           Platinum
           %span.small-heading
             #{availability(@project.project_sponsors, 1)} of 1 Available
-        %ul.normal-font
-        - if @sponsorship_benefits.include?(1)
-          - @sponsorship_benefits[1].each do |benefit|
-            %li
-              = benefit.name
-        .clearfix{:style => "margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #ccc"}
+        %ul.dashed-list
+          - if @sponsorship_benefits.include?(1)
+            - @sponsorship_benefits[1].each do |benefit|
+              %li
+                = benefit.name
+        .clearfix{:style => "margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #e0e0e0; margin-left: -19px; margin-right: -19px; padding-left: 19px; padding-right: 19px;"}
           .pull-left
             %h5{style: "margin-bottom: 0;"} COST
-            %h3{style: "margin: 0;line-height: 20px;"}= number_to_currency((@project.goal.to_i * 0.3), precision: 0)
+            %h3{style: "margin: 0;line-height: 20px;"}= amount_converter((@project.goal.to_i * 0.3))
           - if check_availibility(@project, 1) < 1
             %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-1", :"sponsor-id" => "1"}
               SPONSOR
@@ -55,15 +58,15 @@
           Gold
           %span.small-heading
             #{availability(@project.project_sponsors, 2)} of 3 Available
-        %ul.normal-font
-        - if @sponsorship_benefits.include?(2)
-          - @sponsorship_benefits[2].each do |benefit|
-            %li #{benefit.name}
+        %ul.dashed-list
+          - if @sponsorship_benefits.include?(2)
+            - @sponsorship_benefits[2].each do |benefit|
+              %li #{benefit.name}
         / %div{:style => "height: 80px; width: 100%;"}
-        .clearfix{:style => "margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #ccc"}
+        .clearfix{:style => "margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #e0e0e0; margin-left: -19px; margin-right: -19px; padding-left: 19px; padding-right: 19px;"}
           .pull-left
             %h5{style: "margin-bottom: 0;"} COST
-            %h3{style: "margin: 0;line-height: 20px;"}= number_to_currency((@project.goal.to_i * 0.1), precision: 0)
+            %h3{style: "margin: 0;line-height: 20px;"}= amount_converter((@project.goal.to_i * 0.1))
           - if check_availibility(@project, 2) < 3
             %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-2", :"sponsor-id" => "2"}
               SPONSOR
@@ -76,15 +79,15 @@
           Silver
           %span.small-heading
             #{availability(@project.project_sponsors, 3)} of 5 Available
-        %ul.normal-font
-        - if @sponsorship_benefits.include?(3)
-          - @sponsorship_benefits[3].each do |benefit|
-            %li #{benefit.name}
+        %ul.dashed-list
+          - if @sponsorship_benefits.include?(3)
+            - @sponsorship_benefits[3].each do |benefit|
+              %li #{benefit.name}
         / %div{:style => "height: 80px; width: 100%;"}
-        .clearfix{:style => "margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #ccc"}
+        .clearfix{:style => "margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #e0e0e0; margin-left: -19px; margin-right: -19px; padding-left: 19px; padding-right: 19px;"}
           .pull-left
             %h5{style: "margin-bottom: 0;"} COST
-            %h3{style: "margin: 0;line-height: 20px;"}= number_to_currency((@project.goal.to_i * 0.04), precision: 0)
+            %h3{style: "margin: 0;line-height: 20px;"}= amount_converter((@project.goal.to_i * 0.04))
           - if check_availibility(@project, 2) < 3
             %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-3", :"sponsor-id" => "3"}
               SPONSOR
@@ -95,26 +98,26 @@
               %span
         %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;font-family:'Proxima Nova';"}
           Bronze
-        %ul.normal-font
-        - if @sponsorship_benefits.include?(4)
-          - @sponsorship_benefits[4].each do |benefit|
-            %li #{benefit.name}
+        %ul.dashed-list
+          - if @sponsorship_benefits.include?(4)
+            - @sponsorship_benefits[4].each do |benefit|
+              %li #{benefit.name}
         /%div{:style => "height: 80px; width: 100%;"}
         .clearfix
           .pull-left
             %h5{style: "margin-bottom: 0;"} COST
-            %h3{style: "margin: 0;line-height: 20px;"}= number_to_currency((@project.goal.to_i * 0.005), precision: 0)
+            %h3{style: "margin: 0;line-height: 20px;"}= amount_converter((@project.goal.to_i * 0.005))
           %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-4", :"sponsor-id" => "4"}
             SPONSOR
             %span
 
     = form_for(@sponsor, :url => project_sponsor_path, :html => {:class => "span8", :style => "margin-left: 0;", multipart: true, method: 'PUT'}) do |f|
-      .well.clearfix{:style => "border-top: none;"}
+      .well.clearfix{:style => "border-top: none; padding-bottom: 0; border: 1px solid #e0e0e0;"}
         .payment-errors
         .span12{:style => "background-color: #f5f5f5; margin-left: 0px;"}
-          .pull-left{:style => "width: 250px; height: 500px; border-right: solid 1px #d3d3d3;"}
+          .pull-left{:style => "width: 250px; height: 500px; border-right: solid 1px #d3d3d3; margin-top: -19px; padding-top: 19px;"}
             %h4 SPONSORSHIP COST
-            %h1.cost-level.label-green-big.label-green #{number_to_currency(@cost, precision: 0)}
+            %h1.cost-level.label-green-big.label-green #{amount_converter(@cost)}
             = image_tag "platinum-placement.png", class: "sponsor-placement platinum"
             = image_tag "gold-placement.png", class: "sponsor-placement gold"
             = image_tag "silver-placement.png", class: "sponsor-placement silver"
@@ -132,10 +135,12 @@
             .sponsorship-level-details
               %h2{:style => "color: #70bf4c"}
                 #{@level} sponsor
-              %ul.normal-font
+              %ul.dashed-list
                 - unless @first_benefits.nil?
                   - @first_benefits.each do |benefit|
                     %li #{benefit.name}
+        .span12{:style => "margin: 0 -19px; padding: 0 19px; border-top: 1px solid #d3d3d3; width: 632px;"}
+          %p.checkout-continue-subtext{:style => "border-top: none;"} Continue to payment information below or choose a different seed amount/perk from the right.
 
       %h4 SPONSOR INFORMATION
       .well
@@ -199,7 +204,7 @@
             .field.name
               = label_tag :card_name, class: "label-green" do
                 NAME AS IT APPEARS ON CARD*
-              = text_field_tag nil, user_signed_in? ? current_user.first_name.capitalize : "" , name: "sponsor[card_name]", class: "span12"
+              = text_field_tag nil, user_signed_in? ? current_user.first_name.capitalize : "" , name: "sponsor[card_name]", class: "span12", id: "name"
             .field.card-number
               = label_tag :card_number, class: "label-green" do
                 Credit Card Number*
@@ -229,7 +234,7 @@
           %div
             = f.label :phone, "CONTACT PHONE NUMBER*", class: "label-green"
             = f.text_field :phone, :size => 25, type: "text", label: false, class: "transfer-input"
-        %div{:style => "border-top: solid 1px #a5a5a5; padding-top: 25px", :class => "clearfix"}
+        %div{:style => "border-top: solid 1px #e0e0e0; margin-left: -19px; margin-right: -19px; padding-top: 25px", :class => "clearfix"}
           = image_tag "3.gif", id: "submit-progress", style: "display: none; float: left; position: relative; top: 32px; margin-right: -40px; margin-left: 15px; z-index: 9999;"
           = f.button :submit, class: "btn pull-right", id: "project-submit"
           %a.error-message
@@ -238,6 +243,24 @@
   = @project.id
 
 :javascript
+
+  $('#edit_sponsor_#{@sponsor.id}').validate({
+    rules: {
+      "sponsor[email]":{
+        required: true,
+        email: true
+      },
+      "project_sponsor[site]":{
+        required: true,
+        url: true
+      },
+      "sponsor[phone]":{
+        required: true,
+        number: true
+      }
+    }
+  });
+
   project_token = "#{@project.project_token}";
   project_pub_key = "#{@project.publishable_key}";
 
@@ -255,6 +278,36 @@
         expMonth: $('#card_month').val(),
         expYear: $('#card_year').val()
       };
+      if ($('#card_number').val() == ""){
+        $('#card_number').addClass('error-validated-field');
+      }
+      else{
+        $('#card_number').removeClass('error-validated-field');
+      }
+      if ($('#card_code').val() == ""){
+        $('#card_code').addClass('error-validated-field');
+      }
+      else{
+        $('#card_code').removeClass('error-validated-field');
+      }
+      if ($('#card_month').val() == ""){
+        $('#card_month').addClass('error-validated-field');
+      }
+      else{
+        $('#card_month').removeClass('error-validated-field');
+      }
+      if ($('#card_year').val() == ""){
+        $('#card_year').addClass('error-validated-field');
+      }
+      else{
+        $('#card_year').removeClass('error-validated-field');
+      }
+      if ($('#name').val() == ""){
+        $('#name').addClass('error-validated-field');
+      }
+      else{
+        $('#name').removeClass('error-validated-field');
+      }
       console.log("tes");
       Stripe.createToken(card, handleStripeResponse);
     };
@@ -281,7 +334,7 @@
       }
     };
 
-    $('#new_sponsor').on('submit', function(e){
+    $('#edit_sponsor_#{@sponsor.id}').on('submit', function(e){
       if ( $("#sponsor_payment_type").val() == "Credit Card") {
         if ( $('#card_number').length ){
           processCard();

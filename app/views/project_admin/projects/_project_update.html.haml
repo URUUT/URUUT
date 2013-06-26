@@ -1,6 +1,8 @@
 %h2.title ADD A PROJECT UPDATE
 .notice
 = form_for(@project_update, url: process_project_update_project_admin_projects_path, html: {class: "sponsor-info span12 margin-auto well"}, method: :post, remote: true) do |f|
+  .req-legend
+    *Required
   %div.margin-auto{:style => "margin-bottom: 20px;"}
     = f.label :title, class: "label-green" do
       NEW PROJECT UPDATE TITLE*

@@ -16,7 +16,7 @@
             %label PROJECT LOCATION:
             %section.selectParent
               %select{:id => "location", :name => "city", class: "styledSelect"}
-                %option All cities
+                %option All Cities
                 = render "partials/project_filters", :type => :city
           .keyword.dropdown{style: "margin-top: -12px;"}
             %label{style: "margin-top: 0;margin-bottom: 20px;"} KEYWORD SEARCH
@@ -24,3 +24,16 @@
               :value => params[:keyword]}
               %button.btn.btns{:type => "submit"}
                 %span
+
+:javascript
+  $(function(){
+    $("#category, #location").on("change", function(){
+      $(".project-all-content").html("");
+      $(".loader").fadeIn("fast");
+      $.ajax({
+        url: "/pages/search_category_or_location?category=" + $("#category").val() + "&city=" + $("#location").val()
+      }).done(function(data) {
+        $(".loader").fadeOut("fast");
+      });
+    });
+  });

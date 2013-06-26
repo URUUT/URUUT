@@ -68,7 +68,11 @@
       %hr{style: "margin-top: 0; margin-left: -19px; margin-right: -19px; background: #e0e0e0;"}
       %h4{style: "margin-bottom: 20px;"}
         Perk #
-        %span.count-perk{style: "margin-left: -1%"} #{@project.perks.count + 1}
+        %span.count-perk{style: "margin-left: -1%"}
+          #{@project.perks.count + 1}
+        %span.pull-right
+          .req-legend
+            *Required
       %fieldset{:style => "position:relative"}
         .perk-container
           .perk
@@ -79,28 +83,28 @@
                     = label_tag "perk-amount", class: "label-green" do
                       SEED AMOUNT*
                       %span.italic{style: "color: #000; font-size: 10px;"} (full $ amounts only)
-                    = text_field_tag "perk-amount", '', class: "span4 required"
+                    = text_field_tag "perk-amount",'', class: "span4 required_perks"
                   .span4
                     = label_tag "perk-name", class: "label-green" do
                       PERK TITLE*
                       %span.italic.title-count{style: "color: #000; font-size: 10px;"}
-                    = text_field_tag "perk-name", '', class: "span4 required"
+                    = text_field_tag "perk-name", '', class: "span4 required_perks"
 
             %div
               = label_tag "perk-description", class: "label-green" do
                 Description*
                 %span.italic.desc-count{style: "color: #000; font-size: 10px;"}
-              = text_area_tag "perk-description", nil, style: "height:120px;width:605px;", maxlength: 140, class: :required, placeholder: "All the details on what your seeders will receive for this perk..."
+              = text_area_tag "perk-description", nil, style: "height:120px;width:605px;", maxlength: 140, class: :required_perks, placeholder: "All the details on what your seeders will receive for this perk..."
 
             .row.perk-view
               .span2
                 %div{style: "font-size: 10px;"}
                   = label_tag "limit_perk", "LIMIT # AVAILABLE", class: "label-green"
                 .selectParent{style: "width: 140px;"}
-                  = select_tag "limit_perk", options_for_select({ "Yes" => "yes", "No" => "no" }, "yes"), class: "styledSelect"
+                  = select_tag "limit_perk", options_for_select({ "Yes" => "yes", "No" => "no" }, "no"), class: "styledSelect"
               .span5
                 = label_tag "perk_available", "HOW MANY OF THIS PERK ARE AVAILABLE", class: "label-green"
-                = text_field_tag "perk_available", '', class: "span6"
+                = number_field_tag "perk_available", '', class: "span6"
 
             %input{:type => 'hidden', :value => "", :id => "perk-id"}
 
@@ -145,6 +149,15 @@
 
 :javascript
 
+  var validDigits = function(n){
+    if (n.replace(/[^\d,]+/g, '').length == n.length){
+      return true
+    }
+    else{
+      return false
+    }
+  };
+
   var actionEditButton = function(){
     $('.update-perk').on('click', function(e) {
       e.preventDefault();
@@ -161,12 +174,12 @@
       };
       $.ajax({
         type: 'POST',
-        url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/update_perk',
+        url: 'https://' + document.location.hostname + ":" + document.location.port + '/projects/update_perk',
         data: data
       }).done(function(data) {
         $.ajax({
           type: 'GET',
-          url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/update_content_assets_tab?id='+project
+          url: 'https://' + document.location.hostname + ":" + document.location.port + '/projects/update_content_assets_tab?id='+project
         });
         $(".perk-true").show();
         $(".perk-false").hide();
@@ -191,12 +204,12 @@
       var project = #{@project.id};
       $.ajax({
         type: 'POST',
-        url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/delete_perk',
+        url: 'https://' + document.location.hostname + ":" + document.location.port + '/projects/delete_perk',
         data: data
       }).done(function(data) {
         $.ajax({
           type: 'GET',
-          url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/update_content_assets_tab?id='+project
+          url: 'https://' + document.location.hostname + ":" + document.location.port + '/projects/update_content_assets_tab?id='+project
         });
         $("#perk-item-"+ perk_id +"").remove();
         if ( $(".created-perk").length < 1 ){
@@ -263,13 +276,19 @@
   };
 
   var validatePerk = function(){
-    if ($('#project_perk_permission_input').val() == "Yes") {
+    if ( !validDigits($("#perk-amount").val()) ) {
+      $("#perk-amount").addClass('error-validated-field');
+      alert("The Field Contain Unprohibited Value");
+      return false;
+    }
+
+    if ($('#project_perk_permission').val() == "yes") {
       if ($('#perk-name').val() == "" || $('#perk-amount').val() == "" || $('#perk-description').val() == "") {
-        for (var i = 0; i < $('.required').length; i++){
-          if ($('.required')[i].value == ""){
-            $('#' + $('.required')[i].id).addClass('error-validated-field');
+        for (var i = 0; i < $('.required_perks').length; i++){
+          if ($('.required_perks')[i].value == ""){
+            $('#' + $('.required_perks')[i].id).addClass('error-validated-field');
           } else {
-            $('#' + $('.required')[i].id).removeClass('error-validated-field');
+            $('#' + $('.required_perks')[i].id).removeClass('error-validated-field');
           }
         }
         return false;
@@ -286,11 +305,11 @@
     var project_id = #{@project.id};
     $.ajax({
         type: 'GET',
-        url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/set_perk_to_false?id='+project_id
+        url: 'https://' + document.location.hostname + ":" + document.location.port + '/projects/set_perk_to_false?id='+project_id
     }).done(function(id) {
       $.ajax({
         type: 'GET',
-        url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/update_content_assets_tab?id='+project_id
+        url: 'https://' + document.location.hostname + ":" + document.location.port + '/projects/update_content_assets_tab?id='+project_id
       });
       $(".skip-perk").text("CONTINUE TO STEP 4");
       window.location.href = 'http://' + document.location.hostname + ":" + document.location.port + '/projects/'+ project_id +'/edit#sponsorship';
@@ -318,12 +337,12 @@
       };
       $.ajax({
         type: 'POST',
-        url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/add_perk',
+        url: 'https://' + document.location.hostname + ":" + document.location.port + '/projects/add_perk',
         data: data
       }).done(function(id) {
         $.ajax({
           type: 'GET',
-          url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/update_content_assets_tab?id='+project
+          url: 'https://' + document.location.hostname + ":" + document.location.port + '/projects/update_content_assets_tab?id='+project
         });
         if ( $(".created-perk").length < 1 ){
           $(".title-current-perk").remove();
@@ -369,12 +388,12 @@
       };
       $.ajax({
         type: 'POST',
-        url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/add_perk',
+        url: 'https://' + document.location.hostname + ":" + document.location.port + '/projects/add_perk',
         data: data
       }).done(function(id) {
         $.ajax({
           type: 'GET',
-          url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/update_content_assets_tab?id='+project
+          url: 'https://' + document.location.hostname + ":" + document.location.port + '/projects/update_content_assets_tab?id='+project
         });
         var newPerk = '<div class="created-perk" id="perk-item-'+ id +'"><h6>'+ convertAmount(amount ) +'</h6><h6>'+ name +'</h6><p style="width:268px;word-wrap: break-word;">'+ description +'</p><input id="perk-'+id+'" type="hidden" value="'+id+'"><a class="perk-edit" style="color:#70bf4c; cursor: pointer">edit</a> | <a class="perk-delete" style="color:#70bf4c; cursor: pointer">delete</a></div>';
         $(".list-perk").append(newPerk);
@@ -384,7 +403,7 @@
         $("#perk_available").val("");
         $(".count-perk").text( parseInt($(".count-perk").text()) + 1 );
         actionEditButton(); actionDeleteButton(); actionButton();
-        window.location.href = 'http://' + document.location.hostname + ":" + document.location.port + '/projects/'+ project +'/edit#sponsorship';
+        window.location.href = 'https://' + document.location.hostname + ":" + document.location.port + '/projects/'+ project +'/edit#sponsorship';
 
       });
     } else {

@@ -3,6 +3,7 @@ class ProjectsController < ApplicationController
   require "net/http"
   require "uri"
 
+  skip_before_filter :verify_authenticity_token, only: :add_perk
   before_filter :session_path, only: :create
   before_filter :authenticate_user!, :only => [:index, :create, :edit, :update]
   before_filter :set_session_page
@@ -119,7 +120,10 @@ class ProjectsController < ApplicationController
       @project.step = "/projects/#{@project.id}/edit#assets"
     end
 
-    @sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits)
+    unless sponsorship_benefits.blank?
+      SponsorshipBenefit.where(project_id: params[:id]).destroy_all
+      @sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits)
+    end
     params[:project][:goal] = params[:project][:goal].gsub(",", "") if !params[:project][:goal].nil?
     params[:project][:sponsor_permission] = params[:project][:sponsorship_permission] if !params[:project][:sponsorship_permission].nil?
     @project.update_attributes!(params[:project])
@@ -227,6 +231,18 @@ class ProjectsController < ApplicationController
     render :nothing => true if @project.save
   end
 
+  def get_complete_project
+    @user = User.find(params[:user_id])
+    comparison = params[:status].eql?("Funding Active") ? ">" : "<"
+    @projects_created = @user.projects.where("campaign_deadline #{comparison} ? AND live = 1", Time.now).order("updated_at DESC").page(params[:created_page]).per(2)
+  end
+
+  def get_complete_project_public
+    @user = User.find(params[:user_id])
+    comparison = params[:status].eql?("Funding Active") ? ">" : "<"
+    @projects_created = @user.projects.where("campaign_deadline #{comparison} ? AND live = 1", Time.now).order("updated_at DESC").page(params[:created_page]).per(2)
+  end
+
   def add_perk
     session[:step] = params[:step]
     perk_permission = params[:perk_permission].eql?("yes") ? true : false
@@ -300,7 +316,7 @@ class ProjectsController < ApplicationController
 
   def destroy
     Project.find(params[:id]).destroy
-    redirect_to current_user, notice: "You have successfully deleted your project"
+    redirect_to current_user
   end
 
   def update_content_assets_tab
@@ -316,6 +332,16 @@ class ProjectsController < ApplicationController
   def update_td_mark
     @project = Project.find(params[:id])
     respond_to :js
+  end
+
+  def set_previous_path_for_registration
+    session[:path] = params[:url]
+    redirect_to new_user_registration_url
+  end
+
+  def set_previous_path_for_registration_perk
+    session[:path] = URI.escape(CGI::unescape params[:url])
+    redirect_to new_user_registration_url
   end
 
   private

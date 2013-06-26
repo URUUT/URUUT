@@ -69,6 +69,7 @@ class Project < ActiveRecord::Base
         amount = 0
         amount += self.donations.where("updated_at > ? AND updated_at < ?", date.at_beginning_of_day, date.end_of_day).sum(:amount)
         amount += self.project_sponsors.where("updated_at > ? AND updated_at < ?", date.at_beginning_of_day, date.end_of_day).sum(:cost)
+        amount += amount_by_date.last unless amount_by_date.empty?
         amount_by_date << amount
       end
     end
