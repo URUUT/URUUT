@@ -254,23 +254,6 @@
     return  /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/.test(val);
     }, jQuery.validator.messages.url);
 
-  $('#new_sponsor').validate({
-    rules: {
-      "sponsor[email]":{
-        required: true,
-        email: true
-      },
-      "project_sponsor[site]":{
-        required: true,
-        requiredUrl: true
-      },
-      "sponsor[phone]":{
-        required: true,
-        number: true
-      }
-    }
-  });
-
   project_token = "#{@project.project_token}";
   project_pub_key = "#{@project.publishable_key}";
 
@@ -351,20 +334,51 @@
       }
     };
 
-    $('#new_sponsor').on('submit', function(e){
-      if ( $("#sponsor_payment_type").val() == "Credit Card") {
-        if ( $('#card_number').length ){
-          processCard();
-          return false;
+    $('#new_sponsor').validate({
+      rules: {
+        "sponsor[email]":{
+          required: true,
+          email: true
+        },
+        "project_sponsor[site]":{
+          required: true,
+          requiredUrl: true
+        },
+        "sponsor[phone]":{
+          required: true,
+          number: true
+        }
+      },
+      submitHandler: function(form) {
+        var tes = $('#card_number').val().length != 0
+        if ( $("#sponsor_payment_type").val() == "Credit Card") {
+          if ( $('#card_number').val().length == 0 ){
+            processCard();
+          }
+          else{
+            form.submit();
+          }
         }
         else{
-          return true;
+          form.submit();
         }
       }
-      else{
-        return true;
-      }
     });
+
+    // $('#new_sponsor').on('submit', function(e){
+    //   if ( $("#sponsor_payment_type").val() == "Credit Card") {
+    //     if ( $('#card_number').length ){
+    //       processCard();
+    //       return false;
+    //     }
+    //     else{
+    //       return true;
+    //     }
+    //   }
+    //   else{
+    //     return true;
+    //   }
+    // });
 
     $("#sponsor_payment_type").change(function(){
       if(this.value == "Credit Card"){
