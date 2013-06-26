@@ -34,7 +34,18 @@
       %div
         %h5 Payment using
         %p
-          = image_tag "logo_visa.png" , :class => "cc-type"
+          - if @card_type.eql?("Visa")
+            = image_tag "logo_visa.png" , :class => "cc-type"
+          - elsif @card_type.eql?("MasterCard")
+            = image_tag "logo_mastercard.png" , :class => "cc-type"
+          - elsif @card_type.eql?("American Express")
+            = image_tag "logo_american_express.png" , :class => "cc-type"
+          - elsif @card_type.eql?("Discover")
+            = image_tag "logo_discover.png" , :class => "cc-type"
+          - elsif @card_type.eql?("Diners Club")
+            = image_tag "logo_dinners.png" , :class => "cc-type"
+          - else
+            = image_tag "logo_jcb.png" , :class => "cc-type"
           = @card_type
           ending in
           %strong= @card_last4
