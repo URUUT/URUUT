@@ -41,7 +41,6 @@
         large_image: largeImage
         }
     }).done(function(){
-      console.log("finished");
       $('.cover-content-image').html("<img src='"+largeImage+"/convert?fit=scale&height=300&width=672'>");
     });
   };
@@ -50,7 +49,7 @@
   var photo = document.getElementById('new-photo');
   photo.type="filepicker";
   photo.onchange = function(e){
-    var pictureImage = event.fpfile.url;
+    var pictureImage = e.fpfile.url;
 
     $.ajax({
       url: '/galleries/save_image',
