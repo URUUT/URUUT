@@ -207,7 +207,7 @@
             %a{:href => "#growth"}
               Growth
               %span (Updates)
-        - unless @project.galleries.empty?
+        - unless @images.empty?
           %li
             %a{:href => "#gallery"} Gallery
       #content_container.tab-content
@@ -226,12 +226,14 @@
                 %br
                 = update.content
               %hr
-        - unless @project.galleries.empty?
+        - unless @images.empty?
           #gallery.tab-pane.clearfix
-            - @project.galleries.each do |gallery|
-              %a.thumb-link{:href => gallery.gallery_file_name, :rel => "prettyPhoto"}
-                = image_tag(gallery.gallery_file_name, class: "gallery-thumb")
-
+            .images-content
+              - @images.each do |image|
+                %a.thumb-link{:href => image.gallery_file_name, :rel => "prettyPhoto"}
+                  = image_tag(image.gallery_file_name, class: "gallery-thumb")
+              .clearfix
+              = paginate @images, :params => {:id => @project.id, :controller => 'projects', :action => 'show_more_image'}, remote: true
       %hr
 
       #content_container

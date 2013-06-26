@@ -15,4 +15,31 @@
       // var map = L.map('map').setView([33.7489, -84.3881], 11);
       // L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png').addTo(map);
       // L.marker([33.7489, -84.3881]).addTo(map).bindPopup('<h4>Welcome to URUUT</h4>').openPopup();
+    if ($("#location :selected").text().length > 17){
+      $("#location :selected").text(truncText($("#location :selected").text(), 15, "..."))
+    }
+
+    if ($("#category :selected").text().length > 17){
+      $("#category :selected").text(truncText($("#category :selected").text(), 15, "..."))
+    }
+
+    $("#category").on('change',function(){
+      var length = $("#category option").length;
+      for (var i = 1; i < length; i++){
+        $("#category option")[i].text = $("#category option")[i].attributes["data-item"].value
+      }
+      if ($("#category :selected").text().length > 17){
+        $("#category :selected").text(truncText($("#category :selected").text(), 15, "..."))
+      }
+    })
+
+    $("#location").on('change',function(){
+      var length = $("#location option").length;
+      for (var i = 1; i < length; i++){
+        $("#location option")[i].text = $("#location option")[i].attributes["data-item"].value
+      }
+      if ($("#location :selected").text().length > 17){
+        $("#location :selected").text(truncText($("#location :selected").text(), 15, "..."))
+      }
+    })
   });
