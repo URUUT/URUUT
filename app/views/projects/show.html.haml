@@ -730,9 +730,8 @@
       console.log("#{root_url}projects/#{@project.id}")
       var publish = {
         method: 'feed',
-        message: 'getting educated about Facebook Connect',
         name: "#{@project.project_title}",
-        description: "#{@project.title}",
+        description: "Like making a difference in the community? Check out this great project I found on @URUUT.  You can help fund it, or set up a project of your own to Get RUUTed!",
         caption: "#{@project.organization}",
         link: "#{root_url}projects/#{@project.id}",
         picture: "#{@project.large_image}",
@@ -741,8 +740,7 @@
             name: "#{@project.project_title}",
             link: "#{root_url}projects/#{@project.id}"
           }
-        ],
-        user_message_prompt: 'Share your thoughts about RELL'
+        ]
       };
 
       function callback(response) {
@@ -762,7 +760,7 @@
           height = 400,
           left   = ($(window).width()  - width)  / 2,
           top    = ($(window).height() - height) / 2,
-          url    = "http://twitter.com/share?text=I%20just%20donated%20to%20#{@project.project_title}%2E%20Check%20it%20out%2E",
+          url    = "http://twitter.com/share?url=#{project_url(@project.id)}&text=Like%20making%20a%20difference%20in%20the%20community%3F%20Check%20out%20this%20great%20project%20I%20found%20on%20%40URUUT%20%20%2E&hashtags=GetRUUTed",
           opts   = 'status=1' +
                    ',width='  + width  +
                    ',height=' + height +
