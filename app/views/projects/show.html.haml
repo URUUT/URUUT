@@ -181,8 +181,12 @@
           %span
         .project-sponsors
           - if !@project_sponsors.include?(2) && !@project_sponsors.include?(3)
-            = link_to new_project_sponsor_path(@project.id), :class => 'btn' do
-              Become A Sponsor
+            - if user_signed_in?
+              = link_to new_project_sponsor_path(@project.id), :class => 'btn' do
+                Become A Sponsor
+            - else
+              = link_to "javascript:void(0)", "url-data" => "/projects/#{@project.id}/sponsors/new", :class => 'btn unsignin' do
+                Become A Sponsor
           - if @project_sponsors.include?(2)
             .gold-level
               - if @project_sponsors.include?(2)
