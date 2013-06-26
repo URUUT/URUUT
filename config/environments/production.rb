@@ -57,8 +57,8 @@ Crowdfund::Application.configure do
   config.action_mailer.smtp_settings = {
     address: "smtp.mandrillapp.com",
     port: 587,
-    domain: "localhost",
-    enable_starttls_auto: :true,
+    # domain: "localhost",
+#     enable_starttls_auto: :true,
     user_name: ENV['MANDRILL_USER'],
     password: ENV['MANDRILL_PASSWORD']
   }
