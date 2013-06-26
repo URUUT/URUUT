@@ -24,3 +24,23 @@ $(document).ready(function(){
     elm.id = tmp_id;
   }
 });
+
+function truncText (text, maxLength, ellipseText){
+  ellipseText = ellipseText || '&hellip;';
+
+  if (text.length < maxLength)
+      return text;
+
+  //Find the last piece of string that contain a series of not A-Za-z0-9_ followed by A-Za-z0-9_ starting from maxLength
+  var m = text.substr(0, maxLength).match(/([^A-Za-z0-9_]*)[A-Za-z0-9_]*$/);
+  if(!m) return ellipseText;
+
+  //Position of last output character
+  var lastCharPosition = maxLength-m[0].length;
+
+  //If it is a space or "[" or "(" or "{" then stop one before.
+  if(/[\s\(\[\{]/.test(text[lastCharPosition])) lastCharPosition--;
+
+  //Make sure we do not just return a letter..
+  return (lastCharPosition ? text.substr(0, lastCharPosition+1) : '') + ellipseText;
+}
