@@ -32,18 +32,19 @@
       = f.label :address , "STREET ADDRESS*", class: "label-green"
       = f.text_field :address,  class: "span8 required"
 
-    %div.inline
-      = f.label :city, "CITY*", class: "label-green"
-      = f.text_field :city,  class: "span4 required"
+    .clearfix
+      %div.pull-left
+        = f.label :city, "CITY*", class: "label-green"
+        = f.text_field :city,  class: "span4 required"
 
-    %div.inline{:style => "margin-left:25px;"}
-      = f.label :state,"STATE*", class: "label-green"
-      .selectParent{style: "width: 140px"}
-        = f.select :state, options_for_select(us_states, @project.state), {}, {:onchange => "updateStateInfo()", class: "styledSelect required"}
+      %div.pull-left{:style => "margin-left:25px;"}
+        = f.label :state,"STATE*", class: "label-green"
+        .selectParent{style: "width: 140px"}
+          = f.select :state, options_for_select(us_states, @project.state), {}, {:onchange => "updateStateInfo()", class: "styledSelect required"}
 
-    %div.inline{:style => "margin-left:25px;"}
-      = f.label :zip, "Zipcode*", class: "label-green"
-      = f.text_field :zip, class: "span2 required"
+      %div.pull-left{:style => "margin-left:25px;"}
+        = f.label :zip, "Zipcode*", class: "label-green"
+        = f.text_field :zip, class: "span2 required"
 
     %div
       = f.label :website, :class => "label-green" do
