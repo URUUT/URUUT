@@ -4,6 +4,6 @@ require File.expand_path(File.dirname(__FILE__) + "/../../config/environment")
 desc "This task is called by the Heroku scheduler add-on"
 task :schedule_test => :environment do
   puts "Sending Mail..."
-  ContactMailer.contact_confirmation('Chad', 'chad.bartels@gmail.com', 'test', 'test')
+  ContactMailer.delay.contact_confirmation('Chad', 'chad.bartels@gmail.com', 'test', 'test')
   puts "done."
 end
