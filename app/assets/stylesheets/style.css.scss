@@ -1838,7 +1838,7 @@ body.users.show, body.users.profile{
   height: auto;
 }
 
-body.pages.contact{
+body.pages.contact, body.sponsors.thank_you{
   #flash_notice{
     display: none;
   }
@@ -1854,6 +1854,11 @@ body.pages.contact{
 }
 
 .pagination{
+  text-align: center;
+
+  span{
+    display: inline;
+  }
 
   a{
     color: $green2;
