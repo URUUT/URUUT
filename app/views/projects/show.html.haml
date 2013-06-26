@@ -40,7 +40,7 @@
           / = image_tag "fb-count.png", :class => "fb-share", :style => "margin-right:20px;"
           / = image_tag "tw-count.png", :class => "tw-share", :style => "margin-right:20px;"
           / = image_tag "bitly-link.png", :style => "margin-right:20px;"
-          .fb-count
+          %a.fb-count{:href => "https://www.facebook.com/dialog/feed?app_id=#{Settings.facebook.api_key}&link=#{project_url(@project.id)}&picture=http://fbrell.com/f8.jpg&name=#{url_encode(@project.title)}&caption=#{url_encode(@project.category)}&description=#{url_encode("Our company is RUUTing for this community project and you should, too. Join us by becoming a sponsor or by making a donation on @URUUT's collaborative funding platform. Together we can make a difference in our community")}&redirect_uri=#{root_url}", :target => "_blank"}
             %span
           .tw-count
             %span
@@ -98,7 +98,7 @@
           / = image_tag "fb-count.png", :class => "fb-share", :style => "margin-right:20px;"
           / = image_tag "tw-count.png", :class => "tw-share", :style => "margin-right:20px;"
           / = image_tag "bitly-link.png", :style => "margin-right:20px;"
-          .fb-count
+          %a.fb-count{:href => "https://www.facebook.com/dialog/feed?app_id=#{Settings.facebook.api_key}&link=#{project_url(@project.id)}&picture=http://fbrell.com/f8.jpg&name=#{url_encode(@project.title)}&caption=#{url_encode(@project.category)}&description=#{url_encode("Our company is RUUTing for this community project and you should, too. Join us by becoming a sponsor or by making a donation on @URUUT's collaborative funding platform. Together we can make a difference in our community")}&redirect_uri=#{root_url}", :target => "_blank"}
             %span
           .tw-count
             %span
