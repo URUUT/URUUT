@@ -250,6 +250,10 @@
   = @project.id
 
 :javascript
+  jQuery.validator.addMethod("requiredUrl", function(val, elem) {
+    return  /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/.test(val);
+    }, jQuery.validator.messages.url);
+
   $('#new_sponsor').validate({
     rules: {
       "sponsor[email]":{
@@ -258,7 +262,7 @@
       },
       "project_sponsor[site]":{
         required: true,
-        url: true
+        requiredUrl: true
       },
       "sponsor[phone]":{
         required: true,
