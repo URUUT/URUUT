@@ -485,25 +485,25 @@
 
   var userLocation = 'http://maps.googleapis.com/maps/api/geocode/json?address=#{@project.address},#{@project.city},#{@project.state}&sensor=false';
 
-  // $.ajax({
-  //   url: userLocation,
-  //   success: function(data) {
-  //     console.log(data.results[0].geometry.location.lat);
-  //     var latitude = data.results[0].geometry.location.lat;
-  //     var longitude = data.results[0].geometry.location.lng;
-  //     var map = L.map('map', {
-  //       scrollWheelZoom: false
-  //     }).setView([latitude,longitude], 11);
+  $.ajax({
+    url: userLocation,
+    success: function(data) {
+      console.log(data.results[0].geometry.location.lat);
+      var latitude = data.results[0].geometry.location.lat;
+      var longitude = data.results[0].geometry.location.lng;
+      var map = L.map('map', {
+        scrollWheelZoom: false
+      }).setView([latitude,longitude], 11);
 
-  //     var uruutIcon = L.icon({
-  //       iconUrl: '#{image_path("map-icon.png")}',
-  //       iconSize:     [36, 52]
-  //     });
+      var uruutIcon = L.icon({
+        iconUrl: '#{image_path("map-icon.png")}',
+        iconSize:     [36, 52]
+      });
 
-  //     L.tileLayer('http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {
-  //       attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
-  //     }).addTo(map);
+      L.tileLayer('http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
+      }).addTo(map);
 
-  //     L.marker([latitude,longitude], {icon:uruutIcon}).addTo(map)
-  //   }
-  // });
+      L.marker([latitude,longitude], {icon:uruutIcon}).addTo(map)
+    }
+  });
