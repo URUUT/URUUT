@@ -219,7 +219,7 @@ class ProjectsController < ApplicationController
     end
 
     @project.save
-    # redirect_to "/projects/#{@project.id}/edit#assets"
+    redirect_to "/projects/#{@project.id}/edit#assets"
   end
 
   def save_image
