@@ -45,9 +45,9 @@
           / = image_tag "fb-count.png", :class => "fb-share", :style => "margin-right:20px;"
           / = image_tag "tw-count.png", :class => "tw-share", :style => "margin-right:20px;"
           / = image_tag "bitly-link.png", :style => "margin-right:20px;"
-          / %a.fb-count{:href => "https://www.facebook.com/dialog/feed?app_id=#{Settings.facebook.api_key}&link=#{project_url(@project.id)}&picture=http://fbrell.com/f8.jpg&name=#{url_encode(@project.title)}&caption=#{url_encode(@project.category)}&description=#{url_encode("Like making a difference in the community? Check out this great project I found on @URUUT.  You can help fund it, or set up a project of your own to Get RUUTed! ")}&redirect_uri=#{root_url}", :target => "_blank"}
-          /   %span
-          .fb-like{"data-font" => "lucida grande", "data-href" => "http://uruut.41studio.com", "data-layout" => "button_count", "data-send" => "false", "data-show-faces" => "true", "data-width" => "450"}
+          %a.fb-count{:href => "https://www.facebook.com/dialog/feed?app_id=#{Settings.facebook.api_key}&link=#{project_url(@project.id)}&picture=http://fbrell.com/f8.jpg&name=#{url_encode(@project.title)}&caption=#{url_encode(@project.category)}&description=#{url_encode("Like making a difference in the community? Check out this great project I found on @URUUT.  You can help fund it, or set up a project of your own to Get RUUTed! ")}&redirect_uri=#{root_url}", :target => "_blank"}
+            %span
+          / .fb-like{"data-font" => "lucida grande", "data-href" => "http://uruut.41studio.com", "data-layout" => "button_count", "data-send" => "false", "data-show-faces" => "true", "data-width" => "450"}
           .tw-count
             %span
           .bitly-link
@@ -104,9 +104,8 @@
           / = image_tag "fb-count.png", :class => "fb-share", :style => "margin-right:20px;"
           / = image_tag "tw-count.png", :class => "tw-share", :style => "margin-right:20px;"
           / = image_tag "bitly-link.png", :style => "margin-right:20px;"
-          / %a.fb-count{:href => "https://www.facebook.com/dialog/feed?app_id=#{Settings.facebook.api_key}&link=#{project_url(@project.id)}&picture=http://fbrell.com/f8.jpg&name=#{url_encode(@project.title)}&caption=#{url_encode(@project.category)}&description=#{url_encode("Like making a difference in the community? Check out this great project I found on @URUUT.  You can help fund it, or set up a project of your own to Get RUUTed! ")}&redirect_uri=#{root_url}", :target => "_blank"}
-          /   %span
-          .fb-like{"data-font" => "lucida grande", "data-href" => "http://uruut.41studio.com", "data-layout" => "button_count", "data-send" => "false", "data-show-faces" => "true", "data-width" => "450"}
+          %a.fb-count{:href => "https://www.facebook.com/dialog/feed?app_id=#{Settings.facebook.api_key}&link=#{project_url(@project.id)}&picture=http://fbrell.com/f8.jpg&name=#{url_encode(@project.title)}&caption=#{url_encode(@project.category)}&description=#{url_encode("Like making a difference in the community? Check out this great project I found on @URUUT.  You can help fund it, or set up a project of your own to Get RUUTed! ")}&redirect_uri=#{root_url}", :target => "_blank"}
+            %span
           .tw-count
             %span
           .bitly-link
@@ -161,7 +160,8 @@
               = @project.state
               = @project.zip
             %div
-              .fb-like{:style => "display: block; float: left; margin-left: 5px;", "data-href" => "http://www.facebook.com/#{@project.facebook_page}", "data-layout" => "button_count", "data-send" => "false", "data-show-faces" => "false", "data-width" => "450"}
+              / .fb-like{"data-font" => "lucida grande", "data-href" => "http://uruut.41studio.com", "data-layout" => "button_count", "data-send" => "false", "data-show-faces" => "true", "data-width" => "450"}
+              .fb-like{:style => "display: block; float: left; margin-left: 5px;", "data-href" => "http://www.facebook.com/#{@project.facebook_page}", "data-layout" => "button_count", "data-send" => "false", "data-show-faces" => "true", "data-width" => "450"}
               %a.twitter-follow-button{:style => "display: block; float: left; margin-left: 10px;", "data-show-count" => "false", :href => "https://twitter.com/#{@project.twitter_handle}"} Follow
               %span.label-green{:style => "margin-left: 10px; font-family: 'Proxima Nova Semi', sans-serif;"}
                 WEB:
