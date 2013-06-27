@@ -7,10 +7,16 @@
 
       %div
         = f.label :avatar, "Profile image "
-        = f.hidden_field :avatar, :value => current_user.avatar
-        .row{:style => "margin-left:0px;margin-bottom:10px;"}
+        - if session[:avatar].blank?
+          = f.hidden_field :avatar, :value => current_user.avatar
+        - else
+          = f.hidden_field :avatar, :value => session[:avatar]
+        .row{:style => "margin-bottom:10px;"}
           .span2
-            = image_tag "#{current_user.avatar}", :id => "avatar-img"
+            - if session[:avatar].blank?
+              = image_tag "#{current_user.avatar}", :id => "avatar-img"
+            - else
+              = image_tag "#{session[:avatar]}", :id => "avatar-img"
           .span4
             #avatar-file
               %input{:type => 'filepicker', :name => 'avatar', 'data-fp-button-text' => 'Upload', 'data-fp-apikey' => Settings.filepicker.api_key, 'data-fp-button-class' => 'avatar btn', 'onchange' => 'updateAvatar(event)', 'data-fp-mimetypes' => 'image/*', 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA,INSTAGRAM'}
@@ -32,7 +38,7 @@
         / = f.label :password
         %h5.label-green{style: "margin-bottom: 0;"}
           Password
-          %span.italic{style: "font-size: 11px; letter-spacing: 0;"}
+          %span.italic{style: "font-size: 10px; letter-spacing: 0;"}
             (Must be at least 6 characters long)
         = f.password_field :password, :autocomplete => "off", :class => "input-mini"
       %div.inline.well-half{style: "margin-left: 17px;"}
