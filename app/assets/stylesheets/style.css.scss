@@ -1330,10 +1330,17 @@ iframe.twitter-follow-button{
   }
 }
 
+.tab-pane{
+  .cover-content, .images-content{
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+}
+
 .cover-content, .images-content{
 
-  margin-bottom: 0px;
-  padding-bottom: 0px;
+  margin-bottom: 40px;
+  padding-bottom: 30px;
 
   button[type="button"]{
     background: $green2;
