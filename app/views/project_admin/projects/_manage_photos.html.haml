@@ -13,7 +13,7 @@
       - @galleries.each do |image|
         .list-image.pull-left
           = filepicker_image_tag image.gallery_file_name, width: 216, height: 216, fit: 'scale'
-          = link_to "delete photo", delete_photo_path(image.id), class: "image-delete-button", style: "margin-left:20px", method: 'DELETE', remote: true
+          = link_to "delete photo", delete_photo_path(image.id), class: "image-delete-button",  method: 'DELETE', remote: true
       .clearfix
     = paginate @galleries, remote: true
     %div{:style => "float:left; width: 100%"}
