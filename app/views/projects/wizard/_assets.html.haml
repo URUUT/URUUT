@@ -422,6 +422,7 @@
     });
     $(".joyride-tip-guide .joyride-next-tip").eq(2).attr("onclick", "javascript: $('.submit').addClass('active') ");
     $(".joyride-tip-guide .joyride-next-tip").eq(3).attr("onclick", "javascript: $('.submit').removeClass('active') ");
+    $(".joyride-tip-guide[data-index='1']").children().removeClass("top");
   });
 
   $(".cancel-image").click(function(){
