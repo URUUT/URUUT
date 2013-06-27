@@ -43,13 +43,14 @@
                   = @project.state
                   = @project.zip
               %div
-                %span.label-green.wizard-data-web{:style => "margin-left: 10px;"}
+                .fb-like{:style => "display: block; float: left; margin-left: 5px;", "data-href" => "http://www.facebook.com/#{@project.facebook_page}", "data-layout" => "button_count", "data-send" => "false", "data-show-faces" => "true", "data-width" => "450"}
+                %a.twitter-follow-button{:style => "display: block; float: left; margin-left: 10px;", "data-show-count" => "false", :href => "https://twitter.com/#{@project.twitter_handle}"} Follow
+                %span.label-green{:style => "margin-left: 10px; font-family: 'Proxima Nova Semi', sans-serif;"}
                   WEB:
-                  - unless @project.website.nil?
-                    = link_to(strip_url(@project.website), recognize_url(@project.website), target: "_blank", :style => "font-style: italic; text-decoration: underline; color: #3f403b; font-family: 'Georgia', serif;")
+                  = link_to(strip_url(@project.website), recognize_url(@project.website), target: "_blank", :style => "font-style: italic; text-decoration: underline; color: #3f403b; font-family: 'Georgia', serif;")
                 %span{style: "margin-left: 10px"}
-                = image_tag "message-green.png"
-                = link_to "Contact Us", "mailto:#{User.find(@project.user_id).email}", target: "_blank", :style => "font-style: italic; text-decoration: underline; color: #3f403b; font-family: 'Georgia', serif;"
+                  = image_tag "message-green.png"
+                  = link_to "Contact Us", "mailto:#{User.find(@project.user_id).email}", target: "_blank", :style => "font-style: italic; text-decoration: underline; color: #3f403b; font-family: 'Georgia', serif;"
         - if @project.sponsor_permission
           %h4.title{:style => 'margin-top:50px;'} PROJECT SPONSORS
           = link_to "javascript:void(0)", :class => 'btn', :style => 'background:#3f403b;padding:10px;margin-top:10px;' do
