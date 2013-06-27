@@ -234,7 +234,8 @@
           %div.phone
             = f.label :phone, "CONTACT PHONE NUMBER*", class: "label-green"
             = f.text_field :phone, :size => 25, type: "text", label: false, class: "transfer-input"
-        %div{:style => "border-top: solid 1px #e0e0e0; margin-left: -19px; margin-right: -19px; padding-top: 25px", :class => "clearfix"}
+        %hr{:style => "background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
+        %div{:class => "clearfix"}
           = image_tag "3.gif", id: "submit-progress", style: "display: none; float: left; position: relative; top: 32px; margin-right: -40px; margin-left: 15px; z-index: 9999;"
           = f.button :submit, class: "btn pull-right", id: "project-submit"
           %a.error-message
