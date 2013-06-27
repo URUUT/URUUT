@@ -228,7 +228,10 @@
       #content_container.tab-content
         #planting_seeds.tab-pane.active
           - if @project.seed_mime_type.eql?("video") and !@project.seed_video.blank?
-            - video_seed = @project.seed_video.gsub("watch?v=", "embed/")
+            -if @project.seed_video.start_with?("http://www.youtube.com/")
+              - video_seed = @project.seed_video.gsub("watch?v=", "embed/")
+            -else
+              - video_seed = @project.seed_video.gsub(".be", "be.com/embed")
             %iframe{:height => "413", :src => video_seed, :width => "620"}
           - elsif @project.seed_mime_type.eql?("image") and !@project.seed_image.blank?
             = image_tag "#{@project.seed_image}", style: "float:left; width:100%"
