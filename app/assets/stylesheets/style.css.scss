@@ -155,6 +155,7 @@ h1, h2, h3, h4, h5, h6{
 
 .simplepage-img, .simplepage-wrapper{
   margin-top: 100px;
+  margin-bottom: 100px;
 }
 
 .simplepage-img{
@@ -1329,6 +1330,13 @@ iframe.twitter-follow-button{
   }
 }
 
+.tab-pane{
+  .cover-content, .images-content{
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+}
+
 .cover-content, .images-content{
 
   margin-bottom: 40px;
@@ -1475,6 +1483,8 @@ iframe.twitter-follow-button{
       text-transform: capitalize;
       margin-top: 10px;
       text-decoration: underline;
+      display: block;
+      text-align: center;
 
       &:hover{
         text-decoration: none;
@@ -1482,7 +1492,7 @@ iframe.twitter-follow-button{
     }
 
     &:first-child{
-      margin-left: 0;
+      /*margin-left: 0;*/
     }
   }
 }
@@ -1838,7 +1848,7 @@ body.users.show, body.users.profile{
   height: auto;
 }
 
-body.pages.contact{
+body.pages.contact, body.sponsors.thank_you{
   #flash_notice{
     display: none;
   }
@@ -1854,6 +1864,11 @@ body.pages.contact{
 }
 
 .pagination{
+  text-align: center;
+
+  span{
+    display: inline;
+  }
 
   a{
     color: $green2;
@@ -2091,4 +2106,41 @@ input, select, textarea{
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5) !important;
     color: $grey !important;
   }
+}
+
+/*.funding-info{
+  .fb-like{
+    height: 30px;
+    margin-right: 20px;
+    vertical-align: middle;
+    width: 80px;
+
+    span{
+      width: auto !important;
+
+      iframe{
+        height: 30px !important;
+
+        .pluginButton{
+
+        }
+
+        .pluginCountButton{
+          background: url("bitly.png") center left no-repeat !important;
+          margin-top: -1px !important;
+          margin-bottom: -1px !important;
+          margin-left: -1px !important;
+          font: normal 18px/30px arial, helvetica, sans-serif !important;
+          padding-left: 37px !important;
+          height: 30px !important;
+          display: block !important;
+          min-width: 125px !important;
+        }
+      }
+    }
+  }
+}*/
+
+.add-another{
+  cursor: pointer;
 }

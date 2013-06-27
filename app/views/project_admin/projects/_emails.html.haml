@@ -8,7 +8,7 @@
         .pull-left
           = label_tag "EMAIL RECEPIENT*", nil, class: "label-green"
           .selectParent
-            = select_tag "sponsor_level", options_for_select(@list_recepients), prompt: "Choose sponsor level or perk", onchange: "get_emails_based_on_category()", class: "styledSelect", style: "width: 100%; padding-right: 55px;"
+            = select_tag "sponsor_level", options_for_select(@list_recepients), prompt: "Choose sponsor level or perk", onchange: "get_emails_based_on_category()", class: "styledSelect"
         .pull-left
           %a.cs_import.btn{style: "margin-left: 6%; margin-top: 17px;"} Add Contacts
 
@@ -32,6 +32,21 @@
   var owner_email, owner_first_name, owner_last_name;
   var appendInTextarea = false;
   var emailSep = ", ";
+
+  if ($("#sponsor_level :selected").text().length > 17){
+      $("#sponsor_level :selected").text(truncText($("#sponsor_level :selected").text(), 15, "..."))
+    }
+
+  $("#sponsor_level").on('change',function(){
+    var length = $("#sponsor_level option").length;
+    for (var i = 1; i < length; i++){
+      $("#sponsor_level option")[i].text = $("#sponsor_level option")[i].attributes["data-item"].value
+    }
+    if ($("#sponsor_level :selected").text().length > 17){
+      $("#sponsor_level :selected").text(truncText($("#sponsor_level :selected").text(), 15, "..."))
+    }
+  })
+
   function populateTextarea(contacts, source, owner) {
     var contact, name, email, entry;
     var emails = [];

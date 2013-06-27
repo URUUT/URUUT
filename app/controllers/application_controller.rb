@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
         session[:path] == ""
         edit_project_path(project.id)
       elsif request.referer == sign_in_url
-        super
+        home_pages_url
       else
         stored_location_for(resource) || request.referer || root_path ||  request.env['omniauth.origin']
       end

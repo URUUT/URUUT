@@ -5,16 +5,19 @@ class RegistrationsController < Devise::RegistrationsController
     password_changed = !params[:user][:password].empty?
 
     successfully_updated = @user.update_attributes(params[:user])
-
+    session[:avatar] = params[:user][:avatar]
     if successfully_updated
       # Sign in the user bypassing validation in case his password changed
+
       sign_in @user, :bypass => true
       # if params[:user][:avatar]
 #         render json: { :path => (@user.errors.empty? ? @user.avatar : "#failed#") }
 #       else
+        session.delete(:avatar)
         redirect_to @user
       # end
     else
+      session[:avatar] = params[:user][:avatar]
       render "edit"
     end
   end

@@ -43,13 +43,14 @@
                   = @project.state
                   = @project.zip
               %div
-                %span.label-green.wizard-data-web{:style => "margin-left: 10px;"}
+                .fb-like{:style => "display: block; float: left; margin-left: 5px;", "data-href" => "http://www.facebook.com/#{@project.facebook_page}", "data-layout" => "button_count", "data-send" => "false", "data-show-faces" => "true", "data-width" => "450"}
+                %a.twitter-follow-button{:style => "display: block; float: left; margin-left: 10px;", "data-show-count" => "false", :href => "https://twitter.com/#{@project.twitter_handle}"} Follow
+                %span.label-green{:style => "margin-left: 10px; font-family: 'Proxima Nova Semi', sans-serif;"}
                   WEB:
-                  - unless @project.website.nil?
-                    = link_to(strip_url(@project.website), recognize_url(@project.website), target: "_blank", :style => "font-style: italic; text-decoration: underline; color: #3f403b; font-family: 'Georgia', serif;")
+                  = link_to(strip_url(@project.website), recognize_url(@project.website), target: "_blank", :style => "font-style: italic; text-decoration: underline; color: #3f403b; font-family: 'Georgia', serif;")
                 %span{style: "margin-left: 10px"}
-                = image_tag "message-green.png"
-                = link_to "Contact Us", "mailto:#{User.find(@project.user_id).email}", target: "_blank", :style => "font-style: italic; text-decoration: underline; color: #3f403b; font-family: 'Georgia', serif;"
+                  = image_tag "message-green.png"
+                  = link_to "Contact Us", "mailto:#{User.find(@project.user_id).email}", target: "_blank", :style => "font-style: italic; text-decoration: underline; color: #3f403b; font-family: 'Georgia', serif;"
         - if @project.sponsor_permission
           %h4.title{:style => 'margin-top:50px;'} PROJECT SPONSORS
           = link_to "javascript:void(0)", :class => 'btn', :style => 'background:#3f403b;padding:10px;margin-top:10px;' do
@@ -64,7 +65,10 @@
           #planting_seeds
             .media-container
               - if @project.seed_mime_type.eql?("video") and !@project.seed_video.blank?
-                - video_seed = @project.seed_video.gsub("watch?v=", "embed/")
+                -if @project.seed_video.start_with?("http://www.youtube.com/")
+                  - video_seed = @project.seed_video.gsub("watch?v=", "embed/")
+                -else
+                  - video_seed = @project.seed_video.gsub(".be", "be.com/embed")
                 .seed-content
                   %iframe{:height => "413", :src => video_seed, :width => "620"}
               - elsif @project.seed_mime_type.eql?("image") and !@project.seed_image.blank?
@@ -326,7 +330,7 @@
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
     %h3.title-form-video
-  = form_tag save_video_projects_path, method: :post do
+  = form_tag save_video_projects_path, method: :post, remote: true do
     .modal-body
       %p In the box below, enter the url to your video
       %p You can obtain the url in the following ways:
@@ -427,6 +431,7 @@
     });
     $(".joyride-tip-guide .joyride-next-tip").eq(2).attr("onclick", "javascript: $('.submit').addClass('active') ");
     $(".joyride-tip-guide .joyride-next-tip").eq(3).attr("onclick", "javascript: $('.submit').removeClass('active') ");
+    $(".joyride-tip-guide[data-index='1']").children().removeClass("top");
   });
 
   $(".cancel-image").click(function(){
@@ -486,28 +491,3 @@
       }
     );
   });
-
-  var userLocation = 'http://maps.googleapis.com/maps/api/geocode/json?address=#{@project.address},#{@project.city},#{@project.state}&sensor=false';
-
-  // $.ajax({
-  //   url: userLocation,
-  //   success: function(data) {
-  //     console.log(data.results[0].geometry.location.lat);
-  //     var latitude = data.results[0].geometry.location.lat;
-  //     var longitude = data.results[0].geometry.location.lng;
-  //     var map = L.map('map', {
-  //       scrollWheelZoom: false
-  //     }).setView([latitude,longitude], 11);
-
-  //     var uruutIcon = L.icon({
-  //       iconUrl: '#{image_path("map-icon.png")}',
-  //       iconSize:     [36, 52]
-  //     });
-
-  //     L.tileLayer('http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {
-  //       attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
-  //     }).addTo(map);
-
-  //     L.marker([latitude,longitude], {icon:uruutIcon}).addTo(map)
-  //   }
-  // });

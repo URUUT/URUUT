@@ -80,6 +80,44 @@
 
 :javascript
 
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=209907642492838";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+
+   $(document).ready(function(){
+    var userLocation = 'http://maps.googleapis.com/maps/api/geocode/json?address=#{@project.address},#{@project.city},#{@project.state}&sensor=false';
+
+    $.ajax({
+      url: userLocation,
+      dataType: 'json',
+      success: function(data) {
+        var latitude = data.results[0].geometry.location.lat;
+        var longitude = data.results[0].geometry.location.lng;
+        var map = L.map('map', {
+          scrollWheelZoom: false
+        }).setView([latitude,longitude], 11).invalidateSize(false);
+
+        console.log(new_map = map);
+        var uruutIcon = L.icon({
+          iconUrl: '#{image_path("map-icon.png")}',
+          iconSize:     [36, 52]
+        });
+
+        L.tileLayer('http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {
+          attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
+        }).addTo(map);
+
+        L.marker([latitude,longitude], {icon:uruutIcon}).addTo(map);
+      }
+    });
+  });
+
   var connect = '#{session[:connected]}';
 
   var convertAmount = function(amount){
@@ -322,30 +360,30 @@
           $(".wizard-data-organization").text( $("#project_organization").val() );
           localStorage.clear();
 
-          var userLocation = 'http://maps.googleapis.com/maps/api/geocode/json?address='+ $("#project_address").val() +','+ $("#project_city").val() +','+ $("#project_state").val()+'&sensor=false';
+          // var userLocation = 'http://maps.googleapis.com/maps/api/geocode/json?address='+ $("#project_address").val() +','+ $("#project_city").val() +','+ $("#project_state").val()+'&sensor=false';
 
-          $.ajax({
-            url: userLocation,
-            success: function(data) {
-              console.log(data.results[0].geometry.location.lat);
-              var latitude = data.results[0].geometry.location.lat;
-              var longitude = data.results[0].geometry.location.lng;
-              var map = L.map('map', {
-                scrollWheelZoom: false
-              }).setView([latitude,longitude], 11);
+          // $.ajax({
+          //   url: userLocation,
+          //   success: function(data) {
+          //     console.log(data.results[0].geometry.location.lat);
+          //     var latitude = data.results[0].geometry.location.lat;
+          //     var longitude = data.results[0].geometry.location.lng;
+          //     var map = L.map('map', {
+          //       scrollWheelZoom: false
+          //     }).setView([latitude,longitude], 11);
 
-              var uruutIcon = L.icon({
-                iconUrl: '#{image_path("map-icon.png")}',
-                iconSize:     [36, 52]
-              });
+          //     var uruutIcon = L.icon({
+          //       iconUrl: '#{image_path("map-icon.png")}',
+          //       iconSize:     [36, 52]
+          //     });
 
-              L.tileLayer('http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {
-                attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
-              }).addTo(map);
+          //     L.tileLayer('http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {
+          //       attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
+          //     }).addTo(map);
 
-              L.marker([latitude,longitude], {icon:uruutIcon}).addTo(map)
-            }
-          });
+          //     L.marker([latitude,longitude], {icon:uruutIcon}).addTo(map)
+          //   }
+          // });
 
           window.location.href = '/projects/' + data + '/edit#project-details';
         })
@@ -440,6 +478,7 @@
         $(".assets-link").attr("href", "/projects/" + projectId +"/edit#assets");
         $('.step-container[data-id="sponsorship"] form input#project-submit').val("SAVE AND COUNTINUE");
         window.location.href = '/projects/' + projectId + '/edit#assets';
+        window.location.reload(true);
       })
     });
 

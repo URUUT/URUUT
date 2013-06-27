@@ -32,8 +32,8 @@
           %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;", class: "platinum-availibility"} (1 AVAILABLE)
       .row-fluid
         .span3{:style => "text-align:left;color:#464646;"}
-          %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0;"} Cost
-          %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0"}
+          %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0;"} Cost
+          %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0"}
             - if @project.goal
               = amount_converter(@project.goal.gsub(/,/, '').to_i * 0.30)
           %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (30% of funding goal)
@@ -89,8 +89,8 @@
           %span{:style => "font-size:10px;color:#403e37", class: "gold-availibility"} (3 AVAILABLE)
       .row-fluid
         .span3.left{:style => "text-align:left;color:#464646;"}
-          %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0;"} Cost
-          %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0"}
+          %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0;"} Cost
+          %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0"}
             -if @project.goal
               = amount_converter(@project.goal.gsub(/,/, '').to_i * 0.10)
           %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (10% of funding goal)
@@ -145,8 +145,8 @@
           %span{:style => "font-size:10px;color:#403e37", class: "silver-availibility"} (5 AVAILABLE)
       .row-fluid
         .span3.left{:style => "text-align:left;color:#464646;"}
-          %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0;"} Cost
-          %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0"}
+          %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0;"} Cost
+          %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0"}
             -if @project.goal
               = amount_converter(@project.goal.gsub(/,/, '').to_i * 0.04)
           %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (4% of funding goal)
@@ -201,8 +201,8 @@
           Bronze LEVEL SPONSORSHIP*
       .row-fluid
         .span3.left{:style => "text-align:left;color:#464646;"}
-          %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0;"} Cost
-          %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0"}
+          %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0;"} Cost
+          %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0"}
             - if @project.goal && @project.goal.gsub(/,/, '').to_i * 0.1 < 500
               = amount_converter(@project.goal.gsub(/,/, '').to_i * 0.1)
             -else
@@ -282,8 +282,9 @@
       type: "GET",
       url: "/skip_sponsor"
     }).done(function(data){
-      window.location.href = '/projects/' + project_id + '/edit#assets';
       $(".assets-link").attr("href", "/projects/" + project_id +"/edit#assets");
+      window.location.href = '/projects/' + project_id + '/edit#assets';
+      window.location.reload(true);
     });
   })
 

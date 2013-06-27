@@ -13,9 +13,8 @@
       - @galleries.each do |image|
         .list-image.pull-left
           = filepicker_image_tag image.gallery_file_name, width: 216, height: 216, fit: 'scale'
-          = link_to "delete photo", delete_photo_path(image.id), class: "image-delete-button", style: "margin-left:20px", method: 'DELETE', remote: true
-      .clearfix
-      = paginate @galleries, remote: true
+          = link_to "delete photo", delete_photo_path(image.id), class: "image-delete-button",  method: 'DELETE', remote: true
+    = paginate @galleries, remote: true
     %div{:style => "float:left; width: 100%"}
       %button{:id => "new-photo", type: "filepicker"} ADD NEW PHOTO
 
@@ -41,7 +40,6 @@
         large_image: largeImage
         }
     }).done(function(){
-      console.log("finished");
       $('.cover-content-image').html("<img src='"+largeImage+"/convert?fit=scale&height=300&width=672'>");
     });
   };
@@ -50,7 +48,7 @@
   var photo = document.getElementById('new-photo');
   photo.type="filepicker";
   photo.onchange = function(e){
-    var pictureImage = event.fpfile.url;
+    var pictureImage = e.fpfile.url;
 
     $.ajax({
       url: '/galleries/save_image',
@@ -59,7 +57,7 @@
         gallery: pictureImage
         },
       success: function(data){
-        $('#galleryPicture').append("<div class='list-image pull-left' style='width: 30%; margin-left: 2%; margin-top: 2%'><img src=" + pictureImage + "/convert?fit=scale&height=216&width=216><a href='/galleries/delete_photo/" + data.image_id + "' class='green-font image-delete-button' data-method='DELETE' style='margin-left:20px' data-remote='true'>delete photo</p></div></div></div>");
+        $('#galleryPicture').append("<div class='list-image pull-left'><img src=" + pictureImage + "/convert?fit=scale&height=216&width=216><a href='/galleries/delete_photo/" + data.image_id + "' class='image-delete-button' data-method='DELETE' style='margin-left:20px' data-remote='true'>delete photo</p></div></div></div>");
         deleteImages();
       }
     });
