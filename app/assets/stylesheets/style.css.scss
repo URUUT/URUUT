@@ -1483,6 +1483,8 @@ iframe.twitter-follow-button{
       text-transform: capitalize;
       margin-top: 10px;
       text-decoration: underline;
+      display: block;
+      text-align: center;
 
       &:hover{
         text-decoration: none;
@@ -1490,7 +1492,7 @@ iframe.twitter-follow-button{
     }
 
     &:first-child{
-      margin-left: 0;
+      /*margin-left: 0;*/
     }
   }
 }
@@ -2105,3 +2107,36 @@ input, select, textarea{
     color: $grey !important;
   }
 }
+
+/*.funding-info{
+  .fb-like{
+    height: 30px;
+    margin-right: 20px;
+    vertical-align: middle;
+    width: 80px;
+
+    span{
+      width: auto !important;
+
+      iframe{
+        height: 30px !important;
+
+        .pluginButton{
+
+        }
+
+        .pluginCountButton{
+          background: url("bitly.png") center left no-repeat !important;
+          margin-top: -1px !important;
+          margin-bottom: -1px !important;
+          margin-left: -1px !important;
+          font: normal 18px/30px arial, helvetica, sans-serif !important;
+          padding-left: 37px !important;
+          height: 30px !important;
+          display: block !important;
+          min-width: 125px !important;
+        }
+      }
+    }
+  }
+}*/
