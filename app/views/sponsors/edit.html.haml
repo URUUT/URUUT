@@ -111,7 +111,7 @@
             SPONSOR
             %span
 
-    = form_for(@sponsor, :url => project_sponsor_path, :html => {:class => "span8", :style => "margin-left: 0;", multipart: true, method: 'PUT'}) do |f|
+    = form_for(@sponsor, :url => project_sponsor_path, :html => {:class => "span8 edit_sponsor", :style => "margin-left: 0;", multipart: true, method: 'PUT'}) do |f|
       .well.clearfix{:style => "border-top: none; padding-bottom: 0; border: 1px solid #e0e0e0;"}
         .payment-errors
         .span12{:style => "background-color: #f5f5f5; margin-left: 0px;"}
@@ -244,22 +244,9 @@
 
 :javascript
 
-  $('#edit_sponsor_#{@sponsor.id}').validate({
-    rules: {
-      "sponsor[email]":{
-        required: true,
-        email: true
-      },
-      "project_sponsor[site]":{
-        required: true,
-        url: true
-      },
-      "sponsor[phone]":{
-        required: true,
-        number: true
-      }
-    }
-  });
+  jQuery.validator.addMethod("requiredUrl", function(val, elem) {
+    return  /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/.test(val);
+    }, jQuery.validator.messages.url);
 
   project_token = "#{@project.project_token}";
   project_pub_key = "#{@project.publishable_key}";
@@ -327,25 +314,56 @@
         $('input#token').attr('value', response.id);
         $('input#project_sponsor_card_last4').attr('value', response.card.last4);
         $('input#project_sponsor_card_type').attr('value', response.card.type);
-        $('#new_sponsor')[0].submit();
+        $('.edit-sponsor')[0].submit();
       } else {
         $(".error-message").text(response.error.message);
         return $('input[type=submit]').attr('disabled', false);
       }
     };
 
-    $('#edit_sponsor_#{@sponsor.id}').on('submit', function(e){
-      if ( $("#sponsor_payment_type").val() == "Credit Card") {
-        if ( $('#card_number').length ){
-          processCard();
-          return false;
+    // $('#edit_sponsor_#{@sponsor.id}').on('submit', function(e){
+    //   if ( $("#sponsor_payment_type").val() == "Credit Card") {
+    //     if ( $('#card_number').length ){
+    //       processCard();
+    //       return false;
+    //     }
+    //     else{
+    //       return true;
+    //     }
+    //   }
+    //   else{
+    //     return true;
+    //   }
+    // });
+
+    $('#edit_sponsor_#{@sponsor.id}').validate({
+      rules: {
+        "sponsor[email]":{
+          required: true,
+          email: true
+        },
+        "project_sponsor[site]":{
+          required: true,
+          requiredUrl: true
+        },
+        "sponsor[phone]":{
+          required: true,
+          number: true
+        }
+      },
+      submitHandler: function(form) {
+        var tes = $('#card_number').val().length != 0
+        if ( $("#sponsor_payment_type").val() == "Credit Card") {
+          if ( $('#card_number').val().length == 0 ){
+            processCard();
+          }
+          else{
+            form.submit();
+          }
         }
         else{
-          return true;
+          form.submit();
         }
-      }
-      else{
-        return true;
       }
     });
 

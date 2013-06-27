@@ -3,6 +3,7 @@ class ProjectsController < ApplicationController
   require "net/http"
   require "uri"
 
+  skip_before_filter :verify_authenticity_token, only: :add_perk
   before_filter :session_path, only: :create
   before_filter :authenticate_user!, :only => [:index, :create, :edit, :update]
   before_filter :set_session_page
@@ -294,7 +295,7 @@ class ProjectsController < ApplicationController
   def submit_project
     project = Project.find_by_id(params[:id])
     # project.ready_for_approval = 0
-    # project.live = 1
+    project.live = 0
     # project.approval_date = Date.today.strftime("%F")
     project.ready_for_approval = 1
     if project.save!

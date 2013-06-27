@@ -63,7 +63,7 @@ class SponsorsController < ApplicationController
   def edit
     @sponsor = Sponsor.find(params[:id])
     @project = Project.find(params[:project_id])
-    @project_sponsor = @sponsor.project_sponsors.unscoped.find_by_project_id(params[:project_id])
+    @project_sponsor = ProjectSponsor.unscoped.where(project_id: @project.id, sponsor_id: @sponsor.id).first
     @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
     case @project_sponsor.level_id
       when 1
@@ -96,7 +96,7 @@ class SponsorsController < ApplicationController
 
   def update
     @sponsor = Sponsor.find(params[:id])
-    @project_sponsor = @sponsor.project_sponsors.unscoped.find_by_project_id(params[:project_id])
+    @project_sponsor = ProjectSponsor.unscoped.where(project_id: params[:project_id], sponsor_id: @sponsor.id).first
     sponsor = params[:sponsor]
     project = Project.find(params[:project_id])
     sponsor_name = sponsor[:payment_type].eql?("Wire Transfer") ? sponsor[:name] : sponsor[:card_name]
@@ -179,7 +179,7 @@ class SponsorsController < ApplicationController
 
   def confirmation
     @sponsor = Sponsor.find(params[:id])
-    @project_sponsor = @project.project_sponsors.unscoped.find_by_sponsor_id(@sponsor.id)
+    @project_sponsor =   ProjectSponsor.unscoped.where(project_id: @project.id, sponsor_id: @sponsor.id).first
     @benefits = @project.sponsorship_benefits.where(status: true, sponsorship_level_id: @project_sponsor.level_id )
     @sponsorship_level = SponsorshipLevel.find(@project_sponsor.level_id)
     case @project_sponsor.level_id
@@ -200,7 +200,7 @@ class SponsorsController < ApplicationController
 
   def thank_you
     @project = Project.find(params[:project_id])
-    project_sponsor = @project.project_sponsors.unscoped.where(sponsor_id: params[:sponsor_id]).first
+    project_sponsor =  ProjectSponsor.unscoped.where(project_id: @project.id, sponsor_id: params[:sponsor_id]).first
     # @sponsorship_level = SponsorshipLevel.find(project_sponsor.level_id)
     @benefits = @project.sponsorship_benefits.where(status: true, sponsorship_level_id: project_sponsor.level_id )
     case project_sponsor.level_id

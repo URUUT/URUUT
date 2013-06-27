@@ -40,7 +40,7 @@
       var id = $.trim($(this).parent().parent().find('td:first').text());
       $.ajax({
         type: "POST",
-        url: 'http://' + document.location.host + '/admin/approve',
+        url: 'https://' + document.location.host + '/admin/approve',
         data: {approved:'true', id: id}
       }).done(function(html) {
         var data = $.parseJSON(html);

@@ -7,8 +7,8 @@
 
 .clearfix
 
-  %script{:src => "http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"}
-  %script{:src => "http://maps.stamen.com/js/tile.stamen.js?v1.2.1"}
+= javascript_include_tag "leaflet"
+= javascript_include_tag "tile.stamen"
 
 :javascript
   $(function(){
