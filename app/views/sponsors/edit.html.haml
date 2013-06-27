@@ -225,13 +225,13 @@
             %noscript JavaScript is not enabled and is required for this form. First enable it in your web browser settings.
 
         %div#wire-transfer{:style => "display: none;"}
-          %div
+          %div.name
             = f.label :name, "CONTACT NAME*", class: "label-green"
             = f.text_field :name, :size => 40, label: false, class: "transfer-input"
-          %div
+          %div.email
             = f.label :email, "CONTACT EMAIL*", class: "label-green"
             = f.text_field :email, :size => 40, label: false, class: "transfer-input"
-          %div
+          %div.phone
             = f.label :phone, "CONTACT PHONE NUMBER*", class: "label-green"
             = f.text_field :phone, :size => 25, type: "text", label: false, class: "transfer-input"
         %div{:style => "border-top: solid 1px #e0e0e0; margin-left: -19px; margin-right: -19px; padding-top: 25px", :class => "clearfix"}
