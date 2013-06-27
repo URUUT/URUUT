@@ -694,6 +694,7 @@
 
     $.ajax({
       url: userLocation,
+      dataType: 'json',
       success: function(data) {
         console.log(data.results[0].geometry.location.lat);
         var latitude = data.results[0].geometry.location.lat;
