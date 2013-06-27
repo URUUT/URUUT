@@ -71,8 +71,8 @@
     %h5 SUBMIT
     %p When you're ready, click here to submit for approval. You're only required to add a cover photo.
 
-%script{:src => "http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"}
-%script{:src => "http://maps.stamen.com/js/tile.stamen.js?v1.2.1"}
+= javascript_include_tag "leaflet"
+= javascript_include_tag "tile.stamen"
 
 - if session[:step].nil?
   :javascript
@@ -313,7 +313,7 @@
         }).done(function(data){
           $.ajax({
             type: 'GET',
-            url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/update_td_mark?id='+project
+            url: 'https://' + document.location.hostname + ":" + document.location.port + '/projects/update_td_mark?id='+project
           });
           $(".project-details-link").attr("href", "/projects/" + data +"/edit#project-details");
           $('.step-container[data-id="sponsor-info"] form input#project-submit').val("SAVE AND COUNTINUE");
@@ -435,7 +435,7 @@
       }).done(function(data){
         $.ajax({
           type: 'GET',
-          url: 'http://' + document.location.hostname + ":" + document.location.port + '/projects/update_content_assets_tab?id='+projectId
+          url: 'https://' + document.location.hostname + ":" + document.location.port + '/projects/update_content_assets_tab?id='+projectId
         });
         $(".assets-link").attr("href", "/projects/" + projectId +"/edit#assets");
         $('.step-container[data-id="sponsorship"] form input#project-submit').val("SAVE AND COUNTINUE");

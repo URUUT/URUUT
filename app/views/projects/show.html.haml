@@ -20,9 +20,14 @@
             %p{style: "color: #fff; font-family: 'Proxima Nova Semi', sans-serif;font-size: 11px; letter-spacing: 2px;"}
               SPONSORSHIP OPPORTUNITIES:
           .span5
-            = link_to new_project_sponsor_path(@project.id), :class => 'btn', :style => "background: #70bf4c; color:#fff; text-decoration:none; font-family: 'Proxima Nova Semi', sans-serif; font-style:normal;" do
-              Become A Sponsor
-              %span
+            - if user_signed_in?
+              = link_to new_project_sponsor_path(@project.id), :class => 'btn', :style => "background: #70bf4c; color:#fff; text-decoration:none; font-family: 'Proxima Nova Semi', sans-serif; font-style:normal;" do
+                Become A Sponsor
+                %span
+            - else
+              = link_to "javascript:void(0)", "url-data" => "/projects/#{@project.id}/sponsors/new", :class => 'btn unsignin', :style => "background: #70bf4c; color:#fff; text-decoration:none; font-family: 'Proxima Nova Semi', sans-serif; font-style:normal;" do
+                Become A Sponsor
+                %span
 
 - if !@project.large_image.blank?
   #large_image{:style => "background:url(#{@project.large_image}); background-size: cover"}
@@ -40,7 +45,7 @@
           / = image_tag "fb-count.png", :class => "fb-share", :style => "margin-right:20px;"
           / = image_tag "tw-count.png", :class => "tw-share", :style => "margin-right:20px;"
           / = image_tag "bitly-link.png", :style => "margin-right:20px;"
-          .fb-count
+          %a.fb-count{:href => "https://www.facebook.com/dialog/feed?app_id=#{Settings.facebook.api_key}&link=#{project_url(@project.id)}&picture=http://fbrell.com/f8.jpg&name=#{url_encode(@project.title)}&caption=#{url_encode(@project.category)}&description=#{url_encode("Like making a difference in the community? Check out this great project I found on @URUUT.  You can help fund it, or set up a project of your own to Get RUUTed!")}&redirect_uri=#{root_url}", :target => "_blank"}
             %span
           .tw-count
             %span
@@ -98,7 +103,7 @@
           / = image_tag "fb-count.png", :class => "fb-share", :style => "margin-right:20px;"
           / = image_tag "tw-count.png", :class => "tw-share", :style => "margin-right:20px;"
           / = image_tag "bitly-link.png", :style => "margin-right:20px;"
-          .fb-count
+          %a.fb-count{:href => "https://www.facebook.com/dialog/feed?app_id=#{Settings.facebook.api_key}&link=#{project_url(@project.id)}&picture=http://fbrell.com/f8.jpg&name=#{url_encode(@project.title)}&caption=#{url_encode(@project.category)}&description=#{url_encode("Like making a difference in the community? Check out this great project I found on @URUUT.  You can help fund it, or set up a project of your own to Get RUUTed! ")}&redirect_uri=#{root_url}", :target => "_blank"}
             %span
           .tw-count
             %span
@@ -167,13 +172,21 @@
         %h4.title{:style => 'margin-top:50px;'}
           PROJECT SPONSORS
           - if @project_sponsors.include?(2) || @project_sponsors.include?(3)
-            = link_to new_project_sponsor_path(@project.id), :class => 'btn', :style => 'margin-top: -10px;'  do
-              Become A Sponsor
+            - if user_signed_in?
+              = link_to new_project_sponsor_path(@project.id), :class => 'btn', :style => 'margin-top: -10px;'  do
+                Become A Sponsor
+            - else
+              = link_to "javascript:void(0)", "url-data" => "/projects/#{@project.id}/sponsors/new", :class => 'btn unsignin', :style => 'margin-top: -10px;'  do
+                Become A Sponsor
           %span
         .project-sponsors
           - if !@project_sponsors.include?(2) && !@project_sponsors.include?(3)
-            = link_to new_project_sponsor_path(@project.id), :class => 'btn' do
-              Become A Sponsor
+            - if user_signed_in?
+              = link_to new_project_sponsor_path(@project.id), :class => 'btn' do
+                Become A Sponsor
+            - else
+              = link_to "javascript:void(0)", "url-data" => "/projects/#{@project.id}/sponsors/new", :class => 'btn unsignin' do
+                Become A Sponsor
           - if @project_sponsors.include?(2)
             .gold-level
               - if @project_sponsors.include?(2)
@@ -558,9 +571,14 @@
                 - @project_sponsors[4].each do |sponsor|
                   = link_to(sponsor.name, recognize_url(sponsor.site), target: "_blank")
         %div{style: "margin-top: 5px;"}
-          %a.btn{:href => "/projects/#{@project.id}/sponsors/new?level=bronze"}
-            Become A Sponsor
-            %span
+          - if user_signed_in?
+            %a.btn{:href => "/projects/#{@project.id}/sponsors/new?level=bronze"}
+              Become A Sponsor
+              %span
+          - else
+            = link_to "javascript:void(0)", "url-data" => "/projects/#{@project.id}/sponsors/new?level=bronze", class: "btn unsignin" do
+              Become A Sponsor
+              %span
 
       %h4.title{:style => 'margin-top:50px;'}Partners(#{@project.donations.count})
       %div.business
@@ -574,8 +592,8 @@
           Show More
           %span
 
-%script{:src => "http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"}
-%script{:src => "http://maps.stamen.com/js/tile.stamen.js?v1.2.1"}
+= javascript_include_tag "leaflet"
+= javascript_include_tag "tile.stamen"
 
 :javascript
 
@@ -583,7 +601,7 @@
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
     js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=143792535805526";
+    js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=209907642492838";
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 
@@ -598,7 +616,7 @@
   });
 
   $("#button-seed-custom-unsignin").on("click", function(){
-    sign_url = 'http://' + document.location.hostname + ":" + document.location.port + "/default_perk_donations?amount="+ $("#custom_seed").val() +"&name=custom&project_id=#{@project.id}";
+    sign_url = 'https://' + document.location.hostname + ":" + document.location.port + "/default_perk_donations?amount="+ $("#custom_seed").val() +"&name=custom&project_id=#{@project.id}";
     url = "/default_perk_donations?amount="+ $("#custom_seed").val() +"&name=custom&project_id=#{@project.id}";
     $('.modal').remove();
       $('body').append('<div class="modal hide fade" style="text-align:center;padding:50px;"><button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="position:absolute;top:10px;right:20px;">×</button><h5 style="margin-bottom:20px;">You need to sign in or sign up before continuing.</h5><a href="'+ url +'" class="btn green-btn">Sign In <span></span></a> <span style="font:italic 12px/21px georgia, serif;margin:0 10px;">or</span> <a href="/projects/set_previous_path_for_registration_perk?url='+ encodeURIComponent(sign_url) +'" class="btn green-btn">Sign Up <span></span></a></div>');
@@ -609,7 +627,7 @@
     $("a[rel^='prettyPhoto']").prettyPhoto();
 
     $('.unsignin').click(function(){
-      sign_url = 'http://' + document.location.hostname + ":" + document.location.port + $(this).attr("url-data");
+      sign_url = 'https://' + document.location.hostname + ":" + document.location.port + $(this).attr("url-data");
       url = $(this).attr("url-data");
       $('.modal').remove();
       $('body').append('<div class="modal hide fade" style="text-align:center;padding:50px;"><button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="position:absolute;top:10px;right:20px;">×</button><h5 style="margin-bottom:20px;">You need to sign in or sign up before continuing.</h5><a href="'+ url +'" class="btn green-btn">Sign In <span></span></a> <span style="font:italic 12px/21px georgia, serif;margin:0 10px;">or</span> <a href="/projects/set_previous_path_for_registration?url='+ sign_url +'" class="btn green-btn">Sign Up <span></span></a></div>');
@@ -726,33 +744,28 @@
       $(show).show();
     });
 
-    $('.fb-count').click(function() {
-      console.log("#{root_url}projects/#{@project.id}")
-      var publish = {
-        method: 'feed',
-        name: "#{@project.project_title}",
-        description: "Like making a difference in the community? Check out this great project I found on @URUUT.  You can help fund it, or set up a project of your own to Get RUUTed!",
-        caption: "#{@project.organization}",
-        link: "#{root_url}projects/#{@project.id}",
-        picture: "#{@project.large_image}",
-        actions: [
-          {
-            name: "#{@project.project_title}",
-            link: "#{root_url}projects/#{@project.id}"
-          }
-        ]
-      };
+    // $('.fb-count').click(function() {
+    //   console.log("#{root_url}projects/#{@project.id}")
+    //   var publish = {
+    //     method: 'feed',
+    //     redirect_uri: '#{project_url(@project.id)}',
+    //     name: "#{@project.project_title}",
+    //     description: "Like making a difference in the community? Check out this great project I found on @URUUT.  You can help fund it, or set up a project of your own to Get RUUTed!",
+    //     caption: "#{@project.organization}",
+    //     link: "#{project_url(@project.id)}",
+    //     picture: "#{@project.large_image}"
+    //   };
 
-      function callback(response) {
-        if (response && response.post_id) {
-          console.log('Post was published.');
-        } else {
-          console.log('Post was not published.');
-        }
-      }
+    //   function callback(response) {
+    //     if (response && response.post_id) {
+    //       console.log('Post was published.');
+    //     } else {
+    //       console.log('Post was not published.');
+    //     }
+    //   }
 
-      FB.ui(publish, callback);
-    });
+    //   FB.ui(publish, callback);
+    // });
 
     $('.tw-count').click(function(e) {
       e.preventDefault();
