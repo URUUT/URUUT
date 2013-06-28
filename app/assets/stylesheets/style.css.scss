@@ -2101,6 +2101,8 @@ body.pages.index, body.pages.search{
 }
 
 input, select, textarea{
+  resize: none;
+  
   &:invalid{
     border-color: transparent !important;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5) !important;
