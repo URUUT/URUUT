@@ -174,7 +174,7 @@ label {
 	font:normal 12px/12px "Proxima Nova Semi", arial, sans-serif;
 	letter-spacing:2px;
 	text-transform:uppercase;}
-  
+
 select {
   outline:none !important;
 }
@@ -3302,3 +3302,16 @@ form[id*=project] {
 		}
 	}
 }
+
+.project-submit {
+  background:#70bf4c;
+  border-radius:0;
+  display:block;
+  font: 16px/16px "Proxima Nova Semi", arial, sans-serif;
+  letter-spacing:2px;
+  margin:20px auto 0;
+  padding:15px 24px;
+  text-shadow:none;
+  text-transform:uppercase;
+  &:hover {
+    background:#70bf4c;}}
