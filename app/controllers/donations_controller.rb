@@ -179,6 +179,8 @@ class DonationsController < ApplicationController
     params[:donation][:perk_name] = params[:perk_name]
     unit = params[:donation][:amount].last
     case unit
+      when "K"
+        params[:donation][:amount] = params[:donation][:amount].to_i * 1000
       when "M"
         params[:donation][:amount] = params[:donation][:amount].to_i * 1000000
       when "B"
@@ -190,7 +192,10 @@ class DonationsController < ApplicationController
     end
     session[:payment_amount] = params[:donation][:amount]
     current_user.update_attributes(uruut_point: session[:payment_amount])
-		if @donation.update_attributes(params[:donation])
+    if params[:donation][:amount].is_a?(String)
+      params[:donation][:amount] = params[:donation][:amount].gsub('$', '').gsub(',', '').to_f
+		end
+    if @donation.update_attributes(params[:donation])
 			flash[:notice] = "Successfully updated donation."
 		end
 		redirect_to donation_steps_path

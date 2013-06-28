@@ -24,19 +24,19 @@
       = hidden_field_tag :perk_name, @donation.perk_name
     .field.name
       = label_tag "NAME AS IT APPEARS ON CARD*"
-      = text_field_tag nil, [current_user.first_name, current_user.last_name].join(" "), name: nil, id: "name"
+      = text_field_tag nil, [current_user.first_name, current_user.last_name].join(" "), name: "name", id: "name"
     .field.card-number
       = label_tag :card_number, "Credit Card Number"
-      = text_field_tag :card_number, nil, name: nil
+      = text_field_tag :card_number, nil, name: "credit-card"
     .field.ccv
       = label_tag :card_code, "CVV*"
-      = text_field_tag :card_code, nil, name: nil
+      = text_field_tag :card_code, nil, name: "code"
     .field.expiration
       = label_tag :card_month, "CARD EXPIRATION (MM/YYYY)*"
       / = select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
       / = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}
-      = text_field_tag nil, nil, {name: nil, id: "card_month"}
-      = text_field_tag nil, nil, {name: nil, id: "card_year"}
+      = text_field_tag nil, nil, {name: "month", id: "card_month"}
+      = text_field_tag nil, nil, {name: "year", id: "card_year"}
     .cf
   #stripe_error
     %noscript JavaScript is not enabled and is required for this form. First enable it in your web browser settings.
