@@ -174,6 +174,10 @@ label {
 	font:normal 12px/12px "Proxima Nova Semi", arial, sans-serif;
 	letter-spacing:2px;
 	text-transform:uppercase;}
+  
+select {
+  outline:none !important;
+}
 
 .well {
 	border:none;
@@ -2380,6 +2384,7 @@ form[id*=project] {
 					background:#587e41;
 					border-radius:5px;
 					box-shadow:inset 0 0 7px rgba(64,62,55,0.25);
+          margin:0 auto;
 					&:hover {
 						color:#fff;
 					}
