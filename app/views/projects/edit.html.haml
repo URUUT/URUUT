@@ -337,6 +337,7 @@
     };
   };
 
+  $("#edit_project_#{@project.id}").validate();
    $('.step-container[data-id="sponsor-info"] form').on('submit', function(e){
      if ( connect.length > 0 ) {
       e.preventDefault();
