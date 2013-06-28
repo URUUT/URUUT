@@ -2108,39 +2108,24 @@ input, select, textarea{
   }
 }
 
-/*.funding-info{
-  .fb-like{
-    height: 30px;
-    margin-right: 20px;
-    vertical-align: middle;
-    width: 80px;
+.add-another{
+  cursor: pointer;
+}
 
-    span{
-      width: auto !important;
+@-moz-document url-prefix() {
+  .selectParent{
+    color: rgba(0, 0, 0, 0);
 
-      iframe{
-        height: 30px !important;
-
-        .pluginButton{
-
-        }
-
-        .pluginCountButton{
-          background: url("bitly.png") center left no-repeat !important;
-          margin-top: -1px !important;
-          margin-bottom: -1px !important;
-          margin-left: -1px !important;
-          font: normal 18px/30px arial, helvetica, sans-serif !important;
-          padding-left: 37px !important;
-          height: 30px !important;
-          display: block !important;
-          min-width: 125px !important;
-        }
+    .styledSelect, #type, #project_sponsor_level_id, #sponsor_payment_type{
+      color: rgba(0, 0, 0, 0);
+      color: #555;
+      color: rgba(0,0,0,0);
+      text-shadow: 0 0 0 #555;
+      
+      &:focus{
+        outline: none;
+        -moz-outline: none;
       }
     }
   }
-}*/
-
-.add-another{
-  cursor: pointer;
 }
