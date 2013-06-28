@@ -18,15 +18,16 @@
       = f.label :organization, "Organization/Business Name*", class: "label-green"
       = f.text_field :organization, class: "span8 required"
 
-    %div.inline
-      = f.label :organization_type, "Organization Type*", class: "label-green"
-      .selectParent{style: "width: 290px;"}
-        = f.select :organization_type, options_for_select(project_org_type, @project.organization_type), {:include_blank => 'Select Org Type'}, {:onchange => "updateOrganizedTypeInfo()", class: "styledSelect required"}
+    .clearfix
+      %div.pull-left
+        = f.label :organization_type, "Organization Type*", class: "label-green"
+        .selectParent{style: "width: 290px;"}
+          = f.select :organization_type, options_for_select(project_org_type, @project.organization_type), {:include_blank => 'Select Org Type'}, {:onchange => "updateOrganizedTypeInfo()", class: "styledSelect required"}
 
-    %div.inline{:style => "margin-left:20px;"}
-      = f.label :organization_class, "How Are You Organized?*", class: "label-green"
-      .selectParent{style: "width: 290px;"}
-        = f.select :organization_classification, options_for_select(project_org_class, @project.organization_classification), {:include_blank => 'Select Org Class'}, {:onchange => "updateOrganizedInfo()", class: "styledSelect required"}
+      %div.pull-left{:style => "margin-left:20px;"}
+        = f.label :organization_class, "How Are You Organized?*", class: "label-green"
+        .selectParent{style: "width: 290px;"}
+          = f.select :organization_classification, options_for_select(project_org_class, @project.organization_classification), {:include_blank => 'Select Org Class'}, {:onchange => "updateOrganizedInfo()", class: "styledSelect required"}
 
     %div
       = f.label :address , "STREET ADDRESS*", class: "label-green"
@@ -52,13 +53,14 @@
         %span.italic (Format: www.mysite.com)
       = f.text_field :website,  class: "span8 required"
 
-    %div.inline
-      = f.label :twitter_handle, "Twitter Account*", class: "label-green"
-      = f.text_field :twitter_handle,  class: "span4 required"
+    .clearfix
+      %div.pull-left
+        = f.label :twitter_handle, "Twitter Account*", class: "label-green"
+        = f.text_field :twitter_handle,  class: "span4 required"
 
-    %div.inline{:style => "margin-left:30px;"}
-      = f.label :facebook_page, "Facebook Page*", class: "label-green"
-      = f.text_field :facebook_page,  class: "span4 required"
+      %div.pull-left{:style => "margin-left:30px;"}
+        = f.label :facebook_page, "Facebook Page*", class: "label-green"
+        = f.text_field :facebook_page,  class: "span4 required"
 
     = hidden_field_tag "step", "first"
 
