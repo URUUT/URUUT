@@ -18,26 +18,6 @@ new_subscription =
       cvc: $('#card_code').val()
       expMonth: $('#card_month').val()
       expYear: $('#card_year').val()
-    if $("#card_number").val() is ""
-      $("#card_number").addClass "error-validated-field"
-    else
-      $("#card_number").removeClass "error-validated-field"
-    if $("#card_code").val() is ""
-      $("#card_code").addClass "error-validated-field"
-    else
-      $("#card_code").removeClass "error-validated-field"
-    if $("#card_month").val() is ""
-      $("#card_month").addClass "error-validated-field"
-    else
-      $("#card_month").removeClass "error-validated-field"
-    if $("#card_year").val() is ""
-      $("#card_year").addClass "error-validated-field"
-    else
-      $("#card_year").removeClass "error-validated-field"
-    if $("#name").val() is ""
-      $("#name").addClass "error-validated-field"
-    else
-      $("#name").removeClass "error-validated-field"
     Stripe.createToken(card, new_subscription.handleStripeResponse)
 
   handleStripeResponse: (status, response) ->
@@ -69,26 +49,6 @@ edit_subscription =
       cvc: $('#card_code').val()
       expMonth: $('#card_month').val()
       expYear: $('#card_year').val()
-    if $("#card_number").val() is ""
-      $("#card_number").addClass "error-validated-field"
-    else
-      $("#card_number").removeClass "error-validated-field"
-    if $("#card_code").val() is ""
-      $("#card_code").addClass "error-validated-field"
-    else
-      $("#card_code").removeClass "error-validated-field"
-    if $("#card_month").val() is ""
-      $("#card_month").addClass "error-validated-field"
-    else
-      $("#card_month").removeClass "error-validated-field"
-    if $("#card_year").val() is ""
-      $("#card_year").addClass "error-validated-field"
-    else
-      $("#card_year").removeClass "error-validated-field"
-    if $("#name").val() is ""
-      $("#name").addClass "error-validated-field"
-    else
-      $("#name").removeClass "error-validated-field"
     Stripe.createToken(card, edit_subscription.handleStripeResponse)
 
   handleStripeResponse: (status, response) ->
@@ -106,24 +66,74 @@ edit_subscription =
 
 
 $ ->
+  $("#new_donation").validate
+    rules:
+      name:
+        required: true
+
+      "credit-card":
+        required: true
+        creditcard: true
+
+      code:
+        required: true
+        digits: true
+
+      month:
+        required: true
+        digits: true
+        maxlength: 2
+
+      year:
+        required: true
+        digits: true
+        minlength: 4
+        maxlength: 4
+
+  $(".edit_donation").validate
+    rules:
+      name:
+        required: true
+
+      "credit-card":
+        required: true
+        creditcard: true
+
+      code:
+        required: true
+        digits: true
+
+      month:
+        required: true
+        digits: true
+        maxlength: 2
+
+      year:
+        required: true
+        digits: true
+        minlength: 4
+        maxlength: 4
+
 	$('#new_donation #donate').on 'click', (event) ->
     event.preventDefault()
-    Stripe.setPublishableKey('pk_test_WRrfoQLUDkpGHAxCmOY0Y6ud')
-    if $(".choiced-perk").attr("style") isnt "display:none" and $("#custom_amount").val() is "0"
-      alert "You Can't Input 0 For Seed Amount"
-    else
-      # if $('#card_number').val() == ''
-        # $('#new_donation')[0].submit()
-      # else
+    if $("#new_donation").valid()
+      Stripe.setPublishableKey('pk_test_WRrfoQLUDkpGHAxCmOY0Y6ud')
+      if $(".choiced-perk").attr("style") isnt "display:none" and $("#custom_amount").val() is "0"
+        alert "You Can't Input 0 For Seed Amount"
+      else
         new_subscription.setupForm()
+        # if $('#card_number').val() == ''
+          # $('#new_donation')[0].submit()
+        # else
 
   $('.edit_donation #donate').on 'click', (event) ->
     event.preventDefault()
-    Stripe.setPublishableKey('pk_test_WRrfoQLUDkpGHAxCmOY0Y6ud')
-    if $(".choiced-perk").attr("style") isnt "display:none" and $("#custom_amount").val() is "0"
-      alert "You Can't Input 0 For Seed Amount"
-    else
+    if $(".edit_donation").valid()
+      Stripe.setPublishableKey('pk_test_WRrfoQLUDkpGHAxCmOY0Y6ud')
+      if $(".choiced-perk").attr("style") isnt "display:none" and $("#custom_amount").val() is "0"
+        alert "You Can't Input 0 For Seed Amount"
+      else
+        edit_subscription.setupForm()
       # if $('#card_number').val() == ''
       #   $('.edit_donation')[0].submit()
       # else
-        edit_subscription.setupForm()
