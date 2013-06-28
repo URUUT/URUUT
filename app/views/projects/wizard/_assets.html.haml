@@ -108,7 +108,10 @@
             .span5.details#cultivation-step{:style => "width: 400px"}
               .cultivation-image-priview
                 - if @project.cultivation_mime_type.eql?("video") and !@project.cultivation_video.blank?
-                  - cultivation_video = @project.cultivation_video.gsub("watch?v=", "embed/")
+                  -if @project.cultivation_video.start_with?("http://www.youtube.com/")
+                    - cultivation_video = @project.cultivation_video.gsub("watch?v=", "embed/")
+                  -else
+                    - cultivation_video = @project.cultivation_video.gsub(".be", "be.com/embed")
                   .cultivation-content.clearfix
                     %iframe{:height => "310", :src => cultivation_video, :width => "380"}
                 - elsif @project.cultivation_mime_type.eql?("image") and !@project.cultivation_image.blank?
@@ -335,7 +338,7 @@
       = url_field_tag "video_link", nil, placeholder: "youtube_url"
       = hidden_field_tag "video_type"
     .modal-footer
-      %input{:type => "submit", :value => "Submit video", onClick: "$(this).button('loading')"}
+      %input{:type => "submit", :value => "Submit video"}
 
 :javascript
 
