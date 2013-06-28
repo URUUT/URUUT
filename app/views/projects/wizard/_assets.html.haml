@@ -332,12 +332,7 @@
     %h3.title-form-video
   = form_tag save_video_projects_path, method: :post, remote: true do
     .modal-body
-      %p In the box below, enter the url to your video
-      %p You can obtain the url in the following ways:
-      %ul
-        %li Simply copy/paste the url from the address bar.
-        %li Below the video, click share.  Select "Share this vides" and copy the url and paste below.
-      = url_field_tag "video_link", nil, placeholder: "Enter YouTube URL"
+      = url_field_tag "video_link", nil, placeholder: "youtube_url"
       = hidden_field_tag "video_type"
     .modal-footer
       %input{:type => "submit", :value => "Submit video", onClick: "$(this).button('loading')"}
