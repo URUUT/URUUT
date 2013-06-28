@@ -320,6 +320,7 @@
      return $(this).h5Validate();
    });
 
+<<<<<<< HEAD
   jQuery.validator.addMethod("requiredUrl", function(val, elem) {
     return  /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/.test(val);
     }, jQuery.validator.messages.url);
@@ -456,6 +457,8 @@
     //     $('.step-container[data-id="perks"] form input#project-submit').val("SAVE AND COUNTINUE");
     //   });
     // })
+=======
+>>>>>>> 929118d... fixed validation
 
     $('.step-container[data-id="sponsorship"] form').on('submit', function(e){
       e.preventDefault();
