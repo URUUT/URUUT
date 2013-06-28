@@ -2031,7 +2031,7 @@ body.pages.index, body.pages.search{
   .full-width{
     .selectParent{
       width: 300px;
-      
+
 
       .styledSelect{
         width: 320px;
@@ -2043,7 +2043,7 @@ body.pages.index, body.pages.search{
 .modal{
   width: 460px;
   left: 53%;
-  
+
   .closes{
     color: $green2;
     opacity: 1;
@@ -2064,7 +2064,7 @@ body.pages.index, body.pages.search{
     line-height: 20px;
     letter-spacing: 1;
   }
-  
+
   .modal-footer{
     background: transparent;
     border-top: none;
@@ -2102,7 +2102,7 @@ body.pages.index, body.pages.search{
 
 input, select, textarea{
   resize: none;
-  
+
   &:invalid{
     border-color: transparent !important;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5) !important;
@@ -2123,11 +2123,17 @@ input, select, textarea{
       color: #555;
       color: rgba(0,0,0,0);
       text-shadow: 0 0 0 #555;
-      
+
       &:focus{
         outline: none;
         -moz-outline: none;
       }
     }
+  }
+}
+
+body.pages.home{
+  .alert{
+    display: none;
   }
 }
