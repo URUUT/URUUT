@@ -38,17 +38,19 @@ Crowdfund::Application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
 
-  config.action_mailer.default_url_options = { host: "localhost:3000" }
+  config.action_mailer.default_url_options = { host: ENV['MAIL_HOST'] }
+
 
   config.action_mailer.smtp_settings = {
     address: "smtp.mandrillapp.com",
     port: 587,
-    domain: "localhost",
-    enable_starttls_auto: :true,
-    user_name: "agung.yuliaji@gmail.com",
-    password: "aoNGZ1rulN3ICprygmwKbw"
+    # domain: "localhost",
+#     enable_starttls_auto: :true,
+    user_name: ENV['MANDRILL_USER'],
+    password: ENV['MANDRILL_PASSWORD']
   }
+  
 
-  Paperclip.options[:command_path] = "/usr/local/Cellar/imagemagick/6.7.1-1/bin"
+  # Paperclip.options[:command_path] = "/usr/local/Cellar/imagemagick/6.7.1-1/bin"
   RailsDevelopmentBoost.async = false if defined?(RailsDevelopmentBoost) 
 end
