@@ -1,4 +1,8 @@
-<% video = params[:video_link].gsub("watch?v=", "embed/") %>
+<% if params[:video_link].start_with?("http://www.youtube.com/") %>
+  <% video = params[:video_link].gsub("watch?v=", "embed/") %>
+<% else %>
+  <% video = params[:video_link].gsub(".be", "be.com/embed") %>
+<% end %>
 <% if params[:video_type].eql?("seed") %>
 $(".seed-action-container").show();
 $(".seed-content").html("<iframe width='620' height='413' src='<%= video %>'></iframe>");
@@ -8,3 +12,4 @@ $(".cultivation-content").html("<iframe width='380' height='310' src='<%= video 
 <% end %>
 $("#video_type").val("");
 $("#save-video").modal("hide");
+
