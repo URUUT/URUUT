@@ -74,13 +74,9 @@ GEM
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
-    carrierwave (0.8.0)
-      activemodel (>= 3.2.0)
-      activesupport (>= 3.2.0)
-    climate_control (0.0.3)
-      activesupport (>= 3.0)
-    cocaine (0.5.1)
-      climate_control (>= 0.0.3, < 1.0)
+    celluloid (0.14.1)
+      timers (>= 1.0.0)
+    chronic (0.9.1)
     code_analyzer (0.3.1)
       sexp_processor
     coderay (1.0.9)
@@ -93,6 +89,7 @@ GEM
     coffee-script-source (1.6.2)
     colored (1.2)
     columnize (0.3.6)
+    connection_pool (1.1.0)
     daemons (1.1.9)
     debug_inspector (0.0.2)
     debugger (1.6.0)
@@ -101,18 +98,13 @@ GEM
       debugger-ruby_core_source (~> 1.2.1)
     debugger-linecache (1.2.0)
     debugger-ruby_core_source (1.2.2)
-    delayed_job (3.0.5)
-      activesupport (~> 3.0)
-    delayed_job_active_record (0.4.4)
-      activerecord (>= 2.1.0, < 4)
-      delayed_job (~> 3.0)
-    delayed_paperclip (2.4.5.2)
-      paperclip (>= 2.4.5)
     devise (2.2.3)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
       railties (~> 3.1)
       warden (~> 1.2.1)
+    devise-async (0.7.0)
+      devise (>= 2.2)
     easy_roles (1.2.0)
     erb2haml (0.1.5)
       html2haml
@@ -216,17 +208,13 @@ GEM
       multi_json (~> 1.3)
       omniauth-oauth (~> 1.0)
     orm_adapter (0.4.0)
-    paperclip (3.1.4)
-      activemodel (>= 3.0.0)
-      activerecord (>= 3.0.0)
-      activesupport (>= 3.0.0)
-      cocaine (>= 0.0.2)
-      mime-types
     pg (0.15.1)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
+    rack-protection (1.5.0)
+      rack
     rack-ssl (1.3.3)
       rack
     rack-test (0.6.2)
@@ -265,6 +253,9 @@ GEM
       ffi (>= 0.5.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    redis (3.0.4)
+    redis-namespace (1.3.0)
+      redis (~> 3.0.0)
     ref (1.0.4)
     rest-client (1.6.7)
       mime-types (>= 1.16)
@@ -278,10 +269,23 @@ GEM
       sass (>= 3.1.10)
       tilt (~> 1.3)
     sexp_processor (4.2.1)
+    sidekiq (2.12.4)
+      celluloid (>= 0.14.1)
+      connection_pool (>= 1.0.0)
+      json
+      redis (>= 3.0)
+      redis-namespace
     simple_form (2.1.0)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
     simple_oauth (0.2.0)
+    sinatra (1.4.3)
+      rack (~> 1.4)
+      rack-protection (~> 1.4)
+      tilt (~> 1.3, >= 1.3.4)
+    slim (2.0.0)
+      temple (~> 0.6.5)
+      tilt (~> 1.3, >= 1.3.3)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -291,11 +295,13 @@ GEM
       multi_json (>= 1.0.4, < 2)
       rest-client (~> 1.4)
     subexec (0.2.3)
+    temple (0.6.5)
     therubyracer (0.11.4)
       libv8 (~> 3.11.8.12)
       ref
     thor (0.18.1)
     tilt (1.3.7)
+    timers (1.1.0)
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
@@ -316,6 +322,9 @@ GEM
     validates_email_format_of (1.5.3)
     warden (1.2.1)
       rack (>= 1.0)
+    whenever (0.8.2)
+      activesupport (>= 2.3.4)
+      chronic (>= 0.6.3)
     wicked (0.6.0)
       activesupport (>= 3.0.7)
       rails (>= 3.0.7)
@@ -338,13 +347,11 @@ DEPENDENCIES
   binding_of_caller
   bitly
   capistrano
-  carrierwave
   coffee-rails (~> 3.2.1)
   daemons
   debugger
-  delayed_job_active_record
-  delayed_paperclip
   devise
+  devise-async
   easy_roles
   erb2haml
   filepicker-rails
@@ -361,7 +368,6 @@ DEPENDENCIES
   omniauth-facebook
   omniauth-linkedin
   omniauth-twitter
-  paperclip (~> 3.1.3)
   pg
   rails (= 3.2.11)
   rails-dev-boost!
@@ -369,7 +375,10 @@ DEPENDENCIES
   rails_config
   rb-fsevent (~> 0.9.1)
   sass-rails (~> 3.2.3)
+  sidekiq
   simple_form
+  sinatra (>= 1.3.0)
+  slim (>= 1.1.0)
   stripe
   therubyracer
   truncate_html
@@ -377,5 +386,6 @@ DEPENDENCIES
   uglifier (>= 1.0.3)
   unicorn
   validates_email_format_of
+  whenever
   wicked
   youtube_it

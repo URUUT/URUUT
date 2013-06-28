@@ -1,14 +1,17 @@
 source 'http://rubygems.org'
 
+ruby '1.9.3'
+
 gem 'rails','3.2.11'
 
-gem 'paperclip', '~>3.1.3'
-gem 'delayed_paperclip'
+# gem 'paperclip', '~>3.1.3'
+# gem 'delayed_paperclip'
 gem 'haml'
 gem 'twitter-bootstrap-rails'
 gem 'devise'
+gem 'devise-async'
 gem 'aws-sdk'
-gem 'delayed_job_active_record'
+# gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'stripe'
 gem 'truncate_html'
@@ -75,7 +78,7 @@ end
 gem 'jquery-rails'
 gem 'unicorn'
 gem 'capistrano'
-gem 'carrierwave'
+# gem 'carrierwave'
 gem 'mini_magick'
 gem 'activemerchant', :require => 'active_merchant'
 gem 'simple_form'
@@ -83,4 +86,7 @@ gem 'wicked'
 gem 'validates_email_format_of'
 gem 'merit'
 #gem 'jquery-fileupload-rails'
-#gem 'whenever', require: false
+gem 'sidekiq'
+gem 'whenever'
+gem 'slim', '>= 1.1.0'
+gem 'sinatra', '>= 1.3.0', :require => nil

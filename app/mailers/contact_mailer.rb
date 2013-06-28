@@ -8,6 +8,9 @@ class ContactMailer < ActionMailer::Base
   #   en.contact_mailer.contact_confirmation.subject
   #
   def contact_confirmation(name, email, subject, message)
+    @name = name
+    @email = email
+    @message = message
     mail subject: subject
   end
 end
