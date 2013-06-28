@@ -1,3 +1,5 @@
-%h3.green-font #{@sponsorship_level.name.upcase} sponsor
-- @benefits.each do |benefit|
-  %p.normal-font - #{benefit.name}
+%h2{:style => "color: #70bf4c"} #{@sponsorship_level.name.upcase} sponsor
+
+%ul.normal-font.dashed-list
+  - @benefits.each do |benefit|
+    %li #{benefit.name}
