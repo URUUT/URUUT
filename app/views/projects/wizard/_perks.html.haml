@@ -306,6 +306,26 @@
     }
   };
 
+  jQuery.validator.addMethod("requiredAmount", function(val, elem) {
+      return /^[0-9]+(,[0-9]+)*$/.test(val);
+    }, jQuery.validator.messages.number);
+
+
+  $(".project-details-form").validate({
+    rules: {
+      "perk-amount": {
+        required: true,
+        requiredAmount: true
+      },
+      "perk-name": {
+        required: true
+      },
+      "perk-description": {
+        required: true
+      }
+    }
+  });
+
   $(".skip-perk").on("click", function(){
     $(this).text("LOADING..");
     var project_id = #{@project.id};
