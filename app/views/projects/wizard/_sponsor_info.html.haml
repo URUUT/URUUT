@@ -81,9 +81,72 @@
     %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
     .well.info
       %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Your Ruuts
-      %p First, we are so thrilled to have you on URUUT!
+      %p First, we are so thrilled ot have you on URUUT!
 
-      %p The process of building your project is simple and easy. We will walk you through each step and offer handy tips to make your project a success. For a more detailed guide on how to build and run a successful project, we will send you a complete Project Handbook once your project has been approved.
+      %p The process of bulding your project is simple and easy. We will walk you through each step and offer handy tips to make your project a success. For a more detailed guide on how to build and run a successful project,  take a look at our handy Project Guide (pdf).
+
+%section#connectStripeModal.modal.hide.fade
+  .modal-header{style: "height: 17px;"}
+    %button.close.closes{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"}
+      Close X
+    %h3#myModalLabel.tittle{:style => "margin-bottom: 0;"} Oops
+  .modal-body
+    %p
+      Connect with Stripe, please.
+  .modal-footer
+    %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal", style: "float: none; margin: 0 auto;"} Ok
+
+:javascript
+
+  $(function(){
+    jQuery.validator.addMethod("requiredUrl", function(val, elem) {
+    return  /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/.test(val);
+    }, jQuery.validator.messages.url);
+
+    $(".sponsor-info-form").validate({
+      rules: {
+        "project[zip]": {
+          required: true,
+          digits: true
+        },
+        "project[website]": {
+          required: true,
+          requiredUrl: true
+        }
+      }
+    });
+
+    $('.step-container[data-id="sponsor-info"] form').on('submit', function(e){
+      if ( connect.length > 0 ) {
+      e.preventDefault();
+      if (!$(this).valid()) return;
+        $('.step-container[data-id="sponsor-info"] form input#project-submit').val("LOADING..");
+        var data = $(this).serialize();
+        var project = #{@project.id};
+        $.ajax({
+          type: 'POST',
+          url: '#{project_path(@project.id)}',
+          data: data
+        }).done(function(data){
+          $.ajax({
+            type: 'GET',
+            url: 'https://' + document.location.hostname + ":" + document.location.port + '/projects/update_td_mark?id='+project
+          });
+          $(".project-details-link").attr("href", "/projects/" + data +"/edit#project-details");
+          $('.step-container[data-id="sponsor-info"] form input#project-submit').val("SAVE AND COUNTINUE");
+          $(".wizard-data-location").text( $("#project_city").val() + ", "+ $("#project_state").val() );
+          $(".wizard-data-all-location").text( $("#project_address").val() + " "+ $("#project_city").val() + " " + $("#project_state").val() + " " + $("#project_zip").val() );
+          $(".wizard-data-organization").text( $("#project_organization").val() );
+          localStorage.clear();
+
+          window.location.href = '/projects/' + data + '/edit#project-details';
+        })
+      }else{
+       alert("Connect with Stripe, please.");
+       return false;
+      }
+    });
+  })
 
 
 %section#connectStripeModal.modal.hide.fade
