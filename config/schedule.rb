@@ -18,3 +18,6 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
+every 5.minutes do
+  runner "ContactMailer.delay.contact_confirmation('Chad', 'chad.bartels@gmail.com', 'test', 'test')"
+end

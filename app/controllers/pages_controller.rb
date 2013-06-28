@@ -44,7 +44,7 @@ class PagesController < ApplicationController
 
     logger.debug(params[:pages][:subject])
 
-    ContactMailer.contact_confirmation(name, email, subject, message).deliver
+    ContactMailer.delay.contact_confirmation(name, email, subject, message)
     flash[:notice] = 'Thank You!!! Your Message Has Been Sent'
     redirect_to contact_pages_url
   end
