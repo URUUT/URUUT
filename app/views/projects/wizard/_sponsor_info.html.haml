@@ -12,11 +12,9 @@
       YOUR RUUTS
       %span.italic (Basic Information)
 
-    .req-legend
-      *Required
     %div
       = f.label :organization, "Organization/Business Name*", class: "label-green"
-      = f.text_field :organization, class: "span8 required"
+      = f.text_field :organization, :required => true, class: "span8"
 
     .clearfix
       %div.pull-left
@@ -31,27 +29,26 @@
 
     %div
       = f.label :address , "STREET ADDRESS*", class: "label-green"
-      = f.text_field :address,  class: "span8 required"
+      = f.text_field :address, :required => true, class: "span8"
 
-    .clearfix
-      %div.pull-left
-        = f.label :city, "CITY*", class: "label-green"
-        = f.text_field :city,  class: "span4 required"
+    %div.inline
+      = f.label :city, "CITY*", class: "label-green"
+      = f.text_field :city, :required => true, class: "span4"
 
-      %div.pull-left{:style => "margin-left:25px;"}
-        = f.label :state,"STATE*", class: "label-green"
-        .selectParent{style: "width: 140px"}
-          = f.select :state, options_for_select(us_states, @project.state), {}, {:onchange => "updateStateInfo()", class: "styledSelect required"}
+    %div.inline{:style => "margin-left:25px;"}
+      = f.label :state,"STATE*", class: "label-green"
+      .selectParent{style: "width: 140px"}
+        = f.select :state, options_for_select(us_states, @project.state), {:required => true}, {:onchange => "updateStateInfo()", class: "styledSelect"}
 
-      %div.pull-left{:style => "margin-left:25px;"}
-        = f.label :zip, "Zipcode*", class: "label-green"
-        = f.text_field :zip, class: "span2 required"
+    %div.inline{:style => "margin-left:25px;"}
+      = f.label :zip, "Zipcode*", class: "label-green"
+      = f.text_field :zip, :required => true, class: "span2"
 
     %div
       = f.label :website, :class => "label-green" do
         WEBSITE ADDRESS*
         %span.italic (Format: www.mysite.com)
-      = f.text_field :website,  class: "span8 required"
+      = f.text_field :website, :required => true, class: "span8"
 
     .clearfix
       %div.pull-left
@@ -74,18 +71,30 @@
       %hr{:style => "background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
 
       %div
-        = f.submit "Save And Continue", :class => "btn", :id => "project-submit"
+        / = f.submit "Save And Continue", :class => "btn", :id => "project-submit"
+        %a.btn{"data-toggle" => "modal", :href => "#connectStripeModal", :role => "button", style: "font: italic 12px/15px 'Georgia', georgia, serif !important;text-transform:none;"}
+          Stripe Not Connected
 
   .span4{:style => "margin-top:155px;"}
     %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
     .well.info
       %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Your Ruuts
-      %p First, we are so thrilled ot have you on URUUT!
+      %p First, we are so thrilled to have you on URUUT!
 
-      %p The process of bulding your project is simple and easy. We will walk you through each step and offer handy tips to make your project a success. For a more detailed guide on how to build and run a successful project,  take a look at our handy Project Guide (pdf).
+      %p The process of building your project is simple and easy. We will walk you through each step and offer handy tips to make your project a success. For a more detailed guide on how to build and run a successful project, we will send you a complete Project Handbook once your project has been approved.
 
-      %p The first steps are Your Ruuts - which is your basic information - go ahead and get started! Don’t worry if you get stuck - you can come back anytime to edit your project.
 
+%section#connectStripeModal.modal.hide.fade
+  .modal-header{style: "height: 17px;"}
+    %button.close.closes{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"}
+      Close X
+    %h3#myModalLabel.tittle{:style => "margin-bottom: 0;"} Oops
+  .modal-body
+    %p
+      Connect with Stripe, please.
+  .modal-footer
+    %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal", style: "float: none; margin: 0 auto;"} Ok
+    
 // :javascript
 //   $('#edit_project_#{@project.id}').validate();
 // :javascript
