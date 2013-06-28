@@ -14,7 +14,7 @@
 
     %div
       %h6{:style => "color:#70bf4c"} SPONSORSHIP ON URUUT
-      %p One of the things that makes Uruut different from other crowd-funding platforms is the ability for businesses and foundations to sponsor projects. While we believe business and foundation sponsorship are the best way to help you reach your goal, you are not required to allow them.
+      %p One of the things that makes Uruut different from other crowd-funding platforms is the ability for businesses and foundations to sponsor projects. While we believe business and foundation sponsorship are the best way to help you reach your goal, you are not required to offer sponsorship.
 
     %div
       %h6{:style => "color:#70bf4c"} ALLOW PROJECT SPONSORSHIPS?
@@ -32,21 +32,17 @@
           %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;", class: "platinum-availibility"} (1 AVAILABLE)
       .row-fluid
         .span3{:style => "text-align:left;color:#464646;"}
-          %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0;"} Cost
-          %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0"}
+          %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0;"} Cost
+          %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0"}
             - if @project.goal
               = amount_converter(@project.goal.gsub(/,/, '').to_i * 0.30)
           %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (30% of funding goal)
         .span9{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
-            Platinum Level Sponsorship includes priority logo placement, a link to the sponsor’s website, and the company / foundation’s mission statement on your project page. Platinum Sponsors gain industry exclusivity for project sponsors. In addition to these benefits select suggested benefits or create custom benefits for platinum level sponsors from the checklist below.
+            Platinum Level Sponsorship includes priority logo placement, a link to the sponsor’s website, and the company / foundation’s mission statement on your project page. Platinum Sponsors gain industry exclusivity for project sponsors. In addition to these benefits, select suggested benefits or create custom benefits for platinum level sponsors from the checklist below. (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
             %span{:style =>  "color:#b6b6b4;font-style:italic;"}
               (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
-          %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"}
-            SUGGESTED BENEFITS
-            %span.italic
-              (Check All That Apply)
-            \:
+          %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"} SUGGESTED BENEFITS:
           %div#platinum-box{data:{max: "1", type: "platinum"}}
             %div#platinum-checkbox.existing-checkbox
               -if @project.sponsorship_benefits.empty?
@@ -66,8 +62,8 @@
                     %span#name= benefit.name
                     %span.edit-benefit.italic.label-green select to edit
                     = text_field_tag "platinum[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
-              / %a.italic.green-link.check-all{:href => "javascript:void(0)", data:{target: "platinum-checkbox"}}
-              /   (Check All That Apply)
+              %a.italic.green-link.check-all{:href => "javascript:void(0)", data:{target: "platinum-checkbox"}}
+                (Check All That Apply)
 
               = hidden_field_tag "platinum_count", nil, id: "platinum-count"
             %div#custom-checkbox
@@ -89,21 +85,17 @@
           %span{:style => "font-size:10px;color:#403e37", class: "gold-availibility"} (3 AVAILABLE)
       .row-fluid
         .span3.left{:style => "text-align:left;color:#464646;"}
-          %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0;"} Cost
-          %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0"}
+          %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0;"} Cost
+          %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0"}
             -if @project.goal
               = amount_converter(@project.goal.gsub(/,/, '').to_i * 0.10)
           %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (10% of funding goal)
         .span9.left{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
-            Gold Level Sponsorship includes includes placement of a large sized logo and a link to the sponsor’s website on your project page. Gold Sponsors gain industry exclusivity for project sponsors. In addition to these benefits select suggested benefits or create custom benefits for gold level sponsors from the checklist below.
+            Gold Level Sponsorship includes placement of a large logo and a link to the sponsor’s website on your project page. Gold Sponsors gain industry exclusivity for project sponsors. In addition to these benefits, select suggested benefits or create custom benefits for gold level sponsors from the checklist below. (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
             %span{:style =>  "color:#b6b6b4;font-style:italic;"}
               (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
-          %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"}
-            SUGGESTED BENEFITS
-            %span.italic
-              (Check All That Apply)
-            \:
+          %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"} SUGGESTED BENEFITS:
           %div#gold-box{data:{max: "3", type: "gold"}}
             %div#gold-checkbox.existing-checkbox
               -if @project.sponsorship_benefits.empty?
@@ -123,8 +115,8 @@
                     %span#name= benefit.name
                     %span.edit-benefit.italic.label-green select to edit
                     = text_field_tag "gold[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
-              / %a.italic.green-link.check-all{:href => "javascript:void(0)", data:{target: "gold-checkbox"}}
-              /   (Check All That Apply)
+              %a.italic.green-link.check-all{:href => "javascript:void(0)", data:{target: "gold-checkbox"}}
+                (Check All That Apply)
 
               = hidden_field_tag "gold_count", nil, id: "gold-count"
             %div#custom-checkbox
@@ -145,21 +137,17 @@
           %span{:style => "font-size:10px;color:#403e37", class: "silver-availibility"} (5 AVAILABLE)
       .row-fluid
         .span3.left{:style => "text-align:left;color:#464646;"}
-          %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0;"} Cost
-          %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0"}
+          %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0;"} Cost
+          %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0"}
             -if @project.goal
               = amount_converter(@project.goal.gsub(/,/, '').to_i * 0.04)
           %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (4% of funding goal)
         .span9.left{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
-            Silver Level Sponsorship includes includes placement of a medium sized logo and a link to the sponsor’s website on your project page. In addition to these benefits, select suggested benefits or create custom benefits for silver level sponsors from the checklist below.
+            Silver Level Sponsorship includes placement of a medium-sized logo and a link to the sponsor’s website on your project page. In addition to these benefits, select suggested benefits or create custom benefits for silver level sponsors from the checklist below. (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
             %span{:style =>  "color:#b6b6b4;font-style:italic;"}
               (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
-          %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"}
-            SUGGESTED BENEFITS
-            %span.italic
-              (Check All That Apply)
-            \:
+          %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"} SUGGESTED BENEFITS:
           %div#silver-box{data:{max: "5", type: "silver"}}
             %div#silver-checkbox.existing-checkbox
 
@@ -180,8 +168,8 @@
                     %span#name= benefit.name
                     %span.edit-benefit.italic.label-green select to edit
                     = text_field_tag "silver[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
-              / %a.italic.green-link.check-all{:href => "javascript:void(0)", data:{target: "silver-checkbox"}}
-              /   (Check All That Apply)
+              %a.italic.green-link.check-all{:href => "javascript:void(0)", data:{target: "silver-checkbox"}}
+                (Check All That Apply)
 
               = hidden_field_tag "silver_count", nil, id: "silver-count"
             %div#custom-checkbox
@@ -201,8 +189,8 @@
           Bronze LEVEL SPONSORSHIP*
       .row-fluid
         .span3.left{:style => "text-align:left;color:#464646;"}
-          %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0;"} Cost
-          %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0"}
+          %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0;"} Cost
+          %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;font-weight:bold;line-height:normal;margin:0"}
             - if @project.goal && @project.goal.gsub(/,/, '').to_i * 0.1 < 500
               = amount_converter(@project.goal.gsub(/,/, '').to_i * 0.1)
             -else
@@ -242,9 +230,7 @@
     %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
     .well.info
       %h5{:style => "color:#70bf4c;margin-bottom:10px;"} SPONSORSHIP DETAILS
-      %p URUUT’s Partner-Funding depends not only individual contributors, but sponsorship from businesses and foundations.
-
-      %p There are 4 different levels of sponsorship, with different benefits for each level. Use the checklists to define what each sponsor level includes. Blah blah blah, this is terrible writing, need to have someone actually write this before launch.
+      %p There are 4 different levels of sponsorship, with different benefits for each level. Use the checklists to define what each sponsor level includes.  The Uruut Wizard will automatically calculate the sponsorship levels for you.  Below each level are suggested benefits.  You can use these or create your own, but be sure that you are making it worth your sponsors’ contribution, while being sure to make promises you can deliver.
 
 
 :javascript
@@ -284,9 +270,8 @@
       type: "GET",
       url: "/skip_sponsor"
     }).done(function(data){
-      $(".assets-link").attr("href", "/projects/" + project_id +"/edit#assets");
       window.location.href = '/projects/' + project_id + '/edit#assets';
-      window.location.reload(true);
+      $(".assets-link").attr("href", "/projects/" + project_id +"/edit#assets");
     });
   })
 
