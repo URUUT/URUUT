@@ -71,11 +71,9 @@
       %hr{:style => "background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
 
       %div
-        - if !session[:connected].blank?
-          = f.submit "Save And Continue", :class => "btn", :id => "project-submit"
-        - else
-          %a.btn{"data-toggle" => "modal", :href => "#connectStripeModal", :role => "button", style: "font: italic 12px/15px 'Georgia', georgia, serif !important;text-transform:none;"}
-            Stripe Not Connected
+        / = f.submit "Save And Continue", :class => "btn", :id => "project-submit"
+        %a.btn{"data-toggle" => "modal", :href => "#connectStripeModal", :role => "button", style: "font: italic 12px/15px 'Georgia', georgia, serif !important;text-transform:none;"}
+          Stripe Not Connected
 
   .span4{:style => "margin-top:155px;"}
     %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
@@ -148,6 +146,18 @@
     });
   })
 
+
+%section#connectStripeModal.modal.hide.fade
+  .modal-header{style: "height: 17px;"}
+    %button.close.closes{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"}
+      Close X
+    %h3#myModalLabel.tittle{:style => "margin-bottom: 0;"} Oops
+  .modal-body
+    %p
+      Connect with Stripe, please.
+  .modal-footer
+    %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal", style: "float: none; margin: 0 auto;"} Ok
+    
 // :javascript
 //   $('#edit_project_#{@project.id}').validate();
 // :javascript
