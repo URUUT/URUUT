@@ -74,7 +74,7 @@
         - if !session[:connected].blank?
           = f.submit "Save And Continue", :class => "btn", :id => "project-submit"
         - else
-          %a.btn{"data-toggle" => "modal", :href => "#connectStripeModal", :role => "button", style: "font: italic 12px/15px 'Georgia', georgia, serif !important;text-transform:none;"}
+          %a.btn{"data-toggle" => "modal", :href => "#connectStripeModal", :role => "button", style: 'text-transform: none; width: 274; left: 153; bottom: 15; height: 30; font: 16px/16px "Proxima Nova Semi", arial, sans-serif; line-height: 2;'}
             Stripe Not Connected
 
   .span4{:style => "margin-top:155px;"}
