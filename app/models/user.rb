@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :omniauthable,
-    :recoverable, :rememberable, :trackable, :async
+    :recoverable, :rememberable, :trackable, :validatable, :async
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :remember_me, :city, :state, :zip,
@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   attr_accessor :avatar_upload_width, :avatar_upload_height
   # attr_accessible :title, :body
 
+  validates_confirmation_of :password
   validates_presence_of :first_name
   validates_presence_of :last_name
   validates_presence_of :email
