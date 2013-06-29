@@ -50,14 +50,16 @@
         %span.italic (Format: www.mysite.com)
       = f.text_field :website, :required => true, class: "span8"
 
-    .clearfix
-      %div.pull-left
-        = f.label :twitter_handle, "Twitter Account*", class: "label-green"
-        = f.text_field :twitter_handle,  class: "span4 required"
+    %div
+      = f.label :facebook_page, :class => "label-green" do
+        Facebook Page*
+        %span.italic (Format: facebook.com/yourpage)
+      = f.text_field :facebook_page,  class: "required span8"
+    
+    %div
+      = f.label :twitter_handle, "Twitter Account*", class: "label-green"
+      = f.text_field :twitter_handle,  class: "required span8"
 
-      %div.pull-left{:style => "margin-left:30px;"}
-        = f.label :facebook_page, "Facebook Page*", class: "label-green"
-        = f.text_field :facebook_page,  class: "span4 required"
 
     = hidden_field_tag "step", "first"
 
