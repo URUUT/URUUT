@@ -174,7 +174,7 @@ label {
 	font:normal 12px/12px "Proxima Nova Semi", arial, sans-serif;
 	letter-spacing:2px;
 	text-transform:uppercase;}
-
+  
 select {
   outline:none !important;
 }
@@ -1258,7 +1258,7 @@ textarea[id*='perk'] {
 div[id^='step'] {
   position:relative;}
 
-#project-submit {
+#project-submit, .projects.edit .wizard-btn, .wizard-btn {
   background:#70bf4c;
   border-radius:0;
   display:block;
@@ -1748,7 +1748,7 @@ ul.perks {
           border-radius:0;
           box-shadow:none;
           color:#fff;
-          font:normal 13px/13px "Proxima Nova", arial, sans-serif;
+          font:normal 13px/13px "Proxima Nova Semi", arial, sans-serif;
           letter-spacing:2px;
           padding:10px 25px;
           position:relative;
@@ -2159,7 +2159,7 @@ form[id*=project] {
 	margin-top:190px;
 	#project_twitter_handle {
 		background:#fff url(image-path('twitter-handle.png')) 2% 50% no-repeat;
-		padding-left:35px;
+		padding-left:40px;
 		position:relative;}}
 
 #project_website {
@@ -3302,16 +3302,3 @@ form[id*=project] {
 		}
 	}
 }
-
-.project-submit {
-  background:#70bf4c;
-  border-radius:0;
-  display:block;
-  font: 16px/16px "Proxima Nova Semi", arial, sans-serif;
-  letter-spacing:2px;
-  margin:20px auto 0;
-  padding:15px 24px;
-  text-shadow:none;
-  text-transform:uppercase;
-  &:hover {
-    background:#70bf4c;}}

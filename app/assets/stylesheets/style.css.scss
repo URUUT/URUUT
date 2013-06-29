@@ -134,12 +134,21 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-a.green-link{
-  color: $green2;
-  text-decoration: underline;
+a{
+  &.green-link{
+    color: $green2;
+    text-decoration: underline;
 
-  &:hover{
-    text-decoration: none;
+    &:hover{
+      text-decoration: none;
+    }
+  }
+
+  &.green-font{
+    &:hover{
+      text-decoration: underline;
+      color: $green2;
+    }
   }
 }
 
@@ -1098,7 +1107,7 @@ form {
     }
 
     .btn{
-      background: url('arrow.png') no-repeat center right;
+      background: transparent;
       display: block;
       width: 100%;
       padding: 10px 0;
@@ -1928,7 +1937,7 @@ body.pages.contact, body.sponsors.thank_you{
 }
 
 form{
-  input, textarea, select{
+  input, textarea, select, .selectParent{
     &.error-validated-field, &.error {
       border: 1px solid red !important;
     }
@@ -2031,7 +2040,7 @@ body.pages.index, body.pages.search{
   .full-width{
     .selectParent{
       width: 300px;
-
+      
 
       .styledSelect{
         width: 320px;
@@ -2043,7 +2052,7 @@ body.pages.index, body.pages.search{
 .modal{
   width: 460px;
   left: 53%;
-
+  
   .closes{
     color: $green2;
     opacity: 1;
@@ -2064,7 +2073,7 @@ body.pages.index, body.pages.search{
     line-height: 20px;
     letter-spacing: 1;
   }
-
+  
   .modal-footer{
     background: transparent;
     border-top: none;
@@ -2123,7 +2132,7 @@ input, select, textarea{
       color: #555;
       color: rgba(0,0,0,0);
       text-shadow: 0 0 0 #555;
-
+      
       &:focus{
         outline: none;
         -moz-outline: none;
@@ -2132,8 +2141,8 @@ input, select, textarea{
   }
 }
 
-body.pages.home{
-  .alert{
-    display: none;
-  }
+#project_facebook_page{
+  background: white url("/assets/facebook-form.png") 2% 50% no-repeat;
+  padding-left: 187px;
+  position: relative;
 }
