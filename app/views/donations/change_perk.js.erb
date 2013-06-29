@@ -65,7 +65,7 @@ $("#perk_type option:contains(" + theText + ")").attr('selected', 'selected');
 <% end %>
 
 $("#custom_amount").val("<%= amount_converter_field(params[:custom_seed].gsub(/[^\d,]+/, '').gsub(",", "")) %>");
-$("#amount").val("<%= amount_converter_field(params[:custom_seed].gsub(/[^\d,]+/, '').gsub(",", "")) %>");
+$("#amount").val("<%= params[:custom_seed].gsub(/[^\d,]+/, '').gsub(",", "") %>");
 $(".choiced-perk").show();
 $(".perk-amount").hide();
 <% end %>
