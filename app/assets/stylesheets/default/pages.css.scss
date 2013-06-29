@@ -174,7 +174,7 @@ label {
 	font:normal 12px/12px "Proxima Nova Semi", arial, sans-serif;
 	letter-spacing:2px;
 	text-transform:uppercase;}
-  
+
 select {
   outline:none !important;
 }
@@ -3028,7 +3028,7 @@ form[id*=project] {
 		.ccv {
 			display:inline-block;
       		float:left;
-			width:33%;
+			width:45%;
 			input[type=text] {
 				width:120px !important;
 				padding-left: 60px;
@@ -3039,8 +3039,8 @@ form[id*=project] {
 			box-sizing: border-box;
 			display:inline-block;
       float:left;
-			padding-left:20px;
-			width:66%;
+			padding-left:0px;
+			width:55%;
 			input[type=text]#card_month {
         display:inline-block;
 				width:70px !important;}

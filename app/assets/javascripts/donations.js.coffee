@@ -89,6 +89,8 @@ $ ->
         digits: true
         minlength: 4
         maxlength: 4
+    errorPlacement: (error, element) ->
+      error.appendTo element.parent().find(".error-container")
 
   $(".edit_donation").validate
     rules:
@@ -113,6 +115,8 @@ $ ->
         digits: true
         minlength: 4
         maxlength: 4
+    errorPlacement: (error, element) ->
+      error.appendTo element.parent().find(".error-container")
 
 	$('#new_donation #donate').on 'click', (event) ->
     event.preventDefault()
