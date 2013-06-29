@@ -72,9 +72,9 @@
 
       %div
         - if !session[:connected].blank?
-          = f.submit "Save And Continue", :class => "btn", :id => "project-submit"
+          = f.submit "Save And Continue", :class => "btn wizard-btn", :id => "project-submit"
         - else
-          %a.btn{"data-toggle" => "modal", :href => "#connectStripeModal", :role => "button", style: 'text-transform: none; width: 274; left: 153; bottom: 15; height: 30; font: 16px/16px "Proxima Nova Semi", arial, sans-serif; line-height: 2;'}
+          %a.btn.wizard-btn{"data-toggle" => "modal", :href => "#connectStripeModal", :role => "button", style: "width: 266px;"}
             Stripe Not Connected
 
   .span4{:style => "margin-top:155px;"}
