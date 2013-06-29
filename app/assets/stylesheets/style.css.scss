@@ -1018,12 +1018,13 @@ form {
   }
 
   .phone{
-    width: 50%;
+    width: 100%;
 
     input[type="text"], input[type="number"]{
-      width: 100%;
+      width: 50%;
       padding-left: 60px;
       background: #fff url('form-phone2.png') no-repeat left center;
+      float: left;
     }
   }
 
@@ -1041,7 +1042,7 @@ form {
     display:inline-block;
     float:left;
 
-    width:33%;
+    width:45%;
 
     input[type=text] {
       width:120px !important;
@@ -1056,8 +1057,8 @@ form {
     box-sizing: border-box;
     display:inline-block;
     float:left;
-    padding-left:20px;
-    width:66%;
+    padding-left:0px;
+    width:55%;
 
     input[type=text]#card_month {
       display:inline-block;
@@ -1084,11 +1085,12 @@ form {
 }
 
 .pic-upload{
-  margin-left: 120px;
+  margin-left: 20px;
   width: 220px;
   font-family: 'Proxima Nova', sans-serif;
   color: $light-grey;
   position: relative;
+  float: left;
 
   .upload-btn{
     position: relative;
@@ -2040,7 +2042,7 @@ body.pages.index, body.pages.search{
   .full-width{
     .selectParent{
       width: 300px;
-      
+
 
       .styledSelect{
         width: 320px;
@@ -2052,7 +2054,7 @@ body.pages.index, body.pages.search{
 .modal{
   width: 460px;
   left: 53%;
-  
+
   .closes{
     color: $green2;
     opacity: 1;
@@ -2073,7 +2075,7 @@ body.pages.index, body.pages.search{
     line-height: 20px;
     letter-spacing: 1;
   }
-  
+
   .modal-footer{
     background: transparent;
     border-top: none;
@@ -2132,7 +2134,7 @@ input, select, textarea{
       color: #555;
       color: rgba(0,0,0,0);
       text-shadow: 0 0 0 #555;
-      
+
       &:focus{
         outline: none;
         -moz-outline: none;
@@ -2145,4 +2147,26 @@ input, select, textarea{
   background: white url("/assets/facebook-form.png") 2% 50% no-repeat;
   padding-left: 187px;
   position: relative;
+}
+
+.error-container{
+  float: right;
+  margin-right: 12px;
+
+  &.beside-form{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: inline-block;
+  }
+
+  label.error {
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    text-transform: initial;
+    letter-spacing: 0;
+    font-size: 13px;
+    line-height: 13px;
+    color: red;
+    text-align: right;
+  }
 }
