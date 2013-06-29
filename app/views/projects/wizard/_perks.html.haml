@@ -5,7 +5,7 @@
     border-radius: 0;
     box-shadow: none;
     color: white;
-    font: bold 16px/16px "Proxima Nova", arial, sans-serif;
+    font: normal 16px/16px "Proxima Nova Semi", arial, sans-serif;
     letter-spacing: 2px;
     position: relative;
     text-shadow: none;
@@ -117,7 +117,7 @@
     %hr#line{:style => "margin-left: -20px; margin-right: -20px; background: #e0e0e0;"}
 
     %div.perk-false{style: "#{@project.perk_permission ? 'display:none' : '' }"}
-      = link_to "CONTINUE TO STEP 4", "/projects/#{@project.id}/edit#sponsorship", class: "btn skip-perk", id: "project-submit", style: "position: relative;display:block;margin:0 auto;width:35%"
+      = link_to "CONTINUE TO STEP 4", "/projects/#{@project.id}/edit#sponsorship", class: "btn skip-perk wizard-btn", id: "project-submit", style: "position: relative;display:block;margin:0 auto;width:35%"
 
   .span4{:style => "margin-top:155px;"}
     %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
