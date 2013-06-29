@@ -64,6 +64,7 @@ class DonationStepsController < ApplicationController
         perk.update_attributes(perks_available: new_perk_available)
       end
       current_user.update_attributes(uruut_point: current_user.uruut_point.to_i + session[:payment_amount].to_i)
+      session.delete(:perk_amount)
       redirect_to wizard_path(:thank_you)
     else
       redirect_to wizard_path(:confirmation)
