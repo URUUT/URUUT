@@ -1859,6 +1859,12 @@ body.users.show, body.users.profile{
   height: auto;
 }
 
+body.pages.home{
+  #flash_notice{
+    display: none;
+  }
+}
+
 body.pages.contact, body.sponsors.thank_you{
   #flash_notice{
     display: none;
