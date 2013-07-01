@@ -22,12 +22,10 @@
           .span5
             - if user_signed_in?
               = link_to new_project_sponsor_path(@project.id), :class => 'btn', :style => "background: #70bf4c; color:#fff; text-decoration:none; font-family: 'Proxima Nova Semi', sans-serif; font-style:normal;" do
-                Become A Sponsor
-                %span
+                Become A Sponsor ►
             - else
               = link_to "javascript:void(0)", "url-data" => "/projects/#{@project.id}/sponsors/new", :class => 'btn unsignin', :style => "background: #70bf4c; color:#fff; text-decoration:none; font-family: 'Proxima Nova Semi', sans-serif; font-style:normal;" do
-                Become A Sponsor
-                %span
+                Become A Sponsor ►
 
 - if !@project.large_image.blank?
   #large_image{:style => "background:url(#{@project.large_image}); background-size: cover"}
@@ -176,10 +174,10 @@
           - if @project_sponsors.include?(2) || @project_sponsors.include?(3)
             - if user_signed_in?
               = link_to new_project_sponsor_path(@project.id), :class => 'btn', :style => 'margin-top: -10px;'  do
-                Become A Sponsor
+                Become A Sponsor ►
             - else
               = link_to "javascript:void(0)", "url-data" => "/projects/#{@project.id}/sponsors/new", :class => 'btn unsignin', :style => 'margin-top: -10px;'  do
-                Become A Sponsor
+                Become A Sponsor ►
           %span
         .project-sponsors
           - if !@project_sponsors.include?(2) && !@project_sponsors.include?(3)
@@ -294,12 +292,10 @@
           %p{:style => "font:normal 12px/18px 'Proxima Nova', arial, sans-serif;color:#403e37;margin-bottom:40px;"} We can’t do this alone. Do your part, by becoming a project sponsor. URUUT Partner-Funding depends on individual contributors as well as project sponsorship from businesses and corporate and family foundations. Click the button below to get more details and become a project sponsor.
           - if user_signed_in?
             = link_to new_project_sponsor_path(@project.id), :class => 'btn sponsors', :style => 'margin-top:10px;' do
-              Become A Sponsor
-              %span
+              Become A Sponsor ►
           - else
             = link_to "javascript:void(0)", "url-data" => "/projects/#{@project.id}/sponsors/new", class: "btn sponsors unsignin", style: "margin-top: 10px;" do
-              Become A Sponsor
-              %span
+              Become A Sponsor ►
           / = button_tag :class => "btn sponsors", :style => "margin-top: 10px;" do
           /   Get Started
           /   %span
@@ -338,23 +334,19 @@
                       - elsif p.limit && !p.perks_available.to_i.zero?
                         - if user_signed_in?
                           = link_to "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", class: "btn perk pull-right", style: "margin-top: 10px;" do
-                            Fund Now
-                            %span
+                            Fund Now ►
                         - else
                           - url = url_encode("#{request.protocol}#{request.host_with_port}/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}")
                           = link_to "javascript:void(0)", "url-sign-up" => url, "url-sign-in" => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", class: "btn perk pull-right unsignin-perk", style: "margin-top: 10px;" do
-                            Fund Now
-                            %span
+                            Fund Now ►
                       - else
                         - if user_signed_in?
                           = link_to "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", class: "btn perk pull-right", style: "margin-top: 10px;" do
-                            Fund Now
-                            %span
+                            Fund Now ►
                         - else
                           - url = url_encode("#{request.protocol}#{request.host_with_port}/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}")
                           = link_to "javascript:void(0)", "url-sign-up" => url, "url-sign-in" => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", class: "btn perk pull-right unsignin-perk", style: "margin-top: 10px;" do
-                            Fund Now
-                            %span
+                            Fund Now ►
 
             -else
               - default_perk.each_with_index do |perk, index|
@@ -371,13 +363,11 @@
                         =amount_converter(perk)
                     - if user_signed_in?
                       = link_to "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "btn perk pull-right", :style => "margin-top: 10px;" do
-                        Fund Now
-                        %span
+                        Fund Now ►
                     - else
                       - url = url_encode("#{request.protocol}#{request.host_with_port}/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}")
                       = link_to "javascript:void(0)", "url-sign-up" => url, "url-sign-in" => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "btn perk pull-right unsignin-perk", :style => "margin-top: 10px;" do
-                        Fund Now
-                        %span
+                        Fund Now ►
 
             .seed-level{id: "perk-id-custom"}
               %h3.perk-name-other{id: "perk-name-other-custom"}
@@ -388,7 +378,7 @@
                   .amount
                   %h5 AMOUNT TO SEED
                   .textarea.seed-amount= text_field_tag :custom_seed, nil, style: "width: 100%"
-                %a.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "#{user_signed_in? ? 'button-seed-custom' : 'button-seed-custom-unsignin'}"} Fund Now
+                %a.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "#{user_signed_in? ? 'button-seed-custom' : 'button-seed-custom-unsignin'}"} Fund Now ►
           #sponsorship.tab-pane
             .seed-level
               %h3
@@ -406,12 +396,10 @@
                 - if check_availibility(@project, 1) < 1
                   - if user_signed_in?
                     %a.btn.pull-right.sponsors{:href => "/projects/#{@project.id}/sponsors/new?level=platinum", style: "margin-top: 10px;"}
-                      Sponsor
-                      %span
+                      Sponsor ►
                   - else
                     %a.btn.pull-right.sponsors.unsignin{"url-data" => "/projects/#{@project.id}/sponsors/new?level=platinum", style: "margin-top: 10px;"}
-                      Sponsor
-                      %span
+                      Sponsor ►
                 - else
                   .pull-right{style: "margin-top: 24px; font-style: italic;"}
                     Not Available
@@ -432,12 +420,10 @@
                 - if check_availibility(@project, 2) < 3
                   - if user_signed_in?
                     %a.btn.pull-right.sponsors{:href => "/projects/#{@project.id}/sponsors/new?level=gold", :style => "margin-top: 10px;"}
-                      Sponsor
-                      %span
+                      Sponsor ►
                   - else
                     %a.btn.pull-right.sponsors.unsignin{"url-data" => "/projects/#{@project.id}/sponsors/new?level=gold", style: "margin-top: 10px;"}
-                      Sponsor
-                      %span
+                      Sponsor ►
                 - else
                   .pull-right{style: "margin-top: 24px; font-style: italic;"}
                     Not Available
@@ -458,16 +444,13 @@
                 - if check_availibility(@project, 3) < 5
                   - if user_signed_in?
                     %a.btn.pull-right.sponsors{:href => "/projects/#{@project.id}/sponsors/new?level=silver", :style => "margin-top: 10px;"}
-                      Sponsor
-                      %span
+                      Sponsor ►
                   - else
                     %a.btn.pull-right.sponsors.unsignin{"url-data" => "/projects/#{@project.id}/sponsors/new?level=silver", style: "margin-top: 10px;"}
-                      Sponsor
-                      %span
+                      Sponsor ►
                 - else
                   .pull-right{style: "margin-top: 24px; font-style: italic;"}
                     Not Available
-                    %span
             .seed-level
               %h3 BRONZE
               %ul.normal-font.dashed-list
@@ -485,12 +468,10 @@
                       = number_to_currency(@project.goal.to_i * 0.1, precision: 0)
                 - if user_signed_in?
                   %a.btn.pull-right.sponsors{:href => "/projects/#{@project.id}/sponsors/new?level=bronze", :style => "margin-top: 10px;"}
-                    Sponsor
-                    %span
+                    Sponsor ►
                 - else
                   %a.btn.pull-right.sponsors.unsignin{"url-data" => "/projects/#{@project.id}/sponsors/new?level=bronze", style: "margin-top: 10px;"}
-                    Sponsor
-                    %span
+                    Sponsor ►
       - else
         %h4.tittle{style: "margin-bottom: 0;"} Donate
         -if @project.perk_permission
@@ -518,7 +499,7 @@
                       %span
                   -elsif p.limit && !p.perks_available.to_i.zero?
                     - if user_signed_in?
-                      %a.btn.pull-right{:href => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", :class => "fund btn"} Fund Now
+                      %a.btn.pull-right{:href => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", :class => "fund btn"} Fund Now ►
                     - else
                       - url = url_encode("#{request.protocol}#{request.host_with_port}/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}")
                       %a.btn.pull-right.unsignin-perk{"url-sign-up" => url, "url-sign-in" => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}"} Fund Now
@@ -542,10 +523,10 @@
                   .amount
                     = amount_converter(perk)
                 - if user_signed_in?
-                  %a.btn.pull-right{:href => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "fund btn"} Fund Now #{image_tag('arrow.png')}
+                  %a.btn.pull-right{:href => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "fund btn"} Fund Now ►
                 - else
                   - url = url_encode("#{request.protocol}#{request.host_with_port}/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}")
-                  %a.btn.pull-right.unsignin-perk{"url-sign-up" => url, "url-sign-in" => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "fund btn"} Fund Now #{image_tag('arrow.png')}
+                  %a.btn.pull-right.unsignin-perk{"url-sign-up" => url, "url-sign-in" => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "fund btn"} Fund Now ►
 
         .seed-level{id: "perk-id-custom"}
           %h3.perk-name-other{id: "perk-name-other-custom"}
@@ -556,7 +537,7 @@
               .amount
               %h5 AMOUNT TO SEED
               .textarea.seed-amount= text_field_tag :custom_seed, nil, style: "width: 100%"
-            %a.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "#{user_signed_in? ? 'button-seed-custom' : 'button-seed-custom-unsignin'}"} Fund Now
+            %a.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "#{user_signed_in? ? 'button-seed-custom' : 'button-seed-custom-unsignin'}"} Fund Now ►
 
 
       %h4.title{:style => 'margin-top:50px;'}
@@ -578,12 +559,10 @@
         %div{style: "margin-top: 5px;"}
           - if user_signed_in?
             %a.btn{:href => "/projects/#{@project.id}/sponsors/new?level=bronze"}
-              Become A Sponsor
-              %span
+              Become A Sponsor ►
           - else
             = link_to "javascript:void(0)", "url-data" => "/projects/#{@project.id}/sponsors/new?level=bronze", class: "btn unsignin" do
-              Become A Sponsor
-              %span
+              Become A Sponsor ►
 
       %h4.title{:style => 'margin-top:50px;'}Partners(#{@project.donations.count})
       %div.business
