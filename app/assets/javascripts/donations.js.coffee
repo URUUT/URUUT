@@ -69,12 +69,16 @@ $ ->
   $("#new_donation").validate
     messages:
       year:
+        required: "Fields required"
         minlength: "At least 4 digits"
         maxlength: "No more than 4 digits"
       month:
+        required: "Fields required"
         maxlength: "No more than 2 digits"
       code:
         digits: "Only digits"
+        minlength: "At least 3 digits"
+        maxlength: "At least 3 digits"
     rules:
       name:
         required: true
@@ -86,6 +90,8 @@ $ ->
       code:
         required: true
         digits: true
+        minlength: 3
+        maxlength: 3
 
       month:
         required: true
@@ -97,18 +103,24 @@ $ ->
         digits: true
         minlength: 4
         maxlength: 4
+    groups:
+      date: "month year"
     errorPlacement: (error, element) ->
       error.appendTo element.parent().find(".error-container")
 
   $(".edit_donation").validate
     messages:
       year:
+        required: "Fields required"
         minlength: "At least 4 digits"
         maxlength: "No more than 4 digits"
       month:
+        required: "Fields required"
         maxlength: "No more than 2 digits"
       code:
         digits: "Only digits"
+        minlength: "At least 3 digits"
+        maxlength: "At most 3 digits"
     rules:
       name:
         required: true
@@ -120,6 +132,8 @@ $ ->
       code:
         required: true
         digits: true
+        minlength: 3
+        maxlength: 3
 
       month:
         required: true
@@ -131,6 +145,8 @@ $ ->
         digits: true
         minlength: 4
         maxlength: 4
+    groups:
+      date: "month year"
     errorPlacement: (error, element) ->
       error.appendTo element.parent().find(".error-container")
 

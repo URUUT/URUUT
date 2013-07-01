@@ -20,16 +20,18 @@
 
     .clearfix
       %div.pull-left
-        = f.label :organization_type, "Organization Type*", class: "label-green"
+        = f.label :organization_type, class: "label-green" do
+          Organization Type*
+          %span.error-container
         .selectParent{style: "width: 290px;"}
           = f.select :organization_type, options_for_select(project_org_type, @project.organization_type), {:include_blank => 'Select Org Type'}, {:onchange => "updateOrganizedTypeInfo()", class: "styledSelect required"}
-        %span.error-container
 
       %div.pull-left{:style => "margin-left:20px;"}
-        = f.label :organization_class, "How Are You Organized?*", class: "label-green"
+        = f.label :organization_class, class: "label-green" do
+          How Are You Organized?*
+          %span.error-container
         .selectParent{style: "width: 290px;"}
           = f.select :organization_classification, options_for_select(project_org_class, @project.organization_classification), {:include_blank => 'Select Org Class'}, {:onchange => "updateOrganizedInfo()", class: "styledSelect required"}
-        %span.error-container
     %div
       = f.label :address, class: "label-green" do
         STREET ADDRESS*
@@ -124,7 +126,7 @@
       messages: {
           "project[zip]":{
           required: "Required",
-          digits: "Digits"
+          digits: "Invalid"
         }
       },
       rules: {
@@ -138,7 +140,12 @@
         }
       },
       errorPlacement: function(error, element) {
-        error.appendTo(element.parent().find(".error-container"));
+        if (element.attr("name") == "project[organization_type]" || element.attr("name") == "project[organization_classification]"){
+          error.appendTo(element.parent().parent().find(".error-container"));
+        }
+        else{
+          error.appendTo(element.parent().find(".error-container"));
+        };
       }
     });
 
