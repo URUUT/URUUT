@@ -90,10 +90,10 @@
 
       %div
         - if !session[:connected].blank?
-          = f.submit "Save And Continue", :class => "btn wizard-btn", :id => "project-submit"
+          = f.submit "Save And Continue ►", :class => "btn wizard-btn", :id => "project-submit"
         - else
           %a.btn.wizard-btn{"data-toggle" => "modal", :href => "#connectStripeModal", :role => "button", style: "width: 266px;"}
-            Save And Continue
+            Save And Continue ►
 
   .span4{:style => "margin-top:155px;"}
     %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
