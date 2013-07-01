@@ -60,10 +60,12 @@ class DonationsController < ApplicationController
         @perk = Perk.find(params[:id])
         @project = Project.find(params["project_id"])
         session[:perk_id] = @perk.id
+        session[:perk_amount] = @perk.amount.to_f
       else
         @perk = Perk.new
         @perk.id = params["level"]
         @perk.amount = params["amount"].gsub(",", "")
+        session[:perk_amount] = @perk.amount.to_f
         @project = Project.find(params["project_id"])
         if @project.perk_permission
           perks = @project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i, perk.id] }
@@ -114,6 +116,7 @@ class DonationsController < ApplicationController
       else
         session[:perk_id] = @perks.last[0]
       end
+      session[:perk_amount] = @perk.amount.to_f
       @perk.name = "LEVEL #{@perk.id}"
       @perk.description = "You will receive #{@perk.amount} Uruut Reward Points when you seed $#{@perk.amount}"
     end
@@ -130,6 +133,7 @@ class DonationsController < ApplicationController
       session[:perk_type] = params[:perk_type]
       session[:payment_amount] = params[:donation][:amount]
       session[:project_id_of_perk_selected] = params[:donation][:project_id]
+      session[:perk_amount] = params[:donation][:amount]
       redirect_to donation_steps_path
     else
       render :new
@@ -177,19 +181,20 @@ class DonationsController < ApplicationController
     session[:card_last4] = params[:donation][:card_last4]
     session[:card_type] = params[:donation][:card_type]
     params[:donation][:perk_name] = params[:perk_name]
-    unit = params[:donation][:amount].last
-    case unit
-      when "K"
-        params[:donation][:amount] = params[:donation][:amount].to_i * 1000
-      when "M"
-        params[:donation][:amount] = params[:donation][:amount].to_i * 1000000
-      when "B"
-        params[:donation][:amount] = params[:donation][:amount].to_i * 1000000000
-      when "T"
-        params[:donation][:amount] = params[:donation][:amount].to_i * 1000000000000
-      when "Q"
-        params[:donation][:amount] = params[:donation][:amount].to_i * 1000000000000000
-    end
+    params[:donation][:amount] = session[:perk_amount]
+    # unit = params[:donation][:amount].last
+    # case unit
+    #   when "K"
+    #     params[:donation][:amount] = params[:donation][:amount].to_i * 1000
+    #   when "M"
+    #     params[:donation][:amount] = params[:donation][:amount].to_i * 1000000
+    #   when "B"
+    #     params[:donation][:amount] = params[:donation][:amount].to_i * 1000000000
+    #   when "T"
+    #     params[:donation][:amount] = params[:donation][:amount].to_i * 1000000000000
+    #   when "Q"
+    #     params[:donation][:amount] = params[:donation][:amount].to_i * 1000000000000000
+    # end
     session[:payment_amount] = params[:donation][:amount]
     current_user.update_attributes(uruut_point: session[:payment_amount])
     if params[:donation][:amount].is_a?(String)

@@ -5,7 +5,7 @@
     var logoImage = event.fpfile.url;
 
     $('.logo-company').attr('src', logoImage);
-    $('.logo-company').attr('style', 'position: absolute; top: 5; ;left: 5; width: 100px; height: 100px;');
+    $('.logo-company').attr('style', 'width: 100px; height: 100px;');
     $('#project_sponsor_logo').hide();
     $("#project_sponsor_logo").val(logoImage);
   }
@@ -46,8 +46,7 @@
             %h3{style: "margin: 0; margin-top: 20px; line-height: 20px;"}= amount_converter(@project.goal.to_i * 0.3)
           - if check_availibility(@project, 1) < 1
             %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-1", :"sponsor-id" => "1"}
-              SPONSOR
-              %span
+              SPONSOR ►
           -else
             .pull-right{style: "font-style: italic; margin-top:20px;"}
               Not Available
@@ -67,8 +66,7 @@
             .amount-percentage
           - if check_availibility(@project, 2) < 3
             %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-2", :"sponsor-id" => "2"}
-              SPONSOR
-              %span
+              SPONSOR ►
           -else
             .pull-right{style: "font-style: italic; margin-top:20px;"}
               Not Available
@@ -88,8 +86,7 @@
             .amount-percentage
           - if check_availibility(@project, 3) < 5
             %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-3", :"sponsor-id" => "3"}
-              SPONSOR
-              %span
+              SPONSOR ►
           - else
             .pull-right{style: "font-style: italic; margin-top:20px;"}
               Not Available
@@ -110,8 +107,7 @@
             - else
               %h3{style: "margin: 0;line-height: 20px;"}= amount_converter(@project.goal.to_i * 0.1)
           %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-4", :"sponsor-id" => "4"}
-            SPONSOR
-            %span
+            SPONSOR ►
 
     = form_for(@sponsor, :url => project_sponsors_path, :html => {:class => "span8", :style => "margin-left: 0;", multipart: true, method: 'POST'}) do |f|
       .well.clearfix{:style => "border-top: none; padding-bottom: 0; border: 1px solid #e0e0e0;"}
@@ -149,16 +145,19 @@
         .req-legend
           *Required
         %div
-          = f.label :name, "Business OR ORGANIZATION NAME*", class: "label-green"
+          = f.label :name, class: "label-green" do
+            Business OR ORGANIZATION NAME*
+            %span.error-container
           = text_field :project_sponsor, :name, required: true, label: false, class: "span12"
-        %div.clearfix{:style => "margin-bottom: 10px;"}
+        %div.clearfix{:style => "margin-bottom: 10px; width: 500px;"}
           = f.label :mission, class: "label-green" do
             BUSINESS OR ORGANIZATION'S LOGO*
+            %span.error-container
           %div{:style => "position: relative;"}
             = image_tag "white.png", :class => "img-polaroid pull-left logo-company", :style => "position: relative; z-index: 10;"
             .pic-upload
               .upload-btn
-                %input{:type => 'filepicker', :name => 'project_sponsor_logo', 'data-fp-button-text' => 'UPLOAD', 'data-fp-apikey' => Settings.filepicker.api_key, 'data-fp-button-class' => 'btn', 'onchange' => 'updateSponsorLogo(event)', 'data-fp-mimetypes' => 'image/*', 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA,INSTAGRAM'}
+                %input{:type => 'filepicker', :name => 'project_sponsor_logo', 'data-fp-button-text' => 'UPLOAD ►', 'data-fp-apikey' => Settings.filepicker.api_key, 'data-fp-button-class' => 'btn', 'onchange' => 'updateSponsorLogo(event)', 'data-fp-mimetypes' => 'image/*', 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA,INSTAGRAM'}
                   %span
 
                 / = file_field :project_sponsor, :logo, required: true, label: false
@@ -166,19 +165,23 @@
                 %span
                   Note:
                 Logo file should be at least 200px x 200px jpeg, gif, or png files.
-            = text_field :project_sponsor, :logo, required: true, label: false, type: "", :style => "position: absolute; top: 5; ;left: 5; width: 100px;"
+            = text_field :project_sponsor, :logo, required: true, label: false, type: "", :style => "position: absolute; top: -1; left: -1; width: 112px; height: 112PX; box-shadow: NONE !IMPORTANT;"
+            %span.error-container.beside-form
         %div
           = label_tag :sponsor_type, "Sponsor Type*", class: "label-green"
           / = select_tag :type, options_for_select(["Foundation", "Business"])
           .selectParent.parentWide.clearfix{:style => "margin-bottom: 10px;"}
             = select_tag :type, options_for_select(["Foundation", "Business"]), class: "selectbox"
         %div
-          = f.label :site, "Website*", class: "label-green"
+          = f.label :site, class: "label-green" do
+            Website*
+            %span.error-container
           = text_field :project_sponsor, :site, required: true, label: false, class: "span12"
         %div
           = f.label :mission, class: "label-green" do
             MISSION STATEMENT / ABOUT*
             %span.cutdown.italic
+            %span.error-container
           = text_area :project_sponsor, :mission, maxlength: 275, required: true, :style => "height: 186px; width: 595px;", label: false, class: "mission", placeholder: "Tell your story here ..."
 
       %h3 Payment Information
@@ -210,36 +213,48 @@
             .field.name
               = label_tag :card_name, class: "label-green" do
                 NAME AS IT APPEARS ON CARD*
+                %span.error-container
               = text_field_tag nil, user_signed_in? ? "#{current_user.first_name.capitalize} #{current_user.last_name.capitalize}" : "" , name: "sponsor[card_name]", class: "span12 required_data", id: "name"
             .field.card-number
               = label_tag :card_number, class: "label-green" do
                 Credit Card Number*
-              = text_field_tag :card_number, nil, name: nil, class: "span12 required_data"
-            .field.ccv.span4
+                %span.error-container
+              = text_field_tag :card_number, nil, name: "card-number", class: "span12 required_data"
+            .field.ccv
               = label_tag :card_code, class: "label-green" do
                 CVV*
-              = text_field_tag :card_code, nil, name: nil, class: "span10 required_data"
-            .field.expiration.span6
+              = text_field_tag :card_code, nil, name: "cvv", class: "span10 required_data"
+              %span.error-container.beside-form
+            .field.expiration
               = label_tag :card_month, class: "label-green" do
                 CARD EXPIRATION (MM/YYYY)*
               / = select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
               / = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}
-              = text_field_tag nil, nil, {name: nil, id: "card_month", class: "span3 required_data"}
-              = text_field_tag nil, nil, {name: nil, id: "card_year", class: "span5 required_data"}
+              = text_field_tag nil, nil, {name: "month", id: "card_month", class: "span3 required_data"}
+              = text_field_tag nil, nil, {name: "year", id: "card_year", class: "span5 required_data"}
+              %span.error-container.beside-form
             .cf
           #stripe_error
             %noscript JavaScript is not enabled and is required for this form. First enable it in your web browser settings.
 
         %div#wire-transfer{:style => "display: none;"}
           %div.name
-            = f.label :name, "CONTACT NAME*", class: "label-green"
+            = f.label :name, class: "label-green" do
+              CONTACT NAME*
+              %span.error-container
             = f.text_field :name, :size => 40, label: false, class: "transfer-input"
           %div.email
-            = f.label :email, "CONTACT EMAIL*", class: "label-green"
+            = f.label :email, class: "label-green" do
+              CONTACT EMAIL*
+              %span.error-container
             = f.text_field :email, :size => 40, label: false, class: "transfer-input"
           %div.phone
-            = f.label :phone, "CONTACT PHONE NUMBER*", class: "label-green"
+            = f.label :phone, class: "label-green" do
+              CONTACT PHONE NUMBER*
+
             = f.text_field :phone, :size => 25, type: "text", label: false, class: "transfer-input"
+            %span.error-container.beside-form{style: "float: left; margin-left: 10px;"}
+
         %hr{style: "margin-left: -19px; margin-right: -19px; margin-bottom: 0; background: #e0e0e0;"}
         %div{:style => "padding-top: 10px", :class => "clearfix"}
           = image_tag "3.gif", id: "submit-progress", style: "display: none; float: left; position: relative; top: 32px; margin-right: -40px; margin-left: 15px; z-index: 9999;"
@@ -287,37 +302,6 @@
         expMonth: $('#card_month').val(),
         expYear: $('#card_year').val()
       };
-      if ($('#card_number').val() == ""){
-        $('#card_number').addClass('error-validated-field');
-      }
-      else{
-        $('#card_number').removeClass('error-validated-field');
-      }
-      if ($('#card_code').val() == ""){
-        $('#card_code').addClass('error-validated-field');
-      }
-      else{
-        $('#card_code').removeClass('error-validated-field');
-      }
-      if ($('#card_month').val() == ""){
-        $('#card_month').addClass('error-validated-field');
-      }
-      else{
-        $('#card_month').removeClass('error-validated-field');
-      }
-      if ($('#card_year').val() == ""){
-        $('#card_year').addClass('error-validated-field');
-      }
-      else{
-        $('#card_year').removeClass('error-validated-field');
-      }
-      if ($('#name').val() == ""){
-        $('#name').addClass('error-validated-field');
-      }
-      else{
-        $('#name').removeClass('error-validated-field');
-      }
-      console.log("tes");
       Stripe.createToken(card, handleStripeResponse);
     };
 
@@ -340,6 +324,9 @@
           required: true,
           email: true
         },
+        "project_sponsor[logo]":{
+          required: true
+        },
         "project_sponsor[site]":{
           required: true,
           requiredUrl: true
@@ -347,7 +334,31 @@
         "sponsor[phone]":{
           required: true,
           number: true
+        },
+        "sponsor[card_name]": {
+          required: true
+        },
+        "card-number": {
+          required: true
+        },
+        "cvv": {
+          required: true,
+          digits: true
+        },
+        month: {
+          required: true,
+          digits: true,
+          maxlength: 2
+        },
+        year: {
+          required: true,
+          digits: true,
+          minlength: 4,
+          maxlength: 4
         }
+      },
+      errorPlacement: function(error, element) {
+        error.appendTo(element.parent().find(".error-container"));
       },
       submitHandler: function(form) {
         var tes = $('#card_number').val().length != 0

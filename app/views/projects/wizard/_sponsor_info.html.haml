@@ -13,7 +13,9 @@
       %span.italic (Basic Information)
 
     %div
-      = f.label :organization, "Organization/Business Name*", class: "label-green"
+      = f.label :organization, class: "label-green" do
+        Organization/Business Name*
+        %span.error-container
       = f.text_field :organization, :required => true, class: "span8"
 
     .clearfix
@@ -21,43 +23,55 @@
         = f.label :organization_type, "Organization Type*", class: "label-green"
         .selectParent{style: "width: 290px;"}
           = f.select :organization_type, options_for_select(project_org_type, @project.organization_type), {:include_blank => 'Select Org Type'}, {:onchange => "updateOrganizedTypeInfo()", class: "styledSelect required"}
+        %span.error-container
 
       %div.pull-left{:style => "margin-left:20px;"}
         = f.label :organization_class, "How Are You Organized?*", class: "label-green"
         .selectParent{style: "width: 290px;"}
           = f.select :organization_classification, options_for_select(project_org_class, @project.organization_classification), {:include_blank => 'Select Org Class'}, {:onchange => "updateOrganizedInfo()", class: "styledSelect required"}
-
+        %span.error-container
     %div
-      = f.label :address , "STREET ADDRESS*", class: "label-green"
+      = f.label :address, class: "label-green" do
+        STREET ADDRESS*
+        %span.error-container
       = f.text_field :address, :required => true, class: "span8"
 
     %div.inline
       = f.label :city, "CITY*", class: "label-green"
       = f.text_field :city, :required => true, class: "span4"
+      %span.error-container
 
     %div.inline{:style => "margin-left:25px;"}
       = f.label :state,"STATE*", class: "label-green"
       .selectParent{style: "width: 140px"}
         = f.select :state, options_for_select(us_states, @project.state), {:required => true}, {:onchange => "updateStateInfo()", class: "styledSelect"}
+      %span.error-container
 
     %div.inline{:style => "margin-left:25px;"}
       = f.label :zip, "Zipcode*", class: "label-green"
       = f.text_field :zip, :required => true, class: "span2"
+      %span.error-container
 
     %div
       = f.label :website, :class => "label-green" do
         WEBSITE ADDRESS*
         %span.italic (Format: www.mysite.com)
+        %span.error-container
       = f.text_field :website, :required => true, class: "span8"
 
-    .clearfix
-      %div.pull-left
-        = f.label :twitter_handle, "Twitter Account*", class: "label-green"
-        = f.text_field :twitter_handle,  class: "span4 required"
+    %div
+      = f.label :facebook_page, :class => "label-green" do
+        Facebook Page*
+        %span.italic (Format: facebook.com/yourpage)
+        %span.error-container
+      = f.text_field :facebook_page,  class: "required span8"
 
-      %div.pull-left{:style => "margin-left:30px;"}
-        = f.label :facebook_page, "Facebook Page*", class: "label-green"
-        = f.text_field :facebook_page,  class: "span4 required"
+    %div
+      = f.label :twitter_handle, class: "label-green" do
+        Twitter Account*
+        %span.error-container
+      = f.text_field :twitter_handle,  class: "required span8"
+
 
     = hidden_field_tag "step", "first"
 
@@ -72,10 +86,10 @@
 
       %div
         - if !session[:connected].blank?
-          = f.submit "Save And Continue", :class => "btn", :id => "project-submit"
+          = f.submit "Save And Continue", :class => "btn wizard-btn", :id => "project-submit"
         - else
-          %a.btn{"data-toggle" => "modal", :href => "#connectStripeModal", :role => "button", style: 'text-transform: none; width: 274; left: 153; bottom: 15; height: 30; font: 16px/16px "Proxima Nova Semi", arial, sans-serif; line-height: 2;'}
-            Save And Continue
+          %a.btn.wizard-btn{"data-toggle" => "modal", :href => "#connectStripeModal", :role => "button", style: "width: 266px;"}
+            Stripe Not Connected
 
   .span4{:style => "margin-top:155px;"}
     %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
@@ -177,6 +191,9 @@
           required: true,
           requiredUrl: true
         }
+      },
+      errorPlacement: function(error, element) {
+        error.appendTo(element.parent().find(".error-container"));
       }
     });
 

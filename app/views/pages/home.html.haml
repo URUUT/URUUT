@@ -11,8 +11,7 @@
     %h2 Every community has great projects that can’t get off the ground. But with Uruut, yours can be different. Your park needs a new playground? Uruut it. Need a new library? Uruut it. Senior center? Bike path? Dog park? Uruut it. That’s why we’re here – to help you build the community you deserve.
     .btn.brown
       = link_to "#{user_signed_in? ? 'javascript:void(0)' : new_user_registration_path}", class: "#{'error-sign-up' if user_signed_in?}" do
-        Sign Up Now
-        %span
+        Sign Up Now ►
     %h5
       = link_to "#partner", :class => 'learn-more' do
         Learn More
@@ -49,24 +48,21 @@
         %h5 Business Sponsors
         %p Uruut offers you the opportunity to sponsor projects that associate your brand with high-impact local, regional and national projects.
         = link_to funding_sources_pages_path, :class => "btn" do
-          learn more
-          %span
+          learn more ►
     .graphic-2
       = image_tag "individual.png"
       .content
         %h5 Individual CONTRIBUTORS
         %p Uruut offers you the opportunity to support projects you value, offering perks in exchange for contributions.
         = link_to funding_sources_pages_path, :class => "btn" do
-          learn more
-          %span
+          learn more ►
     .graphic-3
       = image_tag "family.png"
       .content
         %h5 NON-PROFIT Foundations
         %p For corporate and family foundations, Uruut offers you an easy, functional platform to screen, search and provide matching grant dollars to projects and causes relevant to your mission.
         = link_to funding_sources_pages_path, :class => "btn" do
-          learn more
-          %span
+          learn more ►
 
 %section.full-width.transparency
   .container
@@ -106,12 +102,10 @@
       Connect. Cooperate.
       %span{:style => "color:#70bf4c;"} Take Action
     = link_to new_project_path, :class => "btn brown" do
-      Get Funded
-      %span
+      Get Funded ►
 
     = link_to browse_projects_path, :class => "btn" do
-      Fund Projects
-      %span
+      Fund Projects ►
 
 
 %section#error-sign.modal.hide.fade

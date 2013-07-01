@@ -25,7 +25,7 @@
       gallery
 
   %hr{:style => "background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
-  #cultivation
+  #cultivation.row
     .span3.ending
       %h4
         CULTIVATION
@@ -33,7 +33,7 @@
         %span (Project Details)
 
         %h6{:style => "text-align:center;color:#55554d !important;font-family:'Proxima Nova';margin-top:15px;"} Funding Ends
-        %div{:style => "background:#b6b6b4;padding:25px;border-radius:500px;"}
+        %div{:style => "background:#b6b6b4;padding:25px;border-radius:500px;width:120px;height:120px;"}
           %span{:style => 'display:block;text-align:center;font:normal 22px/22px "Proxima Nova Semi";color:#fff;text-transform:uppercase;letter-spacing:5px;'}= (Date.today + (@project.duration).to_i.days).strftime("%b")
           %span{:style => 'display:block;text-align:center;font:normal 72px/72px "Proxima Nova Semi";color:#fff;text-transform:uppercase;margin-top:5px'}= (Date.today + (@project.duration).to_i.days).strftime("%d")
         %h6{:style => "text-align:center;color:#55554d !important;font-family:'Proxima Nova';margin-top:40px;margin-bottom:0;"} Project Goal
