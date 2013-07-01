@@ -231,8 +231,8 @@
                 CARD EXPIRATION (MM/YYYY)*
               / = select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
               / = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}
-              = text_field_tag nil, nil, {name: "month", id: "card_month", class: "span3 required_data"}
-              = text_field_tag nil, nil, {name: "year", id: "card_year", class: "span5 required_data"}
+              = text_field_tag nil, nil, {name: "month", id: "card_month", class: "span3 required_data", maxlength: 2}
+              = text_field_tag nil, nil, {name: "year", id: "card_year", class: "span5 required_data", maxlength: 4}
               %span.error-container.beside-form
             .cf
           #stripe_error
@@ -310,15 +310,22 @@
 
     $('#edit_sponsor_#{@sponsor.id}').validate({
       messages: {
+        "project_sponsor[logo]": {
+          required: "Image can't be blank"
+        },
         year: {
+          required: "Fields required",
           minlength: "At least 4 digits",
           maxlength: "No more than 4 digits"
         },
         month: {
+          required: "Fields required",
           maxlength: "No more than 2 digits"
         },
-        cvv: {
-          digits: "Only digits"
+        "cvv": {
+          digits: "Only digits",
+          minlength: "At least 3 digits",
+          maxlength: "At most 3 digits"
         }
       },
       rules: {
@@ -359,6 +366,9 @@
           maxlength: 4
         }
       },
+      groups:{
+        date: "month year"
+      },
       errorPlacement: function(error, element) {
         error.appendTo(element.parent().find(".error-container"));
       },
@@ -369,7 +379,7 @@
             processCard();
           }
           else{
-            form.submit();
+            processCard();
           }
         }
         else{
