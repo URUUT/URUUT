@@ -453,6 +453,8 @@
 
   $(".save-image").click(function(){
     $("#cropInstruction").remove();
+    $(".loader-cover").show();
+    $('#large_image').css('background', 'none');
     $('.coverphoto').html("CHOOSE A COVER PHOTO");
     $('.drag-instructions').remove();
     $(".cancel-image").text("loading");
@@ -470,7 +472,10 @@
         $('.ui-draggable').remove();
         $(".action-convert").hide();
         $("#cover-priview").remove();
-        $('#large_image').css('background-image','url(' + new_FPFile.url + ')').css('-webkit-background-size', 'cover').css('-moz-background-size', 'cover').css('background-size', 'cover');
+        $('<img />').attr('src', new_FPFile.url).load(function() {
+          $('#large_image').css('background-image','url(' + new_FPFile.url + ')').css('-webkit-background-size', 'cover').css('-moz-background-size', 'cover').css('background-size', 'cover');
+          $(".loader-cover").hide();
+        });
         $('#large_image').attr('data-image', 'true');
         localStorage.setItem('cover_url', new_FPFile.url);
         $.ajax({
