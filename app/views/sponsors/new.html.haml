@@ -265,9 +265,6 @@
   = @project.id
 
 :javascript
-  jQuery.validator.addMethod("requiredUrl", function(val, elem) {
-    return  /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/.test(val);
-    }, jQuery.validator.messages.url);
 
   project_token = "#{@project.project_token}";
   project_pub_key = "#{@project.publishable_key}";
@@ -319,6 +316,15 @@
     };
 
     $('#new_sponsor').validate({
+      messages: {
+        year: {
+          minlength: "At least 4 digits",
+          maxlength: "No more than 4 digits"
+        },
+        month: {
+          maxlength: "No more than 2 digits"
+        }
+      },
       rules: {
         "sponsor[email]":{
           required: true,
@@ -375,21 +381,6 @@
         }
       }
     });
-
-    // $('#new_sponsor').on('submit', function(e){
-    //   if ( $("#sponsor_payment_type").val() == "Credit Card") {
-    //     if ( $('#card_number').length ){
-    //       processCard();
-    //       return false;
-    //     }
-    //     else{
-    //       return true;
-    //     }
-    //   }
-    //   else{
-    //     return true;
-    //   }
-    // });
 
     $("#sponsor_payment_type").change(function(){
       if(this.value == "Credit Card"){

@@ -114,10 +114,6 @@
 
 :javascript
 
-  jQuery.validator.addMethod("requiredAmount", function(val, elem) {
-    return /^[0-9]+(,[0-9]+)*$/.test(val);
-  }, jQuery.validator.messages.number);
-
   $(".project-details-form").validate({
     rules: {
       "project[goal]": {
