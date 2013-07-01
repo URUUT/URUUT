@@ -28,7 +28,7 @@
                 Become A Sponsor ►
 
 - if !@project.large_image.blank?
-  #large_image{:style => "background:url(#{@project.large_image});"}
+  #large_image{:style => "background:url(#{@project.large_image}) center center;"}
     .funding-info
       .container
         .span8
@@ -87,7 +87,7 @@
                 Left
               .amount= campaign_days_left(@project)
 - else
-  #large_image{:style => "background:url(#{@project.large_image});"}
+  #large_image{:style => "background:url(#{@project.large_image}) center center;"}
     .funding-info
       .container
         .span8
