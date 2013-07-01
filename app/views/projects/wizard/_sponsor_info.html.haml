@@ -36,19 +36,19 @@
         %span.error-container
       = f.text_field :address, :required => true, class: "span8"
 
-    %div.inline
+    %div{style: "float: left;"}
       = f.label :city, class: "label-green" do
         CITY*
         %span.error-container
       = f.text_field :city, :required => true, class: "span4"
 
-    %div.inline{:style => "margin-left:25px;"}
+    %div{:style => "float: left; margin-left:25px;"}
       = f.label :state,"STATE*", class: "label-green"
       .selectParent{style: "width: 140px"}
         = f.select :state, options_for_select(us_states, @project.state), {:required => true}, {:onchange => "updateStateInfo()", class: "styledSelect"}
       %span.error-container
 
-    %div.inline{:style => "margin-left:25px;"}
+    %div{:style => "float: left; margin-left:25px;"}
       = f.label :zip, class: "label-green" do
         Zipcode*
         %span.error-container{style: "margin-right: 0;"}
