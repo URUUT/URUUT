@@ -11,3 +11,6 @@ stripe:
 
 filepicker:
   api_key: "<%= ENV['FILEPICKER_API'] %>"
+
+cloudsponge:
+  api_key: "<%= ENV['CLOUDSPONGE_API'] %>"
