@@ -175,6 +175,8 @@
         %div
           = f.label :site, class: "label-green" do
             Website*
+            %span.italic
+              (Format: www.yoursite.com)
             %span.error-container
           = text_field :project_sponsor, :site, required: true, label: false, class: "span12"
         %div
