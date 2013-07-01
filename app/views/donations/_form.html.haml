@@ -36,14 +36,14 @@
       = text_field_tag :card_number, nil, name: "credit-card"
     .field.ccv
       = label_tag :card_code, "CVV*", class: "label-green"
-      = text_field_tag :card_code, nil, name: "code", style: "display: inline-block;"
+      = text_field_tag :card_code, nil, name: "code", maxlength: 3, style: "display: inline-block;"
       %span.error-container.beside-form{style: "float: none; margin-left: 12px;"}
     .field.expiration
       = label_tag :card_month, "CARD EXPIRATION (MM/YYYY)*", class: "label-green"
       / = select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
       / = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}
-      = text_field_tag nil, nil, {name: "month", id: "card_month"}
-      = text_field_tag nil, nil, {name: "year", id: "card_year"}
+      = text_field_tag nil, nil, {name: "month", id: "card_month", maxlength: 2}
+      = text_field_tag nil, nil, {name: "year", id: "card_year", maxlength: 4}
       %span.error-container.beside-form
     .cf
   #stripe_error
