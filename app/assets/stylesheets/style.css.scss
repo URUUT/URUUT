@@ -2157,6 +2157,7 @@ input, select, textarea{
   position: relative;
 }
 
+
 .error-container{
   float: right;
   margin-right: 12px;
@@ -2176,6 +2177,12 @@ input, select, textarea{
     line-height: 13px;
     color: red;
     text-align: right;
+  }
+}
+
+.registrations.new{
+  .error-container{
+    margin-right: 0;
   }
 }
 
