@@ -328,12 +328,13 @@
       var projectId = "#{@project.id}";
       $.ajax({
         type: 'POST',
+        dataType: 'html',
         url: '#{project_path(@project.id)}',
         data: data
       }).done(function(data){
         $.ajax({
           type: 'GET',
-          url: 'https://' + document.location.hostname + ":" + document.location.port + '/projects/update_content_assets_tab?id='+projectId
+          url: '#{request.protocol}' + document.location.hostname + ":" + document.location.port + '/projects/update_content_assets_tab?id='+projectId
         });
         $(".assets-link").attr("href", "/projects/" + projectId +"/edit#assets");
         $('.step-container[data-id="sponsorship"] form input#project-submit').val("SAVE AND COUNTINUE");

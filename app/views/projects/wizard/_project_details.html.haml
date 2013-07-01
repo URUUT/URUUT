@@ -163,6 +163,7 @@
       $(".wizard-data-duration").text( $("#project_duration").val() );
       $(".wizard-data-amount").text( convertAmount($("#project_goal").val()) );
       window.location.href = '/projects/' + data + '/edit#perks';
+      $("body").animate({ scrollTop: 0 }, "slow");
     });
     })
 
