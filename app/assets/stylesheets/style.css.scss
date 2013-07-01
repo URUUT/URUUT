@@ -2208,9 +2208,10 @@ input, select, textarea{
 .faqs, .privacy{
   .fixed{
     dt{
+      padding: 0 0 0 15px;
       a{
         display: inline-block;
-        width: 250px;
+        width: 270px;
       }
     }
   }
