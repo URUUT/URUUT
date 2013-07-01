@@ -1,6 +1,6 @@
 class ContactMailer < ActionMailer::Base
   default from: "info@uruut.com"
-  default to: "cbartels@uruut.com"
+  default to: "mfeinberg@uruut.com, bnorwood@uruut.com"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
