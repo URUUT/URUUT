@@ -284,6 +284,7 @@
       type: "GET",
       url: "/skip_sponsor"
     }).done(function(data){
+      localStorage.setItem('step-assets', true);
       $(".assets-link").attr("href", "/projects/" + project_id +"/edit#assets");
       window.location.href = '/projects/' + project_id + '/edit#assets';
       window.location.reload(true);

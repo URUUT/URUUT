@@ -50,6 +50,16 @@
 = render "projects/wizard/sponsorship", :project => @project
 = render "projects/wizard/assets", :project => @project
 
+%section#errorForm.modal.hide.fade
+  .modal-header{style: "height: 17px;"}
+    %button.close.closes{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"}
+      Close X
+    %h3#myModalLabel.tittle{:style => "margin-bottom: 0;"} Oops
+  .modal-body
+    %p.error-messages
+  .modal-footer
+    %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal", style: "float: none; margin: 0 auto;"} Ok
+
 
 /* Each tip is set within this <ol>. */
 /* This creates the order the tips are displayed */
@@ -184,7 +194,7 @@
 
   $(".submit-finish-project").on("click", function(event){
     event.preventDefault();
-    if ($('#large_image').attr('data-image') == "true") {
+    if ($('#large_image').attr('data-image') == "true" && localStorage.getItem('step-assets') ) {
       $.ajax({
         type:'POST',
         url: '#{projects_submit_project_url}',
@@ -193,8 +203,12 @@
         localStorage.clear();
         window.location.href = "#{thank_you_pages_url}";
       });
-    } else {
-      alert("Please Choose Cover Image");
+    } else if( localStorage.getItem('step-assets') && $('#large_image').attr('data-image') != "true" ) {
+      $(".error-messages").text("Please Choose Cover Image");
+      $("#errorForm").modal("show");
+    }
+    else{
+      return false;
     }
   });
 
@@ -332,6 +346,7 @@
         url: '#{project_path(@project.id)}',
         data: data
       }).done(function(data){
+        localStorage.setItem('step-assets', true);
         $.ajax({
           type: 'GET',
           url: '#{request.protocol}' + document.location.hostname + ":" + document.location.port + '/projects/update_content_assets_tab?id='+projectId
