@@ -319,6 +319,9 @@
 
     $('#new_sponsor').validate({
       messages: {
+        "project_sponsor[logo]": {
+          required: "Image can't be blank"
+        },
         year: {
           required: "Fields required",
           minlength: "At least 4 digits",
