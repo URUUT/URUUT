@@ -13,24 +13,34 @@
       *Required
     .row
       .span3.well-half
-        = f.label :first_name, "First Name*", class: "label-green"
+        = f.label :first_name, class: "label-green" do
+          First Name*
+          %span.error-container
         = f.text_field :first_name
       .span3.well-half
-        = f.label :last_name, "Last Name*", class: "label-green"
+        = f.label :last_name, class: "label-green" do
+          Last Name*
+          %span.error-container
         = f.text_field :last_name
 
     %div
-      = f.label :email, "Email*", class: "label-green"
+      = f.label :email, class: "label-green" do
+        %span.error-container
+        Email*
       = f.email_field :email
 
     - unless session["devise.provider"] && session["devise.uid"]
       .row
         .span3.well-half
-          = f.label :password, "Password*", class: "label-green"
+          = f.label :password, class: "label-green" do
+            Password*
+            %span.error-container
           = f.password_field :password
 
         .span3.well-half
-          = f.label :password_confirmation, "Password Confirmation*", class: "label-green"
+          = f.label :password_confirmation, class: "label-green" do
+            Password Confirmation*
+            %span.error-container
           = f.password_field :password_confirmation
 
     %hr{style: "margin: 0 -19px; background: #e0e0e0;"}
@@ -51,6 +61,9 @@
 
 :javascript
   $('#new_user').validate({
+    messages: {
+      "user[password_confirmation]": "Required"
+    },
     rules: {
       "user[email]":{
         required: true,
@@ -68,7 +81,10 @@
       },
       "user[password_confirmation]":{
         required: true,
-        minlength: 3
+        minlength: 6
       }
+    },
+    errorPlacement: function(error, element) {
+      error.appendTo(element.parent().find(".error-container"));
     }
   });
