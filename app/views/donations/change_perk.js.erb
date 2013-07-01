@@ -16,12 +16,17 @@ $("#perk_type option:contains(" + theText + ")").attr('selected', 'selected');
 
 <% if !params[:id].eql?("custom") %>
   $(".choiced-perk").hide();
+  <% if @perk.amount.to_s.length <= 5 %>
+    $(".perk-amount").attr('style', 'font-size: 52px; color:#81C263;font-family:"Proxima Nova Bold";line-height:100%;')
+  <% else %>
+    $(".perk-amount").attr('style', 'font-size: 31px; color:#81C263;font-family:"Proxima Nova Bold";line-height:100%;')
+  <% end %>
   $(".perk-amount").show();
   $(".perk-amount").text("<%= number_to_currency(@perk.amount, :precision => 0) %>");
   $(".perk-name").text("<%= @perk.name %>");
   $(".perk-description").text("<%= @perk.description.to_s.html_safe %>");
   $("#amount").val("<%= @perk.amount.to_s.split(".")[0] %>");
-  $("#perk_name").val("<%= @perk.name %>");
+  $("#name_of_perk").val("<%= @perk.name %>");
 
   <% if @project.perk_permission? %>
     $(".description-custom").show();
@@ -40,7 +45,11 @@ $("#perk_type option:contains(" + theText + ")").attr('selected', 'selected');
   $("#amount-id-custom").attr("style", "background: #70BF4C");
   $("#button-fund-custom").attr("style", "background: green");
   $("#perk-id-custom").attr("style", "background: #70BF4C");
-  $("#perk_name").val("<%= @perk_name_selected %>");
+  <% if @project.perk_permission? %>
+    $("#name_of_perk").val("<%= @perk_name_selected %>");
+  <% else %>
+    $("#name_of_perk").val("<%= @perk.name %>");
+  <% end %>
   $(".perk-name").text("Custom");
   $(".perk-description").text("");
   $(".description-custom").show();
@@ -63,8 +72,14 @@ $("#perk_type option:contains(" + theText + ")").attr('selected', 'selected');
   <% end %>
   $("#perk_type option:contains(" + theText + ")").attr('selected', 'selected');
 <% end %>
-
+<% char_size = params[:custom_seed].gsub(/[^\d,]+/, '').gsub(",", "").length %>
 $("#custom_amount").val("<%= amount_converter_field(params[:custom_seed].gsub(/[^\d,]+/, '').gsub(",", "")) %>");
+$("#custom_amount").text("<%= amount_converter_field(params[:custom_seed].gsub(/[^\d,]+/, '').gsub(",", "")) %>");
+<% if char_size <= 5 %>
+  $("#custom_amount").attr('style', 'font-size: 52px; color:#81C263;font-family:"Proxima Nova Bold";line-height:100%;')
+<% else %>
+  $("#custom_amount").attr('style', 'font-size: 31px; color:#81C263;font-family:"Proxima Nova Bold";line-height:100%;')
+<% end %>
 $("#amount").val("<%= params[:custom_seed].gsub(/[^\d,]+/, '').gsub(",", "") %>");
 $(".choiced-perk").show();
 $(".perk-amount").hide();

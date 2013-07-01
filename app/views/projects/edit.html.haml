@@ -50,6 +50,16 @@
 = render "projects/wizard/sponsorship", :project => @project
 = render "projects/wizard/assets", :project => @project
 
+%section#errorForm.modal.hide.fade
+  .modal-header{style: "height: 17px;"}
+    %button.close.closes{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"}
+      Close X
+    %h3#myModalLabel.tittle{:style => "margin-bottom: 0;"} Oops
+  .modal-body
+    %p.error-messages
+  .modal-footer
+    %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal", style: "float: none; margin: 0 auto;"} Ok
+
 
 /* Each tip is set within this <ol>. */
 /* This creates the order the tips are displayed */
@@ -57,7 +67,7 @@
   /* data-id needs to be the same as the parent it will attach to */
   %li{"data-class" => "pick-cover-photo", "data-options" => "tipLocation:right"}
     %h5 CHOOSE A COVER PHOTO
-    %p The cover photo is the large splash image that appears on your page. The dimensions should be at least 1600 x 546 pixels. Itâ€™s a big photo and a great opportunity to give your page a striking, eye-catching look. Choose something that reflects your organization, project, and personality.
+    %p The cover photo is the large splash image that appears on your page. The dimensions should be at least 1600 x 546 pixels. It’s a big photo and a great opportunity to give your page a striking, eye-catching look. Choose something that reflects your organization, project, and personality.
     %a{:href => "#", :class => "button small quit-tour joyride-close-tip close-tip-custom"} Quit Tour
   %li{"data-id" => "planting_seeds", "data-options" => "tipLocation:top"}
     %h5 ADD PHOTO / VIDEO
@@ -184,7 +194,7 @@
 
   $(".submit-finish-project").on("click", function(event){
     event.preventDefault();
-    if ($('#large_image').attr('data-image') == "true") {
+    if ($('#large_image').attr('data-image') == "true" && localStorage.getItem('step-assets') ) {
       $.ajax({
         type:'POST',
         url: '#{projects_submit_project_url}',
@@ -193,8 +203,12 @@
         localStorage.clear();
         window.location.href = "#{thank_you_pages_url}";
       });
-    } else {
-      alert("Please Choose Cover Image");
+    } else if( localStorage.getItem('step-assets') && $('#large_image').attr('data-image') != "true" ) {
+      $(".error-messages").text("Please Choose Cover Image");
+      $("#errorForm").modal("show");
+    }
+    else{
+      return false;
     }
   });
 
@@ -328,12 +342,14 @@
       var projectId = "#{@project.id}";
       $.ajax({
         type: 'POST',
+        dataType: 'html',
         url: '#{project_path(@project.id)}',
         data: data
       }).done(function(data){
+        localStorage.setItem('step-assets', true);
         $.ajax({
           type: 'GET',
-          url: 'https://' + document.location.hostname + ":" + document.location.port + '/projects/update_content_assets_tab?id='+projectId
+          url: '#{request.protocol}' + document.location.hostname + ":" + document.location.port + '/projects/update_content_assets_tab?id='+projectId
         });
         $(".assets-link").attr("href", "/projects/" + projectId +"/edit#assets");
         $('.step-container[data-id="sponsorship"] form input#project-submit').val("SAVE AND COUNTINUE");

@@ -114,10 +114,6 @@
 
 :javascript
 
-  jQuery.validator.addMethod("requiredAmount", function(val, elem) {
-    return /^[0-9]+(,[0-9]+)*$/.test(val);
-  }, jQuery.validator.messages.number);
-
   $(".project-details-form").validate({
     rules: {
       "project[goal]": {
@@ -167,6 +163,7 @@
       $(".wizard-data-duration").text( $("#project_duration").val() );
       $(".wizard-data-amount").text( convertAmount($("#project_goal").val()) );
       window.location.href = '/projects/' + data + '/edit#perks';
+      $("body").animate({ scrollTop: 0 }, "slow");
     });
     })
 

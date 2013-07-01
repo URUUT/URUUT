@@ -21,7 +21,7 @@
       / = label_tag :amount, "Amount to Donate"
       = hidden_field_tag :amount, @perk_amount, name: "donation[amount]"
       = hidden_field_tag :perk_permission_type, @project.perk_permission ? "custom" : "default" , name: "perk_type"
-      = hidden_field_tag :perk_name, @perk_name
+      = hidden_field_tag :name_of_perk, @perk_name, class: "dua"
     .req-legend
       *Required
     .field.name
@@ -36,14 +36,14 @@
       = text_field_tag :card_number, nil, name: "credit-card"
     .field.ccv
       = label_tag :card_code, "CVV*", class: "label-green"
-      = text_field_tag :card_code, nil, name: "code", style: "display: inline-block;"
-      %span.error-container.beside-form
+      = text_field_tag :card_code, nil, name: "code", maxlength: 3, style: "display: inline-block;"
+      %span.error-container.beside-form{style: "float: none; margin-left: 12px;"}
     .field.expiration
       = label_tag :card_month, "CARD EXPIRATION (MM/YYYY)*", class: "label-green"
       / = select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
       / = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}
-      = text_field_tag nil, nil, {name: "month", id: "card_month"}
-      = text_field_tag nil, nil, {name: "year", id: "card_year"}
+      = text_field_tag nil, nil, {name: "month", id: "card_month", maxlength: 2}
+      = text_field_tag nil, nil, {name: "year", id: "card_year", maxlength: 4}
       %span.error-container.beside-form
     .cf
   #stripe_error
@@ -60,30 +60,3 @@
     .cf
 
 = javascript_include_tag "donations"
-// :javascript
-//   $("#new_donation").validate({
-//     rules: {
-//       name: {
-//         required: true
-//       },
-//       "credit-card": {
-//         required: true,
-//         creditcard: true
-//       },
-//       code: {
-//         required: true,
-//         digits: true
-//       },
-//       month: {
-//         required: true,
-//         digits: true,
-//         maxlength: 2
-//       },
-//       year: {
-//         required: true,
-//         digits: true,
-//         minlength: 4,
-//         maxlength: 4
-//       }
-//     }
-//   });

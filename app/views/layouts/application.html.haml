@@ -50,7 +50,7 @@
 
       .container
         .row
-          = render 'layouts/messages' if !controller_name.eql?("sessions")
+          = render 'layouts/messages' if !controller_name.eql?("sessions") || !controller_name.eql?("pages")
           = yield
       #push
     = render 'partials/footer'
