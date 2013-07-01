@@ -1432,7 +1432,7 @@ iframe.twitter-follow-button{
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 
-    button[type="button"], .btn{
+    button[type="button"], .btn, #new-seed, #new-cultivation{
       background: transparent;
       color: $green2;
       font-family: 'Georgia', serif;
@@ -1451,7 +1451,7 @@ iframe.twitter-follow-button{
 
     }
 
-    button[type="button"]{
+    button[type="button"], #new-seed, #new-cultivation{
       background: transparent url('pencil-green.png') no-repeat left center;
       padding-left: 15px;
     }
@@ -2113,6 +2113,7 @@ body.pages.index, body.pages.search{
 
 input, select, textarea{
   resize: none;
+
   &:invalid{
     border-color: transparent !important;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5) !important;
@@ -2133,6 +2134,7 @@ input, select, textarea{
       color: #555;
       color: rgba(0,0,0,0);
       text-shadow: 0 0 0 #555;
+
       &:focus{
         outline: none;
         -moz-outline: none;
