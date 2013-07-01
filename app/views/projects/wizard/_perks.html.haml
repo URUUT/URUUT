@@ -103,7 +103,7 @@
                   = select_tag "limit_perk", options_for_select({ "Yes" => "yes", "No" => "no" }, "yes"), class: "styledSelect"
               .span5
                 = label_tag "perk_available", "HOW MANY OF THIS PERK ARE AVAILABLE", class: "label-green"
-                = number_field_tag "perk_available", nil, class: "span6"
+                = number_field_tag "perk_available", nil, class: "span6", onkeypress: "return isNumberKey(event)"
 
             %input{:type => 'hidden', :value => "", :id => "perk-id"}
 
@@ -147,6 +147,15 @@
 
 
 :javascript
+
+  function isNumberKey(evt)
+  {
+     var charCode = (evt.which) ? evt.which : event.keyCode
+     if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+
+     return true;
+  }
 
   var actionEditButton = function(){
     $('.update-perk').on('click', function(e) {
@@ -237,12 +246,12 @@
 
   function updateCountTitle() {
     var remaining = 30 - jQuery('#perk-name').val().length;
-    jQuery('.title-count').text('(' + remaining + ' characters remaining.)');
+    jQuery('.title-count').text('(' + remaining + ' characters remaining)');
   };
 
   function updateDescTitle() {
     var remaining = 140 - jQuery('#perk-description').val().length;
-    jQuery('.desc-count').text('(' + remaining + ' characters remaining.)');
+    jQuery('.desc-count').text('(' + remaining + ' characters remaining)');
   };
 
   updateCountTitle();
