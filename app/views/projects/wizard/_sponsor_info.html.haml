@@ -124,9 +124,12 @@
   $(function(){
     $(".sponsor-info-form").validate({
       messages: {
-          "project[zip]":{
+        "project[zip]":{
           required: "Required",
           digits: "Invalid"
+        },
+        "project[organization_classification]": {
+          required: "Required"
         }
       },
       rules: {
