@@ -162,6 +162,7 @@
           localStorage.clear();
 
           window.location.href = '/projects/' + data + '/edit#project-details';
+          $("body").animate({ scrollTop: 0 }, "slow");
         })
       }else{
        alert("Connect with Stripe, please.");

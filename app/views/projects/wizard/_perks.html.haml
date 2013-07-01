@@ -301,6 +301,7 @@
       });
       $(".skip-perk").text("CONTINUE TO STEP 4");
       window.location.href = '#{request.protocol}' + document.location.hostname + ":" + document.location.port + '/projects/'+ project_id +'/edit#sponsorship';
+      $("body").animate({ scrollTop: 0 }, "slow");
     });
   });
 
@@ -398,5 +399,6 @@
       $(".count-perk").text( parseInt($(".count-perk").text()) + 1 );
       actionEditButton(); actionDeleteButton(); actionButton();
       window.location.href = '#{request.protocol}' + document.location.hostname + ":" + document.location.port + '/projects/'+ project +'/edit#sponsorship';
+      $("body").animate({ scrollTop: 0 }, "slow");
     });
   });
