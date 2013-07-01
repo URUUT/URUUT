@@ -3,6 +3,33 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
+  $(".contact-for").validate
+    rules:
+      "pages[name]":
+        required: true
+
+      "pages[email]":
+        required: true
+        email: true
+
+      "pages[subject]":
+        required: true
+
+      "pages[message]":
+        required: true
+    errorPlacement: (error, element) ->
+      error.appendTo element.parent().find(".error-container")
+
+  $("#new_user").validate
+    rules:
+      "user[email]":
+        required: true,
+        email: true
+      "user[password]":
+        required: true
+    errorPlacement: (error, element) ->
+      error.appendTo element.parent().find(".error-container")
+
   $("#email-sign-up")
     .bind "ajax:error", (event, xhr, status, error) ->
       alert "error #{status}"

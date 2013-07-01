@@ -872,6 +872,7 @@ h5{
 .cont-desc{
   h3{
     margin-bottom: 0;
+    line-height: 18px;
   }
 }
 
@@ -1859,6 +1860,12 @@ body.users.show, body.users.profile{
   height: auto;
 }
 
+body.pages.home{
+  #flash_notice{
+    display: none;
+  }
+}
+
 body.pages.contact, body.sponsors.thank_you{
   #flash_notice{
     display: none;
@@ -2088,6 +2095,7 @@ body.pages.index, body.pages.search{
       font-size: 13px;
       padding: 10px 0;
       border-radius: 5px;
+      font-family: 'Proxima Nova Semi', sans-serif;
 
       &:first-child{
         margin-left: 0;
@@ -2149,6 +2157,7 @@ input, select, textarea{
   position: relative;
 }
 
+
 .error-container{
   float: right;
   margin-right: 12px;
@@ -2164,9 +2173,53 @@ input, select, textarea{
     font-style: italic;
     text-transform: initial;
     letter-spacing: 0;
-    font-size: 13px;
+    font-size: 10px;
     line-height: 13px;
     color: red;
     text-align: right;
+  }
+}
+
+.registrations.new{
+  .error-container{
+    margin-right: 0;
+  }
+}
+
+.contact, .faqs, .privacy, .terms{
+  .copyright{
+    p {
+      font-size:10px;
+      margin:0;
+      color: #fff;
+      line-height: 45px;
+      .italic {
+        font-size:10px;
+      }
+    }
+  }
+}
+
+.pages.about{
+  .more-information{
+    a:hover{
+      text-decoration: none;
+    }
+  }
+}
+
+.tw-count{
+  cursor: pointer;
+}
+
+.faqs, .privacy{
+  .fixed{
+    dt{
+      padding: 0 0 0 15px;
+      a{
+        display: inline-block;
+        width: 270px;
+      }
+    }
   }
 }

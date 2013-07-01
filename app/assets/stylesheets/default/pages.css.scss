@@ -153,6 +153,9 @@ input[type=number] {
 	font:bold 24px/24px arial, helvetica, sans-serif;
 	height:54px !important;
 	padding:19px;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
 	/*width:auto !important;*/
 }
 
@@ -165,10 +168,13 @@ input[type=submit] {
   padding:5px 8px;}
 
 textarea {
-  border-radius:5px;
+	border-radius:5px;
 	box-shadow:1px 1px 1px rgba(0,0,0,0.5);
-  font-size:13px;
-  padding:19px;}
+	font-size:13px;
+  padding:19px;
+  -moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;}
 
 label {
 	font:normal 12px/12px "Proxima Nova Semi", arial, sans-serif;
@@ -749,6 +755,7 @@ footer {
       background: #70bf4c;
       &:hover {
         background: #70bf4c;
+        color: #fff;
       }
     }
     #email-sign-up-error {
@@ -1144,6 +1151,7 @@ h5.time-left {
 		font:normal 14px/17px 'Proxima Nova', arial, sans-serif;
 		letter-spacing:normal;
 		margin-top:10px;
+		margin-right:20px;
 		padding:0 2px;
 		text-decoration:none;
 		text-transform:none;

@@ -46,7 +46,7 @@
 
   $('.tw-share').click(function(e) {
     e.preventDefault();
-    var url = "http://twitter.com/share?url=#{project_url(@project.id)}&text=Our%20company%20is%20RUUTing%20for%20this%20community%20project%20on%20%40URUUT%20and%20you%20should%2C%20too.%20Join%20us%20in%20making%20a%20donation%3A%20%2E&hashtags=GetRUUTed";
+    var url = "http://twitter.com/share?url=#{@project.bitly}&text=Our%20company%20is%20RUUTing%20for%20this%20community%20project%20on%20%40URUUT%20and%20you%20should%2C%20too.%20Join%20us%20in%20making%20a%20donation%3A%20%2E&hashtags=GetRUUTed";
 
     window.open(url);
   });
