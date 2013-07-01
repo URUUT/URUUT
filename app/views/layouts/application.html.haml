@@ -8,8 +8,9 @@
     %title= content_for?(:title) ? yield(:title) : "URUUT"
     %meta{:content => "", :name => "description"}
     %meta{:content => "", :name => "author"}
-    %meta{:property => "og:image", :content => "#{@project.large_image}"}
-    %meta{:property => "og:title", :content => "#{@project.title}"}
+    - if controller_name == "pages" and action_name == "show"
+      %meta{:property => "og:image", :content => "#{@project.large_image}"}
+      %meta{:property => "og:title", :content => "#{@project.title}"}
     = stylesheet_link_tag  "default/application", "trontastic/jquery-ui-1.8.22.custom.css", "leaflet.css", "style.css.scss", :media => "all"
     = stylesheet_link_tag "image_select/jquery.Jcrop.min"
     = javascript_include_tag "application", "https://js.stripe.com/v1/", :media => "all"
