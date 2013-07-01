@@ -33,10 +33,10 @@ module ApplicationHelper
   end
 
   def amount_converter_field(amount)
-    if amount.to_s.length > 6
-      number_to_human(amount, precision: 3)
+    if amount.to_s.length > 9
+      number_to_currency(number_to_human(amount, precision: 3))
     else
-      number_to_human(amount, precision: 3)
+      number_to_currency(amount, precision: 0)
     end
   end
 
