@@ -2,8 +2,9 @@
 .well.clearfix
   .req-legend
     *Required
-  %div.form-send-message.clearfix
-    = form_for(@contact, :as => :post, :url => send_email_project_admin_projects_path, html: {remote: true}) do |f|
+  %div.clearfix
+    .form-send-message
+    = form_for(@contact, :as => :post, :url => send_email_project_admin_projects_path, html: {remote: true, class: "send-project-email"}) do |f|
       .clearfix{style: "margin-bottom: 20px;"}
         .pull-left
           = label_tag "EMAIL RECEPIENT*", nil, class: "label-green"
@@ -13,15 +14,20 @@
           %a.cs_import.btn{style: "margin-left: 6%; margin-top: 17px;"} Add Contacts
 
       %div.textarea-recepient
+        %span.error-container
         %textarea#contact_list{:style => "width:637px;height:24px", :name => "email_recepient"}
         = hidden_field_tag 'email_temp'
 
       %div{:style => "margin-top: 10px"}
-        = f.label :subject , "MESSAGE SUBJECT*", class: "label-green"
+        = f.label :subject, class: "label-green" do
+          MESSAGE SUBJECT*
+          %span.error-container{style: "margin-right: 34%"}
         = f.text_field :subject, :required => true, class: "span8"
 
       %div{:style => "margin-top: 10px"}
-        = f.label :email_content , "EMAIL CONTENT*", class: "label-green"
+        = f.label :email_content, class: "label-green" do
+          EMAIL CONTENT*
+          %span.error-container
         = f.text_area :email_content, :required => true, style: "width: 637px; height: 298px;"
       %hr{:style => "margin-top: 20px; margin-bottom: 20px; background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
       %div
@@ -32,6 +38,27 @@
   var owner_email, owner_first_name, owner_last_name;
   var appendInTextarea = false;
   var emailSep = ", ";
+
+  $(".send-project-email").validate({
+    rules: {
+      "project[goal]": {
+        required: true,
+        requiredAmount: true
+      },
+      "email_recepient": {
+        required: true
+      },
+      "post[subject]": {
+        required: true
+      },
+      "post[email_content]": {
+        required: true
+      }
+    },
+    errorPlacement: function(error, element) {
+      error.appendTo(element.parent().find(".error-container"));
+    }
+  });
 
   if ($("#sponsor_level :selected").text().length > 17){
       $("#sponsor_level :selected").text(truncText($("#sponsor_level :selected").text(), 15, "..."))

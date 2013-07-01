@@ -1,5 +1,5 @@
 <% if @error_messages.blank? %>
-$(".form-send-message").prepend("Email delivered")
+$(".form-send-message").html("Email delivered")
 <% else %>
-$(".form-send-message").prepend('<%= @error_messages.join(", ") %>');
+$(".form-send-message").html('<%= @error_messages.join(", ") %>');
 <% end %>
