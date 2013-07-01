@@ -73,6 +73,8 @@ $ ->
         maxlength: "No more than 4 digits"
       month:
         maxlength: "No more than 2 digits"
+      code:
+        digits: "Only digits"
     rules:
       name:
         required: true
@@ -105,6 +107,8 @@ $ ->
         maxlength: "No more than 4 digits"
       month:
         maxlength: "No more than 2 digits"
+      code:
+        digits: "Only digits"
     rules:
       name:
         required: true

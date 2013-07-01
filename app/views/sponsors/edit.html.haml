@@ -225,7 +225,7 @@
               = label_tag :card_code, class: "label-green" do
                 CVV*
               = text_field_tag :card_code, nil, name: "cvv", class: "span10 required_data"
-              %span.error-container.beside-form
+              %span.error-container.beside-form{style: "float: none; margin-left: 12px;"}
             .field.expiration
               = label_tag :card_month, class: "label-green" do
                 CARD EXPIRATION (MM/YYYY)*
@@ -316,6 +316,9 @@
         },
         month: {
           maxlength: "No more than 2 digits"
+        },
+        cvv: {
+          digits: "Only digits"
         }
       },
       rules: {
