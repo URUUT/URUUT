@@ -85,7 +85,7 @@ class DonationsController < ApplicationController
           session[:perk_id] = @perks.last[0]
         end
         @perk.name = "LEVEL #{@perk.id}"
-        @perk.description = "You will receive #{@perk.amount} Uruut Reward Points when you seed $#{@perk.amount}"
+        @perk.description = "You will receive #{@perk.amount.to_i} Uruut Reward Points when you seed $#{@perk.amount.to_i}"
       end
     else
       @perk = Perk.new
@@ -117,13 +117,13 @@ class DonationsController < ApplicationController
         session[:perk_id] = @perks.last[0]
       end
       session[:perk_amount] = @perk.amount.to_f
-      @perk.name = "LEVEL #{@perk.id}"
+      @perk.name = "Custom"
       @perk.description = "You will receive #{@perk.amount} Uruut Reward Points when you seed $#{@perk.amount}"
     end
   end
 
 	def create
-    params[:donation][:perk_name] = params[:perk_name]
+    params[:donation][:perk_name] = params[:name_of_perk]
     @donation = Donation.new(params[:donation])
     @donation.confirmed = false
 
@@ -167,9 +167,9 @@ class DonationsController < ApplicationController
 	end
 
   def set_new_perk
-    perk = Perk.where(name: params[:perk_name], project_id: params[:project_id])
+    perk = Perk.where(name: params[:name_of_perk], project_id: params[:project_id])
     if perk.empty?
-      session[:perk_id] = params[:perk_name]
+      session[:perk_id] = params[:name_of_perk]
     else
       session[:perk_id] = perk.first.id
     end
@@ -180,7 +180,7 @@ class DonationsController < ApplicationController
 		@donation = Donation.unscoped.find(params[:id])
     session[:card_last4] = params[:donation][:card_last4]
     session[:card_type] = params[:donation][:card_type]
-    params[:donation][:perk_name] = params[:perk_name]
+    params[:donation][:perk_name] = params[:name_of_perk]
     params[:donation][:amount] = session[:perk_amount]
     # unit = params[:donation][:amount].last
     # case unit
