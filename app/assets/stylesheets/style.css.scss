@@ -2179,7 +2179,7 @@ input, select, textarea{
   }
 }
 
-.contact, .faqs{
+.contact, .faqs, .privacy, .terms{
   .copyright{
     p {
       font-size:10px;
@@ -2203,4 +2203,15 @@ input, select, textarea{
 
 .tw-count{
   cursor: pointer;
+}
+
+.faqs, .privacy{
+  .fixed{
+    dt{
+      a{
+        display: inline-block;
+        width: 250px;
+      }
+    }
+  }
 }
