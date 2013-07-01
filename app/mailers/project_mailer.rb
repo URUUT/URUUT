@@ -12,6 +12,7 @@ class ProjectMailer < ActionMailer::Base
 
     @name = "#{user.first_name}" + "#{user.last_name}"
     @email = user.email
+    @image = project.large_image
     @project = project
     @project_title = project.title
 
