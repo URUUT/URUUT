@@ -18,12 +18,12 @@
               %select{:id => "location", :name => "city", class: "styledSelect"}
                 %option All Cities
                 = render "partials/project_filters", :type => :city
-          .keyword.dropdown{style: "margin-top: -12px;"}
-            %label{style: "margin-top: 0;margin-bottom: 20px;"} KEYWORD SEARCH
-            %input{:type => 'text', :id => 'keyword', :name => "keyword", :placeholder => "Keyword...",
+          .keyword.dropdown{style: ""}
+            %label{style: "margin-top: 0;"} KEYWORD SEARCH
+            %input{:style => "display: block; float: left; margin: 0; margin-bottom: 25px;", :type => 'text', :id => 'keyword', :name => "keyword", :placeholder => "Keyword...",
               :value => params[:keyword]}
-              %button.btn.btns{:type => "submit"}
-                %span
+              %button.btn.btns{:type => "submit", style: "display: block; margin-top: 5px;"}
+                ►
 
 :javascript
   $(function(){
