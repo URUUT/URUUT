@@ -67,6 +67,12 @@ edit_subscription =
 
 $ ->
   $("#new_donation").validate
+    messages:
+      year:
+        minlength: "At least 4 digits"
+        maxlength: "No more than 4 digits"
+      month:
+        maxlength: "No more than 2 digits"
     rules:
       name:
         required: true
@@ -93,6 +99,12 @@ $ ->
       error.appendTo element.parent().find(".error-container")
 
   $(".edit_donation").validate
+    messages:
+      year:
+        minlength: "At least 4 digits"
+        maxlength: "No more than 4 digits"
+      month:
+        maxlength: "No more than 2 digits"
     rules:
       name:
         required: true
