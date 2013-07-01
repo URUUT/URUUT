@@ -102,8 +102,10 @@
                 .selectParent{style: "width: 140px;"}
                   = select_tag "limit_perk", options_for_select({ "Yes" => "yes", "No" => "no" }, "yes"), class: "styledSelect"
               .span5
-                = label_tag "perk_available", "HOW MANY OF THIS PERK ARE AVAILABLE", class: "label-green"
-                = number_field_tag "perk_available", nil, class: "span6", onkeypress: "return isNumberKey(event)"
+                = label_tag "perk_available", class: "label-green label-perk-available" do
+                  HOW MANY OF THIS PERK ARE AVAILABLE
+                  %span.error-container{style: "margin-right: -17%"}
+                = number_field_tag "perk_available", nil, class: "span6 required", onkeypress: "return isNumberKey(event)"
 
             %input{:type => 'hidden', :value => "", :id => "perk-id"}
 
@@ -290,7 +292,11 @@
       },
       "perk-description": {
         required: true
-      }
+      },
+      "perk_available": {
+        required: true,
+        requiredAmount: true
+      },
     },
     errorPlacement: function(error, element) {
       error.appendTo(element.parent().find(".error-container"));
@@ -316,9 +322,62 @@
 
   $("#limit_perk").on("change", function(){
     if ( $("#limit_perk").val() == 'no' ){
-      $("#perk_available").val("");
-      $("#perk_available").attr("disabled", "disabled");
+      $("#perk_available").val("").attr("disabled", "disabled").removeClass("required error");
+      $(".label-perk-available .error-container").remove();
+      $(".project-perks-form").validate({
+        messages:{
+          "perk-amount": {
+            requiredAmount: "Valid number"
+          }
+        },
+        rules: {
+          "perk-amount": {
+            required: true,
+            requiredAmount: true
+          },
+          "perk-name": {
+            required: true
+          },
+          "perk-description": {
+            required: true
+          },
+          "perk_available": {
+            required: false
+          },
+        },
+        errorPlacement: function(error, element) {
+          error.appendTo(element.parent().find(".error-container"));
+        }
+      });
     }else{
+      $(".label-perk-available").append("<span class='error-container' style='margin-right: -17%'></span>");
+      $("#perk_available").addClass("required");
+      $(".project-perks-form").validate({
+        messages:{
+          "perk-amount": {
+            requiredAmount: "Valid number"
+          }
+        },
+        rules: {
+          "perk-amount": {
+            required: true,
+            requiredAmount: true
+          },
+          "perk-name": {
+            required: true
+          },
+          "perk-description": {
+            required: true
+          },
+          "perk_available": {
+            required: true,
+            requiredAmount: true
+          },
+        },
+        errorPlacement: function(error, element) {
+          error.appendTo(element.parent().find(".error-container"));
+        }
+      });
       $("#perk_available").removeAttr("disabled");
     }
   });
