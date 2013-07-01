@@ -3,12 +3,14 @@
   = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "well clearfix"}) do |f|
     = devise_error_messages!
 
-    %div
-      = f.label :email
+    %div.inline
+      = f.label :email do
+        %span.error-container
       = f.email_field :email, class: "span7"
 
     %div.inline
-      = f.label :password
+      = f.label :password do
+        %span.error-container
       = f.password_field :password, class: "span7"
 
     - if devise_mapping.rememberable?
