@@ -11,22 +11,30 @@
   .req-legend
     *Required
 
-  = form_for :pages, :url => {:action => "contact_send"} do |f|
+  = form_for :pages, :url => {:action => "contact_send"}, html: {class: "contact-for"} do |f|
 
     %div
-      = f.label :name, "Name*"
+      = f.label :name do
+        Name*
+        .error-container
       = f.text_field :name, :size => ""
 
     %div
-      = f.label :email, "Email*"
+      = f.label :email do
+        Email*
+        .error-container
       = f.text_field :email, :size => ""
 
     %div
-      = f.label :subject, "Subject*"
+      = f.label :subject do
+        Subject*
+        .error-container
       = f.text_field :subject, :size => ""
 
     %div
-      = f.label :message, "Message*"
+      = f.label :message do
+        Message*
+        .error-container
       = f.text_area :message, :cols => ""
 
     %hr
