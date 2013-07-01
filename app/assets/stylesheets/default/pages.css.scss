@@ -153,6 +153,9 @@ input[type=number] {
 	font:bold 24px/24px arial, helvetica, sans-serif;
 	height:54px !important;
 	padding:19px;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
 	/*width:auto !important;*/
 }
 
@@ -749,6 +752,7 @@ footer {
       background: #70bf4c;
       &:hover {
         background: #70bf4c;
+        color: #fff;
       }
     }
     #email-sign-up-error {
