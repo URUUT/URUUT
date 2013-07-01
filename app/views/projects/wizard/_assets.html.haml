@@ -8,7 +8,7 @@
             .loader-image{style: "margin-left: -3%; font-weight: bolder;"} LOADING
             = image_tag "3.gif"
         .div{style: "height: 546px;", id: "image-priview"}
-          %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => Settings.filepicker.api_key, 'data-fp-button-class' => 'coverphoto btn', 'onchange' => 'updateCover(event)', :style => 'left:50%', 'data-fp-mimetypes' => 'image/*', 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA,INSTAGRAM'}
+          %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => Settings.filepicker.api_key, 'data-fp-button-class' => 'coverphoto btn', 'onchange' => 'updateCover(event)', :style => 'left:50%', 'data-fp-mimetypes' => 'image/*', 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA'}
           = render "funding_info"
     - else
       #large_image{data: {image: 'false'}}
@@ -17,7 +17,7 @@
             .loader-image{style: "margin-left: -3%; font-weight: bolder;"} LOADING
             = image_tag "3.gif"
         .div{style: "height: 546px;", id: "image-priview"}
-          %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => Settings.filepicker.api_key, 'data-fp-button-class' => 'coverphoto btn pick-cover-photo', 'onchange' => 'updateCover(event)', :style => 'left:50%', 'data-fp-mimetypes' => 'image/*', 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA,INSTAGRAM'}
+          %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => Settings.filepicker.api_key, 'data-fp-button-class' => 'coverphoto btn pick-cover-photo', 'onchange' => 'updateCover(event)', :style => 'left:50%', 'data-fp-mimetypes' => 'image/*', 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA'}
           = render "funding_info"
 
     .span12.action-convert{style: "margin-top: 276px; display:none"}
@@ -78,13 +78,13 @@
                 %div.seed-content.clearfix{:style => "background: #DDD; width: 100%; height: 414px"}
                   .seed-action-container
                     %div.pull-left
-                      %input{:type => 'filepicker', :name => 'planting_seed_image', 'data-fp-button-text' => 'Add a Photo', 'data-fp-apikey' => Settings.filepicker.api_key, 'data-fp-button-class' => 'btn', 'onchange' => 'updatePlantingSeedImage(event)', 'data-fp-mimetypes' => 'image/*', 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA,INSTAGRAM'}
+                      %input{:type => 'filepicker', :name => 'planting_seed_image', 'data-fp-button-text' => 'Add a Photo', 'data-fp-apikey' => Settings.filepicker.api_key, 'data-fp-button-class' => 'btn', 'onchange' => 'updatePlantingSeedImage(event)', 'data-fp-mimetypes' => 'image/*', 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA'}
                     %div.pull-left
                       = link_to '<i class="icon-facetime-video icon-green"></i> Upload New Video'.html_safe, "javascript:void(0)", class: "btn seed-form"
 
 
               .seed-action-container{style: action_image(@project.seed_image, @project.seed_video)}
-                %input{:type => 'filepicker', :name => 'planting_seed_image', 'data-fp-button-text' => 'Upload New Photo', 'data-fp-apikey' => Settings.filepicker.api_key, 'data-fp-button-class' => 'btn', 'onchange' => 'updatePlantingSeedImage(event)', 'data-fp-mimetypes' => 'image/*', 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA,INSTAGRAM'}
+                %input{:type => 'filepicker', :name => 'planting_seed_image', 'data-fp-button-text' => 'Upload New Photo', 'data-fp-apikey' => Settings.filepicker.api_key, 'data-fp-button-class' => 'btn', 'onchange' => 'updatePlantingSeedImage(event)', 'data-fp-mimetypes' => 'image/*', 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA'}
                 = link_to '<i class="icon-facetime-video icon-green"></i> Upload New Video'.html_safe, "javascript:void(0)", class: "btn seed-form"
 
             %div.wizard-data-story{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.story
@@ -121,12 +121,12 @@
                   %div.cultivation-content.clearfix{:style => "background: #DDD; width: 100%; height: 310px"}
                     .cultivation-action-container
                       %div.pull-left
-                        %input{:type => 'filepicker', :name => 'cultivation_image', 'data-fp-button-text' => 'Add a Photo', 'data-fp-apikey' => Settings.filepicker.api_key, 'data-fp-button-class' => 'btn', 'onchange' => 'updateCultivationImage(event)', 'data-fp-mimetypes' => 'image/*', 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA,INSTAGRAM'}
+                        %input{:type => 'filepicker', :name => 'cultivation_image', 'data-fp-button-text' => 'Add a Photo', 'data-fp-apikey' => Settings.filepicker.api_key, 'data-fp-button-class' => 'btn', 'onchange' => 'updateCultivationImage(event)', 'data-fp-mimetypes' => 'image/*', 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA'}
                       %div.pull-left
                         = link_to '<i class="icon-facetime-video icon-green"></i> Upload New Video'.html_safe, "javascript:void(0)", class: "btn cultivation-form"
 
                 .cultivation-action-container.clearfix{style: action_image(@project.cultivation_image, @project.cultivation_video)}
-                  %input{:type => 'filepicker', :name => 'cultivation_image', 'data-fp-button-text' => 'Upload New Photo', 'data-fp-apikey' => Settings.filepicker.api_key, 'data-fp-button-class' => 'btn', 'onchange' => 'updateCultivationImage(event)', 'data-fp-mimetypes' => 'image/*', 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA,INSTAGRAM'}
+                  %input{:type => 'filepicker', :name => 'cultivation_image', 'data-fp-button-text' => 'Upload New Photo', 'data-fp-apikey' => Settings.filepicker.api_key, 'data-fp-button-class' => 'btn', 'onchange' => 'updateCultivationImage(event)', 'data-fp-mimetypes' => 'image/*', 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA'}
                   = link_to '<i class="icon-facetime-video icon-green"></i> Upload New Video'.html_safe, "javascript:void(0)", class: "btn cultivation-form"
 
               %div.wizard-data-about{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.about
@@ -332,9 +332,12 @@
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
     %h3.title-form-video
-  = form_tag save_video_projects_path, method: :post, remote: true do
-    .modal-body
-      = url_field_tag "video_link", nil, placeholder: "youtube_url"
+  = form_tag save_video_projects_path, class: "video-upload", method: :post, remote: true do
+    .modal-body{style: "font-family: 'Proxima Nova Semi', sans-serif; color: #464646"}
+      %span.error-container
+      = url_field_tag "video_link", nil, placeholder: "youtube_url", class: "span4", style: "height: 30px"
+      %p{style: "font-size: 14px;"}
+        To upload a video please copy and paste Youtube video link into the space provided.
       = hidden_field_tag "video_type"
     .modal-footer
       %input{:type => "submit", :value => "Submit video"}
@@ -351,6 +354,14 @@
 
 :javascript
   $('.new-save-btn').hide();
+
+  $(".video-upload").validate({
+    rules: {
+        "video_link": {
+          required: true
+        }
+      }
+  })
 
   var updateCover = function(event){
     $('.drag-instructions').remove();
@@ -452,13 +463,14 @@
   });
 
   $(".save-image").click(function(){
-    $("#cropInstruction").remove();
+    $(".new-save-btn").attr("style", "margin-top: 24px; text-align:center");
+    $(".cancel-image").hide();
+    $(this).text("loading");
     $(".loader-cover").show();
+    $("#cropInstruction").remove();
     $('#large_image').css('background', 'none');
     $('.coverphoto').html("CHOOSE A COVER PHOTO");
     $('.drag-instructions').remove();
-    $(".cancel-image").text("loading");
-    $(this).text("loading");
     var fpfile = { url: $("#url_image").val(), mimetype: 'image/jpeg', isWriteable: true };
     var newImage = new Image();
     newImage.src = $("#url_image").val();
