@@ -8,7 +8,7 @@
     %title= content_for?(:title) ? yield(:title) : "URUUT"
     %meta{:content => "", :name => "description"}
     %meta{:content => "", :name => "author"}
-    - if controller_name == "pages" and action_name == "show"
+    - if controller_name == "projects" and action_name == "show"
       %meta{:property => "og:image", :content => "#{@project.large_image}"}
       %meta{:property => "og:title", :content => "#{@project.title}"}
     = stylesheet_link_tag  "default/application", "trontastic/jquery-ui-1.8.22.custom.css", "leaflet.css", "style.css.scss", :media => "all"
