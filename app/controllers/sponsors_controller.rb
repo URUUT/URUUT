@@ -26,10 +26,10 @@ class SponsorsController < ApplicationController
       when 'bronze'
         @level = "Bronze"
         @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[4]
-        if (@project.goal.to_i * 0.1) >= 500
+        if (@project.goal.to_i * 0.02) >= 500
           @cost = 500
         else
-          @cost = @project.goal.to_i * 0.1
+          @cost = @project.goal.to_i * 0.02
         end
         session[:level_id] = 4
       else
@@ -47,10 +47,10 @@ class SponsorsController < ApplicationController
             @level = "Silver"
           when 4
             @level = "Bronze"
-            if (@project.goal.to_i * 0.1) >= 500
+            if (@project.goal.to_i * 0.02) >= 500
               @cost = 500
             else
-              @cost = @project.goal.to_i * 0.1
+              @cost = @project.goal.to_i * 0.02
             end
         end
         session[:level_id] = level_sponsor
@@ -84,10 +84,10 @@ class SponsorsController < ApplicationController
       when 4
         @level = "Bronze"
         @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[4]
-        if (@project.goal.to_i * 0.1) >= 500
+        if (@project.goal.to_i * 0.02) >= 500
           @cost = 500
         else
-          @cost = @project.goal.to_i * 0.1
+          @cost = @project.goal.to_i * 0.02
         end
         session[:level_id] = 4
     end
@@ -109,10 +109,10 @@ class SponsorsController < ApplicationController
       when "3"
         cost = project.goal.to_i * 0.04
       when "4"
-        if project.goal.to_i * 0.1 >= 500
+        if project.goal.to_i * 0.02 >= 500
           cost = 500
         else
-          cost = project.goal.to_i * 0.1
+          cost = project.goal.to_i * 0.02
         end
     end
     params[:sponsor][:name] = sponsor_name
@@ -167,10 +167,10 @@ class SponsorsController < ApplicationController
       @image = "/assets/silver-placement.png"
     when "4"
       @image = "/assets/bronze-placement.png"
-      if project.goal.to_i * 0.1 >= 500
+      if project.goal.to_i * 0.02 >= 500
         @cost = 500
       else
-        @cost = project.goal.to_i * 0.1
+        @cost = project.goal.to_i * 0.02
       end
     end
 
@@ -190,10 +190,10 @@ class SponsorsController < ApplicationController
     when 3
       @cost = @project.goal.to_i * 0.04
     when 4
-      if @project.goal.to_i * 0.1 >= 500
+      if @project.goal.to_i * 0.02 >= 500
         @cost = 500
       else
-        @cost = project.goal.to_i * 0.1
+        @cost = @project.goal.to_i * 0.02
       end
     end
   end
@@ -214,10 +214,10 @@ class SponsorsController < ApplicationController
       @cost = @project.goal.to_i * 0.04
       @level = "Silver"
     when 4
-      if @project.goal.to_i * 0.1 >= 500
+      if @project.goal.to_i * 0.02 >= 500
         @cost = 500
       else
-        @cost = @project.goal.to_i * 0.1
+        @cost = @project.goal.to_i * 0.02
       end
       @level = "Bronze"
     end
@@ -262,10 +262,10 @@ class SponsorsController < ApplicationController
     when "3"
       cost = project.goal.to_i * 0.04
     when "4"
-      if project.goal.to_i * 0.1 >= 500
+      if project.goal.to_i * 0.02 >= 500
         cost = 500
       else
-        cost = project.goal.to_i * 0.1
+        cost = project.goal.to_i * 0.02
       end
     end
     params[:sponsor][:name] = sponsor_name

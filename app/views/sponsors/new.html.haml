@@ -101,11 +101,11 @@
         /%div{:style => "height: 80px; width: 100%;"}
         .clearfix
           .pull-left
-            - if (@project.goal.to_i * 0.1) >= 500
+            - if (@project.goal.to_i * 0.02) >= 500
               %h3{style: "margin: 0; margin-top: 20px; line-height: 20px;"}
                 = number_to_currency((500), precision: 0)
             - else
-              %h3{style: "margin: 0;line-height: 20px;"}= amount_converter(@project.goal.to_i * 0.1)
+              %h3{style: "margin: 0;line-height: 20px;"}= amount_converter(@project.goal.to_i * 0.02)
           %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-4", :"sponsor-id" => "4"}
             SPONSOR ►
 
@@ -225,7 +225,7 @@
             .field.ccv
               = label_tag :card_code, class: "label-green" do
                 CVV*
-              = text_field_tag :card_code, nil, name: "cvv", class: "span10 required_data"
+              = text_field_tag :card_code, nil, name: "cvv", maxlength: 3, class: "span10 required_data"
               %span.error-container.beside-form{style: "float: none; margin-left: 12px;"}
             .field.expiration
               = label_tag :card_month, class: "label-green" do
@@ -320,21 +320,21 @@
     $('#new_sponsor').validate({
       messages: {
         "project_sponsor[logo]": {
-          required: "Image can't be blank"
+          required: "Image Can't Be Blank"
         },
         year: {
-          required: "Fields required",
-          minlength: "At least 4 digits",
-          maxlength: "No more than 4 digits"
+          required: "Fields Required",
+          minlength: "At Least 4 Digits",
+          maxlength: "At Most 4 Digits"
         },
         month: {
-          required: "Fields required",
-          maxlength: "No more than 2 digits"
+          required: "Fields Required",
+          maxlength: "No More Than 2 Digits"
         },
         "cvv": {
-          digits: "Only digits",
-          minlength: "At least 3 digits",
-          maxlength: "At most 3 digits"
+          digits: "Only Digits",
+          minlength: "At Least 3 Digits",
+          maxlength: "At Most 3 Digits"
         }
       },
       rules: {
@@ -357,7 +357,8 @@
           required: true
         },
         "card-number": {
-          required: true
+          required: true,
+          creditcard: true
         },
         "cvv": {
           required: true,

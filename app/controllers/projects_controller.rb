@@ -81,10 +81,10 @@ class ProjectsController < ApplicationController
         elsif level.eql?("silver")
           cost = 0.04 * @project.goal.to_i
         else
-          if @project.goal.to_i * 0.1 >= 500
+          if @project.goal.to_i * 0.02 >= 500
             cost = 500
           else
-            cost = 0.1 * @project.goal.to_i
+            cost = 0.02 * @project.goal.to_i
           end
         end
         if @project.sponsorship_benefits.blank? || params["#{level}"]["id_#{count}"].nil?
