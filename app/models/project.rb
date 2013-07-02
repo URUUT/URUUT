@@ -55,11 +55,11 @@ class Project < ActiveRecord::Base
     perk_names = self.donations.map(&:perk_name).uniq
     sponsorship_levels = SponsorshipLevel.where("id IN (?)", level_ids).uniq
 
-    data.push(["All Project Sponsors","All Project Sponsors"]) unless sponsorship_levels.empty?
-    sponsorship_levels.map { |sponsor| [sponsor.name + " Level Sponsors", sponsor.id] }.each { |sponsor| data << sponsor }
-    data.push(["All Project Donors","All Project Donors"]) unless perk_names.empty?
-    perk_names.map { |sponsor| [sponsor + " Project Donors" , sponsor + " Project Donors" ] }.each { |sponsor| data << sponsor }
-    data.unshift(["All Project Sponsors and Donors","All Project Sponsors and Donors"]) if !sponsorship_levels.empty? and !perk_names.empty?
+    data.push(["All Project Sponsors","All Project Sponsors", {"data-name" => "All Project Sponsors"}]) unless sponsorship_levels.empty?
+    sponsorship_levels.map { |sponsor| [sponsor.name + " Level Sponsors", sponsor.id, {"data-name" => sponsor.name + " Level Sponsors"}] }.each { |sponsor| data << sponsor }
+    data.push(["All Project Donors","All Project Donors", {"data-name" => "All Project Donors"}]) unless perk_names.empty?
+    perk_names.map { |sponsor| [sponsor + " Project Donors" , sponsor + " Project Donors", {"data-name" => sponsor + " Project Donors"} ] }.each { |sponsor| data << sponsor }
+    data.unshift(["All Project Sponsors and Donors","All Project Sponsors and Donors", {"data-name" => "All Project Sponsors and Donors"}]) if !sponsorship_levels.empty? and !perk_names.empty?
     data
   end
 
