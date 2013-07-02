@@ -234,10 +234,10 @@
       %hr{:style => "background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
       = hidden_field_tag "step", "fourth"
       %div
-        = f.submit "Save And Continue", :class => "btn", :id => "project-submit", :style => "position: relative;display:block;margin:0 auto;"
+        = f.submit "Save & Continue ►", :class => "btn", :id => "project-submit", :style => "position: relative;display:block;margin:0 auto;"
 
     %div.sponsorship-false{:style => "display:none"}
-      = link_to "CONTINUE TO STEP 5", "/projects/#{@project.id}/edit#assets", class: "btn skip-step", id: "project-submit", style: "position: relative;display:block;margin:0 auto;width:35%"
+      = link_to "CONTINUE TO STEP 5 ►", "/projects/#{@project.id}/edit#assets", class: "btn skip-step", id: "project-submit", style: "position: relative;display:block;margin:0 auto;width:36%"
   .span4{:style => "margin-top:155px;"}
     %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
     .well.info
