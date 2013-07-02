@@ -8,9 +8,9 @@
       .clearfix{style: "margin-bottom: 20px;"}
         .pull-left
           = label_tag nil, class: "label-green" do
-            EMAIL RECEPIENT*
+            CONTRIBUTION CATEGORYs*
             %span.error-container
-          .selectParent            
+          .selectParent{style: "width: 460px;"}
             = select_tag "sponsor_level", options_for_select(@list_recepients), prompt: "Choose sponsor level or perk", onchange: "get_emails_based_on_category()", class: "styledSelect"
         .pull-left
           %a.cs_import.btn{style: "margin-left: 6%; margin-top: 17px;"} Add Contacts
@@ -23,8 +23,8 @@
       %div{:style => "margin-top: 10px"}
         = f.label :subject, class: "label-green" do
           MESSAGE SUBJECT*
-          %span.error-container{style: "margin-right: 34%"}
-        = f.text_field :subject, :required => true, class: "span8"
+          %span.error-container{style: "margin-right: 40px"}
+        = f.text_field :subject, :required => true, style: "width: 637px;"
 
       %div{:style => "margin-top: 10px"}
         = f.label :email_content, class: "label-green" do
@@ -119,7 +119,7 @@
   }
 
   var csPageOptions = {
-    domain_key:"#{Settings.cloudsponge.api_key}",
+    domain_key:"3E6CHQNSGA7WFNM7ATLZ",
     textarea_id:"contact_list",
     beforeDisplayContacts: moveCurrentValue,
     afterSubmitContacts:populateTextarea
@@ -137,3 +137,4 @@
 %script{:src => "https://api.cloudsponge.com/address_books.js"}
 
 /3E6CHQNSGA7WFNM7ATLZ
+/#{Settings.cloudsponge.api_key}
