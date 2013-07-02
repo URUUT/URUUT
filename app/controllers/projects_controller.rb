@@ -27,6 +27,14 @@ class ProjectsController < ApplicationController
     render :layout => 'landing'
   end
 
+  def download_stripe_guide
+    send_file "#{Rails.root}/public/data/Uruut_StripeQuickStartGuide.pdf", :type=>"application/pdf", :x_sendfile=>true
+  end
+
+  def download
+    send_file "#{Rails.root}/public/data/URUUT_ProjectCreationWizard_Step1.psd", :type=>"application/psd", :x_sendfile=>true
+  end
+
   def create
     @project = Project.new(params[:project])
     @project.live = 0
