@@ -6,7 +6,7 @@
 			%h2 Your ideas. Our platform.
 			%p It’s free and easy to submit your project on Uruut. Click below to get started.
 
-			= button_tag :class => "btn create" do
+			= button_tag :class => "btn #{user_signed_in? ? "create" : "must-login"}" do
 				Get Started ►
 
 .full-width.need-to-know.cf
@@ -29,7 +29,7 @@
 .full-width.create-project
 	.container
 		%h2 Create your project & get funded now.
-		= button_tag :class => "btn create" do
+		= button_tag :class => "btn #{user_signed_in? ? "create" : "must-login"}" do
 			Get Started ►
 
 :javascript
@@ -40,10 +40,6 @@
 				url: "#{projects_path}"
 			}).done(function(data){
 				window.location.href = '/projects/' + data + '/edit#sponsor-info';
-			}).error(function(data) {
-				$('.modal').remove();
-				$('body').append('<div class="modal hide fade" style="text-align:center;padding:50px;"><button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="position:absolute;top:10px;right:20px;">×</button><h5 style="margin-bottom:20px;">' + data.responseText + '</h5><a href="/users/sign_in" class="btn">Sign In ►</a> <span style="font:italic 12px/21px georgia, serif;margin:0 10px;">or</span> <a href="/users/sign_up" class="btn">Sign Up ►</a></div>');
-				$('.modal').modal();
 			})
 		})
 	})
