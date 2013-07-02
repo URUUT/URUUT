@@ -19,7 +19,7 @@
               = image_tag "#{session[:avatar]}", :id => "avatar-img"
           .span4
             #avatar-file
-              %input{:type => 'filepicker', :name => 'avatar', 'data-fp-button-text' => 'Upload', 'data-fp-apikey' => Settings.filepicker.api_key, 'data-fp-button-class' => 'avatar btn', 'onchange' => 'updateAvatar(event)', 'data-fp-mimetypes' => 'image/*', 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA,INSTAGRAM'}
+              %input{:type => 'filepicker', :name => 'avatar', 'data-fp-button-text' => 'Upload ►', 'data-fp-apikey' => Settings.filepicker.api_key, 'data-fp-button-class' => 'avatar btn', 'onchange' => 'updateAvatar(event)', 'data-fp-mimetypes' => 'image/*', 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA,INSTAGRAM'}
               %p.note
                 %strong Note:
                 Logo files should be at least 200px x 200px jpeg, gif or png files
@@ -68,8 +68,7 @@
 
       %hr
       %button.btn.btn-primary{:type => "submit"}
-        Submit changes
-        %span
+        Submit changes ►
   .span4
     %h3.title{:style => "margin-bottom:5px;"} My badges
     .well.info.badge-wrapper
