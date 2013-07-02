@@ -1868,7 +1868,7 @@ body.pages.home{
 
 body.pages.contact, body.sponsors.thank_you{
   #flash_notice{
-    display: none;
+    display: none !important;
   }
 
   footer{
