@@ -1,5 +1,5 @@
-<% if params[:funding_goal].gsub(/,/, '').to_i * 0.1 < 500 %>
-  $(".bronze-amount-value").text("<%= amount_converter(params[:funding_goal].gsub(/,/, '').to_i * 0.1) %>");
+<% if params[:funding_goal].gsub(/,/, '').to_i * 0.02 < 500 %>
+  $(".bronze-amount-value").text("<%= amount_converter(params[:funding_goal].gsub(/,/, '').to_i * 0.02) %>");
 <% else %>
   $(".bronze-amount-value").text("<%= amount_converter(500) %>");
 <% end %>
