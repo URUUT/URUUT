@@ -351,10 +351,19 @@
         });
         $(".assets-link").attr("href", "/projects/" + projectId +"/edit#assets");
         $('.step-container[data-id="sponsorship"] form input#project-submit').val("SAVE AND COUNTINUE");
-        window.location.href = '/projects/' + projectId + '/edit#assets';
-        window.location.reload(true);
+
       })
     });
+
+    $(".sponsor_checkbox").on("click", function(){
+      $('.step-container[data-id="sponsorship"] form').submit();
+    })
+
+    $("#next-link-to-assets").click(function(){
+      window.location.href = '/projects/' + projectId + '/edit#assets';
+      window.location.reload(true);
+    })
+
 
     $('.stripe-connect').click(function() {
       localStorage.setItem('organization', $('#project_organization').val());
