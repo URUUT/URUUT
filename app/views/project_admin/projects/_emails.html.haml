@@ -77,7 +77,7 @@
   $("#sponsor_level").on('change',function(){
     var length = $("#sponsor_level option").length;
     for (var i = 1; i < length; i++){
-      $("#sponsor_level option")[i].text = $("#sponsor_level option")[i].attributes["data-item"].value
+      $("#sponsor_level option")[i].text = $("#sponsor_level option")[i].value
     }
     if ($("#sponsor_level :selected").text().length > 17){
       $("#sponsor_level :selected").text(truncText($("#sponsor_level :selected").text(), 15, "..."))
