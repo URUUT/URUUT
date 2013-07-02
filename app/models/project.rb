@@ -1,7 +1,7 @@
 class Project < ActiveRecord::Base
   belongs_to :user
 
-  # before_save :downcase_url_and_facebook
+  before_save :downcase_url_and_facebook
 
   attr_accessible :category, :description, :duration, :goal, :address, :project_title, :sponsorship_permission,
   :city, :state, :zip, :neighborhood, :title, :image, :video, :tags, :live, :short_description, :perk_permission,
@@ -159,6 +159,7 @@ class Project < ActiveRecord::Base
   end
 
   def downcase_url_and_facebook
+    self.twitter_handle.downcase! unless self.twitter_handle.nil?
     self.website.downcase! unless self.website.nil?
     self.facebook_page.downcase! unless self.facebook_page.nil?
   end
