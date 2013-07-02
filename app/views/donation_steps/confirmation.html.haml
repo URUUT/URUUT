@@ -63,8 +63,7 @@
       %hr
       = form_for @donation, :url => wizard_path do |f|
         %button.btn.btn-primary.btn-block{:type => "submit"}
-          Confirm
-          %span
+          Confirm ►
 
 - if @donation.errors.any?
   .error_messages
