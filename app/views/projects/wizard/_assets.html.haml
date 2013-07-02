@@ -248,10 +248,10 @@
                   .clearfix
                     .seed-num
                       .amount
-                        - if (@project.goal.to_i * 0.1) >= 500
+                        - if (@project.goal.to_i * 0.02) >= 500
                           = amount_converter(500)
                         - else
-                          = amount_converter(@project.goal.to_i * 0.1)
+                          = amount_converter(@project.goal.to_i * 0.02)
                     %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
                       Sponsor
                       %span

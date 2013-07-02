@@ -203,8 +203,8 @@
         .span3.left{:style => "text-align:left;color:#464646;"}
           %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0;"} Cost
           %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0"}
-            - if @project.goal && @project.goal.gsub(/,/, '').to_i * 0.1 < 500
-              = amount_converter(@project.goal.gsub(/,/, '').to_i * 0.1)
+            - if @project.goal && @project.goal.gsub(/,/, '').to_i * 0.02 < 500
+              = amount_converter(@project.goal.gsub(/,/, '').to_i * 0.02)
             -else
               = amount_converter(500)
         .span9.left{:style => "text-align:left;color:#464646;"}
