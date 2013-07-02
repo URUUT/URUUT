@@ -20,7 +20,6 @@ class DonationsController < ApplicationController
     @perk = Perk.new
     @perk_name = params[:name].to_s
     @perk_amount = params[:amount].gsub(",", "").to_f
-    debugger
     @perk_description = params[:description]
     @project = Project.find(params[:project_id])
     if params[:amount].blank?
