@@ -27,6 +27,14 @@ class ProjectsController < ApplicationController
     render :layout => 'landing'
   end
 
+  def download_stripe_guide
+    send_file "#{Rails.root}/public/data/Uruut_StripeQuickStartGuide.pdf", :type=>"application/pdf", :x_sendfile=>true
+  end
+
+  def download
+    send_file "#{Rails.root}/public/data/URUUT_ProjectCreationWizard_Step1.psd", :type=>"application/psd", :x_sendfile=>true
+  end
+
   def create
     @project = Project.new(params[:project])
     @project.live = 0
@@ -102,10 +110,10 @@ class ProjectsController < ApplicationController
     SponsorshipBenefit::SPONSORSHIP_BENEFITS.each do |key, value|
 
       case key
-      when 1 then sponsorship_benefits += sponsorship_benefit_level("platinum", value, key)
-      when 2 then sponsorship_benefits += sponsorship_benefit_level("gold", value, key)
-      when 3 then sponsorship_benefits += sponsorship_benefit_level("silver", value, key)
-      when 4 then sponsorship_benefits += sponsorship_benefit_level("custom", value, key) if params[:custom].present?
+        when 1 then sponsorship_benefits += sponsorship_benefit_level("platinum", value, key)
+        when 2 then sponsorship_benefits += sponsorship_benefit_level("gold", value, key)
+        when 3 then sponsorship_benefits += sponsorship_benefit_level("silver", value, key)
+        when 4 then sponsorship_benefits += sponsorship_benefit_level("custom", value, key) if params[:custom].present?
       end
 
     end
@@ -126,8 +134,9 @@ class ProjectsController < ApplicationController
       @project.step = "/projects/#{@project.id}/edit#assets"
     end
 
+    debugger
     unless sponsorship_benefits.blank?
-      SponsorshipBenefit.where(project_id: params[:id]).destroy_all
+      # SponsorshipBenefit.where(project_id: params[:id]).destroy_all
       @sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits)
     end
     params[:project][:goal] = params[:project][:goal].gsub(",", "") if !params[:project][:goal].nil?
