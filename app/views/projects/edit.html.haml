@@ -360,6 +360,7 @@
     })
 
     $("#next-link-to-assets").click(function(){
+      $('.step-container[data-id="sponsorship"] form').submit();
       window.location.href = '/projects/' + projectId + '/edit#assets';
       window.location.reload(true);
     })
