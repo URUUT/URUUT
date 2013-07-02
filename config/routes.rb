@@ -3,7 +3,11 @@ require 'sidekiq/web'
 Crowdfund::Application.routes.draw do
   # match '/users/auth/:provider/callback', to: 'services#create'
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations"}
+  devise_for :users, :controllers => {
+    :omniauth_callbacks => "users/omniauth_callbacks",
+    :registrations => "registrations",
+    :sessions => 'users/sessions',
+  }
   # devise_for :users, :controllers => { :registrations => "registrations" }
   resources :users, :only => [:show] do
     get :get_complete_project, on: :collection
