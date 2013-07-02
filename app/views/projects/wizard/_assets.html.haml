@@ -54,8 +54,7 @@
         - if @project.sponsor_permission
           %h4.title{:style => 'margin-top:50px;'} PROJECT SPONSORS
           = link_to "javascript:void(0)", :class => 'btn', :style => 'background:#3f403b;padding:10px;margin-top:10px;' do
-            Become A Sponsor
-            %span
+            Become A Sponsor ►
 
         %h4.title{:style => 'margin-top:50px;'}
           Planting Seeds
@@ -139,8 +138,7 @@
               %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;font-family:'Proxima Nova';"} PROJECT SPONSORSHIP
               %p{:style => "font:normal 12px/18px 'Proxima Nova', arial, sans-serif;color:#403e37;margin-bottom:40px;"} We can’t do this alone. Do your part, by becoming a project sponsor. URUUT Partner-Funding depends on individual contributors as well as project sponsorship from businesses and corporate and family foundations. Click the button below to get more details and become a project sponsor.
               = link_to "javascript:void(0)", :class => 'black-btn btn', :style => 'margin-top:10px;' do
-                Become A Sponsor
-                %span
+                Become A Sponsor ►
 
             %ul#myTab4.tab-nav
               %li.active
@@ -203,8 +201,7 @@
                       .amount
                         = amount_converter(@project.goal.to_i * 0.3)
                     %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
-                      Sponsor
-                      %span
+                      Sponsor ►
                 .seed-level.gold-level
                   %h3
                     GOLD
@@ -219,8 +216,7 @@
                       .amount
                         = amount_converter(@project.goal.to_i * 0.1)
                     %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
-                      Sponsor
-                      %span
+                      Sponsor ►
                 .seed-level.silver-level
                   %h3
                     SILVER
@@ -236,8 +232,7 @@
                       .amount
                         = amount_converter(@project.goal.to_i * 0.04)
                     %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
-                      Sponsor
-                      %span
+                      Sponsor ►
                 .seed-level.bronze-level
                   %h3 BRONZE
                   %ul.normal-font.dashed-list
@@ -253,8 +248,7 @@
                         - else
                           = number_to_currency(@project.goal.to_i * 0.02, precision: 0)
                     %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
-                      Sponsor
-                      %span
+                      Sponsor ►
           - else
             %h4.tittle.wizard-data-donation{style: "margin-bottom: 0;"} Donation
             -if @project.perk_permission
@@ -311,8 +305,7 @@
         - if @project.sponsor_permission
           %h4.title{:style => 'margin-top:50px;'} Project Sponsors
           = link_to "javascript:void(0)", :class => 'black-btn btn', :style => 'margin-top:10px;' do
-            Become A Sponsor
-            %span
+            Become A Sponsor ►
 
         %h4.title{:style => 'margin-top:50px;'}
           Seeders (0)
@@ -331,16 +324,16 @@
 #save-video.modal.hide.fade
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3.title-form-video Add youtube video
+    %h3.title-form-video.tittle Add youtube video
   = form_tag save_video_projects_path, class: "video-upload", method: :post, remote: true do
     .modal-body{style: "font-family: 'Proxima Nova Semi', sans-serif; color: #464646"}
       %span.error-container
-      = url_field_tag "video_link", nil, placeholder: "Youtube URL", class: "span4", style: "height: 30px"
+      = url_field_tag "video_link", nil, placeholder: "Youtube URL", class: "span4", style: "height: 30px; width: 100%;"
       %p{style: "font-size: 14px;"}
         To upload a video please copy and paste Youtube video link into the space provided.
       = hidden_field_tag "video_type"
     .modal-footer
-      %input{:type => "submit", :value => "Submit video"}
+      %input.btn{:type => "submit", :value => "Submit video", style: "float: none; margin: 0 auto;"}
 
 :javascript
 
