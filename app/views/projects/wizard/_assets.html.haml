@@ -244,9 +244,9 @@
                     .seed-num
                       .amount
                         - if (@project.goal.to_i * 0.02) >= 500
-                          = amount_converter(500)
+                          = number_to_currency(500, precision: 0)
                         - else
-                          = amount_converter(@project.goal.to_i * 0.02)
+                          = number_to_currency(@project.goal.to_i * 0.02, precision: 0)
                     %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
                       Sponsor ►
           - else
