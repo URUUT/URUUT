@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     begin
       sign_in_url = url_for(:action => 'new', :controller => 'sessions', :only_path => false, :protocol => 'http')
+      reset_url = url_for(:action => 'update', :controller => 'passwords', :only_path => false, :protocol => 'http')
       if session[:path] == "project_new"
         project = Project.new
         project.user_id = resource.id
@@ -12,7 +13,9 @@ class ApplicationController < ActionController::Base
         session[:path] == ""
         edit_project_path(project.id)
       elsif request.referer == sign_in_url
-        super
+        home_pages_url
+      elsif request.referer.start_with?(reset_url)
+        home_pages_url
       else
         stored_location_for(resource) || request.referer || root_path ||  request.env['omniauth.origin']
       end
