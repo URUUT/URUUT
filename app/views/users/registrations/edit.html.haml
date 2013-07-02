@@ -25,13 +25,19 @@
                 Logo files should be at least 200px x 200px jpeg, gif or png files
 
       %div.inline.well-half
-        = f.label :first_name
+        = f.label :first_name do
+          FIRST NAME
+          %span.error-container
         = f.text_field :first_name
       %div.inline.well-half{style: "margin-left: 17px;"}
-        = f.label :last_name
+        = f.label :last_name do
+          LAST NAME
+          %span.error-container
         = f.text_field :last_name
       %div
-        = f.label :email
+        = f.label :email do
+          EMAIL
+          %span.error-container
         = f.email_field :email
 
       %div.inline.well-half
