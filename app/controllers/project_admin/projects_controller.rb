@@ -77,7 +77,7 @@ class ProjectAdmin::ProjectsController < ApplicationController
   def send_email
     @error_messages = []
 
-    @error_messages << "email can't be blank" if params[:email_recepient].blank?
+    @error_messages << "email recipient can't be blank" if params[:email_recepient].blank?
     @error_messages << "email subject can't be blank" if params[:post]["subject"].blank?
     @error_messages << "email content can't be blank" if params[:post]["email_content"].blank?
 
@@ -99,10 +99,22 @@ class ProjectAdmin::ProjectsController < ApplicationController
 
   def email_based_on_sponsor_level
     project = Project.find(session[:current_project])
-    if params[:level_id].to_i.to_s == params[:level_id]
-      emails = project.project_sponsors.joins(:sponsor).where("level_id = ?", params[:level_id]).uniq.pluck(:email)
+    case params[:level_id]
+    when "All Project Sponsors and Donors"
+      emails_sponsor = project.project_sponsors.joins(:sponsor).pluck(:email).uniq
+      emails_donors = project.donations.pluck(:email).uniq
+      emails = emails_donors + emails_sponsor
+    when "All Project Sponsors"
+      emails = project.project_sponsors.joins(:sponsor).pluck(:email).uniq
+    when "All Project Donors"
+      emails = project.donations.pluck(:email).uniq
     else
-      emails = project.donations.where("perk_name = ?", params[:level_id]).uniq.pluck(:email)
+      if params[:level_id].to_i.to_s == params[:level_id]
+        emails = project.project_sponsors.joins(:sponsor).where("level_id = ?", params[:level_id]).uniq.pluck(:email)
+      else
+        level_name = params[:level_id].split(" Project")
+        emails = project.donations.where("perk_name = ?", level_name[0]).uniq.pluck(:email)
+      end
     end
 
     emails.reject!(&:empty?)

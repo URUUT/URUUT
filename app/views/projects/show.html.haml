@@ -265,7 +265,7 @@
                 %span{:style => 'display:block;text-align:center;font:normal 22px/22px "Proxima Nova Semi";color:#fff;text-transform:uppercase;letter-spacing:5px;'}= (Date.today + (@project.duration).to_i.days).strftime("%b")
                 %span{:style => 'display:block;text-align:center;font:normal 72px/72px "Proxima Nova Semi";color:#fff;text-transform:uppercase;margin-top:5px'}= (Date.today + (@project.duration).to_i.days).strftime("%d")
               %h6{:style => "text-align:center;color:#55554d !important;font-family:'Proxima Nova';margin-top:40px;margin-bottom:0;"} Project Goal
-              %h2{:style => "text-align:center;color:#b6b6b4;font-family:'Proxima Nova Semi';margin-top:0;"}= number_to_currency(@project.goal, :precision => 0)
+              %h2{:style => "text-align:center;color:#b6b6b4;font-family:'Proxima Nova Semi';margin-top:0;"}= amount_converter(@project.goal)
 
           .span9.details
             - if @project.cultivation_mime_type.eql?("video") and !@project.cultivation_video.blank?

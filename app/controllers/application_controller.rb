@@ -12,10 +12,6 @@ class ApplicationController < ActionController::Base
         project.save
         session[:path] == ""
         edit_project_path(project.id)
-      elsif request.referer == sign_in_url
-        home_pages_url
-      elsif request.referer.start_with?(reset_url)
-        home_pages_url
       else
         stored_location_for(resource) || request.referer || root_path ||  request.env['omniauth.origin']
       end
