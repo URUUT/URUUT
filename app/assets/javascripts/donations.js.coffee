@@ -69,16 +69,16 @@ $ ->
   $("#new_donation").validate
     messages:
       year:
-        required: "Fields required"
-        minlength: "At least 4 digits"
-        maxlength: "No more than 4 digits"
+        required: "Fields Required"
+        minlength: "At Least 4 Digits"
+        maxlength: "At Most 4 Digits"
       month:
-        required: "Fields required"
-        maxlength: "No more than 2 digits"
+        required: "Fields Required"
+        maxlength: "At Most 2 Digits"
       code:
-        digits: "Only digits"
-        minlength: "At least 3 digits"
-        maxlength: "At least 3 digits"
+        digits: "Only Digits"
+        minlength: "At Least 3 Digits"
+        maxlength: "At Most 3 Digits"
     rules:
       name:
         required: true
@@ -111,16 +111,16 @@ $ ->
   $(".edit_donation").validate
     messages:
       year:
-        required: "Fields required"
-        minlength: "At least 4 digits"
-        maxlength: "No more than 4 digits"
+        required: "Fields Required"
+        minlength: "At Least 4 Digits"
+        maxlength: "At Most 4 Digits"
       month:
-        required: "Fields required"
-        maxlength: "No more than 2 digits"
+        required: "Fields Required"
+        maxlength: "At Most 2 Digits"
       code:
-        digits: "Only digits"
-        minlength: "At least 3 digits"
-        maxlength: "At most 3 digits"
+        digits: "Only Digits"
+        minlength: "At Least 3 Digits"
+        maxlength: "At Most 3 Digits"
     rules:
       name:
         required: true
