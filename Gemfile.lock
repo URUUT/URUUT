@@ -374,6 +374,7 @@ DEPENDENCIES
   rails_best_practices
   rails_config
   rb-fsevent (~> 0.9.1)
+  redis
   sass-rails (~> 3.2.3)
   sidekiq
   simple_form
