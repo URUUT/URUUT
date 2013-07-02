@@ -60,7 +60,7 @@
                         %span.edit-benefit.italic.label-green select to edit
                         = text_field_tag "platinum[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field", style: "width: 320px !important; display: none;"
               -else
-                -@project.sponsorship_benefits.where(sponsorship_level_id: 1).each_with_index do |benefit, index|
+                -@project.sponsorship_benefits.where(sponsorship_level_id: 1).order(:id).each_with_index do |benefit, index|
                   %div.checkbox.default
                     = hidden_field_tag "platinum[id_#{index + 1}]", benefit.id
                     = check_box_tag "platinum[#{index + 1}]", nil, benefit.status, class: "sponsor_checkbox"
@@ -118,7 +118,7 @@
                         %span.edit-benefit.italic.label-green select to edit
                         = text_field_tag "gold[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field", style: "width: 320px !important; display: none;"
               -else
-                -@project.sponsorship_benefits.where(sponsorship_level_id: 2).each_with_index do |benefit, index|
+                -@project.sponsorship_benefits.where(sponsorship_level_id: 2).order(:id).each_with_index do |benefit, index|
                   %div.checkbox.default
                     = hidden_field_tag "gold[id_#{index + 1}]", benefit.id
                     = check_box_tag "gold[#{index + 1}]", nil, benefit.status, class: "sponsor_checkbox"
@@ -176,7 +176,7 @@
                         %span.edit-benefit.italic.label-green select to edit
                         = text_field_tag "silver[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field", style: "width: 320px !important; display: none;"
               -else
-                -@project.sponsorship_benefits.where(sponsorship_level_id: 3).each_with_index do |benefit, index|
+                -@project.sponsorship_benefits.where(sponsorship_level_id: 3).order(:id).each_with_index do |benefit, index|
                   %div.checkbox.default
                     = hidden_field_tag "silver[id_#{index + 1}]", benefit.id
                     = check_box_tag "silver[#{index + 1}]", nil, benefit.status, class: "sponsor_checkbox"
@@ -217,7 +217,7 @@
             %div#bronze-checkbox.existing-checkbox
 
               -if !@project.sponsorship_benefits.empty?
-                -@project.sponsorship_benefits.where(sponsorship_level_id: 4).each_with_index do |benefit, index|
+                -@project.sponsorship_benefits.where(sponsorship_level_id: 4).order(:id).each_with_index do |benefit, index|
                   %div.checkbox.default
                     = hidden_field_tag "custom[id_#{index + 1}]", benefit.id
                     = check_box_tag "custom[#{index + 1}]", nil, benefit.status
@@ -238,7 +238,8 @@
       %hr{:style => "background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
       = hidden_field_tag "step", "fourth"
       %div
-        = f.submit "Save & Continue ►", :class => "btn", :id => "project-submit", :style => "position: relative;display:block;margin:0 auto;"
+        = f.submit "Save & Continue ►", :class => "btn", :id => "project-submit", :style => "position: relative;display:none;margin:0 auto;"
+        = link_to "Save & Continue ►", "javascript:void(0)", id: "next-link-to-assets", :class => "btn", :style => "position: relative;display:block;margin:0 auto;width: 262px;"
 
     %div.sponsorship-false{:style => "display:none"}
       = link_to "CONTINUE TO STEP 5", "/projects/#{@project.id}/edit#assets", class: "btn skip-step", id: "project-submit", style: "position: relative;display:block;margin:0 auto;width:35%"

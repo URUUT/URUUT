@@ -8,7 +8,7 @@ class DonationsController < ApplicationController
 		@donation = Donation.new
     @perk = Perk.find(params[:perk])
     @perk_name = params[:name].to_s
-    @perk_amount = params[:amount].gsub(",", "").to_i
+    @perk_amount = params[:amount].gsub(",", "").to_f
     @perk_description = params[:description]
     @project = Project.find(params[:project_id])
     @perks = @project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i] }
@@ -19,7 +19,8 @@ class DonationsController < ApplicationController
     @donation = Donation.new
     @perk = Perk.new
     @perk_name = params[:name].to_s
-    @perk_amount = params[:amount].gsub(",", "").gsub(/[^\d,]+/, '').to_i
+    @perk_amount = params[:amount].gsub(",", "").to_f
+    debugger
     @perk_description = params[:description]
     @project = Project.find(params[:project_id])
     if params[:amount].blank?
@@ -64,7 +65,7 @@ class DonationsController < ApplicationController
       else
         @perk = Perk.new
         @perk.id = params["level"]
-        @perk.amount = params["amount"].gsub(",", "")
+        @perk.amount = params["amount"].gsub(",", "").to_f
         session[:perk_amount] = @perk.amount.to_f
         @project = Project.find(params["project_id"])
         if @project.perk_permission

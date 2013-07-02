@@ -51,7 +51,7 @@
                 %span{style: "margin-left: 10px"}
                   = image_tag "message-green.png"
                   = link_to "Contact Us", "mailto:#{User.find(@project.user_id).email}", target: "_blank", :style => "font-style: italic; text-decoration: underline; color: #3f403b; font-family: 'Georgia', serif;"
-        - if @project.sponsor_permission
+        - if @project.sponsor_permission && !@sponsorship_benefits.blank?
           %h4.title{:style => 'margin-top:50px;'} PROJECT SPONSORS
           = link_to "javascript:void(0)", :class => 'btn', :style => 'background:#3f403b;padding:10px;margin-top:10px;' do
             Become A Sponsor ►
@@ -132,7 +132,7 @@
 
       .span4.sidebar
         .sidebar-assets-content
-          - if @project.sponsor_permission
+          - if @project.sponsor_permission && !@sponsorship_benefits.blank?
             %h4 BECOME A SPONSOR
             .well
               %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;font-family:'Proxima Nova';"} PROJECT SPONSORSHIP
@@ -302,7 +302,7 @@
             = image_tag current_user.avatar
           %h4.wizard-data-organization{:style => "letter-spacing:2px;"}= @project.organization
 
-        - if @project.sponsor_permission
+        - if @project.sponsor_permission && !@sponsorship_benefits.blank?
           %h4.title{:style => 'margin-top:50px;'} Project Sponsors
           = link_to "javascript:void(0)", :class => 'black-btn btn', :style => 'margin-top:10px;' do
             Become A Sponsor ►

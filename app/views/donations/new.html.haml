@@ -21,12 +21,12 @@
           %h6{:style => "line-height:100%;margin-bottom:10px;margin-top:20px;margin-bottom:15px;"} Seed Amount
           - if @perk_amount.to_s.length <= 5
             #custom_amount.choiced-perk.amount{style: "font-size:52px;color:#81C263;font-family:'Proxima Nova Bold';line-height:100%; #{"display:none" if !@perk_name.eql?("custom")}"}
-              = amount_converter_field(@perk_amount)
-            %span.perk-amount{:style => "font-size:52px;color:#81C263;font-family:'Proxima Nova Bold';line-height:100%; #{"display:none" if @perk_name.eql?("custom")}"}= amount_converter_field(@perk_amount)
+              = number_to_currency(@perk_amount.to_f, precision: 2)
+            %span.perk-amount{:style => "font-size:52px;color:#81C263;font-family:'Proxima Nova Bold';line-height:100%; #{"display:none" if @perk_name.eql?("custom")}"}= number_to_currency(@perk_amount.to_f, precision: 2)
           - else
             #custom_amount.choiced-perk.amount{style: "font-size:31px;color:#81C263;font-family:'Proxima Nova Bold';line-height:100%; #{"display:none" if !@perk_name.eql?("custom")}"}
-              = amount_converter_field(@perk_amount)
-            %span.perk-amount{:style => "font-size:31px;color:#81C263;font-family:'Proxima Nova Bold';line-height:100%; #{"display:none" if @perk_name.eql?("custom")}"}= amount_converter_field(@perk_amount)
+              = number_to_currency(@perk_amount.to_f, precision: 2)
+            %span.perk-amount{:style => "font-size:31px;color:#81C263;font-family:'Proxima Nova Bold';line-height:100%; #{"display:none" if @perk_name.eql?("custom")}"}= number_to_currency(@perk_amount.to_f, precision: 2)
         %div.perk-info-choiced{:style => "float:left;display:inline-block;width:340px;padding-right:20px;height:auto;"}
           .choiced-perk{style: "#{"display:none" if !@perk_name.eql?("custom")}"}
             %h6{:style => "line-height:100%;margin-bottom:10px;margin-top:20px"} Choose your perk
@@ -39,7 +39,7 @@
           %h3.perk-name.label-green{:style => 'font-size:20px; line-height:100%;margin:0;'}= @perk_name
           %p.perk-description= @perk_description
           %p.description-custom
-            You will receive #{@perk_amount.to_i} Uruut Reward Points when you seed #{number_to_currency(@perk_amount, precision: 0)}
+            You will receive #{@perk_amount.to_i} Uruut Reward Points when you seed #{number_to_currency(@perk_amount.to_f, precision: 2)}
         .cf
         %p.checkout-continue-subtext Continue to payment information below or choose a different seed amount/perk from the right.
 
