@@ -55,7 +55,7 @@
           /   Change
       %div
         %h5 Payment amount
-        = number_to_currency(@donation.amount, :precision => 0)
+        = number_to_currency(@donation.amount, :precision => 2)
       %hr
       %p.grey
         %strong Note:
