@@ -4,22 +4,33 @@ class ApplicationController < ActionController::Base
   before_filter :last_url
 
   def after_sign_in_path_for(resource)
-    begin
-      sign_in_url = url_for(:action => 'new', :controller => 'sessions', :only_path => false, :protocol => 'http')
-      reset_url = url_for(:action => 'update', :controller => 'passwords', :only_path => false, :protocol => 'http')
+    if session[:path] == "project_new"
+      project = Project.new
+      project.user_id = resource.id
+      project.save
+      session[:path] == ""
+      edit_project_path(project.id)
+    elsif request.referer.eql?(new_user_registration_url) || request.referer.nil?
       if session[:path] == "project_new"
         project = Project.new
         project.user_id = resource.id
         project.save
         session[:path] == ""
         edit_project_path(project.id)
-      else
-        stored_location_for(resource) || request.referer || root_path ||  request.env['omniauth.origin']
+      elsif session[:path] == "sponsor_new"
+        new_project_sponsor_url
+      elsif session[:path]
+        session[:path]
       end
-      # return root_url
-    rescue
-      super
+    elsif request.referer.start_with?(edit_user_password_url)
+      root_url
+    else
+      stored_location_for(resource) || request.referer || root_path ||  request.env['omniauth.origin']
     end
+      # return root_url
+    # rescue
+    #   super
+    # end
     # sign_in_url = url_for(:action => 'new', :controller => 'sessions', :only_path => false, :protocol => 'http')
     # if request.referer == sign_in_url
     #   super

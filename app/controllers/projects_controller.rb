@@ -98,14 +98,14 @@ class ProjectsController < ApplicationController
             cost = 0.02 * @project.goal.to_i
           end
         end
-        if @project.sponsorship_benefits.blank? || params["#{level}"]["id_#{count}"].nil?
+        # if @project.sponsorship_benefits.blank? || params["#{level}"]["id_#{count}"].nil?
           unless params["#{level}"]["info_#{count}"].blank?
             data <<  {name: params["#{level}"]["info_#{count}"],sponsorship_level_id: key, project_id: @project.id, status: status, cost: cost}
           end
-        else
-          sponsorship_benefit = SponsorshipBenefit.find(params[level]["id_#{count}"])
-          sponsorship_benefit.update_attributes({name: params["#{level}"]["info_#{count}"],sponsorship_level_id: key, project_id: @project.id, status: status, cost: cost})
-        end
+        # else
+        #   sponsorship_benefit = SponsorshipBenefit.find(params[level]["id_#{count}"])
+        #   sponsorship_benefit.update_attributes({name: params["#{level}"]["info_#{count}"],sponsorship_level_id: key, project_id: @project.id, status: status, cost: cost})
+        # end
       end
       data
     end
@@ -138,7 +138,7 @@ class ProjectsController < ApplicationController
     end
 
     unless sponsorship_benefits.blank?
-      # SponsorshipBenefit.where(project_id: params[:id]).destroy_all
+      SponsorshipBenefit.where(project_id: params[:id]).destroy_all
       @sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits)
     end
     params[:project][:goal] = params[:project][:goal].gsub(",", "") if !params[:project][:goal].nil?
