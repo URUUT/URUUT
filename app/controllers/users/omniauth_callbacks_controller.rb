@@ -52,7 +52,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       project.save
       session[:path] == ""
       redirect_to "/projects/#{project.id}/edit#sponsor-info"
-    elsif request.referer == new_user_registration_url
+    elsif request.referer == new_user_registration_url || request.referer.nil?
       redirect_to home_pages_url
     else
       redirect_to stored_location_for(resource) || request.referer || root_path ||  request.env['omniauth.origin']
