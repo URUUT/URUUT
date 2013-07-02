@@ -24,9 +24,9 @@
               = number_to_currency(@perk_amount.to_f, precision: 2)
             %span.perk-amount{:style => "font-size:52px;color:#81C263;font-family:'Proxima Nova Bold';line-height:100%; #{"display:none" if @perk_name.eql?("custom")}"}= number_to_currency(@perk_amount.to_f, precision: 2)
           - else
-            #custom_amount.choiced-perk.amount{style: "font-size:31px;color:#81C263;font-family:'Proxima Nova Bold';line-height:100%; #{"display:none" if !@perk_name.eql?("custom")}"}
+            #custom_amount.choiced-perk.amount{style: "font-size:30px;color:#81C263;font-family:'Proxima Nova Bold';line-height:100%; #{"display:none" if !@perk_name.eql?("custom")}"}
               = number_to_currency(@perk_amount.to_f, precision: 2)
-            %span.perk-amount{:style => "font-size:31px;color:#81C263;font-family:'Proxima Nova Bold';line-height:100%; #{"display:none" if @perk_name.eql?("custom")}"}= number_to_currency(@perk_amount.to_f, precision: 2)
+            %span.perk-amount{:style => "font-size:30px;color:#81C263;font-family:'Proxima Nova Bold';line-height:100%; #{"display:none" if @perk_name.eql?("custom")}"}= number_to_currency(@perk_amount.to_f, precision: 2)
         %div.perk-info-choiced{:style => "float:left;display:inline-block;width:340px;padding-right:20px;height:auto;"}
           .choiced-perk{style: "#{"display:none" if !@perk_name.eql?("custom")}"}
             %h6{:style => "line-height:100%;margin-bottom:10px;margin-top:20px"} Choose your perk
