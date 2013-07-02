@@ -7,15 +7,16 @@
     = form_for(@contact, :as => :post, :url => send_email_project_admin_projects_path, html: {remote: true, class: "send-project-email"}) do |f|
       .clearfix{style: "margin-bottom: 20px;"}
         .pull-left
-          = label_tag "EMAIL RECEPIENT*", nil, class: "label-green"
-          .selectParent
+          = label_tag nil, class: "label-green" do
+            EMAIL RECEPIENT*
             %span.error-container
+          .selectParent            
             = select_tag "sponsor_level", options_for_select(@list_recepients), prompt: "Choose sponsor level or perk", onchange: "get_emails_based_on_category()", class: "styledSelect"
         .pull-left
           %a.cs_import.btn{style: "margin-left: 6%; margin-top: 17px;"} Add Contacts
 
       %div.textarea-recepient
-        %span.error-container
+        %span.error-container{style: "margin-right: 40px;"}
         %textarea#contact_list{:style => "width:637px;height:60px", :name => "email_recepient", :placeholder => "emails separated by comma"}
         = hidden_field_tag 'email_temp'
 
@@ -28,11 +29,11 @@
       %div{:style => "margin-top: 10px"}
         = f.label :email_content, class: "label-green" do
           EMAIL CONTENT*
-          %span.error-container
+          %span.error-container{style: "margin-right: 40px;"}
         = f.text_area :email_content, :required => true, style: "width: 637px; height: 298px;"
       %hr{:style => "margin-top: 20px; margin-bottom: 20px; background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
       %div
-        = f.submit "SEND EMAIL", :class => "btn", :id => "project-submit", :style => "border-radius: 5px;"
+        = f.submit "SEND EMAIL ►", :class => "btn", :id => "project-submit", :style => "border-radius: 5px;"
 
 %section#emailSuccess.modal.hide.fade
   .modal-header{style: "height: 17px;"}
@@ -134,3 +135,5 @@
   };
 
 %script{:src => "https://api.cloudsponge.com/address_books.js"}
+
+/3E6CHQNSGA7WFNM7ATLZ
