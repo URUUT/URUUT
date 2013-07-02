@@ -15,7 +15,7 @@
 
       %div.textarea-recepient
         %span.error-container
-        %textarea#contact_list{:style => "width:637px;height:24px", :name => "email_recepient"}
+        %textarea#contact_list{:style => "width:637px;height:60px", :name => "email_recepient", :placeholder => "emails separated by comma"}
         = hidden_field_tag 'email_temp'
 
       %div{:style => "margin-top: 10px"}
@@ -32,6 +32,16 @@
       %hr{:style => "margin-top: 20px; margin-bottom: 20px; background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
       %div
         = f.submit "SEND EMAIL", :class => "btn", :id => "project-submit", :style => "border-radius: 5px;"
+
+%section#emailSuccess.modal.hide.fade
+  .modal-header{style: "height: 17px;"}
+    %button.close.closes{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"}
+      Close X
+    %h3#myModalLabel.tittle{:style => "margin-bottom: 0;"} Email Sent
+  .modal-body
+    %p Your email was sent successfully
+  .modal-footer
+    %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal", style: "float: none; margin: 0 auto;"} Ok
 
 :javascript
 
@@ -67,7 +77,7 @@
   $("#sponsor_level").on('change',function(){
     var length = $("#sponsor_level option").length;
     for (var i = 1; i < length; i++){
-      $("#sponsor_level option")[i].text = $("#sponsor_level option")[i].attributes["data-item"].value
+      $("#sponsor_level option")[i].text = $("#sponsor_level option")[i].value
     }
     if ($("#sponsor_level :selected").text().length > 17){
       $("#sponsor_level :selected").text(truncText($("#sponsor_level :selected").text(), 15, "..."))
