@@ -1,4 +1,4 @@
-- if @project.sponsor_permission
+- if !@sponsorship_benefits.blank? && @project.sponsor_permission
   .platinum-level-container
     .container
       .row
@@ -168,7 +168,7 @@
                 = image_tag "message-green.png"
                 = link_to "Contact Us", "mailto:#{User.find(@project.user_id).email}", target: "_blank", :style => "font-style: italic; text-decoration: underline; color: #3f403b; font-family: 'Georgia', serif;"
 
-      - if @project.sponsor_permission
+      - if !@sponsorship_benefits.blank? && @project.sponsor_permission
         %h4.title{:style => 'margin-top:50px;'}
           PROJECT SPONSORS
           - if @project_sponsors.include?(2) || @project_sponsors.include?(3)
@@ -285,7 +285,7 @@
 
 
     .span4.sidebar
-      - if @project.sponsor_permission
+      - if !@sponsorship_benefits.blank? && @project.sponsor_permission
         %h4 BECOME A SPONSOR
         .well
           %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;font-family:'Proxima Nova';"} PROJECT SPONSORSHIP
@@ -547,7 +547,7 @@
         = image_tag @project.user.avatar
         %h4= @project.organization
 
-      - if @project.sponsor_permission
+      - if !@sponsorship_benefits.blank? && @project.sponsor_permission
         %h4.title{:style => 'margin-top:50px;'} PROJECT SPONSORS
         - if @project_sponsors.include?(4)
           %div
