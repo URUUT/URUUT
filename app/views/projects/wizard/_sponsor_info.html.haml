@@ -84,7 +84,7 @@
     %div
       %p.label-green{:style => "font: bold 12px/12px 'Proxima Nova', arial, sans-serif;text-transform: uppercase;"}
         Payment With Stripe
-      %p{:style => "font:normal 13px/19px 'Proxima Nova';"} An account with Stripe, our payment provider, is required for processing credit card transactions and receiving funds. If you already have an account, you can sign in as a returning customer.
+      %p{:style => "font:normal 13px/19px 'Proxima Nova';"} An account with Stripe, our payment provider, is required for processing credit card transactions and receiving funds. If you already have an account, you can sign in as a returning customer. If you need help setting up tour accounr check out our #{link_to "Guide to Setting Up Stripe", download_stripe_guide_projects_path }.
       = link_to "https://connect.stripe.com/oauth/authorize?scope=read_only&response_type=code&client_id=#{Settings.stripe.client_id}", :target => "_blank", :class => "stripe-connect" do
         = image_tag "stripe-connect.png"
 
@@ -103,7 +103,7 @@
       %h5{:style => "color:#70bf4c;margin-bottom:10px;"} Your Ruuts
       %p First, we are so thrilled to have you on URUUT!
 
-      %p The process of building your project is simple and easy. We will walk you through each step and offer handy tips to make your project a success. For a more detailed guide on how to build and run a successful project, we will send you a complete Project Handbook once your project has been approved.
+      %p The process of building your project is simple and easy. We will walk you through each step and offer handy tips to make your project a success. For a more detailed guide on how to build and run a successful project, take a look at our handy #{link_to "Project Guide (pdf)", download_projects_path }.
 
       %p The first steps are Your Ruuts - which is your basic information - go ahead and get started! Don’t worry if you get stuck - you can come back anytime to edit your project right from your own profile dashboard page.
 %section#connectStripeModal.modal.hide.fade
