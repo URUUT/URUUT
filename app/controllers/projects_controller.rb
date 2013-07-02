@@ -293,7 +293,7 @@ class ProjectsController < ApplicationController
 
   def submit_project
     project = Project.find_by_id(params[:id])
-    # project.ready_for_approval = 0
+    # project_live = 0
     project.live = 0
     # project.approval_date = Date.today.strftime("%F")
     project.ready_for_approval = 1
@@ -332,6 +332,10 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.js { render action: "skip_sponsor.js.erb" }
     end
+  end
+
+  def update_sponsorship_content
+    respond_to :js
   end
 
   def update_td_mark

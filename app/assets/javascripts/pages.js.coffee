@@ -3,6 +3,18 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
+  $("#edit_user").validate
+    rules:
+      "user[last_name]":
+        required: true
+      "user[first_name]":
+        required: true
+      "user[email]":
+        required: true,
+        email: true
+    errorPlacement: (error, element) ->
+      error.appendTo element.parent().find(".error-container")
+
   $(".contact-for").validate
     rules:
       "pages[name]":

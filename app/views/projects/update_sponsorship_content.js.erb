@@ -1,0 +1,10 @@
+<% if params[:funding_goal].gsub(/,/, '').to_i * 0.02 < 500 %>
+  $(".bronze-amount-value").text("<%= amount_converter(params[:funding_goal].gsub(/,/, '').to_i * 0.02) %>");
+<% else %>
+  $(".bronze-amount-value").text("<%= amount_converter(500) %>");
+<% end %>
+
+$(".silver-amount-value").text("<%= amount_converter(params[:funding_goal].gsub(/,/, '').to_i * 0.04) %>");
+$(".gold-amount-value").text("<%= amount_converter(params[:funding_goal].gsub(/,/, '').to_i * 0.10) %>");
+$(".platinum-amount-value").text("<%= amount_converter(params[:funding_goal].gsub(/,/, '').to_i * 0.30) %>");
+
