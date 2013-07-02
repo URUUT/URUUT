@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   layout :layout_by_resource
+  before_filter :last_url
 
   def after_sign_in_path_for(resource)
     if session[:path] == "project_new"
@@ -38,6 +39,13 @@ class ApplicationController < ActionController::Base
     # end
   end
 
+  def last_url
+    url = request.url.split("/").last
+    puts url
+    session[:redirect_url_last] = session[:redirect_url]
+    session[:redirect_url] = request.url if !url.eql?("sign_in")
+    puts session[:redirect_url]
+  end
   protected
 
   def layout_by_resource

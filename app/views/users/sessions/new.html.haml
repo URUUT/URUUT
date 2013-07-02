@@ -1,6 +1,6 @@
 .span8{:style => "margin-top:35px;"}
   %h4 Login
-  = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "well clearfix"}) do |f|
+  = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "well clearfix"}, remote: true) do |f|
     = devise_error_messages!
 
     %div.inline

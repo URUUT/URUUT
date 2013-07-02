@@ -40,9 +40,12 @@ class ProjectsController < ApplicationController
     @project.live = 0
     @project.user_id = current_user.id
     @project.perk_permission = false
-    if @project.save
-      respond_to do |format|
+
+    respond_to do |format|
+      if @project.save
         format.json { render :json => @project.id }
+      else
+        format.json { render :json => "error" }
       end
     end
   end
