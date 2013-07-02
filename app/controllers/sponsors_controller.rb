@@ -35,6 +35,7 @@ class SponsorsController < ApplicationController
       else
         level_sponsor = @sponsorship_levels.first.id
         @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[level_sponsor]
+        # sponsor cost rule
         case level_sponsor
           when 1
             @cost = @project.goal.to_i * 0.3

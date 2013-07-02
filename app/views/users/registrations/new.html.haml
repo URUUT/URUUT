@@ -61,7 +61,11 @@
 :javascript
   $('#new_user').validate({
     messages: {
-      "user[password_confirmation]": "Required"
+      "user[password_confirmation]": {
+        required: "Required",
+        minlength: "Min 6 Character",
+        equalTo: "Doesn't Match"
+      }
     },
     rules: {
       "user[email]":{
@@ -80,7 +84,8 @@
       },
       "user[password_confirmation]":{
         required: true,
-        minlength: 6
+        minlength: 6,
+        equalTo: "#user_password"
       }
     },
     errorPlacement: function(error, element) {
