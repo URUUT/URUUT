@@ -1,8 +1,10 @@
 if ( $("#contact_list").val() == "" ){
   var emails = "<%= @emails %>";
+  $("#contact_list").val( $("#contact_list").val() + emails );
 }
 else{
+  <% unless @emails.blank? %>
   var emails = ",<%= @emails %>";
+  $("#contact_list").val( $("#contact_list").val() + emails );
+  <% end %>
 }
-
-$("#contact_list").val( $("#contact_list").val() + emails );
