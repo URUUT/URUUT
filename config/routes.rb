@@ -105,6 +105,8 @@ Crowdfund::Application.routes.draw do
     post "update_perk", :on => :collection
     post "delete_perk", :on => :collection
     put "edit", :on => :collection
+    get :download, on: :collection
+    get :download_stripe_guide, on: :collection
     resources :sponsors do
       get :get_sponsorship_levels
       get :confirm_sponsor
