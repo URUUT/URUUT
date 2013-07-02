@@ -1,7 +1,7 @@
 class DonationsController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: :default_perk
 	before_filter :authenticate_user!
-  before_filter :set_session_page, :set_session_wizard
+  before_filter :set_session_page, :set_session_wizard, :set_previous_path_for_registration
   layout "landing"
 
 	def new
@@ -214,6 +214,10 @@ class DonationsController < ApplicationController
 
   def set_session_page
     session[:page_active] = "project"
+  end
+
+  def set_previous_path_for_registration
+    session[:path] = params[:url]
   end
 
 end
