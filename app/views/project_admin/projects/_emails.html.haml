@@ -5,10 +5,10 @@
   %div.clearfix
     .form-send-message
     = form_for(@contact, :as => :post, :url => send_email_project_admin_projects_path, html: {remote: true, class: "send-project-email"}) do |f|
-      .clearfix{style: "margin-bottom: 20px;"}
+      .clearfix
         .pull-left
           = label_tag nil, class: "label-green" do
-            CONTRIBUTION CATEGORYs*
+            CONTRIBUTION CATEGORY*
             %span.error-container
           .selectParent{style: "width: 460px;"}
             = select_tag "sponsor_level", options_for_select(@list_recepients), prompt: "Choose sponsor level or perk", onchange: "get_emails_based_on_category()", class: "styledSelect"
@@ -16,7 +16,9 @@
           %a.cs_import.btn{style: "margin-left: 6%; margin-top: 17px;"} Add Contacts
 
       %div.textarea-recepient
-        %span.error-container{style: "margin-right: 40px;"}
+        = label_tag nil, class: "label-green" do
+          To:
+          %span.error-container{style: "margin-right: 40px;"}
         %textarea#contact_list{:style => "width:637px;height:60px", :name => "email_recepient", :placeholder => "emails separated by comma"}
         = hidden_field_tag 'email_temp'
 
