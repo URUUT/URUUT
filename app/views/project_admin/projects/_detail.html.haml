@@ -1,5 +1,5 @@
 %h2.title My Project Details
-= form_for(@project, html: {class: "sponsor-info span12 margin-auto well", multipart: true}, remote: true) do |f|
+= form_for(@project, html: {class: "sponsor-info project-detail-form span12 margin-auto well", multipart: true}, remote: true) do |f|
   .message-content
   %div.clearfix{:style => "margin-bottom: 20px;"}
     %div.pull-left{style: "min-width: 350px; max-width: 350px;margin-right: 20px;"}
@@ -22,16 +22,19 @@
   %div.margin-auto{:style => "margin-bottom: 20px;"}
     = f.label :title, class: "label-green" do
       CAMPAIGN HEADLINE
+      %span.error-container
       %span.cutdown.italic
     = f.text_area :title, maxlength: 150, :required => true, class: "headline", style: "width: 637px; height: 80px;"
   %div.margin-auto{:style => "margin-bottom: 20px;"}
     = f.label :story , "YOUR STORY", class: "label-green" do
       YOUR STORY
+      %span.error-container
       %span.italic
         (about your organization)
     = f.text_area :story, :required => true, style: "width: 637px; height: 298px;"
   %div.margin-auto{:style => "margin-bottom: 20px;"}
     = f.label :about , "TELL US ABOUT YOUR PROJECT", class: "label-green"
+    %span.error-container
     = f.text_area :about, :required => true, style: "width: 637px; height: 298px;"
 
   %hr{:style => "margin-top: 20px; margin-bottom: 20px; background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
@@ -48,3 +51,21 @@
   updateCutdown();
   $('.headline').change(updateCutdown);
   $('.headline').keyup(updateCutdown);
+
+  $('.project-detail-form').validate({
+    rules: {
+      "project[title]":{
+        required: true
+      },
+      "project[story]":{
+        required: true,
+      },
+      "project[about]":{
+        required: true,
+      }
+    },
+    errorPlacement: function(error, element) {
+      error.appendTo(element.parent().find(".error-container"));
+    }
+  });
+

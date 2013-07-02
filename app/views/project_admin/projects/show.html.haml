@@ -71,3 +71,14 @@
 
 .main-content{:style => "margin-top:200px;"}
   = render "overview"
+
+%section#noticeSuccess.modal.hide.fade
+  .modal-header{style: "height: 17px;"}
+    %button.close.closes{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"}
+      Close X
+    %h3#myModalLabel.tittle.title-modal{:style => "margin-bottom: 0;"}
+  .modal-body
+    %p.messages-content-modal
+  .modal-footer
+    %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal", style: "float: none; margin: 0 auto;"} Ok
+

@@ -134,7 +134,6 @@ class ProjectsController < ApplicationController
       @project.step = "/projects/#{@project.id}/edit#assets"
     end
 
-    debugger
     unless sponsorship_benefits.blank?
       # SponsorshipBenefit.where(project_id: params[:id]).destroy_all
       @sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits)
