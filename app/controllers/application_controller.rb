@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     begin
       sign_in_url = url_for(:action => 'new', :controller => 'sessions', :only_path => false, :protocol => 'http')
-      reset_url = url_for(:action => 'update', :controller => 'passwords', :only_path => false, :protocol => 'http')
+      reset_url = url_for(:action => 'edit', :controller => 'passwords', :only_path => false, :protocol => 'http')
       if session[:path] == "project_new"
         project = Project.new
         project.user_id = resource.id
