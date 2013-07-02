@@ -42,7 +42,8 @@
           %ul
             %li
               %h5 Account Log In
-              = form_tag user_session_path do
+              = form_tag user_session_path, remote: true  do
+                = hidden_field_tag 'url', request.url
                 = text_field_tag 'user[email]', nil, :placeholder => "Your Email"
                 = password_field_tag 'user[password]', nil, :placeholder => "Your Password"
                 %div
@@ -81,5 +82,13 @@
         = f.email_field :email
       %div{:style => "text-align: center"}
         = f.submit "Reset My Password", class: "btn", style: "background: #81C263; border-radius: 5px; padding-top: 20px; padding-bottom: 20px;"
+
+#errorModalForm.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "width: 440px;"}
+  .modal-header{:style => "border-bottom: none;"}
+    %button.close.label-green{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button", :style => "font-family: 'Proxima Nova', sans-serif; font-size: 12px;opacity: 1;"}
+      Close X
+    %h3#myModalLabel.tittle{:style => "margin-bottom: 0;"} UPS
+  .modal-body{:style => "padding-top: 0; font-size: 13px; letter-spacing: 1px;"}
+    %p Invalid email or password.
 
 = javascript_include_tag "pages"
