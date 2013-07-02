@@ -9,7 +9,19 @@ class ApplicationController < ActionController::Base
       project.save
       session[:path] == ""
       edit_project_path(project.id)
-    elsif request.referer.eql?(new_user_registration_url)
+    elsif request.referer.eql?(new_user_registration_url) || request.referer.nil?
+      if session[:path] == "project_new"
+        project = Project.new
+        project.user_id = resource.id
+        project.save
+        session[:path] == ""
+        edit_project_path(project.id)
+      elsif session[:path] == "sponsor_new"
+        new_project_sponsor_url
+      elsif session[:path]
+        session[:path]
+      end
+    elsif request.referer.start_with?(edit_user_password_url)
       root_url
     else
       stored_location_for(resource) || request.referer || root_path ||  request.env['omniauth.origin']
