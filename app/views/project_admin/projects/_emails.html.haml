@@ -19,8 +19,9 @@
         = label_tag nil, class: "label-green" do
           To:
           %span.error-container{style: "margin-right: 40px;"}
-        %textarea#contact_list{:style => "width:637px;height:60px", :name => "email_recepient", :placeholder => "emails separated by comma"}
+        %textarea#contact_list{:style => "width:637px;height:60px", :name => "email_recepient_show", :placeholder => "emails separated by comma", disabled: "disabled"}
         = hidden_field_tag 'email_temp'
+        = hidden_field_tag 'email_recepient'
 
       %div{:style => "margin-top: 10px"}
         = f.label :subject, class: "label-green" do
@@ -114,6 +115,7 @@
     $("#email_temp").val("");
 
     $("#contact_list").val( email_content + emails.join(emailSep) );
+    $("#email_recepient").val( $("#contact_list").val() );
   }
 
   function moveCurrentValue(contacts, source, owner) {
