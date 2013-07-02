@@ -1861,7 +1861,7 @@ body.users.show, body.users.profile{
 }
 
 body.pages.home{
-  #flash_notice{
+  #flash_notice, .alert{
     display: none;
   }
 }
