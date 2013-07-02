@@ -99,7 +99,7 @@
             Payment Amount
           %p.normal-font #{number_to_currency(@cost, precision: 0)}
           %div{:style => "height: 80px; width: 100%;"}
-            = link_to "CONFIRM", project_sponsor_confirm_sponsor_path(@project.id, @sponsor.id), :class => "btn confirm-button", :id => "project-submit"
+            = link_to "CONFIRM ►", project_sponsor_confirm_sponsor_path(@project.id, @sponsor.id), :class => "btn confirm-button", :id => "project-submit"
         -else
           %h6.label-green{:style => "margin-bottom: 0;"}
             Preferred Payment Method
@@ -111,7 +111,7 @@
             Payment Amount
           %p.normal-font #{number_to_currency(@cost, precision: 0)}
           %div{:style => "height: 80px; width: 100%;"}
-            = link_to "CONFIRM", purchase_path(project_id: @project.id, sponsor_id: @sponsor.id), :class => "btn confirm-button", :id => "project-submit"
+            = link_to "CONFIRM ►", purchase_path(project_id: @project.id, sponsor_id: @sponsor.id), :class => "btn confirm-button", :id => "project-submit"
 
 .project-id{:style => "display: none;"}
   = @project.id
