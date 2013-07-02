@@ -96,6 +96,7 @@ Crowdfund::Application.routes.draw do
     get "set_previous_path_for_registration_perk", :on => :collection
     get "set_perk_to_false", :on => :collection
     get "update_content_assets_tab", :on => :collection
+    get "update_sponsorship_content", :on => :collection
     get "update_td_mark", :on => :collection
     get "show_more_image", :on => :member
     post "add_perk", :on => :collection
@@ -139,7 +140,7 @@ Crowdfund::Application.routes.draw do
     get "privacy", :on => :collection
     get "funding_sources", :on => :collection
   end
-  
+
   mount Sidekiq::Web => '/sidekiq'
 
   root to: "pages#home"
