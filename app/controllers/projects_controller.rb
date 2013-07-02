@@ -334,6 +334,10 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def update_sponsorship_content
+    respond_to :js
+  end
+
   def update_td_mark
     @project = Project.find(params[:id])
     respond_to :js
