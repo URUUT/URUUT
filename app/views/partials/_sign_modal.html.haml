@@ -1,0 +1,9 @@
+#signinErrorModal.modal.hide.fade
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3.title-form-video.tittle Invalid email or password.
+  = form_tag save_video_projects_path, class: "video-upload", method: :post, remote: true do
+    .modal-body
+        Invalid email or password. If you have not signed up on URUUT, please Sign Up to continue.
+    .modal-footer
+      %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal", style: "float: none; margin: 0 auto;"} Ok
