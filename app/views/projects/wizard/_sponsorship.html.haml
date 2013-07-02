@@ -203,8 +203,8 @@
         .span3.left{:style => "text-align:left;color:#464646;"}
           %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0;"} Cost
           %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0"}
-            - if @project.goal && @project.goal.gsub(/,/, '').to_i * 0.1 < 500
-              = amount_converter(@project.goal.gsub(/,/, '').to_i * 0.1)
+            - if @project.goal && @project.goal.gsub(/,/, '').to_i * 0.02 < 500
+              = amount_converter(@project.goal.gsub(/,/, '').to_i * 0.02)
             -else
               = amount_converter(500)
         .span9.left{:style => "text-align:left;color:#464646;"}
@@ -234,10 +234,10 @@
       %hr{:style => "background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
       = hidden_field_tag "step", "fourth"
       %div
-        = f.submit "Save & Continue ►", :class => "btn", :id => "project-submit", :style => "position: relative;display:block;margin:0 auto;"
+        = f.submit "Save And Continue", :class => "btn", :id => "project-submit", :style => "position: relative;display:block;margin:0 auto;"
 
     %div.sponsorship-false{:style => "display:none"}
-      = link_to "CONTINUE TO STEP 5 ►", "/projects/#{@project.id}/edit#assets", class: "btn skip-step", id: "project-submit", style: "position: relative;display:block;margin:0 auto;width:36%"
+      = link_to "CONTINUE TO STEP 5", "/projects/#{@project.id}/edit#assets", class: "btn skip-step", id: "project-submit", style: "position: relative;display:block;margin:0 auto;width:35%"
   .span4{:style => "margin-top:155px;"}
     %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
     .well.info
