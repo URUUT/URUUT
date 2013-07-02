@@ -70,5 +70,5 @@ jQuery.validator.addMethod("requiredAmount", function(val, elem) {
 }, jQuery.validator.messages.number);
 
 jQuery.validator.addMethod("requiredUrl", function(val, elem) {
-  return  /^(www)+\.[a-zA-Z0-9\-\.]+\.[a-zA-Z0-9\-\.]/.test(val);
+  return  /^([w|W]{3})+\.[a-zA-Z0-9\-\.]+\.[a-zA-Z0-9\-\.]/.test(val);
 }, jQuery.validator.messages.url);
