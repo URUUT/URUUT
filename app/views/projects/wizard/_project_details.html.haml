@@ -154,6 +154,10 @@
       url: '#{project_path(@project.id)}',
       data: data
     }).done(function(data){
+      $.ajax({
+        type: 'GET',
+        url: '/projects/update_sponsorship_content?funding_goal='+ $("#project_goal").val()
+      });
       $(".perks-link").attr("href", "/projects/" + data +"/edit#perks");
       $('.step-container[data-id="project-details"] form input#project-submit').val("SAVE & CONTINUE ►");
       $(".wizard-data-title").text( $("#project_project_title").val() );
