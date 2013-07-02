@@ -404,6 +404,7 @@
 
   var addNewBenefit = function(){
     $(".save_new_benefit").bind("click", function(){
+      $('.step-container[data-id="sponsorship"] form').submit();
       var dataType = $(this).attr("data-type");
       if ($("."+dataType+"-availibility").attr('data-available') == "0"){
         alert("You Can't Add Another Sponsor");
