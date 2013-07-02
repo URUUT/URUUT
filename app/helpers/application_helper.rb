@@ -25,8 +25,8 @@ module ApplicationHelper
   end
 
   def amount_converter(amount)
-    if amount.to_i.to_s.length > 5
-      number_to_currency(number_to_human(amount), precision: 3)
+    if amount.to_f.to_s.length > 5
+      number_to_currency(number_to_human(amount), precision: 2)
     else
       number_to_currency(amount, precision: 0)
     end
