@@ -1,19 +1,36 @@
 %h2.title ADD A PROJECT UPDATE
 .notice
-= form_for(@project_update, url: process_project_update_project_admin_projects_path, html: {class: "sponsor-info span12 margin-auto well"}, method: :post, remote: true) do |f|
+= form_for(@project_update, url: process_project_update_project_admin_projects_path, html: {class: "sponsor-info project-update-form span12 margin-auto well"}, method: :post, remote: true) do |f|
   .req-legend
     *Required
   %div.margin-auto{:style => "margin-bottom: 20px;"}
     = f.label :title, class: "label-green" do
       NEW PROJECT UPDATE TITLE*
+      %span.error-container{style: "margin-right: 40px;"}
       %span.cutdown.italic
     = f.text_area :title, maxlength: 150, :required => true, class: "headline", style: "width: 640px; height: 80px;"
   %div.margin-auto{:style => "margin-bottom: 20px;"}
     = f.label :content , "NEW PROJECT UPDATE CONTENT*", class: "label-green"
+    %span.error-container{style: "margin-right: 40px;"}
     = f.text_area :content, :required => true, style: "width: 640px; height: 298px;"
 
   %hr{:style => "background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
 
   %div.margin-auto
     = f.submit "POST PROJECT UPDATE ►", :class => "btn", :id => "project-submit", :style => "border-radius: 5px;"
+
+:javascript
+  $(".project-update-form").validate({
+    rules: {
+      "project_update[title]": {
+        required: true
+      },
+      "project_update[content]": {
+        required: true
+      }
+    },
+    errorPlacement: function(error, element) {
+      error.appendTo(element.parent().find(".error-container"));
+    }
+  });
 

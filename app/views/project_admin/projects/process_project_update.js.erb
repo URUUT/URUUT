@@ -1,1 +1,8 @@
-$(".notice").html("<%= @alert %>");
+$(".title-modal").text("Project update success");
+$(".messages-content-modal").text("Project successfully updated");
+$("#noticeSuccess").modal("show");
+
+$("#project_update_title").val("");
+$("#project_update_content").val("");
+$("#post_email_content").val("");
+
