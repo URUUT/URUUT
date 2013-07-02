@@ -51,12 +51,15 @@ class Project < ActiveRecord::Base
 
   def list_recepient
     data = []
-    level_ids = self.project_sponsors.map(&:level_id).uniq
+    level_ids = self.project_sponsors.map(&:level_id).uniq.sort{ |x,y| y <=> x }
     perk_names = self.donations.map(&:perk_name).uniq
     sponsorship_levels = SponsorshipLevel.where("id IN (?)", level_ids).uniq
 
-    sponsorship_levels.map { |sponsor| [sponsor.name, sponsor.id] }.each { |sponsor| data << sponsor }
-    perk_names.map { |sponsor| [sponsor, sponsor] }.each { |sponsor| data << sponsor }
+    data.push(["All Project Sponsors","All Project Sponsors"]) unless sponsorship_levels.empty?
+    sponsorship_levels.map { |sponsor| [sponsor.name + " Level Sponsors", sponsor.id] }.each { |sponsor| data << sponsor }
+    data.push(["All Project Donors","All Project Donors"]) unless perk_names.empty?
+    perk_names.map { |sponsor| [sponsor + " Project Donors" , sponsor + " Project Donors" ] }.each { |sponsor| data << sponsor }
+    data.unshift(["All Project Sponsors and Donors","All Project Sponsors and Donors"]) if !sponsorship_levels.empty? and !perk_names.empty?
     data
   end
 

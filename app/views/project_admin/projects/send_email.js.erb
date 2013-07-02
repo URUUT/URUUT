@@ -1,5 +1,6 @@
 <% if @error_messages.blank? %>
-$(".form-send-message").html("Email delivered")
-<% else %>
-$(".form-send-message").html('<%= @error_messages.join(", ") %>');
+$("#emailSuccess").modal("show");
+$("#contact_list").val("");
+$("#post_subject").val("");
+$("#post_email_content").val("");
 <% end %>
