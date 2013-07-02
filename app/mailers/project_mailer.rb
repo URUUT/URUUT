@@ -17,7 +17,7 @@ class ProjectMailer < ActionMailer::Base
     @project = project
     @project_title = project.title
 
-    mail to: @email, subject: @project_title
+    mail to: @email, subject: "Wait For Approval"
   end
 
   def project_message(recepient, header_image, content)
