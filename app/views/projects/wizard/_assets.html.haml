@@ -328,7 +328,7 @@
   = form_tag save_video_projects_path, class: "video-upload", method: :post, remote: true do
     .modal-body{style: "font-family: 'Proxima Nova Semi', sans-serif; color: #464646"}
       %span.error-container
-      = url_field_tag "video_link", nil, placeholder: "Youtube URL", class: "span4", style: "height: 30px; width: 100%;"
+      = url_field_tag "video_link", nil, placeholder: "Youtube URL", class: "span4", style: "height: 30px; width: 100%; box-sizing: border-box;"
       %p{style: "font-size: 14px;"}
         To upload a video please copy and paste Youtube video link into the space provided.
       = hidden_field_tag "video_type"
