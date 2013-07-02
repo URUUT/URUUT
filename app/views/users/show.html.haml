@@ -91,9 +91,10 @@
                     %p
                       = "Are you sure you want to delete the pending project #{title}?"
                   .modal-footer
-                    %a.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Cancel
                     = link_to "Yes, Delete Project", project_path(pending_project), method: :delete, class: "btn"
-
+                    
+                    %a.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Cancel
+                    
                 / %a{:href => "#deleteModal",}
                 /   %i.icon-trash.icon-green
 

@@ -1399,7 +1399,16 @@ div[id^='step'] {
 		width:80px;
 		span {
 			font:normal 18px/30px arial, helvetica, sans-serif;
-			margin-left: 53px;
+			margin-left: 43px;
+		}
+	}
+
+	a{
+		&.fb-count{
+			color: #403e37 !important;
+			&:hover{
+				text-decoration: none;
+			}
 		}
 	}
 	.tw-count {
