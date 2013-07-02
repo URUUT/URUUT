@@ -49,7 +49,7 @@ class ProjectsController < ApplicationController
 
   def edit
     sort_sponsorships = @project.project_sponsors.sort_by {|ps| ps.level_id}
-    @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
+    @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).order(:id).group_by {|sponsor| sponsor.sponsorship_level_id}
     session[:current_project] = @project.id
     @project.update_attributes!(params[:project])
     @perks = @project.perks.order(:amount)
@@ -60,7 +60,7 @@ class ProjectsController < ApplicationController
     @images = @project.galleries.page(params[:page]).per(6)
     sort_sponsorships = @project.project_sponsors.sort_by {|ps| ps.level_id}
     @project_sponsors = sort_sponsorships.group_by {|sponsor| sponsor.level_id}
-    @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
+    @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).order(:id).group_by {|sponsor| sponsor.sponsorship_level_id}
     @perks = @project.perks.order(:amount)
     session[:current_project] = @project.id
     render :layout => 'landing'
