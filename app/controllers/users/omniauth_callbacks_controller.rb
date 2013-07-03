@@ -56,6 +56,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       redirect_to new_project_sponsor_url
     elsif session[:path]
       redirect_to session[:path]
+    elsif !session[:redirect_url_last].blank?
+      redirect_to session[:redirect_url_last]
     else
       redirect_to stored_location_for(resource) || request.referer || session[:redirect_url_last]  ||  request.env['omniauth.origin']
     end

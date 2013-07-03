@@ -10,7 +10,7 @@ class ProjectMailer < ActionMailer::Base
     user = User.find_by_id(project.user_id)
     logger.debug(user)
 
-    @name = "#{user.first_name}" + "#{user.last_name}"
+    @name = "#{user.first_name}" + " #{user.last_name}"
     @email = user.email
     @image = project.large_image
     @host = ActionMailer::Base.default_url_options[:host]
@@ -26,4 +26,13 @@ class ProjectMailer < ActionMailer::Base
     mail to: recepient, subject: "Project messages from Crowfundproject"
   end
 
+  def project_approved(project)
+    user = User.find_by_id(project.user_id)
+    email = user.email
+    @name = "#{user.first_name}" + " #{user.last_name}"
+    @image = project.large_image
+    @host = ActionMailer::Base.default_url_options[:host]
+    @project_id = project.id
+    mail to: email, subject: "Your Project Has Been Approved"
+  end
 end

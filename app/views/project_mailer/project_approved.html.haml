@@ -61,10 +61,14 @@
                 %tr{:style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;"}
                   %td{:style => "margin: 0;padding: 15px;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;width:100%;max-width:620px;"}
                     %p{:style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-bottom: 10px;font-weight: normal;font-size: 14px;line-height: 1.6;"} Dear #{@name}
-                    %p{:style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-bottom: 10px;font-weight: normal;font-size: 14px;line-height: 1.6;"} We have received your submission for #{@project_title} to URUUT.
-                    %p{:style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-bottom: 10px;font-weight: normal;font-size: 14px;line-height: 1.6;"} Over the next 72 hours, we will review your information and approve, deny or suggest changes to your project.  This process is intended to protect you from circumstances you may not have foreseen and ensure that you are set up to succeed. Thank you for your patience while we make sure everything is ready to go.  We will be back in touch with you as quickly as we can; we know that you are ready to get things moving.
+                    %p{:style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-bottom: 10px;font-weight: normal;font-size: 14px;line-height: 1.6;"} Congratulations!  Your URUUT project has been approved!  We applaud your initiative to take charge of improving your community, and our tools are here to help you make that a reality.  Now, it’s time to get to work.  Attached, you will find a Guidebook that will take you through everything you need to know to make your campaign a success.  We hope you are as excited as we are about getting this process underway.  If you need help with anything not covered in the attached materials, please feel free to reach out to our team at #{@host}/pages/contact.
                     %p{:style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-bottom: 10px;font-weight: normal;font-size: 14px;line-height: 1.6;"} 
-                      In the meantime, if you have any questions that aren’t answered in the FAQ’s (#{@host}/pages/faqs), please feel free to reach out to us at #{@host}/pages/contact
+                    Also, we encourage you to actively monitor the activity of your project by accessing the project's
+                    %a{:href => "http://#{@host}/project_admin/projects/#{@project_id}"} admin module
+                    %p{:style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-bottom: 10px;font-weight: normal;font-size: 14px;line-height: 1.6;"} 
+                      Sincerely,
+                      %br
+                      The URUUT Team
                     
           - if @sponsor
             .column{:style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;width: 300px;float: left;"}

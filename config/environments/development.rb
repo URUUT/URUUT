@@ -42,12 +42,12 @@ Crowdfund::Application.configure do
 
 
   config.action_mailer.smtp_settings = {
-    address: "smtp.mandrillapp.com",
+    address: "smtp.gmail.com",
     port: 587,
-    # domain: "localhost",
-#     enable_starttls_auto: :true,
-    user_name: ENV['MANDRILL_USER'],
-    password: ENV['MANDRILL_PASSWORD']
+    domain: "uruut.com",
+    enable_starttls_auto: :true,
+    user_name: ENV['GMAIL_USER'],
+    password: ENV['GMAIL_PASSWORD']
   }
   
 

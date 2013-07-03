@@ -151,6 +151,10 @@ class Project < ActiveRecord::Base
   def self.send_confirmation_email(project)
     ProjectMailer.project_confirmation(project).deliver
   end
+  
+  def self.send_approval_email(project)
+    ProjectMailer.project_approved(project).deliver
+  end
 
   def downcase_city
     unless self.city.nil?
