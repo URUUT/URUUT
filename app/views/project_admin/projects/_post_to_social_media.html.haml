@@ -6,7 +6,7 @@
         %h4.label-green{:style => "margin-bottom: 0;"}
           FACEBOOK
         %p Post a message on your facebook page
-        = link_to image_tag("fb-post.png"), "https://www.facebook.com/dialog/feed?app_id=#{Settings.facebook.api_key}&link=#{project_url(@project.id)}&picture=http://fbrell.com/f8.jpg&name=#{url_encode(@project.title)}&caption=#{url_encode(@project.category)}&description=#{url_encode("Like making a difference in the community? Check out this great project I found on @URUUT.  You can help fund it, or set up a project of your own to Get RUUTed!")}&redirect_uri=#{project_admin_project_messages_url(@project.id)}", target: "_blank"
+        = link_to image_tag("fb-post.png"), "https://www.facebook.com/dialog/feed?app_id=#{Settings.facebook.api_key}&link=#{project_url(@project.id)}&picture=#{@project.large_image}&name=#{url_encode(@project.project_title)}&caption=#{url_encode(@project.category)}&description=#{url_encode("Like making a difference in the community? Check out this great project I found on @URUUT.  You can help fund it, or set up a project of your own to Get RUUTed!")}&redirect_uri=#{project_admin_project_messages_url(@project.id)}", target: "_blank"
       .span6
         %h4.label-green{:style => "margin-bottom: 0;"}
           TWITTER
