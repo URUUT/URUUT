@@ -41,10 +41,10 @@ class ApplicationController < ActionController::Base
 
   def last_url
     url = request.url.split("/").last
-    puts url
-    session[:redirect_url_last] = session[:redirect_url]
-    session[:redirect_url] = request.url if !url.eql?("sign_in")
-    puts session[:redirect_url]
+    unless params[:controller].eql?("registrations")
+      session[:redirect_url_last] = session[:redirect_url]
+      session[:redirect_url] = request.url if !url.eql?("sign_in")
+    end
   end
 
   def session_email_forgot_password
