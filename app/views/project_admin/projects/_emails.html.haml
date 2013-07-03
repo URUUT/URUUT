@@ -78,8 +78,8 @@
     }
   });
 
-  if ($("#sponsor_level :selected").text().length > 17){
-      $("#sponsor_level :selected").text(truncText($("#sponsor_level :selected").text(), 15, "..."))
+  if ($("#sponsor_level :selected").text().length > 31){
+      $("#sponsor_level :selected").text(truncText($("#sponsor_level :selected").text(), 31, "..."))
     }
 
   $("#sponsor_level").on('change',function(){
@@ -87,8 +87,8 @@
     for (var i = 1; i < length; i++){
       $("#sponsor_level option")[i].text = $("#sponsor_level option")[i].attributes['data-name'].value
     }
-    if ($("#sponsor_level :selected").text().length > 17){
-      $("#sponsor_level :selected").text(truncText($("#sponsor_level :selected").text(), 15, "..."))
+    if ($("#sponsor_level :selected").text().length > 31){
+      $("#sponsor_level :selected").text(truncText($("#sponsor_level :selected").text(), 31, "..."))
     }
   })
 
