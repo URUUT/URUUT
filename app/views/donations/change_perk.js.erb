@@ -22,7 +22,13 @@ $("#perk_type option:contains(" + theText + ")").attr('selected', 'selected');
     $(".perk-amount").attr('style', 'font-size: 30px; color:#81C263;font-family:"Proxima Nova Bold";line-height:100%;')
   <% end %>
   $(".perk-amount").show();
-  $(".perk-amount").text("<%= number_to_currency(@perk.amount, :precision => 0) %>");
+
+  <% if @perk.amount.to_s.split(".")[1].eql?("0") %>
+    $(".perk-amount").text("<%= number_to_currency(@perk.amount, :precision => 0) %>");
+  <% else %>
+    $(".perk-amount").text("<%= number_to_currency(@perk.amount, :precision => 2) %>");
+  <% end %>
+
   $(".perk-name").text("<%= @perk.name %>");
   $(".perk-description").text("<%= @perk.description.to_s.html_safe %>");
   $("#amount").val("<%= @perk.amount.to_s.split(".")[0] %>");
@@ -30,7 +36,11 @@ $("#perk_type option:contains(" + theText + ")").attr('selected', 'selected');
 
   <% if @project.perk_permission? %>
     $(".description-custom").show();
-    $(".description-custom").html("You will receive <%= @perk.amount.to_i %> Uruut Reward Points when you seed <%= number_to_currency(@perk.amount.to_f, precision: 2) %>");
+    <% if @perk.amount.to_s.split(".")[1].eql?("0") %>
+      $(".description-custom").html("You will receive <%= @perk.amount.to_i %> Uruut Reward Points when you seed <%= number_to_currency(@perk.amount.to_f, precision: 0) %>");
+    <% else %>
+      $(".description-custom").html("You will receive <%= @perk.amount.to_i %> Uruut Reward Points when you seed <%= number_to_currency(@perk.amount.to_f, precision: 2) %>");
+    <% end %>
   <% else %>
     $(".description-custom").hide();
   <% end %>
@@ -53,12 +63,19 @@ $("#perk_type option:contains(" + theText + ")").attr('selected', 'selected');
   $(".perk-name").text("Custom");
   $(".perk-description").text("");
   $(".description-custom").show();
-  $(".description-custom").html("You will receive <%= @perk.amount.to_i %> Uruut Reward Points when you seed <%= number_to_currency(@perk.amount.to_f, precision: 2) %>");
-
+  <% if @perk.amount.to_s.split(".")[1].eql?("0") %>
+    $(".description-custom").html("You will receive <%= @perk.amount.to_i %> Uruut Reward Points when you seed <%= number_to_currency(@perk.amount.to_f, precision: 0) %>");
+  <% else %>
+    $(".description-custom").html("You will receive <%= @perk.amount.to_i %> Uruut Reward Points when you seed <%= number_to_currency(@perk.amount.to_f, precision: 2) %>");
+  <% end %>
   <% if @perks.blank? %>
     $(".selectParent").hide();
     $(".none-perks").show();
-    $(".none-perks").html("You will receive <%= @perk.amount.to_i %> Uruut Reward Points when you seed <%= number_to_currency(@perk.amount, precision: 0) %>");
+    <% if @perk.amount.to_s.split(".")[1].eql?("0") %>
+      $(".none-perks").html("You will receive <%= @perk.amount.to_i %> Uruut Reward Points when you seed <%= number_to_currency(@perk.amount, precision: 0) %>");
+    <% else %>
+      $(".none-perks").html("You will receive <%= @perk.amount.to_i %> Uruut Reward Points when you seed <%= number_to_currency(@perk.amount, precision: 2) %>");
+    <% end %>
   <% else %>
     <% if @project.perk_permission %>
       $(".selectParent").show();
@@ -74,7 +91,13 @@ $("#perk_type option:contains(" + theText + ")").attr('selected', 'selected');
 <% end %>
 <% char_size = params[:custom_seed].gsub(/[^\d,]+/, '').gsub(",", "").length %>
 $("#custom_amount").val("<%= number_to_currency(params[:custom_seed].gsub(",", "").to_f, precision: 2) %>");
-$("#custom_amount").text("<%= number_to_currency(params[:custom_seed].gsub(",", "").to_f, precision: 2) %>");
+
+<% if params[:custom_seed].include?(".") %>
+  $("#custom_amount").text("<%= number_to_currency(params[:custom_seed].gsub(",", "").to_f, precision: 2) %>");
+<% else %>
+  $("#custom_amount").text("<%= number_to_currency(params[:custom_seed].gsub(",", "").to_f, precision: 0) %>");
+<% end %>
+
 <% if char_size <= 5 %>
   $("#custom_amount").attr('style', 'font-size: 52px; color:#81C263;font-family:"Proxima Nova Bold";line-height:100%;')
 <% else %>
