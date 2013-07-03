@@ -11,7 +11,7 @@
             CONTRIBUTION CATEGORY*
             %span.error-container
           .selectParent{style: "width: 460px;"}
-            = select_tag "sponsor_level", options_for_select(@list_recepients), prompt: "Choose sponsor level or perk", onchange: "get_emails_based_on_category()", class: "styledSelect"
+            = select_tag "sponsor_level", options_for_select(@list_recepients), onchange: "get_emails_based_on_category()", class: "styledSelect"
         .pull-left
           %a.cs_import.btn{style: "margin-left: 6%; margin-top: 17px;"} Add Contacts
 
@@ -20,8 +20,9 @@
           To:
           %span.error-container{style: "margin-right: 40px;"}
         %textarea#contact_list{:style => "width:637px;height:60px", :name => "email_recepient_show", :placeholder => "emails separated by comma", disabled: "disabled"}
+          = @emails
         = hidden_field_tag 'email_temp'
-        = hidden_field_tag 'email_recepient'
+        = hidden_field_tag 'email_recepient', @emails
 
       %div{:style => "margin-top: 10px"}
         = f.label :subject, class: "label-green" do
@@ -107,14 +108,14 @@
       }
     }
 
-    var email_content = $("#email_temp").val();
-    if ( $("#email_temp").val().slice(-1) != "," && $("#email_temp").val() != "" ){
-      email_content = $("#email_temp").val() + " ,";
-    }
+    // var email_content = $("#email_temp").val();
+    // if ( $("#email_temp").val().slice(-1) != "," && $("#email_temp").val() != "" ){
+    //   email_content = $("#email_temp").val() + " ,";
+    // }
     $("#contact_list").val("");
     $("#email_temp").val("");
 
-    $("#contact_list").val( email_content + emails.join(emailSep) );
+    $("#contact_list").val( emails.join(emailSep) );
     $("#email_recepient").val( $("#contact_list").val() );
   }
 
