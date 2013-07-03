@@ -16,6 +16,7 @@ class DonationMailer < ActionMailer::Base
     @image = project.large_image
     @host = ActionMailer::Base.default_url_options[:host]
     @project = project
+    @project_id = project.id
     @project_facebook = @project.facebook_page
     @project_twitter = @project.twitter_handle
     @project_title = project.title
