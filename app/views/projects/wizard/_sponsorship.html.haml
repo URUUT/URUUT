@@ -455,6 +455,7 @@
               c = 0;
             }
             c++;
+            $("#"+name+"-count").val(c + 1)
             $(sponsorship).attr({id: name + "_" + c , name: name + "["+ c + "]"});
             $(contentSponsor).attr({id: name + "_info_" + c , name: name + "[info_"+ c + "]"});
           }
