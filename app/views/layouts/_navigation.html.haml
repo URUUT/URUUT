@@ -80,7 +80,7 @@
         %h4.label-green
           Email Address
           %span.error-container{style: "margin-top: 3px;"}
-        = f.email_field :email
+        = f.email_field :email, class: "email-address-forgot"
       %div{:style => "text-align: center"}
         = f.submit "Reset My Password ►", class: "btn", style: "background: #81C263; border-radius: 5px; padding-top: 20px; padding-bottom: 20px;"
 
@@ -98,13 +98,11 @@
       Close X
     %h3#myModalLabel.tittle{:style => "margin-bottom: 0;"} FORGOT YOUR PASSWORD?
   .modal-body{:style => "padding-top: 0; font-size: 13px; letter-spacing: 1px;"}
-    %p We've sent an email to ... with instructions on how to change your password.
+    %p We've sent an email to #{session[:email_forgot_password]} with instructions on how to change your password.
     %p It may take a few minutes to receive the email. If you don't receive the email:
     %ul
       %li Check your junk mail folder.
-      %li To re-send the email, please
-        %a{"data-toggle" => "modal", :href => "#forgotModal", :role => "button", style: "font: italic 12px/15px 'Georgia', georgia, serif !important;text-transform:none;"}
-          click here.
+      %li To re-send the email, please <a id="click-here">click here.</a>
 
 = javascript_include_tag "pages"
 
@@ -119,4 +117,12 @@
     errorPlacement: function(error, element) {
       error.appendTo(element.parent().find(".error-container"));
     }
+  });
+
+  $(document).ready(function() {
+    $("#click-here").click(function(){
+      $("#forgotPasswordModalForm").modal("hide");
+      $("#forgotModal").modal("show");
+      $(".email-address-forgot").val("");
+    })
   });
