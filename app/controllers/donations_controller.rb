@@ -134,6 +134,7 @@ class DonationsController < ApplicationController
       session[:payment_amount] = params[:donation][:amount]
       session[:project_id_of_perk_selected] = params[:donation][:project_id]
       session[:perk_amount] = params[:donation][:amount]
+      Donation.delay.send_confirmation_email(@donation)
       redirect_to donation_steps_path
     else
       render :new
