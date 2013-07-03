@@ -11,6 +11,7 @@
     - if controller_name == "projects" and action_name == "show"
       %meta{:property => "og:image", :content => "#{@project.large_image}"}
       %meta{:property => "og:title", :content => "#{@project.title}"}
+    = favicon_link_tag 'favicon.ico'
     = stylesheet_link_tag  "default/application", "trontastic/jquery-ui-1.8.22.custom.css", "leaflet.css", "style.css.scss", :media => "all"
     = stylesheet_link_tag "image_select/jquery.Jcrop.min"
     = javascript_include_tag "application", "https://js.stripe.com/v1/", :media => "all"
