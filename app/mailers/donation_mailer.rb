@@ -9,7 +9,11 @@ class DonationMailer < ActionMailer::Base
 
   def share_project(recepient, project_id)
     @project = Project.find(project_id)
-    mail to: recepient, subject: "Share from Crowfundproject donor"
+    @project_title = @project.title
+    @donator_name = "#{current_user.first_name}" + " #{current_user.last_name}"
+    @image = @project.large_image
+    
+    mail to: recepient, subject: "Checkout The Project I Donated To"
   end
 
   def donation_confirmation(donation)
