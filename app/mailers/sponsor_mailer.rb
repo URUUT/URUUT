@@ -1,4 +1,5 @@
 class SponsorMailer < ActionMailer::Base
+  helper :mailer
   default from: "info@uruut.com"
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -34,7 +35,7 @@ class SponsorMailer < ActionMailer::Base
     @project_title = project.title
     @sponsor_email = sponsor.email
     @sponsorship_level = benefit_level.name
-    @sponsorship_cost = "$#{project_sponsor.cost}"
+    @sponsorship_cost = make_currency(project_sponsor.cost)
     
     @name = "#{user.first_name}" + " #{user.last_name}"
     @sponsor_name = project_sponsor.name
