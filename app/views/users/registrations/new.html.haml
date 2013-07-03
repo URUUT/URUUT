@@ -99,11 +99,6 @@
         $('#user_password_confirmation').attr('class', 'error')
         $('.error-container:last').append("<label for='user_password_confirmation' class='error' style='display: block;'>Doesn't Match</label>");
       }
-    }else{
-      $('.error-container:last').text('');
-      $('#user_password_confirmation').removeClass("valid");
-      $('#user_password_confirmation').attr('class', 'error')
-      $('.error-container:last').append("<label for='user_password_confirmation' class='error' style='display: block;'>Doesn't Match</label>");
     }
 
     if( 6 > $('#user_password_confirmation').val().length && $('#user_password_confirmation').val() != ""){
@@ -115,9 +110,18 @@
 
   };
 
-  $('#user_pass, #user_password_confirmation').keyup(function(){
+  $('#user_pass, #user_password_confirmation').keyup(function(e){
     validatePass();
   });
+
+  $(document).keyup(function(e){
+    if(e.keyCode == 9){
+      validatePass();
+      $('#user_pass, #user_password_confirmation').keyup(function(e){
+        validatePass();
+     });
+    }
+  })
 
   $("form").submit(function(){
     if($('#user_password_confirmation').val() == ""){
@@ -125,6 +129,7 @@
       $('#user_password_confirmation').removeClass("valid");
       $('#user_password_confirmation').attr('class', 'error')
       $('.error-container:last').append("<label for='user_password_confirmation' class='error' style='display: block;'>Required</label>");
+      return false;
     }
 
     if( 6 > $('#user_password_confirmation').val().length && $('#user_password_confirmation').val() != ""){

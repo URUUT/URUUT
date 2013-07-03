@@ -7,9 +7,14 @@ class DonationMailer < ActionMailer::Base
   #   en.contact_mailer.contact_confirmation.subject
   #
 
-  def share_project(recepient, project_id)
+  def share_project(recepient, project_id, user_id)
     @project = Project.find(project_id)
-    mail to: recepient, subject: "Share from Crowfundproject donor"
+    @project_title = @project.project_title
+    user = User.find_by_id(user_id)
+    @donator_name = "#{user.first_name}" + " #{user.last_name}"
+    @image = @project.large_image
+
+    mail to: recepient, subject: "Checkout The Project I Donated To"
   end
 
   def donation_confirmation(donation)
@@ -25,7 +30,7 @@ class DonationMailer < ActionMailer::Base
     @project_id = project.id
     @project_facebook = @project.facebook_page
     @project_twitter = @project.twitter_handle
-    @project_title = project.title
+    @project_title = project.project_title
     @sponsor_email = sponsor.email
     @sponsor_name = "#{sponsor.first_name}" + " #{sponsor.last_name}"
 

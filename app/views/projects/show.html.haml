@@ -43,7 +43,7 @@
           / = image_tag "fb-count.png", :class => "fb-share", :style => "margin-right:20px;"
           / = image_tag "tw-count.png", :class => "tw-share", :style => "margin-right:20px;"
           / = image_tag "bitly-link.png", :style => "margin-right:20px;"
-          %a.fb-count{:href => "https://www.facebook.com/dialog/feed?app_id=#{Settings.facebook.api_key}&link=#{project_url(@project.id)}&picture=http://fbrell.com/f8.jpg&name=#{url_encode(@project.title)}&caption=#{url_encode(@project.category)}&description=#{url_encode("Like making a difference in the community? Check out this great project I found on @URUUT.  You can help fund it, or set up a project of your own to Get RUUTed! ")}&redirect_uri=#{root_url}", :target => "_blank"}
+          %a.fb-count{:href => "https://www.facebook.com/dialog/feed?app_id=#{Settings.facebook.api_key}&link=#{project_url(@project.id)}&picture=#{@project.large_image}&name=#{url_encode(@project.project_title)}&caption=#{url_encode(@project.category)}&description=#{url_encode("Like making a difference in the community? Check out this great project I found on @URUUT.  You can help fund it, or set up a project of your own to Get RUUTed! ")}&redirect_uri=#{root_url}", :target => "_blank"}
             %span
           / .fb-like{"data-font" => "lucida grande", "data-href" => "http://uruut.41studio.com", "data-layout" => "button_count", "data-send" => "false", "data-show-faces" => "true", "data-width" => "450"}
           .tw-count
@@ -102,7 +102,7 @@
           / = image_tag "fb-count.png", :class => "fb-share", :style => "margin-right:20px;"
           / = image_tag "tw-count.png", :class => "tw-share", :style => "margin-right:20px;"
           / = image_tag "bitly-link.png", :style => "margin-right:20px;"
-          %a.fb-count{:href => "https://www.facebook.com/dialog/feed?app_id=#{Settings.facebook.api_key}&link=#{project_url(@project.id)}&picture=http://fbrell.com/f8.jpg&name=#{url_encode(@project.title)}&caption=#{url_encode(@project.category)}&description=#{url_encode("Like making a difference in the community? Check out this great project I found on @URUUT.  You can help fund it, or set up a project of your own to Get RUUTed! ")}&redirect_uri=#{root_url}", :target => "_blank"}
+          %a.fb-count{:href => "https://www.facebook.com/dialog/feed?app_id=#{Settings.facebook.api_key}&link=#{project_url(@project.id)}&picture=#{@project.large_image}&name=#{url_encode(@project.project_title)}&caption=#{url_encode(@project.category)}&description=#{url_encode("Like making a difference in the community? Check out this great project I found on @URUUT.  You can help fund it, or set up a project of your own to Get RUUTed! ")}&redirect_uri=#{root_url}", :target => "_blank"}
             %span
           .tw-count
             %span

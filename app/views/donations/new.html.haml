@@ -40,7 +40,7 @@
           %h3.perk-name.label-green{:style => 'font-size:20px; line-height:100%;margin:0;'}= @perk_name
           %p.perk-description= @perk_description
           %p.description-custom
-            You will receive #{@perk_amount.to_i} Uruut Reward Points when you seed #{number_to_currency(@perk_amount.to_f, precision: 2)}
+            You will receive #{@perk_amount.to_i} Uruut Reward Points when you seed #{number_to_currency(@perk_amount.to_f, precision: precision)}
         .cf
         %p.checkout-continue-subtext Continue to payment information below or choose a different seed amount/perk from the right.
 
@@ -95,7 +95,10 @@
           %ul
             %li.seed-amount{id: "amount-id-custom", style: "#{"background: #bee0b4" if @perk_name.eql?("custom")}"}
               %h6 AMOUNT TO SEED
-              %p.amount= text_field_tag :custom_seed, "#{@perk_amount if @perk_name.eql?("custom")}" , {style: "width: 100%;"}
+              - if @perk_amount.to_s.split(".")[1].eql?("0")
+                %p.amount= text_field_tag :custom_seed, "#{@perk_amount.to_i if @perk_name.eql?("custom")}" , {style: "width: 100%;"}
+              - else
+                %p.amount= text_field_tag :custom_seed, "#{@perk_amount if @perk_name.eql?("custom")}" , {style: "width: 100%;"}
           %a{style: "#{"background: #81C263" if @perk_name.eql?("custom")}", :class => "fund btn change-fund pull-right", "perk-id" => "custom", id: "button-fund-custom"} Fund Now ►
 
 :javascript
