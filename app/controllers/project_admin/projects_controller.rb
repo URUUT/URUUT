@@ -94,7 +94,7 @@ class ProjectAdmin::ProjectsController < ApplicationController
       subject = params[:post][:subject]
       recepients = params[:email_recepient].split(",")
       recepients.each do |recepient|
-        # ProjectMailer.project_message(recepient, params[:post]["subject"], params[:email_header], params[:post]["email_content"]).deliver
+        ProjectMailer.project_message(recepient, params[:post]["subject"], params[:email_header], params[:post]["email_content"]).deliver
       end
     end
   end
