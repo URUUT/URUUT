@@ -50,7 +50,6 @@
           - if check_availibility(@project, 1) < 1
             %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-1", :"sponsor-id" => "1"}
               SPONSOR ►
-              %span
           -else
             .pull-right{style: "font-style: italic; margin-top:20px;"}
               Not Available
@@ -71,7 +70,6 @@
           - if check_availibility(@project, 2) < 3
             %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-2", :"sponsor-id" => "2"}
               SPONSOR ►
-              %span
           -else
             .pull-right{style: "font-style: italic; margin-top:20px;"}
               Not Available

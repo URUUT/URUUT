@@ -94,6 +94,26 @@ ul li{
   word-wrap: break-word;
 }
 
+a{
+  color: $green2;
+  text-decoration: none;
+
+  &:hover{
+    color: $green2;
+    text-decoration: underline;
+  }
+
+  &.btn{
+    text-decoration: none;
+  }
+}
+
+.btn, .breadcrumb-container{
+  a{
+    text-decoration: none;
+  }
+}
+
 p{
   word-wrap: break-word;
 
@@ -105,8 +125,12 @@ p{
     color: $green2;
     text-decoration: underline;
 
-    &:hover, &.btn{
+    &:hover{
       color: $green2;
+      text-decoration: none;
+    }
+
+    &.btn{
       text-decoration: none;
     }
   }
