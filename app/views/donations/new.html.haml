@@ -19,14 +19,15 @@
       .well{:style => "border:1px solid #e9e9e9;padding:0;margin-top:20px;"}
         %div{:style => "float:left;padding-left:20px;display:inline-block;height:115px;width:212px;border-right:1px solid #e9e9e9;margin-right:20px;"}
           %h6{:style => "line-height:100%;margin-bottom:10px;margin-top:20px;margin-bottom:15px;"} Seed Amount
+          - precision = @perk_amount.to_s.split(".")[1].eql?("0") ? 0 : 2
           - if @perk_amount.to_s.length <= 5
             #custom_amount.choiced-perk.amount{style: "font-size:52px;color:#81C263;font-family:'Proxima Nova Bold';line-height:100%; #{"display:none" if !@perk_name.eql?("custom")}"}
-              = number_to_currency(@perk_amount.to_f, precision: 2)
-            %span.perk-amount{:style => "font-size:52px;color:#81C263;font-family:'Proxima Nova Bold';line-height:100%; #{"display:none" if @perk_name.eql?("custom")}"}= number_to_currency(@perk_amount.to_f, precision: 2)
+              = number_to_currency(@perk_amount.to_f, precision: precision)
+            %span.perk-amount{:style => "font-size:52px;color:#81C263;font-family:'Proxima Nova Bold';line-height:100%; #{"display:none" if @perk_name.eql?("custom")}"}= number_to_currency(@perk_amount.to_f, precision: precision)
           - else
             #custom_amount.choiced-perk.amount{style: "font-size:30px;color:#81C263;font-family:'Proxima Nova Bold';line-height:100%; #{"display:none" if !@perk_name.eql?("custom")}"}
-              = number_to_currency(@perk_amount.to_f, precision: 2)
-            %span.perk-amount{:style => "font-size:30px;color:#81C263;font-family:'Proxima Nova Bold';line-height:100%; #{"display:none" if @perk_name.eql?("custom")}"}= number_to_currency(@perk_amount.to_f, precision: 2)
+              = number_to_currency(@perk_amount.to_f, precision: precision)
+            %span.perk-amount{:style => "font-size:30px;color:#81C263;font-family:'Proxima Nova Bold';line-height:100%; #{"display:none" if @perk_name.eql?("custom")}"}= number_to_currency(@perk_amount.to_f, precision: precision)
         %div.perk-info-choiced{:style => "float:left;display:inline-block;width:340px;padding-right:20px;height:auto;"}
           .choiced-perk{style: "#{"display:none" if !@perk_name.eql?("custom")}"}
             %h6{:style => "line-height:100%;margin-bottom:10px;margin-top:20px"} Choose your perk
