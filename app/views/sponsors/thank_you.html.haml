@@ -55,7 +55,7 @@
     $.ajax({
       type: "POST",
       url: "/share_email_by_sponsor",
-      data: {emails: emails.join(emailSep), project_id: project_id}
+      data: {emails: emails.join(emailSep), project_id: project_id, user: #{@project_sponsor.id}}
     })
 
   }
