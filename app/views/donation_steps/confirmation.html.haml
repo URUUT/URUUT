@@ -20,10 +20,11 @@
           %h6{:style => "line-height:100%;margin-bottom:10px;margin-top:20px;margin-bottom:15px;"}
             Seed Amount
             = link_to "Change", edit_donation_path(@donation), class: "green-link", style: "text-transform: capitalize; font-family: 'Proxima Nova', sans-serif; letter-spacing: 0;"
+          - precision = @donation.amount.to_s.split(".")[1].eql?("0") ? 0 : 2
           - if @donation.amount.to_s.length <= 5
-            %span{:style => "font-size:52px;color:#70bf4c;font-family:'Proxima Nova Bold';line-height:100%"}= number_to_currency(@donation.amount, precision:2)
+            %span{:style => "font-size:52px;color:#70bf4c;font-family:'Proxima Nova Bold';line-height:100%"}= number_to_currency(@donation.amount, precision: precision)
           - else
-            %span{:style => "font-size:30px;color:#70bf4c;font-family:'Proxima Nova Bold';line-height:100%"}= number_to_currency(@donation.amount, precision:2)
+            %span{:style => "font-size:30px;color:#70bf4c;font-family:'Proxima Nova Bold';line-height:100%"}= number_to_currency(@donation.amount, precision: precision)
         %div{:style => "float:left;display:inline-block;width:340px;padding-right:20px;height:auto"}
           %h6{:style => "line-height:100%;margin-bottom:10px;margin-top:20px"}
             Your Perk
@@ -58,7 +59,7 @@
           /   Change
       %div
         %h5 Payment amount
-        = number_to_currency(@donation.amount, :precision => 2)
+        = number_to_currency(@donation.amount, :precision => precision)
       %hr
       %p.grey
         %strong Note:
