@@ -351,6 +351,7 @@
         $(this).addClass("edit-benefit italic label-green");
         $(this).text("select to edit")
       }
+      $(this).parent().children(".sponsor_checkbox").attr("checked","checked");;
       $('.step-container[data-id="sponsorship"] form').submit();
     });
   }
@@ -401,6 +402,7 @@
       // countCheckbox++;
       addNewBenefit();
       removeAnotherBenefit();
+      $("#" + checkboxName + "_info_"+ countCheckbox).focus();
       return false;
     });
   }
