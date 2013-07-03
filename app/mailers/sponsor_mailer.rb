@@ -12,11 +12,10 @@ class SponsorMailer < ActionMailer::Base
   end
   
   def new_sponsor(sponsor)
-    project = Project.find(sponsor.project_id)
-    user = User.find_by_id(project.user_id)
     project_sponsor = ProjectSponsor.find_by_sponsor_id(sponsor.id)
     benefit_level = SponsorLevel.find_by_id(project_sponsor.level_id)
-    
+    project = Project.find(project_sponsor.project_id)
+    user = User.find_by_id(project.user_id)
     
     @donator_name = "#{user.first_name}" + " #{user.last_name}"
     @email = user.email
@@ -33,18 +32,18 @@ class SponsorMailer < ActionMailer::Base
     @sponsorship_cost = project_sponsor.cost
     
     @name = "#{user.first_name}" + " #{user.last_name}"
-    @sponsor_name = "#{sponsor.first_name}" + " #{sponsor.last_name}"
+    @sponsor_name = project_sponsor.name
 
     mail to: @email, subject: "Sponsor thank you follow-up"
   end
   
   def sponsor_thank_you(sponsor)
     project_sponsor = ProjectSponsor.find_by_sponsor_id(sponsor.id)
-    project = project_sponsor.project_id
+    project = Project.find(project_sponsor.project_id)
     user = User.find_by_id(project.user_id)
     
     @email = sponsor.email
-    @name = "#{sponsor.first_name}" + " #{sponsor.last_name}"
+    @name = project_sponsor.name
     @sponsor_name = "#{user.first_name}" + " #{user.last_name}"
     @image = project.large_image
     @project_name = project.title
