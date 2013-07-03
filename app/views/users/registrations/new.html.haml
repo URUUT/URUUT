@@ -129,6 +129,7 @@
       $('#user_password_confirmation').removeClass("valid");
       $('#user_password_confirmation').attr('class', 'error')
       $('.error-container:last').append("<label for='user_password_confirmation' class='error' style='display: block;'>Required</label>");
+      return false;
     }
 
     if( 6 > $('#user_password_confirmation').val().length && $('#user_password_confirmation').val() != ""){
