@@ -7,6 +7,7 @@ Crowdfund::Application.routes.draw do
     :omniauth_callbacks => "users/omniauth_callbacks",
     :registrations => "registrations",
     :sessions => 'users/sessions',
+    :passwords => 'users/passwords',
   }
   # devise_for :users, :controllers => { :registrations => "registrations" }
   resources :users, :only => [:show] do
