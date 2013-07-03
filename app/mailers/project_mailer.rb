@@ -30,6 +30,7 @@ class ProjectMailer < ActionMailer::Base
     user = User.find_by_id(project.user_id)
     email = user.email
     @name = "#{user.first_name}" + " #{user.last_name}"
+    @image = project.large_image
     @host = ActionMailer::Base.default_url_options[:host]
     @project_id = project.id
     mail to: email, subject: "Your Project Has Been Approved"
