@@ -47,10 +47,11 @@
   .modal-header{:style => "border-bottom: none;"}
     %button.close.label-green{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button", :style => "font-family: 'Proxima Nova', sans-serif; font-size: 12px;opacity: 1;"}
       Close X
-    %h3#myModalLabel.tittle{:style => "margin-bottom: 0;"} Sign In Info
+    %h3#myModalLabel.tittle{:style => "margin-bottom: 0;font-family: 'Proxima Nova', sans-serif;"} Sign In Info
   .modal-body{:style => "padding-top: 0; font-size: 13px; letter-spacing: 1px;"}
-    - flash.each do |name, msg|
-      = content_tag :div, msg.html_safe, :id => "flash_#{name}", style: "#{message_style(controller_name, action_name)}; background: transparent;color: #333;font-style: normal;" if msg.is_a?(String)
+    %h5{style: "margin-left: -9px;"}
+      - flash.each do |name, msg|
+        = content_tag :div, msg.html_safe, :id => "flash_#{name}", style: "#{message_style(controller_name, action_name)}; background: transparent;color: #333;font-style: normal;font-family: 'Proxima Nova Semi', sans-serif;" if msg.is_a?(String)
 
 #forgotModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "width: 440px;"}
   .modal-header{:style => "border-bottom: none;"}
