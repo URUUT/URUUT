@@ -33,7 +33,7 @@ class RegistrationsController < Devise::RegistrationsController
     elsif session[:redirect_url] == user_registration_url
       root_url
     else
-      stored_location_for(resource) || request.referer || session[:redirect_url]  ||  request.env['omniauth.origin']
+      stored_location_for(resource) || session[:redirect_url] || request.referer ||  request.env['omniauth.origin']
     end
       # logger.debug(request.referrer)
       # return root_url
