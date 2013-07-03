@@ -46,17 +46,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def after_sign_in_modify
     # sign_up_url = url_for(:action => 'new', :controller => 'registration', :only_path => false, :protocol => 'http')
-    if session[:path] == "project_new"
+    if session[:redirect_url_last] == new_project_url
+      session.delete(:path)
       project = Project.new
       project.user_id = resource.id
       project.save
-      session[:path] == ""
       redirect_to "/projects/#{project.id}/edit#sponsor-info"
-    elsif session[:path] == "sponsor_new"
-      redirect_to new_project_sponsor_url
-    elsif session[:path]
-      redirect_to session[:path]
-    elsif session[:redirect_url_last] = new_user_registration_url
+    elsif session[:redirect_url_last] == new_user_registration_url
       redirect_to root_url
     else
       redirect_to stored_location_for(resource) || request.referer || session[:redirect_url_last]  ||  request.env['omniauth.origin']
