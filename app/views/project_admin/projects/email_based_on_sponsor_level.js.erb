@@ -1,12 +1,3 @@
-if ( $("#contact_list").val() == "" ){
-  var emails = "<%= @emails %>";
-  $("#contact_list").val( $("#contact_list").val() + emails );
-  $("#email_recepient").val( $("#contact_list").val() );
-}
-else{
-  <% unless @emails.blank? %>
-  var emails = ",<%= @emails %>";
-  $("#contact_list").val( $("#contact_list").val() + emails );
-  $("#email_recepient").val( $("#contact_list").val() );
-  <% end %>
-}
+var emails = "<%= @emails %>";
+$("#contact_list").val( emails );
+$("#email_recepient").val( $("#contact_list").val() );
