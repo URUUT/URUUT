@@ -11,7 +11,7 @@ class SponsorMailer < ActionMailer::Base
     project_sponsor = ProjectSponsor.find_by_id(user_id)
     @sponsor_name = project_sponsor.name
     @project_title = @project.title
-    
+
     mail to: recepient, subject: "Share from Crowfundproject sponsor"
   end
   
@@ -50,6 +50,7 @@ class SponsorMailer < ActionMailer::Base
     @name = project_sponsor.name
     @sponsor_name = "#{user.first_name}" + " #{user.last_name}"
     @image = project.large_image
+    @host = ActionMailer::Base.default_url_options[:host]
     @project_name = project.title
     @project_sponsor = project.organization
     @project_facebook = project.facebook_page
