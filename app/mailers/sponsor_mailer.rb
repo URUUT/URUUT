@@ -13,7 +13,7 @@ class SponsorMailer < ActionMailer::Base
   
   def new_sponsor(sponsor)
     project_sponsor = ProjectSponsor.find_by_sponsor_id(sponsor.id)
-    benefit_level = SponsorLevel.find_by_id(project_sponsor.level_id)
+    benefit_level = SponsorshipLevel.find_by_id(project_sponsor.level_id)
     project = Project.find(project_sponsor.project_id)
     user = User.find_by_id(project.user_id)
     
