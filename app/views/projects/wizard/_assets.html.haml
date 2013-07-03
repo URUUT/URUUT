@@ -38,8 +38,8 @@
               %div{:style => 'font-family:"Proxima Nova"'}
                 = image_tag "marker.jpg", :class => 'marker', :style => 'float:none;'
                 %span.wizard-data-all-location
-                  = @project.address
-                  = @project.city
+                  = "#{@project.address},"
+                  = "#{@project.city},"
                   = @project.state
                   = @project.zip
               %div
@@ -135,7 +135,7 @@
           - if @project.sponsor_permission && !@sponsorship_benefits.blank?
             %h4 BECOME A SPONSOR
             .well
-              %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;font-family:'Proxima Nova';"} PROJECT SPONSORSHIP
+              %h3.label-green{:style => "font-size:20px;letter-spacing:1px;line-height:100%;margin:0;"} PROJECT SPONSORSHIP
               %p{:style => "font:normal 12px/18px 'Proxima Nova', arial, sans-serif;color:#403e37;margin-bottom:40px;"} We can’t do this alone. Do your part, by becoming a project sponsor. URUUT Partner-Funding depends on individual contributors as well as project sponsorship from businesses and corporate and family foundations. Click the button below to get more details and become a project sponsor.
               = link_to "javascript:void(0)", :class => 'black-btn btn', :style => 'margin-top:10px;' do
                 Become A Sponsor ►
