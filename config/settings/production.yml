@@ -8,6 +8,7 @@ twitter:
 
 stripe:
   client_id: "<%= ENV['STRIPE_CLIENT_ID'] %>"
+  api_key: "<%= ENV['STRIPE_KEY'] %>"
 
 filepicker:
   api_key: "<%= ENV['FILEPICKER_API'] %>"
