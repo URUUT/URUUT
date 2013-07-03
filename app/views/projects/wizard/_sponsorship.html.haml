@@ -477,7 +477,12 @@
           editBenefit();
           return false;
         }else{
-          alert("sorry you can't add new benefits because the field is blank!");
+          if (boxName == "custom"){
+            $(this).parent().siblings(".bronze_benefits").addClass("error");
+          }
+          else{
+            $(this).parent().siblings("."+boxName+"_benefits").addClass("error");
+          }
         }
       }
     });
