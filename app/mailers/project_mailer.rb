@@ -15,7 +15,7 @@ class ProjectMailer < ActionMailer::Base
     @image = project.large_image
     @host = ActionMailer::Base.default_url_options[:host]
     @project = project
-    @project_title = project.title
+    @project_title = project.project_title
 
     mail to: @email, subject: "Wait For Approval"
   end
@@ -33,7 +33,7 @@ class ProjectMailer < ActionMailer::Base
     @image = project.large_image
     @host = ActionMailer::Base.default_url_options[:host]
     @project_id = project.id
-    attachments['URUUTGuidebookFinal.pdf'] = File.read(Rails.root.join('/public/data/URUUTGuidebookFinal.pdf'))
+    attachments['URUUTGuidebookFinal.pdf'] = File.read("#{Rails.root}/public/data/URUUTGuidebookFinal.pdf")
     mail to: email, subject: "Your Project Has Been Approved"
   end
 end

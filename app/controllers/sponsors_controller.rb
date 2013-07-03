@@ -117,6 +117,7 @@ class SponsorsController < ApplicationController
         end
     end
     params[:sponsor][:name] = sponsor_name
+    params[:sponsor][:email] = current_user.email if params[:sponsor][:email].blank?
     @sponsor.update_attributes(params[:sponsor])
     @project_sponsor.update_attributes(params[:project_sponsor].merge({cost: cost, project_id: params[:project_id], sponsor_id: @sponsor.id,
                                       level_id: params[:project_sponsor][:level_id]}))
@@ -202,6 +203,7 @@ class SponsorsController < ApplicationController
   def thank_you
     @project = Project.find(params[:project_id])
     project_sponsor =  ProjectSponsor.unscoped.where(project_id: @project.id, sponsor_id: params[:sponsor_id]).first
+    @project_sponsor = project_sponsor
     # @sponsorship_level = SponsorshipLevel.find(project_sponsor.level_id)
     @benefits = @project.sponsorship_benefits.where(status: true, sponsorship_level_id: project_sponsor.level_id )
     case project_sponsor.level_id
@@ -234,7 +236,7 @@ class SponsorsController < ApplicationController
   end
 
   def share_email
-    SponsorMailer.share_project(params[:emails], params[:project_id]).deliver
+    SponsorMailer.share_project(params[:emails], params[:project_id], params[:user]).deliver
     respond_to :js
   end
 
@@ -273,8 +275,8 @@ class SponsorsController < ApplicationController
     card_type = params[:project_sponsor][:card_type]
     last4 = params[:project_sponsor][:card_last4]
     token = params[:token]
-
     @sponsor = Sponsor.new(params[:sponsor])
+    @sponsor.email = current_user.email if params[:sponsor][:email].blank?
     @sponsor.save(validate: false)
     @project_sponsor = ProjectSponsor.create(params[:project_sponsor])
     @project_sponsor.confirmed = false
