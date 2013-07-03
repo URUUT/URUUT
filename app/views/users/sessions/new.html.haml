@@ -1,15 +1,20 @@
 .span8{:style => "margin-top:35px;"}
   %h4 Login
-  = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "well clearfix"}, remote: true) do |f|
+  = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "well clearfix form-signin"}, remote: true) do |f|
     = devise_error_messages!
 
+    .req-legend
+      *Required
+
     %div.inline
-      = f.label :email do
+      = f.label :email, class: "label-green" do
+        EMAIL*
         %span.error-container
       = f.email_field :email, class: "span7"
 
     %div.inline
-      = f.label :password do
+      = f.label :password, class: "label-green" do
+        PASSWORD*
         %span.error-container
       = f.password_field :password, class: "span7"
 
@@ -64,3 +69,20 @@
     /     %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal", :style => "background: #81C263; border-radius: 5px; padding-top: 20px; padding-bottom: 20px;"}
     /       Reset My Password
     /       %span
+
+
+:javascript
+  $('#new_user').validate({
+    rules: {
+      "user[email]":{
+        required: true,
+        email: true
+      },
+      "user[password]":{
+        required: true
+      }
+    },
+    errorPlacement: function(error, element) {
+      error.appendTo(element.parent().find(".error-container"));
+    }
+  });
