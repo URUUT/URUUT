@@ -1,2 +1,6 @@
-$("#errorModalForm").modal("show");
-
+<% if params[:controller].eql?("users/sessions") and params[:action].eql?("create") %>
+  $("#errorModalForm").modal("show");
+<% else %>
+  $("#forgotModal").modal("hide");
+  $("#forgotPasswordModalForm").modal("show");
+<% end %>
