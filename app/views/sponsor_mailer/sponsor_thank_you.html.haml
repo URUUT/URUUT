@@ -67,9 +67,10 @@
                     %p{:style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-bottom: 14px;font-weight: normal;font-size: 14px;line-height: 1.6;"} 
                       Please use the links below to spread the word about our project.  
                     %p{:style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-bottom: 10px;font-weight: normal;font-size: 14px;line-height: 1.6;"} 
-                      %a{:href => "http://#{@project_facebook}"} #{@project_facebook}
-                    %p{:style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-bottom: 10px;font-weight: normal;font-size: 14px;line-height: 1.6;"}
-                      %a{:href => "http://www.twitter.com/#{@project_twitter}"} twitter.com/#{@project_twitter}
+                      %a{:href => "http://#{@project_facebook}"}
+                        %img{:src => "http://#{@host}/assets/email-facebook.png", :style => "vertical-align:middle;margin-right:5px;"} #{@project_facebook}
+                      %a{:href => "http://www.twitter.com/#{@project_twitter}"} 
+                        %img{:src => "http://#{@host}/assets/email-twitter.png", :style => "vertical-align:middle;margin-right:5px;"} #{@project_twitter}
                     
                     %p{:style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-bottom: 10px;font-weight: normal;font-size: 14px;line-height: 1.6;"}
                       We will certainly be spreading the word about your sponsorship through our email system,
@@ -79,6 +80,7 @@
                       Thank you so much, and we can't wait to share more positive updates along the way! 
                     %p{:style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-bottom: 10px;font-weight: normal;font-size: 14px;line-height: 1.6;"} 
                       Gratefully, 
+                      %br
                       %br
                       #{@sponsor_name}
                       %a{:href => "mailto: #{@sponsor_email}"}#{@sponsor_email}
