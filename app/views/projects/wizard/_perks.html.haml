@@ -50,7 +50,7 @@
         If you do chose to add perks, think through ways to make them emotional.  So for a school project, perhaps a thank you from a child?  Or a piece of art created by the students?  In lieu of emotional perks ensure the perks are of value commensurate with the giving living and ensure you can deliver on your promise of delivering the perk in a timely fashion.
         %b Ultimately the delivery of the perk is solely up to you - the project owner.
 
-      %h6{:style => "color:#70bf4c"} USE CUSTOM SEEDER PERKS?
+      %label.label-green{:style => "margin-top : 20px;"} USE CUSTOM SEEDER PERKS?
       .span2{style: "margin-left: 0"}
         .selectParent{style: "width: 140px;"}
           = f.select :perk_permission, options_for_select({ "Yes" => "yes", "No" => "no" }, @project.perk_permission.eql?(true) ? "yes" : "no"), {}, {:onchange => "changePerkPermission()", class: "styledSelect"}
