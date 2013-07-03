@@ -7,12 +7,13 @@ class DonationMailer < ActionMailer::Base
   #   en.contact_mailer.contact_confirmation.subject
   #
 
-  def share_project(recepient, project_id)
+  def share_project(recepient, project_id, user_id)
     @project = Project.find(project_id)
     @project_title = @project.title
-    @donator_name = "#{current_user.first_name}" + " #{current_user.last_name}"
+    user = User.find_by_id(user.id)
+    @donator_name = "#{user.first_name}" + " #{user.last_name}"
     @image = @project.large_image
-    
+
     mail to: recepient, subject: "Checkout The Project I Donated To"
   end
 
