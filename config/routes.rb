@@ -47,6 +47,7 @@ Crowdfund::Application.routes.draw do
    get "projects/:project_id/sponsors/:sponsor_id/thank_you" => "sponsors#thank_you", as: "thank_you_for_sponsor"
 
    post "share_email_by_sponsor" => "sponsors#share_email"
+   post "share_email_by_donor" => "donations#share_email"
 
    post "projects/submit_project"
    post "update_sponsor_info" => "projects#update_sponsor_info"
