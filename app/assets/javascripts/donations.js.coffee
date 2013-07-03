@@ -4,11 +4,13 @@
 
 new_subscription =
   setupForm: ->
+    $("#donate").text("LOADING")
     $('input[type=submit].btn').attr('disabled', true)
     if $('#card_number').length
       new_subscription.processCard()
       false
     else
+      $("#donate").text("Contribute ►")
       $('input[type=submit].btn').attr('disabled', false)
       $('#donate')[0].submit()
 
@@ -30,16 +32,19 @@ new_subscription =
     else
       console.log response
       $('#stripe_error').text(response.error.message)
+      $("#donate").text("Contribute ►")
       $('input[type=submit]').attr('disabled', false)
       return false
 
 edit_subscription =
   setupForm: ->
+    $("#donate").text("LOADING")
     $('input[type=submit].btn').attr('disabled', true)
     if $('#card_number').length
       edit_subscription.processCard()
       false
     else
+      $("#donate").text("Contribute ►")
       $('input[type=submit].btn').attr('disabled', false)
       $('#donate')[0].submit()
 
@@ -61,6 +66,7 @@ edit_subscription =
     else
       console.log response
       $('#stripe_error').text(response.error.message)
+      $("#donate").text("Contribute ►")
       $('input[type=submit]').attr('disabled', false)
       return false
 
