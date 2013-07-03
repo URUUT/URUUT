@@ -22,6 +22,7 @@ class ProjectMailer < ActionMailer::Base
 
   def project_message(recepient, subject_email, header_image, content)
     @image = header_image
+    @host = ActionMailer::Base.default_url_options[:host]
     @content = content
     mail to: recepient, subject: subject_email
   end
