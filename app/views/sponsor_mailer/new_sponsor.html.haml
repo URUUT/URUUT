@@ -61,10 +61,15 @@
                 %tr{:style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;"}
                   %td{:style => "margin: 0;padding: 15px;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;width:100%;max-width:620px;"}
                     %p{:style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-bottom: 10px;font-weight: normal;font-size: 14px;line-height: 1.6;"} Dear #{@name}
-                    %p{:style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-bottom: 10px;font-weight: normal;font-size: 14px;line-height: 1.6;"} We have received your submission for #{@project_title} to URUUT.
-                    %p{:style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-bottom: 10px;font-weight: normal;font-size: 14px;line-height: 1.6;"} Over the next 72 hours, we will review your information and approve, deny or suggest changes to your project.  This process is intended to protect you from circumstances you may not have foreseen and ensure that you are set up to succeed. Thank you for your patience while we make sure everything is ready to go.  We will be back in touch with you as quickly as we can; we know that you are ready to get things moving.
+                    %p{:style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-bottom: 10px;font-weight: normal;font-size: 14px;line-height: 1.6;"} Your project has just signed up another sponsor!  Congratulations! 
+                    %p{:style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-bottom: 14px;font-weight: normal;font-size: 14px;line-height: 1.6;"} 
+                      #{@sponsor_name} is now on board at the #{@sponsorship_level} level and has committed to donate #{@sponsorship_cost} to #{@project_name}.  Although the system has already generated a thank you email, we strongly encourage you to follow it with a personalized note This can be an email or a handwritten note.
                     %p{:style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-bottom: 10px;font-weight: normal;font-size: 14px;line-height: 1.6;"} 
-                      In the meantime, if you have any questions that aren’t answered in the FAQ’s (#{@host}/pages/faqs), please feel free to reach out to us at #{@host}/pages/contact
+                      Either way, reaching out to them to once again to show your gratitude and tell them how impactful their sponsorship will be should certify that they’ve made a great decision to support #{@sponsor_name}.  Keep up the good work!
+                    %p{:style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-bottom: 10px;font-weight: normal;font-size: 14px;line-height: 1.6;"} 
+                      Sincerely,
+                      %br
+                      The URUUT Team
                     
           - if @sponsor
             .column{:style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;width: 300px;float: left;"}
@@ -134,6 +139,7 @@
                       %img{:src => "http://#{@host}/assets/email-facebook.png", :style => "vertical-align:middle;margin-right:5px;"} /get.ruuted 
                     %a{:href => "http://www.twitter.com/uruut", :style => "color:#fff;text-decoration:none;margin:0 5px;"}
                       %img{:src => "http://#{@host}/assets/email-twitter.png", :style => "vertical-align:middle;margin-right:5px;"} @uruut
+                    
                       
         %td{:style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;"}
         

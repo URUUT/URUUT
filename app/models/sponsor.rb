@@ -24,4 +24,12 @@ class Sponsor < ActiveRecord::Base
   def payment_type_credit_card?
     self.payment_type.eql? "Credit Card"
   end
+  
+  def self.send_confirmation_email(sponsor)
+    SponsorMailer.new_sponsor(sponsor).deliver
+  end
+  
+  def self.sponsor_thank_you(sponsor)
+    SponsorMailer.sponsor_thank_you(sponsor).deliver
+  end
 end
