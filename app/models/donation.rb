@@ -5,6 +5,8 @@ class Donation < ActiveRecord::Base
 
   belongs_to :project
   belongs_to :user
+  
+  after_create :send_confirmation_email
 
   default_scope { where(confirmed: true) }
 
@@ -35,6 +37,10 @@ class Donation < ActiveRecord::Base
   def self.edit_donation(project, user)
   	@donation = Donation.where("project_id = ? AND user_id = ?", project, user)
   	return @donation.first.id
+  end
+  
+  def self.send_confirmation_email
+    DonationMailer.donation_confirmation(self).deliver
   end
 
 end
