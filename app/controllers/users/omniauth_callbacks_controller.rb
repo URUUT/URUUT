@@ -55,7 +55,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     elsif session[:redirect_url_last] == new_user_registration_url
       redirect_to root_url
     else
-      redirect_to stored_location_for(resource) || request.referer || session[:redirect_url_last]  ||  request.env['omniauth.origin']
+      redirect_to stored_location_for(resource) || session[:redirect_url_last] || request.referer ||  request.env['omniauth.origin']
     end
   end
 
