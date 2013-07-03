@@ -6,8 +6,6 @@ class Donation < ActiveRecord::Base
   belongs_to :project
   belongs_to :user
   
-  after_create :send_confirmation_email
-
   default_scope { where(confirmed: true) }
 
   def save_with_payment
@@ -39,8 +37,8 @@ class Donation < ActiveRecord::Base
   	return @donation.first.id
   end
   
-  def self.send_confirmation_email
-    DonationMailer.donation_confirmation(self).deliver
+  def self.send_confirmation_email(donation)
+    DonationMailer.donation_confirmation(donation).deliver
   end
 
 end
