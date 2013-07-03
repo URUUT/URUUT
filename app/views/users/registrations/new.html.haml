@@ -35,7 +35,7 @@
           = f.label :password, class: "label-green" do
             Password*
             %span.error-container
-          = f.password_field :password
+          = f.password_field :password, id: "user_pass"
 
         .span3.well-half
           = f.label :password_confirmation, class: "label-green" do
@@ -60,13 +60,6 @@
 
 :javascript
   $('#new_user').validate({
-    messages: {
-      "user[password_confirmation]": {
-        required: "Required",
-        minlength: "Min 6 Chars",
-        equalTo: "Doesn't Match"
-      }
-    },
     rules: {
       "user[email]":{
         required: true,
@@ -81,13 +74,60 @@
       "user[password]":{
         required: true,
         minlength: 6
-      },
-      "user[password_confirmation]":{
-        required: true,
-        minlength: 6
       }
     },
     errorPlacement: function(error, element) {
+      $('#user_pass, #user_password_confirmation').keyup(function(){
+        validatePass();
+      });
       error.appendTo(element.parent().find(".error-container"));
+      if($('#user_password_confirmation').val() == ""){
+        $('.error-container:last').text('');
+        $('#user_password_confirmation').removeClass("valid");
+        $('#user_password_confirmation').attr('class', 'error')
+        $('.error-container:last').append("<label for='user_password_confirmation' class='error' style='display: block;'>Required</label>");
+      }
+
+      if( 6 > $('#user_password_confirmation').val().length && $('#user_password_confirmation').val() != ""){
+        $('.error-container:last').text('');
+        $('#user_password_confirmation').removeClass("valid");
+        $('#user_password_confirmation').attr('class', 'error')
+        $('.error-container:last').append("<label for='user_password_confirmation' class='error' style='display: block;'>Max Char 6</label>");
+      }
+    },
+  });
+
+  var validatePass = function(){
+    var passCom = $('#user_password_confirmation').val();
+    var pass = $('#user_pass').val();
+
+    if(passCom.length != 0){
+      if(pass == passCom){
+        $('.error-container:last').text('');
+        $('#user_password_confirmation').removeClass("error");
+        $('#user_password_confirmation').attr('class', 'valid');
+      }else{
+        $('.error-container:last').text('');
+        $('#user_password_confirmation').removeClass("valid");
+        $('#user_password_confirmation').attr('class', 'error')
+        $('.error-container:last').append("<label for='user_password_confirmation' class='error' style='display: block;'>Doesn't Match</label>");
+      }
+    }else{
+      $('.error-container:last').text('');
+      $('#user_password_confirmation').removeClass("valid");
+      $('#user_password_confirmation').attr('class', 'error')
+      $('.error-container:last').append("<label for='user_password_confirmation' class='error' style='display: block;'>Doesn't Match</label>");
     }
+
+    if( 6 > $('#user_password_confirmation').val().length && $('#user_password_confirmation').val() != ""){
+        $('.error-container:last').text('');
+        $('#user_password_confirmation').removeClass("valid");
+        $('#user_password_confirmation').attr('class', 'error')
+        $('.error-container:last').append("<label for='user_password_confirmation' class='error' style='display: block;'>Max Char 6</label>");
+      }
+
+  };
+
+  $('#user_pass, #user_password_confirmation').keyup(function(){
+    validatePass();
   });
