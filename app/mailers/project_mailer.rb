@@ -26,4 +26,12 @@ class ProjectMailer < ActionMailer::Base
     mail to: recepient, subject: "Project messages from Crowfundproject"
   end
 
+  def project_approved(project)
+    user = User.find_by_id(project.user_id)
+    email = user.email
+    @name = "#{user.first_name}" + " #{user.last_name}"
+    @host = ActionMailer::Base.default_url_options[:host]
+    @project_id = project.id
+    mail to: email, subject: "Your Project Has Been Approved"
+  end
 end
