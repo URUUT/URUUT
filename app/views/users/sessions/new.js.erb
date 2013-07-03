@@ -1,6 +1,7 @@
 <% if params[:controller].eql?("users/sessions") and params[:action].eql?("create") %>
   $("#errorModalForm").modal("show");
 <% else %>
+  $("#updated-email-forgot").text("We've sent an email to <%= session[:email_forgot_password] %> with instructions on how to change your password.")
   $("#forgotModal").modal("hide");
   $("#forgotPasswordModalForm").modal("show");
 <% end %>

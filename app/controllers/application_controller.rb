@@ -49,7 +49,7 @@ class ApplicationController < ActionController::Base
 
   def session_email_forgot_password
     if params[:controller].eql?("devise/passwords") and params[:action].eql?("create")
-      session[:email_forgot_password] = params[:user][:email] if params[:user][:email]
+      session[:email_forgot_password] = params[:user][:email] if params[:user]
     end
   end
 
