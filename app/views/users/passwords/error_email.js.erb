@@ -1,0 +1,14 @@
+$("#updated-email-forgot").html("Your email is unregistered. Please fill the correct one.")
+$("#updated-email-forgot-2").text("");
+$("#updated-email-forgot-3").html("<li>To re-send the email, please <a id='click-here'>click here.</a></li>");
+
+$("#forgotModal").modal("hide");
+$("#forgotPasswordModalForm").modal("show");
+
+$(document).ready(function() {
+  $("#click-here").click(function(){
+    $("#forgotPasswordModalForm").modal("hide");
+    $("#forgotModal").modal("show");
+    $(".email-address-forgot").val("");
+  })
+});
