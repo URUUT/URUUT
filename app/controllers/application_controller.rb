@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   layout :layout_by_resource
-  before_filter :last_url
+  before_filter :last_url, :session_email_forgot_password
 
   def after_sign_in_path_for(resource)
     if session[:path] == "project_new"
@@ -46,14 +46,20 @@ class ApplicationController < ActionController::Base
     session[:redirect_url] = request.url if !url.eql?("sign_in")
     puts session[:redirect_url]
   end
+
+  def session_email_forgot_password
+    if params[:controller].eql?("devise/passwords") and params[:action].eql?("create")
+      session[:email_forgot_password] = params[:user][:email] if params[:user][:email]
+    end
+  end
+
   protected
 
   def layout_by_resource
-   "application"
+    "application"
   end
 
   def set_session_wizard
     session[:step] = nil
   end
-
 end
