@@ -34,7 +34,7 @@
                   %img{:src => "https://uruut.herokuapp.com/assets/logo.png", :style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;max-width: 100%;"}/
                 %td{:align => "right", :style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;"}
                   %h6.collapse{:style => "margin: 0;padding: 0;font-family: &quot;HelveticaNeue-Light&quot;, &quot;Helvetica Neue Light&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Lucida Grande&quot;, sans-serif;line-height: 1.1;margin-bottom: 15px;color: #444;font-weight: 900;font-size: 14px;"} 
-                    %a{:href => "#{@host}/sign_in", :style => "color:#fff;text-decoration:none;"}Log in to your account
+                    %a{:href => "http://#{@host}/sign_in", :style => "color:#fff;text-decoration:none;"}Log in to your account
         %td{:style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;"}
     /
       \----------------------------------
@@ -73,7 +73,7 @@
                     
                     %p{:style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-bottom: 10px;font-weight: normal;font-size: 14px;line-height: 1.6;"} 
                       We are also looking for businesses to partner with. If you come across a company who wants to make a difference in its community, please pass along the link to our 
-                      %a{:href => "#{@host}/projects/#{@project_id}"} project page.
+                      %a{:href => "http://#{@host}/projects/#{@project_id}"} project page.
                       
                     %p{:style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-bottom: 10px;font-weight: normal;font-size: 14px;line-height: 1.6;"} Thank you so much, and we can't wait to share more positive updates along the way! 
                     
@@ -148,9 +148,10 @@
                   %div{:style => "color:#fff"}
                     %span{:style => "font-size:14px;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;vertical-align:middle"} FIND US ON: 
                     %a{:href => "http://www.facebook.com/get.ruuted", :style => "color:#fff;text-decoration:none;margin:0 5px;"} 
-                      %img{:src => "http://uruut-dev.herokuapp.com/assets/email-facebook.png", :style => "vertical-align:middle;margin-right:5px;"} /get.ruuted 
+                      %img{:src => "http://#{@host}/assets/email-facebook.png", :style => "vertical-align:middle;margin-right:5px;"} /get.ruuted 
                     %a{:href => "http://www.twitter.com/uruut", :style => "color:#fff;text-decoration:none;margin:0 5px;"}
-                      %img{:src => "http://uruut-dev.herokuapp.com/assets/email-twitter.png", :style => "vertical-align:middle;margin-right:5px;"} @uruut
+                      %img{:src => "http://#{@host}/assets/email-twitter.png", :style => "vertical-align:middle;margin-right:5px;"} @uruut
+                    
                       
         %td{:style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;"}
         

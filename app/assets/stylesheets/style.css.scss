@@ -2118,6 +2118,8 @@ body.pages.index, body.pages.search{
       padding: 10px 0;
       border-radius: 5px;
       font-family: 'Proxima Nova Semi', sans-serif;
+      background: $green2;
+      color: #fff;
 
       &:first-child{
         margin-left: 0;
@@ -2193,7 +2195,7 @@ input, select, textarea{
   label.error {
     font-family: 'Georgia', serif;
     font-style: italic;
-    text-transform: initial;
+    text-transform: none;
     letter-spacing: 0;
     font-size: 10px;
     line-height: 13px;
