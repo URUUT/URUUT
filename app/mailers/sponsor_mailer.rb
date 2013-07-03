@@ -1,5 +1,8 @@
 class SponsorMailer < ActionMailer::Base
   helper :mailer
+  helper MailerHelper
+  include MailerHelper
+  
   default from: "info@uruut.com"
 
   # Subject can be set in your I18n file at config/locales/en.yml
