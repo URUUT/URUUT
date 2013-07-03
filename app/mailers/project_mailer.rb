@@ -33,7 +33,7 @@ class ProjectMailer < ActionMailer::Base
     @image = project.large_image
     @host = ActionMailer::Base.default_url_options[:host]
     @project_id = project.id
-    attachments['URUUTGuidebookFinal.pdf'] = File.read('#{Rails.root}/public/URUUTGuidebookFinal.pdf')
+    attachments['URUUTGuidebookFinal.pdf'] = File.read("#{Rails.root}/public/URUUTGuidebookFinal.pdf")
     mail to: email, subject: "Your Project Has Been Approved"
   end
 end
