@@ -13,7 +13,7 @@ class SponsorMailer < ActionMailer::Base
   
   def new_sponsor(sponsor)
     project_sponsor = ProjectSponsor.find_by_sponsor_id(sponsor.id)
-    benefit_level = SponsorLevel.find_by_id(project_sponsor.level_id)
+    benefit_level = SponsorshipLevel.find_by_id(project_sponsor.level_id)
     project = Project.find(project_sponsor.project_id)
     user = User.find_by_id(project.user_id)
     
@@ -29,7 +29,7 @@ class SponsorMailer < ActionMailer::Base
     @project_title = project.title
     @sponsor_email = sponsor.email
     @sponsorship_level = benefit_level.name
-    @sponsorship_cost = project_sponsor.cost
+    @sponsorship_cost = number_to_currency(project_sponsor.cost, :precision => 0)
     
     @name = "#{user.first_name}" + " #{user.last_name}"
     @sponsor_name = project_sponsor.name

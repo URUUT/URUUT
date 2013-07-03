@@ -19,16 +19,17 @@
       .well{:style => "border:1px solid #e9e9e9;padding:0;margin-top:20px;"}
         %div{:style => "float:left;padding-left:20px;display:inline-block;height:115px;width:212px;border-right:1px solid #e9e9e9;margin-right:20px;"}
           %h6{:style => "line-height:100%;margin-bottom:10px;margin-top:20px;margin-bottom:14px;"} Seed Amount
+          - precision = @donation.amount.to_s.split(".")[1].eql?("0") ? 0 : 2
           - if @donation.amount.to_f.to_s.length <= 5
-            #custom_amount.choiced-perk.amount{style: "font-size:30px;color:#70bf4c;font-family:'Proxima Nova Bold';line-height:100%; #{"display:none" if !session[:perk_type].eql?("custom")}"}
-              = number_to_currency(@donation.amount.to_f, precision: 2)
+            #custom_amount.choiced-perk.amount{style: "font-size:52px;color:#70bf4c;font-family:'Proxima Nova Bold';line-height:100%; #{"display:none" if !session[:perk_type].eql?("custom")}"}
+              = number_to_currency(@donation.amount.to_f, precision: precision)
           - else
             #custom_amount.choiced-perk.amount{style: "font-size:30px;color:#70bf4c;font-family:'Proxima Nova Bold';line-height:100%; #{"display:none" if !session[:perk_type].eql?("custom")}"}
-              = number_to_currency(@donation.amount.to_f, precision: 2)
+              = number_to_currency(@donation.amount.to_f, precision: precision)
           - if @donation.amount.to_i.to_s.length <= 5
-            %span.perk-amount{:style => "font-size:30px;color:#70bf4c;font-family:'Proxima Nova Bold';line-height:100%; #{"display:none" if session[:perk_type].eql?("custom")}"}= number_to_currency(@donation.amount.to_f, precision:2)
+            %span.perk-amount{:style => "font-size:52px;color:#70bf4c;font-family:'Proxima Nova Bold';line-height:100%; #{"display:none" if session[:perk_type].eql?("custom")}"}= number_to_currency(@donation.amount.to_f, precision: precision)
           - else
-            %span.perk-amount{:style => "font-size:30px;color:#70bf4c;font-family:'Proxima Nova Bold';line-height:100%; #{"display:none" if session[:perk_type].eql?("custom")}"}= number_to_currency(@donation.amount.to_f, precision:2)
+            %span.perk-amount{:style => "font-size:30px;color:#70bf4c;font-family:'Proxima Nova Bold';line-height:100%; #{"display:none" if session[:perk_type].eql?("custom")}"}= number_to_currency(@donation.amount.to_f, precision: precision)
         %div.perk-info-choiced{:style => "float:left;display:inline-block;width:340px;padding-right:20px;height:auto;"}
           .choiced-perk{style: "#{"display:none" if !session[:perk_type].eql?("custom")}"}
             %h6{:style => "line-height:100%;margin-bottom:10px;margin-top:20px"} Choose your perk
@@ -41,7 +42,7 @@
           %h3.perk-name{:style => 'font-size:20px; color:#70bf4c;line-height:100%;margin:0;'}= @donation.perk_name
           %span.perk-description{:style => "font-size:12px;font-family:'Proxima Nova';"}
           %p.description-custom
-          You will receive #{@donation.amount.to_i} Uruut Reward Points when you seed #{number_to_currency(@donation.amount.to_f, precision: 2)}
+            You will receive #{@donation.amount.to_i} Uruut Reward Points when you seed #{number_to_currency(@donation.amount.to_f, precision: precision)}
         .cf
         %p.checkout-continue-subtext Continue to payment information below or choose a different seed amount/perk from the right.
 
@@ -112,27 +113,27 @@
     $('#new_sponsor').validate();
     $("#perk_name").val(theText);
 
-    if (perkStatus == "true"){
-      $(".selectParent").hide();
-      $(".none-perks").show();
-      $(".none-perks").html("You will receive "+ point + " Uruut Reward Points when you seed "+ amount)
-      $(".description-custom").hide();
-    }
-    else{
-      $(".selectParent").show();
-      $(".none-perks").hide();
-      $(".description-custom").show();
-    }
+    // if (perkStatus == "true"){
+    //   $(".selectParent").hide();
+    //   $(".none-perks").show();
+    //   $(".none-perks").html("You will receive "+ point + " Uruut Reward Points when you seed "+ amount)
+    //   $(".description-custom").hide();
+    // }
+    // else{
+    //   $(".selectParent").show();
+    //   $(".none-perks").hide();
+    //   $(".description-custom").show();
+    // }
 
-    if (perkPermission == "false"){
-      if (perkName == "custom"){
-          $(".description-custom").show();
-          $(".selectParent").hide();
-          }
-      else{
-        $(".description-custom").hide();
-      }
-    }
+    // if (perkPermission == "false"){
+    //   if (perkName == "custom"){
+    //       $(".description-custom").show();
+    //       $(".selectParent").hide();
+    //       }
+    //   else{
+    //     $(".description-custom").hide();
+    //   }
+    // }
   })
 
   $(".change-fund").click(function(){

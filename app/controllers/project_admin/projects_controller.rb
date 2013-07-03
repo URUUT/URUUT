@@ -5,7 +5,7 @@ class ProjectAdmin::ProjectsController < ApplicationController
     :send_email, :email_based_on_sponsor_level, :project_update, :process_project_update]
 
 
-  respond_to :js, except: [:index, :update, :show, :emails_page]
+  respond_to :js, except: [:index, :update, :show, :emails_page, :messages]
   has_scope :page, :default => 1
   layout false, :only => "stripe_update"
 
@@ -28,7 +28,16 @@ class ProjectAdmin::ProjectsController < ApplicationController
 
   end
 
-  def messages; end
+  def messages
+    subheader
+    @fundings = @project.all_funding_by_project(params[:page])
+    @total_fundings = @project.total_funding_by_project
+
+    respond_to do |format|
+      format.js
+      format.html
+    end
+  end
 
   def overview; end
 
@@ -83,7 +92,10 @@ class ProjectAdmin::ProjectsController < ApplicationController
 
     if @error_messages.blank?
       subject = params[:post][:subject]
-      ProjectMailer.project_message(params[:email_recepient], params[:email_header], params[:post]["email_content"]).deliver
+      recepients = params[:email_recepient].split(",")
+      recepients.each do |recepient|
+        ProjectMailer.project_message(recepient, params[:email_header], params[:post]["email_content"]).deliver
+      end
     end
   end
 
