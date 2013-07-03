@@ -15,7 +15,7 @@ class ProjectMailer < ActionMailer::Base
     @image = project.large_image
     @host = ActionMailer::Base.default_url_options[:host]
     @project = project
-    @project_title = project.title
+    @project_title = project.project_title
 
     mail to: @email, subject: "Wait For Approval"
   end
