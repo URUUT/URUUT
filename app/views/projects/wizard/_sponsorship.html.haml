@@ -220,7 +220,7 @@
                 -@project.sponsorship_benefits.where(sponsorship_level_id: 4).order(:id).each_with_index do |benefit, index|
                   %div.checkbox.default
                     = hidden_field_tag "custom[id_#{index + 1}]", benefit.id
-                    = check_box_tag "custom[#{index + 1}]", nil, benefit.status
+                    = check_box_tag "custom[#{index + 1}]", nil, benefit.status, class: "sponsor_checkbox"
                     %span#name= benefit.name
                     %span.edit-benefit.italic.label-green select to edit
                     = text_field_tag "custom[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
@@ -277,7 +277,7 @@
   $(".box_gold_benefits").attr("name", "silver[" + (silverSum + 1) + "]");
   $(".box_gold_benefits").attr("id", "silver_" + (silverSum + 1));
 
-  $("#custom-count").val(1);
+  $("#custom-count").val(bronzeSum + 1);
   $(".bronze_benefits").attr("name", "bronze[info_" + (bronzeSum + 1) + "]");
   $(".bronze_benefits").attr("id", "bronze_info_" + (bronzeSum + 1));
   $(".box_gold_benefits").attr("name", "bronze[" + (bronzeSum + 1) + "]");
@@ -355,6 +355,22 @@
     });
   }
 
+  var reIndexSponsors = function(){
+    sizeSponsors = $(".sponsor_checkbox").size();
+    c = 0;
+    name = "";
+    for(x = 0; sizeSponsors < x; x++ ){
+      alert(0)
+      sponsorship = $(".sponsor_checkbox")[x];
+      if(name !=  $(sponsorship).attr("id").split("_")[0]){
+        name = $(sponsorship).attr("id").split("_")[0];
+        c = 0;
+      }
+      c++;
+      $(sponsorship).attr({id: name + "_" + c , name: name + "["+ c + "]"});
+    }
+  }
+
   var addAnotherNewBenefit = function(){
     $(".add-another").bind("click", function(e) {
       var divCore = $(this).parent().children("#custom-checkbox");
@@ -380,7 +396,7 @@
         }
 
       // $("#"+ checkboxName +"-count").val(countCheckbox);
-      $("<div class='checkbox default'><input id='"+ checkboxName + "_" + countCheckbox + "' type='checkbox' value='1' name='"+ checkboxName +"[id_"+ countCheckbox +"]''><input id='"+ checkboxName + "_info_"+ countCheckbox +"' class='"+checkboxName+"_benefits add_benefits' type='text' style='width: 100% !important;' placeholder='Create your custom benefit here...' name='"+ checkboxName + "[info_"+countCheckbox+"]'><span><span class='save_new_benefit pull-right btn' style='margin-top:-19px; left:0px' data-type='"+checkboxName+"' >Save</span></span><span class='remove-another pull-right btn' style='margin-top:-19px; left: -5px;'>Remove</span></div>").appendTo(divCore);
+      $("<div class='checkbox default'><input calss='sponsor_checkbox' id='"+ checkboxName + "_" + countCheckbox + "' type='checkbox' value='1' name='"+ checkboxName +"[id_"+ countCheckbox +"]''><input id='"+ checkboxName + "_info_"+ countCheckbox +"' class='"+checkboxName+"_benefits add_benefits' type='text' style='width: 100% !important;' placeholder='Create your custom benefit here...' name='"+ checkboxName + "[info_"+countCheckbox+"]'><span><span class='save_new_benefit pull-right btn' style='margin-top:-19px; left:0px' data-type='"+checkboxName+"' >Save</span></span><span class='remove-another pull-right btn' style='margin-top:-19px; left: -5px;'>Remove</span></div>").appendTo(divCore);
       $("#"+checkboxName+"-count").val(parseInt($("#"+checkboxName+"-count").val())+1)
       // countCheckbox++;
       addNewBenefit();
@@ -405,7 +421,7 @@
 
   var addNewBenefit = function(){
     $(".save_new_benefit").bind("click", function(){
-      $('.step-container[data-id="sponsorship"] form').submit();
+      // $('.step-container[data-id="sponsorship"] form').submit();
       var dataType = $(this).attr("data-type");
       if ($("."+dataType+"-availibility").attr('data-available') == "0"){
         alert("You Can't Add Another Sponsor");
@@ -416,7 +432,6 @@
 
         if ( divCore.children().children("input").length > 0 ){
           var benefits = divCore.children().children("input").last();
-          // console.log(benefits);
           var boxName = benefits.attr("id").split("_")[0];
           var boxValue = benefits.attr("id").split("_")[2];
           var boxLength = parseInt(boxValue) + 1;
@@ -427,7 +442,23 @@
         }
 
         if(benefitsValue){
-          $("<div class='checkbox default'><input id='"+boxName+"_"+boxLength+"' type='checkbox' name='"+boxName+"["+boxLength+"]' checked='checked'><span id='name'>"+benefitsValue+"</span> <span class='edit-benefit italic label-green'>select to edit</span><input id='"+ boxName +"_info_"+ boxLength+"' class='edit-text-field' type='text' value='"+benefitsValue+"' style='width: 320px !important; display: none;' name='"+boxName+"[info_"+boxLength+"]'></div>").appendTo($(this).parent().parent().parent());
+          $("<div class='checkbox default'><input class='sponsor_checkbox' id='"+boxName+"_"+boxLength+"' type='checkbox' name='"+boxName+"["+boxLength+"]' checked='checked'><span id='name'>"+benefitsValue+"</span> <span class='edit-benefit italic label-green'>select to edit</span><input id='"+ boxName +"_info_"+ boxLength+"' class='edit-text-field' type='text' value='"+benefitsValue+"' style='width: 320px !important; display: none;' name='"+boxName+"[info_"+boxLength+"]'></div>").appendTo($(this).parent().parent().parent());
+          sizeSponsors = $(".sponsor_checkbox").size();
+          c = 0;
+          name = "";
+          for(x = 0; sizeSponsors > x; x++ ){
+            sponsorship = $(".sponsor_checkbox")[x];
+            contentSponsor = $(".edit-text-field")[x];
+            if(name !=  $(sponsorship).attr("id").split("_")[0]){
+              name = $(sponsorship).attr("id").split("_")[0];
+              c = 0;
+            }
+            c++;
+            $(sponsorship).attr({id: name + "_" + c , name: name + "["+ c + "]"});
+            $(contentSponsor).attr({id: name + "_info_" + c , name: name + "[info_"+ c + "]"});
+          }
+          $('.step-container[data-id="sponsorship"] form').submit();
+
           boxLength++;
           switch (boxName)
           {
