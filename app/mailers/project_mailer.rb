@@ -20,10 +20,10 @@ class ProjectMailer < ActionMailer::Base
     mail to: @email, subject: "Wait For Approval"
   end
 
-  def project_message(recepient, header_image, content)
+  def project_message(recepient, subject_email, header_image, content)
     @image = header_image
     @content = content
-    mail to: recepient, subject: "Project messages from Crowfundproject"
+    mail to: recepient, subject: subject_email
   end
 
   def project_approved(project)

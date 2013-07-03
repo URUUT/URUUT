@@ -225,11 +225,13 @@
 
   $(".seed-form").on("click", function(){
     $("#video_type").val("seed");
+    $("#video_link").val("");
     $("#save-video").modal("show");
   });
 
   $(".cultivation-form").on("click", function(){
     $("#video_type").val("cultivation");
+    $("#video_link").val("");
     $("#save-video").modal("show");
   });
 

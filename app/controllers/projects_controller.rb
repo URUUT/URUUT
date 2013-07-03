@@ -56,6 +56,10 @@ class ProjectsController < ApplicationController
     session[:current_project] = @project.id
     @project.update_attributes!(params[:project])
     @perks = @project.perks.order(:amount)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show

@@ -94,13 +94,18 @@ class ProjectAdmin::ProjectsController < ApplicationController
       subject = params[:post][:subject]
       recepients = params[:email_recepient].split(",")
       recepients.each do |recepient|
-        ProjectMailer.project_message(recepient, params[:email_header], params[:post]["email_content"]).deliver
+        # ProjectMailer.project_message(recepient, params[:post]["subject"], params[:email_header], params[:post]["email_content"]).deliver
       end
     end
   end
 
   def emails_page
     @project = Project.find(params[:project_id])
+    emails_sponsor = @project.project_sponsors.joins(:sponsor).pluck(:email).uniq
+    emails_donors = @project.donations.pluck(:email).uniq
+    @emails = emails_donors + emails_sponsor
+    @emails.reject!(&:empty?)
+    @emails = @emails.join(",")
     @total_fundings = @project.total_funding_by_project
     @contact = Contact.new
     @need_doctype = true
