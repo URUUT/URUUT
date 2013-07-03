@@ -211,7 +211,7 @@ class DonationsController < ApplicationController
   end
 
   def share_email
-    DonorMailer.share_project(params[:emails], params[:project_id]).deliver
+    DonationMailer.share_project(params[:emails], params[:project_id]).deliver
     respond_to :js
   end
 
