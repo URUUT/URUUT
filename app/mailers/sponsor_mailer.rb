@@ -59,7 +59,7 @@ class SponsorMailer < ActionMailer::Base
     @project_twitter = project.twitter_handle
     @project_id = project.id
     
-    mail to: @email, subject: "Thank You"
+    mail to: @email, bcc: user.email, subject: "Thank You"
   end
 
 end
