@@ -4,28 +4,18 @@ class ApplicationController < ActionController::Base
   before_filter :last_url, :session_email_forgot_password
 
   def after_sign_in_path_for(resource)
-    if session[:path] == "project_new"
+    if session[:redirect_url] == new_project_url
+      session.delete(:path)
       project = Project.new
       project.user_id = resource.id
       project.save
-      session[:path] == ""
-      edit_project_path(project.id)
-    elsif request.referer.eql?(new_user_registration_url) || request.referer.nil?
-      if session[:path] == "project_new"
-        project = Project.new
-        project.user_id = resource.id
-        project.save
-        session[:path] == ""
-        edit_project_path(project.id)
-      elsif session[:path] == "sponsor_new"
-        new_project_sponsor_url
-      elsif session[:path]
-        session[:path]
-      end
+      "/projects/#{project.id}/edit#sponsor-info"
+    elsif session[:redirect_url] == user_registration_url
+      root_url
     elsif request.referer.start_with?(edit_user_password_url)
       root_url
     else
-      stored_location_for(resource) || request.referer || root_path ||  request.env['omniauth.origin']
+      stored_location_for(resource) || request.referer || session[:redirect_url]  ||  request.env['omniauth.origin']
     end
       # return root_url
     # rescue
