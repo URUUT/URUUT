@@ -16,6 +16,7 @@ class AdminController < ApplicationController
       project.live = 1
       project.ready_for_approval = 0
       project.approval_date = Date.today
+      Project.delay.send_approval_email(project)
       project.save!
     else
       newData = "Failure"
