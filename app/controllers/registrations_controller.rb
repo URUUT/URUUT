@@ -24,20 +24,16 @@ class RegistrationsController < Devise::RegistrationsController
 
   def after_sign_up_path_for(resource)
     # sign_up_url = url_for(:action => 'create', :controller => 'registrations', :only_path => false, :protocol => 'http')
-    if session[:path] == "project_new"
+    if session[:redirect_url_last] == new_project_url
+      session.delete(:path)
       project = Project.new
       project.user_id = resource.id
       project.save
-      session[:path] == ""
-      edit_project_path(project.id)
-    elsif session[:path] == "sponsor_new"
-      new_project_sponsor_url
-    elsif session[:path]
-      session[:path]
-    elsif session[:redirect_url_last] = user_registration_url
+      "/projects/#{project.id}/edit#sponsor-info"
+    elsif session[:redirect_url_last] == user_registration_url
       root_url
     else
-      stored_location_for(resource) || request.referer || session[:redirect_url_last] ||  request.env['omniauth.origin']
+      stored_location_for(resource) || request.referer || session[:redirect_url_last]  ||  request.env['omniauth.origin']
     end
       # logger.debug(request.referrer)
       # return root_url
