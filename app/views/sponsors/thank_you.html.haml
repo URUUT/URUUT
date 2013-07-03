@@ -24,25 +24,6 @@
 
 :javascript
   var project_id = "#{@project.id}";
-  var project_id = "#{@project.id}";
-
-  function postToFeed() {
-    // calling the API ...
-    var obj = {
-      method: 'feed',
-      redirect_uri: '#',
-      link: '#{project_url(@project.id)}',
-      picture: 'http://fbrell.com/f8.jpg',
-      name: '#{@project.title}',
-      caption: '#{@project.category}',
-      description: 'Our company is RUUTing for this community project and you should, too. Join us by making a donation on @URUUT’s collaborative funding platform. Together we can make a difference in our community!'
-    };
-
-    function callback(response) {
-    }
-
-    FB.ui(obj, callback);
-  }
 
   $('.tw-share').click(function(e) {
     e.preventDefault();
