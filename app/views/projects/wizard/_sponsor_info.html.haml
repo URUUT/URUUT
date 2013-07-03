@@ -122,7 +122,7 @@
     %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal", style: "float: none; margin: 0 auto;"} Ok
 
 :javascript
-
+  $("#project_zip").attr("maxlength", '6')
   $(function(){
     $(".sponsor-info-form").validate({
       messages: {
