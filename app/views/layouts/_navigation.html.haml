@@ -98,7 +98,7 @@
       Close X
     %h3#myModalLabel.tittle{:style => "margin-bottom: 0;"} FORGOT YOUR PASSWORD?
   .modal-body{:style => "padding-top: 0; font-size: 13px; letter-spacing: 1px;"}
-    %p We've sent an email to #{session[:email_forgot_password]} with instructions on how to change your password.
+    %p{id: "updated-email-forgot"} We've sent an email to #{session[:email_forgot_password]} with instructions on how to change your password.
     %p It may take a few minutes to receive the email. If you don't receive the email:
     %ul
       %li Check your junk mail folder.
