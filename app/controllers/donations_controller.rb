@@ -210,6 +210,11 @@ class DonationsController < ApplicationController
     @donators = Donation.where(project_id: params[:id])
   end
 
+  def share_email
+    DonorMailer.share_project(params[:emails], params[:project_id]).deliver
+    respond_to :js
+  end
+
   private
 
   def set_session_page

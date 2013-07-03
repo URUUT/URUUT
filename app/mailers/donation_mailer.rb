@@ -6,6 +6,12 @@ class DonationMailer < ActionMailer::Base
   #
   #   en.contact_mailer.contact_confirmation.subject
   #
+
+  def share_project(recepient, project_id)
+    @project = Project.find(project_id)
+    mail to: recepient, subject: "Share from Crowfundproject donor"
+  end
+
   def donation_confirmation(donation)
     user = User.find_by_id(donation.user_id)
     project = Project.find(donation.project_id)
