@@ -32,7 +32,7 @@ class SponsorMailer < ActionMailer::Base
     @sponsorship_cost = project_sponsor.cost
     
     @name = "#{user.first_name}" + " #{user.last_name}"
-    @sponsor_name = "#{sponsor.first_name}" + " #{sponsor.last_name}"
+    @sponsor_name = project_sponsor.name
 
     mail to: @email, subject: "Sponsor thank you follow-up"
   end
@@ -43,7 +43,7 @@ class SponsorMailer < ActionMailer::Base
     user = User.find_by_id(project.user_id)
     
     @email = sponsor.email
-    @name = "#{sponsor.first_name}" + " #{sponsor.last_name}"
+    @name = project_sponsor.name
     @sponsor_name = "#{user.first_name}" + " #{user.last_name}"
     @image = project.large_image
     @project_name = project.title
