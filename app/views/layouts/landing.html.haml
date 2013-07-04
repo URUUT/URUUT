@@ -1,58 +1,116 @@
-!!!
-%html{:itemscope => "", :itemtype => "http://schema.org/LocalBusiness", :xmlns => "http://www.w3.org/1999/xhtml", "xmlns:fb" => "http://ogp.me/ns/fb#"}
-  %head
-    %meta{:charset => "utf-8"}
-    %meta{"http-equiv" => "X-UA-Compatible", :content => "IE=edge,chrome=1"}
-    %meta{:name => "viewport", :content => "width=960, maximum-scale=1"}
-    %title= content_for?(:title) ? yield(:title) : "URUUT"
-    %meta{:content => "", :name => "description"}
-    %meta{:content => "", :name => "author"}
-    - if controller_name == "projects" and action_name == "show"
-      %meta{:property => "og:image", :content => "#{@project.large_image}"}
-      %meta{:property => "og:title", :content => "#{@project.title}"}
-    = favicon_link_tag 'favicon.ico'
-    = stylesheet_link_tag    "default/application", "trontastic/jquery-ui-1.8.22.custom.css", "leaflet.css", "style.css.scss", "prettyPhoto.css", :media => "all"
-    = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js", "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js", "application", "https://js.stripe.com/v1/", "jquery.prettyPhoto.js", :media => "all"
-    = filepicker_js_include_tag
-    = javascript_include_tag "pages"
-    = javascript_tag do
-      Stripe.setPublishableKey("#{STRIPE_PUBLIC_KEY}");
+- if controller_name == "projects" and action_name == "show"
+  !!!
+  %html{:itemscope => "", :itemtype => "http://schema.org/LocalBusiness", :xmlns => "http://www.w3.org/1999/xhtml", "xmlns:fb" => "http://ogp.me/ns/fb#"}
+    %head
+      %meta{:charset => "utf-8"}
+      %meta{"http-equiv" => "X-UA-Compatible", :content => "IE=edge,chrome=1"}
+      %meta{:name => "viewport", :content => "width=960, maximum-scale=1"}
+      %title= content_for?(:title) ? yield(:title) : "URUUT"
+      %meta{:content => "", :name => "description"}
+      %meta{:content => "", :name => "author"}
+      - if controller_name == "projects" and action_name == "show"
+        %meta{:property => "og:image", :content => "#{@project.large_image}"}
+        %meta{:property => "og:title", :content => "#{@project.project_title} | URUUT"}
+        %meta{:property => 'og:description', :content=> "#{@project.title}" }
+      = favicon_link_tag 'favicon.ico'
+      = stylesheet_link_tag    "default/application", "trontastic/jquery-ui-1.8.22.custom.css", "leaflet.css", "style.css.scss", "prettyPhoto.css", :media => "all"
+      = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js", "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js", "application", "https://js.stripe.com/v1/", "jquery.prettyPhoto.js", :media => "all"
+      = filepicker_js_include_tag
+      = javascript_include_tag "pages"
+      = javascript_tag do
+        Stripe.setPublishableKey("#{STRIPE_PUBLIC_KEY}");
 
-    = csrf_meta_tags
-    = yield(:head)
-  %body{:class => "#{controller_name} #{action_name}"}
-    #fb-root
-      :javascript
+      = csrf_meta_tags
+      = yield(:head)
+    %body{:class => "#{controller_name} #{action_name}"}
+      #fb-root
+        :javascript
 
-        window.fbAsyncInit = function() {
-          // init the FB JS SDK
-          FB.init({
-            appId      : "#{Settings.facebook.api_key}",                        // App ID from the app dashboard
-            channelUrl : '', // Channel file for x-domain comms
-            status     : true,                                 // Check Facebook Login status
-            xfbml      : true                                  // Look for social plugins on the page
-          });
+          window.fbAsyncInit = function() {
+            // init the FB JS SDK
+            FB.init({
+              appId      : "#{Settings.facebook.api_key}",                        // App ID from the app dashboard
+              channelUrl : '', // Channel file for x-domain comms
+              status     : true,                                 // Check Facebook Login status
+              xfbml      : true                                  // Look for social plugins on the page
+            });
 
-          // Additional initialization code such as adding Event Listeners goes here
-        };
+            // Additional initialization code such as adding Event Listeners goes here
+          };
 
-        (function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) return;
-          js = d.createElement(s); js.id = id;
-          js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=#{Settings.facebook.api_key}";
-          fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
+          (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=#{Settings.facebook.api_key}";
+            fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));
 
-        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+          !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 
-    #wrap
-      %header.navbar
-        .container
-          = render 'layouts/navigation'
-      = yield
-      #push
-    = render 'partials/footer'
+      #wrap
+        %header.navbar
+          .container
+            = render 'layouts/navigation'
+        = yield
+        #push
+      = render 'partials/footer'
+- else
+  %html
+    %head
+      %meta{:charset => "utf-8"}
+      %meta{"http-equiv" => "X-UA-Compatible", :content => "IE=edge,chrome=1"}
+      %meta{:name => "viewport", :content => "width=960, maximum-scale=1"}
+      %title= content_for?(:title) ? yield(:title) : "URUUT"
+      %meta{:content => "", :name => "description"}
+      %meta{:content => "", :name => "author"}
+      - if controller_name == "projects" and action_name == "show"
+        %meta{:property => "og:image", :content => "#{@project.large_image}"}
+        %meta{:property => "og:title", :content => "#{@project.project_title} | URUUT"}
+        %meta{:property => 'og:description', :content=> "#{@project.title}" }
+      = favicon_link_tag 'favicon.ico'
+      = stylesheet_link_tag    "default/application", "trontastic/jquery-ui-1.8.22.custom.css", "leaflet.css", "style.css.scss", "prettyPhoto.css", :media => "all"
+      = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js", "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js", "application", "https://js.stripe.com/v1/", "jquery.prettyPhoto.js", :media => "all"
+      = filepicker_js_include_tag
+      = javascript_include_tag "pages"
+      = javascript_tag do
+        Stripe.setPublishableKey("#{STRIPE_PUBLIC_KEY}");
+
+      = csrf_meta_tags
+      = yield(:head)
+    %body{:class => "#{controller_name} #{action_name}"}
+      #fb-root
+        :javascript
+
+          window.fbAsyncInit = function() {
+            // init the FB JS SDK
+            FB.init({
+              appId      : "#{Settings.facebook.api_key}",                        // App ID from the app dashboard
+              channelUrl : '', // Channel file for x-domain comms
+              status     : true,                                 // Check Facebook Login status
+              xfbml      : true                                  // Look for social plugins on the page
+            });
+
+            // Additional initialization code such as adding Event Listeners goes here
+          };
+
+          (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=#{Settings.facebook.api_key}";
+            fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));
+
+          !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+
+      #wrap
+        %header.navbar
+          .container
+            = render 'layouts/navigation'
+        = yield
+        #push
+      = render 'partials/footer'
 
 :javascript
 
