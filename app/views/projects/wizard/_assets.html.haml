@@ -153,11 +153,13 @@
                       .seed-level
                         %h3{style: "font-size: 20px;"}
                           = p.name
+                        %h3
                           - if p.limit
                             %span.small-heading
-                              = p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of #{p.perks_available} Available)"
-                        %p
-                          When you seed $#{p.amount.to_i}, you will receive #{p.description}
+                              = p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of #{p.perk_limit} Available)"
+                        %ul.normal-font.dashed-list
+                          %li
+                            When you seed $#{p.amount.to_i}, you will receive #{p.description}
                         %p.subtext
                           Uruut Reward Points: #{p.amount.to_i}
                         .clearfix
@@ -172,7 +174,8 @@
                     - description = "You will receive #{perk} Uruut Reward Points when you seed $#{perk.to_i}"
                     .seed-level
                       %h3= name
-                      %p{style: "height: auto; margin: 5px 0; overflow: hidden; text-overflow:ellipsis;"}= description
+                      %ul.normal-font.dashed-list
+                        %li= description
                       .clearfix
                         .seed-num
                           .amount
@@ -261,11 +264,13 @@
                   .seed-level
                     %h3{style: "font-size: 20px;"}
                       = p.name
+                    %h3
                       - if p.limit
                         %span.small-heading
-                          = p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of #{p.perks_available} Available)"
-                    %p
-                      When you seed $#{p.amount.to_i}, you will receive #{p.description}
+                          = p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of #{p.perk_limit} Available)"
+                    %ul.normal-font.dashed-list
+                      %li
+                        When you seed $#{p.amount.to_i}, you will receive #{p.description}
                     %p.subtext
                       Uruut Reward Points: #{p.amount.to_i}
                     .clearfix
@@ -281,7 +286,8 @@
                 - description = "You will receive #{perk} Uruut Reward Points when you seed $#{perk}"
                 .seed-level
                   %h3= name
-                  %p{style: "height: auto; margin: 5px 0; overflow: hidden; text-overflow:ellipsis;"}= description
+                  %ul.normal-font.dashed-list
+                    %li= description
                   .clearfix
                     .seed-num
                       .amount

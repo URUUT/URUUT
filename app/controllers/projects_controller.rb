@@ -271,7 +271,7 @@ class ProjectsController < ApplicationController
       limit_status = params[:limit].eql?("yes") ? true : false
       perk = Perk.create(name: params[:name], amount: params[:amount],
                   description: params[:description], project_id: params[:project],
-                  perks_available: params[:perks_available], limit: limit_status)
+                  perks_available: params[:perks_available], limit: limit_status, perk_limit: params[:perks_available])
     end
     respond_to do |format|
 
