@@ -1,2 +1,73 @@
 .container
-	%h1 Thank You For Your Donation
+  .row-fluid{style: "margin-top: 30px;"}
+    .span9
+      %h4.tittle{style: "padding-bottom: 10px;"} THANK YOU!
+      %h4.label-green Congratulations!
+      %p{:style => "letter-spacing: 1px;"} You are now an official sponsor to #{session[:donation_thank_you][:project_title]}. Now it's time to spread the word
+      %div
+        = link_to image_tag("fb-share.png",style: "width: 150px"), "https://www.facebook.com/dialog/feed?app_id=#{Settings.facebook.api_key}&link=#{project_url(session[:donation_thank_you][:project_id])}&picture=#{session[:donation_thank_you][:project_large_image]}&name=#{url_encode(session[:donation_thank_you][:project_url])}&caption=#{url_encode(session[:donation_thank_you][:project_title])}&description=#{url_encode("I'm RUUTing for this community project and you should, too. Join me by making a donation on @URUUT’s collaborative funding platform. Let's make a difference in our community!")}&redirect_uri=#{thank_you_donations_url}", style: "display: block; float: left;", target: "_blank"
+        = image_tag "tw-share.png", style: "cursor:pinter; margin-left: 2%; display: block; float: left; width: 150px; cursor:pointer", class: "tw-share"
+        = link_to image_tag("ml-share.png", style: "width: 150px"), "javascript:void(0)", style: "margin-left: 2%; display: block; float: left;", class: "cs_import"
+        %span.link-short{:style => "font-weight:bolder; font-size: 18px !important; margin-left: 2%"}
+          = session[:donation_thank_you][:project_bitly]
+
+    .span3.pull-right.messages-content
+      %h4.title Details
+      .well.pull-left{style: "margin-left: 0;"}
+        %h5.label-green{style: "margin-bottom: 0;"} Payment amount
+        %p #{number_to_currency(session[:donation_thank_you][:amount], :precision => 0)}
+        %h5.label-green{style: "margin-bottom: 0;"} Your perk
+        %h6{style: "margin: 0;"}
+          = session[:donation_thank_you][:perk_name]
+        %p= session[:donation_thank_you][:perk_description]
+        %p{style: "color: #e0e0e0; font-size: 11px;"}
+          %span{style: "font-family: 'Proxima Nova Semi', sans-serif;"}
+            Estimated delivery :
+          13 October 2013
+
+:javascript
+  var project_id = "#{session[:donation_thank_you][:project_id]}";
+
+  $('.tw-share').click(function(e) {
+    e.preventDefault();
+    var url = "http://twitter.com/share?url=#{session[:donation_thank_you][:bitly]}&text=I%27m%20RUUTing%20for%20this%20community%20project%20on%20%40URUUT%20and%20you%20should%2C%20too.%20Join%20me%20in%20making%20a%20donation%3A%20%2E&hashtags=GetRUUTed";
+
+    window.open(url);
+  });
+
+  var owner_email, owner_first_name, owner_last_name;
+  var appendInTextarea = false;
+  var emailSep = ", ";
+  function sendEmail(contacts, source, owner) {
+    var contact, name, email, entry;
+    var emails = [];
+    var textarea = document.getElementById('contact_list');
+
+    for (var i = 0; i < contacts.length; i++) {
+      contact = contacts[i];
+      name = contact.fullName();
+      email = contact.selectedEmail();
+      entry = name + "<" + email +">";
+      if (emails.indexOf(entry) < 0) {
+        emails.push(entry);
+      }
+    }
+
+    $("#contact_list").val("");
+
+    $.ajax({
+      type: "POST",
+      url: "/share_email_by_donor",
+      data: {emails: emails.join(emailSep), project_id: project_id, user_id: #{current_user.id}}
+    })
+
+  }
+
+
+  var csPageOptions = {
+    domain_key:"#{Settings.cloudsponge.api_key}", // default for 127.0.0.1, please change it
+    textarea_id:"contact_list",
+    afterSubmitContacts:sendEmail
+  };
+
+%script{:src => "https://api.cloudsponge.com/address_books.js"}
