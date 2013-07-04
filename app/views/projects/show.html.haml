@@ -318,7 +318,7 @@
                       - if p.limit
                         %p.subtext{style:"text-transform: uppercase; font-size: 12px; letter-spacing: 1px;"}= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of 100 Available)"
                       %p
-                        When you seed #{amount_converter(p.amount.to_i)}, you will receive an official #{p.description}
+                        When you seed $#{amount_converter(p.amount.to_i)}, you will receive an official #{p.description}
                       %p.subtext
                         Uruut Reward Points: #{p.amount.to_i}
 
@@ -352,7 +352,7 @@
               - default_perk.each_with_index do |perk, index|
                 - index += 1
                 - name = "LEVEL #{index}"
-                - description = "You will receive #{perk} Uruut Reward Points when you seed $#{perk}"
+                - description = "You will receive #{perk} Uruut Reward Points when you seed $#{perk.to_i}"
                 .seed-level
                   %h3= name
                   %p{style: "height: auto; margin: 5px 0; overflow: hidden; text-overflow:ellipsis;"}= description
@@ -484,7 +484,7 @@
                   - if p.limit
                     %p.subtext{style:"text-transform: uppercase; font-size: 12px; letter-spacing: 1px;"}= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of 100 Available)"
                   %p
-                    When you seed #{amount_converter(p.amount.to_i)}, you will receive an official #{p.description}
+                    When you seed $#{amount_converter(p.amount.to_i)}, you will receive an official #{p.description}
                   %p.subtext
                     Uruut Reward Points: #{p.amount.to_i}
 
@@ -513,7 +513,7 @@
           - default_perk.each_with_index do |perk, index|
             - index += 1
             - name = "LEVEL #{index}"
-            - description = "You will receive #{perk} Uruut Reward Points when you seed $#{perk}"
+            - description = "You will receive #{perk} Uruut Reward Points when you seed $#{perk.to_i}"
             .seed-level
               %h3= name
               %p{style: "height: auto; margin: 5px 0; overflow: hidden; text-overflow:ellipsis;"}= description
