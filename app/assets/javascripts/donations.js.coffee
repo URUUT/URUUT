@@ -159,7 +159,7 @@ $ ->
 	$('#new_donation #donate').on 'click', (event) ->
     event.preventDefault()
     if $("#new_donation").valid()
-      Stripe.setPublishableKey('pk_test_WRrfoQLUDkpGHAxCmOY0Y6ud')
+      Stripe.setPublishableKey(stripe_pub_key)
       if $(".choiced-perk").attr("style") isnt "display:none" and $("#custom_amount").val() is "0"
         alert "You Can't Input 0 For Seed Amount"
       else
@@ -171,7 +171,7 @@ $ ->
   $('.edit_donation #donate').on 'click', (event) ->
     event.preventDefault()
     if $(".edit_donation").valid()
-      Stripe.setPublishableKey('pk_test_WRrfoQLUDkpGHAxCmOY0Y6ud')
+      Stripe.setPublishableKey(stripe_pub_key)
       if $(".choiced-perk").attr("style") isnt "display:none" and $("#custom_amount").val() is "0"
         alert "You Can't Input 0 For Seed Amount"
       else

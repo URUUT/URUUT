@@ -66,7 +66,7 @@
 /     console.log("Project Id: #{@project.id}");
 
 :javascript
-
+  stripe_pub_key = "#{Settings.stripe.pub_key}";
   // if(window.opener) {
   //   window.opener.location.reload(true);
   //   window.close()
