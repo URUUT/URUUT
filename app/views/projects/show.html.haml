@@ -318,7 +318,7 @@
                       - if p.limit
                         %p.subtext{style:"text-transform: uppercase; font-size: 12px; letter-spacing: 1px;"}= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of 100 Available)"
                       %p
-                        When you seed $#{amount_converter(p.amount.to_i)}, you will receive an official #{p.description}
+                        When you seed $#{amount_converter(p.amount.to_i)}, you will receive  #{p.description}
                       %p.subtext
                         Uruut Reward Points: #{p.amount.to_i}
 
@@ -484,7 +484,7 @@
                   - if p.limit
                     %p.subtext{style:"text-transform: uppercase; font-size: 12px; letter-spacing: 1px;"}= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of 100 Available)"
                   %p
-                    When you seed #{amount_converter(p.amount.to_i)}, you will receive an official #{p.description}
+                    When you seed #{amount_converter(p.amount.to_i)}, you will receive #{p.description}
                   %p.subtext
                     Uruut Reward Points: #{p.amount.to_i}
 
