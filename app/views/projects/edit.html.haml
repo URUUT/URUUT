@@ -375,6 +375,10 @@
       $('.step-container[data-id="sponsorship"] form').submit();
     })
 
+    $("#project_sponsorship_permission").on("change", function(){
+      $('.step-container[data-id="sponsorship"] form').submit();
+    })
+
     $("#next-link-to-assets").click(function(){
       window.location.href = '/projects/' + projectId + '/edit#assets';
       window.location.reload(true);
