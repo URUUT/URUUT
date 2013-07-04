@@ -204,7 +204,7 @@ class ProjectsController < ApplicationController
     code = params[:code]
     client = OAuth2::Client.new("#{Settings.stripe.client_id}", "#{Settings.stripe.api_key}", :site => "https://connect.stripe.com/oauth/authorize")
     logger.debug(client.to_yaml)
-    token = client.auth_code.get_token(code, :headers => {'Authorization' => "Bearer #{Settings.stripe.api_key}"})
+    token = client.auth_code.get_token(code, :params => {:scope => 'read_write'}, :headers => {'Authorization' => "Bearer #{Settings.stripe.api_key}"})
     logger.debug(token.params['stripe_publishable_key'])
 
     project = Project.find(session[:current_project])
