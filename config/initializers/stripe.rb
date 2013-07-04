@@ -7,4 +7,4 @@ Rails.configuration.stripe = {
   :secret_key      => API_KEY
 }
 
-Stripe.api_key = ""
+Stripe.api_key = API_KEY
