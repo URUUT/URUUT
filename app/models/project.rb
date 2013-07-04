@@ -62,7 +62,7 @@ class Project < ActiveRecord::Base
     data.push(["All Project Donors","All Project Donors", {"data-name" => "All Project Donors"}]) unless perk_names.empty?
     perk_names.map { |sponsor| [sponsor + " Project Donors" , sponsor + " Project Donors", {"data-name" => sponsor + " Project Donors"} ] }.each { |sponsor| data << sponsor }
     data.unshift(["All Project Sponsors and Donors","All Project Sponsors and Donors", {"data-name" => "All Project Sponsors and Donors"}]) if !sponsorship_levels.empty? and !perk_names.empty?
-    data.unshift(["My Contact", "My Contact"])
+    data.unshift(["My Contacts", "My Contacts"])
     data
   end
 
