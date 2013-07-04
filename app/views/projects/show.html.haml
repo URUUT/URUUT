@@ -314,13 +314,13 @@
                   .seed-level
                     %h3{style: "font-size: 20px;"}
                       = p.name
-                    %div
                       - if p.limit
-                        %p.subtext{style:"text-transform: uppercase; font-size: 12px; letter-spacing: 1px;"}= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of 100 Available)"
-                      %p
-                        When you seed $#{amount_converter(p.amount.to_i)}, you will receive an official #{p.description}
-                      %p.subtext
-                        Uruut Reward Points: #{p.amount.to_i}
+                        %span.small-heading
+                          = p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of #{p.perks_available} Available)"
+                    %p
+                      When you seed #{amount_converter(p.amount.to_i)}, you will receive an official #{p.description}
+                    %p.subtext
+                      Uruut Reward Points: #{p.amount.to_i}
 
                     .clearfix{style: "margin-top: 20px;"}
                       .seed-num
@@ -480,13 +480,13 @@
               .seed-level
                 %h3{style: "font-size: 20px;"}
                   = p.name
-                %div
                   - if p.limit
-                    %p.subtext{style:"text-transform: uppercase; font-size: 12px; letter-spacing: 1px;"}= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of 100 Available)"
-                  %p
-                    When you seed #{amount_converter(p.amount.to_i)}, you will receive an official #{p.description}
-                  %p.subtext
-                    Uruut Reward Points: #{p.amount.to_i}
+                    %span.small-heading
+                      = p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of #{p.perks_available} Available)"
+                %p
+                  When you seed #{amount_converter(p.amount.to_i)}, you will receive an official #{p.description}
+                %p.subtext
+                  Uruut Reward Points: #{p.amount.to_i}
 
                 .clearfix{style: "margin-top: 20px;"}
                   .seed-num
