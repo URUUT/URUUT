@@ -16,6 +16,7 @@ class SponsorMailer < ActionMailer::Base
     @sponsor_name = project_sponsor.name
     @image = @project.large_image
     @project_title = @project.project_title
+    @host = ActionMailer::Base.default_url_options[:host]
 
     mail to: recepient, subject: "Share from Crowfundproject sponsor"
   end
