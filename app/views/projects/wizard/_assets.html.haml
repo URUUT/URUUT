@@ -153,8 +153,9 @@
                       .seed-level
                         %h3{style: "font-size: 20px;"}
                           = p.name
-                        - if p.limit
-                          %p= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} Available)"
+                          - if p.limit
+                            %span.small-heading
+                              = p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of #{p.perks_available} Available)"
                         %p
                           When you seed $#{p.amount.to_i}, you will receive an official #{p.description}
                         %p.subtext
@@ -260,8 +261,9 @@
                   .seed-level
                     %h3{style: "font-size: 20px;"}
                       = p.name
-                    - if p.limit
-                      %p= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} Available)"
+                      - if p.limit
+                        %span.small-heading
+                          = p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of #{p.perks_available} Available)"
                     %p
                       When you seed $#{p.amount.to_i}, you will receive an official #{p.description}
                     %p.subtext
