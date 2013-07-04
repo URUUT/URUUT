@@ -82,7 +82,7 @@
           %span.error-container.error-email{style: "margin-top: 3px;"}
         = f.email_field :email, class: "email-address-forgot"
       %div{:style => "text-align: center"}
-        = f.submit "Reset My Password ►", class: "btn", style: "background: #81C263; border-radius: 5px; padding-top: 20px; padding-bottom: 20px;"
+        = f.submit "Reset My Password ►", class: "btn button-reset", style: "background: #81C263; border-radius: 5px; padding-top: 20px; padding-bottom: 20px;"
 
 #errorModalForm.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "width: 440px;"}
   .modal-header{:style => "border-bottom: none;"}
@@ -117,6 +117,12 @@
     errorPlacement: function(error, element) {
       error.appendTo(element.parent().find(".error-container"));
     }
+  });
+
+  $('.modal-body form').on('submit', function(e){
+    e.preventDefault();
+    if (!$(this).valid()) return;
+      $('.modal-body form input.button-reset').val("LOADING..");
   });
 
   $(document).ready(function() {
