@@ -61,7 +61,8 @@
                 %h3.perk-name-other{id: "perk-name-other-#{p.id}"}= p.name
                 - if p.limit
                   %p= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} Available)"
-                %p= p.description
+                %p
+                  When you seed #{p.amount}, you will receive an official #{p.description}
                 %ul
                   %li.seed-amount{id: "amount-id-#{p.id}"}
                     %h6 SEED
