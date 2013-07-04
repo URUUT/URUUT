@@ -51,6 +51,18 @@ class DonationStepsController < ApplicationController
         #   @perk = @perk.first
         # end
       end
+
+      session[:donation_thank_you] = {
+        amount: @donation.amount,
+        project_id: @project.id,
+        project_large_image: @project.large_image,
+        project_bitly: @project.bitly,
+        project_title: @project.project_title,
+        project_category: @project.category,
+        perk_name: @perk.name,
+        perk_description: @perk.description
+      }
+
       render_wizard
     else
       redirect_to root_path
