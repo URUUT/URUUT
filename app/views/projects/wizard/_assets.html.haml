@@ -156,7 +156,7 @@
                         - if p.limit
                           %p= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} Available)"
                         %p
-                          When you seed $#{p.amount.to_i}, you will receive an official #{p.description}
+                          When you seed $#{p.amount.to_i}, you will receive #{p.description}
                         %p.subtext
                           Uruut Reward Points: #{p.amount.to_i}
                         .clearfix
@@ -263,7 +263,7 @@
                     - if p.limit
                       %p= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} Available)"
                     %p
-                      When you seed $#{p.amount.to_i}, you will receive an official #{p.description}
+                      When you seed $#{p.amount.to_i}, you will receive #{p.description}
                     %p.subtext
                       Uruut Reward Points: #{p.amount.to_i}
                     .clearfix
