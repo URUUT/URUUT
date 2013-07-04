@@ -43,15 +43,15 @@
   / = render "devise/shared/links"
 
 = render "social-login"
-#messegesModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "width: 440px;"}
-  .modal-header{:style => "border-bottom: none;"}
-    %button.close.label-green{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button", :style => "font-family: 'Proxima Nova', sans-serif; font-size: 12px;opacity: 1;"}
-      Close X
-    %h3#myModalLabel.tittle{:style => "margin-bottom: 0;font-family: 'Proxima Nova', sans-serif;"} Sign In Info
-  .modal-body{:style => "padding-top: 0; font-size: 13px; letter-spacing: 1px;"}
-    %h5{style: "margin-left: -9px;"}
-      - flash.each do |name, msg|
-        = content_tag :div, msg.html_safe, :id => "flash_#{name}", style: "#{message_style(controller_name, action_name)}; background: transparent;color: #333;font-style: normal;font-family: 'Proxima Nova Semi', sans-serif;" if msg.is_a?(String)
+#messegesModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => " display: block;padding: 50px;text-align: center;"}
+  %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :style => "position:absolute;top:10px;right:20px;", :type => "button"} ×
+  %h5{:style => "margin-bottom:20px;"} You need to sign in or sign up before continuing.
+  %a.btn.green-btn{:href => "/users/sign_in"} Sign In ►
+  %span{:style => "font:italic 12px/21px georgia, serif;margin:0 10px;"} or
+  %a.btn.green-btn{:href => "/users/sign_up"} Sign Up ►
+  %h5{style: "margin-left: -9px; display: none;"}
+    - flash.each do |name, msg|
+      = content_tag :div, msg.html_safe, :id => "flash_#{name}", style: "#{message_style(controller_name, action_name)}; background: transparent;color: #333;font-style: normal;font-family: 'Proxima Nova Semi', sans-serif;" if msg.is_a?(String)
 
 #forgotModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "width: 440px;"}
   .modal-header{:style => "border-bottom: none;"}
