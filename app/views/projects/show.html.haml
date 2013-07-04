@@ -318,9 +318,10 @@
                       - if p.limit
                         %span.small-heading
                           = p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of #{p.perk_limit} Available)"
+                    When you seed #{amount_converter(p.amount.to_i)}, you will receive:
                     %ul.normal-font.dashed-list
                       %li
-                        When you seed #{amount_converter(p.amount.to_i)}, you will receive an official #{p.description}
+                        #{p.description}
                     %p.subtext
                       Uruut Reward Points: #{p.amount.to_i}
                     .clearfix{style: "margin-top: 20px;"}
@@ -353,9 +354,10 @@
               - default_perk.each_with_index do |perk, index|
                 - index += 1
                 - name = "LEVEL #{index}"
-                - description = "You will receive #{perk} Uruut Reward Points when you seed $#{perk.to_i}"
+                - description = "#{perk} Uruut Reward Points"
                 .seed-level
                   %h3= name
+                  When you seed #{amount_converter(perk.to_i)}, you will receive:
                   %ul.normal-font.dashed-list
                     %li= description
                   .clearfix
@@ -486,9 +488,10 @@
                   - if p.limit
                     %span.small-heading
                       = p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of #{p.perk_limit} Available)"
+                When you seed #{amount_converter(p.amount.to_i)}, you will receive:
                 %ul.normal-font.dashed-list
                   %li
-                    When you seed #{amount_converter(p.amount.to_i)}, you will receive an official #{p.description}
+                    #{p.description}
                 %p.subtext
                   Uruut Reward Points: #{p.amount.to_i}
                 .clearfix{style: "margin-top: 20px;"}
@@ -516,9 +519,10 @@
           - default_perk.each_with_index do |perk, index|
             - index += 1
             - name = "LEVEL #{index}"
-            - description = "You will receive #{perk} Uruut Reward Points when you seed $#{perk.to_i}"
+            - description = "#{perk} Uruut Reward Points"
             .seed-level
               %h3= name
+              When you seed #{amount_converter(perk.to_i)}, you will receive:
               %ul.normal-font.dashed-list
                 %li= description
               .clearfix
