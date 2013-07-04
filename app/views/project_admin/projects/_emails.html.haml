@@ -20,9 +20,8 @@
           To:
           %span.error-container{style: "margin-right: 40px;"}
         %textarea#contact_list{:style => "width:637px;height:60px", :name => "email_recepient_show", :placeholder => "emails separated by comma", disabled: "disabled"}
-          = @emails
         = hidden_field_tag 'email_temp'
-        = hidden_field_tag 'email_recepient', @emails
+        = hidden_field_tag 'email_recepient'
 
       %div{:style => "margin-top: 10px"}
         = f.label :subject, class: "label-green" do
