@@ -113,7 +113,8 @@
       = render 'partials/footer'
 
 :javascript
-
+  stripe_pub_key = "#{Settings.stripe.pub_key}";
+  
   var updateProgressbar = function(id, value) {
     console.log(id);
     console.log(value);
