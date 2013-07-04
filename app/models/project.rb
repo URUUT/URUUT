@@ -63,6 +63,7 @@ class Project < ActiveRecord::Base
     perk_names.map { |sponsor| [sponsor + " Project Donors" , sponsor + " Project Donors", {"data-name" => sponsor + " Project Donors"} ] }.each { |sponsor| data << sponsor }
     data.unshift(["All Project Sponsors and Donors","All Project Sponsors and Donors", {"data-name" => "All Project Sponsors and Donors"}]) if !sponsorship_levels.empty? and !perk_names.empty?
     data.unshift(["My Contact", "My Contact"]) if data.empty?
+    data
   end
 
   def amount_per_day
