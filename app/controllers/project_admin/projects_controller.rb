@@ -125,6 +125,8 @@ class ProjectAdmin::ProjectsController < ApplicationController
       emails = project.project_sponsors.joins(:sponsor).pluck(:email).uniq
     when "All Project Donors"
       emails = project.donations.pluck(:email).uniq
+    when "My Contact"
+      emails = []
     else
       if params[:level_id].to_i.to_s == params[:level_id]
         emails = project.project_sponsors.joins(:sponsor).where("level_id = ?", params[:level_id]).uniq.pluck(:email)
