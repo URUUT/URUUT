@@ -11,6 +11,7 @@ class WelcomeMailer < ActionMailer::Base
 
     @name = user.name
     @email = user.email
+    @host = ActionMailer::Base.default_url_options[:host]
     unless @email.empty?
       mail to: @email, subject: "Welcome To URUUT"
     end
