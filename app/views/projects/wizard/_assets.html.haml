@@ -92,7 +92,7 @@
 
           #cultivation
             .span2.ending
-              %h4.title
+              %h4.title{style: "color: #464646 !important; font-weight: bold;"}
                 CULTIVATION
                 %br
                 %span (Project Details)
@@ -155,7 +155,8 @@
                           = p.name
                         - if p.limit
                           %p= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} Available)"
-                        %p= p.description
+                        %p
+                          When you seed #{p.amount}, you will receive an official #{p.description}
                         .clearfix
                           .seed-num
                             .amount
@@ -259,7 +260,8 @@
                       = p.name
                     - if p.limit
                       %p= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} Available)"
-                    %p= p.description
+                    %p
+                      When you seed #{p.amount}, you will receive an official #{p.description}
                     .clearfix
                       .seed-num
                         .amount

@@ -59,7 +59,8 @@
                 %h3.perk-name-other{style: "#{"color: #000" if @perk.id.eql?(p.id)}", id: "perk-name-other-#{p.id}"}= p.name
                 - if p.limit
                   %p= p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} Available)"
-                %p= p.description
+                %p
+                  When you seed #{p.amount}, you will receive an official #{p.description}
                 %ul
                   %li.seed-amount{style: "#{"background: #bee0b4" if @perk.id.eql?(p.id)}", id: "amount-id-#{p.id}"}
                     %h6 SEED
