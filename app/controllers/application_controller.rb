@@ -10,9 +10,7 @@ class ApplicationController < ActionController::Base
       project.user_id = resource.id
       project.save
       "/projects/#{project.id}/edit#sponsor-info"
-    elsif session[:redirect_url] == user_registration_url
-      root_url
-    elsif request.referer.start_with?(edit_user_password_url)
+    elsif session[:redirect_url] == user_registration_url || request.referer.nil? || request.referer.start_with?(edit_user_password_url) || session[:redirect_url] == root_url
       root_url
     else
       stored_location_for(resource) || request.referer || session[:redirect_url]  ||  request.env['omniauth.origin']

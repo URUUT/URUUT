@@ -210,6 +210,11 @@ class DonationsController < ApplicationController
     @donators = Donation.where(project_id: params[:id])
   end
 
+  def thank_you
+    @need_doctype = true
+    render :layout => "application"
+  end
+
   def share_email
     DonationMailer.share_project(params[:emails], params[:project_id], params[:user_id]).deliver
     respond_to :js

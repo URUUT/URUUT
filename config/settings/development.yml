@@ -1,13 +1,18 @@
 facebook:
-  api_key: <%= ENV['FACEBOOK_KEY'] %>
-  secret_key: <%= ENV['FACEBOOK_SECRET'] %>
+  api_key: "<%= ENV['FACEBOOK_KEY'] %>"
+  secret_key: "<%= ENV['FACEBOOK_SECRET'] %>"
 
 twitter:
-  consumer_key: <%= ENV['TWITTER_KEY'] %>
-  consumer_secret: <%= ENV['TWITTER_SECRET'] %>
+  consumer_key: "<%= ENV['TWITTER_KEY'] %>"
+  consumer_secret: "<%= ENV['TWITTER_SECRET'] %>"
 
 stripe:
-  client_id: <%= ENV['STRIPE_CLIENT_ID'] %>
+  client_id: "<%= ENV['STRIPE_CLIENT_ID'] %>"
+  api_key: "<%= ENV['STRIPE_KEY'] %>"
+  pub_key: "<%= ENV['STRIPE_PUB_KEY'] %>"
 
 filepicker:
-  api_key: <%= ENV['FILEPICKER_API'] %>
+  api_key: "<%= ENV['FILEPICKER_API'] %>"
+
+cloudsponge:
+  api_key: "<%= ENV['CLOUDSPONGE_API'] %>"

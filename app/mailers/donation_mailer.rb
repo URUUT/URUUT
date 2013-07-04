@@ -13,6 +13,7 @@ class DonationMailer < ActionMailer::Base
     user = User.find_by_id(user_id)
     @donator_name = "#{user.first_name}" + " #{user.last_name}"
     @image = @project.large_image
+    @host = ActionMailer::Base.default_url_options[:host]
 
     mail to: recepient, subject: "Checkout The Project I Donated To"
   end
@@ -34,6 +35,6 @@ class DonationMailer < ActionMailer::Base
     @sponsor_email = sponsor.email
     @sponsor_name = "#{sponsor.first_name}" + " #{sponsor.last_name}"
 
-    mail to: @email, subject: "Donor Thank You"
+    mail to: @email, subject: "Thank You, Donor"
   end
 end

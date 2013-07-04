@@ -252,21 +252,35 @@
         $('.breadcrumbs li[class*="' + hashVal + '"]').addClass('active');
       }
       if(hashVal == 'project-details') {
+        $(".sponsor-info-link").attr("href", "/projects/#{@project.id}/edit#sponsor-info");
+        $(".project-details-link").attr("href", "/projects/#{@project.id}/edit#project-details");
         $("#uruutTour").joyride("destroy");
         $("[data-id='" + hashVal + "']").show();
         $('li.' + hashVal).addClass('active');
       }
       if(hashVal == 'perks') {
+        $(".sponsor-info-link").attr("href", "/projects/#{@project.id}/edit#sponsor-info");
+        $(".project-details-link").attr("href", "/projects/#{@project.id}/edit#project-details");
+        $(".perks-link").attr("href", "/projects/#{@project.id}/edit#perks");
         $("#uruutTour").joyride("destroy");
         $("[data-id='" + hashVal + "']").show();
         $('.breadcrumbs li[class*="' + hashVal + '"]').addClass('active');
       }
       if(hashVal == 'sponsorship') {
+        $(".sponsor-info-link").attr("href", "/projects/#{@project.id}/edit#sponsor-info");
+        $(".project-details-link").attr("href", "/projects/#{@project.id}/edit#project-details");
+        $(".perks-link").attr("href", "/projects/#{@project.id}/edit#perks");
+        $(".sponsorship-link").attr("href", "/projects/#{@project.id}/edit#sponsorship");
         $("#uruutTour").joyride("destroy");
         $("[data-id='" + hashVal + "']").show();
         $('.breadcrumbs li[class*="' + hashVal + '"]').addClass('active');
       }
       if(hashVal == 'assets') {
+        $(".sponsor-info-link").attr("href", "/projects/#{@project.id}/edit#sponsor-info");
+        $(".project-details-link").attr("href", "/projects/#{@project.id}/edit#project-details");
+        $(".perks-link").attr("href", "/projects/#{@project.id}/edit#perks");
+        $(".sponsorship-link").attr("href", "/projects/#{@project.id}/edit#sponsorship");
+        $(".assets-link").attr("href", "/projects/#{@project.id}/edit#assets");
         $("[data-id='" + hashVal + "']").show();
         $('.breadcrumbs li[class*="' + hashVal + '"]').addClass('active');
         $("#uruutTour").joyride();

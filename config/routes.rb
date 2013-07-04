@@ -93,6 +93,7 @@ Crowdfund::Application.routes.draw do
     get "thank_you", :on => :collection
     get "change_perk", :on => :member
     get "more_donators", :on => :member
+    get "thank_you", :on => :collection
   end
   resources :projects do
     get :get_complete_project, on: :collection
