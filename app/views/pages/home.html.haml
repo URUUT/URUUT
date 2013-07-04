@@ -8,7 +8,7 @@
       .alert
         = alert
     %h1{style: "font-family: 'Proxima Nova Semi'"} Giving you the power to CREATE A better community.
-    %h2 Every community has great projects that can’t get off the ground. But with Uruut, yours can be different. Your park needs a new playground? Uruut it. Need a new library? Uruut it. Senior center? Bike path? Dog park? Uruut it. That’s why we’re here – to help you build the community you deserve.
+    %h2 Every community has great projects that can’t get off the ground. But with Uruut, yours can be different. Your park needs a new playground? Uruut it. Need a new library? Uruut it. Senior center? Bike path? Dog park? Uruut it. That’s why we’re here – to help you strengthen your community.
     .btn.brown
       = link_to "#{user_signed_in? ? 'javascript:void(0)' : new_user_registration_path}", class: "#{'error-sign-up' if user_signed_in?}" do
         Sign Up Now ►
@@ -33,34 +33,35 @@
   .container
     .marketing.float-left
       %h3 A NEW KIND OF CROWDFUNDING PLATFORM.
-      %h2 Unlike others, Uruut is the only one specifically designed to make your contributions go further—much further—by also capturing business and foundation funding and putting it all to work right where you live.
+      %h2 Unlike others, Uruut is the only platform specifically designed to make your individual contributions go further -much further - by also supporting business and foundation funding.
     .pie-chart.float-right
       = image_tag "pie-chart.png"
 
 %section.full-width.better
   .container
     %h3 WHAT MAKES URUUT BETTER?
-    %h2 Greater chance for funding success. Bottom line.
-    %p With three different sources for funding, projects have a much greater chance of reaching their funding goal.
+    %h2 A greater chance for funding success. Bottom line.
+    %p By harnessing three different funding sources, projects have a much better chance of reaching their goal.
     .graphic-1
       = image_tag "suitcase.png"
       .content
         %h5 Business Sponsors
-        %p Uruut offers you the opportunity to sponsor projects that associate your brand with high-impact local, regional and national projects.
+        %p Uruut offers businesses and CSR organizations an opportunity to align to high-impact community projects and programs.  This directly connects you to customers and the local community while increasing brand awareness and social responsibility reach.
         = link_to funding_sources_pages_path, :class => "btn" do
           learn more ►
     .graphic-2
       = image_tag "individual.png"
       .content
         %h5 Individual CONTRIBUTORS
-        %p Uruut offers you the opportunity to support projects you value, offering perks in exchange for contributions.
+        %p Uruut offers you the opportunity to support projects you value, keeping your generosity targeted and connecting you to the lives you touch. When you join with thousands of other caring donors, there’s no stopping what a crowd can do.
         = link_to funding_sources_pages_path, :class => "btn" do
-          learn more ►
+          learn more
+          %span
     .graphic-3
       = image_tag "family.png"
       .content
-        %h5 NON-PROFIT Foundations
-        %p For corporate and family foundations, Uruut offers you an easy, functional platform to screen, search and provide matching grant dollars to projects and causes relevant to your mission.
+        %h5 Foundations
+        %p For private, family and corporate foundations, Uruut offers a marketplace of vetted ideas, enabling foundations to easily screen, search and provide support to projects and causes relevant to your mission.
         = link_to funding_sources_pages_path, :class => "btn" do
           learn more ►
 
@@ -71,30 +72,30 @@
     .float-left
       = image_tag "laptop.jpg"
     .marketing.float-left
-      %p This is a foreign sentiment to us. While others disengage after a project has been funded, for Uruut getting a project funded is just the beginning. We regard accountability and transparency as an absolute necessity, because you should know exactly how your resources are being spent, and that promises are being kept. So we’ve built a robust application to provide insight into post-funding budget and project status.
+      %p This is a foreign sentiment to us. While others disengage after a project has been funded, for Uruut, getting a project funded is just the beginning. We regard accountability and transparency as an absolute necessity, because you should know exactly how your resources are being applied, and that promises are being kept.  You should be connected to the lives your donations touch, so we’ve built a robust application that democratizes the funding process by providing insight into post-funding budget and project status.
 
 %section.full-width.who-should-use
   .container
     %h3 WHO IS URUUT FOR?
-    %h2 Anyone who wants to raise their odds of fundraising success.
-    %p While URUUT is open to many types of projects, we specialize in working with the following:
+    %h2 Anyone who wants to strengthen their community and raise their odds of fundraising success.
+    %p While Uruut is open to many types of projects, we specialize in working with the following:
     .graphic-1
       = image_tag "municipalities.png"
       .content
         %h5 Municipalities
-        %p Cities and local jurisdictions looking to form public/private partnerships and need funding for underfunded or zero funded projects and programs.
+        %p Cities and local jurisdictions looking to form public/private partnerships that target underfunded or zero-funded projects and programs.
 
     .graphic-2
       = image_tag "member-organizations.png"
       .content
         %h5 Member Organizations
-        %p Chambers of Commerce, local leadership organizations, PTAs, and others who need a helping hand with community oriented initiatives.
+        %p Chambers of Commerce, local leadership organizations, PTAs, and others who need a helping hand with community-oriented initiatives.
 
     .graphic-3
       = image_tag "non-profits.png"
       .content
         %h5 CIVIC ORGANIZATIONS
-        %p Community focused civic organizations who are looking to expand their reach and are seeking greater transparency.
+        %p Community-focused civic organizations, schools, churches and other non-profits, looking to expand their reach and that seek greater transparency.
 
 %section.full-width.make-it-happen
   .container
