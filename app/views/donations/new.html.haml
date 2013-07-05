@@ -61,17 +61,19 @@
                   - if p.limit
                     %span.small-heading
                       = p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of #{p.perk_limit} Available)"
+                When you seed #{amount_converter(p.amount)}, you will receive:
                 %ul.normal-font.dashed-list
                   %li
-                    You will receive #{p.amount.to_i} Uruut Reward Points when you seed #{amount_converter(p.amount)}
-                %ul
+                    #{p.description}
+                %p.subtext
+                  Uruut Reward Points: #{p.amount.to_i}
+                %ul{style: "padding-top: 10px;"}
                   %li.seed-amount{style: "#{"background: #bee0b4" if @perk.id.eql?(p.id)}", id: "amount-id-#{p.id}"}
-                    %h6 SEED
                     %p.amount #{amount_converter(p.amount.to_i)}
                   %li.fund-button
                     - if p.limit
                       - if p.perks_available.to_i.zero?
-                        %a{:class => "fund btn pull-right"} Fund Now ►
+                        %span{:class => "fund pull-right", style: "font-style: italic;"} Not Available
                       -else
                         %a{:class => "fund btn change-fund pull-right", "perk-id" => "#{p.id}", style: "#{"background: #81C263" if @perk.id.eql?(p.id)}", id: "button-fund-#{p.id}"} Fund Now ►
                     -else
@@ -80,15 +82,15 @@
           - default_perk.each_with_index do |perk_amount, index|
             - index += 1
             - name = "LEVEL #{index}"
-            - description = "You will receive #{perk_amount.to_i} Uruut Reward Points when you seed #{amount_converter(perk_amount)}"
+            - description = "#{perk_amount.to_i} Uruut Reward Points"
             %li.perk.clearfix{style: "#{"background: #bee0b4" if @perk_amount.eql?(perk_amount)}", id: "perk-id-#{index}"}
               %h3.perk-name-other{style: "#{"color: #000" if @perk_amount.eql?(perk_amount)}", id: "perk-name-other-#{index}"}
                 = name
+              When you seed #{amount_converter(perk_amount)}, you will receive:
               %ul.normal-font.dashed-list
                 %li= description
-              %ul
+              %ul{style: "padding-top: 10px;"}
                 %li.seed-amount{style: "#{"background: #bee0b4" if @perk_amount.eql?(perk_amount)}", id: "amount-id-#{index}"}
-                  %h6 SEED
                   %p.amount #{amount_converter(perk_amount)}
                 %li.fund-button
                   %a{:class => "fund btn change-fund", "perk-id" => "default", style: "#{"background: #81C263" if @perk_amount.eql?(perk_amount)}", "amount" => "#{perk_amount}", "level" => "#{index}", id: "button-fund-#{index}"} Fund Now ►

@@ -84,7 +84,7 @@ $ ->
       code:
         digits: "Only Digits"
         minlength: "At Least 3 Digits"
-        maxlength: "At Most 3 Digits"
+        maxlength: "At Most 4 Digits"
     rules:
       name:
         required: true
@@ -97,7 +97,7 @@ $ ->
         required: true
         digits: true
         minlength: 3
-        maxlength: 3
+        maxlength: 4
 
       month:
         required: true
@@ -126,7 +126,7 @@ $ ->
       code:
         digits: "Only Digits"
         minlength: "At Least 3 Digits"
-        maxlength: "At Most 3 Digits"
+        maxlength: "At Most 4 Digits"
     rules:
       name:
         required: true
@@ -139,7 +139,7 @@ $ ->
         required: true
         digits: true
         minlength: 3
-        maxlength: 3
+        maxlength: 4
 
       month:
         required: true

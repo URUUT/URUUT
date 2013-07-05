@@ -225,7 +225,7 @@
             .field.ccv
               = label_tag :card_code, class: "label-green" do
                 CVV*
-              = text_field_tag :card_code, nil, name: "cvv", maxlength: 3, class: "span10 required_data"
+              = text_field_tag :card_code, nil, name: "cvv", maxlength: 4, class: "span10 required_data"
               %span.error-container.beside-form{style: "float: none; margin-left: 12px;"}
             .field.expiration
               = label_tag :card_month, class: "label-green" do
@@ -334,7 +334,7 @@
         "cvv": {
           digits: "Only Digits",
           minlength: "At Least 3 Digits",
-          maxlength: "At Most 3 Digits"
+          maxlength: "At Most 4 Digits"
         }
       },
       rules: {
@@ -362,7 +362,8 @@
         },
         "cvv": {
           required: true,
-          digits: true
+          digits: true,
+          maxlength: 4
         },
         month: {
           required: true,
