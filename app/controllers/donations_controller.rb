@@ -134,18 +134,29 @@ class DonationsController < ApplicationController
       session[:payment_amount] = params[:donation][:amount]
       session[:project_id_of_perk_selected] = params[:donation][:project_id]
       session[:perk_amount] = params[:donation][:amount]
-      redirect_to donation_steps_path
-    else
-      render :new
+      # redirect_to donation_steps_path
+    # else
+    #   render :new
     end
 
-    #@donation = Donation.new(params[:donation])
-    #@token = @donation.token
-    #if @donation.save_with_payment
+    @donation = Donation.new(params[:donation])
+    @token = @donation.token
+    # if @donation.save_with_payment
     #  redirect_to project_url(@donation.project_id), :notice => "Thank you for contributing!"
-    #else
+    # else
     #  render :new
-    #end
+    # end
+
+    ### new function for payment ###
+    @error_payment = @donation.error_payment?
+    if @error_payment
+      # render :new
+      redirect_to :back, notice: @error_payment
+    else
+      redirect_to donation_steps_path
+      # redirect_to project_url(@donation.project_id), :notice => "Thank you for contributing!"
+    end
+
 	end
 
 	def edit

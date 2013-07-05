@@ -5,11 +5,11 @@ class Donation < ActiveRecord::Base
 
   belongs_to :project
   belongs_to :user
-  
+
   default_scope { where(confirmed: true) }
 
   def save_with_payment
-    logger.debug(token)
+  #   logger.debug(token)
     current_user = :current_user
     Stripe.api_key = "#{Settings.stripe.api_key}"
     customer = Stripe::Customer.create(description: email, card: token)
@@ -22,6 +22,23 @@ class Donation < ActiveRecord::Base
     errors.add :base, "There was a problem with your credit card."
     false
   end
+
+  ###  new function for handle Stripe error  ###
+
+  def error_payment?
+    error = false
+    begin
+      customer = Stripe::Customer.create(description: email, card: token)
+      self.customer_token = customer.id
+      self.confirmed = true
+      save!
+    rescue Stripe::CardError => e
+      error = e.message
+    end
+    error
+  end
+
+  #####################################################
 
   def self.already_donated(project, user)
   	@donation = Donation.where("project_id = ? AND user_id = ?", project, user)
@@ -36,7 +53,7 @@ class Donation < ActiveRecord::Base
   	@donation = Donation.where("project_id = ? AND user_id = ?", project, user)
   	return @donation.first.id
   end
-  
+
   def self.send_confirmation_email(donation)
     DonationMailer.donation_confirmation(donation).deliver
   end
