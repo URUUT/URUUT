@@ -10,6 +10,7 @@ class DonationMailer < ActionMailer::Base
   def share_project(recepient, project_id, user_id)
     @project = Project.find(project_id)
     @project_title = @project.project_title
+    @project_id = @project.id
     user = User.find_by_id(user_id)
     @donator_name = "#{user.first_name}" + " #{user.last_name}"
     @image = @project.large_image
