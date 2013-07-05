@@ -36,7 +36,7 @@
       = text_field_tag :card_number, nil, name: "credit-card"
     .field.ccv
       = label_tag :card_code, "CVV*", class: "label-green"
-      = text_field_tag :card_code, nil, name: "code", style: "display: inline-block;"
+      = text_field_tag :card_code, nil, name: "code", maxlength: 4, style: "display: inline-block;"
       %span.error-container.beside-form
     .field.expiration
       = label_tag :card_month, "CARD EXPIRATION (MM/YYYY)*", class: "label-green"

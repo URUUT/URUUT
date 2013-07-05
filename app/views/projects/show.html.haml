@@ -330,7 +330,7 @@
                         .amount
                           = amount_converter(p.amount.to_i)
                       - if p.limit && p.perks_available.to_i.zero?
-                        .pull-right{style: "font-style: italic;"}
+                        .pull-right{style: "font-style: italic; margin-top: 22px;"}
                           Not Available
                           %span
                       - elsif p.limit && !p.perks_available.to_i.zero?
