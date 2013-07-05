@@ -118,7 +118,7 @@ class User < ActiveRecord::Base
   end
 
   def projects_funded
-    Project.joins(:donations).where("donations.user_id = ?", self.id).uniq
+    Project.joins(:donations).where("donations.user_id = ? AND donations.confirmed = #{true}", self.id).uniq
   end
 
   def amount_funded
