@@ -36,6 +36,6 @@ class DonationMailer < ActionMailer::Base
     @sponsor_email = sponsor.email
     @sponsor_name = "#{sponsor.first_name}" + " #{sponsor.last_name}"
 
-    mail to: @email, subject: "Thank You, Donor"
+    mail to: @email, subject: "Thank You, Donor!"
   end
 end

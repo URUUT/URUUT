@@ -44,7 +44,7 @@ class SponsorMailer < ActionMailer::Base
     
     @name = "#{user.first_name}" + " #{user.last_name}"
     @sponsor_name = project_sponsor.name
-    @sponsor_email = project_sponsor.email
+    @sponsor_email = sponsor.email
 
     mail to: @email, subject: "Sponsor thank you follow-up"
   end
@@ -65,7 +65,7 @@ class SponsorMailer < ActionMailer::Base
     @project_twitter = project.twitter_handle
     @project_id = project.id
     
-    mail to: @email, subject: "Thank You, Sponsor"
+    mail to: @email, subject: "Thank You, Sponsor!"
   end
 
 end
