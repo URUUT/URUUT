@@ -44,6 +44,7 @@ class SponsorMailer < ActionMailer::Base
     
     @name = "#{user.first_name}" + " #{user.last_name}"
     @sponsor_name = project_sponsor.name
+    @sponsor_real_name = sponsor.name
     @sponsor_email = sponsor.email
 
     mail to: @email, subject: "Sponsor thank you follow-up"
