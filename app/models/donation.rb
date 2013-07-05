@@ -27,6 +27,7 @@ class Donation < ActiveRecord::Base
 
   def error_payment?
     error = false
+    Stripe.api_key = "#{Settings.stripe.api_key}"
     begin
       customer = Stripe::Customer.create(description: email, card: token)
       self.customer_token = customer.id
