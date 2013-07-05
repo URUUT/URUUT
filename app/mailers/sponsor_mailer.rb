@@ -16,6 +16,7 @@ class SponsorMailer < ActionMailer::Base
     @sponsor_name = project_sponsor.name
     @image = @project.large_image
     @project_title = @project.project_title
+    @project_id = @project.id
     @host = ActionMailer::Base.default_url_options[:host]
 
     mail to: recepient, subject: "Share from Crowfundproject sponsor"
@@ -37,12 +38,13 @@ class SponsorMailer < ActionMailer::Base
     @project_facebook = @project.facebook_page
     @project_twitter = @project.twitter_handle
     @project_title = project.title
-    @sponsor_email = sponsor.email
+    # @sponsor_email = sponsor.email
     @sponsorship_level = benefit_level.name
     @sponsorship_cost = ActionController::Base.helpers.number_to_currency(project_sponsor.cost, precision: 0)
     
     @name = "#{user.first_name}" + " #{user.last_name}"
     @sponsor_name = project_sponsor.name
+    @sponsor_email = project_sponsor.email
 
     mail to: @email, subject: "Sponsor thank you follow-up"
   end
@@ -63,7 +65,7 @@ class SponsorMailer < ActionMailer::Base
     @project_twitter = project.twitter_handle
     @project_id = project.id
     
-    mail to: @email, bcc: user.email, subject: "Thank You"
+    mail to: @email, subject: "Thank You, Sponsor"
   end
 
 end

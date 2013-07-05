@@ -61,7 +61,11 @@
                 %tr{:style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;"}
                   %td{:style => "margin: 0;padding: 15px;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;width:100%;max-width:620px;"}
                     %p{:style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-bottom: 10px;font-weight: normal;font-size: 14px;line-height: 1.6;"} Hello,
-                    %p{:style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-bottom: 10px;font-weight: normal;font-size: 14px;line-height: 1.6;"} Today I made a big investment in my community by sponsoring <PROJECT NAME> on Uruut.  I am so excited about this opportunity that I want to share it with you.  The link below will take you to the project page; I hope that you will see the same great value I did.  Please consider joining us to make our community a better place.
+                    %p{:style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-bottom: 10px;font-weight: normal;font-size: 14px;line-height: 1.6;"} 
+                      Today I made a big investment in my community by sponsoring #{@project_title} on Uruut.  I am so excited about this opportunity that I want to share it with you.  This 
+                      %a{:href => "http://#{@host}/projects/#{@project_id}"} link 
+                      will take you to the project page. 
+                      I hope that you will see the same great value I did.  Please consider joining us to make our community a better place.
                     
                     %p{:style => "margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;margin-bottom: 10px;font-weight: normal;font-size: 14px;line-height: 1.6;"} Enthusiastically,
                     
