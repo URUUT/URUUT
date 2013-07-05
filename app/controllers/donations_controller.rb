@@ -188,33 +188,41 @@ class DonationsController < ApplicationController
   end
 
 	def update
-		@donation = Donation.unscoped.find(params[:id])
-    session[:card_last4] = params[:donation][:card_last4]
-    session[:card_type] = params[:donation][:card_type]
-    params[:donation][:perk_name] = params[:name_of_perk]
-    params[:donation][:amount] = session[:perk_amount]
-    # unit = params[:donation][:amount].last
-    # case unit
-    #   when "K"
-    #     params[:donation][:amount] = params[:donation][:amount].to_i * 1000
-    #   when "M"
-    #     params[:donation][:amount] = params[:donation][:amount].to_i * 1000000
-    #   when "B"
-    #     params[:donation][:amount] = params[:donation][:amount].to_i * 1000000000
-    #   when "T"
-    #     params[:donation][:amount] = params[:donation][:amount].to_i * 1000000000000
-    #   when "Q"
-    #     params[:donation][:amount] = params[:donation][:amount].to_i * 1000000000000000
-    # end
-    session[:payment_amount] = params[:donation][:amount]
-    current_user.update_attributes(uruut_point: session[:payment_amount])
-    if params[:donation][:amount].is_a?(String)
-      params[:donation][:amount] = params[:donation][:amount].gsub('$', '').gsub(',', '').to_f
-		end
-    if @donation.update_attributes(params[:donation])
-			flash[:notice] = "Successfully updated donation."
-		end
-		redirect_to donation_steps_path
+    donation = Donation.new(params[:donation])
+    donation.token = params[:donation][:token]
+
+    @error_payment = donation.error_payment?
+    if @error_payment
+      redirect_to :back, notice: @error_payment
+    else
+  		@donation = Donation.unscoped.find(params[:id])
+      session[:card_last4] = params[:donation][:card_last4]
+      session[:card_type] = params[:donation][:card_type]
+      params[:donation][:perk_name] = params[:name_of_perk]
+      params[:donation][:amount] = session[:perk_amount]
+      # unit = params[:donation][:amount].last
+      # case unit
+      #   when "K"
+      #     params[:donation][:amount] = params[:donation][:amount].to_i * 1000
+      #   when "M"
+      #     params[:donation][:amount] = params[:donation][:amount].to_i * 1000000
+      #   when "B"
+      #     params[:donation][:amount] = params[:donation][:amount].to_i * 1000000000
+      #   when "T"
+      #     params[:donation][:amount] = params[:donation][:amount].to_i * 1000000000000
+      #   when "Q"
+      #     params[:donation][:amount] = params[:donation][:amount].to_i * 1000000000000000
+      # end
+      session[:payment_amount] = params[:donation][:amount]
+      current_user.update_attributes(uruut_point: session[:payment_amount])
+      if params[:donation][:amount].is_a?(String)
+        params[:donation][:amount] = params[:donation][:amount].gsub('$', '').gsub(',', '').to_f
+  		end
+      if @donation.update_attributes(params[:donation])
+  			flash[:notice] = "Successfully updated donation."
+  		end
+  		redirect_to donation_steps_path
+    end
 	end
 
   def more_donators
