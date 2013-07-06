@@ -76,8 +76,7 @@ Crowdfund::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   config.action_controller.asset_host = Proc.new do |source, request = nil, *_|
-    scheme = request.ssl? ? "https" : "http"
-    "#{scheme}://#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
+    "//#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
   end
 
 end
