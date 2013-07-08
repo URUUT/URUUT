@@ -33,7 +33,7 @@
     %hr{:style => "background: #e0e0e0; margin-left: -19px; margin-right: -19px; margin-bottom: 10px"}
 
     %div.clearfix{:style => "text-align: center"}
-      = button_tag(type: 'submit', class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:left;") do
+      = button_tag(type: 'submit', class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:left; border-radius: 5px;") do
         Sign In ►
     %div
       - if devise_mapping.recoverable? && controller_name != 'passwords'
