@@ -51,6 +51,10 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def distinct_donors
+    donations.select("DISTINCT(donations.user_id)")
+  end
+
   def list_recepient
     data = []
     level_ids = self.project_sponsors.map(&:level_id).uniq.sort{ |x,y| y <=> x }

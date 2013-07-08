@@ -572,14 +572,14 @@
             = link_to "javascript:void(0)", "url-data" => "/projects/#{@project.id}/sponsors/new?level=bronze", class: "btn unsignin" do
               Become A Sponsor ►
 
-      %h4.title{:style => 'margin-top:50px;'}Partners(#{@project.donations.count})
+      %h4.title{:style => 'margin-top:50px;'}Partners(#{@project.distinct_donors.count})
       %div.business
-        - @project.donations.limit(20).each do |donation|
+        - @project.distinct_donors.limit(20).each do |donation|
           - if user_signed_in?
             = link_to(image_tag(donation.user.avatar, style: "width: 27px; height:27px; margin-bottom: 5px; border-radius: 500px 500px 500px 500px;"), profile_path(donation.user.id))
           - else
             = link_to(image_tag(donation.user.avatar, style: "width: 27px; height:27px; margin-bottom: 5px; border-radius: 500px 500px 500px 500px;"), "javascript:void(0)", "url-data" => "/users/#{donation.user.id}/profile", class: "unsignin")
-      - if @project.donations.count > 20
+      - if @project.distinct_donors.count > 20
         = link_to more_donators_donation_path(@project.id), :class => 'btn more', :style => 'margin-top:10px;', remote: true do
           Show More
           %span

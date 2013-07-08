@@ -1,4 +1,4 @@
-- @donators.each do |donator|
+- @project.distinct_donors.each do |donator|
   - if user_signed_in?
     = link_to(image_tag(donator.user.avatar, style: "width: 27px; height:27px; margin-bottom: 5px; border-radius: 500px 500px 500px 500px;"), profile_path(donator.user.id))
   - else
