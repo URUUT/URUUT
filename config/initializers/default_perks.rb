@@ -1,1 +1,1 @@
-DEFAULT_PERK = [["Level 1", 10], ["Level 2", 25], ["Level 3", 50], ["Level 4", 100], ["Level 5", 250]]
+DEFAULT_PERK = [["Level 1", 10, 1, "10 Uruut Reward Points", 5], ["Level 2", 25, 2, "25 Uruut Reward Points", 5], ["Level 3", 50, 3, "50 Uruut Reward Points", 5], ["Level 4", 100, 4, "100 Uruut Reward Points", 5], ["Level 5", 250, 5, "250 Uruut Reward Points", 5]]

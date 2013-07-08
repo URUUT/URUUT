@@ -22,6 +22,7 @@
       = hidden_field_tag :amount, session[:perk_amount], name: "donation[amount]"
       = hidden_field_tag :perk_permission_type, @project.perk_permission ? "custom" : "default" , name: "perk_type"
       = hidden_field_tag :name_of_perk, @donation.perk_name
+      = hidden_field_tag :perk_description, @donation.description, class: "dua"
     .req-legend
       *Required
     .field.name
