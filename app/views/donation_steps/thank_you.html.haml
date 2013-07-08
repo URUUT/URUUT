@@ -19,7 +19,12 @@
         %h5.label-green{style: "margin-bottom: 0;"} Your perk
         %h6{style: "margin: 0;"}
           = @perk.name
-        %p= @perk.description
+        - precision = @donation.amount.to_s.split(".")[1].eql?("0") ? 0 : 2
+        %p When you seed #{number_to_currency(@donation.amount, precision: precision)}, you will receive:
+        %ul.dashed-list
+          %li= @donation.description
+        - if !session[:perk_type].eql?("default")
+          %p.subtext Uruut Reward Points: #{@donation.amount.to_i}
         %p{style: "color: #e0e0e0; font-size: 11px;"}
           %span{style: "font-family: 'Proxima Nova Semi', sans-serif;"}
             Estimated delivery :
