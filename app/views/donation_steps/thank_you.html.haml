@@ -2,8 +2,8 @@
   .row-fluid{style: "margin-top: 30px;"}
     .span9
       %h4.tittle{style: "padding-bottom: 10px;"} THANK YOU!
-      %h4.label-green Congratulations!
-      %p{:style => "letter-spacing: 1px;"} You are now an official donor to #{@project.project_title}. Now it's time to spread the word
+      %h4.label-green{style: "text-transform: none;"} Congratulations!
+      %p{:style => "letter-spacing: 1px;"} You are now an official donor to #{@project.project_title}! Now it's time to spread the word.
       %div
         = link_to image_tag("fb-share.png",style: "width: 150px", class: "fb-share-button"), "https://www.facebook.com/dialog/feed?app_id=#{Settings.facebook.api_key}&link=#{project_url(@project.id)}&picture=#{@project.large_image}&name=#{url_encode(@project.project_title)}&caption=#{url_encode(@project.category)}&description=#{url_encode("I'm RUUTing for this community project and you should, too. Join me by making a donation on @URUUT’s collaborative funding platform. Let's make a difference in our community!")}&redirect_uri=#{thank_you_donations_url}", style: "display: block; float: left;", target: "_blank"
         = image_tag "tw-share.png", style: "cursor:pinter; margin-left: 2%; display: block; float: left; width: 150px; cursor:pointer", class: "tw-share"
@@ -18,17 +18,17 @@
         %p #{number_to_currency(@donation.amount, :precision => 0)}
         %h5.label-green{style: "margin-bottom: 0;"} Your perk
         %h6{style: "margin: 0;"}
-          = @perk.name
+          = @perk.name.titleize
         - precision = @donation.amount.to_s.split(".")[1].eql?("0") ? 0 : 2
         %p When you seed #{number_to_currency(@donation.amount, precision: precision)}, you will receive:
         %ul.dashed-list
           %li= @donation.description
         - if !session[:perk_type].eql?("default")
           %p.subtext Uruut Reward Points: #{@donation.amount.to_i}
-        %p{style: "color: #e0e0e0; font-size: 11px;"}
-          %span{style: "font-family: 'Proxima Nova Semi', sans-serif;"}
-            Estimated delivery :
-          13 October 2013
+        / %p{style: "color: #e0e0e0; font-size: 11px;"}
+        /   %span{style: "font-family: 'Proxima Nova Semi', sans-serif;"}
+        /     Estimated Delivery :
+        /   13 October 2013
 
 :javascript
   var project_id = "#{@project.id}";
