@@ -1,6 +1,6 @@
 class DonationsController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: :default_perk
-	before_filter :authenticate_user!
+	before_filter :authenticate_user!, except: [:more_donators]
   before_filter :set_session_page, :set_session_wizard, :set_previous_path_for_registration
   layout "landing"
 
