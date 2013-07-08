@@ -17,7 +17,11 @@ class AdminController < ApplicationController
       project.ready_for_approval = 0
       project.approval_date = Date.today
       Project.delay.send_approval_email(project)
+      project_create_badge = Merit::Badge.new(id:2, name:"Project creation badge")
       project.save!
+      if !project.user.badges.include?(project_create_badge)
+        project.user.add_badge(2)
+      end
     else
       newData = "Failure"
     end
