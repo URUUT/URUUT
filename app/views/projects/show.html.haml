@@ -576,9 +576,9 @@
       %div.business
         - @project.donations.limit(20).each do |donation|
           - if user_signed_in?
-            = link_to(image_tag(donation.user.avatar, style: "width: 27px; height:27px; margin-bottom: 5px;"), profile_path(donation.user.id))
+            = link_to(image_tag(donation.user.avatar, style: "width: 27px; height:27px; margin-bottom: 5px; border-radius: 500px 500px 500px 500px;"), profile_path(donation.user.id))
           - else
-            = link_to(image_tag(donation.user.avatar, style: "width: 27px; height:27px; margin-bottom: 5px;"), "javascript:void(0)", "url-data" => "/users/#{donation.user.id}/profile", class: "unsignin")
+            = link_to(image_tag(donation.user.avatar, style: "width: 27px; height:27px; margin-bottom: 5px; border-radius: 500px 500px 500px 500px;"), "javascript:void(0)", "url-data" => "/users/#{donation.user.id}/profile", class: "unsignin")
       - if @project.donations.count > 20
         = link_to more_donators_donation_path(@project.id), :class => 'btn more', :style => 'margin-top:10px;', remote: true do
           Show More
