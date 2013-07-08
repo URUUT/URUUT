@@ -45,6 +45,21 @@
           .cf
           = paginate @projects_created, :param_name => "created_page"
 
+      -unless @projects_funded.blank?
+        %h3.tittle
+          They've Funded Projects
+        %div
+          .projects-funded.dropdown-list.clearfix
+            %label Project status:
+            .selectParent
+              %select.styledSelect{:id => "projects-funded"}
+                %option Funding Active
+                %option Funding Completed
+        #project-fund
+          = render "project", :projects => @projects_funded
+          .cf
+          = paginate @projects_funded, :param_name => "funded_page"
+
     .span4
 
       %h3.title #{who(:whose)} badges
