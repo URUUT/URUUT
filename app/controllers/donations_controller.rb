@@ -226,7 +226,7 @@ class DonationsController < ApplicationController
 	end
 
   def more_donators
-    @donators = Donation.where(project_id: params[:id])
+    @project = Project.find(params[:id])
   end
 
   def thank_you
