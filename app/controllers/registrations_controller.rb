@@ -30,6 +30,8 @@ class RegistrationsController < Devise::RegistrationsController
       project.user_id = resource.id
       project.save
       "/projects/#{project.id}/edit#sponsor-info"
+    elsif session[:path]
+      session[:path]
     elsif session[:redirect_url] == user_registration_url
       root_url
     else
