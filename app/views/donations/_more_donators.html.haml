@@ -1,5 +1,5 @@
 - @donators.each do |donator|
   - if user_signed_in?
-    = link_to(image_tag(donator.user.avatar, style: "width: 27px; height:27px; margin-bottom: 5px;"), profile_path(donator.user.id))
+    = link_to(image_tag(donator.user.avatar, style: "width: 27px; height:27px; margin-bottom: 5px; border-radius: 500px 500px 500px 500px;"), profile_path(donator.user.id))
   - else
-    = link_to(image_tag(donator.user.avatar, style: "width: 27px; height:27px; margin-bottom: 5px;"), "javascript:void(0)", "url-data" => "/users/#{donator.user.id}/profile", class: "unsignin")
+    = link_to(image_tag(donator.user.avatar, style: "width: 27px; height:27px; margin-bottom: 5px; border-radius: 500px 500px 500px 500px;"), "javascript:void(0)", "url-data" => "/users/#{donator.user.id}/profile", class: "unsignin")
