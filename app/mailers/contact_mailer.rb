@@ -11,6 +11,7 @@ class ContactMailer < ActionMailer::Base
     @name = name
     @email = email
     @message = message
-    mail subject: subject, from: @email, to: "info@uruut.com"
+    @subject = subject
+    mail subject: @subject, from: @email, to: "info@uruut.com"
   end
 end
