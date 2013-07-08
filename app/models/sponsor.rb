@@ -30,4 +30,19 @@ class Sponsor < ActiveRecord::Base
   def self.sponsor_thank_you(sponsor)
     SponsorMailer.sponsor_thank_you(sponsor).deliver
   end
+  
+  def self.save_customer(current_user, project_sponsor)
+    Stripe.api_key = "#{Settings.stripe.api_key}"
+    name = current_user.first_name + ' ' + current_user.last_name
+    description = "Name: #{name}, Email: #{current_user.email}, Payment Type: Sponsor" 
+    customer = Stripe::Customer.create(description: description, card: project_sponsor.card_token)
+    project_sponsor.customer_id = customer.id
+    project_sponsor.save!
+
+  rescue Stripe::InvalidRequestError => e
+    logger.error "Stripe error while creating customer: #{e.message}"
+    # errors.add :base, "There was a problem with your credit card."
+    false
+  end
+  
 end

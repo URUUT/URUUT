@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130624153150) do
+ActiveRecord::Schema.define(:version => 20130708003558) do
 
   create_table "badges_sashes", :force => true do |t|
     t.integer  "badge_id"
@@ -121,6 +121,7 @@ ActiveRecord::Schema.define(:version => 20130624153150) do
     t.integer "project_id"
     t.boolean "limit",           :default => false
     t.string  "perks_available"
+    t.integer "perk_limit"
   end
 
   create_table "project_sponsors", :force => true do |t|
@@ -141,6 +142,7 @@ ActiveRecord::Schema.define(:version => 20130624153150) do
     t.string   "site"
     t.boolean  "confirmed",    :default => false
     t.string   "sponsor_type"
+    t.string   "customer_id"
   end
 
   create_table "project_updates", :force => true do |t|
