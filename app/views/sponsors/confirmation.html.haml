@@ -41,7 +41,7 @@
               %h3{:style => 'font-size:20px; color:#70bf4c;line-height:100%;margin:0;margin-bottom: 5px;'}
                 #{@sponsorship_level.name.upcase} SPONSOR
               %p.subtext
-                = truncate(@sponsorship_level.description, lenght: 200)
+                = truncate(@sponsorship_level.description, length: 200)
 
               %ul.sponsorship-level-details.dashed-list
                 - @benefits.each do |benefit|
