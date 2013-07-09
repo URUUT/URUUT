@@ -5,8 +5,8 @@
         = image_tag "#{@user.avatar}", :class => "img-circle"
 
       .user-name-wrapper
-        %h4.user-name
-          =truncate(@user.first_name, :length => 14)
+        %h4.user-name{style: "text-transform: none;"}
+          #{@user.first_name.titleize} #{@user.last_name.titleize}
         - if @is_current
           = link_to "not you? click here to logout", destroy_user_session_path, :class => "green"
 
@@ -48,7 +48,7 @@
           .cf
           = paginate @projects_created, :param_name => "created_page"
 
-      -unless @projects_funded.blank?
+      -unless @projects_funded.first.nil?
         - if @is_current
           %h3.tittle Projects I've Funded
           %div
@@ -92,9 +92,9 @@
                       = "Are you sure you want to delete the pending project #{title}?"
                   .modal-footer
                     = link_to "Yes, Delete Project", project_path(pending_project), method: :delete, class: "btn"
-                    
+
                     %a.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Cancel
-                    
+
                 / %a{:href => "#deleteModal",}
                 /   %i.icon-trash.icon-green
 

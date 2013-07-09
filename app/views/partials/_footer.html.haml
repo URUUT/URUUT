@@ -12,6 +12,19 @@
       width: 35px;
     }
 
+:javascript
+  $(".new_newsletter").validate({
+    rules: {
+      "newsletter[email]": {
+        required: true,
+        email: true
+      }
+    },
+    errorPlacement: function(error, element) {
+      error.appendTo(element.parent().find(".error-container"));
+    }
+  });
+
 %footer
   .container.cf
     %ul
@@ -53,6 +66,7 @@
         %h6 Sign up for URUUT news
         = form_for Newsletter.new, :remote => true, :html => { :id => "email-sign-up" } do |f|
           %div
+            .error-container{style: "margin-right: 0px;"}
             = f.email_field "email", :placeholder => "enter email address"
             %button.btn{:type => "submit"}
               ►
