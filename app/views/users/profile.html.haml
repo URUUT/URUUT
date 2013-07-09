@@ -5,8 +5,8 @@
         = image_tag "#{@user.avatar}", :class => "img-circle"
 
       .user-name-wrapper
-        %h4.user-name
-          =truncate(@user.first_name, :length => 14)
+        %h4.user-name{style: "text-transform: none;"}
+          #{@user.first_name.titleize} #{@user.last_name.titleize}
         - if @is_current
           = link_to "not you? click here to logout", destroy_user_session_path, :class => "green"
 
