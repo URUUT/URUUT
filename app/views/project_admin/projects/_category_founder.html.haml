@@ -1,13 +1,13 @@
 -if params[:type].eql?("individual")
-  - @founders.group_by{ |p| p.perk_name  }.each do |perk_name, founders|
-    %div.label-green= "PERK : #{perk_name} (#{founders.count})"
+  - @founders.group_by{ |p| p.perk_name  }.sort_by{|_key, value| value.first.amount }.reverse.each do |founders|
+    %div.label-green= "PERK : #{founders[0]} (#{founders[1].count})"
     %table.table.table-striped
-      - founders.each do |founder|
+      - founders[1].each do |founder|
         %tr
           %td= image_tag avatar_project_admin(founder.user.avatar), style: "width:37px"
           %td= truncate([founder.user.first_name, founder.user.last_name].join(" "), length: 17)
           %td= "#{number_to_currency(founder.amount, precision: 0)}"
-          %td= truncate(perk_name, length: 17)
+          %td= truncate(founders[0], length: 17)
           %td= founder.updated_at.strftime("%m/%d")
 - else
   - sponsors = project_sponsor_by_level(@project)
