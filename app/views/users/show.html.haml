@@ -48,7 +48,7 @@
           .cf
           = paginate @projects_created, :param_name => "created_page"
 
-      -unless @projects_funded.blank?
+      -unless @projects_funded.first.nil?
         - if @is_current
           %h3.tittle Projects I've Funded
           %div
