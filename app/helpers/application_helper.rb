@@ -25,8 +25,8 @@ module ApplicationHelper
   end
 
   def amount_converter(amount)
-    if amount.to_f.to_s.length > 5
-      number_to_currency(number_to_human(amount), precision: 2)
+    if amount.to_f.to_s.length > 9
+      number_to_currency(number_to_human(amount, precision: 2))
     else
       number_to_currency(amount, precision: 0)
     end
@@ -114,7 +114,7 @@ module ApplicationHelper
   end
 
   def stripe_pub_key
-    return ENV['STRIPE_PUB_KEY']
+    return "pk_test_1XvbGBUir6OeX1ljhENDmZ7h"
   end
 
   def project_sponsor_by_level(project)
