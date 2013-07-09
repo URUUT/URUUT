@@ -23,14 +23,14 @@ new_sponsor =
 
   handleStripeResponse: (status, response) ->
     if status == 200
-      console.log response
+      alert response
       $('input#token').attr('value', response.id)
       $('input#project_sponsor_card_last4').attr('value', response.card.last4)
       $('input#project_sponsor_card_type').attr('value', response.card.type)
       $('#new_sponsor')[0].submit()
       false
     else
-      console.log response
+      alert response
       return false
       $('#stripe_error').text(response.error.message)
       $('input[type=submit]').attr('disabled', false)
@@ -69,17 +69,19 @@ edit_sponsor =
 
 
 $ ->
-	console.log "Current Project is: " + project_pub_key
 	$('#new_sponsor #project-submit').on 'click', (event) ->
+    alert "Current Project is: " + stripe_pub_key
     event.preventDefault()
-    Stripe.setPublishableKey(project_pub_key);
+    Stripe.setPublishableKey(stripe_pub_key)
     if $('#card_number').val() == ''
       $('#new_sponsor')[0].submit()
     else
       new_sponsor.setupForm()
 
   $('#edit_donation #donate').on 'click', (event) ->
+    alert "Current Project is: " + stripe_pub_key
     event.preventDefault()
+		Stripe.setPublishableKey(stripe_pub_key)
     if $('#card_number').val() == ''
       $('#edit_donation')[0].submit()
     else
