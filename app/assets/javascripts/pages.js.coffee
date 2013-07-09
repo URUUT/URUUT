@@ -64,9 +64,9 @@ $ ->
 	address = ''
 	map = ''
 	codeAddress = ''
-	userLocation = 'http://api.wipmania.com/jsonp?callback=?'
-	window.getLocation = $.getJSON userLocation, (data)->
-		console.log(data)
+	# userLocation = 'http://api.wipmania.com/jsonp?callback=?'
+	# window.getLocation = $.getJSON userLocation, (data)->
+	# 	console.log(data)
 
   $('.down').click ->
 		$('.dropdown').toggle()
