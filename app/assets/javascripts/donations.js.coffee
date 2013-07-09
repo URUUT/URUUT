@@ -6,13 +6,15 @@ new_subscription =
   setupForm: ->
     $("#donate").text("LOADING")
     $('input[type=submit].btn').attr('disabled', true)
-    if $('#card_number').length
+    if $("#amount").val() != "0.0"
       new_subscription.processCard()
       false
     else
       $("#donate").text("Contribute ►")
       $('input[type=submit].btn').attr('disabled', false)
+      $("#stripe_error").html("You Can't Insert $0 For Amount")
       $('#donate')[0].submit()
+      false
 
   processCard: ->
     card =
@@ -40,13 +42,15 @@ edit_subscription =
   setupForm: ->
     $("#donate").text("LOADING")
     $('input[type=submit].btn').attr('disabled', true)
-    if $('#card_number').length
+    if $("#amount").val() != "0.0"
       edit_subscription.processCard()
       false
     else
       $("#donate").text("Contribute ►")
       $('input[type=submit].btn').attr('disabled', false)
+      $("#stripe_error").html("You Can't Insert $0 For Amount")
       $('#donate')[0].submit()
+      false
 
   processCard: ->
     card =

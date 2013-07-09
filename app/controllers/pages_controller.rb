@@ -42,11 +42,8 @@ class PagesController < ApplicationController
     subject = params[:pages][:subject]
     message = params[:pages][:message]
 
-    logger.debug(params[:pages][:subject])
-
     ContactMailer.delay.contact_confirmation(name, email, subject, message)
-    flash[:notice] = 'Thank You!!! Your Message Has Been Sent'
-    redirect_to contact_pages_url
+    redirect_to contact_pages_url, notice: "Thank You!!! Your Message Has Been Sent"
   end
 
   def how_it_works

@@ -15,4 +15,19 @@ class ProjectSponsor < ActiveRecord::Base
   validates_length_of :mission, maximum: 275
 
   default_scope { where(confirmed: true) }
+  
+  def self.save_customer
+    logger.debug "Save With Payment Working?"
+    current_user = :current_user
+    Stripe.api_key = "#{Settings.stripe.api_key}"
+    customer = Stripe::Customer.create(description: current_user.email, card: card_token)
+    ProjectSponsor.customer_token = customer.id
+    save!
+
+  rescue Stripe::InvalidRequestError => e
+    logger.error "Stripe error while creating customer: #{e.message}"
+    errors.add :base, "There was a problem with your credit card."
+    false
+  end
+  
 end

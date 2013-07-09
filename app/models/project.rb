@@ -47,8 +47,11 @@ class Project < ActiveRecord::Base
   def self.get_sponsor_token
     if :current_user
       Stripe.api_key = API_KEY
-
     end
+  end
+
+  def distinct_donors
+    donations.select("DISTINCT(donations.user_id)")
   end
 
   def list_recepient
@@ -167,6 +170,17 @@ class Project < ActiveRecord::Base
     self.twitter_handle.downcase! unless self.twitter_handle.nil?
     self.website.downcase! unless self.website.nil?
     self.facebook_page.downcase! unless self.facebook_page.nil?
+  end
+  
+  def self.check_days_left
+    today = DateTime.now
+    projects = Project.where("live = ?", 1)
+    projects.each do |p|
+      if p.campaign_deadline.to_date == Date.today
+        p.live=0
+        p.save!
+      end
+    end
   end
 
 end

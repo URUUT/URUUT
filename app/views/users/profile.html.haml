@@ -5,8 +5,8 @@
         = image_tag "#{@user.avatar}", :class => "img-circle"
 
       .user-name-wrapper
-        %h4.user-name
-          =truncate(@user.first_name, :length => 14)
+        %h4.user-name{style: "text-transform: none;"}
+          #{@user.first_name.titleize} #{@user.last_name.titleize}
         - if @is_current
           = link_to "not you? click here to logout", destroy_user_session_path, :class => "green"
 
@@ -44,6 +44,21 @@
           = render "pages/project", :projects => @projects_created
           .cf
           = paginate @projects_created, :param_name => "created_page"
+
+      -unless @projects_funded.first.nil?
+        %h3.tittle
+          They've Funded Projects
+        %div
+          .projects-funded.dropdown-list.clearfix
+            %label Project status:
+            .selectParent
+              %select.styledSelect{:id => "projects-funded"}
+                %option Funding Active
+                %option Funding Completed
+        #project-fund
+          = render "project", :projects => @projects_funded
+          .cf
+          = paginate @projects_funded, :param_name => "funded_page"
 
     .span4
 
