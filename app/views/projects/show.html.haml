@@ -589,7 +589,7 @@
               = link_to(image_tag(donation.user.avatar, style: "width: 27px; height:27px; margin-bottom: 5px; border-radius: 500px 500px 500px 500px;"), "javascript:void(0)", "url-data" => "/users/#{donation.user.id}/profile", class: "unsignin")
         - if @project.distinct_donors.count > 20
           - if user_signed_in?
-            = link_to more_donators_donation_path(@project.id), :class => 'btn more', :style => 'margin-top:10px;', remote: true do
+            = link_to "/donations/#{@project.id}/more_donators?logged_in=yes", :class => 'btn more', :style => 'margin-top:10px;', remote: true do
               Show More
               %span
           - else

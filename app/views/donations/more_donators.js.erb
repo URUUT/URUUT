@@ -1,1 +1,6 @@
-$(".business").html("<%=j render 'more_donators' %>")
+<% if params[:logged_in].eql?("yes") %>
+$(".business").html("<%=j render 'more_donators' %>");
+$(".more").fadeOut("slow");
+<% else %>
+window.location.href = "<%= session[:redirect_url] %>";
+<% end %>
