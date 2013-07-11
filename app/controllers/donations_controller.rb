@@ -43,6 +43,7 @@ class DonationsController < ApplicationController
       end
       if @perks.blank?
         @perk_name_selected = "Custom"
+        @perk_description = ""
       else
         @perk_name_selected = @perks.last[0]
         @perk_description = @perks.last[3]
@@ -66,6 +67,7 @@ class DonationsController < ApplicationController
         @project = Project.find(params["project_id"])
         session[:perk_id] = @perk.id
         session[:perk_amount] = @perk.amount.to_f
+        @perk_description = @perk.description
       else
         @perk = Perk.new
         @perk.id = params["level"]
@@ -94,7 +96,7 @@ class DonationsController < ApplicationController
         else
           session[:perk_id] = @perks.last[0]
         end
-        @perk.name = "LEVEL #{@perk.id}"
+        @perk.name = "Level #{@perk.id}"
         @perk.description = "You will receive #{@perk.amount.to_i} Uruut Reward Points when you seed $#{@perk.amount.to_i}"
       end
     else
@@ -119,6 +121,7 @@ class DonationsController < ApplicationController
       end
       if @perks.blank?
         @perk_name_selected = "Custom"
+        @perk_description = ""
       else
         @perk_name_selected = @perks.last[0]
         @perk_description = @perks.last[3]
@@ -198,13 +201,15 @@ class DonationsController < ApplicationController
   end
 
   def set_new_perk
-    perk = Perk.where(name: params[:name_of_perk], project_id: params[:project_id])
-    if perk.empty?
+    perk = Perk.where(name: params[:perk_name], project_id: params[:project_id]).first
+    @perk_name_selected = perk.name
+    @perk_description = perk.description
+    if perk.nil?
       session[:perk_id] = params[:name_of_perk]
     else
-      session[:perk_id] = perk.first.id
+      session[:perk_id] = perk.id
     end
-    render nothing: true
+    respond_to :js
   end
 
   def update
@@ -220,6 +225,7 @@ class DonationsController < ApplicationController
     session[:card_type] = params[:donation][:card_type]
     params[:donation][:perk_name] = params[:name_of_perk]
     params[:donation][:amount] = session[:perk_amount]
+    params[:donation][:description] = params[:perk_description]
     # unit = params[:donation][:amount].last
     # case unit
     #   when "K"
