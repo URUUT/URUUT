@@ -15,7 +15,7 @@
 			slideshow: 5000, /* false OR interval time in ms */
 			autoplay_slideshow: false, /* true/false */
 			opacity: 0.80, /* Value between 0 and 1 */
-			show_title: true, /* true/false */
+			show_title: false, /* true/false */
 			allow_resize: true, /* Resize the photos bigger than viewport. true/false */
 			allow_expand: true, /* Allow the user to expand a resized image. true/false */
 			default_width: 500,
