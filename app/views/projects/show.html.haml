@@ -653,7 +653,7 @@
     $.ajax({
       type: "GET",
       dataType: 'jsonp',
-      url: "http://graph.facebook.com/fql?q=select%20%20like_count%20from%20link_stat%20where%20url=%22#{root_url}projects/#{@project.id}%22"
+      url: "//graph.facebook.com/fql?q=select%20%20like_count%20from%20link_stat%20where%20url=%22#{root_url}projects/#{@project.id}%22"
     }).done(function(data) {
       $('.fb-count span').text(data.data[0].like_count);
     });
@@ -663,7 +663,7 @@
     $.ajax({
       type: "GET",
       dataType: 'jsonp',
-      url: "http://urls.api.twitter.com/1/urls/count.json?url=#{root_url}projects/#{@project.id}"
+      url: "//urls.api.twitter.com/1/urls/count.json?url=#{root_url}projects/#{@project.id}"
     }).done(function(data) {
       console.log(data.count);
       $('.tw-count span').text(data.count);
@@ -683,7 +683,7 @@
     getFbCount();
     getTwCount();
     var activeTab = $('.nav-tabs li.active a').attr('href');
-    var userLocation = 'http://maps.googleapis.com/maps/api/geocode/json?address=#{@project.address},#{@project.city},#{@project.state}&sensor=false';
+    var userLocation = '//maps.googleapis.com/maps/api/geocode/json?address=#{@project.address},#{@project.city},#{@project.state}&sensor=false';
 
     $('.tax-deductible').tooltip({
         placement: "top",
@@ -708,7 +708,7 @@
           iconSize:     [36, 52]
         });
 
-        L.tileLayer('http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {
+        L.tileLayer('//{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {
           attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
         }).addTo(map);
 
@@ -779,7 +779,7 @@
           height = 400,
           left   = ($(window).width()  - width)  / 2,
           top    = ($(window).height() - height) / 2,
-          url    = "http://twitter.com/share?url=#{project_url(@project.id)}&text=Like%20making%20a%20difference%20in%20the%20community%3F%20Check%20out%20this%20great%20project%20I%20found%20on%20%40URUUT%20%20%2E&hashtags=GetRUUTed",
+          url    = "//twitter.com/share?url=#{project_url(@project.id)}&text=Like%20making%20a%20difference%20in%20the%20community%3F%20Check%20out%20this%20great%20project%20I%20found%20on%20%40URUUT%20%20%2E&hashtags=GetRUUTed",
           opts   = 'status=1' +
                    ',width='  + width  +
                    ',height=' + height +
