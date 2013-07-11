@@ -247,7 +247,7 @@
             .images-content
               - @images.each do |image|
                 %a.thumb-link{:href => image.gallery_file_name, :rel => "prettyPhoto"}
-                  = image_tag(image.gallery_file_name, class: "gallery-thumb")
+                  = image_tag("#{image.gallery_file_name}/convert?w=190&h=120", class: "gallery-thumb")
               .clearfix
               = paginate @images, :params => {:id => @project.id, :controller => 'projects', :action => 'show_more_image'}, remote: true
       %hr
@@ -653,7 +653,7 @@
     $.ajax({
       type: "GET",
       dataType: 'jsonp',
-      url: "http://graph.facebook.com/fql?q=select%20%20like_count%20from%20link_stat%20where%20url=%22#{root_url}projects/#{@project.id}%22"
+      url: "#{request.protocol}graph.facebook.com/fql?q=select%20%20like_count%20from%20link_stat%20where%20url=%22#{root_url}projects/#{@project.id}%22"
     }).done(function(data) {
       $('.fb-count span').text(data.data[0].like_count);
     });
@@ -663,7 +663,7 @@
     $.ajax({
       type: "GET",
       dataType: 'jsonp',
-      url: "http://urls.api.twitter.com/1/urls/count.json?url=#{root_url}projects/#{@project.id}"
+      url: "#{request.protocol}urls.api.twitter.com/1/urls/count.json?url=#{root_url}projects/#{@project.id}"
     }).done(function(data) {
       console.log(data.count);
       $('.tw-count span').text(data.count);

@@ -54,12 +54,18 @@ $ ->
       else
         $("#email-sign-up-error").show()
 
-  geocoder = ''
-  address = ''
-  map = ''
-  codeAddress = ''
+  # submit_filter_form = ->
+  #   $("form.project-filter").submit()
 
-  $('.down').click ->
+  # $("form.project-filter #location").bind "change", submit_filter_form
+  # $("form.project-filter #category").bind "change", submit_filter_form
+
+	geocoder = ''
+	address = ''
+	map = ''
+	codeAddress = ''
+	
+	$('.down').click ->
 		$('.dropdown').toggle()
 
 	$('ul.nav li').hover ->
