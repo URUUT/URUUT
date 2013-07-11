@@ -36,7 +36,7 @@
             .selectParent
               = select_tag :perk_type, options_for_select(@perks), {:onchange => 'changeAmount(this)', class: "styledSelect"}
             .none-perks{style: "display:none"}
-            %p{:style => "font-size:12px;font-family:'Proxima Nova';text-align:left;color:#b6b6b4;margin:0;font-style: italic"} (Perk eligibility based on donation amount.)
+            %p{:style => "font-size:12px;font-family:'Proxima Nova';text-align:left;color:#403e37;margin:0;font-style: italic"} (Perk eligibility based on donation amount.)
 
           %h6{:style => "line-height:100%;margin-bottom:0px;margin-top:20px"} Your Selected Perk
           %h3.perk-name{:style => 'font-size:20px; color:#70bf4c;line-height:100%;margin:0;'}= @donation.perk_name
