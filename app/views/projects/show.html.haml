@@ -664,7 +664,7 @@
     $.ajax({
       type: "GET",
       dataType: 'jsonp',
-      url: "#{request.protocol}urls.api.twitter.com/1/urls/count.json?url=#{root_url}projects/#{@project.id}"
+      url: "#{request.protocol}cdn.api.twitter.com/1/urls/count.json?url=#{root_url}projects/#{@project.id}"
     }).done(function(data) {
       console.log(data.count);
       $('.tw-count span').text(data.count);
