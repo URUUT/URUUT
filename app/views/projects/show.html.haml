@@ -664,9 +664,10 @@
     $.ajax({
       type: "GET",
       dataType: 'jsonp',
-      url: "#{request.protocol}social-count.eu01.aws.af.cm/#{root_url}projects/#{@project.id}"
+      url: "#{request.protocol}social-count.eu01.aws.af.cm/http://"+ document.location.host +"#{project_path(@project.id)}"
     }).done(function(data) {
-      $('.tw-count span').text(data.shares);
+      console.log(data.count);
+      $('.tw-count span').text(data.count);
     });
   }
 
@@ -779,7 +780,7 @@
           height = 400,
           left   = ($(window).width()  - width)  / 2,
           top    = ($(window).height() - height) / 2,
-          url    = "#{request.protocol}twitter.com/share?url=#{project_url(@project.id)}&text=Like%20making%20a%20difference%20in%20the%20community%3F%20Check%20out%20this%20great%20project%20I%20found%20on%20%40URUUT%20%20%2E&hashtags=GetRUUTed",
+          url    = "#{request.protocol}twitter.com/share?url=http://"+ document.location.host +"#{project_path(@project.id)}&text=Like%20making%20a%20difference%20in%20the%20community%3F%20Check%20out%20this%20great%20project%20I%20found%20on%20%40URUUT%20%20%2E&hashtags=GetRUUTed",
           opts   = 'status=1' +
                    ',width='  + width  +
                    ',height=' + height +
