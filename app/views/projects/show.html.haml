@@ -683,7 +683,7 @@
     getFbCount();
     getTwCount();
     var activeTab = $('.nav-tabs li.active a').attr('href');
-    var userLocation = '//maps.googleapis.com/maps/api/geocode/json?address=#{@project.address},#{@project.city},#{@project.state}&sensor=false';
+    var userLocation = "#{request.protocol}maps.googleapis.com/maps/api/geocode/json?address=#{@project.address},#{@project.city},#{@project.state}&sensor=false";
 
     $('.tax-deductible').tooltip({
         placement: "top",
@@ -708,7 +708,7 @@
           iconSize:     [36, 52]
         });
 
-        L.tileLayer('//{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {
+        L.tileLayer("#{request.protocol}{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png", {
           attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
         }).addTo(map);
 
@@ -779,7 +779,7 @@
           height = 400,
           left   = ($(window).width()  - width)  / 2,
           top    = ($(window).height() - height) / 2,
-          url    = "//twitter.com/share?url=#{project_url(@project.id)}&text=Like%20making%20a%20difference%20in%20the%20community%3F%20Check%20out%20this%20great%20project%20I%20found%20on%20%40URUUT%20%20%2E&hashtags=GetRUUTed",
+          url    = "#{request.protocol}twitter.com/share?url=#{project_url(@project.id)}&text=Like%20making%20a%20difference%20in%20the%20community%3F%20Check%20out%20this%20great%20project%20I%20found%20on%20%40URUUT%20%20%2E&hashtags=GetRUUTed",
           opts   = 'status=1' +
                    ',width='  + width  +
                    ',height=' + height +
