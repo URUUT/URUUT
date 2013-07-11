@@ -247,7 +247,7 @@
             .images-content
               - @images.each do |image|
                 %a.thumb-link{:href => image.gallery_file_name, :rel => "prettyPhoto"}
-                  = image_tag(image.gallery_file_name, class: "gallery-thumb")
+                  = image_tag("#{image.gallery_file_name}/convert?w=190&h=120", class: "gallery-thumb")
               .clearfix
               = paginate @images, :params => {:id => @project.id, :controller => 'projects', :action => 'show_more_image'}, remote: true
       %hr
