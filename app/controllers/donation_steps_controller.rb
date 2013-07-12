@@ -79,7 +79,7 @@ class DonationStepsController < ApplicationController
         current_user.add_badge(3)
       end
       perk = Perk.where(project_id: session[:project_id_of_perk_selected], amount: session[:payment_amount]).first
-      if !perk.nil? && perk.limit? && perk.perks_available > 0
+      if !perk.nil? && perk.limit? && perk.perks_available.to_i > 0
         new_perk_available = perk.perks_available.to_i - 1
         perk.update_attributes(perks_available: new_perk_available)
       end
