@@ -85,7 +85,7 @@ class DonationStepsController < ApplicationController
       end
       current_user.update_attributes(uruut_point: current_user.uruut_point.to_i + session[:payment_amount].to_i)
       session.delete(:perk_amount)
-      Donation.delay.send_confirmation_email(@donation)
+      Donation.send_confirmation_email(@donation)
       redirect_to wizard_path(:thank_you)
     else
       redirect_to wizard_path(:confirmation)
