@@ -274,7 +274,7 @@
     var selectedLevel = parseInt($('#selected_level').attr("level_id"));
     $("#project_sponsor_level_id option[value='"+ selectedLevel +"']").attr("selected", "selected");
 
-    Stripe.setPublishableKey('pk_test_BTNPlS59UIPJC5Fnp7CR9It6');
+    Stripe.setPublishableKey('project_pub_key');
 
     var processCard = function() {
       var card;
