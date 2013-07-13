@@ -573,7 +573,7 @@
             = link_to "javascript:void(0)", "url-data" => "/projects/#{@project.id}/sponsors/new?level=bronze", class: "btn unsignin" do
               Become A Sponsor ►
 
-      %h4.title{:style => 'margin-top:50px;'}Partners(#{@project.distinct_donors.count})
+      %h4.title{:style => 'margin-top:50px;'}Donors(#{@project.distinct_donors.count})
       - if notice
         %div.business
           - @project.distinct_donors.each do |donation|
