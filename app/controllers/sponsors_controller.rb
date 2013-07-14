@@ -205,7 +205,7 @@ class SponsorsController < ApplicationController
     project_sponsor =  ProjectSponsor.unscoped.where(project_id: @project.id, sponsor_id: params[:sponsor_id]).first
     @project_sponsor = project_sponsor
     Sponsor.save_customer(current_user, @project_sponsor)
-    Sponsor.create_charge(@project_sponsor)
+    # Sponsor.create_charge(@project_sponsor)
     # @sponsorship_level = SponsorshipLevel.find(project_sponsor.level_id)
     @benefits = @project.sponsorship_benefits.where(status: true, sponsorship_level_id: project_sponsor.level_id )
     case project_sponsor.level_id
