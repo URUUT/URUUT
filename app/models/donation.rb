@@ -11,10 +11,8 @@ class Donation < ActiveRecord::Base
   def save_with_payment
   #   logger.debug(token)
     current_user = :current_user
-    name = "#{current_user.first_name} #{current_user.last_name}"
     Stripe.api_key = "#{Settings.stripe.api_key}"
-    description = "Name: #{name}, Email: #{current_user.email}, Payment Type: Donation"
-    customer = Stripe::Customer.create(description: description, card: token)
+    customer = Stripe::Customer.create(description: email, card: token)
     self.customer_token = customer.id
     self.confirmed = true
     save!
