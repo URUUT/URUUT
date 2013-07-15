@@ -37,9 +37,16 @@
             %p{:style => "font-size:12px;font-family:'Proxima Nova';text-align:left;color:#403e37;margin:0;font-style: italic"} (Perk eligibility based on donation amount.)
 
           %h6{:style => "line-height:100%;margin-bottom:0px;margin-top:20px"} Your Selected Perk
-          %h3.perk-name.label-green{:style => 'font-size:20px; line-height:100%;margin:0;'}= @perk_name
+          %h3.perk-name.label-green{:style => 'font-size:20px; line-height:100%;margin:0;'}
+            - if @perk_name_selected.nil?
+              = @perk_name
+            - else
+              = @perk_name_selected
           %p.perk-description
-            You will receive #{@perk_description} when you seed #{number_to_currency(@perk_amount.to_f, precision: precision)}
+            - if @project.perk_permission
+              #{@perk_description}
+            - else
+              You will receive #{@perk_description} when you seed #{number_to_currency(@perk_amount.to_f, precision: precision)}
           %p.description-custom
             You will receive #{@perk_amount.to_i} Uruut Reward Points when you seed #{number_to_currency(@perk_amount.to_f, precision: precision)}
         .cf

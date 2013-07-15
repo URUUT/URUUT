@@ -196,7 +196,7 @@ class DonationsController < ApplicationController
     if @perks.blank?
       @perk_name_selected = "Custom"
     else
-      @perk_name_selected = @perks.last[0]
+      @perk_name_selected = @donation.perk_name
     end
     @donation.save!
   end
@@ -205,7 +205,6 @@ class DonationsController < ApplicationController
     perk = Perk.where(name: params[:perk_name], project_id: params[:project_id]).first
     @perk_name_selected = perk.name
     @perk_description = perk.description
-    @perk_amount = perk.amount
     if perk.nil?
       session[:perk_id] = params[:name_of_perk]
     else
