@@ -1,3 +1,3 @@
 $("#name_of_perk").val("<%= @perk_name_selected %>");
 $("#perk_description").val("<%= @perk_name_selected %>");
-$(".perk-description").text("<%= @perk_name_selected %>")
+$(".perk-description").text("You will receive <%= @perk_name_selected %> when you seed <%= number_to_currency(@perk_amount, precision: 0) %>")
