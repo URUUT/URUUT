@@ -205,6 +205,7 @@ class DonationsController < ApplicationController
     perk = Perk.where(name: params[:perk_name], project_id: params[:project_id]).first
     @perk_name_selected = perk.name
     @perk_description = perk.description
+    @perk_amount = perk.amount
     if perk.nil?
       session[:perk_id] = params[:name_of_perk]
     else
