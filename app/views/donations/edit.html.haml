@@ -145,6 +145,25 @@
     //     $(".description-custom").hide();
     //   }
     // }
+
+    $("#perk_type option").each(function(){
+      $(this).attr('data', $(this).text())
+    });
+
+    if ($("#perk_type :selected").text().length > 17){
+      $("#perk_type :selected").text(truncText($("#perk_type :selected").text(), 15, "..."))
+    }
+
+    $("#perk_type").on('change',function(){
+      var length = $("#perk_type option").length;
+      for (var i = 1; i < length; i++){
+        $("#perk_type option")[i].text = $("#perk_type option")[i].attributes["data"].value
+      }
+      if ($("#perk_type :selected").text().length > 17){
+        $("#perk_type :selected").text(truncText($("#perk_type :selected").text(), 15, "..."))
+      }
+    })
+
   })
 
   $(".change-fund").click(function(){
