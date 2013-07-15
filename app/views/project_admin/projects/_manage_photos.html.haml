@@ -4,8 +4,25 @@
     %div
       .cover-content
         .cover-content-image
-          = filepicker_image_tag @project.large_image, width: 672, height: 300, fit: 'scale' if @project.large_image
-        %button{:id => "project-submit", type: "filepicker"} CHANGE
+          .cover-content-image-data{style: "height: 319px; overflow: hidden; position: relative;"}
+            .div.loader-cover.container{style: "display:none; top: 87px; left: 42%; position: absolute;"}
+              .loader-image LOADING
+              = image_tag "3.gif", style: "margin-left: 1%; width: 20px"
+            .project-cover-image
+              = filepicker_image_tag @project.large_image, width: 672, height: 300, fit: 'scale' if @project.large_image
+            .action.new-save-btn{style: "top: 242px; left: 33%; position: absolute; margin-top: 0; display: none"}
+              %a.btn.save-image{href: "javascript:void(0)", style: "background: #81C263; font: 11px/11px 'Proxima Nova Semi',arial,sans-serif;"}
+                SAVE
+              %a.btn.cancel-image{href: "javascript:void(0)", style: "background: #81C263; font: 11px/11px 'Proxima Nova Semi',arial,sans-serif;"}
+                CANCEL
+        %button{:id => "project-submit", type: "filepicker", 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA'} CHANGE
+
+    .span12.action-convert{style: "margin-top: 276px; display:none"}
+      = hidden_field_tag "url_image"
+      = hidden_field_tag "x_position"
+      = hidden_field_tag "y_position"
+      = hidden_field_tag "width_after"
+      = hidden_field_tag "height_after"
 
   %h3.tittle MY PROJECT PHOTO GALLERY
   .images-content{:style => "float:left; width:100%"}
@@ -16,11 +33,11 @@
           = link_to "delete photo", delete_photo_path(image.id), class: "image-delete-button",  method: 'DELETE', remote: true
     = paginate @galleries, remote: true
     %div{:style => "float:left; width: 100%"}
-      %button{:id => "new-photo", type: "filepicker"} ADD NEW PHOTO
+      %button{:id => "new-photo", type: "filepicker", 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA'} ADD NEW PHOTO
 
+= javascript_include_tag "jquery-ui"
+= javascript_include_tag "jquery.ui.touch-punch.min"
 
-
-%script{:src => "http://code.jquery.com/ui/1.10.2/jquery-ui.js"}
 :javascript
   var deleteImages = function (){
     $('.image-delete-button').click(function(){
@@ -33,17 +50,117 @@
   cover.type="filepicker";
   cover.onchange = function(e){
     var largeImage = e.fpfile.url;
-    $.ajax({
-      url: '/projects/save_image',
-      method: 'POST',
-      data: {
-        large_image: largeImage
-        }
-    }).done(function(){
-      $('.cover-content-image').html("<img src='"+largeImage+"/convert?fit=scale&height=300&width=672'>");
+    // $.ajax({
+    //   url: '/projects/save_image',
+    //   method: 'POST',
+    //   data: {
+    //     large_image: largeImage
+    //     }
+    // }).done(function(){
+    //   $('.cover-content-image').html("<img src='"+largeImage+"/convert?fit=scale&height=300&width=672'>");
+    // });
+    $(".project-cover-image").hide();
+    $('.drag-instructions').remove();
+    $(".loader-cover").show();
+    $('<img />').attr('src', largeImage).load(function() {
+      $('.coverphoto').html("CHOOSE A COVER PHOTO");
+      var largeImageObj = new Image;
+      largeImageObj.src = largeImage;
+      if ( largeImageObj.width >= 1600 )
+      {
+        $(".loader-cover").hide();
+        $("#url_image").val(largeImage);
+
+        var dragImg = new Image;
+        dragImg.src = largeImage;
+        dragImg.id = "dragImg";
+
+        $('.ui-draggable').remove();
+        $("#y_position").val(0);
+        $('.cover-content-image-data').prepend(dragImg);
+        $('.cover-content-image-data').append('<span class="drag-instructions">DRAG TO REPOSITION COVER PHOTO</span>');
+
+        $('#dragImg').draggable({
+          axis: 'y',
+          drag: function(event, ui) {
+            var bottom = $(this).parent().height() - $(this).height();
+            if(ui.position.top > 0) {
+              ui.position.top = 0;
+            }
+
+            if(ui.position.top < bottom) {
+              ui.position.top = bottom;
+            }
+          },
+          stop: function(event, ui) {
+            var w = $('.ui-draggable').width();
+            var wOriginal = largeImageObj.width;
+            var ratio = parseInt(wOriginal) / parseInt(w);
+            $('#y_position').val(Math.round(Math.abs(ui.position.top * ratio)));
+          }
+        });
+
+        $('.new-save-btn').show();
+      }
+      else{
+        $('.new-save-btn').hide();
+        $(".loader-cover").hide();
+        $('.drag-instructions').remove();
+        $(".project-cover-image").show();
+        $('.cover-content-image-data').append('<span class="drag-instructions" style="width: 300px;"><b>image width for cover should be more than 1600px</b></span>');
+      }
     });
   };
   filepicker.constructWidget(cover);
+
+  $(".cancel-image").click(function(){
+    $('.drag-instructions').remove();
+    $("#cropInstruction").remove();
+    $('.ui-draggable').remove();
+    $(".action-convert").hide();
+    $(".save-image").text('SAVE');
+    $(".cancel-image").text("CANCEL");
+    $('.new-save-btn').hide();
+    $(".project-cover-image").show();
+  });
+
+  $(".save-image").click(function(){
+    $(".new-save-btn").attr("style", "left: 43%;");
+    $(".cancel-image").hide();
+    $(this).text("loading");
+    $(".loader-cover").show();
+    $("#cropInstruction").remove();
+    $('.drag-instructions').remove();
+    var fpfile = { url: $("#url_image").val(), mimetype: 'image/jpeg', isWriteable: true };
+    var newImage = new Image();
+    newImage.src = $("#url_image").val();
+    filepicker.convert(fpfile,
+      {crop: [0, $("#y_position").val(), newImage.width, newImage.height]},
+      {},
+      function(new_FPFile){
+        $('.ui-draggable').remove();
+        $(".action-convert").hide();
+        $("#cover-priview").remove();
+        $('<img />').attr('src', new_FPFile.url).load(function() {
+          $(".project-cover-image").show().html("<img src='"+new_FPFile.url+"/convert?fit=scale&height=300&width=672'>");
+          $(".loader-cover").hide();
+        });
+        $.ajax({
+            url: '/projects/save_image',
+            method: 'POST',
+            data: { large_image: new_FPFile.url }
+          });
+        $(".save-image").text('SAVE');
+        $(".cancel-image").show().text("CANCEL");
+        $(".new-save-btn").hide().attr("style", "top: 242px; left: 33%; position: absolute; margin-top: 0; display: none");
+      },
+      function(FPError){
+        $(".new-save-btn").attr("style", "top: 242px; left: 33%; position: absolute; margin-top: 0; display: none");
+        $(".save-image").text('SAVE');
+        $(".cancel-image").show().text("CANCEL");
+      }
+    );
+  });
 
   var photo = document.getElementById('new-photo');
   photo.type="filepicker";
@@ -63,4 +180,3 @@
     });
   };
   filepicker.constructWidget(photo);
-
