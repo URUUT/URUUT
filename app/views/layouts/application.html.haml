@@ -20,7 +20,8 @@
     = javascript_include_tag "application", "https://js.stripe.com/v1/", :media => "all"
     = javascript_include_tag "jquery.ui.mouse", "ui.draggable", "jquery.ui.touch-punch.min"
     = javascript_include_tag "jquery.Jcrop.min"
-    = javascript_include_tag "selectivizr-min"
+    /[if lt IE 8]
+      = javascript_include_tag "selectivizr-min"
     = filepicker_js_include_tag
     = javascript_tag do
       Stripe.setPublishableKey("#{STRIPE_PUBLIC_KEY}");
