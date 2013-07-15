@@ -496,7 +496,7 @@ select {
         color:#403e37;
       }
       &:last-child {
-        margin-right:0;
+        margin-right:0 !important;
       }
       select {
         width:100%;
