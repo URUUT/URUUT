@@ -54,6 +54,12 @@ class Project < ActiveRecord::Base
     donations.select("DISTINCT(donations.user_id)")
   end
 
+  def individual_donors(page_num)
+    donations_group = self.donations.group_by{ |p| p.perk_name  }.sort_by{|_key, value| value.first.amount }.reverse
+    donations = donations_group.map { |donation| donation[1] }.flatten
+    Kaminari.paginate_array(donations).page(page_num).per(25)
+  end
+
   def list_recepient
     data = []
     level_ids = self.project_sponsors.map(&:level_id).uniq.sort{ |x,y| y <=> x }
@@ -64,7 +70,9 @@ class Project < ActiveRecord::Base
     sponsorship_levels.map { |sponsor| [sponsor.name + " Level Sponsors", sponsor.id, {"data-name" => sponsor.name + " Level Sponsors"}] }.each { |sponsor| data << sponsor }
     data.push(["All Project Donors","All Project Donors", {"data-name" => "All Project Donors"}]) unless perk_names.empty?
     perk_names.map { |sponsor| [sponsor + " Project Donors" , sponsor + " Project Donors", {"data-name" => sponsor + " Project Donors"} ] }.each { |sponsor| data << sponsor }
-    data.unshift(["All Project Sponsors and Donors","All Project Sponsors and Donors", {"data-name" => "All Project Sponsors and Donors"}]) if !sponsorship_levels.empty? and !perk_names.empty?
+    if !sponsorship_levels.empty? and !perk_names.empty?
+      data.unshift(["All Project Sponsors and Donors","All Project Sponsors and Donors", {"data-name" => "All Project Sponsors and Donors"}])
+    end
     data.unshift(["My Contacts", "My Contacts"])
     data
   end
@@ -86,6 +94,11 @@ class Project < ActiveRecord::Base
     amount_by_date
   end
 
+  def project_sponsor_by_level(page_num)
+    data = self.project_sponsors.group_by { |sponsor| sponsor.level_id }.sort.map{ |sponsor| sponsor[1] }.flatten
+    Kaminari.paginate_array(data).page(page_num).per(25)
+  end
+
   def print_test
     logger.debug("Test Crap")
   end
@@ -102,12 +115,6 @@ class Project < ActiveRecord::Base
     total_data = []
 
     fundings.group_by{ |p| p.updated_at.to_date  }.sort {|x,y| y <=> x }.each { |funding| total_data << funding }
-    Kaminari.paginate_array(total_data).page(page_num).per(25)
-  end
-
-  def founders(page_num)
-    fundings = populate_funding_by_project
-    total_data= fundings.sort {|x,y| x.created_at <=> y.created_at }
     Kaminari.paginate_array(total_data).page(page_num).per(25)
   end
 
@@ -171,7 +178,7 @@ class Project < ActiveRecord::Base
     self.website.downcase! unless self.website.nil?
     self.facebook_page.downcase! unless self.facebook_page.nil?
   end
-  
+
   def self.check_days_left
     today = DateTime.now
     projects = Project.where("live = ?", 1)
