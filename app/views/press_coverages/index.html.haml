@@ -5,7 +5,7 @@
     - @press_coverages.each do |release|
       .release
         = link_to "#{release.title}", "#{release.link}", "data-id" => "#{release.id}", :style => "display:block;"
-        %small= release.release_date
+        %small #{release.publication} - #{release.release_date}
         %p
           = link_to "Edit Press Coverage", edit_press_coverage_path(release.id)
           = link_to "Delete Press Coverage", press_coverage_path(release.id), method: "delete"
