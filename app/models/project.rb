@@ -96,7 +96,7 @@ class Project < ActiveRecord::Base
 
   def project_sponsor_by_level(page_num)
     data = self.project_sponsors.group_by { |sponsor| sponsor.level_id }.sort.map{ |sponsor| sponsor[1] }.flatten
-    sponsors_data = Kaminari.paginate_array(data).page(page_num).per(25)
+    Kaminari.paginate_array(data).page(page_num).per(25)
   end
 
   def print_test
