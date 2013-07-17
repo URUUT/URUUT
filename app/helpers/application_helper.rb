@@ -148,7 +148,7 @@ module ApplicationHelper
   end
 
   def count_project_sponsor_by_level(sponsors)
-    if sponsor.blank?
+    if sponsors.blank?
       0
     else
       id_level = sponsors.first.level_id
