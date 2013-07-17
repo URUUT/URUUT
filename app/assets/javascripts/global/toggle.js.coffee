@@ -1,7 +1,7 @@
 $(document).ready ->
 
   # Switch Click
-  $(".Switch").click ->
+  $(".switch").click ->
 
     # Check If Enabled (Has 'On' Class)
     if $(this).hasClass("On")
@@ -20,7 +20,7 @@ $(document).ready ->
 
 
   # Loops Through Each Toggle Switch On Page
-  $(".Switch").each ->
+  $(".switch").each ->
 
     # Search of a checkbox within the parent
     if $(this).parent().find("input:checkbox").length
