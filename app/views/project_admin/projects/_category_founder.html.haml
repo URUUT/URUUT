@@ -12,7 +12,7 @@
 - else
   - sponsors = project_sponsor_by_level(@founders, params[:page])
   - sponsors.each do |sponsor_level, sponsors|
-    %div.label-green= "#{sponsor_level} LEVEL SPONSORS (#{count_project_sponsor_by_level(sponsors.first.level_id)})"
+    %div.label-green= "#{sponsor_level} LEVEL SPONSORS (#{count_project_sponsor_by_level(sponsors)})"
     - if sponsors.blank?
       %p No Sponsors at this level
     - else
