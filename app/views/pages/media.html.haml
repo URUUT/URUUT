@@ -4,30 +4,38 @@
   %h6 Uruut Logos
   %hr
   %h6 Press Coverage
-  .article
-    = link_to "New crowdfunding site Uruut launches", "http://www.bizjournals.com/atlanta/blog/atlantech/2013/07/new-crowdfunding-site-uruut-launches.html"
-    %small Atlanta Business Chronicle
-  .article
-    = link_to "New Atlanta Startup Aims to Help Underfunded Municipalities", "http://www.peachpundit.com/2013/07/10/new-atlanta-startup-aims-to-help-underfunded-muncipalities/"
-    %small Peach Pundit
-  .article
-    = link_to "Crowdfunding Community, Uruut Crowdfunding Platform Goes Live", "http://www.google.com/url?sa=X&q=http://www.crowdfundinsider.com/2013/07/18660-crowdfunding-community-uruut-crowdfunding-platform-goes-live/&ct=ga&cad=CAcQARgAIAEoATABOAFArLX5jgVIAVgAYgVlbi1VUw&cd=7CwHJmi2pPo&usg=AFQjCNEHY57J1RF3DF5Ie91SzWwz4_f1hQ"
-    %small Crowdfund Insider
-  .article
-    = link_to "Ashford Park School Foundation partners with Uruut to construct an outdoor classroom", "http://thebrookhavenpost.net/?p=6897"
-    %small Brookhaven Post
-  .article
-    = link_to "Ashford Park School Looks to Crowdfunding for New Outdoor Classroom", "http://brookhaven.patch.com/groups/schools/p/ashford-park-school-to-use-crowdfunding-startup-for-new-outdoor-classroom"
-    %small Brookhaven Patch
-  .article
-    = link_to "Public Beta Launch: Atlanta's Uruut", "http://southernalpha.com/general/public-beta-launch-atlantas-uruut/"
-    %small SouthernAlpha
-  .article
-    = link_to "Crowdfunding Power: Solving climate change and other community needs", "http://www.justmeans.com/Crowdfunding-Power-Solving-Climate-Change-Other-Community-Needs/59965.html"
-    %small Just Means
-  .article
-    = link_to "Strengthening community starts with U", "http://yourmarkontheworld.com/post/55570243738/strengthening-community-starts-with-u"
-    %small Your Mark on the World
+  - unless @press_coverages.blank?
+    - @press_coverages.each do |release|
+      .article
+        = link_to "#{release.title}", "#{release.link}", "data-id" => "#{release.id}", :style => "display:block;"
+        %small #{release.publication} - #{release.release_date}
+  - else
+    %h4{:style => "text-align:center;"}
+      No Press Coverage Currently	
+  / .article
+/     = link_to "New crowdfunding site Uruut launches", "http://www.bizjournals.com/atlanta/blog/atlantech/2013/07/new-crowdfunding-site-uruut-launches.html"
+/     %small Atlanta Business Chronicle
+/   .article
+/     = link_to "New Atlanta Startup Aims to Help Underfunded Municipalities", "http://www.peachpundit.com/2013/07/10/new-atlanta-startup-aims-to-help-underfunded-muncipalities/"
+/     %small Peach Pundit
+/   .article
+/     = link_to "Crowdfunding Community, Uruut Crowdfunding Platform Goes Live", "http://www.google.com/url?sa=X&q=http://www.crowdfundinsider.com/2013/07/18660-crowdfunding-community-uruut-crowdfunding-platform-goes-live/&ct=ga&cad=CAcQARgAIAEoATABOAFArLX5jgVIAVgAYgVlbi1VUw&cd=7CwHJmi2pPo&usg=AFQjCNEHY57J1RF3DF5Ie91SzWwz4_f1hQ"
+/     %small Crowdfund Insider
+/   .article
+/     = link_to "Ashford Park School Foundation partners with Uruut to construct an outdoor classroom", "http://thebrookhavenpost.net/?p=6897"
+/     %small Brookhaven Post
+/   .article
+/     = link_to "Ashford Park School Looks to Crowdfunding for New Outdoor Classroom", "http://brookhaven.patch.com/groups/schools/p/ashford-park-school-to-use-crowdfunding-startup-for-new-outdoor-classroom"
+/     %small Brookhaven Patch
+/   .article
+/     = link_to "Public Beta Launch: Atlanta's Uruut", "http://southernalpha.com/general/public-beta-launch-atlantas-uruut/"
+/     %small SouthernAlpha
+/   .article
+/     = link_to "Crowdfunding Power: Solving climate change and other community needs", "http://www.justmeans.com/Crowdfunding-Power-Solving-Climate-Change-Other-Community-Needs/59965.html"
+/     %small Just Means
+/   .article
+/     = link_to "Strengthening community starts with U", "http://yourmarkontheworld.com/post/55570243738/strengthening-community-starts-with-u"
+/     %small Your Mark on the World
 		
   %hr
   %h6 Press Releases
