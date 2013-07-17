@@ -5,6 +5,14 @@
 
   filepicker.setKey('#{Settings.filepicker.api_key}');
 
+  $(".sub-menu-project").live("click",function(){
+    $(".main-content").html('<div class="loading-main-content" style=" font-weight: bolder; margin-left: 47%;">Loading..<br><img alt="3" src="/assets/3.gif" style="padding-left: 2%"></div>');
+  });
+
+  $(".menu-messages").live("click",function(){
+    $(".content-manage-project").html('<div class="loading-main-content" style=" font-weight: bolder; margin-left: 40%; margin-top: 140px">Loading..<br><img alt="3" src="/assets/3.gif" style="padding-left: 2%"></div>');
+  });
+
 
 .full-width.banner
   .container
