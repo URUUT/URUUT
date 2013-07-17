@@ -11,12 +11,21 @@ $(document).ready ->
 
       # Change Button Style - Remove On Class, Add Off Class
       $(this).removeClass("On").addClass "Off"
+
+      $("form.registration-edit .newsletter-popover").popover
+        content: "If you unsubscribe, you will no longer receive campaign updates, Uruut news, or other recurring emails. \
+          You may still receive one-time emails based on your use of the site, such as confirmations for your contributions."
+        placement: "top"
+        trigger: "hover"
+
     else # If Button Is Disabled (Has 'Off' Class)
       # Try To Find Checkbox Within Parent Div, And Uncheck It
       $(this).parent().find("input:checkbox").attr "checked", false
 
       # Change Button Style - Remove Off Class, Add On Class
       $(this).removeClass("Off").addClass "On"
+
+      $("form.registration-edit .newsletter-popover").popover "destroy"
 
 
   # Loops Through Each Toggle Switch On Page
