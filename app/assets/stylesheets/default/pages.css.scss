@@ -3326,3 +3326,15 @@ form[id*=project] {
 		}
 	}
 }
+
+body.media {
+	margin-top:0 !important;
+	overflow:scroll !important;
+}
+
+.article {
+	margin-bottom:15px;
+	a {
+		display:block;
+	}
+}
