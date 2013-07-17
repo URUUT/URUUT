@@ -147,12 +147,12 @@ module ApplicationHelper
     sponsors
   end
 
-  def count_project_sponsor_by_level(sponsors)
+  def count_project_sponsor_by_level(sponsors, project)
     if sponsors.blank?
       0
     else
       id_level = sponsors.first.level_id
-      ProjectSponsor.where(level_id: id_level).count
+      ProjectSponsor.where(level_id: id_level, project_id: project.id).count
     end
   end
 
@@ -200,8 +200,8 @@ module ApplicationHelper
     donations.map { |donation| donation.amount }.inject(0) {|sum, element| sum + element }
   end
 
-  def total_donor_by_level(perk_name)
-    Donation.where(perk_name: perk_name).count
+  def total_donor_by_level(perk_name, project)
+    Donation.where(perk_name: perk_name, project_id: project.id).group_by { |donation| donation.user_id }.count
   end
 
   def avatar_project_admin(avatar_link)
