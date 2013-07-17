@@ -1,18 +1,18 @@
 -if params[:type].eql?("individual")
   - @founders.group_by{ |p| p.perk_name  }.sort_by{|_key, value| value.first.amount }.reverse.each do |founders|
-    %div.label-green= "PERK : #{founders[0]} (#{founders[1].count})"
+    %div.label-green= "PERK : #{founders[0]} (#{total_donor_by_level(founders[0])})"
     %table.table.table-striped
-      - founders[1].each do |founder|
+      - founders[1].group_by {|donation| donation.user_id }.each do |user_id, founder|
         %tr
-          %td= image_tag avatar_project_admin(founder.user.avatar), style: "width:37px"
-          %td= truncate([founder.user.first_name, founder.user.last_name].join(" "), length: 17)
-          %td= "#{number_to_currency(founder.amount, precision: 0)}"
+          %td= image_tag avatar_project_admin(founder.last.user.avatar), style: "width:37px"
+          %td= truncate([founder.last.user.first_name, founder.last.user.last_name].join(" "), length: 17)
+          %td= "#{number_to_currency(total_amount_by_donor(founder), precision: 0)}"
           %td= truncate(founders[0], length: 17)
-          %td= founder.updated_at.strftime("%m/%d")
+          %td= founder.sort_by {|founder| founder.updated_at }.last.updated_at.strftime("%m/%d")
 - else
-  - sponsors = project_sponsor_by_level(@project)
+  - sponsors = project_sponsor_by_level(@founders, params[:page])
   - sponsors.each do |sponsor_level, sponsors|
-    %div.label-green= "#{sponsor_level} LEVEL SPONSORS (#{sponsors.count})"
+    %div.label-green= "#{sponsor_level} LEVEL SPONSORS (#{count_project_sponsor_by_level(sponsors.first.level_id)})"
     - if sponsors.blank?
       %p No Sponsors at this level
     - else
