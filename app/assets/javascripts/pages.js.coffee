@@ -75,8 +75,6 @@ $ ->
 
 	# $('#duration').datepicker({altField: '#project_duration', altFormat: 'yy-mm-dd'})
 
-	$('#project_description').redactor()
-
 
 	$("div.project div.location img").click ->
 	  console.log "hello"

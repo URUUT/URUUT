@@ -49,6 +49,9 @@ class PagesController < ApplicationController
   def how_it_works
     # session[:previous_page] = request.referer
   end
+  
+  def media
+  end
 
   private
   def projects_list

@@ -148,6 +148,7 @@ Crowdfund::Application.routes.draw do
     get "thank_you", :on => :collection
     get "privacy", :on => :collection
     get "funding_sources", :on => :collection
+    get "media", :on => :collection
   end
 
   mount Sidekiq::Web => '/sidekiq'
