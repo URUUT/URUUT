@@ -31,9 +31,13 @@
 		
   %hr
   %h6 Press Releases
-  .article
-    = link_to "Uruut’s Community Focused Crowdfunding Platform Enters Public Beta", "http://www.prweb.com/releases/2013/7/prweb10904663.htm"
-    %small July 10, 2013
+  - unless @press_releases.blank?
+    - @press_releases.each do |release|
+      .article
+        = link_to "#{release.title}", "#{release.link}"
+        %small= release.release_date
+  - else
+    %h3 No Press Releases
 	
 .span4.well.info{:style => "width: 260px;margin-top:50px;padding:20px"}
   %h5{:style => "color:#70bf4c;margin-bottom:10px;letter-spacing:1px;"} Press Contacts

@@ -1,0 +1,12 @@
+= form_for @press_release, url: new_media_press_release_path do |f|
+	%div
+		= f.label :title
+		= f.text_field :title
+	
+	%div
+		= f.label :link
+		= f.text_field :link
+		
+	%div
+		= f.label :release_date
+		= f.text_field :release_date

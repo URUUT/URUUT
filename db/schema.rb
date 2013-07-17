@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130709033424) do
+ActiveRecord::Schema.define(:version => 20130717043249) do
 
   create_table "badges_sashes", :force => true do |t|
     t.integer  "badge_id"
@@ -123,6 +123,22 @@ ActiveRecord::Schema.define(:version => 20130709033424) do
     t.boolean "limit",           :default => false
     t.string  "perks_available"
     t.integer "perk_limit"
+  end
+
+  create_table "press_coverages", :force => true do |t|
+    t.string   "title"
+    t.string   "link"
+    t.date     "release_date"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "press_releases", :force => true do |t|
+    t.string   "title"
+    t.string   "link"
+    t.string   "release_date"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "project_sponsors", :force => true do |t|

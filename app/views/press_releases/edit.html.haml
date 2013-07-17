@@ -1,0 +1,25 @@
+%h3 Edit this Press Release
+
+= form_for @press_release do |f|
+	- if @press_release.errors.any?
+		.error_messages
+			%h2
+				= pluralize(@press_release.errors.count, "error")
+				prohibited this subscription from being saved:
+			%ul
+				- @press_release.errors.full_messages.each do |msg|
+					%li= msg
+	%div
+		= f.label :title
+		= f.text_field :title, :style => "width:500px"
+	
+	%div
+		= f.label :link
+		= f.text_field :link, :style => "width:500px"
+		
+	%div
+		= f.label :release_date
+		= f.text_field :release_date, :style => "width:250px"
+		
+	%div
+		= f.submit

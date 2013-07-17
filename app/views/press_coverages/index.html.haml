@@ -1,0 +1,14 @@
+.span12
+  %h3 Current Press Coverage
+
+  - unless @press_coverages.blank?
+    - @press_coverages.each do |release|
+      .release
+        = link_to "#{release.title}", "#{release.link}", "data-id" => "#{release.id}", :style => "display:block;"
+        %small= release.release_date
+        %p
+          = link_to "Edit Press Coverage", edit_press_coverage_path(release.id)
+          = link_to "Delete Press Coverage", press_coverage_path(release.id), method: "delete"
+  - else
+    %h4{:style => "text-align:center;"}
+      No Press Coverage Currently

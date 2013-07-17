@@ -51,6 +51,7 @@ class PagesController < ApplicationController
   end
   
   def media
+    @press_releases = PressRelease.all
   end
 
   private

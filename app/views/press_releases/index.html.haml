@@ -1,0 +1,14 @@
+.span12
+  %h3 Current Press Releases
+
+  - unless @press_releases.blank?
+    - @press_releases.each do |release|
+      .release
+        = link_to "#{release.title}", "#{release.link}", "data-id" => "#{release.id}", :style => "display:block;"
+        %small= release.release_date
+        %p
+          = link_to "Edit Press Release", edit_press_release_path(release.id)
+          = link_to "Delete Press Release", press_release_path(release.id), method: "delete"
+  - else
+    %h4{:style => "text-align:center;"}
+      No Press Releases Currently
