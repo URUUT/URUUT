@@ -147,8 +147,13 @@ module ApplicationHelper
     sponsors
   end
 
-  def count_project_sponsor_by_level(level_id)
-    ProjectSponsor.where(level_id: level_id).count
+  def count_project_sponsor_by_level(sponsors)
+    if sponsor.blank?
+      0
+    else
+      id_level = sponsors.first.level_id
+      ProjectSponsor.where(level_id: id_level).count
+    end
   end
 
   def count_percentage(total, amount)
