@@ -89,6 +89,12 @@ Crowdfund::Application.routes.draw do
       end
     end
   end
+  
+  scope '/media' do
+    resources :press_releases
+    resources :press_coverages
+  end
+  
   resources :donations do
     get "thank_you", :on => :collection
     get "change_perk", :on => :member
