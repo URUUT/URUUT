@@ -75,9 +75,9 @@ class ProjectAdmin::ProjectsController < ApplicationController
       @all = true
     else
       @founders = if params[:type].eql?("individual")
-        @project.donations.page(params[:page]).per(25)
+        @project.individual_donors(params[:page])
       else
-        @project.project_sponsors.page(params[:page]).per(25)
+        @project.project_sponsor_by_level(params[:page])
       end
       @all = false
     end

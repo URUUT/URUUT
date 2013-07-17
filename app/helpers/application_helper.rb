@@ -117,26 +117,38 @@ module ApplicationHelper
     return "pk_test_1XvbGBUir6OeX1ljhENDmZ7h"
   end
 
-  def project_sponsor_by_level(project)
-    gold_sponsors, silver_sponsors, bronze_sponsors, platinum_sponsors = [], [], [], []
-    project.project_sponsors.each do |sponsor|
-      if sponsor.level_id.eql?(1)
-        platinum_sponsors << sponsor
-      elsif sponsor.level_id.eql?(2)
-        gold_sponsors << sponsor
-      elsif sponsor.level_id.eql?(3)
-        silver_sponsors << sponsor
-      elsif sponsor.level_id.eql?(4)
+  def project_sponsor_by_level(founders, page_num)
+    if page_num.nil?
+      gold_sponsors, silver_sponsors, bronze_sponsors, platinum_sponsors = [], [], [], []
+      founders.each do |sponsor|
+        if sponsor.level_id.eql?(1)
+          platinum_sponsors << sponsor
+        elsif sponsor.level_id.eql?(2)
+          gold_sponsors << sponsor
+        elsif sponsor.level_id.eql?(3)
+          silver_sponsors << sponsor
+        elsif sponsor.level_id.eql?(4)
+          bronze_sponsors << sponsor
+        end
+      end
+      sponsors = {
+        "PLATINUM" => platinum_sponsors,
+        "GOLD" => gold_sponsors,
+        "SILVER" => silver_sponsors,
+        "BRONZE" => bronze_sponsors
+      }
+    else
+      bronze_sponsors = []
+      founders.each do |sponsor|
         bronze_sponsors << sponsor
       end
+      sponsors = { "BRONZE" => bronze_sponsors }
     end
-    sponsors = {
-      "PLATINUM" => platinum_sponsors,
-      "GOLD" => gold_sponsors,
-      "SILVER" => silver_sponsors,
-      "BRONZE" => bronze_sponsors
-    }
     sponsors
+  end
+
+  def count_project_sponsor_by_level(level_id)
+    ProjectSponsor.where(level_id: level_id).count
   end
 
   def count_percentage(total, amount)
@@ -177,6 +189,14 @@ module ApplicationHelper
         "javascript:void(0)"
       end
     end
+  end
+
+  def total_amount_by_donor(donations)
+    donations.map { |donation| donation.amount }.inject(0) {|sum, element| sum + element }
+  end
+
+  def total_donor_by_level(perk_name)
+    Donation.where(perk_name: perk_name).count
   end
 
   def avatar_project_admin(avatar_link)
