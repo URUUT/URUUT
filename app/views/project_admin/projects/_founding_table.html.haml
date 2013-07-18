@@ -4,19 +4,23 @@
     %th Total Funding For Day
     %th Individual Contributors
     %th Sponsors
-  - @fundings.each do |date, founders|
-    - individual_count, sponsors_count, amount = 0, 0, 0
-    - founders.each do |founder|
-      - if founder.type_founder.eql?("individual")
-        - individual_count += 1
-        - amount += founder.amount.to_i
-      - else
-        - sponsors_count += 1
-        - amount += founder.cost.to_i
+  - if @fundings.blank?
     %tr
-      %td= date.strftime("%m/%d/%Y")
-      %td= "#{number_to_currency(amount, precision: 0)}"
-      %td= individual_count
-      %td= sponsors_count
-
-= paginate @fundings, remote: true
+      %td.no-founder{colspan: 4, style: "text-align: center;"} No Current Funders
+  - else
+    - @fundings.each do |date, founders|
+      - individual_count, sponsors_count, amount = 0, 0, 0
+      - founders.each do |founder|
+        - if founder.type_founder.eql?("individual")
+          - individual_count += 1
+          - amount += founder.amount.to_i
+        - else
+          - sponsors_count += 1
+          - amount += founder.cost.to_i
+      %tr
+        %td= date.strftime("%m/%d/%Y")
+        %td= "#{number_to_currency(amount, precision: 0)}"
+        %td= individual_count
+        %td= sponsors_count
+- unless @fundings.blank?
+  = paginate @fundings, remote: true
