@@ -41,7 +41,22 @@ class DonationsController < ApplicationController
           end
         end
       end
-      if @perks.blank?
+
+      if !@project.perk_permission
+        amount = params[:amount].to_f
+        @perk_description = "#{params[:amount].to_i} Uruut Reward Points"
+        if amount < 20
+          @perk_name_selected = "Level 1"
+        elsif amount < 50
+          @perk_name_selected = "Level 2"
+        elsif amount < 100
+          @perk_name_selected = "Level 3"
+        elsif amount < 250
+          @perk_name_selected = "Level 4"
+        else
+          @perk_name_selected = "Level 5"
+        end
+      elsif @perks.blank?
         @perk_name_selected = "Custom"
         @perk_description = ""
       else
@@ -120,7 +135,22 @@ class DonationsController < ApplicationController
           end
         end
       end
-      if @perks.blank?
+
+      if !@project.perk_permission
+        amount = params[:custom_seed].to_f
+        @perk_description = "#{params[:custom_seed].to_i} Uruut Reward Points"
+        if amount < 20
+          @perk_name_selected = "Level 1"
+        elsif amount < 50
+          @perk_name_selected = "Level 2"
+        elsif amount < 100
+          @perk_name_selected = "Level 3"
+        elsif amount < 250
+          @perk_name_selected = "Level 4"
+        else
+          @perk_name_selected = "Level 5"
+        end
+      elsif @perks.blank?
         @perk_name_selected = "Custom"
         @perk_description = ""
       else
@@ -193,11 +223,7 @@ class DonationsController < ApplicationController
         @perks.push(perk)
       end
     end
-    if @perks.blank?
-      @perk_name_selected = "Custom"
-    else
-      @perk_name_selected = @donation.perk_name
-    end
+    @perk_name_selected = @donation.perk_name
     @donation.save!
   end
 
