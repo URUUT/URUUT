@@ -6,7 +6,7 @@
         %tr
           %td= image_tag avatar_project_admin(founder.last.user.avatar), style: "width:37px"
           %td= truncate([founder.last.user.first_name, founder.last.user.last_name].join(" "), length: 17)
-          %td= "#{number_to_currency(total_amount_by_donor(founder), precision: 0)}"
+          %td= "#{amount_converter(total_amount_by_donor(founder))}"
           %td= truncate(founders[0], length: 17)
           %td= founder.sort_by { |founder| founder.updated_at }.last.updated_at.strftime("%m/%d")
 - else
@@ -19,9 +19,9 @@
       %table.table.table-striped
         - sponsors.each do |sponsor|
           %tr
-            %td= image_tag "#{sponsor.logo}/convert?fit=scale&height=37&width=37"
+            %td= filepicker_image_tag sponsor.logo, width: 37, height: 37, fit: 'scale'
             %td= truncate(sponsor.name, length: 17)
-            %td= "#{number_to_currency(sponsor.cost, precision: 0)}"
+            %td= "#{amount_converter(sponsor.cost)}"
             %td= truncate("#{sponsor.sponsorship_level.name} sponsor", length: 17)
             %td= sponsor.updated_at.strftime("%m/%d")
 
