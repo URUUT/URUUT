@@ -1,97 +1,98 @@
-= javascript_include_tag "highchart/highcharts"
-= javascript_include_tag "highchart/theme/grid"
+- unless @total_fundings[:total_amount].zero?
+  = javascript_include_tag "highchart/highcharts"
+  = javascript_include_tag "highchart/theme/grid"
 
-:javascript
-  $(function () {
-    $('.chart-pie').highcharts({
-      chart: {
-          plotBackgroundColor: null,
-          plotBorderWidth: null,
-          borderColor: null,
-          plotShadow: false
-      },
-      legend: {
-        enabled: false
-      },
-      title: {
-          text: null
-      },
-      tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage}%</b>',
-        percentageDecimals: 1
-      },
-      plotOptions: {
-          pie: {
-              allowPointSelect: true,
-              cursor: 'pointer',
-              dataLabels: {
-                  enabled: false
-              },
-              showInLegend: true
-          }
-      },
-      series: [{
-          type: 'pie',
-          name: 'Funding share',
-          data: [
-              ['BUSINESS SPONSORS', #{count_percentage(@total_fundings[:total_amount], @total_fundings[:business_amount]).split("%").first } ],
-              ['FOUNDATION SPONSORS', #{count_percentage(@total_fundings[:total_amount], @total_fundings[:foundation_amount]).split("%").first} ],
-              ['INDIVIDUAL CONTRIBUTORS', #{count_percentage(@total_fundings[:total_amount], @total_fundings[:individual_amount]).split("%").first} ]
-          ]
-      }]
-    });
+  :javascript
+    $(function () {
+      $('.chart-pie').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            borderColor: null,
+            plotShadow: false
+        },
+        legend: {
+          enabled: false
+        },
+        title: {
+            text: null
+        },
+        tooltip: {
+          pointFormat: '{series.name}: <b>{point.percentage}%</b>',
+          percentageDecimals: 1
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Funding share',
+            data: [
+                ['BUSINESS SPONSORS', #{count_percentage(@total_fundings[:total_amount], @total_fundings[:business_amount]).split("%").first } ],
+                ['FOUNDATION SPONSORS', #{count_percentage(@total_fundings[:total_amount], @total_fundings[:foundation_amount]).split("%").first} ],
+                ['INDIVIDUAL CONTRIBUTORS', #{count_percentage(@total_fundings[:total_amount], @total_fundings[:individual_amount]).split("%").first} ]
+            ]
+        }]
+      });
 
-    $('.chart-bar').highcharts({
-      chart: {
-          type: 'area',
-          borderColor: null,
-      },
-      legend: {
-        enabled: false
-      },
-      title: {
-          text: null
-      },
-      xAxis: {
-          type: 'linear',
-          showLastLabel: true,
-          endOnTick: true,
-          max: #{@project.duration.to_i},
-          tickInterval: #{get_interval_chart(@project)}
-      },
-      yAxis: {
-          title: { text: 'Dollars' },
-          labels: {
-                    formatter: function() {
-                        return '$'+this.value;
-                    }
-                  }
-      },
-      tooltip: {
-          formatter: function () {
-            return '$' + Highcharts.numberFormat(this.y, 2);
-          }
-      },
-      plotOptions: {
-          area: {
-              marker: {
-                  enabled: true,
-                  symbol: 'circle',
-                  radius: 2,
-                  states: {
-                      hover: {
-                          enabled: true
+      $('.chart-bar').highcharts({
+        chart: {
+            type: 'area',
+            borderColor: null,
+        },
+        legend: {
+          enabled: false
+        },
+        title: {
+            text: null
+        },
+        xAxis: {
+            type: 'linear',
+            showLastLabel: true,
+            endOnTick: true,
+            max: #{@project.duration.to_i},
+            tickInterval: #{get_interval_chart(@project)}
+        },
+        yAxis: {
+            title: { text: 'Dollars' },
+            labels: {
+                      formatter: function() {
+                          return '$'+this.value;
                       }
-                  }
-              }
-          }
-      },
-      series: [{
-          name: 'Funding',
-          data: #{@project.amount_per_day.inspect}
-      }]
+                    }
+        },
+        tooltip: {
+            formatter: function () {
+              return '$' + Highcharts.numberFormat(this.y, 2);
+            }
+        },
+        plotOptions: {
+            area: {
+                marker: {
+                    enabled: true,
+                    symbol: 'circle',
+                    radius: 2,
+                    states: {
+                        hover: {
+                            enabled: true
+                        }
+                    }
+                }
+            }
+        },
+        series: [{
+            name: 'Funding',
+            data: #{@project.amount_per_day.inspect}
+        }]
+      });
     });
-  });
 
 
 
@@ -100,6 +101,8 @@
     .span8.pull-left
       %h2.tittle FUNDING TRACKER
       .info
+        - if @total_fundings[:total_amount].zero?
+          .no-founder No Current Funders
         .chart-bar
 
       %h2.tittle FUNDING BREAKDOWN BY DAY
@@ -109,6 +112,8 @@
       %h2.title{:style =>"margin-bottom: 5px;"}
         FUNDING SOURCES
       %div{:class => "well info"}
+        - if @total_fundings[:total_amount].zero?
+          .no-founder No Current Funders
         .chart-pie
 
         .percentage
