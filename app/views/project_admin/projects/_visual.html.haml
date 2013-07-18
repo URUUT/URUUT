@@ -12,12 +12,23 @@
   #content_container.tab-content
     #planting_seeds.tab-pane.active
       .image_warp.image_wrap_cover
-        - if @project.seed_image
-          .planting-seeds-main-content
-            = image_tag "#{@project.seed_image}", id: "seed_image_cultivation", class: "seed_image", "data-project-id" => @project.id
-        .action_button{style: "#{'' if @project.seed_image}"}
-          %button{:id => "new-seed", type: "filepicker"} ADD NEW PHOTO
-          = link_to '<i class="icon-trash icon-green"></i> Delete Photo'.html_safe, delete_image_path(@project.id, type: "seed_image"), class: "btn delete_photo_planting", method: 'DELETE', style: "display: #{'none' unless @project.seed_image}", remote: true
+        .planting-seeds-main-content
+          - if @project.seed_mime_type.eql?("video") and !@project.seed_video.blank?
+            -if @project.seed_video.start_with?("http://www.youtube.com/")
+              - video_seed = @project.seed_video.gsub("watch?v=", "embed/")
+            -else
+              - video_seed = @project.seed_video.gsub(".be", "be.com/embed")
+            .seed-content
+              %iframe{:height => "413", :src => video_seed, :width => "620"}
+          - elsif @project.seed_mime_type.eql?("image") and !@project.seed_image.blank?
+            .seed-content.clearfix
+              = image_tag "#{@project.seed_image}", style: "float:left; width:100%", id: "seed_image_cultivation", class: "seed_image", "data-project-id" => @project.id
+          - else
+            .seed-content.clearfix{style: "background: #DDD; width: 100%; height: 414px;"}
+
+        .seed-action-container
+          %button{:id => "new-seed", type: "filepicker", 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA'} ADD NEW PHOTO
+          = link_to '<i class="icon-facetime-video icon-green"></i> Upload New Video'.html_safe, "javascript:void(0)", class: "btn seed-form"
       %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.about
     #growth.tab-pane
       growth
@@ -34,18 +45,45 @@
 
         %h6{:style => "text-align:center;color:#55554d !important;font-family:'Proxima Nova';margin-top:15px;"} Funding Ends
         %div{:style => "background:#b6b6b4;padding:25px;border-radius:500px;width:120px;height:120px;"}
-          %span{:style => 'display:block;text-align:center;font:normal 13px/13px "Proxima Nova Semi";color:#fff;text-transform:uppercase;letter-spacing:5px;margin-top: 10px'}= @project.campaign_deadline
-          %span{:style => 'display:block;text-align:center;font:normal 23px/72px "Proxima Nova Semi";color:#fff;text-transform:uppercase;margin-top:5px'}= @project.campaign_deadline
+          %span{:style => 'display:block;text-align:center;font:normal 22px/22px "Proxima Nova Semi";color:#fff;text-transform:uppercase;letter-spacing:5px; margin-top: 17px;'}= (Date.today + (@project.duration).to_i.days).strftime("%b")
+          %span{:style => 'display:block;text-align:center;font:normal 72px/68px "Proxima Nova Semi";color:#fff;text-transform:uppercase;'}= (Date.today + (@project.duration).to_i.days).strftime("%d")
         %h6{:style => "text-align:center;color:#55554d !important;font-family:'Proxima Nova';margin-top:40px;margin-bottom:0;"} Project Goal
         %h2{:style => "text-align:center;color:#403e37;font-family:'Proxima Nova Semi';margin-top:0;"}= amount_converter(@project.goal)
     .span9.details
-      %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.story
       .cultivation-image-content
         .cultivation-image-main-content
-          = image_tag "#{@project.cultivation_image}", class: "cultivation_image" if @project.cultivation_image
-        .action_button
-          %button{:id => "new-cultivation", type: "filepicker"} ADD NEW PHOTO
-          = link_to '<i class="icon-trash icon-green"></i> Delete Photo'.html_safe, delete_image_path(@project.id, type: "cultivation"), class: "btn delete_photo_cultivation", method: 'DELETE', style: "display: #{'none' unless @project.cultivation_image}", remote: true
+          - if @project.cultivation_mime_type.eql?("video") and !@project.cultivation_video.blank?
+            -if @project.cultivation_video.start_with?("http://www.youtube.com/")
+              - cultivation_video = @project.cultivation_video.gsub("watch?v=", "embed/")
+            -else
+              - cultivation_video = @project.cultivation_video.gsub(".be", "be.com/embed")
+            .cultivation-content.clearfix
+              %iframe{:height => "310", :src => cultivation_video, :width => "380"}
+          - elsif @project.cultivation_mime_type.eql?("image") and !@project.cultivation_image.blank?
+            .cultivation-content.clearfix
+              = image_tag "#{@project.cultivation_image}", class: "cultivation_image", style: "float:left; width:100%"
+          - else
+            %div.cultivation-content.clearfix{:style => "background: #DDD; width: 100%; height: 310px"}
+
+        .action_button.cultivation-action-container
+          %button{:id => "new-cultivation", type: "filepicker", 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA'} ADD NEW PHOTO
+          = link_to '<i class="icon-facetime-video icon-green"></i> Upload New Video'.html_safe, "javascript:void(0)", class: "btn cultivation-form"
+
+      %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.story
+
+#save-video.modal.hide.fade
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3.title-form-video.tittle Add youtube video
+  = form_tag save_video_projects_path, class: "video-upload", method: :post, remote: true do
+    .modal-body{style: "font-family: 'Proxima Nova Semi', sans-serif; color: #464646"}
+      %span.error-container
+      = url_field_tag "video_link", nil, placeholder: "Youtube URL", class: "span4", style: "height: 30px; width: 100%; box-sizing: border-box;"
+      %p{style: "font-size: 14px;"}
+        To upload a video please copy and paste Youtube video link into the space provided.
+      = hidden_field_tag "video_type"
+    .modal-footer
+      %input.btn{:type => "submit", :value => "Submit video", style: "float: none; margin: 0 auto;"}
 
 %script{:src => "http://code.jquery.com/ui/1.10.2/jquery-ui.js"}
 :javascript
@@ -55,6 +93,18 @@
 
   $('.delete_photo_cultivation').click(function(){
     $('.cultivation-image-content').remove();
+  });
+
+  $(".seed-form").on("click", function(){
+    $("#video_type").val("seed");
+    $("#video_link").val("");
+    $("#save-video").modal("show");
+  });
+
+  $(".cultivation-form").on("click", function(){
+    $("#video_type").val("cultivation");
+    $("#video_link").val("");
+    $("#save-video").modal("show");
   });
 
   var cover = document.getElementById('new-seed');
@@ -71,7 +121,7 @@
       success: function(data){
         $('#seed_image').remove();
         $('.delete_photo').show();
-        $('.planting-seeds-main-content').html("<img src=" + seedImage + " id='seed_image_cultivation' data-project-id="+ data +">");
+        $('.planting-seeds-main-content').html("<img src=" + seedImage + " id='seed_image_cultivation' data-project-id="+ data +" style='float:left; width:100%'>");
       }
     });
   };
@@ -91,24 +141,13 @@
       success: function(data){
         $('#seed_image').remove();
         $('.delete_photo').show();
-        $('.cultivation-image-main-content').html("<img src=" + seedImage + " data-project-id="+ data.project_id +">");
+        $('.cultivation-image-main-content').html("<img src=" + seedImage + " data-project-id="+ data.project_id +" style='float:left; width:100%'>");
       }
     });
   };
   filepicker.constructWidget(cultivation);
 
-  var updateImageSeed = function(event){
-
-  }
-
-
-  function updateCutdown() {
-    var remaining = 150 - jQuery('.headline').val().length;
-    jQuery('.cutdown').text('(' + remaining + ' characters remaining.)');
-  }
-
-  updateCutdown();
-  $('.headline').change(updateCutdown);
-  $('.headline').keyup(updateCutdown);
+  $(".seed-action-container :button").last().text("Add A Photo");
+  $(".cultivation-action-container :button").last().text("Add A Photo");
 
 
