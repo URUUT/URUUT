@@ -40,10 +40,8 @@
           %h3.perk-name.label-green{:style => 'font-size:20px; line-height:100%;margin:0;'}
             - if @perk_name_selected.nil?
               = @perk_name
-            - elsif @project.perk_permission
-              = @perk_name_selected
             - else
-              Custom
+              = @perk_name_selected
           %p.perk-description
             - if @project.perk_permission
               #{@perk_description}

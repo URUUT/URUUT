@@ -57,10 +57,10 @@ $("#perk_description").val("<%= @perk_description %>");
   $("#amount-id-custom").attr("style", "background: #70BF4C");
   $("#button-fund-custom").attr("style", "background: green");
   $("#perk-id-custom").attr("style", "background: #70BF4C");
-  <% if @project.perk_permission? %>
-    $("#name_of_perk").val("<%= @perk_name_selected %>");
-  <% else %>
+  <% if @perk_name_selected.blank? %>
     $("#name_of_perk").val("<%= @perk.name %>");
+  <% else %>
+    $("#name_of_perk").val("<%= @perk_name_selected %>");
   <% end %>
 
   <% if @project.perk_permission %>
@@ -77,21 +77,28 @@ $("#perk_description").val("<%= @perk_description %>");
   <% end %>
   <% if @perks.blank? %>
     $(".selectParent").hide();
-    $(".none-perks").show();
-    $(".perk-name").text("Custom");
+    <% if @perk_name_selected.blank? %>
+      $(".perk-name").text("Custom");
+      $(".none-perks").show();
+    <% else %>
+      $(".perk-name").text("<%= @perk_name_selected %>");
+      $(".none-perks").hide();
+    <% end %>
+
     <% if @perk.amount.to_s.split(".")[1].eql?("0") %>
       $(".none-perks").html("You will receive <%= @perk.amount.to_i %> Uruut Reward Points when you seed <%= number_to_currency(@perk.amount, precision: 0) %>");
     <% else %>
       $(".none-perks").html("You will receive <%= @perk.amount.to_i %> Uruut Reward Points when you seed <%= number_to_currency(@perk.amount, precision: 2) %>");
     <% end %>
   <% else %>
+
+    $(".perk-name").text("<%= @perk_name_selected %>");
     <% if @project.perk_permission %>
       $(".selectParent").show();
-      $(".perk-name").text("<%= @perk_name_selected %>");
     <% else %>
-      $(".perk-name").text("Custom");
       $(".selectParent").hide();
     <% end %>
+
     $(".none-perks").hide();
     $("#perk_type").html('');
     <% @perks.each do |perk| %>
