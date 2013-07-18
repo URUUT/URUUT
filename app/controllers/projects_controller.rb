@@ -323,8 +323,12 @@ class ProjectsController < ApplicationController
 
   def update_image
     @project = Project.find_by_id(session[:current_project])
-    image = params[:status].eql?("seed_image") ? 'seed_image' : 'cultivation_image'
-    @project.update_attribute(image.to_sym, params[:image])
+    if params[:status].eql?("seed_image")
+      @project.update_attributes(seed_mime_type: "image", seed_image: params[:image])
+    else
+      @project.update_attributes(cultivation_mime_type: "image", cultivation_image: params[:image])
+    end
+
     render nothing: true
   end
 
