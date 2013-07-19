@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :remember_me, :city, :state, :zip,
     :neighborhood, :provider, :uid, :token, :organization, :mission, :subscribed, :avatar, :uruut_point
 
-  # after_create :send_welcome_email
+  after_create :send_welcome_email
   after_create :assign_default_badge
 
   attr_accessor :avatar_upload_width, :avatar_upload_height
