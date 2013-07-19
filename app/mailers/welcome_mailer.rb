@@ -9,7 +9,7 @@ class WelcomeMailer < ActionMailer::Base
   def welcome_confirmation(user)
     logger.debug(user)
 
-    @name = user.name
+    @name = "#{user.first_name}" + " #{user.last_name}"
     @email = user.email
     @host = ActionMailer::Base.default_url_options[:host]
     unless @email.empty?
