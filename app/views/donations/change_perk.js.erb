@@ -1,5 +1,5 @@
 var theText = "<%= @perk_name_selected %>";
-var perkPermission = "#{@project.perk_permission}"
+var perkPermission = "<%= @project.perk_permission %>"
 
 $(".perk").attr("style", "");
 $(".none-perks").hide();
@@ -104,7 +104,17 @@ $("#perk_description").val("<%= @perk_description %>");
     <% @perks.each do |perk| %>
       $("#perk_type").append('<option value="<%= perk[1] %>"><%= perk[0] %></option>');
   <% end %>
+
+  $("#perk_type option").each(function(){
+    $(this).attr('data', $(this).text())
+  });
+
   $("#perk_type option:contains(" + theText + ")").attr('selected', 'selected');
+
+  if ($("#perk_type :selected").text().length > 17){
+    $("#perk_type :selected").text(truncText($("#perk_type :selected").text(), 15, "..."))
+  }
+
 <% end %>
 <% char_size = params[:custom_seed].gsub(/[^\d,]+/, '').gsub(",", "").length %>
 $("#custom_amount").val("<%= number_to_currency(params[:custom_seed].gsub(",", "").to_f, precision: 2) %>");
