@@ -2,7 +2,7 @@
   %h2{:style => "color:#70BF4C;"} Media Room
   %hr
   %h6 Uruut Logos
-  = link_to image_tag("uruut-logos.png"), "/data/uruut_logos.zip"
+  = link_to "#{request.protocol}#{request.host_with_port}#{asset_path("uruut-logo.png")}", "#{request.protocol}#{request.host_with_port}/data/uruut_logos.zip"
   %hr
   %h6 Press Coverage
   - unless @press_coverages.blank?
