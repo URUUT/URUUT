@@ -35,34 +35,36 @@
 											%img{:src => "http://#{@host}/assets/email-login.png", :style => "display:block;margin:25px 10px 0 0;"}
 					%tr
 						%td{:valign => "top"}
-							%img{:src => "https://www.uruut.com/assets/pr-email-banner.jpg", :style => "display:block;"}
+							%img{:src => "#{@image}/convert?w=620", :style => "display:block;"}
 					%tr
 						%td{:valign => "top"}
+							%p{:style => "color:#444;font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size:13px;margin:14px;"} Dear #{@donator_name}
+							%p{:style => "color:#444;font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size:13px;margin:14px;"} Thank you for contributing to the #{@project_title}!  It’s a very exciting time at #{@project_title}, and we’re very excited to have you involved with our URUUT campaign.  Generosity just like yours is going to help us change our community, so thank you very much!
+							%h6{:style => "margin: 0;padding: 0;font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;line-height: 1.1;margin:14px;color: #444;font-weight: 900;font-size: 14px;"} CROWDFUNDING NEEDS A CROWD TO WORK!
+							%p{:style => "color:#444;font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size:13px;margin:14px;"} 
+								Please use the links below to spread the word about our 
+								%a{:href => "http://#{@host}/projects/#{@project_id}"} project.
 							%p{:style => "color:#444;font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size:13px;margin:14px;"}
-								Dear #{@name},
-								
+								%a{:href => "http://facebook.com/#{@project_facebook}"}
+									%img{:src => "http://#{@host}/assets/email-facebook.png", :style => "vertical-align:middle;margin-right:5px;"} #{@project_facebook}
+								%a{:href => "http://www.twitter.com/#{@project_twitter}"} 
+									%img{:src => "http://#{@host}/assets/email-twitter.png", :style => "vertical-align:middle;margin-right:5px;margin-left:5px;"} #{@project_twitter}
+									                                     
+							%h6{:style => "margin: 0;padding: 0;font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;line-height: 1.1;margin:14px;color: #444;font-weight: 900;font-size: 14px;"} KNOW A POTENTIAL SPONSOR?
+              
 							%p{:style => "color:#444;font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size:13px;margin:14px;"}
-								Welcome to Uruut!  You are one step closer to a more vibrant community where "Strengthening Community Starts With U."
-								
+								We are also looking for businesses to partner with. If you come across a company who wants to make a difference in its community, please pass along the link to our 
+								%a{:href => "http://#{@host}/projects/#{@project_id}"} project page.
+                
+							%p{:style => "color:#444;font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size:13px;margin:14px;"} Thank you so much, and we can't wait to share more positive updates along the way! 
+              
+							%p{:style => "color:#444;font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size:13px;margin:14px;"} Gratefully,
+              
+							%p{:style => "color:#444;font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size:13px;margin:14px;"} #{@sponsor_name}
 							%p{:style => "color:#444;font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size:13px;margin:14px;"}
-								Uruut helps transform communities by bringing individuals, businesses and foundations together with groups seeking community-level funding through a transparent, feature-rich, crowdfunding platform.
-								
-							%p{:style => "color:#444;font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size:13px;margin:14px;"}
-								We are very excited to have you as part of the Uruut Community!
-								
-							%p{:style => "color:#444;font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size:13px;margin:14px;"}
-								You can find out more about Uruut and our innovative, new approach to crowdfunding 
-								%a{:href => "https://uruut.herokuapp.com/pages/funding_sources"} here
-								, and you can browse our projects in the 
-								%a{:href => "https://uruut.herokuapp.com/browse/projects"} Marketplace.
-								
-							%p{:style => "color:#444;font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size:13px;margin:14px;"}
-								Please follow us Facebook and Twitter by using the links below.  If you are interested in setting up a project of your own, or need more information, please 
-								= link_to "Contact Us", "https://#{host}/pages/contact".
-							%p{:style => "color:#444;font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size:13px;margin:14px;"}
-								Welcome!
-								%br
-								The Uruut Team
+								%a{:href => "mailto: #{@sponsor_email}"}#{@sponsor_email}
+							
+
 					%tr
 						%td{:align => "center", :valign => "top"}
 							%table#email-footer{:bgcolor => "#403e37", :width => "100%", :cellspacing => "0", :style => "border-spacing:0;border-collapse: collapse;"}
