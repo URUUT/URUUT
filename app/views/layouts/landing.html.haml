@@ -76,7 +76,7 @@
         %meta{:property => "og:title", :content => "#{@project.project_title} | URUUT"}
         %meta{:property => 'og:description', :content=> "#{@project.title}" }
       - else
-        %meta{:property => "og:image", :content => "#{asset_path('logo-seed.png') }"}
+        %meta{:property => "og:image", :content => "https://www.uruut.com#{asset_path('logo-seed.png') }"}
         %meta{:property => "og:title", :content => ""}
         %meta{:property => "og:description", :content => "Giving You The Power To Create A Better Community"}
       = favicon_link_tag 'favicon.ico'
