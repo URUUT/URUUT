@@ -138,8 +138,6 @@
   stripe_pub_key = "#{Settings.stripe.pub_key}";
 
   var updateProgressbar = function(id, value) {
-    console.log(id);
-    console.log(value);
     $('.progressbar' + id).progressbar({
       value: value
     });
@@ -150,10 +148,6 @@
     $('form [id*="edit_project"]').h5Validate();
     $('form [id*="new_project"]').h5Validate();
 
-    $('.coverphoto').bind('change', function(event){
-      console.log("Hello Close");
-    });
-
     $('#myModal form').submit(function() {
       var valuesToSubmit = $(this).serialize();
       $.ajax({
@@ -161,7 +155,6 @@
         data: valuesToSubmit,
         dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
       }).success(function(json){
-        console.log(json);
       });
       return false; // prevents normal behaviour
     });

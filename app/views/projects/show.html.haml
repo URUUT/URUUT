@@ -40,12 +40,8 @@
           %hr
           %p.short-desc= @project.title
           %h6{:style => "color:#403e37;font-family:'Proxima Nova Semi';display:inline-block;margin:0;letter-spacing:normal;"} SHARE:
-          / = image_tag "fb-count.png", :class => "fb-share", :style => "margin-right:20px;"
-          / = image_tag "tw-count.png", :class => "tw-share", :style => "margin-right:20px;"
-          / = image_tag "bitly-link.png", :style => "margin-right:20px;"
           %a.fb-count{:href => "https://www.facebook.com/dialog/feed?app_id=#{Settings.facebook.api_key}&link=#{project_url(@project.id)}&picture=#{@project.large_image}&name=#{url_encode(@project.project_title)}&caption=#{url_encode(@project.category)}&description=#{url_encode("Like making a difference in the community? Check out this great project I found on @URUUT.  You can help fund it, or set up a project of your own to Get RUUTed! ")}&redirect_uri=#{root_url}", :target => "_blank"}
             %span
-          / .fb-like{"data-font" => "lucida grande", "data-href" => "http://uruut.41studio.com", "data-layout" => "button_count", "data-send" => "false", "data-show-faces" => "true", "data-width" => "450"}
           .tw-count
             %span
           .bitly-link
@@ -53,8 +49,6 @@
               %span= @project.bitly.sub(/http:\/\//, '')
             - else
               %span
-
-          / %p= link_to "Contact Project Creator", "mailto:#{User.find(@project.user_id).email}"
 
         .span4
           .progress-container.span3.offset1
@@ -64,10 +58,6 @@
               - if totalsponsor(@project).eql?(0)
                 %p $0
               - else
-                / - totalDonated = 0
-                / - if @donation
-                /   - @donation.each do |d|
-                /     - totalDonated += d.amount
                 %p= amount_converter(totalsponsor(@project))
 
           #progressbar
@@ -666,7 +656,6 @@
       dataType: 'jsonp',
       url: "#{request.protocol}cdn.api.twitter.com/1/urls/count.json?url=#{root_url}projects/#{@project.id}"
     }).done(function(data) {
-      console.log(data.count);
       $('.tw-count span').text(data.count);
     });
   }
@@ -697,7 +686,6 @@
       url: userLocation,
       dataType: 'json',
       success: function(data) {
-        console.log(data.results[0].geometry.location.lat);
         var latitude = data.results[0].geometry.location.lat;
         var longitude = data.results[0].geometry.location.lng;
         var map = L.map('map', {
@@ -725,10 +713,8 @@
     $('.progress-container').attr('style', 'margin-left: ' + (#{percentage_sponsor(@project)} - 4)
   + '%');
 
-    console.log(#{percentage_sponsor(@project)} + "persentasi");
     if(#{percentage_sponsor(@project)} >= 50){
       $('img.seed').attr('style','float: right');
-      console.log(#{percentage_sponsor(@project)} + "float right");
 
       $('.progress-container').attr('style', 'margin-left: ' + (#{percentage_sponsor(@project)} - 64)
   + '%');
@@ -743,36 +729,12 @@
       $('.nav-tabs li').removeClass('active');
       $('.nav-tabs li').each(function(){
         var content = $(this).find('a').attr('href');
-        console.log(content);
         $(content).hide();
       });
 
       $(this).parent('li').addClass('active');
       $(show).show();
     });
-
-    // $('.fb-count').click(function() {
-    //   console.log("#{root_url}projects/#{@project.id}")
-    //   var publish = {
-    //     method: 'feed',
-    //     redirect_uri: '#{project_url(@project.id)}',
-    //     name: "#{@project.project_title}",
-    //     description: "Like making a difference in the community? Check out this great project I found on @URUUT.  You can help fund it, or set up a project of your own to Get RUUTed!",
-    //     caption: "#{@project.organization}",
-    //     link: "#{project_url(@project.id)}",
-    //     picture: "#{@project.large_image}"
-    //   };
-
-    //   function callback(response) {
-    //     if (response && response.post_id) {
-    //       console.log('Post was published.');
-    //     } else {
-    //       console.log('Post was not published.');
-    //     }
-    //   }
-
-    //   FB.ui(publish, callback);
-    // });
 
     $('.tw-count').click(function(e) {
       e.preventDefault();
