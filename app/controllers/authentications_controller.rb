@@ -28,7 +28,6 @@ class AuthenticationsController < ApplicationController
     else
       @user = User.new
       @user.email = omni['extra']['raw_info'].email
-      #@user.save!
       @user.apply_omniauth(omni)
 
       if @user.save

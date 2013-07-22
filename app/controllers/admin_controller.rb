@@ -6,7 +6,6 @@ class AdminController < ApplicationController
 
   def unapproved
     @unapproved_projects = Project.where(:ready_for_approval => 1).page(params[:page]).per(20)
-    logger.debug(@unapproved_projects)
   end
 
   def approve
