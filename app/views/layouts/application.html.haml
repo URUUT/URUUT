@@ -22,6 +22,7 @@
     = javascript_include_tag "jquery.ui.mouse", "ui.draggable", "jquery.ui.touch-punch.min"
     = javascript_include_tag "jquery.Jcrop.min"
     /[if lt IE 9]
+      = stylesheet_link_tag "ie-only.css.scss"
       = javascript_include_tag "selectivizr-min"
     = filepicker_js_include_tag
     = javascript_tag do
