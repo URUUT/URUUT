@@ -1,0 +1,23 @@
+img{
+	max-width: none;
+}
+
+.dropdown.keyword{
+	.btns{
+		border-radius: 0 5px 5px 0;
+		behavior: url("/assets/PIE-1.0.0/PIE.htc");
+		margin-left: 239px;
+		margin-top: -54px;
+		padding: 0;
+		height: 54px;
+		width: 45px;
+		background: #77bf4c;
+	}
+}
+
+.tooltip{
+	.tooltip-inner{
+		box-shadow: 0 2px 5px 5px #eee;
+		behavior: url("/assets/PIE-1.0.0/PIE.htc");
+	}
+}
