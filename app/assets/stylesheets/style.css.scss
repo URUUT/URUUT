@@ -21,18 +21,21 @@ $light-brown: #53544b;
 
 @mixin text-shadow ($string: 0 1px 3px rgba(0, 0, 0, 0.25)) {
   text-shadow: $string;
+  behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 }
 
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
   -moz-border-radius: $radius;
   border-radius: $radius;
+  behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 }
 
 @mixin box-shadow($shadow) {
   -webkit-box-shadow: $shadow;
   -moz-box-shadow: $shadow;
   box-shadow: $shadow;
+  behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 }
 
 @mixin transition ($transition) {
@@ -40,24 +43,28 @@ $light-brown: #53544b;
   -moz-transition:    $transition;
   -ms-transition:     $transition;
   -o-transition:      $transition;
+  behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 }
 @mixin transform($string){
   -webkit-transform: $string;
   -moz-transform:    $string;
   -ms-transform:     $string;
   -o-transform:      $string;
+  behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 }
 @mixin scale ($factor) {
   -webkit-transform: scale($factor);
   -moz-transform:    scale($factor);
   -ms-transform:     scale($factor);
   -o-transform:      scale($factor);
+  behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 }
 @mixin rotate ($deg) {
   -webkit-transform: rotate($deg);
   -moz-transform:    rotate($deg);
   -ms-transform:     rotate($deg);
   -o-transform:      rotate($deg);
+  behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 }
 // ========================================= //
 
@@ -88,6 +95,15 @@ body{
       background: lighten($green2, 10%);
     }
   }
+}
+
+textarea, input[type="text"], input[type="password"],
+input[type="datetime"], input[type="datetime-local"],
+input[type="date"], input[type="month"], input[type="time"],
+input[type="week"], input[type="number"], input[type="email"],
+input[type="url"], input[type="search"], input[type="tel"],
+input[type="color"], .uneditable-input {
+  position: relative;
 }
 
 ul li{
@@ -407,9 +423,10 @@ img.cc-type{
       border-top: 1px solid #eaeaea !important;
       border-right: 1px solid #eaeaea !important;
       border-left: 1px solid #eaeaea !important;
-      border-radius: 10px 10px 0 0;
+      border-radius: 10px 10px 0px 0px;
       margin-bottom: 0;
       cursor: pointer !important;
+      behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 
       span{
         display: inline;
@@ -826,6 +843,7 @@ h5{
   -moz-border-radius-bottomleft: 5px;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
+  behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 
   &, a{
     color: #fff;
@@ -1426,6 +1444,7 @@ iframe.twitter-follow-button{
     -moz-border-radius-topright: 5px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 
     button[type="button"], .btn{
       background: transparent;
@@ -1469,6 +1488,7 @@ iframe.twitter-follow-button{
     -moz-border-radius-topright: 5px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 
     button[type="button"], .btn, #new-seed, #new-cultivation{
       background: transparent;
@@ -1809,6 +1829,7 @@ footer div ul li a{
   -moz-border-radius-bottomleft: 5px;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
+  behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 
   a{
     color: #fff;
@@ -1946,6 +1967,7 @@ body.pages.contact, body.sponsors.thank_you{
       background: #3f403b;
       border: none;
       border-radius: 0;
+      behavior: url(image-path('PIE-1.0.0/PIE.htc'));
       box-shadow: none;
       color: #fff;
       font: normal 13px/13px "Proxima Nova Semi", arial, sans-serif;
@@ -2031,6 +2053,7 @@ form{
   text-align: center;
   letter-spacing: 1;
   @include border-radius(5px);
+  behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 
   b{
     font-weight: normal;
@@ -2073,12 +2096,14 @@ form{
       -webkit-border-top-left-radius: 5px;
       -moz-border-radius-topleft: 5px;
       border-top-left-radius: 5px;
+      behavior: url(image-path('PIE-1.0.0/PIE.htc'));
     }
 
     &:last-child{
       -webkit-border-top-right-radius: 5px;
       -moz-border-radius-topright: 5px;
       border-top-right-radius: 5px;
+      behavior: url(image-path('PIE-1.0.0/PIE.htc'));
     }
   }
 
@@ -2154,6 +2179,7 @@ body.pages.index, body.pages.search{
       font-size: 13px;
       padding: 10px 0;
       border-radius: 5px;
+      behavior: url(image-path('PIE-1.0.0/PIE.htc'));
       font-family: 'Proxima Nova Semi', sans-serif;
       background: $green2;
       color: #fff;

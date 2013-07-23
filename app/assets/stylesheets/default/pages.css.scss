@@ -149,6 +149,7 @@ input[type=date],
 input[type=password],
 input[type=number] {
   border-radius:5px;
+  behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 	box-shadow:1px 1px 1px rgba(0,0,0,0.5);
 	font:bold 24px/24px arial, helvetica, sans-serif;
 	height:54px !important;
@@ -169,6 +170,7 @@ input[type=submit] {
 
 textarea {
 	border-radius:5px;
+	behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 	box-shadow:1px 1px 1px rgba(0,0,0,0.5);
 	font-size:13px;
   padding:19px;
@@ -188,6 +190,7 @@ select {
 .well {
 	border:none;
 	border-radius:0;
+	behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 	border-top:6px solid #70bf4c;
 	box-shadow:none;
 	position:relative;
@@ -224,6 +227,7 @@ select {
 	.dropdown.signed-in {
 		.dropdown-menu {
 			border-radius:0;
+			behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 			padding:20px;
 			ul {
 				margin:0;
@@ -257,6 +261,7 @@ select {
 	}
 	.dropdown-menu.log-in {
 		border-radius:0;
+		behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 		padding:20px;
 		ul {
 			margin:0;
@@ -301,22 +306,24 @@ select {
 					width:180px;
 					input[type=text] {
 						border-radius:0;
+						behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 						box-shadow:none;
 						font:italic 12px/15px 'Georgia', georgia, serif;
 						height:30px !important;
 						margin-bottom:5px;
 						max-width:180px;
-						padding:0px 10px;
+						padding:5px 10px;
 						width:180px !important;
 					}
 					input[type=password] {
 						border-radius:0;
+						behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 						box-shadow:none;
 						font:italic 12px/15px 'Georgia', georgia, serif;
 						height:30px !important;
 						margin-bottom:10px;
 						max-width:180px;
-						padding:0px 10px;
+						padding:5px 10px;
 						width:180px !important;
 					}
 					input[type=checkbox] {
@@ -341,6 +348,7 @@ select {
   background:#3f403b;
   border:none;
   border-radius:0;
+  behavior: url(image-path('PIE-1.0.0/PIE.htc'));
   box-shadow:none;
   color:#fff;
   font:normal 13px/13px "Proxima Nova", arial, sans-serif;
@@ -456,6 +464,7 @@ select {
 			}
 			#keyword {
 				border-radius: 5px;
+				behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 				box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 				color:#555;
 				font: bold 24px/24px arial, helvetica, sans-serif;
@@ -525,6 +534,7 @@ select {
         -webkit-border-radius: 5px 0 0 5px !important;
         -moz-border-radius: 5px 0 0 5px !important;
         border-radius: 5px 0 0 5px !important;
+        behavior: url(image-path('PIE-1.0.0/PIE.htc'));
         margin: -9px 0 0 0;
         box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
         color:#555;
@@ -534,6 +544,7 @@ select {
       }
       #keyword + .btns {
         border-radius:0 5px 5px 0;
+        behavior: url(image-path('PIE-1.0.0/PIE.htc'));
         margin-left:239px;
         margin-top:-54px;
         padding:0;
@@ -610,6 +621,7 @@ select {
 	input[type=email],
 	input[type=password] {
     border-radius: 0;
+    behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 		font-size: 13px;
     height: 18px;
     line-height: 18px;
@@ -738,6 +750,7 @@ footer {
     }
     input[type=email] {
       border-radius:5px 0 0 5px;
+      behavior: url(image-path('PIE-1.0.0/PIE.htc'));
       width:180px !important;
       margin-top:10px;
       margin-right:0px;
@@ -748,6 +761,7 @@ footer {
     }
     button {
       border-radius:0 5px 5px 0;
+      behavior: url(image-path('PIE-1.0.0/PIE.htc'));
       margin-left:-5px;
       margin-top:-5px;
       padding:0;
@@ -925,6 +939,7 @@ div.dropdown {
 				max-width:26px;}}}
   input[type=search]{
     border-radius: 0;
+    behavior: url(image-path('PIE-1.0.0/PIE.htc'));
     font-family:'Proxima Nova', sans-serif;
     font-size:11px;
     line-height: 18px;
@@ -936,6 +951,7 @@ div.dropdown {
 nav.navbar-inner {
 	background:#b0b0b0;
 	border-radius:0 !important;
+	behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 	box-shadow:0 0 0 0 !important;
 	height:45px; }
 
@@ -1112,6 +1128,7 @@ nav.navbar-inner {
 
 div[class*='progressbar']{
   border-radius:0;
+  behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 	border:1px solid #fff;
   background:url(image-path('progress-bar-back.png')) top left repeat;
 	display:block;
@@ -1214,6 +1231,7 @@ h5.time-left {
     background:#70bf4c;
     box-shadow:none;
     border-radius:0;
+    behavior: url(image-path('PIE-1.0.0/PIE.htc'));
     color:#fff;
     font: 11px/11px "Proxima Nova Semi", arial, sans-serif;
     letter-spacing:2px;
@@ -1250,6 +1268,7 @@ textarea[id*='perk'] {
 .add-perk, .update-perk {
 	background: #423F38;
 	border-radius: 0;
+	behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 	color: #fff;
 	display: block;
 	font: 16px/16px "Proxima Nova Semi", arial, sans-serif;
@@ -1270,6 +1289,7 @@ div[id^='step'] {
 #project-submit, .projects.edit .wizard-btn, .wizard-btn, #next-link-to-assets {
   background:#70bf4c;
   border-radius:0;
+  behavior: url(image-path('PIE-1.0.0/PIE.htc'));
   display:block;
   font: 16px/16px "Proxima Nova Semi", arial, sans-serif;
 	letter-spacing:2px;
@@ -1294,6 +1314,7 @@ div[id^='step'] {
 		position:relative;
 		top:330px;}
   .funding-info {
+  	background: url(image-path('funding-info.png')) repeat;
     background: rgba(112, 191, 76, 0.85);
     bottom:0;
     height:125px;
@@ -1663,6 +1684,7 @@ a.green {
       -webkit-border-radius: 5px !important;
       -moz-border-radius: 5px !important;
       border-radius: 5px !important;
+      behavior: url(image-path('PIE-1.0.0/PIE.htc'));
     }
   }
 }
@@ -1868,6 +1890,7 @@ form.registration-edit {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
+    behavior: url(image-path('PIE-1.0.0/PIE.htc'));
     &:hover {
       background:#70bf4c;
       color: #FFF;
@@ -1885,6 +1908,7 @@ form.registration-edit {
     position: relative;
     background: #a5a39d;
     border-radius: 20px;
+    behavior: url(image-path('PIE-1.0.0/PIE.htc'));
     box-shadow:
       inset 0 3px 8px 1px rgba(0,0,0,0.2),
       0 1px 0 rgba(255,255,255,0.5);
@@ -1895,6 +1919,7 @@ form.registration-edit {
     z-index: -1;
     top: -8px; right: -8px; bottom: -8px; left: -8px;
     border-radius: inherit;
+    behavior: url(image-path('PIE-1.0.0/PIE.htc'));
     background: #ccc; /* Fallback */
     background: linear-gradient(#f2f2f2, #ababab);
     box-shadow: 0 0 10px rgba(0,0,0,0.3),
@@ -1906,6 +1931,7 @@ form.registration-edit {
     z-index: -1;
     top: -18px; right: -18px; bottom: -18px; left: -18px;
     border-radius: inherit;
+    behavior: url(image-path('PIE-1.0.0/PIE.htc'));
     background: #eee; /* Fallback */
     background: linear-gradient(#e0e0e0, #eee);
     box-shadow: 0 1px 0 rgba(255,255,255,0.5);
@@ -1921,6 +1947,7 @@ form.registration-edit {
     top: 0;
     z-index: 2;
     border-radius: inherit;
+    behavior: url(image-path('PIE-1.0.0/PIE.htc'));
     background: #b2ac9e; /* Fallback */
     background: linear-gradient(#fff, #eee);
     box-shadow:
@@ -1938,6 +1965,7 @@ form.registration-edit {
     background: rgb(204, 204, 204); /* Fallback */
     background: linear-gradient(rgb(204, 204, 204), rgb(245, 245, 245));
     border-radius: inherit;
+    behavior: url(image-path('PIE-1.0.0/PIE.htc'));
   }
   .switch label i:before {
     content: "off";
@@ -2263,6 +2291,7 @@ form[id*=project] {
 		.btn {
 			background:#70bf4c;
 			border-radius:5px;
+			behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 			box-shadow:1px 1px 2px rgba(0,0,0,0.45);
 			color:#fff;
 			font-size:18px;
@@ -2321,6 +2350,7 @@ form[id*=project] {
 		.btn {
 			background:#70bf4c;
 			border-radius:5px;
+			behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 			box-shadow:1px 1px 2px rgba(0,0,0,0.45);
 			color:#fff;
 			font-size:18px;
@@ -2407,6 +2437,7 @@ form[id*=project] {
 				.btn {
 					background:#587e41;
 					border-radius:5px;
+					behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 					box-shadow:inset 0 0 7px rgba(64,62,55,0.25);
           margin:0 auto;
 					&:hover {
@@ -2472,6 +2503,7 @@ form[id*=project] {
 			.btn {
 				background:#70bf4c;
 				border-radius:5px;
+				behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 				box-shadow:1px 1px 2px rgba(0,0,0,0.45);
 				color:#fff;
 				margin-top:20px;
@@ -2549,6 +2581,7 @@ form[id*=project] {
 		.btn {
 			background:#70bf4c;
 			border-radius:5px;
+			behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 			box-shadow:1px 1px 2px rgba(0,0,0,0.45);
 			color:#fff;
 			font-size:18px;
@@ -2718,6 +2751,7 @@ form[id*=project] {
 		.btn {
 			background:#70bf4c;
 			border-radius:5px;
+			behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 			box-shadow:1px 1px 2px rgba(0,0,0,0.45);
 			color:#fff;
 			font-size:18px;
@@ -2991,6 +3025,7 @@ form[id*=project] {
 		.send .btn {
 			background:#70bf4c;
 			border-radius:5px;
+			behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 			box-shadow:1px 1px 2px rgba(0,0,0,0.45);
 			color:#fff;
 			display:block;
@@ -3134,6 +3169,7 @@ form[id*=project] {
 				.btn {
 					background:#70bf4c;
 					border-radius:4px;
+					behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 					box-shadow:1px 1px 2px rgba(0,0,0,0.45);
 					color:#fff;
 					display:block;
@@ -3225,6 +3261,7 @@ form[id*=project] {
 				.btn {
 					background:#70bf4c;
 					border-radius:4px;
+					behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 					box-shadow:1px 1px 2px rgba(0,0,0,0.45);
 					color:#fff;
 					display:block;
@@ -3284,6 +3321,7 @@ form[id*=project] {
 		.btn {
 			background:#70bf4c;
 			border-radius:4px;
+			behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 			box-shadow:1px 1px 2px rgba(0,0,0,0.45);
 			color:#fff;
 			display:inline-block;
