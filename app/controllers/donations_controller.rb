@@ -74,7 +74,6 @@ class DonationsController < ApplicationController
         session[:perk_id] = @perks.last[0]
       end
     end
-    logger.debug @perks
     render :new
   end
 

@@ -22,6 +22,7 @@
     = javascript_include_tag "jquery.ui.mouse", "ui.draggable", "jquery.ui.touch-punch.min"
     = javascript_include_tag "jquery.Jcrop.min"
     /[if lt IE 9]
+      = stylesheet_link_tag "ie-only.css.scss"
       = javascript_include_tag "selectivizr-min"
     = filepicker_js_include_tag
     = javascript_tag do
@@ -66,11 +67,6 @@
     = render 'partials/footer'
 = javascript_include_tag "pages"
 
-/ - unless @project.id.nil?
-/   %script
-/     project_id = #{@project.id};
-/     console.log("Project Id: #{@project.id}");
-
 :javascript
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -82,23 +78,10 @@
 
 :javascript
   stripe_pub_key = "#{Settings.stripe.pub_key}";
-  // if(window.opener) {
-  //   window.opener.location.reload(true);
-  //   window.close()
-  // }
-
-  //$('.social-login a').click(function(e) {
-  //  e.preventDefault();
-  //  var ahref = $(this).attr('href');
-  //  console.log(ahref);
-  //  window.open(ahref,'_blank', 'height=500,width=500,location=no,menubar=no');
-  //})
 
   $('.stripe-connect').click(function(e) {
     e.preventDefault();
     var ahref = $(this).attr('href');
-    console.log(ahref);
-    console.log($('#connected').val());
     if($('#connected').val() !== 'true') {
       window.open(ahref,'_blank', 'height=500,width=500,location=no,menubar=no');
     }
@@ -120,7 +103,6 @@
   };
 
   var updatePlantingSeedImage = function(event) {
-    console.log(event.fpfile.url);
     var plantingSeedImage = event.fpfile.url;
 
     $.ajax({
@@ -128,14 +110,12 @@
       method: 'POST',
       data: { seed_image: plantingSeedImage }
     }).done(function(){
-      console.log("finished");
       $(".seed-action-container").show();
       $('.seed-content').attr("style", "width: 100%").html('<img src="' + plantingSeedImage + '" style="float:left; width:100%" />');
     });
   }
 
   var updateCultivationImage = function(event) {
-    console.log(event.fpfile.url);
     var cultivationImage = event.fpfile.url;
 
     $.ajax({
@@ -149,16 +129,12 @@
   }
 
   var updateAvatar = function(event) {
-    console.log(event.fpfile.url);
     var avatarImage = event.fpfile.url + '/convert?w=100&h=100&fit=crop';
-
-    console.log(avatarImage);
     $('#user_avatar').val(avatarImage);
     $('#avatar-img').attr('src', avatarImage);
   }
 
   var updateProgressbar = function(id, value) {
-    console.log(id);
     $('.progressbar' + id).progressbar({
       value: value
     });
@@ -169,10 +145,6 @@
     $('form [id*="edit_project"]').h5Validate();
     $('form [id*="new_project"]').h5Validate();
 
-    $('.coverphoto').bind('change', function(event){
-      console.log("Hello Close");
-    });
-
     $('#myModal form').submit(function() {
       var valuesToSubmit = $(this).serialize();
       $.ajax({
@@ -180,7 +152,6 @@
         data: valuesToSubmit,
         dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
       }).success(function(json){
-        console.log(json);
       });
       return false; // prevents normal behaviour
     });
