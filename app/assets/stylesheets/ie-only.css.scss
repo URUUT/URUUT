@@ -5,7 +5,7 @@ img{
 .dropdown.keyword{
 	.btns{
 		border-radius: 0 5px 5px 0;
-		behavior: url("/assets/PIE-1.0.0/PIE.htc");
+		behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 		margin-left: 239px;
 		margin-top: -54px;
 		padding: 0;
@@ -16,8 +16,36 @@ img{
 }
 
 .tooltip{
-	.tooltip-inner{
-		box-shadow: 0 2px 5px 5px #eee;
-		behavior: url("/assets/PIE-1.0.0/PIE.htc");
+	box-shadow: 0 1px 3px rgba(224, 224, 224, 0.2);
+	background-clip: padding-box;
+	behavior: url(image-path('PIE-1.0.0/PIE.htc'));
+}
+
+.popover{
+	border-radius: 6px;
+	box-shadow: 0 1px 3px rgba(224, 224, 224, 0.2);
+	background-clip: padding-box;
+	behavior: url(image-path('PIE-1.0.0/PIE.htc'));
+}
+
+.error-container{
+	label.error{
+		font-size: 9px;
 	}
+}
+
+.row-fluid{
+	[class*='span']{
+		margin-left: 1%;
+	}
+}
+
+.circlegrey{
+  background:#b6b6b4;
+  padding:25px;
+  border-radius:500px;
+  width:120px;
+  height:120px;
+  behavior: url(image-path('PIE-1.0.0/PIE.htc'));
+  position: relative;
 }

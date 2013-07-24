@@ -227,7 +227,6 @@ select {
 	.dropdown.signed-in {
 		.dropdown-menu {
 			border-radius:0;
-			behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 			padding:20px;
 			ul {
 				margin:0;
@@ -253,6 +252,7 @@ select {
 						text-transform: uppercase;
 						&:hover {
 							background:none;
+							background-color: transparent;
 						}
 					}
 				}
@@ -261,7 +261,6 @@ select {
 	}
 	.dropdown-menu.log-in {
 		border-radius:0;
-		behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 		padding:20px;
 		ul {
 			margin:0;
@@ -1626,6 +1625,14 @@ a.green {
   color:#70bf4c;
   text-decoration:underline;
   font-style:italic;
+}
+
+.popover{
+	border-radius: 6px;
+	box-shadow: 0 2px 2px rgba(0,0,0, 0.25);
+	border: none;
+	background-clip: padding-box;
+	behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 }
 
 .badge-wrapper {

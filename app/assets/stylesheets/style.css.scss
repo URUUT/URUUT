@@ -298,11 +298,24 @@ h1, h2, h3, h4, h5, h6{
   }
 }
 
+.circlegrey{
+  background:#b6b6b4;
+  padding:25px;
+  border-radius:500px;
+  width:120px;
+  height:120px;
+  behavior: url(image-path('PIE-1.0.0/PIE.htc'));
+  position: relative;
+}
+
 .tooltip{
 
   text-transform: uppercase;
   font-family: 'Proxima Nova Semi', sans-serif;
   width: 140px;
+  border-radius: 5px;
+  box-shadow: 0 2px 2px rgba(0,0,0, 0.25);
+  padding: 0;
 
   &.in{
     opacity: 1;
@@ -312,13 +325,16 @@ h1, h2, h3, h4, h5, h6{
 
     .tooltip-arrow{
       border-top-color: #fff;
+      bottom: -5px;
     }
   }
 
   .tooltip-inner{
     background-color: #fff;
     color: $green2;
-    @include box-shadow(0 2px 2px rgba(0,0,0, 0.25));
+    border-radius: 5px;
+    position: relative;
+    behavior: url(image-path('PIE-1.0.0/PIE.htc'));
   }
 }
 
@@ -423,7 +439,9 @@ img.cc-type{
       border-top: 1px solid #eaeaea !important;
       border-right: 1px solid #eaeaea !important;
       border-left: 1px solid #eaeaea !important;
-      border-radius: 10px 10px 0px 0px;
+      border-radius: 0;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
       margin-bottom: 0;
       cursor: pointer !important;
       behavior: url(image-path('PIE-1.0.0/PIE.htc'));
