@@ -332,9 +332,9 @@ h1, h2, h3, h4, h5, h6{
   .tooltip-inner{
     background-color: #fff;
     color: $green2;
-    border-radius: 5px;
     position: relative;
-    behavior: url(image-path('PIE-1.0.0/PIE.htc'));
+    z-index: 2;
+    /*behavior: url(image-path('PIE-1.0.0/PIE.htc'));*/
   }
 }
 

@@ -41,11 +41,39 @@ img{
 }
 
 .circlegrey{
-  background:#b6b6b4;
-  padding:25px;
-  border-radius:500px;
-  width:120px;
-  height:120px;
-  behavior: url(image-path('PIE-1.0.0/PIE.htc'));
-  position: relative;
+	background:#b6b6b4;
+	padding:25px;
+	border-radius:500px;
+	width:120px;
+	height:120px;
+	behavior: url(image-path('PIE-1.0.0/PIE.htc'));
+	position: relative;
+}
+
+.pages{
+	.texture{
+		.dropdown{
+			width: 298px;
+		}
+	}
+}
+
+.dropdown.signed-in {
+	.dropdown-menu {
+		ul {
+			li:hover {					
+				a {
+					&:hover {
+						background:transparent;
+						color: #403e37;
+						filter: none;
+					}
+				}
+			}
+		}
+	}
+}
+
+.project{
+	margin-right: 10px !important;
 }
