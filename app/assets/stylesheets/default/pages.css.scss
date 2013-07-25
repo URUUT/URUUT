@@ -1915,7 +1915,6 @@ form.registration-edit {
     position: relative;
     background: #a5a39d;
     border-radius: 20px;
-    behavior: url(image-path('PIE-1.0.0/PIE.htc'));
     box-shadow:
       inset 0 3px 8px 1px rgba(0,0,0,0.2),
       0 1px 0 rgba(255,255,255,0.5);
@@ -1926,7 +1925,6 @@ form.registration-edit {
     z-index: -1;
     top: -8px; right: -8px; bottom: -8px; left: -8px;
     border-radius: inherit;
-    behavior: url(image-path('PIE-1.0.0/PIE.htc'));
     background: #ccc; /* Fallback */
     background: linear-gradient(#f2f2f2, #ababab);
     box-shadow: 0 0 10px rgba(0,0,0,0.3),
@@ -1938,7 +1936,6 @@ form.registration-edit {
     z-index: -1;
     top: -18px; right: -18px; bottom: -18px; left: -18px;
     border-radius: inherit;
-    behavior: url(image-path('PIE-1.0.0/PIE.htc'));
     background: #eee; /* Fallback */
     background: linear-gradient(#e0e0e0, #eee);
     box-shadow: 0 1px 0 rgba(255,255,255,0.5);
@@ -1954,7 +1951,6 @@ form.registration-edit {
     top: 0;
     z-index: 2;
     border-radius: inherit;
-    behavior: url(image-path('PIE-1.0.0/PIE.htc'));
     background: #b2ac9e; /* Fallback */
     background: linear-gradient(#fff, #eee);
     box-shadow:
@@ -1972,7 +1968,6 @@ form.registration-edit {
     background: rgb(204, 204, 204); /* Fallback */
     background: linear-gradient(rgb(204, 204, 204), rgb(245, 245, 245));
     border-radius: inherit;
-    behavior: url(image-path('PIE-1.0.0/PIE.htc'));
   }
   .switch label i:before {
     content: "off";
