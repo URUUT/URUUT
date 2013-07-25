@@ -41,6 +41,7 @@ Crowdfund::Application.routes.draw do
    get "update_image" => "projects#update_image"
    post "galleries/save_image"
    get "galleries/save_image"
+   get "galleries/delete_photo/:id" => "galleries#destroy", as: "delete_photo_via_get"
    delete "galleries/delete_photo/:id" => "galleries#destroy", as: "delete_photo"
    delete "projects/:id/delete_image" => "projects#delete_image", as: "delete_image"
    get "projects/:project_id/sponsors/:id/confirmation" => "sponsors#confirmation", as: "confirmation"
@@ -89,12 +90,12 @@ Crowdfund::Application.routes.draw do
       end
     end
   end
-  
+
   scope '/media' do
     resources :press_releases
     resources :press_coverages
   end
-  
+
   resources :donations do
     get "thank_you", :on => :collection
     get "change_perk", :on => :member
