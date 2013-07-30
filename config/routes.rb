@@ -158,6 +158,7 @@ Crowdfund::Application.routes.draw do
   end
 
   mount Sidekiq::Web => '/sidekiq'
+  mount JasmineRails::Engine => "/specs" if defined?(JasmineRails)
 
   root to: "pages#home"
 
