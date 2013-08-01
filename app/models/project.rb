@@ -55,9 +55,48 @@ class Project < ActiveRecord::Base
   end
 
   def individual_donors(page_num)
-    donations_group = self.donations.group_by{ |p| p.perk_name  }.sort_by{|_key, value| value.first.amount }.reverse
+    # donations_group = self.donations.group_by{ |p| p.perk_name  }.sort_by{|_key, value| value.first.amount }.reverse
+    # donations = donations_group.map { |donation| donation[1] }.flatten
+    # Kaminari.paginate_array(donations).page(page_num).per(25)
+    donations_data = []
+    users_data = self.donations.group_by { |donation| donation.user_id }.map {|donation| [ donation[0], total_donation_by_user(donation[1]), last_donation_by_user(donation[1]) ] }
+    donations_levels = group_and_sort_donor(self.donations, self.id)
+    donations_levels_and_amount = donations_levels.map { |donation| [ donation[0], get_amount_by_perk_name(donation[0], self.id) ] }
+
+    users_data.each do |user|
+      levels = []
+      donations_levels_and_amount.each do |donation_level|
+        if user[1] >= donation_level[1]
+          levels << donation_level[0]
+        end
+      end
+      donations_data << Donation.new(project_id: self.id, amount: user[1], user_id: user[0], perk_name: levels.first, last_founded: user[2])
+    end
+
+    donations_group = group_and_sort_donor(donations_data, self.id)
     donations = donations_group.map { |donation| donation[1] }.flatten
     Kaminari.paginate_array(donations).page(page_num).per(25)
+  end
+
+  def group_and_sort_donor(data, project_id)
+    data.group_by{ |p| p.perk_name  }.sort_by{|key, value| get_amount_by_perk_name(key, project_id) }.reverse
+  end
+
+  def total_donation_by_user(data)
+    data.map { |donation| donation.amount }.inject(0) {|sum, element| sum + element }
+  end
+
+  def last_donation_by_user(data)
+    data.sort_by { |founder| founder.updated_at }.last.updated_at.strftime("%m/%d")
+  end
+
+  def get_amount_by_perk_name(perk_name, project_id)
+    perk = Perk.where(name: perk_name, project_id: project_id)
+    if perk.empty?
+      0
+    else
+      perk.first.amount
+    end
   end
 
   def list_recepient
