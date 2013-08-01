@@ -1,14 +1,14 @@
 -if params[:type].eql?("individual")
-  - @founders.group_by{ |p| p.perk_name  }.sort_by{|_key, value| value.first.amount }.reverse.each do |founders|
-    %div.label-green= "PERK : #{founders[0]} (#{total_donor_by_level(founders[0], @project)})"
+  - @founders.group_by{ |p| p.perk_name  }.sort_by{|key, value| get_amount_by_perk_name(key, @project.id) }.reverse.each do |founders|
+    %div.label-green= "PERK : #{founders[0]} (#{founders[1].count})"
     %table.table.table-striped
-      - founders[1].group_by {|donation| donation.user_id }.each do |user_id, founder|
+      - founders[1].each do |founder|
         %tr
-          %td= image_tag avatar_project_admin(founder.last.user.avatar), style: "width:37px"
-          %td= truncate([founder.last.user.first_name, founder.last.user.last_name].join(" "), length: 17)
-          %td= "#{amount_converter(total_amount_by_donor(founder))}"
-          %td= truncate(founders[0], length: 17)
-          %td= founder.sort_by { |founder| founder.updated_at }.last.updated_at.strftime("%m/%d")
+          %td{style: "text-align: left"}= image_tag avatar_project_admin(founder.user.avatar), style: "width:37px"
+          %td{style: "width: 260px; text-align: left"}= truncate([founder.user.first_name, founder.user.last_name].join(" "), length: 17)
+          %td{style: "text-align: center"}= "#{amount_converter(founder.amount)}"
+          %td{style: "text-align: center"}= truncate(founders[0], length: 17)
+          %td{style: "text-align: center"}= founder.last_founded
 - else
   - sponsors = project_sponsor_by_level(@founders, params[:page])
   - sponsors.each do |sponsor_level, sponsors|
@@ -20,7 +20,7 @@
         - sponsors.each do |sponsor|
           %tr
             %td= filepicker_image_tag sponsor.logo, width: 37, height: 37, fit: 'scale'
-            %td= truncate(sponsor.name, length: 17)
+            %td{style: "width: 160px;"}= truncate(sponsor.name, length: 17)
             %td= "#{amount_converter(sponsor.cost)}"
             %td= truncate("#{sponsor.sponsorship_level.name} sponsor", length: 17)
             %td= sponsor.updated_at.strftime("%m/%d")
