@@ -24,6 +24,8 @@
     /[if lt IE 9]
       = stylesheet_link_tag "ie-only.css.scss"
       = javascript_include_tag "selectivizr-min"
+    /[if lte IE 8]
+      = stylesheet_link_tag "leaflet.ie"
     = filepicker_js_include_tag
     = javascript_tag do
       Stripe.setPublishableKey("#{STRIPE_PUBLIC_KEY}");
