@@ -137,6 +137,14 @@
       $(".selectParent").hide();
     }
 
+    $(":checkbox").click(function(){
+      if($(this).is(":checked")){
+        $(".content-anonymous").fadeIn();
+      }else{
+        $(".content-anonymous").fadeOut();
+      }
+    });
+
     // if (perkPermission == "false"){
     //   if (perkName == "custom"){
     //       $(".description-custom").show();
