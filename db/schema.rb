@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130717204948) do
+ActiveRecord::Schema.define(:version => 20130802021451) do
 
   create_table "badges_sashes", :force => true do |t|
     t.integer  "badge_id"
@@ -107,6 +107,16 @@ ActiveRecord::Schema.define(:version => 20130717204948) do
   create_table "merit_scores", :force => true do |t|
     t.integer "sash_id"
     t.string  "category", :default => "default"
+  end
+
+  create_table "milestoneemails", :force => true do |t|
+    t.boolean  "fifteen_percent"
+    t.boolean  "fifty_percent"
+    t.boolean  "seventy_five_percent"
+    t.boolean  "ninety_percent"
+    t.integer  "project_id"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
   end
 
   create_table "newsletters", :force => true do |t|

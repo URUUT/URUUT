@@ -2,10 +2,10 @@
 
 FactoryGirl.define do
   factory :milestoneemail do
-    15percent false
-    50percent false
-    75percent false
-    90percent false
+    fifteen_percent false
+    fifty_percent false
+    seventy_five_percent false
+    ninety_percent false
     project_id 1
   end
 end
