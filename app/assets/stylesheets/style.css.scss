@@ -388,7 +388,10 @@ h1, h2, h3, h4, h5, h6{
 
 img.cc-type{
   height: 20px;
-  @include border-radius(2px);
+  border-radius : 2px;
+  -webkit-border-radius : 2px;
+  -moz-border-radius : 2px;
+  -o-border-radius : 2px;
 }
 
 

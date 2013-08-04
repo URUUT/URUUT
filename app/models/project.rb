@@ -51,7 +51,9 @@ class Project < ActiveRecord::Base
   end
 
   def distinct_donors
-    donations.select("DISTINCT(donations.user_id)")
+    anonymous_donors = self.donations.where(anonymous: true).uniq_by { |donation| donation.user_id }
+    real_donors = self.donations.where(anonymous: false).uniq_by { |donation| donation.user_id }
+    donors = (anonymous_donors + real_donors).sort_by {|donor| donor.updated_at }.reverse
   end
 
   def individual_donors(page_num)
