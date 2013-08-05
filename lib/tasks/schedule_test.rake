@@ -4,14 +4,21 @@ desc "Send milestone email"
 task :milestone_email => :environment do
   projects = Project.where("live = ?", 1)
   projects.each do |p|
+    mailer = Milestoneemail.find_by_project_id(p.id)
+    unless mailer.blank?
+      puts "Mailer is: #{mailer.id}"
+    else
+      mailer = Milestoneemail.create(:project_id => p.id)
+    end
     goal = p.goal
     donations = Donation.where("project_id = ?", p.id)
+    puts donations.size
+    donors = donations.uniq_by{|donation| donation.user_id}
+    puts donors.size
     total = donations.inject(0){ |sum,e| sum += e.amount }
     percent = (total.to_f/goal.to_f)
-    puts "Total is #{total}"
-    puts "Goal is #{goal}"
-    puts "Percent to goal is #{percent}%"
     infinity = 1.0 / 0.0
+
     case percent
     when 1.0..infinity
       puts "Completely Funded"
@@ -22,7 +29,19 @@ task :milestone_email => :environment do
     when 0.50..0.74
       puts "50 Percent"
     when 0.15..0.49
-      puts "15 Percent"
+      unless mailer.blank?
+        unless mailer.fifteen_percent == true
+          puts "Mail this bitch"
+          donors.each do |donor|
+            user = User.find(donor.user_id)
+            puts user.first_name
+          end
+          mailer.fifteen_percent = true
+          mailer.save!
+        else
+          puts "Already been mailed"
+        end
+      end
     else
       puts "It needs to fund further"
     end
