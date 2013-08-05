@@ -60,6 +60,18 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'rails_best_practices'
   gem 'debugger'
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'cucumber-rails'
+  gem 'capybara', :group => :test
+  gem 'factory_girl'
+  gem 'factory_girl_rails', :group => :test
+  gem 'database_cleaner', :group => :test
+  gem 'email_spec', :group => :test
+  gem 'ci_reporter', :group => :test
+  gem 'jasmine'
+  gem 'jasmine-rails'
+  gem 'jasminerice'
 end
 
 gem 'jquery-rails'
