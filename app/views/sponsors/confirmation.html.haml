@@ -111,7 +111,7 @@
             Payment Amount
           %p.normal-font #{number_to_currency(@cost, precision: 0)}
           %div{:style => "height: 80px; width: 100%;"}
-            = link_to "CONFIRM ►", "javascript:void(0)", :class => "btn confirm-button", :id => "project-submit", "data-href" => purchase_path(project_id: @project.id, sponsor_id: @sponsor.id)
+            = link_to "CONFIRM ►", purchase_path(project_id: @project.id, sponsor_id: @sponsor.id), :class => "btn confirm-button", :id => "project-submit"
 
 .project-id{:style => "display: none;"}
   = @project.id
@@ -122,8 +122,6 @@
     $(".confirm-button").click(function(){
       $(this).attr("disabled", "disabled");
       $(this).text("processing....");
-      window.location.href = $(".confirm-button").attr("data-href");
     });
-
   });
 / $.get("/projects/" + projectId + "/sponsors/" + this.value + "/get_sponsorship_levels.js")

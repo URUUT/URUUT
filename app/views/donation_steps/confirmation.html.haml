@@ -32,11 +32,10 @@
           %h3{:style => 'font-size:20px; color:#70bf4c;line-height:100%;margin:0;'}= @donation.perk_name
           - precision = @donation.amount.to_s.split(".")[1].eql?("0") ? 0 : 2
           %div{:style => "font-size:12px;font-family:'Proxima Nova';"}
-            - unless @donation.anonymous
-              When you seed #{number_to_currency(@donation.amount, precision: precision)} you will receive:
-              - unless @donation.description.nil?
-                %ul.dashed-list
-                  %li= @donation.description
+            When you seed #{number_to_currency(@donation.amount, precision: precision)} you will receive:
+            - unless @donation.description.nil?
+              %ul.dashed-list
+                %li= @donation.description
             - if !session[:perk_type].eql?("default")
               %p.subtext Uruut Reward Points: #{@donation.amount.to_i}
         .cf

@@ -78,9 +78,9 @@
                       - if p.perks_available.to_i.zero?
                         %span{:class => "fund pull-right", style: "font-style: italic;"} Not Available
                       -else
-                        %a{:class => "fund btn change-fund pull-right", "perk-id" => "#{p.id}", id: "button-fund-#{p.id}"} Donate ►
+                        %a{:class => "fund btn change-fund pull-right", "perk-id" => "#{p.id}", id: "button-fund-#{p.id}"} Fund Now ►
                     -else
-                      %a{:class => "fund btn change-fund pull-right", "perk-id" => "#{p.id}", id: "button-fund-#{p.id}"} Donate ►
+                      %a{:class => "fund btn change-fund pull-right", "perk-id" => "#{p.id}", id: "button-fund-#{p.id}"} Fund Now ►
         -else
           - default_perk.each_with_index do |perk_amount, index|
             - index += 1
@@ -96,7 +96,7 @@
                 %li.seed-amount{id: "amount-id-#{index}"}
                   %p.amount= number_to_currency(perk_amount, precision: 0)
                 %li.fund-button
-                  %a{:class => "fund btn change-fund", "perk-id" => "default", style: "#{"background: #70bf4c" if @donation.amount.eql?(perk_amount)}", "amount" => "#{perk_amount}", "level" => "#{index}", id: "button-fund-#{index}"} Donate ►
+                  %a{:class => "fund btn change-fund", "perk-id" => "default", style: "#{"background: #70bf4c" if @donation.amount.eql?(perk_amount)}", "amount" => "#{perk_amount}", "level" => "#{index}", id: "button-fund-#{index}"} Fund Now ►
 
         %li.perk.clearfix{id: "perk-id-custom", style: "#{"background: #bee0b4" if session[:perk_type].eql?("custom")}"}
           %h3.perk-name-other{style: "#{"color: #000" if session[:perk_type].eql?("custom")}", id: "perk-name-other"}
@@ -106,7 +106,7 @@
             %li.seed-amount{id: "amount-id-custom", style: "#{"background: #bee0b4" if session[:perk_type].eql?("custom")}"}
               %h6 AMOUNT TO SEED
               %p.amount= text_field_tag :custom_seed, "#{@donation.amount.to_i if session[:perk_type].eql?("custom")}" , {style: "width: 100%;"}
-          %a{style: "#{"background: #70bf4c" if session[:perk_type].eql?("custom")}", :class => "fund btn change-fund pull-right", "perk-id" => "custom", id: "button-fund-custom"} Donate ►
+          %a{style: "#{"background: #70bf4c" if session[:perk_type].eql?("custom")}", :class => "fund btn change-fund pull-right", "perk-id" => "custom", id: "button-fund-custom"} Fund Now ►
 
 :javascript
 
@@ -136,14 +136,6 @@
     if (perkPermission == "false"){
       $(".selectParent").hide();
     }
-
-    $(":checkbox").click(function(){
-      if($(this).is(":checked")){
-        $(".content-anonymous").fadeIn();
-      }else{
-        $(".content-anonymous").fadeOut();
-      }
-    });
 
     // if (perkPermission == "false"){
     //   if (perkName == "custom"){

@@ -171,7 +171,7 @@
           = label_tag :sponsor_type, "Sponsor Type*", class: "label-green"
           / = select_tag :type, options_for_select(["Foundation", "Business"])
           .selectParent.parentWide.clearfix{:style => "margin-bottom: 10px;"}
-            = select_tag :type, options_for_select(["Foundation", "Business", "Individual/Family"]), class: "selectbox"
+            = select_tag :type, options_for_select(["Foundation", "Business"]), class: "selectbox"
         %div
           = f.label :site, class: "label-green" do
             Website*

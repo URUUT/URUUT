@@ -3,14 +3,14 @@
     - if founder.type_founder.eql?("sponsor")
       %tr
         %td= filepicker_image_tag founder.logo, width: 37, height: 37, fit: 'scale'
-        %td{style: "width: 210px;"}= truncate(founder.name, length: 17)
+        %td= truncate(founder.name, length: 17)
         %td= "#{amount_converter(founder.cost)}"
         %td= truncate("#{founder.sponsorship_level.name} sponsor", length: 17)
         %td= founder.updated_at.strftime("%m/%d")
     - else
       %tr
         %td= image_tag avatar_project_admin(founder.user.avatar), style: "width:37px"
-        %td{style: "width: 210px;"}= truncate([founder.user.first_name, founder.user.last_name].join(" "), length: 17)
+        %td= truncate([founder.user.first_name, founder.user.last_name].join(" "), length: 17)
         %td= "#{amount_converter(founder.amount)}"
         %td= truncate(founder.perk_name, length: 17)
         %td= founder.updated_at.strftime("%m/%d")
