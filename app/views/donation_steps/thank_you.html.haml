@@ -5,7 +5,7 @@
       %h4.label-green{style: "text-transform: none;"} Congratulations!
       %p{:style => "letter-spacing: 1px;"} You are now an official donor to #{@project.project_title}! Now it's time to spread the word.
       %div
-        = link_to image_tag("fb-share.png",style: "width: 150px", class: "fb-share-button"), "https://www.facebook.com/dialog/feed?app_id=#{Settings.facebook.api_key}&link=#{project_url(@project.id)}&picture=#{@project.large_image}&name=#{url_encode(@project.project_title)}&caption=#{url_encode(@project.category)}&description=#{url_encode("I'm RUUTing for this community project and you should, too. Join me by making a donation on @URUUT’s collaborative funding platform. Let's make a difference in our community!")}&redirect_uri=#{thank_you_donations_url}", style: "display: block; float: left;", target: "_blank"
+        = link_to image_tag("fb-share.png",style: "width: 150px"), "javascript:void(0)", "data-description" => "#{url_encode("I'm RUUTing for this community project and you should, too. Join me by making a donation on @URUUT’s collaborative funding platform. Let's make a difference in our community!")}", class: "fb-share-button", style: "display: block; float: left;"
         = image_tag "tw-share.png", style: "cursor:pinter; margin-left: 2%; display: block; float: left; width: 150px; cursor:pointer", class: "tw-share"
         = link_to image_tag("ml-share.png", style: "width: 150px"), "javascript:void(0)", style: "margin-left: 2%; display: block; float: left;", class: "cs_import"
         %span.link-short{:style => "font-weight:bolder; font-size: 18px !important; margin-left: 2%"}
@@ -20,9 +20,10 @@
         %h6{style: "margin: 0;"}
           = @perk.name.titleize
         - precision = @donation.amount.to_s.split(".")[1].eql?("0") ? 0 : 2
-        %p When you seed #{number_to_currency(@donation.amount, precision: precision)}, you will receive:
-        %ul.dashed-list
-          %li= @donation.description
+        - unless @donation.anonymous
+          %p When you seed #{number_to_currency(@donation.amount, precision: precision)}, you will receive:
+          %ul.dashed-list
+            %li= @donation.description
         - if !session[:perk_type].eql?("default")
           %p.subtext Uruut Reward Points: #{@donation.amount.to_i}
         / %p{style: "color: #e0e0e0; font-size: 11px;"}
@@ -51,7 +52,10 @@
   //   FB.ui(obj, callback);
   // }
   $(".fb-share-button").click(function(e){
-    window.close();
+    e.preventDefault();
+    var desc = $(this).attr("data-description");
+    var url_data = "https://www.facebook.com/dialog/feed?app_id=#{Settings.facebook.api_key}&link=#{project_url(@project.id)}&picture=#{@project.large_image}&name=#{url_encode(@project.project_title)}&caption=#{url_encode(@project.category)}&description="+ desc +"&redirect_uri=#{thank_you_donations_url}";
+    window.open(url_data, '_blank');
   })
 
   $('.tw-share').click(function(e) {
