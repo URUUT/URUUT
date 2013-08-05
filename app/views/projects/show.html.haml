@@ -40,12 +40,8 @@
           %hr
           %p.short-desc= @project.title
           %h6{:style => "color:#403e37;font-family:'Proxima Nova Semi';display:inline-block;margin:0;letter-spacing:normal;"} SHARE:
-          / = image_tag "fb-count.png", :class => "fb-share", :style => "margin-right:20px;"
-          / = image_tag "tw-count.png", :class => "tw-share", :style => "margin-right:20px;"
-          / = image_tag "bitly-link.png", :style => "margin-right:20px;"
           %a.fb-count{:href => "https://www.facebook.com/dialog/feed?app_id=#{Settings.facebook.api_key}&link=#{project_url(@project.id)}&picture=#{@project.large_image}&name=#{url_encode(@project.project_title)}&caption=#{url_encode(@project.category)}&description=#{url_encode("Like making a difference in the community? Check out this great project I found on @URUUT.  You can help fund it, or set up a project of your own to Get RUUTed! ")}&redirect_uri=#{root_url}", :target => "_blank"}
             %span
-          / .fb-like{"data-font" => "lucida grande", "data-href" => "http://uruut.41studio.com", "data-layout" => "button_count", "data-send" => "false", "data-show-faces" => "true", "data-width" => "450"}
           .tw-count
             %span
           .bitly-link
@@ -53,8 +49,6 @@
               %span= @project.bitly.sub(/http:\/\//, '')
             - else
               %span
-
-          / %p= link_to "Contact Project Creator", "mailto:#{User.find(@project.user_id).email}"
 
         .span4
           .progress-container.span3.offset1
@@ -64,10 +58,6 @@
               - if totalsponsor(@project).eql?(0)
                 %p $0
               - else
-                / - totalDonated = 0
-                / - if @donation
-                /   - @donation.each do |d|
-                /     - totalDonated += d.amount
                 %p= amount_converter(totalsponsor(@project))
 
           #progressbar
@@ -261,12 +251,12 @@
               %br
               %span (Project Details)
 
-              %h6{:style => "text-align:center;color:#55554d !important;font-family:'Proxima Nova';margin-top:15px;"} Funding Ends
-              %div{:style => "background:#b6b6b4;padding:25px;border-radius:500px;"}
-                %span{:style => 'display:block;text-align:center;font:normal 22px/22px "Proxima Nova Semi";color:#fff;text-transform:uppercase;letter-spacing:5px;'}= @project.campaign_deadline.strftime("%b")
-                %span{:style => 'display:block;text-align:center;font:normal 72px/72px "Proxima Nova Semi";color:#fff;text-transform:uppercase;margin-top:5px'}= @project.campaign_deadline.strftime("%d")
-              %h6{:style => "text-align:center;color:#55554d !important;font-family:'Proxima Nova';margin-top:40px;margin-bottom:0;"} Project Goal
-              %h2{:style => "text-align:center;color:#403e37;font-family:'Proxima Nova Semi';margin-top:0;"}= amount_converter(@project.goal)
+            %h6{:style => "text-align:center;color:#55554d !important;font-family:'Proxima Nova';margin-top:15px;"} Funding Ends
+            %div.circlegrey{style: "background: #b6b6b4;"}
+              %span{:style => 'display:block;text-align:center;font:normal 22px/22px "Proxima Nova Semi";color:#fff;text-transform:uppercase;letter-spacing:5px;'}= @project.campaign_deadline.strftime("%b")
+              %span{:style => 'display:block;text-align:center;font:normal 72px/72px "Proxima Nova Semi";color:#fff;text-transform:uppercase;margin-top:5px'}= @project.campaign_deadline.strftime("%d")
+            %h6{:style => "text-align:center;color:#55554d !important;font-family:'Proxima Nova';margin-top:40px;margin-bottom:0;"} Project Goal
+            %h2{:style => "text-align:center;color:#403e37;font-family:'Proxima Nova Semi';margin-top:0;"}= amount_converter(@project.goal)
 
           .span9.details
             - if @project.cultivation_mime_type.eql?("video") and !@project.cultivation_video.blank?
@@ -337,19 +327,19 @@
                       - elsif p.limit && !p.perks_available.to_i.zero?
                         - if user_signed_in?
                           = link_to "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", class: "btn perk pull-right", style: "margin-top: 10px;" do
-                            Fund Now ►
+                            Donate ►
                         - else
                           - url = url_encode("#{request.protocol}#{request.host_with_port}/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}")
                           = link_to "javascript:void(0)", "url-sign-up" => url, "url-sign-in" => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", class: "btn perk pull-right unsignin-perk", style: "margin-top: 10px;" do
-                            Fund Now ►
+                            Donate ►
                       - else
                         - if user_signed_in?
                           = link_to "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", class: "btn perk pull-right", style: "margin-top: 10px;" do
-                            Fund Now ►
+                            Donate ►
                         - else
                           - url = url_encode("#{request.protocol}#{request.host_with_port}/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}")
                           = link_to "javascript:void(0)", "url-sign-up" => url, "url-sign-in" => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", class: "btn perk pull-right unsignin-perk", style: "margin-top: 10px;" do
-                            Fund Now ►
+                            Donate ►
 
             -else
               - default_perk.each_with_index do |perk, index|
@@ -368,11 +358,11 @@
                         =amount_converter(perk)
                     - if user_signed_in?
                       = link_to "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "btn perk pull-right", :style => "margin-top: 10px;" do
-                        Fund Now ►
+                        Donate ►
                     - else
                       - url = url_encode("#{request.protocol}#{request.host_with_port}/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}")
                       = link_to "javascript:void(0)", "url-sign-up" => url, "url-sign-in" => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "btn perk pull-right unsignin-perk", :style => "margin-top: 10px;" do
-                        Fund Now ►
+                        Donate ►
 
             .seed-level{id: "perk-id-custom"}
               %h3.perk-name-other{id: "perk-name-other-custom"}
@@ -383,7 +373,7 @@
                   .amount
                   %h5 AMOUNT TO SEED
                   .textarea.seed-amount= text_field_tag :custom_seed, nil, style: "width: 100%"
-                %a.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "#{user_signed_in? ? 'button-seed-custom' : 'button-seed-custom-unsignin'}"} Fund Now ►
+                %a.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "#{user_signed_in? ? 'button-seed-custom' : 'button-seed-custom-unsignin'}"} Donate ►
           #sponsorship.tab-pane
             .seed-level
               %h3
@@ -506,16 +496,16 @@
                       %span
                   -elsif p.limit && !p.perks_available.to_i.zero?
                     - if user_signed_in?
-                      %a.btn.pull-right{:href => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", :class => "fund btn"} Fund Now ►
+                      %a.btn.pull-right{:href => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", :class => "fund btn"} Donate ►
                     - else
                       - url = url_encode("#{request.protocol}#{request.host_with_port}/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}")
-                      %a.btn.pull-right.unsignin-perk{"url-sign-up" => url, "url-sign-in" => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}"} Fund Now
+                      %a.btn.pull-right.unsignin-perk{"url-sign-up" => url, "url-sign-in" => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}"} Donate
                   - else
                     - if user_signed_in?
-                      %a.btn.pull-right{:href => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}"} Fund Now
+                      %a.btn.pull-right{:href => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}"} Donate
                     - else
                       - url = url_encode("#{request.protocol}#{request.host_with_port}/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}")
-                      %a.btn.pull-right.unsignin-perk{"url-sign-up" => url, "url-sign-in" => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}"} Fund Now
+                      %a.btn.pull-right.unsignin-perk{"url-sign-up" => url, "url-sign-in" => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}"} Donate
         -else
           - default_perk.each_with_index do |perk, index|
             - index += 1
@@ -532,10 +522,10 @@
                   .amount
                     = amount_converter(perk)
                 - if user_signed_in?
-                  %a.btn.pull-right{:href => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "fund btn"} Fund Now ►
+                  %a.btn.pull-right{:href => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "fund btn"} Donate ►
                 - else
                   - url = url_encode("#{request.protocol}#{request.host_with_port}/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}")
-                  %a.btn.pull-right.unsignin-perk{"url-sign-up" => url, "url-sign-in" => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "fund btn"} Fund Now ►
+                  %a.btn.pull-right.unsignin-perk{"url-sign-up" => url, "url-sign-in" => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "fund btn"} Donate ►
 
         .seed-level{id: "perk-id-custom"}
           %h3.perk-name-other{id: "perk-name-other-custom"}
@@ -546,7 +536,7 @@
               .amount
               %h5 AMOUNT TO SEED
               .textarea.seed-amount= text_field_tag :custom_seed, nil, style: "width: 100%"
-            %a.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "#{user_signed_in? ? 'button-seed-custom' : 'button-seed-custom-unsignin'}"} Fund Now ►
+            %a.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "#{user_signed_in? ? 'button-seed-custom' : 'button-seed-custom-unsignin'}"} Donate ►
 
 
       %h4.title{:style => 'margin-top:50px;'}
@@ -578,16 +568,22 @@
         %div.business
           - @project.distinct_donors.each do |donation|
             - if user_signed_in?
-              = link_to(image_tag(donation.user.avatar, style: "width: 27px; height:27px; margin-bottom: 5px; border-radius: 500px 500px 500px 500px;"), profile_path(donation.user.id))
+              = link_to(image_tag(donation.user.avatar, style: "width: 27px; height:27px; margin-bottom: 5px; border-radius: 500px 500px 500px 500px; behavior: url('assets/PIE-1.0.0/PIE.htc');"), profile_path(donation.user.id))
             - else
-              = link_to(image_tag(donation.user.avatar, style: "width: 27px; height:27px; margin-bottom: 5px; border-radius: 500px 500px 500px 500px;"), "javascript:void(0)", "url-data" => "/users/#{donation.user.id}/profile", class: "unsignin")
+              = link_to(image_tag(donation.user.avatar, style: "width: 27px; height:27px; margin-bottom: 5px; border-radius: 500px 500px 500px 500px; behavior: url('assets/PIE-1.0.0/PIE.htc');"), "javascript:void(0)", "url-data" => "/users/#{donation.user.id}/profile", class: "unsignin")
       - else
         %div.business
-          - @project.distinct_donors.limit(20).each do |donation|
+          - @project.distinct_donors.take(20).each do |donation|
             - if user_signed_in?
-              = link_to(image_tag(donation.user.avatar, style: "width: 27px; height:27px; margin-bottom: 5px; border-radius: 500px 500px 500px 500px;"), profile_path(donation.user.id))
+              - if donation.anonymous
+                = link_to(image_tag("anonymous.png", style: "width: 27px; height:27px; margin-bottom: 5px; border-radius: 500px 500px 500px 500px; behavior: url('assets/PIE-1.0.0/PIE.htc');", "data-toggle" => "tooltip", title: "ANONYMOUS DONOR", class: "donor-anonymous"), "javascript:void(0)")
+              - else
+                = link_to(image_tag(donation.user.avatar, style: "width: 27px; height:27px; margin-bottom: 5px; border-radius: 500px 500px 500px 500px; behavior: url('assets/PIE-1.0.0/PIE.htc');"), profile_path(donation.user.id))
             - else
-              = link_to(image_tag(donation.user.avatar, style: "width: 27px; height:27px; margin-bottom: 5px; border-radius: 500px 500px 500px 500px;"), "javascript:void(0)", "url-data" => "/users/#{donation.user.id}/profile", class: "unsignin")
+              - if donation.anonymous
+                = link_to(image_tag("anonymous.png", style: "width: 27px; height:27px; margin-bottom: 5px; border-radius: 500px 500px 500px 500px; behavior: url('assets/PIE-1.0.0/PIE.htc');", "data-toggle" => "tooltip", title: "ANONYMOUS DONOR", class: "donor-anonymous"), "javascript:void(0)")
+              - else
+                = link_to(image_tag(donation.user.avatar, style: "width: 27px; height:27px; margin-bottom: 5px; border-radius: 500px 500px 500px 500px; behavior: url('assets/PIE-1.0.0/PIE.htc');"), "javascript:void(0)", "url-data" => "/users/#{donation.user.id}/profile", class: "unsignin")
         - if @project.distinct_donors.count > 20
           - if user_signed_in?
             = link_to "/donations/#{@project.id}/more_donators?logged_in=yes", :class => 'btn more', :style => 'margin-top:10px;', remote: true do
@@ -598,6 +594,7 @@
               Show More
               %span
 
+= javascript_include_tag "//maps.googleapis.com/maps/api/js?libraries=places&sensor=false"
 = javascript_include_tag "leaflet"
 = javascript_include_tag "tile.stamen"
 
@@ -619,6 +616,25 @@
     }).done(function(data) {
       window.location.href = "/default_perk_donations?amount="+ $("#custom_seed").val() +"&name=custom&project_id=#{@project.id}"
     });
+  });
+
+  var mygc = new google.maps.Geocoder();
+  mygc.geocode({'address' : '#{@project.address},#{@project.city},#{@project.state} #{@project.zip}'}, function(results, status){
+      var latitude = results[0].geometry.location.lat();
+      var longitude = results[0].geometry.location.lng();
+
+      var map = L.map('map', { scrollWheelZoom: false }).setView([latitude, longitude], 11);
+
+      var uruutIcon = L.icon({
+        iconUrl: '#{image_path("map-icon.png")}',
+        iconSize:     [36, 52]
+      });
+
+      L.tileLayer("https://stamen-tiles.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png", {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
+      }).addTo(map);
+
+      L.marker([latitude, longitude], {icon:uruutIcon}).addTo(map);
   });
 
   $("#button-seed-custom-unsignin").on("click", function(){
@@ -666,7 +682,6 @@
       dataType: 'jsonp',
       url: "#{request.protocol}cdn.api.twitter.com/1/urls/count.json?url=#{root_url}projects/#{@project.id}"
     }).done(function(data) {
-      console.log(data.count);
       $('.tw-count span').text(data.count);
     });
   }
@@ -684,39 +699,18 @@
     getFbCount();
     getTwCount();
     var activeTab = $('.nav-tabs li.active a').attr('href');
-    var userLocation = "#{request.protocol}maps.googleapis.com/maps/api/geocode/json?address=#{@project.address},#{@project.city},#{@project.state}&sensor=false";
 
     $('.tax-deductible').tooltip({
-        placement: "top",
-        trigger: "hover"
-      });
-
-    $(activeTab).show();
-
-    $.ajax({
-      url: userLocation,
-      dataType: 'json',
-      success: function(data) {
-        console.log(data.results[0].geometry.location.lat);
-        var latitude = data.results[0].geometry.location.lat;
-        var longitude = data.results[0].geometry.location.lng;
-        var map = L.map('map', {
-          scrollWheelZoom: false
-        }).setView([latitude,longitude], 11);
-
-        var uruutIcon = L.icon({
-          iconUrl: '#{image_path("map-icon.png")}',
-          iconSize:     [36, 52]
-        });
-
-        L.tileLayer("https://stamen-tiles.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png", {
-          attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
-        }).addTo(map);
-
-        L.marker([latitude,longitude], {icon:uruutIcon}).addTo(map)
-      }
+      placement: "top",
+      trigger: "hover"
     });
 
+    $('.donor-anonymous').tooltip({
+      placement: "top",
+      trigger: "hover"
+    });
+
+    $(activeTab).show();
 
     $( "#progressbar" ).progressbar({
       value: #{percentage_sponsor(@project)}
@@ -725,10 +719,8 @@
     $('.progress-container').attr('style', 'margin-left: ' + (#{percentage_sponsor(@project)} - 4)
   + '%');
 
-    console.log(#{percentage_sponsor(@project)} + "persentasi");
     if(#{percentage_sponsor(@project)} >= 50){
       $('img.seed').attr('style','float: right');
-      console.log(#{percentage_sponsor(@project)} + "float right");
 
       $('.progress-container').attr('style', 'margin-left: ' + (#{percentage_sponsor(@project)} - 64)
   + '%');
@@ -743,36 +735,12 @@
       $('.nav-tabs li').removeClass('active');
       $('.nav-tabs li').each(function(){
         var content = $(this).find('a').attr('href');
-        console.log(content);
         $(content).hide();
       });
 
       $(this).parent('li').addClass('active');
       $(show).show();
     });
-
-    // $('.fb-count').click(function() {
-    //   console.log("#{root_url}projects/#{@project.id}")
-    //   var publish = {
-    //     method: 'feed',
-    //     redirect_uri: '#{project_url(@project.id)}',
-    //     name: "#{@project.project_title}",
-    //     description: "Like making a difference in the community? Check out this great project I found on @URUUT.  You can help fund it, or set up a project of your own to Get RUUTed!",
-    //     caption: "#{@project.organization}",
-    //     link: "#{project_url(@project.id)}",
-    //     picture: "#{@project.large_image}"
-    //   };
-
-    //   function callback(response) {
-    //     if (response && response.post_id) {
-    //       console.log('Post was published.');
-    //     } else {
-    //       console.log('Post was not published.');
-    //     }
-    //   }
-
-    //   FB.ui(publish, callback);
-    // });
 
     $('.tw-count').click(function(e) {
       e.preventDefault();

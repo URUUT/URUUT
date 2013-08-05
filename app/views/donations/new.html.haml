@@ -83,9 +83,9 @@
                       - if p.perks_available.to_i.zero?
                         %span{:class => "fund pull-right", style: "font-style: italic;"} Not Available
                       -else
-                        %a{:class => "fund btn change-fund pull-right", "perk-id" => "#{p.id}", style: "#{"background: #81C263" if @perk.id.eql?(p.id)}", id: "button-fund-#{p.id}"} Fund Now ►
+                        %a{:class => "fund btn change-fund pull-right", "perk-id" => "#{p.id}", style: "#{"background: #81C263" if @perk.id.eql?(p.id)}", id: "button-fund-#{p.id}"} Donate ►
                     -else
-                      %a{:class => "fund btn change-fund pull-right", "perk-id" => "#{p.id}", style: "#{"background: #81C263" if @perk.id.eql?(p.id)}", id: "button-fund-#{p.id}"} Fund Now ►
+                      %a{:class => "fund btn change-fund pull-right", "perk-id" => "#{p.id}", style: "#{"background: #81C263" if @perk.id.eql?(p.id)}", id: "button-fund-#{p.id}"} Donate ►
         -else
           - default_perk.each_with_index do |perk_amount, index|
             - index += 1
@@ -101,7 +101,7 @@
                 %li.seed-amount{style: "#{"background: #bee0b4" if @perk_amount.eql?(perk_amount)}", id: "amount-id-#{index}"}
                   %p.amount #{amount_converter(perk_amount)}
                 %li.fund-button
-                  %a{:class => "fund btn change-fund", "perk-id" => "default", style: "#{"background: #81C263" if @perk_amount.eql?(perk_amount)}", "amount" => "#{perk_amount}", "level" => "#{index}", id: "button-fund-#{index}"} Fund Now ►
+                  %a{:class => "fund btn change-fund", "perk-id" => "default", style: "#{"background: #81C263" if @perk_amount.eql?(perk_amount)}", "amount" => "#{perk_amount}", "level" => "#{index}", id: "button-fund-#{index}"} Donate ►
 
         %li.perk.clearfix{id: "perk-id-custom", style: "#{"background: #bee0b4" if @perk_name.eql?("custom")}"}
           %h3.perk-name-other{style: "#{"color: #000" if @perk_name.eql?("custom")}", id: "perk-name-other"}
@@ -114,7 +114,7 @@
                 %p.amount= text_field_tag :custom_seed, "#{@perk_amount.to_i if @perk_name.eql?("custom")}" , {style: "width: 100%;"}
               - else
                 %p.amount= text_field_tag :custom_seed, "#{@perk_amount if @perk_name.eql?("custom")}" , {style: "width: 100%;"}
-          %a{style: "#{"background: #81C263" if @perk_name.eql?("custom")}", :class => "fund btn change-fund pull-right", "perk-id" => "custom", id: "button-fund-custom"} Fund Now ►
+          %a{style: "#{"background: #81C263" if @perk_name.eql?("custom")}", :class => "fund btn change-fund pull-right", "perk-id" => "custom", id: "button-fund-custom"} Donate ►
 
 :javascript
 
@@ -167,9 +167,17 @@
       if ($("#perk_type :selected").text().length > 17){
         $("#perk_type :selected").text(truncText($("#perk_type :selected").text(), 15, "..."))
       }
-    })
+    });
 
   })
+
+  $(":checkbox").click(function(){
+    if($(this).is(":checked")){
+      $(".content-anonymous").fadeIn();
+    }else{
+      $(".content-anonymous").fadeOut();
+    }
+  });
 
   $(".change-fund").click(function(){
     // $("#custom_seed").val() = $("#custom_seed").val().replace(/[^\d,]+/g, '');

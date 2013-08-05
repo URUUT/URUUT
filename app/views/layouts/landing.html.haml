@@ -20,7 +20,10 @@
       = stylesheet_link_tag    "default/application", "trontastic/jquery-ui-1.8.22.custom.css", "leaflet.css", "style.css.scss", "prettyPhoto.css", :media => "all"
       = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js", "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js", "application", "https://js.stripe.com/v1/", "jquery.prettyPhoto.js", :media => "all"
       /[if lt IE 9]
+        = stylesheet_link_tag "ie-only.css.scss"
         = javascript_include_tag "selectivizr-min"
+      /[if lte IE 8]
+        = stylesheet_link_tag "leaflet.ie"
       = filepicker_js_include_tag
       = javascript_include_tag "pages"
       = javascript_tag do
@@ -83,6 +86,7 @@
       = stylesheet_link_tag    "default/application", "trontastic/jquery-ui-1.8.22.custom.css", "leaflet.css", "style.css.scss", "prettyPhoto.css", :media => "all"
       = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js", "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js", "application", "https://js.stripe.com/v1/", "jquery.prettyPhoto.js", :media => "all"
       /[if lt IE 9]
+        = stylesheet_link_tag "ie-only.css.scss"
         = javascript_include_tag "selectivizr-min"
       = filepicker_js_include_tag
       = javascript_include_tag "pages"
@@ -138,8 +142,6 @@
   stripe_pub_key = "#{Settings.stripe.pub_key}";
 
   var updateProgressbar = function(id, value) {
-    console.log(id);
-    console.log(value);
     $('.progressbar' + id).progressbar({
       value: value
     });
@@ -150,10 +152,6 @@
     $('form [id*="edit_project"]').h5Validate();
     $('form [id*="new_project"]').h5Validate();
 
-    $('.coverphoto').bind('change', function(event){
-      console.log("Hello Close");
-    });
-
     $('#myModal form').submit(function() {
       var valuesToSubmit = $(this).serialize();
       $.ajax({
@@ -161,7 +159,6 @@
         data: valuesToSubmit,
         dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
       }).success(function(json){
-        console.log(json);
       });
       return false; // prevents normal behaviour
     });

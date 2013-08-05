@@ -57,7 +57,6 @@ class SponsorsController < ApplicationController
         session[:level_id] = level_sponsor
     end
     @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
-    logger.debug(@sponsorship_levels)
     render :layout => 'landing'
   end
 
