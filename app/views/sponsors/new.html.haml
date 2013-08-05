@@ -306,7 +306,6 @@
 
     var handleStripeResponse = function(status, response) {
       if (status === 200) {
-        console.log(response);
         $('input#token').attr('value', response.id);
         $('input#project_sponsor_card_last4').attr('value', response.card.last4);
         $('input#project_sponsor_card_type').attr('value', response.card.type);

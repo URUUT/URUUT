@@ -1,0 +1,79 @@
+img{
+	max-width: none;
+}
+
+.dropdown.keyword{
+	.btns{
+		border-radius: 0 5px 5px 0;
+		behavior: url(image-path('PIE-1.0.0/PIE.htc'));
+		margin-left: 239px;
+		margin-top: -54px;
+		padding: 0;
+		height: 54px;
+		width: 45px;
+		background: #77bf4c;
+	}
+}
+
+.tooltip{
+	box-shadow: 0 1px 3px rgba(224, 224, 224, 0.2);
+	background-clip: padding-box;
+	behavior: url(image-path('PIE-1.0.0/PIE.htc'));
+}
+
+.popover{
+	border-radius: 6px;
+	box-shadow: 0 1px 3px rgba(224, 224, 224, 0.2);
+	background-clip: padding-box;
+	behavior: url(image-path('PIE-1.0.0/PIE.htc'));
+}
+
+.error-container{
+	label.error{
+		font-size: 9px;
+	}
+}
+
+.row-fluid{
+	[class*='span']{
+		margin-left: 1%;
+	}
+}
+
+.circlegrey{
+	background:#b6b6b4;
+	padding:25px;
+	border-radius:500px;
+	width:100px;
+	height:100px;
+	behavior: url(image-path('PIE-1.0.0/PIE.htc'));
+	position: relative;
+}
+
+.pages{
+	.texture{
+		.dropdown{
+			width: 298px;
+		}
+	}
+}
+
+.dropdown.signed-in {
+	.dropdown-menu {
+		ul {
+			li:hover {					
+				a {
+					&:hover {
+						background:transparent;
+						color: #403e37;
+						filter: none;
+					}
+				}
+			}
+		}
+	}
+}
+
+.project{
+	margin-right: 10px !important;
+}

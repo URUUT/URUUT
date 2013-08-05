@@ -11,7 +11,7 @@
   .container
     %div.cf
       = image_tag 'individual-large.png'
-      %div 
+      %div
         %h3 INDIVIDUAL CONTRIBUTORS
         %h2 It Starts With U
         %p We know you care deeply for your community, which is why our platform provides you with a meaningful way to be actively involved and engaged in your locale. It’s as simple as searching for and contributing to the projects you want to see become a reality. Then, you share them with those around you, and, in no time at all, that park you wanted is there for you to enjoy.
@@ -30,12 +30,12 @@
 
 .full-width.create-project
   .container
-    %h2 
-      Connect. Cooperate. 
+    %h2
+      Connect. Cooperate.
       %span Take Action.
     = link_to new_project_path, :class => "btn get-funded" do
       Get Funded ►
-    
+
     = link_to browse_projects_path, :class => "btn fund-projects" do
       Fund Projects ►
 
@@ -47,8 +47,6 @@
         url: '#{projects_path}',
         data: ''
       }).done(function(data){
-        console.log("Success???");
-        console.log(data);
         window.location.href = '/projects/' + data + '/edit#sponsor-info';
       })
     })

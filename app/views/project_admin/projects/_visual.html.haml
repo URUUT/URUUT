@@ -27,7 +27,7 @@
             .seed-content.clearfix{style: "background: #DDD; width: 100%; height: 414px;"}
 
         .seed-action-container
-          %button{:id => "new-seed", type: "filepicker", 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA'} ADD NEW PHOTO
+          %button{:id => "new-seed", :type => "button"} ADD NEW PHOTO
           = link_to '<i class="icon-facetime-video icon-green"></i> Upload New Video'.html_safe, "javascript:void(0)", class: "btn seed-form"
       %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.about
     #growth.tab-pane
@@ -43,12 +43,12 @@
         %br
         %span{style: "font: normal 11px/11px 'Georgia', georgia, serif; font-style: italic; text-transform: none"} (Project Details)
 
-        %h6{:style => "text-align:center;color:#55554d !important;font-family:'Proxima Nova';margin-top:15px;"} Funding Ends
-        %div{:style => "background:#b6b6b4;padding:25px;border-radius:500px;width:120px;height:120px;"}
-          %span{:style => 'display:block;text-align:center;font:normal 22px/22px "Proxima Nova Semi";color:#fff;text-transform:uppercase;letter-spacing:5px; margin-top: 17px;'}= (Date.today + (@project.duration).to_i.days).strftime("%b")
-          %span{:style => 'display:block;text-align:center;font:normal 72px/68px "Proxima Nova Semi";color:#fff;text-transform:uppercase;'}= (Date.today + (@project.duration).to_i.days).strftime("%d")
-        %h6{:style => "text-align:center;color:#55554d !important;font-family:'Proxima Nova';margin-top:40px;margin-bottom:0;"} Project Goal
-        %h2{:style => "text-align:center;color:#403e37;font-family:'Proxima Nova Semi';margin-top:0;"}= amount_converter(@project.goal)
+      %h6{:style => "text-align:center;color:#55554d !important;font-family:'Proxima Nova';margin-top:15px;"} Funding Ends
+      %div.circlegrey{style: "background: #b6b6b4;"}
+        %span{:style => 'display:block;text-align:center;font:normal 22px/22px "Proxima Nova Semi";color:#fff;text-transform:uppercase;letter-spacing:5px; margin-top: 10px;'}= (Date.today + (@project.duration).to_i.days).strftime("%b")
+        %span{:style => 'display:block;text-align:center;font:normal 72px/68px "Proxima Nova Semi";color:#fff;text-transform:uppercase;'}= (Date.today + (@project.duration).to_i.days).strftime("%d")
+      %h6{:style => "text-align:center;color:#55554d !important;font-family:'Proxima Nova';margin-top:40px;margin-bottom:0;"} Project Goal
+      %h2{:style => "text-align:center;color:#403e37;font-family:'Proxima Nova Semi';margin-top:0;"}= amount_converter(@project.goal)
     .span9.details
       .cultivation-image-content
         .cultivation-image-main-content
@@ -66,7 +66,7 @@
             %div.cultivation-content.clearfix{:style => "background: #DDD; width: 100%; height: 310px"}
 
         .action_button.cultivation-action-container
-          %button{:id => "new-cultivation", type: "filepicker", 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA'} ADD NEW PHOTO
+          %button{:id => "new-cultivation", :type => "button"} ADD NEW PHOTO
           = link_to '<i class="icon-facetime-video icon-green"></i> Upload New Video'.html_safe, "javascript:void(0)", class: "btn cultivation-form"
 
       %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.story
@@ -87,13 +87,9 @@
 
 %script{:src => "http://code.jquery.com/ui/1.10.2/jquery-ui.js"}
 :javascript
-  $('.delete_photo_planting').click(function(){
-    $('#seed_image_cultivation').remove();
-  });
-
-  $('.delete_photo_cultivation').click(function(){
-    $('.cultivation-image-content').remove();
-  });
+  var mimetypesData = 'image/*';
+  var servicesData = ['BOX','COMPUTER','FACEBOOK','DROPBOX','INSTAGRAM','FLICKR','PICASA'];
+  filepicker.setKey("A0hKwuvSQNypdkNoCog4kz"); // please change when move to production, the issue is rails syntax not readable on IE8
 
   $(".seed-form").on("click", function(){
     $("#video_type").val("seed");
@@ -107,45 +103,61 @@
     $("#save-video").modal("show");
   });
 
-  var cover = document.getElementById('new-seed');
-  cover.type="filepicker";
-  cover.onchange = function(e){
-    var seedImage = event.fpfile.url;
+  $("#new-seed").click(function(){
+    filepicker.pick({
+      mimetypes: mimetypesData,
+      openTo: 'COMPUTER',
+      services: servicesData,
+      },
+      function(e){
+        var seedImage = e.url;
 
-    $.ajax({
-      url: '/update_image?status=seed_image',
-      method: 'POST',
-      data: {
-        image: seedImage
-        },
-      success: function(data){
-        $('#seed_image').remove();
-        $('.delete_photo').show();
-        $('.planting-seeds-main-content').html("<img src=" + seedImage + " id='seed_image_cultivation' data-project-id="+ data +" style='float:left; width:100%'>");
+        $.ajax({
+          url: '/update_image?status=seed_image',
+          method: 'POST',
+          data: {
+            image: seedImage
+            },
+          success: function(data){
+            $('#seed_image').remove();
+            $('.delete_photo').show();
+            $('.planting-seeds-main-content').html("<img src=" + seedImage + " id='seed_image_cultivation' data-project-id="+ data +" style='float:left; width:100%'>");
+          }
+        });
+      },
+      function(e){
+        console.log(JSON.stringify(e));
       }
-    });
-  };
-  filepicker.constructWidget(cover);
+    );
+  });
 
-  var cultivation = document.getElementById('new-cultivation');
-  cultivation.type="filepicker";
-  cultivation.onchange = function(e){
-    var seedImage = event.fpfile.url;
+  $("#new-cultivation").click(function(){
+    filepicker.pick({
+      mimetypes: mimetypesData,
+      openTo: 'COMPUTER',
+      services: servicesData,
+      },
+      function(e){
+        var cultivationImage = e.url;
 
-    $.ajax({
-      url: '/update_image?status=cultivation',
-      method: 'POST',
-      data: {
-        image: seedImage
-        },
-      success: function(data){
-        $('#seed_image').remove();
-        $('.delete_photo').show();
-        $('.cultivation-image-main-content').html("<img src=" + seedImage + " data-project-id="+ data.project_id +" style='float:left; width:100%'>");
+        $.ajax({
+          url: '/update_image?status=cultivation',
+          method: 'POST',
+          data: {
+            image: cultivationImage
+            },
+          success: function(data){
+            $('#seed_image').remove();
+            $('.delete_photo').show();
+            $('.cultivation-image-main-content').html("<img src=" + cultivationImage + " data-project-id="+ data.project_id +" style='float:left; width:100%'>");
+          }
+        });
+      },
+      function(e){
+        console.log(JSON.stringify(e));
       }
-    });
-  };
-  filepicker.constructWidget(cultivation);
+    );
+  });
 
   $(".seed-action-container :button").last().text("Add A Photo");
   $(".cultivation-action-container :button").last().text("Add A Photo");

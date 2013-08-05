@@ -15,7 +15,7 @@
                 SAVE
               %a.btn.cancel-image{href: "javascript:void(0)", style: "background: #81C263; font: 11px/11px 'Proxima Nova Semi',arial,sans-serif;"}
                 CANCEL
-        %button{:id => "project-submit", type: "filepicker", 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA'} CHANGE
+        %button{:id => "project-submit-button", :type => "button"} CHANGE COVER
 
     .span12.action-convert{style: "margin-top: 276px; display:none"}
       = hidden_field_tag "url_image"
@@ -30,88 +30,93 @@
       - @galleries.each do |image|
         .list-image.pull-left
           = filepicker_image_tag image.gallery_file_name, width: 216, height: 216, fit: 'scale'
-          = link_to "delete photo", delete_photo_path(image.id), class: "image-delete-button",  method: 'DELETE', remote: true
+          = link_to "delete photo", "javascript:void(0)", class: "image-delete-button", "data-href" => delete_photo_path(image.id)
     = paginate @galleries, remote: true
     %div{:style => "float:left; width: 100%"}
-      %button{:id => "new-photo", type: "filepicker", 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA'} ADD NEW PHOTO
+      %button{:id => "new-photo-button", :type => "button"} ADD NEW PHOTO
 
 = javascript_include_tag "jquery-ui"
 = javascript_include_tag "jquery.ui.touch-punch.min"
 
 :javascript
+  var mimetypesData = 'image/*';
+  var servicesData = ['BOX','COMPUTER','FACEBOOK','DROPBOX','INSTAGRAM','FLICKR','PICASA'];
+  filepicker.setKey("A0hKwuvSQNypdkNoCog4kz"); // please change when move to production, the issue is rails syntax not readable on IE8
+
   var deleteImages = function (){
     $('.image-delete-button').click(function(){
       $(this).parent().remove();
+      $.ajax({
+        url: $(this).attr("data-href")
+      });
     });
   }
   deleteImages();
 
-  var cover = document.getElementById('project-submit');
-  cover.type="filepicker";
-  cover.onchange = function(e){
-    var largeImage = e.fpfile.url;
-    // $.ajax({
-    //   url: '/projects/save_image',
-    //   method: 'POST',
-    //   data: {
-    //     large_image: largeImage
-    //     }
-    // }).done(function(){
-    //   $('.cover-content-image').html("<img src='"+largeImage+"/convert?fit=scale&height=300&width=672'>");
-    // });
-    $(".project-cover-image").hide();
-    $('.drag-instructions').remove();
-    $(".loader-cover").show();
-    $('<img />').attr('src', largeImage).load(function() {
-      $('.coverphoto').html("CHOOSE A COVER PHOTO");
-      var largeImageObj = new Image;
-      largeImageObj.src = largeImage;
-      if ( largeImageObj.width >= 1600 )
-      {
-        $(".loader-cover").hide();
-        $("#url_image").val(largeImage);
+  $("#project-submit-button").click(function(){
+    filepicker.pick({
+      mimetypes: mimetypesData,
+      openTo: 'COMPUTER',
+      services: servicesData,
+      },
+      function(e){
+        var largeImage = e.url;
+        $(".project-cover-image").hide();
+        $('.drag-instructions').remove();
+        $(".loader-cover").show();
+        $('<img />').attr('src', largeImage).load(function() {
+          $('.coverphoto').html("CHOOSE A COVER PHOTO");
+          var largeImageObj = new Image;
+          largeImageObj.src = largeImage;
+          if ( largeImageObj.width >= 1600 )
+          {
+            $(".loader-cover").hide();
+            $("#url_image").val(largeImage);
 
-        var dragImg = new Image;
-        dragImg.src = largeImage;
-        dragImg.id = "dragImg";
+            var dragImg = new Image;
+            dragImg.src = largeImage;
+            dragImg.id = "dragImg";
 
-        $('.ui-draggable').remove();
-        $("#y_position").val(0);
-        $('.cover-content-image-data').prepend(dragImg);
-        $('.cover-content-image-data').append('<span class="drag-instructions">DRAG TO REPOSITION COVER PHOTO</span>');
+            $('.ui-draggable').remove();
+            $("#y_position").val(0);
+            $('.cover-content-image-data').prepend(dragImg);
+            $('.cover-content-image-data').append('<span class="drag-instructions">DRAG TO REPOSITION COVER PHOTO</span>');
 
-        $('#dragImg').draggable({
-          axis: 'y',
-          drag: function(event, ui) {
-            var bottom = $(this).parent().height() - $(this).height();
-            if(ui.position.top > 0) {
-              ui.position.top = 0;
-            }
+            $('#dragImg').draggable({
+              axis: 'y',
+              drag: function(event, ui) {
+                var bottom = $(this).parent().height() - $(this).height();
+                if(ui.position.top > 0) {
+                  ui.position.top = 0;
+                }
 
-            if(ui.position.top < bottom) {
-              ui.position.top = bottom;
-            }
-          },
-          stop: function(event, ui) {
-            var w = $('.ui-draggable').width();
-            var wOriginal = largeImageObj.width;
-            var ratio = parseInt(wOriginal) / parseInt(w);
-            $('#y_position').val(Math.round(Math.abs(ui.position.top * ratio)));
+                if(ui.position.top < bottom) {
+                  ui.position.top = bottom;
+                }
+              },
+              stop: function(event, ui) {
+                var w = $('.ui-draggable').width();
+                var wOriginal = largeImageObj.width;
+                var ratio = parseInt(wOriginal) / parseInt(w);
+                $('#y_position').val(Math.round(Math.abs(ui.position.top * ratio)));
+              }
+            });
+            $('.new-save-btn').show();
+          }
+          else{
+            $('.new-save-btn').hide();
+            $(".loader-cover").hide();
+            $('.drag-instructions').remove();
+            $(".project-cover-image").show();
+            $('.cover-content-image-data').append('<span class="drag-instructions" style="width: 300px;"><b>image width for cover should be more than 1600px</b></span>');
           }
         });
-
-        $('.new-save-btn').show();
+      },
+      function(e){
+        console.log(JSON.stringify(e));
       }
-      else{
-        $('.new-save-btn').hide();
-        $(".loader-cover").hide();
-        $('.drag-instructions').remove();
-        $(".project-cover-image").show();
-        $('.cover-content-image-data').append('<span class="drag-instructions" style="width: 300px;"><b>image width for cover should be more than 1600px</b></span>');
-      }
-    });
-  };
-  filepicker.constructWidget(cover);
+    );
+  });
 
   $(".cancel-image").click(function(){
     $('.drag-instructions').remove();
@@ -162,21 +167,28 @@
     );
   });
 
-  var photo = document.getElementById('new-photo');
-  photo.type="filepicker";
-  photo.onchange = function(e){
-    var pictureImage = e.fpfile.url;
-
-    $.ajax({
-      url: '/galleries/save_image',
-      method: 'POST',
-      data: {
-        gallery: pictureImage
-        },
-      success: function(data){
-        $('#galleryPicture').append("<div class='list-image pull-left'><img src=" + pictureImage + "/convert?fit=scale&height=216&width=216><a href='/galleries/delete_photo/" + data.image_id + "' class='image-delete-button' data-method='DELETE' style='margin-left:20px' data-remote='true'>delete photo</p></div></div></div>");
-        deleteImages();
+  $("#new-photo-button").click(function(){
+    filepicker.pick({
+      mimetypes: mimetypesData,
+      openTo: 'COMPUTER',
+      services: servicesData,
+      },
+      function(e){
+        var pictureImage = e.url;
+        $.ajax({
+          url: '/galleries/save_image',
+          method: 'POST',
+          data: { gallery: pictureImage },
+          success: function(data){
+            $('#galleryPicture').append("<div class='list-image pull-left'><img src=" + pictureImage +"/convert?fit=scale&height=216&width=216><a data-href='/galleries/delete_photo/" + data.image_id + "' class='image-delete-button' style='margin-left:20px; cursor:pointer'>delete photo</a></div>");
+            deleteImages();
+          }
+        });
+      },
+      function(e){
+        console.log(JSON.stringify(e));
       }
-    });
-  };
-  filepicker.constructWidget(photo);
+    );
+  });
+
+
