@@ -200,13 +200,8 @@ module ApplicationHelper
     donations.map { |donation| donation.amount }.inject(0) {|sum, element| sum + element }
   end
 
-  def get_amount_by_perk_name(perk_name, project_id)
-    perk = Perk.where(name: perk_name, project_id: project_id)
-    if perk.empty?
-      0
-    else
-      perk.first.amount
-    end
+  def total_donor_by_level(perk_name, project)
+    Donation.where(perk_name: perk_name, project_id: project.id).group_by { |donation| donation.user_id }.count
   end
 
   def avatar_project_admin(avatar_link)

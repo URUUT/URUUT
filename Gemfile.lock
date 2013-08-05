@@ -432,7 +432,6 @@ DEPENDENCIES
   easy_roles
   email_spec
   erb2haml
-  factory_girl
   factory_girl_rails
   filepicker-rails
   haml

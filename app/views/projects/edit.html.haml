@@ -81,7 +81,6 @@
     %h5 SUBMIT
     %p When you're ready, click here to submit for approval. You're only required to add a cover photo.
 
-= javascript_include_tag "//maps.googleapis.com/maps/api/js?libraries=places&sensor=false"
 = javascript_include_tag "leaflet"
 = javascript_include_tag "tile.stamen"
 
@@ -102,23 +101,30 @@
   !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 
    $(document).ready(function(){
-    var mygc = new google.maps.Geocoder();
-    mygc.geocode({'address' : '#{@project.address},#{@project.city},#{@project.state} #{@project.zip}'}, function(results, status){
-      var latitude = results[0].geometry.location.lat();
-      var longitude = results[0].geometry.location.lng();
+    var userLocation = 'http://maps.googleapis.com/maps/api/geocode/json?address=#{@project.address},#{@project.city},#{@project.state}&sensor=false';
 
-      var map = L.map('map', { scrollWheelZoom: false }).setView([latitude, longitude], 11);
+    $.ajax({
+      url: userLocation,
+      dataType: 'json',
+      success: function(data) {
+        var latitude = data.results[0].geometry.location.lat;
+        var longitude = data.results[0].geometry.location.lng;
+        var map = L.map('map', {
+          scrollWheelZoom: false
+        }).setView([latitude,longitude], 11).invalidateSize(false);
 
-      var uruutIcon = L.icon({
-        iconUrl: '#{image_path("map-icon.png")}',
-        iconSize:     [36, 52]
-      });
+        console.log(new_map = map);
+        var uruutIcon = L.icon({
+          iconUrl: '#{image_path("map-icon.png")}',
+          iconSize:     [36, 52]
+        });
 
-      L.tileLayer("https://stamen-tiles.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png", {
-        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
-      }).addTo(map);
+        L.tileLayer('http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {
+          attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery Â© <a href="http://cloudmade.com">CloudMade</a>'
+        }).addTo(map);
 
-      L.marker([latitude, longitude], {icon:uruutIcon}).addTo(map);
+        L.marker([latitude,longitude], {icon:uruutIcon}).addTo(map);
+      }
     });
   });
 

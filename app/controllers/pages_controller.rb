@@ -51,7 +51,7 @@ class PagesController < ApplicationController
   end
   
   def media
-    @press_releases = PressRelease.order("release_date DESC").all
+    @press_releases = PressRelease.all
     @press_coverages = PressCoverage.order("release_date DESC").all
   end
 
