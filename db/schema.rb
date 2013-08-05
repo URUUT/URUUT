@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130802021451) do
+ActiveRecord::Schema.define(:version => 20130802032847) do
 
   create_table "badges_sashes", :force => true do |t|
     t.integer  "badge_id"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20130802021451) do
     t.string   "perk_name"
     t.boolean  "confirmed",      :default => false
     t.text     "description"
+    t.boolean  "anonymous",      :default => false
   end
 
   create_table "galleries", :force => true do |t|
@@ -171,6 +172,7 @@ ActiveRecord::Schema.define(:version => 20130802021451) do
     t.boolean  "confirmed",    :default => false
     t.string   "sponsor_type"
     t.string   "customer_id"
+    t.boolean  "anonymous",    :default => false
   end
 
   create_table "project_updates", :force => true do |t|
