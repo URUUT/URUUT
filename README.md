@@ -38,8 +38,10 @@ Use these gems to start writing **tests first**.
 
 I will be going through the styles, JS, and other portions of code to reduce unused code and consolidate things to their correct locations over the next few weeks to help with maintainability.  Going forward, there are some rule that we need to adhere to:  
 
-* I expect the rails asset pipeline to be used correctly from here on out, meaning all JS is written in CoffeeScript and saved in a .js.coffee file in the assets/javascript folder, no more JS in views<br />
-* No more inline styles.  All styles need to be added to the appropriate stylesheets in scss format and let rails compile accordingly.  Don't worry about going back through code and removing existing inline styles, that is already being handled<br />
+* I expect the rails asset pipeline to be used correctly from here on out, meaning all JS is written in CoffeeScript and saved in a .js.coffee file in the assets/javascript folder, no more JS in views
+
+* No more inline styles.  All styles need to be added to the appropriate stylesheets in scss format and let rails compile accordingly.  Don't worry about going back through code and removing existing inline styles, that is already being handled
+
 * Ensure we are writing **unit tests for JS** and paying attention to JS performance while writing to help with page load times.  
 
 
