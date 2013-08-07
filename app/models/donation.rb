@@ -9,19 +9,18 @@ class Donation < ActiveRecord::Base
   default_scope { where(confirmed: true) }
 
   def save_with_payment
-  #   logger.debug(token)
-    # current_user = :current_user
-    # Stripe.api_key = "#{Settings.stripe.api_key}"
-    # customer = Stripe::Customer.create(description: email, card: token)
-    # self.customer_token = customer.id
-    # self.confirmed = true
-    # save!
+    logger.debug(token)
+    current_user = :current_user
+    Stripe.api_key = "#{Settings.stripe.api_key}"
+    customer = Stripe::Customer.create(description: email, card: token)
+    self.customer_token = customer.id
+    self.confirmed = true
+    save!
 
-  # rescue Stripe::InvalidRequestError => e
-  #   logger.error "Stripe error while creating customer: #{e.message}"
-  #   errors.add :base, "There was a problem with your credit card."
-  #   false
-    true
+  rescue Stripe::InvalidRequestError => e
+    logger.error "Stripe error while creating customer: #{e.message}"
+    errors.add :base, "There was a problem with your credit card."
+    false
   end
 
   ###  new function for handle Stripe error  ###
