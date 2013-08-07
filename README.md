@@ -5,24 +5,24 @@ From here on out, we'll be using a git branching workflow (again) and not direct
 A good example and description can be found [here][1].       
 ***
 ##The basic workflow goes like this:##
-![](https://www.atlassian.com/git/workflows/pageSections/00/contentFullWidth/0/…FullWidth/0/content_files/file0/document/git-workflow-feature-branch-1.png "Git Branching Workflow")
+![](https://www.atlassian.com/git/workflows/pageSections/00/contentFullWidth/0/tabs/01/pageSections/07/contentFullWidth/0/content_files/file0/document/git-workflow-feature-branch-1.png "Git Branching Workflow")
 
-####Create a new branch with descriptive name####
+Create a new branch with descriptive name  
 `git checkout -b madas-feature`
 
-####Do some work implementing feature####
+Do some work implementing feature  
 
-####Add Files and Commit####
-`git status  
-git add <some-file>  
-git commit -m "Some descriptive message of what was implemented"`
+Add Files and Commit  
+`git status`
+`git add <some-file>`
+`git commit -m "Some descriptive message of what was implemented"`
 
-####Push branch to origin####
+Push branch to origin  
 `git push -u origin madas-feature`
 
-####From here you just continue to work and repeat the add/commit/push process until you feel the feature is done.####
+From here you just continue to work and repeat the add/commit/push process until you feel the feature is done.  
 
-####When you feel the feature is done, you will now go to [bitbucket][2] to create a pull-request and add reviewers (atleast Chad).####
+When you feel the feature is done, you will now go to [bitbucket][2] to create a pull-request and add reviewers (atleast Chad).  
 ***
 
 ##New Testing Requirements##  
