@@ -25,7 +25,7 @@ From here you just continue to work and repeat the add/commit/push process until
 When you feel the feature is done, you will now go to [bitbucket][2] to create a pull-request and add reviewers (atleast Chad).  
 ***
 
-##New Testing Requirements##  
+##New Testing Requirements##
 Now that we have launched and the feature addition will be slower, we will need to ensure that we are writing tests for everything we do.  I've included the following gems to the bundle and expect to start moving to a more TDD style of coding.
 
 * Rspec
