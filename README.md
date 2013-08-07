@@ -13,12 +13,12 @@ Create a new branch with descriptive name
 Do some work implementing feature  
 
 Add Files and Commit  
-`git status`
-`git add <some-file>`
+`git status`  
+`git add <some-file>`  
 `git commit -m "Some descriptive message of what was implemented"`
 
 Push branch to origin  
-`git push -u origin madas-feature`
+`git push -u origin madas-feature`  
 
 From here you just continue to work and repeat the add/commit/push process until you feel the feature is done.  
 
