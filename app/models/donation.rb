@@ -9,7 +9,6 @@ class Donation < ActiveRecord::Base
   default_scope { where(confirmed: true) }
 
   def save_with_payment
-  #   logger.debug(token)
     current_user = :current_user
     Stripe.api_key = "#{Settings.stripe.api_key}"
     customer = Stripe::Customer.create(description: email, card: token)
