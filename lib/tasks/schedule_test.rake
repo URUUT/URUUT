@@ -35,6 +35,7 @@ task :milestone_email => :environment do
           donors.each do |donor|
             user = User.find(donor.user_id)
             puts user.first_name
+            Milestonemailer.milestone_email(user.email, percent, p).deliver
           end
           mailer.fifteen_percent = true
           mailer.save!
