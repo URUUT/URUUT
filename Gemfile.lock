@@ -204,6 +204,8 @@ GEM
     kgio (2.8.0)
     launchy (2.3.0)
       addressable (~> 2.3)
+    lazyload-rails (0.2.0)
+      nokogiri (~> 1.5)
     libwebsocket (0.1.5)
       addressable
     listen (1.0.3)
@@ -443,6 +445,7 @@ DEPENDENCIES
   jasminerice
   jquery-rails
   kaminari
+  lazyload-rails
   merit
   mini_magick
   newrelic_rpm

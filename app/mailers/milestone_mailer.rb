@@ -4,7 +4,9 @@ class MilestoneMailer < ActionMailer::Base
   def milestone_email(email, percent, project)
   	  @email = email
   	  @percent = percent
-  	  @project = project
+  	  @project = Project.find_by_id(project)
+  	  @image = @project.large_image
+  	  
   	  mail to: @email, subject: "Milestone Email Test"
   end
 end
