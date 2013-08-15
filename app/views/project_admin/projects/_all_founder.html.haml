@@ -9,8 +9,8 @@
         %td= founder.updated_at.strftime("%m/%d")
     - else
       %tr
-        %td= image_tag avatar_project_admin(founder.user.avatar), style: "width:37px"
-        %td{style: "width: 210px;"}= truncate([founder.user.first_name, founder.user.last_name].join(" "), length: 17)
+        %td= image_tag avatar_project_admin(founder.user.avatar, founder.anonymous), style: "width:37px"
+        %td{style: "width: 210px;"}= donor_name_project_admin(truncate([founder.user.first_name, founder.user.last_name].join(" "), length: 17), founder.anonymous)
         %td= "#{amount_converter(founder.amount)}"
         %td= truncate(founder.perk_name, length: 17)
         %td= founder.updated_at.strftime("%m/%d")
