@@ -1,4 +1,8 @@
 $('.menu-messages').removeClass('active');
 $('.visual').addClass('active').append("<div class='arrow'></div>").append('<div class="arrow"></div>');
-
+$(document).ajaxStop(function(){
+  $("img").lazyload({
+      effect: "fadeIn"
+  });
+});
 $('.content-manage-project').html('<%=j render :partial => "visual" %>');
