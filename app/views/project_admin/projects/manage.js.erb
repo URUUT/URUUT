@@ -3,5 +3,9 @@ $(".manage").parent().addClass("active");
 
 $('.sub-menu-project').removeClass('active');
 $('.manage').addClass('active').append("<div class='arrow'></div>").append('<div class="arrow"></div>');
-
+$(document).ajaxStop(function(){
+  $("img").lazyload({
+      effect: "fadeIn"
+  });
+});
 $('.main-content').html("<%=j render 'manage' %>");
