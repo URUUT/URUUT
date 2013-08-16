@@ -19,7 +19,11 @@
       %table.table.table-striped
         - sponsors.each do |sponsor|
           %tr
-            %td= filepicker_image_tag sponsor.logo, width: 37, height: 37, fit: 'scale'
+            - if sponsor.anonymous
+              - sponsor.name = "ANONYMOUS SPONSOR"
+              %td= image_tag "anonymous.png", width: 37, height: 37
+            - else
+              %td= filepicker_image_tag sponsor.logo, width: 37, height: 37, fit: 'scale'
             %td{style: "width: 160px;"}= truncate(sponsor.name, length: 17)
             %td= "#{amount_converter(sponsor.cost)}"
             %td= truncate("#{sponsor.sponsorship_level.name} sponsor", length: 17)
