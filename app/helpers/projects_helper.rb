@@ -100,4 +100,33 @@ module ProjectsHelper
     ["10", "25", "50", "100", "250"]
   end
 
+  def image_sponsor(sponsor)
+    if sponsor.anonymous
+      image_tag("uruut-fb-og.png", class: "img-polaroid")
+    else
+      link_to(image_tag(sponsor.logo, class: "img-polaroid"), recognize_url(sponsor.site), target: "_blank")
+    end
+  end
+
+  def sponsor_name(sponsor)
+    if sponsor.anonymous
+      "<a href='javascript:void(0)'>ANONYMOUS <br> SPONSOR</a>"
+    else
+      link_to(sponsor.name, recognize_url(sponsor.site), target: "_blank", style: "color: #70bf4c;")
+    end
+  end
+
+  def sponsor_link(sponsor)
+    unless sponsor.site.nil? or sponsor.anonymous
+      link_to(strip_url(sponsor.site), recognize_url(sponsor.site), target: "_blank", style: "")
+    end
+  end
+
+  def sponsor_item(sponsor)
+    "<div class='sponsor'>#{image_sponsor(sponsor)}
+      <h5>#{sponsor_name(sponsor)}</h5>
+      #{sponsor_link(sponsor)}
+    </div>".html_safe
+  end
+
 end
