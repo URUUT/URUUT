@@ -10,7 +10,7 @@
       %h4.title.wizard-data-title= @project.project_title
       %span.location.wizard-data-location #{@project.city}, #{@project.state}
       %span.pull-right.wizard-data-td-mark{:style => "margin-top: -20px"}
-        = image_tag 'td-logo-black.png', class: "tax-deductible deductable-black", "data-toggle" => "tooltip", title: "Donations Are Tax Deductable", style: "#{show_td_mark(@project)}"
+        = image_tag 'td-logo-black.png', class: "tax-deductible deductable-black", "data-toggle" => "tooltip", title: "Donations Are Tax Deductible", style: "#{show_td_mark(@project)}"
       %hr
       %p.short-desc.wizard-data-description{:style => "font:normal 12px/18px 'Proxima Nova';"}= @project.title
 
