@@ -33,9 +33,10 @@
                             %td{:align => "right", :valign => "top", :style => "border-bottom:6px solid #70bf4c;"}
                               %a{:href => "http://#{@host}/users/sign_in"}
                                 %img{:src => "http://#{@host}/assets/email-login.png", :style => "display:block;margin:25px 10px 0 0;"}
-                    %tr
-                      %td{:valign => "top"}
-                        %img{:src => "#{@image}/convert?w=620", :style => "display:block;"}
+                    - if @image
+                      %tr
+                        %td{:valign => "top"}
+                          %img{:src => "#{@image}/convert?w=620", :style => "display:block;"}
                     %tr
                       %td{:valign => "top"}
                         %div #{@content}
