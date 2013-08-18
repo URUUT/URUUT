@@ -223,6 +223,15 @@ select {
 	text-transform:none;
 	letter-spacing: 0;}
 
+.full-width.green-description h1.main-headline {
+	font-family: 'Proxima Nova Semi';
+	font-size: 36px;
+	letter-spacing: 2px;
+	line-height: 1.5;
+	margin-top:60px;
+	text-align: center;
+}
+
 .right {
 	.dropdown.signed-in {
 		.dropdown-menu {
@@ -2273,6 +2282,13 @@ form[id*=project] {
 			text-align:left;
 			text-shadow:1px 1px 2px rgba(0,1,1,0.45);
 			text-transform:none;
+
+      &.paragraph1{
+        margin: 0 auto 15px;
+      }
+      &.paragraph2{
+        margin: 0 auto 35px;
+      }
 		}
 		h5 {
 			color:#fff;
