@@ -58,7 +58,7 @@
       %span.error-container
     = f.check_box :anonymous, {label: false, style: "margin-bottom: 5px"}
     I would like to make this donation anonymously.
-    .content-anonymous{style: "#{'display: none' unless @donation.anonymous}"}
+    .content-anonymous{style: "display: none"}
       (If checked, your information will be witheld from the project owner as well as from any other audience, and you will not receive the selected perk.)
   .actions
     %hr
