@@ -161,7 +161,7 @@ class Project < ActiveRecord::Base
 
   def total_funding_by_project
     fundings = populate_funding_by_project
-    total_amout, individual_amount, business_amount, foundation_amount = 0, 0, 0, 0
+    total_amout, individual_amount, business_amount, family_amount, foundation_amount = 0, 0, 0, 0, 0
 
     fundings.each do |funding|
       if funding.type_founder.eql?("individual")
@@ -170,8 +170,10 @@ class Project < ActiveRecord::Base
       else
         if funding.sponsor_type.eql?("Foundation")
           foundation_amount += funding.cost.to_i
-        else
+        elsif funding.sponsor_type.eql?("Business")
           business_amount += funding.cost.to_i
+        else
+          family_amount += funding.cost.to_i
         end
         total_amout += funding.cost.to_i
       end
@@ -181,6 +183,7 @@ class Project < ActiveRecord::Base
       total_amount: total_amout,
       individual_amount: individual_amount,
       business_amount: business_amount,
+      family_amount: family_amount,
       foundation_amount: foundation_amount
     }
     fundings_data
