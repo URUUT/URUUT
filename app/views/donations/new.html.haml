@@ -171,14 +171,6 @@
 
   })
 
-  $(":checkbox").click(function(){
-    if($(this).is(":checked")){
-      $(".content-anonymous").fadeIn();
-    }else{
-      $(".content-anonymous").fadeOut();
-    }
-  });
-
   $(".change-fund").click(function(){
     // $("#custom_seed").val() = $("#custom_seed").val().replace(/[^\d,]+/g, '');
     if ( $(this).attr("perk-id") == "default" ){
