@@ -119,12 +119,12 @@ class ProjectAdmin::ProjectsController < ApplicationController
     case params[:level_id]
     when "All Project Sponsors and Donors"
       emails_sponsor = project.project_sponsors.joins(:sponsor).pluck(:email).uniq
-      emails_donors = project.donations.pluck(:email).uniq
+      emails_donors = project.donations.where(anonymous: false).pluck(:email).uniq
       emails = emails_donors + emails_sponsor
     when "All Project Sponsors"
       emails = project.project_sponsors.joins(:sponsor).pluck(:email).uniq
     when "All Project Donors"
-      emails = project.donations.pluck(:email).uniq
+      emails = project.donations.where(anonymous: false).pluck(:email).uniq
     when "My Contacts"
       emails = []
     else
@@ -132,7 +132,7 @@ class ProjectAdmin::ProjectsController < ApplicationController
         emails = project.project_sponsors.joins(:sponsor).where("level_id = ?", params[:level_id]).uniq.pluck(:email)
       else
         level_name = params[:level_id].split(" Project")
-        emails = project.donations.where("perk_name = ?", level_name[0]).uniq.pluck(:email)
+        emails = project.donations.where(anonymous: false).where("perk_name = ?", level_name[0]).uniq.pluck(:email)
       end
     end
 

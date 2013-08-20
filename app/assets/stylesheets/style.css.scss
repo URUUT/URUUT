@@ -6,6 +6,7 @@ $green2: #81C263; /* #70bf4c;*/
 $light-green: #bee0b4;
 $brown: #403e37;
 $light-brown: #53544b;
+$white: #FFF;
 
 @mixin cleared($clr: both){
   &:before, &:after {
@@ -1640,6 +1641,9 @@ ul.chart-legend{
       }
       &.individual{
         background: $grey;
+      }
+      &.family{
+        background: $white;
       }
     }
 
