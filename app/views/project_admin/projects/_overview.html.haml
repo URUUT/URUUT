@@ -18,8 +18,9 @@
             text: null
         },
         tooltip: {
-          pointFormat: '{series.name}: <b>{point.percentage}%</b>',
-          percentageDecimals: 1
+          formatter: function(){
+            return this.point.name + "<br> Funding share: <b>" + this.point.percentage.toFixed(2) +"%</b>"
+          }
         },
         plotOptions: {
             pie: {
@@ -37,7 +38,8 @@
             data: [
                 ['BUSINESS SPONSORS', #{count_percentage(@total_fundings[:total_amount], @total_fundings[:business_amount]).split("%").first } ],
                 ['FOUNDATION SPONSORS', #{count_percentage(@total_fundings[:total_amount], @total_fundings[:foundation_amount]).split("%").first} ],
-                ['INDIVIDUAL CONTRIBUTORS', #{count_percentage(@total_fundings[:total_amount], @total_fundings[:individual_amount]).split("%").first} ]
+                ['INDIVIDUAL CONTRIBUTORS', #{count_percentage(@total_fundings[:total_amount], @total_fundings[:individual_amount]).split("%").first} ],
+                ['INDIVIDUAL/FAMILY SPONSORS', #{count_percentage(@total_fundings[:total_amount], @total_fundings[:family_amount]).split("%").first} ]
             ]
         }]
       });
@@ -128,6 +130,11 @@
             .legend-info
               %h5 FOUNDATION SPONSORS
               %h4= "#{count_percentage(@total_fundings[:total_amount], @total_fundings[:foundation_amount])} - #{number_to_currency(@total_fundings[:foundation_amount], :precision => 0)}"
+          %li
+            .color.family
+            .legend-info
+              %h5 INDIVIDUAL/FAMILY SPONSORS
+              %h4= "#{count_percentage(@total_fundings[:total_amount], @total_fundings[:family_amount])} - #{number_to_currency(@total_fundings[:family_amount], :precision => 0)}"
           %li
             .color.individual
             .legend-info
