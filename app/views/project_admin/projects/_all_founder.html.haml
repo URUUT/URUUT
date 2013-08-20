@@ -2,7 +2,11 @@
   - @founders.each do |founder|
     - if founder.type_founder.eql?("sponsor")
       %tr
-        %td= filepicker_image_tag founder.logo, width: 37, height: 37, fit: 'scale'
+        - if founder.anonymous
+          - founder.name = "ANONYMOUS SPONSOR"
+          %td= image_tag "anonymous.png", width: 37, height: 37
+        - else
+          %td= filepicker_image_tag founder.logo, width: 37, height: 37, fit: 'scale'
         %td{style: "width: 210px;"}= truncate(founder.name, length: 17)
         %td= "#{amount_converter(founder.cost)}"
         %td= truncate("#{founder.sponsorship_level.name} sponsor", length: 17)

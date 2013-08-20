@@ -144,6 +144,14 @@
       .well
         .req-legend
           *Required
+        %div.anonymous-check
+          = f.label :anonymous, class: "label-green" do
+            ANONYMOUS SPONSORSHIP?
+            %span.error-container
+          = f.check_box :anonymous, {label: false, style: "margin-bottom: 5px"}
+          I would like to make this sponsorship anonymously.
+          .content-anonymous{style: "#{'display: none' unless @sponsor.anonymous}"}
+            (If checked, your information will be witheld from the project owner as well as from any other audience, and you will not receive the sponsorship benefits listed above. We still need to gather your information in order to provide you with a tax receipt. Website, Logo, and Mission Statement are optional.)
         %div
           = f.label :name, class: "label-green" do
             Business OR ORGANIZATION NAME*
@@ -151,7 +159,8 @@
           = text_field :project_sponsor, :name, required: true, label: false, class: "span12"
         %div.clearfix{:style => "margin-bottom: 10px; width: 500px;"}
           = f.label :mission, class: "label-green" do
-            BUSINESS OR ORGANIZATION'S LOGO*
+            BUSINESS OR ORGANIZATION'S LOGO
+            %span.real-green-small{style: "color: #81C263 !important; #{'display: none' if @sponsor.anonymous}"}"}*
             %span.error-container
           %div{:style => "position: relative;"}
             = image_tag @project_sponsor.logo, :class => "img-polaroid pull-left logo-company", :style => "position: relative; z-index: 10; width:100px; height:100px;"
@@ -171,17 +180,19 @@
           = label_tag :sponsor_type, "Sponsor Type*", class: "label-green"
           / = select_tag :type, options_for_select(["Foundation", "Business"])
           .selectParent.parentWide.clearfix{:style => "margin-bottom: 10px;"}
-            = select_tag :type, options_for_select(["Foundation", "Business"]), class: "selectbox"
+            = select_tag :type, options_for_select(["Foundation", "Business", "Individual/Family"], @project_sponsor.sponsor_type), class: "selectbox"
         %div
           = f.label :site, class: "label-green" do
-            Website*
+            Website
+            %span.real-green-small{style: "color: #81C263 !important; #{'display: none' if @sponsor.anonymous}"}*
             %span.italic
               (Format: www.yoursite.com)
             %span.error-container
           = text_field :project_sponsor, :site, required: true, label: false, class: "span12"
         %div
           = f.label :mission, class: "label-green" do
-            MISSION STATEMENT / ABOUT*
+            MISSION STATEMENT / ABOUT
+            %span.real-green-small{style: "color: #81C263 !important; #{'display: none' if @sponsor.anonymous}"}"}*
             %span.cutdown.italic
             %span.error-container
           = text_area :project_sponsor, :mission, maxlength: 275, required: true, :style => "height: 186px; width: 595px;", label: false, class: "mission", placeholder: "Tell your story here ..."
@@ -268,6 +279,7 @@
 
   project_token = "#{@project.project_token}";
   project_pub_key = "#{@project.publishable_key}";
+  anonymous_status = "#{@sponsor.anonymous}";
 
   $(function(){
     var selectedLevel = parseInt($('#selected_level').attr("level_id"));
@@ -389,6 +401,12 @@
       }
     });
 
+    if (anonymous_status)
+    {
+      $("#project_sponsor_logo, #project_sponsor_mission").removeAttr("required").rules("remove");
+      $("#project_sponsor_site").removeAttr("required").attr("style", "border: none !important").rules("remove");
+    }
+
     $("#sponsor_payment_type").change(function(){
       if(this.value == "Credit Card"){
         $("#wire-transfer").hide();
@@ -448,5 +466,25 @@
         $("#loading").hide();
       });
     });
+
+    $(":checkbox").click(function(){
+      if($(this).is(":checked")){
+        $(".content-anonymous").fadeIn();
+        $(".real-green-small").hide();
+        $("#project_sponsor_logo, #project_sponsor_mission").removeAttr("required").rules("remove");
+        $("#project_sponsor_site").removeAttr("required").attr("style", "border: none !important").rules("remove");
+      }else{
+        $(".content-anonymous").fadeOut();
+        $(".real-green-small").show();
+        $("#project_sponsor_logo, #project_sponsor_mission").attr("required", "required").rules( "add", {
+          required: true
+        });
+        $("#project_sponsor_site").removeAttr("style").attr("required", "required").rules("add", {
+          required: true,
+          requiredUrl: true
+        });
+      }
+    });
+
   });
 / $.get("/projects/" + projectId + "/sponsors/" + this.value + "/get_sponsorship_levels.js")
