@@ -2,9 +2,9 @@ $(".admin-menu li").removeClass("active");
 $(".founder").parent().addClass("active");
 
 $(document).ajaxStop(function(){
-  $("img").lazyload({
-      effect: "fadeIn"
-  });
+//  $("img").lazyload({
+//      effect: "fadeIn"
+//  });
 });
 
 $('.main-content').html("<%=j render :partial => 'founder' %>");
