@@ -1,8 +1,8 @@
 $('.menu-messages').removeClass('active');
 $('.cover').addClass('active').append("<div class='arrow'></div>").append('<div class="arrow"></div>');
 $(document).ajaxStop(function(){
-  $("img").lazyload({
-      effect: "fadeIn"
-  });
+  //$("img").lazyload({
+      //effect: "fadeIn"
+  //});
 });
 $('.content-manage-project').html("<%=j render 'manage_photos' %>");
