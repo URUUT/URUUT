@@ -5,6 +5,7 @@ class SponsorsController < ApplicationController
 
   def new
     @sponsor = Sponsor.new
+    @sponsor.anonymous = false
     @project = Project.find(params[:project_id])
     session[:path] = "sponsor_new"
     case params[:level]
@@ -64,6 +65,7 @@ class SponsorsController < ApplicationController
     @sponsor = Sponsor.find(params[:id])
     @project = Project.find(params[:project_id])
     @project_sponsor = ProjectSponsor.unscoped.where(project_id: @project.id, sponsor_id: @sponsor.id).first
+    @sponsor.anonymous = @project_sponsor.anonymous
     @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
     case @project_sponsor.level_id
       when 1
@@ -95,6 +97,8 @@ class SponsorsController < ApplicationController
   end
 
   def update
+    params[:project_sponsor][:anonymous] = params[:sponsor][:anonymous]
+    params[:sponsor].delete("anonymous")
     @sponsor = Sponsor.find(params[:id])
     @project_sponsor = ProjectSponsor.unscoped.where(project_id: params[:project_id], sponsor_id: @sponsor.id).first
     sponsor = params[:sponsor]
@@ -255,6 +259,8 @@ class SponsorsController < ApplicationController
   end
 
   def create_sponsor
+    params[:project_sponsor][:anonymous] = params[:sponsor][:anonymous]
+    params[:sponsor].delete("anonymous")
     sponsor = params[:sponsor]
     sponsor_name = sponsor[:payment_type].eql?("Wire Transfer") ? sponsor[:name] : sponsor[:card_name]
     project = Project.find(params[:project_id])
