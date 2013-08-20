@@ -14,7 +14,6 @@
         .span4
           %p
           = @project_sponsors[1].last.mission
-
 - if !@project.large_image.blank?
   #large_image{:style => "background:url(#{@project.large_image}); background-size: cover"}
     .funding-info
@@ -170,23 +169,13 @@
               - if @project_sponsors.include?(2)
                 %h4 Gold Level Sponsors
                 - @project_sponsors[2].each do |sponsor|
-                  .sponsor
-                    = link_to(image_tag(sponsor.logo, class: "img-polaroid"), recognize_url(sponsor.site), target: "_blank")
-                    %h5
-                      = link_to(sponsor.name, recognize_url(sponsor.site), target: "_blank", style: "color: #70bf4c;")
-                    - unless sponsor.site.nil?
-                      = link_to(strip_url(sponsor.site), recognize_url(sponsor.site), target: "_blank", style: "")
+                  = sponsor_item(sponsor)
           - if @project_sponsors.include?(3)
             .silver-level
               - if @project_sponsors.include?(3)
                 %h4 Silver Level Sponsors
                 - @project_sponsors[3].each do |sponsor|
-                  .sponsor
-                    = link_to(image_tag(sponsor.logo, class: "img-polaroid"), recognize_url(sponsor.site), target: "_blank")
-                    %h5
-                      = link_to(sponsor.name, recognize_url(sponsor.site), target: "_blank", style: "color: #70bf4c;")
-                    - unless sponsor.site.nil?
-                      = link_to(strip_url(sponsor.site), recognize_url(sponsor.site), target: "_blank", style: "")
+                  = sponsor_item(sponsor)
 
       %ul#myTab1.tab-nav
         %li.active
@@ -536,7 +525,10 @@
             %div.project-sponsors-link
               - if @project_sponsors.include?(4)
                 - @project_sponsors[4].each do |sponsor|
-                  = link_to(sponsor.name, recognize_url(sponsor.site), target: "_blank")
+                  - if sponsor.anonymous
+                    = link_to("ANONYMOUS SPONSOR", "javascript:void(0)")
+                  - else
+                    = link_to(sponsor.name, recognize_url(sponsor.site), target: "_blank")
         %div{style: "margin-top: 5px;"}
           - if user_signed_in?
             %a.btn{:href => "/projects/#{@project.id}/sponsors/new?level=bronze"}
