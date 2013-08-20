@@ -76,6 +76,12 @@ edit_subscription =
 
 
 $ ->
+  $(":checkbox").click ->
+    if $(this).is(":checked")
+      $(".content-anonymous").fadeIn()
+    else
+      $(".content-anonymous").fadeOut()
+
   $("#new_donation").validate
     messages:
       year:
