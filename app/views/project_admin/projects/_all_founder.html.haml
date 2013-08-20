@@ -2,29 +2,19 @@
   - @founders.each do |founder|
     - if founder.type_founder.eql?("sponsor")
       %tr
-<<<<<<< HEAD
-        %td= filepicker_image_tag founder.logo, width: 37, height: 37, fit: 'scale'
-        %td= truncate(founder.name, length: 17)
-=======
         - if founder.anonymous
           - founder.name = "ANONYMOUS SPONSOR"
           %td= image_tag "anonymous.png", width: 37, height: 37
         - else
           %td= filepicker_image_tag founder.logo, width: 37, height: 37, fit: 'scale'
         %td{style: "width: 210px;"}= truncate(founder.name, length: 17)
->>>>>>> 348ca50c66482fab94b2d2f17c448da16b306113
         %td= "#{amount_converter(founder.cost)}"
         %td= truncate("#{founder.sponsorship_level.name} sponsor", length: 17)
         %td= founder.updated_at.strftime("%m/%d")
     - else
       %tr
-<<<<<<< HEAD
-        %td= image_tag avatar_project_admin(founder.user.avatar), style: "width:37px"
-        %td= truncate([founder.user.first_name, founder.user.last_name].join(" "), length: 17)
-=======
         %td= image_tag avatar_project_admin(founder.user.avatar, founder.anonymous), style: "width:37px"
         %td{style: "width: 210px;"}= donor_name_project_admin(truncate([founder.user.first_name, founder.user.last_name].join(" "), length: 17), founder.anonymous)
->>>>>>> 348ca50c66482fab94b2d2f17c448da16b306113
         %td= "#{amount_converter(founder.amount)}"
         %td= truncate(founder.perk_name, length: 17)
         %td= founder.updated_at.strftime("%m/%d")

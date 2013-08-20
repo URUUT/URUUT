@@ -52,17 +52,6 @@
     - if notice
       = notice
     %noscript JavaScript is not enabled and is required for this form. First enable it in your web browser settings.
-<<<<<<< HEAD
-  %div
-    -# = f.label :anonymous, class: "label-green" do
-    -#   ANONYMOUS DONATION
-    -#   %span.error-container
-    -# = f.check_box :anonymous, {label: false, style: "margin-bottom: 5px"}
-    -# I would like to make this donation anonymously.
-    -# .content-anonymous{style: "margin-left: 3%; display:none"}
-    -#   (If checked, your information will be witheld from the project owner as well as from any other audience, and you will not receive the selected perk.)
-
-=======
   %div.anonymous-check
     = f.label :anonymous, class: "label-green" do
       ANONYMOUS DONATION
@@ -71,7 +60,6 @@
     I would like to make this donation anonymously.
     .content-anonymous{style: "display: none"}
       (If checked, your information will be witheld from the project owner as well as from any other audience, and you will not receive the selected perk.)
->>>>>>> 348ca50c66482fab94b2d2f17c448da16b306113
   .actions
     %hr
     %p{:style => "font:normal 12px/18px 'Proxima Nova';color:#403e37"}
