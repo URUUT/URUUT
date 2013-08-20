@@ -55,11 +55,6 @@ class Project < ActiveRecord::Base
   end
 
   def individual_donors(page_num)
-<<<<<<< HEAD
-    donations_group = self.donations.group_by{ |p| p.perk_name  }.sort_by{|_key, value| value.first.amount }.reverse
-    donations = donations_group.map { |donation| donation[1] }.flatten
-    Kaminari.paginate_array(donations).page(page_num).per(25)
-=======
     # donations_group = self.donations.group_by{ |p| p.perk_name  }.sort_by{|_key, value| value.first.amount }.reverse
     # donations = donations_group.map { |donation| donation[1] }.flatten
     # Kaminari.paginate_array(donations).page(page_num).per(25)
@@ -92,7 +87,6 @@ class Project < ActiveRecord::Base
     end
 
     donations_data
->>>>>>> 348ca50c66482fab94b2d2f17c448da16b306113
   end
 
   def list_recepient
