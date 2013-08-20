@@ -60,8 +60,21 @@ class Project < ActiveRecord::Base
     # donations_group = self.donations.group_by{ |p| p.perk_name  }.sort_by{|_key, value| value.first.amount }.reverse
     # donations = donations_group.map { |donation| donation[1] }.flatten
     # Kaminari.paginate_array(donations).page(page_num).per(25)
+    donations_data = individual_donors_by_type("real") + individual_donors_by_type("anonymous")
+
+    donations_group = group_and_sort_donor(donations_data, self.id)
+    donations = donations_group.map { |donation| donation[1] }.flatten
+    Kaminari.paginate_array(donations).page(page_num).per(25)
+  end
+
+  def individual_donors_by_type(type)
     donations_data = []
-    users_data = self.donations.group_by { |donation| donation.user_id }.map {|donation| [ donation[0], total_donation_by_user(donation[1]), last_donation_by_user(donation[1]) ] }
+    donors = if type.eql?("anonymous")
+      self.donations.where(anonymous: true)
+    else
+      self.donations.where(anonymous: false)
+    end
+    users_data = donors.group_by { |donation| donation.user_id }.map {|donation| [ donation[0], total_donation_by_user(donation[1]), last_donation_by_user(donation[1]), donation[1].first.anonymous ] }
     donations_levels = group_and_sort_donor(self.donations, self.id)
     donations_levels_and_amount = donations_levels.map { |donation| [ donation[0], get_amount_by_perk_name(donation[0], self.id) ] }
 
@@ -72,12 +85,10 @@ class Project < ActiveRecord::Base
           levels << donation_level[0]
         end
       end
-      donations_data << Donation.new(project_id: self.id, amount: user[1], user_id: user[0], perk_name: levels.first, last_founded: user[2])
+      donations_data << Donation.new(project_id: self.id, amount: user[1], user_id: user[0], perk_name: levels.first, last_founded: user[2], anonymous: user[3])
     end
 
-    donations_group = group_and_sort_donor(donations_data, self.id)
-    donations = donations_group.map { |donation| donation[1] }.flatten
-    Kaminari.paginate_array(donations).page(page_num).per(25)
+    donations_data
   end
 
   def group_and_sort_donor(data, project_id)
@@ -104,7 +115,7 @@ class Project < ActiveRecord::Base
   def list_recepient
     data = []
     level_ids = self.project_sponsors.map(&:level_id).uniq.sort{ |x,y| y <=> x }
-    perk_names = self.donations.map(&:perk_name).uniq
+    perk_names = self.donations.where(anonymous: false).map(&:perk_name).uniq
     sponsorship_levels = SponsorshipLevel.where("id IN (?)", level_ids).uniq
 
     data.push(["All Project Sponsors","All Project Sponsors", {"data-name" => "All Project Sponsors"}]) unless sponsorship_levels.empty?

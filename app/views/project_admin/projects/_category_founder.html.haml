@@ -4,8 +4,8 @@
     %table.table.table-striped
       - founders[1].each do |founder|
         %tr
-          %td{style: "text-align: left"}= image_tag avatar_project_admin(founder.user.avatar), style: "width:37px"
-          %td{style: "width: 260px; text-align: left"}= truncate([founder.user.first_name, founder.user.last_name].join(" "), length: 17)
+          %td{style: "text-align: left"}= image_tag avatar_project_admin(founder.user.avatar, founder.anonymous), style: "width:37px"
+          %td{style: "width: 260px; text-align: left"}= donor_name_project_admin(truncate([founder.user.first_name, founder.user.last_name].join(" "), length: 17), founder.anonymous)
           %td{style: "text-align: center"}= "#{amount_converter(founder.amount)}"
           %td{style: "text-align: center"}= truncate(founders[0], length: 17)
           %td{style: "text-align: center"}= founder.last_founded
