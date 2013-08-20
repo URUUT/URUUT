@@ -1,32 +1,19 @@
-- if !@sponsorship_benefits.blank? && @project.sponsor_permission
+- if !@sponsorship_benefits.blank? && @project.sponsor_permission && @project_sponsors.include?(1)
   .platinum-level-container
     .container
       .row
-        - if @project_sponsors.include?(1)
-          .span8
-            = image_tag @project_sponsors[1].last.logo, :class => "sponsor-logo img-polaroid"
-            .sponsor-info
-              %h5
-                Platinum Level Sponsor
-              %h3
-                = @project_sponsors[1].last.name
-              - unless @project_sponsors[1].last.site.nil?
-                = link_to(strip_url(@project_sponsors[1].last.site), recognize_url(@project_sponsors[1].last.site), target: "_blank")
-          .span4
-            %p
-            = @project_sponsors[1].last.mission
-        - else
-          .span2
-            %p{style: "color: #fff; font-family: 'Proxima Nova Semi', sans-serif;font-size: 11px; letter-spacing: 2px;"}
-              SPONSORSHIP OPPORTUNITIES:
-          .span5
-            - if user_signed_in?
-              = link_to new_project_sponsor_path(@project.id), :class => 'btn', :style => "background: #70bf4c; color:#fff; text-decoration:none; font-family: 'Proxima Nova Semi', sans-serif; font-style:normal;" do
-                Become A Sponsor ►
-            - else
-              = link_to "javascript:void(0)", "url-data" => "/projects/#{@project.id}/sponsors/new", :class => 'btn unsignin', :style => "background: #70bf4c; color:#fff; text-decoration:none; font-family: 'Proxima Nova Semi', sans-serif; font-style:normal;" do
-                Become A Sponsor ►
-
+        .span8
+          = image_tag @project_sponsors[1].last.logo, :class => "sponsor-logo img-polaroid"
+          .sponsor-info
+            %h5
+              Platinum Level Sponsor
+            %h3
+              = @project_sponsors[1].last.name
+            - unless @project_sponsors[1].last.site.nil?
+              = link_to(strip_url(@project_sponsors[1].last.site), recognize_url(@project_sponsors[1].last.site), target: "_blank")
+        .span4
+          %p
+          = @project_sponsors[1].last.mission
 - if !@project.large_image.blank?
   #large_image{:style => "background:url(#{@project.large_image}); background-size: cover"}
     .funding-info
@@ -182,23 +169,13 @@
               - if @project_sponsors.include?(2)
                 %h4 Gold Level Sponsors
                 - @project_sponsors[2].each do |sponsor|
-                  .sponsor
-                    = link_to(image_tag(sponsor.logo, class: "img-polaroid"), recognize_url(sponsor.site), target: "_blank")
-                    %h5
-                      = link_to(sponsor.name, recognize_url(sponsor.site), target: "_blank", style: "color: #70bf4c;")
-                    - unless sponsor.site.nil?
-                      = link_to(strip_url(sponsor.site), recognize_url(sponsor.site), target: "_blank", style: "")
+                  = sponsor_item(sponsor)
           - if @project_sponsors.include?(3)
             .silver-level
               - if @project_sponsors.include?(3)
                 %h4 Silver Level Sponsors
                 - @project_sponsors[3].each do |sponsor|
-                  .sponsor
-                    = link_to(image_tag(sponsor.logo, class: "img-polaroid"), recognize_url(sponsor.site), target: "_blank")
-                    %h5
-                      = link_to(sponsor.name, recognize_url(sponsor.site), target: "_blank", style: "color: #70bf4c;")
-                    - unless sponsor.site.nil?
-                      = link_to(strip_url(sponsor.site), recognize_url(sponsor.site), target: "_blank", style: "")
+                  = sponsor_item(sponsor)
 
       %ul#myTab1.tab-nav
         %li.active
@@ -277,20 +254,14 @@
 
     .span4.sidebar
       - if !@sponsorship_benefits.blank? && @project.sponsor_permission
-        %h4 BECOME A SPONSOR
+        %h4 DONATE OR SPONSOR?
         .well
-          %h3.label-green{:style => "font-size:20px;letter-spacing:1px;line-height:100%;margin:0;"} PROJECT SPONSORSHIP
-          %p{:style => "font:normal 12px/18px 'Proxima Nova', arial, sans-serif;color:#403e37;margin-bottom:40px;"} We can’t do this alone. Do your part, by becoming a project sponsor. URUUT Partner-Funding depends on individual contributors as well as project sponsorship from businesses and corporate and family foundations. Click the button below to get more details and become a project sponsor.
-          - if user_signed_in?
-            = link_to new_project_sponsor_path(@project.id), :class => 'btn sponsors', :style => 'margin-top:10px;' do
-              Become A Sponsor ►
-          - else
-            = link_to "javascript:void(0)", "url-data" => "/projects/#{@project.id}/sponsors/new", class: "btn sponsors unsignin", style: "margin-top: 10px;" do
-              Become A Sponsor ►
-          / = button_tag :class => "btn sponsors", :style => "margin-top: 10px;" do
-          /   Get Started
-          /   %span
-
+          %p{:style => "font:normal 12px/18px 'Proxima Nova', arial, sans-serif;color:#403e37;margin-bottom:25px;"} 
+            %b Uruut's crowfunding platform encourages participation from multiple audiences. Select the tab below that best fits your description:
+          %h3.label-green{:style => "font-size:15px;letter-spacing:1px;line-height:100%;margin:0;"} DONATE
+          %p{:style => "font:normal 12px/18px 'Proxima Nova', arial, sans-serif;color:#403e37;margin-bottom:25px;"} You are an individual who cares about specific causes and wants to support that cause.
+          %h3.label-green{:style => "font-size:15px;letter-spacing:1px;line-height:100%;margin:0;"} SPONSOR
+          %p{:style => "font:normal 12px/18px 'Proxima Nova', arial, sans-serif;color:#403e37"} You are an a bussiness, foundation or a family that wants to firmly, visibly associate yourself with a cause or project.
         .sidebar-tab
         %ul#myTab2.tab-nav
           %li.active
@@ -554,7 +525,10 @@
             %div.project-sponsors-link
               - if @project_sponsors.include?(4)
                 - @project_sponsors[4].each do |sponsor|
-                  = link_to(sponsor.name, recognize_url(sponsor.site), target: "_blank")
+                  - if sponsor.anonymous
+                    = link_to("ANONYMOUS SPONSOR", "javascript:void(0)")
+                  - else
+                    = link_to(sponsor.name, recognize_url(sponsor.site), target: "_blank")
         %div{style: "margin-top: 5px;"}
           - if user_signed_in?
             %a.btn{:href => "/projects/#{@project.id}/sponsors/new?level=bronze"}

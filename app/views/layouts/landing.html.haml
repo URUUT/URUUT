@@ -82,7 +82,7 @@
         %meta{:property => "og:description", :content => "Giving You The Power To Create A Better Community"}
       = favicon_link_tag 'favicon.ico'
       = stylesheet_link_tag    "default/application", "trontastic/jquery-ui-1.8.22.custom.css", "leaflet.css", "style.css.scss", "prettyPhoto.css", :media => "all"
-      = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js", "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js", "application", "https://js.stripe.com/v1/", "jquery.prettyPhoto.js", :media => "all"
+      = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js", "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js", "application", "https://js.stripe.com/v1/", "jquery.prettyPhoto.js", "jquery.lazyload.js", :media => "all"
       /[if lt IE 9]
         = stylesheet_link_tag "ie-only.css.scss"
         = javascript_include_tag "selectivizr-min"
@@ -96,6 +96,10 @@
     %body{:class => "#{controller_name} #{action_name}"}
       #fb-root
         :javascript
+
+          $(function(){
+            //$("img").lazyload();
+          })
 
           window.fbAsyncInit = function() {
             // init the FB JS SDK
@@ -146,6 +150,7 @@
   }
 
   $(function(){
+    //$("img").lazyload();
     $('form fieldset p a').addClass('btn');
     $('form [id*="edit_project"]').h5Validate();
     $('form [id*="new_project"]').h5Validate();

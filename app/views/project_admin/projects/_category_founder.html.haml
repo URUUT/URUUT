@@ -4,11 +4,19 @@
     %table.table.table-striped
       - founders[1].group_by {|donation| donation.user_id }.each do |user_id, founder|
         %tr
+<<<<<<< HEAD
           %td= image_tag avatar_project_admin(founder.last.user.avatar), style: "width:37px"
           %td= truncate([founder.last.user.first_name, founder.last.user.last_name].join(" "), length: 17)
           %td= "#{amount_converter(total_amount_by_donor(founder))}"
           %td= truncate(founders[0], length: 17)
           %td= founder.sort_by { |founder| founder.updated_at }.last.updated_at.strftime("%m/%d")
+=======
+          %td{style: "text-align: left"}= image_tag avatar_project_admin(founder.user.avatar, founder.anonymous), style: "width:37px"
+          %td{style: "width: 260px; text-align: left"}= donor_name_project_admin(truncate([founder.user.first_name, founder.user.last_name].join(" "), length: 17), founder.anonymous)
+          %td{style: "text-align: center"}= "#{amount_converter(founder.amount)}"
+          %td{style: "text-align: center"}= truncate(founders[0], length: 17)
+          %td{style: "text-align: center"}= founder.last_founded
+>>>>>>> 348ca50c66482fab94b2d2f17c448da16b306113
 - else
   - sponsors = project_sponsor_by_level(@founders, params[:page])
   - sponsors.each do |sponsor_level, sponsors|
@@ -19,8 +27,17 @@
       %table.table.table-striped
         - sponsors.each do |sponsor|
           %tr
+<<<<<<< HEAD
             %td= filepicker_image_tag sponsor.logo, width: 37, height: 37, fit: 'scale'
             %td= truncate(sponsor.name, length: 17)
+=======
+            - if sponsor.anonymous
+              - sponsor.name = "ANONYMOUS SPONSOR"
+              %td= image_tag "anonymous.png", width: 37, height: 37
+            - else
+              %td= filepicker_image_tag sponsor.logo, width: 37, height: 37, fit: 'scale'
+            %td{style: "width: 160px;"}= truncate(sponsor.name, length: 17)
+>>>>>>> 348ca50c66482fab94b2d2f17c448da16b306113
             %td= "#{amount_converter(sponsor.cost)}"
             %td= truncate("#{sponsor.sponsorship_level.name} sponsor", length: 17)
             %td= sponsor.updated_at.strftime("%m/%d")

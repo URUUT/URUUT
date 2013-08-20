@@ -204,9 +204,18 @@ module ApplicationHelper
     Donation.where(perk_name: perk_name, project_id: project.id).group_by { |donation| donation.user_id }.count
   end
 
-  def avatar_project_admin(avatar_link)
-    avatar_link = "default-user.png" if avatar_link.eql?("/images/default-avatar.png")
+  def avatar_project_admin(avatar_link, anonymous)
+    if anonymous
+      avatar_link = "anonymous.png"
+    else
+      avatar_link = "default-user.png" if avatar_link.eql?("/images/default-avatar.png")
+    end
     avatar_link
+  end
+
+  def donor_name_project_admin(name, anonymous)
+    name = "Anonymous Donor" if anonymous
+    name
   end
 
   def get_interval_chart(project)

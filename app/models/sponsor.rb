@@ -8,7 +8,7 @@ class Sponsor < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :payment_type,
                   :phone, :org_name, :mission, :card_name
 
-  attr_accessor :card_name
+  attr_accessor :card_name, :anonymous
   # attr_accessible :title, :body
   has_many :project_sponsors
 
