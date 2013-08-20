@@ -1,1 +1,6 @@
+$(document).ajaxStop(function(){
+  $("img").lazyload({
+      effect: "fadeIn"
+  });
+});
 $(".info-table").html("<%= escape_javascript(render 'founding_table') %>");
