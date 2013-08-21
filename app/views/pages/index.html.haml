@@ -1,5 +1,9 @@
 = render "partials/banner_map"
 
+.beta-banner
+  .container
+    %p PUBLIC BETA NOTICE: We are currently in our public beta phase. As such, we only have select projects live and in the funding phase.  We are accepting submissions from new projects and reviewing the many amazing projects we have already received. If you have a project that needs funding, apply to get funding now by clicking the "Get Funded" button below.
+
 - if params[:keyword]
   = render "results_keyword"
 - else

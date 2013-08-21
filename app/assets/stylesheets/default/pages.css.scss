@@ -483,6 +483,13 @@ select {
 	}
 }
 
+.beta-banner {
+	background: #70bf4c;
+	color:#fff;
+	font-family: 'Proxima Nova';
+	font-size:14px;
+	padding:15px 0 5px;}
+
 .pages {
   .texture {
     background: url(image-path('bg-tile.jpg')) top left repeat;
@@ -1067,6 +1074,18 @@ nav.navbar-inner {
   height:90px;
   position:relative;
   width:100%;
+  .btn {
+	background:url(image-path('bg-tile.jpg')) top left repeat;
+	border-radius: 3px;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+	display:inline-block;
+  	font-size:18px;
+  	margin:4px 3px;
+	padding:20px 35px;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+	width: 160px;
+	&:hover {
+		color:#fff;}}
   hr {
     border-top:1px solid #e6e6e6;
     border-bottom:1px solid #f3f3f3;
@@ -1186,6 +1205,48 @@ h5.time-left {
 .recent .project {
 	margin-left:0 !important;
 }
+
+.ending-soon {
+	margin-bottom:0;}
+
+.potential {
+	h3 {
+		color:#70bf4c;
+	}
+	.funding {
+		background:#70bf4c;
+		height:auto;
+		p {
+			color:#fff;
+			font-family:'Proxima Nova Semi';
+			letter-spacing:1px;
+			margin:0;
+			padding:15px 0;
+			text-align:center;
+			width:100%;}}}
+
+.potential-description {
+	font-family: 'Proxima Nova';
+	letter-spacing:normal;
+	line-height:1.5;
+	margin-top:-40px;
+	text-align:center;
+	text-transform:capitalize;
+	& + .btn {
+		background: #70bf4c;
+		border-radius: 5px;
+		behavior: url("/assets/PIE-1.0.0/PIE.htc");
+		box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.45);
+		color: #fff;
+		display:inline-block;
+		font-size: 18px;
+		left:50%;
+		margin-bottom:50px;
+		margin-left:-100px;
+		margin-top:10px;
+		padding: 22px;
+		text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.45);
+		width: auto !important;}}
 
 .ending-soon {
 	background:#eee;
