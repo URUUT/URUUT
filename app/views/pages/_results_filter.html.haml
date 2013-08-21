@@ -12,17 +12,76 @@
         = image_tag "3.gif", style: "margin-left: 20%"
       .project-all-content
         = render "project", :projects => @projects
+      .potential
+        %div.project
+          .project-img
+            = link_to image_tag("project_started.jpg", :class => "project-image"), "#" 
+          .content
+            .cont-desc
+              %h3 Your Project
+              %p.short-description We are now accepting applications for projects. If you have a project that needs funding apply to get funding now. 
+            .location
+              %span &nbsp;
+          .funding
+            %p
+              = link_to "Get Funded ►", new_project_path, :class => "btn" 
 
-//.ending-soon.clearfix
-//  .container
-//    %p.sections
-//      = image_tag 'ending-soon-icon.png'
-//      Projects Ending Soon
+.ending-soon.clearfix
+  .container
+    %p.sections
+      = image_tag 'ending-soon-icon.png'
+      Potential Future Projects
+    .project-all
+      .project-all-content.potential
+        %div.project
+          .project-img
+            = link_to image_tag("neighborhood-improvement.jpg", :class => "project-image"), "#" 
+          .content
+            .cont-desc
+              %h3 NEIGHBORHOOD IMPROVEMENT 
+              %p.short-description We are currently looking for and reviewing projects that will improve neighborhoods.
 
-//      = link_to "View All", "#", :class => 'view-all'
+            .location
+              %span &nbsp;
+          .funding
+            %p BETTER YOUR NEIGHBORHOOD 
 
-//      = render "project", :projects => @ending
+      .project-all-content.potential
+        %div.project
+          .project-img
+            = link_to image_tag("parks-recreation.jpg", :class => "project-image"), "#" 
+          .content
+            .cont-desc
+              %h3 PARKS AND RECREATION  
+              %p.short-description We are currently looking for and reviewing projects that will improve parks and recreation programs. 
 
+            .location
+              %span &nbsp;
+          .funding
+            %p IMPROVE YOUR PARK
+      
+      .project-all-content.potential
+        %div.project
+          .project-img
+            = link_to image_tag("arts-culture.jpg", :class => "project-image"), "#" 
+          .content
+            .cont-desc
+              %h3 ARTS / CULTURE
+              %p.short-description We are currently looking for and reviewing projects that will grow and support the arts.
+
+            .location
+              %span &nbsp;
+          .funding
+            %p SUPPORT THE ARTS
+
+      .clearfix
+
+      %h3.potential-description 
+        These categories are just a few examples from our early interactions. 
+        %br
+        If your project doesn't fall into one of them, we still want to hear all about it.
+
+      = link_to "Get Funded ►", new_project_path, :class => "btn"
 //.featured-success.clearfix
 //  .container
 //    %p.sections
