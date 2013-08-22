@@ -15,7 +15,7 @@
           %p
           = @project_sponsors[1].last.mission
 - if !@project.large_image.blank?
-  #large_image{:style => "background:url(#{@project.large_image});filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=#{@project.large_image}, sizingMethod=scale); -ms-filter: 'progid:DXImageTransform.Microsoft.AlphaImageLoader(src=#{@project.large_image}, sizingMethod=scale)';"}
+  #large_image{:style => "background:url(#{@project.large_image});"}
     .funding-info
       .container
         .span8
