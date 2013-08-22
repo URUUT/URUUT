@@ -1480,7 +1480,7 @@ div[id^='step'] {
 
 .projects.show {
 	#large_image {
-		background-position:center center;
+		background-position:top center !important;
 		background-size:cover !important;
 	}
 

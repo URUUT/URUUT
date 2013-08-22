@@ -199,8 +199,7 @@
               - video_seed = @project.seed_video.gsub("http", "https").gsub(".be", "be.com/embed")
             %iframe{:height => "413", :src => video_seed, :width => "620"}
           - elsif @project.seed_mime_type.eql?("image") and !@project.seed_image.blank?
-            / Image URL below needs to keep the convert addition to url to get smaller thumbnail image, please leave intact
-            = image_tag "#{@project.seed_image}/convert?w=190&h=120", style: "float:left; width:100%"
+            = image_tag "#{@project.seed_image}", style: "float:left; width:100%"
           %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= @project.story
         - unless @project.project_updates.empty?
           #growth.tab-pane
