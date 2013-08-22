@@ -1479,6 +1479,11 @@ div[id^='step'] {
       text-transform:uppercase;}}}
 
 .projects.show {
+	#large_image {
+		background-position:center center;
+		background-size:cover !important;
+	}
+
 	.fb-count {
 		background:url(image-path('fb-count.png')) top left no-repeat;
 		display:inline-block;
