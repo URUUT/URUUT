@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #step-2, #step-3 {
-	display:none; }
+    display:none; }
 
 legend.heading {
   border-bottom: 5px solid #4ac94a;
@@ -20,36 +20,36 @@ legend.heading {
 }
 
 .project-details {
-	margin:15px 0;
-	li {
-		display:inline-block;
-		font:bold 26px/26px "Proxima Nova Semi", arial, sans-serif;
+    margin:15px 0;
+    li {
+        display:inline-block;
+        font:bold 26px/26px "Proxima Nova Semi", arial, sans-serif;
     position:relative;
-		top:0;
-		text-align:left;
-		margin:0;
-		vertical-align:top;
-		&:first-child {
+        top:0;
+        text-align:left;
+        margin:0;
+        vertical-align:top;
+        &:first-child {
       width:70%;
       span.small {
         width:50px;}}
     span.small {
       color:#fff;
       display:inline-block;
-			font:normal 10px/15px "Rubrik Medium", arial, sans-serif;
+            font:normal 10px/15px "Rubrik Medium", arial, sans-serif;
       letter-spacing:1px;
       margin-top:-5px;
       position:relative;
-			top:0;
+            top:0;
       width:35px;}
-		div {
-			height:20px;
-			width:250px; }}}
+        div {
+            height:20px;
+            width:250px; }}}
 
 form.edit_project, form.new_project {
-	float:left;
+    float:left;
   margin-left:50px;
-	width:570px;
+    width:570px;
 }
 
 .green-font{
@@ -79,7 +79,7 @@ form.edit_project, form.new_project {
  */
 
 form.edit_project fieldset label, form.new_project fieldset label {
-	font-size:13px;
+    font-size:13px;
   font-weight:400;
 }
 
@@ -88,112 +88,128 @@ form.edit_project input[type=submit] {
 }
 
 form {
-	input[type=text], input[type=email], input[type=password]  {
-		display:block;
-		margin-bottom:15px;}
-	ul.pager {
-		display:inline-block;}}
+    input[type=text], input[type=email], input[type=password]  {
+        display:block;
+        margin-bottom:15px;}
+    ul.pager {
+        display:inline-block;}}
 
 #steps {
-	display:block;
-	margin:-15px auto 50px;
-	overflow:hidden;
-	padding-right:20px;
-	text-align:center;
-	li {
-		background:#dfdfdf;
-		color:#fff;
+    display:block;
+    margin:-15px auto 50px;
+    overflow:hidden;
+    padding-right:20px;
+    text-align:center;
+    li {
+        background:#dfdfdf;
+        color:#fff;
     cursor:pointer;
-		display:inline-block;
+        display:inline-block;
     font-family:'Lato', sans-serif;
-		font-size:16px;
-		font-weight:200;
-		list-style-type:none;
-		margin-right:20px;
-		padding:5px 35px 5px 30px;
-		position:relative;
+        font-size:16px;
+        font-weight:200;
+        list-style-type:none;
+        margin-right:20px;
+        padding:5px 35px 5px 30px;
+        position:relative;
     &:hover {
       background:#5ea240;
       &:after {
         border-top: 50px solid transparent; /* Go big on the size, and let overflow hide */
         border-bottom: 50px solid transparent;
         border-left: 30px solid #5ea240;}}
-		&:after {
-			content: " ";
-			display: block;
-			width: 0;
-			height: 0;
-			border-top: 50px solid transparent;           /* Go big on the size, and let overflow hide */
-			border-bottom: 50px solid transparent;
-			border-left: 30px solid #dfdfdf;
-			position: absolute;
-			top: 50%;
-			margin-top: -50px;
-			left: 100%;
-			z-index: 2;}
-		&:before {
-			content: " ";
-			display: block;
-			width: 0;
-			height: 0;
-			border-top: 50px solid transparent;
-			border-bottom: 50px solid transparent;
-			border-left: 30px solid white;
-			position: absolute;
-			top: 50%;
-			margin-top: -50px;
-			margin-left: 1px;
-			left: 100%;
-			z-index: 1;}
-		&.current {
-			background:#70bf4c;
-			color:#fff;
-			&:after {
-				content: " ";
-				display: block;
-				width: 0;
-				height: 0;
-				border-top: 50px solid transparent;           /* Go big on the size, and let overflow hide */
-				border-bottom: 50px solid transparent;
-				border-left: 30px solid #70bf4c;
-				position: absolute;
-				top: 50%;
-				margin-top: -50px;
-				left: 100%;
-				z-index: 2;}
-			&:before {
-				content: " ";
-				display: block;
-				width: 0;
-				height: 0;
-				border-top: 50px solid transparent;
-				border-bottom: 50px solid transparent;
-				border-left: 30px solid white;
-				position: absolute;
-				top: 50%;
-				margin-top: -50px;
-				margin-left: 1px;
-				left: 100%;
-				z-index: 1;}}
-		span {
-			display:inline-block;
-			font-size:16px;
-			font-weight:200;
+        &:after {
+            content: " ";
+            display: block;
+            width: 0;
+            height: 0;
+            border-top: 50px solid transparent;           /* Go big on the size, and let overflow hide */
+            border-bottom: 50px solid transparent;
+            border-left: 30px solid #dfdfdf;
+            position: absolute;
+            top: 50%;
+            margin-top: -50px;
+            left: 100%;
+            z-index: 2;}
+        &:before {
+            content: " ";
+            display: block;
+            width: 0;
+            height: 0;
+            border-top: 50px solid transparent;
+            border-bottom: 50px solid transparent;
+            border-left: 30px solid white;
+            position: absolute;
+            top: 50%;
+            margin-top: -50px;
+            margin-left: 1px;
+            left: 100%;
+            z-index: 1;}
+        &.current {
+            background:#70bf4c;
+            color:#fff;
+            &:after {
+                content: " ";
+                display: block;
+                width: 0;
+                height: 0;
+                border-top: 50px solid transparent;           /* Go big on the size, and let overflow hide */
+                border-bottom: 50px solid transparent;
+                border-left: 30px solid #70bf4c;
+                position: absolute;
+                top: 50%;
+                margin-top: -50px;
+                left: 100%;
+                z-index: 2;}
+            &:before {
+                content: " ";
+                display: block;
+                width: 0;
+                height: 0;
+                border-top: 50px solid transparent;
+                border-bottom: 50px solid transparent;
+                border-left: 30px solid white;
+                position: absolute;
+                top: 50%;
+                margin-top: -50px;
+                margin-left: 1px;
+                left: 100%;
+                z-index: 1;}}
+        span {
+            display:inline-block;
+            font-size:16px;
+            font-weight:200;
       letter-spacing:2px;
       text-transform:uppercase;
-			&:before {
-				content:':';}}}}
+            &:before {
+                content:':';}}}}
 
 p[id*='commands'] {
-	margin-top:20px;
-	text-align:right;
+    margin-top:20px;
+    text-align:right;
 }
 
 p[id*='commands'] .btn {
-	margin-left:20px;
+    margin-left:20px;
 }
 
 strong, b {
-	font-weight: 400;
-	font-family: 'Proxima Nova Semi', sans-serif;
+    font-weight: 400;
+    font-family: 'Proxima Nova Semi', sans-serif;
 }
+
+.donor-sponsor-type{
+    .description{
+      font:normal 12px/18px 'Proxima Nova', arial, sans-serif; color:#403e37; margin-bottom:25px;
+    }
+    .type-header{
+      font-size:15px; letter-spacing:1px; line-height:100%; margin:0;
+    }
+    .type-content{
+      font:normal 12px/18px 'Proxima Nova', arial, sans-serif; color:#403e37;
+    }
+    .type-content-top{
+      margin-bottom:25px;
+    }
+}
+
