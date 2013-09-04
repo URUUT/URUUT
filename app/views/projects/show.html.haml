@@ -254,13 +254,13 @@
     .span4.sidebar
       - if !@sponsorship_benefits.blank? && @project.sponsor_permission
         %h4 DONATE OR SPONSOR?
-        .well
-          %p{:style => "font:normal 12px/18px 'Proxima Nova', arial, sans-serif;color:#403e37;margin-bottom:25px;"} 
+        .well.donor-sponsor-type
+          %p.description
             %b Uruut's crowfunding platform encourages participation from multiple audiences. Select the tab below that best fits your description:
-          %h3.label-green{:style => "font-size:15px;letter-spacing:1px;line-height:100%;margin:0;"} DONATE
-          %p{:style => "font:normal 12px/18px 'Proxima Nova', arial, sans-serif;color:#403e37;margin-bottom:25px;"} You are an individual who cares about specific causes and wants to support that cause.
-          %h3.label-green{:style => "font-size:15px;letter-spacing:1px;line-height:100%;margin:0;"} SPONSOR
-          %p{:style => "font:normal 12px/18px 'Proxima Nova', arial, sans-serif;color:#403e37"} You are an a bussiness, foundation or a family that wants to firmly, visibly associate yourself with a cause or project.
+          %h3.label-green.type-header DONATE
+          %p.type-content.type-content-top You are an individual who cares about specific causes and wants to support that cause.
+          %h3.label-green.type-header SPONSOR
+          %p.type-content You are an a business, foundation or a family that wants to firmly, visibly associate yourself with a cause or project.
         .sidebar-tab
         %ul#myTab2.tab-nav
           %li.active
