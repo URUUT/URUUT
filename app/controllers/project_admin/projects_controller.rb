@@ -140,6 +140,15 @@ class ProjectAdmin::ProjectsController < ApplicationController
     @emails = emails.join(",")
   end
 
+  def document_room
+  end
+
+  def photos_and_videos
+  end
+
+  def communication_zone
+  end
+
   private
 
   def set_project

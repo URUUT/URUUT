@@ -76,6 +76,9 @@
       %li.message
         = link_to "Project Messages", project_admin_project_messages_path(@project.id), class: "sub-menu-project messages"
         .nav-arrow
+      %li.workroom.message
+        = link_to "Transparency Workroom", project_admin_project_document_room_path(@project.id), class: "sub-menu-project workroom", remote: true
+        .nav-arrow
 
 .main-content{:style => "margin-top:200px;"}
   = render "overview"
