@@ -1,0 +1,10 @@
+<% if @authenticated %>
+$(".admin-menu li").removeClass("active");
+$(".workroom").parent().addClass("active");
+
+$('.sub-menu-project').removeClass('active');
+$('.workroom').addClass('active').append("<div class='arrow'></div>").append('<div class="arrow"></div>');
+$('.main-content').html("<%=j render 'index' %>");
+<% else %>
+window.location.href = "<%= root_url %>";
+<% end %>
