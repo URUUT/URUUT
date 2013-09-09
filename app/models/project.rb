@@ -10,8 +10,6 @@ class Project < ActiveRecord::Base
   :organization_classification, :cultivation_video, :campaign_deadline, :sponsor_permission, :step, :seed_mime_type
 
   attr_accessor :sponsorship_permission, :perk_type
-  #validates :title, :short_description, :description, :presence => true, :if => :active?
-  #validates :image, :address, :city, :state, :zip, :neighborhood, :duration, :goal, :presence => true, :if => :active_or_step1?
 
   with_options dependent: :destroy do |project|
     project.has_many :donations
@@ -20,6 +18,7 @@ class Project < ActiveRecord::Base
     project.has_many :project_updates
     project.has_many :project_sponsors
     project.has_many :sponsorship_benefits
+    project.has_many :documents
   end
 
   has_many :sponsorship_levels

@@ -1,9 +1,6 @@
 = stylesheet_link_tag "admin_project"
 
 #fb-root
-:javascript
-
-  filepicker.setKey('#{Settings.filepicker.api_key}');
 
 .full-width.banner
   .container
@@ -66,6 +63,9 @@
         .nav-arrow
       %li.message.active
         = link_to "Project Messages", project_admin_project_messages_path(@project.id), class: "sub-menu-project messages active"
+        .nav-arrow
+      %li.workroom.message
+        = link_to "Transparency Workroom", "/project_admin/documents?project_id=#{@project.id}", class: "sub-menu-project workroom", remote: true
         .nav-arrow
 
 .main-content{:style => "margin-top:200px;"}
