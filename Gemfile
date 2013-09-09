@@ -72,6 +72,7 @@ group :development, :test do
   gem 'jasmine'
   gem 'jasmine-rails'
   gem 'jasminerice'
+  gem 'launchy'
 end
 
 gem 'jquery-rails'
@@ -88,3 +89,4 @@ gem 'whenever'
 gem 'slim', '>= 1.1.0'
 gem 'sinatra', '>= 1.3.0', :require => nil
 gem 'redis'
+gem 'cloudinary'

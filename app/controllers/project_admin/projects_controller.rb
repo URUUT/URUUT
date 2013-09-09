@@ -101,11 +101,6 @@ class ProjectAdmin::ProjectsController < ApplicationController
 
   def emails_page
     @project = Project.find(params[:project_id])
-    # emails_sponsor = @project.project_sponsors.joins(:sponsor).pluck(:email).uniq
-    # emails_donors = @project.donations.pluck(:email).uniq
-    # @emails = emails_donors + emails_sponsor
-    # @emails.reject!(&:empty?)
-    # @emails = @emails.join(",")
     @total_fundings = @project.total_funding_by_project
     @contact = Contact.new
     @need_doctype = true
@@ -138,9 +133,6 @@ class ProjectAdmin::ProjectsController < ApplicationController
 
     emails.reject!(&:empty?)
     @emails = emails.join(",")
-  end
-
-  def document_room
   end
 
   def photos_and_videos
