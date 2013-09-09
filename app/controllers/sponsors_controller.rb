@@ -250,9 +250,10 @@ class SponsorsController < ApplicationController
   def project_id
     @project = Project.find(params[:project_id])
     @sponsorship_levels = SponsorshipLevel.all
-    platinum = @project.project_sponsors.where(level_id: 1).count
-    gold = @project.project_sponsors.where(level_id: 2).count
-    silver = @project.project_sponsors.where(level_id: 3).count
+    sponsors_of_project = @project.project_sponsors
+    platinum = sponsor_of_project.select { |sponsor| sponsor.level_id.eql?(1) }.count
+    gold = sponsor_of_project.select { |sponsor| sponsor.level_id.eql?(2) }.count
+    silver = sponsor_of_project.select { |sponsor| sponsor.level_id.eql?(3) }.count
     @sponsorship_levels.delete_if{|level| level.name.eql?("Platinum")} if platinum >= 1
     @sponsorship_levels.delete_if{|level| level.name.eql?("Gold")} if gold >= 3
     @sponsorship_levels.delete_if{|level| level.name.eql?("Silver")} if silver >= 5
