@@ -1,0 +1,59 @@
+%div
+  %h2.title.document-room DOCUMENT ROOM
+  .project-funder.well{:style => "padding-left: 5%"}
+    .row
+      .span6.pull-left
+        = label_tag "document", "UPLOAD A NEW DOCUMENT", class: "label-green"
+        = link_to "UPLOAD A DOCUMENT ►", "javascript:void(0)", :class => "btn new-document-button", :id => "project-submit", :style => "border-radius: 5px;"
+      .span6.pull-left
+        %span Note:
+        You should upload any and all applicable documents including, schedules, receipts, plans, blueprints, etc. Acceptable file types include .doc, .pdf, .ppt, .txt and .xls
+    %hr
+    = label_tag "current_document", "CURRENT DOCUMENTS", class: "label-green"
+    .images-content{:style => "width:100%"}
+      #galleryPicture.clearfix
+        - @documents.each do |document|
+          .list-image.pull-left
+            = cl_image_tag("#{document.public_id}.png", :width => 216, :height => 216, :crop => :fill)
+            = link_to "delete", "javascript:void(0)", class: "image-delete-button", "data-href" => project_admin_document_path(document.id)
+
+:javascript
+  var deleteImages = function (){
+    $('.image-delete-button').click(function(){
+      $(this).parent().remove();
+      $.ajax({
+        url: $(this).attr("data-href")
+      });
+    });
+  };
+
+  deleteImages();
+
+  $(".new-document-button").click(function(){
+    filepicker.pick({
+      openTo: 'COMPUTER',
+      extensions: ['.doc', '.pdf', '.ppt', '.txt', '.xls', '.docx'],
+      services: ['COMPUTER','BOX','DROPBOX','EVERNOTE', 'FTP', 'GOOGLE_DRIVE', 'SKYDRIVE']
+      },
+      function(e){
+        var fileUrl = e.url;
+        var fileName = e.filename;
+        console.log(data = e);
+
+        $.ajax({
+          url: '/project_admin/documents.js',
+          type: 'POST',
+          data: {
+            url: fileUrl,
+            filename: fileName,
+            project_id: #{@project.id}
+            },
+          success: function(data){
+          }
+        });
+      },
+      function(e){
+        console.log(JSON.stringify(e));
+      }
+    );
+  });
