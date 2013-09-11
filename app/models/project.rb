@@ -51,29 +51,25 @@ class Project < ActiveRecord::Base
   end
 
   def distinct_donors
-    anonymous_donors = self.donations.where(anonymous: true).uniq_by { |donation| donation.user_id }
-    real_donors = self.donations.where(anonymous: false).uniq_by { |donation| donation.user_id }
+    project_donations = self.donations
+    anonymous_donors = project_donations.select { |donation| donation.anonymous }.uniq_by { |donation| donation.user_id }
+    real_donors = project_donations.select { |donation| !donation.anonymous }.uniq_by { |donation| donation.user_id }
     donors = (anonymous_donors + real_donors).sort_by {|donor| donor.updated_at }.reverse
   end
 
   def individual_donors(page_num)
-    # donations_group = self.donations.group_by{ |p| p.perk_name  }.sort_by{|_key, value| value.first.amount }.reverse
-    # donations = donations_group.map { |donation| donation[1] }.flatten
-    # Kaminari.paginate_array(donations).page(page_num).per(25)
-    donations_data = individual_donors_by_type("real") + individual_donors_by_type("anonymous")
+    project_donations = self.donations
+    anonymous_donors = project_donations.select { |donation| donation.anonymous }
+    real_donors = project_donations.select { |donation| !donation.anonymous }
+    donations_data = individual_donors_by_type(real_donors) + individual_donors_by_type(anonymous_donors)
 
     donations_group = group_and_sort_donor(donations_data, self.id)
     donations = donations_group.map { |donation| donation[1] }.flatten
     Kaminari.paginate_array(donations).page(page_num).per(25)
   end
 
-  def individual_donors_by_type(type)
+  def individual_donors_by_type(donors)
     donations_data = []
-    donors = if type.eql?("anonymous")
-      self.donations.where(anonymous: true)
-    else
-      self.donations.where(anonymous: false)
-    end
     users_data = donors.group_by { |donation| donation.user_id }.map {|donation| [ donation[0], total_donation_by_user(donation[1]), last_donation_by_user(donation[1]), donation[1].first.anonymous ] }
     donations_levels = group_and_sort_donor(self.donations, self.id)
     donations_levels_and_amount = donations_levels.map { |donation| [ donation[0], get_amount_by_perk_name(donation[0], self.id) ] }
@@ -156,25 +152,19 @@ class Project < ActiveRecord::Base
   end
 
   def founders(page_num)
-    fundings = populate_funding_by_project
-    total_data = fundings.sort {|x,y| y.created_at <=> x.created_at }
-
+    total_data = populate_funding_by_project.sort {|x,y| y.created_at <=> x.created_at }
     Kaminari.paginate_array(total_data).page(page_num).per(25)
   end
 
   def all_funding_by_project(page_num)
-    fundings = populate_funding_by_project
-    total_data = []
-
-    fundings.group_by{ |p| p.updated_at.to_date  }.sort {|x,y| y <=> x }.each { |funding| total_data << funding }
+    total_data = populate_funding_by_project.group_by{ |p| p.updated_at.to_date  }.sort {|x,y| y <=> x }
     Kaminari.paginate_array(total_data).page(page_num).per(25)
   end
 
   def total_funding_by_project
-    fundings = populate_funding_by_project
     total_amout, individual_amount, business_amount, family_amount, foundation_amount = 0, 0, 0, 0, 0
 
-    fundings.each do |funding|
+    populate_funding_by_project.each do |funding|
       if funding.type_founder.eql?("individual")
         individual_amount += funding.amount.to_i
         total_amout += funding.amount.to_i
