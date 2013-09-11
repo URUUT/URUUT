@@ -4,9 +4,74 @@
     .row
       .span6.pull-left
         = label_tag "document", "UPLOAD A NEW PHOTO", class: "label-green"
-        = link_to "UPLOAD A PHOTO ►", "javascript:void(0)", :class => "btn", :id => "project-submit", :style => "border-radius: 5px;"
+        = link_to "UPLOAD A PHOTO ►", "javascript:void(0)", :class => "btn upload-photo-button", :id => "project-submit", :style => "border-radius: 5px;"
       .span6.pull-left
         = label_tag "document", "UPLOAD A NEW VIDEO", class: "label-green"
-        = link_to "UPLOAD A VIDEO ►", "javascript:void(0)", :class => "btn", :id => "project-submit", :style => "border-radius: 5px;"
+        = link_to "UPLOAD A VIDEO ►", "javascript:void(0)", :class => "btn upload-video-button", :id => "project-submit", :style => "border-radius: 5px;"
     %hr
     = label_tag "photos_videos", "CURRENT PHOTOS & VIDEOS", class: "label-green"
+    .images-content{:style => "width:100%"}
+      #galleryPicture.clearfix
+        - @photos_and_videos.each do |media|
+          .list-image.pull-left
+            = filepicker_image_tag media.gallery_file_name, width: 216, height: 216, fit: 'scale'
+            = link_to "delete", "javascript:void(0)", class: "image-delete-button", "data-href" => delete_photo_via_get_path(media.id)
+      = paginate @photos_and_videos, remote: true
+
+#save-video.modal.hide.fade
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3.title-form-video.tittle Add youtube video
+  = form_tag save_video_projects_path, class: "video-upload", method: :post, remote: true do
+    .modal-body{style: "font-family: 'Proxima Nova Semi', sans-serif; color: #464646"}
+      %span.error-container
+      = url_field_tag "video_link", nil, placeholder: "Youtube URL", class: "span4", style: "height: 30px; width: 100%; box-sizing: border-box;"
+      %p{style: "font-size: 14px;"}
+        To upload a video please copy and paste Youtube video link into the space provided.
+      = hidden_field_tag "video_type"
+    .modal-footer
+      %input.btn{:type => "submit", :value => "Submit video", style: "float: none; margin: 0 auto;"}
+
+:javascript
+  var deleteImages = function (){
+    $('.image-delete-button').click(function(){
+      $(this).parent().remove();
+      $.ajax({
+        url: $(this).attr("data-href")
+      });
+    });
+  };
+
+  deleteImages();
+
+  $(".upload-photo-button").click(function(){
+    filepicker.pick({
+      openTo: 'COMPUTER',
+      mimetypes: 'image/*',
+      services: ['BOX','COMPUTER','FACEBOOK','DROPBOX','INSTAGRAM','FLICKR','PICASA']
+      },
+      function(e){
+        var fileUrl = e.url;
+
+        $.ajax({
+          url: '/galleries/save_photo_tw_room.js',
+          type: 'POST',
+          data: {
+            file_url: fileUrl,
+            project_id: #{@project.id}
+            },
+          success: function(data){
+            $('#galleryPicture').append("<div class='list-image pull-left'><img src=" + fileUrl +"/convert?fit=scale&height=216&width=216><a data-href='/galleries/delete_photo/" + data.image_id + "' class='image-delete-button' style='margin-left:20px; cursor:pointer'>delete photo</a></div>");
+            deleteImages();
+          }
+        });
+      },
+      function(e){
+        console.log(JSON.stringify(e));
+      }
+    );
+  });
+
+  $(".upload-video-button").on("click", function(){
+    $("#save-video").modal("show");
+  });

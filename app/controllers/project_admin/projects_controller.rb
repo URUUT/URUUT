@@ -4,7 +4,6 @@ class ProjectAdmin::ProjectsController < ApplicationController
   before_filter :set_project_ajax, except: [:index, :update, :show,
     :send_email, :email_based_on_sponsor_level, :project_update, :process_project_update]
 
-
   respond_to :js, except: [:index, :update, :show, :emails_page, :messages]
   has_scope :page, :default => 1
   layout false, :only => "stripe_update"
@@ -22,10 +21,6 @@ class ProjectAdmin::ProjectsController < ApplicationController
       format.js
       format.html
     end
-  end
-
-  def update
-
   end
 
   def messages
@@ -136,6 +131,7 @@ class ProjectAdmin::ProjectsController < ApplicationController
   end
 
   def photos_and_videos
+    @photos_and_videos = @project.galleries.media_transparent_room(params[:page])
   end
 
   def communication_zone
