@@ -11,4 +11,12 @@ class GalleriesController < ApplicationController
 
     render json: { image_id: @image.id }
   end
+
+  def save_photo_tw_room
+    project = Project.find(params[:project_id])
+    @image = project.galleries.create(gallery_file_name: params[:file_url], gallery_type: "transparency_workroom")
+
+    render json: { image_id: @image.id }
+  end
+
 end
