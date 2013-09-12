@@ -1,4 +1,4 @@
 class Document < ActiveRecord::Base
-  attr_accessible :filename, :public_id, :project_id
+  attr_accessible :filename, :url, :project_id
   belongs_to :project
 end

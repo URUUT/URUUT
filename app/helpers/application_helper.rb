@@ -243,4 +243,8 @@ module ApplicationHelper
     end
   end
 
+  def document_thumbnail(url, width)
+    "http://docs.google.com/viewer?url=#{url}&a=bi&pagenumber=1&w=#{width}"
+  end
+
 end
