@@ -61,7 +61,6 @@ GEM
       json (~> 1.4)
       nokogiri (>= 1.4.4)
       uuidtools (~> 2.1)
-    aws_cf_signer (0.1.2)
     bcrypt-ruby (3.0.1)
     better_errors (0.8.0)
       coderay (>= 1.0.0)
@@ -92,9 +91,6 @@ GEM
     chronic (0.9.1)
     ci_reporter (1.9.0)
       builder (>= 2.1.2)
-    cloudinary (1.0.63)
-      aws_cf_signer
-      rest-client
     code_analyzer (0.3.1)
       sexp_processor
     coderay (1.0.9)
@@ -426,7 +422,6 @@ DEPENDENCIES
   capistrano
   capybara
   ci_reporter
-  cloudinary
   coffee-rails (~> 3.2.1)
   cucumber-rails
   daemons
