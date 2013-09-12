@@ -14,7 +14,7 @@
       #galleryPicture.clearfix
         - @documents.each do |document|
           .list-image.pull-left
-            = cl_image_tag("#{document.public_id}.png", :width => 216, :height => 216, :crop => :fill)
+            = image_tag(document_thumbnail(document.url, 216), style: "height: 222px; width: 222px")
             = link_to "delete", "javascript:void(0)", class: "image-delete-button", "data-href" => project_admin_document_path(document.id)
 
 :javascript

@@ -7,9 +7,7 @@ class ProjectAdmin::DocumentsController < ApplicationController
   end
 
   def create
-    file_uploaded = Cloudinary::Uploader.upload(params[:url])
-    @document = Document.create(filename: params[:filename], public_id: file_uploaded["public_id"], project_id: @project.id)
-    render json: { document: @document }
+    @document = Document.create(filename: params[:filename], url: params[:url],  project_id: @project.id)
   end
 
   def destroy
