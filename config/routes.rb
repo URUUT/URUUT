@@ -59,7 +59,9 @@ Crowdfund::Application.routes.draw do
 
   resources :s3_uploads
   namespace :project_admin do
-    resources :documents
+    resources :documents do
+      get "delete" => "documents#destroy", :on => :member
+    end
     resources :projects do
       get "messages"
       get "overview"
