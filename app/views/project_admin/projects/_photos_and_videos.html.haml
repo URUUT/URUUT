@@ -35,10 +35,14 @@
 :javascript
   var deleteImages = function (){
     $('.image-delete-button').click(function(){
-      $(this).parent().remove();
-      $.ajax({
-        url: $(this).attr("data-href")
-      });
+      var confirmation = confirm("Are you sure you want to delete?");
+      if (confirmation == true)
+      {
+        $(this).parent().remove();
+        $.ajax({
+          url: $(this).attr("data-href")
+        });
+      }
     });
   };
 
