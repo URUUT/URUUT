@@ -15,15 +15,20 @@
         - @documents.each do |document|
           .list-image.pull-left
             = image_tag(document_thumbnail(document.url, 216), style: "height: 222px; width: 222px")
-            = link_to "delete", "javascript:void(0)", class: "image-delete-button", "data-href" => project_admin_document_path(document.id)
+            = link_to "delete", "javascript:void(0)", class: "image-delete-button", "data-href" => delete_project_admin_document_path(document.id)
+      = paginate @documents, remote: true
 
 :javascript
   var deleteImages = function (){
     $('.image-delete-button').click(function(){
-      $(this).parent().remove();
-      $.ajax({
-        url: $(this).attr("data-href")
-      });
+      var confirmation = confirm("Are you sure you want to delete?");
+      if (confirmation == true)
+      {
+        $(this).parent().remove();
+        $.ajax({
+          url: $(this).attr("data-href")
+        });
+      }
     });
   };
 
@@ -38,7 +43,6 @@
       function(e){
         var fileUrl = e.url;
         var fileName = e.filename;
-        console.log(data = e);
 
         $.ajax({
           url: '/project_admin/documents.js',
@@ -49,6 +53,7 @@
             project_id: #{@project.id}
             },
           success: function(data){
+            deleteImages();
           }
         });
       },

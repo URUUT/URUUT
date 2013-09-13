@@ -1,9 +1,9 @@
 class ProjectAdmin::DocumentsController < ApplicationController
-  before_filter :set_project
+  before_filter :set_project, except: :destroy
 
   def index
     @authenticated = admin_required!
-    @documents = @project.documents if @authenticated
+    @documents = @project.documents.page(params[:page]).per(9) if @authenticated
   end
 
   def create
@@ -11,13 +11,8 @@ class ProjectAdmin::DocumentsController < ApplicationController
   end
 
   def destroy
-    @document = Document.find(params[:id])
-    @document.destroy
-
-    respond_to do |format|
-      format.html { redirect_to project_admin_documents_url }
-      format.json { head :no_content }
-    end
+    Document.delete(params[:id])
+    render :text => "Success"
   end
 
   private
