@@ -1,0 +1,18 @@
+var deleteImages = function (){
+  $('.image-delete-button').click(function(){
+    var confirmation = confirm("Are you sure you want to delete?");
+    if (confirmation == true)
+    {
+      $(this).parent().remove();
+      $.ajax({
+        url: $(this).attr("data-href")
+      });
+    }
+  });
+};
+$('#galleryPicture').append("<div class='list-image pull-left'><img src='<%= @thumbnail_url %>'><a data-href='/galleries/delete_photo/<%= @image.id %>' class='image-delete-button' style='margin-left:20px; cursor:pointer'><%= @link_text %></a></div>");
+deleteImages();
+<% if params[:mimetype] == "video" %>
+$("#save-video").modal('hide');
+$("#video_link").val("");
+<% end %>
