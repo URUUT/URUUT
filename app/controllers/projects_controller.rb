@@ -380,8 +380,7 @@ class ProjectsController < ApplicationController
   end
 
   def generate_video_link(link)
-    youtube_client = YouTubeIt::Client.new
-    video_data = youtube_client.video_by(link)
+    video_data = video_data_by_link(link)
     video_data.player_url.gsub('&feature=youtube_gdata_player', '')
   end
 

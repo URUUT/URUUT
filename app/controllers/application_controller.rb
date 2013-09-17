@@ -45,6 +45,11 @@ class ApplicationController < ActionController::Base
     @email_users = User.pluck :email
   end
 
+  def video_data_by_link(link)
+    youtube_client = YouTubeIt::Client.new
+    youtube_client.video_by(link)
+  end
+
   protected
 
   def layout_by_resource
