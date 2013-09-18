@@ -25,8 +25,6 @@ class GalleriesController < ApplicationController
         file_url = video_data.player_url.gsub('&feature=youtube_gdata_player', '')
         thumbnail = video_data.thumbnails.detect {|video| video.height == 360 }.url
       end
-
-      puts thumbnail
       @image = project.galleries.create(
         gallery_file_name: file_url,
         gallery_type: "transparency_workroom",
