@@ -4,7 +4,7 @@
     .row
       .span6.pull-left
         = label_tag "document", "UPLOAD A NEW PHOTO", class: "label-green"
-        = link_to "UPLOAD A PHOTO ►", "javascript:void(0)", :class => "btn upload-photo-button", :id => "project-submit", :style => "border-radius: 5px;"
+        = link_to "UPLOAD A PHOTO ►", "javascript:void(0)", :class => "btn upload-photo-button", :id => "project-submit", :style => "border-radius: 5px;", project_id: @project.id
       .span6.pull-left
         = label_tag "document", "UPLOAD A NEW VIDEO", class: "label-green"
         = link_to "UPLOAD A VIDEO ►", "javascript:void(0)", :class => "btn upload-video-button", :id => "project-submit", :style => "border-radius: 5px;"
@@ -35,47 +35,4 @@
     .modal-footer
       %input.btn{:type => "submit", :value => "Submit video", style: "float: none; margin: 0 auto;"}
 
-:javascript
-  var deleteImages = function (){
-    $('.image-delete-button').click(function(){
-      var confirmation = confirm("Are you sure you want to delete?");
-      if (confirmation == true)
-      {
-        $(this).parent().remove();
-        $.ajax({
-          url: $(this).attr("data-href")
-        });
-      }
-    });
-  };
-
-  deleteImages();
-
-  $(".upload-photo-button").click(function(){
-    filepicker.pick({
-      openTo: 'COMPUTER',
-      mimetypes: 'image/*',
-      services: ['BOX','COMPUTER','FACEBOOK','DROPBOX','INSTAGRAM','FLICKR','PICASA']
-      },
-      function(e){
-        var fileUrl = e.url;
-
-        $.ajax({
-          url: '/galleries/save_photo_tw_room.js',
-          type: 'POST',
-          data: {
-            file_url: fileUrl,
-            mimetype: "image",
-            project_id: #{@project.id}
-            }
-        });
-      },
-      function(e){
-        console.log(JSON.stringify(e));
-      }
-    );
-  });
-
-  $(".upload-video-button").on("click", function(){
-    $("#save-video").modal("show");
-  });
+= javascript_include_tag "transparency_workroom"
