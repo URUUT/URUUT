@@ -4,7 +4,7 @@
     .row
       .span6.pull-left
         = label_tag "document", "UPLOAD A NEW DOCUMENT", class: "label-green"
-        = link_to "UPLOAD A DOCUMENT ►", "javascript:void(0)", :class => "btn new-document-button", :id => "project-submit", :style => "border-radius: 5px;"
+        = link_to "UPLOAD A DOCUMENT ►", "javascript:void(0)", :class => "btn new-document-button", :id => "project-submit", :style => "border-radius: 5px;", project_id: @project.id
       .span6.pull-left
         %span Note:
         You should upload any and all applicable documents including, schedules, receipts, plans, blueprints, etc. Acceptable file types include .doc, .pdf, .ppt, .txt and .xls
@@ -18,47 +18,4 @@
             = link_to "delete", "javascript:void(0)", class: "image-delete-button", "data-href" => delete_project_admin_document_path(document.id), rel: "tooltip", title: "delete this document"
       = paginate @documents, remote: true
 
-:javascript
-  var deleteImages = function (){
-    $('.image-delete-button').click(function(){
-      var confirmation = confirm("Are you sure you want to delete?");
-      if (confirmation == true)
-      {
-        $(this).parent().remove();
-        $.ajax({
-          url: $(this).attr("data-href")
-        });
-      }
-    });
-  };
-
-  deleteImages();
-
-  $(".new-document-button").click(function(){
-    filepicker.pick({
-      openTo: 'COMPUTER',
-      extensions: ['.doc', '.pdf', '.ppt', '.txt', '.xls', '.docx'],
-      services: ['COMPUTER','BOX','DROPBOX','EVERNOTE', 'FTP', 'GOOGLE_DRIVE', 'SKYDRIVE']
-      },
-      function(e){
-        var fileUrl = e.url;
-        var fileName = e.filename;
-
-        $.ajax({
-          url: '/project_admin/documents.js',
-          type: 'POST',
-          data: {
-            url: fileUrl,
-            filename: fileName,
-            project_id: #{@project.id}
-            },
-          success: function(data){
-            deleteImages();
-          }
-        });
-      },
-      function(e){
-        console.log(JSON.stringify(e));
-      }
-    );
-  });
+= javascript_include_tag "transparency_workroom"
