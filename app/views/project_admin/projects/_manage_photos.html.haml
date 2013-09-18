@@ -30,7 +30,7 @@
       - @galleries.each do |image|
         .list-image.pull-left
           = filepicker_image_tag image.gallery_file_name, width: 216, height: 216, fit: 'scale'
-          = link_to "delete photo", "javascript:void(0)", class: "image-delete-button", "data-href" => delete_photo_path(image.id)
+          = link_to "delete photo", "javascript:void(0)", class: "image-delete-button gallery-delete", "data-href" => delete_photo_path(image.id), rel: "tooltip", title: "delete this photo"
     = paginate @galleries, remote: true
     %div{:style => "float:left; width: 100%"}
       %button{:id => "new-photo-button", :type => "button"} ADD NEW PHOTO
@@ -179,7 +179,7 @@
           method: 'POST',
           data: { gallery: pictureImage },
           success: function(data){
-            $('#galleryPicture').append("<div class='list-image pull-left'><img src=" + pictureImage +"/convert?fit=scale&height=216&width=216><a data-href='/galleries/delete_photo/" + data.image_id + "' class='image-delete-button' style='margin-left:20px; cursor:pointer'>delete photo</a></div>");
+            $('#galleryPicture').append("<div class='list-image pull-left'><img src=" + pictureImage +"/convert?fit=scale&height=216&width=216><a data-href='/galleries/delete_photo/" + data.image_id + "' class='image-delete-button gallery-delete' style='margin-left:20px; cursor:pointer'>delete photo</a></div>");
             deleteImages();
           }
         });
