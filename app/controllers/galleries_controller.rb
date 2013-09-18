@@ -23,7 +23,7 @@ class GalleriesController < ApplicationController
       file_url = thumbnail = ""
       unless video_data.blank?
         file_url = video_data.player_url.gsub('&feature=youtube_gdata_player', '')
-        thumbnail = video_data.thumbnails.detect {|video| video.height == 180 }.url
+        thumbnail = video_data.thumbnails.detect {|video| video.height == 360 }.url
       end
 
       puts thumbnail

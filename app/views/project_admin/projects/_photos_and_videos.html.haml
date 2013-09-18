@@ -14,10 +14,10 @@
       #galleryPicture.clearfix
         - @photos_and_videos.each do |media|
           - link_text = media.gallery_content_type.eql?("video") ? "Delete Video" : "Delete Photo"
-          - image = media.gallery_content_type.eql?("video") ? image_tag(media.thumbnail_url, width: 216, height: 216) : filepicker_image_tag(media.gallery_file_name, width: 216, height: 216, fit: 'scale')
+          - image = media.gallery_content_type.eql?("video") ? image_tag(media.thumbnail_url, style: "height: 205px;") : filepicker_image_tag(media.gallery_file_name, width: 216, height: 216, fit: 'scale')
           .list-image.pull-left
             = image
-            = link_to link_text, "javascript:void(0)", class: "image-delete-button", "data-href" => delete_photo_via_get_path(media.id)
+            = link_to link_text, "javascript:void(0)", class: "image-delete-button media-photo-video", "data-href" => delete_photo_via_get_path(media.id), rel: "tooltip", title: "delete"
       = paginate @photos_and_videos, remote: true
 
 #save-video.modal.hide.fade
