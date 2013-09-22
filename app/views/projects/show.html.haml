@@ -62,7 +62,10 @@
                 Days
                 %br
                 Left
-              .amount= campaign_days_left(@project)
+                - if campaign_days_left(@project) > 0
+                  .amount= campaign_days_left(@project)
+                - else
+                  .amount 0
 - else
   #large_image{:style => "background:url(#{@project.large_image}); background-size: cover"}
     .funding-info
@@ -117,7 +120,10 @@
                 Days
                 %br
                 Left
-              .amount= campaign_days_left(@project)
+                - if campaign_days_left(@project) > 0
+                  .amount= campaign_days_left(@project)
+                - else
+                  .amount 0
 
 .container
   .row-fluid.show-content
