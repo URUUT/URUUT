@@ -34,7 +34,7 @@
               %h5{:style => "color:#b6b6b4 !important;"} Funded
 
             %li.days-left
-              - if campaign_days_left(p) > 
+              - if campaign_days_left(p) > 0
                 %p.days #{campaign_days_left(p)}
               - else
                 %p.days 0
