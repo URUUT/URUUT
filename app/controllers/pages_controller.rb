@@ -7,6 +7,7 @@ class PagesController < ApplicationController
 
   def index
     projects_list
+    @project_success = Project.where("live = 1 AND status = 'funded'")
   end
 
   def home
@@ -78,7 +79,7 @@ class PagesController < ApplicationController
       query << "#{field} ILIKE :keyword"
     end
 
-    @projects = Project.where("#{query.join(" OR ")} AND live = 1 AND ready_for_approval = 0", :keyword=> "%#{params[:keyword]}%").by_city(params[:city]).by_category(params[:category])
+    @projects = Project.where("#{query.join(" OR ")} AND live = 1 AND status IS NULL AND ready_for_approval = 0", :keyword=> "%#{params[:keyword]}%").by_city(params[:city]).by_category(params[:category])
   end
 
   private
