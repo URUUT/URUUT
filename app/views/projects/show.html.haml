@@ -689,8 +689,15 @@
       value: #{percentage_sponsor(@project)}
     });
 
-    $('.progress-container').attr('style', 'margin-left: ' + (#{percentage_sponsor(@project)} - 4)
-  + '%');
+
+    var margin;
+    if(#{percentage_sponsor(@project)} > 50) {
+      margin = 50;
+    }else{
+      margin = #{percentage_sponsor(@project)};
+    }
+
+    $('.progress-container').attr('style', 'margin-left: ' + margin  + '%');
 
     /*if(#{percentage_sponsor(@project)} >= 50){
       $('img.seed').attr('style','float: right');
