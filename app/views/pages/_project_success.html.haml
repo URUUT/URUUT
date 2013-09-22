@@ -32,6 +32,12 @@
               = amount_converter(p.goal)
             %h5{:style => "color:#b6b6b4 !important;"} Funded
 
+          %li.days-left
+              - if campaign_days_left(p) > 0
+                %p.days #{campaign_days_left(p)}
+              - else
+                %p.days 0
+              %h5.time-left{:style => "color:#b6b6b4 !important;"} Days Left
       - if controller_name.eql?('users') or action_name.eql?('get_complete_project') and current_user.id.eql?(p.user_id) and !action_name.eql?('profile')
         .project-admin-panel
           = link_to "Project Admin Panel ►", project_admin_project_url(p.id)
