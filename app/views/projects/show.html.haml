@@ -57,15 +57,13 @@
             .amount
               = amount_converter(@project.goal)
 
-            .days-left
-              %span.small
-                Days
-                %br
-                Left
-                - if campaign_days_left(@project) > 0
-                  .amount= campaign_days_left(@project)
-                - else
-                  .amount 0
+            - if @project.status == nil
+              .days-left
+                %span.small
+                  Days
+                  %br
+                  Left
+                .amount= campaign_days_left(@project)
 - else
   #large_image{:style => "background:url(#{@project.large_image}); background-size: cover"}
     .funding-info
@@ -115,15 +113,13 @@
               Goal
             .amount= amount_converter(@project.goal)
 
-            .days-left
-              %span.small
-                Days
-                %br
-                Left
-                - if campaign_days_left(@project) > 0
-                  .amount= campaign_days_left(@project)
-                - else
-                  .amount 0
+            - if @project.status == nil
+              .days-left
+                %span.small
+                  Days
+                  %br
+                  Left
+                .amount= campaign_days_left(@project)
 
 .container
   .row-fluid.show-content
