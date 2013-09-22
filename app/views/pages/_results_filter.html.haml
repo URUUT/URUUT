@@ -26,6 +26,34 @@
             %p
               = link_to "Get Funded ►", new_project_path, :class => "btn" 
 
+.recent.clearfix
+  .container
+    %p.sections
+      = image_tag "recent-project-icon.png"
+      CURRENT PROJECTS
+
+      = link_to "View All", "#", :class => 'view-all'
+    .project-all
+      .loader{:style => "margin-left: 35%; font-weight: bold; font-size: 16px;top: 60px;position: absolute;z-index: 1000;  display:none"}
+        Loading..
+        %br
+        = image_tag "3.gif", style: "margin-left: 20%"
+      .project-all-content
+        = render "project_success", :projects => @projects
+      .potential
+        %div.project
+          .project-img
+            = image_tag "project_started.jpg"
+          .content
+            .cont-desc
+              %h3 Your Project
+              %p.short-description We are now accepting applications for projects. If you have a project that needs funding apply to get funding now. 
+            .location
+              %span &nbsp;
+          .funding
+            %p
+              = link_to "Get Funded ►", new_project_path, :class => "btn" 
+
 .ending-soon.clearfix
   .container
     %p.sections

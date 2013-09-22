@@ -27,7 +27,7 @@
                 .seed-num
                   .amount
                     %p.amount #{amount_converter(p.amount.to_i)}
-                %a.black-btn.btn.pull-right{:href => "javascript:void(0)"} Donate #{image_tag('arrow.png')}
+                %a.black-btn.btn.pull-right{:href => "javascript:void(0)"} Fund Now #{image_tag('arrow.png')}
       -else
         - default_perk.each_with_index do |perk, index|
           - index += 1
@@ -40,7 +40,7 @@
               .seed-num
                 .amount
                   %p.amount #{amount_converter(perk)}
-              %a.black-btn.btn.pull-right{:href => "javascript:void(0)"} Donate #{image_tag('arrow.png')}
+              %a.black-btn.btn.pull-right{:href => "javascript:void(0)"} Fund Now #{image_tag('arrow.png')}
 
       .seed-level{id: "perk-id-custom"}
         %h3.perk-name-other{id: "perk-name-other-custom"}
@@ -51,7 +51,7 @@
             .amount
             %h5 AMOUNT TO SEED
             .textarea.seed-amount= text_field_tag :custom_seed, nil, style: "width: 100%"
-          %a.black-btn.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "button-seed-custom"} Donate
+          %a.black-btn.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "button-seed-custom"} Fund Now
 
     #sponsorship.tab-pane
       .seed-level.platinum-level
@@ -136,7 +136,7 @@
               .amount
                 %p.amount
                   = amount_converter(p.amount.to_i)
-            %a.black-btn.btn.pull-right{:href => "javascript:void(0)"} Donate #{image_tag('arrow.png')}
+            %a.black-btn.btn.pull-right{:href => "javascript:void(0)"} Fund Now #{image_tag('arrow.png')}
   -else
     - default_perk.each_with_index do |perk, index|
       - index += 1
@@ -150,7 +150,7 @@
             .amount
               %p.amount
                 = amount_converter(perk)
-          %a.black-btn.btn.pull-right{:href => "javascript:void(0)"} Donate #{image_tag('arrow.png')}
+          %a.black-btn.btn.pull-right{:href => "javascript:void(0)"} Fund Now #{image_tag('arrow.png')}
 
   .seed-level{id: "perk-id-custom"}
     %h3.perk-name-other{id: "perk-name-other-custom"}
@@ -161,7 +161,7 @@
         .amount
         %h5 AMOUNT TO SEED
         .textarea.seed-amount= text_field_tag :custom_seed, nil, style: "width: 100%"
-      %a.black-btn.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "button-seed-custom"} Donate
+      %a.black-btn.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "button-seed-custom"} Fund Now
 
 
 :javascript

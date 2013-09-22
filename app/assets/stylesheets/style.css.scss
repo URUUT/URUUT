@@ -389,10 +389,7 @@ h1, h2, h3, h4, h5, h6{
 
 img.cc-type{
   height: 20px;
-  border-radius : 2px;
-  -webkit-border-radius : 2px;
-  -moz-border-radius : 2px;
-  -o-border-radius : 2px;
+  @include border-radius(2px);
 }
 
 
@@ -638,7 +635,6 @@ textarea, .textarea input[type="text"]{
       float: left;
       width: 33%;
       text-align: center;
-     // border-right: 1px solid $light-grey;
       cursor: pointer;
       margin: 20px 0;
 
