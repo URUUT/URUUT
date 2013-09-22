@@ -1,6 +1,6 @@
 - if projects
   - projects.each do |p|
-    - if p.live == 1
+    - if p.live == 1  && p.status == nil
       %div.project
         .project-img
           -if !p.large_image.blank?
