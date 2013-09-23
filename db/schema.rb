@@ -311,6 +311,7 @@ ActiveRecord::Schema.define(:version => 20130815062943) do
     t.integer  "level",                  :default => 0
     t.integer  "uruut_point",            :default => 0
     t.string   "roles",                  :default => "--- []"
+    t.text     "fb_image"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
