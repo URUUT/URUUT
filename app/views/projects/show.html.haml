@@ -39,9 +39,9 @@
 
         .span4
           .progress-container.span3.offset1
-            = image_tag 'seed.png', :class => "seed"
+            / = image_tag 'seed.png', :class => "seed"
             %div
-              %span Seed Funds Pledged
+              %span Funds Pledged
               - if totalsponsor(@project).eql?(0)
                 %p $0
               - else
@@ -63,7 +63,7 @@
                   Days
                   %br
                   Left
-                .amount= campaign_days_left(@project)
+                .amount= campaign_days_left(@project) > 0 ? campaign_days_left(@project):0
 - else
   #large_image{:style => "background:url(#{@project.large_image}); background-size: cover"}
     .funding-info
@@ -92,9 +92,9 @@
 
         .span4
           .progress-container.span3.offset1
-            = image_tag 'seed.png', :class => "seed"
+            / = image_tag 'seed.png', :class => "seed"
             %div
-              %span Seed Funds Pledged
+              %span Funds Pledged
               - if totalsponsor(@project).eql?(0)
                 %p $0
               - else
@@ -119,7 +119,7 @@
                   Days
                   %br
                   Left
-                .amount= campaign_days_left(@project)
+                .amount= campaign_days_left(@project) > 0 ? campaign_days_left(@project):0
 
 .container
   .row-fluid.show-content
@@ -697,7 +697,7 @@
       margin = #{percentage_sponsor(@project)};
     }
 
-    $('.progress-container').attr('style', 'margin-left: ' + margin  + '%');
+    // $('.progress-container').attr('style', 'margin-left: ' + margin  + '%');
 
     /*if(#{percentage_sponsor(@project)} >= 50){
       $('img.seed').attr('style','float: right');
