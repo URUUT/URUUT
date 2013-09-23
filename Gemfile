@@ -28,6 +28,7 @@ gem 'youtube_it'
 gem 'rails_config'
 gem 'easy_roles'
 gem 'newrelic_rpm'
+gem 'meta_request'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
