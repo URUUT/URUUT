@@ -17,6 +17,10 @@ class UsersController < ApplicationController
       @projects_funded = @user.projects_funded.live.order("updated_at DESC").page(params[:funded_page]).per(2)
       @pending_projects = @user.projects.where(live: 0)
     end
+
+    @projects_created.each do |p|
+      puts p.title
+    end
   end
 
   def profile
