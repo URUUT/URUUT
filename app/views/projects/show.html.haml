@@ -340,109 +340,109 @@
                         = link_to "javascript:void(0)", "url-sign-up" => url, "url-sign-in" => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "btn perk pull-right unsignin-perk", :style => "margin-top: 10px;" do
                           Fund Now ►
 
-            .seed-level{id: "perk-id-custom"}
-              %h3.perk-name-other{id: "perk-name-other-custom"}
-                CHOOSE YOUR PERK
-              %p With this option you choose the amount to seed, you will receive 1 Uruut Reward Point for each dollar you seed.
-              .clearfix
-                .seed-num
-                  .amount
-                  %h5 AMOUNT TO SEED
-                  .textarea.seed-amount= text_field_tag :custom_seed, nil, style: "width: 100%"
-                %a.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "#{user_signed_in? ? 'button-seed-custom' : 'button-seed-custom-unsignin'}"} Fund Now ►
-          #sponsorship.tab-pane
-            .seed-level
-              %h3
-                PLATINUM
-                %span.small-heading
-                  (#{availability(@project.project_sponsors, 1)} of 1 available)
-              %ul.normal-font.dashed-list
-                -if @sponsorship_benefits.include?(1)
-                  -@sponsorship_benefits[1].each do |benefit|
-                    %li= benefit.name
-              .clearfix
-                .seed-num
-                  .amount
-                    = amount_converter(@project.goal.to_i * 0.3)
-                - if check_availibility(@project, 1) < 1
-                  - if user_signed_in?
-                    %a.btn.pull-right.sponsors{:href => "/projects/#{@project.id}/sponsors/new?level=platinum", style: "margin-top: 10px;"}
-                      Sponsor ►
-                  - else
-                    %a.btn.pull-right.sponsors.unsignin{"url-data" => "/projects/#{@project.id}/sponsors/new?level=platinum", style: "margin-top: 10px;"}
-                      Sponsor ►
-                - else
-                  .pull-right{style: "margin-top: 24px; font-style: italic;"}
-                    Not Available
-                    %span
-            .seed-level
-              %h3
-                GOLD
-                %span.small-heading
-                  (#{availability(@project.project_sponsors, 2)} of 3 available)
-              %ul.normal-font.dashed-list
-                -if @sponsorship_benefits.include?(2)
-                  -@sponsorship_benefits[2].each do |benefit|
-                    %li=benefit.name
-              .clearfix
-                .seed-num
-                  .amount
-                    = amount_converter(@project.goal.to_i * 0.1)
-                - if check_availibility(@project, 2) < 3
-                  - if user_signed_in?
-                    %a.btn.pull-right.sponsors{:href => "/projects/#{@project.id}/sponsors/new?level=gold", :style => "margin-top: 10px;"}
-                      Sponsor ►
-                  - else
-                    %a.btn.pull-right.sponsors.unsignin{"url-data" => "/projects/#{@project.id}/sponsors/new?level=gold", style: "margin-top: 10px;"}
-                      Sponsor ►
-                - else
-                  .pull-right{style: "margin-top: 24px; font-style: italic;"}
-                    Not Available
-                    %span
-            .seed-level
-              %h3
-                SILVER
-                %span.small-heading
-                  (#{availability(@project.project_sponsors, 3)} of 5 available)
-              %ul.normal-font.dashed-list
-                -if @sponsorship_benefits.include?(3)
-                  -@sponsorship_benefits[3].each do |benefit|
-                    %li= benefit.name
-              .clearfix
-                .seed-num
-                  .amount
-                    = amount_converter(@project.goal.to_i * 0.04)
-                - if check_availibility(@project, 3) < 5
-                  - if user_signed_in?
-                    %a.btn.pull-right.sponsors{:href => "/projects/#{@project.id}/sponsors/new?level=silver", :style => "margin-top: 10px;"}
-                      Sponsor ►
-                  - else
-                    %a.btn.pull-right.sponsors.unsignin{"url-data" => "/projects/#{@project.id}/sponsors/new?level=silver", style: "margin-top: 10px;"}
-                      Sponsor ►
-                - else
-                  .pull-right{style: "margin-top: 24px; font-style: italic;"}
-                    Not Available
-            .seed-level
-              %h3 BRONZE
-              %ul.normal-font.dashed-list
-                %li Text mention on project page
-                -if @sponsorship_benefits.include?(4)
-                  -@sponsorship_benefits[4].each do |benefit|
-                    %li= benefit.name
-                    %span
-              .clearfix
-                .seed-num
-                  .amount
-                    - if (@project.goal.to_i * 0.02) >= 500
-                      = amount_converter(500)
+              .seed-level{id: "perk-id-custom"}
+                %h3.perk-name-other{id: "perk-name-other-custom"}
+                  CHOOSE YOUR PERK
+                %p With this option you choose the amount to seed, you will receive 1 Uruut Reward Point for each dollar you seed.
+                .clearfix
+                  .seed-num
+                    .amount
+                    %h5 AMOUNT TO SEED
+                    .textarea.seed-amount= text_field_tag :custom_seed, nil, style: "width: 100%"
+                  %a.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "#{user_signed_in? ? 'button-seed-custom' : 'button-seed-custom-unsignin'}"} Fund Now ►
+            #sponsorship.tab-pane
+              .seed-level
+                %h3
+                  PLATINUM
+                  %span.small-heading
+                    (#{availability(@project.project_sponsors, 1)} of 1 available)
+                %ul.normal-font.dashed-list
+                  -if @sponsorship_benefits.include?(1)
+                    -@sponsorship_benefits[1].each do |benefit|
+                      %li= benefit.name
+                .clearfix
+                  .seed-num
+                    .amount
+                      = amount_converter(@project.goal.to_i * 0.3)
+                  - if check_availibility(@project, 1) < 1
+                    - if user_signed_in?
+                      %a.btn.pull-right.sponsors{:href => "/projects/#{@project.id}/sponsors/new?level=platinum", style: "margin-top: 10px;"}
+                        Sponsor ►
                     - else
-                      = amount_converter(@project.goal.to_i * 0.02)
-                - if user_signed_in?
-                  %a.btn.pull-right.sponsors{:href => "/projects/#{@project.id}/sponsors/new?level=bronze", :style => "margin-top: 10px;"}
-                    Sponsor ►
-                - else
-                  %a.btn.pull-right.sponsors.unsignin{"url-data" => "/projects/#{@project.id}/sponsors/new?level=bronze", style: "margin-top: 10px;"}
-                    Sponsor ►
+                      %a.btn.pull-right.sponsors.unsignin{"url-data" => "/projects/#{@project.id}/sponsors/new?level=platinum", style: "margin-top: 10px;"}
+                        Sponsor ►
+                  - else
+                    .pull-right{style: "margin-top: 24px; font-style: italic;"}
+                      Not Available
+                      %span
+              .seed-level
+                %h3
+                  GOLD
+                  %span.small-heading
+                    (#{availability(@project.project_sponsors, 2)} of 3 available)
+                %ul.normal-font.dashed-list
+                  -if @sponsorship_benefits.include?(2)
+                    -@sponsorship_benefits[2].each do |benefit|
+                      %li=benefit.name
+                .clearfix
+                  .seed-num
+                    .amount
+                      = amount_converter(@project.goal.to_i * 0.1)
+                  - if check_availibility(@project, 2) < 3
+                    - if user_signed_in?
+                      %a.btn.pull-right.sponsors{:href => "/projects/#{@project.id}/sponsors/new?level=gold", :style => "margin-top: 10px;"}
+                        Sponsor ►
+                    - else
+                      %a.btn.pull-right.sponsors.unsignin{"url-data" => "/projects/#{@project.id}/sponsors/new?level=gold", style: "margin-top: 10px;"}
+                        Sponsor ►
+                  - else
+                    .pull-right{style: "margin-top: 24px; font-style: italic;"}
+                      Not Available
+                      %span
+              .seed-level
+                %h3
+                  SILVER
+                  %span.small-heading
+                    (#{availability(@project.project_sponsors, 3)} of 5 available)
+                %ul.normal-font.dashed-list
+                  -if @sponsorship_benefits.include?(3)
+                    -@sponsorship_benefits[3].each do |benefit|
+                      %li= benefit.name
+                .clearfix
+                  .seed-num
+                    .amount
+                      = amount_converter(@project.goal.to_i * 0.04)
+                  - if check_availibility(@project, 3) < 5
+                    - if user_signed_in?
+                      %a.btn.pull-right.sponsors{:href => "/projects/#{@project.id}/sponsors/new?level=silver", :style => "margin-top: 10px;"}
+                        Sponsor ►
+                    - else
+                      %a.btn.pull-right.sponsors.unsignin{"url-data" => "/projects/#{@project.id}/sponsors/new?level=silver", style: "margin-top: 10px;"}
+                        Sponsor ►
+                  - else
+                    .pull-right{style: "margin-top: 24px; font-style: italic;"}
+                      Not Available
+              .seed-level
+                %h3 BRONZE
+                %ul.normal-font.dashed-list
+                  %li Text mention on project page
+                  -if @sponsorship_benefits.include?(4)
+                    -@sponsorship_benefits[4].each do |benefit|
+                      %li= benefit.name
+                      %span
+                .clearfix
+                  .seed-num
+                    .amount
+                      - if (@project.goal.to_i * 0.02) >= 500
+                        = amount_converter(500)
+                      - else
+                        = amount_converter(@project.goal.to_i * 0.02)
+                  - if user_signed_in?
+                    %a.btn.pull-right.sponsors{:href => "/projects/#{@project.id}/sponsors/new?level=bronze", :style => "margin-top: 10px;"}
+                      Sponsor ►
+                  - else
+                    %a.btn.pull-right.sponsors.unsignin{"url-data" => "/projects/#{@project.id}/sponsors/new?level=bronze", style: "margin-top: 10px;"}
+                      Sponsor ►
       - else
         %h4.tittle{style: "margin-bottom: 0;"} Donate
         -if @project.perk_permission
