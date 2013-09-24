@@ -265,79 +265,80 @@
           %p.type-content.type-content-top You are an individual who cares about specific causes and wants to support that cause.
           %h3.label-green.type-header SPONSOR
           %p.type-content You are an a business, foundation or a family that wants to firmly, visibly associate yourself with a cause or project.
-        .sidebar-tab
-          %ul#myTab2.tab-nav
-            %li.active
-              %a{:href => "#perks"} Donate
-            %li
-              %a{:href => "#sponsorship"} Sponsor
-      - if @project.status == nil
-        .tab-content
-          #perks.tab-pane.active
-            -if @project.perk_permission
-              -if @perks
-                - @perks.each do |p|
+        - if @project.status == nil
+          .sidebar-tab
+            %ul#myTab2.tab-nav
+              %li.active
+                %a{:href => "#perks"} Donate
+              %li
+                %a{:href => "#sponsorship"} Sponsor
+
+          .tab-content
+            #perks.tab-pane.active
+              -if @project.perk_permission
+                -if @perks
+                  - @perks.each do |p|
+                    .seed-level
+                      %h3{style: "font-size: 20px;"}
+                        = p.name
+                      %h3
+                        - if p.limit
+                          %span.small-heading
+                            = p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of #{p.perk_limit} Available)"
+                      When you seed #{amount_converter(p.amount.to_i)}, you will receive:
+                      %ul.normal-font.dashed-list
+                        %li
+                          #{p.description}
+                      %p.subtext
+                        Uruut Reward Points: #{p.amount.to_i}
+                      .clearfix{style: "margin-top: 20px;"}
+                        .seed-num
+                          / %div Seed
+                          .amount
+                            = amount_converter(p.amount.to_i)
+                        - if p.limit && p.perks_available.to_i.zero?
+                          .pull-right{style: "font-style: italic; margin-top: 22px;"}
+                            Not Available
+                            %span
+                        - elsif p.limit && !p.perks_available.to_i.zero?
+                          - if user_signed_in?
+                            = link_to "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", class: "btn perk pull-right", style: "margin-top: 10px;" do
+                              Fund Now ►
+                          - else
+                            - url = url_encode("#{request.protocol}#{request.host_with_port}/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}")
+                            = link_to "javascript:void(0)", "url-sign-up" => url, "url-sign-in" => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", class: "btn perk pull-right unsignin-perk", style: "margin-top: 10px;" do
+                              Fund Now ►
+                        - else
+                          - if user_signed_in?
+                            = link_to "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", class: "btn perk pull-right", style: "margin-top: 10px;" do
+                              Fund Now ►
+                          - else
+                            - url = url_encode("#{request.protocol}#{request.host_with_port}/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}")
+                            = link_to "javascript:void(0)", "url-sign-up" => url, "url-sign-in" => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", class: "btn perk pull-right unsignin-perk", style: "margin-top: 10px;" do
+                              Fund Now ►
+
+              -else
+                - default_perk.each_with_index do |perk, index|
+                  - index += 1
+                  - name = "LEVEL #{index}"
+                  - description = "#{perk} Uruut Reward Points"
                   .seed-level
-                    %h3{style: "font-size: 20px;"}
-                      = p.name
-                    %h3
-                      - if p.limit
-                        %span.small-heading
-                          = p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of #{p.perk_limit} Available)"
-                    When you seed #{amount_converter(p.amount.to_i)}, you will receive:
+                    %h3= name
+                    When you seed #{amount_converter(perk.to_i)}, you will receive:
                     %ul.normal-font.dashed-list
-                      %li
-                        #{p.description}
-                    %p.subtext
-                      Uruut Reward Points: #{p.amount.to_i}
-                    .clearfix{style: "margin-top: 20px;"}
+                      %li= description
+                    .clearfix
                       .seed-num
                         / %div Seed
                         .amount
-                          = amount_converter(p.amount.to_i)
-                      - if p.limit && p.perks_available.to_i.zero?
-                        .pull-right{style: "font-style: italic; margin-top: 22px;"}
-                          Not Available
-                          %span
-                      - elsif p.limit && !p.perks_available.to_i.zero?
-                        - if user_signed_in?
-                          = link_to "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", class: "btn perk pull-right", style: "margin-top: 10px;" do
-                            Fund Now ►
-                        - else
-                          - url = url_encode("#{request.protocol}#{request.host_with_port}/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}")
-                          = link_to "javascript:void(0)", "url-sign-up" => url, "url-sign-in" => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", class: "btn perk pull-right unsignin-perk", style: "margin-top: 10px;" do
-                            Fund Now ►
+                          =amount_converter(perk)
+                      - if user_signed_in?
+                        = link_to "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "btn perk pull-right", :style => "margin-top: 10px;" do
+                          Fund Now ►
                       - else
-                        - if user_signed_in?
-                          = link_to "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", class: "btn perk pull-right", style: "margin-top: 10px;" do
-                            Fund Now ►
-                        - else
-                          - url = url_encode("#{request.protocol}#{request.host_with_port}/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}")
-                          = link_to "javascript:void(0)", "url-sign-up" => url, "url-sign-in" => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", class: "btn perk pull-right unsignin-perk", style: "margin-top: 10px;" do
-                            Fund Now ►
-
-            -else
-              - default_perk.each_with_index do |perk, index|
-                - index += 1
-                - name = "LEVEL #{index}"
-                - description = "#{perk} Uruut Reward Points"
-                .seed-level
-                  %h3= name
-                  When you seed #{amount_converter(perk.to_i)}, you will receive:
-                  %ul.normal-font.dashed-list
-                    %li= description
-                  .clearfix
-                    .seed-num
-                      / %div Seed
-                      .amount
-                        =amount_converter(perk)
-                    - if user_signed_in?
-                      = link_to "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "btn perk pull-right", :style => "margin-top: 10px;" do
-                        Fund Now ►
-                    - else
-                      - url = url_encode("#{request.protocol}#{request.host_with_port}/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}")
-                      = link_to "javascript:void(0)", "url-sign-up" => url, "url-sign-in" => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "btn perk pull-right unsignin-perk", :style => "margin-top: 10px;" do
-                        Fund Now ►
+                        - url = url_encode("#{request.protocol}#{request.host_with_port}/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}")
+                        = link_to "javascript:void(0)", "url-sign-up" => url, "url-sign-in" => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "btn perk pull-right unsignin-perk", :style => "margin-top: 10px;" do
+                          Fund Now ►
 
             .seed-level{id: "perk-id-custom"}
               %h3.perk-name-other{id: "perk-name-other-custom"}
