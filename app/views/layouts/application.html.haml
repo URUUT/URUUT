@@ -87,6 +87,11 @@
     }
   })
 
+  if(window.parent.location.href == document.location.protocol + '//#{request.host_with_port}/projects/1/edit#sponsor-info') {
+    self.close();
+    window.opener.location.reload(false);
+  }
+
   function showCoords(coords)
   {
     // get original image resolution info
