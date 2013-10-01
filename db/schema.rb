@@ -11,7 +11,40 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130815062943) do
+ActiveRecord::Schema.define(:version => 20130921045013) do
+
+  create_table "active_admin_comments", :force => true do |t|
+    t.string   "resource_id",   :null => false
+    t.string   "resource_type", :null => false
+    t.integer  "author_id"
+    t.string   "author_type"
+    t.text     "body"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.string   "namespace"
+  end
+
+  add_index "active_admin_comments", ["author_type", "author_id"], :name => "index_active_admin_comments_on_author_type_and_author_id"
+  add_index "active_admin_comments", ["namespace"], :name => "index_active_admin_comments_on_namespace"
+  add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_admin_notes_on_resource_type_and_resource_id"
+
+  create_table "admin_users", :force => true do |t|
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+  end
+
+  add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
+  add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
   create_table "badges_sashes", :force => true do |t|
     t.integer  "badge_id"
@@ -47,6 +80,14 @@ ActiveRecord::Schema.define(:version => 20130815062943) do
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
+  create_table "documents", :force => true do |t|
+    t.string   "filename"
+    t.integer  "project_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "url"
+  end
+
   create_table "donations", :force => true do |t|
     t.integer  "user_id"
     t.integer  "project_id"
@@ -61,12 +102,56 @@ ActiveRecord::Schema.define(:version => 20130815062943) do
     t.boolean  "anonymous",      :default => false
   end
 
+  create_table "filter_types", :force => true do |t|
+    t.string   "name"
+    t.string   "display_name"
+    t.decimal  "price"
+    t.integer  "suggested_replacement_time"
+    t.text     "description"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.string   "image_url"
+  end
+
+  add_index "filter_types", ["name"], :name => "index_filter_types_on_name"
+
+  create_table "filters", :force => true do |t|
+    t.integer  "subscription_id"
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
+    t.integer  "quantity"
+    t.integer  "thickness"
+    t.decimal  "temp_width",      :precision => 10, :scale => 1
+    t.decimal  "temp_length",     :precision => 10, :scale => 1
+    t.decimal  "width",           :precision => 10, :scale => 1
+    t.decimal  "length",          :precision => 10, :scale => 1
+  end
+
+  add_index "filters", ["subscription_id"], :name => "index_filters_on_subscription_id"
+
+  create_table "fulfillment_orders", :force => true do |t|
+    t.integer  "subscription_id"
+    t.string   "stripe_charge_id"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+    t.string   "sent_to_manufacturing"
+    t.string   "sent_to_fulfillment"
+    t.string   "street"
+    t.string   "street2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zipcode"
+    t.integer  "filter_type_id"
+    t.float    "total"
+  end
+
   create_table "galleries", :force => true do |t|
     t.string   "gallery_file_name"
     t.string   "gallery_content_type"
-    t.integer  "gallery_file_size"
     t.datetime "gallery_updated_at"
     t.integer  "project_id"
+    t.string   "gallery_type"
+    t.string   "thumbnail_url"
   end
 
   create_table "identities", :force => true do |t|
@@ -137,8 +222,10 @@ ActiveRecord::Schema.define(:version => 20130815062943) do
   end
 
   create_table "posts", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "title"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "press_coverages", :force => true do |t|
@@ -234,6 +321,30 @@ ActiveRecord::Schema.define(:version => 20130815062943) do
     t.string   "step"
   end
 
+  create_table "promotion_types", :force => true do |t|
+    t.string   "name"
+    t.string   "display_name"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "promotions", :force => true do |t|
+    t.string   "name"
+    t.string   "code"
+    t.datetime "created_at",                                                         :null => false
+    t.datetime "updated_at",                                                         :null => false
+    t.integer  "promotion_type_id"
+    t.decimal  "amount",            :precision => 10, :scale => 2
+    t.datetime "used_at"
+    t.boolean  "reusable",                                         :default => true
+  end
+
+  create_table "reminder_emails", :force => true do |t|
+    t.string   "email"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "sashes", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -279,41 +390,51 @@ ActiveRecord::Schema.define(:version => 20130815062943) do
     t.datetime "updated_at",   :null => false
   end
 
-  create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "",                           :null => false
-    t.string   "encrypted_password",     :default => "",                           :null => false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.string   "first_name"
-    t.string   "website"
+  create_table "subscriptions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "filter_type_id"
+    t.integer  "months_between_deliveries"
+    t.string   "stripe_customer_token"
+    t.string   "street"
+    t.string   "street2"
     t.string   "city"
     t.string   "state"
-    t.string   "zip"
-    t.string   "neighborhood"
-    t.string   "provider"
-    t.string   "uid"
-    t.string   "token"
-    t.string   "organization"
-    t.text     "mission"
-    t.boolean  "subscribed"
-    t.string   "avatar",                 :default => "/assets/default-avatar.png"
+    t.string   "zipcode"
+    t.datetime "created_at",                                                                   :null => false
+    t.datetime "updated_at",                                                                   :null => false
+    t.boolean  "confirmed",                                                 :default => false
+    t.string   "address_state"
+    t.string   "promo_code"
+    t.float    "subtotal"
+    t.float    "shipping_total"
+    t.float    "promotion_total"
+    t.integer  "promotion_id"
+    t.integer  "last_fulfillment_id"
+    t.string   "name"
+    t.integer  "months_until_active"
+    t.datetime "service_start_date"
     t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string   "confirmation_token"
-    t.string   "last_name"
-    t.integer  "sash_id"
-    t.integer  "level",                  :default => 0
-    t.integer  "uruut_point",            :default => 0
-    t.string   "roles",                  :default => "--- []"
+    t.text     "source"
+    t.text     "notes"
+    t.boolean  "active",                                                    :default => true
+    t.decimal  "promotion_amount_remaining", :precision => 10, :scale => 2
+    t.integer  "promotion_type_id"
+    t.string   "email"
+    t.string   "password_digest"
   end
 
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
-  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "subscriptions", ["user_id"], :name => "index_subscriptions_on_user_id"
+
+  create_table "users", :force => true do |t|
+    t.string   "email"
+    t.string   "password_digest"
+    t.string   "password_reset_token"
+    t.datetime "password_reset_sent_at"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+    t.string   "access_token"
+  end
+
+  add_index "users", ["email"], :name => "index_users_on_email"
 
 end

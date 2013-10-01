@@ -64,6 +64,13 @@ Crowdfund::Application.configure do
     user_name: ENV["MANDRILL_USER"],
     password: ENV["MANDRILL_PASSWORD"]
   }
+  
+  config.middleware.use ExceptionNotification::Rack,
+    :email => {
+      :email_prefix => "[Exception] ",
+      :sender_address => %{"notifier" <cbartels@uruut.com>},
+      :exception_recipients => %w{cbartels@uruut.com}
+    }
 
   # Enable threaded mode
   # config.threadsafe!
