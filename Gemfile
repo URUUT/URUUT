@@ -22,13 +22,13 @@ gem 'kaminari'
 gem 'bitly'
 gem 'filepicker-rails'
 gem 'heroku'
-# gem 'therubyracer'
 gem 'has_scope'
 gem 'youtube_it'
 gem 'rails_config'
 gem 'easy_roles'
 gem 'newrelic_rpm'
 gem 'meta_request'
+
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -40,6 +40,7 @@ end
 group :production do
   gem 'pg'
   gem 'sass-rails',   '~> 3.2.3'
+  gem 'exception_notification'
 end
 
 group :staging do
