@@ -55,8 +55,6 @@ class Project < ActiveRecord::Base
     anonymous_donors = project_donations.select { |donation| donation.anonymous }.uniq_by { |donation| donation.user_id }
     real_donors = project_donations.select { |donation| !donation.anonymous }.uniq_by { |donation| donation.user_id }
     donors = (anonymous_donors + real_donors).sort_by {|donor| donor.updated_at }.reverse
-    donations.select("DISTINCT(donations.user_id)")
-
   end
 
   def individual_donors(page_num)
@@ -87,6 +85,27 @@ class Project < ActiveRecord::Base
     end
 
     donations_data
+  end
+
+  def group_and_sort_donor(data, project_id)
+    data.group_by{ |p| p.perk_name  }.sort_by{|key, value| get_amount_by_perk_name(key, project_id) }.reverse
+  end
+
+  def total_donation_by_user(data)
+    data.map { |donation| donation.amount }.inject(0) {|sum, element| sum + element }
+  end
+
+  def last_donation_by_user(data)
+    data.sort_by { |founder| founder.updated_at }.last.updated_at.strftime("%m/%d")
+  end
+
+  def get_amount_by_perk_name(perk_name, project_id)
+    perk = Perk.where(name: perk_name, project_id: project_id)
+    if perk.empty?
+      0
+    else
+      perk.first.amount
+    end
   end
 
   def list_recepient
