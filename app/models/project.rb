@@ -55,6 +55,8 @@ class Project < ActiveRecord::Base
     anonymous_donors = project_donations.select { |donation| donation.anonymous }.uniq_by { |donation| donation.user_id }
     real_donors = project_donations.select { |donation| !donation.anonymous }.uniq_by { |donation| donation.user_id }
     donors = (anonymous_donors + real_donors).sort_by {|donor| donor.updated_at }.reverse
+    donations.select("DISTINCT(donations.user_id)")
+
   end
 
   def individual_donors(page_num)
@@ -97,15 +99,6 @@ class Project < ActiveRecord::Base
 
   def last_donation_by_user(data)
     data.sort_by { |founder| founder.updated_at }.last.updated_at.strftime("%m/%d")
-  end
-
-  def get_amount_by_perk_name(perk_name, project_id)
-    perk = Perk.where(name: perk_name, project_id: project_id)
-    if perk.empty?
-      0
-    else
-      perk.first.amount
-    end
   end
 
   def list_recepient
@@ -152,25 +145,19 @@ class Project < ActiveRecord::Base
   end
 
   def founders(page_num)
-    fundings = populate_funding_by_project
-    total_data = fundings.sort {|x,y| y.created_at <=> x.created_at }
-
+    total_data = populate_funding_by_project.sort {|x,y| y.created_at <=> x.created_at }
     Kaminari.paginate_array(total_data).page(page_num).per(25)
   end
 
   def all_funding_by_project(page_num)
-    fundings = populate_funding_by_project
-    total_data = []
-
-    fundings.group_by{ |p| p.updated_at.to_date  }.sort {|x,y| y <=> x }.each { |funding| total_data << funding }
+    total_data = populate_funding_by_project.group_by{ |p| p.updated_at.to_date  }.sort {|x,y| y <=> x }
     Kaminari.paginate_array(total_data).page(page_num).per(25)
   end
 
   def total_funding_by_project
-    fundings = populate_funding_by_project
     total_amout, individual_amount, business_amount, family_amount, foundation_amount = 0, 0, 0, 0, 0
 
-    fundings.each do |funding|
+    populate_funding_by_project.each do |funding|
       if funding.type_founder.eql?("individual")
         individual_amount += funding.amount.to_i
         total_amout += funding.amount.to_i
