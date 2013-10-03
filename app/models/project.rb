@@ -152,19 +152,25 @@ class Project < ActiveRecord::Base
   end
 
   def founders(page_num)
-    total_data = populate_funding_by_project.sort {|x,y| y.created_at <=> x.created_at }
+    fundings = populate_funding_by_project
+    total_data = fundings.sort {|x,y| y.created_at <=> x.created_at }
+
     Kaminari.paginate_array(total_data).page(page_num).per(25)
   end
 
   def all_funding_by_project(page_num)
-    total_data = populate_funding_by_project.group_by{ |p| p.updated_at.to_date  }.sort {|x,y| y <=> x }
+    fundings = populate_funding_by_project
+    total_data = []
+
+    fundings.group_by{ |p| p.updated_at.to_date  }.sort {|x,y| y <=> x }.each { |funding| total_data << funding }
     Kaminari.paginate_array(total_data).page(page_num).per(25)
   end
 
   def total_funding_by_project
+    fundings = populate_funding_by_project
     total_amout, individual_amount, business_amount, family_amount, foundation_amount = 0, 0, 0, 0, 0
 
-    populate_funding_by_project.each do |funding|
+    fundings.each do |funding|
       if funding.type_founder.eql?("individual")
         individual_amount += funding.amount.to_i
         total_amout += funding.amount.to_i
