@@ -101,6 +101,15 @@ class Project < ActiveRecord::Base
     data.sort_by { |founder| founder.updated_at }.last.updated_at.strftime("%m/%d")
   end
 
+  def get_amount_by_perk_name(perk_name, project_id)
+    perk = Perk.where(name: perk_name, project_id: project_id)
+    if perk.empty?
+      0
+    else
+      perk.first.amount
+    end
+  end
+
   def list_recepient
     data = []
     level_ids = self.project_sponsors.map(&:level_id).uniq.sort{ |x,y| y <=> x }
