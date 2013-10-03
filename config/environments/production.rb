@@ -82,4 +82,11 @@ Crowdfund::Application.configure do
 #     "//#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
 #   end
 
+  config.middleware.use ExceptionNotification::Rack,
+    :email => {
+      :email_prefix => "[Whatever] ",
+      :sender_address => %{"notifier" <cbartels@uruut.com>},
+      :exception_recipients => %w{cbartels@uruut.com}
+    }
+
 end
