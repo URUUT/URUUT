@@ -139,6 +139,9 @@ GEM
     erb2haml (0.1.5)
       html2haml
     erubis (2.7.0)
+    exception_notification (4.0.1)
+      actionmailer (>= 3.0.4)
+      activesupport (>= 3.0.4)
     excon (0.20.1)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -439,6 +442,7 @@ DEPENDENCIES
   easy_roles
   email_spec
   erb2haml
+  exception_notification
   factory_girl_rails
   filepicker-rails
   haml

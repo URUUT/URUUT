@@ -1,6 +1,6 @@
 class Donation < ActiveRecord::Base
   attr_accessible :amount, :project_id, :customer_token, :user_id, :email, :token,
-  :card_last4, :created_at, :card_type, :perk_name, :confirmed, :description
+  :card_last4, :created_at, :card_type, :perk_name, :confirmed, :description, :anonymous
   attr_accessor :token, :card_last4, :card_type, :type_founder
 
   belongs_to :project

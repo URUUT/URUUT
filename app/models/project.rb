@@ -89,6 +89,18 @@ class Project < ActiveRecord::Base
     donations_data
   end
 
+  def group_and_sort_donor(data, project_id)
+    data.group_by{ |p| p.perk_name  }.sort_by{|key, value| get_amount_by_perk_name(key, project_id) }.reverse
+  end
+
+  def total_donation_by_user(data)
+    data.map { |donation| donation.amount }.inject(0) {|sum, element| sum + element }
+  end
+
+  def last_donation_by_user(data)
+    data.sort_by { |founder| founder.updated_at }.last.updated_at.strftime("%m/%d")
+  end
+
   def list_recepient
     data = []
     level_ids = self.project_sponsors.map(&:level_id).uniq.sort{ |x,y| y <=> x }
