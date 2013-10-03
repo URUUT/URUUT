@@ -1,6 +1,5 @@
 - @project.distinct_donors.each do |donator|
   - if user_signed_in?
-<<<<<<< HEAD
     - if donator.anonymous
       = link_to(image_tag("anonymous.png", style: "width: 27px; height:27px; margin-bottom: 5px; border-radius: 500px 500px 500px 500px; behavior: url('assets/PIE-1.0.0/PIE.htc');", "data-toggle" => "tooltip", title: "ANONYMOUS DONOR", class: "donor-anonymous"), "javascript:void(0)")
     - else
@@ -10,8 +9,3 @@
       = link_to(image_tag("anonymous.png", style: "width: 27px; height:27px; margin-bottom: 5px; border-radius: 500px 500px 500px 500px; behavior: url('assets/PIE-1.0.0/PIE.htc');", "data-toggle" => "tooltip", title: "ANONYMOUS DONOR", class: "donor-anonymous"), "javascript:void(0)")
     - else
       = link_to(image_tag(donator.user.avatar, style: "width: 27px; height:27px; margin-bottom: 5px; border-radius: 500px 500px 500px 500px;"), "javascript:void(0)", "url-data" => "/users/#{donator.user.id}/profile", class: "unsignin")
-=======
-    = link_to(image_tag(donator.user.avatar, style: "width: 27px; height:27px; margin-bottom: 5px; border-radius: 500px 500px 500px 500px;"), profile_path(donator.user.id))
-  - else
-    = link_to(image_tag(donator.user.avatar, style: "width: 27px; height:27px; margin-bottom: 5px; border-radius: 500px 500px 500px 500px;"), "javascript:void(0)", "url-data" => "/users/#{donator.user.id}/profile", class: "unsignin")
->>>>>>> d47bfccd674c59ea284e40171b8757cc02d644c3
