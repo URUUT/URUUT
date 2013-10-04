@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: uruut-dev
+  api_key: '353876493444934'
+  api_secret: qUrIG5lUFOakJXSnAm039eir7Cw
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: uruut-dev
+  api_key: '353876493444934'
+  api_secret: qUrIG5lUFOakJXSnAm039eir7Cw
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: uruut-dev
+  api_key: '353876493444934'
+  api_secret: qUrIG5lUFOakJXSnAm039eir7Cw
+  enhance_image_tag: true
+  static_image_support: false

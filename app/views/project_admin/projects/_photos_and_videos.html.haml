@@ -1,0 +1,38 @@
+%div
+  %h2.title.project-founder PHOTOS & VIDEOS
+  .project-funder.well{:style => "padding-left: 5%"}
+    .row
+      .span6.pull-left
+        = label_tag "document", "UPLOAD A NEW PHOTO", class: "label-green"
+        = link_to "UPLOAD A PHOTO ►", "javascript:void(0)", :class => "btn upload-photo-button", :id => "project-submit", :style => "border-radius: 5px;", project_id: @project.id
+      .span6.pull-left
+        = label_tag "document", "UPLOAD A NEW VIDEO", class: "label-green"
+        = link_to "UPLOAD A VIDEO ►", "javascript:void(0)", :class => "btn upload-video-button", :id => "project-submit", :style => "border-radius: 5px;"
+    %hr
+    = label_tag "photos_videos", "CURRENT PHOTOS & VIDEOS", class: "label-green"
+    .images-content{:style => "width:100%"}
+      #galleryPicture.clearfix
+        - @photos_and_videos.each do |media|
+          - link_text = media.gallery_content_type.eql?("video") ? "Delete Video" : "Delete Photo"
+          - image = media.gallery_content_type.eql?("video") ? image_tag(media.thumbnail_url, style: "height: 205px;") : filepicker_image_tag(media.gallery_file_name, width: 216, height: 216, fit: 'scale')
+          .list-image.pull-left
+            = image
+            = link_to link_text, "javascript:void(0)", class: "image-delete-button media-photo-video", "data-href" => delete_photo_via_get_path(media.id), rel: "tooltip", title: "delete"
+      = paginate @photos_and_videos, remote: true
+
+#save-video.modal.hide.fade
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3.title-form-video.tittle Add youtube video
+  = form_tag galleries_save_photo_tw_room_path, class: "video-upload", method: :post, remote: true do
+    .modal-body{style: "font-family: 'Proxima Nova Semi', sans-serif; color: #464646"}
+      %span.error-container
+      = url_field_tag "video_link", nil, placeholder: "Youtube URL", class: "span4", style: "height: 30px; width: 100%; box-sizing: border-box;"
+      %p{style: "font-size: 14px;"}
+        To upload a video please copy and paste Youtube video link into the space provided.
+      = hidden_field_tag "mimetype", "video"
+      = hidden_field_tag "project_id", @project.id
+    .modal-footer
+      %input.btn{:type => "submit", :value => "Submit video", style: "float: none; margin: 0 auto;"}
+
+= javascript_include_tag "transparency_workroom"

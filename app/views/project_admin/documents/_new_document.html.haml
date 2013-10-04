@@ -1,0 +1,3 @@
+.list-image.pull-left
+  = image_tag(document_thumbnail(@document.url, 216), style: "height: 222px; width: 222px")
+  = link_to "delete", "javascript:void(0)", class: "image-delete-button", "data-href" => delete_project_admin_document_path(@document.id), rel: "tooltip", title: "delete this document"

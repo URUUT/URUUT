@@ -1,0 +1,21 @@
+%div
+  %h2.title.document-room DOCUMENT ROOM
+  .project-funder.well{:style => "padding-left: 5%"}
+    .row
+      .span6.pull-left
+        = label_tag "document", "UPLOAD A NEW DOCUMENT", class: "label-green"
+        = link_to "UPLOAD A DOCUMENT ►", "javascript:void(0)", :class => "btn new-document-button", :id => "project-submit", :style => "border-radius: 5px;", project_id: @project.id
+      .span6.pull-left
+        %span Note:
+        You should upload any and all applicable documents including, schedules, receipts, plans, blueprints, etc. Acceptable file types include .doc, .pdf, .ppt, .txt and .xls
+    %hr
+    = label_tag "current_document", "CURRENT DOCUMENTS", class: "label-green"
+    .images-content{:style => "width:100%"}
+      #galleryPicture.clearfix
+        - @documents.each do |document|
+          .list-image.pull-left
+            = image_tag(document_thumbnail(document.url, 216), style: "height: 222px; width: 222px")
+            = link_to "delete", "javascript:void(0)", class: "image-delete-button", "data-href" => delete_project_admin_document_path(document.id), rel: "tooltip", title: "delete this document"
+      = paginate @documents, remote: true
+
+= javascript_include_tag "transparency_workroom"

@@ -28,7 +28,7 @@ gem 'rails_config'
 gem 'easy_roles'
 gem 'newrelic_rpm'
 gem 'meta_request'
-
+gem 'exception_notification'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -73,6 +73,7 @@ group :development, :test do
   gem 'jasmine'
   gem 'jasmine-rails'
   gem 'jasminerice'
+  gem 'launchy'
 end
 
 gem 'jquery-rails'
