@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130815062943) do
+ActiveRecord::Schema.define(:version => 20130921045013) do
 
   create_table "badges_sashes", :force => true do |t|
     t.integer  "badge_id"
@@ -47,6 +47,14 @@ ActiveRecord::Schema.define(:version => 20130815062943) do
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
+  create_table "documents", :force => true do |t|
+    t.string   "filename"
+    t.integer  "project_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "url"
+  end
+
   create_table "donations", :force => true do |t|
     t.integer  "user_id"
     t.integer  "project_id"
@@ -64,9 +72,10 @@ ActiveRecord::Schema.define(:version => 20130815062943) do
   create_table "galleries", :force => true do |t|
     t.string   "gallery_file_name"
     t.string   "gallery_content_type"
-    t.integer  "gallery_file_size"
     t.datetime "gallery_updated_at"
     t.integer  "project_id"
+    t.string   "gallery_type"
+    t.string   "thumbnail_url"
   end
 
   create_table "identities", :force => true do |t|
@@ -134,11 +143,6 @@ ActiveRecord::Schema.define(:version => 20130815062943) do
     t.boolean "limit",           :default => false
     t.string  "perks_available"
     t.integer "perk_limit"
-  end
-
-  create_table "posts", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "press_coverages", :force => true do |t|
@@ -280,30 +284,13 @@ ActiveRecord::Schema.define(:version => 20130815062943) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "",                           :null => false
-    t.string   "encrypted_password",     :default => "",                           :null => false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.string   "first_name"
-    t.string   "website"
-    t.string   "city"
-    t.string   "state"
-    t.string   "zip"
-    t.string   "neighborhood"
-    t.string   "provider"
-    t.string   "uid"
-    t.string   "token"
-    t.string   "organization"
-    t.text     "mission"
-    t.boolean  "subscribed"
-    t.string   "avatar",                 :default => "/assets/default-avatar.png"
-    t.datetime "confirmed_at"
+    t.string   "email"
+    t.string   "password_digest"
+    t.string   "password_reset_token"
+    t.datetime "password_reset_sent_at"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+    t.string   "access_token"
     t.datetime "confirmation_sent_at"
     t.string   "confirmation_token"
     t.string   "last_name"
@@ -314,7 +301,6 @@ ActiveRecord::Schema.define(:version => 20130815062943) do
     t.text     "fb_image"
   end
 
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
-  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["email"], :name => "index_users_on_email"
 
 end

@@ -9,68 +9,59 @@ Crowdfund::Application.routes.draw do
     :sessions => 'users/sessions',
     :passwords => 'users/passwords',
   }
-  # devise_for :users, :controllers => { :registrations => "registrations" }
+
   resources :users, :only => [:show] do
     get :get_complete_project, on: :collection
   end
 
   get "contacts/new"
-
   get "contacts/edit"
-
-  #devise_for :users
-
-  # get "services/index"
-  #
-  # get "services/create"
-  #
-  # get "services/destroy"
-
   get "image/new"
-
   get "set_new_perk" => "donations#set_new_perk"
-
-  # get "users/profile"
   get "users/:user_id/profile" => "users#profile", as: "profile"
 
   match "browse/projects" => "pages#index", :as => "browse_projects"
   match "search/projects" => "pages#search", :as => "search_projects"
 
-   get "projects/save_image"
-   post "projects/save_image"
-   get "update_image" => "projects#update_image"
-   post "galleries/save_image"
-   get "galleries/save_image"
-   get "galleries/delete_photo/:id" => "galleries#destroy", as: "delete_photo_via_get"
-   delete "galleries/delete_photo/:id" => "galleries#destroy", as: "delete_photo"
-   delete "projects/:id/delete_image" => "projects#delete_image", as: "delete_image"
-   get "projects/:project_id/sponsors/:id/confirmation" => "sponsors#confirmation", as: "confirmation"
-   get "purchase" => "payments#purchase"
-   get "projects/:project_id/sponsors/:sponsor_id/thank_you" => "sponsors#thank_you", as: "thank_you_for_sponsor"
+  get "projects/save_image"
+  get "update_image" => "projects#update_image"
+  get "galleries/save_image"
+  get "galleries/delete_photo/:id" => "galleries#destroy", as: "delete_photo_via_get"
+  get "galleries/delete_photo_tw_room/:id" => "galleries#delete_media_tw_room", as: "delete_media_tw_room"
+  delete "galleries/delete_photo/:id" => "galleries#destroy", as: "delete_photo"
+  delete "projects/:id/delete_image" => "projects#delete_image", as: "delete_image"
+  get "projects/:project_id/sponsors/:id/confirmation" => "sponsors#confirmation", as: "confirmation"
+  get "purchase" => "payments#purchase"
+  get "projects/:project_id/sponsors/:sponsor_id/thank_you" => "sponsors#thank_you", as: "thank_you_for_sponsor"
 
-   post "share_email_by_sponsor" => "sponsors#share_email"
-   post "share_email_by_donor" => "donations#share_email"
+  post "projects/save_image"
+  post "galleries/save_image"
+  post "galleries/save_photo_tw_room"
+  post "share_email_by_sponsor" => "sponsors#share_email"
+  post "share_email_by_donor" => "donations#share_email"
 
-   post "projects/submit_project"
-   post "update_sponsor_info" => "projects#update_sponsor_info"
+  post "projects/submit_project"
+  post "update_sponsor_info" => "projects#update_sponsor_info"
 
-   get "projects/stripe_update"
-   get "default_perk_donations" => "donations#default_perk"
+  get "projects/stripe_update"
+  get "default_perk_donations" => "donations#default_perk"
 
   post "#{Rails.root}/public/images/"
 
-   get "admin/unapproved"
-   post "admin/approve"
+  get "admin/unapproved"
+  post "admin/approve"
 
-   get "/skip_sponsor" => "projects#skip_sponsor"
+  get "/skip_sponsor" => "projects#skip_sponsor"
 
   resources :admin do
     get "deny", :on => :member
   end
 
   resources :s3_uploads
-  #resources :projects
   namespace :project_admin do
+    resources :documents do
+      get "delete" => "documents#destroy", :on => :member
+    end
     resources :projects do
       get "messages"
       get "overview"
@@ -82,6 +73,8 @@ Crowdfund::Application.routes.draw do
       get "emails_page"
       get "project_founder"
       get "project_update"
+      get "photos_and_videos"
+      get "communication_zone"
 
       collection do
         get "email_based_on_sponsor_level"

@@ -3,8 +3,6 @@
 #fb-root
 :javascript
 
-  filepicker.setKey('#{Settings.filepicker.api_key}');
-
   $(".sub-menu-project").live("click",function(){
     $(".main-content").html('<div class="loading-main-content" style=" font-weight: bolder; margin-left: 47%;">Loading..<br><img alt="3" src="/assets/3.gif" style="padding-left: 2%"></div>');
   });
@@ -63,7 +61,7 @@
 
 .menu-project
   .container
-    %ul.clearfix.admin-menu
+    %ul.clearfix.admin-menu{:style => "margin-left: 0"}
       %li.overview.active{:style => "margin-left: 0"}
         = link_to "Project Overview", project_admin_project_path(@project.id), class: "sub-menu-project"
         .nav-arrow
@@ -75,6 +73,9 @@
         .nav-arrow
       %li.message
         = link_to "Project Messages", project_admin_project_messages_path(@project.id), class: "sub-menu-project messages"
+        .nav-arrow
+      %li.tw
+        = link_to "Transparency Workroom", "/project_admin/documents?project_id=#{@project.id}", class: "sub-menu-project workroom", remote: true
         .nav-arrow
 
 .main-content{:style => "margin-top:200px;"}

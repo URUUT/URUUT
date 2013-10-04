@@ -10,8 +10,6 @@ class Project < ActiveRecord::Base
   :organization_classification, :cultivation_video, :campaign_deadline, :sponsor_permission, :step, :seed_mime_type
 
   attr_accessor :sponsorship_permission, :perk_type
-  #validates :title, :short_description, :description, :presence => true, :if => :active?
-  #validates :image, :address, :city, :state, :zip, :neighborhood, :duration, :goal, :presence => true, :if => :active_or_step1?
 
   with_options dependent: :destroy do |project|
     project.has_many :donations
@@ -20,6 +18,7 @@ class Project < ActiveRecord::Base
     project.has_many :project_updates
     project.has_many :project_sponsors
     project.has_many :sponsorship_benefits
+    project.has_many :documents
   end
 
   has_many :sponsorship_levels
@@ -127,14 +126,16 @@ class Project < ActiveRecord::Base
   end
 
   def amount_per_day
-    if self.donations.blank? and self.project_sponsors.blank?
+    project_donations = self.donations
+    project_sponsors = self.project_sponsors
+    if project_donations.blank? and project_sponsors.blank?
       amount_by_date = ""
     else
       amount_by_date = []
       self.created_at.to_date.upto(Time.now.to_date).each do |date|
         amount = 0
-        amount += self.donations.where("updated_at > ? AND updated_at < ?", date.at_beginning_of_day, date.end_of_day).sum(:amount)
-        amount += self.project_sponsors.where("updated_at > ? AND updated_at < ?", date.at_beginning_of_day, date.end_of_day).sum(:cost)
+        amount += project_donations.select{ |donation| donation.updated_at > date.at_beginning_of_day and donation.updated_at < date.end_of_day }.map { |donation| donation.amount }.inject(0) {|sum, element| sum + element }
+        amount += project_sponsors.select{ |sponsor| sponsor.updated_at > date.at_beginning_of_day and sponsor.updated_at < date.end_of_day }.map { |sponsor| sponsor.cost }.inject(0) {|sum, element| sum + element }
         amount += amount_by_date.last unless amount_by_date.empty?
         amount_by_date << amount
       end

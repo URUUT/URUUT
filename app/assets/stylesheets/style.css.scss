@@ -1277,48 +1277,67 @@ input[id*="amount"] {
 
       a{
         /*font-family: 'Proxima Nova', sans-serif !important;*/
-        font-size: 12px !important;
+        font-size: 10px !important;
         letter-spacing: 2px !important;
-        padding-left: 30px;
+        padding-left: 28px;
       }
 
       &.overview{
         a{
           background: url('project_admin_overview.png') no-repeat bottom left;
+          background-size: contain;
         }
 
         &.active a{
           background: url('project_admin_overview_active.png') no-repeat bottom left;
+          background-size: contain;
         }
       }
 
       &.manage{
         a{
           background: url('project_admin_manage.png') no-repeat bottom left;
+          background-size: contain;
         }
 
         &.active a{
           background: url('project_admin_manage_active.png') no-repeat bottom left;
+          background-size: contain;
         }
       }
 
       &.funder{
         a{
           background: url('project_admin_funder.png') no-repeat bottom left;
+          background-size: contain;
         }
 
         &.active a{
           background: url('project_admin_funder_active.png') no-repeat bottom left;
+          background-size: contain;
         }
       }
 
       &.message{
         a{
           background: url('project_admin_message.png') no-repeat bottom left;
+          background-size: contain;
         }
 
         &.active a{
           background: url('project_admin_message_active.png') no-repeat bottom left;
+          background-size: contain;
+        }
+      }
+      &.tw{
+        a{
+          background: url('project_admin_tw.png') no-repeat bottom left;
+          background-size: contain;
+        }
+
+        &.active a{
+          background: url('project_admin_tw_active.png') no-repeat bottom left;
+          background-size: contain;
         }
       }
 
@@ -1572,6 +1591,11 @@ iframe.twitter-follow-button{
       text-decoration: underline;
       display: block;
       text-align: center;
+      cursor:pointer;
+      background: image-url('trash.png');
+      background-repeat: no-repeat;
+      background-size: 15px 15px;
+      background-position: 65px;
 
       &:hover{
         text-decoration: none;
@@ -1580,6 +1604,13 @@ iframe.twitter-follow-button{
 
     &:first-child{
       /*margin-left: 0;*/
+    }
+
+    .media-photo-video{
+      background-position: 50px !important;
+    }
+    .gallery-delete{
+      background-position: 55px !important;
     }
   }
 }
