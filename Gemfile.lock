@@ -443,7 +443,6 @@ DEPENDENCIES
   email_spec
   erb2haml
   exception_notification
-  factory_girl
   factory_girl_rails
   filepicker-rails
   haml
