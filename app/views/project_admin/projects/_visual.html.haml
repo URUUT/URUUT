@@ -45,13 +45,8 @@
 
       %h6{:style => "text-align:center;color:#55554d !important;font-family:'Proxima Nova';margin-top:15px;"} Funding Ends
       %div.circlegrey{style: "background: #b6b6b4;"}
-<<<<<<< HEAD
         %span{:style => 'display:block;text-align:center;font:normal 22px/22px "Proxima Nova Semi";color:#fff;text-transform:uppercase;letter-spacing:5px; margin-top: 10px;'}= @project.campaign_deadline.strftime("%b")
         %span{:style => 'display:block;text-align:center;font:normal 72px/68px "Proxima Nova Semi";color:#fff;text-transform:uppercase;'}= @project.campaign_deadline.strftime("%d")
-=======
-        %span{:style => 'display:block;text-align:center;font:normal 22px/22px "Proxima Nova Semi";color:#fff;text-transform:uppercase;letter-spacing:5px; margin-top: 17px;'}= (Date.today + (@project.duration).to_i.days).strftime("%b")
-        %span{:style => 'display:block;text-align:center;font:normal 72px/68px "Proxima Nova Semi";color:#fff;text-transform:uppercase;'}= (Date.today + (@project.duration).to_i.days).strftime("%d")
->>>>>>> d47bfccd674c59ea284e40171b8757cc02d644c3
       %h6{:style => "text-align:center;color:#55554d !important;font-family:'Proxima Nova';margin-top:40px;margin-bottom:0;"} Project Goal
       %h2{:style => "text-align:center;color:#403e37;font-family:'Proxima Nova Semi';margin-top:0;"}= amount_converter(@project.goal)
     .span9.details
