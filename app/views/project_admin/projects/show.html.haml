@@ -55,7 +55,10 @@
           %br
           Remaining
         %h2.highlighted-value
-          #{campaign_days_left(@project)}
+          - if campaign_days_left(@project) > 0
+            #{campaign_days_left(@project)}
+          - else
+            Complete
 
 .cf
 
