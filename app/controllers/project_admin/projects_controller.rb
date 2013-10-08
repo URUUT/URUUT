@@ -135,6 +135,10 @@ class ProjectAdmin::ProjectsController < ApplicationController
   end
 
   def communication_zone
+    @test = "test"
+    respond_to do |format|
+      format.js
+    end
   end
 
   private
