@@ -714,11 +714,9 @@ textarea, .textarea input[type="text"]{
 }
 
 .progress-container{
+  display: block;
+  float: none;
   margin-left: 0px;
-
-  // & > div{
-  //   margin-left: 40px;
-  // }
 }
 
 .planter{
