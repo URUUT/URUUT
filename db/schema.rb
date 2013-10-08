@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130917111156) do
+ActiveRecord::Schema.define(:version => 20131008045714) do
 
   create_table "badges_sashes", :force => true do |t|
     t.integer  "badge_id"
@@ -117,6 +117,11 @@ ActiveRecord::Schema.define(:version => 20130917111156) do
   create_table "merit_scores", :force => true do |t|
     t.integer "sash_id"
     t.string  "category", :default => "default"
+  end
+
+  create_table "messages", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "milestoneemails", :force => true do |t|
