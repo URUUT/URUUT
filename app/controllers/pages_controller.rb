@@ -8,7 +8,7 @@ class PagesController < ApplicationController
   def index
     # projects_list
     @projects = Project.where("live = 1 AND status IS NULL")
-    @project_success = Project.where("live = 1 AND status = 'funded'")
+    @project_success = Project.where("live = 1 AND status = 'Funding Completed'")
   end
 
   def home
@@ -51,7 +51,7 @@ class PagesController < ApplicationController
   def how_it_works
     # session[:previous_page] = request.referer
   end
-  
+
   def media
     @press_releases = PressRelease.all
     @press_coverages = PressCoverage.order("release_date DESC").all
