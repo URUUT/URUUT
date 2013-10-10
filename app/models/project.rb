@@ -236,4 +236,60 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def get_donors(project)
+    donors = Donation.where("project_id = ?", project.id)
+  end
+
+  def get_sponsors(project)
+    sponsors = ProjectSponsor.where("project_id = ? AND customer_id != ?", project.id, '')
+  end
+
+  def create_token(customer_token, access_token)
+    Stripe::Token.create(
+      {:customer => customer_token},
+      access_token
+    )
+  end
+
+  def create_charges
+    donors = get_donors(self)
+    sponsors = get_sponsors(self)
+
+    donors.each do |donor|
+      token = create_token(donor.customer_token, self.project_token)
+      amount = donor.amount.to_i * 100
+      description = self.project_title
+      application_fee = (amount * 0.06).to_i
+      project_token = self.project_token
+
+      Stripe::Charge.create({
+          :amount => amount,
+          :currency => "usd",
+          :card => token.id,
+          :description => description,
+          :application_fee => application_fee
+        },
+        project_token
+      )
+    end
+
+    sponsors.each do |sponsor|
+      token = create_token(sponsor.customer_id, self.project_token)
+      amount = sponsor.cost.to_i * 100
+      description = self.project_title
+      application_fee = (amount * 0.10).to_i
+      project_token = self.project_token
+
+      Stripe::Charge.create({
+          :amount => amount,
+          :currency => "usd",
+          :card => token.id,
+          :description => description,
+          :application_fee => application_fee
+        },
+        project_token
+      )
+    end
+  end
+
 end
