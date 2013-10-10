@@ -87,7 +87,7 @@
     }
   })
 
-  if(window.parent.location.href == document.location.protocol + '//#{request.host_with_port}/projects/1/edit#sponsor-info') {
+  if(window.parent.location.href.indexOf('edit#sponsor-info') > -1 ) {
     self.close();
     window.opener.location.reload(false);
   }
