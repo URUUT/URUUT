@@ -1,4 +1,5 @@
 class ProjectMailer < ActionMailer::Base
+  layout 'mailer'
   default from: "info@uruut.com"
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -23,7 +24,7 @@ class ProjectMailer < ActionMailer::Base
   def project_message(recepient, subject_email, header_image, content)
     @image = header_image
     @host = ActionMailer::Base.default_url_options[:host]
-    @content = content
+    @content = ApplicationController.helpers.simple_format(content)
     mail to: recepient, subject: subject_email
   end
 
