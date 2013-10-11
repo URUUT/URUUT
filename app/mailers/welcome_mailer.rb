@@ -1,4 +1,5 @@
 class WelcomeMailer < ActionMailer::Base
+  layout 'mailer'
   default from: "info@uruut.com"
 
   # Subject can be set in your I18n file at config/locales/en.yml

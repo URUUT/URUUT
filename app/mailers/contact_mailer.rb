@@ -1,4 +1,5 @@
 class ContactMailer < ActionMailer::Base
+  layout 'mailer'
   # default from: "info@uruut.com"
   # default to: "mfeinberg@uruut.com, bnorwood@uruut.com"
 
