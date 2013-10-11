@@ -56,8 +56,8 @@ Crowdfund::Application.configure do
       :sender_address => %{"notifier" <cbartels@uruut.com>},
       :exception_recipients => %w{cbartels@uruut.com}
     }
-  
+
 
   # Paperclip.options[:command_path] = "/usr/local/Cellar/imagemagick/6.7.1-1/bin"
-  RailsDevelopmentBoost.async = false if defined?(RailsDevelopmentBoost) 
+  RailsDevelopmentBoost.async = false if defined?(RailsDevelopmentBoost)
 end

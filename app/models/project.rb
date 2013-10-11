@@ -238,4 +238,124 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def get_donors(project)
+    donors = Donation.where("project_id = ? AND customer_token != ?", project.id, '')
+  end
+
+  def get_sponsors(project)
+    sponsors = ProjectSponsor.where("project_id = ? AND customer_id != ?", project.id, '')
+  end
+
+  def create_token(customer_token, access_token)
+    Stripe::Token.create(
+      {:customer => customer_token},
+      access_token
+    )
+  end
+
+  def create_charges
+    donors = get_donors(self)
+    sponsors = get_sponsors(self)
+
+    donors.each do |donor|
+      begin
+        token = create_token(donor.customer_token, self.project_token)
+        amount = donor.amount.to_i * 100
+        description = "Donor #{self.project_title} #{User.where('id = ?', donor.user_id).first.first_name} #{User.where('id = ?', donor.user_id).first.last_name} #{User.where('id = ?', donor.user_id).first.email}"
+        application_fee = (amount * 0.06).to_i
+        project_token = self.project_token
+
+        Stripe::Charge.create({
+            :amount => amount,
+            :currency => "usd",
+            :card => token.id,
+            :description => description,
+            :application_fee => application_fee
+          },
+          project_token
+        )
+      rescue Stripe::CardError => e
+        # Since it's a decline, Stripe::CardError will be caught
+        body = e.json_body
+        err  = body[:error]
+
+        puts "Status is: #{e.http_status}"
+        puts "Type is: #{err[:type]}"
+        puts "Code is: #{err[:code]}"
+        # param is '' in this case
+        puts "Param is: #{err[:param]}"
+        puts "Message is: #{err[:message]}"
+
+        next
+      rescue Stripe::InvalidRequestError => e
+        # Invalid parameters were supplied to Stripe's API
+        puts e
+      rescue Stripe::AuthenticationError => e
+        # Authentication with Stripe's API failed
+        # (maybe you changed API keys recently)
+        puts e
+      rescue Stripe::APIConnectionError => e
+        # Network communication with Stripe failed
+        puts e
+      rescue Stripe::StripeError => e
+        # Display a very generic error to the user, and maybe send
+        # yourself an email
+        puts e
+      rescue => e
+        # Something else happened, completely unrelated to Stripe
+        puts e
+      end
+    end
+
+    sponsors.each do |sponsor|
+      begin
+        token = create_token(sponsor.customer_id, self.project_token)
+        amount = sponsor.cost.to_i * 100
+        sponsor_name = Sponsor.where("id = ?", sponsor.sponsor_id).first.name
+        sponsor_email = Sponsor.where("id = ?", sponsor.sponsor_id).first.email
+        description = "Sponsor #{self.project_title} #{sponsor_name} #{sponsor_email}"
+        application_fee = (amount * 0.10).to_i
+        project_token = self.project_token
+
+        Stripe::Charge.create({
+            :amount => amount,
+            :currency => "usd",
+            :card => token.id,
+            :description => description,
+            :application_fee => application_fee
+          },
+          project_token
+        )
+      rescue Stripe::CardError => e
+        # Since it's a decline, Stripe::CardError will be caught
+        body = e.json_body
+        err  = body[:error]
+
+        puts "Status is: #{e.http_status}"
+        puts "Type is: #{err[:type]}"
+        puts "Code is: #{err[:code]}"
+        # param is '' in this case
+        puts "Param is: #{err[:param]}"
+        puts "Message is: #{err[:message]}"
+      rescue Stripe::InvalidRequestError => e
+        # Invalid parameters were supplied to Stripe's API
+        puts e
+      rescue Stripe::AuthenticationError => e
+        # Authentication with Stripe's API failed
+        # (maybe you changed API keys recently)
+        puts e
+      rescue Stripe::APIConnectionError => e
+        # Network communication with Stripe failed
+        puts e
+      rescue Stripe::StripeError => e
+        # Display a very generic error to the user, and maybe send
+        # yourself an email
+        puts e
+      rescue => e
+        # Something else happened, completely unrelated to Stripe
+        puts e
+      end
+    end
+  end
+
 end
