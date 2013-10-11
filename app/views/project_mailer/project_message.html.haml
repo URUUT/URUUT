@@ -1,53 +1,7 @@
-!!!
-%head
-  %title
-    :css
-      @media only screen and (max-width:620px){
-        img {
-          max-width:100% !important;
-        }
-        #inner-body {
-          width:100% !important;
-          max-width:620px !important;
-        }
-      }
-%body
-  %table#body-container{:height => "100%", :width => "100%", :style => "border-collapse: collapse;"}
-    %tr
-      %td{:align => "center", :valign => "top"}
-        %table#inner-body{:width => "620", :cellspacing => "0", :cellpadding => "0", :style => "border-spacing:0;border-collapse: collapse;"}
-          %tr
-            %td{:align => "center", :valign => "top"}
-              %table{:style => "margin: 0;padding: 0;max-width: 620px;width: 100%;"}
-                %tr{:style => "margin: 0;padding: 0;"}
-                  %td{:style => "margin: 0;padding: 0;"}
-                    %p{:style => "margin: 0;padding: 10px 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;font-weight: normal;font-size: 11px;line-height: 1;"} 
-                      %span{:style => "color:#70bf4c"}Uruut. 
-                      Connect. Cooperate. Take Action
-                    %tr
-                      %td{:align => "center", :valign => "top"}
-                        %table#email-header{:bgcolor => "#403e37", :width => "100%", :cellspacing => "0", :style => "border-spacing:0;border-collapse: collapse;"}
-                          %tr
-                            %td{:align => "left", :valign => "top", :style => "border-bottom:6px solid #70bf4c;"}
-                              %img{:src => "https://uruut.herokuapp.com/assets/logo.png", :style => "margin:10px;display:block;"}
-                            %td{:align => "right", :valign => "top", :style => "border-bottom:6px solid #70bf4c;"}
-                              %a{:href => "http://#{@host}/users/sign_in"}
-                                %img{:src => "http://#{@host}/assets/email-login.png", :style => "display:block;margin:25px 10px 0 0;"}
-                    - if @image
-                      %tr
-                        %td{:valign => "top"}
-                          %img{:src => "#{@image}/convert?w=620", :style => "display:block;"}
-                    %tr
-                      %td{:valign => "top"}
-                        %div{:style => "padding:35px 20px"} #{@content}
-                    %tr
-                      %td{:align => "center", :valign => "top"}
-                        %table#email-footer{:bgcolor => "#403e37", :width => "100%", :cellspacing => "0", :style => "border-spacing:0;border-collapse: collapse;"}
-                          %tr
-                            %td{:align => "right", :valign => "top"}
-                              %p{:style => "color:#fff;font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size:13px;margin:10px;"}
-                                FIND US ON:
-                                %a{:href => "http://www.facebook.com/get.ruuted", :style => "color:#fff;margin-left:10px"}
-                                  %img{:src => "https://d2q0qd5iz04n9u.cloudfront.net/_ssl/proxy.php/http/uruut-dev.herokuapp.com/assets/email-facebook.png", :style => "vertical-align:middle;margin:3px;"} /get.ruuted
-                                %a{:href => "http://www.twitter.com/uruut", :style => "color:#fff;margin-left:10px"}
-                                  %img{:src => "https://d2q0qd5iz04n9u.cloudfront.net/_ssl/proxy.php/http/uruut-dev.herokuapp.com/assets/email-twitter.png", :style => "vertical-align:middle;margin:3px;"} @uruut      
+- if @image
+  %tr
+    %td{:valign => "top"}
+      %img{:src => "#{@image}/convert?w=620", :style => "display:block;"}
+%tr
+  %td{:valign => "top"}
+    %div{:style => "padding:35px 20px"} #{@content}

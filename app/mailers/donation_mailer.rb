@@ -1,4 +1,5 @@
 class DonationMailer < ActionMailer::Base
+  layout 'mailer'
   default from: "info@uruut.com"
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -23,7 +24,7 @@ class DonationMailer < ActionMailer::Base
     user = User.find_by_id(donation.user_id)
     project = Project.find(donation.project_id)
     sponsor = User.find_by_id(project.user_id)
-    
+
     @donator_name = "#{user.first_name}" + " #{user.last_name}"
     @email = user.email
     @image = project.large_image

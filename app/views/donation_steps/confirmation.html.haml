@@ -33,7 +33,7 @@
           - precision = @donation.amount.to_s.split(".")[1].eql?("0") ? 0 : 2
           %div{:style => "font-size:12px;font-family:'Proxima Nova';"}
             When you seed #{number_to_currency(@donation.amount, precision: precision)} you will receive:
-            - unless @donation.description.nil?
+            - if @donation.description?
               %ul.dashed-list
                 %li= @donation.description
             - if !session[:perk_type].eql?("default")

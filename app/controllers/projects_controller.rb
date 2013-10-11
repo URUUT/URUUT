@@ -148,7 +148,7 @@ class ProjectsController < ApplicationController
     params[:project][:goal] = params[:project][:goal].gsub(",", "") if !params[:project][:goal].nil?
     params[:project][:sponsor_permission] = params[:project][:sponsorship_permission] if !params[:project][:sponsorship_permission].nil?
     @project.update_attributes!(params[:project])
-    if @project.bitly.blank?
+    unless @project.bitly?
       bitly = Bitly.client
       page_url = bitly.shorten("#{request.scheme}://#{request.host_with_port}/projects/#{@project.id}") rescue nil
       @project.bitly = page_url.short_url rescue nil

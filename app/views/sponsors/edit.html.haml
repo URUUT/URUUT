@@ -219,7 +219,7 @@
           = hidden_field_tag 'project_sponsor[card_type]'
           = hidden_field_tag 'project_sponsor[card_last4]'
           = hidden_field_tag 'project_sponsor[project_id]', @project.id
-          - if @sponsor.token.present?
+          - if @sponsor.token?
             Credit card has been provided.
           - else
             .field.name
