@@ -55,4 +55,54 @@ class Donation < ActiveRecord::Base
     DonationMailer.donation_confirmation(donation).deliver
   end
 
+  def self.generate_report(project_id)
+    require 'csv'
+
+    project_name = Project.find(project_id).project_title
+    index_array = Donation.where("project_id = ?", project_id).map(&:user_id).uniq
+    donations = Donation.where("project_id = ?", project_id)
+    perks = Perk.where("project_id = ?", project_id)
+
+    CSV.open("#{Rails.root}/reports/report.csv", "w+") do |csv|
+
+      csv << ["project name", "email", "amount", "perk", "description"]
+
+      index_array.each do |index|
+        sum = 0
+        matches = donations.where("user_id = ?",index)
+        matches.each do |p|
+          sum += p.amount
+        end
+
+        if perks.first.amount > sum
+          perk_name = "n/a"
+          perk_description = "n/a"
+        elsif sum > perks.last.amount
+          perk_name = perks.last.name
+          perk_description = perks.last.description
+        else
+          perks.each_cons(3) do |p, c, n|
+            if sum.between?(p.amount, n.amount)
+              if sum = p.amount
+                perk_name = p.name
+                perk_description = p.description
+              elsif sum = n.amount
+                perk_name = n.name
+                perk_description = n.description
+              else
+                perk_name = p.name
+                perk_description = p.description
+              end
+            end
+          end
+        end
+        csv << ["#{project_name}", "#{matches.uniq.first.email}", "#{sum}", "#{perk_name}", "#{perk_description}"]
+      end
+
+    end
+
+    DonationMailer.send_donation_report.deliver
+
+  end
+
 end
