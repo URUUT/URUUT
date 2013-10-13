@@ -61,7 +61,7 @@ class Donation < ActiveRecord::Base
     project_name = Project.find(project_id).project_title
     index_array = Donation.where("project_id = ?", project_id).map(&:user_id).uniq
     donations = Donation.where("project_id = ?", project_id)
-    perks = Perk.where("project_id = ?", project_id)
+    perks = Perk.where("project_id = ?", project_id).order("id ASC")
 
     CSV.open("#{Rails.root}/reports/report.csv", "w+") do |csv|
 
@@ -75,27 +75,34 @@ class Donation < ActiveRecord::Base
         end
 
         if perks.first.amount > sum
+          puts "sum is too small for perk"
           perk_name = "n/a"
           perk_description = "n/a"
         elsif sum > perks.last.amount
+          puts "sum gets largest perk"
           perk_name = perks.last.name
           perk_description = perks.last.description
         else
           perks.each_cons(3) do |p, c, n|
             if sum.between?(p.amount, n.amount)
+              puts "sum is between before and after"
               if sum = p.amount
+                puts "sum = before"
                 perk_name = p.name
                 perk_description = p.description
               elsif sum = n.amount
+                puts "sum = after"
                 perk_name = n.name
                 perk_description = n.description
               else
+                puts "sum <> so still looking"
                 perk_name = p.name
                 perk_description = p.description
               end
             end
           end
         end
+
         csv << ["#{project_name}", "#{matches.uniq.first.email}", "#{sum}", "#{perk_name}", "#{perk_description}"]
       end
 
