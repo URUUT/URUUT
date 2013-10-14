@@ -65,7 +65,7 @@ class Donation < ActiveRecord::Base
 
     CSV.open("#{Rails.root}/reports/report.csv", "w+") do |csv|
 
-      csv << ["project name", "email", "amount", "perk", "description"]
+      csv << ["project name", "email", "first name", "last name", "amount", "perk", "description"]
 
       index_array.each do |index|
         sum = 0
@@ -75,11 +75,9 @@ class Donation < ActiveRecord::Base
         end
 
         if perks.first.amount > sum
-          puts "sum is too small for perk"
           perk_name = "n/a"
           perk_description = "n/a"
         elsif sum > perks.last.amount
-          puts "sum gets largest perk"
           perk_name = perks.last.name
           perk_description = perks.last.description
         else
@@ -89,27 +87,9 @@ class Donation < ActiveRecord::Base
               perk_description = p.description
             end
           end
-          # perks.each_cons(3) do |p, c, n|
-          #   if sum.between?(p.amount, n.amount)
-          #     puts "sum is between before and after"
-          #     if sum = p.amount
-          #       puts "sum = before"
-          #       perk_name = p.name
-          #       perk_description = p.description
-          #     elsif sum = n.amount
-          #       puts "sum = after"
-          #       perk_name = n.name
-          #       perk_description = n.description
-          #     else
-          #       puts "sum <> so still looking"
-          #       perk_name = p.name
-          #       perk_description = p.description
-          #     end
-          #   end
-          # end
         end
 
-        csv << ["#{project_name}", "#{matches.uniq.first.email}", "#{sum}", "#{perk_name}", "#{perk_description}"]
+        csv << ["#{project_name}", "#{matches.uniq.first.email}", "#{User.find(matches.uniq.first.id).first_name}", "#{User.find(matches.uniq.first.id).last_name}", "#{sum}", "#{perk_name}", "#{perk_description}"]
       end
 
     end
