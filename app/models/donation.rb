@@ -89,7 +89,7 @@ class Donation < ActiveRecord::Base
           end
         end
 
-        csv << ["#{project_name}", "#{matches.uniq.first.email}", "#{User.find(matches.uniq.first.id).first_name}", "#{User.find(matches.uniq.first.id).last_name}", "#{sum}", "#{perk_name}", "#{perk_description}"]
+        csv << ["#{project_name}", "#{matches.uniq.first.email}", "#{User.find(matches.uniq.first.user_id).first_name}", "#{User.find(matches.uniq.first.user_id).last_name}", "#{sum}", "#{perk_name}", "#{perk_description}"]
       end
 
     end
