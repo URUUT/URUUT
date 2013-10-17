@@ -63,7 +63,7 @@ class Donation < ActiveRecord::Base
     donations = Donation.where("project_id = ?", project_id)
     perks = Perk.where("project_id = ?", project_id).order("id ASC")
 
-    CSV.open("#{Rails.root}/reports/report.csv", "w+") do |csv|
+    CSV.open("#{Rails.root}/reports/donor_report.csv", "w+") do |csv|
 
       csv << ["project name", "email", "first name", "last name", "amount", "perk", "description"]
 

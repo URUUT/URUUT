@@ -40,8 +40,8 @@ class DonationMailer < ActionMailer::Base
     mail to: @email, subject: "Thank You, Donor!"
   end
 
-   def send_donation_report
-    attachments['report.csv'] = File.read('reports/report.csv')
+  def send_donation_report
+    attachments['donation_report.csv'] = File.read('reports/donation_report.csv')
 
     mail to: 'cbartels@uruut.com', subject: 'Donation Report', body: ''
   end
