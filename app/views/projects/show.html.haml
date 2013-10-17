@@ -447,8 +447,8 @@
               .clearfix
                 .seed-num
                   .amount
-                    - if (@project.goal.to_i * 0.02) >= 500
-                      = amount_converter(500)
+                    - if (@project.goal.to_i * 0.02) >= 750
+                      = amount_converter(750)
                     - else
                       = amount_converter(@project.goal.to_i * 0.02)
                 - if user_signed_in? && @project.status == nil
