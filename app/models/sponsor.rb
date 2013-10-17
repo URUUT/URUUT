@@ -95,9 +95,9 @@ class Sponsor < ActiveRecord::Base
           end
         end
 
-        level_cost = less_than_sum.max.cost
+        level_cost = less_than_sum.max
 
-        total_benefits = less_than_sum.each_index.select{|i| less_than_sum[i].cost == level_cost}
+        total_benefits = less_than_sum.each_index.select{|i| less_than_sum[i].cost == level_cost.cost}
         benefit_names = ''
 
         total_benefits.each do |tb|
