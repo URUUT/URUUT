@@ -110,7 +110,7 @@ class Sponsor < ActiveRecord::Base
       end
     end
 
-    # SponsorMailer.send_sponsor_report.deliver
+    SponsorMailer.send_sponsor_report.deliver
 
   end
 
