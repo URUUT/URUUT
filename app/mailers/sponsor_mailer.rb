@@ -70,4 +70,10 @@ class SponsorMailer < ActionMailer::Base
     mail to: @email, subject: "Thank You, Sponsor!"
   end
 
+  def send_sponsor_report
+    attachments['sponsor_report.csv'] = File.read('reports/sponsor_report.csv')
+
+    mail to: 'cbartels@uruut.com', subject: 'Sponsor Report', body: ''
+  end
+
 end

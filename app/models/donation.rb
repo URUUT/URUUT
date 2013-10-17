@@ -61,11 +61,12 @@ class Donation < ActiveRecord::Base
     project_name = Project.find(project_id).project_title
     index_array = Donation.where("project_id = ?", project_id).map(&:user_id).uniq
     donations = Donation.where("project_id = ?", project_id)
-    perks = Perk.where("project_id = ?", project_id)
 
-    CSV.open("#{Rails.root}/reports/report.csv", "w+") do |csv|
+    perks = Perk.where("project_id = ?", project_id).order("id ASC")
 
-      csv << ["project name", "email", "amount", "perk", "description"]
+    CSV.open("#{Rails.root}/reports/donor_report.csv", "w+") do |csv|
+
+      csv << ["project name", "email", "first name", "last name", "amount", "perk", "description"]
 
       index_array.each do |index|
         sum = 0
@@ -81,22 +82,15 @@ class Donation < ActiveRecord::Base
           perk_name = perks.last.name
           perk_description = perks.last.description
         else
-          perks.each_cons(3) do |p, c, n|
-            if sum.between?(p.amount, n.amount)
-              if sum = p.amount
-                perk_name = p.name
-                perk_description = p.description
-              elsif sum = n.amount
-                perk_name = n.name
-                perk_description = n.description
-              else
-                perk_name = p.name
-                perk_description = p.description
-              end
+          perks.each do |p|
+            if p.amount < sum
+              perk_name = p.name
+              perk_description = p.description
             end
           end
         end
-        csv << ["#{project_name}", "#{matches.uniq.first.email}", "#{sum}", "#{perk_name}", "#{perk_description}"]
+
+        csv << ["#{project_name}", "#{matches.uniq.first.email}", "#{User.find(matches.uniq.first.user_id).first_name}", "#{User.find(matches.uniq.first.user_id).last_name}", "#{sum}", "#{perk_name}", "#{perk_description}"]
       end
 
     end
