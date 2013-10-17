@@ -204,7 +204,7 @@
             %iframe{:height => "413", :src => video_seed, :width => "620"}
           - elsif @project.seed_mime_type.eql?("image") and !@project.seed_image.blank?
             = image_tag "#{@project.seed_image}", style: "float:left; width:100%"
-          %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: pre-wrap;"}= @project.story
+          %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: pre-line;"}= simple_format(@project.story)
         - unless @project.project_updates.empty?
           #growth.tab-pane
             - @project.project_updates.each do |update|
@@ -244,7 +244,7 @@
               %iframe{:height => "310", :src => cultivation_video, :width => "380"}
             - elsif @project.cultivation_mime_type.eql?("image") and !@project.cultivation_image.blank?
               = image_tag "#{@project.cultivation_image}", style: "float:left; width:100%"
-            %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: pre-wrap;"}= @project.about
+            %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: pre-line;"}= simple_format(@project.about)
 
       -#%hr
       -#.comments
