@@ -24,3 +24,8 @@
 
 # Ignore dev mailer
 /config/initializers/dev_mail.rb
+
+# pow stuff
+.rvmrc
+.powrc
+.powenv
