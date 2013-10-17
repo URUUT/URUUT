@@ -90,17 +90,18 @@ class Sponsor < ActiveRecord::Base
         puts sum
 
         benefit.each do |b|
-          if b.cost < sum
+          if b.cost > sum
             less_than_sum.push b
           end
         end
 
-        level_cost = less_than_sum.max
+        level_cost = less_than_sum.max.cost
+
         total_benefits = less_than_sum.each_index.select{|i| less_than_sum[i].cost == level_cost}
         benefit_names = ''
 
         total_benefits.each do |tb|
-          benefit_names += less_than_sum[tb].name
+          puts less_than_sum[tb].name
         end
         puts Sponsor.find(index).name
         puts benefit_names
@@ -109,7 +110,7 @@ class Sponsor < ActiveRecord::Base
       end
     end
 
-    SponsorMailer.send_sponsor_report.deliver
+    # SponsorMailer.send_sponsor_report.deliver
 
   end
 
