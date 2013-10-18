@@ -252,8 +252,8 @@
                   .clearfix
                     .seed-num
                       .amount
-                        - if (@project.goal.to_i * 0.02) >= 500
-                          = number_to_currency(500, precision: 0)
+                        - if (@project.goal.to_i * 0.02) >= 750
+                          = number_to_currency(750, precision: 0)
                         - else
                           = number_to_currency(@project.goal.to_i * 0.02, precision: 0)
                     %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
