@@ -371,7 +371,7 @@
               .clearfix
                 .seed-num
                   .amount
-                    = amount_converter(@project.goal.to_i * 0.3)
+                    = amount_converter(@project.goal.to_i * 0.25)
                 - if check_availibility(@project, 1) < 1 && @project.status == nil
                   - if user_signed_in?
                     %a.btn.pull-right.sponsors{:href => "/projects/#{@project.id}/sponsors/new?level=platinum", style: "margin-top: 10px;"}
@@ -425,7 +425,7 @@
               .clearfix
                 .seed-num
                   .amount
-                    = amount_converter(@project.goal.to_i * 0.04)
+                    = amount_converter(@project.goal.to_i * 0.05)
                 - if check_availibility(@project, 3) < 5 && @project.status == nil
                   - if user_signed_in?
                     %a.btn.pull-right.sponsors{:href => "/projects/#{@project.id}/sponsors/new?level=silver", :style => "margin-top: 10px;"}
