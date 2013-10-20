@@ -66,7 +66,7 @@
         .clearfix
           .seed-num
             .amount
-              = amount_converter(@project.goal.to_i * 0.3)
+              = amount_converter(@project.goal.to_i * 0.25)
           %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
             Sponsor
             %span
@@ -99,7 +99,7 @@
         .clearfix
           .seed-num
             .amount
-              = amount_converter(@project.goal.to_i * 0.04)
+              = amount_converter(@project.goal.to_i * 0.05)
           %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
             Sponsor
             %span
@@ -113,8 +113,8 @@
         .clearfix
           .seed-num
             .amount
-              - if (@project.goal.to_i * 0.1) >= 500
-                = amount_converter(500)
+              - if (@project.goal.to_i * 0.1) >= 750
+                = amount_converter(750)
               - else
                 = amount_converter(@project.goal.to_i * 0.1)
           %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}

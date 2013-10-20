@@ -90,14 +90,14 @@ class ProjectsController < ApplicationController
         end
         status = params["#{level}"]["#{count}"] ? 1 : 0
         if level.eql?("platinum")
-          cost = 0.3 * @project.goal.to_i
+          cost = 0.25 * @project.goal.to_i
         elsif level.eql?("gold")
           cost = 0.1 * @project.goal.to_i
         elsif level.eql?("silver")
-          cost = 0.04 * @project.goal.to_i
+          cost = 0.05 * @project.goal.to_i
         else
-          if @project.goal.to_i * 0.02 >= 500
-            cost = 500
+          if @project.goal.to_i * 0.02 >= 750
+            cost = 750
           else
             cost = 0.02 * @project.goal.to_i
           end
