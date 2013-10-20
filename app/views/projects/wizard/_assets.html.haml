@@ -128,7 +128,11 @@
                   %input{:type => 'filepicker', :name => 'cultivation_image', 'data-fp-button-text' => 'Upload New Photo', 'data-fp-apikey' => Settings.filepicker.api_key, 'data-fp-button-class' => 'btn', 'onchange' => 'updateCultivationImage(event)', 'data-fp-mimetypes' => 'image/*', 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA'}
                   = link_to '<i class="icon-facetime-video icon-green"></i> Upload New Video'.html_safe, "javascript:void(0)", class: "btn cultivation-form"
 
+<<<<<<< HEAD
               %div.wizard-data-about{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: pre-wrap;"}= simple_format(@project.about)
+=======
+              %div.wizard-data-about{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= simple_format(@project.about)
+>>>>>>> 718c016a1d09a10930047e58209a0f4fd18ae570
 
       .span4.sidebar
         .sidebar-assets-content
@@ -208,7 +212,7 @@
                   .clearfix
                     .seed-num
                       .amount
-                        = amount_converter(@project.goal.to_i * 0.3)
+                        = amount_converter(@project.goal.to_i * 0.25)
                     %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
                       Sponsor ►
                 .seed-level.gold-level
@@ -239,7 +243,7 @@
                   .clearfix
                     .seed-num
                       .amount
-                        = amount_converter(@project.goal.to_i * 0.04)
+                        = amount_converter(@project.goal.to_i * 0.05)
                     %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
                       Sponsor ►
                 .seed-level.bronze-level
@@ -252,8 +256,8 @@
                   .clearfix
                     .seed-num
                       .amount
-                        - if (@project.goal.to_i * 0.02) >= 500
-                          = number_to_currency(500, precision: 0)
+                        - if (@project.goal.to_i * 0.02) >= 750
+                          = number_to_currency(750, precision: 0)
                         - else
                           = number_to_currency(@project.goal.to_i * 0.02, precision: 0)
                     %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
