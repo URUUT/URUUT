@@ -45,7 +45,7 @@
         .clearfix{:style => "margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #e0e0e0; margin-left: -19px; margin-right: -19px; padding-left: 19px; padding-right: 19px;"}
           .pull-left
             %h5{style: "margin-bottom: 0;"} COST
-            %h3{style: "margin: 0;line-height: 20px;"}= amount_converter((@project.goal.to_i * 0.3))
+            %h3{style: "margin: 0;line-height: 20px;"}= amount_converter((@project.goal.to_i * 0.25))
           - if check_availibility(@project, 1) < 1
             %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-1", :"sponsor-id" => "1"}
               SPONSOR ►
@@ -85,7 +85,7 @@
         .clearfix{:style => "margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #e0e0e0; margin-left: -19px; margin-right: -19px; padding-left: 19px; padding-right: 19px;"}
           .pull-left
             %h5{style: "margin-bottom: 0;"} COST
-            %h3{style: "margin: 0;line-height: 20px;"}= amount_converter((@project.goal.to_i * 0.04))
+            %h3{style: "margin: 0;line-height: 20px;"}= amount_converter((@project.goal.to_i * 0.05))
           - if check_availibility(@project, 2) < 3
             %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-3", :"sponsor-id" => "3"}
               SPONSOR ►
@@ -101,9 +101,9 @@
         /%div{:style => "height: 80px; width: 100%;"}
         .clearfix
           .pull-left
-            - if (@project.goal.to_i * 0.02) >= 500
+            - if (@project.goal.to_i * 0.02) >= 750
               %h3{style: "margin: 0; margin-top: 20px; line-height: 20px;"}
-                = number_to_currency((500), precision: 0)
+                = number_to_currency((750), precision: 0)
             - else
               %h3{style: "margin: 0;line-height: 20px;"}= amount_converter(@project.goal.to_i * 0.02)
           %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-4", :"sponsor-id" => "4"}

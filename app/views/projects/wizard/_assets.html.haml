@@ -208,7 +208,7 @@
                   .clearfix
                     .seed-num
                       .amount
-                        = amount_converter(@project.goal.to_i * 0.3)
+                        = amount_converter(@project.goal.to_i * 0.25)
                     %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
                       Sponsor ►
                 .seed-level.gold-level
@@ -239,7 +239,7 @@
                   .clearfix
                     .seed-num
                       .amount
-                        = amount_converter(@project.goal.to_i * 0.04)
+                        = amount_converter(@project.goal.to_i * 0.05)
                     %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
                       Sponsor ►
                 .seed-level.bronze-level
