@@ -11,7 +11,7 @@ class SponsorsController < ApplicationController
     case params[:level]
       when 'platinum'
         @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[1]
-        @cost = @project.goal.to_i * 0.3
+        @cost = @project.goal.to_i * 0.25
         @level = "Platinum"
         session[:level_id] = 1
       when 'gold'
@@ -21,14 +21,14 @@ class SponsorsController < ApplicationController
         session[:level_id] = 2
       when 'silver'
         @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[3]
-        @cost = @project.goal.to_i * 0.04
+        @cost = @project.goal.to_i * 0.05
         @level = "Silver"
         session[:level_id] = 3
       when 'bronze'
         @level = "Bronze"
         @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[4]
-        if (@project.goal.to_i * 0.02) >= 500
-          @cost = 500
+        if (@project.goal.to_i * 0.02) >= 750
+          @cost = 750
         else
           @cost = @project.goal.to_i * 0.02
         end
@@ -39,18 +39,18 @@ class SponsorsController < ApplicationController
         # sponsor cost rule
         case level_sponsor
           when 1
-            @cost = @project.goal.to_i * 0.3
+            @cost = @project.goal.to_i * 0.25
             @level = "Platinum"
           when 2
             @cost = @project.goal.to_i * 0.1
             @level = "Gold"
           when 3
-            @cost = @project.goal.to_i * 0.04
+            @cost = @project.goal.to_i * 0.05
             @level = "Silver"
           when 4
             @level = "Bronze"
-            if (@project.goal.to_i * 0.02) >= 500
-              @cost = 500
+            if (@project.goal.to_i * 0.02) >= 750
+              @cost = 750
             else
               @cost = @project.goal.to_i * 0.02
             end
@@ -70,7 +70,7 @@ class SponsorsController < ApplicationController
     case @project_sponsor.level_id
       when 1
         @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[1]
-        @cost = @project.goal.to_i * 0.3
+        @cost = @project.goal.to_i * 0.25
         @level = "Platinum"
         session[:level_id] = 1
       when 2
@@ -80,14 +80,14 @@ class SponsorsController < ApplicationController
         session[:level_id] = 2
       when 3
         @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[3]
-        @cost = @project.goal.to_i * 0.04
+        @cost = @project.goal.to_i * 0.05
         @level = "Silver"
         session[:level_id] = 3
       when 4
         @level = "Bronze"
         @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[4]
-        if (@project.goal.to_i * 0.02) >= 500
-          @cost = 500
+        if (@project.goal.to_i * 0.02) >= 750
+          @cost = 750
         else
           @cost = @project.goal.to_i * 0.02
         end
@@ -107,14 +107,14 @@ class SponsorsController < ApplicationController
     cost = SponsorshipLevel.find(params[:project_sponsor][:level_id]).cost
     case params[:project_sponsor][:level_id]
       when "1"
-        cost = project.goal.to_i * 0.3
+        cost = project.goal.to_i * 0.25
       when "2"
         cost = project.goal.to_i * 0.1
       when "3"
-        cost = project.goal.to_i * 0.04
+        cost = project.goal.to_i * 0.05
       when "4"
-        if project.goal.to_i * 0.02 >= 500
-          cost = 500
+        if project.goal.to_i * 0.02 >= 750
+          cost = 750
         else
           cost = project.goal.to_i * 0.02
         end
@@ -162,18 +162,18 @@ class SponsorsController < ApplicationController
 
     case params[:sponsor_id]
     when "1"
-      @cost = project.goal.to_i * 0.3
+      @cost = project.goal.to_i * 0.25
       @image = "/assets/platinum-placement.png"
     when "2"
       @cost = project.goal.to_i * 0.1
       @image = "/assets/gold-placement.png"
     when "3"
-      @cost = project.goal.to_i * 0.04
+      @cost = project.goal.to_i * 0.05
       @image = "/assets/silver-placement.png"
     when "4"
       @image = "/assets/bronze-placement.png"
-      if project.goal.to_i * 0.02 >= 500
-        @cost = 500
+      if project.goal.to_i * 0.02 >= 750
+        @cost = 750
       else
         @cost = project.goal.to_i * 0.02
       end
@@ -189,14 +189,14 @@ class SponsorsController < ApplicationController
     @sponsorship_level = SponsorshipLevel.find(@project_sponsor.level_id)
     case @project_sponsor.level_id
     when 1
-      @cost = @project.goal.to_i * 0.3
+      @cost = @project.goal.to_i * 0.25
     when 2
       @cost = @project.goal.to_i * 0.1
     when 3
-      @cost = @project.goal.to_i * 0.04
+      @cost = @project.goal.to_i * 0.05
     when 4
-      if @project.goal.to_i * 0.02 >= 500
-        @cost = 500
+      if @project.goal.to_i * 0.02 >= 750
+        @cost = 750
       else
         @cost = @project.goal.to_i * 0.02
       end
@@ -213,17 +213,17 @@ class SponsorsController < ApplicationController
     @benefits = @project.sponsorship_benefits.where(status: true, sponsorship_level_id: project_sponsor.level_id )
     case project_sponsor.level_id
     when 1
-      @cost = @project.goal.to_i * 0.3
+      @cost = @project.goal.to_i * 0.25
       @level = "Platinum"
     when 2
       @cost = @project.goal.to_i * 0.1
       @level = "Gold"
     when 3
-      @cost = @project.goal.to_i * 0.04
+      @cost = @project.goal.to_i * 0.05
       @level = "Silver"
     when 4
-      if @project.goal.to_i * 0.02 >= 500
-        @cost = 500
+      if @project.goal.to_i * 0.02 >= 750
+        @cost = 750
       else
         @cost = @project.goal.to_i * 0.02
       end
@@ -267,14 +267,14 @@ class SponsorsController < ApplicationController
     project = Project.find(params[:project_id])
     case params[:project_sponsor][:level_id]
     when "1"
-      cost = project.goal.to_i * 0.3
+      cost = project.goal.to_i * 0.25
     when "2"
       cost = project.goal.to_i * 0.1
     when "3"
-      cost = project.goal.to_i * 0.04
+      cost = project.goal.to_i * 0.05
     when "4"
-      if project.goal.to_i * 0.02 >= 500
-        cost = 500
+      if project.goal.to_i * 0.02 >= 750
+        cost = 750
       else
         cost = project.goal.to_i * 0.02
       end

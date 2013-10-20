@@ -90,13 +90,14 @@ class Sponsor < ActiveRecord::Base
         puts sum
 
         benefit.each do |b|
-          if b.cost < sum
+          if b.cost > sum
             less_than_sum.push b
           end
         end
 
         level_cost = less_than_sum.max
-        total_benefits = less_than_sum.each_index.select{|i| less_than_sum[i].cost == level_cost}
+
+        total_benefits = less_than_sum.each_index.select{|i| less_than_sum[i].cost == level_cost.cost}
         benefit_names = ''
 
         total_benefits.each do |tb|
@@ -105,7 +106,7 @@ class Sponsor < ActiveRecord::Base
         puts Sponsor.find(index).name
         puts benefit_names
 
-        csv << ["#{project_name}", "#{Sponsor.find(matches.uniq.first.id).email}", "#{Sponsor.find(matches.uniq.first.id).name}", "#{sum}", "#{benefit_names}"]
+        csv << ["#{project_name}", "#{Sponsor.find(matches.uniq.first.id).email}", "#{Sponsor.find(matches.uniq.first.id).name}", "#{sum}", "#{benefit_names.to_s}"]
       end
     end
 
