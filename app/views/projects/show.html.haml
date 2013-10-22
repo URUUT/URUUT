@@ -244,11 +244,8 @@
               %iframe{:height => "310", :src => cultivation_video, :width => "380"}
             - elsif @project.cultivation_mime_type.eql?("image") and !@project.cultivation_image.blank?
               = image_tag "#{@project.cultivation_image}", style: "float:left; width:100%"
-<<<<<<< HEAD
+
             %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: pre-line;"}= simple_format(@project.about)
-=======
-            %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: break-word;"}= simple_format(@project.about)
->>>>>>> 718c016a1d09a10930047e58209a0f4fd18ae570
 
       -#%hr
       -#.comments
