@@ -7,6 +7,8 @@
 # Ignore bundler config
 /.bundle
 
+/vendor/bundle
+
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/schema.rb
@@ -17,10 +19,12 @@
 
 # Ignore uploaded files
 /public/uploads
+/public/system/projects
+/public/system/galleries
+/public/assets
 
 # Ignore RubyMine IDE folder
 /.idea
-/public/assets
 
 # Ignore dev mailer
 /config/initializers/dev_mail.rb
@@ -29,3 +33,6 @@
 .rvmrc
 .powrc
 .powenv
+
+# ignore large file script
+git-large-files.pl
