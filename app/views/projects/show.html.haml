@@ -584,7 +584,7 @@
               Show More
               %span
 
-= javascript_include_tag "http://maps.google.com/maps/api/js?sensor=false"
+= javascript_include_tag "//maps.google.com/maps/api/js?sensor=false"
 = javascript_include_tag "leaflet"
 = javascript_include_tag "tile.stamen"
 
@@ -670,7 +670,7 @@
     getFbCount();
     getTwCount();
     var activeTab = $('.nav-tabs li.active a').attr('href');
-    
+
     var geocoder = new google.maps.Geocoder();
     var geocoderRequest = { address: "#{@project.address},#{@project.city},#{@project.state}" };
     geocoder.geocode(geocoderRequest, function(results, status){
