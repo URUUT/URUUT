@@ -15,6 +15,7 @@ class AdminController < ApplicationController
       project.live = 1
       project.ready_for_approval = 0
       project.approval_date = Date.today
+      project.status = "Funding Active"
       Project.delay.send_approval_email(project)
       project_create_badge = Merit::Badge.new(id:2, name:"Project creation badge")
       project.save!
