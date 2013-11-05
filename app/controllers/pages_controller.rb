@@ -6,7 +6,7 @@ class PagesController < ApplicationController
   before_filter :set_session_wizard, except: :home
 
   def index
-    projects_list
+    @projects = Project.where("live = 1 AND status IS NULL")
     @project_success = Project.where("live = 1 AND status = 'Funding Completed'")
   end
 
@@ -79,7 +79,7 @@ class PagesController < ApplicationController
       query << "#{field} ILIKE :keyword"
     end
 
-    @projects = Project.where("#{query.join(" OR ")} AND live = 1 AND status IS NULL OR status = '' AND ready_for_approval = 0", :keyword=> "%#{params[:keyword]}%").by_city(params[:city]).by_category(params[:category])
+    @projects = Project.where("#{query.join(" OR ")} AND live = 1 AND status IS NULL OR status = ''", :keyword=> "%#{params[:keyword]}%").by_city(params[:city]).by_category(params[:category])
   end
 
   private
