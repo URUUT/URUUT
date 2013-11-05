@@ -57,7 +57,7 @@
             .amount
               = amount_converter(@project.goal)
 
-            - if @project.status == nil
+            - unless @project.status == "Funding Completed"
               .days-left
                 %span.small
                   Days
@@ -113,7 +113,7 @@
               Goal
             .amount= amount_converter(@project.goal)
 
-            - if @project.status == nil
+            - unless @project.status == "Funding Completed"
               .days-left
                 %span.small
                   Days
@@ -150,7 +150,7 @@
       - if !@sponsorship_benefits.blank? && @project.sponsor_permission
         %h4.title{:style => 'margin-top:50px;'}
           PROJECT SPONSORS
-          - if @project.status == nil
+          - unless @project.status == "Funding Completed"
             - if @project_sponsors.include?(2) || @project_sponsors.include?(3)
               - if user_signed_in?
                 = link_to new_project_sponsor_path(@project.id), :class => 'btn', :style => 'margin-top: -10px;'  do
@@ -161,7 +161,7 @@
           %span
         .project-sponsors
           - if !@project_sponsors.include?(2) && !@project_sponsors.include?(3)
-            - if @project.status == nil
+            - unless @project.status == "Funding Completed"
               - if user_signed_in?
                 = link_to new_project_sponsor_path(@project.id), :class => 'btn' do
                   Become A Sponsor ►
@@ -339,11 +339,11 @@
                       = link_to "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "btn perk pull-right", :style => "margin-top: 10px;" do
                         Fund Now ►
                     - else
-                      - if @project.status == nil
+                      - unless @project.status == "Funding Completed"
                         - url = url_encode("#{request.protocol}#{request.host_with_port}/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}")
                         = link_to "javascript:void(0)", "url-sign-up" => url, "url-sign-in" => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "btn perk pull-right unsignin-perk", :style => "margin-top: 10px;" do
                           Fund Now ►
-            - if @project.status == nil
+            - unless @project.status == "Funding Completed"
               .seed-level{id: "perk-id-custom"}
                 %h3.perk-name-other{id: "perk-name-other-custom"}
                   CHOOSE YOUR PERK
@@ -454,7 +454,7 @@
                   %a.btn.pull-right.sponsors{:href => "/projects/#{@project.id}/sponsors/new?level=bronze", :style => "margin-top: 10px;"}
                     Sponsor ►
                 - else
-                  - if @project.status == nil
+                  - unless @project.status == "Funding Completed"
                     %a.btn.pull-right.sponsors.unsignin{"url-data" => "/projects/#{@project.id}/sponsors/new?level=bronze", style: "margin-top: 10px;"}
                       Sponsor ►
       - else
@@ -491,7 +491,7 @@
                       - url = url_encode("#{request.protocol}#{request.host_with_port}/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}")
                       %a.btn.pull-right.unsignin-perk{"url-sign-up" => url, "url-sign-in" => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}"} Fund Now
                   - else
-                    - if @project.status == nil
+                    - unless @project.status == "Funding Completed"
                       - if user_signed_in?
                         %a.btn.pull-right{:href => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}"} Fund Now
                       - else
@@ -515,10 +515,10 @@
                 - if user_signed_in? && @project.status == nil
                   %a.btn.pull-right{:href => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "fund btn"} Fund Now ►
                 - else
-                  - if @project.status == nil
+                  - unless @project.status == "Funding Completed"
                     - url = url_encode("#{request.protocol}#{request.host_with_port}/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}")
                     %a.btn.pull-right.unsignin-perk{"url-sign-up" => url, "url-sign-in" => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "fund btn"} Fund Now ►
-        - if @project.status == nil
+        - unless @project.status == "Funding Completed"
           .seed-level{id: "perk-id-custom"}
             %h3.perk-name-other{id: "perk-name-other-custom"}
               CHOOSE YOUR PERK
@@ -550,7 +550,7 @@
                     = link_to("ANONYMOUS SPONSOR", "javascript:void(0)")
                   - else
                     = link_to(sponsor.name, recognize_url(sponsor.site), target: "_blank")
-        - if @project.status == nil
+        - unless @project.status == "Funding Completed"
           %div{style: "margin-top: 5px;"}
             - if user_signed_in?
               %a.btn{:href => "/projects/#{@project.id}/sponsors/new?level=bronze"}
