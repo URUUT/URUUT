@@ -26,6 +26,9 @@
 # Ignore RubyMine IDE folder
 /.idea
 
+# Ignore RubyMine IDE folder
+/.idea
+
 # Ignore dev mailer
 /config/initializers/dev_mail.rb
 
