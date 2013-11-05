@@ -301,21 +301,21 @@
                           %span
                       - elsif p.limit && !p.perks_available.to_i.zero?
                         - if user_signed_in?
-                          - if !@project.status == "Funding Completed"
+                          - unless @project.status == "Funding Completed"
                             = link_to "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", class: "btn perk pull-right", style: "margin-top: 10px;" do
                               Fund Now ►
                         - else
-                          - if !@project.status == "Funding Completed"
+                          - unless @project.status == "Funding Completed"
                             - url = url_encode("#{request.protocol}#{request.host_with_port}/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}")
                             = link_to "javascript:void(0)", "url-sign-up" => url, "url-sign-in" => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", class: "btn perk pull-right unsignin-perk", style: "margin-top: 10px;" do
                               Fund Now ►
                       - else
                         - if user_signed_in?
-                          - if !@project.status == "Funding Completed"
+                          - unless @project.status == "Funding Completed"
                             = link_to "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", class: "btn perk pull-right", style: "margin-top: 10px;" do
                               Fund Now ►
                         - else
-                          - if !@project.status == "Funding Completed"
+                          - unless @project.status == "Funding Completed"
                             - url = url_encode("#{request.protocol}#{request.host_with_port}/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}")
                             = link_to "javascript:void(0)", "url-sign-up" => url, "url-sign-in" => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", class: "btn perk pull-right unsignin-perk", style: "margin-top: 10px;" do
                               Fund Now ►
@@ -359,7 +359,7 @@
               %h3
                 PLATINUM
                 %span.small-heading
-                  - if !@project.status == "Funding Completed"
+                  - unless @project.status == "Funding Completed"
                     (#{availability(@project.project_sponsors, 1)} of 1 available)
                   - else
                     (0 of 1 available)
@@ -386,7 +386,7 @@
               %h3
                 GOLD
                 %span.small-heading
-                  - if !@project.status == "Funding Completed"
+                  - unless @project.status == "Funding Completed"
                     (#{availability(@project.project_sponsors, 2)} of 3 available)
                   - else
                     (0 of 3 available)
@@ -413,7 +413,7 @@
               %h3
                 SILVER
                 %span.small-heading
-                  - if !@project.status == "Funding Completed"
+                  - unless @project.status == "Funding Completed"
                     (#{availability(@project.project_sponsors, 3)} of 5 available)
                   - else
                     (0 of 5 available)
