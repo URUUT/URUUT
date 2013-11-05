@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131026055125) do
+ActiveRecord::Schema.define(:version => 20131105185500) do
 
   create_table "badges_sashes", :force => true do |t|
     t.integer  "badge_id"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20131026055125) do
     t.boolean  "confirmed",      :default => false
     t.text     "description"
     t.boolean  "anonymous",      :default => false
+    t.datetime "last_founded"
   end
 
   create_table "galleries", :force => true do |t|
@@ -263,6 +264,17 @@ ActiveRecord::Schema.define(:version => 20131026055125) do
     t.string "session_id"
     t.text   "data"
   end
+
+  create_table "settings", :force => true do |t|
+    t.string   "var",         :null => false
+    t.text     "value"
+    t.integer  "target_id",   :null => false
+    t.string   "target_type", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "settings", ["target_type", "target_id", "var"], :name => "index_settings_on_target_type_and_target_id_and_var", :unique => true
 
   create_table "sponsors", :force => true do |t|
     t.string  "payment_type"
