@@ -674,9 +674,9 @@
     var geocoder = new google.maps.Geocoder();
     var geocoderRequest = { address: "#{@project.address},#{@project.city},#{@project.state}" };
     geocoder.geocode(geocoderRequest, function(results, status){
-      var latitude = results[0].geometry.location.lb;
-      var longitude = results[0].geometry.location.mb;
-
+      var latitude = results[0].geometry.location.nb;
+      var longitude = results[0].geometry.location.ob;
+    
       var map = L.map('map', {
           scrollWheelZoom: false
       }).setView([latitude,longitude], 11);
@@ -690,7 +690,7 @@
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
       }).addTo(map);
 
-      L.marker([latitude,longitude], {icon:uruutIcon}).addTo(map)
+      L.marker([latitude,longitude], {icon:uruutIcon}).addTo(map);
     });
 
     $('.tax-deductible').tooltip({
