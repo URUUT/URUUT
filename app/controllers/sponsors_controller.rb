@@ -130,6 +130,7 @@ class SponsorsController < ApplicationController
   def create
     # current_user = :current_user
     project = Project.find(params[:project_id])
+    logger.debug "Project is #{project}"
     sponsor_count = project.project_sponsors.where(level_id: params[:project_sponsor][:level_id]).count
     case params[:project_sponsor][:level_id]
     when '1'
