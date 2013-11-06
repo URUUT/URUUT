@@ -6,5 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.where(email: 'admin@uruut.com').first_or_create(email: 'admin@uruut.com', first_name: 'Super', last_name: 'Admin', password: 'superAdmin', password_confirmation: 'superAdmin', roles: ['admin'])
+User.where(email: 'admin@uruut.com').first_or_create(email: 'admin@uruut.com', first_name: 'Super', last_name: 'Admin', password: 'superAdmin', password_confirmation: 'superAdmin')
 
+SponsorshipLevel.where(name: 'Platinum').first_or_create(name: 'Platinum')
+SponsorshipLevel.where(name: 'Gold').first_or_create(name: 'Gold')
+SponsorshipLevel.where(name: 'Silver').first_or_create(name: 'Silver')
+SponsorshipLevel.where(name: 'Bronze').first_or_create(name: 'Bronze')
