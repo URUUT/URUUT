@@ -335,7 +335,7 @@
                       / %div Seed
                       .amount
                         =amount_converter(perk)
-                    - if user_signed_in? && @project.status == nil
+                    - if user_signed_in? && @project.status == 'Funding Active'
                       = link_to "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "btn perk pull-right", :style => "margin-top: 10px;" do
                         Fund Now ►
                     - else
@@ -371,7 +371,7 @@
                 .seed-num
                   .amount
                     = amount_converter(@project.goal.to_i * 0.25)
-                - if check_availibility(@project, 1) < 1 && @project.status == nil
+                - if check_availibility(@project, 1) < 1 && @project.status == 'Funding Active'
                   - if user_signed_in?
                     %a.btn.pull-right.sponsors{:href => "/projects/#{@project.id}/sponsors/new?level=platinum", style: "margin-top: 10px;"}
                       Sponsor ►
@@ -398,7 +398,7 @@
                 .seed-num
                   .amount
                     = amount_converter(@project.goal.to_i * 0.1)
-                - if check_availibility(@project, 2) < 3 && @project.status == nil
+                - if check_availibility(@project, 2) < 3 && @project.status == 'Funding Active'
                   - if user_signed_in?
                     %a.btn.pull-right.sponsors{:href => "/projects/#{@project.id}/sponsors/new?level=gold", :style => "margin-top: 10px;"}
                       Sponsor ►
@@ -425,7 +425,7 @@
                 .seed-num
                   .amount
                     = amount_converter(@project.goal.to_i * 0.05)
-                - if check_availibility(@project, 3) < 5 && @project.status == nil
+                - if check_availibility(@project, 3) < 5 && @project.status == 'Funding Active'
                   - if user_signed_in?
                     %a.btn.pull-right.sponsors{:href => "/projects/#{@project.id}/sponsors/new?level=silver", :style => "margin-top: 10px;"}
                       Sponsor ►
@@ -450,7 +450,7 @@
                       = amount_converter(750)
                     - else
                       = amount_converter(@project.goal.to_i * 0.02)
-                - if user_signed_in? && @project.status == nil
+                - if user_signed_in? && @project.status == 'Funding Active'
                   %a.btn.pull-right.sponsors{:href => "/projects/#{@project.id}/sponsors/new?level=bronze", :style => "margin-top: 10px;"}
                     Sponsor ►
                 - else
@@ -484,7 +484,7 @@
                     .pull-right{style: "font-style: italic;"}
                       Not Available
                       %span
-                  -elsif p.limit && !p.perks_available.to_i.zero? && @project.status == nil
+                  -elsif p.limit && !p.perks_available.to_i.zero? && @project.status == 'Funding Active'
                     - if user_signed_in?
                       %a.btn.pull-right{:href => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", :class => "fund btn"} Fund Now ►
                     - else
@@ -512,7 +512,7 @@
                   / %div Seed
                   .amount
                     = amount_converter(perk)
-                - if user_signed_in? && @project.status == nil
+                - if user_signed_in? && @project.status == 'Funding Active'
                   %a.btn.pull-right{:href => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "fund btn"} Fund Now ►
                 - else
                   - unless @project.status == "Funding Completed"
