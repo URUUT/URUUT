@@ -1,6 +1,7 @@
 class PressCoveragesController < ApplicationController
-  before_filter :authenticate_user!, :admin_required!
-  
+  load_and_authorize_resource
+  # before_filter :authenticate_user!
+
   def index
     @press_coverages = PressCoverage.all
   end
@@ -35,11 +36,11 @@ class PressCoveragesController < ApplicationController
     redirect_to press_coverages_url
   end
   
-  private
-  def admin_required!
-    unless current_user.is_admin?
-      flash[:error] = "Sorry, you don't have the right permissions to access this page."
-      redirect_to root_url and return false
-    end
-  end
+  # private
+  # def admin_required!
+  #   unless current_user.is_admin?
+  #     flash[:error] = "Sorry, you don't have the right permissions to access this page."
+  #     redirect_to root_url and return false
+  #   end
+  # end
 end
