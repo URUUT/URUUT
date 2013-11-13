@@ -29,6 +29,7 @@ gem 'rails_config'
 gem 'newrelic_rpm'
 gem 'meta_request'
 gem 'exception_notification'
+gem 'prawn'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
