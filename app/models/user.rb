@@ -58,7 +58,8 @@ class User < ActiveRecord::Base
             email:auth.info.email,
             password:password,
             password_confirmation:password,
-            token:auth.credentials.token
+            token:auth.credentials.token,
+            avatar: auth.info.image
           )
         elsif type.eql?("linkedln")
           user = User.create(
