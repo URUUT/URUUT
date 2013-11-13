@@ -390,7 +390,7 @@ class ProjectsController < ApplicationController
 
   def admin_required!
     @project = Project.find(params[:id])
-     unless current_user.is_admin?
+     unless current_user.role == "admin"
       unless @project.user.id.eql?(current_user.id)
        flash[:error] = "Sorry, you don't have right permision to accessing page."
        redirect_to root_url and return false

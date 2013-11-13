@@ -22,7 +22,7 @@ class ProjectAdmin::DocumentsController < ApplicationController
   end
 
   def admin_required!
-   unless current_user.is_admin?
+   unless current_user.role == "admin"
     @project.user.id.eql?(current_user.id) ? true : false
    end
  end
