@@ -1,6 +1,6 @@
 class PressReleasesController < ApplicationController
-  
-  before_filter :authenticate_user!, :admin_required!
+  load_and_authorize_resource
+  # before_filter :authenticate_user!
   
   def index
     @press_releases = PressRelease.all
@@ -36,12 +36,12 @@ class PressReleasesController < ApplicationController
     redirect_to press_releases_url
   end
   
-  private
-  def admin_required!
-    unless current_user.is_admin?
-      flash[:error] = "Sorry, you don't have the right permissions to access this page."
-      redirect_to root_url and return false
-    end
-  end
+  # private
+  # def admin_required!
+  #   unless current_user.is_admin?
+  #     flash[:error] = "Sorry, you don't have the right permissions to access this page."
+  #     redirect_to root_url and return false
+  #   end
+  # end
   
 end
