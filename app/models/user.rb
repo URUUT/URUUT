@@ -129,6 +129,16 @@ class User < ActiveRecord::Base
     donation.nil? ? "" : donation.project.city
   end
 
+  def generate_tax_report
+    donations = self.donations
+    donations.inject(0) {|sum, i| sum + i.amount}
+
+    # Implicit Block
+    Prawn::Document.generate("reports/tax_report.pdf") do
+     text "#{donations.inject(0) {|sum, i| sum + i.amount}}"
+    end
+  end
+
   private
 
   def send_welcome_email
