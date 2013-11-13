@@ -124,62 +124,6 @@
 .container
   .row-fluid.show-content
     .span8
-      %h4.title Where We're Ruuted
-      .map-container
-        #map{:style => "width:100%;height:300px"}
-        #map-details
-          .project-location
-            %h4= @project.organization
-            %div{:style => 'font-family:"Proxima Nova"'}
-              = image_tag "marker.jpg", :class => 'marker', :style => 'float:none;'
-              = "#{@project.address},"
-              = "#{@project.city},"
-              = @project.state
-              = @project.zip
-            %div
-              / .fb-like{"data-font" => "lucida grande", "data-href" => "http://uruut.41studio.com", "data-layout" => "button_count", "data-send" => "false", "data-show-faces" => "true", "data-width" => "450"}
-              .fb-like{:style => "display: block; float: left; margin-left: 5px;", "data-href" => project_url(@project.id), "data-layout" => "button_count", "data-send" => "false", "data-show-faces" => "true", "data-width" => "450"}
-              %a.twitter-follow-button{:style => "display: block; float: left; margin-left: 10px;", "data-show-count" => "false", :href => "https://twitter.com/#{@project.twitter_handle}"} Follow
-              %span.label-green{:style => "margin-left: 10px; font-family: 'Proxima Nova Semi', sans-serif;"}
-                WEB:
-                = link_to(strip_url(@project.website), recognize_url(@project.website), target: "_blank", :style => "font-style: italic; text-decoration: underline; color: #3f403b; font-family: 'Georgia', serif;")
-              %span{style: "margin-left: 10px"}
-                = image_tag "message-green.png"
-                = link_to "Contact Us", "mailto:#{User.find(@project.user_id).email}", target: "_blank", :style => "font-style: italic; text-decoration: underline; color: #3f403b; font-family: 'Georgia', serif;"
-
-      - if !@sponsorship_benefits.blank? && @project.sponsor_permission
-        %h4.title{:style => 'margin-top:50px;'}
-          PROJECT SPONSORS
-          - unless @project.status == "Funding Completed"
-            - if @project_sponsors.include?(2) || @project_sponsors.include?(3)
-              - if user_signed_in?
-                = link_to new_project_sponsor_path(@project.id), :class => 'btn', :style => 'margin-top: -10px;'  do
-                  Become A Sponsor ►
-              - else
-                = link_to "javascript:void(0)", "url-data" => "/projects/#{@project.id}/sponsors/new", :class => 'btn unsignin', :style => 'margin-top: -10px;'  do
-                  Become A Sponsor ►
-          %span
-        .project-sponsors
-          - if !@project_sponsors.include?(2) && !@project_sponsors.include?(3)
-            - unless @project.status == "Funding Completed"
-              - if user_signed_in?
-                = link_to new_project_sponsor_path(@project.id), :class => 'btn' do
-                  Become A Sponsor ►
-              - else
-                = link_to "javascript:void(0)", "url-data" => "/projects/#{@project.id}/sponsors/new", :class => 'btn unsignin' do
-                  Become A Sponsor ►
-          - if @project_sponsors.include?(2)
-            .gold-level
-              - if @project_sponsors.include?(2)
-                %h4 Gold Level Sponsors
-                - @project_sponsors[2].each do |sponsor|
-                  = sponsor_item(sponsor)
-          - if @project_sponsors.include?(3)
-            .silver-level
-              - if @project_sponsors.include?(3)
-                %h4 Silver Level Sponsors
-                - @project_sponsors[3].each do |sponsor|
-                  = sponsor_item(sponsor)
 
       %ul#myTab1.tab-nav
         %li.active
@@ -221,7 +165,63 @@
                   = image_tag("#{image.gallery_file_name}/convert?w=190&h=120&quality=65", class: "gallery-thumb")
               .clearfix
               = paginate @images, :params => {:id => @project.id, :controller => 'projects', :action => 'show_more_image'}, remote: true
-      %hr
+
+      - if !@sponsorship_benefits.blank? && @project.sponsor_permission
+        %h4.title{:style => 'margin-top:50px;'}
+          PROJECT SPONSORS
+          - unless @project.status == "Funding Completed"
+            - if @project_sponsors.include?(2) || @project_sponsors.include?(3)
+              - if user_signed_in?
+                = link_to new_project_sponsor_path(@project.id), :class => 'btn', :style => 'margin-top: -10px;'  do
+                  Become A Sponsor ►
+              - else
+                = link_to "javascript:void(0)", "url-data" => "/projects/#{@project.id}/sponsors/new", :class => 'btn unsignin', :style => 'margin-top: -10px;'  do
+                  Become A Sponsor ►
+          %span
+        .project-sponsors
+          - if !@project_sponsors.include?(2) && !@project_sponsors.include?(3)
+            - unless @project.status == "Funding Completed"
+              - if user_signed_in?
+                = link_to new_project_sponsor_path(@project.id), :class => 'btn' do
+                  Become A Sponsor ►
+              - else
+                = link_to "javascript:void(0)", "url-data" => "/projects/#{@project.id}/sponsors/new", :class => 'btn unsignin' do
+                  Become A Sponsor ►
+          - if @project_sponsors.include?(2)
+            .gold-level
+              - if @project_sponsors.include?(2)
+                %h4 Gold Level Sponsors
+                - @project_sponsors[2].each do |sponsor|
+                  = sponsor_item(sponsor)
+          - if @project_sponsors.include?(3)
+            .silver-level
+              - if @project_sponsors.include?(3)
+                %h4 Silver Level Sponsors
+                - @project_sponsors[3].each do |sponsor|
+                  = sponsor_item(sponsor)
+
+      %h4.title Where We're Ruuted
+      .map-container
+        #map{:style => "width:100%;height:300px"}
+        #map-details
+          .project-location
+            %h4= @project.organization
+            %div{:style => 'font-family:"Proxima Nova"'}
+              = image_tag "marker.jpg", :class => 'marker', :style => 'float:none;'
+              = "#{@project.address},"
+              = "#{@project.city},"
+              = @project.state
+              = @project.zip
+            %div
+              / .fb-like{"data-font" => "lucida grande", "data-href" => "http://uruut.41studio.com", "data-layout" => "button_count", "data-send" => "false", "data-show-faces" => "true", "data-width" => "450"}
+              .fb-like{:style => "display: block; float: left; margin-left: 5px;", "data-href" => project_url(@project.id), "data-layout" => "button_count", "data-send" => "false", "data-show-faces" => "true", "data-width" => "450"}
+              %a.twitter-follow-button{:style => "display: block; float: left; margin-left: 10px;", "data-show-count" => "false", :href => "https://twitter.com/#{@project.twitter_handle}"} Follow
+              %span.label-green{:style => "margin-left: 10px; font-family: 'Proxima Nova Semi', sans-serif;"}
+                WEB:
+                = link_to(strip_url(@project.website), recognize_url(@project.website), target: "_blank", :style => "font-style: italic; text-decoration: underline; color: #3f403b; font-family: 'Georgia', serif;")
+              %span{style: "margin-left: 10px"}
+                = image_tag "message-green.png"
+                = link_to "Contact Us", "mailto:#{User.find(@project.user_id).email}", target: "_blank", :style => "font-style: italic; text-decoration: underline; color: #3f403b; font-family: 'Georgia', serif;"
 
       #content_container
         #cultivation
@@ -674,8 +674,8 @@
     var geocoder = new google.maps.Geocoder();
     var geocoderRequest = { address: "#{@project.address},#{@project.city},#{@project.state}" };
     geocoder.geocode(geocoderRequest, function(results, status){
-      var latitude = results[0].geometry.location.nb;
-      var longitude = results[0].geometry.location.ob;
+      var latitude = results[0].geometry.location.lat();
+      var longitude = results[0].geometry.location.lng();
     
       var map = L.map('map', {
           scrollWheelZoom: false

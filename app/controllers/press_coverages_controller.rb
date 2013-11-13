@@ -38,7 +38,7 @@ class PressCoveragesController < ApplicationController
   
   # private
   # def admin_required!
-  #   unless current_user.is_admin?
+  #   unless current_user.role == "admin"
   #     flash[:error] = "Sorry, you don't have the right permissions to access this page."
   #     redirect_to root_url and return false
   #   end

@@ -70,7 +70,7 @@ edit_sponsor =
 
 $ ->
 	$('#new_sponsor #project-submit').on 'click', (event) ->
-    alert "Current Project is: " + stripe_pub_key
+    # alert "Current Project is: " + stripe_pub_key
     event.preventDefault()
     Stripe.setPublishableKey(stripe_pub_key)
     if $('#card_number').val() == ''
@@ -81,7 +81,7 @@ $ ->
   $('#edit_donation #donate').on 'click', (event) ->
     alert "Current Project is: " + stripe_pub_key
     event.preventDefault()
-		Stripe.setPublishableKey(stripe_pub_key)
+    Stripe.setPublishableKey(stripe_pub_key)
     if $('#card_number').val() == ''
       $('#edit_donation')[0].submit()
     else
