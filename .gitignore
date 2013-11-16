@@ -36,5 +36,8 @@
 .powrc
 .powenv
 
+# ignore secret token
+config/initializers/secret_token.rb
+
 # ignore large file script
 git-large-files.pl
