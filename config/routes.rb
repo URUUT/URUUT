@@ -7,7 +7,7 @@ Crowdfund::Application.routes.draw do
     :omniauth_callbacks => "users/omniauth_callbacks",
     :registrations => "registrations",
     :sessions => 'users/sessions',
-    :passwords => 'users/passwords',
+    :passwords => 'users/passwords'
   }
 
   resources :users, :only => [:show] do
@@ -46,7 +46,7 @@ Crowdfund::Application.routes.draw do
   get "projects/stripe_update"
   get "default_perk_donations" => "donations#default_perk"
 
-  post "#{Rails.root}/public/images/"
+  post "#{Rails.root}/public/images"
 
   get "admin/unapproved"
   post "admin/approve"
