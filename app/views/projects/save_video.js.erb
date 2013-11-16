@@ -1,7 +1,7 @@
 <% if params[:video_link].start_with?("http://www.youtube.com/") %>
-  <% video = params[:video_link].gsub("watch?v=", "embed/") %>
+  <% video = params[:video_link].gsub('http', 'https').gsub("watch?v=", "embed/") %>
 <% else %>
-  <% video = params[:video_link].gsub(".be", "be.com/embed") %>
+  <% video = params[:video_link].gsub('http', 'https').gsub(".be", "be.com/embed") %>
 <% end %>
 <% if params[:video_type].eql?("seed") %>
 $(".seed-action-container").show();
