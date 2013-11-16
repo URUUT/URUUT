@@ -220,7 +220,7 @@ class ProjectsController < ApplicationController
 
   def save_video
     video = params[:video_link].gsub('http[s]?', '')
-    link_video = generate_video_link(params[:video_link])
+    link_video = generate_video_link(video)
 
     @project = Project.find_by_id(session[:current_project])
     if params[:video_type].eql?("seed")
