@@ -27,7 +27,7 @@
     = filepicker_js_include_tag
     = javascript_tag do
       Stripe.setPublishableKey("#{STRIPE_PUBLIC_KEY}");
-
+    = airbrake_javascript_notifier
     = csrf_meta_tags
     = yield(:head)
   %body{:class => "#{controller_name} #{action_name}"}
