@@ -50,12 +50,12 @@ Crowdfund::Application.configure do
     password: ENV['GMAIL_PASSWORD']
   }
 
-  config.middleware.use ExceptionNotification::Rack,
-    :email => {
-      :email_prefix => "[Exception] ",
-      :sender_address => %{"notifier" <cbartels@uruut.com>},
-      :exception_recipients => %w{cbartels@uruut.com}
-    }
+  # config.middleware.use ExceptionNotification::Rack,
+  #   :email => {
+  #     :email_prefix => "[Exception] ",
+  #     :sender_address => %{"notifier" <cbartels@uruut.com>},
+  #     :exception_recipients => %w{cbartels@uruut.com}
+  #   }
 
 
   # Paperclip.options[:command_path] = "/usr/local/Cellar/imagemagick/6.7.1-1/bin"
