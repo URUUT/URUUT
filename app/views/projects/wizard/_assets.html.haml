@@ -110,7 +110,7 @@
                   -if @project.seed_video.start_with?("http://www.youtube.com/")
                     - video_seed = @project.seed_video.gsub("http", "https").gsub("watch?v=", "embed/")
                   -else
-                    - cultivation_video = @project.cultivation_video.gsub(".be", "be.com/embed")
+                    - cultivation_video = @project.cultivation_video.gsub("http", "https").gsub(".be", "be.com/embed")
                   .cultivation-content.clearfix
                     %iframe{:height => "310", :src => cultivation_video, :width => "380"}
                 - elsif @project.cultivation_mime_type.eql?("image") and !@project.cultivation_image.blank?
