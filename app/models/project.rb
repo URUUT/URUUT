@@ -23,6 +23,7 @@ class Project < ActiveRecord::Base
 
   has_many :sponsorship_levels
   has_many :documents
+  has_many :users
   accepts_nested_attributes_for :perks, allow_destroy: true
   accepts_nested_attributes_for :galleries, allow_destroy: true
 
