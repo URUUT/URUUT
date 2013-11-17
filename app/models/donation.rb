@@ -22,6 +22,23 @@ class Donation < ActiveRecord::Base
     false
   end
 
+  def self.reorder_perks(perks, amount)
+    perks_arr = []
+
+    perks.each do |perk|
+      if perk[1].to_f <= amount
+        if !perk[4].blank? && perk[4].to_i > 0
+          perks_arr.push(perk)
+        elsif perk[4].blank?
+          perks_arr.push(perk)
+        end
+      end
+    end
+
+    perks_arr
+    
+  end
+
   ###  new function for handle Stripe error  ###
 
   def error_payment?
