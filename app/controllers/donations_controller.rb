@@ -37,13 +37,14 @@ class DonationsController < ApplicationController
 
       @perk_name_selected, @perk_description = Donation.get_perk_name(@project, amount, @perks)
 
-      if @perks.blank?
-        session[:perk_id] = "Custom"
-      elsif @project.perk_permission
-        session[:perk_id] = @perks.last[2]
-      else
-        session[:perk_id] = @perks.last[0]
-      end
+      # if @perks.blank?
+      #   session[:perk_id] = "Custom"
+      # elsif @project.perk_permission
+      #   session[:perk_id] = @perks.last[2]
+      # else
+      #   session[:perk_id] = @perks.last[0]
+      # end
+      session[:perk_id] = Donation.set_perk_id(@perks, @project)
     end
     render :new
   end
@@ -94,16 +95,14 @@ class DonationsController < ApplicationController
 
       @perk_name_selected, @perk_description = Donation.get_perk_name(@project, amount, @perks)
 
-      logger.debug @perk_name_selected
-      logger.debug @perk_description
-
-      if @perks.blank?
-        session[:perk_id] = "Custom"
-      elsif @project.perk_permission
-        session[:perk_id] = @perks.last[2]
-      else
-        session[:perk_id] = @perks.last[0]
-      end
+      # if @perks.blank?
+      #   session[:perk_id] = "Custom"
+      # elsif @project.perk_permission
+      #   session[:perk_id] = @perks.last[2]
+      # else
+      #   session[:perk_id] = @perks.last[0]
+      # end
+      session[:perk_id] = Donation.set_perk_id(@perks, @project)
       session[:perk_amount] = @perk.amount.to_f
       @perk.name = "Custom"
       @perk.description = "You will receive #{@perk.amount} Uruut Reward Points when you seed $#{@perk.amount}"

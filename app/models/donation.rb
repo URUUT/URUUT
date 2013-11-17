@@ -67,6 +67,17 @@ class Donation < ActiveRecord::Base
     return [perk_name_selected, perk_description]
   end
 
+  def self.set_perk_id(perks, project)
+    if perks.blank?
+      perk_id = "Custom"
+    elsif project.perk_permission
+      perk_id = perks.last[2]
+    else
+      perk_id = perks.last[0]
+    end
+    perk_id
+  end
+
   ###  new function for handle Stripe error  ###
 
   def error_payment?
