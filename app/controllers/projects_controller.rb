@@ -250,15 +250,11 @@ class ProjectsController < ApplicationController
   end
 
   def get_complete_project
-    @user = User.find(params[:user_id])
-    comparison = params[:status].eql?("Funding Active") ? ">" : "<"
-    @projects_created = @user.projects.where("campaign_deadline #{comparison} ? AND live = 1", Time.now).order("updated_at DESC").page(params[:created_page]).per(2)
+    get_projects
   end
 
   def get_complete_project_public
-    @user = User.find(params[:user_id])
-    comparison = params[:status].eql?("Funding Active") ? ">" : "<"
-    @projects_created = @user.projects.where("campaign_deadline #{comparison} ? AND live = 1", Time.now).order("updated_at DESC").page(params[:created_page]).per(2)
+    get_projects
   end
 
   def add_perk
@@ -368,6 +364,12 @@ class ProjectsController < ApplicationController
   def set_previous_path_for_registration_perk
     session[:path] = URI.escape(CGI::unescape params[:url])
     redirect_to new_user_registration_url
+  end
+
+  def get_projects
+    @user = User.find(params[:user_id])
+    comparison = params[:status].eql?("Funding Active") ? ">" : "<"
+    @projects_created = @user.projects.where("campaign_deadline #{comparison} ? AND live = 1", Time.now).order("updated_at DESC").page(params[:created_page]).per(2)
   end
 
   private
