@@ -26,17 +26,8 @@ class AuthenticationsController < ApplicationController
       sign_in_and_redirect current_user
 
     else
-      @user = User.new
-      @user.email = omni['extra']['raw_info'].email
-      @user.apply_omniauth(omni)
-
-      if @user.save
-        flash[:notice] = "Logged in."
-        sign_in_and_redirect User.find(@user.id)
-      else
-        session[:omniauth] = omni.except('extra')
-        redirect_to new_user_registration_path
-      end
+      user = User.new
+      user.create_facebook_user(omni)
     end
   end
 end

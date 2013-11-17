@@ -13,16 +13,7 @@ class AdminController < ApplicationController
     if params['approved'] == "true"
       newData = "Success"
       project = Project.find_by_id(params['id'])
-      project.live = 1
-      project.ready_for_approval = 0
-      project.approval_date = Date.today
-      project.status = "Funding Active"
-      Project.delay.send_approval_email(project)
-      project_create_badge = Merit::Badge.new(id:2, name:"Project creation badge")
-      project.save!
-      if !project.user.badges.include?(project_create_badge)
-        project.user.add_badge(2)
-      end
+      project.approve!
     else
       newData = "Failure"
     end
