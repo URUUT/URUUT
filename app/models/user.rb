@@ -108,6 +108,19 @@ class User < ActiveRecord::Base
     end
   end
 
+  def create_facebook_user(omni)
+    self.email = omni['extra']['raw_info'].email
+    self.apply_omniauth(omni)
+
+    if self.save
+      flash[:notice] = "Logged in."
+      sign_in_and_redirect User.find(self.id)
+    else
+      session[:omniauth] = omni.except('extra')
+      redirect_to new_user_registration_path
+    end
+  end
+
   def email_required?
     super && provider.blank?
   end

@@ -239,6 +239,19 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def approve!
+    self.live = 1
+    self.ready_for_approval = 0
+    self.approval_date = Date.today
+    self.status = "Funding Active"
+    Project.delay.send_approval_email(self)
+    project_create_badge = Merit::Badge.new(id:2, name:"Project creation badge")
+    self.save!
+    if !self.user.badges.include?(project_create_badge)
+      self.user.add_badge(2)
+    end
+  end
+
   def get_donors(project)
     donors = Donation.where("project_id = ? AND customer_token != ?", project.id, '')
   end
