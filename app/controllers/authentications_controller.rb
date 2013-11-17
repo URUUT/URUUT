@@ -26,8 +26,8 @@ class AuthenticationsController < ApplicationController
       sign_in_and_redirect current_user
 
     else
-      user = User.new
-      user.create_facebook_user(omni)
+      @user = User.new
+      @user.create_facebook_user(omni)
     end
   end
 end

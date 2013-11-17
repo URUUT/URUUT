@@ -13,20 +13,7 @@ class DonationStepsController < ApplicationController
 
       if session[:perk_type].eql?("default")
         @perk = Perk.new
-        case session[:payment_amount]
-        when "10"
-          @perk.name = "Level 1"
-        when "25"
-          @perk.name = "Level 2"
-        when "50"
-          @perk.name = "Level 3"
-        when "100"
-          @perk.name = "Level 4"
-        when "250"
-          @perk.name = "Level 5"
-        else
-          @perk.name = "Custom"
-        end
+        @perk.get_perk_name(session[:payment_amount])
 
         if session[:payment_amount].to_s.split(".")[1].eql?("0")
           @perk.description = "You will receive #{session[:payment_amount].to_i} Uruut Reward Points when you seed $#{session[:payment_amount].to_i}"
@@ -42,14 +29,6 @@ class DonationStepsController < ApplicationController
         else
           @perk.description = "You will receive #{@perk.amount.to_i} Uruut Reward Points when you seed $#{@perk.amount.to_f}"
         end
-        # @perk = Perk.where(id: session[:perk_id])
-        # if @perk.empty?
-        #   @perk = Perk.new
-        #   @perk.name = "Custom"
-        #   @perk.amount = session[:payment_amount]
-        # else
-        #   @perk = @perk.first
-        # end
       end
 
       session[:donation_thank_you] = {
