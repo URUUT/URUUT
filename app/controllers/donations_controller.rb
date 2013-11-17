@@ -37,13 +37,6 @@ class DonationsController < ApplicationController
 
       @perk_name_selected, @perk_description = Donation.get_perk_name(@project, amount, @perks)
 
-      # if @perks.blank?
-      #   session[:perk_id] = "Custom"
-      # elsif @project.perk_permission
-      #   session[:perk_id] = @perks.last[2]
-      # else
-      #   session[:perk_id] = @perks.last[0]
-      # end
       session[:perk_id] = Donation.set_perk_id(@perks, @project)
     end
     render :new
@@ -95,13 +88,6 @@ class DonationsController < ApplicationController
 
       @perk_name_selected, @perk_description = Donation.get_perk_name(@project, amount, @perks)
 
-      # if @perks.blank?
-      #   session[:perk_id] = "Custom"
-      # elsif @project.perk_permission
-      #   session[:perk_id] = @perks.last[2]
-      # else
-      #   session[:perk_id] = @perks.last[0]
-      # end
       session[:perk_id] = Donation.set_perk_id(@perks, @project)
       session[:perk_amount] = @perk.amount.to_f
       @perk.name = "Custom"
@@ -130,24 +116,6 @@ class DonationsController < ApplicationController
     else
       render :new
     end
-
-    # @donation = Donation.new(params[:donation])
-    # @token = @donation.token
-    # if @donation.save_with_payment
-    #  redirect_to project_url(@donation.project_id), :notice => "Thank you for contributing!"
-    # else
-    #  render :new
-    # end
-
-    # ### new function for payment ###
-    # @error_payment = @donation.error_payment?
-    # if @error_payment
-    #   # render :new
-    #   redirect_to :back, notice: @error_payment
-    # else
-    #   redirect_to donation_steps_path
-      # redirect_to project_url(@donation.project_id), :notice => "Thank you for contributing!"
-    # end
 
   end
 
@@ -178,32 +146,12 @@ class DonationsController < ApplicationController
   end
 
   def update
-    # donation = Donation.new(params[:donation])
-    # donation.token = params[:donation][:token]
-
-    # @error_payment = donation.error_payment?
-    # if @error_payment
-    #   redirect_to :back, notice: @error_payment
-    # else
     @donation = Donation.unscoped.find(params[:id])
     session[:card_last4] = params[:donation][:card_last4]
     session[:card_type] = params[:donation][:card_type]
     params[:donation][:perk_name] = params[:name_of_perk]
     params[:donation][:amount] = session[:perk_amount]
     params[:donation][:description] = params[:perk_description]
-    # unit = params[:donation][:amount].last
-    # case unit
-    #   when "K"
-    #     params[:donation][:amount] = params[:donation][:amount].to_i * 1000
-    #   when "M"
-    #     params[:donation][:amount] = params[:donation][:amount].to_i * 1000000
-    #   when "B"
-    #     params[:donation][:amount] = params[:donation][:amount].to_i * 1000000000
-    #   when "T"
-    #     params[:donation][:amount] = params[:donation][:amount].to_i * 1000000000000
-    #   when "Q"
-    #     params[:donation][:amount] = params[:donation][:amount].to_i * 1000000000000000
-    # end
     session[:payment_amount] = params[:donation][:amount]
     current_user.update_attributes(uruut_point: session[:payment_amount])
     if params[:donation][:amount].is_a?(String)
@@ -213,7 +161,6 @@ class DonationsController < ApplicationController
      flash[:notice] = "Successfully updated donation."
    end
    redirect_to donation_steps_path
-    # end
   end
 
   def more_donators
