@@ -36,25 +36,8 @@ class SponsorsController < ApplicationController
       else
         level_sponsor = @sponsorship_levels.first.id
         @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[level_sponsor]
-        # sponsor cost rule
-        case level_sponsor
-          when 1
-            @cost = @project.goal.to_i * 0.25
-            @level = "Platinum"
-          when 2
-            @cost = @project.goal.to_i * 0.1
-            @level = "Gold"
-          when 3
-            @cost = @project.goal.to_i * 0.05
-            @level = "Silver"
-          when 4
-            @level = "Bronze"
-            if (@project.goal.to_i * 0.02) >= 750
-              @cost = 750
-            else
-              @cost = @project.goal.to_i * 0.02
-            end
-        end
+        
+        @cost = Sponsor.set_sponsorship_percentage(level_sponsor, @project)
         session[:level_id] = level_sponsor
     end
     @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
@@ -240,20 +223,8 @@ class SponsorsController < ApplicationController
     sponsor = params[:sponsor]
     sponsor_name = sponsor[:payment_type].eql?("Wire Transfer") ? sponsor[:name] : sponsor[:card_name]
     project = Project.find(params[:project_id])
-    case params[:project_sponsor][:level_id]
-    when "1"
-      cost = project.goal.to_i * 0.25
-    when "2"
-      cost = project.goal.to_i * 0.1
-    when "3"
-      cost = project.goal.to_i * 0.05
-    when "4"
-      if project.goal.to_i * 0.02 >= 750
-        cost = 750
-      else
-        cost = project.goal.to_i * 0.02
-      end
-    end
+    
+    cost = Sponsor.set_sponsorship_percentage(params[:project_sponsor][:level_id], project)
     params[:sponsor][:name] = sponsor_name
     card_type = params[:project_sponsor][:card_type]
     last4 = params[:project_sponsor][:card_last4]
