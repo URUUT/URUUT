@@ -74,6 +74,15 @@ class Donation < ActiveRecord::Base
     perk_id
   end
 
+  def self.set_perks(project)
+    if project.perk_permission
+      perks = project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i, perk.id, perk.description, perk.perks_available] }
+    else
+      perks = DEFAULT_PERK
+    end
+    perks
+  end
+
   ###  new function for handle Stripe error  ###
 
   def error_payment?

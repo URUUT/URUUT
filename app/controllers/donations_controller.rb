@@ -26,11 +26,8 @@ class DonationsController < ApplicationController
       @perks = @project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i] }
       session[:perk_id] = "custom_donate"
     else
-      if @project.perk_permission
-        perks = @project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i, perk.id, perk.description, perk.perks_available] }
-      else
-        perks = DEFAULT_PERK
-      end
+
+      perks = Donation.set_perks(@project)
 
       @perks = Donation.reorder_perks(perks, @perk_amount)
 
@@ -55,11 +52,8 @@ class DonationsController < ApplicationController
         @perk.amount = params["amount"].gsub(",", "").to_f
         session[:perk_amount] = @perk.amount.to_f
         @project = Project.find(params["project_id"])
-        if @project.perk_permission
-          perks = @project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i, perk.id, perk.description, perk.perks_available] }
-        else
-          perks = DEFAULT_PERK
-        end
+        
+        perks = Donation.set_perks(@project)
         @perks = Donation.reorder_perks(perks, @perk.amount)
         @perk_name_selected = @perks.last[0]
         @perk_description = @perks.last[3]
@@ -76,11 +70,8 @@ class DonationsController < ApplicationController
       @perk.id = params["level"]
       @perk.amount = params["custom_seed"].gsub(",", "")
       @project = Project.find(params["project_id"])
-      if @project.perk_permission
-        perks = @project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i, perk.id, perk.description, perk.perks_available] }
-      else
-        perks = DEFAULT_PERK
-      end
+      
+      perks = Donation.set_perks(@project)
 
       @perks = Donation.reorder_perks(perks, @perk.amount)
 
