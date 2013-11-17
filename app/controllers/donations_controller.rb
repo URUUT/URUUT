@@ -31,16 +31,8 @@ class DonationsController < ApplicationController
       else
         perks = DEFAULT_PERK
       end
-      @perks = []
-      perks.each do |perk|
-        if perk[1].to_f <= params[:amount].gsub(",", "").to_f
-          if !perk[4].blank? && perk[4].to_i > 0
-            @perks.push(perk)
-          elsif perk[4].blank?
-            @perks.push(perk)
-          end
-        end
-      end
+
+      @perks = Donation.reorder_perks(perks, @perk_amount)
 
       if !@project.perk_permission
         amount = params[:amount].to_f
@@ -96,16 +88,7 @@ class DonationsController < ApplicationController
         else
           perks = DEFAULT_PERK
         end
-        @perks = []
-        perks.each do |perk|
-          if perk[1].to_f <= params[:amount].gsub(",", "").to_f
-            if !perk[4].blank? && perk[4].to_i > 0
-              @perks.push(perk)
-            elsif perk[4].blank?
-              @perks.push(perk)
-            end
-          end
-        end
+        @perks = Donation.reorder_perks(perks, @perk.amount)
         @perk_name_selected = @perks.last[0]
         @perk_description = @perks.last[3]
         if @project.perk_permission
@@ -126,16 +109,8 @@ class DonationsController < ApplicationController
       else
         perks = DEFAULT_PERK
       end
-      @perks = []
-      perks.each do |perk|
-        if perk[1].to_f <= params["custom_seed"].gsub(",", "").to_f
-          if !perk[4].blank? && perk[4].to_i > 0
-            @perks.push(perk)
-          elsif perk[4].blank?
-            @perks.push(perk)
-          end
-        end
-      end
+
+      @perks = Donation.reorder_perks(perks, @perk.amount)
 
       if !@project.perk_permission
         amount = params[:custom_seed].to_f
