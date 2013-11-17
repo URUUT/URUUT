@@ -6,16 +6,6 @@ module ProjectsHelper
     return finalDate.to_i
   end
 
-  def vidUrl(oldUrl)
-    uri = URI(oldUrl)
-    scheme = uri.scheme
-    path = uri.path
-    host = uri.host
-    addition = 'embed'
-    newUrl = '#{scheme}://www.youtube.com/#{addition}#{path}'
-    return newUrl
-  end
-
   def project_title(id)
     project = Project.find(id)
     return project.title
@@ -27,15 +17,6 @@ module ProjectsHelper
 
   def project_categories
     [
-			#['parks & recreation','parks & recreation'],
-			#['neighborhood','neighborhood'],
-			#['cleanup/beautification','cleanup & beautification'],
-			#['roads & sidewalks','roads & sidewalks'],
-			#['health & well being','health & well being'],
-			#['child & adolescent','child & adolescent'],
-			#['pets','pets'],
-			#['miscellaneous','miscellaneous']
-      #['Animal / Pets],
       ['Art / Culture'],
       ['Athletic / Sports'],
       ['Education / Schools'],

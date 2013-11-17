@@ -19,8 +19,8 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name
   validates_presence_of :last_name
   validates_presence_of :email
-  # validates_presence_of :password
-  # validates_presence_of :password_confirmation
+  validates_presence_of :password
+  validates_presence_of :password_confirmation
 
   # validate :minimum_image_size
   validates_uniqueness_of :email, :case_sensitive => false
@@ -61,27 +61,27 @@ class User < ActiveRecord::Base
             token:auth.credentials.token,
             avatar: auth.info.image
           )
-        elsif type.eql?("linkedln")
-          user = User.create(
-            first_name:auth.info.name.to_s.split(' ')[0],
-            last_name: auth.info.name.to_s.split(' ')[1],
-            provider:auth.provider,
-            uid:auth.uid,
-            email:auth.info.email,
-            password:password,
-            password_confirmation:password,
-            token:auth.credentials.token
-          )
-        else
-          user = User.create(
-            first_name: auth['info']['name'].to_s.split(" ")[0],
-            last_name: auth['info']['name'].to_s.split(" ")[1],
-            provider:auth.provider,
-            uid:auth.uid,
-            email: "#{auth.info.nickname}@uruut.com",
-            password:password,
-            password_confirmation:password,
-            token:auth.credentials.token)
+        # elsif type.eql?("linkedln")
+        #   user = User.create(
+        #     first_name:auth.info.name.to_s.split(' ')[0],
+        #     last_name: auth.info.name.to_s.split(' ')[1],
+        #     provider:auth.provider,
+        #     uid:auth.uid,
+        #     email:auth.info.email,
+        #     password:password,
+        #     password_confirmation:password,
+        #     token:auth.credentials.token
+        #   )
+        # else
+        #   user = User.create(
+        #     first_name: auth['info']['name'].to_s.split(" ")[0],
+        #     last_name: auth['info']['name'].to_s.split(" ")[1],
+        #     provider:auth.provider,
+        #     uid:auth.uid,
+        #     email: "#{auth.info.nickname}@uruut.com",
+        #     password:password,
+        #     password_confirmation:password,
+        #     token:auth.credentials.token)
         end
       else
         user.update_attributes({provider: auth.provider,uid: auth.uid})
@@ -100,13 +100,6 @@ class User < ActiveRecord::Base
     else
       super
     end
-    #super.tap do |user|
-    #  if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
-    #    user.email = data["email"] if user.email.blank?
-    #  elsif data = session["devise.twitter_data"]
-    #    user.name = data["name"] if user.name.blank?
-    #  end
-    #end
   end
 
   def email_required?
@@ -150,10 +143,5 @@ class User < ActiveRecord::Base
     self.add_badge(1)
   end
 
-  # def minimum_image_size
-  #     if self.avatar_upload_width && self.avatar_upload_height && (self.avatar_upload_width < 200 || self.avatar_upload_height < 200)
-  #       errors.add :avatar, "Image should be at least 200px x 200px"
-  #     end
-  #   end
 
 end

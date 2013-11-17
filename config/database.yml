@@ -1,8 +1,8 @@
-development:
+development: &development
   adapter: postgresql
   encoding: unicode
   database: uruut_development
-  host: 127.0.0.1
+  host: localhost
   pool: 5
   username: <%= ENV['POSTGRES_USER'] %>
   password: <%= ENV['POSTGRES_PASS'] %>
@@ -11,21 +11,12 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test: &test
-  adapter: postgresql
-  encoding: unicode
   database: uruut_test
-  host: 127.0.0.1
-  pool: 5
-  username: <%= ENV['POSTGRES_USER'] %>
-  password: <%= ENV['POSTGRES_PASS'] %>
+  <<: *development
 
 production:
-  adapter: postgresql
-  encoding: unicode
   database: uruut_production
-  host: 127.0.0.1
-  pool: 5
-  username: <%= ENV['POSTGRES_USER'] %>
-  password: <%= ENV['POSTGRES_PASS'] %>
+  <<: *development
+
 cucumber:
   <<: *test
