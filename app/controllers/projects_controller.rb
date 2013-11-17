@@ -366,12 +366,6 @@ class ProjectsController < ApplicationController
     redirect_to new_user_registration_url
   end
 
-  def get_projects
-    @user = User.find(params[:user_id])
-    comparison = params[:status].eql?("Funding Active") ? ">" : "<"
-    @projects_created = @user.projects.where("campaign_deadline #{comparison} ? AND live = 1", Time.now).order("updated_at DESC").page(params[:created_page]).per(2)
-  end
-
   private
 
   def set_session_page
@@ -389,16 +383,6 @@ class ProjectsController < ApplicationController
 
   def session_path
     session[:path] = "project_new"
-  end
-
-  def admin_required!
-    @project = Project.find(params[:id])
-     unless current_user.role == "admin"
-      unless @project.user.id.eql?(current_user.id)
-       flash[:error] = "Sorry, you don't have right permision to accessing page."
-       redirect_to root_url and return false
-      end
-     end
   end
 
 end
