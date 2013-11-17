@@ -126,7 +126,6 @@
             = label_tag :project_sponsor_name do
               CHOOSE YOUR SPONSORSHIP LEVEL
             .selectParent
-              = @sponsorship_levels
               = select :project_sponsor, :level_id, options_for_select(@sponsorship_levels.map {|level| ["#{level.name} Level", level.id]}, session[:level_id]), class: "selectbox"
 
             %br/

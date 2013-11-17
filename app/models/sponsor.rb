@@ -30,6 +30,24 @@ class Sponsor < ActiveRecord::Base
     SponsorMailer.sponsor_thank_you(sponsor, email).deliver
   end
 
+  def self.set_sponsorship_percentage(level_id, project)
+    case level_id
+      when "1"
+        cost = project.goal.to_i * 0.25
+      when "2"
+        cost = project.goal.to_i * 0.1
+      when "3"
+        cost = project.goal.to_i * 0.05
+      when "4"
+        if project.goal.to_i * 0.02 >= 750
+          cost = 750
+        else
+          cost = project.goal.to_i * 0.02
+        end
+    end
+    cost
+  end
+
   def self.save_customer(current_user, project_sponsor)
     Stripe.api_key = "#{Settings.stripe.api_key}"
     name = current_user.first_name + ' ' + current_user.last_name
