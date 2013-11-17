@@ -16,10 +16,11 @@ class DonationsController < ApplicationController
   end
 
   def default_perk
+    amount = params[:amount]
     @donation = Donation.new
     @perk = Perk.new
     @perk_name = params[:name].to_s
-    @perk_amount = params[:amount].gsub(",", "").to_f
+    @perk_amount = amount.gsub(",", "").to_f
     @perk_description = params[:description]
     @project = Project.find(params[:project_id])
     if params[:amount].blank?
@@ -34,29 +35,7 @@ class DonationsController < ApplicationController
 
       @perks = Donation.reorder_perks(perks, @perk_amount)
 
-      if !@project.perk_permission
-        amount = params[:amount].to_f
-        @perk_description = "#{params[:amount].to_i} Uruut Reward Points"
-        if amount < 10
-          @perk_name_selected = "Custom"
-        elsif amount < 25
-          @perk_name_selected = "Level 1"
-        elsif amount < 50
-          @perk_name_selected = "Level 2"
-        elsif amount < 100
-          @perk_name_selected = "Level 3"
-        elsif amount < 250
-          @perk_name_selected = "Level 4"
-        else
-          @perk_name_selected = "Level 5"
-        end
-      elsif @perks.blank?
-        @perk_name_selected = "No Perk"
-        @perk_description = ""
-      else
-        @perk_name_selected = @perks.last[0]
-        @perk_description = @perks.last[3]
-      end
+      @perk_name_selected, @perk_description = Donation.get_perk_name(@project, amount, @perks)
 
       if @perks.blank?
         session[:perk_id] = "Custom"
@@ -100,9 +79,10 @@ class DonationsController < ApplicationController
         @perk.description = "You will receive #{@perk.amount.to_i} Uruut Reward Points when you seed $#{@perk.amount.to_i}"
       end
     else
+      amount = params["custom_seed"]
       @perk = Perk.new
       @perk.id = params["level"]
-      @perk.amount = params["custom_seed"].gsub(",", "")
+      @perk.amount = amount.gsub(",", "")
       @project = Project.find(params["project_id"])
       if @project.perk_permission
         perks = @project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i, perk.id, perk.description, perk.perks_available] }
@@ -112,29 +92,10 @@ class DonationsController < ApplicationController
 
       @perks = Donation.reorder_perks(perks, @perk.amount)
 
-      if !@project.perk_permission
-        amount = params[:custom_seed].to_f
-        @perk_description = "#{params[:custom_seed].to_i} Uruut Reward Points"
-        if amount < 10
-          @perk_name_selected = "Custom"
-        elsif amount < 25
-          @perk_name_selected = "Level 1"
-        elsif amount < 50
-          @perk_name_selected = "Level 2"
-        elsif amount < 100
-          @perk_name_selected = "Level 3"
-        elsif amount < 250
-          @perk_name_selected = "Level 4"
-        else
-          @perk_name_selected = "Level 5"
-        end
-      elsif @perks.blank?
-        @perk_name_selected = "No Perk"
-        @perk_description = ""
-      else
-        @perk_name_selected = @perks.last[0]
-        @perk_description = @perks.last[3]
-      end
+      @perk_name_selected, @perk_description = Donation.get_perk_name(@project, amount, @perks)
+
+      logger.debug @perk_name_selected
+      logger.debug @perk_description
 
       if @perks.blank?
         session[:perk_id] = "Custom"
