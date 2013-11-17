@@ -58,11 +58,12 @@ class Donation < ActiveRecord::Base
   def self.generate_report(project_id)
     require 'csv'
 
-    project_name = Project.find(project_id).project_title
-    index_array = Donation.where("project_id = ?", project_id).map(&:user_id).uniq
-    donations = Donation.where("project_id = ?", project_id)
+    project = Project.find(project_id)
+    project_name = project.project_title
+    index_array = project.donations.map(&:user_id).uniq
+    donations = project.donations
 
-    perks = Perk.where("project_id = ?", project_id).order("id ASC")
+    perks = project.perks.order("id ASC")
 
     CSV.open("#{Rails.root}/reports/donor_report.csv", "w+") do |csv|
 
