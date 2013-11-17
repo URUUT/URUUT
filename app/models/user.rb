@@ -90,6 +90,14 @@ class User < ActiveRecord::Base
     user
   end
 
+  def self.set_redirect_path
+    session.delete(:path)
+    project = Project.new
+    project.user_id = resource.id
+    project.save
+    "/projects/#{project.id}/edit#sponsor-info"
+  end
+
   def self.new_with_session(params, session)
     if session["devise.user_attributes"]
       new(session["devise.user_attributes"], :without_protection => true) do |user|
