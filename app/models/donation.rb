@@ -41,7 +41,7 @@ class Donation < ActiveRecord::Base
 
   def self.get_perk_name(project, amount, perks)
     if !project.perk_permission
-      amount = amount.to_f
+      amount = amount
       perk_description = "#{amount.to_i} Uruut Reward Points"
       if amount < 10
         perk_name_selected = "Custom"

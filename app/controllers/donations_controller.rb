@@ -16,11 +16,10 @@ class DonationsController < ApplicationController
   end
 
   def default_perk
-    amount = params[:amount]
     @donation = Donation.new
     @perk = Perk.new
     @perk_name = params[:name].to_s
-    @perk_amount = amount.gsub(",", "").to_f
+    @perk_amount = params[:amount].gsub(",", "").to_f
     @perk_description = params[:description]
     @project = Project.find(params[:project_id])
     if params[:amount].blank?
@@ -35,7 +34,7 @@ class DonationsController < ApplicationController
 
       @perks = Donation.reorder_perks(perks, @perk_amount)
 
-      @perk_name_selected, @perk_description = Donation.get_perk_name(@project, amount, @perks)
+      @perk_name_selected, @perk_description = Donation.get_perk_name(@project, @perk_amount, @perks)
 
       session[:perk_id] = Donation.set_perk_id(@perks, @project)
     end
@@ -73,10 +72,9 @@ class DonationsController < ApplicationController
         @perk.description = "You will receive #{@perk.amount.to_i} Uruut Reward Points when you seed $#{@perk.amount.to_i}"
       end
     else
-      amount = params["custom_seed"]
       @perk = Perk.new
       @perk.id = params["level"]
-      @perk.amount = amount.gsub(",", "")
+      @perk.amount = params["custom_seed"].gsub(",", "")
       @project = Project.find(params["project_id"])
       if @project.perk_permission
         perks = @project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i, perk.id, perk.description, perk.perks_available] }
@@ -86,7 +84,7 @@ class DonationsController < ApplicationController
 
       @perks = Donation.reorder_perks(perks, @perk.amount)
 
-      @perk_name_selected, @perk_description = Donation.get_perk_name(@project, amount, @perks)
+      @perk_name_selected, @perk_description = Donation.get_perk_name(@project, @perk.amount, @perks)
 
       session[:perk_id] = Donation.set_perk_id(@perks, @project)
       session[:perk_amount] = @perk.amount.to_f
