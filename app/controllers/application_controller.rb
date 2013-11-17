@@ -11,16 +11,6 @@ class ApplicationController < ActionController::Base
     else
       stored_location_for(resource) || request.referer || session[:redirect_url]  ||  request.env['omniauth.origin']
     end
-      # return root_url
-    # rescue
-    #   super
-    # end
-    # sign_in_url = url_for(:action => 'new', :controller => 'sessions', :only_path => false, :protocol => 'http')
-    # if request.referer == sign_in_url
-    #   super
-    # else
-    #   stored_location_for(resource) || request.referer || root_path
-    # end
   end
 
   def last_url
@@ -32,9 +22,7 @@ class ApplicationController < ActionController::Base
   end
 
   def session_email_forgot_password
-    # if params[:controller].eql?("devise/passwords") and params[:action].eql?("create")
       session[:email_forgot_password] = params[:user][:email] if params[:user]
-    # end
   end
 
   def additional_information
