@@ -40,20 +40,18 @@ class Donation < ActiveRecord::Base
   end
 
   def self.get_perk_name(project, amount, perks)
-    amounts = [10, 25, 50, 100, 250]
-    levels = ["Level 1", "Level 2", "Level 3", "Level 4", "Level 5"]
     if !project.perk_permission
       perk_description = "#{amount.to_i} Uruut Reward Points"
-      arr = amounts.each do |a|
+      arr = AMOUNTS.each do |a|
         a < amount
       end
 
       if arr[0].empty?
         perk_name_selected = "Custom"
       else
-        perk_name_selected = levels[amounts.index(arr[0].max)]
+        perk_name_selected = LEVELS[amounts.index(arr[0].max)]
       end
-      
+
     elsif perks.blank?
       perk_name_selected = "No Perk"
       perk_description = ""
