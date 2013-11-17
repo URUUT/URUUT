@@ -39,6 +39,41 @@ class Donation < ActiveRecord::Base
     
   end
 
+  def self.get_perk_name(project, amount, perks)
+    logger.debug project
+    logger.debug amount
+    logger.debug perks
+
+    if !project.perk_permission
+      amount = amount.to_f
+      perk_description = "#{amount.to_i} Uruut Reward Points"
+      if amount < 10
+        perk_name_selected = "Custom"
+      elsif amount < 25
+        perk_name_selected = "Level 1"
+      elsif amount < 50
+        perk_name_selected = "Level 2"
+      elsif amount < 100
+        perk_name_selected = "Level 3"
+      elsif amount < 250
+        perk_name_selected = "Level 4"
+      else
+        perk_name_selected = "Level 5"
+      end
+    elsif perks.blank?
+      perk_name_selected = "No Perk"
+      perk_description = ""
+    else
+      perk_name_selected = perks.last[0]
+      perk_description = perks.last[3]
+    end
+
+    logger.debug perk_name_selected
+    logger.debug perk_description
+
+    return [perk_name_selected, perk_description]
+  end
+
   ###  new function for handle Stripe error  ###
 
   def error_payment?
