@@ -91,29 +91,33 @@ Crowdfund::Application.routes.draw do
 
   resources :donations do
     get "thank_you", :on => :collection
-    get "change_perk", :on => :member
-    get "more_donators", :on => :member
-    get "thank_you", :on => :collection
+
+    member do
+      get "change_perk"
+      get "more_donators"
+    end
   end
   resources :projects do
-    get :get_complete_project, on: :collection
-    get :get_complete_project_public, on: :collection
-    get "add_desc", :on => :collection
-    get "set_previous_path_for_registration", :on => :collection
-    get "set_previous_path_for_registration_perk", :on => :collection
-    get "set_perk_to_false", :on => :collection
-    get "update_content_assets_tab", :on => :collection
-    get "update_sponsorship_content", :on => :collection
-    get "update_td_mark", :on => :collection
+    collection do
+      get :get_complete_project
+      get :get_complete_project_public
+      get "add_desc"
+      get "set_previous_path_for_registration"
+      get "set_previous_path_for_registration_perk"
+      get "set_perk_to_false"
+      get "update_content_assets_tab"
+      get "update_sponsorship_content"
+      get "update_td_mark"
+      post "add_perk"
+      post "save_video"
+      post "get_perk"
+      post "update_perk"
+      post "delete_perk"
+      put "edit"
+      get :download
+      get :download_stripe_guide
+    end
     get "show_more_image", :on => :member
-    post "add_perk", :on => :collection
-    post "save_video", :on => :collection
-    post "get_perk", :on => :collection
-    post "update_perk", :on => :collection
-    post "delete_perk", :on => :collection
-    put "edit", :on => :collection
-    get :download, on: :collection
-    get :download_stripe_guide, on: :collection
     resources :sponsors do
       get :get_sponsorship_levels
       get :confirm_sponsor
@@ -134,21 +138,23 @@ Crowdfund::Application.routes.draw do
   #end
 
   resources :pages do
-    get "search_category_or_location", :on => :collection
-    get "discover", :on => :collection
-    get "categories", :on => :collection
-    post "contact", :on => :collection
-    get "contact", :on => :collection
-    post "contact_send", :on => :collection
-    get "how_it_works", :on => :collection
-    get "terms", :on => :collection
-    get "about", :on => :collection
-    get 'home', :on => :collection
-    get "faqs", :on => :collection
-    get "thank_you", :on => :collection
-    get "privacy", :on => :collection
-    get "funding_sources", :on => :collection
-    get "media", :on => :collection
+    collection do
+      get "search_category_or_location"
+      get "discover"
+      get "categories"
+      post "contact"
+      get "contact"
+      post "contact_send"
+      get "how_it_works"
+      get "terms"
+      get "about"
+      get 'home'
+      get "faqs"
+      get "thank_you"
+      get "privacy"
+      get "funding_sources"
+      get "media"
+    end
   end
 
   mount Sidekiq::Web => '/sidekiq'

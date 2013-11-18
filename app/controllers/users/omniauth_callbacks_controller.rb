@@ -46,8 +46,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     # sign_up_url = url_for(:action => 'new', :controller => 'registration', :only_path => false, :protocol => 'http')
     if session[:redirect_url_last] == new_project_url
       session.delete(:path)
-      project = Project.new
-      project.user_id = resource.id
+      project = resource.projects.build()
       project.save!
       redirect_to "/projects/#{project.id}/edit#sponsor-info"
     elsif session[:redirect_url_last] == new_user_registration_url
