@@ -7,7 +7,7 @@ $(document).ajaxStop(function(){
 //  });
 });
 
-$('.main-content').html("<%=j render :partial => 'founder' %>");
+$('.main-content').html("<%=j render 'founder' %>");
 
 <% if params[:type].eql?("sponsor") %>
 $(".founder-all").attr("style", "");

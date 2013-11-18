@@ -36,10 +36,10 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.new(params[:project])
-    @project.live = 0
-    @project.user_id = current_user.id
-    @project.perk_permission = false
+    logger.debug "Params are: #{params[:project]}"
+
+    @project = current_user.projects.build(params[:project])
+    @project.save
 
     respond_to do |format|
       if @project.save
@@ -159,7 +159,7 @@ class ProjectsController < ApplicationController
         @perks = @project.perks.order(:amount)
         @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
         respond_to do |format|
-          format.js { render action: "skip_sponsor.js.erb" }
+          format.js { render "skip_sponsor.js.erb" }
         end
       else
         respond_to do |format|
@@ -343,7 +343,7 @@ class ProjectsController < ApplicationController
     @perks = @project.perks.order(:amount)
 
     respond_to do |format|
-      format.js { render action: "skip_sponsor.js.erb" }
+      format.js { render "skip_sponsor.js.erb" }
     end
   end
 
