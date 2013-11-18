@@ -36,8 +36,6 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    logger.debug "Params are: #{params[:project]}"
-
     @project = current_user.projects.build(params[:project])
     @project.save
 
