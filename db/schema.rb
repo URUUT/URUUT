@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131118045508) do
+ActiveRecord::Schema.define(:version => 20131118055103) do
 
   create_table "badges_sashes", :force => true do |t|
     t.integer  "badge_id"
@@ -245,7 +245,7 @@ ActiveRecord::Schema.define(:version => 20131118045508) do
     t.string   "state"
     t.string   "zip"
     t.string   "neighborhood"
-    t.integer  "live"
+    t.integer  "live",                        :default => 0
     t.text     "short_description"
     t.string   "bitly"
     t.string   "project_token"
@@ -269,7 +269,7 @@ ActiveRecord::Schema.define(:version => 20131118045508) do
     t.string   "cultivation_video"
     t.string   "seed_mime_type",              :default => "image"
     t.string   "cultivation_mime_type",       :default => "image"
-    t.boolean  "perk_permission"
+    t.boolean  "perk_permission",             :default => false
     t.datetime "campaign_deadline"
     t.datetime "created_at"
     t.datetime "updated_at"
