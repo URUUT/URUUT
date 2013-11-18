@@ -143,7 +143,7 @@ class ProjectsController < ApplicationController
 
     unless sponsorship_benefits.blank?
       SponsorshipBenefit.where(project_id: params[:id]).destroy_all
-      @sponsorship_benefits = SponsorshipBenefit.create(sponsorship_benefits)
+      @sponsorship_benefits = SponsorshipBenefit.create!(sponsorship_benefits)
     end
     params[:project][:goal] = params[:project][:goal].gsub(",", "") if !params[:project][:goal].nil?
     params[:project][:sponsor_permission] = params[:project][:sponsorship_permission] if !params[:project][:sponsorship_permission].nil?
@@ -193,7 +193,7 @@ class ProjectsController < ApplicationController
   def skip_sponsor
     session[:step] = "fourth"
     @project = Project.find(session[:current_project])
-    @project.update_attributes(sponsor_permission: false)
+    @project.update_attributes!(sponsor_permission: false)
     @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
     @perks = @project.perks.order(:amount)
 
@@ -231,7 +231,7 @@ class ProjectsController < ApplicationController
       @project.cultivation_mime_type = "video"
     end
 
-    @project.save
+    @project.save!
   end
 
   def save_image
@@ -263,7 +263,7 @@ class ProjectsController < ApplicationController
     Project.update(params[:project], perk_permission: perk_permission)
     unless perk_permission.eql?(false) && params[:name].blank?
       limit_status = params[:limit].eql?("yes") ? true : false
-      perk = Perk.create(name: params[:name], amount: params[:amount],
+      perk = Perk.create!(name: params[:name], amount: params[:amount],
                   description: params[:description], project_id: params[:project],
                   perks_available: params[:perks_available], limit: limit_status, perk_limit: params[:perks_available])
     end
@@ -318,9 +318,9 @@ class ProjectsController < ApplicationController
   def update_image
     @project = Project.find_by_id(session[:current_project])
     if params[:status].eql?("seed_image")
-      @project.update_attributes(seed_mime_type: "image", seed_image: params[:image])
+      @project.update_attributes!(seed_mime_type: "image", seed_image: params[:image])
     else
-      @project.update_attributes(cultivation_mime_type: "image", cultivation_image: params[:image])
+      @project.update_attributes!(cultivation_mime_type: "image", cultivation_image: params[:image])
     end
 
     render nothing: true

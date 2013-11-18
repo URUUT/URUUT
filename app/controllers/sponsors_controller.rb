@@ -36,7 +36,7 @@ class SponsorsController < ApplicationController
       else
         level_sponsor = @sponsorship_levels.first.id
         @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[level_sponsor]
-        
+
         @cost = Sponsor.set_sponsorship_percentage(level_sponsor, @project)
         session[:level_id] = level_sponsor
     end
@@ -91,8 +91,8 @@ class SponsorsController < ApplicationController
     cost = Sponsor.set_sponsorship_percentage(params[:project_sponsor][:level_id], project)
     params[:sponsor][:name] = sponsor_name
     params[:sponsor][:email] = current_user.email if params[:sponsor][:email].blank?
-    @sponsor.update_attributes(params[:sponsor])
-    @project_sponsor.update_attributes(params[:project_sponsor].merge({cost: cost, project_id: params[:project_id], sponsor_id: @sponsor.id,
+    @sponsor.update_attributes!(params[:sponsor])
+    @project_sponsor.update_attributes!(params[:project_sponsor].merge({cost: cost, project_id: params[:project_id], sponsor_id: @sponsor.id,
                                       level_id: params[:project_sponsor][:level_id]}))
     redirect_to confirmation_url(params[:project_id], @sponsor.id)
   end
@@ -193,7 +193,7 @@ class SponsorsController < ApplicationController
   def confirm_sponsor
     @sponsor = Sponsor.find(params[:sponsor_id])
     project_sponsor = ProjectSponsor.unscoped.where(project_id: params[:project_id], sponsor_id: @sponsor.id).last
-    project_sponsor.update_attributes(status: "confirmed", confirmed: true)
+    project_sponsor.update_attributes!(status: "confirmed", confirmed: true)
     Sponsor.delay.send_confirmation_email(@sponsor)
     redirect_to thank_you_for_sponsor_url(params[:project_id], @sponsor.id)
   end
@@ -223,7 +223,7 @@ class SponsorsController < ApplicationController
     sponsor = params[:sponsor]
     sponsor_name = sponsor[:payment_type].eql?("Wire Transfer") ? sponsor[:name] : sponsor[:card_name]
     project = Project.find(params[:project_id])
-    
+
     cost = Sponsor.set_sponsorship_percentage(params[:project_sponsor][:level_id], project)
     params[:sponsor][:name] = sponsor_name
     card_type = params[:project_sponsor][:card_type]
@@ -231,11 +231,11 @@ class SponsorsController < ApplicationController
     token = params[:token]
     @sponsor = Sponsor.new(params[:sponsor])
     @sponsor.email = current_user.email if params[:sponsor][:email].blank?
-    @sponsor.save(validate: false)
-    @project_sponsor = ProjectSponsor.create(params[:project_sponsor])
+    @sponsor.save!(validate: false)
+    @project_sponsor = ProjectSponsor.create!(params[:project_sponsor])
     @project_sponsor.confirmed = false
     @project_sponsor.save!
-    @project_sponsor.update_attributes({cost: cost, project_id: params[:project_id], sponsor_id: @sponsor.id,
+    @project_sponsor.update_attributes!({cost: cost, project_id: params[:project_id], sponsor_id: @sponsor.id,
                                       level_id: params[:project_sponsor][:level_id], card_token: token,
                                       card_type: card_type, card_last4: last4, sponsor_type: params[:type] })
     session[:project_sponsor] = @project_sponsor

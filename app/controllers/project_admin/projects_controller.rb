@@ -52,7 +52,7 @@ class ProjectAdmin::ProjectsController < ApplicationController
   def process_project_update
     params[:project_update][:project_id] = session[:current_project]
     project_update = ProjectUpdate.new(params[:project_update])
-    project_update.save
+    project_update.save!
     @alert = "Project successfully updated"
   end
 

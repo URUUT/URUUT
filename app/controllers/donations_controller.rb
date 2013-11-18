@@ -52,7 +52,7 @@ class DonationsController < ApplicationController
         @perk.amount = params["amount"].gsub(",", "").to_f
         session[:perk_amount] = @perk.amount.to_f
         @project = Project.find(params["project_id"])
-        
+
         perks = Donation.set_perks(@project)
         @perks = Donation.reorder_perks(perks, @perk.amount)
         @perk_name_selected = @perks.last[0]
@@ -70,7 +70,7 @@ class DonationsController < ApplicationController
       @perk.id = params["level"]
       @perk.amount = params["custom_seed"].gsub(",", "")
       @project = Project.find(params["project_id"])
-      
+
       perks = Donation.set_perks(@project)
 
       @perks = Donation.reorder_perks(perks, @perk.amount)
@@ -142,7 +142,7 @@ class DonationsController < ApplicationController
     params[:donation][:amount] = session[:perk_amount]
     params[:donation][:description] = params[:perk_description]
     session[:payment_amount] = params[:donation][:amount]
-    current_user.update_attributes(uruut_point: session[:payment_amount])
+    current_user.update_attributes!(uruut_point: session[:payment_amount])
     if params[:donation][:amount].is_a?(String)
       params[:donation][:amount] = params[:donation][:amount].gsub('$', '').gsub(',', '').to_f
     end

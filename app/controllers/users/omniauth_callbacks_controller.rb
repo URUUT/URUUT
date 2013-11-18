@@ -48,7 +48,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       session.delete(:path)
       project = Project.new
       project.user_id = resource.id
-      project.save
+      project.save!
       redirect_to "/projects/#{project.id}/edit#sponsor-info"
     elsif session[:redirect_url_last] == new_user_registration_url
       redirect_to root_url
