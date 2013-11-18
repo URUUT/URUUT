@@ -34,13 +34,6 @@ class ApplicationController < ActionController::Base
     youtube_client.video_by(link)
   end
 
-  def admin_required!
-    unless current_user.role == "admin" || @project.user.id.eql?(current_user.id)
-      flash[:error] = "Sorry, you don't have right permision to accessing page."
-      redirect_to root_url and return false
-    end
-  end
-
   protected
 
   def layout_by_resource

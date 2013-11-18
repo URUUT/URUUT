@@ -160,4 +160,11 @@ class ProjectAdmin::ProjectsController < ApplicationController
     @sponsor_count = @sponsors.empty? ? 0 : @sponsors.count
   end
 
+  def admin_required!
+    unless current_user.role == "admin" || @project.user.id.eql?(current_user.id)
+      flash[:error] = "Sorry, you don't have right permision to accessing page."
+      redirect_to root_url and return false
+    end
+  end
+
 end
