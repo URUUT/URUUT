@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131116090147) do
+ActiveRecord::Schema.define(:version => 20131118043351) do
 
   create_table "badges_sashes", :force => true do |t|
     t.integer  "badge_id"
@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(:version => 20131116090147) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "contacts", ["user_id"], :name => "index_contacts_on_user_id"
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -55,6 +57,8 @@ ActiveRecord::Schema.define(:version => 20131116090147) do
     t.string   "url"
   end
 
+  add_index "documents", ["project_id"], :name => "index_documents_on_project_id"
+
   create_table "donations", :force => true do |t|
     t.integer  "user_id"
     t.integer  "project_id"
@@ -70,6 +74,9 @@ ActiveRecord::Schema.define(:version => 20131116090147) do
     t.datetime "last_founded"
   end
 
+  add_index "donations", ["project_id"], :name => "index_donations_on_project_id"
+  add_index "donations", ["user_id"], :name => "index_donations_on_user_id"
+
   create_table "galleries", :force => true do |t|
     t.string   "gallery_file_name"
     t.string   "gallery_content_type"
@@ -79,6 +86,8 @@ ActiveRecord::Schema.define(:version => 20131116090147) do
     t.string   "thumbnail_url"
   end
 
+  add_index "galleries", ["project_id"], :name => "index_galleries_on_project_id"
+
   create_table "identities", :force => true do |t|
     t.string   "provider"
     t.string   "uid"
@@ -87,6 +96,8 @@ ActiveRecord::Schema.define(:version => 20131116090147) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "identities", ["user_id"], :name => "index_identities_on_user_id"
 
   create_table "merit_actions", :force => true do |t|
     t.integer  "user_id"
@@ -100,6 +111,8 @@ ActiveRecord::Schema.define(:version => 20131116090147) do
     t.datetime "updated_at",                       :null => false
   end
 
+  add_index "merit_actions", ["user_id"], :name => "index_merit_actions_on_user_id"
+
   create_table "merit_activity_logs", :force => true do |t|
     t.integer  "action_id"
     t.string   "related_change_type"
@@ -107,6 +120,9 @@ ActiveRecord::Schema.define(:version => 20131116090147) do
     t.string   "description"
     t.datetime "created_at"
   end
+
+  add_index "merit_activity_logs", ["related_change_id"], :name => "index_merit_activity_logs_on_related_change_id"
+  add_index "merit_activity_logs", ["related_change_type"], :name => "index_merit_activity_logs_on_related_change_type"
 
   create_table "merit_score_points", :force => true do |t|
     t.integer  "score_id"
@@ -119,6 +135,8 @@ ActiveRecord::Schema.define(:version => 20131116090147) do
     t.integer "sash_id"
     t.string  "category", :default => "default"
   end
+
+  add_index "merit_scores", ["sash_id"], :name => "index_merit_scores_on_sash_id"
 
   create_table "messages", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -134,6 +152,8 @@ ActiveRecord::Schema.define(:version => 20131116090147) do
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
   end
+
+  add_index "milestoneemails", ["project_id"], :name => "index_milestoneemails_on_project_id"
 
   create_table "newsletters", :force => true do |t|
     t.string   "email"
@@ -195,6 +215,10 @@ ActiveRecord::Schema.define(:version => 20131116090147) do
     t.boolean  "anonymous",    :default => false
   end
 
+  add_index "project_sponsors", ["project_id"], :name => "index_project_sponsors_on_project_id"
+  add_index "project_sponsors", ["sponsor_id"], :name => "index_project_sponsors_on_sponsor_id"
+  add_index "project_sponsors", ["sponsor_type"], :name => "index_project_sponsors_on_sponsor_type"
+
   create_table "project_updates", :force => true do |t|
     t.integer  "project_id"
     t.string   "title"
@@ -202,6 +226,8 @@ ActiveRecord::Schema.define(:version => 20131116090147) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "project_updates", ["project_id"], :name => "index_project_updates_on_project_id"
 
   create_table "projects", :force => true do |t|
     t.string   "title"
@@ -249,6 +275,8 @@ ActiveRecord::Schema.define(:version => 20131116090147) do
     t.string   "step"
   end
 
+  add_index "projects", ["user_id"], :name => "index_projects_on_user_id"
+
   create_table "sashes", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -259,6 +287,8 @@ ActiveRecord::Schema.define(:version => 20131116090147) do
     t.string  "provider"
     t.integer "user_id"
   end
+
+  add_index "services", ["user_id"], :name => "index_services_on_user_id"
 
   create_table "sessions", :force => true do |t|
     t.string "session_id"
@@ -298,6 +328,9 @@ ActiveRecord::Schema.define(:version => 20131116090147) do
     t.string   "sponsorship_level"
     t.float    "cost",                 :default => 0.0
   end
+
+  add_index "sponsorship_benefits", ["project_id"], :name => "index_sponsorship_benefits_on_project_id"
+  add_index "sponsorship_benefits", ["sponsorship_level_id"], :name => "index_sponsorship_benefits_on_sponsorship_level_id"
 
   create_table "sponsorship_levels", :force => true do |t|
     t.string   "name"
@@ -345,5 +378,6 @@ ActiveRecord::Schema.define(:version => 20131116090147) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["sash_id"], :name => "index_users_on_sash_id"
 
 end
