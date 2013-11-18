@@ -60,9 +60,9 @@ class DonationStepsController < ApplicationController
       perk = Perk.where(project_id: session[:project_id_of_perk_selected], amount: session[:payment_amount]).first
       if !perk.nil? && perk.limit? && perk.perks_available.to_i > 0
         new_perk_available = perk.perks_available.to_i - 1
-        perk.update_attributes(perks_available: new_perk_available)
+        perk.update_attributes!(perks_available: new_perk_available)
       end
-      current_user.update_attributes(uruut_point: current_user.uruut_point.to_i + session[:payment_amount].to_i)
+      current_user.update_attributes!(uruut_point: current_user.uruut_point.to_i + session[:payment_amount].to_i)
       session.delete(:perk_amount)
       Donation.send_confirmation_email(@donation)
       redirect_to wizard_path(:thank_you)

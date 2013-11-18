@@ -7,7 +7,7 @@ class ProjectAdmin::DocumentsController < ApplicationController
   end
 
   def create
-    @document = Document.create(filename: params[:filename], url: params[:url],  project_id: @project.id)
+    @document = Document.create!(filename: params[:filename], url: params[:url],  project_id: @project.id)
   end
 
   def destroy

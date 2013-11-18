@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name
   validates_presence_of :last_name
   validates_presence_of :email
-  
+
   # validate :minimum_image_size
   validates_uniqueness_of :email, :case_sensitive => false
 
@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
       unless user
         password = Devise.friendly_token[0,20]
         if type.eql?("facebook")
-          user = User.create(
+          user = User.create!(
             first_name:auth.extra.raw_info.name.to_s.split(' ')[0],
             last_name: auth.extra.raw_info.name.to_s.split(' ')[1],
             provider:auth.provider,
@@ -82,7 +82,7 @@ class User < ActiveRecord::Base
         #     token:auth.credentials.token)
         end
       else
-        user.update_attributes({provider: auth.provider,uid: auth.uid})
+        user.update_attributes!({provider: auth.provider,uid: auth.uid})
       end
     end
     user
@@ -92,7 +92,7 @@ class User < ActiveRecord::Base
     session.delete(:path)
     project = Project.new
     project.user_id = resource.id
-    project.save
+    project.save!
     "/projects/#{project.id}/edit#sponsor-info"
   end
 
