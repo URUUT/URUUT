@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131118043351) do
+ActiveRecord::Schema.define(:version => 20131118045508) do
 
   create_table "badges_sashes", :force => true do |t|
     t.integer  "badge_id"
@@ -171,6 +171,8 @@ ActiveRecord::Schema.define(:version => 20131118043351) do
     t.integer "perk_limit"
   end
 
+  add_index "perks", ["project_id"], :name => "index_perks_on_project_id"
+
   create_table "posts", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -294,6 +296,8 @@ ActiveRecord::Schema.define(:version => 20131118043351) do
     t.string "session_id"
     t.text   "data"
   end
+
+  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
 
   create_table "settings", :force => true do |t|
     t.string   "var",         :null => false
