@@ -5,7 +5,7 @@ class Sponsor < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :name, :payment_type
+  attr_accessible :email, :name, :payment_type, :card_name, :phone
 
   attr_accessor :card_name, :anonymous
   # attr_accessible :title, :body

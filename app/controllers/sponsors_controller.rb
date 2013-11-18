@@ -50,32 +50,8 @@ class SponsorsController < ApplicationController
     @project_sponsor = ProjectSponsor.unscoped.where(project_id: @project.id, sponsor_id: @sponsor.id).first
     @sponsor.anonymous = @project_sponsor.anonymous
     @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
-    case @project_sponsor.level_id
-      when 1
-        @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[1]
-        @cost = @project.goal.to_i * 0.25
-        @level = "Platinum"
-        session[:level_id] = 1
-      when 2
-        @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[2]
-        @cost = @project.goal.to_i * 0.1
-        @level = "Gold"
-        session[:level_id] = 2
-      when 3
-        @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[3]
-        @cost = @project.goal.to_i * 0.05
-        @level = "Silver"
-        session[:level_id] = 3
-      when 4
-        @level = "Bronze"
-        @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[4]
-        if (@project.goal.to_i * 0.02) >= 750
-          @cost = 750
-        else
-          @cost = @project.goal.to_i * 0.02
-        end
-        session[:level_id] = 4
-    end
+    @first_benefits, @cost, @level, session[:level_id] = SponsorshipBenefit.get_benefits_info(@project, @project_sponsor.level_id)
+
     render :layout => 'landing'
   end
 
