@@ -60,13 +60,17 @@
                   %option -- Select Status --
                   %option Funding Active
                   %option Funding Completed
-                  
+
           #project-fund
             = render "project", :projects => @projects_funded
             .cf
             = paginate @projects_funded, :param_name => "funded_page"
 
     .span4
+      -unless current_user.tax_reports.empty?
+        %h3 My Tax Receipts
+        - current_user.tax_reports.uniq.each do |report|
+          = link_to report.url.gsub('https://s3.amazonaws.com/uruut/tax_reports/',''), report.url, target: '_blank'
       -unless @pending_projects.empty?
         %h3 My Pending Projects
         .well
