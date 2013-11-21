@@ -31,6 +31,7 @@ class User < ActiveRecord::Base
 
 
   has_many :donations
+  has_many :tax_reports
 
   # Badging
   has_merit
@@ -142,14 +143,36 @@ class User < ActiveRecord::Base
     donation.nil? ? "" : donation.project.city
   end
 
-  def generate_tax_report
-    donations = self.donations
-    donations.inject(0) {|sum, i| sum + i.amount}
+  def generate_tax_report(project)
+    donations = self.donations.where(project_id: project.id)
+    total_donated = donations.inject(0) {|sum, i| sum + i.amount}
+    first_name = self.first_name
+    last_name = self.last_name
 
     # Implicit Block
-    Prawn::Document.generate("reports/tax_report.pdf") do
-     text "#{donations.inject(0) {|sum, i| sum + i.amount}}"
+    Prawn::Document.generate("tmp/#{project.title.parameterize.underscore}_#{self.first_name}#{self.last_name}_tax_report.pdf") do
+      font_size 18
+      text "#{project.organization}"
+
+      font_size 12
+      text "Donator Name: #{first_name} #{last_name}"
+      text "Total Donated: #{total_donated}"
     end
+    upload_to_s3("#{project.title.parameterize.underscore}_#{self.first_name}#{self.last_name}_tax_report.pdf")
+  end
+
+  def upload_to_s3(filename)
+    s3 = AWS::S3.new
+    bucket = s3.buckets['uruut/tax_reports']
+    obj = bucket.objects[filename]
+    obj.write(:file => "tmp/#{filename}")
+    url = obj.public_url.to_s
+    save_url(url)
+  end
+
+  def save_url(url)
+    tax_report = self.tax_reports.build(url: url)
+    tax_report.save!
   end
 
   private
