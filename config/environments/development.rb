@@ -40,14 +40,13 @@ Crowdfund::Application.configure do
 
   config.action_mailer.default_url_options = { host: ENV['MAIL_HOST'] }
 
-
   config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
+    address: "smtp.mandrillapp.com",
     port: 587,
-    domain: "uruut.com",
+    domain: "localhost",
     enable_starttls_auto: :true,
-    user_name: ENV['GMAIL_USER'],
-    password: ENV['GMAIL_PASSWORD']
+    user_name: ENV["MANDRILL_USER"],
+    password: ENV["MANDRILL_PASSWORD"]
   }
 
   # config.middleware.use ExceptionNotification::Rack,
