@@ -39,5 +39,9 @@
 # ignore secret token
 config/initializers/secret_token.rb
 
+# Ignores RVM files
+.ruby-version
+.ruby-gemset
+
 # ignore large file script
 git-large-files.pl
