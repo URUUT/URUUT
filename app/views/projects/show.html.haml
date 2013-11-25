@@ -541,12 +541,17 @@
           %div
             BRONZE LEVEL SPONSOR
             %div.project-sponsors-link
-              - if @project_sponsors.include?(4)
-                - @project_sponsors[4].each do |sponsor|
-                  - if sponsor.anonymous
-                    = link_to("ANONYMOUS SPONSOR", "javascript:void(0)")
-                  - else
-                    = link_to(sponsor.name, recognize_url(sponsor.site), target: "_blank")
+              / - if @project_sponsors.include?(4)
+              - last_sponsor = @project_sponsors[4].last
+              - @project_sponsors[4].each do |sponsor|
+                - if sponsor.anonymous
+                  = link_to("ANONYMOUS SPONSOR", "javascript:void(0)")
+                  - unless last_sponsor == sponsor
+                    ,
+                - else
+                  = link_to(sponsor.name, recognize_url(sponsor.site), target: "_blank")
+                  - unless last_sponsor == sponsor
+                    ,
         - unless @project.status == "Funding Completed"
           %div{style: "margin-top: 5px;"}
             - if user_signed_in?
