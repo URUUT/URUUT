@@ -128,8 +128,7 @@
       %ul#myTab1.tab-nav
         %li.active
           %a{:href => "#planting_seeds"}
-            Planting Seeds
-            %span (About)
+            About Us
         - unless @project.project_updates.empty?
           %li
             %a{:href => "#growth"}
@@ -147,7 +146,17 @@
               - video_seed = @project.seed_video.gsub("http", "https").gsub(".be", "be.com/embed")
             %iframe{:height => "413", :src => video_seed, :width => "620"}
           - elsif @project.seed_mime_type.eql?("image") and !@project.seed_image.blank?
-            = image_tag "#{@project.seed_image}", style: "float:left; width:100%"
+            = image_tag "#{@project.seed_image}", style: "width:100%"
+          %h4{:style => "margin-top: 20px;color: #81c263 !important;font-weight: 400;"}= @project.organization
+          %div
+            .fb-like{:style => "display: block; float: left; margin-left: 5px;", "data-href" => project_url(@project.id), "data-layout" => "button_count", "data-send" => "false", "data-show-faces" => "true", "data-width" => "450"}
+            %a.twitter-follow-button{:style => "display: block; float: left; margin-left: 10px;", "data-show-count" => "false", :href => "https://twitter.com/#{@project.twitter_handle}"} Follow
+            %span.label-green{:style => "margin-left: 10px; font-family: 'Proxima Nova Semi', sans-serif;display:inline-block;"}
+              WEB:
+              = link_to(strip_url(@project.website), recognize_url(@project.website), target: "_blank", :style => "font-style: italic; text-decoration: underline; color: #3f403b; font-family: 'Georgia', serif;")
+            %span{style: "margin-left: 10px;display:inline-block;"}
+              = image_tag "message-green.png"
+              = link_to "Contact Us", "mailto:#{User.find(@project.user_id).email}", target: "_blank", :style => "font-style: italic; text-decoration: underline; color: #3f403b; font-family: 'Georgia', serif;"
           %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: pre-line;"}= simple_format(@project.story)
         - unless @project.project_updates.empty?
           #growth.tab-pane
@@ -200,36 +209,24 @@
                 - @project_sponsors[3].each do |sponsor|
                   = sponsor_item(sponsor)
 
-      %h4.title Where We're Ruuted
+      %h4.title Location
       .map-container
         #map{:style => "width:100%;height:300px"}
         #map-details
           .project-location
-            %h4= @project.organization
             %div{:style => 'font-family:"Proxima Nova"'}
               = image_tag "marker.jpg", :class => 'marker', :style => 'float:none;'
               = "#{@project.address},"
               = "#{@project.city},"
               = @project.state
               = @project.zip
-            %div
-              / .fb-like{"data-font" => "lucida grande", "data-href" => "http://uruut.41studio.com", "data-layout" => "button_count", "data-send" => "false", "data-show-faces" => "true", "data-width" => "450"}
-              .fb-like{:style => "display: block; float: left; margin-left: 5px;", "data-href" => project_url(@project.id), "data-layout" => "button_count", "data-send" => "false", "data-show-faces" => "true", "data-width" => "450"}
-              %a.twitter-follow-button{:style => "display: block; float: left; margin-left: 10px;", "data-show-count" => "false", :href => "https://twitter.com/#{@project.twitter_handle}"} Follow
-              %span.label-green{:style => "margin-left: 10px; font-family: 'Proxima Nova Semi', sans-serif;"}
-                WEB:
-                = link_to(strip_url(@project.website), recognize_url(@project.website), target: "_blank", :style => "font-style: italic; text-decoration: underline; color: #3f403b; font-family: 'Georgia', serif;")
-              %span{style: "margin-left: 10px"}
-                = image_tag "message-green.png"
-                = link_to "Contact Us", "mailto:#{User.find(@project.user_id).email}", target: "_blank", :style => "font-style: italic; text-decoration: underline; color: #3f403b; font-family: 'Georgia', serif;"
+
 
       #content_container
         #cultivation
           .span3.ending
             %h4.title{style: "color: #464646 !important; font-weight: bold;"}
-              CULTIVATION
-              %br
-              %span (Project Details)
+              Project Details
 
             %h6{:style => "text-align:center;color:#55554d !important;font-family:'Proxima Nova';margin-top:15px;"} Funding Ends
             %div.circlegrey{style: "background: #b6b6b4;"}
@@ -676,7 +673,7 @@
     geocoder.geocode(geocoderRequest, function(results, status){
       var latitude = results[0].geometry.location.lat();
       var longitude = results[0].geometry.location.lng();
-    
+
       var map = L.map('map', {
           scrollWheelZoom: false
       }).setView([latitude,longitude], 11);

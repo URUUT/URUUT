@@ -60,27 +60,6 @@ class User < ActiveRecord::Base
             token:auth.credentials.token,
             avatar: auth.info.image
           )
-        # elsif type.eql?("linkedln")
-        #   user = User.create(
-        #     first_name:auth.info.name.to_s.split(' ')[0],
-        #     last_name: auth.info.name.to_s.split(' ')[1],
-        #     provider:auth.provider,
-        #     uid:auth.uid,
-        #     email:auth.info.email,
-        #     password:password,
-        #     password_confirmation:password,
-        #     token:auth.credentials.token
-        #   )
-        # else
-        #   user = User.create(
-        #     first_name: auth['info']['name'].to_s.split(" ")[0],
-        #     last_name: auth['info']['name'].to_s.split(" ")[1],
-        #     provider:auth.provider,
-        #     uid:auth.uid,
-        #     email: "#{auth.info.nickname}@uruut.com",
-        #     password:password,
-        #     password_confirmation:password,
-        #     token:auth.credentials.token)
         end
       else
         user.update_attributes!({provider: auth.provider,uid: auth.uid})
