@@ -31,7 +31,7 @@ class DonationsController < ApplicationController
 
       @perks = Donation.reorder_perks(perks, @perk_amount)
 
-      @perk_name_selected, @perk_description = Donation.get_perk_name(@project, @perk_amount, @perks)
+      @perk_name_selected, @perk_description = Donation.get_perk_info(@project, @perk_amount, @perks)
 
       session[:perk_id] = Donation.set_perk_id(@perks, @project)
     end
@@ -75,7 +75,7 @@ class DonationsController < ApplicationController
 
       @perks = Donation.reorder_perks(perks, @perk.amount)
 
-      @perk_name_selected, @perk_description = Donation.get_perk_name(@project, @perk.amount, @perks)
+      @perk_name_selected, @perk_description = Donation.get_perk_info(@project, @perk.amount, @perks)
 
       session[:perk_id] = Donation.set_perk_id(@perks, @project)
       session[:perk_amount] = @perk.amount.to_f

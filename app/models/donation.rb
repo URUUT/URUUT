@@ -36,10 +36,10 @@ class Donation < ActiveRecord::Base
     end
 
     perks_arr
-    
+
   end
 
-  def self.get_perk_name(project, amount, perks)
+  def self.get_perk_info(project, amount, perks)
     if !project.perk_permission
       perk_description = "#{amount.to_i} Uruut Reward Points"
       arr = AMOUNTS.each do |a|
