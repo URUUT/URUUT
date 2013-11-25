@@ -154,6 +154,10 @@ class User < ActiveRecord::Base
     tax_report.save!
   end
 
+  def is_admin?
+    role == 'admin'
+  end
+
   private
 
   def send_welcome_email
