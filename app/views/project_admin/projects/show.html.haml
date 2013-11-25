@@ -46,7 +46,7 @@
           %br
           Contributions
         %h2.highlighted-value
-          = @donations.count
+          = @project.distinct_donors.count
 
     .span2
       %div{:style => ""}
