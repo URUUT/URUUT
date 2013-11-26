@@ -49,7 +49,7 @@ class Donation < ActiveRecord::Base
         a < amount
       end
 
-      if arr[0].empty?
+      if arr[0] == nil || arr[0] == ''
         perk_name_selected = "Custom"
       else
         perk_name_selected = LEVELS[amounts.index(arr[0].max)]
