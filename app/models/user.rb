@@ -129,7 +129,7 @@ class User < ActiveRecord::Base
     last_name = self.last_name
 
     # Implicit Block
-    Prawn::Document.generate("tmp/#{project.title.parameterize.underscore}_#{self.first_name}#{self.last_name}_tax_report.pdf") do
+    Prawn::Document.generate("tmp/#{project.organization.parameterize.underscore}_#{self.first_name}#{self.last_name}_tax_report.pdf") do
       font_size 18
       text "#{project.organization}"
 
@@ -137,7 +137,7 @@ class User < ActiveRecord::Base
       text "Donator Name: #{first_name} #{last_name}"
       text "Total Donated: #{total_donated}"
     end
-    upload_to_s3("#{project.title.parameterize.underscore}_#{self.first_name}#{self.last_name}_tax_report.pdf")
+    upload_to_s3("#{project.organization.parameterize.underscore}_#{self.first_name}#{self.last_name}_tax_report.pdf")
   end
 
   def upload_to_s3(filename)
