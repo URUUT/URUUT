@@ -8,6 +8,8 @@ class Donation < ActiveRecord::Base
 
   default_scope { where(confirmed: true) }
 
+  AMOUNTS = [10, 25, 50, 100, 250]
+
   def save_with_payment
     current_user = :current_user
     Stripe.api_key = "#{Settings.stripe.api_key}"
