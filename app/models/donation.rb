@@ -9,6 +9,7 @@ class Donation < ActiveRecord::Base
   default_scope { where(confirmed: true) }
 
   AMOUNTS = [10, 25, 50, 100, 250]
+  LEVELS = ["Level 1", "Level 2", "Level 3", "Level 4", "Level 5"]
 
   def save_with_payment
     current_user = :current_user
