@@ -1,4 +1,4 @@
-desc 'Access helper methods in rake tasks'
+desc 'Close out completed projects and generate charges and tax reports'
 namespace :uruut do
 	task :finished_projects => [:environment] do
   	include ApplicationHelper
@@ -7,6 +7,12 @@ namespace :uruut do
 		projects.each do |project|
 			if totalsponsor(project) >= project.goal.to_f && project.goal.to_f > 0
 				project.update_attributes(status: "Funding Completed")
+				user_ids = project.donations.select(:user_id).map(&:user_id).uniq
+				unless user_ids.nil?
+					puts "There are Donations"
+				else
+					puts "No Donations"
+				end
 				#puts "Project Successful"
 			else
 				project.update_attributes(live: 0, status: "Funding Failed")
