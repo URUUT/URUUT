@@ -31,7 +31,7 @@ class DonationsController < ApplicationController
 
       @perks = Donation.reorder_perks(perks, @perk_amount)
 
-      @perk_name_selected, @perk_description = Donation.get_perk_info(@project, params[:amount].gsub(",", "").to_f, @perks)
+      @perk_name_selected, @perk_description = Donation.get_perk_info(@project, @perk_amount, @perks)
 
       session[:perk_id] = Donation.set_perk_id(@perks, @project)
     end

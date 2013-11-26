@@ -8,9 +8,6 @@ class Donation < ActiveRecord::Base
 
   default_scope { where(confirmed: true) }
 
-  AMOUNTS = [10, 25, 50, 100, 250]
-  LEVELS = ["Level 1", "Level 2", "Level 3", "Level 4", "Level 5"]
-
   def save_with_payment
     current_user = :current_user
     Stripe.api_key = "#{Settings.stripe.api_key}"
@@ -43,6 +40,7 @@ class Donation < ActiveRecord::Base
   end
 
   def self.get_perk_info(project, amount, perks)
+
     if !project.perk_permission
       perk_description = "#{amount.to_i} Uruut Reward Points"
       arr = AMOUNTS.each do |a|
