@@ -9,7 +9,9 @@ namespace :uruut do
 				project.update_attributes(status: "Funding Completed")
 				user_ids = project.donations.select(:user_id).map(&:user_id).uniq
 				unless user_ids.nil?
-					puts "There are Donations"
+					user_ids.each do |user|
+						User.find(user).generate_tax_report(project)
+					end
 				else
 					puts "No Donations"
 				end
