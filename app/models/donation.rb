@@ -50,7 +50,7 @@ class Donation < ActiveRecord::Base
       if arr[0] == nil || arr[0] == ''
         perk_name_selected = "Custom"
       else
-        perk_name_selected = LEVELS[amounts.index(arr[0].max)]
+        perk_name_selected = LEVELS[AMOUNTS.index(arr[0].max)]
       end
 
     elsif perks.blank?
