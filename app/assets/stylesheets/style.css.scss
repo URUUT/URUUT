@@ -712,6 +712,25 @@ textarea, .textarea input[type="text"]{
   }
 }
 
+.tax-report {
+  display: block;
+  margin-bottom: 10px;
+  padding-right: 10px;
+  position: relative;
+  word-wrap: break-word;
+
+  &:after {
+    background-image: url("glyphicons-halflings.png");
+    background-position: -25px -23px;
+    content: '';
+    display: inline-block;
+    height: 14px;
+    position: absolute;
+    right: 0;
+    width: 14px;
+  }
+}
+
 .progress-container{
   display: block;
   float: none;
