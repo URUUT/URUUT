@@ -16,6 +16,7 @@ class UsersController < ApplicationController
     @projects_created = @user.projects.live.order("updated_at DESC").page(params[:created_page]).per(2)
     @projects_funded = @user.projects_funded.live.order("updated_at DESC").page(params[:funded_page]).per(2)
     @pending_projects = @user.projects.where(live: 0)
+    @tax_reports = @user.tax_reports.page(params[:tax_report]).per(2)
     # end
 
   end

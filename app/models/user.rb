@@ -124,18 +124,28 @@ class User < ActiveRecord::Base
 
   def generate_tax_report(project)
     donations = self.donations.where(project_id: project.id)
-    total_donated = donations.inject(0) {|sum, i| sum + i.amount}
+    total_donated = ActionController::Base.helpers.number_to_currency(donations.inject(0) {|sum, i| sum + i.amount}.to_f)
     first_name = self.first_name
     last_name = self.last_name
+    perks = Perk.where(project_id: project.id).order("amount ASC")
+    eligible_perk = perks.compact.find_all { |item| ActionController::Base.helpers.number_to_currency(item.amount) <= total_donated }.max
 
     # Implicit Block
     Prawn::Document.generate("tmp/#{project.organization.parameterize.underscore}_#{self.first_name}#{self.last_name}_tax_report.pdf") do
       font_size 18
-      text "#{project.organization}"
+      pad(20) { text "#{project.organization}" }
+      stroke_horizontal_rule
 
       font_size 12
-      text "Donator Name: #{first_name} #{last_name}"
-      text "Total Donated: #{total_donated}"
+      pad(20) { text "Donator Name: #{first_name} #{last_name}" }
+      pad(20) { text "Total Donated: #{total_donated}" }
+
+      pad(20) { text "Eligible Perk: #{eligible_perk.name} - #{eligible_perk.description}" }
+      pad(20) { text "Estimated Value: ___________" }
+      stroke_horizontal_rule
+
+      font_size 10
+      pad(20) { text "Disclaimer placeholder" }
     end
     upload_to_s3("#{project.organization.parameterize.underscore}_#{self.first_name}#{self.last_name}_tax_report.pdf")
   end
