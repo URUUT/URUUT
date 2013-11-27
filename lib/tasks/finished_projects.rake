@@ -15,8 +15,7 @@ namespace :uruut do
 				else
 					puts "No Donations"
 				end
-				project.create_donation_charges
-				project.create_sponsor_charges
+				#puts "Project Successful"
 			else
 				project.update_attributes(live: 0, status: "Funding Failed")
 				#puts "Project Not Successful"
