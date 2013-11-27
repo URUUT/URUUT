@@ -74,17 +74,21 @@ class PagesController < ApplicationController
     @projects = Project.where("#{query.join(' OR ')}", :keyword => "%#{params[:keyword]}%")
                         .by_city(params[:city])
                         .by_category(params[:category])
-                        .reject { |project| project.status.nil? || project.live == 0 || project.live.nil?}
-  end
+                        .reject { |project| project.status.nil? || project.status == "Funding Completed" || project.live == 0 || project.live.nil? }
 
-  private
+    @project_success = Project.where("#{query.join(' OR ')}", :keyword => "%#{params[:keyword]}%")
+                        .by_city(params[:city])
+                        .by_category(params[:category])
+                        .reject { |project| project.live == 0 || project.live.nil? }
+                        .reject { |project| project.status.nil? || project.status == "Funding Active" }
+  end
 
   def set_session_page
     session[:page_active] = if action_name.eql?("about")
       "about"
     else
       action_name.eql?("home") ? "home" : "project"
-   end
- end
+    end
+  end
 
 end
