@@ -1,4 +1,4 @@
-= render "partials/banner_map"
+/ = render "partials/banner_map"
 
 .beta-banner
   .container
@@ -11,8 +11,14 @@
 
 .clearfix
 
+= javascript_include_tag "leaflet"
+= javascript_include_tag "tile.stamen"
+
 :javascript
   $(function(){
+      // var map = L.map('map').setView([33.7489, -84.3881], 11);
+      // L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png').addTo(map);
+      // L.marker([33.7489, -84.3881]).addTo(map).bindPopup('<h4>Welcome to URUUT</h4>').openPopup();
     if ($("#location :selected").text().length > 17){
       $("#location :selected").text(truncText($("#location :selected").text(), 15, "..."))
     }
