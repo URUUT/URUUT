@@ -71,24 +71,17 @@ class PagesController < ApplicationController
       query << "#{field} ILIKE :keyword"
     end
 
-    @projects = Project.where("#{query.join(' OR ')}", :keyword => "%#{params[:keyword]}%")
-                        .by_city(params[:city])
-                        .by_category(params[:category])
-                        .reject { |project| project.status.nil? || project.status == "Funding Completed" || project.live == 0 || project.live.nil? }
-
-    @project_success = Project.where("#{query.join(' OR ')}", :keyword => "%#{params[:keyword]}%")
-                        .by_city(params[:city])
-                        .by_category(params[:category])
-                        .reject { |project| project.live == 0 || project.live.nil? }
-                        .reject { |project| project.status.nil? || project.status == "Funding Active" }
+    @projects = Project.where("#{query.join(" OR ")} AND live = 1 AND status IS NULL OR status = ''", :keyword=> "%#{params[:keyword]}%").by_city(params[:city]).by_category(params[:category])
   end
+
+  private
 
   def set_session_page
     session[:page_active] = if action_name.eql?("about")
       "about"
     else
       action_name.eql?("home") ? "home" : "project"
-    end
-  end
+   end
+ end
 
 end
