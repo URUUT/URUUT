@@ -7,7 +7,7 @@ class Project < ActiveRecord::Base
   :city, :state, :zip, :neighborhood, :title, :image, :video, :tags, :live, :short_description, :perk_permission,
   :perks_attributes, :galleries_attributes, :status, :organization, :website, :twitter_handle, :facebook_page, :seed_video,
   :story, :about, :large_image, :seed_image, :cultivation_image, :ready_for_approval, :organization_type, :cultivation_mime_type,
-  :organization_classification, :cultivation_video, :campaign_deadline, :sponsor_permission, :step, :seed_mime_type
+  :organization_classification, :cultivation_video, :campaign_deadline, :sponsor_permission, :step, :seed_mime_type, :partial_funding
 
   attr_accessor :sponsorship_permission, :perk_type
 

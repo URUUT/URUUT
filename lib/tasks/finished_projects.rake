@@ -5,7 +5,7 @@ namespace :uruut do
 
 		projects = Project.live.ending_today
 		projects.each do |project|
-			if totalsponsor(project) >= project.goal.to_f && project.goal.to_f > 0
+			if (totalsponsor(project) >= project.goal.to_f && project.goal.to_f > 0) || (project.partial_funding == true && project.goal.to_f > 0)
 				project.update_attributes(status: "Funding Completed")
 				user_ids = project.donations.select(:user_id).map(&:user_id).uniq
 				unless user_ids.nil?

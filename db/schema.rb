@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131121071842) do
+ActiveRecord::Schema.define(:version => 20131202045816) do
 
   create_table "badges_sashes", :force => true do |t|
     t.integer  "badge_id"
@@ -275,6 +275,7 @@ ActiveRecord::Schema.define(:version => 20131121071842) do
     t.datetime "updated_at"
     t.boolean  "sponsor_permission",          :default => true
     t.string   "step"
+    t.boolean  "partial_funding",             :default => false
   end
 
   add_index "projects", ["user_id"], :name => "index_projects_on_user_id"
