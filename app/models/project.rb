@@ -2,6 +2,7 @@ class Project < ActiveRecord::Base
   belongs_to :user
 
   before_save :downcase_url_and_facebook
+  before_save :downcase_city
 
   attr_accessible :category, :description, :duration, :goal, :address, :project_title, :sponsorship_permission,
   :city, :state, :zip, :neighborhood, :title, :image, :video, :tags, :live, :short_description, :perk_permission,
@@ -219,9 +220,7 @@ class Project < ActiveRecord::Base
   end
 
   def downcase_city
-    unless self.city.nil?
-      self.city.downcase!
-    end
+    self.city.downcase! unless self.city.nil?
   end
 
   def downcase_url_and_facebook
