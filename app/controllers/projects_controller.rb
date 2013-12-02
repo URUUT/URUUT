@@ -49,14 +49,49 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    sort_sponsorships = @project.project_sponsors.sort_by {|ps| ps.level_id}
-    @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).order(:id).group_by {|sponsor| sponsor.sponsorship_level_id}
-    session[:current_project] = @project.id
-    @project.update_attributes!(params[:project])
-    @perks = @project.perks.order(:amount)
-    respond_to do |format|
-      format.html
-      format.js
+    if params[:step]
+      if params[:step] == 'first'
+        @project.errors.clear
+        @project.update_attributes!(params[:project])
+        @project.sponsor_info = true
+        if @project.valid?
+          render :json => "Success"
+        else
+          render :json => { :errors => @project.errors.full_messages }
+        end
+      end
+
+      if params[:step] == 'second'
+        @project.errors.clear
+        @project.update_attributes!(params[:project])
+        @project.project_details = true
+        if @project.valid?
+          render :json => "Success"
+        else
+          render :json => { :errors => @project.errors.full_messages }
+        end
+      end
+
+      if params[:step] == 'last'
+        @project.errors.clear
+        @project.update_attributes!(params[:project])
+        @project.assets = true
+        if @project.valid?
+          render :json => "Success"
+        else
+          render :json => { :errors => @project.errors.full_messages }
+        end
+      end
+    else
+      sort_sponsorships = @project.project_sponsors.sort_by {|ps| ps.level_id}
+      @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).order(:id).group_by {|sponsor| sponsor.sponsorship_level_id}
+      session[:current_project] = @project.id
+      @project.update_attributes!(params[:project])
+      @perks = @project.perks.order(:amount)
+      respond_to do |format|
+        format.html
+        format.js
+      end
     end
   end
 

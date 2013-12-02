@@ -10,7 +10,29 @@ class Project < ActiveRecord::Base
   :story, :about, :large_image, :seed_image, :cultivation_image, :ready_for_approval, :organization_type, :cultivation_mime_type,
   :organization_classification, :cultivation_video, :campaign_deadline, :sponsor_permission, :step, :seed_mime_type, :partial_funding
 
-  attr_accessor :sponsorship_permission, :perk_type
+  attr_accessor :sponsorship_permission, :perk_type, :sponsor_info, :project_details, :assets
+
+  validates_presence_of :organization, :if => :sponsor_info
+  validates_presence_of :organization_type, :if => :sponsor_info
+  validates_presence_of :organization_classification, :if => :sponsor_info
+  validates_presence_of :address, :if => :sponsor_info
+  validates_presence_of :city, :if => :sponsor_info
+  validates_presence_of :state, :if => :sponsor_info
+  validates_presence_of :zip, :if => :sponsor_info
+  validates_presence_of :website, :if => :sponsor_info
+  validates_presence_of :facebook_page, :if => :sponsor_info
+  validates_presence_of :twitter_handle, :if => :sponsor_info
+  validates_presence_of :project_token, :if => :sponsor_info
+
+  validates_presence_of :project_title, :if => :project_details
+  validates_presence_of :goal, :if => :project_details
+  validates_presence_of :duration, :if => :project_details
+  validates_presence_of :category, :if => :project_details
+  validates_presence_of :title, :if => :project_details
+  validates_presence_of :story, :if => :project_details
+  validates_presence_of :about, :if => :project_details
+
+  validates_presence_of :large_image, :if => :assets
 
   with_options dependent: :destroy do |project|
     project.has_many :donations

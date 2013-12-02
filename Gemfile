@@ -28,7 +28,6 @@ gem 'youtube_it'
 gem 'rails_config'
 gem 'newrelic_rpm'
 gem 'meta_request'
-#gem 'exception_notification'
 gem 'airbrake'
 gem 'prawn'
 

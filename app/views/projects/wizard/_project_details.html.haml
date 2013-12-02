@@ -29,7 +29,7 @@
         FUNDING GOAL*
         %span.italic{style: "color: #000"}
         %span.error-container
-      = f.text_field :goal, :required => true, class: "span8"
+      = f.text_field :goal, :required => true, class: "span8", pattern: ""
 
     %div{style: 'margin-bottom: 25px;'}
       = f.label :partial_funding, class: "label-green", style: 'display: inline-block' do
@@ -149,6 +149,8 @@
       error.appendTo(element.parent().find(".error-container"));
     }
   });
+
+  $('#project_goal').maskMoney({allowZero:false, precision: 0});
 
   $('.step-container[data-id="project-details"] form').on('submit', function(e){
     e.preventDefault();
