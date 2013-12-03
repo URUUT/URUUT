@@ -1,4 +1,4 @@
-- Project.live.order(type).unique_values_of(type).map{ |type| type.to_s.downcase }.reject!(&:empty?).uniq.each do |item|
+- Project.live.order(type).unique_values_of(type).map{ |type| type.to_s.downcase }.reject!(&:empty?).each do |item|
   - if item == params[type]
     %option{:selected => true, "data-item" => item }= item
   - else
