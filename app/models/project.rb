@@ -37,11 +37,11 @@ class Project < ActiveRecord::Base
   end
 
   def self.by_city(city)
-    (city && city.downcase != "all cities") ? where("city = ?", city) : where("")
+    (city && city.downcase != "all cities") ? where("lower(city) = ?", city.downcase) : where("")
   end
 
   def self.by_category(category)
-    (category && category.downcase != "all categories") ? where("category = ?", category) : where("")
+    (category && category.downcase != "all categories") ? where("lower(category) = ?", category.downcase) : where("")
   end
 
   def self.by_keyword(keyword)
