@@ -17,7 +17,7 @@ namespace :uruut do
 				end
 				#puts "Project Successful"
 			else
-				project.update_attributes(live: 0, status: "Funding Failed")
+				project.update_attributes!(live: 0, status: "Funding Failed")
 				#puts "Project Not Successful"
 			end
 		end
