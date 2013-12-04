@@ -157,7 +157,10 @@ Crowdfund::Application.routes.draw do
     end
   end
 
-  mount Sidekiq::Web => '/sidekiq'
+  authenticate :user, lambda { |u| u.role == "admin" } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   mount JasmineRails::Engine => "/specs" if defined?(JasmineRails)
 
   root to: "pages#home"
