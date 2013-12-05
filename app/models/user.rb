@@ -129,8 +129,8 @@ class User < ActiveRecord::Base
     last_name = self.last_name
     perks = Perk.where(project_id: project.id).order("amount ASC")
     eligible_perk = perks.compact.find_all { |item| ActionController::Base.helpers.number_to_currency(item.amount) <= total_donated }.max
-    eligible_perk_name = eligible_perk.nil? ? "No Perks" : eligible_perk.name
-    eligible_perk_description = eligible_perk.nil? ? "No Perks" : eligible_perk.description
+    eligible_perk_name = eligible_perk.nil? ? "None" : eligible_perk.name
+    eligible_perk_description = eligible_perk.nil? ? " " : eligible_perk.description
     todays_date = Date.today
     # Implicit Block
     Prawn::Document.generate("tmp/#{project.organization.parameterize.underscore}_#{self.first_name}#{self.last_name}_tax_report.pdf") do
