@@ -133,7 +133,7 @@ class User < ActiveRecord::Base
     eligible_perk_description = eligible_perk.nil? ? " " : eligible_perk.description
     todays_date = Date.today
     # Implicit Block
-    Prawn::Document.generate("tmp/#{project.organization.parameterize.underscore}_#{self.first_name}#{self.last_name}_tax_report.pdf") do
+    Prawn::Document.generate("tmp/#{project.organization[0..8]}_#{DateTime.now}#{self.id}") do
       font_size 18
       pad(20) { text "#{project.organization}" }
       stroke_horizontal_rule
