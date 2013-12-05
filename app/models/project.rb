@@ -25,6 +25,7 @@ class Project < ActiveRecord::Base
   has_many :sponsorship_levels
   has_many :documents
   has_many :users
+  has_many :tax_reports
   accepts_nested_attributes_for :perks, allow_destroy: true
   accepts_nested_attributes_for :galleries, allow_destroy: true
 
@@ -291,6 +292,7 @@ class Project < ActiveRecord::Base
           },
           project_token
         )
+        sponsor.update_column(:approved, true)
       rescue Stripe::CardError => e
         # Since it's a decline, Stripe::CardError will be caught
         body = e.json_body
@@ -344,6 +346,7 @@ class Project < ActiveRecord::Base
           },
           project_token
         )
+        donor.update_column(:approved, true)
       rescue Stripe::CardError => e
         # Since it's a decline, Stripe::CardError will be caught
         body = e.json_body

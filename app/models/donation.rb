@@ -7,6 +7,7 @@ class Donation < ActiveRecord::Base
   belongs_to :user
 
   default_scope { where(confirmed: true) }
+  scope :approved, where(approved: true)
 
   def save_with_payment
     current_user = :current_user

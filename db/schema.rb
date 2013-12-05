@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131202045816) do
+ActiveRecord::Schema.define(:version => 20131205064844) do
 
   create_table "badges_sashes", :force => true do |t|
     t.integer  "badge_id"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20131202045816) do
     t.text     "description"
     t.boolean  "anonymous",      :default => false
     t.datetime "last_founded"
+    t.boolean  "approved",       :default => false
   end
 
   add_index "donations", ["project_id"], :name => "index_donations_on_project_id"
@@ -215,6 +216,7 @@ ActiveRecord::Schema.define(:version => 20131202045816) do
     t.string   "sponsor_type"
     t.string   "customer_id"
     t.boolean  "anonymous",    :default => false
+    t.boolean  "approved",     :default => false
   end
 
   add_index "project_sponsors", ["project_id"], :name => "index_project_sponsors_on_project_id"
@@ -352,7 +354,11 @@ ActiveRecord::Schema.define(:version => 20131202045816) do
     t.datetime "updated_at", :null => false
     t.string   "url"
     t.integer  "user_id"
+    t.integer  "project_id"
   end
+
+  add_index "tax_reports", ["project_id"], :name => "index_tax_reports_on_project_id"
+  add_index "tax_reports", ["user_id"], :name => "index_tax_reports_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",                           :null => false

@@ -7,7 +7,11 @@ namespace :uruut do
 		projects.each do |project|
 			if (totalsponsor(project) >= project.goal.to_f && project.goal.to_f > 0) || (project.partial_funding == true && project.goal.to_f > 0)
 				project.update_attributes(status: "Funding Completed")
-				user_ids = project.donations.select(:user_id).map(&:user_id).uniq
+
+				project.create_donation_charges
+				project.create_sponsor_charges
+
+				user_ids = project.donations.approved.select(:user_id).map(&:user_id).uniq
 				unless user_ids.nil?
 					user_ids.each do |user|
 						User.find(user).generate_tax_report(project)
