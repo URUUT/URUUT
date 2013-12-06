@@ -133,7 +133,7 @@ class User < ActiveRecord::Base
     eligible_perk_description = eligible_perk.nil? ? " " : eligible_perk.description
     todays_date = Date.today
     # Implicit Block
-    Prawn::Document.generate("tmp/#{project.organization[0..8]}_#{DateTime.now}#{self.id}") do
+    Prawn::Document.generate("tmp/#{project.organization[0..8].gsub(/\s+/, '')}_#{Date.today.strftime('%Y%m%d')}#{self.id}.pdf") do
       font_size 18
       pad(20) { text "#{project.organization}" }
       stroke_horizontal_rule
@@ -149,14 +149,14 @@ class User < ActiveRecord::Base
       font_size 10
       pad(20) { text "No goods or services were received in exchange for the donation unless specified above.  It is recommended you seek advice from a tax professional." }
     end
-    upload_to_s3("#{project.organization.parameterize.underscore}_#{self.first_name}#{self.last_name}_tax_report.pdf", project)
+    upload_to_s3("#{project.organization[0..8].gsub(/\s+/, '')}_#{Date.today.strftime('%Y%m%d')}#{self.id}.pdf", project)
   end
 
   def upload_to_s3(filename, project)
     s3 = AWS::S3.new
     bucket = s3.buckets['uruut/tax_reports']
     obj = bucket.objects[filename]
-    obj.write(:file => "tmp/#{filename}")
+    obj.write(:file => "#{Rails.root}/tmp/#{filename}")
     url = obj.public_url.to_s
     save_url(url, project)
   end
