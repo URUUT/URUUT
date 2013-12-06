@@ -125,6 +125,7 @@ Crowdfund::Application.routes.draw do
   end
 
   resources :projects
+  resources :transparency_workroom
 
   resources :project_steps
   resources :donation_steps
