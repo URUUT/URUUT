@@ -12,27 +12,14 @@ class Project < ActiveRecord::Base
 
   attr_accessor :sponsorship_permission, :perk_type, :sponsor_info, :project_details, :assets
 
-  validates_presence_of :organization, :if => :sponsor_info
-  validates_presence_of :organization_type, :if => :sponsor_info
-  validates_presence_of :organization_classification, :if => :sponsor_info
-  validates_presence_of :address, :if => :sponsor_info
-  validates_presence_of :city, :if => :sponsor_info
-  validates_presence_of :state, :if => :sponsor_info
-  validates_presence_of :zip, :if => :sponsor_info
-  validates_presence_of :website, :if => :sponsor_info
-  validates_presence_of :facebook_page, :if => :sponsor_info
-  validates_presence_of :twitter_handle, :if => :sponsor_info
-  validates_presence_of :project_token, :if => :sponsor_info
+  validates :organization, :organization_type, :organization_classification, :address,
+            :city, :state, :zip, :website, :facebook_page, :twitter_handle, :project_token,
+            presence: true,:if => :sponsor_info
 
-  validates_presence_of :project_title, :if => :project_details
-  validates_presence_of :goal, :if => :project_details
-  validates_presence_of :duration, :if => :project_details
-  validates_presence_of :category, :if => :project_details
-  validates_presence_of :title, :if => :project_details
-  validates_presence_of :story, :if => :project_details
-  validates_presence_of :about, :if => :project_details
+  validates :project_title, :duration, :category, :title, :story, :about, presence: true, :if => :project_details
+  validates :goal, presence: true, numericality: true, :if => :project_details
 
-  validates_presence_of :large_image, :if => :assets
+  validates :large_image, presence: true, :if => :assets
 
   with_options dependent: :destroy do |project|
     project.has_many :donations
