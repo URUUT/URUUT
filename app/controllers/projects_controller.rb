@@ -217,7 +217,7 @@ class ProjectsController < ApplicationController
   end
 
   def save_video
-    video = params[:video_link].gsub(/^(http|https):/, '')
+    video = params[:video_link]
     link_video = generate_video_link(video)
 
     @project = Project.find_by_id(session[:current_project])
@@ -376,7 +376,7 @@ class ProjectsController < ApplicationController
 
   def generate_video_link(link)
     video_data = video_data_by_link(link)
-    video_data.player_url.gsub('&feature=youtube_gdata_player', '')
+    video_data.player_url.sub('&feature=youtube_gdata_player', '').sub(/^(http|https):/, '')
   end
 
   def session_path
