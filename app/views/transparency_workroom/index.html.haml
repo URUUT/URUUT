@@ -14,6 +14,7 @@
                     .doc-image
                         = image_tag(document_thumbnail(document.url, 216))
                     %p= document.filename
+                    = link_to "Download", download_file_project_transparency_workroom_index_path(:document_id => document)
         .events
             %h3 Calendar
             %h3 Coming Soon
