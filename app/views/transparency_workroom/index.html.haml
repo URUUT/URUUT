@@ -18,10 +18,22 @@
         .events
             %h3 Calendar
             %h3 Coming Soon
-            .platinum
-                %p Platinum Sponsor
-            .gold
-                %p Gold Sponsors:
+            - if @project.project_sponsors.platinum
+                .platinum.cf
+                    %h5 Platinum Sponsor
+                    .platinum-logo
+                        = image_tag @project.project_sponsors.platinum.first.logo
+                    %p= @project.project_sponsors.platinum.first.name
+                    = link_to "#{@project.project_sponsors.platinum.first.site}", @project.project_sponsors.platinum.first.site, class: 'url'
+            - if @project.project_sponsors.gold
+                .gold.cf
+                    %h5 Gold Sponsors:
+                    - @project.project_sponsors.gold.each do |sponsor|
+                        .gold-container
+                            .gold-logo
+                                = image_tag sponsor.logo
+                            %p.name= sponsor.name
+                            = link_to "#{sponsor.site}", sponsor.site, class: 'url'
 
 
 .full-width.latest-photos

@@ -2405,16 +2405,21 @@ input, select, textarea{
         border-right: 1px solid #403e37;
         float: left;
         margin: 0 5% 0 0;
-        width: 73%;
+        padding: 0 2% 0 0;
+        width: 71%;
       }
       .events {
         box-sizing: border-box;
         float: left;
-        width: 22%;
+        width: 24%;
         p {
           color: #b6b6b4;
           font-size: 14px;
           font-weight: bold;
+        }
+
+        .name {
+          font-size: 12px;
         }
       }
     }
@@ -2487,6 +2492,82 @@ input, select, textarea{
     font-family: 'Georgia', georgia, serif;
     font-style: italic;
     text-align: left;
+    text-decoration: underline;
+  }
+}
+
+.platinum {
+  h5 {
+    color: #b6b6b4;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  a {
+    color: $green;
+    font-family: 'Georgia', georgia, serif;
+    font-style: italic;
+    text-decoration: underline;
+  }
+}
+
+.gold {
+  h5 {
+    color: #b6b6b4;
+    margin-top: 25px;
+  }
+}
+
+.platinum-logo {
+  background: #fff;
+  display: inline-block;
+  float: left;
+  height: 75px;
+  margin-right: 15px;
+  position: relative;
+  width: 75px;
+
+  img {
+    display: inline-block;
+    height: 100%;
+    line-height: 50px;
+    position: absolute;
+    vertical-align: middle;
+  }
+}
+
+.gold-container {
+  box-sizing: border-box;
+  margin: 5px 5px 25px;
+
+  .gold-logo {
+    background: #fff;
+    display: inline-block;
+    height: 50px;
+    margin: 0 auto;
+    position: relative;
+    width: 50px;
+
+    img {
+      display: inline-block;
+      height: 100%;
+      line-height: 35px;
+      position: absolute;
+      vertical-align: middle;
+    }
+  }
+
+  p {
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  a {
+    color: $green;
+    font-family: 'Georgia', georgia, serif;
+    font-style: italic;
     text-decoration: underline;
   }
 }
