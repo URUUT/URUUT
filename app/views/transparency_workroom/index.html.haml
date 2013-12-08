@@ -1,0 +1,40 @@
+.full-width.title.cf
+    .container
+        %h2.span3 Transparency Workroom
+        .details.span6
+            %h4= @project.project_title
+            %p= @project.title
+
+.full-width.document-container.cf
+    .container
+        .documents
+            %h3 Latest Documents
+            - @documents.each do |document|
+                .doc-container
+                    .doc-image
+                        = image_tag(document_thumbnail(document.url, 216))
+                    %p= document.filename
+        .events
+            %h3 Calendar
+            %h3 Coming Soon
+            .platinum
+                %p Platinum Sponsor
+            .gold
+                %p Gold Sponsors:
+
+
+.full-width.latest-photos
+    .container
+        %h3 Latest Photos & Videos
+        - @photo_vids.each do |photo_vid|
+            - if photo_vid.thumbnail_url
+                %img{src: "#{photo_vid.thumbnail_url}", class: 'tw-image'}
+            - else
+                %img{src: "#{photo_vid.gallery_file_name}", class: 'tw-image'}
+
+.full-width.communication
+    .container
+        %h3 Communication Zone
+        %h5 Coming Soon
+
+.cf

@@ -122,10 +122,10 @@ Crowdfund::Application.routes.draw do
       get :get_sponsorship_levels
       get :confirm_sponsor
     end
+    resources :transparency_workroom
   end
 
   resources :projects
-  resources :transparency_workroom
 
   resources :project_steps
   resources :donation_steps
