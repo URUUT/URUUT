@@ -7,6 +7,11 @@ class TransparencyWorkroomController < ApplicationController
 		@photo_vids = @project.galleries.media_transparent_room(params[:page])
 	end
 
-	def show
+	def download_file
+	  	require 'open-uri'
+	  	document = Document.find(params[:document_id])
+		url = document.url
+		data = open(url).read
+		send_data data, :disposition => 'attachment', :filename => document.filename
 	end
 end
