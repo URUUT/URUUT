@@ -21,7 +21,7 @@
         .events
             %h3 Calendar
             %h3 Coming Soon
-            - if @project.project_sponsors.platinum
+            - if @project.project_sponsors.platinum.first
                 .platinum.cf
                     %h5 Platinum Sponsor
                     .platinum-logo
