@@ -64,18 +64,22 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'rails_best_practices'
   gem 'debugger'
-  gem 'rspec'
-  gem 'rspec-rails'
   gem 'cucumber-rails', :require => false
-  gem "capybara", :group => :test
-  gem 'factory_girl_rails'
-  gem 'database_cleaner', :group => :test
-  gem 'email_spec', :group => :test
-  gem 'ci_reporter', :group => :test
   gem 'jasmine'
   gem 'jasmine-rails'
   gem 'jasminerice'
   gem 'launchy'
+end
+
+group :test do
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem "capybara"
+  gem 'factory_girl_rails'
+  gem 'database_cleaner'
+  gem 'email_spec'
+  gem 'ci_reporter'
+  gem 'ffaker'
   gem 'webmock'
 end
 
