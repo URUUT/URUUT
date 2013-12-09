@@ -174,11 +174,6 @@ ActiveRecord::Schema.define(:version => 20131205062131) do
 
   add_index "perks", ["project_id"], :name => "index_perks_on_project_id"
 
-  create_table "posts", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "press_coverages", :force => true do |t|
     t.string   "title"
     t.string   "link"
