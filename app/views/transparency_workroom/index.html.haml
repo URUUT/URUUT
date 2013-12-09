@@ -9,12 +9,15 @@
     .container
         .documents
             %h3 Latest Documents
-            - @documents.each do |document|
-                .doc-container
-                    .doc-image
-                        = image_tag(document_thumbnail(document.url, 216))
-                    %p= document.filename
-                    = link_to "Download", download_file_project_transparency_workroom_index_path(:document_id => document)
+            - if @documents
+                - @documents.each do |document|
+                    .doc-container
+                        .doc-image
+                            = image_tag(document_thumbnail(document.url, 216))
+                        %p= document.filename
+                        = link_to "Download", download_file_project_transparency_workroom_index_path(:document_id => document)
+            - else
+                %h3 No Documents
         .events
             %h3 Calendar
             %h3 Coming Soon
@@ -39,11 +42,16 @@
 .full-width.latest-photos
     .container
         %h3 Latest Photos & Videos
-        - @photo_vids.each do |photo_vid|
-            - if photo_vid.thumbnail_url
-                %img{src: "#{photo_vid.thumbnail_url}", class: 'tw-image'}
-            - else
-                %img{src: "#{photo_vid.gallery_file_name}", class: 'tw-image'}
+        - if @photo_vids
+            - @photo_vids.each do |photo_vid|
+                - if photo_vid.thumbnail_url
+                    %a{:href => photo_vid.gallery_file_name, :rel => "prettyPhoto"}
+                        %img{src: "#{photo_vid.thumbnail_url}", class: 'tw-image'}
+                - else
+                    %a{:href => photo_vid.gallery_file_name, :rel => "prettyPhoto"}
+                        %img{src: "#{photo_vid.gallery_file_name}", class: 'tw-image'}
+        - else
+            %h3 No Photos & Videos
 
 .full-width.communication
     .container
