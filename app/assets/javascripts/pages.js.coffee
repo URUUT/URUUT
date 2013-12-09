@@ -3,6 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
+  $("a[rel^='prettyPhoto']").prettyPhoto()
   $("#edit_user").validate
     rules:
       "user[last_name]":
