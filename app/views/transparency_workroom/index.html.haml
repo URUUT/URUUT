@@ -9,7 +9,7 @@
     .container
         .documents
             %h3 Latest Documents
-            - unless @documents.nil?
+            - if !@documents.blank?
                 - @documents.each do |document|
                     .doc-container
                         .doc-image
@@ -21,14 +21,15 @@
         .events
             %h3 Calendar
             %h3 Coming Soon
-            - unless @project.project_sponsors.platinum.first.nil?
+            - unless @project.project_sponsors.platinum.first.blank?
                 .platinum.cf
                     %h5 Platinum Sponsor
                     .platinum-logo
                         = image_tag @project.project_sponsors.platinum.first.logo
                     %p= @project.project_sponsors.platinum.first.name
                     = link_to "#{@project.project_sponsors.platinum.first.site}", @project.project_sponsors.platinum.first.site, class: 'url'
-            - unless @project.project_sponsors.gold.nil?
+
+            - unless @project.project_sponsors.gold.first.blank?
                 .gold.cf
                     %h5 Gold Sponsors:
                     - @project.project_sponsors.gold.each do |sponsor|
@@ -42,7 +43,7 @@
 .full-width.latest-photos
     .container
         %h3 Latest Photos & Videos
-        - unless @photo_vids.nil?
+        - unless @photo_vids.blank?
             - @photo_vids.each do |photo_vid|
                 - if photo_vid.thumbnail_url
                     %a{:href => photo_vid.gallery_file_name, :rel => "prettyPhoto"}
@@ -51,7 +52,7 @@
                     %a{:href => photo_vid.gallery_file_name, :rel => "prettyPhoto"}
                         %img{src: "#{photo_vid.gallery_file_name}", class: 'tw-image'}
         - else
-            %h3 No Photos & Videos
+            %h4 No Photos & Videos
 
 .full-width.communication
     .container
