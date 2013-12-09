@@ -33,6 +33,8 @@
 
 # pow stuff
 .rvmrc
+.ruby-version
+.ruby-gemset
 .powrc
 .powenv
 
