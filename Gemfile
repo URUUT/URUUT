@@ -68,6 +68,7 @@ group :development, :test do
   gem 'jasmine-rails'
   gem 'jasminerice'
   gem 'launchy'
+  gem 'dotenv-rails'
 end
 
 group :test do
