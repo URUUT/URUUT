@@ -22,7 +22,7 @@ gem 'omniauth-linkedin'
 gem 'kaminari'
 gem 'bitly'
 gem 'filepicker-rails'
-gem 'heroku'
+# gem 'heroku'
 gem 'has_scope'
 gem 'youtube_it'
 gem 'rails_config'
@@ -76,6 +76,7 @@ group :development, :test do
   gem 'jasmine-rails'
   gem 'jasminerice'
   gem 'launchy'
+  gem 'webmock'
 end
 
 gem 'jquery-rails'
