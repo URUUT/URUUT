@@ -1,8 +1,10 @@
 # Just like the config/database.yml this file requires an entry for each environment
 #   # http://aws.amazon.com/security-credentials
-development:
+development: &development
   access_key_id: "<%= ENV['S3_KEY'] %>"
   secret_access_key: "<%= ENV['S3_SECRET'] %>"
+test:
+  <<: *development
 production:
   access_key_id: "<%= ENV['S3_KEY'] %>"
   secret_access_key: "<%= ENV['S3_SECRET'] %>"
