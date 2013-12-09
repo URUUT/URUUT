@@ -9,7 +9,7 @@
     .container
         .documents
             %h3 Latest Documents
-            - if @documents
+            - unless @documents.nil?
                 - @documents.each do |document|
                     .doc-container
                         .doc-image
@@ -21,14 +21,14 @@
         .events
             %h3 Calendar
             %h3 Coming Soon
-            - if @project.project_sponsors.platinum.first
+            - unless @project.project_sponsors.platinum.first.nil?
                 .platinum.cf
                     %h5 Platinum Sponsor
                     .platinum-logo
                         = image_tag @project.project_sponsors.platinum.first.logo
                     %p= @project.project_sponsors.platinum.first.name
                     = link_to "#{@project.project_sponsors.platinum.first.site}", @project.project_sponsors.platinum.first.site, class: 'url'
-            - if @project.project_sponsors.gold
+            - unless @project.project_sponsors.gold.nil?
                 .gold.cf
                     %h5 Gold Sponsors:
                     - @project.project_sponsors.gold.each do |sponsor|
@@ -42,7 +42,7 @@
 .full-width.latest-photos
     .container
         %h3 Latest Photos & Videos
-        - if @photo_vids
+        - unless @photo_vids.nil?
             - @photo_vids.each do |photo_vid|
                 - if photo_vid.thumbnail_url
                     %a{:href => photo_vid.gallery_file_name, :rel => "prettyPhoto"}
