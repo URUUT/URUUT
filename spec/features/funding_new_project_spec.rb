@@ -27,16 +27,10 @@ feature 'Funding a new project' do
   end
 
   scenario 'User fills Project info', :js => true do
-    project         = Project.new
-    project.user    = @user
-    project.project_details = false
-    project.project_token = 'token'
-    project.bitly = 'blablabla'
-    project.save
-
+    create_project
     page.set_rack_session(:connected => true)
 
-    visit edit_project_path(project, anchor: 'sponsor-info')
+    visit edit_project_path(@project, anchor: 'sponsor-info')
 
     fill_in 'project_organization', with: 'Some Project Name'
     select 'School', from: 'project_organization_type'
@@ -55,16 +49,10 @@ feature 'Funding a new project' do
   end
 
   scenario 'User fills Your Story', :js => true do
-    project         = Project.new
-    project.user    = @user
-    project.project_details = false
-    project.project_token = 'token'
-    project.bitly = 'blablabla'
-    project.save
-
+    create_project
     page.set_rack_session(:connected => true)
 
-    visit edit_project_path(project, anchor: 'project-details')
+    visit edit_project_path(@project, anchor: 'project-details')
 
     fill_in 'project_project_title', with: 'Project title'
     fill_in 'project_goal', with: '100'
@@ -78,6 +66,28 @@ feature 'Funding a new project' do
     click_button 'Save & Continue'
 
     expect(page).to have_content('SEEDER PERKS')
+  end
+
+  scenario 'User fills SEEDER PERKS', :js => true do
+    create_project
+    page.set_rack_session(:connected => true)
+
+    visit edit_project_path(@project, anchor: 'perks')
+
+    select 'No', from: 'project_perk_permission'
+
+    click_link 'CONTINUE TO STEP 4'
+
+    expect(page).to have_content('SPONSORSHIP DETAILS')
+  end
+
+  def create_project
+    @project         = Project.new
+    @project.user    = @user
+    @project.project_details = false
+    @project.project_token = 'token'
+    @project.bitly = 'blablabla'
+    @project.save
   end
 
 end
