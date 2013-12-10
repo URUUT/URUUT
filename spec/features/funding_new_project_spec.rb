@@ -54,4 +54,30 @@ feature 'Funding a new project' do
     expect(page).to have_content('YOUR STORY')
   end
 
+  scenario 'User fills Your Story', :js => true do
+    project         = Project.new
+    project.user    = @user
+    project.project_details = false
+    project.project_token = 'token'
+    project.bitly = 'blablabla'
+    project.save
+
+    page.set_rack_session(:connected => true)
+
+    visit edit_project_path(project, anchor: 'project-details')
+
+    fill_in 'project_project_title', with: 'Project title'
+    fill_in 'project_goal', with: '100'
+    check 'project_partial_funding'
+    select '30', from: 'project_duration'
+    select 'Art / Culture', from: 'project_category'
+    fill_in 'project_title', with: 'Campaign title'
+    fill_in 'project_story', with: 'The story'
+    fill_in 'project_about', with: 'About the project'
+
+    click_button 'Save & Continue'
+
+    expect(page).to have_content('SEEDER PERKS')
+  end
+
 end
