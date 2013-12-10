@@ -75,6 +75,7 @@ group :test do
   gem 'rspec'
   gem 'rspec-rails'
   gem "capybara"
+  gem 'selenium-webdriver', '~> 2.38.0'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'email_spec'
