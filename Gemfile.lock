@@ -288,6 +288,9 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
+    rack_session_access (0.1.1)
+      builder (>= 2.0.0)
+      rack (>= 1.0.0)
     rails (3.2.15)
       actionmailer (= 3.2.15)
       actionpack (= 3.2.15)
@@ -482,6 +485,7 @@ DEPENDENCIES
   omniauth-twitter
   pg
   prawn
+  rack_session_access
   rails (= 3.2.15)
   rails-dev-boost!
   rails_best_practices
