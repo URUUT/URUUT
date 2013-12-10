@@ -81,6 +81,20 @@ feature 'Funding a new project' do
     expect(page).to have_content('SPONSORSHIP DETAILS')
   end
 
+  scenario 'User fills SPONSORSHIP DETAILS', :js => true do
+    create_project
+    page.set_rack_session(:connected => true)
+
+    visit edit_project_path(@project, anchor: 'sponsorship')
+
+    select 'Yes', from: 'project_sponsorship_permission'
+    check 'platinum_1'
+
+    click_link 'next-link-to-assets'
+
+    expect(page).to have_content('ABOUT US')
+  end
+
   def create_project
     @project         = Project.new
     @project.user    = @user
