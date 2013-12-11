@@ -102,6 +102,8 @@ feature 'Funding a new project' do
 
     visit edit_project_path(@project, anchor: 'assets')
 
+    page.execute_script("localStorage.setItem('step-assets', 'image_path')")
+
     within(".span12") do
       click_link 'Get Ruuted'
     end
