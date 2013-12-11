@@ -95,6 +95,20 @@ feature 'Funding a new project' do
     expect(page).to have_content('ABOUT US')
   end
 
+  scenario 'User fills VISUALS', :js => true do
+    create_project
+    @project.update_attributes(large_image: 'https://www.filepicker.io/api/file/dcFwLDJTrqA2encyBmAx')
+    page.set_rack_session(:connected => true)
+
+    visit edit_project_path(@project, anchor: 'assets')
+
+    within(".span12") do
+      click_link 'Get Ruuted'
+    end
+
+    expect(page).to have_content('YOU DID IT')
+  end
+
   def create_project
     @project         = Project.new
     @project.user    = @user
