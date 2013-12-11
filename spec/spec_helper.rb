@@ -8,21 +8,25 @@ require 'capybara/rspec'
 require 'database_cleaner'
 require 'email_spec'
 require 'webmock/rspec'
+require "rack_session_access/capybara"
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
-WebMock.disable_net_connect!
+WebMock.disable_net_connect!(allow_localhost: true)
 
 RSpec.configure do |config|
   config.include(EmailSpec::Helpers)
   config.include(EmailSpec::Matchers)
+  config.include Warden::Test::Helpers
+
+  Warden.test_mode!
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
 
   # If true, the base class of anonymous controllers will be inferred
   # automatically. This will be the default behavior in future versions of
