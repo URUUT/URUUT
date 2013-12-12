@@ -15,4 +15,12 @@ feature 'Donating and sponsoring to a Project' do
     end
   end
 
+  scenario 'User funds $10 to a Project', js: true do
+    visit project_path(@project)
+
+    page.first('.seed-level').click_link('Fund Now')
+
+    expect(page).to have_content('PAYMENT INFORMATION')
+  end
+
 end
