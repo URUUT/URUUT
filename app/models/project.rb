@@ -4,6 +4,8 @@ class Project < ActiveRecord::Base
   before_save :downcase_url_and_facebook
   before_save :downcase_city
 
+  before_validation :strip_comma_from_goal, :if => :project_details
+
   attr_accessible :category, :description, :duration, :goal, :address, :project_title, :sponsorship_permission,
   :city, :state, :zip, :neighborhood, :title, :image, :video, :tags, :live, :short_description, :perk_permission,
   :perks_attributes, :galleries_attributes, :status, :organization, :website, :twitter_handle, :facebook_page, :seed_video,
@@ -35,6 +37,7 @@ class Project < ActiveRecord::Base
   has_many :documents
   has_many :users
   has_many :tax_reports
+  has_many :posts
   accepts_nested_attributes_for :perks, allow_destroy: true
   accepts_nested_attributes_for :galleries, allow_destroy: true
 
@@ -262,6 +265,10 @@ class Project < ActiveRecord::Base
     if !self.user.badges.include?(project_create_badge)
       self.user.add_badge(2)
     end
+  end
+
+  def strip_comma_from_goal
+    self.goal = self.goal.gsub(/,/, '')
   end
 
   def get_donors(project)

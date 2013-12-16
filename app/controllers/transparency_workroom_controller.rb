@@ -1,8 +1,10 @@
 class TransparencyWorkroomController < ApplicationController
 	layout "landing"
+	before_filter :authenticate_user!
 
 	def index
 		@project = Project.find(params[:project_id])
+		@comment = Comment.new
 		@documents = @project.documents.all
 		@photo_vids = @project.galleries.media_transparent_room(params[:page])
 	end

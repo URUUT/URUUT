@@ -1,0 +1,10 @@
+- if flash[:error]
+    %p.error= flash[:error]
+
+- if flash[:notice]
+    %p.notice= flash[:notice]
+
+= form_for [@project, @post] do |f|
+    = f.text_field :title
+    = f.text_area :body
+    = f.submit

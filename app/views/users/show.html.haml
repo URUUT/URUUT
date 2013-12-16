@@ -42,7 +42,7 @@
               %select.styledSelect{:id => "projects-created"}
                 %option -- Select Status --
                 %option Funding Active
-                %option Funding Completed
+                %option{:selected => params[:status] == "Funding Completed"} Funding Completed
 
         #project-create
           = render "pages/project", :projects => @projects_created
@@ -153,18 +153,7 @@
 
   $(document).ready(function() {
 
-    // $(".delete").click(function () {
-    //     $('.proj-name').text($(this).data('title'));
-    //     $('#deleteModal').modal('show');
-    // });
-
     $('#projects-created').change(function(){
-        // if ($(this).val() == "Funding Completed"){
-        //   $('.project-create .success').parent().addClass("success");
-        // }
-        // else{
-        //   $(".project-create").removeClass("success");
-        // }
         var status = $(this).val();
         $.ajax({
           url: "/projects/get_complete_project",
