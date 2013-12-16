@@ -5,6 +5,7 @@ require 'rspec/rails'
 require 'rspec/autorun'
 require 'capybara/rails'
 require 'capybara/rspec'
+require 'capybara/poltergeist'
 require 'database_cleaner'
 require 'email_spec'
 require 'webmock/rspec'
@@ -16,7 +17,11 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 WebMock.disable_net_connect!(allow_localhost: true)
 
-Capybara.javascript_driver = :selenium
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app)
+end
+
+Capybara.javascript_driver = :webkit
 
 RSpec.configure do |config|
   config.include(EmailSpec::Helpers)

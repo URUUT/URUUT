@@ -77,6 +77,7 @@ group :test do
   gem "capybara"
   gem 'selenium-webdriver', '~> 2.38.0'
   gem 'capybara-webkit',    '~> 1.1.0'
+  gem 'poltergeist',        '~> 1.5.0'
   gem 'rack_session_access'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
