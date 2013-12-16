@@ -127,9 +127,15 @@ Crowdfund::Application.routes.draw do
         get :download_file
       end
     end
+    resources :posts do
+      collection do
+        get :create_post
+      end
+    end
   end
 
   resources :projects
+  resources :comments
 
   resources :project_steps
   resources :donation_steps

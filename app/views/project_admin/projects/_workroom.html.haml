@@ -9,6 +9,6 @@
         %h3{:class => "menu-messages photos-videos"}
           = link_to "PHOTOS & VIDEOS", project_admin_project_photos_and_videos_path(@project.id), remote: true
         %h3{:class => "menu-messages communication"}
-          = link_to "COMMUNICATION", project_admin_project_communication_zone_path(@project.id), remote: true
+          = link_to "COMMUNICATION", project_posts_path(@project.id), remote: true
     .span9.pull-right.content-workroom
       = render "document_room"
