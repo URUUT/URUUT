@@ -45,6 +45,8 @@ feature 'Donating and sponsoring to a Project' do
     click_button 'Contribute'
 
     expect(page).to have_content('CONFIRM')
+
+    WebMock.disable_net_connect!(allow_localhost: true)
   end
 
   scenario 'User confirms $10 donation', js: true do
@@ -70,6 +72,8 @@ feature 'Donating and sponsoring to a Project' do
     click_button 'Confirm'
 
     expect(page).to have_content('THANK YOU!')
+
+    WebMock.disable_net_connect!(allow_localhost: true)
   end
 
 end
