@@ -70,7 +70,6 @@ feature 'Donating and sponsoring to a Project' do
     click_button 'Confirm'
 
     expect(page).to have_content('THANK YOU!')
-    sleep(30)
   end
 
 end
