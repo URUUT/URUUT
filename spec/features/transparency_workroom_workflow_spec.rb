@@ -63,4 +63,20 @@ feature 'Transparency Woorkroom Workflow' do
     WebMock.disable_net_connect!(allow_localhost: true)
   end
 
+  scenario "User adds a comment", js: true do
+    @project.update_attributes(campaign_deadline: 3.days.from_now)
+    visit project_admin_project_path(@project)
+
+    click_link 'Transparency Workroom'
+    click_link 'COMMUNICATION'
+
+    within('.new_post') do
+      fill_in 'post_title', with: 'Post Title'
+      fill_in 'post_body', with: 'Post Body'
+      click_button 'Create Post'
+    end
+
+    expect(page).to have_content('SUCCESSFULLY CREATED POST')
+  end
+
 end
