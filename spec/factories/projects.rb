@@ -24,7 +24,7 @@ FactoryGirl.define do
     large_image                  "https://www.filepicker.io/api/file/SduGhaCQQaaQDGehuMhs"
     story                        { Faker::Lorem.paragraph(3) }
     about                        { Faker::Lorem.paragraph(3) }
-    approval_date                "2013-11-22"
+    approval_date                { Date.current.to_s(:db) }
     project_title                { Faker::Product.product_name }
     ready_for_approval           0
     organization_type            "Church"
