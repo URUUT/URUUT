@@ -32,4 +32,15 @@ feature 'Transparency Woorkroom Workflow' do
     end
   end
 
+  scenario "User visits Transparency Workroom of the Project", js: true do
+    @project.update_attributes(campaign_deadline: 3.days.from_now)
+    visit project_admin_project_path(@project)
+
+    click_link 'Transparency Workroom'
+
+    within('.span9') do
+      expect(page).to have_content('DOCUMENT ROOM')
+    end
+  end
+
 end
