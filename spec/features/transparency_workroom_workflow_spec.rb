@@ -11,7 +11,9 @@ feature 'Transparency Woorkroom Workflow' do
   scenario 'User visits his profile' do
     visit user_path(@user)
 
-    expect(page).to have_content("PROJECTS I'VE CREATED")
+    within('.span8') do
+      expect(page).to have_content("Projects I've Created")
+    end
   end
 
   scenario "User goes to Project's Panel of an Active Funding Project", js: true do
