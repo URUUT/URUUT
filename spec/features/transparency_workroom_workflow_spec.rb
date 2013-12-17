@@ -79,4 +79,13 @@ feature 'Transparency Woorkroom Workflow' do
     expect(page).to have_content('SUCCESSFULLY CREATED POST')
   end
 
+  scenario "User visits transparency workroom of a Funding Completed Project", js: true do
+    @project.update_attributes(campaign_deadline: 1.days.ago)
+    @project.posts.create(title: 'Post Title', body: 'Post Body', user_id: @user.id)
+    visit project_transparency_workroom_index_path(@project)
+
+    expect(page).to have_content('POST TITLE')
+    expect(page).to have_content('Post Body')
+  end
+
 end
