@@ -23,4 +23,13 @@ feature 'Transparency Woorkroom Workflow' do
     expect(page).to have_content('PROJECT ADMIN PANEL')
   end
 
+  scenario "User visits Project Admin Panel of the Project" do
+    @project.update_attributes(campaign_deadline: 3.days.from_now)
+    visit project_admin_project_path(@project)
+
+    within('.span8') do
+      expect(page).to have_content('FUNDING TRACKER')
+    end
+  end
+
 end
