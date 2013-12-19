@@ -27,7 +27,7 @@
 /public/system/projects
 /public/system/galleries
 /public/assets
-/reports
+# /reports
 
 # Ignore RubyMine IDE folder
 /.idea
