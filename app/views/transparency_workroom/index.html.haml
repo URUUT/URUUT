@@ -1,0 +1,120 @@
+.full-width.title.cf
+    .container
+        %h2.span3 Transparency Workroom
+        .details.span6
+            %h4= @project.project_title
+            %p= @project.title
+
+.full-width.document-container.cf
+    .container
+        .documents
+            %h3.latest-documents Latest Documents
+            - if !@documents.blank?
+                - @documents.each do |document|
+                    .doc-container
+                        .doc-image
+                            = image_tag(document_thumbnail(document.url, 216))
+                        %p= document.filename
+                        = link_to "Download", download_file_project_transparency_workroom_index_path(:document_id => document)
+            - else
+                %h4 No Documents
+        .events
+            %h3 Calendar
+            %h4 Coming Soon
+            - unless @project.project_sponsors.platinum.first.blank?
+                .platinum.cf
+                    %h5 Platinum Sponsor
+                    .platinum-logo
+                        = image_tag @project.project_sponsors.platinum.first.logo
+                    %p= @project.project_sponsors.platinum.first.name
+                    = link_to "#{@project.project_sponsors.platinum.first.site}", @project.project_sponsors.platinum.first.site, class: 'url'
+
+            - unless @project.project_sponsors.gold.first.blank?
+                .gold.cf
+                    %h5 Gold Sponsors:
+                    - @project.project_sponsors.gold.each do |sponsor|
+                        .gold-container
+                            .gold-logo
+                                = image_tag sponsor.logo
+                            %p.name= sponsor.name
+                            = link_to "#{sponsor.site}", sponsor.site, class: 'url'
+
+
+.full-width.latest-photos
+    .container
+        %h3 Latest Photos & Videos
+        - unless @photo_vids.blank?
+            - @photo_vids.each do |photo_vid|
+                - if photo_vid.thumbnail_url
+                    %a{:href => photo_vid.gallery_file_name, :rel => "prettyPhoto"}
+                        %img{src: "#{photo_vid.thumbnail_url}", class: 'tw-image'}
+                - else
+                    %a{:href => photo_vid.gallery_file_name, :rel => "prettyPhoto"}
+                        %img{src: "#{photo_vid.gallery_file_name}", class: 'tw-image'}
+        - else
+            %h4 No Photos & Videos
+
+.full-width.communication
+    .container
+        %h3 Communication Zone
+        - if @project.posts.empty?
+            %h5 No Communication
+        %div
+            - @project.posts.each do |post|
+                .post
+                    %h4.post-title= post.title
+                    %span.post-date= post.created_at.to_s.to_date
+                    %div.post-body= simple_format(post.body)
+
+
+                    = link_to 'Add Comment', '#', class: 'add-comment'
+                    = link_to "( #{post.comments.count} ) Comments", '#', class: 'comment-count'
+
+                    .comment-list
+                        %hr
+
+                        %h5 #{post.comments.count} Comments
+                        - post.comments.each do |comment|
+                            %div.comment
+                                %p= simple_format(comment.body)
+                                %p= full_name(current_user)
+                        %hr
+
+                    .new-comment
+                        %h5 Add Comment
+                        = form_for @comment, :url => comments_path(post) do |f|
+                            %div
+                                = f.text_area :body, style: 'height: 175px; width: 100%;', placeholder: 'Comment Here...'
+
+                            %div
+                                = f.hidden_field :post_id, :value => post.id
+
+                            .submit
+                                = f.submit "Submit", :class => "btn"
+
+                        .close-comments
+                            = link_to 'X Close Comments', '#'
+
+                        %hr
+
+.cf
+
+:javascript
+    $(function() {
+        $("a[rel^='prettyPhoto']").prettyPhoto();
+
+        $('.communication').on('click', '.comment-count', function(e) {
+            e.preventDefault();
+            $(this).siblings('.comment-list').toggleClass('active');
+        });
+
+        $('.communication').on('click', '.add-comment', function(e) {
+            e.preventDefault();
+            $(this).siblings('.new-comment').toggleClass('active');
+        });
+
+        $('.communication').on('click', '.close-comments a', function(e) {
+            e.preventDefault();
+            console.log($(this).parent().parent().siblings('.comment-list').removeClass('active'));
+        });
+    });

@@ -242,4 +242,8 @@ module ApplicationHelper
     "http://docs.google.com/viewer?url=#{url}&a=bi&pagenumber=1&w=#{width}"
   end
 
+  def full_name user
+    return "- #{user.first_name} #{user.last_name}"
+  end
+
 end

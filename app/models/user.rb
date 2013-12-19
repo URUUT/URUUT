@@ -129,38 +129,40 @@ class User < ActiveRecord::Base
     last_name = self.last_name
     perks = Perk.where(project_id: project.id).order("amount ASC")
     eligible_perk = perks.compact.find_all { |item| ActionController::Base.helpers.number_to_currency(item.amount) <= total_donated }.max
-
+    eligible_perk_name = eligible_perk.nil? ? "None" : eligible_perk.name
+    eligible_perk_description = eligible_perk.nil? ? " " : eligible_perk.description
+    todays_date = Date.today
     # Implicit Block
-    Prawn::Document.generate("tmp/#{project.organization.parameterize.underscore}_#{self.first_name}#{self.last_name}_tax_report.pdf") do
+    Prawn::Document.generate("tmp/#{project.organization[0..8].gsub(/\s+/, '')}_#{Date.today.strftime('%Y%m%d')}#{self.id}.pdf") do
       font_size 18
       pad(20) { text "#{project.organization}" }
       stroke_horizontal_rule
 
       font_size 12
+      pad(20) { text "Date: #{todays_date}"}
       pad(20) { text "Donator Name: #{first_name} #{last_name}" }
       pad(20) { text "Total Donated: #{total_donated}" }
 
-      pad(20) { text "Eligible Perk: #{eligible_perk.name} - #{eligible_perk.description}" }
-      pad(20) { text "Estimated Value: ___________" }
+      pad(20) { text "Perk/Benefit Received: #{eligible_perk_name} - #{eligible_perk_description}" }
       stroke_horizontal_rule
 
       font_size 10
-      pad(20) { text "Disclaimer placeholder" }
+      pad(20) { text "No goods or services were received in exchange for the donation unless specified above.  It is recommended you seek advice from a tax professional." }
     end
-    upload_to_s3("#{project.organization.parameterize.underscore}_#{self.first_name}#{self.last_name}_tax_report.pdf")
+    upload_to_s3("#{project.organization[0..8].gsub(/\s+/, '')}_#{Date.today.strftime('%Y%m%d')}#{self.id}.pdf", project)
   end
 
-  def upload_to_s3(filename)
+  def upload_to_s3(filename, project)
     s3 = AWS::S3.new
     bucket = s3.buckets['uruut/tax_reports']
     obj = bucket.objects[filename]
-    obj.write(:file => "tmp/#{filename}")
+    obj.write(:file => "#{Rails.root}/tmp/#{filename}")
     url = obj.public_url.to_s
-    save_url(url)
+    save_url(url, project)
   end
 
-  def save_url(url)
-    tax_report = self.tax_reports.build(url: url)
+  def save_url(url, project)
+    tax_report = self.tax_reports.build(url: url, project_id: project.id)
     tax_report.save!
   end
 

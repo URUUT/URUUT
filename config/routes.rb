@@ -122,9 +122,20 @@ Crowdfund::Application.routes.draw do
       get :get_sponsorship_levels
       get :confirm_sponsor
     end
+    resources :transparency_workroom do
+      collection do
+        get :download_file
+      end
+    end
+    resources :posts do
+      collection do
+        get :create_post
+      end
+    end
   end
 
   resources :projects
+  resources :comments
 
   resources :project_steps
   resources :donation_steps
@@ -157,7 +168,10 @@ Crowdfund::Application.routes.draw do
     end
   end
 
-  mount Sidekiq::Web => '/sidekiq'
+  authenticate :user, lambda { |u| u.role == "admin" } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   mount JasmineRails::Engine => "/specs" if defined?(JasmineRails)
 
   root to: "pages#home"

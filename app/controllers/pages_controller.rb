@@ -71,7 +71,15 @@ class PagesController < ApplicationController
       query << "#{field} ILIKE :keyword"
     end
 
-    @projects = Project.where("#{query.join(" OR ")} AND live = 1 AND status IS NULL OR status = ''", :keyword=> "%#{params[:keyword]}%").by_city(params[:city]).by_category(params[:category])
+    @projects = Project.live.where("#{query.join(' OR ')}", :keyword => "%#{params[:keyword]}%")
+                        .by_city(params[:city])
+                        .by_category(params[:category])
+                        .reject { |project| project.status == "Funding Completed" || project.status == nil }
+
+    @project_success = Project.live.where("#{query.join(' OR ')}", :keyword => "%#{params[:keyword]}%")
+                        .by_city(params[:city])
+                        .by_category(params[:category])
+                        .reject { |project| project.status == "Funding Active" || project.status == nil }
   end
 
   private

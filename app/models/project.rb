@@ -2,14 +2,26 @@ class Project < ActiveRecord::Base
   belongs_to :user
 
   before_save :downcase_url_and_facebook
+  before_save :downcase_city
+
+  before_validation :strip_comma_from_goal, :if => :project_details
 
   attr_accessible :category, :description, :duration, :goal, :address, :project_title, :sponsorship_permission,
   :city, :state, :zip, :neighborhood, :title, :image, :video, :tags, :live, :short_description, :perk_permission,
   :perks_attributes, :galleries_attributes, :status, :organization, :website, :twitter_handle, :facebook_page, :seed_video,
   :story, :about, :large_image, :seed_image, :cultivation_image, :ready_for_approval, :organization_type, :cultivation_mime_type,
-  :organization_classification, :cultivation_video, :campaign_deadline, :sponsor_permission, :step, :seed_mime_type
+  :organization_classification, :cultivation_video, :campaign_deadline, :sponsor_permission, :step, :seed_mime_type, :partial_funding
 
-  attr_accessor :sponsorship_permission, :perk_type
+  attr_accessor :sponsorship_permission, :perk_type, :sponsor_info, :project_details, :assets
+
+  validates :organization, :organization_type, :organization_classification, :address,
+            :city, :state, :zip, :website, :facebook_page, :twitter_handle, :project_token,
+            presence: true,:if => :sponsor_info
+
+  validates :project_title, :duration, :category, :title, :story, :about, presence: true, :if => :project_details
+  validates :goal, presence: true, numericality: true, :if => :project_details
+
+  validates :large_image, presence: true, :if => :assets
 
   with_options dependent: :destroy do |project|
     project.has_many :donations
@@ -24,6 +36,8 @@ class Project < ActiveRecord::Base
   has_many :sponsorship_levels
   has_many :documents
   has_many :users
+  has_many :tax_reports
+  has_many :posts
   accepts_nested_attributes_for :perks, allow_destroy: true
   accepts_nested_attributes_for :galleries, allow_destroy: true
 
@@ -36,11 +50,11 @@ class Project < ActiveRecord::Base
   end
 
   def self.by_city(city)
-    (city && city.downcase != "all cities") ? where("city = ?", city) : where("")
+    (city && city.downcase != "all cities") ? where("lower(city) = ?", city.downcase) : where("")
   end
 
   def self.by_category(category)
-    (category && category.downcase != "all categories") ? where("category = ?", category) : where("")
+    (category && category.downcase != "all categories") ? where("lower(category) = ?", category.downcase) : where("")
   end
 
   def self.by_keyword(keyword)
@@ -219,9 +233,7 @@ class Project < ActiveRecord::Base
   end
 
   def downcase_city
-    unless self.city.nil?
-      self.city.downcase!
-    end
+    self.city.downcase! unless self.city.nil?
   end
 
   def downcase_url_and_facebook
@@ -253,6 +265,10 @@ class Project < ActiveRecord::Base
     if !self.user.badges.include?(project_create_badge)
       self.user.add_badge(2)
     end
+  end
+
+  def strip_comma_from_goal
+    self.goal = self.goal.gsub(/,/, '')
   end
 
   def get_donors(project)
@@ -292,6 +308,7 @@ class Project < ActiveRecord::Base
           },
           project_token
         )
+        sponsor.update_column(:approved, true)
       rescue Stripe::CardError => e
         # Since it's a decline, Stripe::CardError will be caught
         body = e.json_body
@@ -345,6 +362,7 @@ class Project < ActiveRecord::Base
           },
           project_token
         )
+        donor.update_column(:approved, true)
       rescue Stripe::CardError => e
         # Since it's a decline, Stripe::CardError will be caught
         body = e.json_body

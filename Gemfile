@@ -28,7 +28,6 @@ gem 'youtube_it'
 gem 'rails_config'
 gem 'newrelic_rpm'
 gem 'meta_request'
-#gem 'exception_notification'
 gem 'airbrake'
 gem 'prawn'
 
@@ -69,6 +68,23 @@ group :development, :test do
   gem 'jasmine-rails'
   gem 'jasminerice'
   gem 'launchy'
+  gem 'dotenv-rails'
+end
+
+group :test do
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem "capybara"
+  gem 'selenium-webdriver', '~> 2.38.0'
+  gem 'capybara-webkit',    '~> 1.1.0'
+  gem 'poltergeist',        '~> 1.5.0'
+  gem 'rack_session_access'
+  gem 'factory_girl_rails'
+  gem 'database_cleaner'
+  gem 'email_spec'
+  gem 'ci_reporter'
+  gem 'ffaker'
+  gem 'webmock'
 end
 
 group :test do

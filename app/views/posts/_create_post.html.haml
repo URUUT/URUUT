@@ -1,0 +1,26 @@
+%div
+  %h2.title.project-founder Post an Update
+  .project-funder.well{:style => "padding-left: 5%"}
+    .row
+      .span11.pull-left
+        .flash-messages
+        = form_for [@project, @post], id: 'new_post', :remote => true do |f|
+          %div
+            = f.text_field :title, class: "span12", placeholder: 'Post Title'
+
+          %div
+            = f.text_area :body, class: "span12", placeholder: 'Message Body', style: 'height: 200px'
+
+          %div
+            = f.submit "Create Post", :class => "btn wizard-btn", :id => "project-submit"
+
+:javascript
+  $(function() {
+    $('#new_post').bind("ajax:success", function(xhr, data, status) {
+      if(status == 'success') {
+        var message = "Successfully created post";
+        $('#new_post')[0].reset();
+        $('.flash-messages').html("<h6 class='notice'>" + message + "</h6>");
+      }
+    });
+  });

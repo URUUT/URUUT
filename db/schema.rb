@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131121071842) do
+ActiveRecord::Schema.define(:version => 20131217011636) do
 
   create_table "badges_sashes", :force => true do |t|
     t.integer  "badge_id"
@@ -23,6 +23,15 @@ ActiveRecord::Schema.define(:version => 20131121071842) do
   add_index "badges_sashes", ["badge_id", "sash_id"], :name => "index_badges_sashes_on_badge_id_and_sash_id"
   add_index "badges_sashes", ["badge_id"], :name => "index_badges_sashes_on_badge_id"
   add_index "badges_sashes", ["sash_id"], :name => "index_badges_sashes_on_sash_id"
+
+  create_table "comments", :force => true do |t|
+    t.text    "body"
+    t.integer "post_id"
+    t.integer "user_id"
+  end
+
+  add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
+  add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
   create_table "contacts", :force => true do |t|
     t.string   "email"
@@ -72,6 +81,7 @@ ActiveRecord::Schema.define(:version => 20131121071842) do
     t.text     "description"
     t.boolean  "anonymous",      :default => false
     t.datetime "last_founded"
+    t.boolean  "approved",       :default => false
   end
 
   add_index "donations", ["project_id"], :name => "index_donations_on_project_id"
@@ -176,7 +186,14 @@ ActiveRecord::Schema.define(:version => 20131121071842) do
   create_table "posts", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "title"
+    t.text     "body"
+    t.integer  "project_id"
+    t.integer  "user_id"
   end
+
+  add_index "posts", ["project_id"], :name => "index_posts_on_project_id"
+  add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
 
   create_table "press_coverages", :force => true do |t|
     t.string   "title"
@@ -215,6 +232,7 @@ ActiveRecord::Schema.define(:version => 20131121071842) do
     t.string   "sponsor_type"
     t.string   "customer_id"
     t.boolean  "anonymous",    :default => false
+    t.boolean  "approved",     :default => false
   end
 
   add_index "project_sponsors", ["project_id"], :name => "index_project_sponsors_on_project_id"
@@ -275,6 +293,7 @@ ActiveRecord::Schema.define(:version => 20131121071842) do
     t.datetime "updated_at"
     t.boolean  "sponsor_permission",          :default => true
     t.string   "step"
+    t.boolean  "partial_funding",             :default => false
   end
 
   add_index "projects", ["user_id"], :name => "index_projects_on_user_id"
@@ -351,7 +370,11 @@ ActiveRecord::Schema.define(:version => 20131121071842) do
     t.datetime "updated_at", :null => false
     t.string   "url"
     t.integer  "user_id"
+    t.integer  "project_id"
   end
+
+  add_index "tax_reports", ["project_id"], :name => "index_tax_reports_on_project_id"
+  add_index "tax_reports", ["user_id"], :name => "index_tax_reports_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",                           :null => false

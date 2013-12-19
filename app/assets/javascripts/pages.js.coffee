@@ -64,7 +64,7 @@ $ ->
 	address = ''
 	map = ''
 	codeAddress = ''
-	
+
 	$('.down').click ->
 		$('.dropdown').toggle()
 

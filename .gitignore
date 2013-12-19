@@ -7,12 +7,16 @@
 # Ignore bundler config
 /.bundle
 .DS_Store
+.env
 
 /vendor/bundle
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/schema.rb
+
+# Ignore database configuration file
+/config/database.yml
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
@@ -33,6 +37,8 @@
 
 # pow stuff
 .rvmrc
+.ruby-version
+.ruby-gemset
 .powrc
 .powenv
 

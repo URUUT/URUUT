@@ -250,6 +250,26 @@
         $("#uruutTour").joyride("destroy");
         $("[data-id='" + hashVal + "']").show();
         $('.breadcrumbs li[class*="' + hashVal + '"]').addClass('active');
+        $('#project-submit').click(function(e) {
+          e.preventDefault();
+          $.ajax({
+            url: '#{edit_project_url(@project.id)}',
+            type: 'GET',
+            dataType: 'json',
+            data: $(this).closest('form').serialize()
+          }).complete(function(data) {
+            if(data.responseText == "Success") {
+              $('#project-submit').closest('form').submit();
+            }else {
+              var response = $.parseJSON(data.responseText);
+              $('#errorForm.modal .error-messages').text('');
+              $(response.errors).each(function(k,v) {
+                $('#errorForm.modal .error-messages').append('<p>' + v + '</p>');
+                $('#errorForm.modal').modal();
+              });
+            }
+          });
+        });
       }
       if(hashVal == 'project-details') {
         $(".sponsor-info-link").attr("href", "/projects/#{@project.id}/edit#sponsor-info");
@@ -257,6 +277,27 @@
         $("#uruutTour").joyride("destroy");
         $("[data-id='" + hashVal + "']").show();
         $('li.' + hashVal).addClass('active');
+        $('.project-details-form #project-submit').click(function(e) {
+          e.preventDefault();
+          $.ajax({
+            url: '#{edit_project_url(@project.id)}',
+            type: 'GET',
+            dataType: 'json',
+            data: $(this).closest('form').serialize()
+          }).complete(function(data) {
+            console.log(data);
+            if(data.responseText == "Success") {
+              $('.project-details-form #project-submit').closest('form').submit();
+            }else {
+              var response = $.parseJSON(data.responseText);
+              $('#errorForm.modal .error-messages').text('');
+              $(response.errors).each(function(k,v) {
+                $('#errorForm.modal .error-messages').append('<p>' + v + '</p>');
+                $('#errorForm.modal').modal();
+              });
+            }
+          });
+        });
       }
       if(hashVal == 'perks') {
         $(".sponsor-info-link").attr("href", "/projects/#{@project.id}/edit#sponsor-info");
@@ -286,6 +327,27 @@
         $("#uruutTour").joyride();
         $(".joyride-tip-guide .joyride-next-tip").eq(2).attr("onclick", "javascript: $('.submit').addClass('active') ");
         $(".joyride-tip-guide .joyride-next-tip").eq(3).attr("onclick", "javascript: $('.submit').removeClass('active') ");
+        $('.step-container[data-id="assets"] #project-submit').click(function(e) {
+          e.preventDefault();
+          $.ajax({
+            url: '#{edit_project_url(@project.id)}',
+            type: 'GET',
+            dataType: 'json',
+            data: $(this).closest('form').serialize()
+          }).complete(function(data) {
+            console.log(data);
+            if(data.responseText == "Success") {
+              $('.step-container[data-id="assets"] #project-submit').closest('form').submit();
+            }else {
+              var response = $.parseJSON(data.responseText);
+              $('#errorForm.modal .error-messages').text('');
+              $(response.errors).each(function(k,v) {
+                $('#errorForm.modal .error-messages').append('<p>' + v + '</p>');
+                $('#errorForm.modal').modal();
+              });
+            }
+          });
+        });
       }
     }else{
       window.location.href = "/projects/#{@project.id}/edit#sponsor-info";
