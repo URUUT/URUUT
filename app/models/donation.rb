@@ -128,7 +128,7 @@ class Donation < ActiveRecord::Base
 
     perks = project.perks.order("id ASC")
 
-    CSV.open("#{Rails.root}/reports/donor_report.csv", "w+") do |csv|
+    CSV.open("reports/donor_report.csv", "w+") do |csv|
 
       csv << ["project name", "email", "first name", "last name", "amount", "perk", "description"]
 
