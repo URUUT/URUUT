@@ -33,6 +33,8 @@ class User < ActiveRecord::Base
   has_many :donations
   has_many :tax_reports
 
+  has_one :membership
+
   # Badging
   has_merit
 
