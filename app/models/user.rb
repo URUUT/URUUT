@@ -35,6 +35,8 @@ class User < ActiveRecord::Base
 
   has_one :membership
 
+  acts_as_tenant(:account)
+
   # Badging
   has_merit
 
