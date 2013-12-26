@@ -457,7 +457,7 @@ PLATFORMS
 DEPENDENCIES
   activemerchant
   activerecord-postgresql-adapter
-  acts_as_tenant
+  acts_as_tenant (~> 0.3.1)
   airbrake
   aws-sdk
   better_errors
