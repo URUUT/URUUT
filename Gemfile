@@ -32,6 +32,7 @@ gem 'airbrake'
 gem 'prawn'
 gem 'acts_as_tenant', '~> 0.3.1'
 gem 'writeexcel', '~> 1.0.3'
+gem 'acts_as_tenant', '~> 0.3.1'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
