@@ -51,4 +51,4 @@ I will be going through the styles, JS, and other portions of code to reduce unu
 [1]: https://www.atlassian.com/git/workflows#!workflow-feature-branch
 [2]: https://bitbucket.org/chaddy81/crowdfundproject-dev/pull-request/new
 
-#Changed to GitHub
+#Changed to GitHub.
