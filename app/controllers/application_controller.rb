@@ -55,6 +55,8 @@ class ApplicationController < ActionController::Base
 private
 
   def get_current_tenant
+    return unless current_user
+
     current_account = current_user.account
     set_current_tenant(current_account)
   end
