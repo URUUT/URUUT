@@ -1,0 +1,19 @@
+machine:
+  ruby:
+    version: 2.0.0-p353
+
+deployment:
+  develop:
+    branch: develop
+    heroku:
+      appname: uruut-dev
+  multitenant:
+    branch: multitenant
+    heroku:
+      appname: uruut-multitenant
+
+database:
+  override:
+    - cp config/database.ci.yml config/database.yml
+    - bundle exec rake db:create --trace
+    - bundle exec rake db:schema:load --trace
