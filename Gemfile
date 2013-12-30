@@ -65,9 +65,9 @@ group :development, :test do
   gem 'rails_best_practices'
   gem 'debugger', '~> 1.6.4'
   gem 'cucumber-rails', :require => false
-  gem 'jasmine'
-  gem 'jasmine-rails'
-  gem 'jasminerice'
+  # gem 'jasmine'
+  # gem 'jasmine-rails'
+  # gem 'jasminerice'
   gem 'launchy'
   gem 'dotenv-rails'
 end
