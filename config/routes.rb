@@ -76,6 +76,8 @@ Crowdfund::Application.routes.draw do
       get "photos_and_videos"
       get "communication_zone"
 
+      resource :xls, only: [:create]
+
       collection do
         get "email_based_on_sponsor_level"
         post "send_email"
