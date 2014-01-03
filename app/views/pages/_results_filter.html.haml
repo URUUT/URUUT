@@ -1,7 +1,6 @@
 .recent.clearfix
   .container
     %p.sections
-      = image_tag "recent-project-icon.png"
       CURRENT PROJECTS
 
       = link_to "View All", "#", :class => 'view-all'
@@ -29,8 +28,7 @@
 .recent.clearfix
   .container
     %p.sections
-      = image_tag "recent-project-icon-empty.png"
-      Highlighted Successes
+      Featured Successes
 
       = link_to "View All", "#", :class => 'view-all'
     .project-all
@@ -50,9 +48,6 @@
               %p.short-description We are now accepting applications for projects. If you have a project that needs funding apply to get funding now. 
             .location
               %span &nbsp;
-          .funding
-            %p
-              = link_to "Get Funded ►", new_project_path, :class => "btn" 
 
 .ending-soon.clearfix
   .container

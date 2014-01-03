@@ -39,7 +39,7 @@ class UsersController < ApplicationController
   def get_complete_project
     @user = User.find(params[:user_id])
     comparison = params[:status].eql?("Funding Active") ? ">" : "<"
-    @projects_funded = @user.projects_funded.where("campaign_deadline #{comparison} ? AND live = 1", Time.now).order("updated_at DESC").page(params[:created_page]).per(2)
+    @projects_funded = @user.projects_funded.where("campaign_deadline #{comparison} ? AND live = 1", Time.now).order("updated_at DESC").page(params[:funded_page]).per(2)
   end
 
   private
