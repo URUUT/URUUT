@@ -59,7 +59,7 @@
                 %select.styledSelect{:id => "projects-funded"}
                   %option -- Select Status --
                   %option Funding Active
-                  %option Funding Completed
+                  %option{:selected => params[:status] == "Funding Completed"} Funding Completed
 
           #project-fund
             = render "project", :projects => @projects_funded
