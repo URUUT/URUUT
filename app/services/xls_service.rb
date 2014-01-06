@@ -14,9 +14,9 @@ private
   attr_reader :funders
 
   def get_resource
-    case funders.first.class
-    when User           then Xls::Donors.new(funders)
-    when ProjectSponsor then Xls::Sponsors.new(funders)
+    case funders.first.class.to_s
+    when "User"           then Xls::Donors.new(funders)
+    when "ProjectSponsor" then Xls::Sponsors.new(funders)
     end
   end
 
