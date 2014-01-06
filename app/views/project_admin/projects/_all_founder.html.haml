@@ -20,4 +20,3 @@
         %td= founder.updated_at.strftime("%m/%d")
 
 = paginate @founders, remote: true
-= link_to 'Download Excel', project_admin_project_xls_path(@project), method: :post
