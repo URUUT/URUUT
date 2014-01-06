@@ -28,6 +28,5 @@
             %td= "#{amount_converter(sponsor.cost)}"
             %td= truncate("#{sponsor.sponsorship_level.name} sponsor", length: 17)
             %td= sponsor.updated_at.strftime("%m/%d")
-  = link_to 'Download Excel', project_admin_project_xls_path(@project, type: params[:type]), method: :post
 
 = paginate @founders, remote: true, :type => params[:type]
