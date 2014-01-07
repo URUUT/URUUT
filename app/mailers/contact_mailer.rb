@@ -13,6 +13,6 @@ class ContactMailer < ActionMailer::Base
     @email = email
     @message = message
     @subject = subject
-    mail subject: @subject, from: @email, to: "npx@techbridge.org"
+    mail subject: @subject, from: @email, to: "info@uruut.com"
   end
 end
