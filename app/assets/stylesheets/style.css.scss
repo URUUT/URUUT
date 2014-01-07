@@ -2548,10 +2548,39 @@ input, select, textarea{
   .gold-logo {
     background: #fff;
     display: inline-block;
+    float: left;
     height: 50px;
-    margin: 0 auto;
+    margin: 0 10px 0 0;
     position: relative;
     width: 50px;
+
+    img {
+      display: inline-block;
+      height: 100%;
+      line-height: 35px;
+      position: absolute;
+      vertical-align: middle;
+    }
+  }
+
+  .name, .url {
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .url {
+    display: inline-block;
+  }
+
+  .silver-logo {
+    background: #fff;
+    display: inline-block;
+    float: left;
+    height: 35px;
+    margin: 0 10px 0 0;
+    position: relative;
+    width: 35px;
 
     img {
       display: inline-block;
