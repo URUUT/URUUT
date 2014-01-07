@@ -40,6 +40,9 @@ class User < ActiveRecord::Base
   # Badging
   has_merit
 
+  scope :unique_project_donors, ->(project) { joins(:donations).
+    where(donations: { project_id: project.id, confirmed: true }).uniq }
+
   # mount_uploader :avatar, AvatarUploader
 
   def self.create_with_omniauth(info)

@@ -1,12 +1,8 @@
 class Worksheet::Base
 
-  attr_reader :file_path
-
-  def initialize(funders)
-    @file_path = 'tmp/project_funders.xls'
+  def initialize(xls, funders)
     @funders   = funders
-    @xls       = WriteExcel.new(@file_path)
-    @worksheet = @xls.add_worksheet
+    @worksheet = xls.add_worksheet
   end
 
   def create
@@ -15,13 +11,9 @@ class Worksheet::Base
         worksheet.write(row, column, funder.send(attribute))
       end
     end
-
-    xls.close
-
-    self
   end
 
 private
-  attr_reader :funders, :xls, :worksheet
+  attr_reader :funders, :worksheet
 
 end
