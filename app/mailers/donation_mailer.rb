@@ -1,6 +1,6 @@
 class DonationMailer < ActionMailer::Base
   layout 'mailer'
-  default from: "info@uruut.com"
+  default from: "npx@techbridge.org"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
