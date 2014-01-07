@@ -1,4 +1,4 @@
-class Xls::Donors < Xls::Base
+class Worksheet::Donors < Worksheet::Base
 
 private
   def attributes

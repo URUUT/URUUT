@@ -1,4 +1,4 @@
-class Xls::Base
+class Worksheet::Base
 
   attr_reader :file_path
 

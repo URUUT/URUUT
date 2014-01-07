@@ -1,4 +1,4 @@
-class Xls::Sponsors < Xls::Base
+class Worksheet::Sponsors < Worksheet::Base
 
 private
   def attributes
