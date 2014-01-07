@@ -14,7 +14,7 @@
           .arrow
         - if any_project_donors_or_sponsors?(@project)
           %h3{:class => "menu-messages"}
-            = link_to 'Download Donor/Sponsor List', project_admin_project_xls_path(@project), method: :post, style: "font-size: 9px"
+            = link_to 'Download Funders List', project_admin_project_xls_path(@project), method: :post, style: "font-size: 9px"
             .arrow
     .span9.pull-right.founder-content
       = render "founder_content"
