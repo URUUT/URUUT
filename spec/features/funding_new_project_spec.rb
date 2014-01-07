@@ -20,7 +20,7 @@ feature 'Funding a new project' do
     visit new_project_path
 
     within('.hero') do
-      click_button 'Get Started'
+      click_link 'Get Started'
     end
 
     expect(page).to have_content('Basic Information')
