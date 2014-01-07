@@ -1,23 +1,34 @@
 class XlsService
 
-  def initialize(funders)
-    @funders = funders
+  def initialize(donors, project_sponsors)
+    @donors = donors
+    @project_sponsors = project_sponsors
+    @xls = WriteExcel.new(file_path)
   end
 
   def create
-    resource = get_resource
-    resource.create
+    create_donors_worksheet
+    create_project_sponsors_worksheet
+
+    xls.close
+
+    self
+  end
+
+  def file_path
+    'tmp/project_funders.xls'
   end
 
 private
 
-  attr_reader :funders
+  attr_reader :donors, :project_sponsors, :xls
 
-  def get_resource
-    case funders.first.class.to_s
-    when "User"           then Xls::Donors.new(funders)
-    when "ProjectSponsor" then Xls::Sponsors.new(funders)
-    end
+  def create_donors_worksheet
+    Worksheet::Donors.new(xls, donors).create
+  end
+
+  def create_project_sponsors_worksheet
+    Worksheet::Sponsors.new(xls, project_sponsors).create
   end
 
 end
