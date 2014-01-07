@@ -6,7 +6,7 @@
 			%h2 Your ideas. Our platform.
 			%p{:style => "color:#b6b6b4 !important;"} It’s free and easy to start your project on Uruut. Click below to get started.
 
-			= button_tag :class => "btn #{user_signed_in? ? "create" : "must-login"}" do
+			= link_to "/projects", method: :post, class: "btn #{user_signed_in? ? "" : "must-login"}" do
 				Get Started ►
 
 .full-width.need-to-know.cf
@@ -29,17 +29,5 @@
 .full-width.create-project
 	.container
 		%h2 Create your project & get funded now.
-		= button_tag :class => "btn #{user_signed_in? ? "create" : "must-login"}" do
+		= link_to "/projects", method: :post, class: "btn #{user_signed_in? ? "" : "must-login"}" do
 			Get Started ►
-
-:javascript
-	$(function(){
-		$('.btn.create').click(function(){
-			$.ajax({
-				type: 'POST',
-				url: "#{projects_path}"
-			}).done(function(data){
-				window.location.href = '/projects/' + data + '/edit#sponsor-info';
-			})
-		})
-	})

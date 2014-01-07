@@ -37,10 +37,9 @@ class ProjectsController < ApplicationController
 
   def create
     @project = current_user.projects.build(params[:project])
-    @project.save
-
     respond_to do |format|
       if @project.save
+        format.html { redirect_to edit_project_path(@project, anchor: 'sponsor-info') }
         format.json { render :json => @project.id }
       else
         format.json { render :json => "error" }
