@@ -4,7 +4,7 @@ class SponsorMailer < ActionMailer::Base
   helper MailerHelper
   include MailerHelper
 
-  default from: "info@uruut.com"
+  default from: "npx@techbridge.org"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
