@@ -2435,6 +2435,8 @@ input, select, textarea{
 
     &.communication {
       background: #eee;
+      .to-left{ margin-left: 0px; }
+      h3.no-bubble:before{ display: none; }
     }
 
   }
