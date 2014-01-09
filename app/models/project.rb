@@ -38,6 +38,7 @@ class Project < ActiveRecord::Base
   has_many :users
   has_many :tax_reports
   has_many :posts
+  has_many :questions
   accepts_nested_attributes_for :perks, allow_destroy: true
   accepts_nested_attributes_for :galleries, allow_destroy: true
 
