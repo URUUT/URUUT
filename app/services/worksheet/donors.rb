@@ -9,13 +9,15 @@ private
   attr_reader :project
 
   def attributes(funder)
+    funder_donation = donation(funder)
+
     { project_name: project.title,
       email:        funder.email,
       first_name:   funder.first_name,
       last_name:    funder.last_name,
-      amount:       donation(funder).amount,
-      perk:         donation(funder).perk_name,
-      description:  donation(funder).description }
+      amount:       funder_donation.amount,
+      perk:         funder_donation.perk_name,
+      description:  funder_donation.description }
   end
 
   def funders
@@ -23,7 +25,7 @@ private
   end
 
   def donation(funder)
-    @donation = Donation.where(user_id: funder, project_id: project).first
+    Donation.with_funder(funder).with_project(project).first
   end
 
   def column_titles
