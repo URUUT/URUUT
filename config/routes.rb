@@ -98,6 +98,7 @@ Crowdfund::Application.routes.draw do
     end
   end
   resources :projects do
+    resources :question, :only => [:new, :create]
     collection do
       get :get_complete_project
       get :get_complete_project_public

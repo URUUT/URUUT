@@ -56,46 +56,58 @@
 
 .full-width.communication
     .container
-        %h3 Communication Zone
-        - if @project.posts.empty?
-            %h5 No Communication
-        %div
-            - @project.posts.each do |post|
-                .post
-                    %h4.post-title= post.title
-                    %span.post-date= post.created_at.to_s.to_date
-                    %div.post-body= simple_format(post.body)
+        .span9.to-left
+            %h3 Communication Zone
+            - if @project.posts.empty?
+                %h5 No Communication
+            %div
+                - @project.posts.each do |post|
+                    .post
+                        %h4.post-title= post.title
+                        %span.post-date= post.created_at.to_s.to_date
+                        %div.post-body= simple_format(post.body)
 
 
-                    = link_to 'Add Comment', '#', class: 'add-comment'
-                    = link_to "( #{post.comments.count} ) Comments", '#', class: 'comment-count'
+                        = link_to 'Add Comment', '#', class: 'add-comment'
+                        = link_to "( #{post.comments.count} ) Comments", '#', class: 'comment-count'
 
-                    .comment-list
-                        %hr
+                        .comment-list
+                            %hr
 
-                        %h5 #{post.comments.count} Comments
-                        - post.comments.each do |comment|
-                            %div.comment
-                                %p= simple_format(comment.body)
-                                %p= full_name(current_user)
-                        %hr
+                            %h5 #{post.comments.count} Comments
+                            - post.comments.each do |comment|
+                                %div.comment
+                                    %p= simple_format(comment.body)
+                                    %p= full_name(current_user)
+                            %hr
 
-                    .new-comment
-                        %h5 Add Comment
-                        = form_for @comment, :url => comments_path(post) do |f|
-                            %div
-                                = f.text_area :body, style: 'height: 175px; width: 100%;', placeholder: 'Comment Here...'
+                        .new-comment
+                            %h5 Add Comment
+                            = form_for @comment, :url => comments_path(post) do |f|
+                                %div
+                                    = f.text_area :body, style: 'height: 175px; width: 100%;', placeholder: 'Comment Here...'
 
-                            %div
-                                = f.hidden_field :post_id, :value => post.id
+                                %div
+                                    = f.hidden_field :post_id, :value => post.id
 
-                            .submit
-                                = f.submit "Submit", :class => "btn"
+                                .submit
+                                    = f.submit "Submit", :class => "btn"
 
-                        .close-comments
-                            = link_to 'X Close Comments', '#'
+                            .close-comments
+                                = link_to 'X Close Comments', '#'
 
-                        %hr
+                            %hr
+        .span3.to-left
+            %h3.no-bubble Ask a question
+            .potential
+                %div.project
+                    .content
+                        = form_for @question, url: project_question_index_path, html: { class: 'contact'} do |f|
+                            = f.label 'subject'
+                            = f.text_field :subject, placeholder: 'Type your subject...'
+                            = f.label "What's your question?"
+                            = f.text_area :body, rows: 5, placeholder: 'Type your questions here...'
+                            = f.submit "Submit ►", class: "btn brown"
 
 .cf
 
