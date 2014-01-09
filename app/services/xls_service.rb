@@ -23,19 +23,11 @@ private
   attr_reader :project, :xls
 
   def create_donors_worksheet
-    Worksheet::Donors.new(xls, donors).create
+    Worksheet::Donors.new(xls, project).create
   end
 
   def create_project_sponsors_worksheet
-    Worksheet::Sponsors.new(xls, project_sponsors).create
-  end
-
-  def donors
-    @donors = User.unique_project_donors(project)
-  end
-
-  def project_sponsors
-    @project_sponsors = project.project_sponsors
+    Worksheet::Sponsors.new(xls, project).create
   end
 
 end

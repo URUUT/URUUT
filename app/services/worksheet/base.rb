@@ -1,6 +1,7 @@
 class Worksheet::Base
 
-  def initialize(xls, funders, worksheet_name)
+  def initialize(xls, project, funders, worksheet_name)
+    @project   = project
     @funders   = funders
     @worksheet = xls.add_worksheet(worksheet_name)
   end
@@ -14,6 +15,6 @@ class Worksheet::Base
   end
 
 private
-  attr_reader :funders, :worksheet
+  attr_reader :project, :funders, :worksheet
 
 end
