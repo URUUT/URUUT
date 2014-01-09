@@ -9,8 +9,10 @@ test:
 deployment:
   production:
     branch: master
-    heroku:
-      appname: uruut
+    commands:
+      - git push git@heroku.com:uruut.git $CIRCLE_SHA1:master: --force
+          timeout: 300
+      - heroku run rake db:migrate --app uruut
   develop:
     branch: develop
     heroku:
