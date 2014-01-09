@@ -1,8 +1,8 @@
 class Worksheet::Base
 
-  def initialize(xls, funders)
+  def initialize(xls, funders, worksheet_name)
     @funders   = funders
-    @worksheet = xls.add_worksheet
+    @worksheet = xls.add_worksheet(worksheet_name)
   end
 
   def create
