@@ -111,10 +111,12 @@
             .potential
                 %div.project
                     .content
-                        = form_for 'question' do |f|
-                            =# f.input_field 'subject'
-                            = f.text_area 'subject', rows: 5
-                            = f.submit "Submit", :class => "btn"
+                        = form_for 'question', html: { class: 'contact'} do |f|
+                            = f.label 'subject'
+                            = f.text_field 'subject', placeholder: 'subject'
+                            = f.label "What's your question?"
+                            = f.text_area 'subject', rows: 5, placeholder: 'Type your questions here...'
+                            = f.submit "Submit ►", class: "btn brown"
 .cf
 
 :javascript

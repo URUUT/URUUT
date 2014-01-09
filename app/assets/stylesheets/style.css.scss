@@ -2437,6 +2437,30 @@ input, select, textarea{
       background: #eee;
       .to-left{ margin-left: 0px; }
       h3.no-bubble:before{ display: none; }
+      form.contact{
+        display: block;
+        margin: auto;
+        width: 250px;
+        height: 318px;
+        padding-top: 35px;
+        label{
+          color: #70bf4c;
+          margin-bottom: 8px;
+        }
+        input, textarea{
+          width: 100%;
+          margin-bottom: 20px;
+          padding: 15px;
+        }
+        .btn{
+          border-radius: 0;
+          padding: 8px 0;
+          width: 50%;
+          margin-left: 50%;
+          font-size: 12px;
+          font-weight: bold;
+        }
+      }
     }
 
   }
