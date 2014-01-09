@@ -1,4 +1,4 @@
 class Question < ActiveRecord::Base
   belongs_to :user
-  attr_accessible :email, :user_id, :body, :subject
+  attr_accessible :body, :subject
 end
