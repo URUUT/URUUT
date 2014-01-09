@@ -14,7 +14,6 @@ Crowdfund::Application.routes.draw do
     get :get_complete_project, on: :collection
   end
 
-  resources :question, :only => [:new, :create]
   get "contacts/new"
   get "contacts/new"
   get "contacts/edit"
@@ -102,6 +101,7 @@ Crowdfund::Application.routes.draw do
     end
   end
   resources :projects do
+    resources :question, :only => [:new, :create]
     collection do
       get :get_complete_project
       get :get_complete_project_public

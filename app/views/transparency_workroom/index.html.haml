@@ -111,7 +111,7 @@
             .potential
                 %div.project
                     .content
-                        = form_for @question, url: question_index_path, html: { class: 'contact'} do |f|
+                        = form_for @question, url: project_question_index_path, html: { class: 'contact'} do |f|
                             = f.label 'subject'
                             = f.text_field :subject, placeholder: 'Type your subject...'
                             = f.label "What's your question?"
