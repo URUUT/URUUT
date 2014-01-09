@@ -111,11 +111,11 @@
             .potential
                 %div.project
                     .content
-                        = form_for "@contact", html: { class: 'contact'} do |f|
+                        = form_for @question, url: question_index_path, html: { class: 'contact'} do |f|
                             = f.label 'subject'
-                            = f.text_field 'subject', placeholder: 'Type your subject...'
+                            = f.text_field :subject, placeholder: 'Type your subject...'
                             = f.label "What's your question?"
-                            = f.text_area 'subject', rows: 5, placeholder: 'Type your questions here...'
+                            = f.text_area :body, rows: 5, placeholder: 'Type your questions here...'
                             = f.submit "Submit ►", class: "btn brown"
 .cf
 
