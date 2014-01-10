@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140109180139) do
+ActiveRecord::Schema.define(:version => 20140110143901) do
 
   create_table "accounts", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -30,11 +30,9 @@ ActiveRecord::Schema.define(:version => 20140109180139) do
   add_index "badges_sashes", ["sash_id"], :name => "index_badges_sashes_on_sash_id"
 
   create_table "comments", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.text     "body"
-    t.integer  "post_id"
-    t.integer  "user_id"
+    t.text    "body"
+    t.integer "post_id"
+    t.integer "user_id"
   end
 
   add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
@@ -204,8 +202,8 @@ ActiveRecord::Schema.define(:version => 20140109180139) do
     t.datetime "updated_at", :null => false
     t.string   "title"
     t.text     "body"
-    t.integer  "user_id"
     t.integer  "project_id"
+    t.integer  "user_id"
   end
 
   add_index "posts", ["project_id"], :name => "index_posts_on_project_id"
@@ -434,6 +432,8 @@ ActiveRecord::Schema.define(:version => 20140109180139) do
     t.integer  "uruut_point",            :default => 0
     t.string   "role",                   :default => ""
     t.integer  "account_id"
+    t.string   "stripe_user_token"
+    t.string   "stripe_card_token"
   end
 
   add_index "users", ["account_id"], :name => "index_users_on_account_id"
