@@ -2694,40 +2694,43 @@ form[id*=project] {
 	&.our-story {
 		padding:80px 0;
     text-align: center;
-		h1 {
-		 color:#70bf4c;
+    color: #8e8e8e;
+    h1 {
+     color:#70bf4c;
      text-transform: none;
     }
-		p {
-			color:#55554d;
-			font-family:'Proxima Nova';
-			font-size:16px;
-			line-height:24px;}}
-	&.our-mission {
-		background:#55554d;
-		padding:80px 0;
-		div.half {
-			-webkit-box-sizing: border-box;
-			-moz-box-sizing: border-box;
-			box-sizing: border-box;
-			display:inline-block;
-			float:left;
-			width:50%;
-			h3 {
-				color:#70bf4c;
-				margin-bottom:0;}
-			h2 {
-				color:#fff;
-				font-family: 'Proxima Nova';
-				font-weight:normal;
-				line-height:normal;
-				margin-top:0;
-				text-transform:none;}
-			p {
-				color:#b6b6b4;
-				font-family: 'Proxima Nova';
-				font-size:14px;
-				line-height:150%;}
+    p {
+      font-family:'Proxima Nova';
+      font-size:16px;
+      line-height:24px;}}
+  &.our-mission {
+    background:#55554d;
+    padding:80px 0;
+    div.half {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      display:inline-block;
+      float:left;
+      width:50%;
+      h1 {
+        text-transform: none;
+        margin-bottom:20px;}
+      h3 {
+        color:#70bf4c;
+        margin-bottom:0;}
+      h2 {
+        color:#fff;
+        font-family: 'Proxima Nova';
+        font-weight:normal;
+        line-height:normal;
+        margin-top:0;
+        text-transform:none;}
+      p {
+        color: #8e8e8e;
+        font-family: 'Proxima Nova';
+        font-size:14px;
+        line-height:150%;}
 			&:first-child {
 				padding-right:25px;}
 			&:last-child {
@@ -2792,6 +2795,10 @@ form[id*=project] {
       color:#403e37;
       margin:0 auto;
       width:610px;}
+    h1 {
+      text-transform: none;
+      margin-bottom:40px;
+      text-align:center;}
     h3 {
       color:#70bf4c;
       margin-bottom:10px;
@@ -2824,12 +2831,39 @@ form[id*=project] {
         color:#403e37;
         font-family:'myriad pro', arial, sans-serif;
         font-size:12px;
-        font-weight:600;}}
+        font-weight:600;}}}
+
   &.gray-band {
-    background:#eee;
-    border: 3px solid black;
+    color: #8e8e8e;
+    background:#f8f8f8;
+    border-top: 2pt solid #d0d0d0;
+    border-bottom: 2pt solid #d0d0d0;
+    padding: 80px 0;
   }
-}
+
+  .bubble {
+    color:#70bf4c;
+    background:#fff;
+    border-radius: 10px;
+    padding: 30px;
+    position: relative;
+  }
+  .bubble:after{
+    width: 1px;
+    height: 1px;
+    border-left: 20px solid transparent;
+    border-right: 40px solid transparent;
+    border-top: 52px solid #fff;
+    border-radius: 7px;
+    display: block;
+    content: "";
+    -webkit-transform: rotate(234deg);
+    -moz-transform: rotate(234deg);
+    position: absolute;
+    position: absolute;
+    top: 67px;
+    z-index: 1;
+  }
 
   &.more-information {
     padding:50px 0;
