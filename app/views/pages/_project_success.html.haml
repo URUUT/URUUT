@@ -20,7 +20,7 @@
           %span #{p.city}, #{p.state}
           - if p.partial_funding
             %span.pull-right
-              = image_tag 'td-logo.png', class: "tax-deductible", "data-toggle" => "tooltip", title: "Partial funding"
+              = image_tag 'pf-logo.png', class: "tax-deductible", "data-toggle" => "tooltip", title: "Partial funding"
           - if p.organization_classification.eql?("170(c)(1)") || p.organization_classification.eql?("501(c)(3)")
             %span.pull-right
               = image_tag 'td-logo.png', class: "tax-deductible", "data-toggle" => "tooltip", title: "Donations Are Tax Deductible"
