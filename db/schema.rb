@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140110163659) do
+ActiveRecord::Schema.define(:version => 20140110181616) do
 
   create_table "accounts", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -393,6 +393,7 @@ ActiveRecord::Schema.define(:version => 20140110163659) do
     t.string   "stripe_plan_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.datetime "canceled_at"
   end
 
   add_index "subscriptions", ["membership_id"], :name => "index_subscriptions_on_membership_id"
