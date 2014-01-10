@@ -22,6 +22,9 @@
           %h4.title= @project.project_title
           %span.location #{@project.city}, #{@project.state}
           %span.pull-right{:style => "margin-top: -20px"}
+            - if @project.partial_funding
+              = image_tag 'pf-logo-black.png', class: "tax-deductible deductable-black", "data-toggle" => "tooltip", title: "Partial Funding"
+          %span.pull-right{:style => "margin-top: -20px"}
             - if @project.organization_classification.eql?("170(c)(1)") || @project.organization_classification.eql?("501(c)(3)")
               = image_tag 'td-logo-black.png', class: "tax-deductible deductable-black", "data-toggle" => "tooltip", title: "Donations Are Tax Deductible"
           %hr
@@ -71,6 +74,9 @@
         .span8
           %h4.title= @project.project_title
           %span.location #{@project.city}, #{@project.state}
+          %span.pull-right{:style => "margin-top: -20px"}
+            - if @project.partial_funding
+              = image_tag 'pf-logo-black.png', class: "tax-deductible deductable-black", "data-toggle" => "tooltip", title: "Partial Funding"
           %span.pull-right{:style => "margin-top: -20px"}
             - if @project.organization_classification.eql?("170(c)(1)") || @project.organization_classification.eql?("501(c)(3)")
               = image_tag 'td-logo-black.png', class: "tax-deductible deductable-black", "data-toggle" => "tooltip", title: "Donations Are Tax Deductible"
