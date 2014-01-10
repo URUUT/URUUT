@@ -4,4 +4,8 @@ class SubscriptionsController < ApplicationController
     # TODO Stripe integration
   end
 
+  def destroy
+    # TODO Stripe integration
+  end
+
 end
