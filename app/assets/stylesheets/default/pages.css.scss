@@ -2779,51 +2779,56 @@ form[id*=project] {
 			&:last-child {
 				padding-left:25px;}}
 	&.meet-the-team {
-		padding:80px 0;
+		padding:58px 0;
 		div.founder {
 			-webkit-box-sizing: border-box;
 			-moz-box-sizing: border-box;
 			box-sizing: border-box;
-			display:inline-block;
-			float:left;
-			padding:0 25px;
-			width:25%;
+      height: 390px;
+      text-align: center;
 			img {
 				display:block;
-				margin:30px auto 15px;
+        width: 147px;
+				margin:40px auto 15px;
 				position:relative;}
 			p {
 				color:#403e37;
-				line-height:200%;}
+				line-height:200%;
+        font-size: 16px;
+        margin: 0 10px;}
 			h2 {
 				margin-bottom:0;
-				letter-spacing: 1px;}
+				letter-spacing: 1px;
+        text-transform: none;}
 			.title {
-				color:#70bf4c;
-				font-family:'Proxima Nova';
-				font-size:14px;
-				font-weight:600;
-				margin-bottom:5px;
-				text-align:center;}}
-		p {
-			color:#403e37;
-			font-family: 'Proxima Nova';
-			font-size:14px;
-			line-height:200%;
-			text-align:center;}
+      color: #70bf4c;
+      font-family: 'Proxima Nova';
+      font-size: 13pt;
+      font-weight: 600;
+      margin: 5px;
+      text-align: center;
+      letter-spacing: 2pt;
+      }}
 		h1 {
-			color:#403e37;
+			color:#70bf4c;
 			font-family: 'Proxima Nova';
 			font-weight:normal;
 			line-height:normal;
 			margin-top:0;
+      letter-spacing: 1pt;
 			text-align:center;
 			text-transform:none;}
-		h3 {
-			color:#70bf4c;
-			line-height:normal;
-			margin:0 0 10px;
-			text-align:center;}}
+		p {
+      color: #8e8e8e;
+      line-height: 36px;
+      margin: 0 0 10px;
+      text-align: center;
+      font-size: 23px;
+      text-transform: none;
+      letter-spacing: 1pt;
+      padding: 0 8px;
+      word-spacing: -1pt;
+    }}
   &.advisory-board {
     background:#eee;
     padding:80px 0;
