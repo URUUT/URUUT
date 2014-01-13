@@ -2708,31 +2708,23 @@ form[id*=project] {
   &.our-mission {
     background:#55554d;
     padding:47px 0;
-    div.half {
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      box-sizing: border-box;
-      display:inline-block;
-      float:left;
-      width:50%;
-      h1 {
-        text-transform: none;
-        margin-bottom:20px;}
-      h3 {
-        color:#70bf4c;
-        margin-bottom:0;}
-      h2 {
-        color:#fff;
-        font-family: 'Proxima Nova';
-        font-weight:normal;
-        line-height:normal;
-        margin-top:0;
-        margin-left: -7px;
-        font-size: 32px;
-        text-transform: none;
-        letter-spacing: 0.7pt;
-        word-spacing: 4pt;
-        }}
+    h1 {
+      text-transform: none;
+      margin-bottom:20px;}
+    h3 {
+      color:#70bf4c;
+      margin-bottom:0;}
+    h2 {
+      font-family: 'Proxima Nova';
+      font-weight:normal;
+      line-height:normal;
+      margin-top:0;
+      margin-left: -7px;
+      font-size: 32px;
+      text-transform: none;
+      letter-spacing: 0.7pt;
+      word-spacing: 4pt;
+      }
       p {
         color: #8e8e8e;
         font-family: 'Proxima Nova';
@@ -2742,23 +2734,50 @@ form[id*=project] {
         line-height: 25px;
         word-spacing: 1.5pt;
         letter-spacing: 0pt;
+      }
+      .bubble {
+        background: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        padding-top: 22px;
+        position: relative;
+        top: 67px;
+        left: 35px;
+        p.quotes {
+          color:#70bf4c;
+          font-size: 23px;
+          margin: 3px 15px;
+          letter-spacing: 0pt;
+          word-spacing: 0pt;
+          line-height: 23.5pt;
         }
-      p.quotes {
-        font-size: 23px;
-        margin: 3px 15px;
-        letter-spacing: 0pt;
-        word-spacing: 0pt;
-        line-height: 23.5pt;
+        p.author {
+          color:#70bf4c;
+          text-align: right;
+          margin: 10px;
+          font-size: 15px;
         }
-      p.author {
-        text-align: right;
-        margin: 10px;
-        font-size: 15px;
-        }}
+      }
+      .bubble:after{
+        width: 1px;
+        height: 1px;
+        border-left: 20px solid transparent;
+        border-right: 40px solid transparent;
+        border-top: 52px solid #fff;
+        border-radius: 7px;
+        display: block;
+        content: "";
+        -webkit-transform: rotate(234deg);
+        -moz-transform: rotate(234deg);
+        position: absolute;
+        left: 47px;
+        bottom: -17px;
+        z-index: 1;
+      }
 			&:first-child {
 				padding-right:25px;}
 			&:last-child {
-				padding-left:25px;}
+				padding-left:25px;}}
 	&.meet-the-team {
 		padding:80px 0;
 		div.founder {
@@ -2862,35 +2881,8 @@ form[id*=project] {
     background:#f8f8f8;
     border-top: 2pt solid #d0d0d0;
     border-bottom: 2pt solid #d0d0d0;
-    padding: 47px 0 80px;
+    padding: 57px 0 80px;
   }
-
-  .bubble {
-    color:#70bf4c;
-    background:#fff;
-    border-radius: 10px;
-    padding: 30px;
-    position: relative;
-    top: 80px;
-    left: 55px;
-  }
-  .bubble:after{
-    width: 1px;
-    height: 1px;
-    border-left: 20px solid transparent;
-    border-right: 40px solid transparent;
-    border-top: 52px solid #fff;
-    border-radius: 7px;
-    display: block;
-    content: "";
-    -webkit-transform: rotate(234deg);
-    -moz-transform: rotate(234deg);
-    position: absolute;
-    left: 47px;
-    bottom: -17px;
-    z-index: 1;
-  }
-
   &.more-information {
     padding:50px 0;
     text-align:center;
@@ -2924,7 +2916,7 @@ form[id*=project] {
 				background:#403e37;
 				padding:22px 0;
 			}}}
-
+.without-margin-left{ margin-left: 0; }
 .faqs {
   .span8 {
 		margin-top:60px;
