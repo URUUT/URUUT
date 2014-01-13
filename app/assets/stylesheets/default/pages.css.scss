@@ -2696,11 +2696,16 @@ form[id*=project] {
     text-align: center;
     color: #8e8e8e;
     h1 {
-     color:#70bf4c;
-     text-transform: none;
-    }
-    p {
+      color:#70bf4c;
       font-family: 'Proxima Nova';
+      font-weight:normal;
+      line-height:normal;
+      margin-top:0;
+      letter-spacing: 1pt;
+      text-align:center;
+      text-transform:none;}
+    p {
+      font-family: 'Proxima Nova light';
       font-size: 25px;
       margin: 12px 0 35px;
       line-height: 37px;
@@ -2794,12 +2799,14 @@ form[id*=project] {
         position:relative;}
       p {
         color: #8e8e8e;
+        font-family: 'Proxima Nova';
         line-height: 19pt;
         font-size: 16px;
         margin-top: 11px;
         letter-spacing: 0.3pt;
       }
       h2 {
+        font-family: 'Proxima Nova';
         margin-bottom:0;
         letter-spacing: 1px;
         text-transform: none;}
@@ -2822,6 +2829,7 @@ form[id*=project] {
       text-align:center;
       text-transform:none;}
     p {
+      font-family: 'Proxima Nova light';
       color: #8e8e8e;
       line-height: 36px;
       margin: 0 0 10px;
@@ -2847,11 +2855,15 @@ form[id*=project] {
       margin:0 auto;
       width:610px;}
     h1 {
-      text-transform: none;
-      margin: 0;
-      letter-spacing: 1pt;
+      margin-top:0;
       margin-bottom:55px;
-      text-align:center;}
+      text-align:center;
+      font-family: 'Proxima Nova';
+      font-weight:normal;
+      line-height:normal;
+      letter-spacing: 1pt;
+      text-align:center;
+      text-transform:none;}
     h3 {
       color:#70bf4c;
       margin-bottom:10px;
@@ -2903,6 +2915,7 @@ form[id*=project] {
       display:inline-block;
       font-family:'Proxima Nova';
       font-weight:normal;
+      letter-spacing: 0pt;
       text-transform:none;}
     }
 		.btn {
