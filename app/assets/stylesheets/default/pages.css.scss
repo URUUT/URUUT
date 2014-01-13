@@ -2771,39 +2771,39 @@ form[id*=project] {
         -moz-transform: rotate(234deg);
         position: absolute;
         left: 47px;
-        bottom: -17px;
+        bottom: -19px;
         z-index: 1;
       }
 			&:first-child {
 				padding-right:25px;}
 			&:last-child {
-				padding-left:25px;}}
-	&.meet-the-team {
-		padding:58px 0 48px;
-		div.founder {
-			-webkit-box-sizing: border-box;
-			-moz-box-sizing: border-box;
-			box-sizing: border-box;
+        padding-left:25px;}}
+  &.meet-the-team {
+    padding:58px 0 48px;
+    div.founder {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
       height: 417px;
       text-align: center;
-			img {
-				display:block;
+      img {
+        display:block;
         width: 147px;
         border-radius: 147px;
-				margin:40px auto 15px;
-				position:relative;}
-			p {
-        color: #403e37;
+        margin:40px auto 15px;
+        position:relative;}
+      p {
+        color: #8e8e8e;
         line-height: 19pt;
         font-size: 16px;
         margin-top: 11px;
         letter-spacing: 0.3pt;
       }
-			h2 {
-				margin-bottom:0;
-				letter-spacing: 1px;
+      h2 {
+        margin-bottom:0;
+        letter-spacing: 1px;
         text-transform: none;}
-			.title {
+      .title {
       color: #70bf4c;
       font-family: 'Proxima Nova';
       font-size: 13pt;
@@ -2812,16 +2812,16 @@ form[id*=project] {
       text-align: center;
       letter-spacing: 2pt;
       }}
-		h1 {
-			color:#70bf4c;
-			font-family: 'Proxima Nova';
-			font-weight:normal;
-			line-height:normal;
-			margin-top:0;
+    h1 {
+      color:#70bf4c;
+      font-family: 'Proxima Nova';
+      font-weight:normal;
+      line-height:normal;
+      margin-top:0;
       letter-spacing: 1pt;
-			text-align:center;
-			text-transform:none;}
-		p {
+      text-align:center;
+      text-transform:none;}
+    p {
       color: #8e8e8e;
       line-height: 36px;
       margin: 0 0 10px;
@@ -2848,7 +2848,9 @@ form[id*=project] {
       width:610px;}
     h1 {
       text-transform: none;
-      margin-bottom:40px;
+      margin: 0;
+      letter-spacing: 1pt;
+      margin-bottom:55px;
       text-align:center;}
     h3 {
       color:#70bf4c;
@@ -2869,20 +2871,23 @@ form[id*=project] {
         display:inline-block;
         vertical-align:middle;}
       p {
-        color:#403e37;
+        color:#8e8e8e;
         font-family:'myriad pro', arial, sans-serif;
         font-size:12px;
         margin-bottom:0;
         text-align:left;}
       .name {
-        color:#70bf4c;
-        font-family:'myriad pro', arial, sans-serif;
-        font-size:14px}
+        color: #70bf4c;
+        font-family: 'myriad pro', arial, sans-serif;
+        font-size: 11pt;
+        text-transform: uppercase;
+        font-weight: bold;
+        letter-spacing: 2pt;}
       .experience {
-        color:#403e37;
+        color:#8e8e8e;
         font-family:'myriad pro', arial, sans-serif;
         font-size:12px;
-        font-weight:600;}}}
+        font-weight:bold;}}}
 
   &.gray-band {
     color: #8e8e8e;
