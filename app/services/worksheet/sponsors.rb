@@ -12,10 +12,11 @@ private
     project_sponsor_benefit = benefit(project_sponsor)
 
     { project_name: project.title,
-      email:        project_sponsor.sponsor.email,
       name:         project_sponsor.name,
-      cost:         project_sponsor.cost,
-      benefit:      project_sponsor_benefit.name }
+      email:        project_sponsor.sponsor.email,
+      amount:       project_sponsor.cost,
+      level:        project_sponsor.sponsorship_level.name,
+      description:  project_sponsor_benefit.name }
   end
 
   def project_sponsors
@@ -23,7 +24,7 @@ private
   end
 
   def column_titles
-    [:project_name, :email, :name, :cost, :benefit]
+    [:project_name, :name, :email, :amount, :level, :description]
   end
 
   def benefit(project_sponsor)
