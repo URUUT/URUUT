@@ -401,7 +401,7 @@ class Project < ActiveRecord::Base
 private
 
   def calculate_sponsor_application_fee(sponsor, application_fee)
-    sponsor.membership_kind == 'percent' ? application_fee : nil
+    sponsor.membership_kind == 'fee' ? application_fee : nil
   end
 
 end
