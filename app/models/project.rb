@@ -305,7 +305,7 @@ class Project < ActiveRecord::Base
             :currency => "usd",
             :card => token.id,
             :description => description,
-            :application_fee => application_fee
+            :application_fee => calculate_sponsor_application_fee(sponsor, application_fee)
           },
           project_token
         )
@@ -396,6 +396,12 @@ class Project < ActiveRecord::Base
         puts e
       end
     end
+  end
+
+private
+
+  def calculate_sponsor_application_fee(sponsor, application_fee)
+    sponsor.membership_kind == 'percent' ? application_fee : nil
   end
 
 end
