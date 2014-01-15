@@ -1,0 +1,32 @@
+%section.full-width.our-story
+  .container
+    %h1 All The Features You Need at a Sensible Price.
+
+    %p
+      We understand nonproﬁts are on tight budgets, that’s why we offer three easy to 
+      understand and affordable packages to ﬁt every nonproﬁts needs.
+
+%section.full-width.our-mission.gray-band{style: 'text-align: center;'}
+  .container
+    %div.span4
+      %h4 Fee-based
+      = link_to new_user_registration_path do
+        .btn
+          Sign up ►
+    %div.span4{style: 'box-sizing: border-box;border-left: 2pt solid #d0d0d0;border-right: 2pt solid #d0d0d0;'}
+      %h4 Basic
+      = link_to new_user_registration_path do
+        .btn
+          Sign up ►
+    %div.span4
+      %h4 Plus
+      = link_to new_user_registration_path do
+        .btn
+          Sign up ►
+
+%section.full-width.more-information
+  .container
+    %h2 Take your nonproﬁt to the next level.
+    = link_to new_project_path do
+      .btn
+        GET STARTED ►

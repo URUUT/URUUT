@@ -167,6 +167,7 @@ Crowdfund::Application.routes.draw do
       get "faqs"
       get "thank_you"
       get "privacy"
+      get "pricing_page"
       get "funding_sources"
       get "media"
     end
