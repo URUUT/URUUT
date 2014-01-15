@@ -11,7 +11,7 @@
     %div.span4
       %h4 Fee-based
       - if user_signed_in?
-        = form_for 'user' do |f|
+        = form_for 'user', url: user_memberships_path(current_user, membership_type: 'fee') do |f|
           = f.submit 'Select ►', class: 'btn'
       - else
         = link_to new_user_registration_path do
@@ -20,7 +20,7 @@
     %div.span4{style: 'box-sizing: border-box;border-left: 2pt solid #d0d0d0;border-right: 2pt solid #d0d0d0;'}
       %h4 Basic
       - if user_signed_in?
-        = form_for 'user' do |f|
+        = form_for 'user', url: user_memberships_path(current_user, membership_type: 'basic') do |f|
           = f.submit 'Select ►', class: 'btn'
       - else
         = link_to new_user_registration_path do
@@ -29,7 +29,7 @@
     %div.span4
       %h4 Plus
       - if user_signed_in?
-        = form_for 'user' do |f|
+        = form_for 'user', url: user_memberships_path(current_user, membership_type: 'plus') do |f|
           = f.submit 'Select ►', class: 'btn'
       - else
         = link_to new_user_registration_path do
