@@ -15,4 +15,8 @@ class MembershipsController < ApplicationController
     end
   end
 
+  def show
+    @membership_type = current_user.membership.kind
+  end
+
 end
