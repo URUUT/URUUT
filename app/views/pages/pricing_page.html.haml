@@ -10,19 +10,34 @@
   .container
     %div.span4
       %h4 Fee-based
-      = link_to new_user_registration_path do
-        .btn
-          Sign up ►
+      - if user_signed_in?
+        = link_to new_user_registration_path do
+          .btn
+            Select ►
+      - else
+        = link_to new_user_registration_path do
+          .btn
+            Sign up ►
     %div.span4{style: 'box-sizing: border-box;border-left: 2pt solid #d0d0d0;border-right: 2pt solid #d0d0d0;'}
       %h4 Basic
-      = link_to new_user_registration_path do
-        .btn
-          Sign up ►
+      - if user_signed_in?
+        = link_to new_user_registration_path do
+          .btn
+            Select ►
+      - else
+        = link_to new_user_registration_path do
+          .btn
+            Sign up ►
     %div.span4
       %h4 Plus
-      = link_to new_user_registration_path do
-        .btn
-          Sign up ►
+      - if user_signed_in?
+        = link_to new_user_registration_path do
+          .btn
+            Select ►
+      - else
+        = link_to new_user_registration_path do
+          .btn
+            Sign up ►
 
 %section.full-width.more-information
   .container
@@ -30,3 +45,4 @@
     = link_to new_project_path do
       .btn
         GET STARTED ►
+
