@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140110181616) do
+ActiveRecord::Schema.define(:version => 20140115180935) do
 
   create_table "accounts", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -119,8 +119,10 @@ ActiveRecord::Schema.define(:version => 20140110181616) do
     t.string   "kind"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "sponsor_id"
   end
 
+  add_index "memberships", ["sponsor_id"], :name => "index_memberships_on_sponsor_id"
   add_index "memberships", ["user_id"], :name => "index_memberships_on_user_id"
 
   create_table "merit_actions", :force => true do |t|
