@@ -1017,13 +1017,39 @@ h5{
       line-height: 14px;
       letter-spacing: 0.5px;
     }
-
+    .box-content h5{
+      font: normal 12px/12px "Proxima Nova Bold", arial, sans-serif;
+      letter-spacing: 2px;
+    }
     .profile-img{
       height: 100px;
       width: 100px;
       margin-bottom: 10px;
     }
   }
+}
+
+.box-content {
+  border-bottom: 2pt solid #d6d6d6;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  a { text-decoration: underline; }
+  p {
+    color: #403e37;
+    line-height: 21px;
+    word-spacing: 1px;
+  }
+  ul{
+    color: #403e37;
+    list-style: none;
+  }
+}
+.box-content:last-child { border-bottom: none; }
+
+.logo_card, .info_card { display: inline-block; }
+.logo_card {
+  vertical-align: top;
+  border: 1px solid #d6d6d6;
 }
 
 .project-img{

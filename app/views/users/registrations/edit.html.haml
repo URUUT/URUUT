@@ -77,9 +77,9 @@
         Submit changes ►
   .span4
     %h3.title{:style => "margin-bottom:5px;"} MEMBERSHIP SETTINGS
-    .well.info.badge-wrapper
+    .well.info
       .box-content
-        %h5.label-green{style: "margin-bottom: 0;"} SUBSCRIPTION STATUS
+        %h5.label-green{style: "margin-bottom: 7px;"} SUBSCRIPTION STATUS
         %p
           Your 
           %b Uruut Basic 
@@ -92,12 +92,30 @@
         = link_to 'Change your subscription plan.', 'hola'
 
       .box-content
-        %h5.label-green{style: "margin-bottom: 0;"} PAYMENT METHOD
+        %h5.label-green{style: "margin-bottom: 7px;"} PAYMENT METHOD
         %p The following payment card is currently used for payment:
+        .logo_card
+          = image_tag 'logo_visa.png'
+        .info_card
+          %ul
+            %li 
+              %b Card Number: 
+              **** **** **** 8495
+            %li 
+              %b Expiration Date: 
+              09/2014
+            %li 
+              %b Billing Address:
+            %li 
+              Nicholas Hollomon
+            %li 
+              1616 Flat Shoals Rd SE
+            %li 
+              Atlanta, GA 30316
         = link_to 'Change payment method or card details.', 'hola'
 
       .box-content
-        %h5.label-green{style: "margin-bottom: 0;"} CANCEL YOUR SUBSCRIPTION
+        %h5.label-green{style: "margin-bottom: 7px;"} CANCEL YOUR SUBSCRIPTION
         = link_to 'View cancellation options.', 'hola'
 
   .span4
