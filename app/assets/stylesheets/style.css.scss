@@ -1109,6 +1109,12 @@ h5{
 
 form {
 
+  p.form-subtitle{
+    font-family: "Proxima Nova", arial, sans-serif;
+    word-spacing: 1pt;
+    margin-bottom: 50px;
+  }
+
   .name {
     width:100%;
 
@@ -1183,6 +1189,17 @@ form {
     }
   }
 
+  .expiration.well-half {
+    input[type=text]#card_month {
+      width:32% !important;
+    }
+
+    input[type=text]#card_year {
+      margin-left: 20px;
+      width:60% !important;
+    }
+  }
+
   .actions {
 
     p {
@@ -1194,7 +1211,12 @@ form {
       float:right;
     }
   }
+
+  .btn{
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.45);
+  }
 }
+
 
 .pic-upload{
   margin-left: 20px;

@@ -2,7 +2,7 @@
   .span8{:style => "margin-top:15px;"}
     %h4 CHANGE PAYMENT METHOD
     = form_for 'payment', html: { class: "well registration-edit"} do |f|
-      %p{style: 'font-family: "Proxima Nova", arial, sans-serif; word-spacing: 1pt;'}
+      %p.form-subtitle
         If you wish to use a different card for your monthly subscription payment enter the details of the new card below.
       %div.name
         = f.label :name do
@@ -18,8 +18,8 @@
         = f.label :cvc do
           CVC
           %span.error-container
-        = f.text_field :cvc
-      %div.expiration
+        = f.text_field :cvc, style: 'width: 90%!important;'
+      %div.expiration.well-half
         = f.label :expiration do
           CARD EXPIRATION
           %span.italic{style: "font-size: 11px; letter-spacing: 0;"}
@@ -37,11 +37,11 @@
           CITY
           %span.error-container
         = f.text_field :city
-      %div.inline.well-half
+      %div.inline.well-half{style: "margin-right: 19px;"}
         = f.label :state, class: "label-green" do
           STATE
           %span.error-container
-        .selectParent{style: "width: 260px;"}
+        .selectParent{style: "width: 280px;"}
           = f.select :state, options_for_select(['LA'], ['1']), {:include_blank => true}, {class: "styledSelect required"}
 
       %div.inline.well-half{style: "vertical-align: top;"}
