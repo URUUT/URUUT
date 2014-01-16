@@ -1,10 +1,7 @@
 .row{:style => "margin-top:35px;"}
   .span8{:style => "margin-top:15px;"}
     %h4 Edit account information
-    = form_for(resource, :as => resource_name, :url => registration_path(resource_name),
-      :html => { :method => :put, :class => "well registration-edit" },) do |f|
-      = devise_error_messages!
-
+    = form_for 'payment', html: { class: "well registration-edit"} do |f|
       %div
         = f.label :avatar, "Profile image "
         - if session[:avatar].blank?
@@ -79,20 +76,7 @@
     %h3.title{:style => "margin-bottom:5px;"} MEMBERSHIP SETTINGS
     .well.info
       .box-content
-        %h5.label-green{style: "margin-bottom: 7px;"} SUBSCRIPTION STATUS
-        %p
-          Your 
-          %b Uruut Basic 
-          subscription will be 
-          automatically renewed 01-14-2014 and 
-          charged 
-          %b $99 every 1 month 
-          unless you 
-          cancel your subscription before that time.
-        = link_to 'Change your subscription plan.', pricing_page_pages_path
-
-      .box-content
-        %h5.label-green{style: "margin-bottom: 7px;"} PAYMENT METHOD
+        %h5.label-green{style: "margin-bottom: 7px;"} CURRENT PAYMENT METHOD
         %p The following payment card is currently used for payment:
         .logo_card
           = image_tag 'logo_visa.png'
@@ -112,15 +96,3 @@
               1616 Flat Shoals Rd SE
             %li 
               Atlanta, GA 30316
-        = link_to 'Change payment method or card details.', change_payment_method_pages_path
-
-      .box-content
-        %h5.label-green{style: "margin-bottom: 7px;"} CANCEL YOUR SUBSCRIPTION
-        = link_to 'View cancellation options.', 'hola'
-
-  .span4
-    %h3.title{:style => "margin-bottom:5px;"} My badges
-    .well.info.badge-wrapper
-      - @user.badges.each do |badge|
-        .profile-badge
-          = image_tag badge.custom_fields[:image], :class => "img-circle", :data => { :content => badge.name }
