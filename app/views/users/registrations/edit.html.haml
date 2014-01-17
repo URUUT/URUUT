@@ -116,7 +116,7 @@
 
       .box-content
         %h5.label-green{style: "margin-bottom: 7px;"} CANCEL YOUR SUBSCRIPTION
-        = link_to 'View cancellation options.', 'hola'
+        = link_to 'View cancellation options.', user_membership_cancel_path(current_user, current_user.membership)
 
   .span4
     %h3.title{:style => "margin-bottom:5px;"} My badges
