@@ -309,8 +309,6 @@ ActiveRecord::Schema.define(:version => 20140109180139) do
     t.integer  "project_id"
   end
 
-  add_index "projects", ["user_id"], :name => "index_projects_on_user_id"
-
   create_table "sashes", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
