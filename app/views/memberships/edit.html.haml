@@ -1,6 +1,6 @@
 .row{:style => "margin-top:35px;"}
   .span8{:style => "margin-top:15px;"}
-    %h4 CHANGE PAYMENT METHOD
+    %h4.font-bold CHANGE PAYMENT METHOD
     = form_for 'payment', html: { class: "well registration-edit"} do |f|
       %p.form-subtitle
         If you wish to use a different card for your monthly subscription payment enter the details of the new card below.
@@ -52,8 +52,7 @@
       %button.btn.btn-primary{:type => "submit"}
         Submit changes ►
   .span4
-    %h3.title{:style => "margin-bottom:5px;"} MEMBERSHIP SETTINGS
-    .well.info
+    .well.info.without-title
       .box-content
         %h5.label-green{style: "margin-bottom: 7px;"} CURRENT PAYMENT METHOD
         %p The following payment card is currently used for payment:
