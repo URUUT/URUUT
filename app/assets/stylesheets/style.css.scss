@@ -1040,18 +1040,37 @@ h5{
   padding-bottom: 25px;
   margin-bottom: 25px;
   a { text-decoration: underline; }
+  b {
+    font-family: 'Proxima Nova Bold', arial, sans-serif;
+    color: #403e37;
+    font-size: 14px;
+  }
   p {
     color: #403e37;
     line-height: 21px;
-    word-spacing: 1px;
+    word-spacing: 0px;
+    font-size: 14px;
+    margin-bottom: 25px;
   }
   ul{
     color: #403e37;
     list-style: none;
   }
 }
+.content-list{
+  padding-top: 20px;
+  margin-left: 0;
+}
 .box-content:last-child { border-bottom: none; }
-
+.side-icon{
+  display: inline-block;
+  vertical-align: top;
+}
+.side-info{
+  display: inline-block;
+  width: 500px;
+  margin-left: 13px;
+}
 .logo_card, .info_card { display: inline-block; }
 .logo_card {
   vertical-align: top;
