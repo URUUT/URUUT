@@ -30,6 +30,10 @@ gem 'newrelic_rpm'
 gem 'meta_request'
 gem 'airbrake'
 gem 'prawn'
+<<<<<<< HEAD
+=======
+gem 'writeexcel', '~> 1.0.3'
+>>>>>>> develop
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -79,18 +83,6 @@ group :test do
   gem 'capybara-webkit',    '~> 1.1.0'
   gem 'poltergeist',        '~> 1.5.0'
   gem 'rack_session_access'
-  gem 'factory_girl_rails'
-  gem 'database_cleaner'
-  gem 'email_spec'
-  gem 'ci_reporter'
-  gem 'ffaker'
-  gem 'webmock'
-end
-
-group :test do
-  gem 'rspec'
-  gem 'rspec-rails'
-  gem "capybara"
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'email_spec'

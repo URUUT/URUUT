@@ -32,9 +32,13 @@ class User < ActiveRecord::Base
 
   has_many :donations
   has_many :tax_reports
+  has_many :questions
 
   # Badging
   has_merit
+
+  scope :unique_project_donors, ->(project) { joins(:donations).
+    where(donations: { project_id: project.id, confirmed: true }).uniq }
 
   # mount_uploader :avatar, AvatarUploader
 

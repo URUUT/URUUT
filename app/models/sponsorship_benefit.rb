@@ -16,4 +16,7 @@ class SponsorshipBenefit < ActiveRecord::Base
                           {id: 2, desc: "Monthly plug on social media leading up to the project and the month after the project has been complete."},
                           {id: 3, desc: "Five tickets to VIP Gala Event."}],
                           4 => [{id: 1, desc: "Lorem ipsum dolor sit amet."}]}
+
+  scope :for_project, ->(project) { where(project_id: project.id) }
+  scope :with_project_sponsor_level, ->(project_sponsor) { where(sponsorship_level_id: project_sponsor.level_id) }
 end

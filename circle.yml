@@ -9,8 +9,8 @@ test:
 deployment:
   production:
     branch: master
-      heroku:
-        appname: uruut
+    heroku:
+      appname: uruut
   develop:
     branch: develop
     heroku:

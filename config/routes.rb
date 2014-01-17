@@ -15,6 +15,7 @@ Crowdfund::Application.routes.draw do
   end
 
   get "contacts/new"
+  get "contacts/new"
   get "contacts/edit"
   get "image/new"
   get "set_new_perk" => "donations#set_new_perk"
@@ -76,6 +77,8 @@ Crowdfund::Application.routes.draw do
       get "photos_and_videos"
       get "communication_zone"
 
+      resource :xls, only: [:create]
+
       collection do
         get "email_based_on_sponsor_level"
         post "send_email"
@@ -98,6 +101,7 @@ Crowdfund::Application.routes.draw do
     end
   end
   resources :projects do
+    resources :question, :only => [:new, :create]
     collection do
       get :get_complete_project
       get :get_complete_project_public
