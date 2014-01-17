@@ -166,8 +166,8 @@ class User < ActiveRecord::Base
   end
 
   def save_url(url, project)
-    tax_report = self.tax_reports.build(url: url, project_id: project.id)
-    tax_report.save!
+    tax_report = self.tax_reports.new
+    tax_report.update_attributes(url: url, project_id: project.id)
   end
 
   def is_admin?
