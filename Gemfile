@@ -30,10 +30,7 @@ gem 'newrelic_rpm'
 gem 'meta_request'
 gem 'airbrake'
 gem 'prawn'
-<<<<<<< HEAD
-=======
 gem 'writeexcel', '~> 1.0.3'
->>>>>>> develop
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
