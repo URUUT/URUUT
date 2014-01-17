@@ -1,6 +1,7 @@
 class MembershipsController < ApplicationController
 
   before_filter :authenticate_user!
+  before_filter :find_membership, only: [:show, :edit]
 
   def create
     user_membership = current_user.membership
@@ -16,7 +17,14 @@ class MembershipsController < ApplicationController
   end
 
   def show
-    @membership_type = current_user.membership.kind
   end
 
+  def edit
+  end
+
+  private
+
+  def find_membership
+    @membership = current_user.membership
+  end
 end

@@ -112,7 +112,7 @@
               1616 Flat Shoals Rd SE
             %li 
               Atlanta, GA 30316
-        = link_to 'Change payment method or card details.', change_payment_method_pages_path
+        = link_to 'Change payment method or card details.', edit_user_membership_path(current_user, current_user.membership)
 
       .box-content
         %h5.label-green{style: "margin-bottom: 7px;"} CANCEL YOUR SUBSCRIPTION
