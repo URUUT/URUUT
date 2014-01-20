@@ -1,7 +1,22 @@
-worker_processes 3
+APP_PATH = "/u/apps/techbridge"
+
+worker_processes 4
+
+working_directory "#{APP_PATH}/current" # available in 0.94.0+
+
+listen "/tmp/.unicorn.sock", :backlog => 64
+listen 8080, :tcp_nopush => true
+
 timeout 30
+
+pid "#{APP_PATH}/shared/pids/unicorn.pid"
+
+stderr_path "#{APP_PATH}/shared/log/unicorn.stderr.log"
+stdout_path "#{APP_PATH}/shared/log/unicorn.stdout.log"
+
 preload_app true
-#listen 4040
+GC.respond_to?(:copy_on_write_friendly=) and
+  GC.copy_on_write_friendly = true
 
 before_fork do |server, worker|
 
