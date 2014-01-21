@@ -11,7 +11,7 @@ private
   def attributes(project_sponsor)
     project_sponsor_benefit = benefit(project_sponsor)
 
-    { project_name:      project.title,
+    { project_name:      project.project_title,
       organization_name: project_sponsor.name,
       name:              project_sponsor.sponsor.name,
       email:             project_sponsor.sponsor.email,
