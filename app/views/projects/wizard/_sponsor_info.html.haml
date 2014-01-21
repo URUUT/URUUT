@@ -85,13 +85,16 @@
       %label.label-green
         Payment With Stripe
       %p{:style => "font:normal 13px/19px 'Proxima Nova';"} An account with Stripe, our payment provider, is required for processing credit card transactions and receiving funds. If you already have an account, you can sign in as a returning customer. If you need help setting up your account check out our #{link_to "Guide to Setting Up Stripe", download_stripe_guide_projects_path }.
-      = link_to "https://connect.stripe.com/oauth/authorize?scope=read_write&response_type=code&client_id=#{Settings.stripe.client_id}", :target => "_blank", :class => "stripe-connect" do
-        = image_tag "stripe-connect.png"
+      - if @project.project_token.blank?
+        = link_to "https://connect.stripe.com/oauth/authorize?scope=read_write&response_type=code&client_id=#{Settings.stripe.client_id}", :target => "_blank", :class => "stripe-connect" do
+          = image_tag "stripe-connect.png"
+      - else
+        = image_tag "stripe-connected.png"
 
       %hr{:style => "background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
 
       %div
-        - if !session[:connected].blank?
+        - if !session[:connected].blank? || !@project.project_token.blank?
           = f.submit "Save & Continue ►", :class => "btn wizard-btn", :id => "project-submit"
         - else
           %a.btn.wizard-btn{"data-toggle" => "modal", :href => "#connectStripeModal", :role => "button", style: "width: 266px;"}
@@ -182,4 +185,48 @@
        return false;
       }
     });
+
+    $('.stripe-connect').click(function() {
+      localStorage.setItem('organization', $('#project_organization').val());
+      localStorage.setItem('address', $('#project_address').val());
+      localStorage.setItem('city', $('#project_city').val());
+      localStorage.setItem('state', $('#project_state').val());
+      localStorage.setItem('zip', $('#project_zip').val());
+      localStorage.setItem('website', $('#project_website').val());
+      localStorage.setItem('twitter_handle', $('#project_twitter_handle').val());
+      localStorage.setItem('facebook_page', $('#project_facebook_page').val());
+    });
+
+    if(localStorage.getItem('organization')) {
+      $('#project_organization').val(localStorage.getItem('organization'));
+    }
+
+    if(localStorage.getItem('address')) {
+      $('#project_address').val(localStorage.getItem('address'));
+    }
+
+    if(localStorage.getItem('city')) {
+      $('#project_city').val(localStorage.getItem('city'));
+    }
+
+    if(localStorage.getItem('state')) {
+      $('#project_state').val(localStorage.getItem('state'));
+    }
+
+    if(localStorage.getItem('zip')) {
+      $('#project_zip').val(localStorage.getItem('zip'));
+    }
+
+    if(localStorage.getItem('website')) {
+      $('#project_website').val(localStorage.getItem('website'));
+    }
+
+    if(localStorage.getItem('twitter_handle')) {
+      $('#project_twitter_handle').val(localStorage.getItem('twitter_handle'));
+    }
+
+    if(localStorage.getItem('facebook_page')) {
+      $('#project_facebook_page').val(localStorage.getItem('facebook_page'));
+    }
+
   })
