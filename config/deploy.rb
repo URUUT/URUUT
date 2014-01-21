@@ -19,9 +19,18 @@ default_run_options[:pty] = true
 server '192.34.58.42', :app, :web, :db, :primary => true
 set :bundle_flags, '--deployment --quiet --binstubs'
 
+set :default_environment, {
+  'PATH' => "/home/#{user}/.rbenv/shims:/home/#{user}/.rbenv/bin:$PATH",
+  'REDISTOGO_URL' => 'redis://localhost:6379/'
+}
+
 namespace :db do
   task :db_config, :except => { :no_release => true }, :role => :app do
     run "cp -f #{shared_path}/system/database.yml #{release_path}/config/database.yml"
+  end
+
+  task :load_schema, :except => { :no_release => true }, :roles => :app do
+    run "cd #{current_path}; bundle exec rake db:schema:load RAILS_ENV=#{rails_env}"
   end
 end
 
@@ -30,20 +39,20 @@ namespace :deploy do
     desc "#{command} unicorn server"
     task command, roles: :app, except: {no_release: true} do
       #monkey path
-      run "#{sudo} /etc/init.d/bk_development stop"
-      run "#{sudo} rm -f /var/run/bk_development/bk_development.pid"
-      run "#{sudo} /etc/init.d/bk_development start"
+      run "#{sudo} /etc/init.d/unicorn_techbridge stop"
+      run "#{sudo} rm -f /u/apps/techbridge/shared/pids/unicorn.pid"
+      run "#{sudo} /etc/init.d/unicorn_techbridge start"
     end
   end
 
   desc "reload the database with seed data"
   task :seed do
-    run "cd #{current_path}; rake db:seed RAILS_ENV=#{rails_env}"
+    run "cd #{current_path}; bundle exec rake db:seed RAILS_ENV=#{rails_env}"
   end
 
   desc "Clear Tmp folder"
   task :seed do
-    run "cd #{current_path}; rake tmp:clear RAILS_ENV=#{rails_env}"
+    run "cd #{current_path}; bundle exec rake tmp:clear RAILS_ENV=#{rails_env}"
   end
 
 
@@ -58,6 +67,6 @@ namespace :deploy do
   end
 end
 
-after "deploy:finalize_update", "db:db_config"
+after "deploy:finalize_update", "db:db_config", "db:load_schema"
 after "deploy", "deploy:migrate", "deploy:seed", "deploy:change_file_permission",
       "deploy:bundle_install"
