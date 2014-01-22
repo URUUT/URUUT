@@ -12,6 +12,7 @@ Crowdfund::Application.routes.draw do
 
   resources :users, :only => [:show] do
     get :get_complete_project, on: :collection
+    resource  :payment_method
     resources :subscriptions
     resources :memberships do
       get :cancel
