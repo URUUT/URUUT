@@ -1,12 +1,6 @@
 require 'stripe'
 
-class Gateway::CustomerService
-
-  attr_reader :user
-
-  def initialize(user)
-    @user = user
-  end
+class Gateway::CustomerService < Gateway::BaseService
 
   def create
     return false if user.stripe_user_token
