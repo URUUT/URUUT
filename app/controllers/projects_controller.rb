@@ -96,7 +96,8 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.find(params[:id])
+    @project = Project.live.find_by_id(params[:id]) || not_found
+
     @images = @project.galleries.page(params[:page]).per(6)
     sort_sponsorships = @project.project_sponsors.sort_by {|ps| ps.level_id}
     @project_sponsors = sort_sponsorships.group_by {|sponsor| sponsor.level_id }
