@@ -1,5 +1,9 @@
 class RegistrationsController < Devise::RegistrationsController
 
+  def edit
+    @customer_card = Gateway::CardsService.new(current_user).find_card
+  end
+
   def create
     build_resource
 

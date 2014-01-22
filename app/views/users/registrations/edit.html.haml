@@ -97,21 +97,10 @@
         .logo_card
           = image_tag 'logo_visa.png'
         .info_card
-          %ul
-            %li 
-              %b Card Number: 
-              **** **** **** 8495
-            %li 
-              %b Expiration Date: 
-              09/2014
-            %li 
-              %b Billing Address:
-            %li 
-              Nicholas Hollomon
-            %li 
-              1616 Flat Shoals Rd SE
-            %li 
-              Atlanta, GA 30316
+          - if @customer_card
+            = render partial: 'payment_methods/default_card_details', locals: { customer_card: @customer_card }
+          - else
+            %p You have not setup any card yet.
         = link_to 'Change payment method or card details.', edit_user_payment_method_path(current_user)
 
       .box-content
