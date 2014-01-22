@@ -1,19 +1,19 @@
 .row{:style => "margin-top:35px;"}
   .span8{:style => "margin-top:15px;"}
     %h4.font-bold CHANGE PAYMENT METHOD
-    = form_for 'payment', html: { class: "well registration-edit"} do |f|
+    = form_for @credit_card, url: user_payment_method_path(current_user), method: :put, html: { class: "well registration-edit"} do |f|
       %p.form-subtitle
         If you wish to use a different card for your monthly subscription payment enter the details of the new card below.
       %div.name
         = f.label :name do
           NAME AS IT APPEARS ON CARD
           %span.error-container
-        = f.text_field :first_name
+        = f.text_field :name
       %div.card-number
-        = f.label :card_number do
+        = f.label :number do
           CARD NUMBER
           %span.error-container
-        = f.text_field :card_number
+        = f.text_field :number
       %div.ccv
         = f.label :cvc do
           CVC
@@ -25,13 +25,13 @@
           %span.italic{style: "font-size: 11px; letter-spacing: 0;"}
             (MM / YYYY)
           %span.error-container
-        = f.text_field :card_month, id: 'card_month'
-        = f.text_field :card_year, id: 'card_year'
+        = f.text_field :exp_month, id: 'card_month'
+        = f.text_field :exp_year, id: 'card_year'
       %div
-        = f.label :adress do
+        = f.label :billing_address do
           BILLING STREET ADDRESS
           %span.error-container
-        = f.text_field :adress
+        = f.text_field :billing_address
       %div
         = f.label :city do
           CITY
@@ -60,17 +60,17 @@
           = image_tag 'logo_visa.png'
         .info_card
           %ul
-            %li 
-              %b Card Number: 
-              **** **** **** 8495
-            %li 
-              %b Expiration Date: 
-              09/2014
-            %li 
+            %li
+              %b Card Number:
+              **** **** **** #{@customer_card.last4}
+            %li
+              %b Expiration Date:
+              #{@customer_card.exp_month}/#{@customer_card.exp_year}
+            %li
               %b Billing Address:
-            %li 
-              Nicholas Hollomon
-            %li 
-              1616 Flat Shoals Rd SE
-            %li 
-              Atlanta, GA 30316
+            %li
+              #{@customer_card.name}
+            %li
+              #{@customer_card.address_line1}
+            %li
+              #{@customer_card.address_city}, #{@customer_card.address_state} #{@customer_card.address_zip}
