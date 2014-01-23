@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140123161008) do
+ActiveRecord::Schema.define(:version => 20140123173625) do
 
   create_table "accounts", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -91,6 +91,13 @@ ActiveRecord::Schema.define(:version => 20140123161008) do
 
   add_index "donations", ["project_id"], :name => "index_donations_on_project_id"
   add_index "donations", ["user_id"], :name => "index_donations_on_user_id"
+
+  create_table "features", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "galleries", :force => true do |t|
     t.string   "gallery_file_name"
