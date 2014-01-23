@@ -1,6 +1,5 @@
 class Plan < ActiveRecord::Base
-  belongs_to :membership
-
+  has_many :membership
   has_many :plan_features
   has_many :features, through: :plan_features
 
