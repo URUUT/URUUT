@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140115180935) do
+ActiveRecord::Schema.define(:version => 20140123160121) do
 
   create_table "accounts", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -198,6 +198,16 @@ ActiveRecord::Schema.define(:version => 20140115180935) do
   end
 
   add_index "perks", ["project_id"], :name => "index_perks_on_project_id"
+
+  create_table "plans", :force => true do |t|
+    t.integer  "membership_id"
+    t.string   "stripe_plan_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.datetime "canceled_at"
+  end
+
+  add_index "plans", ["membership_id"], :name => "index_subscriptions_on_membership_id"
 
   create_table "posts", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -389,16 +399,6 @@ ActiveRecord::Schema.define(:version => 20140115180935) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
-
-  create_table "subscriptions", :force => true do |t|
-    t.integer  "membership_id"
-    t.string   "stripe_plan_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-    t.datetime "canceled_at"
-  end
-
-  add_index "subscriptions", ["membership_id"], :name => "index_subscriptions_on_membership_id"
 
   create_table "tax_reports", :force => true do |t|
     t.datetime "created_at", :null => false
