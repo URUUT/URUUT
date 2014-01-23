@@ -3110,6 +3110,59 @@ form[id*=project] {
   }
   .logo { height: 55px; }
 }
+.service{
+  text-align: center;
+  h1{
+    font-family: 'Proxima Nova';
+  }
+  h4{
+    font-family: 'Proxima Nova light';
+    font-size: 23px;
+    margin: 12px 0 35px;
+    line-height: 37px;
+    color: #8e8e8e;
+    text-transform: none;
+    letter-spacing: 0.8pt;
+  }
+}
+.block-service {
+  display: inline-block;
+  float: left;
+  box-sizing: border-box;
+  width: 49%;
+  height: 390px;
+  padding: 23px;
+  img{ height: 55px; }
+  h3{
+    font-family: 'Proxima Nova';
+    font-size: 32px;
+    margin: 12px 0 35px;
+    line-height: 44px;
+    color: #464646!important;
+    text-transform: none;
+    letter-spacing: 0pt;
+    padding: 0 40px;
+  }
+  .price {
+    font-family: 'Proxima Nova';
+    color: #464646;
+    margin: 40px 0 20px 0;
+    font-size: 13pt;
+    span{
+      font-family: 'Proxima Nova';
+      font-size: 20pt;
+      append{
+        font-size: 80%;
+        position: relative;
+        top: -7px;
+        right: -5px;
+      }
+    }
+  }
+}
+.block-service:first-of-type,
+.block-service:nth-of-type(2){ border-bottom: 1pt solid #d0d0d0; }
+.block-service:nth-child(odd){ border-right: 1pt solid #d0d0d0; }
 .privacy {
   .span8 {
 		margin-top:60px;
