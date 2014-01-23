@@ -1,13 +1,6 @@
-class Subscription < ActiveRecord::Base
+class Plan < ActiveRecord::Base
   belongs_to :membership
   attr_accessible :stripe_plan_id
 
-  def active?
-    canceled_at.blank?
-  end
-
-  def canceled?
-    !active?
-  end
 
 end
