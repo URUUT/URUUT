@@ -258,7 +258,7 @@ class Project < ActiveRecord::Base
     self.live = 1
     self.ready_for_approval = 0
     self.approval_date = Date.today
-    self.campaign_deadline = self.approval_date + (self.duration.to_i).days
+    self.campaign_deadline = self.approval_date.end_of_day + (self.duration.to_i).days
     self.status = "Funding Active"
     Project.delay.send_approval_email(self)
     project_create_badge = Merit::Badge.new(id:2, name:"Project creation badge")
