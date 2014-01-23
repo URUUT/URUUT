@@ -43,7 +43,7 @@
         %li
           %s - Free Google SEO Grant Application
       - if user_signed_in?
-        = form_for 'user', url: user_memberships_path(current_user, membership_type: 'fee') do |f|
+        = form_for 'user', url: user_membership_path(current_user, current_user.membership, membership_type: 'fee'), method: :put do |f|
           = f.submit 'Select ►', class: 'btn', style: 'font-weight: bold;'
       - else
         = link_to new_user_registration_path do
@@ -83,7 +83,7 @@
         %li
           %s - Free Google SEO Grant Application
       - if user_signed_in?
-        = form_for 'user', url: user_memberships_path(current_user, membership_type: 'basic') do |f|
+        = form_for 'user', url: user_membership_path(current_user, current_user.membership, membership_type: 'basic'), method: :put do |f|
           = f.submit 'Select ►', class: 'btn', style: 'font-weight: bold;'
       - else
         = link_to new_user_registration_path do
@@ -118,7 +118,7 @@
         %li - Volunteer Solicitation Tracker
         %li - Free Google SEO Grant Application
       - if user_signed_in?
-        = form_for 'user', url: user_memberships_path(current_user, membership_type: 'plus') do |f|
+        = form_for 'user', url: user_membership_path(current_user, current_user.membership, membership_type: 'plus'), method: :put do |f|
           = f.submit 'Select ►', class: 'btn', style: 'font-weight: bold;'
       - else
         = link_to new_user_registration_path do
