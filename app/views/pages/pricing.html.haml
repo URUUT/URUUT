@@ -8,8 +8,40 @@
 
 %section.full-width.our-mission.gray-band{style: 'text-align: center;'}
   .container
-    %div.span4
+    %div.span4.plan
       %h4 Fee-based
+      .price
+        %h1
+          5
+          %sup %
+        %p of money raised
+        %hr
+      %h4 PACKAGE FEATURES
+      %ul
+        %li - Multi-donor Social Fundraising Platform
+        %li - Uruut Payments Powered by Stripe
+        %li - All or Nothing Funding Engine
+        %li - Realtime Campaign Analytics
+        %li - Uruut.com Marketplace
+        %li - Easy to Use Campaign Setup Wizard
+        %li - Campaign Social Analytics
+        %li - Unlimited Projects
+        %li - Basic Donor Management / CRM
+        %li - Social and Email Outreach Platform
+        %li - Unlimited Email Support
+        %li - Total Flexibility Cancel Anytime*
+        %li
+          %s - No Transaction Fee^
+        %li
+          %s - All or Nothing AND Partial Funding
+        %li
+          %s - Auto Tax Letter Generation
+        %li
+          %s - Post Funding Communication Center
+        %li
+          %s - Volunteer Solicitation Tracker
+        %li
+          %s - Free Google SEO Grant Application
       - if user_signed_in?
         = form_for 'user', url: user_memberships_path(current_user, membership_type: 'fee') do |f|
           = f.submit 'Select ►', class: 'btn', style: 'font-weight: bold;'
@@ -17,8 +49,39 @@
         = link_to new_user_registration_path do
           .btn
             Sign up ►
-    %div.span4{style: 'box-sizing: border-box;border-left: 2pt solid #d0d0d0;border-right: 2pt solid #d0d0d0;'}
-      %h4 Basic
+    %div.span4.lateral-border.plan
+      %h4.font-bold Basic
+      .price
+        %h1
+          %append $
+          99
+        %p per month
+        %hr
+      %h4 PACKAGE FEATURES
+      %ul
+        %li - Multi-donor Social Fundraising Platform
+        %li - Uruut Payments Powered by Stripe
+        %li - All or Nothing Funding Engine
+        %li - Realtime Campaign Analytics
+        %li - Uruut.com Marketplace
+        %li - Easy to Use Campaign Setup Wizard
+        %li - Campaign Social Analytics
+        %li - Unlimited Projects
+        %li - Basic Donor Management / CRM
+        %li - Social and Email Outreach Platform
+        %li - Unlimited Email Support
+        %li - Total Flexibility Cancel Anytime*
+        %li - No Transaction Fee^
+        %li
+          %s - All or Nothing AND Partial Funding
+        %li
+          %s - Auto Tax Letter Generation
+        %li
+          %s - Post Funding Communication Center
+        %li
+          %s - Volunteer Solicitation Tracker
+        %li
+          %s - Free Google SEO Grant Application
       - if user_signed_in?
         = form_for 'user', url: user_memberships_path(current_user, membership_type: 'basic') do |f|
           = f.submit 'Select ►', class: 'btn', style: 'font-weight: bold;'
@@ -26,8 +89,34 @@
         = link_to new_user_registration_path do
           .btn
             Sign up ►
-    %div.span4
+    %div.span4.plan
       %h4 Plus
+      .price
+        %h1
+          %append $
+          149
+        %p per month
+        %hr
+      %h4 PACKAGE FEATURES
+      %ul
+        %li - Multi-donor Social Fundraising Platform
+        %li - Uruut Payments Powered by Stripe
+        %li - All or Nothing Funding Engine
+        %li - Realtime Campaign Analytics
+        %li - Uruut.com Marketplace
+        %li - Easy to Use Campaign Setup Wizard
+        %li - Campaign Social Analytics
+        %li - Unlimited Projects
+        %li - Basic Donor Management / CRM
+        %li - Social and Email Outreach Platform
+        %li - Unlimited Email Support
+        %li - Total Flexibility Cancel Anytime*
+        %li - No Transaction Fee^
+        %li - All or Nothing AND Partial Funding
+        %li - Auto Tax Letter Generation
+        %li - Post Funding Communication Center
+        %li - Volunteer Solicitation Tracker
+        %li - Free Google SEO Grant Application
       - if user_signed_in?
         = form_for 'user', url: user_memberships_path(current_user, membership_type: 'plus') do |f|
           = f.submit 'Select ►', class: 'btn', style: 'font-weight: bold;'

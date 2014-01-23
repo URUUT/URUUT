@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   layout "application", :except => [:index, :discover, :about, :contact]
-  layout "landing", :only => [:index, :discover, :about, :home, :funding_sources, :search, :pricing_page]
+  layout "landing", :only => [:index, :discover, :about, :home, :funding_sources, :search, :pricing]
   skip_before_filter :set_previous_page
   before_filter :set_session_page
   before_filter :set_session_wizard, except: :home
