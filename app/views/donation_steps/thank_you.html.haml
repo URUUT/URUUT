@@ -42,7 +42,7 @@
   //     picture: 'http://fbrell.com/f8.jpg',
   //     name: '#{@project.title}',
   //     caption: '#{@project.category}',
-  //     description: "I'm RUUTing for this community project and you should, too. Join me by making a donation on @URUUT’s collaborative funding platform. Let’s make a difference in our community!"
+  //     description: "I'm RUUTing for this project and you should, too. Join me by making a donation on @URUUT’s collaborative funding platform. Let’s make a difference in our community!"
   //   };
 
   //   function callback(response) {
@@ -56,7 +56,7 @@
 
   $('.tw-share').click(function(e) {
     e.preventDefault();
-    var url = "http://twitter.com/share?url=#{@project.bitly}&text=I%27m%20RUUTing%20for%20this%20community%20project%20on%20%40URUUT%20and%20you%20should%2C%20too.%20Join%20me%20in%20making%20a%20donation%3A%20&hashtags=GetRUUTed";
+    var url = "http://twitter.com/share?url=#{@project.bitly}&text=I%27m%20RUUTing%20for%20this%20project%20on%20%40URUUT%20and%20you%20should%2C%20too.%20Join%20me%20in%20making%20a%20donation%3A%20&hashtags=GetRUUTed";
 
     window.open(url);
   });
