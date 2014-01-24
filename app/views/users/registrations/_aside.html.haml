@@ -1,0 +1,25 @@
+.span4
+  .well.without-title{style: "margin-top: 75px;"} 
+    .box-content
+      %h5.label-green{style: "margin-bottom: 7px;"} ORDER SUMMARY
+      %p{style: "margin-bottom: 0;"}
+        %b Plan: 
+        Uruut Basic Subscription
+        %br
+        %b Price: 
+        $99 / mo
+        %br
+        %b Amount to be charged today: 
+        $99.00
+        %br
+        %i Upgrade or cancel online, anytime.
+
+    .box-content
+      %h5.label-green{style: "margin-bottom: 7px;"} NOT READY TO BUY NOW?
+      = link_to 'Request A Free Demo ►', pricing_pages_path
+      %br
+      = link_to 'Request More Information ►', pricing_pages_path
+
+    .box-content
+      %h5.label-green{style: "margin-bottom: 7px;"} ARE YOU A DONOR?
+      = link_to 'View Fundraising Projects Here ►', pricing_pages_path

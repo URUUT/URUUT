@@ -5,12 +5,11 @@
 
 
 .span8{:style => "margin-top:35px;"}
-  %h4 Create an account
+  %h4 SIGN UP (STEP 1 OF 2)
   = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => "well"}) do |f|
     = devise_error_messages!
-
-    .req-legend
-      *Required
+    %h4 Tell us about you.
+    %br
     .row
       .span3.well-half
         = f.label :first_name, class: "label-green" do
@@ -24,39 +23,29 @@
         = f.text_field :last_name
 
     %div
-      = f.label :email, class: "label-green" do
+      = f.label :organization_name, class: "label-green" do
         %span.error-container
-        Email*
+        Organization name*
       = f.email_field :email
 
-    - unless session["devise.provider"] && session["devise.uid"]
-      .row
-        .span3.well-half
-          = f.label :password, class: "label-green" do
-            Password*
-            %span.error-container
-          = f.password_field :password, id: "user_pass"
+    %div
+      = f.label :email, class: "label-green" do
+        %span.error-container
+        Email address*
+      = f.email_field :email
 
-        .span3.well-half
-          = f.label :password_confirmation, class: "label-green" do
-            Password Confirmation*
-            %span.error-container.error-password-confirmation
-          = f.password_field :password_confirmation
+    .row
+      .span3.well-half
+        = f.label :telephone, class: "label-green" do
+          Phone number*
+          %span.error-container
+        = f.password_field :telephone, id: "user_pass"
 
-    %hr{style: "margin: 0 -19px; background: #e0e0e0;"}
     %div.inline
       = button_tag(type: 'submit', class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:left; border-radius: 5px;") do
-        Create My Account ►
+        Next Step ►
 
-      %p{:style => "color:#403e37;float:left;width:270px;margin-top:25px;margin-left:20px;font-family:arial;"}
-        By creating an account, you agree to our
-        = link_to "terms of use", terms_pages_path
-        and
-        = link_to "privacy policy", privacy_pages_path
-
-  / = render "devise/shared/links"
-
-= render "social-login"
+= render "aside"
 
 :javascript
   $('#new_user').validate({

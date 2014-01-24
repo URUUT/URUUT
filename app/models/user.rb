@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   after_create :send_welcome_email
   after_create :assign_default_badge
 
-  attr_accessor :avatar_upload_width, :avatar_upload_height
+  attr_accessor :avatar_upload_width, :avatar_upload_height, :telephone
   # attr_accessible :title, :body
 
   validates_confirmation_of :password
