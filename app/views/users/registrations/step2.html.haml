@@ -1,0 +1,68 @@
+.row{:style => "margin-top:35px;"}
+  .span8{:style => "margin-top:15px;"}
+    %h4.font-bold SIGN UP (STEP 2 OF 2)
+    = form_for 'credit_card', html: { class: "well registration-edit"} do |f|
+      %h3
+        Billing Information
+      %div.name
+        = f.label :name do
+          NAME AS IT APPEARS ON CARD*
+          %span.error-container
+        = f.text_field :name
+      %div.card-number
+        = f.label :number do
+          CARD NUMBER*
+          %span.error-container
+        = f.text_field :number
+      %div.ccv
+        = f.label :cvc do
+          CVC*
+          %span.error-container
+        = f.text_field :cvc, style: 'width: 90%!important;'
+      %div.expiration.well-half
+        = f.label :expiration do
+          CARD EXPIRATION*
+          %span.italic{style: "font-size: 11px; letter-spacing: 0;"}
+            (MM / YYYY)
+          %span.error-container
+        = f.text_field :exp_month, id: 'card_month'
+        = f.text_field :exp_year, id: 'card_year'
+      %div
+        = f.label :billing_address do
+          BILLING STREET ADDRESS*
+          %span.error-container
+        = f.text_field :billing_address
+      %div
+        = f.label :city do
+          CITY*
+          %span.error-container
+        = f.text_field :city
+      %div.inline.well-half{style: "margin-right: 19px;"}
+        = f.label :state, class: "label-green" do
+          STATE*
+          %span.error-container
+        .selectParent{style: "width: 280px;"}
+          = f.select :state, options_for_select(['LA'], ['1']), {:include_blank => true}, {class: "styledSelect required"}
+
+      %div.inline.well-half{style: "vertical-align: top;"}
+        = f.label :zip_code do
+          ZIP CODE*
+          %span.error-container
+        = f.text_field :zip_code
+      .row
+        .span3.well-half
+          = f.label :password, class: "label-green" do
+            Password*
+            %span.error-container
+          = f.password_field :password, id: "user_pass"
+
+        .span3.well-half
+          = f.label :password_confirmation, class: "label-green" do
+            Password Confirmation*
+            %span.error-container.error-password-confirmation
+          = f.password_field :password_confirmation
+      %button.btn.btn-primary{:type => "submit", style: "width: 280px;"}
+        Finish ►
+  .span4
+    .well.info.without-title
+      = render 'summary'

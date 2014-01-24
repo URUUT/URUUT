@@ -42,10 +42,14 @@
         = f.password_field :telephone, id: "user_pass"
 
     %div.inline
-      = button_tag(type: 'submit', class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:left; border-radius: 5px;") do
+      = link_to users_sign_up_step2_path, class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:left; border-radius: 5px; width: 230px;" do
         Next Step ►
 
-= render "aside"
+.span4
+  .well.without-title{style: "margin-top: 75px;"} 
+    = render "summary"
+    = render "buy"
+    = render "donor"
 
 :javascript
   $('#new_user').validate({

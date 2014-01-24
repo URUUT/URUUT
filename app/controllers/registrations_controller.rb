@@ -48,6 +48,10 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def step2
+    @credit_card = CreditCard.new()
+  end
+
   def after_sign_up_path_for(resource)
     # sign_up_url = url_for(:action => 'create', :controller => 'registrations', :only_path => false, :protocol => 'http')
     if session[:redirect_url] == new_project_url
