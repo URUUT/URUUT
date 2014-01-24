@@ -1,5 +1,7 @@
 class RegistrationsController < Devise::RegistrationsController
 
+  layout "landing", only: [:confirmation]
+
   def edit
     @customer_card = Gateway::CardsService.new(current_user).find_card
   end

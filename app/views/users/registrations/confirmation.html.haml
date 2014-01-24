@@ -1,0 +1,26 @@
+%section.full-width.our-story
+  .container
+    %h1 Thank You! Your Uruut Account is Now Active.
+
+    %p{ style: 'margin: 12px 115px 35px;' }
+      Set up your first campaign, access Uruut’s powerful donor relationship management tools, or just start exploring.
+
+    = link_to new_project_path do
+      .btn
+        GET STARTED ►
+
+
+%section.full-width.our-mission.gray-band{style: 'text-align: center;'}
+  .container
+    %div.span6.plan
+      %h2 Watch the Welcome Video
+      .video
+        = image_tag 'video.png'
+    %div.span6
+      %h2 Need Help Getting Started?
+      %p{style: 'margin: 0;'} Download our Getting Started Guide (PDF).
+      %br
+      = link_to new_project_path do
+        .btn
+          DOWNLOAD ►
+

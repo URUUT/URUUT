@@ -61,8 +61,10 @@
             Password Confirmation*
             %span.error-container.error-password-confirmation
           = f.password_field :password_confirmation
-      %button.btn.btn-primary{:type => "submit", style: "width: 280px;"}
-        Finish ►
+
+      %div.inline
+        = link_to users_sign_up_confirmation_path, class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:left; border-radius: 5px; width: 230px;" do
+          Finish ►
   .span4
     .well.info.without-title
       = render 'summary'

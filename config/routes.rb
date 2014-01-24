@@ -21,6 +21,7 @@ Crowdfund::Application.routes.draw do
 
   devise_scope :user do
     get "/users/sign_up/step2" => "registrations#step2"
+    get "/users/sign_up/confirmation" => "registrations#confirmation"
   end
 
   get "contacts/new"
