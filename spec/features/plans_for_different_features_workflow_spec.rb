@@ -39,4 +39,15 @@ feature 'Change Plan Workflow' do
     expect(page).to have_content('Your membership is FEE')
   end
 
+  scenario 'User choose a basic plan', js: true do
+    visit edit_user_registration_path
+    click_link 'Change your subscription plan.'
+
+    within('.plan:nth-child(2)') do
+      click_button 'Select ►'
+    end
+
+    expect(page).to have_content('Your membership is BASIC')
+  end
+
 end
