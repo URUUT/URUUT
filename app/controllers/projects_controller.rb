@@ -160,7 +160,7 @@ class ProjectsController < ApplicationController
     end
 
     unless params[:project][:duration].blank?
-      params[:project][:campaign_deadline] = params[:project][:duration].to_i.days.from_now.to_time
+      params[:project][:campaign_deadline] = params[:project][:duration].to_i.days.from_now.end_of_day.to_time
     end
 
     session[:step] = params[:step]
