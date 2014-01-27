@@ -125,14 +125,16 @@
   .modal-footer
     %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal", style: "float: none; margin: 0 auto;"} Ok
 
+- if session[:step].nil? && @project.project_token.nil?
+  :javascript
+    localStorage.clear();
+
 :javascript
   $("#project_zip").attr("maxlength", '6');
+  connect = "#{@project.project_token}" || "#{session[:connected]}";
 
   $(function(){
-    connect = "#{@project.project_token}" || "#{session[:connected]}";
-    if(typeOf connect == 'undefined') {
-      localStorage.clear();
-    }
+
     $(".sponsor-info-form").validate({
       messages: {
         "project[zip]":{
@@ -163,10 +165,9 @@
       }
     });
 
-    $('.step-container[data-id="sponsor-info"] form').on('submit', function(e){
-      if ( connect.length > 0 ) {
+    $('form.sponsor-info-form').submit( function(e) {
       e.preventDefault();
-      if (!$(this).valid()) return;
+      if ( connect.length > 0 ) {
         $('.step-container[data-id="sponsor-info"] form input#project-submit').val("LOADING..");
         var data = $(this).serialize();
         var project = #{@project.id};
