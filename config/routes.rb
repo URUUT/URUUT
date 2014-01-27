@@ -167,6 +167,7 @@ Crowdfund::Application.routes.draw do
       get "discover"
       get "categories"
       get "chose_plan"
+      get "change_plan"
       post "contact"
       get "contact"
       post "contact_send"
