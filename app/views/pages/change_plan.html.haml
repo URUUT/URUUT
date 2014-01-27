@@ -5,7 +5,7 @@
     %row
       .span4
         %h4 ALL PLANS INCLUDE:
-        %ul
+        %ul.checked-list
           %li Dedicated launch manager (over $2500 value)
           %li Multi-donor fundraising platform
           %li Unlimited campaign hosting
@@ -25,10 +25,10 @@
           %li Robust donor email platform
           %li Easy donor data import / export
           %li Personalized customer support
-          %hr.short-gray{ style: 'margin-left: 0;' }
-            %p.green-subtitle CUSTOMER SATISFACTION GUARANTEE
-          %p
-            If for any reason you are not satisﬁed with Uruut, just let us know within 30 days of your initial purchase, and we'll refund your ﬁrst month's subscription fee. Please note the customer satisfaction guarantee only applies to the Pay Per Month plans ("Basic" and "Plus"), but does NOT apply to the Pay Per Transaction plan.
+        %hr.short-gray{ style: 'margin-left: 0;' }
+          %p.green-subtitle CUSTOMER SATISFACTION GUARANTEE
+        %p
+          If for any reason you are not satisﬁed with Uruut, just let us know within 30 days of your initial purchase, and we'll refund your ﬁrst month's subscription fee. Please note the customer satisfaction guarantee only applies to the Pay Per Month plans ("Basic" and "Plus"), but does NOT apply to the Pay Per Transaction plan.
       .span8
         .plan-box.text-center
           %header
@@ -54,8 +54,8 @@
             %ul.small-list
               %li - Pay 5% of amount raised
               %li - No monthly fees
-              = form_for 'user' do |f|
-                = f.submit 'Select Plan ►', class: 'btn btn-small btn-gray', style: 'font-weight: bold;'
+            = form_for 'user' do |f|
+              = f.submit 'Select Plan ►', class: 'btn btn-small btn-gray', style: 'font-weight: bold;'
         .plan-box.text-center
           %header
             URUUT PLUS
@@ -76,7 +76,7 @@
               %li - Automatically-generated tax receipts
               %li - Detailed Google Analytics reports
               %li - Advanced campaign transparency
-            = link_to 'View Full Plan Details', '#'
+            = link_to 'View Full Plan Details', '#', style: 'margin: 25px 0;'
             = form_for 'user' do |f|
               = f.submit 'Select Plan ►', class: 'btn', style: 'font-weight: bold;'
         %br

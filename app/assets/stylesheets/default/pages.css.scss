@@ -3037,6 +3037,7 @@ form[id*=project] {
 .padding{ padding: 50px 0; }
 .margin-bot{ margin-bottom: 40px; }
 .margin-top{ margin-top: 40px; }
+.margin-tb{ margin: 40px 0; }
 .text-center{ text-align: center; }
 .font-dark{ color: #464646 !important; }
 hr.short-gray {
@@ -3056,9 +3057,14 @@ hr.short-gray {
   word-spacing: 1.5pt;
   letter-spacing: 0pt;
 }
+ul.checked-list{
+  list-style: none;
+  margin-left: 0;
+  li{ margin-bottom: 5px; }
+}
 .plan-box {
   width: 300px;
-  height: 550px;
+  height: 590px;
   display: inline-block;
   background: #fff;
   margin-right: 17px;
@@ -3075,22 +3081,25 @@ hr.short-gray {
   }
   .plan{
     padding: 12px;
+    a{ display: inline-block; }
     b {
       font-size: 11pt;
       line-height: 20pt;
       margin: 5px 0;
     }
+    p{ line-height: 16pt; }
     ul{
       font-family: 'Proxima Nova';
       margin: 20px 0;
     }
     .small-list{
-      margin: 5px 0;
+      margin: 0;
       li{
+        margin: 0;
         font-size: 10pt;
       }
     }
-    form{ margin: 20px 0; }
+    form{ margin: 0; }
     .price{
       h1{
         font-size: 60px;
@@ -3102,11 +3111,13 @@ hr.short-gray {
   .btn{
     width: 100%;
     margin: 0;
+    margin-top: 20px;
     padding: 15px 0;
     &.btn-small {
       width: 150px;
       font-size: 10pt;
       padding: 7pt 0;
+      margin: 20px 0;
     }
     &.btn-gray {
       background: #8e8e8e;
