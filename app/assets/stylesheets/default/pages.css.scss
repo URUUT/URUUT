@@ -3061,6 +3061,10 @@ ul.checked-list{
   list-style: none;
   margin-left: 0;
   li{ margin-bottom: 5px; }
+  li:before{
+    content: asset-url('checkbox.png', image);
+    margin-right: 3px;
+  }
 }
 .plan-box {
   width: 300px;

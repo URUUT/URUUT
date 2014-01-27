@@ -81,7 +81,8 @@
             = form_for 'user' do |f|
               = f.submit 'Select Plan ►', class: 'btn', style: 'font-weight: bold;'
         %br
-        %i * A credit card transaction processing fee equal to 2.99% of amount raised,plus $0.30 per transaction applies to all plans.
+        %p.text-center{ style: 'width: 435px; margin:auto;'}
+          %i * A credit card transaction processing fee equal to 2.99% of amount raised, plus $0.30 per transaction applies to all plans.
 %section.full-width
   .container.padding
     = image_tag 'powered-by.png', class: 'powered-logo'
