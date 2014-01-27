@@ -1,11 +1,84 @@
-%section.full-width.our-story.gray-band{style: 'text-align: center;'}
+%section.full-width.gray-band
   .container
-    %h1 Choose the Plan That’s Right For You.
+    %h1.green-title.text-center Choose the Plan That’s Right For You.
 
-%section.full-width.our-story
-  .container
-    %h1 Integrate With Your Existing Website
-    %p
-      Take full advantage of the Uruut platform by seamlessly integrating it into your website.
-      = link_to 'contact us', contact_pages_path
-      for more information and a quote.
+    %row
+      .span4
+        %b.font-dark ALL PLANS INCLUDE:
+        %ul
+          %li Dedicated launch manager (over $2500 value)
+          %li Multi-donor fundraising platform
+          %li Unlimited campaign hosting
+          %li Funds released in 7 days, guaranteed
+          %li Upload photos, videos & stories
+          %li Automatic email thank you letters
+          %li Integrated social media sharing
+          %li Donation by credit cards and checks
+          %li Anonymous donations accepted
+          %li Donor perks and beneﬁts engine
+          %li Transparency workroom
+          %li Campaign updated platform
+          %li Donor relationship management
+          %li Donor contact and giving reports
+          %li Campaign analytics and reporting
+          %li Social communication dashboard
+          %li Robust donor email platform
+          %li Easy donor data import / export
+          %li Personalized customer support
+          %hr.short-gray{ style: 'margin-left: 0;' }
+            %p.green-subtitle CUSTOMER SATISFACTION GUARANTEE
+          %p
+            If for any reason you are not satisﬁed with Uruut, just let us know within 30 days of your initial purchase, and we'll refund your ﬁrst month's subscription fee. Please note the customer satisfaction guarantee only applies to the Pay Per Month plans ("Basic" and "Plus"), but does NOT apply to the Pay Per Transaction plan.
+
+      .span8
+        .plan-box.text-center
+          %header
+            URUUT BASIC
+          .plan
+            %h4 PAY MONTHLY
+            .price
+              %h1
+                %append $
+                99
+                %sup *
+              %p per month
+              %hr
+            %ul
+              %li - Convenient, predictable monthly cost
+              %li - Fundraising resources & experts
+              %li - No contracts. Cancel or upgrade anytime
+              %li - “All or Nothing” campaigns only
+              = form_for 'user' do |f|
+                = f.submit 'Select Plan ►', class: 'btn', style: 'font-weight: bold;'
+
+        .plan-box.text-center
+          %header
+            URUUT PLUS
+          .plan
+            %h4 PAY MONTHLY
+            .price
+              %h1
+                %append $
+                149
+                %sup *
+              %p per month
+              %hr
+            %b
+              Our most flexible and transparent solution includes all the benefits of the $99 monthly plan, PLUS:
+            %ul
+              %li - Convenient, predictable monthly cost
+              %li - Fundraising resources & experts
+              %li - No contracts. Cancel or upgrade anytime
+              %li - “All or Nothing” campaigns only
+              = form_for 'user' do |f|
+                = f.submit 'Select Plan ►', class: 'btn', style: 'font-weight: bold;'
+        %br
+        %i * A credit card transaction processing fee equal to 2.99% of am
+%section.full-width
+  .container.padding
+    %h1.green-title Integrate With Your Existing Website
+    .normal-paragraph
+      %p
+        Take full advantage of the Uruut platform by seamlessly integrating it into your website.
+        = link_to 'contact us', contact_pages_path
+        for more information and a quote.
