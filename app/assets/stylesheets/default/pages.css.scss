@@ -3182,6 +3182,53 @@ ul.checked-list{
     }
   }
 }
+.change-plan{
+  header{
+    border-bottom: 5pt solid #81c263;
+    padding: 30px 0 0;
+    margin-bottom: 30px;
+    h1{
+      text-align: left;
+      font-size: 18pt;
+    }
+  }
+  p{
+    font-family: 'Proxima Nova';
+    font-size: 12pt;
+  }
+  p.green-subtitle {
+    color: #81c263;
+    font: normal 16px/18px "Proxima Nova Bold", arial, sans-serif;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .plan{
+    padding: 13px 0;
+    ul { color: #8e8e8e; }
+  }
+  .btn{
+    width: 263px;
+    margin: 0;
+  }
+  .plan-with-border{
+    border: 4pt solid #81c263;
+    position: relative;
+    box-sizing: border-box;
+    padding: 13px;
+    &:before{
+      content: 'CURRENT SELECTION';
+      color: #81c263;
+      font-family: 'Proxima Nova Semi';
+      position: absolute;
+      top: -11px;
+      background: #fff;
+      padding: 0 10px;
+      display: inline-block;
+      left: 70px;
+      float: left;
+    }
+  }
+}
 .custom-plan{
   h1{ margin-bottom: 50px; }
   h3{

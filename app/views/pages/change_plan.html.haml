@@ -1,24 +1,25 @@
 %section.full-width.change-plan
   .container
-    .header
-      %h1.text-center.margin-bot CHANGE YOUR SUBSCRIPTION.
+    %header
+      %h1 CHANGE YOUR SUBSCRIPTION.
 
     %p.green-subtitle WANT TO CHANGE YOUR SUBSCRIPTION PLAN?
     %p
       We know nonprofits needs are always changing, so we make it easy for you to change your subscription plan as that need arises.
-
+    %br
     %p
       %b Choose your new subscription plan below:
+    %br
 
-    %row
-      %div.span4.plan
-        %h4 Fee-based
+    .row.text-center
+      .span4.plan
+        %h4 PAY PER TRANSACTION
         .price
           %h1
             5
             %sup %
           %p of money raised
-          %hr
+          %br
         %h4 PACKAGE FEATURES
         %ul
           %li - Dedicated launch manager
@@ -55,14 +56,14 @@
           %li
             %s - Advanced campaign transparency
 
-      %div.span4.plan
+      .span4.plan.plan-with-border
         %h4.font-bold Basic
         .price
           %h1
             %append $
             99
           %p per month
-          %hr
+          %br
         %h4 PACKAGE FEATURES
         %ul
           %li - Dedicated launch manager
@@ -96,14 +97,14 @@
           %li
             %s - Advanced campaign transparency
 
-      %div.span4.plan
+      .span4.plan
         %h4 Plus
         .price
           %h1
             %append $
             149
           %p per month
-          %hr
+          %br
         %h4 PACKAGE FEATURES
         %ul
           %li - Dedicated launch manager
@@ -132,6 +133,7 @@
           %li - Automatically-generated tax receipts
           %li - Detailed Google Analytics reports
           %li - Advanced campaign transparency
-
+    %br
+    .row.text-center
       = form_for 'user' do |f|
         = f.submit 'CONFIRM CHANGE ►', class: 'btn', style: 'font-weight: bold;'
