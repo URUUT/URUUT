@@ -3035,6 +3035,8 @@ form[id*=project] {
 .padding-bot{ padding-bottom: 50px; }
 .padding-top{ padding-top: 50px; }
 .padding{ padding: 50px 0; }
+.margin-bot{ margin-bottom: 40px; }
+.margin-top{ margin-top: 40px; }
 .text-center{ text-align: center; }
 .font-dark{ color: #464646 !important; }
 hr.short-gray {
@@ -3056,6 +3058,7 @@ hr.short-gray {
 }
 .plan-box {
   width: 300px;
+  height: 550px;
   display: inline-block;
   background: #fff;
   margin-right: 17px;
@@ -3064,13 +3067,50 @@ hr.short-gray {
   box-sizing: border-box;
   box-shadow: 0px 0px 10px -3px rgba(0, 0, 0, 0.45);
   header{
-    padding: 15px;
+    padding: 12px;
     background: #81c263;
     color: #fff;
+    font-size: 12pt;
+    font-family: 'Proxima Nova Semi';
   }
   .plan{
-    padding: 15px;
-    ul{ font-family: 'Proxima Nova'; }
+    padding: 12px;
+    b {
+      font-size: 11pt;
+      line-height: 20pt;
+      margin: 5px 0;
+    }
+    ul{
+      font-family: 'Proxima Nova';
+      margin: 20px 0;
+    }
+    .small-list{
+      margin: 5px 0;
+      li{
+        font-size: 10pt;
+      }
+    }
+    form{ margin: 20px 0; }
+    .price{
+      h1{
+        font-size: 60px;
+        letter-spacing: 0px;
+        append{ left: -13px; }
+      }
+    }
+  }
+  .btn{
+    width: 100%;
+    margin: 0;
+    padding: 15px 0;
+    &.btn-small {
+      width: 150px;
+      font-size: 10pt;
+      padding: 7pt 0;
+    }
+    &.btn-gray {
+      background: #8e8e8e;
+    }
   }
 }
 .plan-box:last-of-type { margin-right: 0; }

@@ -1,10 +1,10 @@
 %section.full-width.gray-band
   .container
-    %h1.green-title.text-center Choose the Plan That’s Right For You.
+    %h1.green-title.text-center.margin-bot Choose the Plan That’s Right For You.
 
     %row
       .span4
-        %b.font-dark ALL PLANS INCLUDE:
+        %h4 ALL PLANS INCLUDE:
         %ul
           %li Dedicated launch manager (over $2500 value)
           %li Multi-donor fundraising platform
@@ -29,7 +29,6 @@
             %p.green-subtitle CUSTOMER SATISFACTION GUARANTEE
           %p
             If for any reason you are not satisﬁed with Uruut, just let us know within 30 days of your initial purchase, and we'll refund your ﬁrst month's subscription fee. Please note the customer satisfaction guarantee only applies to the Pay Per Month plans ("Basic" and "Plus"), but does NOT apply to the Pay Per Transaction plan.
-
       .span8
         .plan-box.text-center
           %header
@@ -48,9 +47,15 @@
               %li - Fundraising resources & experts
               %li - No contracts. Cancel or upgrade anytime
               %li - “All or Nothing” campaigns only
+            = form_for 'user' do |f|
+              = f.submit 'Select Plan ►', class: 'btn', style: 'font-weight: bold;'
+            %hr
+            %b OR PAY PER TRANSACTION
+            %ul.small-list
+              %li - Pay 5% of amount raised
+              %li - No monthly fees
               = form_for 'user' do |f|
-                = f.submit 'Select Plan ►', class: 'btn', style: 'font-weight: bold;'
-
+                = f.submit 'Select Plan ►', class: 'btn btn-small btn-gray', style: 'font-weight: bold;'
         .plan-box.text-center
           %header
             URUUT PLUS
@@ -63,17 +68,19 @@
                 %sup *
               %p per month
               %hr
-            %b
-              Our most flexible and transparent solution includes all the benefits of the $99 monthly plan, PLUS:
+            %p
+              %b
+                Our most flexible and transparent solution includes all the benefits of the $99 monthly plan, PLUS:
             %ul
-              %li - Convenient, predictable monthly cost
-              %li - Fundraising resources & experts
-              %li - No contracts. Cancel or upgrade anytime
-              %li - “All or Nothing” campaigns only
-              = form_for 'user' do |f|
-                = f.submit 'Select Plan ►', class: 'btn', style: 'font-weight: bold;'
+              %li - Partial funding campaigns
+              %li - Automatically-generated tax receipts
+              %li - Detailed Google Analytics reports
+              %li - Advanced campaign transparency
+            = link_to 'View Full Plan Details', '#'
+            = form_for 'user' do |f|
+              = f.submit 'Select Plan ►', class: 'btn', style: 'font-weight: bold;'
         %br
-        %i * A credit card transaction processing fee equal to 2.99% of am
+        %i * A credit card transaction processing fee equal to 2.99% of amount raised,plus $0.30 per transaction applies to all plans.
 %section.full-width
   .container.padding
     %h1.green-title Integrate With Your Existing Website
