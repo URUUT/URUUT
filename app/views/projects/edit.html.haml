@@ -194,7 +194,8 @@
 
   $(".submit-finish-project").on("click", function(event){
     event.preventDefault();
-    if ($('#large_image').attr('data-image') == "true" && localStorage.getItem('step-assets') ) {
+    var imageUrl = "#{@project.large_image}";
+    if (($('#large_image').attr('data-image') == "true" && localStorage.getItem('step-assets')) || ($('#large_image').attr('data-image') && typeof imageUrl !== 'undefined') ) {
       $.ajax({
         type:'POST',
         url: '#{projects_submit_project_url}',

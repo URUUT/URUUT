@@ -126,8 +126,9 @@
     %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal", style: "float: none; margin: 0 auto;"} Ok
 
 :javascript
-  $("#project_zip").attr("maxlength", '6')
+  $("#project_zip").attr("maxlength", '6');
   $(function(){
+    connect = "#{@project.project_token}" || "#{session[:connected]}";
     $(".sponsor-info-form").validate({
       messages: {
         "project[zip]":{
