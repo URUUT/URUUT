@@ -26,8 +26,9 @@
           %li Easy donor data import / export
           %li Personalized customer support
         %hr.short-gray{ style: 'margin-left: 0;' }
-          %p.green-subtitle CUSTOMER SATISFACTION GUARANTEE
-        %p
+        = image_tag 'badge-100.png', class: 'badge-100'
+        %p.green-subtitle CUSTOMER SATISFACTION GUARANTEE
+        %p{ style: 'line-height: 16pt;' }
           If for any reason you are not satisﬁed with Uruut, just let us know within 30 days of your initial purchase, and we'll refund your ﬁrst month's subscription fee. Please note the customer satisfaction guarantee only applies to the Pay Per Month plans ("Basic" and "Plus"), but does NOT apply to the Pay Per Transaction plan.
       .span8
         .plan-box.text-center
@@ -83,9 +84,11 @@
         %i * A credit card transaction processing fee equal to 2.99% of amount raised,plus $0.30 per transaction applies to all plans.
 %section.full-width
   .container.padding
+    = image_tag 'powered-by.png', class: 'powered-logo'
     %h1.green-title Integrate With Your Existing Website
     .normal-paragraph
       %p
         Take full advantage of the Uruut platform by seamlessly integrating it into your website.
-        = link_to 'contact us', contact_pages_path
-        for more information and a quote.
+        %br
+          = link_to 'Contact us', contact_pages_path
+          for more information and a quote.

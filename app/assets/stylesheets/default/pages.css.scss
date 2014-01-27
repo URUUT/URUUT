@@ -3081,13 +3081,12 @@ ul.checked-list{
   }
   .plan{
     padding: 12px;
-    a{ display: inline-block; }
+    a{ display: inline-block; text-decoration: underline; }
     b {
       font-size: 11pt;
       line-height: 20pt;
       margin: 5px 0;
     }
-    p{ line-height: 16pt; }
     ul{
       font-family: 'Proxima Nova';
       margin: 20px 0;
@@ -3158,6 +3157,18 @@ ul.checked-list{
     border: 0;
     background: gray;
   }
+}
+.badge-100 {
+  display: inline-block;
+  float: left;
+  height: 50px;
+  margin-right: 5px;
+  margin-top: -10px;
+}
+.powered-logo {
+  display: inline-block;
+  float: right;
+  margin-top: 20px;
 }
 .plan{
   ul{
