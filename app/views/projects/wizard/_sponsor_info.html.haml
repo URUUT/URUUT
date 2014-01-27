@@ -130,6 +130,9 @@
 
   $(function(){
     connect = "#{@project.project_token}" || "#{session[:connected]}";
+    if(typeOf connect == 'undefined') {
+      localStorage.clear();
+    }
     $(".sponsor-info-form").validate({
       messages: {
         "project[zip]":{
