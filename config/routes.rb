@@ -182,7 +182,7 @@ Crowdfund::Application.routes.draw do
       get "funding_sources"
       get "media"
       get "landing"
-      get 'features'
+      get 'donor_relationship'
     end
   end
 
