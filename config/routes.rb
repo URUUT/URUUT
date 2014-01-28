@@ -184,6 +184,7 @@ Crowdfund::Application.routes.draw do
       get "landing"
       get 'donor_relationship'
       get 'donor_convenience'
+      get 'fundraising'
     end
   end
 
