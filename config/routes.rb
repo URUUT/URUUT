@@ -181,6 +181,7 @@ Crowdfund::Application.routes.draw do
       get "pricing"
       get "funding_sources"
       get "media"
+      get "landing"
     end
   end
 
