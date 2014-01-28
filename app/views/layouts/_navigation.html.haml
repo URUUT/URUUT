@@ -3,15 +3,18 @@
 
 %ul.nav
   %li
+    = link_to "Features", browse_projects_path, style: "#{"color: #70BF4C !important" if session[:page_active].eql?("features")}"
+  %li
+    = link_to "Pricing", pricing_pages_path, style: "#{"color: #70BF4C !important" if session[:page_active].eql?("pricing")}"
+  %li
+    = link_to "Resources", pricing_pages_path, style: "#{"color: #70BF4C !important" if session[:page_active].eql?("resources")}"
+  %li
     = link_to "Fund Projects", browse_projects_path, style: "#{"color: #70BF4C !important" if session[:page_active].eql?("project")}"
   %li
-    = link_to "/projects/new", style: "#{"color: #70BF4C !important" if session[:page_active].eql?("funding")}" do
-      Get Funding
-  %li
-    = link_to about_pages_path, style: "#{"color: #70BF4C !important" if session[:page_active].eql?("about") }" do
-      About URUUT
-  -#%li
-    -#= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
+    = link_to "Demo", "/projects/new", style: "#{"color: #70BF4C !important" if session[:page_active].eql?("funding")}"
+  - unless user_signed_in?
+    %li
+      = link_to "Sign Up", new_user_registration_path, :class => "sign-up-link"
 
 %ul.pull-right.right.logged-in
   - if user_signed_in?
@@ -34,8 +37,6 @@
   - else
     %li.dropdown
       = link_to "Log In", "#", :class => "dropdown-toggle", 'data-toggle' => 'dropdown'
-      %span.or or
-      = link_to "Sign Up", new_user_registration_path, :class => "sign-up-link"
       %div.log-in.dropdown-menu
         .drop-wrapper
           .dropdown-arrow

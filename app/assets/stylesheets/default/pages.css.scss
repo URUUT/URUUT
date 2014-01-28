@@ -232,9 +232,13 @@ select {
 	text-align: center;
 }
 
+.navbar .pull-right > li > .dropdown-menu {
+  right: -85px!important;
+}
+
 .right {
-	.dropdown.signed-in {
-		.dropdown-menu {
+  .dropdown.signed-in {
+    .dropdown-menu {
 			border-radius:0;
 			padding:20px;
 			ul {
@@ -713,7 +717,7 @@ footer {
 		ul {
 			display:inline-block;
 			margin:0;
-			padding-right:50px;
+			padding-right:49px;
 			vertical-align:top;
 			&:last-child {
 				padding-right:0;}
@@ -795,7 +799,25 @@ footer {
     }
   }
 }
-
+a .btn {
+  background: #70bf4c;
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.45);
+  color: #fff;
+  font-size: 18px;
+  margin-left: 25px;
+  margin-top: -5px;
+  padding: 22px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.45);
+}
+footer .btn {
+  font-size: 10pt;
+  padding: 10pt;
+  width: 125px;
+  margin-left: 0;
+  margin-top: 15px;
+  &.btn-gray { background: #8e8e8e!important; }
+}
 .social {
   text-align:right;
   a img {
@@ -820,15 +842,11 @@ ul.nav {
   color:#242424;
 	margin-left:64px !important;
 	li {
-		border-left:1px solid #55554d;
-    padding:0 10px;
+    padding:0 15px;
 		position:relative;
-		width:139px;
-		&:last-child {
-			border-right:1px solid #55554d;}
 		a {
 			color:#fff !important;
-      font-family:'Proxima Nova Semi', sans-serif;
+      font-family:'Proxima Nova', sans-serif;
       font-size:12px;
 			letter-spacing:2px;
 			line-height:60px !important;
