@@ -3455,6 +3455,52 @@ ul.checked-list{
       bottom: 10px;
     }
   }
+  .booble-section{
+    h1, h4 {
+      font-family: 'Proxima Nova';
+      text-align: center;
+      text-transform: none;
+    }
+    h4{
+      font-size: 17pt;
+      color: #8e8e8e;
+      margin-bottom: 100px;
+    }
+    img{
+      height: 100px;
+      display: inline-block;
+      float: left;
+      margin-right: 20px;
+      margin-left: 13px;
+    }
+    .booble{
+      position: relative;
+      top: -40px;
+      height: 150px;
+      display: table-cell;
+      vertical-align: middle;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      p{ font-size: 13pt; line-height: 18pt; }
+    }
+    .booble:after{
+      position: absolute;
+      bottom: -25px;
+      content: '';
+      width: 0; 
+      height: 0;
+      border-top: 30px solid #fff;
+      border-left: 30px solid transparent; 
+      border-right: 30px solid transparent; 
+    }
+    .data{
+      display: inline-block;
+      float: left;
+      width: 315px;
+      margin-top: 20px;
+    }
+  }
 }
 
 .block-service:first-of-type,
