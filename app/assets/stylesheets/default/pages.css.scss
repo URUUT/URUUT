@@ -3416,10 +3416,50 @@ ul.checked-list{
       text-decoration: underline;
     }
   }
+  .block-service{
+    height: 500px;
+    text-align: left;
+    position: relative;
+    img {
+      height: 65px;
+      display: inline-block;
+      float: left;
+      margin-right: 10px;
+    }
+    h3{
+      vertical-align: middle;
+      line-height: 25pt;
+      height: 50pt;
+      margin: 0;
+      display: table-cell;
+      width: 340px;
+      padding: 0;
+    }
+    h4{
+      font-family: 'Proxima Nova Bold';
+      font-size: 12pt;
+      color: #70bf4c;
+      text-transform: uppercase;
+      line-height: 18pt;
+      letter-spacing: 3pt;
+      margin: 30px 0;
+    }
+    ul{
+      text-indent: -18px;
+      margin-left: 18px;
+      margin-bottom: 30px;
+    }
+    a{
+      font-size: 12pt;
+      position: absolute;
+      bottom: 10px;
+    }
+  }
 }
+
 .block-service:first-of-type,
 .block-service:nth-of-type(2){ border-bottom: 1pt solid #d0d0d0; }
-.block-service:nth-child(odd){ border-right: 1pt solid #d0d0d0; }
+.block-service:nth-of-type(odd){ border-right: 1pt solid #d0d0d0; }
 .privacy {
   .span8 {
 		margin-top:60px;
