@@ -11,7 +11,7 @@
 
       = link_to '#', class: 'arrow' do
         LEARN MORE
-        = image_tag 'arrow.png'
+        = image_tag 'arrow-btm.png'
 
       %hr
 
@@ -19,3 +19,51 @@
         Are you a donor? 
         = link_to 'Click Here ', '#'
         to view projects and make a donation.
+  .container.padding.text-center
+    .span6.camping
+      %h1.green-title Start A Campaign Now!
+      %p
+        Create and launch your next fundraising campaign instantly!
+
+      = link_to new_user_registration_path do
+        .btn
+          Get started ►
+    .span6.camping
+      %h1.green-title Check It Out
+      %p
+        Discover why our customers say we have revolutionized fundraising in their organization.
+
+      = link_to new_user_registration_path do
+        .btn
+          Demo ►
+
+  %section.full-width.gray-band
+    %h1 cuadros
+
+  %section.full-width.laptop-section
+    .container.padding
+      %h1.green-title.text-center.margin-bot
+        Choose Uruut To Optimize Online Donations
+        %br
+        On Our Site...Or Yours
+
+      = image_tag 'laptop.png', class: 'laptop'
+
+      .info
+        %p
+          %b Let Uruut Host Your Campaign
+        %ul.checked-list
+          %li Instant setup
+          %li Dedicated Campaign Manager
+          %li Get started in minutes
+
+        %p
+          %b Seamlessly Integrate Uruut On Your Site
+        %ul.checked-list
+          %li Maintain your brand and your site’s look and feel
+          %li Simple conﬁguration and set up
+
+        = link_to 'Contact Us to learn more', '#'
+
+  %section.full-width.gray-band
+    %h1 cuadros
