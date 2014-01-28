@@ -948,12 +948,13 @@ div.dropdown {
       border:none;}
     a {
       color:#fff;
-      font-size:11px;
+      font-size:12px;
       letter-spacing:2px;
       line-height:60px !important;
       text-transform:uppercase;
       -webkit-font-smoothing: subpixel-antialiased;
       &:hover {
+        color: #70bf4c;
         text-decoration:none}}
     a.sign-up-link {
       color:#83c140;}
@@ -964,12 +965,12 @@ div.dropdown {
       margin:0 5px;}}
   li.signed-in {
     border:none;
-		a {
-			font:normal 12px/12px "Proxima Nova Semi", arial, sans-serif;
-			letter-spacing:normal;
-			text-transform:none;
-			img {
-				max-width:26px;}}}
+    a {
+      font:normal 12px/12px "Proxima Nova Semi", arial, sans-serif;
+      letter-spacing:normal;
+      text-transform:none;
+      img {
+        max-width:26px;}}}
   input[type=search]{
     border-radius: 0;
     behavior: url(image-path('PIE-1.0.0/PIE.htc'));
@@ -2222,7 +2223,25 @@ input.selectbox {
 	position:absolute;
 	width:100%;
 }
-
+.navbar img.down-arrow{
+  display: inline-block;
+  position: absolute;
+  right: 0px;
+  top: 29px;
+}
+.navbar.submenu-active{ margin-bottom: 120px; }
+.navbar .breadcrumb-container{ top: 60px; }
+.navbar .breadcrumbs{ display: none; }
+.navbar .breadcrumbs li{
+  width: 225px;
+  display: table-cell;
+  opacity: 0.5;
+  border: 0;
+}
+.navbar .breadcrumbs li:hover,
+.navbar .breadcrumbs li:active{
+  opacity: 1;
+}
 .breadcrumbs {
 	list-style-type: none;
   height: 120px;
@@ -2257,9 +2276,23 @@ input.selectbox {
 		.steps {
 			font:normal 12px/12px "Proxima Nova Semi", arial, sans-serif;
 			margin:30px 0 3px 0;}
-		.title {
-			font:normal 24px/24px "Proxima Nova Semi", arial, sans-serif;
-			margin-bottom:3px;}
+    .title {
+      font:normal 24px/24px "Proxima Nova Semi", arial, sans-serif;
+      margin-bottom:3px;}
+    img{
+      display: inline-block;
+      float: left;
+      margin-top: 23px;
+      margin-right: 15px;
+    }
+		.second-title {
+      color: #70bf4c;
+			font:normal 13px/18px "Proxima Nova Bold", arial, sans-serif;
+			width: 130px;
+      display: table-cell;
+      height: 120px;
+      vertical-align: middle;
+      margin-bottom:3px;}
 		.description {
 			font:italic 12px/12px "Georgia", georgia, serif;
 			text-transform:none;}

@@ -3,7 +3,8 @@
 
 %ul.nav
   %li
-    = link_to "Features", browse_projects_path, style: "#{"color: #70BF4C !important" if session[:page_active].eql?("features")}"
+    = link_to "Features", '#', id: 'features-btn', style: "#{"color: #70BF4C !important" if session[:page_active].eql?("features")}"
+    = image_tag 'down-arrow.png', class: 'down-arrow'
   %li
     = link_to "Pricing", pricing_pages_path, style: "#{"color: #70BF4C !important" if session[:page_active].eql?("pricing")}"
   %li
@@ -65,6 +66,32 @@
                 We’ll never post anything
                 %br
                 without permission.
+
+.breadcrumb-container
+  %ul.breadcrumbs
+    %li
+      = link_to "#" do
+        = image_tag 'image.png'
+        %span.second-title FUNDRAISING
+        %span.border
+
+    %li
+      = link_to "#" do
+        = image_tag 'image2.png'
+        %span.second-title DONOR RELATIONSHIP MANAGEMENT
+        %span.border
+
+    %li
+      = link_to "#" do
+        = image_tag 'image3.png'
+        %span.second-title ANALYTICS AND INSIGHTS
+        %span.border
+
+    %li
+      = link_to "#" do
+        = image_tag 'image4.png'
+        %span.second-title DONOR CONVENIENCE & TRANSPARENCY
+        %span.border
 
   -#%input{:type => "search", :placeholder => "Search"}
 #forgotModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "width: 440px;"}
@@ -131,5 +158,13 @@
       $("#forgotPasswordModalForm").modal("hide");
       $("#forgotModal").modal("show");
       $(".email-address-forgot").val("");
+    })
+    $("#features-btn").click(function(){
+      $(".navbar .breadcrumbs").toggle();
+      if ($(".navbar").hasClass("submenu-active")){
+        $(".navbar").removeClass("submenu-active");
+      }else{
+        $(".navbar").addClass("submenu-active");
+      }
     })
   });
