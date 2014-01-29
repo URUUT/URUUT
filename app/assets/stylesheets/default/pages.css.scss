@@ -2232,15 +2232,15 @@ input.selectbox {
 .navbar.submenu-active{ margin-bottom: 120px; }
 .navbar .breadcrumb-container{ top: 60px; }
 .navbar .breadcrumbs{ display: none; }
+.navbar .breadcrumbs.active{ display: block; }
 .navbar .breadcrumbs li{
   width: 225px;
   display: table-cell;
   opacity: 0.5;
   border: 0;
 }
-.navbar .breadcrumbs li:hover,
-.navbar .breadcrumbs li:active{
-  opacity: 1;
+.navbar .breadcrumbs li:hover{
+  opacity: 1!important;
 }
 .breadcrumbs {
 	list-style-type: none;
@@ -3110,8 +3110,11 @@ hr.short-gray {
   letter-spacing: 0pt;
 }
 ul.checked-list{
+  font-family: 'Proxima Nova';
   list-style: none;
   margin-left: 0;
+  font-size: 12pt;
+  color: #8e8e8e;
   li{ margin-bottom: 5px; }
   li:before{
     content: asset-url('checkbox.png', image);
