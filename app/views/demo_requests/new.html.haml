@@ -1,0 +1,144 @@
+:css
+  input[type="text"], input[type="email"], input[type="date"], input[type="password"] {
+  width: 100% !important;
+  }
+
+
+.span8{:style => "margin-top:35px;"}
+  %h4 SIGN UP (STEP 1 OF 2)
+  = form_for 'demo', :html => {:class => "well"} do |f|
+    = devise_error_messages!
+    %h4 Tell us about you.
+    %br
+    .row
+      .span3.well-half
+        = f.label :first_name, class: "label-green" do
+          First Name*
+          %span.error-container
+        = f.text_field :first_name
+      .span3.well-half
+        = f.label :last_name, class: "label-green" do
+          Last Name*
+          %span.error-container
+        = f.text_field :last_name
+
+    %div
+      = f.label :organization_name, class: "label-green" do
+        %span.error-container
+        Organization name*
+      = f.email_field :email
+
+    %div
+      = f.label :email, class: "label-green" do
+        %span.error-container
+        Email address*
+      = f.email_field :email
+
+    .row
+      .span3.well-half
+        = f.label :telephone, class: "label-green" do
+          Phone number*
+          %span.error-container
+        = f.password_field :telephone, id: "user_pass"
+
+    %div.inline
+      = link_to users_sign_up_step2_path, class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:left; border-radius: 5px; width: 230px;" do
+        Next Step ►
+
+.span4
+  .well.without-title{style: "margin-top: 75px;"} 
+    = render "summary"
+    = render "buy"
+    = render "donor"
+
+:javascript
+  $('#new_user').validate({
+    rules: {
+      "user[email]":{
+        required: true,
+        email: true
+      },
+      "user[first_name]":{
+        required: true,
+      },
+      "user[last_name]":{
+        required: true,
+      },
+      "user[password]":{
+        required: true,
+        minlength: 6
+      }
+    },
+    errorPlacement: function(error, element) {
+      $('#user_pass, #user_password_confirmation').keyup(function(){
+        validatePass();
+      });
+      error.appendTo(element.parent().find(".error-container"));
+    },
+  });
+
+  var validatePass = function(){
+    var passCom = $('#user_password_confirmation').val();
+    var pass = $('#user_pass').val();
+
+    if(passCom.length != 0){
+      if(pass == passCom){
+        $('.error-password-confirmation').text('');
+        $('#user_password_confirmation').removeClass("error");
+        $('#user_password_confirmation').attr('class', 'valid');
+      }else{
+        $('.error-password-confirmation').text('');
+        $('#user_password_confirmation').removeClass("valid");
+        $('#user_password_confirmation').attr('class', 'error')
+        $('.error-password-confirmation').append("<label for='user_password_confirmation' class='error' style='display: block;'>Doesn't Match</label>");
+      }
+    }
+
+    if( 6 > $('#user_password_confirmation').val().length && $('#user_password_confirmation').val() != ""){
+        $('.error-password-confirmation').text('');
+        $('#user_password_confirmation').removeClass("valid");
+        $('#user_password_confirmation').attr('class', 'error')
+        $('.error-password-confirmation').append("<label for='user_password_confirmation' class='error' style='display: block;'>Max Char 6</label>");
+      }
+
+  };
+
+  $('#user_pass, #user_password_confirmation').keyup(function(e){
+    validatePass();
+  });
+
+  $(document).keyup(function(e){
+    if(e.keyCode == 9){
+      validatePass();
+      $('#user_pass, #user_password_confirmation').keyup(function(e){
+        validatePass();
+     });
+    }
+  })
+
+  $("#new_user").submit(function(){
+    if($('#user_password_confirmation').val() == ""){
+      $('.error-password-confirmation').text('');
+      $('#user_password_confirmation').removeClass("valid");
+      $('#user_password_confirmation').attr('class', 'error')
+      $('.error-password-confirmation').append("<label for='user_password_confirmation' class='error' style='display: block;'>Required</label>");
+      return false;
+    }
+
+    if( 6 > $('#user_password_confirmation').val().length && $('#user_password_confirmation').val() != ""){
+      $('.error-password-confirmation').text('');
+      $('#user_password_confirmation').removeClass("valid");
+      $('#user_password_confirmation').attr('class', 'error')
+      $('.error-password-confirmation').append("<label for='user_password_confirmation' class='error' style='display: block;'>Max Char 6</label>");
+    }
+
+    if($('#user_password_confirmation').val() == $('#user_pass').val()){
+      return true;
+    }else{
+      $('.error-password-confirmation').text('');
+      $('#user_password_confirmation').removeClass("valid");
+      $('#user_password_confirmation').attr('class', 'error')
+      $('.error-password-confirmation').append("<label for='user_password_confirmation' class='error' style='display: block;'>Doesn't Match</label>");
+    }
+    return false;
+  })
