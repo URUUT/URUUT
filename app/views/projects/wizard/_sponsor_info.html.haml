@@ -85,13 +85,16 @@
       %label.label-green
         Payment With Stripe
       %p{:style => "font:normal 13px/19px 'Proxima Nova';"} An account with Stripe, our payment provider, is required for processing credit card transactions and receiving funds. If you already have an account, you can sign in as a returning customer. If you need help setting up your account check out our #{link_to "Guide to Setting Up Stripe", download_stripe_guide_projects_path }.
-      = link_to "https://connect.stripe.com/oauth/authorize?scope=read_write&response_type=code&client_id=#{Settings.stripe.client_id}", :target => "_blank", :class => "stripe-connect" do
-        = image_tag "stripe-connect.png"
+      - if @project.project_token.blank?
+        = link_to "https://connect.stripe.com/oauth/authorize?scope=read_write&response_type=code&client_id=#{Settings.stripe.client_id}", :target => "_blank", :class => "stripe-connect" do
+          = image_tag "stripe-connect.png"
+      - else
+        = image_tag "stripe-connected.png"
 
       %hr{:style => "background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
 
       %div
-        - if !session[:connected].blank?
+        - if !session[:connected].blank? || !@project.project_token.blank?
           = f.submit "Save & Continue ►", :class => "btn wizard-btn", :id => "project-submit"
         - else
           %a.btn.wizard-btn{"data-toggle" => "modal", :href => "#connectStripeModal", :role => "button", style: "width: 266px;"}
@@ -105,7 +108,7 @@
 
       %p The process of building your project is simple and easy. We will walk you through each step and offer handy tips to make your project a success. For a more detailed guide on how to build and run a successful project, we will send you a complete Project Handbook once your project has been approved.
 
-      %p The first steps are Profile - which is your basic information - go ahead and get started! Don’t worry if you get stuck - you can come back anytime to edit your project.
+      %p The first step is your Profile - which is your basic information - go ahead and get started! Don’t worry if you get stuck - you can come back anytime to edit your project.
 
 %section#connectStripeModal.modal.hide.fade
   .modal-header{style: "height: 17px;"}
@@ -122,9 +125,16 @@
   .modal-footer
     %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal", style: "float: none; margin: 0 auto;"} Ok
 
+- if session[:step].nil? && @project.project_token.nil?
+  :javascript
+    localStorage.clear();
+
 :javascript
-  $("#project_zip").attr("maxlength", '6')
+  $("#project_zip").attr("maxlength", '6');
+  connect = "#{@project.project_token}" || "#{session[:connected]}";
+
   $(function(){
+
     $(".sponsor-info-form").validate({
       messages: {
         "project[zip]":{
@@ -155,10 +165,9 @@
       }
     });
 
-    $('.step-container[data-id="sponsor-info"] form').on('submit', function(e){
-      if ( connect.length > 0 ) {
+    $('form.sponsor-info-form').submit( function(e) {
       e.preventDefault();
-      if (!$(this).valid()) return;
+      if ( connect.length > 0 ) {
         $('.step-container[data-id="sponsor-info"] form input#project-submit').val("LOADING..");
         var data = $(this).serialize();
         var project = #{@project.id};
@@ -182,4 +191,48 @@
        return false;
       }
     });
+
+    $('.stripe-connect').click(function() {
+      localStorage.setItem('organization', $('#project_organization').val());
+      localStorage.setItem('address', $('#project_address').val());
+      localStorage.setItem('city', $('#project_city').val());
+      localStorage.setItem('state', $('#project_state').val());
+      localStorage.setItem('zip', $('#project_zip').val());
+      localStorage.setItem('website', $('#project_website').val());
+      localStorage.setItem('twitter_handle', $('#project_twitter_handle').val());
+      localStorage.setItem('facebook_page', $('#project_facebook_page').val());
+    });
+
+    if(localStorage.getItem('organization')) {
+      $('#project_organization').val(localStorage.getItem('organization'));
+    }
+
+    if(localStorage.getItem('address')) {
+      $('#project_address').val(localStorage.getItem('address'));
+    }
+
+    if(localStorage.getItem('city')) {
+      $('#project_city').val(localStorage.getItem('city'));
+    }
+
+    if(localStorage.getItem('state')) {
+      $('#project_state').val(localStorage.getItem('state'));
+    }
+
+    if(localStorage.getItem('zip')) {
+      $('#project_zip').val(localStorage.getItem('zip'));
+    }
+
+    if(localStorage.getItem('website')) {
+      $('#project_website').val(localStorage.getItem('website'));
+    }
+
+    if(localStorage.getItem('twitter_handle')) {
+      $('#project_twitter_handle').val(localStorage.getItem('twitter_handle'));
+    }
+
+    if(localStorage.getItem('facebook_page')) {
+      $('#project_facebook_page').val(localStorage.getItem('facebook_page'));
+    }
+
   })

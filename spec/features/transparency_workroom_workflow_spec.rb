@@ -61,7 +61,7 @@ feature 'Transparency Woorkroom Workflow' do
 
     sleep(10)
 
-    expect(page).to have_content('Delete Video')
+    expect(page).to have_content(/Delete/)
     WebMock.disable_net_connect!(allow_localhost: true)
   end
 

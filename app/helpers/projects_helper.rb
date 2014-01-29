@@ -110,4 +110,9 @@ module ProjectsHelper
     </div>".html_safe
   end
 
+  def any_project_donors_or_sponsors?(project)
+    User.unique_project_donors(project).any? ||
+    project.project_sponsors.any?
+  end
+
 end

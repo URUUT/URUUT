@@ -2,6 +2,10 @@ machine:
   ruby:
     version: 2.0.0-p353
 
+test:
+  override:
+    - RAILS_ENV="test" RACK_ENV="test" bundle exec rspec --color spec
+
 deployment:
   production:
     branch: master

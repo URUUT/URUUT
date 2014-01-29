@@ -732,6 +732,25 @@ textarea, .textarea input[type="text"]{
   }
 }
 
+.tax-report {
+  display: block;
+  margin-bottom: 10px;
+  padding-right: 10px;
+  position: relative;
+  word-wrap: break-word;
+
+  &:after {
+    background-image: url("glyphicons-halflings.png");
+    background-position: -25px -23px;
+    content: '';
+    display: inline-block;
+    height: 14px;
+    position: absolute;
+    right: 0;
+    width: 14px;
+  }
+}
+
 .progress-container{
   display: block;
   float: none;
@@ -2489,7 +2508,6 @@ input, select, textarea{
         }
       }
     }
-
   }
   .title {
     padding: 25px 0;
@@ -2601,10 +2619,39 @@ input, select, textarea{
   .gold-logo {
     background: #fff;
     display: inline-block;
+    float: left;
     height: 50px;
-    margin: 0 auto;
+    margin: 0 10px 0 0;
     position: relative;
     width: 50px;
+
+    img {
+      display: inline-block;
+      height: 100%;
+      line-height: 35px;
+      position: absolute;
+      vertical-align: middle;
+    }
+  }
+
+  .name, .url {
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .url {
+    display: inline-block;
+  }
+
+  .silver-logo {
+    background: #fff;
+    display: inline-block;
+    float: left;
+    height: 35px;
+    margin: 0 10px 0 0;
+    position: relative;
+    width: 35px;
 
     img {
       display: inline-block;

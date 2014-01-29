@@ -15,6 +15,7 @@ Crowdfund::Application.routes.draw do
   end
 
   get "contacts/new"
+  get "contacts/new"
   get "contacts/edit"
   get "image/new"
   get "set_new_perk" => "donations#set_new_perk"
@@ -75,6 +76,8 @@ Crowdfund::Application.routes.draw do
       get "project_update"
       get "photos_and_videos"
       get "communication_zone"
+
+      resource :xls, only: [:create]
 
       collection do
         get "email_based_on_sponsor_level"

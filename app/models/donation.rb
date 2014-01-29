@@ -8,6 +8,8 @@ class Donation < ActiveRecord::Base
 
   default_scope { where(confirmed: true) }
   scope :approved, where(approved: true)
+  scope :with_funder, ->(funder) { where(user_id: funder) }
+  scope :with_project, ->(project) { where(project_id: project) }
 
   def save_with_payment
     current_user = :current_user
@@ -128,7 +130,7 @@ class Donation < ActiveRecord::Base
 
     perks = project.perks.order("id ASC")
 
-    CSV.open("#{Rails.root}/reports/donor_report.csv", "w+") do |csv|
+    CSV.open("reports/donor_report.csv", "w+") do |csv|
 
       csv << ["project name", "email", "first name", "last name", "amount", "perk", "description"]
 

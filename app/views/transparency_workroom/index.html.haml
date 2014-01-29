@@ -19,8 +19,6 @@
             - else
                 %h4 No Documents
         .events
-            %h3 Calendar
-            %h4 Coming Soon
             - unless @project.project_sponsors.platinum.first.blank?
                 .platinum.cf
                     %h5 Platinum Sponsor
@@ -39,6 +37,15 @@
                             %p.name= sponsor.name
                             = link_to "#{sponsor.site}", sponsor.site, class: 'url'
 
+            - unless @project.project_sponsors.silver.first.blank?
+                .gold.cf
+                    %h5 Silver Sponsors:
+                    - @project.project_sponsors.silver.each do |sponsor|
+                        .gold-container
+                            .silver-logo
+                                = image_tag sponsor.logo
+                            %p.name= sponsor.name
+                            = link_to "#{sponsor.site}", sponsor.site, class: 'url'
 
 .full-width.latest-photos
     .container
