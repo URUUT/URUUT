@@ -1,0 +1,3 @@
+class Demo < ActiveRecord::Base
+  attr_accessible :accepts_donations_from_businesses, :accepts_donations_from_foundations, :accepts_donations_from_individual, :accepts_donations_from_other, :accepts_donations_from_other_description, :crowdfunding, :crowdfunding_campaign_goals, :email, :first_name, :founded_date, :fund_direct_email, :fund_email, :fund_events, :fund_other, :fund_other_description, :fund_seasonal, :fund_website_donation, :fund_year_round, :last_name, :money_raised_yearly, :non_profit, :organization, :organization_description, :phone, :seven_days_to_receive_funds, :social_outreach, :sponsorship_program, :type_of_accepted_donations
+end
