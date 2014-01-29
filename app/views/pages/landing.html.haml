@@ -9,7 +9,7 @@
       %h2
         Everything your nonproﬁt needs to reach more donors, and raise more funds.
 
-      = link_to '#', class: 'arrow' do
+      = link_to root_path(anchor: 'feature'), class: 'arrow' do
         LEARN MORE
         = image_tag 'arrow-btm.png'
 
@@ -17,7 +17,7 @@
 
       %p
         Are you a donor? 
-        = link_to 'Click Here ', '#'
+        = link_to 'Click Here ', '/brose/project'
         to view projects and make a donation.
   .container.padding.text-center
     .span6.camping
@@ -37,7 +37,7 @@
         .btn
           Demo ►
 
-  %section.full-width.our-mission.gray-band.service
+  %section.full-width.our-mission.gray-band.service#feature
     .container
       %h1 All the features you need at a sensible price.
       .block-service
@@ -52,7 +52,7 @@
           %li Choose between subscription or transaction-based pricing
           %li Guaranteed 7-day delivery of donated funds
           %li You can choose to run campaigns on uruut.com or on your organization’s web site
-        = link_to 'Learn more ›', '#'
+        = link_to 'Learn more ›', fundraising_pages_path
       .block-service
         = image_tag 'image4.png'
         %h3 Donor Convenience and Transparency
@@ -63,7 +63,7 @@
           %li Post routine photo or video updates to show donors how and where their money is being spent
           %li Create personalized communications for any donor
           %li Social integration make it fun and easy for donors to share campaigns with their networks and inspire new donations
-        = link_to 'Learn more ›', '#'
+        = link_to 'Learn more ›', donor_convenience_pages_path
 
       .block-service
         = image_tag 'image2.png'
@@ -76,7 +76,7 @@
           %li Easily import/export data and integrate with multiple platforms
           %li Automatically generate thank you letters and tax receipts
           %li Manage and communicate social media communications from one location
-        = link_to 'Learn more ›', '#'
+        = link_to 'Learn more ›', donor_relationship_pages_path
 
       .block-service
         = image_tag 'image3.png'
@@ -88,7 +88,7 @@
           %li Analyze social media effectiveness and adjust social outreach campaigns accordingly
           %li Use integrated tools and partners to identify new donors
           %li Customer support
-        = link_to 'Learn more ›', '#'
+        = link_to 'Learn more ›', analytics_pages_path
 
   %section.full-width.laptop-section
     .container.padding
@@ -113,17 +113,17 @@
           %li Maintain your brand and your site’s look and feel
           %li Simple conﬁguration and set up
 
-        = link_to 'Contact Us to learn more', '#'
+        = link_to 'Contact Us to learn more', contact_pages_path
 
   %section.full-width.gray-band.booble-section
     .container
-      %h1 Don’t Take Our Word For It.
+      %h1{ style: '39.5pt;' } Don’t Take Our Word For It.
       %h4 Hear what our customers are saying.
 
       .span6
         .booble
           %p “As a small nonproﬁt/school foundation run by parents we needed a powerful, easy to use and cost appropriate solution to fundraise and manage our donor communications. Uruut is exactly what we need and then some.”
-        = image_tag 'doug-headshot.png'
+        = image_tag 'keefe-headshot.png'
         .data
           %p.green-subtitle SHAWN KEEFE
           %p President Ashford Park Elementary School Foundation
@@ -131,7 +131,7 @@
       .span6
         .booble
           %p “The team at Uruut clearly wakes up everyday wanting to make my life easier and our nonproﬁt more successful.”
-        = image_tag 'donovan-headshot.png'
+        = image_tag 'seghal-headshot.png'
         .data
           %p.green-subtitle KASHI SEGHAL
           %p Program Director Mentor Walk

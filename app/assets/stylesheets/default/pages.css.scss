@@ -3142,6 +3142,8 @@ ul.checked-list{
   li:before{
     content: asset-url('checkbox.png', image);
     margin-right: 3px;
+    position: relative;
+    top: 1px;
   }
 }
 .plan-box {
@@ -3495,7 +3497,7 @@ ul.checked-list{
     }
   }
   .block-service{
-    height: 500px;
+    height: 600px;
     text-align: left;
     position: relative;
     img {
@@ -3527,10 +3529,11 @@ ul.checked-list{
       margin-left: 18px;
       margin-bottom: 30px;
     }
+    ul.checked-list li{ line-height: 20pt; }
     a{
       font-size: 12pt;
-      position: absolute;
-      bottom: 10px;
+      position: relative;
+      top: 15px;
     }
   }
   .booble-section{
