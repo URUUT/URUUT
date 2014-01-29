@@ -6,15 +6,18 @@ feature 'Funding a new project' do
     login_as(@user, :scope => :user)
   end
 
-  scenario 'User clicks on Get Funding' do
-    visit root_url
+  # this test was commented because we removed
+  # Get Funding link from the menu, delete in 
+  # the future after confirmation
+  # scenario 'User clicks on Get Funding' do
+  #   visit root_url
 
-    within(".nav") do
-      click_link 'Get Funding'
-    end
+  #   within(".nav") do
+  #     click_link 'Get Funding'
+  #   end
 
-    expect(page.body).to have_content('Get Started')
-  end
+  #   expect(page.body).to have_content('Get Started')
+  # end
 
   scenario 'User clicks on Get Started', :js => true do
     visit new_project_path
