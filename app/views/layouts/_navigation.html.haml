@@ -66,8 +66,8 @@
                 %br
                 without permission.
 
-.breadcrumb-container
-  %ul.breadcrumbs{class: ('active' if (controller.controller_name == 'pages' && controller.action_name != 'landing'))}
+.breadcrumb-container{class: ('active' if (controller.controller_name == 'pages' && controller.action_name != 'landing'))}
+  %ul.breadcrumbs
     %li{ style: ('opacity: 1;' if current_page?(controller: 'pages', action: 'fundraising'))}
       = link_to fundraising_pages_path do
         = image_tag 'image.png'
@@ -159,7 +159,7 @@
       $(".email-address-forgot").val("");
     })
     $("#features-btn").click(function(){
-      $(".navbar .breadcrumbs").toggle();
+      $(".navbar .breadcrumb-container").toggle();
       if ($(".navbar").hasClass("submenu-active")){
         $(".navbar").removeClass("submenu-active");
       }else{

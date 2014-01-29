@@ -2226,6 +2226,8 @@ input.selectbox {
 	left:0;
 	position:absolute;
 	width:100%;
+  border-bottom: 2pt solid #70BF4C;
+  display: none;
 }
 .nav li:first-child a:after{
   content: '';
@@ -2252,8 +2254,8 @@ input.selectbox {
 
 .navbar.submenu-active{ margin-bottom: 120px; }
 .navbar .breadcrumb-container{ top: 60px; }
-.navbar .breadcrumbs{ display: none; }
-.navbar .breadcrumbs.active{ display: block; }
+.navbar .breadcrumb-container{ display: none; }
+.navbar .breadcrumb-container.active{ display: block; }
 .navbar .breadcrumbs li{
   width: 225px;
   display: table-cell;
