@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   after_create :send_welcome_email
   after_create :assign_default_badge
 
-  attr_accessor :avatar_upload_width, :avatar_upload_height
+  attr_accessor :avatar_upload_width, :avatar_upload_height, :telephone
   # attr_accessible :title, :body
 
   validates_confirmation_of :password
@@ -33,6 +33,10 @@ class User < ActiveRecord::Base
   has_many :donations
   has_many :tax_reports
   has_many :questions
+
+  has_one :membership
+
+  acts_as_tenant(:account)
 
   # Badging
   has_merit

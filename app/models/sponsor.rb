@@ -1,4 +1,7 @@
 class Sponsor < ActiveRecord::Base
+
+  delegate :kind, to: :membership, prefix: true
+
   PAYMENT = ["Credit Card", "Wire Transfer/Check"]
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -10,6 +13,7 @@ class Sponsor < ActiveRecord::Base
   attr_accessor :card_name, :anonymous
   # attr_accessible :title, :body
   has_many :project_sponsors
+  has_one  :membership
 
   validates :card_name, presence: true, if: :payment_type_credit_card?
   validates :phone, :email, :name, presence: true, if: :payment_type_transfer?

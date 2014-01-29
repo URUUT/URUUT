@@ -11,7 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140109180139) do
+ActiveRecord::Schema.define(:version => 20140123191752) do
+
+  create_table "accounts", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "badges_sashes", :force => true do |t|
     t.integer  "badge_id"
@@ -25,11 +30,9 @@ ActiveRecord::Schema.define(:version => 20140109180139) do
   add_index "badges_sashes", ["sash_id"], :name => "index_badges_sashes_on_sash_id"
 
   create_table "comments", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.text     "body"
-    t.integer  "post_id"
-    t.integer  "user_id"
+    t.text    "body"
+    t.integer "post_id"
+    t.integer "user_id"
   end
 
   add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
@@ -89,6 +92,13 @@ ActiveRecord::Schema.define(:version => 20140109180139) do
   add_index "donations", ["project_id"], :name => "index_donations_on_project_id"
   add_index "donations", ["user_id"], :name => "index_donations_on_user_id"
 
+  create_table "features", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "galleries", :force => true do |t|
     t.string   "gallery_file_name"
     t.string   "gallery_content_type"
@@ -110,6 +120,18 @@ ActiveRecord::Schema.define(:version => 20140109180139) do
   end
 
   add_index "identities", ["user_id"], :name => "index_identities_on_user_id"
+
+  create_table "memberships", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "sponsor_id"
+    t.integer  "plan_id"
+  end
+
+  add_index "memberships", ["plan_id"], :name => "index_memberships_on_plan_id"
+  add_index "memberships", ["sponsor_id"], :name => "index_memberships_on_sponsor_id"
+  add_index "memberships", ["user_id"], :name => "index_memberships_on_user_id"
 
   create_table "merit_actions", :force => true do |t|
     t.integer  "user_id"
@@ -185,13 +207,30 @@ ActiveRecord::Schema.define(:version => 20140109180139) do
 
   add_index "perks", ["project_id"], :name => "index_perks_on_project_id"
 
+  create_table "plan_features", :force => true do |t|
+    t.integer  "plan_id"
+    t.integer  "feature_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "plan_features", ["feature_id"], :name => "index_plan_features_on_feature_id"
+  add_index "plan_features", ["plan_id"], :name => "index_plan_features_on_plan_id"
+
+  create_table "plans", :force => true do |t|
+    t.string   "stripe_plan_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.string   "name"
+  end
+
   create_table "posts", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "title"
     t.text     "body"
-    t.integer  "user_id"
     t.integer  "project_id"
+    t.integer  "user_id"
   end
 
   add_index "posts", ["project_id"], :name => "index_posts_on_project_id"
@@ -419,8 +458,12 @@ ActiveRecord::Schema.define(:version => 20140109180139) do
     t.integer  "level",                  :default => 0
     t.integer  "uruut_point",            :default => 0
     t.string   "role",                   :default => ""
+    t.integer  "account_id"
+    t.string   "stripe_user_token"
+    t.string   "stripe_card_token"
   end
 
+  add_index "users", ["account_id"], :name => "index_users_on_account_id"
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["sash_id"], :name => "index_users_on_sash_id"

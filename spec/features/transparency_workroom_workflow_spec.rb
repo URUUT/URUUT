@@ -59,7 +59,7 @@ feature 'Transparency Woorkroom Workflow' do
       click_button 'Submit video'
     end
 
-    sleep(10)
+    sleep(15)
 
     expect(page).to have_content(/Delete/)
     WebMock.disable_net_connect!(allow_localhost: true)

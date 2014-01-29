@@ -1,0 +1,65 @@
+.row{:style => "margin-top:35px;"}
+  .span8{:style => "margin-top:15px;"}
+    %h4.font-bold CHANGE PAYMENT METHOD
+    = form_for @credit_card, url: user_payment_method_path(current_user), method: :put, html: { class: "well registration-edit"} do |f|
+      %p.form-subtitle
+        If you wish to use a different card for your monthly subscription payment enter the details of the new card below.
+      %div.name
+        = f.label :name do
+          NAME AS IT APPEARS ON CARD
+          %span.error-container
+        = f.text_field :name
+      %div.card-number
+        = f.label :number do
+          CARD NUMBER
+          %span.error-container
+        = f.text_field :number
+      %div.ccv
+        = f.label :cvc do
+          CVC
+          %span.error-container
+        = f.text_field :cvc, style: 'width: 90%!important;'
+      %div.expiration.well-half
+        = f.label :expiration do
+          CARD EXPIRATION
+          %span.italic{style: "font-size: 11px; letter-spacing: 0;"}
+            (MM / YYYY)
+          %span.error-container
+        = f.text_field :exp_month, id: 'card_month'
+        = f.text_field :exp_year, id: 'card_year'
+      %div
+        = f.label :billing_address do
+          BILLING STREET ADDRESS
+          %span.error-container
+        = f.text_field :billing_address
+      %div
+        = f.label :city do
+          CITY
+          %span.error-container
+        = f.text_field :city
+      %div.inline.well-half{style: "margin-right: 19px;"}
+        = f.label :state, class: "label-green" do
+          STATE
+          %span.error-container
+        .selectParent{style: "width: 280px;"}
+          = f.select :state, options_for_select(['LA'], ['1']), {:include_blank => true}, {class: "styledSelect required"}
+
+      %div.inline.well-half{style: "vertical-align: top;"}
+        = f.label :zip_code do
+          ZIP CODE
+          %span.error-container
+        = f.text_field :zip_code
+      %button.btn.btn-primary{:type => "submit"}
+        Submit changes ►
+  .span4
+    .well.info.without-title
+      .box-content
+        %h5.label-green{style: "margin-bottom: 7px;"} CURRENT PAYMENT METHOD
+        %p The following payment card is currently used for payment:
+        .logo_card
+          = image_tag 'logo_visa.png'
+        .info_card
+          - if @customer_card
+            = render partial: 'payment_methods/default_card_details', locals: { customer_card: @customer_card }
+          - else
+            You have not setup any card yet.
