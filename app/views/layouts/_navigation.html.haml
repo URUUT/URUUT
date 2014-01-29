@@ -68,27 +68,27 @@
                 without permission.
 
 .breadcrumb-container
-  %ul.breadcrumbs
-    %li
-      = link_to "#" do
+  %ul.breadcrumbs{class: ('active' if controller.controller_name == 'pages')}
+    %li{ style: ('opacity: 1;' if current_page?(controller: 'pages', action: 'fundraising'))}
+      = link_to fundraising_pages_path do
         = image_tag 'image.png'
         %span.second-title FUNDRAISING
         %span.border
 
-    %li
-      = link_to "#" do
+    %li{ style: ('opacity: 1;' if current_page?(controller: 'pages', action: 'donor_relationship'))}
+      = link_to donor_relationship_pages_path do
         = image_tag 'image2.png'
         %span.second-title DONOR RELATIONSHIP MANAGEMENT
         %span.border
 
-    %li
-      = link_to "#" do
+    %li{ style: ('opacity: 1;' if current_page?(controller: 'pages', action: 'analytics'))}
+      = link_to analytics_pages_path do
         = image_tag 'image3.png'
         %span.second-title ANALYTICS AND INSIGHTS
         %span.border
 
-    %li
-      = link_to "#" do
+    %li{ style: ('opacity: 1;' if current_page?(controller: 'pages', action: 'donor_convenience'))}
+      = link_to donor_convenience_pages_path do
         = image_tag 'image4.png'
         %span.second-title DONOR CONVENIENCE & TRANSPARENCY
         %span.border
@@ -167,4 +167,9 @@
         $(".navbar").addClass("submenu-active");
       }
     })
+    if ($(".breadcrumbs").hasClass("active")){
+      $(".navbar").addClass("submenu-active");
+    }else{
+      $(".navbar").removeClass("submenu-active");
+    }
   });
