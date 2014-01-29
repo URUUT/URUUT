@@ -3,16 +3,15 @@
 
 %ul.nav
   %li
-    = link_to "Features", '#', id: 'features-btn', style: "#{"color: #70BF4C !important" if session[:page_active].eql?("features")}"
-    = image_tag 'down-arrow.png', class: 'down-arrow'
+    = link_to "Features", '#', id: 'features-btn'
   %li
-    = link_to "Pricing", pricing_pages_path, style: "#{"color: #70BF4C !important" if session[:page_active].eql?("pricing")}"
+    = link_to "Pricing", pricing_pages_path
   %li
-    = link_to "Resources", pricing_pages_path, style: "#{"color: #70BF4C !important" if session[:page_active].eql?("resources")}"
+    = link_to "Resources", pricing_pages_path
   %li
-    = link_to "Fund Projects", browse_projects_path, style: "#{"color: #70BF4C !important" if session[:page_active].eql?("project")}"
+    = link_to "Fund Projects", browse_projects_path
   %li
-    = link_to "Demo", "/projects/new", style: "#{"color: #70BF4C !important" if session[:page_active].eql?("funding")}"
+    = link_to "Demo", "#"
   - unless user_signed_in?
     %li
       = link_to "Sign Up", new_user_registration_path, :class => "sign-up-link"
@@ -68,7 +67,7 @@
                 without permission.
 
 .breadcrumb-container
-  %ul.breadcrumbs{class: ('active' if controller.controller_name == 'pages')}
+  %ul.breadcrumbs{class: ('active' if (controller.controller_name == 'pages' && controller.action_name != 'landing'))}
     %li{ style: ('opacity: 1;' if current_page?(controller: 'pages', action: 'fundraising'))}
       = link_to fundraising_pages_path do
         = image_tag 'image.png'
