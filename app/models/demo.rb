@@ -87,6 +87,7 @@ class Demo < ActiveRecord::Base
     :non_profit,
     :organization,
     :organization_description,
+    :partial_funding,
     :phone,
     :seven_days_to_receive_funds,
     :social_outreach,
@@ -96,7 +97,7 @@ class Demo < ActiveRecord::Base
   validates :first_name, :last_name, :organization, :email, :phone,
     :founded_date, :non_profit, :organization_description, :money_raised_yearly,
     :sponsorship_program, :crowdfunding, :crowdfunding_campaign_goals,
-    :seven_days_to_receive_funds, :social_outreach, presence: true
+    :partial_funding, :seven_days_to_receive_funds, :social_outreach, presence: true
 
   validate :current_fundraising_activities, :type_of_accepted_donors
 

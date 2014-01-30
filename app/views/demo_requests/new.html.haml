@@ -37,7 +37,7 @@
 .span8{style: "margin-top:35px;"}
   %h4.step_name SIGN UP (STEP 1 OF 2)
   %h4.step_name{ style: 'display:none;' } SIGN UP (STEP 2 OF 2)
-  = form_for @demo, url: '#' , html: {class: "well"} do |f|
+  = form_for @demo, url: demo_request_path , html: {class: "well"} do |f|
     .error-box
       Please complete all field
     #step1
@@ -120,6 +120,8 @@
       = render partial: 'demo_requests/regarding_crowdfunding', locals: { f: f }
       %br
       = render partial: 'demo_requests/crowdfunding_camping', locals: { f: f }
+      %br
+      = render partial: 'demo_requests/partial_funding', locals: { f: f }
       %br
       = render partial: 'demo_requests/seven_days_to_receive_funds', locals: { f: f }
       %br

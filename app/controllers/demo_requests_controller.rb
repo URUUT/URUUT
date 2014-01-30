@@ -7,6 +7,12 @@ class DemoRequestsController < ApplicationController
 
   def create
     @demo = Demo.new(params[:demo])
+
+    if @demo.save
+      redirect_to thank_you_demo_request_path
+    else
+      render :new
+    end
   end
 
   def thank_you

@@ -1,0 +1,10 @@
+.row
+  .span6
+    = f.label :partial_funding, class: "label-green" do
+      DOES YOUR ORGANIZATION OFFER “PARTIAL FUNDING” CROWDFUNDING CAMPAIGNS? (AS OPPOSED TO “ALL OR NOTHING” CAMPAIGNS) *
+    %span.error-container
+    %div
+      - Demo::BASIC_OPTIONS.each do |key, value|
+        = f.radio_button :partial_funding, Demo::BASIC_OPTIONS[key], style: 'display: inline-block'
+        = f.label :partial_funding, key, style: 'display: inline-block'
+        %br

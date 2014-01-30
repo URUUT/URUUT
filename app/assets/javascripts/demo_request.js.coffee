@@ -12,10 +12,10 @@ $ ->
     $("#step1 input:blank").addClass('error')
 
   $("#next-step").click ->
-    if validate_field()
+    # if validate_field()
       change_step()
-    else
-      show_errors()
+    # else
+      # show_errors()
 
   $("#previous").click ->
       change_step()
