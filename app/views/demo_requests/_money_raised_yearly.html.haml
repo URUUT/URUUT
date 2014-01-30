@@ -1,0 +1,10 @@
+.row
+  .span6
+    = f.label :money_raised_yearly, class: "label-green" do
+      ON AVERAGE, HOW MUCH MONEY DOES YOUR ORGANIZATION RAISE ANNUALY?*
+    %span.error-container
+    %div
+      - Demo::MONEY_RAISED_YEARLY.each do |key, value|
+        = f.radio_button :money_raised_yearly, Demo::MONEY_RAISED_YEARLY[key]
+        = f.label :money_raised_yearly, key
+        %br

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140123191752) do
+ActiveRecord::Schema.define(:version => 20140129205147) do
 
   create_table "accounts", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -62,6 +62,39 @@ ActiveRecord::Schema.define(:version => 20140123191752) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
+  create_table "demos", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "organization"
+    t.string   "email"
+    t.string   "phone"
+    t.date     "founded_date"
+    t.integer  "non_profit"
+    t.text     "organization_description"
+    t.integer  "money_raised_yearly"
+    t.boolean  "fund_events"
+    t.boolean  "fund_website_donation"
+    t.boolean  "fund_direct_email"
+    t.boolean  "fund_email"
+    t.boolean  "fund_year_round"
+    t.boolean  "fund_seasonal"
+    t.boolean  "fund_other"
+    t.string   "fund_other_description"
+    t.integer  "type_of_accepted_donations"
+    t.boolean  "accepts_donations_from_individual"
+    t.boolean  "accepts_donations_from_businesses"
+    t.boolean  "accepts_donations_from_foundations"
+    t.boolean  "accepts_donations_from_other"
+    t.string   "accepts_donations_from_other_description"
+    t.integer  "sponsorship_program"
+    t.integer  "crowdfunding"
+    t.integer  "crowdfunding_campaign_goals"
+    t.integer  "seven_days_to_receive_funds"
+    t.string   "social_outreach"
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+  end
 
   create_table "documents", :force => true do |t|
     t.string   "filename"

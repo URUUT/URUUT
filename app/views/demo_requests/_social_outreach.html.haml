@@ -1,0 +1,10 @@
+.row
+  .span6
+    = f.label :social_outreach, class: "label-green" do
+      REGARDING SOCIAL OUTREACH TO AMPLIFY DONATIONS FROM EXISTING DONORS, WHICH OF THE FOLLOWING BEST DESCRIBES YOUR ORGANIZATION?*
+    %span.error-container
+    %div
+      - Demo::SOCIAL_OUTREACH.each do |key, values|
+        = f.radio_button :social_outreach, values[0], style: 'display: inline-block'
+        = f.label :social_outreach, values[1], style: 'display: inline-block'
+        %br

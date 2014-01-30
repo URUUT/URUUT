@@ -1,0 +1,10 @@
+.row
+  .span6
+    = f.label :sponsorship_program, class: "label-green" do
+      DOES YOUR ORGANIZATION OFFER SPONSORSHIP DONATION PROGRAM FOR BUSINESSES AND FOUNDATIONS TO EASILY DONATE ONLINE?*
+    %span.error-container
+    %div
+      - Demo::BASIC_OPTIONS.each do |key, value|
+        = f.radio_button :sponsorship_program, Demo::BASIC_OPTIONS[key], style: 'display: inline-block'
+        = f.label :sponsorship_program, key, style: 'display: inline-block'
+        %br

@@ -1,142 +1,136 @@
 :css
-  input[type="text"], input[type="email"], input[type="date"], input[type="password"] {
-  width: 100% !important;
+  .full-with {
+    width: 100% !important;
+  }
+  input[type="radio"]{
+    display: inline-block;
+    float: left;
+  }
+  .inline{ width: 100%; }
+  .inline-field{
+    display: inline-block;
+    width: 60px;
+  }
+  .inline-field label{ width: auto; }
+  label{
+    width: 90%;
+    margin-left: 5px; 
+    margin-bottom: 10px;
+    display: inline-block;
+    font-family: "Proxima Nova Semi";
+    font-size: 10pt;
+    line-height: 14pt;
+  }
+  .label-green{
+    font-family: "Proxima Nova Bold";
+    margin-left: 0;
+    width: 130%;
   }
 
-.span8{:style => "margin-top:35px;"}
-  %h4 SIGN UP (STEP 1 OF 2)
-  = form_for 'demo', :html => {:class => "well"} do |f|
-    %h4 Tell us about you.
-    %br
-    .row
-      .span3.well-half
-        = f.label :first_name, class: "label-green" do
-          First Name*
+.span8{style: "margin-top:35px;"}
+  %h4.step_name{ style: 'display:none;' } SIGN UP (STEP 1 OF 2)
+  %h4.step_name SIGN UP (STEP 2 OF 2)
+  = form_for @demo, url: '#' , html: {class: "well"} do |f|
+    #step1{ style: 'display:none;' }
+      %h4 Tell us about you.
+      %br
+      .row
+        .span3.well-half
+          = f.label :first_name, class: "label-green" do
+            First Name*
+            %span.error-container
+          = f.text_field :first_name, class: 'full-with'
+        .span3.well-half
+          = f.label :last_name, class: "label-green" do
+            Last Name*
+            %span.error-container
+          = f.text_field :last_name, class: 'full-with'
+
+      %div
+        = f.label :organization, class: "label-green" do
           %span.error-container
-        = f.text_field :first_name
-      .span3.well-half
-        = f.label :last_name, class: "label-green" do
-          Last Name*
+          Organization name*
+        = f.text_field :organization, class: 'full-with'
+
+      %div
+        = f.label :email, class: "label-green" do
           %span.error-container
-        = f.text_field :last_name
+          Email address*
+        = f.email_field :email, class: 'full-with'
 
-    %div
-      = f.label :organization_name, class: "label-green" do
-        %span.error-container
-        Organization name*
-      = f.email_field :email
+      .row
+        .span3.well-half
+          = f.label :phone, class: "label-green" do
+            Phone number*
+            %span.error-container
+          = f.text_field :phone, id: "user_pass", class: 'full-with'
 
-    %div
-      = f.label :email, class: "label-green" do
-        %span.error-container
-        Email address*
-      = f.email_field :email
+      %div.inline
+        = link_to '#', id: "next-step" do
+          .btn{ style: 'margin:0; width:235px;'}
+            Next Step ►
 
-    .row
-      .span3.well-half
-        = f.label :telephone, class: "label-green" do
-          Phone number*
-          %span.error-container
-        = f.password_field :telephone, id: "user_pass"
+    #step2
+      %h4 Tell us about your organization.
+      %br
+      .row
+        .span6
+          = f.label :founded_date, class: "label-green" do
+            IN WHAT YEAR WAS YOUR ORGANIZATION FOUNDED?*
+            %span.error-container
+          = f.text_field :founded_date, style: 'width:55%;'
+      .row
+        .span6
+          = f.label :non_profit, class: "label-green" do
+            ARE YOU A NONPROFIT ORGANIZATION?*
+            %span.error-container
+          %div.inline-field
+            = f.radio_button :non_profit, Demo::NON_PROFIT[:yes]
+            = f.label :non_profit, "Yes"
+          %div.inline-field
+            = f.radio_button :non_profit, Demo::NON_PROFIT[:no]
+            = f.label :non_profit, "No"
+          %br
+      .row
+        .span7
+          = f.label :organization_description, class: "label-green" do
+            PLEASE DESCRIBE YOUR ORGANIZATION, IT’S MISSION, AND CAUSES*
+          = f.text_area :organization_description, class: 'full-with', rows: 5
+      %br
 
-    %div.inline
-      = link_to users_sign_up_step2_path, class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:left; border-radius: 5px; width: 230px;" do
-        Next Step ►
+      = render partial: 'demo_requests/money_raised_yearly', locals: { f: f }
+      %br
+      = render partial: 'demo_requests/current_fundraising_activities', locals: { f: f }
+      %br
+      = render partial: 'demo_requests/type_of_accepted_donations', locals: { f: f }
+      %br
+      = render partial: 'demo_requests/type_of_donors_accepted', locals: { f: f }
+      %br
+      = render partial: 'demo_requests/sponsorship_program', locals: { f: f }
+      %br
+      = render partial: 'demo_requests/regarding_crowdfunding', locals: { f: f }
+      %br
+      = render partial: 'demo_requests/crowdfunding_camping', locals: { f: f }
+      %br
+      = render partial: 'demo_requests/seven_days_to_receive_funds', locals: { f: f }
+      %br
+      = render partial: 'demo_requests/social_outreach', locals: { f: f }
+
+      %div.inline
+        = link_to '#', class: "btn btn-gray", id: "previous", style: "margin:20px 0 0;float:left; border-radius: 5px; width: 110px; background: #8e8e8e;" do
+          ◄ PREVIOUS
+
+        = f.submit 'FINISH ►', class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:right; border-radius: 5px; width: 230px;"
 
 .span4
   .well.without-title{style: "margin-top: 75px;"} 
     .box-content
+      %h5.label-green{style: "margin-bottom: 7px;"} NOT READY FOR A DEMO YET?
+      = link_to 'Request More Information ►', contact_pages_path
+
+    .box-content
       %h5.label-green{style: "margin-bottom: 7px;"} ARE YOU A DONOR?
       = link_to 'View Fundraising Projects Here ►', pricing_pages_path
 
-:javascript
-  $('#new_user').validate({
-    rules: {
-      "user[email]":{
-        required: true,
-        email: true
-      },
-      "user[first_name]":{
-        required: true,
-      },
-      "user[last_name]":{
-        required: true,
-      },
-      "user[password]":{
-        required: true,
-        minlength: 6
-      }
-    },
-    errorPlacement: function(error, element) {
-      $('#user_pass, #user_password_confirmation').keyup(function(){
-        validatePass();
-      });
-      error.appendTo(element.parent().find(".error-container"));
-    },
-  });
 
-  var validatePass = function(){
-    var passCom = $('#user_password_confirmation').val();
-    var pass = $('#user_pass').val();
-
-    if(passCom.length != 0){
-      if(pass == passCom){
-        $('.error-password-confirmation').text('');
-        $('#user_password_confirmation').removeClass("error");
-        $('#user_password_confirmation').attr('class', 'valid');
-      }else{
-        $('.error-password-confirmation').text('');
-        $('#user_password_confirmation').removeClass("valid");
-        $('#user_password_confirmation').attr('class', 'error')
-        $('.error-password-confirmation').append("<label for='user_password_confirmation' class='error' style='display: block;'>Doesn't Match</label>");
-      }
-    }
-
-    if( 6 > $('#user_password_confirmation').val().length && $('#user_password_confirmation').val() != ""){
-        $('.error-password-confirmation').text('');
-        $('#user_password_confirmation').removeClass("valid");
-        $('#user_password_confirmation').attr('class', 'error')
-        $('.error-password-confirmation').append("<label for='user_password_confirmation' class='error' style='display: block;'>Max Char 6</label>");
-      }
-
-  };
-
-  $('#user_pass, #user_password_confirmation').keyup(function(e){
-    validatePass();
-  });
-
-  $(document).keyup(function(e){
-    if(e.keyCode == 9){
-      validatePass();
-      $('#user_pass, #user_password_confirmation').keyup(function(e){
-        validatePass();
-     });
-    }
-  })
-
-  $("#new_user").submit(function(){
-    if($('#user_password_confirmation').val() == ""){
-      $('.error-password-confirmation').text('');
-      $('#user_password_confirmation').removeClass("valid");
-      $('#user_password_confirmation').attr('class', 'error')
-      $('.error-password-confirmation').append("<label for='user_password_confirmation' class='error' style='display: block;'>Required</label>");
-      return false;
-    }
-
-    if( 6 > $('#user_password_confirmation').val().length && $('#user_password_confirmation').val() != ""){
-      $('.error-password-confirmation').text('');
-      $('#user_password_confirmation').removeClass("valid");
-      $('#user_password_confirmation').attr('class', 'error')
-      $('.error-password-confirmation').append("<label for='user_password_confirmation' class='error' style='display: block;'>Max Char 6</label>");
-    }
-
-    if($('#user_password_confirmation').val() == $('#user_pass').val()){
-      return true;
-    }else{
-      $('.error-password-confirmation').text('');
-      $('#user_password_confirmation').removeClass("valid");
-      $('#user_password_confirmation').attr('class', 'error')
-      $('.error-password-confirmation').append("<label for='user_password_confirmation' class='error' style='display: block;'>Doesn't Match</label>");
-    }
-    return false;
-  })
+= javascript_include_tag "demo_request"

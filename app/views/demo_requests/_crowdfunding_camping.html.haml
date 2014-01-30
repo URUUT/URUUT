@@ -1,0 +1,11 @@
+.row
+  .span6
+    = f.label :crowdfunding_campaign_goals, class: "label-green" do
+      IF YOU ENGAGED IN CROWDFUNDING CAMPAIGN, DID YOU MEET YOUR GOAL?*
+
+    %span.error-container
+    %div
+      - Demo::CROWDFUNDING_CAMPING.each do |key, value|
+        = f.radio_button :crowdfunding_campaign_goals, Demo::CROWDFUNDING_CAMPING[key], style: 'display: inline-block'
+        = f.label :crowdfunding_campaign_goals, key, style: 'display: inline-block'
+        %br
