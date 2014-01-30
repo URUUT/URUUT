@@ -1,0 +1,22 @@
+%section.full-width.our-story
+  .container{ style: 'margin-top: 30px;'}
+    %h1 Thank You!
+    %p Your Free Demo Registration is now conﬁrmed.
+
+
+%section.full-width.our-mission.gray-band
+  .container
+    %div.span6.without-margin-left
+      %p
+        Please check your inbox as we sent you an email with instructions on how to schedule a convenient time to demo Uruut with us. 
+        = link_to 'Resend Email', '#'
+    %div.span6.without-margin-left
+      %p
+        If you prefer to have someone call you back sooner, simply send an email to 
+        = mail_to 'demo@uruut.com' 
+        and include your name, organization name and phone number and we’ll get back to you as soon as possible!
+
+    %center
+      = link_to root_path do
+        .btn{ style: 'margin: 70px 0 0; width:auto;padding: 30px;'}
+          RETURN TO URUUT.COM ►

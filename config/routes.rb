@@ -19,7 +19,9 @@ Crowdfund::Application.routes.draw do
     end
   end
 
-  resource :demo_request
+  resource :demo_request do
+    get 'thank_you'
+  end
 
   devise_scope :user do
     get "/users/sign_up/step2" => "registrations#step2"
