@@ -26,11 +26,20 @@
     margin-left: 0;
     width: 130%;
   }
+  .error-box {
+    display: none;
+    background: rgba(245, 11, 11, 0.69);
+    color: #fff;
+    padding: 7px;
+    font-weight: bold;
+  }
 
 .span8{style: "margin-top:35px;"}
   %h4.step_name SIGN UP (STEP 1 OF 2)
   %h4.step_name{ style: 'display:none;' } SIGN UP (STEP 2 OF 2)
   = form_for @demo, url: '#' , html: {class: "well"} do |f|
+    .error-box
+      Please complete all field
     #step1
       %h4 Tell us about you.
       %br
