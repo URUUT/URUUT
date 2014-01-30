@@ -92,4 +92,45 @@ class Demo < ActiveRecord::Base
     :social_outreach,
     :sponsorship_program,
     :type_of_accepted_donations
+
+  validates :first_name, :last_name, :organization, :email, :phone,
+    :founded_date, :non_profit, :organization_description, :money_raised_yearly,
+    :sponsorship_program, :crowdfunding, :crowdfunding_campaign_goals,
+    :seven_days_to_receive_funds, :social_outreach, presence: true
+
+  validate :current_fundraising_activities, :type_of_accepted_donors
+
+private
+
+  def current_fundraising_activities
+    unless valid_fundraising_activities_options?
+      errors.add(:base, 'You must select at least one fundraising activity')
+    end
+  end
+
+  def valid_fundraising_activities_options?
+    (fund_direct_email     ||
+     fund_email            ||
+     fund_events           ||
+     fund_seasonal         ||
+     fund_website_donation ||
+     fund_year_round)      ||
+    (fund_other            &&
+     fund_other_description.present?)
+  end
+
+  def type_of_accepted_donors
+    unless valid_type_of_donors?
+      errors.add(:base, 'You must select at least kind of donor your organization accepts')
+    end
+  end
+
+  def valid_type_of_donors?
+    (accepts_donations_from_businesses  ||
+     accepts_donations_from_foundations ||
+     accepts_donations_from_individual) ||
+    (accepts_donations_from_other &&
+     accepts_donations_from_other_description.present?)
+  end
+
 end
