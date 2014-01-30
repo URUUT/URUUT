@@ -3,7 +3,7 @@ $ ->
     $("#step1, #step2, .step_name").toggle()
 
   validate_field = ->
-    true
+    $("#step1 input:blank").length = 0
 
   $("#next-step").click ->
     if validate_field()
