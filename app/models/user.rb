@@ -7,12 +7,13 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :remember_me, :city, :state, :zip,
-    :neighborhood, :provider, :role, :uid, :token, :organization, :mission, :subscribed, :avatar, :uruut_point
+    :neighborhood, :provider, :role, :uid, :token, :organization, :mission, :subscribed, :avatar, :uruut_point,
+    :telephone
 
   after_create :send_welcome_email
   after_create :assign_default_badge
 
-  attr_accessor :avatar_upload_width, :avatar_upload_height, :telephone
+  attr_accessor :avatar_upload_width, :avatar_upload_height
   # attr_accessible :title, :body
 
   validates_confirmation_of :password

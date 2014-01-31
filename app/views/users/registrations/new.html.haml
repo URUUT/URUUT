@@ -4,8 +4,8 @@
   }
 
 
-.span8{:style => "margin-top:35px;"}
-  %h4 SIGN UP (STEP 1 OF 2)
+.span8{:style => "margin-top:75px;"}
+
   = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => "well"}) do |f|
     = devise_error_messages!
     %h4 Tell us about you.
@@ -23,10 +23,10 @@
         = f.text_field :last_name
 
     %div
-      = f.label :organization_name, class: "label-green" do
+      = f.label :organization, class: "label-green" do
         %span.error-container
         Organization name*
-      = f.email_field :email
+      = f.text_field :organization
 
     %div
       = f.label :email, class: "label-green" do
@@ -39,10 +39,17 @@
         = f.label :telephone, class: "label-green" do
           Phone number*
           %span.error-container
-        = f.password_field :telephone, id: "user_pass"
+        = f.text_field :telephone, id: "user_telephone"
+
+    .row
+      .span3.well-half
+        = f.label :password, class: "label-green" do
+          Password*
+          %span.error-container
+        = f.password_field :password, id: "user_password"
 
     %div.inline
-      = link_to users_sign_up_step2_path, class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:left; border-radius: 5px; width: 230px;" do
+      = f.submit 'Finish', class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:left; border-radius: 5px; width: 230px;" do
         Next Step ►
 
 .span4
