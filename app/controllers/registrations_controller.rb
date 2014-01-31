@@ -15,7 +15,7 @@ class RegistrationsController < Devise::RegistrationsController
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?
         sign_up(resource_name, resource)
-        respond_with resource, :location => after_sign_up_path_for(resource)
+        respond_with resource, :location => full_registration_path(resource)
       else
         set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_navigational_format?
         expire_session_data_after_sign_in!
@@ -67,6 +67,16 @@ class RegistrationsController < Devise::RegistrationsController
     end
       # logger.debug(request.referrer)
       # return root_url
+  end
+
+private
+
+  def full_registration_path(resource)
+    if resource.full_registration
+      new_user_payment_method_path(resource)
+    else
+      after_sign_up_path_for(resource)
+    end
   end
 
 end

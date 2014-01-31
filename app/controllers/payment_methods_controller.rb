@@ -15,7 +15,8 @@ class PaymentMethodsController < ApplicationController
     customer_plan = Gateway::PlansService.new(current_user)
     plan_id = params[:credit_card][:plan_id]
 
-    if @credit_card.valid? && @card_service.create(credit_card) && customer_plan.update_plan(plan_id)
+    if @credit_card.valid? && @card_service.create(@credit_card)
+      customer_plan.update_plan(plan_id) if plan_id.present?
       redirect_to new_project_path
     else
       render :new

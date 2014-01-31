@@ -8,6 +8,7 @@
 
   = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => "well"}) do |f|
     = devise_error_messages!
+    = f.hidden_field :full_registration, value: params[:full_registration] || params[:user].try('[:full_registration]')
     %h4 Tell us about you.
     %br
     .row

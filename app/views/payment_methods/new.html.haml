@@ -2,7 +2,7 @@
   .span8{:style => "margin-top:15px;"}
     %h4.font-bold SET PAYMENT METHOD
     = form_for @credit_card, url: user_payment_method_path(current_user), method: :post, html: { class: "well registration-edit"} do |f|
-      = f.hidden_field :plan_id, value: (params[:plan_id] || params[:credit_card][:plan_id])
+      = f.hidden_field :plan_id, value: (params[:plan_id] || params[:credit_card].try('[:plan_id]'))
       = render partial: 'payment_methods/credit_card_fields', locals: { f: f }
   .span4
     .well.info.without-title
