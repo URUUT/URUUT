@@ -160,6 +160,7 @@
     })
     $("#features-btn").click(function(){
       $(".navbar .breadcrumb-container").toggle();
+      $(this).parent().toggleClass('active-menu');
       if ($(".navbar").hasClass("submenu-active")){
         $(".navbar").removeClass("submenu-active");
       }else{

@@ -866,6 +866,8 @@ ul.nav {
       }
       &:hover a{
         color:#70bf4c !important;}
+      &.active-menu a{
+        color:#70bf4c !important;}
 		img {
       margin:-2px 0 0 5px;
 			vertical-align:middle;}}}
@@ -2247,7 +2249,8 @@ input.selectbox {
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
 }
-.nav li:first-child:hover a:after{
+.nav li:first-child:hover a:after,
+.nav li.active-menu:first-child a:after{
   content: '';
   width: 0;
   height: 0;
