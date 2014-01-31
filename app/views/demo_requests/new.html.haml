@@ -9,12 +9,4 @@
               %li= error_message
       = render partial: 'demo_requests/step1', locals: { f: f }
 
-  .span4
-    .well.without-title{style: "margin-top: 75px;"} 
-      .box-content
-        %h5.label-green{style: "margin-bottom: 7px;"} NOT READY FOR A DEMO YET?
-        = link_to 'Request More Information ►', contact_pages_path
-
-      .box-content
-        %h5.label-green{style: "margin-bottom: 7px;"} ARE YOU A DONOR?
-        = link_to 'View Fundraising Projects Here ►', browse_projects_path
+  = render partial: 'demo_requests/aside'
