@@ -9,8 +9,6 @@ class Gateway::PlansService < Gateway::BaseService
     user_membership = @user.membership
     user_membership.plan = plan
 
-    puts "*******************plan_id: #{plan_id}"
-
     user_membership.save && customer.update_subscription(plan: plan_id)
   end
 

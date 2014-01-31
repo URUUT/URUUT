@@ -11,14 +11,13 @@ class PaymentMethodsController < ApplicationController
   end
 
   def create
-    credit_card = CreditCard.new(params[:credit_card])
+    @credit_card = CreditCard.new(params[:credit_card])
     customer_plan = Gateway::PlansService.new(current_user)
     plan_id = params[:credit_card][:plan_id]
 
-    if @card_service.create(credit_card) && customer_plan.update_plan(plan_id)
+    if @credit_card.valid? && @card_service.create(credit_card) && customer_plan.update_plan(plan_id)
       redirect_to new_project_path
     else
-      flash[:notice] = 'Something went wrong. Please try again in a few minutes.'
       render :new
     end
   end

@@ -1,9 +1,15 @@
 class CreditCard
   extend ActiveModel::Naming
   include ActiveModel::Conversion
+  include ActiveModel::Validations
 
   attr_accessor :number, :exp_month, :exp_year, :cvc, :name, :billing_address,
                 :city, :zip_code, :state, :plan_id
+
+  validates :number, :exp_month, :exp_year, :cvc, :name, :billing_address,
+            :city, :zip_code, :state, presence: true
+
+  validate  :valid_exp_year?
 
   def initialize(attributes={})
     @number = attributes[:number]
@@ -33,5 +39,13 @@ class CreditCard
 
   def persisted?
     false
+  end
+
+private
+
+  def valid_exp_year?
+    unless exp_year.to_i >= Date.current.year
+      errors.add(:exp_year, "must be equal or greater than #{Date.current.year}")
+    end
   end
 end
