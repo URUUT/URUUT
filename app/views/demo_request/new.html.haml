@@ -1,12 +1,12 @@
 .demo-requests
   .span8{style: "margin-top:35px;"}
     %h4.step_name SIGN UP (STEP 1 OF 2)
-    = form_for @demo, url: demo_request_path , html: {class: "well"} do |f|
+    = form_for @demo, url: demo_request_index_path , html: {class: "well"} do |f|
       - if @demo.errors.any?
         .error-box
           %ul
             - @demo.errors.full_messages do |error_message|
               %li= error_message
-      = render partial: 'demo_requests/step1', locals: { f: f }
+      = render partial: 'demo_request/step1', locals: { f: f }
 
-  = render partial: 'demo_requests/aside'
+  = render partial: 'demo_request/aside'

@@ -19,9 +19,10 @@ Crowdfund::Application.routes.draw do
     end
   end
 
-  resource :demo_request do
+  resources :demo_request do
     get 'thank_you'
     get 'organization'
+    put 'organization_update'
   end
 
   devise_scope :user do

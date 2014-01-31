@@ -1,0 +1,10 @@
+.demo-requests
+  .span8{style: "margin-top:35px;"}
+    %h4.step_name SIGN UP (STEP 2 OF 2)
+    = form_for @demo, url: demo_request_organization_update_path(@demo) , html: {class: "well"} do |f|
+      - if @demo.errors.any?
+        .error-box
+          Please complete all field
+      = render partial: 'demo_request/step2', locals: { f: f }
+
+  = render partial: 'demo_request/aside'
