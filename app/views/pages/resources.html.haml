@@ -1,6 +1,7 @@
 :css
-  .box-content h5{
+  .box-content h5, h5.label-green{
     font-family: 'Proxima Nova Bold';
+    letter-spacing: 1pt;
   }
   .box-content p{
     font-size: 12pt;
@@ -13,8 +14,63 @@
     color: #81c263;
     padding-bottom: 5px;
   }
+  .span8 h2{
+    margin-top: 30px;
+    font-family: 'Proxima Nova';
+    text-transform: none;
+    font-size: 22pt;
+  }
+  .span8 h4{
+    color: #81c263;
+    text-transform: none;
+    font-size: 14pt;
+    letter-spacing: 1pt;
+    margin-bottom: 5px;
+  }
+  .span8 p{
+    color: #8e8e8e;
+    font-size: 10pt;
+    margin-bottom: 20px;
+  }
+  .span8 .experts{ display: inline-block; height: 150px; width: 300px;}
+  .span8 .experts p{ margin-bottom: 0px; }
+  .experts p b{
+    font-size: 11pt;
+    text-decoration: underline;
+  }
+  .experts img{ height: 85px; float: left; margin-right: 10px; }
 
-.span8
+  .fb, .tw {
+    display: inline-block;
+    height: 13px;
+    color: #fff;
+    text-decoration: none!important;
+    padding: 8pt 0 6pt 24pt;
+    font-weight: bold;
+    line-height: 10pt;
+  }
+  .fb {
+    background: url("/assets/facebook.png") top left no-repeat;
+    background-position: 13px;
+    background-size: 8px;
+    margin-right: 10px;
+  }
+
+  .tw {
+    background: url("/assets/twitter.png") top left no-repeat;
+    background-position: 10px;
+    background-size: 15px;
+  }
+
+  .btn-tw, .btn-fb {
+    width: 180px;
+    background: #486399;
+    border-radius: 5px;
+  }
+  .btn-tw { background: #4090ff; margin-bottom: 15px; }
+  .social-links a:hover{ color: #fff; text-decoration: none; }
+
+.span8{ style: 'padding-bottom: 55px;'}
   %h1 RESOURCES
 
   %h2 Articles
@@ -28,15 +84,20 @@
   %h4 Crowdfunding Atlanta Style
   %p AJC Tech Biz - 2013-10-11 
 
-  %h2 Experts
-  %h5.label-green FUNDRAISING
-  %p
-    %b Ashlie Graham
-  %p Fundraising Consultant
-  %h5.label-green NONPROFIT MANAGEMENT
-  %p
-    %b Ashlie Graham
-  %p Fundraising Consultant
+  %h2{ style: 'margin-top: 55px;'} Experts
+  .experts
+    %h5.label-green FUNDRAISING
+    = image_tag 'ashlie-headshot.png'
+    %p
+      %b Ashlie Graham
+    %p Fundraising Consultant
+
+  .experts
+    %h5.label-green NONPROFIT MANAGEMENT
+    = image_tag 'ashlie-headshot.png'
+    %p
+      %b Ashlie Graham
+    %p Fundraising Consultant
 
 .span4
   .well.without-title{style: "margin-top: 65px;"}
@@ -53,3 +114,9 @@
       %p
         For the latest news on Uruut follow us on 
         Twitter and Like Us on Facebook.
+
+      .social-links
+        .btn-tw
+          = link_to "Follow Uruut on Twitter","http://www.twitter.com/uruut", {class: "tw", target: "_blank"}
+        .btn-fb
+          = link_to "Like Uruut on Facebook","http://www.facebook.com/get.ruuted", {class: "fb", target: "_blank"}
