@@ -33,6 +33,4 @@
       = f.text_field :phone, id: "user_pass", class: 'full-with'
 
   %div.inline
-    = link_to '#', id: "next-step" do
-      .btn{ style: 'margin:0; width:235px;'}
-        Next Step ►
+    = f.submit 'Next Step ►', class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:right; border-radius: 5px; width: 230px;"

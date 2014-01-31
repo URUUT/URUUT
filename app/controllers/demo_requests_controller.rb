@@ -3,7 +3,6 @@ class DemoRequestsController < ApplicationController
   before_filter :set_demo, only: [:new, :organization]
 
   def new
-    @demo = Demo.new
   end
 
   def create

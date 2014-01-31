@@ -94,12 +94,13 @@ class Demo < ActiveRecord::Base
     :sponsorship_program,
     :type_of_accepted_donations
 
-  validates :first_name, :last_name, :organization, :email, :phone,
-    :founded_date, :non_profit, :organization_description, :money_raised_yearly,
-    :sponsorship_program, :crowdfunding, :crowdfunding_campaign_goals,
-    :partial_funding, :seven_days_to_receive_funds, :social_outreach, presence: true
+  validates :first_name, :last_name, :organization, :email, :phone, presence: true
 
-  validate :current_fundraising_activities, :type_of_accepted_donors
+  validate :current_fundraising_activities, :type_of_accepted_donors, on: :update
+
+  validates :founded_date, :non_profit, :organization_description, :money_raised_yearly,
+    :sponsorship_program, :crowdfunding, :crowdfunding_campaign_goals,
+    :partial_funding, :seven_days_to_receive_funds, :social_outreach, presence: true, on: :create
 
 private
 
