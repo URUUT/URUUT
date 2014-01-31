@@ -48,15 +48,13 @@
               %li - Fundraising resources & experts
               %li - No contracts. Cancel or upgrade anytime
               %li - “All or Nothing” campaigns only
-            = form_for 'user' do |f|
-              = f.submit 'Select Plan ►', class: 'btn', style: 'font-weight: bold;'
+            = link_to 'Select Plan ►', new_user_payment_method_path(current_user, plan_id: 'basic'), class: 'btn', style: 'font-weight: bold;'
             %hr
             %b OR PAY PER TRANSACTION
             %ul.small-list
               %li - Pay 5% of amount raised
               %li - No monthly fees
-            = form_for 'user' do |f|
-              = f.submit 'Select Plan ►', class: 'btn btn-small btn-gray', style: 'font-weight: bold;'
+            = link_to 'Select Plan ►', new_user_payment_method_path(current_user, plan_id: 'fee'), class: 'btn btn-small btn-gray', style: 'font-weight: bold;'
         .plan-box.text-center
           %header
             URUUT PLUS
@@ -78,8 +76,7 @@
               %li - Detailed Google Analytics reports
               %li - Advanced campaign transparency
             = link_to 'View Full Plan Details', '#', style: 'margin: 25px 0;'
-            = form_for 'user' do |f|
-              = f.submit 'Select Plan ►', class: 'btn', style: 'font-weight: bold;'
+            = link_to 'Select Plan ►', new_user_payment_method_path(current_user, plan_id: 'plus'), class: 'btn', style: 'font-weight: bold;'
         %br
         %p.text-center{ style: 'width: 435px; margin:auto;'}
           %i * A credit card transaction processing fee equal to 2.99% of amount raised, plus $0.30 per transaction applies to all plans.

@@ -1,11 +1,26 @@
 class PaymentMethodsController < ApplicationController
 
   before_filter :authenticate_user!
-  before_filter :find_customer_data, only: [:edit, :update]
+  before_filter :find_customer_data
+  before_filter :new_credit_card, only: [:new, :edit]
+
+  def new
+  end
 
   def edit
-    @credit_card = CreditCard.new()
-    @customer_card = @card_service.find_card
+  end
+
+  def create
+    credit_card = CreditCard.new(params[:credit_card])
+    customer_plan = Gateway::PlansService.new(current_user)
+    plan_id = params[:credit_card][:plan_id]
+
+    if @card_service.create(credit_card) && customer_plan.update_plan(plan_id)
+      redirect_to new_project_path
+    else
+      flash[:notice] = 'Something went wrong. Please try again in a few minutes.'
+      render :new
+    end
   end
 
   def update
@@ -21,6 +36,11 @@ class PaymentMethodsController < ApplicationController
   end
 
 private
+
+  def new_credit_card
+    @credit_card = CreditCard.new()
+    @customer_card = @card_service.find_card
+  end
 
   def find_customer_data
     @card_service = Gateway::CardsService.new(current_user)

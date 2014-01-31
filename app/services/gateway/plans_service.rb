@@ -5,7 +5,13 @@ class Gateway::PlansService < Gateway::BaseService
   def update_plan(plan_id)
     return false unless find_card
 
-    customer.update_subscription(plan: plan_id)
+    plan = Plan.where(name: plan_id).first
+    user_membership = @user.membership
+    user_membership.plan = plan
+
+    puts "*******************plan_id: #{plan_id}"
+
+    user_membership.save && customer.update_subscription(plan: plan_id)
   end
 
   def cancel_plan

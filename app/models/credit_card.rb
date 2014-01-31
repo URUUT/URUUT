@@ -3,7 +3,7 @@ class CreditCard
   include ActiveModel::Conversion
 
   attr_accessor :number, :exp_month, :exp_year, :cvc, :name, :billing_address,
-                :city, :zip_code, :state
+                :city, :zip_code, :state, :plan_id
 
   def initialize(attributes={})
     @number = attributes[:number]

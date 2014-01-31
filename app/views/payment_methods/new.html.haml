@@ -1,9 +1,9 @@
 .row{:style => "margin-top:35px;"}
   .span8{:style => "margin-top:15px;"}
-    %h4.font-bold CHANGE PAYMENT METHOD
-    = form_for @credit_card, url: user_payment_method_path(current_user), method: :put, html: { class: "well registration-edit"} do |f|
-      %p.form-subtitle
-        If you wish to use a different card for your monthly subscription payment enter the details of the new card below.
+    %h4.font-bold SET PAYMENT METHOD
+    = form_for @credit_card, url: user_payment_method_path(current_user), method: :post, html: { class: "well registration-edit"} do |f|
+      - if params['plan_id'].present?
+        = f.hidden_field :plan_id, value: params[:plan_id]
       = render partial: 'payment_methods/credit_card_fields', locals: { f: f }
   .span4
     .well.info.without-title
