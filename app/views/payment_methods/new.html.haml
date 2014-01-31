@@ -16,3 +16,36 @@
             = render partial: 'payment_methods/default_card_details', locals: { customer_card: @customer_card }
           - else
             You have not setup any card yet.
+
+:javascript
+  $('#new_credit_card').validate({
+    rules: {
+      "credit_card[name]":{
+        required: true,
+      },
+      "credit_card[number]":{
+        required: true,
+      },
+      "credit_card[cvc]":{
+        required: true,
+      },
+      "credit_card[exp_month]":{
+        required: true,
+      },
+      "credit_card[exp_year]":{
+        required: true,
+      },
+      "credit_card[billing_address]":{
+        required: true,
+      },
+      "credit_card[city]":{
+        required: true,
+      },
+      "credit_card[state]":{
+        required: true,
+      },
+      "credit_card[zip_code]":{
+        required: true,
+      },
+    },
+  });
