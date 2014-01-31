@@ -21,6 +21,7 @@ Crowdfund::Application.routes.draw do
 
   resource :demo_request do
     get 'thank_you'
+    get 'organization'
   end
 
   devise_scope :user do

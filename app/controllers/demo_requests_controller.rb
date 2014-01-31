@@ -1,5 +1,6 @@
 class DemoRequestsController < ApplicationController
   layout "landing", only: [:thank_you]
+  before_filter :set_demo, only: [:new, :organization]
 
   def new
     @demo = Demo.new
@@ -15,7 +16,15 @@ class DemoRequestsController < ApplicationController
     end
   end
 
+  def organization
+  end
+
   def thank_you
-    
+  end
+
+  protected
+
+  def set_demo
+    @demo = Demo.new
   end
 end
