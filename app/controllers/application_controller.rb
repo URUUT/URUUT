@@ -7,8 +7,6 @@ class ApplicationController < ActionController::Base
 
   rescue_from ActionController::RoutingError, with: :render404
 
-  rescue_from ActionController::RoutingError, with: :render404
-
   def after_sign_in_path_for(resource)
     if session[:redirect_url] == new_project_url
       User.set_redirect_path

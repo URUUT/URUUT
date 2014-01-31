@@ -2907,3 +2907,16 @@ input, select, textarea{
     }
   }
 }
+
+.plan-tooltip{
+  cursor: pointer;
+
+  & + .tooltip {
+    width: auto;
+      .tooltip-inner {
+        max-width: 350px;
+        padding: 10px;
+        width: 100%;
+      }
+  }
+}
