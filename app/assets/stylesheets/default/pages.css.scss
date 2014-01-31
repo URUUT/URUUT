@@ -2237,6 +2237,8 @@ input.selectbox {
 	width:100%;
   border-bottom: 2pt solid #70BF4C;
   display: none;
+  box-sizing: border-box;
+  height: 120px;
 }
 .nav li:first-child a:after{
   content: '';
