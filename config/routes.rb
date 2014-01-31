@@ -191,6 +191,7 @@ Crowdfund::Application.routes.draw do
       get 'donor_convenience'
       get 'fundraising'
       get 'analytics'
+      get 'resources'
     end
   end
 
