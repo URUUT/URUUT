@@ -98,7 +98,7 @@ class Demo < ActiveRecord::Base
 
   validate :current_fundraising_activities, :type_of_accepted_donors, on: :update
 
-  validates :founded_date, :non_profit, :organization_description, :money_raised_yearly,
+  validates :non_profit, :organization_description, :money_raised_yearly,
     :sponsorship_program, :crowdfunding, :crowdfunding_campaign_goals,
     :partial_funding, :seven_days_to_receive_funds, :social_outreach, presence: true, on: :update
 
