@@ -32,6 +32,10 @@ class PagesController < ApplicationController
     @projects = Project.where('live = true AND deleted = false').page(params[:page]).per(9)
   end
 
+  def download_article
+    send_file "#{Rails.root}/public/articles/#{params[:file]}", filename: params[:file], type: 'application/pdf'
+  end
+
   def categories
   	@category = Project.where("category = ?", params[:category])
   end

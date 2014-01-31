@@ -193,6 +193,7 @@ Crowdfund::Application.routes.draw do
       get 'fundraising'
       get 'analytics'
       get 'resources'
+      get 'download_article'
     end
   end
 
