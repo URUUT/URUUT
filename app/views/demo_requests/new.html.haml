@@ -38,8 +38,11 @@
   %h4.step_name SIGN UP (STEP 1 OF 2)
   %h4.step_name{ style: 'display:none;' } SIGN UP (STEP 2 OF 2)
   = form_for @demo, url: demo_request_path , html: {class: "well"} do |f|
-    .error-box
-      Please complete all field
+    - if @demo.errors.any?
+      .error-box
+        %ul
+          - @demo.errors.full_messages do |error_message|
+            %li= error_message
     #step1
       %h4 Tell us about you.
       %br
