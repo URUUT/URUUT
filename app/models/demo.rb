@@ -100,7 +100,7 @@ class Demo < ActiveRecord::Base
 
   validates :founded_date, :non_profit, :organization_description, :money_raised_yearly,
     :sponsorship_program, :crowdfunding, :crowdfunding_campaign_goals,
-    :partial_funding, :seven_days_to_receive_funds, :social_outreach, presence: true, on: :create
+    :partial_funding, :seven_days_to_receive_funds, :social_outreach, presence: true, on: :update
 
 private
 
