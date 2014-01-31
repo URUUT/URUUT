@@ -4142,3 +4142,40 @@ body.media {
 		display:block;
 	}
 }
+
+.demo-requests{
+  .full-with {
+    width: 100% !important;
+  }
+  input[type="radio"]{
+    display: inline-block;
+    float: left;
+  }
+  .inline{ width: 100%; }
+  .inline-field{
+    display: inline-block;
+    width: 60px;
+  }
+  .inline-field label{ width: auto; }
+  label{
+    width: 90%;
+    margin-left: 5px; 
+    margin-bottom: 10px;
+    display: inline-block;
+    font-family: "Proxima Nova Semi";
+    font-size: 10pt;
+    line-height: 14pt;
+  }
+  .label-green{
+    font-family: "Proxima Nova Bold";
+    margin-left: 0;
+    width: 130%;
+  }
+  .error-box {
+    display: none;
+    background: rgba(245, 11, 11, 0.69);
+    color: #fff;
+    padding: 7px;
+    font-weight: bold;
+  }
+}
