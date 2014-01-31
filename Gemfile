@@ -31,6 +31,7 @@ gem 'meta_request'
 gem 'airbrake'
 gem 'prawn'
 gem 'writeexcel', '~> 1.0.3'
+gem 'activeadmin'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
