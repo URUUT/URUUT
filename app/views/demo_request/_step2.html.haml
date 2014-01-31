@@ -1,5 +1,10 @@
 #step2
   %h4 Tell us about your organization.
+  - if f.object.errors.any?
+    .error-box
+      %ul
+        - f.object.errors.full_messages.each do |msg|
+          %li= msg
   %br
   .row
     .span6
@@ -51,5 +56,3 @@
       ◄ PREVIOUS
 
     = f.submit 'FINISH ►', class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:right; border-radius: 5px; width: 230px;"
-
-
