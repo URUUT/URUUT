@@ -25,9 +25,12 @@
       %p
         Create and launch your next fundraising campaign instantly!
 
-      = link_to "/projects", method: :post do
-        .btn
-          Get started ►
+      - if user_signed_in?
+        = link_to "/projects", method: :post do
+          .btn
+            Get started ►
+      - else
+        = link_to 'Get started ►', '#', class: 'btn must-login'
     .span6.camping
       %h1.green-title Check It Out
       %p
