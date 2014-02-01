@@ -80,15 +80,19 @@
     .well.info
       .box-content
         %h5.label-green{style: "margin-bottom: 7px;"} SUBSCRIPTION STATUS
-        %p
-          Your 
-          %b Uruut Basic 
-          subscription will be 
-          automatically renewed 01-14-2014 and 
-          charged 
-          %b $99 every 1 month 
-          unless you 
-          cancel your subscription before that time.
+        - if user_signed_in? && current_user.membership.plan
+          %p
+            Your
+            %b Uruut #{membership_title(current_user)}
+            subscription will be
+            automatically renewed #{next_membership_renewal_date(current_user)} and
+            charged
+            %b #{membership_cost(current_user)} every 1 month
+            unless you
+            cancel your subscription before that time.
+        - else
+          %p
+            None selected yet
         = link_to 'Change your subscription plan.', choose_plan_pages_path
 
       .box-content
