@@ -23,6 +23,10 @@ Crowdfund::Application.routes.draw do
     get 'thank_you'
     get 'organization'
     put 'organization_update'
+
+    collection do
+      get 'whitepaper'
+    end
   end
 
   devise_scope :user do

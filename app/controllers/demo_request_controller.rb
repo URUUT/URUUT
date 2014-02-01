@@ -42,4 +42,8 @@ class DemoRequestController < ApplicationController
 
   def thank_you
   end
+
+  def whitepaper
+    send_file 'public/whitepaper.pdf'
+  end
 end
