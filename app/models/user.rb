@@ -69,6 +69,8 @@ class User < ActiveRecord::Base
             token:auth.credentials.token,
             avatar: auth.info.image
           )
+          user.build_membership.save
+          Gateway::CustomerService.new(user).create
         end
       else
         user.update_attributes!({provider: auth.provider,uid: auth.uid})
