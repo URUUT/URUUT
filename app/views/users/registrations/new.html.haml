@@ -8,8 +8,8 @@
 
   = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => "well"}) do |f|
     = devise_error_messages!
-    - if params[:full_registration] || params[:user].try('[:full_registration]')
-      = f.hidden_field :full_registration, value: params[:full_registration] || params[:user].try('[:full_registration]')
+    - if params[:full_registration] || (params[:user] && params[:user][:full_registration])
+      = f.hidden_field :full_registration, value: params[:full_registration] || (params[:user] && params[:user][:full_registration])
     %h4 Tell us about you.
     %br
     .row
@@ -50,6 +50,13 @@
           %span.error-container
         = f.password_field :password, id: "user_password"
 
+    .row
+      .span3.well-half
+        = f.label :password_confirmation, class: "label-green" do
+          Password Confirmation*
+          %span.error-container
+        = f.password_field :password_confirmation, id: "user_password_confirmation"
+
     %div.inline
       = f.submit 'Finish', class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:left; border-radius: 5px; width: 230px;"
 
@@ -76,77 +83,75 @@
         required: true,
         minlength: 6
       }
-    },
-    errorPlacement: function(error, element) {
-      $('#user_pass, #user_password_confirmation').keyup(function(){
-        validatePass();
-      });
-      error.appendTo(element.parent().find(".error-container"));
+      "user[password_confirmation]":{
+        required: true,
+        minlength: 6
+      }
     },
   });
 
-  var validatePass = function(){
-    var passCom = $('#user_password_confirmation').val();
-    var pass = $('#user_pass').val();
+  / var validatePass = function(){
+  /   var passCom = $('#user_password_confirmation').val();
+  /   var pass = $('#user_pass').val();
 
-    if(passCom.length != 0){
-      if(pass == passCom){
-        $('.error-password-confirmation').text('');
-        $('#user_password_confirmation').removeClass("error");
-        $('#user_password_confirmation').attr('class', 'valid');
-      }else{
-        $('.error-password-confirmation').text('');
-        $('#user_password_confirmation').removeClass("valid");
-        $('#user_password_confirmation').attr('class', 'error')
-        $('.error-password-confirmation').append("<label for='user_password_confirmation' class='error' style='display: block;'>Doesn't Match</label>");
-      }
-    }
+  /   if(passCom.length != 0){
+  /     if(pass == passCom){
+  /       $('.error-password-confirmation').text('');
+  /       $('#user_password_confirmation').removeClass("error");
+  /       $('#user_password_confirmation').attr('class', 'valid');
+  /     }else{
+  /       $('.error-password-confirmation').text('');
+  /       $('#user_password_confirmation').removeClass("valid");
+  /       $('#user_password_confirmation').attr('class', 'error')
+  /       $('.error-password-confirmation').append("<label for='user_password_confirmation' class='error' style='display: block;'>Doesn't Match</label>");
+  /     }
+  /   }
 
-    if( 6 > $('#user_password_confirmation').val().length && $('#user_password_confirmation').val() != ""){
-        $('.error-password-confirmation').text('');
-        $('#user_password_confirmation').removeClass("valid");
-        $('#user_password_confirmation').attr('class', 'error')
-        $('.error-password-confirmation').append("<label for='user_password_confirmation' class='error' style='display: block;'>Max Char 6</label>");
-      }
+  /   if( 6 > $('#user_password_confirmation').val().length && $('#user_password_confirmation').val() != ""){
+  /       $('.error-password-confirmation').text('');
+  /       $('#user_password_confirmation').removeClass("valid");
+  /       $('#user_password_confirmation').attr('class', 'error')
+  /       $('.error-password-confirmation').append("<label for='user_password_confirmation' class='error' style='display: block;'>Max Char 6</label>");
+  /     }
 
-  };
+  / };
 
-  $('#user_pass, #user_password_confirmation').keyup(function(e){
-    validatePass();
-  });
+  / $('#user_pass, #user_password_confirmation').keyup(function(e){
+  /   validatePass();
+  / });
 
-  $(document).keyup(function(e){
-    if(e.keyCode == 9){
-      validatePass();
-      $('#user_pass, #user_password_confirmation').keyup(function(e){
-        validatePass();
-     });
-    }
-  })
+  / $(document).keyup(function(e){
+  /   if(e.keyCode == 9){
+  /     validatePass();
+  /     $('#user_pass, #user_password_confirmation').keyup(function(e){
+  /       validatePass();
+  /    });
+  /   }
+  / })
 
-  $("#new_user").submit(function(){
-    if($('#user_password_confirmation').val() == ""){
-      $('.error-password-confirmation').text('');
-      $('#user_password_confirmation').removeClass("valid");
-      $('#user_password_confirmation').attr('class', 'error')
-      $('.error-password-confirmation').append("<label for='user_password_confirmation' class='error' style='display: block;'>Required</label>");
-      return false;
-    }
+  / $("#new_user").submit(function(){
+  /   if($('#user_password_confirmation').val() == ""){
+  /     $('.error-password-confirmation').text('');
+  /     $('#user_password_confirmation').removeClass("valid");
+  /     $('#user_password_confirmation').attr('class', 'error')
+  /     $('.error-password-confirmation').append("<label for='user_password_confirmation' class='error' style='display: block;'>Required</label>");
+  /     return false;
+  /   }
 
-    if( 6 > $('#user_password_confirmation').val().length && $('#user_password_confirmation').val() != ""){
-      $('.error-password-confirmation').text('');
-      $('#user_password_confirmation').removeClass("valid");
-      $('#user_password_confirmation').attr('class', 'error')
-      $('.error-password-confirmation').append("<label for='user_password_confirmation' class='error' style='display: block;'>Max Char 6</label>");
-    }
+  /   if( 6 > $('#user_password_confirmation').val().length && $('#user_password_confirmation').val() != ""){
+  /     $('.error-password-confirmation').text('');
+  /     $('#user_password_confirmation').removeClass("valid");
+  /     $('#user_password_confirmation').attr('class', 'error')
+  /     $('.error-password-confirmation').append("<label for='user_password_confirmation' class='error' style='display: block;'>Max Char 6</label>");
+  /   }
 
-    if($('#user_password_confirmation').val() == $('#user_pass').val()){
-      return true;
-    }else{
-      $('.error-password-confirmation').text('');
-      $('#user_password_confirmation').removeClass("valid");
-      $('#user_password_confirmation').attr('class', 'error')
-      $('.error-password-confirmation').append("<label for='user_password_confirmation' class='error' style='display: block;'>Doesn't Match</label>");
-    }
-    return false;
-  })
+  /   if($('#user_password_confirmation').val() == $('#user_pass').val()){
+  /     return true;
+  /   }else{
+  /     $('.error-password-confirmation').text('');
+  /     $('#user_password_confirmation').removeClass("valid");
+  /     $('#user_password_confirmation').attr('class', 'error')
+  /     $('.error-password-confirmation').append("<label for='user_password_confirmation' class='error' style='display: block;'>Doesn't Match</label>");
+  /   }
+  /   return false;
+  / })
