@@ -3581,11 +3581,11 @@ ul.checked-list{
       position: absolute;
       bottom: -25px;
       content: '';
-      width: 0; 
+      width: 0;
       height: 0;
       border-top: 30px solid #fff;
-      border-left: 30px solid transparent; 
-      border-right: 30px solid transparent; 
+      border-left: 30px solid transparent;
+      border-right: 30px solid transparent;
     }
     .data{
       display: inline-block;
@@ -3684,23 +3684,30 @@ ul.checked-list{
 }
 
 .terms {
+  .address {
+    margin-bottom: 50px;
+    margin-top: 15px;
+  }
   .span12 {
 		margin-top:20px;
 		.page-title {
 			color:#70bf4c;
 			font-family:"Proxima Nova";
-			margin-top:0;
+      margin-bottom: 20px;
+			margin-top:50px;
 			text-transform:uppercase;}
 		ul {
 			li {
 		    color:#403e37;
 		    font-family:'Proxima Nova';
 		    font-size:14px;
-		    line-height:200%;
-				list-style-type:disc;
-		    margin-bottom:15px;}}
+		    line-height: 1.5;
+				list-style-type:none;
+		    margin-bottom:0;}}
 		h4 {
-			line-height:24px;
+      color: $green2;
+			line-height:normal;
+      margin:35px 0 5px;
 			text-transform:none;}}
 		.bold {
 			color:#464646;
@@ -3708,7 +3715,7 @@ ul.checked-list{
   h2 {
     font-family:'Proxima Nova';
     line-height:normal;
-    margin:30px 0 5px;
+    margin:0 0 10px;
     text-transform:none;
     &.anchor {
       color:#403e37;
@@ -4161,7 +4168,7 @@ body.media {
   .inline-field label{ width: auto; }
   label{
     width: 90%;
-    margin-left: 5px; 
+    margin-left: 5px;
     margin-bottom: 10px;
     display: inline-block;
     font-family: "Proxima Nova Semi";
@@ -4181,7 +4188,7 @@ body.media {
   }
 }
 .resources{
-  
+
   .box-content h5, h5.label-green{
     font-family: 'Proxima Nova Bold';
     letter-spacing: 1pt;
