@@ -36,7 +36,7 @@
     STATE
     %span.error-container
   .selectParent{style: "width: 280px;"}
-    = f.select :state, options_for_select(['LA'], ['1']), {:include_blank => true}, {class: "styledSelect required"}
+    = f.select :state, options_for_select(us_states), {:include_blank => true}, {class: "styledSelect required"}
 
 %div.inline.well-half{style: "vertical-align: top;"}
   = f.label :zip_code do
