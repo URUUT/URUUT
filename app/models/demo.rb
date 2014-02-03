@@ -102,13 +102,13 @@ class Demo < ActiveRecord::Base
     :sponsorship_program, :crowdfunding, :crowdfunding_campaign_goals,
     :partial_funding, :seven_days_to_receive_funds, :social_outreach, presence: true, on: :update
 
-  def create_for_user(user)
+  def self.create_for_user(user)
     Demo.first_or_create(
-        first_name:   current_user.first_name,
-        last_name:    current_user.last_name,
-        organization: current_user.organization,
-        email:        current_user.email,
-        phone:        current_user.telephone)
+        first_name:   user.first_name,
+        last_name:    user.last_name,
+        organization: user.organization,
+        email:        user.email,
+        phone:        user.telephone)
   end
 
 private
