@@ -1,3 +1,7 @@
+:css
+  .normal-paragraph p{ margin-left: 0; margin-bottom: 0; }
+  .normal-paragraph h1.green-title{ font-size: 24pt; margin-top: 45px;}
+
 %section.full-width.our-story{ style: 'padding-bottom: 0;'}
   .container
     %h1 Online Fundraising Has Evolved... Now It’s Your Turn
@@ -21,7 +25,7 @@
 %section.full-width.normal-paragraph.padding
   .container
 
-    %div.span6.text-left
+    %div.span5.text-left
       %h1.green-title Instantly Set Up Online Fundraising Campaigns
       %p
         %b All Campaign Types Supported
@@ -39,11 +43,12 @@
       %ul.checked-list
         %li A Uruut campaign specialist is assigned to help you successfully set up and launch your campaign
         %li Easy-to-understand Get Started Guide and resources help you navigate every step of the way
-      %p
-        * A credit card transaction processing fee equal to 2.99% of amount raised applies to all campaigns.
+      %p{style: 'font-size: 11pt; line-height: 14pt;'}
+        %i
+          * A credit card transaction processing fee equal to 2.99% of amount raised applies to all campaigns.
 
-    %div.span6
-      = image_tag 'campaign.png'
+    %div.span7
+      = image_tag 'URUUT_ProjectCreationWizard_09.jpg'
 
 %section.full-width.our-mission.gray-band
   .container
@@ -52,14 +57,14 @@
 
     %div.span7
       %h2.text-left Choose Uruut To Optimize Online Donations On Our Site... Or Yours
-      %p.text-left
+      %p.text-left{style: 'margin-left: 0;'}
         %b Let Uruut Host Your Campaign
         %ul.checked-list
           %li Instant setup
           %li Dedicated Campaign Manager
           %li Get started in minutes
 
-      %p.text-left
+      %p.text-left{style: 'margin-left: 0;'}
         %b Seamlessly Integrate Uruut On Your Site
         %ul.checked-list
           %li Maintain your brand and your site’s look and feel
