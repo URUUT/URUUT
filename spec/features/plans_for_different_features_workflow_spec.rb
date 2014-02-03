@@ -11,13 +11,13 @@ feature 'Change Plan Workflow' do
     end
   end
 
-  scenario 'User visits his account information' do
-    visit edit_user_registration_path
+  # scenario 'User visits his account information' do
+  #   visit edit_user_registration_path
 
-    within('.span8') do
-      expect(page).to have_content("Edit account information")
-    end
-  end
+  #   within('.span8') do
+  #     expect(page).to have_content("Edit account information")
+  #   end
+  # end
 
   # scenario 'User visits pricing page', js: true do
   #   visit edit_user_registration_path
