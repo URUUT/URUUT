@@ -5,7 +5,7 @@
       - if @demo.errors.any?
         .error-box
           %ul
-            - @demo.errors.full_messages do |error_message|
+            - @demo.errors.full_messages.each do |error_message|
               %li= error_message
       = render partial: 'demo_request/step1', locals: { f: f }
 

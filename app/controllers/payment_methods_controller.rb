@@ -15,10 +15,15 @@ class PaymentMethodsController < ApplicationController
     customer_plan = Gateway::PlansService.new(current_user)
     plan_id = params[:credit_card][:plan_id]
 
-    if @credit_card.valid? && @card_service.create(@credit_card)
-      customer_plan.update_plan(plan_id) if plan_id.present?
-      redirect_to users_sign_up_confirmation_path
-    else
+    begin
+      if @credit_card.valid? && @card_service.create(@credit_card)
+        customer_plan.update_plan(plan_id) if plan_id.present?
+        redirect_to users_sign_up_confirmation_path
+      else
+        render :new
+      end
+    rescue Stripe::CardError => e
+      @credit_card.errors.add(:base, e.message)
       render :new
     end
   end

@@ -4,6 +4,11 @@
     = form_for @credit_card, url: user_payment_method_path(current_user), method: :put, html: { class: "well registration-edit"} do |f|
       %p.form-subtitle
         If you wish to use a different card for your monthly subscription payment enter the details of the new card below.
+      - if @credit_card.errors.any?
+        .error-box
+          %ul
+            - @credit_card.errors.full_messages.each do |error_message|
+              %li= error_message
       = render partial: 'payment_methods/credit_card_fields', locals: { f: f }
   .span4
     .well.info.without-title
