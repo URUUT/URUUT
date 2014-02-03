@@ -2,7 +2,12 @@ class DemoRequestController < ApplicationController
   layout "landing", only: [:thank_you]
 
   def new
-    @demo = Demo.new
+    if current_user
+      @demo = Demo.create_for_user(current_user)
+      redirect_to demo_request_organization_path(@demo)
+    else
+      @demo = Demo.new
+    end
   end
 
   def create
