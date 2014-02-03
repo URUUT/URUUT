@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_filter :last_url, :session_email_forgot_password, :additional_information,
                 :get_current_tenant
 
-  rescue_from ActionController::RoutingError, with: :render404
+  # rescue_from ActionController::RoutingError, with: :render404
 
   def after_sign_in_path_for(resource)
     if session[:redirect_url] == new_project_url

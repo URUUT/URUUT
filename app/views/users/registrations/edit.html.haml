@@ -80,7 +80,7 @@
     .well.info
       .box-content
         %h5.label-green{style: "margin-bottom: 7px;"} SUBSCRIPTION STATUS
-        - if user_signed_in? && current_user.membership.plan
+        - if user_signed_in? && !current_user.membership.nil?
           %p
             Your
             %b Uruut #{membership_title(current_user)}
@@ -107,9 +107,10 @@
             %p You have not setup any card yet.
         = link_to 'Change payment method or card details.', edit_user_payment_method_path(current_user)
 
-      .box-content
-        %h5.label-green{style: "margin-bottom: 7px;"} CANCEL YOUR SUBSCRIPTION
-        = link_to 'View cancellation options.', user_membership_cancel_path(current_user, current_user.membership)
+      - unless current_user.membership.nil?
+        .box-content
+          %h5.label-green{style: "margin-bottom: 7px;"} CANCEL YOUR SUBSCRIPTION
+          = link_to 'View cancellation options.', user_membership_cancel_path(current_user, current_user.membership)
 
   .span4
     %h3.title{:style => "margin-bottom:5px;"} My badges
