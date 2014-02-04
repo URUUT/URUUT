@@ -2913,10 +2913,28 @@ input, select, textarea{
 
   & + .tooltip {
     width: auto;
+      .tooltip-arrow {
+        top: 50%;
+        margin-top: -8px;
+      }
       .tooltip-inner {
         max-width: 350px;
         padding: 10px;
         width: 100%;
+      }
+      &.right{
+        .tooltip-arrow {
+          border-right-color: #fff;
+          border-width: 8px 8px 8px 0;
+          left: -7px;
+        }
+      }
+      &.left {
+        .tooltip-arrow {
+          border-left-color: #fff;
+          border-width: 8px 0 8px 8px;
+          right: -7px;
+        }
       }
   }
 }

@@ -3177,7 +3177,7 @@ ul.checked-list{
   }
   .plan{
     padding: 12px;
-    a{ display: inline-block; text-decoration: underline; }
+    a{ display: inline-block; }
     b {
       font-size: 11pt;
       line-height: 20pt;
@@ -3204,13 +3204,16 @@ ul.checked-list{
     }
   }
   .btn{
+    font-size: 12px;
+    font-weight: 600;
     width: 100%;
     margin: 0;
     margin-top: 20px;
     padding: 15px 0;
+    text-decoration: none;
     &.btn-small {
       width: 150px;
-      font-size: 10pt;
+      font-size: 10px;
       padding: 7pt 0;
       margin: 20px 0;
     }
@@ -3223,6 +3226,7 @@ ul.checked-list{
 .price{
   h1 {
     color: #70bf4c;
+    font-family: 'Proxima Nova', helvetica, arial, sans-serif;
     font-weight: normal;
     line-height: normal;
     margin-top: 0;
@@ -3232,7 +3236,7 @@ ul.checked-list{
     font-size: 70px;
     word-spacing: -10pt;
     letter-spacing: -2pt;
-    margin-bottom: 0px!important;
+    margin-bottom: 0px !important;
     sup, append{
       vertical-align: top;
       font-size: 57%;
@@ -3261,9 +3265,34 @@ ul.checked-list{
   margin-right: 5px;
   margin-top: -10px;
 }
+.integrate {
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  margin: 20px 0;
+
+  h4 {
+    background: $green2;
+    border-radius: 5px 5px 0 0;
+    color: #fff;
+    font-family: 'Proxima Nova', helvetica, arial, sans-serif;
+    font-size: 14px;
+    margin: 0;
+    padding: 10px 0;
+    text-align: center;
+  }
+  img {
+    margin: 0 20px;
+    width: 120px;
+  }
+  p {
+    font-size: 14px;
+    margin: 20px;
+  }
+}
 .powered-logo {
   display: inline-block;
-  float: right;
+  float: left;
   margin-top: 20px;
 }
 .plan{

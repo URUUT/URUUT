@@ -79,7 +79,7 @@
             - if user_signed_in?
               = link_to 'Select Plan ►', new_user_payment_method_path(current_user, plan_id: 'fee'), class: 'btn btn-small btn-gray', style: 'font-weight: bold;'
             - else
-              = link_to 'Select Plan ►', '#', class: 'btn must-login', style: 'font-weight: bold;'
+              = link_to 'Select Plan ►', '#', class: 'btn btn-small btn-gray', style: 'font-weight: bold;'
         .plan-box.text-center
           %header
             URUUT PLUS
@@ -110,19 +110,17 @@
             - else
               = link_to 'Select Plan ►', '#', class: 'btn must-login', style: 'font-weight: bold;'
         %br
+      .span8
+        .integrate.clearfix
+          %h4 Integrate With Your Existing Website
+          .normal-paragraph
+            = image_tag 'powered-by.png', class: 'powered-logo', align: 'left'
+            %p
+              Take full advantage of the Uruut platform by seamlessly integrating it into your website.
+              = link_to 'Contact us', contact_pages_path
+              for more information and a quote.
         %p.text-center{ style: 'width: 435px; margin:auto;'}
           %i * A credit card transaction processing fee equal to 2.99% of amount raised, plus $0.30 per transaction applies to all plans.
-%section.full-width
-  .container.padding
-    = image_tag 'powered-by.png', class: 'powered-logo'
-    %h1.green-title Integrate With Your Existing Website
-    .normal-paragraph
-      %p
-        Take full advantage of the Uruut platform by seamlessly integrating it into your website.
-        %br
-          = link_to 'Contact us', contact_pages_path
-          for more information and a quote.
-
 
 :javascript
   $(function() {
