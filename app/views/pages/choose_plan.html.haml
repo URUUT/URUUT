@@ -104,7 +104,6 @@
 
               %li{'data-toggle' => 'tooltip', 'data-placement' => 'left', title: "The PLUS plan offers the ability to keep projects stored in the Transparency Workroom for as long as you like (compared with 60 days in the BASIC plan).", class: 'plan-tooltip'} - Advanced campaign transparency
 
-            = link_to 'View Full Plan Details', '#', style: 'margin: 25px 0;'
             - if user_signed_in?
               = link_to 'Select Plan ►', new_user_payment_method_path(current_user, plan_id: 'plus'), class: 'btn', style: 'font-weight: bold;'
             - else
