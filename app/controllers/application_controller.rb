@@ -7,7 +7,9 @@ class ApplicationController < ActionController::Base
 
   # rescue_from ActionController::RoutingError, with: :render404
 
-  def after_sign_in_path_for(resource)
+  def after_sign_in_path_for(resource, params=nil)
+    return new_user_payment_method_path(current_user, plan_id: params[:sign_in_plan]) if params && params[:sign_in_plan]
+
     if session[:redirect_url] == new_project_url
       User.set_redirect_path
     elsif session[:redirect_url] == user_registration_url || request.referer.nil? || request.referer.start_with?(edit_user_password_url) || session[:redirect_url] == root_url

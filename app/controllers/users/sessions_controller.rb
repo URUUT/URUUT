@@ -29,9 +29,9 @@ class Users::SessionsController < DeviseController
     #   respond_to :js
     # end
     if request.xhr?
-      render js: "window.location = '#{after_sign_in_path_for(resource)}';"
+      render js: "window.location = '#{after_sign_in_path_for(resource, params[:user])}';"
     else
-      respond_with resource, :location => after_sign_in_path_for(resource)
+      respond_with resource, :location => after_sign_in_path_for(resource, params[:user])
     end
 
   end
