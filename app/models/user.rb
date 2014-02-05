@@ -45,6 +45,8 @@ class User < ActiveRecord::Base
   scope :unique_project_donors, ->(project) { joins(:donations).
     where(donations: { project_id: project.id, confirmed: true }).uniq }
 
+  delegate :plan, to: :membership, prefix: true
+
   # mount_uploader :avatar, AvatarUploader
 
   def self.create_with_omniauth(info)
@@ -181,7 +183,15 @@ class User < ActiveRecord::Base
     role == 'admin'
   end
 
-  private
+  def donor?
+    membership_plan.blank?
+  end
+
+  def campaign_manager?
+    !donor?
+  end
+
+private
 
   def send_welcome_email
     WelcomeMailer.welcome_confirmation(self).deliver
@@ -190,6 +200,7 @@ class User < ActiveRecord::Base
   def assign_default_badge
     self.add_badge(1)
   end
+
 
 
 end
