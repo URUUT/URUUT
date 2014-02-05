@@ -73,7 +73,7 @@ private
 
   def full_registration_path(resource)
     if resource.full_registration
-      new_user_payment_method_path(resource)
+      new_user_payment_method_path(resource, plan_id: resource.sign_up_plan)
     else
       after_sign_up_path_for(resource)
     end
