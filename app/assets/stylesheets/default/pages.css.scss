@@ -3573,8 +3573,8 @@ ul.checked-list{
     ul.checked-list li{ line-height: 20pt; }
     a{
       font-size: 12pt;
-      position: relative;
-      top: 15px;
+      position: absolute;
+      bottom: 25px;
     }
   }
   .booble-section{
