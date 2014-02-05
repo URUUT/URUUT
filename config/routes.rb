@@ -10,6 +10,7 @@ Crowdfund::Application.routes.draw do
     :passwords => 'users/passwords'
   }
 
+  resource  :marketing_info
   resources :users, :only => [:show] do
     get :get_complete_project, on: :collection
     resource  :payment_method

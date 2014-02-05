@@ -36,6 +36,7 @@ class User < ActiveRecord::Base
   has_many :questions
 
   has_one :membership
+  has_one :marketing_info
 
   acts_as_tenant(:account)
 

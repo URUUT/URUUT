@@ -43,6 +43,10 @@ class PagesController < ApplicationController
   def contact
   end
 
+  def choose_plan
+    @marketing_info = MarketingInfo.new
+  end
+
   def contact_send
     name = params[:pages][:name]
     email = params[:pages][:email]
