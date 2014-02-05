@@ -2,6 +2,14 @@ class RegistrationsController < Devise::RegistrationsController
 
   layout "landing", only: [:confirmation]
 
+  def new
+    build_resource
+    @marketing_info = MarketingInfo.find params[:marketing_info_id]
+    resource.first_name = @marketing_info.first_name
+    resource.last_name  = @marketing_info.last_name
+    resource.email      = @marketing_info.email
+  end
+
   def edit
     @customer_card = Gateway::CardsService.new(current_user).find_card
   end
