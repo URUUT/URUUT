@@ -121,12 +121,12 @@
         %p.text-center{ style: 'width: 435px; margin:auto;'}
           %i * A credit card transaction processing fee equal to 2.99% of amount raised, plus $0.30 per transaction applies to all plans.
 
-.modal.hide.fade{style: "text-align:center;padding:50px;"}
+#modal-form.hide.fade{style: "text-align:center;padding:50px;"}
   %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", style: "position:absolute;top:10px;right:20px;", type: "button"} ×
   %h5{style: "margin-bottom:20px;"}
     You need to Sign In or Sign Up before continuing.
 
-  = form_for @marketing_info, url: marketing_info_path do |f|    
+  = form_for @marketing_info, url: marketing_info_path do |f|
     .row
       .span3.well-half
         = f.label :first_name, class: "label-green" do
@@ -144,6 +144,8 @@
         Email address*
       = f.email_field :email, class: 'full-with', required: true
 
+      = f.hidden_field :href, value: ''
+
     %a.btn{href: "/users/sign_in?sign_in_plan=' + $(this).data('plan-type') + '"} Sign In ►
     %span{style: "font:italic 12px/21px georgia, serif;margin:0 10px;"} or
     = f.submit 'Sign Up ►', class: 'btn'
@@ -154,8 +156,10 @@
   });
 
   $(document).ready(function(){
-    $('.modal').modal();
+    $('.modal').remove();
+    $('#modal-form').addClass('modal');
     $(".btn.custom-login").on("click",function(){
-      $('body').append('<div class="modal hide fade" style="text-align:center;padding:50px;"><button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="position:absolute;top:10px;right:20px;">×</button><h5 style="margin-bottom:20px;">You need to Sign In or <a href="/users/sign_up?full_registration=1&sign_up_plan=' + $(this).data('plan-type') + '">Sign Up</a> before continuing.</h5><a href="/users/sign_in?sign_in_plan=' + $(this).data('plan-type') + '" class="btn">Sign In ►</a> <span style="font:italic 12px/21px georgia, serif;margin:0 10px;">or</span> <a href="/users/sign_up?full_registration=1&sign_up_plan=' + $(this).data('plan-type') + '" class="btn">Sign Up ►</a></div>');
+      $('input[name="marketing_info[href]"]').val('/users/sign_up?full_registration=1&amp;sign_up_plan=' + $(this).data('plan-type'))
+      $('.modal').modal();
     })
   });
