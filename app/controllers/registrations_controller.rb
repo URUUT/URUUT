@@ -12,6 +12,7 @@ class RegistrationsController < Devise::RegistrationsController
     if resource.save
       resource.build_membership.save
       Gateway::CustomerService.new(resource).create
+      Gateway::PlansService.new(resource).update_plan('fee') if resource.sign_up_plan == 'fee'
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?
         sign_up(resource_name, resource)
@@ -72,8 +73,10 @@ class RegistrationsController < Devise::RegistrationsController
 private
 
   def full_registration_path(resource)
-    if resource.full_registration
+    if resource.full_registration && resource.sign_up_plan != 'fee'
       new_user_payment_method_path(resource, plan_id: resource.sign_up_plan)
+    elsif resource.sign_up_plan == 'fee'
+      users_sign_up_confirmation_path
     else
       after_sign_up_path_for(resource)
     end
