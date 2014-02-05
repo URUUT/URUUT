@@ -3,8 +3,6 @@ require 'stripe'
 class Gateway::PlansService < Gateway::BaseService
 
   def update_plan(plan_id)
-    return false unless find_card || plan_id == 'fee'
-
     plan = Plan.where(name: plan_id).first
     user_membership = @user.membership
     user_membership.plan = plan
@@ -25,6 +23,7 @@ private
     when 'fee'
       true
     when 'basic', 'plus'
+      find_card
       customer.update_subscription(plan: plan_id)
     else
       false
