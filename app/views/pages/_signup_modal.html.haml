@@ -24,6 +24,6 @@
 
       = f.hidden_field :href, value: ''
 
-    %a.btn{href: "/users/sign_in?sign_in_plan=' + $(this).data('plan-type') + '"} Sign In ►
+    %a.btn.signin{href: "#"} Sign In ►
     %span{style: "font:italic 12px/21px georgia, serif;margin:0 10px;"} or
     = f.submit 'Sign Up ►', class: 'btn', style: "font-family: 'Proxima Nova Semi';padding: 8px 25px;"

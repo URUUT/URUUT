@@ -133,6 +133,7 @@
     $('#modal-form').addClass('modal');
     $(".btn.custom-login").on("click",function(){
       $('input[name="marketing_info[href]"]').val('/users/sign_up?full_registration=1&amp;sign_up_plan=' + $(this).data('plan-type'))
+      $('.signin').attr('href','/users/sign_in?sign_in_plan=' + $(this).data('plan-type'))
       $('.modal').modal();
     })
   });
