@@ -1,8 +1,10 @@
+:css
+  input.full-with{ box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5) !important; }
 
 #modal-form.hide.fade{style: "text-align:center;padding:50px;"}
   %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", style: "position:absolute;top:10px;right:20px;", type: "button"} ×
   %h5{style: "margin-bottom:20px;"}
-    You need to Sign In or Sign Up before continuing.
+    You need to Log In or Sign Up before continuing.
   %br
   = form_for @marketing_info, url: marketing_info_path do |f|
     .row
