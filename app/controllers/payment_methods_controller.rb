@@ -5,6 +5,13 @@ class PaymentMethodsController < ApplicationController
   before_filter :new_credit_card, only: [:new, :edit]
 
   def new
+    customer_plan = Gateway::PlansService.new(current_user)
+    plan_id = params[:plan_id]
+
+    if plan_id == 'fee'
+      customer_plan.update_plan('fee')
+      redirect_to users_sign_up_confirmation_path
+    end
   end
 
   def edit
