@@ -5,7 +5,7 @@ module MembershipsHelper
   end
 
   def next_membership_renewal_date(user)
-    (user.membership.updated_at + 1.month).strftime('%d-%m-%Y')
+    (user.membership.updated_at + 1.month).strftime('%m-%d-%Y')
   end
 
   def membership_cost(user)
