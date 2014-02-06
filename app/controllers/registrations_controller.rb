@@ -4,10 +4,14 @@ class RegistrationsController < Devise::RegistrationsController
 
   def new
     build_resource
-    @marketing_info = MarketingInfo.find params[:marketing_info_id]
-    resource.first_name = @marketing_info.first_name
-    resource.last_name  = @marketing_info.last_name
-    resource.email      = @marketing_info.email
+
+    @marketing_info = MarketingInfo.find_by_id(params[:marketing_info_id])
+
+    if @marketing_info
+      resource.first_name = @marketing_info.first_name
+      resource.last_name  = @marketing_info.last_name
+      resource.email      = @marketing_info.email
+    end
   end
 
   def edit
