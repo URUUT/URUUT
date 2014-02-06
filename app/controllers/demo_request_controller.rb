@@ -13,6 +13,7 @@ class DemoRequestController < ApplicationController
   def create
     @demo = Demo.new(params[:demo])
     if @demo.save
+      DemoRequestMailer.scheduled_demo_confirmation(@demo).deliver
       redirect_to demo_request_organization_path(@demo)
     else
       render :new
