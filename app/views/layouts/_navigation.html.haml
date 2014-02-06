@@ -3,7 +3,7 @@
 
 %ul.nav
   %li
-    = link_to "Features", '#', id: 'features-btn'
+    = link_to "Features", '#', class: 'features-btn'
   %li
     = link_to "Pricing", choose_plan_pages_path
   %li
@@ -158,7 +158,7 @@
       $("#forgotModal").modal("show");
       $(".email-address-forgot").val("");
     })
-    $("#features-btn").click(function(){
+    $(".features-btn").click(function(){
       $(".navbar .breadcrumb-container").toggle();
       $(this).parent().toggleClass('active-menu');
       if ($(".navbar").hasClass("submenu-active")){
