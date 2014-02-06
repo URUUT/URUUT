@@ -121,34 +121,7 @@
         %p.text-center{ style: 'width: 435px; margin:auto;'}
           %i * A credit card transaction processing fee equal to 2.99% of amount raised, plus $0.30 per transaction applies to all plans.
 
-#modal-form.hide.fade{style: "text-align:center;padding:50px;"}
-  %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", style: "position:absolute;top:10px;right:20px;", type: "button"} ×
-  %h5{style: "margin-bottom:20px;"}
-    You need to Sign In or Sign Up before continuing.
-
-  = form_for @marketing_info, url: marketing_info_path do |f|
-    .row
-      .span3.well-half{style: 'width: 45%;'}
-        = f.label :first_name, class: "label-green" do
-          First Name*
-          %span.error-container
-        = f.text_field :first_name, class: 'full-with', required: true
-      .span3.well-half{style: 'width: 45%;'}
-        = f.label :last_name, class: "label-green" do
-          Last Name*
-          %span.error-container
-        = f.text_field :last_name, class: 'full-with', required: true
-    %div
-      = f.label :email, class: "label-green" do
-        %span.error-container
-        Email address*
-      = f.email_field :email, class: 'full-with', style: 'width: 96%;', required: true
-
-      = f.hidden_field :href, value: ''
-
-    %a.btn{href: "/users/sign_in?sign_in_plan=' + $(this).data('plan-type') + '"} Sign In ►
-    %span{style: "font:italic 12px/21px georgia, serif;margin:0 10px;"} or
-    = f.submit 'Sign Up ►', class: 'btn', style: "font-family: 'Proxima Nova Semi';padding: 8px 25px;"
+= render partial: 'signup_modal'
 
 :javascript
   $(function() {
