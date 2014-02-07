@@ -77,7 +77,7 @@
       %li.message
         = link_to "Project Messages", project_admin_project_messages_path(@project.id), class: "sub-menu-project messages"
         .nav-arrow
-      - if current_user.membership_plan.have_feature? 'communication_center'
+      - if current_user.membership_plan.has_feature? 'communication_center'
         %li.tw
           = link_to "Transparency Workroom", "/project_admin/documents?project_id=#{@project.id}", class: "sub-menu-project workroom", remote: true
           .nav-arrow
