@@ -3200,6 +3200,7 @@ ul.checked-list{
       h1{
         font-size: 60px;
         letter-spacing: 0px;
+        position: relative;
         append{ left: -13px; }
       }
     }
@@ -3238,11 +3239,13 @@ ul.checked-list{
     word-spacing: -10pt;
     letter-spacing: -2pt;
     margin-bottom: 0px !important;
+    sup {
+      position: absolute;
+    }
     sup, append{
       vertical-align: top;
       font-size: 57%;
       top: 23px;
-      left: -11pt;
     }
   }
   p{
