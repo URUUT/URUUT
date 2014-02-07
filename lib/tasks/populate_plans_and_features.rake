@@ -14,11 +14,13 @@ namespace :populate do
       donor_cms: 'Basic Donor Management / CRM',
       oureach_platform: 'Social and Email Outreach Platform',
       email_support: 'Unlimited Email Support',
+      communication_center: 'Post Funding Communication Center',
       cancel_anytime: 'Total Flexibility Cancel Anytime*'
     }
 
     BASIC_FEATURES = FEE_FEATURES.merge({
-      no_transaction_fee: 'No Transaction Fee^'
+      no_transaction_fee: 'No Transaction Fee^',
+      communication_center: 'Post Funding Communication Center'
     })
 
     PLUS_FEATURES = BASIC_FEATURES.merge({
