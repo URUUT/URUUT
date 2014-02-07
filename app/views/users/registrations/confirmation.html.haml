@@ -5,9 +5,15 @@
     %p{ style: 'margin: 12px 115px 35px;' }
       Set up your first campaign, access Uruut’s powerful donor relationship management tools, or just start exploring.
 
-    = link_to choose_plan_pages_path do
-      .btn
-        GET STARTED ►
+    - if user_signed_in? && current_user.campaign_manager?
+      = link_to "/projects", method: :post do
+        .btn
+          Get started ►
+    - else
+      = link_to choose_plan_pages_path do
+        .btn
+          Get started ►
+
 
     %p{ style: 'margin: 50px 115px 10px;' }
       To help you get started, we will assign one of our campaign launch managers to <a href="http://meetme.so/UruutConsulting">schedule a kick-off call</a> with you to walk you through the campaign set up process and help answer any questions you might have.
