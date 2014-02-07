@@ -80,16 +80,7 @@
     .well.info
       .box-content
         %h5.label-green{style: "margin-bottom: 7px;"} SUBSCRIPTION STATUS
-        - if user_signed_in? && !current_user.membership.nil?
-          %p
-            Your
-            %b Uruut #{membership_title(current_user)}
-            #{membership_cost_message_start(current_user)}
-            %b #{membership_cost(current_user)}
-            #{membership_cost_message_end(current_user)}
-        - else
-          %p
-            None selected yet
+        = render partial: 'shared/subscription_status', locals: { current_user: current_user }
         = link_to 'Change your subscription plan.', choose_plan_pages_path
 
       .box-content

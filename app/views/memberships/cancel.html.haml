@@ -58,13 +58,5 @@
     .well.info.without-title
       .box-content
         %h5.label-green{style: "margin-bottom: 7px;"} SUBSCRIPTION STATUS
-        %p
-          Your 
-          %b Uruut Basic 
-          subscription will be 
-          automatically renewed 01-14-2014 and 
-          charged 
-          %b $99 every 1 month 
-          unless you 
-          cancel your subscription before that time.
+        = render partial: 'shared/subscription_status', locals: { current_user: current_user }
 
