@@ -50,7 +50,6 @@ class DemoRequestController < ApplicationController
   end
 
   def whitepaper
-    DemoRequestMailer.whitepaper_demo_confirmation(@demo).deliver
     send_file 'public/whitepaper.pdf'
   end
 end
