@@ -37,6 +37,8 @@ class User < ActiveRecord::Base
   has_one :membership
   has_one :marketing_info
 
+  delegate :kind, to: :membership, prefix: true
+
   acts_as_tenant(:account)
 
   # Badging
