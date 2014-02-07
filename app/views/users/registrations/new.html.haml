@@ -59,7 +59,10 @@
         = f.password_field :password_confirmation, id: "user_password_confirmation"
 
     %div.inline
-      = f.submit 'Finish', class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:left; border-radius: 5px; width: 230px;"
+      - if (params[:sign_up_plan] || (params[:user] && params[:user][:sign_up_plan])) == 'fee'
+        = f.submit 'Finish', class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:left; border-radius: 5px; width: 230px;"
+      - else
+        = f.submit 'Continue', class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:left; border-radius: 5px; width: 230px;"
 
 .span4
   .well.without-title{style: "margin-top: 75px;"}
