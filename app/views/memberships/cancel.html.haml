@@ -48,7 +48,8 @@
         %h5.label-green{style: "margin-bottom: 7px;"} STILL WANT TO CANCEL YOUR SUBSCRIPTION?
         %p
           Remember, if you click ‘Cancel Subscription’ below, your Uruut subscription will expire on 
-          01-14-2014. But you’re welcome back anytime and we hope to help make your life as a 
+          #{membership_expire_date(current_user)}. 
+          But you’re welcome back anytime and we hope to help make your life as a 
           nonproﬁt easier in the future.
 
         = link_to user_registration_path do

@@ -8,6 +8,10 @@ module MembershipsHelper
     (user.membership.updated_at + 1.month).strftime('%m-%d-%Y')
   end
 
+  def membership_expire_date(user)
+    (user.membership.updated_at + 1.month - 1.day).strftime('%m-%d-%Y')
+  end
+
   def membership_cost(user)
     case user.membership.kind
     when 'fee'
