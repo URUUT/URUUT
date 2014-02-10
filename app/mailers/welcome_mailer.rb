@@ -25,7 +25,7 @@ class WelcomeMailer < ActionMailer::Base
     @email = user.email
     @host = ActionMailer::Base.default_url_options[:host]
     unless @email.empty?
-      mail to: @email, bcc: "agraham@uruut.com, kbush@uruut.com, mfeinberg@uruut.com, bnorwood@uruut.com, alejo+bcc@bandofcoders.com" subject: "Welcome To URUUT"
+      mail to: @email, bcc: "agraham@uruut.com, kbush@uruut.com, mfeinberg@uruut.com, bnorwood@uruut.com, alejo+bcc@bandofcoders.com", subject: "Welcome To URUUT"
     end
   end
 end
