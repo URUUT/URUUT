@@ -7,7 +7,7 @@ class PaymentMethodsController < ApplicationController
   def new
     customer_plan = Gateway::PlansService.new(current_user)
     plan_id = params[:plan_id]
-
+    @plan = Plan.where("name = ?", plan_id).first
     if plan_id == 'fee'
       customer_plan.update_plan('fee')
       redirect_to users_sign_up_confirmation_path

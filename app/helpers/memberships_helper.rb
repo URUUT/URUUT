@@ -23,6 +23,17 @@ module MembershipsHelper
     end
   end
 
+  def membership_cost_by_plan(plan)
+    case plan.name
+    when 'fee'
+      '5% of any amount raised on each project'
+    when 'basic'
+      '$99 every 1 month'
+    when 'plus'
+      '$149 every 1 month'
+    end
+  end
+
   def membership_cost_message_start(user)
     case user.membership.kind
     when 'fee'

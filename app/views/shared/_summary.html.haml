@@ -2,13 +2,10 @@
   %h6.label-green{style: "margin-bottom: 7px;"} ORDER SUMMARY
   %p{style: "margin-bottom: 40px;line-height: 16pt;"}
     %b Plan: 
-    Uruut Basic Subscription
+    Uruut #{@plan.name.titlecase}
     %br
     %b Price: 
-    $99 / mo
-    %br
-    %b Amount to be charged today: 
-    $99.00
+    #{membership_cost_by_plan(@plan)}
     %br
     %i Upgrade or cancel online, anytime.
   %br
