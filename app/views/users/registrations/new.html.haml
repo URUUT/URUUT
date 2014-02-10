@@ -65,7 +65,7 @@
         = f.submit 'Continue', class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:left; border-radius: 5px; width: 230px;"
 
 .span4
-  = render partial: 'summary'
+  = render partial: 'summary', locals: { current_user: current_user }
 
 :javascript
   $('#new_user').validate({
