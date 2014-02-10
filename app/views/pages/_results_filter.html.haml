@@ -24,7 +24,7 @@
           .funding
             %p
               - if user_signed_in? && current_user.campaign_manager?
-                = link_to 'Get started ►', '/projects', method: :post, class: 'btn'
+                = link_to 'Get Funded ►', '/projects', method: :post, class: 'btn'
               - else
                 = link_to 'Get Funded ►', choose_plan_pages_path, class: 'btn'
 
@@ -97,7 +97,7 @@
         If your project doesn't fall into one of them, we still want to hear all about it.
 
       - if user_signed_in? && current_user.campaign_manager?
-        = link_to 'Get started ►', '/projects', method: :post, class: 'btn'
+        = link_to 'Get Funded ►', '/projects', method: :post, class: 'btn'
       - else
         = link_to 'Get Funded ►', choose_plan_pages_path, class: 'btn'
 
