@@ -195,7 +195,11 @@ class User < ActiveRecord::Base
 private
 
   def send_welcome_email
-    WelcomeMailer.welcome_confirmation(self).deliver
+    if self.donor?
+      WelcomeMailer.welcome_confirmation_donor(self).deliver
+    else
+      WelcomeMailer.welcome_confirmation_user(self).deliver
+    end
   end
 
   def assign_default_badge

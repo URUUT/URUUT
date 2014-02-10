@@ -7,7 +7,18 @@ class WelcomeMailer < ActionMailer::Base
   #
   #   en.contact_mailer.contact_confirmation.subject
   #
-  def welcome_confirmation(user)
+  def welcome_confirmation_donor(user)
+    logger.debug(user)
+
+    @name = "#{user.first_name}" + " #{user.last_name}"
+    @email = user.email
+    @host = ActionMailer::Base.default_url_options[:host]
+    unless @email.empty?
+      mail to: @email, subject: "Welcome To URUUT"
+    end
+  end
+
+  def welcome_confirmation_user(user)
     logger.debug(user)
 
     @name = "#{user.first_name}" + " #{user.last_name}"
