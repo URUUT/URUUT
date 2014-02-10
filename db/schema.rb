@@ -30,11 +30,9 @@ ActiveRecord::Schema.define(:version => 20140205182536) do
   add_index "badges_sashes", ["sash_id"], :name => "index_badges_sashes_on_sash_id"
 
   create_table "comments", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.text     "body"
-    t.integer  "post_id"
-    t.integer  "user_id"
+    t.text    "body"
+    t.integer "post_id"
+    t.integer "user_id"
   end
 
   add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
@@ -274,8 +272,8 @@ ActiveRecord::Schema.define(:version => 20140205182536) do
     t.datetime "updated_at", :null => false
     t.string   "title"
     t.text     "body"
-    t.integer  "user_id"
     t.integer  "project_id"
+    t.integer  "user_id"
   end
 
   add_index "posts", ["project_id"], :name => "index_posts_on_project_id"

@@ -195,7 +195,7 @@ class User < ActiveRecord::Base
 private
 
   def send_welcome_email
-    if self.donor?
+    if self.membership.nil?
       WelcomeMailer.welcome_confirmation_donor(self).deliver
     else
       WelcomeMailer.welcome_confirmation_user(self).deliver
@@ -205,7 +205,5 @@ private
   def assign_default_badge
     self.add_badge(1)
   end
-
-
 
 end
