@@ -19,14 +19,12 @@ namespace :populate do
     }
 
     BASIC_FEATURES = FEE_FEATURES.merge({
-      no_transaction_fee: 'No Transaction Fee^',
-      communication_center: 'Post Funding Communication Center'
+      no_transaction_fee: 'No Transaction Fee^'
     })
 
     PLUS_FEATURES = BASIC_FEATURES.merge({
       partial_funding: 'All or Nothing AND Partial Funding',
       auto_tax: 'Auto Tax Letter Generation',
-      communication_center: 'Post Funding Communication Center',
       volunteer_tracker: 'Volunteer Solicitation Tracker',
       google_seo: 'Free Google SEO Grant Application'
     })
