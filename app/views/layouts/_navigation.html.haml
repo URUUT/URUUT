@@ -3,7 +3,7 @@
 
 %ul.nav
   %li
-    = link_to "Features", '#', class: 'features-btn'
+    = link_to "Features", fundraising_pages_path
   %li
     = link_to "Pricing", choose_plan_pages_path
   %li
@@ -66,27 +66,27 @@
                 %br
                 without permission.
 
-.breadcrumb-container
+.breadcrumb-container{ class: ('active' if features_page?)}
   %ul.breadcrumbs
-    %li{ style: ('opacity: 1;' if request.path == 'pages/fundraising')}
+    %li{ style: ('opacity: 1;' if request.path == '/pages/fundraising')}
       = link_to fundraising_pages_path do
         = image_tag 'image.png'
         %span.second-title FUNDRAISING
         %span.border
 
-    %li{ style: ('opacity: 1;' if request.path == 'pages/donor_relationship')}
+    %li{ style: ('opacity: 1;' if request.path == '/pages/donor_relationship')}
       = link_to donor_relationship_pages_path do
         = image_tag 'image2.png'
         %span.second-title DONOR RELATIONSHIP MANAGEMENT
         %span.border
 
-    %li{ style: ('opacity: 1;' if request.path == 'pages/analytics')}
+    %li{ style: ('opacity: 1;' if request.path == '/pages/analytics')}
       = link_to analytics_pages_path do
         = image_tag 'image3.png'
         %span.second-title ANALYTICS AND INSIGHTS
         %span.border
 
-    %li{ style: ('opacity: 1;' if request.path == 'pages/donor_convenience')}
+    %li{ style: ('opacity: 1;' if request.path == '/pages/donor_convenience')}
       = link_to donor_convenience_pages_path do
         = image_tag 'image4.png'
         %span.second-title DONOR CONVENIENCE & TRANSPARENCY
@@ -157,15 +157,6 @@
       $("#forgotPasswordModalForm").modal("hide");
       $("#forgotModal").modal("show");
       $(".email-address-forgot").val("");
-    })
-    $(".features-btn").click(function(){
-      $(".navbar .breadcrumb-container").toggle();
-      $(this).parent().toggleClass('active-menu');
-      if ($(".navbar").hasClass("submenu-active")){
-        $(".navbar").removeClass("submenu-active");
-      }else{
-        $(".navbar").addClass("submenu-active");
-      }
     })
     if ($(".breadcrumb-container").hasClass("active")){
       $(".navbar").addClass("submenu-active");
