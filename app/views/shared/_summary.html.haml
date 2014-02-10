@@ -1,11 +1,15 @@
-.well.without-title{style: "margin-top: 75px;"}
+.well.without-title{style: "margin-top: 75px;padding-bottom:40px;"}
   %h6.label-green{style: "margin-bottom: 7px;"} ORDER SUMMARY
-  %p{style: "margin-bottom: 40px;line-height: 16pt;"}
-    %b Plan: 
-    Uruut #{@plan.name.titlecase}
+  - if user_signed_in? && !current_user.membership.plan.nil?
+    %p
+      %b Plan: 
+      Uruut #{@plan.name.titlecase}
+      %br
+      %b Price: 
+      #{membership_cost_by_plan(@plan)}
+      %br
+      %i Upgrade or cancel online, anytime.
     %br
-    %b Price: 
-    #{membership_cost_by_plan(@plan)}
-    %br
-    %i Upgrade or cancel online, anytime.
-  %br
+  - else
+    %p
+      None selected yet
