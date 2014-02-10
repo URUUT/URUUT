@@ -65,13 +65,7 @@
         = f.submit 'Continue', class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:left; border-radius: 5px; width: 230px;"
 
 .span4
-  .well.without-title{style: "margin-top: 75px;"}
-    %h6 LOG IN WITH FACEBOOK
-    %p It’s fast and easy.
-    = link_to "/users/auth/facebook" do
-      = image_tag 'fb-login.png'
-    %br
-    %p.grey We'll never post anything without permission.
+  = render partial: 'summary'
 
 :javascript
   $('#new_user').validate({
