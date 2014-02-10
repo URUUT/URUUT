@@ -22,6 +22,7 @@
             = render partial: 'payment_methods/default_card_details', locals: { customer_card: @customer_card }
           - else
             You have not setup any card yet.
+    = render partial: 'shared/summary', locals: { current_user: current_user }
 
 :javascript
   $('#new_credit_card').validate({
