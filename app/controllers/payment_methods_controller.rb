@@ -25,6 +25,7 @@ class PaymentMethodsController < ApplicationController
     begin
       if @credit_card.valid? && @card_service.create(@credit_card)
         customer_plan.update_plan(plan_id) if plan_id.present?
+        current_user.send_welcome_email
         redirect_to users_sign_up_confirmation_path
       else
         render :new
