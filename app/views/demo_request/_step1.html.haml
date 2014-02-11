@@ -1,0 +1,36 @@
+#step1
+  %h4 Tell us about you.
+  %br
+  .row
+    .span3.well-half
+      = f.label :first_name, class: "label-green" do
+        First Name*
+        %span.error-container
+      = f.text_field :first_name, class: 'full-with', required: true
+    .span3.well-half
+      = f.label :last_name, class: "label-green" do
+        Last Name*
+        %span.error-container
+      = f.text_field :last_name, class: 'full-with', required: true
+
+  %div
+    = f.label :organization, class: "label-green" do
+      %span.error-container
+      Organization name*
+    = f.text_field :organization, class: 'full-with', required: true
+
+  %div
+    = f.label :email, class: "label-green" do
+      %span.error-container
+      Email address*
+    = f.email_field :email, class: 'full-with', required: true
+
+  .row
+    .span3.well-half
+      = f.label :phone, class: "label-green" do
+        Phone number*
+        %span.error-container
+      = f.text_field :phone, id: "user_pass", class: 'full-with', required: true
+
+  %div.inline
+    = f.submit 'Next Step ►', class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:right; border-radius: 5px; width: 230px;"

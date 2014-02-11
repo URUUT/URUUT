@@ -3,15 +3,18 @@
 
 %ul.nav
   %li
-    = link_to "Fund Projects", browse_projects_path, style: "#{"color: #70BF4C !important" if session[:page_active].eql?("project")}"
+    = link_to "Features", '#', class: 'features-btn'
   %li
-    = link_to "/projects/new", style: "#{"color: #70BF4C !important" if session[:page_active].eql?("funding")}" do
-      Get Funding
+    = link_to "Pricing", choose_plan_pages_path
   %li
-    = link_to about_pages_path, style: "#{"color: #70BF4C !important" if session[:page_active].eql?("about") }" do
-      About URUUT
-  -#%li
-    -#= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
+    = link_to "Resources", resources_pages_path
+  %li
+    = link_to "Fund Projects", browse_projects_path
+  %li
+    = link_to "Demo", new_demo_request_path
+  - unless user_signed_in?
+    %li
+      = link_to "Sign Up", choose_plan_pages_path
 
 %ul.pull-right.right.logged-in
   - if user_signed_in?
@@ -34,8 +37,6 @@
   - else
     %li.dropdown
       = link_to "Log In", "#", :class => "dropdown-toggle", 'data-toggle' => 'dropdown'
-      %span.or or
-      = link_to "Sign Up", new_user_registration_path, :class => "sign-up-link"
       %div.log-in.dropdown-menu
         .drop-wrapper
           .dropdown-arrow
@@ -64,6 +65,32 @@
                 We’ll never post anything
                 %br
                 without permission.
+
+.breadcrumb-container
+  %ul.breadcrumbs
+    %li{ style: ('opacity: 1;' if request.path == 'pages/fundraising')}
+      = link_to fundraising_pages_path do
+        = image_tag 'image.png'
+        %span.second-title FUNDRAISING
+        %span.border
+
+    %li{ style: ('opacity: 1;' if request.path == 'pages/donor_relationship')}
+      = link_to donor_relationship_pages_path do
+        = image_tag 'image2.png'
+        %span.second-title DONOR RELATIONSHIP MANAGEMENT
+        %span.border
+
+    %li{ style: ('opacity: 1;' if request.path == 'pages/analytics')}
+      = link_to analytics_pages_path do
+        = image_tag 'image3.png'
+        %span.second-title ANALYTICS AND INSIGHTS
+        %span.border
+
+    %li{ style: ('opacity: 1;' if request.path == 'pages/donor_convenience')}
+      = link_to donor_convenience_pages_path do
+        = image_tag 'image4.png'
+        %span.second-title DONOR CONVENIENCE & TRANSPARENCY
+        %span.border
 
   -#%input{:type => "search", :placeholder => "Search"}
 #forgotModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "width: 440px;"}
@@ -131,4 +158,18 @@
       $("#forgotModal").modal("show");
       $(".email-address-forgot").val("");
     })
+    $(".features-btn").click(function(){
+      $(".navbar .breadcrumb-container").toggle();
+      $(this).parent().toggleClass('active-menu');
+      if ($(".navbar").hasClass("submenu-active")){
+        $(".navbar").removeClass("submenu-active");
+      }else{
+        $(".navbar").addClass("submenu-active");
+      }
+    })
+    if ($(".breadcrumb-container").hasClass("active")){
+      $(".navbar").addClass("submenu-active");
+    }else{
+      $(".navbar").removeClass("submenu-active");
+    }
   });

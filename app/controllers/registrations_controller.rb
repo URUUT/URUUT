@@ -1,4 +1,45 @@
 class RegistrationsController < Devise::RegistrationsController
+
+  layout "landing", only: [:confirmation]
+
+  def new
+    build_resource
+
+    @marketing_info = MarketingInfo.find_by_id(params[:marketing_info_id])
+
+    if @marketing_info
+      resource.first_name = @marketing_info.first_name
+      resource.last_name  = @marketing_info.last_name
+      resource.email      = @marketing_info.email
+    end
+  end
+
+  def edit
+    @customer_card = Gateway::CardsService.new(current_user).find_card
+  end
+
+  def create
+    build_resource
+
+    if resource.save
+      resource.build_membership.save
+      Gateway::CustomerService.new(resource).create
+      Gateway::PlansService.new(resource).update_plan('fee') if resource.sign_up_plan == 'fee'
+      if resource.active_for_authentication?
+        set_flash_message :notice, :signed_up if is_navigational_format?
+        sign_up(resource_name, resource)
+        respond_with resource, :location => full_registration_path(resource)
+      else
+        set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_navigational_format?
+        expire_session_data_after_sign_in!
+        respond_with resource, :location => after_inactive_sign_up_path_for(resource)
+      end
+    else
+      clean_up_passwords resource
+      respond_with resource
+    end
+  end
+
   def update
     @user = User.find(current_user.id)
     email_changed = @user.email != params[:user][:email]
@@ -22,6 +63,10 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def step2
+    @credit_card = CreditCard.new()
+  end
+
   def after_sign_up_path_for(resource)
     # sign_up_url = url_for(:action => 'create', :controller => 'registrations', :only_path => false, :protocol => 'http')
     if session[:redirect_url] == new_project_url
@@ -35,6 +80,18 @@ class RegistrationsController < Devise::RegistrationsController
     end
       # logger.debug(request.referrer)
       # return root_url
+  end
+
+private
+
+  def full_registration_path(resource)
+    if resource.full_registration && resource.sign_up_plan != 'fee'
+      new_user_payment_method_path(resource, plan_id: resource.sign_up_plan)
+    elsif resource.sign_up_plan == 'fee'
+      users_sign_up_confirmation_path
+    else
+      after_sign_up_path_for(resource)
+    end
   end
 
 end

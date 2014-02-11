@@ -13,3 +13,7 @@ SponsorshipLevel.where(name: 'Platinum').first_or_create(name: 'Platinum')
 SponsorshipLevel.where(name: 'Gold').first_or_create(name: 'Gold')
 SponsorshipLevel.where(name: 'Silver').first_or_create(name: 'Silver')
 SponsorshipLevel.where(name: 'Bronze').first_or_create(name: 'Bronze')
+
+['fee', 'basic', 'plus'].each do |plan_name|
+  Plan.create(name: plan_name, stripe_plan_id: plan_name)
+end

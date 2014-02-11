@@ -1,0 +1,139 @@
+%section.full-width.gray-band
+  .container
+    %h1.green-title.text-center.margin-bot Choose the Plan That’s Right For You.
+
+    %row
+      .span4
+        %h4 ALL PLANS INCLUDE:
+        %ul.checked-list
+          %li{'data-toggle' => 'tooltip', 'data-placement' => 'right', title: "When you signup for Uruut, we'll assign one of our campaign launch specialists who will help you set up your account, plan your campaign strategy, and successfully launch your campaign.", class: 'plan-tooltip'} Dedicated launch manager (over $2500 value)
+
+          %li{'data-toggle' => 'tooltip', 'data-placement' => 'right', title: "Uruut is the only platform that makes it easy for all donor types to donate online, including individuals, businesses and foundations", class: 'plan-tooltip'} Multi-donor fundraising platform
+
+          %li{'data-toggle' => 'tooltip', 'data-placement' => 'right', title: "Set up and launch as many campaigns as you like.", class: 'plan-tooltip'} Unlimited campaign hosting
+
+          %li{'data-toggle' => 'tooltip', 'data-placement' => 'right', title: "Stop waiting for lengthy payment delays caused by credit card processors. Uruut guarantees funds to be released within 7 days so you can put donated funds to use faster.", class: 'plan-tooltip'} Funds released in 7 days, guaranteed
+
+          %li{'data-toggle' => 'tooltip', 'data-placement' => 'right', title: "Uruut makes it easy to upload photos, videos and documents that help bring your campaign to life and sell your story to donors.", class: 'plan-tooltip'} Upload photos, videos & stories
+
+          %li{'data-toggle' => 'tooltip', 'data-placement' => 'right', title: "Uruut conveniently sends out thank you letters to donors automatically, saving you time while making sure you quickly acknowledge donors", class: 'plan-tooltip'} Automatic email thank you letters
+
+          %li{'data-toggle' => 'tooltip', 'data-placement' => 'right', title: "With Uruut, your donors can instantly share your campaign with all of their social media contacts in just a few clicks.", class: 'plan-tooltip'} Integrated social media sharing
+
+          %li{'data-toggle' => 'tooltip', 'data-placement' => 'right', title: "Uruut is one of the only online fundraising platforms that accepts checks from donors in addition to credit cards.", class: 'plan-tooltip'} Donation by credit cards and checks
+
+          %li{'data-toggle' => 'tooltip', 'data-placement' => 'right', title: "Sometimes donors want to remain private about their donation. Uruut makes this as easy as clicking one check box.", class: 'plan-tooltip'} Anonymous donations accepted
+
+          %li{'data-toggle' => 'tooltip', 'data-placement' => 'right', title: "Create custom donor perks and benefits to provide incentive and gratitude for donor's generosity.", class: 'plan-tooltip'} Donor perks and beneﬁts engine
+
+          %li{'data-toggle' => 'tooltip', 'data-placement' => 'right', title: "An industry-first, Uruut's Transparency Workroom opens up a whole new world to donors to show and tell them how their funds are being used. Upload photos and videos to demonstrate progress and provide donors with an inside look at the benefits of their generosity.", class: 'plan-tooltip'} Transparency workroom
+
+          %li{'data-toggle' => 'tooltip', 'data-placement' => 'right', title: "Provide regular email updates to donors, sponsors and constituents to update them on campaign progress.", class: 'plan-tooltip'} Campaign updated platform
+
+          %li{'data-toggle' => 'tooltip', 'data-placement' => 'right', title: "Uruut's donor relationship management tools are just the right size for small nonprofits, and make it easy to organize /manage donors and build donor loyalty.", class: 'plan-tooltip'} Donor relationship management
+
+          %li{'data-toggle' => 'tooltip', 'data-placement' => 'right', title: "Know more about your donors to optimize contact and donations with them.", class: 'plan-tooltip'} Donor contact and giving reports
+
+          %li{'data-toggle' => 'tooltip', 'data-placement' => 'right', title: "Measure campaign performance in real-time", class: 'plan-tooltip'} Campaign analytics and reporting
+
+          %li{'data-toggle' => 'tooltip', 'data-placement' => 'right', title: "Uruut creates a single access point for managing all donor communications including social media, to grow awareness of your cause, increase donor  ranks and optimize donations from existing donors.", class: 'plan-tooltip'} Social communication dashboard
+
+          %li{'data-toggle' => 'tooltip', 'data-placement' => 'right', title: "Quickly and easily segment donors into logical groups, and personalize communications with them.", class: 'plan-tooltip'} Robust donor email platform
+
+          %li{'data-toggle' => 'tooltip', 'data-placement' => 'right', title: "You can quickly import and export contacts/donors for use with other programs. ", class: 'plan-tooltip'} Easy donor data import / export
+
+          %li{'data-toggle' => 'tooltip', 'data-placement' => 'right', title: "Dedicated campaign launch support, access to resources and experts in fundraising and nonprofit management, and unlimited email support are just some of the ways we help our you to succeed.", class: 'plan-tooltip'} Personalized customer support
+
+        %hr.short-gray{ style: 'margin-left: 0;' }
+        = image_tag 'badge-100.png', class: 'badge-100'
+        %p.green-subtitle CUSTOMER SATISFACTION GUARANTEE
+        %p{ style: 'line-height: 16pt;' }
+          If for any reason you are not satisﬁed with Uruut, just let us know within 30 days of your initial purchase, and we'll refund your ﬁrst month's subscription fee. Please note the customer satisfaction guarantee only applies to the Pay Per Month plans ("Basic" and "Plus"), but does NOT apply to the Pay Per Transaction plan.
+      .span8
+        .plan-box.text-center
+          %header
+            URUUT BASIC
+          .plan
+            %h4 PAY MONTHLY
+            .price
+              %h1
+                %append $
+                99
+                %sup *
+              %p per month
+              %hr
+            %ul
+              %li - Convenient, predictable monthly cost
+              %li - Fundraising resources & experts
+              %li - No contracts. Cancel or upgrade anytime
+              %li - “All or Nothing” campaigns only
+            - if user_signed_in?
+              = link_to 'Select Plan ►', new_user_payment_method_path(current_user, plan_id: 'basic'), class: 'btn', style: 'font-weight: bold;'
+            - else
+              = link_to 'Select Plan ►', '#', data: { "plan-type" => 'basic'}, class: 'btn custom-login', style: 'font-weight: bold;'
+            %hr
+            %b OR PAY PER TRANSACTION
+            %ul.small-list
+              %li - Pay 5% of amount raised
+              %li - No monthly fees
+            - if user_signed_in?
+              = link_to 'Select Plan ►', new_user_payment_method_path(current_user, plan_id: 'fee'), class: 'btn btn-small btn-gray', style: 'font-weight: bold;'
+            - else
+              = link_to 'Select Plan ►', '#', data: { "plan-type" => 'fee'}, class: 'btn btn-small btn-gray custom-login', style: 'font-weight: bold;'
+        .plan-box.text-center
+          %header
+            URUUT PLUS
+          .plan
+            %h4 PAY MONTHLY
+            .price
+              %h1
+                %append $
+                149
+                %sup *
+              %p per month
+              %hr
+            %p
+              %b
+                Our most flexible and transparent solution includes all the benefits of the $99 monthly plan, PLUS:
+            %ul{style: 'height: 160px;'}
+              %li{'data-toggle' => 'tooltip', 'data-placement' => 'left', title: 'In addition to "all or nothing" campaigns, the PLUS plan offers the ability to offer "partial funding" campaigns. "Partial funding" means that you collect all funds donated whether or not you achieve your funding goal during the campaign period.', class: 'plan-tooltip'} - Partial funding campaigns
+
+              %li{'data-toggle' => 'tooltip', 'data-placement' => 'left', title: "Uruut  automatically creates, stores and sends tax receipts, creating a welcomed convenience for both you and your donor.", class: 'plan-tooltip'} - Automatically-generated tax receipts
+
+              %li{'data-toggle' => 'tooltip', 'data-placement' => 'left', title: "Robust Google Analytics reports provide you with deeper insights into how well your campaigns are working, and helps identify areas where you can improve and optimize fundraising programs.", class: 'plan-tooltip'} - Detailed Google Analytics reports
+
+              %li{'data-toggle' => 'tooltip', 'data-placement' => 'left', title: "The PLUS plan offers the ability to keep projects stored in the Transparency Workroom for as long as you like (compared with 60 days in the BASIC plan).", class: 'plan-tooltip'} - Advanced campaign transparency
+
+            - if user_signed_in?
+              = link_to 'Select Plan ►', new_user_payment_method_path(current_user, plan_id: 'plus'), class: 'btn', style: 'font-weight: bold;'
+            - else
+              = link_to 'Select Plan ►', '#', data: { "plan-type" => 'plus'}, class: 'btn custom-login', style: 'font-weight: bold;'
+        %br
+      .span8
+        .integrate.clearfix
+          %h4 Integrate With Your Existing Website
+          .normal-paragraph
+            = image_tag 'powered-by.png', class: 'powered-logo', align: 'left'
+            %p
+              Take full advantage of the Uruut platform by seamlessly integrating it into your website.
+              = link_to 'Contact us', contact_pages_path
+              for more information and a quote.
+        %p.text-center{ style: 'width: 435px; margin:auto;'}
+          %i * A credit card transaction processing fee equal to 2.99% of amount raised, plus $0.30 per transaction applies to all plans.
+
+= render partial: 'signup_modal'
+
+:javascript
+  $(function() {
+    $('.plan-tooltip').tooltip();
+  });
+
+  $(document).ready(function(){
+    $('.modal').remove();
+    $('#modal-form').addClass('modal');
+    $(".btn.custom-login").on("click",function(){
+      $('input[name="marketing_info[href]"]').val('/users/sign_up?full_registration=1&amp;sign_up_plan=' + $(this).data('plan-type'))
+      $('.signin').attr('href','/users/sign_in?sign_in_plan=' + $(this).data('plan-type'))
+      $('.modal').modal();
+    })
+  });

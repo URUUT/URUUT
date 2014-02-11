@@ -3,7 +3,11 @@ class NewslettersController < ApplicationController
   def create
     newsletter = Newsletter.new(params[:newsletter])
 
-    render :json => { :created => newsletter.save! }
+    if result = newsletter.save
+      NewsletterMailer.newsletter_confirmation(newsletter).deliver
+    end
+
+    render :json => { :created => result }
   end
 
 end

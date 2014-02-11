@@ -43,6 +43,7 @@ class Project < ActiveRecord::Base
   accepts_nested_attributes_for :perks, allow_destroy: true
   accepts_nested_attributes_for :galleries, allow_destroy: true
 
+  scope :ready_for_approval, where(ready_for_approval: 1)
   scope :live, where("live = 1")
   scope :funding_complete, where("status = 'Funding Complete'")
   scope :ending_today, where("campaign_deadline BETWEEN ? AND ?", DateTime.now.beginning_of_day, DateTime.now.end_of_day)
@@ -306,7 +307,7 @@ class Project < ActiveRecord::Base
             :currency => "usd",
             :card => token.id,
             :description => description,
-            :application_fee => application_fee
+            :application_fee => calculate_funder_application_fee(sponsor, application_fee)
           },
           project_token
         )
@@ -360,7 +361,7 @@ class Project < ActiveRecord::Base
             :currency => "usd",
             :card => token.id,
             :description => description,
-            :application_fee => application_fee
+            :application_fee => calculate_funder_application_fee(donor, application_fee)
           },
           project_token
         )
@@ -397,6 +398,12 @@ class Project < ActiveRecord::Base
         puts e
       end
     end
+  end
+
+private
+
+  def calculate_funder_application_fee(funder, application_fee)
+    funder.membership_kind == 'fee' ? application_fee : nil
   end
 
 end

@@ -1,10 +1,14 @@
 .span8{:style => "margin-top:35px;"}
   %h4 Login
-  = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "well clearfix form-signin"}, remote: true) do |f|
+  = form_for(resource, :url => user_session_path, :method => :post, :html => {:class => "well clearfix form-signin"}) do |f|
     = devise_error_messages!
 
     .req-legend
       *Required
+
+    - if (params[:sign_in_plan] || (params[:user] && params[:user][:sign_in_plan]))
+      %div.inline
+        = f.hidden_field :sign_in_plan, value: (params[:sign_in_plan] || (params[:user] && params[:user][:sign_in_plan]))
 
     %div.inline
       = f.label :email, class: "label-green" do

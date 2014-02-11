@@ -4,7 +4,7 @@ machine:
 
 test:
   override:
-    - RAILS_ENV="test" RACK_ENV="test" bundle exec rspec --color spec
+    - RAILS_ENV="test" RACK_ENV="test" bundle exec rspec -cfn spec
 
 deployment:
   production:
@@ -20,9 +20,9 @@ deployment:
     heroku:
       appname: uruut-multitenant
   techbridge:
-    branch: techbridge
+    branch: techbridge-staging
     heroku:
-      appname: techbridge
+      appname: techbridge-staging
 
 database:
   override:

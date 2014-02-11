@@ -1,0 +1,11 @@
+.row
+  .span6
+    = f.label :current_fundrasing_activities, class: "label-green" do
+      WHAT CURRENT FUNDRAISING ACTIVITIES DOES YOUR ORGANIZATION ACTIVELY ENGAGE IN? (PLEASE SELECT ALL THAT APPLY)*
+    %span.error-container
+    %div
+      - Demo::CURRENT_FUNDRAISING_ACTIVITIES.each do |field, label|
+        = f.check_box field, style: 'display: inline-block'
+        = f.label field, label, style: 'display: inline-block'
+        %br
+      = f.text_area :fund_other_description, class: 'full-with', rows: 2

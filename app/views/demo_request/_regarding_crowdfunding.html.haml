@@ -1,0 +1,10 @@
+.row
+  .span6
+    = f.label :crowdfunding, class: "label-green" do
+      REGARDING CROWDFUNDING, WHAT BEST DESCRIBES YOUR ORGANIZATION?*
+    %span.error-container
+    %div
+      - Demo::CROWDFUNDING.each do |key, values|
+        = f.radio_button :crowdfunding, values[0], style: 'display: inline-block'
+        = f.label :crowdfunding, values[1], style: 'display: inline-block'
+        %br

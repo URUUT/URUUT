@@ -1,0 +1,11 @@
+.row
+  .span6
+    = f.label :type_of_donors_accepted, class: "label-green" do
+      WHICH OF THE FOLLOWING DONORS DOES YOUR ORGANIZATION SOLICIT DONATIONS FROM: (PLEASE SELECT ALL THAT APPLY)*
+    %span.error-container
+    %div
+      - Demo::TYPE_OF_DONORS_ACCEPTED.each do |field, label|
+        = f.check_box field, style: 'display: inline-block'
+        = f.label field, label, style: 'display: inline-block'
+        %br
+      = f.text_area :accepts_donations_from_other_description, class: 'full-with', rows: 2

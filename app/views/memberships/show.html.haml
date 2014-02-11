@@ -1,0 +1,10 @@
+%section.full-width.our-story
+  .container
+    %h1
+      Hi! 
+      = "#{current_user.last_name} #{current_user.last_name}"
+
+    %p
+      Your membership is 
+      %b{ style: 'text-transform: uppercase;'}
+        = @membership.kind

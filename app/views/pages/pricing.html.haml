@@ -1,0 +1,212 @@
+%section.full-width.our-story
+  .container
+    %h1 All The Features You Need at a Sensible Price.
+
+    %p
+      We understand nonproﬁts are on tight budgets, that’s why we offer three easy to 
+      understand and affordable packages to ﬁt every nonproﬁts needs.
+
+%section.full-width.our-mission.gray-band{style: 'text-align: center;'}
+  .container
+    %div.span4.plan
+      %h4 Fee-based
+      .price
+        %h1
+          5
+          %sup %
+        %p of money raised
+        %hr
+      %h4 PACKAGE FEATURES
+      %ul
+        %li - Multi-donor Social Fundraising Platform
+        %li - Uruut Payments Powered by Stripe
+        %li - All or Nothing Funding Engine
+        %li - Realtime Campaign Analytics
+        %li - Uruut.com Marketplace
+        %li - Easy to Use Campaign Setup Wizard
+        %li - Campaign Social Analytics
+        %li - Unlimited Projects
+        %li - Basic Donor Management / CRM
+        %li - Social and Email Outreach Platform
+        %li - Unlimited Email Support
+        %li - Total Flexibility Cancel Anytime*
+        %li
+          %s - No Transaction Fee^
+        %li
+          %s - All or Nothing AND Partial Funding
+        %li
+          %s - Auto Tax Letter Generation
+        %li
+          %s - Post Funding Communication Center
+        %li
+          %s - Volunteer Solicitation Tracker
+        %li
+          %s - Free Google SEO Grant Application
+      - if user_signed_in?
+        = form_for 'user', url: user_membership_path(current_user, current_user.membership, membership_type: 'fee'), method: :put do |f|
+          = f.submit 'Select ►', class: 'btn', style: 'font-weight: bold;'
+      - else
+        = link_to new_user_registration_path do
+          .btn
+            Sign up ►
+    %div.span4.lateral-border.plan
+      %h4.font-bold Basic
+      .price
+        %h1
+          %append $
+          99
+        %p per month
+        %hr
+      %h4 PACKAGE FEATURES
+      %ul
+        %li - Multi-donor Social Fundraising Platform
+        %li - Uruut Payments Powered by Stripe
+        %li - All or Nothing Funding Engine
+        %li - Realtime Campaign Analytics
+        %li - Uruut.com Marketplace
+        %li - Easy to Use Campaign Setup Wizard
+        %li - Campaign Social Analytics
+        %li - Unlimited Projects
+        %li - Basic Donor Management / CRM
+        %li - Social and Email Outreach Platform
+        %li - Unlimited Email Support
+        %li - Total Flexibility Cancel Anytime*
+        %li - No Transaction Fee^
+        %li
+          %s - All or Nothing AND Partial Funding
+        %li
+          %s - Auto Tax Letter Generation
+        %li
+          %s - Post Funding Communication Center
+        %li
+          %s - Volunteer Solicitation Tracker
+        %li
+          %s - Free Google SEO Grant Application
+      - if user_signed_in?
+        = form_for 'user', url: user_membership_path(current_user, current_user.membership, membership_type: 'basic'), method: :put do |f|
+          = f.submit 'Select ►', class: 'btn', style: 'font-weight: bold;'
+      - else
+        = link_to new_user_registration_path do
+          .btn
+            Sign up ►
+    %div.span4.plan
+      %h4 Plus
+      .price
+        %h1
+          %append $
+          149
+        %p per month
+        %hr
+      %h4 PACKAGE FEATURES
+      %ul
+        %li - Multi-donor Social Fundraising Platform
+        %li - Uruut Payments Powered by Stripe
+        %li - All or Nothing Funding Engine
+        %li - Realtime Campaign Analytics
+        %li - Uruut.com Marketplace
+        %li - Easy to Use Campaign Setup Wizard
+        %li - Campaign Social Analytics
+        %li - Unlimited Projects
+        %li - Basic Donor Management / CRM
+        %li - Social and Email Outreach Platform
+        %li - Unlimited Email Support
+        %li - Total Flexibility Cancel Anytime*
+        %li - No Transaction Fee^
+        %li - All or Nothing AND Partial Funding
+        %li - Auto Tax Letter Generation
+        %li - Post Funding Communication Center
+        %li - Volunteer Solicitation Tracker
+        %li - Free Google SEO Grant Application
+      - if user_signed_in?
+        = form_for 'user', url: user_membership_path(current_user, current_user.membership, membership_type: 'plus'), method: :put do |f|
+          = f.submit 'Select ►', class: 'btn', style: 'font-weight: bold;'
+      - else
+        = link_to new_user_registration_path do
+          .btn
+            Sign up ►
+  %p * Cancelation will occur at the end of the month on monthly packages. ^ 2.99% plus 30 cent credit card processing fee in effect on all packages
+
+%section.full-width.our-story.custom-plan
+  .container
+    %h1 Powered by Uruut, Cobranded by You.
+
+    = image_tag 'laptop.jpg', class: 'notebook-img'
+    .right-column
+      = image_tag 'icon-flor.png', class: 'logo'
+      %h3 CUSTOMIZED COBRANDED SOLUTIONS
+      %p
+        Want to discuss how you can incorporate Uruut directly into your nonproﬁt’s site?
+      .price
+        From
+        %span
+          %append $
+          000/
+        mo
+      = link_to '#' do
+        .btn
+          Contact us ►
+
+
+%section.full-width.our-mission.gray-band.service
+  .container
+    %h1 Full Service Means Full Service.
+    %h4
+      In addition to our standard pricing packages we offer add-on services to help your nonproﬁt reach maximum impact.
+    .block-service
+      = image_tag 'icon-camping.png'
+      %h3 Fundraising / Campaign Consulting
+      %p
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut malesuada tincidunt porta. Integer eget eros nisi. Vivamus porttitor vehicula nulla. Nulla facilisi.
+      .price
+        From
+        %span
+          %append $
+          150/
+        hr
+      = link_to 'Contact Us For More information ›', '#'
+    .block-service
+      = image_tag 'icon-design.png'
+      %h3 Web Design and Development Services
+      %p
+        Duis rhoncus ornare leo. Etiam massa lacus, egestas ut sem non, mattis tempus arcu. Morbi facilisis odio et est bibendum lobortis. Nunc eget enim ac nisi dapibus.
+      .price
+        From
+        %span
+          %append $
+          150/
+        hr
+      = link_to 'Contact Us For More information ›', '#'
+    .block-service
+      = image_tag 'icon-sponsor.png'
+      %h3 Donor and Sponsor Identiﬁcation Tools
+      %p
+        Morbi bibendum lorem at tincidunt pharetra. Nulla sit amet mi ut lacus porta dictum vel id risus. Duis aliquet velit mi, non molestie arcu porta vitae.
+      .price
+        From
+        %span
+          %append $
+          99 - 
+          %append $
+          200/
+        mo
+      = link_to 'Contact Us For More information ›', '#'
+    .block-service
+      = image_tag 'icon-phone.png'
+      %h3 Technical Phone Support
+      %p
+        Morbi sagittis sapien a pulvinar ultricies. Suspendisse at orci in eros tempus egestas sed ut mi. Nunc arcu eros, egestas id vestibulum nec, rhoncus euismod urna.
+      .price
+        From
+        %span
+          %append $
+          50/
+        hr
+      = link_to 'Contact Us For More information ›', '#'
+
+%section.full-width.more-information
+  .container
+    %h2 Take your nonproﬁt to the next level.
+    = link_to new_project_path do
+      .btn
+        GET STARTED ►
+
