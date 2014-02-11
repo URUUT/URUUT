@@ -33,8 +33,9 @@
 									%td{:align => "right", :valign => "top", :style => "border-bottom:6px solid #70bf4c;"}
 										%a{:href => "http://#{@host}/users/sign_in"}
 											%img{:src => "http://#{@host}/assets/email-login.png", :style => "display:block;margin:25px 10px 0 0;"}
-
-					= yield
+					%tr
+						%td
+							= yield
 
 					%tr
 						%td{:align => "center", :valign => "top"}
