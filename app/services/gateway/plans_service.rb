@@ -7,7 +7,7 @@ class Gateway::PlansService < Gateway::BaseService
     user_membership = @user.membership
     user_membership.plan = plan
 
-    user_membership.save && update_subscription(plan_id)
+    update_stripe_subscription(user_membership, plan_id)
   end
 
   def cancel_plan
@@ -18,13 +18,15 @@ class Gateway::PlansService < Gateway::BaseService
 
 private
 
-  def update_subscription(plan_id)
+  def update_stripe_subscription(user_membership, plan_id)
     case plan_id
     when 'fee'
       true
     when 'basic', 'plus'
       find_card
-      customer.update_subscription(plan: plan_id)
+      response = customer.update_subscription(plan: plan_id)
+      user_membership.stripe_subscription_id = response.id
+      user_membership.save
     else
       false
     end
