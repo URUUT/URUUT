@@ -45,6 +45,6 @@ private
   end
 
   def updates_from_basic_or_plus_to_fee?(membership, plan_id)
-    plan_id == 'fee' && ['basic', 'plus'].include?(membership.kind)
+    plan_id == 'fee' && membership.plan && ['basic', 'plus'].include?(membership.kind)
   end
 end
