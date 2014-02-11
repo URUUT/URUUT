@@ -585,14 +585,14 @@
             - else
               = link_to(image_tag("anonymous.png", style: "width: 27px; height:27px; margin-bottom: 5px; border-radius: 500px 500px 500px 500px; behavior: url('assets/PIE-1.0.0/PIE.htc');", "data-toggle" => "tooltip", title: "ANONYMOUS DONOR", class: "donor-anonymous"), "javascript:void(0)")
         - if @project.distinct_donors.count > 20
-            - if user_signed_in?
-              = link_to "/donations/#{@project.id}/more_donators?logged_in=yes", :class => 'btn more', :style => 'margin-top:10px;', remote: true do
-                Show More
-                %span
-            - else
-              = link_to "javascript:void(0)", "url-data" => more_donators_donation_path(@project.id), :class => 'btn more unsignin', :style => 'margin-top:10px;' do
-                Show More
-                %span
+          - if user_signed_in?
+            = link_to "/donations/#{@project.id}/more_donators?logged_in=yes", :class => 'btn more', :style => 'margin-top:10px;', remote: true do
+              Show More
+              %span
+          - else
+            = link_to "javascript:void(0)", "url-data" => more_donators_donation_path(@project.id), :class => 'btn more unsignin', :style => 'margin-top:10px;' do
+              Show More
+              %span
 
 = javascript_include_tag "//maps.google.com/maps/api/js?sensor=false"
 = javascript_include_tag "leaflet"
