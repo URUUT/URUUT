@@ -7,13 +7,13 @@ feature 'Donating and sponsoring to a Project' do
     login_as(@user, :scope => :user)
   end
 
-  scenario 'User visits Project#show' do
-    visit project_path(@project)
+  # scenario 'User visits Project#show' do
+  #   visit project_path(@project)
 
-    within('.tab-nav li.active') do
-      expect(page).to have_link('About Us')
-    end
-  end
+  #   within('.tab-nav li.active') do
+  #     expect(page).to have_link('About Us')
+  #   end
+  # end
 
   # scenario 'User funds $10 to a Project', js: true do
   #   visit project_path(@project)
