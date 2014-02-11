@@ -10,7 +10,7 @@ class Gateway::PlansService < Gateway::BaseService
 
   def cancel_plan
     membership = @user.membership
-    return false unless find_card && membership.stripe_subscription_id
+    return false unless find_card
 
     cancel_stripe_subscription(membership)
     membership.plan = nil
