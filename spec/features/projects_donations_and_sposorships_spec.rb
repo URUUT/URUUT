@@ -10,8 +10,8 @@ feature 'Donating and sponsoring to a Project' do
   scenario 'User visits Project#show' do
     visit project_path(@project)
 
-    within('li.active') do
-      expect(page).to have_content('About Us')
+    within('.tab-nav li.active') do
+      expect(page).to have_link('About Us')
     end
   end
 
