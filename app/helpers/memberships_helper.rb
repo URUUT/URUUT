@@ -37,9 +37,9 @@ module MembershipsHelper
   def membership_cost_message_start(user)
     case user.membership.kind
     when 'fee'
-      'subscription means you will be charged'
+      'means you will be charged'
     when 'basic', 'plus'
-      "subscription will be automatically renewed #{next_membership_renewal_date(user)} and charged"
+      "will be automatically renewed #{next_membership_renewal_date(user)} and charged"
     end
   end
 
