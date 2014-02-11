@@ -11,9 +11,12 @@ class Gateway::PlansService < Gateway::BaseService
   end
 
   def cancel_plan
-    return false unless find_card
+    membership = @user.membership
+    return false unless find_card && membership.stripe_subscription_id
 
-    customer.cancel_subscription
+    cancel_stripe_subscription(membership)
+    membership.stripe_subscription_id = nil
+    membership.save
   end
 
 private
@@ -32,4 +35,10 @@ private
     end
   end
 
+  def cancel_stripe_subscription(membership)
+    case membership.kind
+    when 'basic', 'plus'
+      customer.cancel_subscription
+    end
+  end
 end
