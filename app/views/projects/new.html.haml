@@ -1,14 +1,3 @@
-.full-width.hero
-	.container
-		= image_tag "light-bulb.png"
-		%div
-			%h3 GET FUNDING
-			%h2 Your ideas. Our platform.
-			%p{:style => "color:#b6b6b4 !important;"} It’s free and easy to start your project on Uruut. Click below to get started.
-
-			= link_to "/projects", method: :post, class: "btn #{user_signed_in? ? "" : "must-login"}" do
-				Get Started ►
-
 .full-width.need-to-know.cf
 	.container
 		%h3 WHAT DO I NEED TO KNOW?
