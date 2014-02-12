@@ -1,6 +1,6 @@
 .well.without-title{style: "margin-top: 75px;padding-bottom:40px;"}
   %h6.label-green{style: "margin-bottom: 7px;"} ORDER SUMMARY
-  - if user_signed_in? && !current_user.membership.plan.nil?
+  - if @plan
     %p
       %b Plan: 
       Uruut #{@plan.name.titlecase}

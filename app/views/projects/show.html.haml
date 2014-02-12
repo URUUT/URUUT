@@ -577,10 +577,13 @@
       - else
         %div.business
           - @project.distinct_donors.limit(20).each do |donation|
-            - if user_signed_in?
-              = link_to(image_tag(donation.user.avatar, style: "width: 27px; height:27px; margin-bottom: 5px; border-radius: 500px 500px 500px 500px; behavior: url('assets/PIE-1.0.0/PIE.htc');"), profile_path(donation.user.id))
+            - unless Donation.find_by_user_id(donation.user_id).anonymous
+              - if user_signed_in?
+                = link_to(image_tag(donation.user.avatar, style: "width: 27px; height:27px; margin-bottom: 5px; border-radius: 500px 500px 500px 500px; behavior: url('assets/PIE-1.0.0/PIE.htc');"), profile_path(donation.user.id))
+              - else
+                = link_to(image_tag(donation.user.avatar, style: "width: 27px; height:27px; margin-bottom: 5px; border-radius: 500px 500px 500px 500px; behavior: url('assets/PIE-1.0.0/PIE.htc');"), "javascript:void(0)", "url-data" => "/users/#{donation.user.id}/profile", class: "unsignin")
             - else
-              = link_to(image_tag(donation.user.avatar, style: "width: 27px; height:27px; margin-bottom: 5px; border-radius: 500px 500px 500px 500px; behavior: url('assets/PIE-1.0.0/PIE.htc');"), "javascript:void(0)", "url-data" => "/users/#{donation.user.id}/profile", class: "unsignin")
+              = link_to(image_tag("anonymous.png", style: "width: 27px; height:27px; margin-bottom: 5px; border-radius: 500px 500px 500px 500px; behavior: url('assets/PIE-1.0.0/PIE.htc');", "data-toggle" => "tooltip", title: "ANONYMOUS DONOR", class: "donor-anonymous"), "javascript:void(0)")
         - if @project.distinct_donors.count > 20
           - if user_signed_in?
             = link_to "/donations/#{@project.id}/more_donators?logged_in=yes", :class => 'btn more', :style => 'margin-top:10px;', remote: true do
@@ -624,6 +627,7 @@
   });
 
   $(document).ready(function(){
+    $('.donor-anonymous').tooltip();
     $("a[rel^='prettyPhoto']").prettyPhoto();
 
     $('.unsignin').click(function(){

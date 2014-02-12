@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140205182536) do
+ActiveRecord::Schema.define(:version => 20140211150309) do
 
   create_table "accounts", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -166,10 +166,11 @@ ActiveRecord::Schema.define(:version => 20140205182536) do
 
   create_table "memberships", :force => true do |t|
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
     t.integer  "sponsor_id"
     t.integer  "plan_id"
+    t.string   "stripe_subscription_id"
   end
 
   add_index "memberships", ["plan_id"], :name => "index_memberships_on_plan_id"
@@ -268,12 +269,12 @@ ActiveRecord::Schema.define(:version => 20140205182536) do
   end
 
   create_table "posts", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
     t.string   "title"
     t.text     "body"
     t.integer  "project_id"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "posts", ["project_id"], :name => "index_posts_on_project_id"
@@ -411,17 +412,6 @@ ActiveRecord::Schema.define(:version => 20140205182536) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
 
-  create_table "settings", :force => true do |t|
-    t.string   "var",         :null => false
-    t.text     "value"
-    t.integer  "target_id",   :null => false
-    t.string   "target_type", :null => false
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  add_index "settings", ["target_type", "target_id", "var"], :name => "index_settings_on_target_type_and_target_id_and_var", :unique => true
-
   create_table "sponsors", :force => true do |t|
     t.string  "payment_type"
     t.string  "name"
@@ -467,7 +457,6 @@ ActiveRecord::Schema.define(:version => 20140205182536) do
   end
 
   add_index "tax_reports", ["project_id"], :name => "index_tax_reports_on_project_id"
-  add_index "tax_reports", ["user_id"], :name => "index_tax_reports_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",                           :null => false
