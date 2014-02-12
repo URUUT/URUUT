@@ -10,12 +10,12 @@ class Gateway::PlansService < Gateway::BaseService
 
   def cancel_plan
     membership = @user.membership
-    return false unless find_card
+    if membership.basic_or_plus?
+      return false unless find_card
+    end
 
     cancel_stripe_subscription(membership)
-    membership.plan = nil
-    membership.stripe_subscription_id = nil
-    membership.save
+    membership.clean_plan_data!
   end
 
 private
@@ -45,6 +45,6 @@ private
   end
 
   def updates_from_basic_or_plus_to_fee?(membership, plan_id)
-    plan_id == 'fee' && membership.plan && ['basic', 'plus'].include?(membership.kind)
+    plan_id == 'fee' && membership.basic_or_plus?
   end
 end
