@@ -1,0 +1,58 @@
+.row{:style => "margin-top:35px;"}
+  .span8{:style => "margin-top:35px;"}
+    %h4.font-bold SET PAYMENT METHOD
+    = form_for @credit_card, url: user_payment_method_path(current_user), method: :post, html: { class: "well registration-edit"} do |f|
+      - if @credit_card.errors.any?
+        .error-box
+          %ul
+            - @credit_card.errors.full_messages.each do |error_message|
+              %li= error_message
+      - if (params[:plan_id] || (params[:credit_card] && params[:credit_card][:plan_id]))
+        = f.hidden_field :plan_id, value: (params[:plan_id] || (params[:credit_card] && params[:credit_card][:plan_id]))
+      = render partial: 'payment_methods/credit_card_fields', locals: { f: f }
+  .span4
+    = render partial: 'shared/summary', locals: { current_user: current_user }
+    .well.info
+      .box-content
+        %h5.label-green{style: "margin-bottom: 7px;"} CURRENT PAYMENT METHOD
+        %p The following payment card is currently used for payment:
+        .logo_card
+          = image_tag 'logo_visa.png'
+        .info_card
+          - if @customer_card
+            = render partial: 'payment_methods/default_card_details', locals: { customer_card: @customer_card }
+          - else
+            You have not setup any card yet.
+
+:javascript
+  $('#new_credit_card').validate({
+    rules: {
+      "credit_card[name]":{
+        required: true,
+      },
+      "credit_card[number]":{
+        required: true,
+      },
+      "credit_card[cvc]":{
+        required: true,
+      },
+      "credit_card[exp_month]":{
+        required: true,
+      },
+      "credit_card[exp_year]":{
+        required: true,
+      },
+      "credit_card[billing_address]":{
+        required: true,
+      },
+      "credit_card[city]":{
+        required: true,
+      },
+      "credit_card[state]":{
+        required: true,
+      },
+      "credit_card[zip_code]":{
+        required: true,
+      },
+    },
+  });

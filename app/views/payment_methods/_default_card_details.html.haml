@@ -1,0 +1,15 @@
+%ul
+  %li
+    %b Card Number:
+    **** **** **** #{customer_card.last4}
+  %li
+    %b Expiration Date:
+    #{customer_card.exp_month}/#{customer_card.exp_year}
+  %li
+    %b Billing Address:
+  %li
+    #{customer_card.name}
+  %li
+    #{customer_card.address_line1}
+  %li
+    #{customer_card.address_city}, #{customer_card.address_state} #{customer_card.address_zip}

@@ -1,0 +1,10 @@
+.row
+  .span6
+    = f.label :seven_days_to_receive_funds, class: "label-green" do
+      DOES YOUR ORGANIZATION WAIT MORE THAN SEVEN DAYS TO RECEIVE FUNDS FROM CROWDFUNDING OR ONLINE FUNDRAISING CAMPAIGNS?*
+    %span.error-container
+    %div
+      - Demo::BASIC_OPTIONS.each do |key, value|
+        = f.radio_button :seven_days_to_receive_funds, Demo::BASIC_OPTIONS[key], style: 'display: inline-block'
+        = f.label :seven_days_to_receive_funds, key, style: 'display: inline-block'
+        %br

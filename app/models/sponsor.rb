@@ -1,4 +1,7 @@
 class Sponsor < ActiveRecord::Base
+
+  delegate :kind, to: :membership, prefix: true
+
   PAYMENT = ["Credit Card", "Wire Transfer/Check"]
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -10,6 +13,7 @@ class Sponsor < ActiveRecord::Base
   attr_accessor :card_name, :anonymous
   # attr_accessible :title, :body
   has_many :project_sponsors
+  has_one  :membership
 
   validates :card_name, presence: true, if: :payment_type_credit_card?
   validates :phone, :email, :name, presence: true, if: :payment_type_transfer?
@@ -32,13 +36,13 @@ class Sponsor < ActiveRecord::Base
 
   def self.set_sponsorship_percentage(level_id, project)
     case level_id
-      when "1"
+      when 1
         cost = project.goal.to_i * 0.25
-      when "2"
+      when 2
         cost = project.goal.to_i * 0.1
-      when "3"
+      when 3
         cost = project.goal.to_i * 0.05
-      when "4"
+      when 4
         if project.goal.to_i * 0.02 >= 750
           cost = 750
         else

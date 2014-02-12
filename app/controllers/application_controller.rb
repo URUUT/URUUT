@@ -1,11 +1,15 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  set_current_tenant_through_filter
   layout :layout_by_resource
-  before_filter :last_url, :session_email_forgot_password, :additional_information
+  before_filter :last_url, :session_email_forgot_password, :additional_information,
+                :get_current_tenant
 
-  rescue_from ActionController::RoutingError, with: :render404
+  # rescue_from ActionController::RoutingError, with: :render404
 
-  def after_sign_in_path_for(resource)
+  def after_sign_in_path_for(resource, params=nil)
+    return new_user_payment_method_path(current_user, plan_id: params[:sign_in_plan]) if params && params[:sign_in_plan]
+
     if session[:redirect_url] == new_project_url
       User.set_redirect_path
     elsif session[:redirect_url] == user_registration_url || request.referer.nil? || request.referer.start_with?(edit_user_password_url) || session[:redirect_url] == root_url
@@ -58,6 +62,15 @@ class ApplicationController < ActionController::Base
     @user = User.find(params[:user_id])
     comparison = params[:status].eql?("Funding Active") ? ">" : "<"
     @projects_created = @user.projects.where("campaign_deadline #{comparison} ? AND live = 1", Time.now).order("updated_at DESC").page(params[:created_page]).per(2)
+  end
+
+private
+
+  def get_current_tenant
+    return unless current_user
+
+    current_account = current_user.account
+    set_current_tenant(current_account)
   end
 
 end

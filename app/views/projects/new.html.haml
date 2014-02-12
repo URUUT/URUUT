@@ -6,8 +6,12 @@
 			%h2 Your ideas. Our platform.
 			%p{:style => "color:#b6b6b4 !important;"} It’s free and easy to start your project on Uruut. Click below to get started.
 
-			= link_to "/projects", method: :post, class: "btn #{user_signed_in? ? "" : "must-login"}" do
-				Get Started ►
+			- if user_signed_in?
+				= link_to "/projects", method: :post, class: "btn" do
+					Get Started ►
+			- else
+				= link_to '#', class: 'btn must-login' do
+					Get Started ►
 
 .full-width.need-to-know.cf
 	.container
@@ -29,5 +33,9 @@
 .full-width.create-project
 	.container
 		%h2 Create your project & get funded now.
-		= link_to "/projects", method: :post, class: "btn #{user_signed_in? ? "" : "must-login"}" do
-			Get Started ►
+		- if user_signed_in?
+			= link_to "/projects", method: :post, class: "btn" do
+				Get Started ►
+		- else
+			= link_to '#', class: 'btn must-login' do
+				Get Started ►

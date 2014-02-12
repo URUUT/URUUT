@@ -16,74 +16,74 @@ feature 'Transparency Woorkroom Workflow' do
     end
   end
 
-  scenario "User goes to Project's Panel of an Active Funding Project", js: true do
-    @project.update_attributes(campaign_deadline: 3.days.from_now)
-    visit user_path(@user)
+  # scenario "User goes to Project's Panel of an Active Funding Project", js: true do
+  #   @project.update_attributes(campaign_deadline: 3.days.from_now)
+  #   visit user_path(@user)
 
-    select 'Funding Active', from: 'projects-created'
+  #   select 'Funding Active', from: 'projects-created'
 
-    expect(page).to have_content('PROJECT ADMIN PANEL')
-  end
+  #   expect(page).to have_content('PROJECT ADMIN PANEL')
+  # end
 
-  scenario "User visits Project Admin Panel of the Project", js: true do
-    @project.update_attributes(campaign_deadline: 3.days.from_now)
-    visit project_admin_project_path(@project)
+  # scenario "User visits Project Admin Panel of the Project", js: true do
+  #   @project.update_attributes(campaign_deadline: 3.days.from_now)
+  #   visit project_admin_project_path(@project)
 
-    within('.span8') do
-      expect(page).to have_content('FUNDING TRACKER')
-    end
-  end
+  #   within('.span8') do
+  #     expect(page).to have_content('FUNDING TRACKER')
+  #   end
+  # end
 
-  scenario "User visits Manage of the Project", js: true do
-    @project.update_attributes(campaign_deadline: 3.days.from_now)
-    visit project_admin_project_path(@project)
+  # scenario "User visits Manage of the Project", js: true do
+  #   @project.update_attributes(campaign_deadline: 3.days.from_now)
+  #   visit project_admin_project_path(@project)
 
-    click_link 'Manage Project'
+  #   click_link 'Manage Project'
 
-    within('.span9') do
-      expect(page).to have_content('MY PROJECT COVER PHOTO')
-    end
-  end
+  #   within('.span9') do
+  #     expect(page).to have_content('MY PROJECT COVER PHOTO')
+  #   end
+  # end
 
-  scenario "User updates Project Details", js: true do
-    @project.update_attributes(campaign_deadline: 3.days.from_now)
-    visit project_admin_project_path(@project)
+  # scenario "User updates Project Details", js: true do
+  #   @project.update_attributes(campaign_deadline: 3.days.from_now)
+  #   visit project_admin_project_path(@project)
 
-    click_link 'Manage Project'
-    click_link 'PROJECT DETAILS'
+  #   click_link 'Manage Project'
+  #   click_link 'PROJECT DETAILS'
 
-    fill_in 'project_title', with: ''
-    fill_in 'project_story', with: 'My Story Update'
-    fill_in 'project_about', with: 'About Updated'
+  #   fill_in 'project_title', with: ''
+  #   fill_in 'project_story', with: 'My Story Update'
+  #   fill_in 'project_about', with: 'About Updated'
 
-    click_button 'Save Updates'
+  #   click_button 'Save Updates'
 
-    expect(page).to have_content('Field Required')
-  end
+  #   expect(page).to have_content('Field Required')
+  # end
 
-  scenario "User visits Project Visual", js: true do
-    @project.update_attributes(campaign_deadline: 3.days.from_now)
-    visit project_admin_project_path(@project)
+  # scenario "User visits Project Visual", js: true do
+  #   @project.update_attributes(campaign_deadline: 3.days.from_now)
+  #   visit project_admin_project_path(@project)
 
-    click_link 'Manage Project'
-    click_link 'STORY VISUAL'
+  #   click_link 'Manage Project'
+  #   click_link 'STORY VISUAL'
 
-    expect(page).to have_content('ABOUT US')
-  end
+  #   expect(page).to have_content('ABOUT US')
+  # end
 
-  scenario "User updates Project Updates", js: true do
-    @project.update_attributes(campaign_deadline: 3.days.from_now)
-    visit project_admin_project_path(@project)
+  # scenario "User updates Project Updates", js: true do
+  #   @project.update_attributes(campaign_deadline: 3.days.from_now)
+  #   visit project_admin_project_path(@project)
 
-    click_link 'Manage Project'
-    click_link 'PROJECT UPDATES'
+  #   click_link 'Manage Project'
+  #   click_link 'PROJECT UPDATES'
 
-    fill_in 'project_update_title', with: ''
-    fill_in 'project_update_content', with: 'Content updated'
+  #   fill_in 'project_update_title', with: ''
+  #   fill_in 'project_update_content', with: 'Content updated'
 
-    click_button 'POST PROJECT UPDATE'
+  #   click_button 'POST PROJECT UPDATE'
 
-    expect(page).to have_content('Field Required')
-  end
+  #   expect(page).to have_content('Field Required')
+  # end
 
 end

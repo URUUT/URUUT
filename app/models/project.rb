@@ -306,7 +306,7 @@ class Project < ActiveRecord::Base
             :currency => "usd",
             :card => token.id,
             :description => description,
-            :application_fee => application_fee
+            :application_fee => calculate_funder_application_fee(application_fee)
           },
           project_token
         )
@@ -360,7 +360,7 @@ class Project < ActiveRecord::Base
             :currency => "usd",
             :card => token.id,
             :description => description,
-            :application_fee => application_fee
+            :application_fee => calculate_funder_application_fee(application_fee)
           },
           project_token
         )
@@ -397,6 +397,12 @@ class Project < ActiveRecord::Base
         puts e
       end
     end
+  end
+
+private
+
+  def calculate_funder_application_fee(application_fee)
+    user.membership_kind == 'fee' ? application_fee : nil
   end
 
 end

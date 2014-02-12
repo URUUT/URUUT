@@ -7,12 +7,12 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :remember_me, :city, :state, :zip,
-    :neighborhood, :provider, :role, :uid, :token, :organization, :mission, :subscribed, :avatar, :uruut_point
+    :neighborhood, :provider, :role, :uid, :token, :organization, :mission, :subscribed, :avatar, :uruut_point,
+    :telephone, :full_registration, :sign_in_plan, :sign_up_plan
 
-  after_create :send_welcome_email
   after_create :assign_default_badge
 
-  attr_accessor :avatar_upload_width, :avatar_upload_height
+  attr_accessor :avatar_upload_width, :avatar_upload_height, :full_registration, :sign_in_plan, :sign_up_plan
   # attr_accessible :title, :body
 
   validates_confirmation_of :password
@@ -34,11 +34,20 @@ class User < ActiveRecord::Base
   has_many :tax_reports
   has_many :questions
 
+  has_one :membership
+  has_one :marketing_info
+
+  delegate :kind, to: :membership, prefix: true
+
+  acts_as_tenant(:account)
+
   # Badging
   has_merit
 
   scope :unique_project_donors, ->(project) { joins(:donations).
     where(donations: { project_id: project.id, confirmed: true }).uniq }
+
+  delegate :plan, to: :membership, prefix: true
 
   # mount_uploader :avatar, AvatarUploader
 
@@ -64,6 +73,8 @@ class User < ActiveRecord::Base
             token:auth.credentials.token,
             avatar: auth.info.image
           )
+          user.build_membership.save
+          Gateway::CustomerService.new(user).create
         end
       else
         user.update_attributes!({provider: auth.provider,uid: auth.uid})
@@ -174,15 +185,26 @@ class User < ActiveRecord::Base
     role == 'admin'
   end
 
-  private
+  def donor?
+    membership_plan.blank?
+  end
+
+  def campaign_manager?
+    !donor?
+  end
 
   def send_welcome_email
-    WelcomeMailer.welcome_confirmation(self).deliver
+    if self.donor?
+      WelcomeMailer.welcome_confirmation_donor(self).deliver
+    else
+      WelcomeMailer.welcome_confirmation_user(self).deliver
+    end
   end
+
+private
 
   def assign_default_badge
     self.add_badge(1)
   end
-
 
 end

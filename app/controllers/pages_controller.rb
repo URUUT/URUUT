@@ -1,6 +1,8 @@
 class PagesController < ApplicationController
   layout "application", :except => [:index, :discover, :about, :contact]
-  layout "landing", :only => [:index, :discover, :about, :home, :funding_sources, :search]
+  layout "landing", :only => [:index, :discover, :about, :home, :funding_sources,
+    :search, :pricing, :choose_plan, :change_plan, :landing, :donor_relationship,
+    :donor_convenience, :fundraising, :analytics]
   skip_before_filter :set_previous_page
   before_filter :set_session_page
   before_filter :set_session_wizard, except: :home
@@ -30,11 +32,19 @@ class PagesController < ApplicationController
     @projects = Project.where('live = true AND deleted = false').page(params[:page]).per(9)
   end
 
+  def download_article
+    send_file "#{Rails.root}/public/articles/#{params[:file]}", filename: params[:file], type: 'application/pdf'
+  end
+
   def categories
   	@category = Project.where("category = ?", params[:category])
   end
 
   def contact
+  end
+
+  def choose_plan
+    @marketing_info = MarketingInfo.new
   end
 
   def contact_send

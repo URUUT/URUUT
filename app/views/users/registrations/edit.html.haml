@@ -74,7 +74,32 @@
 
       %hr
       %button.btn.btn-primary{:type => "submit"}
-        Submit changes ►
+        Submit ►
+  .span4
+    %h3.title{:style => "margin-bottom:5px;"} MEMBERSHIP SETTINGS
+    .well.info
+      .box-content
+        %h5.label-green{style: "margin-bottom: 7px;"} SUBSCRIPTION STATUS
+        = render partial: 'shared/subscription_status', locals: { current_user: current_user }
+        = link_to 'Change your subscription plan.', choose_plan_pages_path
+
+      .box-content
+        %h5.label-green{style: "margin-bottom: 7px;"} PAYMENT METHOD
+        %p The following payment card is currently used for payment:
+        .logo_card
+          = image_tag 'logo_visa.png'
+        .info_card
+          - if @customer_card
+            = render partial: 'payment_methods/default_card_details', locals: { customer_card: @customer_card }
+          - else
+            %p You have not setup any card yet.
+        = link_to 'Change payment method or card details.', edit_user_payment_method_path(current_user)
+
+      - unless current_user.membership.nil?
+        .box-content
+          %h5.label-green{style: "margin-bottom: 7px;"} CANCEL YOUR SUBSCRIPTION
+          = link_to 'View cancellation options.', user_membership_cancel_path(current_user, current_user.membership)
+
   .span4
     %h3.title{:style => "margin-bottom:5px;"} My badges
     .well.info.badge-wrapper

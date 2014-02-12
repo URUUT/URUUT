@@ -5,7 +5,7 @@ namespace :uruut do
 
 		projects = Project.live.ending_today
 		projects.each do |project|
-			if (totalsponsor(project) >= project.goal.to_f && project.goal.to_f > 0) || (project.partial_funding == true && project.goal.to_f > 0)
+			if valid_project?(project)
 				project.update_attributes(status: "Funding Completed")
 
 				project.create_donation_charges
@@ -25,5 +25,11 @@ namespace :uruut do
 				#puts "Project Not Successful"
 			end
 		end
+	end
+
+	def valid_project?(project)
+		(totalsponsor(project) >= project.goal.to_f && project.goal.to_f > 0) ||
+		((project.partial_funding == true && project.goal.to_f > 0)           &&
+		project.user.membership.kind == 'plus')
 	end
 end

@@ -1,0 +1,29 @@
+#modal-form.hide.fade{style: "text-align:center;padding:10px;"}
+  %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", style: "position:absolute;top:10px;right:20px;", type: "button"} ×
+  %h5{style: "margin-bottom:20px;"}
+    You need to Log In or Sign Up before continuing.
+  %br
+  = form_for @marketing_info, url: marketing_info_path do |f|
+    .row
+      .span3.well-half
+        = f.label :first_name, class: "label-green" do
+          First Name*
+          %span.error-container
+        = f.text_field :first_name, class: 'full-with', required: true
+      .span3.well-half
+        = f.label :last_name, class: "label-green" do
+          Last Name*
+          %span.error-container
+        = f.text_field :last_name, class: 'full-with', required: true
+      .span3.well-half
+        = f.label :email, class: "label-green" do
+          %span.error-container
+          Email address*
+        = f.email_field :email, class: 'full-with', style: 'width: 96%;', required: true
+
+      = f.hidden_field :href, value: ''
+    %br
+    = f.submit 'Next ►', class: 'btn', style: "font-family: 'Proxima Nova Semi';padding: 8px 25px; width: 200px;"
+    %p{ style: 'margin-top: 40px;'}
+      Do you already have an account? Click here to
+      %a.signin{href: "#"} Log In ►

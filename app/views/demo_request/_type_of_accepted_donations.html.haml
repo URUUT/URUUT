@@ -1,0 +1,10 @@
+.row
+  .span6
+    = f.label :type_of_accepted_donations, class: "label-green" do
+      FOR DONATIONS MADE ON YOUR WEBSITE, WHICH OF THE FOLLOWING BEST DESCRIBES YOUR ORGANIZATION?*
+    %span.error-container
+    %div
+      - Demo::TYPE_OF_ACCEPTED_DONATIONS.each do |key, values|
+        = f.radio_button :type_of_accepted_donations, values[0], style: 'display: inline-block'
+        = f.label :type_of_accepted_donations, values[1], style: 'display: inline-block'
+        %br

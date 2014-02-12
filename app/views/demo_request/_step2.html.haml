@@ -1,0 +1,58 @@
+#step2
+  %h4 Tell us about your organization.
+  - if f.object.errors.any?
+    .error-box
+      %ul
+        - f.object.errors.full_messages.each do |msg|
+          %li= msg
+  %br
+  .row
+    .span6
+      = f.label :founded_date, class: "label-green" do
+        IN WHAT YEAR WAS YOUR ORGANIZATION FOUNDED?*
+        %span.error-container
+      = f.text_field :founded_date, style: 'width:55%;', required: true
+  .row
+    .span6
+      = f.label :non_profit, class: "label-green" do
+        ARE YOU A NONPROFIT ORGANIZATION?*
+        %span.error-container
+      %div.inline-field
+        = f.radio_button :non_profit, Demo::NON_PROFIT[:yes]
+        = f.label :non_profit, "Yes"
+      %div.inline-field
+        = f.radio_button :non_profit, Demo::NON_PROFIT[:no]
+        = f.label :non_profit, "No"
+      %br
+  .row
+    .span7
+      = f.label :organization_description, class: "label-green" do
+        PLEASE DESCRIBE YOUR ORGANIZATION, IT’S MISSION, AND CAUSES*
+      = f.text_area :organization_description, class: 'full-with', rows: 5
+  %br
+
+  = render partial: 'demo_request/money_raised_yearly', locals: { f: f }
+  %br
+  = render partial: 'demo_request/current_fundraising_activities', locals: { f: f }
+  %br
+  = render partial: 'demo_request/type_of_accepted_donations', locals: { f: f }
+  %br
+  = render partial: 'demo_request/type_of_donors_accepted', locals: { f: f }
+  %br
+  = render partial: 'demo_request/sponsorship_program', locals: { f: f }
+  %br
+  = render partial: 'demo_request/regarding_crowdfunding', locals: { f: f }
+  %br
+  = render partial: 'demo_request/crowdfunding_camping', locals: { f: f }
+  %br
+  = render partial: 'demo_request/partial_funding', locals: { f: f }
+  %br
+  = render partial: 'demo_request/seven_days_to_receive_funds', locals: { f: f }
+  %br
+  = render partial: 'demo_request/social_outreach', locals: { f: f }
+
+  %div.inline
+    = link_to edit_demo_request_path(id: @demo), class: "btn btn-gray", id: "previous", style: "margin:20px 0 0;float:left; border-radius: 5px; width: 110px; background: #8e8e8e;" do
+      ◄ PREVIOUS
+
+    = f.submit 'FINISH ►', class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:right; border-radius: 5px; width: 230px;"
