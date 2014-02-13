@@ -587,7 +587,7 @@ select {
     padding:10px 15px;
     text-transform:uppercase;
     a {
-      color:#403e37;
+      color:$green;
       font:normal 12px/12px "Proxima Nova Semi", arial, sans-serif;
       letter-spacing:2px;}
     img {
@@ -941,7 +941,7 @@ div.dropdown {
       &:hover {
         text-decoration:none}}
     a.sign-up-link {
-      color:#83c140;}
+      color:$green;}
     span.or {
       color:#fff;
       font-family:"Georgia", georgia, serif;
