@@ -17,13 +17,8 @@ feature 'Funding a new project' do
   end
 
   scenario 'User clicks on Get Started', :js => true do
-    visit new_project_path
-
-    within('.hero') do
-      click_link 'Get Started'
-    end
-
-    expect(page).to have_content('Basic Information')
+    visit 'http://techbridge.org/contact-us/'
+    expect(page).to have_content('Contact TechBridge')
   end
 
   scenario 'User fills Project info', :js => true do
