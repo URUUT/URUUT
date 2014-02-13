@@ -710,12 +710,14 @@ footer {
   font-size:10px;
   padding:40px 0 30px;
   position:relative;
+  text-align: right;
 	div {
 		ul {
 			display:inline-block;
 			margin:0;
 			padding-right:50px;
 			vertical-align:top;
+      text-align: left;
 			&:last-child {
 				padding-right:0;}
 			li {
