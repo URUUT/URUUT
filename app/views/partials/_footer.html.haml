@@ -25,29 +25,6 @@
     }
   });
 
-%footer
-  .container.cf
-    %ul
-      %li
-        %h6 Find Us On
-      %li
-        = link_to "","http://www.facebook.com/get.ruuted", {:class => "fb", :target => "_blank"}
-        = link_to "","http://www.twitter.com/uruut", {:class => "tw", :target => "_blank"}
-        = link_to "", "http://www.linkedin.com/company/uruut", {:class => "lkd", :target => "_blank"}
-        = link_to "", "https://plus.google.com/114477089797728702899/posts", {:class => "gplus", :target => "_blank"}
-
-    %ul
-      %li
-        %h6 Sign up for URUUT news
-        = form_for Newsletter.new, :remote => true, :html => { :id => "email-sign-up" } do |f|
-          %div
-            .error-container{style: "margin-right: 0px;"}
-            = f.email_field "email", :placeholder => "enter email address"
-            %button.btn{:type => "submit"}
-              ►
-          %div#email-sign-up-error
-            %p Please check your email
-
 .copyright
   .container
     %p
