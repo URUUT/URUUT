@@ -18,5 +18,4 @@
 .full-width.create-project
 	.container
 		%h2 Click here to connect with TechBridge for a consultation on your technology project .
-		= button_tag :class => "btn #{user_signed_in? ? "create" : "must-login"}" do
-			Get Started ►
+		= link_to 'Get Started ►', 'http://techbridge.org/contact-us/', class: "btn"
