@@ -103,7 +103,7 @@ feature 'Funding a new project' do
       click_link 'Get Ruuted'
     end
 
-    expect(page).to have_content('YOU DID IT')
+    expect(page).to have_content('CURRENT PROJECTS')
   end
 
   def create_project
