@@ -65,7 +65,6 @@
         .row
           = render 'layouts/messages' if !controller_name.eql?("sessions") || !controller_name.eql?("pages")
           = yield
-      #push
     = render 'partials/footer'
 = javascript_include_tag "pages"
 
