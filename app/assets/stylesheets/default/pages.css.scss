@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 $green: #95D60A;
-$green2: #81C263;
+$green2: $green;
 $light-green: #bee0b4;
 
 @font-face {
@@ -1387,7 +1387,7 @@ div[id^='step'] {
 		top:330px;}
   .funding-info {
   	background: url(image-path('funding-info.png')) repeat;
-    background: rgba(112, 191, 76, 0.85);
+    background: rgba(149, 214, 10, 0.85);
     bottom:0;
     height:125px;
     left:0;
@@ -2064,7 +2064,7 @@ form.registration-edit {
     text-shadow: 0 1px 0 rgb(189, 189, 189), 0 -1px 0 rgb(148, 148, 148);
   }
   .switch input:checked ~ label { /* Background */
-    background: #81C263;
+    background: $green;
   }
 
   .switch input:checked ~ label i { /* Toggle */
@@ -2076,7 +2076,7 @@ form.registration-edit {
     content: "on";
     right: 100%;
     color: #fff;
-    text-shadow: 0 1px 0 darken(#81C263, 20%), 0 -1px 0 lighten(#81C263, 10%);
+    text-shadow: 0 1px 0 darken($green, 20%), 0 -1px 0 lighten($green, 10%);
   }
 }
 
