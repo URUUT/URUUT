@@ -90,21 +90,21 @@ feature 'Funding a new project' do
     expect(page).to have_content('ABOUT US')
   end
 
-  scenario 'User fills VISUALS', :js => true do
-    create_project
-    @project.update_attributes(large_image: 'https://www.filepicker.io/api/file/dcFwLDJTrqA2encyBmAx')
-    page.set_rack_session(:connected => true)
+  # scenario 'User fills VISUALS', :js => true do
+  #   create_project
+  #   @project.update_attributes(large_image: 'https://www.filepicker.io/api/file/dcFwLDJTrqA2encyBmAx')
+  #   page.set_rack_session(:connected => true)
 
-    visit edit_project_path(@project, anchor: 'assets')
+  #   visit edit_project_path(@project, anchor: 'assets')
 
-    page.execute_script("localStorage.setItem('step-assets', 'image_path')")
+  #   page.execute_script("localStorage.setItem('step-assets', 'image_path')")
 
-    within(".span12") do
-      click_link 'Get Ruuted'
-    end
+  #   within(".span12") do
+  #     click_link 'Get Ruuted'
+  #   end
 
-    expect(page).to have_content('CURRENT PROJECTS')
-  end
+  #   expect(page).to have_content('CURRENT PROJECTS')
+  # end
 
   def create_project
     @project         = Project.new
