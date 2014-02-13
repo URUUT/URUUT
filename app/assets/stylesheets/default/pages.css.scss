@@ -2707,6 +2707,10 @@ form[id*=project] {
   &.our-mission {
     background:#55554d;
     padding:80px 0;
+    h3 {
+      color:$green;
+      font-size: 24.5px;
+      margin-bottom:10px;}
     div.half {
       -webkit-box-sizing: border-box;
       -moz-box-sizing: border-box;
@@ -2714,10 +2718,6 @@ form[id*=project] {
       display:inline-block;
       float:left;
       width:50%;
-      h3 {
-        color:$green;
-        font-size: 24.5px;
-        margin-bottom:0;}
       h2 {
         color:#fff;
         font-family: 'Proxima Nova';
