@@ -43,7 +43,7 @@
           %h3.perk-name{:style => 'font-size:20px; color:#70bf4c;line-height:100%;margin:0;'}= @donation.perk_name
           %span.perk-description{:style => "font-size:12px;font-family:'Proxima Nova';"}
           %p.description-custom
-            You will receive #{@donation.amount.to_i} Uruut Reward Points when you seed #{number_to_currency(@donation.amount.to_f, precision: precision)}
+            You will receive #{@donation.amount.to_i} Nonprofit Xchange Reward Points when you seed #{number_to_currency(@donation.amount.to_f, precision: precision)}
         .cf
         %p.checkout-continue-subtext Continue to payment information below or choose a different seed amount/perk from the right.
 
@@ -69,7 +69,7 @@
                   %li
                     #{p.description}
                 %p.subtext
-                  Uruut Reward Points: #{p.amount.to_i}
+                  Nonprofit Xchange Reward Points: #{p.amount.to_i}
                 %ul{style: "padding-top: 10px;"}
                   %li.seed-amount{id: "amount-id-#{p.id}"}
                     %p.amount= number_to_currency(p.amount.to_i, precision: 0)
@@ -85,7 +85,7 @@
           - default_perk.each_with_index do |perk_amount, index|
             - index += 1
             - name = "LEVEL #{index}"
-            - description = "#{perk_amount.to_i} Uruut Reward Points"
+            - description = "#{perk_amount.to_i} Nonprofit Xchange Reward Points"
             %li.perk.clearfix{id: "perk-id-#{index}"}
               %h3.perk-name-other{id: "perk-name-other-#{index}"}
                 = name
@@ -124,7 +124,7 @@
     // if (perkStatus == "true"){
     //   $(".selectParent").hide();
     //   $(".none-perks").show();
-    //   $(".none-perks").html("You will receive "+ point + " Uruut Reward Points when you seed "+ amount)
+    //   $(".none-perks").html("You will receive "+ point + " Nonprofit Xchange Reward Points when you seed "+ amount)
     //   $(".description-custom").hide();
     // }
     // else{

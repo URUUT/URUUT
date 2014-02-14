@@ -2,7 +2,7 @@
   .span8
     %h3.title Review your contribution
     %p
-      By confirming your contribution, you agree to Uruut.com's
+      By confirming your contribution, you agree to Nonprofit Xchange
       = link_to "Privacy Policy", privacy_pages_path, target: "_blank"
       and
       = link_to "Terms of Use", terms_pages_path, target: "_blank"
@@ -37,7 +37,7 @@
               %ul.dashed-list
                 %li= @donation.description
             - if !session[:perk_type].eql?("default")
-              %p.subtext Uruut Reward Points: #{@donation.amount.to_i}
+              %p.subtext Nonprofit Xchange Reward Points: #{@donation.amount.to_i}
         .cf
 
   .span4

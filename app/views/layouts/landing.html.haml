@@ -5,12 +5,12 @@
       %meta{:charset => "utf-8"}
       %meta{"http-equiv" => "X-UA-Compatible", :content => "IE=edge,chrome=1"}
       %meta{:name => "viewport", :content => "width=960, maximum-scale=1"}
-      %title= content_for?(:title) ? yield(:title) : "URUUT"
+      %title= content_for?(:title) ? yield(:title) : "Nonprofit Xchange"
       %meta{:content => "", :name => "description"}
       %meta{:content => "", :name => "author"}
       - if controller_name == "projects" and action_name == "show"
         %meta{:property => "og:image", :content => "#{@project.large_image}"}
-        %meta{:property => "og:title", :content => "#{@project.project_title} | URUUT"}
+        %meta{:property => "og:title", :content => "#{@project.project_title} | Nonprofit Xchange"}
         %meta{:property => 'og:description', :content=> "#{@project.title}" }
       - else
         %meta{:property => "og:image", :content => "https://www.uruut.com#{asset_path('uruut-fb-og.png') }"}
