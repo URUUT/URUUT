@@ -160,7 +160,7 @@
         %div.clearfix{:style => "margin-bottom: 10px; width: 500px;"}
           = f.label :mission, class: "label-green" do
             BUSINESS OR ORGANIZATION'S LOGO
-            %span.real-green-small{style: "color: #81C263 !important; #{'display: none' if @sponsor.anonymous}"}"}*
+            %span.real-green-small{style: "color: #95D60A !important; #{'display: none' if @sponsor.anonymous}"}"}*
             %span.error-container
           %div{:style => "position: relative;"}
             = image_tag @project_sponsor.logo, :class => "img-polaroid pull-left logo-company", :style => "position: relative; z-index: 10; width:100px; height:100px;"
@@ -184,7 +184,7 @@
         %div
           = f.label :site, class: "label-green" do
             Website
-            %span.real-green-small{style: "color: #81C263 !important; #{'display: none' if @sponsor.anonymous}"}*
+            %span.real-green-small{style: "color: #95D60A !important; #{'display: none' if @sponsor.anonymous}"}*
             %span.italic
               (Format: www.yoursite.com)
             %span.error-container
@@ -192,7 +192,7 @@
         %div
           = f.label :mission, class: "label-green" do
             MISSION STATEMENT / ABOUT
-            %span.real-green-small{style: "color: #81C263 !important; #{'display: none' if @sponsor.anonymous}"}"}*
+            %span.real-green-small{style: "color: #95D60A !important; #{'display: none' if @sponsor.anonymous}"}"}*
             %span.cutdown.italic
             %span.error-container
           = text_area :project_sponsor, :mission, maxlength: 275, required: true, :style => "height: 186px; width: 595px;", label: false, class: "mission", placeholder: "Tell your story here ..."

@@ -153,7 +153,7 @@
             %iframe{:height => "413", :src => video_seed, :width => "620"}
           - elsif @project.seed_mime_type.eql?("image") and !@project.seed_image.blank?
             = image_tag "#{@project.seed_image}", style: "width:100%"
-          %h4{:style => "margin-top: 20px;color: #81c263 !important;font-weight: 400;"}= @project.organization
+          %h4{:style => "margin-top: 20px;color: #95D60A !important;font-weight: 400;"}= @project.organization
           %div
             .fb-like{:style => "display: block; float: left; margin-left: 5px;", "data-href" => project_url(@project.id), "data-layout" => "button_count", "data-send" => "false", "data-show-faces" => "true", "data-width" => "450"}
             %a.twitter-follow-button{:style => "display: block; float: left; margin-left: 10px;", "data-show-count" => "false", :href => "https://twitter.com/#{@project.twitter_handle}"} Follow

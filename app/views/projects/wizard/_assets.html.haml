@@ -58,7 +58,7 @@
               .seed-action-container{style: action_image(@project.seed_image, @project.seed_video)}
                 %input{:type => 'filepicker', :name => 'planting_seed_image', 'data-fp-button-text' => 'Upload New Photo', 'data-fp-apikey' => Settings.filepicker.api_key, 'data-fp-button-class' => 'btn', 'onchange' => 'updatePlantingSeedImage(event)', 'data-fp-mimetypes' => 'image/*', 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA'}
                 = link_to '<i class="icon-facetime-video icon-green"></i> Upload New Video'.html_safe, "javascript:void(0)", class: "btn seed-form"
-            %h4.wizard-data-organization{:style => "margin-top: 20px;color: #81c263 !important;font-weight: 400;"}= @project.organization
+            %h4.wizard-data-organization{:style => "margin-top: 20px;color: #95D60A !important;font-weight: 400;"}= @project.organization
             %div
               .fb-like{:style => "display: block; float: left; margin-left: 5px;", "data-href" => "http://www.facebook.com/#{@project.facebook_page}", "data-layout" => "button_count", "data-send" => "false", "data-show-faces" => "true", "data-width" => "450"}
               %a.twitter-follow-button{:style => "display: block; float: left; margin-left: 10px;", "data-show-count" => "false", :href => "https://twitter.com/#{@project.twitter_handle}"} Follow
