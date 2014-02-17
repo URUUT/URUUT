@@ -128,18 +128,18 @@
     .well.info
       .user-perks
         - unless @perks.blank?
-          %h5.title-current-perk{:style => "color:#70bf4c;margin-bottom:10px;"} CURRENT PERKS
+          %h5.title-current-perk{:style => "color:#95d60a;margin-bottom:10px;"} CURRENT PERKS
           - @perks.each do |p|
             %div.created-perk{id: "perk-item-#{p.id}"}
               %h6= amount_converter(p.amount)
               %h6= p.name
               %p{:style => "width:268px;word-wrap: break-word;"}= p.description
               %input{:type => 'hidden', :value => "#{p.id}", :id => "perk-#{p.id}"}
-              %a{:class => "perk-edit", :style => "color:#70bf4c; cursor: pointer"} edit
+              %a{:class => "perk-edit", :style => "color:#95d60a; cursor: pointer"} edit
               |
-              %a{:class => "perk-delete", :style => "color:#70bf4c; cursor: pointer"} delete
+              %a{:class => "perk-delete", :style => "color:#95d60a; cursor: pointer"} delete
 
-      %h5{:style => "color:#70bf4c;margin-bottom:10px; margin-top: 30px"} SEEDER PERKS
+      %h5{:style => "color:#95d60a;margin-bottom:10px; margin-top: 30px"} SEEDER PERKS
       %p The most common amounts donated are between $25-$100. We suggest you offer perks that will emotionally touch your donors and enhance the great feeling they get from helping your project.
 
       %p A Final Word on Perks – Our research shows definitively that contributing to a project like yours is an emotional endeavor for donors. Though offering perks can sometimes be effective in the short-run, it ends up turning a positive, emotional encounter into a simple financial transaction. We encourage you to remember that the greatest reward you can offer your donors is the feeling they will get from your successfully funded and completed project.
@@ -189,7 +189,7 @@
         $('#perk-id').val("");
         $('.save-new-perk, #project-submit, .perk-view').show();
         $('.update-perk').hide();
-        var updatedPerk = '<div class="created-perk" id="perk-item-'+ perk_id +'"><h6>'+ convertAmount(amount ) +'</h6><h6>'+ name +'</h6><p style="width:268px;word-wrap: break-word;">'+ description +'</p><input id="perk-'+perk_id+'" type="hidden" value="'+perk_id+'"><a class="perk-edit" style="color:#70bf4c; cursor: pointer">edit</a> | <a class="perk-delete" style="color:#70bf4c; cursor: pointer">delete</a></div>';
+        var updatedPerk = '<div class="created-perk" id="perk-item-'+ perk_id +'"><h6>'+ convertAmount(amount ) +'</h6><h6>'+ name +'</h6><p style="width:268px;word-wrap: break-word;">'+ description +'</p><input id="perk-'+perk_id+'" type="hidden" value="'+perk_id+'"><a class="perk-edit" style="color:#95d60a; cursor: pointer">edit</a> | <a class="perk-delete" style="color:#95d60a; cursor: pointer">delete</a></div>';
         $("#perk-item-"+ perk_id +"").html(updatedPerk);
         actionEditButton(); actionDeleteButton(); actionButton();
       });
@@ -407,11 +407,11 @@
       });
       if ( $(".created-perk").length < 1 ){
         $(".title-current-perk").remove();
-        var newPerk = '<h5 style="color:#70bf4c;margin-bottom:10px;" class="title-current-perk">CURRENT PERKS</h5><div class="created-perk" id="perk-item-'+ id +'"><h6>'+ convertAmount(amount ) +'</h6><h6>'+ name +'</h6><p style="width:268px;word-wrap: break-word;">'+ description +'</p><input id="perk-'+id+'" type="hidden" value="'+id+'"><a class="perk-edit" style="color:#70bf4c; cursor: pointer">edit</a> | <a class="perk-delete" style="color:#70bf4c; cursor: pointer">delete</a></div>';
+        var newPerk = '<h5 style="color:#95d60a;margin-bottom:10px;" class="title-current-perk">CURRENT PERKS</h5><div class="created-perk" id="perk-item-'+ id +'"><h6>'+ convertAmount(amount ) +'</h6><h6>'+ name +'</h6><p style="width:268px;word-wrap: break-word;">'+ description +'</p><input id="perk-'+id+'" type="hidden" value="'+id+'"><a class="perk-edit" style="color:#95d60a; cursor: pointer">edit</a> | <a class="perk-delete" style="color:#95d60a; cursor: pointer">delete</a></div>';
         $(".user-perks").append(newPerk);
       }
       else{
-        var newPerk = '<div class="created-perk" id="perk-item-'+ id +'"><h6>'+ convertAmount(amount ) +'</h6><h6>'+ name +'</h6><p style="width:268px;word-wrap: break-word;">'+ description +'</p><input id="perk-'+id+'" type="hidden" value="'+id+'"><a class="perk-edit" style="color:#70bf4c; cursor: pointer">edit</a> | <a class="perk-delete" style="color:#70bf4c; cursor: pointer">delete</a></div>';
+        var newPerk = '<div class="created-perk" id="perk-item-'+ id +'"><h6>'+ convertAmount(amount ) +'</h6><h6>'+ name +'</h6><p style="width:268px;word-wrap: break-word;">'+ description +'</p><input id="perk-'+id+'" type="hidden" value="'+id+'"><a class="perk-edit" style="color:#95d60a; cursor: pointer">edit</a> | <a class="perk-delete" style="color:#95d60a; cursor: pointer">delete</a></div>';
         $(".user-perks").append(newPerk);
       }
       $("input.project-save-continue").val("SAVE PERK & CONTINUE ►");
@@ -453,7 +453,7 @@
         type: 'GET',
         url: '#{request.protocol}' + document.location.hostname + ":" + document.location.port + '/projects/update_content_assets_tab?id='+project
       });
-      var newPerk = '<div class="created-perk" id="perk-item-'+ id +'"><h6>'+ convertAmount(amount ) +'</h6><h6>'+ name +'</h6><p style="width:268px;word-wrap: break-word;">'+ description +'</p><input id="perk-'+id+'" type="hidden" value="'+id+'"><a class="perk-edit" style="color:#70bf4c; cursor: pointer">edit</a> | <a class="perk-delete" style="color:#70bf4c; cursor: pointer">delete</a></div>';
+      var newPerk = '<div class="created-perk" id="perk-item-'+ id +'"><h6>'+ convertAmount(amount ) +'</h6><h6>'+ name +'</h6><p style="width:268px;word-wrap: break-word;">'+ description +'</p><input id="perk-'+id+'" type="hidden" value="'+id+'"><a class="perk-edit" style="color:#95d60a; cursor: pointer">edit</a> | <a class="perk-delete" style="color:#95d60a; cursor: pointer">delete</a></div>';
       $(".list-perk").append(newPerk);
       $("input.project-save-continue").val("SAVE PERK & CONTINUE ►");
       $(".save-new-perk").text("SAVE PERK & ADD MORE ►");

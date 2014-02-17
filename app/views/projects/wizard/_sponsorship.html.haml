@@ -13,11 +13,11 @@
             %li #{msg}
 
     %div
-      %h6{:style => "color:#70bf4c"} SPONSORSHIP ON Nonprofit Xchange
+      %h6{:style => "color:#95d60a"} SPONSORSHIP ON Nonprofit Xchange
       %p One of the things that makes Nonprofit Xchange different from other crowd-funding platforms is the ability for businesses and foundations to sponsor projects. While we believe business and foundation sponsorship are the best way to help you reach your goal, you are not required to offer sponsorship.
 
     %div
-      %h6{:style => "color:#70bf4c"} ALLOW PROJECT SPONSORSHIPS?
+      %h6{:style => "color:#95d60a"} ALLOW PROJECT SPONSORSHIPS?
       .span2{style: "margin-left: 0"}
         .selectParent{style: "width: 140px;"}
           = f.select :sponsorship_permission, options_for_select({ "Yes" => true, "No" => false }, @project.sponsor_permission), {}, {:onchange => "changeProjectPermission()", class: "styledSelect"}
@@ -26,7 +26,7 @@
     %div.sponsorship-true
 
       %div
-        %h6{:style => "color:#70bf4c"}
+        %h6{:style => "color:#95d60a"}
           PLATINUM LEVEL SPONSORSHIP*
           %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;"} (industry-specific exclusivity)
           %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;", class: "platinum-availibility"} (1 AVAILABLE)
@@ -43,7 +43,7 @@
             Platinum Level Sponsorship includes priority logo placement, a link to the sponsor’s website, and the company / foundation’s mission statement on your project page. Platinum Sponsors gain industry exclusivity for project sponsors. In addition to these benefits, select suggested benefits or create custom benefits for platinum level sponsors from the checklist below. (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
             %span{:style =>  "color:#403e37;font-style:italic;"}
               (Suggested benefits should be used as a guide and can be customized to meet your project's specific needs.)
-          %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"}
+          %h6{:style => "color:#95d60a;letter-spacing:normal;margin:15px 0 3px;"}
             SUGGESTED BENEFITS
             %span.italic
               (Check All That Apply)
@@ -72,7 +72,7 @@
 
               = hidden_field_tag "platinum_count", nil, id: "platinum-count"
             %div#custom-checkbox
-              %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 10px;"} CREATE CUSTOM BENEFITS:
+              %h6{:style => "color:#95d60a;letter-spacing:normal;margin:15px 0 10px;"} CREATE CUSTOM BENEFITS:
               %div.checkbox.add_checkbox
                 = check_box_tag "add_platinum",nil,false, class: "box_platinum_benefits"
                 = text_field_tag "platinum[]", nil, placeholder: "Create your custom benefit here....", style: "width: 100% !important", class: "platinum_benefits add_benefits"
@@ -84,7 +84,7 @@
       %hr{:style => "background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
 
       %div
-        %h6{:style => "color:#70bf4c"}
+        %h6{:style => "color:#95d60a"}
           Gold LEVEL SPONSORSHIP*
           %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;"} (industry-specific exclusivity)
           %span{:style => "font-size:10px;color:#403e37", class: "gold-availibility"} (3 AVAILABLE)
@@ -101,7 +101,7 @@
             Gold Level Sponsorship includes placement of a large logo and a link to the sponsor’s website on your project page. Gold Sponsors gain industry exclusivity for project sponsors. In addition to these benefits, select suggested benefits or create custom benefits for gold level sponsors from the checklist below. (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
             %span{:style =>  "color:#403e37;font-style:italic;"}
               (Suggested benefits should be used as a guide and can be customized to meet your project's specific needs.)
-          %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"}
+          %h6{:style => "color:#95d60a;letter-spacing:normal;margin:15px 0 3px;"}
             SUGGESTED BENEFITS
             %span.italic
               (Check All That Apply)
@@ -130,7 +130,7 @@
 
               = hidden_field_tag "gold_count", nil, id: "gold-count"
             %div#custom-checkbox
-              %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 10px;"} CREATE CUSTOM BENEFITS:
+              %h6{:style => "color:#95d60a;letter-spacing:normal;margin:15px 0 10px;"} CREATE CUSTOM BENEFITS:
               %div.checkbox.add_checkbox
                 = check_box_tag "add_gold",nil,false, class: "box_gold_benefits"
                 = text_field_tag "gold[]", nil, placeholder: "Create your custom benefit here....", style: "width: 100% !important", class: "gold_benefits add_benefits"
@@ -142,7 +142,7 @@
       %hr{:style => "background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
 
       %div
-        %h6{:style => "color:#70bf4c"}
+        %h6{:style => "color:#95d60a"}
           Silver LEVEL SPONSORSHIP*
           %span{:style => "font-size:10px;color:#403e37", class: "silver-availibility"} (5 AVAILABLE)
       .row-fluid
@@ -158,7 +158,7 @@
             Silver Level Sponsorship includes placement of a medium-sized logo and a link to the sponsor’s website on your project page. In addition to these benefits, select suggested benefits or create custom benefits for silver level sponsors from the checklist below. (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
             %span{:style =>  "color:#403e37;font-style:italic;"}
               (Suggested benefits should be used as a guide and can be customized to meet your project's specific needs.)
-          %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"}
+          %h6{:style => "color:#95d60a;letter-spacing:normal;margin:15px 0 3px;"}
             SUGGESTED BENEFITS
             %span.italic
               (Check All That Apply)
@@ -188,7 +188,7 @@
 
               = hidden_field_tag "silver_count", nil, id: "silver-count"
             %div#custom-checkbox
-              %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 10px;"} CREATE CUSTOM BENEFITS:
+              %h6{:style => "color:#95d60a;letter-spacing:normal;margin:15px 0 10px;"} CREATE CUSTOM BENEFITS:
               %div.checkbox.add_checkbox
                 = check_box_tag "add_silver",nil,false, class: "box_silver_benefits"
                 = text_field_tag "silver[]", nil, placeholder: "Create your custom benefit here....", style: "width: 100% !important", class: "silver_benefits add_benefits"
@@ -200,7 +200,7 @@
       %hr{:style => "background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
 
       %div
-        %h6{:style => "color:#70bf4c;"}
+        %h6{:style => "color:#95d60a;"}
           Bronze LEVEL SPONSORSHIP*
       .row-fluid
         .span3.left{:style => "text-align:left;color:#464646;"}
@@ -227,7 +227,7 @@
 
               = hidden_field_tag "custom_count", nil, id: "custom-count"
             %div#custom-checkbox
-              %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 10px;"} CREATE CUSTOM BENEFITS:
+              %h6{:style => "color:#95d60a;letter-spacing:normal;margin:15px 0 10px;"} CREATE CUSTOM BENEFITS:
               %div.checkbox.add_checkbox
                 = check_box_tag "add_bronze", nil,false, class: "box_bronze_benefits"
                 = text_field_tag "bronze[]", nil, placeholder: "Create your custom benefit here....", style: "width: 100% !important", class: "bronze_benefits add_benefits"
@@ -246,7 +246,7 @@
   .span4{:style => "margin-top:155px;"}
     %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
     .well.info
-      %h5{:style => "color:#70bf4c;margin-bottom:10px;"} SPONSORSHIP DETAILS
+      %h5{:style => "color:#95d60a;margin-bottom:10px;"} SPONSORSHIP DETAILS
       %p Nonprofit Xchange's Partner-Funding depends not only individual contributors, but sponsorship from businesses and foundations.
 
       %p There are 4 different levels of sponsorship, with different benefits for each level. Use the checklists to define what each sponsor level includes.  The Nonprofit Xchange Wizard will automatically calculate the sponsorship levels for you.  Below each level are suggested benefits.  You can use these or create your own, but be sure that you are making it worth your sponsors’ contribution, while being sure to make promises you can deliver.
