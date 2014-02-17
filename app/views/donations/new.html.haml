@@ -63,7 +63,7 @@
         -if @project.perk_permission
           -unless @project.perks.blank?
             - @project.perks.order(:amount).each do |p|
-              %li.perk.clearfix{style: "#{"background: #bee0b4" if @perk.id.eql?(p.id)}", id: "perk-id-#{p.id}"}
+              %li.perk.clearfix{style: "#{"background: #95d60a" if @perk.id.eql?(p.id)}", id: "perk-id-#{p.id}"}
                 %h3.perk-name-other{style: "#{"color: #000" if @perk.id.eql?(p.id)}", id: "perk-name-other-#{p.id}"}= p.name
                 %h3
                   - if p.limit
@@ -76,7 +76,7 @@
                 %p.subtext
                   Nonprofit Xchange Reward Points: #{p.amount.to_i}
                 %ul{style: "padding-top: 10px;"}
-                  %li.seed-amount{style: "#{"background: #bee0b4" if @perk.id.eql?(p.id)}", id: "amount-id-#{p.id}"}
+                  %li.seed-amount{style: "#{"background: #95d60a" if @perk.id.eql?(p.id)}", id: "amount-id-#{p.id}"}
                     %p.amount #{amount_converter(p.amount.to_i)}
                   %li.fund-button
                     - if p.limit
@@ -91,24 +91,24 @@
             - index += 1
             - name = "LEVEL #{index}"
             - description = "#{perk_amount.to_i} Nonprofit Xchange Reward Points"
-            %li.perk.clearfix{style: "#{"background: #bee0b4" if @perk_amount.eql?(perk_amount)}", id: "perk-id-#{index}"}
+            %li.perk.clearfix{style: "#{"background: #95d60a" if @perk_amount.eql?(perk_amount)}", id: "perk-id-#{index}"}
               %h3.perk-name-other{style: "#{"color: #000" if @perk_amount.eql?(perk_amount)}", id: "perk-name-other-#{index}"}
                 = name
               When you seed #{amount_converter(perk_amount)}, you will receive:
               %ul.normal-font.dashed-list
                 %li= description
               %ul{style: "padding-top: 10px;"}
-                %li.seed-amount{style: "#{"background: #bee0b4" if @perk_amount.eql?(perk_amount)}", id: "amount-id-#{index}"}
+                %li.seed-amount{style: "#{"background: #95d60a" if @perk_amount.eql?(perk_amount)}", id: "amount-id-#{index}"}
                   %p.amount #{amount_converter(perk_amount)}
                 %li.fund-button
                   %a{:class => "fund btn change-fund", "perk-id" => "default", style: "#{"background: #95D60A" if @perk_amount.eql?(perk_amount)}", "amount" => "#{perk_amount}", "level" => "#{index}", id: "button-fund-#{index}"} Fund Now ►
 
-        %li.perk.clearfix{id: "perk-id-custom", style: "#{"background: #bee0b4" if @perk_name.eql?("custom")}"}
+        %li.perk.clearfix{id: "perk-id-custom", style: "#{"background: #95d60a" if @perk_name.eql?("custom")}"}
           %h3.perk-name-other{style: "#{"color: #000" if @perk_name.eql?("custom")}", id: "perk-name-other"}
             CHOOSE YOUR PERK
           %p With this option you choose the amount to seed and which perk you receive. (Perk egibility based on donation amount)
           %ul
-            %li.seed-amount{id: "amount-id-custom", style: "#{"background: #bee0b4" if @perk_name.eql?("custom")}"}
+            %li.seed-amount{id: "amount-id-custom", style: "#{"background: #95d60a" if @perk_name.eql?("custom")}"}
               %h6 AMOUNT TO SEED
               - if @perk_amount.to_s.split(".")[1].eql?("0")
                 %p.amount= text_field_tag :custom_seed, "#{@perk_amount.to_i if @perk_name.eql?("custom")}" , {style: "width: 100%;"}

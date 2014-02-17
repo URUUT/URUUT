@@ -98,12 +98,12 @@
                 %li.fund-button
                   %a{:class => "fund btn change-fund", "perk-id" => "default", style: "#{"background: #70bf4c" if @donation.amount.eql?(perk_amount)}", "amount" => "#{perk_amount}", "level" => "#{index}", id: "button-fund-#{index}"} Fund Now ►
 
-        %li.perk.clearfix{id: "perk-id-custom", style: "#{"background: #bee0b4" if session[:perk_type].eql?("custom")}"}
+        %li.perk.clearfix{id: "perk-id-custom", style: "#{"background: #95d60a" if session[:perk_type].eql?("custom")}"}
           %h3.perk-name-other{style: "#{"color: #000" if session[:perk_type].eql?("custom")}", id: "perk-name-other"}
             CHOOSE YOUR PERK
           %p With this option you choose the amount to seed and which perk you receive. (Perk egibility based on donation amount)
           %ul
-            %li.seed-amount{id: "amount-id-custom", style: "#{"background: #bee0b4" if session[:perk_type].eql?("custom")}"}
+            %li.seed-amount{id: "amount-id-custom", style: "#{"background: #95d60a" if session[:perk_type].eql?("custom")}"}
               %h6 AMOUNT TO SEED
               %p.amount= text_field_tag :custom_seed, "#{@donation.amount.to_i if session[:perk_type].eql?("custom")}" , {style: "width: 100%;"}
           %a{style: "#{"background: #70bf4c" if session[:perk_type].eql?("custom")}", :class => "fund btn change-fund pull-right", "perk-id" => "custom", id: "button-fund-custom"} Fund Now ►
