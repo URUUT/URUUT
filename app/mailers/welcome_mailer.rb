@@ -1,6 +1,6 @@
 class WelcomeMailer < ActionMailer::Base
   layout 'mailer'
-  default from: "npx@techbridge.org"
+  default from: "info@techbridge.com"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
