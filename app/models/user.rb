@@ -73,9 +73,8 @@ class User < ActiveRecord::Base
   end
 
   def self.set_redirect_path
-    session.delete(:path)
     project = Project.new
-    project.user_id = resource.id
+    project.user_id = id
     project.save!
     "/projects/#{project.id}/edit#sponsor-info"
   end
