@@ -100,7 +100,7 @@ feature 'Funding a new project' do
   #   page.execute_script("localStorage.setItem('step-assets', 'image_path')")
 
   #   within(".span12") do
-  #     click_link 'Get Ruuted'
+  #     click_link 'Get Started'
   #   end
 
   #   expect(page).to have_content('CURRENT PROJECTS')
