@@ -72,9 +72,9 @@ class User < ActiveRecord::Base
     user
   end
 
-  def self.set_redirect_path
+  def set_redirect_path
     project = Project.new
-    project.user_id = id
+    project.user_id = self.id
     project.save!
     "/projects/#{project.id}/edit#sponsor-info"
   end
