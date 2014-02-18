@@ -51,7 +51,6 @@ feature 'Funding a new project' do
 
     fill_in 'project_project_title', with: 'Project title'
     fill_in 'project_goal', with: '100'
-    check 'project_partial_funding'
     select '30', from: 'project_duration'
     select 'Art / Culture', from: 'project_category'
     fill_in 'project_title', with: 'Campaign title'
