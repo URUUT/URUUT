@@ -58,7 +58,7 @@
               .seed-action-container{style: action_image(@project.seed_image, @project.seed_video)}
                 %input{:type => 'filepicker', :name => 'planting_seed_image', 'data-fp-button-text' => 'Upload New Photo', 'data-fp-apikey' => Settings.filepicker.api_key, 'data-fp-button-class' => 'btn', 'onchange' => 'updatePlantingSeedImage(event)', 'data-fp-mimetypes' => 'image/*', 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA'}
                 = link_to '<i class="icon-facetime-video icon-green"></i> Upload New Video'.html_safe, "javascript:void(0)", class: "btn seed-form"
-            %h4.wizard-data-organization{:style => "margin-top: 20px;color: #81c263 !important;font-weight: 400;"}= @project.organization
+            %h4.wizard-data-organization{:style => "margin-top: 20px;color: #95D60A !important;font-weight: 400;"}= @project.organization
             %div
               .fb-like{:style => "display: block; float: left; margin-left: 5px;", "data-href" => "http://www.facebook.com/#{@project.facebook_page}", "data-layout" => "button_count", "data-send" => "false", "data-show-faces" => "true", "data-width" => "450"}
               %a.twitter-follow-button{:style => "display: block; float: left; margin-left: 10px;", "data-show-count" => "false", :href => "https://twitter.com/#{@project.twitter_handle}"} Follow
@@ -132,7 +132,7 @@
             %h4 BECOME A SPONSOR
             .well
               %h3.label-green{:style => "font-size:20px;letter-spacing:1px;line-height:100%;margin:0;"} PROJECT SPONSORSHIP
-              %p{:style => "font:normal 12px/18px 'Proxima Nova', arial, sans-serif;color:#403e37;margin-bottom:40px;"} We can’t do this alone. Do your part, by becoming a project sponsor. URUUT Partner-Funding depends on individual contributors as well as project sponsorship from businesses and corporate and family foundations. Click the button below to get more details and become a project sponsor.
+              %p{:style => "font:normal 12px/18px 'Proxima Nova', arial, sans-serif;color:#403e37;margin-bottom:40px;"} We can’t do this alone. Do your part, by becoming a project sponsor. Nonprofit Xchange Partner-Funding depends on individual contributors as well as project sponsorship from businesses and corporate and family foundations. Click the button below to get more details and become a project sponsor.
               = link_to "javascript:void(0)", :class => 'black-btn btn', :style => 'margin-top:10px;' do
                 Become A Sponsor ►
 
@@ -158,7 +158,7 @@
                           %li
                             #{p.description}
                         %p.subtext
-                          Uruut Reward Points: #{p.amount.to_i}
+                          Nonprofit Xchange Reward Points: #{p.amount.to_i}
                         .clearfix
                           .seed-num
                             .amount
@@ -168,7 +168,7 @@
                   - default_perk.each_with_index do |perk, index|
                     - index += 1
                     - name = "LEVEL #{index}"
-                    - description = "#{perk} Uruut Reward Points"
+                    - description = "#{perk} Nonprofit Xchange Reward Points"
                     .seed-level
                       %h3= name
                       When you seed $#{perk.to_i}, you will receive:
@@ -183,7 +183,7 @@
                 .seed-level{id: "perk-id-custom"}
                   %h3.perk-name-other{id: "perk-name-other-custom"}
                     CHOOSE YOUR PERK
-                  %p With this option you choose the amount to seed, you will receive 1 Uruut Reward Point for each dollar you seed.
+                  %p With this option you choose the amount to seed, you will receive 1 Nonprofit Xchange Reward Point for each dollar you seed.
                   .clearfix
                     .seed-num
                       .amount
@@ -271,7 +271,7 @@
                       %li
                         #{p.description}
                     %p.subtext
-                      Uruut Reward Points: #{p.amount.to_i}
+                      Nonprofit Xchange Reward Points: #{p.amount.to_i}
                     .clearfix
                       .seed-num
                         .amount
@@ -282,7 +282,7 @@
               - default_perk.each_with_index do |perk, index|
                 - index += 1
                 - name = "LEVEL #{index}"
-                - description = "#{perk} Uruut Reward Points"
+                - description = "#{perk} Nonprofit Xchange Reward Points"
                 .seed-level
                   %h3= name
                   When you seed $#{perk.to_i}, you will receive:
@@ -298,7 +298,7 @@
             .seed-level{id: "perk-id-custom"}
               %h3.perk-name-other{id: "perk-name-other-custom"}
                 CHOOSE YOUR PERK
-              %p With this option you choose the amount to seed, you will receive 1 Uruut Reward Point for each dollar you seed.
+              %p With this option you choose the amount to seed, you will receive 1 Nonprofit Xchange Reward Point for each dollar you seed.
               .clearfix
                 .seed-num
                   .amount
@@ -331,7 +331,7 @@
           %h5{:style => "margin-bottom: 0"}
             Submission
           %h2{:style => "color: #fff; margin: 0; font-size: 24px; line-height: 30px;"}
-            Get Ruuted ►
+            Get Started ►
           %p{:style => "font: 400 italic 11px/15px 'Georgia', serif; color: #464646; text-transform: initial"} Submit Your Project for Approval
 
 #save-video.modal.hide.fade

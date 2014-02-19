@@ -1,87 +1,8 @@
-- if @need_doctype
-  :css
-    footer form#email-sign-up input {
-      display: inline;
-      /* height: 19px !important; */
-    }
-    footer form#email-sign-up button {
-      margin-left: -5px;
-      margin-top: -5px;
-      padding: 0;
-      height: 40px;
-      width: 35px;
-    }
-
-:javascript
-  $(".new_newsletter").validate({
-    rules: {
-      "newsletter[email]": {
-        required: true,
-        email: true
-      }
-    },
-    errorPlacement: function(error, element) {
-      error.appendTo(element.parent().find(".error-container"));
-    }
-  });
-
-%footer
-  .container.cf
-    %ul
-      %li
-        = link_to browse_projects_path do
-          %h6 Fund Projects
-      %li
-        = link_to new_project_path do
-          %h6 Get Funding
-      %li
-        = link_to about_pages_path do
-          %h6 About URUUT
-      %li
-        = link_to contact_pages_path do
-          %h6 Contact
-
-    %ul
-      %li
-        = link_to faqs_pages_path do
-          %h6 FAQ
-      %li
-        = link_to media_pages_path do
-          %h6 Media Room
-      %li
-        = link_to privacy_pages_path do
-          %h6 Privacy Policy
-      %li
-        = link_to terms_pages_path do
-          %h6 Terms of Use
-
-    %ul
-      %li
-        %h6 Find Us On
-      %li
-        = link_to "","http://www.facebook.com/get.ruuted", {:class => "fb", :target => "_blank"}
-        = link_to "","http://www.twitter.com/uruut", {:class => "tw", :target => "_blank"}
-        = link_to "", "http://www.linkedin.com/company/uruut", {:class => "lkd", :target => "_blank"}
-        = link_to "", "https://plus.google.com/114477089797728702899/posts", {:class => "gplus", :target => "_blank"}
-
-    %ul
-      %li
-        %h6 Sign up for URUUT news
-        = form_for Newsletter.new, :remote => true, :html => { :id => "email-sign-up" } do |f|
-          %div
-            .error-container{style: "margin-right: 0px;"}
-            = f.email_field "email", :placeholder => "enter email address"
-            %button.btn{:type => "submit"}
-              ►
-          %div#email-sign-up-error
-            %p Please check your email
-
 .copyright
   .container
     %p
-      = image_tag 'footer-logo.png'
       &copy;
       = Date.today.strftime('%Y')
-      URUUT.
+      TechBridge.
       %span.italic
         All Rights Reserved.

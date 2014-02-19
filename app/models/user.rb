@@ -37,6 +37,9 @@ class User < ActiveRecord::Base
   # Badging
   has_merit
 
+  scope :unique_project_donors, ->(project) { joins(:donations).
+    where(donations: { project_id: project.id, confirmed: true }).uniq }
+
   # mount_uploader :avatar, AvatarUploader
 
   def self.create_with_omniauth(info)
@@ -69,10 +72,9 @@ class User < ActiveRecord::Base
     user
   end
 
-  def self.set_redirect_path
-    session.delete(:path)
+  def set_redirect_path
     project = Project.new
-    project.user_id = resource.id
+    project.user_id = self.id
     project.save!
     "/projects/#{project.id}/edit#sponsor-info"
   end
@@ -163,8 +165,8 @@ class User < ActiveRecord::Base
   end
 
   def save_url(url, project)
-    tax_report = self.tax_reports.build(url: url, project_id: project.id)
-    tax_report.save!
+    tax_report = self.tax_reports.new
+    tax_report.update_attributes(url: url, project_id: project.id)
   end
 
   def is_admin?

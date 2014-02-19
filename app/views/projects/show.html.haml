@@ -153,7 +153,7 @@
             %iframe{:height => "413", :src => video_seed, :width => "620"}
           - elsif @project.seed_mime_type.eql?("image") and !@project.seed_image.blank?
             = image_tag "#{@project.seed_image}", style: "width:100%"
-          %h4{:style => "margin-top: 20px;color: #81c263 !important;font-weight: 400;"}= @project.organization
+          %h4{:style => "margin-top: 20px;color: #95D60A !important;font-weight: 400;"}= @project.organization
           %div
             .fb-like{:style => "display: block; float: left; margin-left: 5px;", "data-href" => project_url(@project.id), "data-layout" => "button_count", "data-send" => "false", "data-show-faces" => "true", "data-width" => "450"}
             %a.twitter-follow-button{:style => "display: block; float: left; margin-left: 10px;", "data-show-count" => "false", :href => "https://twitter.com/#{@project.twitter_handle}"} Follow
@@ -262,7 +262,7 @@
         %h4 DONATE OR SPONSOR?
         .well.donor-sponsor-type
           %p.description
-            %b Uruut's crowdfunding platform encourages participation from multiple audiences. Select the tab below that best fits your description:
+            %b Nonprofit Xchange's crowdfunding platform encourages participation from multiple audiences. Select the tab below that best fits your description:
           %h3.label-green.type-header DONATE
           %p.type-content.type-content-top You are an individual who cares about specific causes and wants to support that cause.
           %h3.label-green.type-header SPONSOR
@@ -292,7 +292,7 @@
                       %li
                         #{p.description}
                     %p.subtext
-                      Uruut Reward Points: #{p.amount.to_i}
+                      Nonprofit Xchange Reward Points: #{p.amount.to_i}
                     .clearfix{style: "margin-top: 20px;"}
                       .seed-num
                         / %div Seed
@@ -327,7 +327,7 @@
               - default_perk.each_with_index do |perk, index|
                 - index += 1
                 - name = "LEVEL #{index}"
-                - description = "#{perk} Uruut Reward Points"
+                - description = "#{perk} Nonprofit Xchange Reward Points"
                 .seed-level
                   %h3= name
                   When you seed #{amount_converter(perk.to_i)}, you will receive:
@@ -350,7 +350,7 @@
               .seed-level{id: "perk-id-custom"}
                 %h3.perk-name-other{id: "perk-name-other-custom"}
                   CHOOSE YOUR PERK
-                %p With this option you choose the amount to seed, you will receive 1 Uruut Reward Point for each dollar you seed.
+                %p With this option you choose the amount to seed, you will receive 1 Nonprofit Xchange Reward Point for each dollar you seed.
                 .clearfix
                   .seed-num
                     .amount
@@ -477,7 +477,7 @@
                   %li
                     #{p.description}
                 %p.subtext
-                  Uruut Reward Points: #{p.amount.to_i}
+                  Nonprofit Xchange Reward Points: #{p.amount.to_i}
                 .clearfix{style: "margin-top: 20px;"}
                   .seed-num
                     / %div Seed
@@ -504,7 +504,7 @@
           - default_perk.each_with_index do |perk, index|
             - index += 1
             - name = "LEVEL #{index}"
-            - description = "#{perk} Uruut Reward Points"
+            - description = "#{perk} Nonprofit Xchange Reward Points"
             .seed-level
               %h3= name
               When you seed #{amount_converter(perk.to_i)}, you will receive:
@@ -525,7 +525,7 @@
           .seed-level{id: "perk-id-custom"}
             %h3.perk-name-other{id: "perk-name-other-custom"}
               CHOOSE YOUR PERK
-            %p With this option you choose the amount to seed, you will receive 1 Uruut Reward Point for each dollar you seed.
+            %p With this option you choose the amount to seed, you will receive 1 Nonprofit Xchange Reward Point for each dollar you seed.
             .clearfix
               .seed-num
                 .amount

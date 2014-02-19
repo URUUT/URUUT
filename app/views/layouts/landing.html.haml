@@ -5,18 +5,18 @@
       %meta{:charset => "utf-8"}
       %meta{"http-equiv" => "X-UA-Compatible", :content => "IE=edge,chrome=1"}
       %meta{:name => "viewport", :content => "width=960, maximum-scale=1"}
-      %title= content_for?(:title) ? yield(:title) : "URUUT"
+      %title= content_for?(:title) ? yield(:title) : "Nonprofit Xchange"
       %meta{:content => "", :name => "description"}
       %meta{:content => "", :name => "author"}
       - if controller_name == "projects" and action_name == "show"
         %meta{:property => "og:image", :content => "#{@project.large_image}"}
-        %meta{:property => "og:title", :content => "#{@project.project_title} | URUUT"}
+        %meta{:property => "og:title", :content => "#{@project.project_title} | Nonprofit Xchange"}
         %meta{:property => 'og:description', :content=> "#{@project.title}" }
       - else
         %meta{:property => "og:image", :content => "https://www.uruut.com#{asset_path('uruut-fb-og.png') }"}
         %meta{:property => "og:title", :content => ""}
         %meta{:property => "og:description", :content => "Giving You The Power To Create A Better Community"}
-      = favicon_link_tag 'favicon.ico'
+      = favicon_link_tag 'favicon2.ico'
       = stylesheet_link_tag    "default/application", "trontastic/jquery-ui-1.8.22.custom.css", "leaflet.css", "style.css.scss", "prettyPhoto.css", :media => "all"
       = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js", "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js", "application", "https://js.stripe.com/v1/", "jquery.prettyPhoto.js", :media => "all"
       /[if lt IE 9]
@@ -60,7 +60,6 @@
           .container
             = render 'layouts/navigation'
         = yield
-        #push
       = render 'partials/footer'
 - else
   !!!
@@ -69,7 +68,7 @@
       %meta{:charset => "utf-8"}
       %meta{"http-equiv" => "X-UA-Compatible", :content => "IE=edge,chrome=1"}
       %meta{:name => "viewport", :content => "width=960, maximum-scale=1"}
-      %title= content_for?(:title) ? yield(:title) : "URUUT"
+      %title= content_for?(:title) ? yield(:title) : "Nonprofit Xchange"
       %meta{:content => "", :name => "description"}
       %meta{:content => "", :name => "author"}
       - if controller_name == "projects" and action_name == "show"
@@ -80,7 +79,7 @@
         %meta{:property => "og:image", :content => "https://www.uruut.com#{asset_path('uruut-fb-og.png') }"}
         %meta{:property => "og:title", :content => ""}
         %meta{:property => "og:description", :content => "Giving You The Power To Create A Better Community"}
-      = favicon_link_tag 'favicon.ico'
+      = favicon_link_tag 'favicon2.ico'
       = stylesheet_link_tag    "default/application", "trontastic/jquery-ui-1.8.22.custom.css", "leaflet.css", "style.css.scss", "prettyPhoto.css", :media => "all"
       = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js", "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js", "application", "https://js.stripe.com/v1/", "jquery.prettyPhoto.js", :media => "all"
       /[if lt IE 9]
@@ -128,7 +127,6 @@
           .container
             = render 'layouts/navigation'
         = yield
-        #push
       = render 'partials/footer'
 
 :javascript

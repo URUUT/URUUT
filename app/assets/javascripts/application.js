@@ -74,9 +74,8 @@ jQuery.validator.addMethod("requiredUrl", function(val, elem) {
 
 $(document).ready(function(){
   $(".btn.must-login").on("click",function(){
-    $('.modal').remove();
-    $('body').append('<div class="modal hide fade" style="text-align:center;padding:50px;"><button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="position:absolute;top:10px;right:20px;">×</button><h5 style="margin-bottom:20px;">You need to Sign In or <a href="/users/sign_up">Sign Up</a> before continuing.</h5><a href="/users/sign_in" class="btn">Sign In ►</a> <span style="font:italic 12px/21px georgia, serif;margin:0 10px;">or</span> <a href="/users/sign_up" class="btn">Sign Up ►</a></div>');
-    $('.modal').modal();
+    $('body').append('<div id="sign_in_modal" class="modal hide fade" style="text-align:center;padding:50px;"><button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="position:absolute;top:10px;right:20px;">×</button><h5 style="margin-bottom:20px;">You need to Sign In or <a href="/users/sign_up">Sign Up</a> before continuing.</h5><a href="/users/sign_in" class="btn">Sign In ►</a> <span style="font:italic 12px/21px georgia, serif;margin:0 10px;">or</span> <a href="/users/sign_up" class="btn">Sign Up ►</a></div>');
+    $('#sign_in_modal').modal();
   })
 });
 

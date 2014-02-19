@@ -1,8 +1,8 @@
 - if @project.sponsor_permission
   %h4 BECOME A SPONSOR
   .well
-    %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;font-family:'Proxima Nova';"} PROJECT SPONSORSHIP
-    %p{:style => "font:normal 12px/18px 'Proxima Nova', arial, sans-serif;color:#403e37;margin-bottom:40px;"} We can’t do this alone. Do your part, by becoming a project sponsor. URUUT Partner-Funding depends on individual contributors as well as project sponsorship from businesses and corporate and family foundations. Click the button below to get more details and become a project sponsor.
+    %h3{:style => "font-size:20px;letter-spacing:normal;color:#95d60a;line-height:100%;margin:0;font-family:'Proxima Nova';"} PROJECT SPONSORSHIP
+    %p{:style => "font:normal 12px/18px 'Proxima Nova', arial, sans-serif;color:#403e37;margin-bottom:40px;"} We can’t do this alone. Do your part, by becoming a project sponsor. Nonprofit Xchange Partner-Funding depends on individual contributors as well as project sponsorship from businesses and corporate and family foundations. Click the button below to get more details and become a project sponsor.
     = link_to "javascript:void(0)", :class => 'black-btn btn', :style => 'margin-top:10px;' do
       Become A Sponsor
       %span
@@ -32,7 +32,7 @@
         - default_perk.each_with_index do |perk, index|
           - index += 1
           - name = "LEVEL #{index}"
-          - description = "You will receive #{perk} Uruut Reward Points when you seed $#{perk}"
+          - description = "You will receive #{perk} Nonprofit Xchange Reward Points when you seed $#{perk}"
           .seed-level
             %h3= name
             %p{style: "height: auto; margin: 5px 0; overflow: hidden; text-overflow:ellipsis;"}= description
@@ -45,7 +45,7 @@
       .seed-level{id: "perk-id-custom"}
         %h3.perk-name-other{id: "perk-name-other-custom"}
           CHOOSE YOUR PERK
-        %p With this option you choose the amount to seed, you will receive 1 Uruut Reward Point for each dollar you seed.
+        %p With this option you choose the amount to seed, you will receive 1 Nonprofit Xchange Reward Point for each dollar you seed.
         .clearfix
           .seed-num
             .amount
@@ -141,7 +141,7 @@
     - default_perk.each_with_index do |perk, index|
       - index += 1
       - name = "LEVEL #{index}"
-      - description = "You will receive #{perk} Uruut Reward Points when you seed $#{perk}"
+      - description = "You will receive #{perk} Nonprofit Xchange Reward Points when you seed $#{perk}"
       .seed-level
         %h3= name
         %p{style: "height: auto; margin: 5px 0; overflow: hidden; text-overflow:ellipsis;"}= description
@@ -155,7 +155,7 @@
   .seed-level{id: "perk-id-custom"}
     %h3.perk-name-other{id: "perk-name-other-custom"}
       CHOOSE YOUR PERK
-    %p With this option you choose the amount to seed, you will receive 1 Uruut Reward Point for each dollar you seed.
+    %p With this option you choose the amount to seed, you will receive 1 Nonprofit Xchange Reward Point for each dollar you seed.
     .clearfix
       .seed-num
         .amount

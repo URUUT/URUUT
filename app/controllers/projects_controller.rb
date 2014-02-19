@@ -37,10 +37,9 @@ class ProjectsController < ApplicationController
 
   def create
     @project = current_user.projects.build(params[:project])
-    @project.save
-
     respond_to do |format|
       if @project.save
+        format.html { redirect_to edit_project_path(@project, anchor: 'sponsor-info') }
         format.json { render :json => @project.id }
       else
         format.json { render :json => "error" }
@@ -96,7 +95,8 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.find(params[:id])
+    @project = Project.live.find_by_id(params[:id]) || not_found
+
     @images = @project.galleries.page(params[:page]).per(6)
     sort_sponsorships = @project.project_sponsors.sort_by {|ps| ps.level_id}
     @project_sponsors = sort_sponsorships.group_by {|sponsor| sponsor.level_id }

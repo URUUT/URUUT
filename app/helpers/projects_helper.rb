@@ -93,7 +93,7 @@ module ProjectsHelper
     if sponsor.anonymous
       "<a href='javascript:void(0)'>ANONYMOUS <br> SPONSOR</a>"
     else
-      link_to(sponsor.name, recognize_url(sponsor.site), target: "_blank", style: "color: #70bf4c;")
+      link_to(sponsor.name, recognize_url(sponsor.site), target: "_blank", style: "color: #95d60a;")
     end
   end
 
@@ -108,6 +108,11 @@ module ProjectsHelper
       <h5>#{sponsor_name(sponsor)}</h5>
       #{sponsor_link(sponsor)}
     </div>".html_safe
+  end
+
+  def any_project_donors_or_sponsors?(project)
+    User.unique_project_donors(project).any? ||
+    project.project_sponsors.any?
   end
 
 end

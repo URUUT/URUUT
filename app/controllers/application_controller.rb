@@ -3,9 +3,11 @@ class ApplicationController < ActionController::Base
   layout :layout_by_resource
   before_filter :last_url, :session_email_forgot_password, :additional_information
 
+  rescue_from ActionController::RoutingError, with: :render404
+
   def after_sign_in_path_for(resource)
     if session[:redirect_url] == new_project_url
-      User.set_redirect_path
+      resource.set_redirect_path
     elsif session[:redirect_url] == user_registration_url || request.referer.nil? || request.referer.start_with?(edit_user_password_url) || session[:redirect_url] == root_url
       root_url
     else
@@ -32,6 +34,14 @@ class ApplicationController < ActionController::Base
   def video_data_by_link(link)
     youtube_client = YouTubeIt::Client.new
     youtube_client.video_by(link)
+  end
+
+  def not_found
+    raise ActionController::RoutingError.new('Not Found')
+  end
+
+  def render404
+    render :file => 'public/404.html', status: 404, layout: false
   end
 
   protected

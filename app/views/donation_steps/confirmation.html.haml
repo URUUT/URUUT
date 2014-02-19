@@ -2,7 +2,7 @@
   .span8
     %h3.title Review your contribution
     %p
-      By confirming your contribution, you agree to Uruut.com's
+      By confirming your contribution, you agree to Nonprofit Xchange
       = link_to "Privacy Policy", privacy_pages_path, target: "_blank"
       and
       = link_to "Terms of Use", terms_pages_path, target: "_blank"
@@ -11,7 +11,7 @@
       .well{:style => "border:1px solid #e9e9e9;padding:0;margin-top:20px;"}
         %div{:style => "border-top:1px solid #e9e9e9;border-bottom:1px solid #e9e9e9;padding:10px 20px;font-size:12px;font-family:'Proxima Nova';margin:0;"}
           %h5{:style => "margin: 0px;"} Project name
-          %h3{:style => 'color:#70bf4c;line-height:100%;margin:10px 0 0;'}= @project.project_title
+          %h3{:style => 'color:#95d60a;line-height:100%;margin:10px 0 0;'}= @project.project_title
           %p
             = image_tag "marker.jpg"
             %span{:style => "font:normal 12px/12px 'Proxima Nova Semi';text-transform:uppercase;margin-left: 5px;"}
@@ -22,14 +22,14 @@
             = link_to "Change", edit_donation_path(@donation), class: "green-link", style: "text-transform: capitalize; font-family: 'Proxima Nova', sans-serif; letter-spacing: 0;"
           - precision = @donation.amount.to_s.split(".")[1].eql?("0") ? 0 : 2
           - if @donation.amount.to_s.length <= 5
-            %span{:style => "font-size:52px;color:#70bf4c;font-family:'Proxima Nova Bold';line-height:100%"}= number_to_currency(@donation.amount, precision: precision)
+            %span{:style => "font-size:52px;color:#95d60a;font-family:'Proxima Nova Bold';line-height:100%"}= number_to_currency(@donation.amount, precision: precision)
           - else
-            %span{:style => "font-size:30px;color:#70bf4c;font-family:'Proxima Nova Bold';line-height:100%"}= number_to_currency(@donation.amount, precision: precision)
+            %span{:style => "font-size:30px;color:#95d60a;font-family:'Proxima Nova Bold';line-height:100%"}= number_to_currency(@donation.amount, precision: precision)
         %div{:style => "float:left;display:inline-block;width:340px;padding-right:20px;height:auto"}
           %h6{:style => "line-height:100%;margin-bottom:10px;margin-top:20px"}
             Your Perk
             = link_to "Change", edit_donation_path(@donation), class: "green-link", style: "text-transform: capitalize; font-family: 'Proxima Nova', sans-serif; letter-spacing: 0;"
-          %h3{:style => 'font-size:20px; color:#70bf4c;line-height:100%;margin:0;'}= @donation.perk_name
+          %h3{:style => 'font-size:20px; color:#95d60a;line-height:100%;margin:0;'}= @donation.perk_name
           - precision = @donation.amount.to_s.split(".")[1].eql?("0") ? 0 : 2
           %div{:style => "font-size:12px;font-family:'Proxima Nova';"}
             When you seed #{number_to_currency(@donation.amount, precision: precision)} you will receive:
@@ -37,7 +37,7 @@
               %ul.dashed-list
                 %li= @donation.description
             - if !session[:perk_type].eql?("default")
-              %p.subtext Uruut Reward Points: #{@donation.amount.to_i}
+              %p.subtext Nonprofit Xchange Reward Points: #{@donation.amount.to_i}
         .cf
 
   .span4

@@ -40,7 +40,7 @@
 
     %li.submit
       = link_to "javascript:void(0)", class: "submit-finish-project #{"submit-finish-project" if session[:step].eql?("fourth") }" do
-        %span.steps Get Ruuted
+        %span.steps Get Started
         %span.title Submit
         %span.description Submit Your Project for Approval
 
@@ -84,10 +84,6 @@
 = javascript_include_tag "leaflet"
 = javascript_include_tag "tile.stamen"
 
-- if session[:step].nil?
-  :javascript
-    localStorage.clear();
-
 :javascript
 
   (function(d, s, id) {
@@ -101,34 +97,37 @@
   !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 
    $(document).ready(function(){
-    var userLocation = 'http://maps.googleapis.com/maps/api/geocode/json?address=#{@project.address},#{@project.city},#{@project.state}&sensor=false';
 
-    $.ajax({
-      url: userLocation,
-      dataType: 'json',
-      success: function(data) {
-        var latitude = data.results[0].geometry.location.lat;
-        var longitude = data.results[0].geometry.location.lng;
-        var map = L.map('map', {
-          scrollWheelZoom: false
-        }).setView([latitude,longitude], 11).invalidateSize(false);
+    if($('div[data-id="assets"]').is(":visible")) {
+      var userLocation = 'http://maps.googleapis.com/maps/api/geocode/json?address=#{@project.address},#{@project.city},#{@project.state}&sensor=false';
 
-        console.log(new_map = map);
-        var uruutIcon = L.icon({
-          iconUrl: '#{image_path("map-icon.png")}',
-          iconSize:     [36, 52]
-        });
+      $.ajax({
+        url: userLocation,
+        dataType: 'json',
+        success: function(data) {
+          var latitude = data.results[0].geometry.location.lat;
+          var longitude = data.results[0].geometry.location.lng;
+          var map = L.map('map', {
+            scrollWheelZoom: false
+          }).setView([latitude,longitude], 11).invalidateSize(false);
 
-        L.tileLayer('http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {
-          attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery Â© <a href="http://cloudmade.com">CloudMade</a>'
-        }).addTo(map);
+          console.log(new_map = map);
+          var uruutIcon = L.icon({
+            iconUrl: '#{image_path("map-icon.png")}',
+            iconSize:     [36, 52]
+          });
 
-        L.marker([latitude,longitude], {icon:uruutIcon}).addTo(map);
-      }
-    });
+          L.tileLayer('http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery Â© <a href="http://cloudmade.com">CloudMade</a>'
+          }).addTo(map);
+
+          L.marker([latitude,longitude], {icon:uruutIcon}).addTo(map);
+        }
+      });
+    }
   });
 
-  var connect = '#{session[:connected]}';
+  var connect = "#{session[:connected]}" || "#{@project.project_token}";
 
   var convertAmount = function(amount){
     amount = accounting.formatMoney(amount, "$", 0);
@@ -194,7 +193,8 @@
 
   $(".submit-finish-project").on("click", function(event){
     event.preventDefault();
-    if ($('#large_image').attr('data-image') == "true" && localStorage.getItem('step-assets') ) {
+    var imageUrl = "#{@project.large_image}";
+    if (($('#large_image').attr('data-image') == "true" && localStorage.getItem('step-assets')) || ($('#large_image').attr('data-image') && typeof imageUrl !== 'undefined') ) {
       $.ajax({
         type:'POST',
         url: '#{projects_submit_project_url}',

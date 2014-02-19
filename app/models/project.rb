@@ -39,6 +39,7 @@ class Project < ActiveRecord::Base
   has_many :tax_reports
   has_many :posts
   has_many :questions
+
   accepts_nested_attributes_for :perks, allow_destroy: true
   accepts_nested_attributes_for :galleries, allow_destroy: true
 
@@ -297,7 +298,7 @@ class Project < ActiveRecord::Base
         sponsor_name = Sponsor.where("id = ?", sponsor.sponsor_id).first.name
         sponsor_email = Sponsor.where("id = ?", sponsor.sponsor_id).first.email
         description = "Sponsor #{self.project_title} #{sponsor_name} #{sponsor_email}"
-        application_fee = (amount * 0.10).to_i
+        application_fee = (amount * 0.05).to_i
         project_token = self.project_token
 
         Stripe::Charge.create({
@@ -351,7 +352,7 @@ class Project < ActiveRecord::Base
         token = create_token(donor.customer_token, self.project_token)
         amount = donor.amount.to_i * 100
         description = "Donor #{self.project_title} #{User.where('id = ?', donor.user_id).first.first_name} #{User.where('id = ?', donor.user_id).first.last_name} #{User.where('id = ?', donor.user_id).first.email}"
-        application_fee = (amount * 0.06).to_i
+        application_fee = (amount * 0.05).to_i
         project_token = self.project_token
 
         Stripe::Charge.create({

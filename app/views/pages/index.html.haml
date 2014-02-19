@@ -2,7 +2,7 @@
 
 .beta-banner
   .container
-    %p PUBLIC BETA NOTICE: We are currently in our public beta phase. As such, we only have select projects live and in the funding phase.  We are accepting submissions from new projects and reviewing the many amazing projects we have already received. If you have a project that needs funding, apply to get funding now by clicking the "Get Funded" button below.
+    %p Increase the impact of your favorite nonprofit! Fund their technology project to grow their capacity to serve. That means more homeless are given refuge, more kids have access to education programs and more dogs are sheltered.
 
 - if params[:keyword]
   = render "results_keyword"
@@ -18,7 +18,7 @@
   $(function(){
       // var map = L.map('map').setView([33.7489, -84.3881], 11);
       // L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png').addTo(map);
-      // L.marker([33.7489, -84.3881]).addTo(map).bindPopup('<h4>Welcome to URUUT</h4>').openPopup();
+      // L.marker([33.7489, -84.3881]).addTo(map).bindPopup('<h4>Welcome to Nonprofit Xchange</h4>').openPopup();
     if ($("#location :selected").text().length > 17){
       $("#location :selected").text(truncText($("#location :selected").text(), 15, "..."))
     }

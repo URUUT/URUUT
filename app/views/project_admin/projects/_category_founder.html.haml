@@ -1,6 +1,6 @@
 -if params[:type].eql?("individual")
   - @founders.group_by{ |p| p.perk_name  }.sort_by{|_key, value| value.first.amount }.reverse.each do |founders|
-    %div.label-green= "PERK 777: #{founders[0]} (#{total_donor_by_level(founders[0], @project)})"
+    %div.label-green= "PERK: #{founders[0]} (#{total_donor_by_level(founders[0], @project)})"
     %table.table.table-striped
       - founders[1].group_by {|donation| donation.user_id }.each do |user_id, founder|
         %tr

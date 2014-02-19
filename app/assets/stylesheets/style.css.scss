@@ -2,8 +2,8 @@ $super-light-grey: #f5f5f5;
 $light-grey: #b2b2b2;
 $grey: #403e37;
 $green: #48c94c;
-$green2: #81C263; /* #70bf4c;*/
-$light-green: #bee0b4;
+$green2: #95D60A; /* #95d60a;*/
+$light-green: #95d60a;
 $brown: #403e37;
 $light-brown: #53544b;
 $white: #FFF;
@@ -710,6 +710,25 @@ textarea, .textarea input[type="text"]{
     width: 30px;
     height: 30px;
     margin-left: 10px;
+  }
+}
+
+.tax-report {
+  display: block;
+  margin-bottom: 10px;
+  padding-right: 10px;
+  position: relative;
+  word-wrap: break-word;
+
+  &:after {
+    background-image: url("glyphicons-halflings.png");
+    background-position: -25px -23px;
+    content: '';
+    display: inline-block;
+    height: 14px;
+    position: absolute;
+    right: 0;
+    width: 14px;
   }
 }
 
@@ -1755,7 +1774,7 @@ ul.breadcrumbs{
     }
 
     &.highlighted{
-      background: #70bf4c;
+      background: #95d60a;
 
       .title{
         color: #fff;
@@ -1882,7 +1901,7 @@ footer div ul li a{
 #flash_alert, .sessions #flash_notice, .users.show #flash_notice{
   width: 900px;
   margin: 0 auto;
-  background: #70bf4c;
+  background: #95d60a;
   color: #fff;
   padding: 20px;
   font-family: 'Georgia', serif;
@@ -1960,7 +1979,7 @@ body.users.show, body.users.profile{
 
 
       h2{
-        color: #70bf4c;
+        color: #95d60a;
         font-family: 'Proxima Nova Light';
         letter-spacing: normal;
         margin: 0;
@@ -2459,7 +2478,7 @@ input, select, textarea{
           font-size: 18px;
         }
         label{
-          color: #70bf4c;
+          color: #95d60a;
           margin-bottom: 6px;
         }
         input, textarea{
@@ -2489,7 +2508,6 @@ input, select, textarea{
         }
       }
     }
-
   }
   .title {
     padding: 25px 0;
@@ -2601,10 +2619,39 @@ input, select, textarea{
   .gold-logo {
     background: #fff;
     display: inline-block;
+    float: left;
     height: 50px;
-    margin: 0 auto;
+    margin: 0 10px 0 0;
     position: relative;
     width: 50px;
+
+    img {
+      display: inline-block;
+      height: 100%;
+      line-height: 35px;
+      position: absolute;
+      vertical-align: middle;
+    }
+  }
+
+  .name, .url {
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .url {
+    display: inline-block;
+  }
+
+  .silver-logo {
+    background: #fff;
+    display: inline-block;
+    float: left;
+    height: 35px;
+    margin: 0 10px 0 0;
+    position: relative;
+    width: 35px;
 
     img {
       display: inline-block;

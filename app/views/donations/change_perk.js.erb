@@ -19,9 +19,9 @@ $("#perk_description").val("<%= @perk_description %>");
   $(".perk-description").show();
   $(".choiced-perk").hide();
   <% if @perk.amount.to_s.length <= 5 %>
-    $(".perk-amount").attr('style', 'font-size: 52px; color:#81C263;font-family:"Proxima Nova Bold";line-height:100%;')
+    $(".perk-amount").attr('style', 'font-size: 52px; color:#95D60A;font-family:"Proxima Nova Bold";line-height:100%;')
   <% else %>
-    $(".perk-amount").attr('style', 'font-size: 30px; color:#81C263;font-family:"Proxima Nova Bold";line-height:100%;')
+    $(".perk-amount").attr('style', 'font-size: 30px; color:#95D60A;font-family:"Proxima Nova Bold";line-height:100%;')
   <% end %>
   $(".perk-amount").show();
 
@@ -126,9 +126,9 @@ $("#custom_amount").val("<%= number_to_currency(params[:custom_seed].gsub(",", "
 <% end %>
 
 <% if char_size <= 5 %>
-  $("#custom_amount").attr('style', 'font-size: 52px; color:#81C263;font-family:"Proxima Nova Bold";line-height:100%;')
+  $("#custom_amount").attr('style', 'font-size: 52px; color:#95D60A;font-family:"Proxima Nova Bold";line-height:100%;')
 <% else %>
-  $("#custom_amount").attr('style', 'font-size: 30px; color:#81C263;font-family:"Proxima Nova Bold";line-height:100%;')
+  $("#custom_amount").attr('style', 'font-size: 30px; color:#95D60A;font-family:"Proxima Nova Bold";line-height:100%;')
 <% end %>
 $("#amount").val("<%= params[:custom_seed].gsub(",", "").to_f %>");
 $(".choiced-perk").show();

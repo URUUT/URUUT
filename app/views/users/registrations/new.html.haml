@@ -48,14 +48,6 @@
       = button_tag(type: 'submit', class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:left; border-radius: 5px;") do
         Create My Account ►
 
-      %p{:style => "color:#403e37;float:left;width:270px;margin-top:25px;margin-left:20px;font-family:arial;"}
-        By creating an account, you agree to our
-        = link_to "terms of use", terms_pages_path
-        and
-        = link_to "privacy policy", privacy_pages_path
-
-  / = render "devise/shared/links"
-
 = render "social-login"
 
 :javascript
