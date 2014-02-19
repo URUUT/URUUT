@@ -20,13 +20,10 @@ deployment:
     heroku:
       appname: uruut-multitenant
   techbridge:
-<<<<<<< HEAD
     branch: techbridge
     commands:
       - bundle exec cap deploy
   techbridge-staging:
-=======
->>>>>>> techbridge-staging
     branch: techbridge-staging
     heroku:
       appname: techbridge-staging
