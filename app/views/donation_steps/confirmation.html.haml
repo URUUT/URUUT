@@ -31,13 +31,6 @@
             = link_to "Change", edit_donation_path(@donation), class: "green-link", style: "text-transform: capitalize; font-family: 'Proxima Nova', sans-serif; letter-spacing: 0;"
           %h3{:style => 'font-size:20px; color:#95d60a;line-height:100%;margin:0;'}= @donation.perk_name
           - precision = @donation.amount.to_s.split(".")[1].eql?("0") ? 0 : 2
-          %div{:style => "font-size:12px;font-family:'Proxima Nova';"}
-            When you seed #{number_to_currency(@donation.amount, precision: precision)} you will receive:
-            - if @donation.description?
-              %ul.dashed-list
-                %li= @donation.description
-            - if !session[:perk_type].eql?("default")
-              %p.subtext Nonprofit Xchange Reward Points: #{@donation.amount.to_i}
         .cf
 
   .span4
