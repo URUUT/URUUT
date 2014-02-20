@@ -73,6 +73,7 @@ group :development, :test do
   # gem 'jasminerice'
   gem 'launchy'
   gem 'dotenv-rails'
+  gem 'rails_email_preview', '~> 0.2.12'
 end
 
 group :test do
