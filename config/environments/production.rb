@@ -13,7 +13,7 @@ Crowdfund::Application.configure do
   config.static_cache_control = "public, max-age=#{1.year.to_i}"
 
   # Compress JavaScripts and CSS
-  config.assets.compress = false
+  config.assets.compress = true
   config.assets.css_compressor = :yui
   config.assets.js_compressor = :uglifier
 
