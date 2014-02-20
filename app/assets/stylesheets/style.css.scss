@@ -3,6 +3,7 @@ $light-grey: #b2b2b2;
 $grey: #403e37;
 $green: #48c94c;
 $green2: #95D60A; /* #95d60a;*/
+$blue: #19345f;
 $light-green: #95d60a;
 $brown: #403e37;
 $light-brown: #53544b;
@@ -2049,7 +2050,7 @@ body.pages.contact, body.sponsors.thank_you{
 
     .btn{
       background: none;
-      background: #3f403b;
+      background: $blue;
       border: none;
       border-radius: 0;
       behavior: url(image-path('PIE-1.0.0/PIE.htc'));

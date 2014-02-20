@@ -6,6 +6,7 @@ $green: #95D60A;
 $green2: $green;
 $light-green: $green;
 $blue: #19345f;
+$light-blue: #66C3ea;
 
 @font-face {
   font-family: 'Proxima Nova Light';
@@ -355,7 +356,7 @@ select {
 
 .btn {
   background:none;
-  background:#3f403b;
+  background:$blue;
   border:none;
   border-radius:0;
   behavior: url(image-path('PIE-1.0.0/PIE.htc'));
@@ -698,7 +699,7 @@ header {
 			width:87px;}}}
 
 p.sections {
-  color:#55554d;
+  color:$light-blue;
   font:normal 18px/18px "Proxima Nova Semi", arial, sans-serif;
   letter-spacing:2px;
   margin-bottom:15px;
@@ -824,12 +825,12 @@ ul.nav {
   color:#242424;
 	margin-left:64px !important;
 	li {
-		border-left:1px solid #55554d;
+		border-left:1px solid $light-blue;
     padding:0 10px;
 		position:relative;
 		width:auto;
 		&:last-child {
-			border-right:1px solid #55554d;}
+			border-right:1px solid $light-blue;}
 		a {
 			color:#fff !important;
       font-family:'Proxima Nova Semi', sans-serif;
@@ -900,7 +901,7 @@ div.dropdown {
   text-align:center;
   width:100%;
   li {
-    border-left:1px solid #55554d;
+    border-left:1px solid $light-blue;
     font:normal 12px/12px 'Proxima Nova', sans-serif;
     display:inline-block;
     letter-spacing:2px;
@@ -1655,7 +1656,7 @@ img.avatar-thumb {
 }
 
 .banner {
-  background:url(image-path('bg-tile.jpg'))top left repeat;
+  background:$blue;
   left:0;
   margin-bottom:50px;
   position:absolute;
@@ -1875,7 +1876,7 @@ ul.perks {
         position:relative;
         .btn {
           background:none;
-          background:#3f403b;
+          background:$blue;
           border:none;
           border-radius:0;
           box-shadow:none;
@@ -2504,7 +2505,7 @@ form[id*=project] {
 			margin:65px 0 5px;
 		}
 		p {
-			color:#55554d;
+			color:$light-blue;
 			font-family:'Proxima Nova';
 			font-size:14px;
 			margin-bottom:40px;
@@ -2534,7 +2535,7 @@ form[id*=project] {
 					}
 				}
 				p {
-					color:#55554d;
+					color:$light-blue;
 					font-family:'Proxima Nova';
 					margin-bottom:20px;
 				}
@@ -2786,7 +2787,7 @@ form[id*=project] {
     background:#eee;
     padding:80px 0;
     p {
-      color:#55554d;
+      color:$light-blue;
       font-family:'Proxima Nova';
       font-size:14px;
       line-height:150%;
