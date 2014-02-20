@@ -153,6 +153,12 @@
                           - if p.limit
                             %span.small-heading
                               = p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of #{p.perk_limit} Available)"
+                        When you seed $#{p.amount.to_i}, you will receive:
+                        %ul.normal-font.dashed-list
+                          %li
+                            #{p.description}
+                        %p.subtext
+                          Nonprofit Xchange Reward Points: #{p.amount.to_i}
                         .clearfix
                           .seed-num
                             .amount
@@ -162,8 +168,12 @@
                   - default_perk.each_with_index do |perk, index|
                     - index += 1
                     - name = "LEVEL #{index}"
+                    - description = "#{perk} Nonprofit Xchange Reward Points"
                     .seed-level
                       %h3= name
+                      When you seed $#{perk.to_i}, you will receive:
+                      %ul.normal-font.dashed-list
+                        %li= description
                       .clearfix
                         .seed-num
                           .amount
@@ -173,7 +183,7 @@
                 .seed-level{id: "perk-id-custom"}
                   %h3.perk-name-other{id: "perk-name-other-custom"}
                     CHOOSE YOUR PERK
-                  %p With this option you choose the amount to seed.
+                  %p With this option you choose the amount to seed, you will receive 1 Nonprofit Xchange Reward Point for each dollar you seed.
                   .clearfix
                     .seed-num
                       .amount
@@ -256,6 +266,12 @@
                       - if p.limit
                         %span.small-heading
                           = p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of #{p.perk_limit} Available)"
+                    When you seed $#{p.amount.to_i}, you will receive:
+                    %ul.normal-font.dashed-list
+                      %li
+                        #{p.description}
+                    %p.subtext
+                      Nonprofit Xchange Reward Points: #{p.amount.to_i}
                     .clearfix
                       .seed-num
                         .amount
@@ -266,8 +282,12 @@
               - default_perk.each_with_index do |perk, index|
                 - index += 1
                 - name = "LEVEL #{index}"
+                - description = "#{perk} Nonprofit Xchange Reward Points"
                 .seed-level
                   %h3= name
+                  When you seed $#{perk.to_i}, you will receive:
+                  %ul.normal-font.dashed-list
+                    %li= description
                   .clearfix
                     .seed-num
                       .amount
@@ -278,7 +298,7 @@
             .seed-level{id: "perk-id-custom"}
               %h3.perk-name-other{id: "perk-name-other-custom"}
                 CHOOSE YOUR PERK
-              %p With this option you choose the amount to seed.
+              %p With this option you choose the amount to seed, you will receive 1 Nonprofit Xchange Reward Point for each dollar you seed.
               .clearfix
                 .seed-num
                   .amount
