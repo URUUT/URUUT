@@ -20,7 +20,7 @@ class ProjectsController < ApplicationController
     @project = Project.new
     session[:current_project] = ''
     session[:connected] = ''
-
+    @special_users = ['Jennifer']
 
     #    @project.perks.build
     #    @project.galleries.build
