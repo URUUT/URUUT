@@ -87,8 +87,8 @@ Crowdfund::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   # config.action_controller.asset_host = Proc.new do |source, request = nil, *_|
-#     "//#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
-#   end
+  #   "//#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
+  # end
 
   # config.middleware.use ExceptionNotification::Rack,
   #   :email => {
