@@ -7,6 +7,7 @@ $green2: $green;
 $light-green: $green;
 $blue: #19345f;
 $light-blue: #66C3ea;
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700);
 
 @font-face {
   font-family: 'Proxima Nova Light';
@@ -130,7 +131,7 @@ h4,
 h5,
 h6 {
   color:#464646;
-  font-family:'Proxima Nova Semi', sans-serif;
+  font-family:'Source Sans Pro', sans-serif;
 	letter-spacing:2px;
   text-transform:uppercase;}
 
@@ -176,7 +177,7 @@ input[type=submit] {
   border:none;
   box-shadow:1px 1px 1px rgba(0,0,0,.28);
   color:#fff;
-  font:300 13px/17px 'Proxima Nova', sans-serif;
+  font:300 13px/17px 'Source Sans Pro', sans-serif;
   padding:5px 8px;}
 
 textarea {
@@ -453,7 +454,7 @@ select {
       vertical-align: middle;
 			/*width:300px;*/
 			label {
-				color:#403e37;
+				color:#fff!important;
 			}
 			&:last-child {
 				margin-right:0;
@@ -841,8 +842,8 @@ ul.nav {
     &:hover { background: $blue; }
     a {
       color:#fff !important;
-      font-family:'Proxima Nova Light', sans-serif;
-      font-size:14px;
+      font-family:'Source Sans Pro', sans-serif;
+      font-size:18px;
       letter-spacing:2px;
       line-height:60px !important;
       padding:0 !important;
@@ -940,7 +941,7 @@ div.dropdown {
   width:100%;
   li {
     border-left:1px solid $light-blue;
-    font:normal 12px/12px 'Proxima Nova', sans-serif;
+    font:normal 12px/12px 'Source Sans Pro', sans-serif;
     display:inline-block;
     letter-spacing:2px;
     line-height:60px;
@@ -960,7 +961,7 @@ div.dropdown {
   text-align:right;
   li {
     border-right:1px solid #242424;
-    font:normal 12px/12px 'Proxima Nova', sans-serif;
+    font:normal 12px/12px 'Source Sans Pro', sans-serif;
     display:inline-block;
     list-style-type:none;
     -webkit-font-smoothing: subpixel-antialiased;
@@ -998,7 +999,7 @@ div.dropdown {
   input[type=search]{
     border-radius: 0;
     behavior: url(image-path('PIE-1.0.0/PIE.htc'));
-    font-family:'Proxima Nova', sans-serif;
+    font-family:'Source Sans Pro', sans-serif;
     font-size:11px;
     line-height: 18px;
     margin-left:5px;
@@ -1052,7 +1053,7 @@ nav.navbar-inner {
     overflow:hidden;
     a{
       color:#689d00;
-      font-family: 'Proxima Nova', sans-serif;
+      font-family: 'Source Sans Pro', sans-serif;
       font-weight:400;
       line-height:normal;
       text-transform:uppercase;
@@ -1181,7 +1182,7 @@ nav.navbar-inner {
   h5 {
 		color:#403e37;
 		display:block;
-    font-family: 'Proxima Nova', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     font-size:8px;
     font-style:normal;
     font-weight:400;
@@ -1331,6 +1332,7 @@ h5.time-left {
   height:60px;
 	li {
 		a {
+      font-family: 'Source Sans Pro', sans-serif;
 			line-height:60px;
 		}
 	}
