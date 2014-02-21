@@ -65,8 +65,13 @@ namespace :deploy do
   task :bundle_install do
     run "cd #{release_path}; bundle install"
   end
+
+  desc "Reload Nginx"
+  task :reload_nginx do
+      sudo "/etc/init.d/nginx reload"
+  end
 end
 
 after "deploy:finalize_update", "db:db_config", "db:load_schema"
 after "deploy", "deploy:migrate", "deploy:seed", "deploy:change_file_permission",
-      "deploy:bundle_install", 'deploy:restart'
+      "deploy:bundle_install", 'deploy:restart', 'deploy:reload_nginx'
