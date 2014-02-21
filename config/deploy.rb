@@ -69,4 +69,4 @@ end
 
 after "deploy:finalize_update", "db:db_config", "db:load_schema"
 after "deploy", "deploy:migrate", "deploy:seed", "deploy:change_file_permission",
-      "deploy:bundle_install"
+      "deploy:bundle_install", 'deploy:restart'
