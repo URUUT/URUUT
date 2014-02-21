@@ -496,19 +496,19 @@
           - default_perk.each_with_index do |perk, index|
             - index += 1
             - name = "LEVEL #{index}"
-              %ul.normal-font.dashed-list
-                %li= description
-              .clearfix
-                .seed-num
-                  / %div Seed
-                  .amount
-                    = amount_converter(perk)
-                - if user_signed_in? && @project.status == 'Funding Active'
-                  %a.btn.pull-right{:href => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "fund btn"} Fund Now ►
-                - else
-                  - unless @project.status == "Funding Completed"
-                    - url = url_encode("#{request.protocol}#{request.host_with_port}/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}")
-                    %a.btn.pull-right.unsignin-perk{"url-sign-up" => url, "url-sign-in" => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "fund btn"} Fund Now ►
+            %ul.normal-font.dashed-list
+              %li= description
+            .clearfix
+              .seed-num
+                / %div Seed
+                .amount
+                  = amount_converter(perk)
+              - if user_signed_in? && @project.status == 'Funding Active'
+                %a.btn.pull-right{:href => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "fund btn"} Fund Now ►
+              - else
+                - unless @project.status == "Funding Completed"
+                  - url = url_encode("#{request.protocol}#{request.host_with_port}/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}")
+                  %a.btn.pull-right.unsignin-perk{"url-sign-up" => url, "url-sign-in" => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "fund btn"} Fund Now ►
         - unless @project.status == "Funding Completed"
           .seed-level{id: "perk-id-custom"}
             %h3.perk-name-other{id: "perk-name-other-custom"}
