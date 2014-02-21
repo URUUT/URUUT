@@ -36,7 +36,18 @@
 											%img{:src => "http://#{@host}/assets/email-login.png", :style => "display:block;margin:25px 10px 0 0;"}
 
 					= yield
-
+					%tr
+						%td
+							%b Xchange Team | TechBridge
+							%i Business smart. Community focused.
+							%p
+								Office
+								%a 404.405.2772 
+								| 
+								= mail_to 'xchange@techbridge.org'
+								| 
+								= link_to 'www.techbridge.org', 'http://www.techbridge.org'
+							= image_tag 'TB.png'
 					%tr
 						%td{:align => "center", :valign => "top"}
 							%table#email-footer{:bgcolor => "#403e37", :width => "100%", :cellspacing => "0", :style => "border-spacing:0;border-collapse: collapse;"}
