@@ -111,10 +111,18 @@ body {
 
 body {
   color:#3f403b;
+  background: url('http://techbridge.org/alpha/wp-content/themes/techbridge-2013/img/stripes-bg.png');
   font:normal 13px/19px 'Georgia', georgia, serif;
   margin:0;
   padding:0;}
-
+.container.content{
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: 0.1em 0.2em 0.5em #666;
+  width: 1024px!important;}
 h1,
 h2,
 h3,
@@ -676,6 +684,7 @@ select {
 	font:normal 12px/12px "Proxima Nova Semi", arial, sans-serif;
 	list-style-type:none;
 	margin-top:20px;
+  padding: 0 15px;
 	a {
 		color:#fff;	}}
 
@@ -807,6 +816,9 @@ footer {
   background:$blue;
   color:#fff;
   line-height:45px;
+  width: 1024px;
+  margin:auto;
+  box-shadow: 0.1em 0.2em 0.5em #666;
 	p {
 		font-size:10px;
 		margin:0;
@@ -819,7 +831,6 @@ footer {
 	display:none; }
 
 ul.nav {
-  width: 100%;
 	li {
 		border-right:1px solid #fff;
     padding:0 10px;
@@ -843,7 +854,38 @@ ul.nav {
     img {
       margin:-2px 0 0 5px;
       vertical-align:middle;}}}
-
+.nav-triangle-holder {
+  height: 0.714285714em;
+  background-color: transparent;
+  margin: 0 -0.714285714em;
+}
+.triangle-left, triangle-right {
+  width: 0;
+  height: 0;
+  clear: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  display: block;
+}
+.triangle-left {
+  border-bottom: 0.714285714em solid transparent;
+  border-right: 0.714285714em solid #50a52d;
+  float: left;
+}
+.between-triangles {
+  background-color: #fff;
+  height: 0.714285714em;
+  width: 71.4285714em;
+  position: relative;
+  float: left;
+  clear: none;
+}
+.triangle-right {
+  border-bottom: 0.714285714em solid transparent;
+  border-left: 0.714285714em solid #50a52d;
+  float: right;
+}
 .right .dropdown-menu.log-in ul li:hover{ background: #fff; }
 div.dropdown {
   color:#fff !important;
@@ -939,7 +981,7 @@ div.dropdown {
       &:hover {
         text-decoration:none}}
     a.sign-up-link {
-      color:$green;}
+      color:#fff;}
     span.or {
       color:#fff;
       font-family:"Georgia", georgia, serif;
@@ -1281,6 +1323,9 @@ h5.time-left {
 .navigation{
   background:$green;
   border-bottom: 1px solid #3D4A5E;
+  width: 1044px;
+  margin-left: -10px;
+  .container{ width: 1024px!important;}
 }
 .nav {
   height:60px;

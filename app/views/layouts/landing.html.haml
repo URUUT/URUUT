@@ -16,7 +16,7 @@
         %meta{:property => "og:image", :content => "https://www.uruut.com#{asset_path('uruut-fb-og.png') }"}
         %meta{:property => "og:title", :content => ""}
         %meta{:property => "og:description", :content => "Giving You The Power To Create A Better Community"}
-      = favicon_link_tag 'favicon2.ico'
+      = favicon_link_tag "http://techbridge.org/alpha/wp-content/themes/techbridge-2013/favicon.png"
       = stylesheet_link_tag    "default/application", "trontastic/jquery-ui-1.8.22.custom.css", "leaflet.css", "style.css.scss", "prettyPhoto.css", :media => "all"
       = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js", "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js", "application", "https://js.stripe.com/v1/", "jquery.prettyPhoto.js", :media => "all"
       /[if lt IE 9]
@@ -55,7 +55,7 @@
 
           !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 
-      #wrap
+      .container.content
         %header.navbar
           = render 'layouts/navigation'
         = yield
@@ -78,7 +78,7 @@
         %meta{:property => "og:image", :content => "https://www.uruut.com#{asset_path('uruut-fb-og.png') }"}
         %meta{:property => "og:title", :content => ""}
         %meta{:property => "og:description", :content => "Giving You The Power To Create A Better Community"}
-      = favicon_link_tag 'favicon2.ico'
+      = favicon_link_tag "http://techbridge.org/alpha/wp-content/themes/techbridge-2013/favicon.png"
       = stylesheet_link_tag    "default/application", "trontastic/jquery-ui-1.8.22.custom.css", "leaflet.css", "style.css.scss", "prettyPhoto.css", :media => "all"
       = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js", "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js", "application", "https://js.stripe.com/v1/", "jquery.prettyPhoto.js", :media => "all"
       /[if lt IE 9]
@@ -121,7 +121,7 @@
 
           !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 
-      #wrap
+      .container.content
         %header.navbar
           = render 'layouts/navigation'
         = yield
