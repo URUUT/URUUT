@@ -1,4 +1,4 @@
-require 'rails_email_preview'
+# require 'rails_email_preview'
 
 #= REP hooks and config
 #RailsEmailPreview.setup do |config|
@@ -29,7 +29,7 @@ Rails.application.config.to_prepare do
   # RailsEmailPreview.layout = 'admin'
 
   # Auto-load preview classes from:
-  RailsEmailPreview.preview_classes = Dir[Rails.root.join 'app/mailer_previews/*_preview.rb'].map { |p|
-    File.basename(p, '.rb').camelize
-  }
+  # RailsEmailPreview.preview_classes = Dir[Rails.root.join 'app/mailer_previews/*_preview.rb'].map { |p|
+  #   File.basename(p, '.rb').camelize
+  # }
 end
