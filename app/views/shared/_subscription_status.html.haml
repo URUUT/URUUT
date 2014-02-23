@@ -1,7 +1,7 @@
 - if user_signed_in? && !current_user.membership.plan.nil?
   %p
     Your
-    %b Uruut #{membership_title(current_user)}
+    %b Uruut #{membership_title(current_user)} Subscription
     #{membership_cost_message_start(current_user)}
     %b #{membership_cost(current_user)}
     #{membership_cost_message_end(current_user)}

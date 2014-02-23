@@ -93,6 +93,7 @@ class DonationsController < ApplicationController
       params[:donation][:description] = params[:perk_description]
     end
     params[:donation][:perk_name] = params[:name_of_perk]
+    logger.debug params[:donation].to_yaml
     @donation = Donation.new(params[:donation])
     @donation.confirmed = false
 
@@ -164,7 +165,7 @@ class DonationsController < ApplicationController
 
   def thank_you
     @need_doctype = true
-    @thanks_url = URI.encode(session[:donation_thank_you][:bitly]) 
+    @thanks_url = URI.encode(session[:donation_thank_you][:bitly])
     render :layout => "application"
   end
 

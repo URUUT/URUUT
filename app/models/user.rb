@@ -10,7 +10,6 @@ class User < ActiveRecord::Base
     :neighborhood, :provider, :role, :uid, :token, :organization, :mission, :subscribed, :avatar, :uruut_point,
     :telephone, :full_registration, :sign_in_plan, :sign_up_plan
 
-  after_create :send_welcome_email
   after_create :assign_default_badge
 
   attr_accessor :avatar_upload_width, :avatar_upload_height, :full_registration, :sign_in_plan, :sign_up_plan
@@ -37,6 +36,8 @@ class User < ActiveRecord::Base
 
   has_one :membership
   has_one :marketing_info
+
+  delegate :kind, to: :membership, prefix: true
 
   acts_as_tenant(:account)
 
@@ -192,16 +193,18 @@ class User < ActiveRecord::Base
     !donor?
   end
 
-private
-
   def send_welcome_email
-    WelcomeMailer.welcome_confirmation(self).deliver
+    if self.donor?
+      WelcomeMailer.welcome_confirmation_donor(self).deliver
+    else
+      WelcomeMailer.welcome_confirmation_user(self).deliver
+    end
   end
+
+private
 
   def assign_default_badge
     self.add_badge(1)
   end
-
-
 
 end

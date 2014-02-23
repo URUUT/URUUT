@@ -15,8 +15,6 @@
       .box-content
         %h5.label-green{style: "margin-bottom: 7px;"} CURRENT PAYMENT METHOD
         %p The following payment card is currently used for payment:
-        .logo_card
-          = image_tag 'logo_visa.png'
         .info_card
           - if @customer_card
             = render partial: 'payment_methods/default_card_details', locals: { customer_card: @customer_card }

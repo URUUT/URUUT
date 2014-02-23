@@ -52,7 +52,7 @@
           But you’re welcome back anytime and we hope to help make your life as a 
           nonproﬁt easier in the future.
 
-        = link_to user_registration_path do
+        = link_to user_membership_path(current_user, current_user.membership), method: :delete do
           .btn{style: 'width: 285px; margin-left: 0;'}
             CANCEL SUBSCRIPTION ►
   .span4

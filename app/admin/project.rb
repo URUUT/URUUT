@@ -3,16 +3,10 @@ ActiveAdmin.register Project do
     column :project_title do |project|
       link_to project.project_title, admin_project_path(project)
     end
-    scope :ready_for_approval, ready_for_approval: 1
 
     default_actions
   end
 
-  show :title => :project_title do
-    # column :project_title
-  end
-
-  categories = ["cat1", "cat2", "cat3"]
   form do |f|
     f.inputs "Project Details" do
       f.input :category, :as => :select, :collection => project_categories, prompt: 'Select a Category'
@@ -24,7 +18,7 @@ ActiveAdmin.register Project do
       f.input :sponsorship_permission
 
       f.input :city
-      f.input :state
+      f.input :state, :as => :select, :collection => us_states, prompt: 'Choose a state'
       f.input :zip
       f.input :neighborhood
       f.input :title

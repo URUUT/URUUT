@@ -1,5 +1,5 @@
 .row{:style => "margin-top:35px;"}
-  .span8{:style => "margin-top:15px;"}
+  .span8{:style => "margin-top:35px;"}
     %h4.font-bold SIGN UP (STEP 2 OF 2)
     = form_for 'credit_card', html: { class: "well registration-edit"} do |f|
       %h3
@@ -66,5 +66,4 @@
         = link_to users_sign_up_confirmation_path, class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:left; border-radius: 5px; width: 230px;" do
           Finish ►
   .span4
-    .well.info.without-title
-      = render 'summary'
+    = render partial: 'shared/summary', locals: { current_user: current_user }

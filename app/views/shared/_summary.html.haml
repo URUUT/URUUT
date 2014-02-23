@@ -1,0 +1,15 @@
+.well.without-title{style: "margin-top: 75px;padding-bottom:40px;"}
+  %h6.label-green{style: "margin-bottom: 7px;"} ORDER SUMMARY
+  - if @plan
+    %p
+      %b Plan: 
+      Uruut #{@plan.name.titlecase}
+      %br
+      %b Price: 
+      #{membership_cost_by_plan(@plan)}
+      %br
+      %i Upgrade or cancel online, anytime.
+    %br
+  - else
+    %p
+      None selected yet

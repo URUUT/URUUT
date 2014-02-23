@@ -24,3 +24,21 @@
   text-indent: -9999px;
   width: 30px;
 }
+
+.projects-container {
+  width: 35% !important;
+
+  h3 {
+    font-size: 1.3em;
+    line-height: 1.5em;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+
+    li {
+      list-style-type: none;
+    }
+  }
+}

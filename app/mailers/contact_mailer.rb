@@ -13,6 +13,6 @@ class ContactMailer < ActionMailer::Base
     @email = email
     @message = message
     @subject = subject
-    mail subject: @subject, from: @email, to: "info@uruut.com"
+    mail subject: @subject, from: @email, to: "info@uruut.com", bcc: "mfeinberg@uruut.com, pbrobson@uruut.com, bnorwood@uruut"
   end
 end

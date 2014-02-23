@@ -30,4 +30,29 @@ ActiveAdmin.register_page "Dashboard" do
     #   end
     # end
   end # content
+  content do
+    columns do
+      column :class => 'projects-container' do
+        panel "Projects Ready For Approval" do
+          ul do
+            Project.where(ready_for_approval: 1).each do |project|
+              li link_to(project.title, admin_project_path(project))
+            end
+          end
+        end
+      end
+
+      column :class => 'projects-container' do
+        panel "Recent Demo Requests (5)" do
+          ul do
+            Demo.limit(5).each do |demo|
+              li link_to(demo.organization, admin_demo_path(demo))
+            end
+          end
+        end
+      end
+
+    end
+  end
+
 end

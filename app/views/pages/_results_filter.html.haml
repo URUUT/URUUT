@@ -23,7 +23,10 @@
               %span &nbsp;
           .funding
             %p
-              = link_to "Get Funded ►", new_project_path, :class => "btn"
+              - if user_signed_in? && current_user.campaign_manager?
+                = link_to 'Get Funded ►', '/projects', method: :post, class: 'btn'
+              - else
+                = link_to 'Get Funded ►', choose_plan_pages_path, class: 'btn'
 
 .recent.clearfix
   .container
@@ -93,7 +96,11 @@
         %br
         If your project doesn't fall into one of them, we still want to hear all about it.
 
-      = link_to "Get Funded ►", new_project_path, :class => "btn"
+      - if user_signed_in? && current_user.campaign_manager?
+        = link_to 'Get Funded ►', '/projects', method: :post, class: 'btn'
+      - else
+        = link_to 'Get Funded ►', choose_plan_pages_path, class: 'btn'
+
 //.featured-success.clearfix
 //  .container
 //    %p.sections

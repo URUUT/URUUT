@@ -307,7 +307,7 @@ class Project < ActiveRecord::Base
             :currency => "usd",
             :card => token.id,
             :description => description,
-            :application_fee => calculate_funder_application_fee(sponsor, application_fee)
+            :application_fee => calculate_funder_application_fee(application_fee)
           },
           project_token
         )
@@ -361,7 +361,7 @@ class Project < ActiveRecord::Base
             :currency => "usd",
             :card => token.id,
             :description => description,
-            :application_fee => calculate_funder_application_fee(donor, application_fee)
+            :application_fee => calculate_funder_application_fee(application_fee)
           },
           project_token
         )
@@ -402,8 +402,8 @@ class Project < ActiveRecord::Base
 
 private
 
-  def calculate_funder_application_fee(funder, application_fee)
-    funder.membership_kind == 'fee' ? application_fee : nil
+  def calculate_funder_application_fee(application_fee)
+    user.membership_kind == 'fee' ? application_fee : nil
   end
 
 end

@@ -12,6 +12,7 @@ class RegistrationsController < Devise::RegistrationsController
       resource.last_name  = @marketing_info.last_name
       resource.email      = @marketing_info.email
     end
+    @plan = Plan.where("name = ?", params[:sign_up_plan]).first
   end
 
   def edit

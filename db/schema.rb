@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140207232748) do
+ActiveRecord::Schema.define(:version => 20140211150309) do
 
   create_table "accounts", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(:version => 20140207232748) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
   end
 
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
@@ -199,10 +201,11 @@ ActiveRecord::Schema.define(:version => 20140207232748) do
 
   create_table "memberships", :force => true do |t|
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
     t.integer  "sponsor_id"
     t.integer  "plan_id"
+    t.string   "stripe_subscription_id"
   end
 
   add_index "memberships", ["plan_id"], :name => "index_memberships_on_plan_id"

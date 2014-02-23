@@ -94,7 +94,8 @@ class Demo < ActiveRecord::Base
     :sponsorship_program,
     :type_of_accepted_donations
 
-  validates :first_name, :last_name, :organization, :email, :phone, presence: true
+  validates :first_name, :last_name, :email, presence: true
+  # validates :phone, organization, presence: true
 
   validate :current_fundraising_activities, :type_of_accepted_donors, on: :update
 
@@ -103,7 +104,7 @@ class Demo < ActiveRecord::Base
     :partial_funding, :seven_days_to_receive_funds, :social_outreach, presence: true, on: :update
 
   def self.create_for_user(user)
-    Demo.first_or_create(
+    demo = Demo.create(
         first_name:   user.first_name,
         last_name:    user.last_name,
         organization: user.organization,

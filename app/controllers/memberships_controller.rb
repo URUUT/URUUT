@@ -19,6 +19,17 @@ class MembershipsController < ApplicationController
   def cancel
   end
 
+  def destroy
+    plan_service = Gateway::PlansService.new(current_user)
+
+    if plan_service.cancel_plan
+      redirect_to root_path
+    else
+      render :cancel
+    end
+
+  end
+
   private
 
   def find_membership
