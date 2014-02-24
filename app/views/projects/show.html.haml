@@ -155,8 +155,8 @@
             = image_tag "#{@project.seed_image}", style: "width:100%"
           %h4{:style => "margin-top: 20px;color: #81c263 !important;font-weight: 400;"}= @project.organization
           %div
-            .fb-like{:style => "display: block; float: left; margin-left: 5px;", "data-href" => project_url(@project.id), "data-layout" => "button_count", "data-send" => "false", "data-show-faces" => "true", "data-width" => "450"}
-            %a.twitter-follow-button{:style => "display: block; float: left; margin-left: 10px;", "data-show-count" => "false", :href => "https://twitter.com/#{@project.twitter_handle}"} Follow
+            .fb-like{:style => "display: inline-block; float: left; margin-left: 5px;width:76px !important;", "data-href" => project_url(@project.id), "data-layout" => "button_count", "data-send" => "false", "data-show-faces" => "true", "data-width" => "76"}
+            %a.twitter-follow-button{:style => "display: inline-block; float: left; margin-left: 10px;", "data-show-count" => "false", :href => "https://twitter.com/#{@project.twitter_handle}"} Follow
             %span.label-green{:style => "margin-left: 10px; font-family: 'Proxima Nova Semi', sans-serif;display:inline-block;"}
               WEB:
               = link_to(strip_url(@project.website), recognize_url(@project.website), target: "_blank", :style => "font-style: italic; text-decoration: underline; color: #3f403b; font-family: 'Georgia', serif;")

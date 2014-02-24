@@ -21,9 +21,8 @@
 
     .span4
       .progress-container
-        = image_tag 'seed.png', :class => "seed"
         %div
-          %span Seed Funds Pledged
+          %span Funds Pledged
           - if @donation && @donation.length == 0
             %p $0
           - else
