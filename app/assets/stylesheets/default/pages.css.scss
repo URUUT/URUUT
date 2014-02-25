@@ -2273,7 +2273,7 @@ input.selectbox {
 		&:hover:after {
 			border-left: 8px solid #ccc;}
 		a {
-			color:#333;
+			color:#fff;
 			font: normal 15px/42px "Proxima Nova Semi", arial, sans-serif !important;
 			letter-spacing:2px;
 			text-transform:uppercase;
@@ -2311,7 +2311,7 @@ input.selectbox {
 		text-align:left;
 		text-shadow:0 1px 1px rgba(255, 255, 255, 0.15);}
 	.steps {
-		color:#fff;
+		color:$green;
 		font:normal 12px/12px "Proxima Nova Semi", arial, sans-serif;
 		margin:30px 0 3px 0;}
 	.title {
@@ -2319,7 +2319,7 @@ input.selectbox {
 		font:normal 24px/24px "Proxima Nova Semi", arial, sans-serif;
 		margin-bottom:3px;}
 	.description {
-		color:#403e37;
+		color:$green;
 		font:italic 12px/12px "Georgia", georgia, serif;
 		text-transform:none;}
 	.border {
