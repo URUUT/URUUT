@@ -93,7 +93,7 @@ module ProjectsHelper
     if sponsor.anonymous
       "<a href='javascript:void(0)'>ANONYMOUS <br> SPONSOR</a>"
     else
-      link_to(sponsor.name, recognize_url(sponsor.site), target: "_blank", style: "color: #70bf4c;")
+      link_to(sponsor.name, recognize_url(sponsor.site), target: "_blank", style: "color: #95d60a;")
     end
   end
 

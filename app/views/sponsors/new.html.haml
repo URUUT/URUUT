@@ -33,7 +33,7 @@
     .span4.sidebar.pull-right
       %h4 SPONSORSHIP LEVELS
       .well
-        %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;"}
+        %h3{:style => "font-size:20px;letter-spacing:normal;color:#95d60a;line-height:100%;margin:0;"}
           Platinum
           %span.small-heading
             (#{availability(@project.project_sponsors, 1)} of 1 Available)
@@ -51,7 +51,7 @@
             .pull-right{style: "font-style: italic; margin-top:20px;"}
               Not Available
               %span
-        %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;"}
+        %h3{:style => "font-size:20px;letter-spacing:normal;color:#95d60a;line-height:100%;margin:0;"}
           Gold
           %span.small-heading
             (#{availability(@project.project_sponsors, 2)} of 3 Available)
@@ -71,7 +71,7 @@
             .pull-right{style: "font-style: italic; margin-top:20px;"}
               Not Available
               %span
-        %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;"}
+        %h3{:style => "font-size:20px;letter-spacing:normal;color:#95d60a;line-height:100%;margin:0;"}
           Silver
           %span.small-heading
             (#{availability(@project.project_sponsors, 3)} of 5 Available)
@@ -91,7 +91,7 @@
             .pull-right{style: "font-style: italic; margin-top:20px;"}
               Not Available
               %span
-        %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;"}
+        %h3{:style => "font-size:20px;letter-spacing:normal;color:#95d60a;line-height:100%;margin:0;"}
           Bronze
         %ul.normal-font.dashed-list
           %li Text mention on project page
@@ -131,7 +131,7 @@
             %br/
             %h5 SPONSORSHIP DETAILS
             .sponsorship-level-details
-              %h2{:style => "color: #70bf4c"}
+              %h2{:style => "color: #95d60a"}
                 #{@level} sponsor
               %ul.normal-font.dashed-list
                 - if !@first_benefits.nil?
@@ -160,7 +160,7 @@
         %div.clearfix{:style => "margin-bottom: 10px; width: 500px;"}
           = f.label :mission, class: "label-green" do
             BUSINESS OR ORGANIZATION'S LOGO
-            %span.real-green-small{style: "color: #81C263 !important;"}*
+            %span.real-green-small{style: "color: #95D60A !important;"}*
             %span.error-container
           %div{:style => "position: relative;"}
             = image_tag "white.png", :class => "img-polaroid pull-left logo-company", :style => "position: relative; z-index: 10;"
@@ -184,7 +184,7 @@
         %div
           = f.label :site, class: "label-green" do
             Website
-            %span.real-green-small{style: "color: #81C263 !important;"}*
+            %span.real-green-small{style: "color: #95D60A !important;"}*
             %span.italic
               (Format: www.yoursite.com)
             %span.error-container
@@ -192,7 +192,7 @@
         %div
           = f.label :mission, class: "label-green" do
             MISSION STATEMENT / ABOUT
-            %span.real-green-small{style: "color: #81C263 !important"}*
+            %span.real-green-small{style: "color: #95D60A !important"}*
             %span.cutdown.italic
             %span.error-container
           = text_area :project_sponsor, :mission, maxlength: 275, required: true, :style => "height: 186px; width: 595px;", label: false, class: "mission", placeholder: "Tell your story here ..."

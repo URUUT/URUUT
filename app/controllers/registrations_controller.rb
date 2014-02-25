@@ -25,7 +25,7 @@ class RegistrationsController < Devise::RegistrationsController
   def after_sign_up_path_for(resource)
     # sign_up_url = url_for(:action => 'create', :controller => 'registrations', :only_path => false, :protocol => 'http')
     if session[:redirect_url] == new_project_url
-      User.set_redirect_path
+      resource.set_redirect_path
     elsif session[:path]
       session[:path]
     elsif session[:redirect_url] == user_registration_url

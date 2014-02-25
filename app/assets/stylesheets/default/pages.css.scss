@@ -2,8 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$green2: #81C263;
-$light-green: #bee0b4;
+$green: #95D60A;
+$green2: $green;
+$light-green: $green;
+$blue: #19345f;
+$light-blue: #66C3ea;
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700);
 
 @font-face {
   font-family: 'Proxima Nova Light';
@@ -100,7 +104,7 @@ body {
   min-height: 100%;
   height: auto !important;
   height: 100%;
-  margin: 0 auto -180px;}
+  margin: 0 auto;}
 
 #push,
 #footer {
@@ -108,10 +112,18 @@ body {
 
 body {
   color:#3f403b;
+  background: url('http://techbridge.org/alpha/wp-content/themes/techbridge-2013/img/stripes-bg.png');
   font:normal 13px/19px 'Georgia', georgia, serif;
   margin:0;
   padding:0;}
-
+.container.content{
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: 0.1em 0.2em 0.5em #666;
+  width: 1024px!important;}
 h1,
 h2,
 h3,
@@ -119,7 +131,7 @@ h4,
 h5,
 h6 {
   color:#464646;
-  font-family:'Proxima Nova Semi', sans-serif;
+  font-family:'Source Sans Pro', sans-serif;
 	letter-spacing:2px;
   text-transform:uppercase;}
 
@@ -165,7 +177,7 @@ input[type=submit] {
   border:none;
   box-shadow:1px 1px 1px rgba(0,0,0,.28);
   color:#fff;
-  font:300 13px/17px 'Proxima Nova', sans-serif;
+  font:300 13px/17px 'Source Sans Pro', sans-serif;
   padding:5px 8px;}
 
 textarea {
@@ -191,7 +203,7 @@ select {
 	border:none;
 	border-radius:0;
 	behavior: url(image-path('PIE-1.0.0/PIE.htc'));
-	border-top:6px solid #70bf4c;
+	border-top:6px solid  $green;
 	box-shadow:none;
 	position:relative;
 	.title {
@@ -249,7 +261,7 @@ select {
 						margin-top:6px;
 						padding-top:8px;
 						a {
-							color:#70bf4c;
+							color: $green;
 						}
 					}
 					a {
@@ -279,7 +291,7 @@ select {
 				display:block;
 				text-align:left !important;
 				h5 {
-					color:#70bf4c;
+					color: $green;
 					letter-spacing:normal;
 				}
 				a {
@@ -353,7 +365,7 @@ select {
 
 .btn {
   background:none;
-  background:#3f403b;
+  background:$blue;
   border:none;
   border-radius:0;
   behavior: url(image-path('PIE-1.0.0/PIE.htc'));
@@ -403,7 +415,7 @@ select {
 		font:normal 12px/12px "Proxima Nova Semi", arial, sans-serif;
 		margin:30px 0 3px 0;}
 	.title {
-		color:#70bf4c;
+		color: $green;
 		font:normal 24px/24px "Proxima Nova Semi", arial, sans-serif;
 		margin-bottom:3px;}
 	.description {
@@ -416,7 +428,7 @@ select {
   padding:0;}
 .pages {
 	.texture {
-		background: url(image-path('bg-tile.jpg')) top left repeat;
+		background: $blue;
 		padding:20px 0;
         form {
             display:inline;
@@ -442,7 +454,7 @@ select {
       vertical-align: middle;
 			/*width:300px;*/
 			label {
-				color:#403e37;
+				color:#fff!important;
 			}
 			&:last-child {
 				margin-right:0;
@@ -484,7 +496,7 @@ select {
 }
 
 .beta-banner {
-	background: #70bf4c;
+	background:  $green;
 	color:#fff;
 	font-family: 'Proxima Nova';
 	font-size:14px;
@@ -492,7 +504,7 @@ select {
 
 .pages {
   .texture {
-    background: url(image-path('bg-tile.jpg')) top left repeat;
+    background: $blue;
     padding:20px 0;
         form {
             display:inline;
@@ -565,9 +577,9 @@ select {
         padding:0;
         height:54px;
         width:45px;
-        background: #70bf4c;
+        background:  $green;
         &:hover {
-          background: #70bf4c;
+          background:  $green;
         }
       }
     }
@@ -586,7 +598,7 @@ select {
     padding:10px 15px;
     text-transform:uppercase;
     a {
-      color:#403e37;
+      color:$green;
       font:normal 12px/12px "Proxima Nova Semi", arial, sans-serif;
       letter-spacing:2px;}
     img {
@@ -673,6 +685,7 @@ select {
 	font:normal 12px/12px "Proxima Nova Semi", arial, sans-serif;
 	list-style-type:none;
 	margin-top:20px;
+  padding: 0 15px;
 	a {
 		color:#fff;	}}
 
@@ -680,23 +693,20 @@ header {
 	.container {
 		width:960px !important;}
 	h1.logo {
-		background: transparent url(image-path('logo.png'))top left no-repeat;
-		float:left;
-    height:41px;
-		left:0px;
+    background: #fff;
     margin-left:10px;
     margin-top:8px;
-		position:relative;
-		width:87px;
-		a {
+    background-repeat: no-repeat;
+    a {
+      background: url(image-path('new-logo.png'));
 			display:inline-block;
-			height:40px;
+			height:130px;
       text-decoration:none;
 			text-indent:-9999px;
-			width:87px;}}}
+			width:290px;}}}
 
 p.sections {
-  color:#55554d;
+  color:$light-blue;
   font:normal 18px/18px "Proxima Nova Semi", arial, sans-serif;
   letter-spacing:2px;
   margin-bottom:15px;
@@ -709,12 +719,14 @@ footer {
   font-size:10px;
   padding:40px 0 30px;
   position:relative;
+  text-align: right;
 	div {
 		ul {
 			display:inline-block;
 			margin:0;
 			padding-right:50px;
 			vertical-align:top;
+      text-align: left;
 			&:last-child {
 				padding-right:0;}
 			li {
@@ -757,7 +769,7 @@ footer {
 						margin:0 !important;}}}}}
   form#email-sign-up {
     h3 {
-      color: #70bf4c;
+      color:  $green;
     }
     input {
       display:inline;
@@ -782,9 +794,9 @@ footer {
       padding:0;
       height:40px;
       width:35px;
-      background: #70bf4c;
+      background:  $green;
       &:hover {
-        background: #70bf4c;
+        background:  $green;
         color: #fff;
       }
     }
@@ -802,9 +814,12 @@ footer {
     margin-left:15px;}}
 
 .copyright {
-  background:#53544b;
+  background:$blue;
   color:#fff;
   line-height:45px;
+  width: 1024px;
+  margin:auto;
+  box-shadow: 0.1em 0.2em 0.5em #666;
 	p {
 		font-size:10px;
 		margin:0;
@@ -817,33 +832,62 @@ footer {
 	display:none; }
 
 ul.nav {
-  color:#242424;
-	margin-left:64px !important;
 	li {
-		border-left:1px solid #55554d;
+		border-right:1px solid #fff;
     padding:0 10px;
 		position:relative;
-		width:139px;
+		width:auto;
 		&:last-child {
-			border-right:1px solid #55554d;}
-		a {
-			color:#fff !important;
-      font-family:'Proxima Nova Semi', sans-serif;
-      font-size:12px;
-			letter-spacing:2px;
-			line-height:60px !important;
+			border-right:0px;}
+    &:hover { background: $blue; }
+    a {
+      color:#fff !important;
+      font-family:'Source Sans Pro', sans-serif;
+      font-size:18px;
+      letter-spacing:2px;
+      line-height:60px !important;
       padding:0 !important;
       text-decoration:none;
-			text-shadow:0 0 0 !important;
-      text-transform:uppercase;
+      text-shadow:0 0 0 !important;
+      text-transform:capitalize;
       &:hover {
-        color:#70bf4c !important;
         text-decoration:underline;}}
-		img {
+    img {
       margin:-2px 0 0 5px;
-			vertical-align:middle;}}}
-
-
+      vertical-align:middle;}}}
+.nav-triangle-holder {
+  height: 0.714285714em;
+  background-color: transparent;
+  margin: 0 -0.714285714em;
+}
+.triangle-left, triangle-right {
+  width: 0;
+  height: 0;
+  clear: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  display: block;
+}
+.triangle-left {
+  border-bottom: 0.714285714em solid transparent;
+  border-right: 0.714285714em solid #50a52d;
+  float: left;
+}
+.between-triangles {
+  background-color: #fff;
+  height: 0.714285714em;
+  width: 71.4285714em;
+  position: relative;
+  float: left;
+  clear: none;
+}
+.triangle-right {
+  border-bottom: 0.714285714em solid transparent;
+  border-left: 0.714285714em solid #50a52d;
+  float: right;
+}
+.right .dropdown-menu.log-in ul li:hover{ background: #fff; }
 div.dropdown {
   color:#fff !important;
   display:none;
@@ -886,7 +930,7 @@ div.dropdown {
 
 
 .right li .img-circle {
-	margin-right:5px;
+  margin-right:5px;
   vertical-align:middle !important;}
 
 .left {
@@ -896,8 +940,8 @@ div.dropdown {
   text-align:center;
   width:100%;
   li {
-    border-left:1px solid #55554d;
-    font:normal 12px/12px 'Proxima Nova', sans-serif;
+    border-left:1px solid $light-blue;
+    font:normal 12px/12px 'Source Sans Pro', sans-serif;
     display:inline-block;
     letter-spacing:2px;
     line-height:60px;
@@ -917,7 +961,7 @@ div.dropdown {
   text-align:right;
   li {
     border-right:1px solid #242424;
-    font:normal 12px/12px 'Proxima Nova', sans-serif;
+    font:normal 12px/12px 'Source Sans Pro', sans-serif;
     display:inline-block;
     list-style-type:none;
     -webkit-font-smoothing: subpixel-antialiased;
@@ -938,7 +982,7 @@ div.dropdown {
       &:hover {
         text-decoration:none}}
     a.sign-up-link {
-      color:#83c140;}
+      color:#fff;}
     span.or {
       color:#fff;
       font-family:"Georgia", georgia, serif;
@@ -955,7 +999,7 @@ div.dropdown {
   input[type=search]{
     border-radius: 0;
     behavior: url(image-path('PIE-1.0.0/PIE.htc'));
-    font-family:'Proxima Nova', sans-serif;
+    font-family:'Source Sans Pro', sans-serif;
     font-size:11px;
     line-height: 18px;
     margin-left:5px;
@@ -990,7 +1034,7 @@ nav.navbar-inner {
 			vertical-align:text-top;}}}
 
 .project {
-  border-top:6px solid #70bf4c;
+  border-top:6px solid  $green;
   width:300px;
   height:396px;
   float:left;
@@ -1000,7 +1044,7 @@ nav.navbar-inner {
   h3 {
     margin-top:0;
     a {
-      color:#70bf4c;
+      color: $green;
       line-height:100%;
       margin:0;}}
   h4 {
@@ -1009,7 +1053,7 @@ nav.navbar-inner {
     overflow:hidden;
     a{
       color:#689d00;
-      font-family: 'Proxima Nova', sans-serif;
+      font-family: 'Source Sans Pro', sans-serif;
       font-weight:400;
       line-height:normal;
       text-transform:uppercase;
@@ -1069,13 +1113,13 @@ nav.navbar-inner {
     width:260px;}}
 
 .funding {
-  background:url(image-path('bg-tile.jpg')) top left repeat;
+  background:$blue;
 	display:inline-block;
   height:90px;
   position:relative;
   width:100%;
   .btn {
-	background:url(image-path('bg-tile.jpg')) top left repeat;
+	background:$blue;
 	border-radius: 3px;
 	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 	display:inline-block;
@@ -1138,7 +1182,7 @@ nav.navbar-inner {
   h5 {
 		color:#403e37;
 		display:block;
-    font-family: 'Proxima Nova', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     font-size:8px;
     font-style:normal;
     font-weight:400;
@@ -1186,7 +1230,7 @@ h5.time-left {
 		h3 {
 			margin-top:0;
 			a {
-				color:#70bf4c;
+				color: $green;
 				line-height:100%;
 				margin:0;}}}
 	.view-all {
@@ -1211,10 +1255,10 @@ h5.time-left {
 
 .potential {
 	h3 {
-		color:#70bf4c;
+		color: $green;
 	}
 	.funding {
-		background:#70bf4c;
+		background: $green;
 		height:auto;
 		p {
 			color:#fff;
@@ -1233,7 +1277,7 @@ h5.time-left {
 	text-align:center;
 	text-transform:capitalize;
 	& + .btn {
-		background: #70bf4c;
+		background:  $green;
 		border-radius: 5px;
 		behavior: url("/assets/PIE-1.0.0/PIE.htc");
 		box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.45);
@@ -1276,14 +1320,19 @@ h5.time-left {
   content:'' !important;}
 
 .navbar {
-  background:#403e37;
-  height:60px;
   margin-bottom:0;}
-
+.navigation{
+  background:$green;
+  border-bottom: 1px solid #3D4A5E;
+  width: 1044px;
+  margin-left: -10px;
+  .container{ width: 1024px!important;}
+}
 .nav {
-	height:60px;
+  height:60px;
 	li {
 		a {
+      font-family: 'Source Sans Pro', sans-serif;
 			line-height:60px;
 		}
 	}
@@ -1297,7 +1346,7 @@ h5.time-left {
     text-transform:uppercase;}
   .btn{
     background:none;
-    background:#70bf4c;
+    background: $green;
     box-shadow:none;
     border-radius:0;
     behavior: url(image-path('PIE-1.0.0/PIE.htc'));
@@ -1356,7 +1405,7 @@ div[id^='step'] {
   position:relative;}
 
 #project-submit, .projects.edit .wizard-btn, .wizard-btn, #next-link-to-assets {
-  background:#70bf4c;
+  background: $green;
   border-radius:0;
   behavior: url(image-path('PIE-1.0.0/PIE.htc'));
   display:block;
@@ -1367,7 +1416,7 @@ div[id^='step'] {
   text-shadow:none;
   text-transform:uppercase;
   &:hover {
-    background:#70bf4c;}}
+    background: $green;}}
 
 #large_image {
   background:#ddd url(image-path('cover-photo.png')) top center no-repeat;
@@ -1384,7 +1433,7 @@ div[id^='step'] {
 		top:330px;}
   .funding-info {
   	background: url(image-path('funding-info.png')) repeat;
-    background: rgba(112, 191, 76, 0.85);
+    background: rgba(149, 214, 10, 0.85);
     bottom:0;
     height:125px;
     left:0;
@@ -1651,7 +1700,7 @@ img.avatar-thumb {
 }
 
 .banner {
-  background:url(image-path('bg-tile.jpg'))top left repeat;
+  background:$blue;
   left:0;
   margin-bottom:50px;
   position:absolute;
@@ -1687,7 +1736,7 @@ img.avatar-thumb {
     line-height:10px;
   }
   h3 {
-    color:#70bf4c;
+    color: $green;
     font-size:24px;
     margin-top: 3px;
     line-height:24px;
@@ -1697,7 +1746,7 @@ img.avatar-thumb {
   }
 }
 a.green {
-  color:#70bf4c;
+  color: $green;
   text-decoration:underline;
   font-style:italic;
 }
@@ -1716,7 +1765,7 @@ a.green {
     display:none;
   }
   .popover-content {
-    color: #70bf4c;
+    color:  $green;
     font: 14px "Proxima Nova", arial, sans-serif;
     text-transform:uppercase;
     letter-spacing:1px;
@@ -1734,7 +1783,7 @@ a.green {
   font-family:'Proxima Nova';
 
   h2.green {
-    color:#70bf4c;
+    color: $green;
     font-weight:normal;
     text-transform:none;
   }
@@ -1752,7 +1801,7 @@ a.green {
       }
     }
     h5 {
-      color:#70bf4c;
+      color: $green;
       margin-bottom:0px;
       margin-top:0px;
     }
@@ -1839,7 +1888,7 @@ ul.perks {
     list-style-type:none;
     padding:20px;
     h3 {
-      color:#70bf4c;
+      color: $green;
       font: 20px/20px "Proxima Nova Semi", arial, sans-serif;
       letter-spacing:2px;
       margin:0;}
@@ -1871,7 +1920,7 @@ ul.perks {
         position:relative;
         .btn {
           background:none;
-          background:#3f403b;
+          background:$blue;
           border:none;
           border-radius:0;
           box-shadow:none;
@@ -1940,7 +1989,7 @@ ul.perks {
 form.registration-edit {
   font-family:"Proxima Nova Semi", arial, sans-serif;
   label {
-    color:#70bf4c;
+    color: $green;
   }
   input {
     margin-bottom:20px !important;
@@ -1962,7 +2011,7 @@ form.registration-edit {
     width:100%;
   }
   button {
-    background:#70bf4c;
+    background: $green;
     display:block;
     font: 18px/18px "Proxima Nova Semi", arial, sans-serif;
     letter-spacing:3px;
@@ -1975,7 +2024,7 @@ form.registration-edit {
     border-radius: 5px;
     behavior: url(image-path('PIE-1.0.0/PIE.htc'));
     &:hover {
-      background:#70bf4c;
+      background: $green;
       color: #FFF;
     }
   }
@@ -2061,7 +2110,7 @@ form.registration-edit {
     text-shadow: 0 1px 0 rgb(189, 189, 189), 0 -1px 0 rgb(148, 148, 148);
   }
   .switch input:checked ~ label { /* Background */
-    background: #81C263;
+    background: $green;
   }
 
   .switch input:checked ~ label i { /* Toggle */
@@ -2073,7 +2122,7 @@ form.registration-edit {
     content: "on";
     right: 100%;
     color: #fff;
-    text-shadow: 0 1px 0 darken(#81C263, 20%), 0 -1px 0 lighten(#81C263, 10%);
+    text-shadow: 0 1px 0 darken($green, 20%), 0 -1px 0 lighten($green, 10%);
   }
 }
 
@@ -2199,9 +2248,7 @@ input.selectbox {
 			width:135px;}}}
 
 .breadcrumb-container {
-	background:url(image-path('bg-tile.jpg')) top left repeat;
-	left:0;
-	position:absolute;
+	background:$blue;
 	width:100%;
 }
 
@@ -2226,7 +2273,7 @@ input.selectbox {
 		&:hover:after {
 			border-left: 8px solid #ccc;}
 		a {
-			color:#333;
+			color:#fff;
 			font: normal 15px/42px "Proxima Nova Semi", arial, sans-serif !important;
 			letter-spacing:2px;
 			text-transform:uppercase;
@@ -2264,15 +2311,15 @@ input.selectbox {
 		text-align:left;
 		text-shadow:0 1px 1px rgba(255, 255, 255, 0.15);}
 	.steps {
-		color:#fff;
+		color:$green;
 		font:normal 12px/12px "Proxima Nova Semi", arial, sans-serif;
 		margin:30px 0 3px 0;}
 	.title {
-		color:#70bf4c;
+		color: $green;
 		font:normal 24px/24px "Proxima Nova Semi", arial, sans-serif;
 		margin-bottom:3px;}
 	.description {
-		color:#403e37;
+		color:$green;
 		font:italic 12px/12px "Georgia", georgia, serif;
 		text-transform:none;}
 	.border {
@@ -2301,7 +2348,7 @@ form[id*=project] {
 .social-login {
 	position:relative;
 	h6 {
-		color:#70bf4c;
+		color: $green;
 		margin-bottom:0;
 	}
 	p {
@@ -2323,7 +2370,7 @@ form[id*=project] {
 
 .full-width {
 	&.green-description {
-		background:#70bf4c;
+		background: $green;
 		height:550px;
 		text-align:left;
 		a {
@@ -2374,7 +2421,7 @@ form[id*=project] {
 				width:22px;
 				}}
 		.btn {
-			background:#70bf4c;
+			background: $green;
 			border-radius:5px;
 			behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 			box-shadow:1px 1px 2px rgba(0,0,0,0.45);
@@ -2433,7 +2480,7 @@ form[id*=project] {
 			width:630px;
 		}
 		.btn {
-			background:#70bf4c;
+			background: $green;
 			border-radius:5px;
 			behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 			box-shadow:1px 1px 2px rgba(0,0,0,0.45);
@@ -2458,7 +2505,7 @@ form[id*=project] {
 		}
 	}
 	&.partner {
-		background:url(image-path('bg-tile.jpg')) top left repeat;
+		background:$blue;
 		height:378px;
 		.marketing {
 			margin-top:80px;
@@ -2472,7 +2519,7 @@ form[id*=project] {
 				text-transform:none;
 			}
 			h3 {
-				color:#70bf4c;
+				color: $green;
 				margin-bottom:0;
 			}
 		}
@@ -2481,7 +2528,7 @@ form[id*=project] {
 		}
 	}
 	&.better {
-		background:#70bf4c;
+		background: $green;
 		box-shadow: inset 0px 2px 5px rgba(64,62,55,0.25), inset 0px -3px 5px rgba(64,62,55,0.20);
 		height:787px;
 		text-align:center;
@@ -2500,7 +2547,7 @@ form[id*=project] {
 			margin:65px 0 5px;
 		}
 		p {
-			color:#55554d;
+			color:$light-blue;
 			font-family:'Proxima Nova';
 			font-size:14px;
 			margin-bottom:40px;
@@ -2530,7 +2577,7 @@ form[id*=project] {
 					}
 				}
 				p {
-					color:#55554d;
+					color:$light-blue;
 					font-family:'Proxima Nova';
 					margin-bottom:20px;
 				}
@@ -2573,7 +2620,7 @@ form[id*=project] {
 			text-align:center;
 			text-transform:none;}
 		h3 {
-			color:#70bf4c;
+			color: $green;
 			font-family: 'Proxima Nova';
 			line-height:100%;
 			margin-top:0;
@@ -2586,7 +2633,7 @@ form[id*=project] {
 				color:#403e37;
 				font:normal 14px/24px "Proxima Nova", "Myriad Pro", arial, helvetica;}
 			.btn {
-				background:#70bf4c;
+				background: $green;
 				border-radius:5px;
 				behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 				box-shadow:1px 1px 2px rgba(0,0,0,0.45);
@@ -2611,7 +2658,7 @@ form[id*=project] {
 		padding:60px 0;
 		text-align:center;
 		h3 {
-			color:#70bf4c;
+			color: $green;
 			font-family:'Proxima Nova';
 			letter-spacing:normal;
 			line-height:24px;
@@ -2640,7 +2687,7 @@ form[id*=project] {
 			width:220px;
 			.content {
 				h5 {
-					color:#70bf4c;
+					color: $green;
 					letter-spacing:normal;
 					margin-top:25px;
 				}
@@ -2664,7 +2711,7 @@ form[id*=project] {
 			text-transform:none;
 		}
 		.btn {
-			background:#70bf4c;
+			background: $green;
 			border-radius:5px;
 			behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 			box-shadow:1px 1px 2px rgba(0,0,0,0.45);
@@ -2691,160 +2738,98 @@ form[id*=project] {
 }
 
 .full-width {
-	&.our-story {
-		padding:47px 0;
-    text-align: center;
-    color: #8e8e8e;
-    h1 {
-      color:#70bf4c;
-      font-family: 'Proxima Nova';
-      font-weight:normal;
-      line-height:normal;
-      margin-top:0;
-      letter-spacing: 1pt;
-      text-align:center;
-      text-transform:none;}
-    p {
-      font-family: 'Proxima Nova light';
-      font-size: 25px;
-      margin: 12px 0 35px;
-      line-height: 37px;
-      }}
-  &.our-mission {
-    background:#55554d;
-    padding:47px 0;
-    h1 {
-      text-transform: none;
-      margin-bottom:20px;}
-    h3 {
-      color:#70bf4c;
-      margin-bottom:0;}
+  &.our-story {
+    background:#eee;
+    padding:80px 0;
     h2 {
-      font-family: 'Proxima Nova';
-      font-weight:normal;
-      line-height:normal;
-      margin-top:0;
-      margin-left: -7px;
-      font-size: 32px;
-      text-transform: none;
-      letter-spacing: 0.7pt;
-      word-spacing: 4pt;
-      }
-      p {
-        color: #8e8e8e;
+     color:$green;}
+    p {
+      color:#55554d;
+      font-family:'Proxima Nova';
+      font-size:16px;
+      line-height:24px;}}
+  &.our-mission {
+    background:$blue;
+    padding:80px 0;
+    h3 {
+      color:$green;
+      font-size: 24.5px;
+      margin-bottom:10px;}
+    div.half {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      display:inline-block;
+      float:left;
+      width:50%;
+      h2 {
+        color:#fff;
         font-family: 'Proxima Nova';
-        font-size: 16px;
-        margin-left: -7px;
-        margin-top: 22px;
-        line-height: 25px;
-        word-spacing: 1.5pt;
-        letter-spacing: 0pt;
-      }
-      .bubble {
-        background: #fff;
-        border-radius: 10px;
-        padding: 20px;
-        padding-top: 22px;
-        position: relative;
-        top: 67px;
-        left: 35px;
-        p.quotes {
-          color:#70bf4c;
-          font-size: 23px;
-          margin: 3px 15px;
-          letter-spacing: 0pt;
-          word-spacing: 0pt;
-          line-height: 23.5pt;
-        }
-        p.author {
-          color:#70bf4c;
-          text-align: right;
-          margin: 10px;
-          font-size: 15px;
-        }
-      }
-      .bubble:after{
-        width: 1px;
-        height: 1px;
-        border-left: 20px solid transparent;
-        border-right: 40px solid transparent;
-        border-top: 52px solid #fff;
-        border-radius: 7px;
-        display: block;
-        content: "";
-        -webkit-transform: rotate(234deg);
-        -moz-transform: rotate(234deg);
-        position: absolute;
-        left: 47px;
-        bottom: -19px;
-        z-index: 1;
-      }
-			&:first-child {
-				padding-right:25px;}
-			&:last-child {
-        padding-left:25px;}}
+        font-weight:normal;
+        line-height:normal;
+        margin-top:0;
+        text-transform:none;}
+      p {
+        color:#b6b6b4;
+        font-family: 'Proxima Nova';
+        font-size:14px;
+        line-height:150%;}
+      &:first-child {
+        padding-right:25px;}
+      &:last-child {
+        padding-left:25px;}}}
   &.meet-the-team {
-    padding:58px 0 48px;
+    padding:80px 0;
     div.founder {
       -webkit-box-sizing: border-box;
       -moz-box-sizing: border-box;
       box-sizing: border-box;
-      height: 417px;
-      text-align: center;
+      display:inline-block;
+      float:left;
+      padding:0 25px;
+      width:25%;
       img {
         display:block;
-        width: 147px;
-        border-radius: 147px;
-        margin:40px auto 15px;
+        margin:30px auto 15px;
         position:relative;}
       p {
-        color: #8e8e8e;
-        font-family: 'Proxima Nova';
-        line-height: 19pt;
-        font-size: 16px;
-        margin-top: 11px;
-        letter-spacing: 0.3pt;
-      }
+        color:#403e37;
+        line-height:200%;}
       h2 {
-        font-family: 'Proxima Nova';
         margin-bottom:0;
-        letter-spacing: 1px;
-        text-transform: none;}
+        letter-spacing: 1px;}
       .title {
-      color: #70bf4c;
+        color:$green;
+        font-family:'Proxima Nova';
+        font-size:14px;
+        font-weight:600;
+        margin-bottom:5px;
+        text-align:center;}}
+    p {
+      color:#403e37;
       font-family: 'Proxima Nova';
-      font-size: 13pt;
-      font-weight: 600;
-      margin: 5px;
-      text-align: center;
-      letter-spacing: 2pt;
-      }}
-    h1 {
-      color:#70bf4c;
+      font-size:14px;
+      line-height:200%;
+      text-align:center;}
+    h2 {
+      color:#403e37;
       font-family: 'Proxima Nova';
       font-weight:normal;
       line-height:normal;
       margin-top:0;
-      letter-spacing: 1pt;
       text-align:center;
       text-transform:none;}
-    p {
-      font-family: 'Proxima Nova light';
-      color: #8e8e8e;
-      line-height: 36px;
-      margin: 0 0 10px;
-      text-align: center;
-      font-size: 23px;
-      text-transform: none;
-      letter-spacing: 1pt;
-      padding: 0 8px;
-      word-spacing: -1pt;
-    }}
+    h3 {
+      color:$green;
+      font-size: 24.5px;
+      line-height:normal;
+      margin:0 0 10px;
+      text-align:center;}}
   &.advisory-board {
     background:#eee;
     padding:80px 0;
     p {
-      color:#55554d;
+      color:$light-blue;
       font-family:'Proxima Nova';
       font-size:14px;
       line-height:150%;
@@ -2854,18 +2839,9 @@ form[id*=project] {
       color:#403e37;
       margin:0 auto;
       width:610px;}
-    h1 {
-      margin-top:0;
-      margin-bottom:55px;
-      text-align:center;
-      font-family: 'Proxima Nova';
-      font-weight:normal;
-      line-height:normal;
-      letter-spacing: 1pt;
-      text-align:center;
-      text-transform:none;}
     h3 {
-      color:#70bf4c;
+      color:$green;
+      font-size: 24.5px;
       margin-bottom:10px;
       text-align:center;}
     .advisor {
@@ -2873,7 +2849,7 @@ form[id*=project] {
       -moz-box-sizing: border-box;
       box-sizing: border-box;
       float:left;
-      margin-bottom:65px;
+      margin-bottom:35px;
       width:50%;
       img {
         margin-right:10px;
@@ -2883,23 +2859,21 @@ form[id*=project] {
         display:inline-block;
         vertical-align:middle;}
       p {
-        color:#8e8e8e;
+        color:#403e37;
         font-family:'myriad pro', arial, sans-serif;
         font-size:12px;
         margin-bottom:0;
         text-align:left;}
       .name {
-        color: #70bf4c;
-        font-family: 'myriad pro', arial, sans-serif;
-        font-size: 11pt;
-        text-transform: uppercase;
-        font-weight: bold;
-        letter-spacing: 2pt;}
+        color:$green;
+        font-family:'myriad pro', arial, sans-serif;
+        font-size:14px}
       .experience {
-        color:#8e8e8e;
+        color:#403e37;
         font-family:'myriad pro', arial, sans-serif;
         font-size:12px;
-        font-weight:bold;}}}
+        font-weight:600;}}}
+
 
   &.gray-band {
     color: #8e8e8e;
@@ -2919,7 +2893,7 @@ form[id*=project] {
       text-transform:none;}
     }
 		.btn {
-			background:#70bf4c;
+			background: $green;
 			border-radius:5px;
 			behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 			box-shadow:1px 1px 2px rgba(0,0,0,0.45);
@@ -2947,7 +2921,7 @@ form[id*=project] {
   .span8 {
 		margin-top:60px;
 		.page-title {
-			color:#70bf4c;
+			color: $green;
 			margin-top:0;
 			text-transform:uppercase;}
 		ul {
@@ -2982,7 +2956,7 @@ form[id*=project] {
     margin-bottom:15px;}
   .fixed {
     background:#f8f8f8;
-    border-top:6px solid #70bf4c;
+    border-top:6px solid  $green;
     counter-reset: my-badass-counter;
     margin-left:0;
     padding:15px 0;
@@ -2998,7 +2972,7 @@ form[id*=project] {
       line-height:30px;
       padding:0 20px;
       &.active, &:hover {
-        background:#70bf4c url(image-path('dt-arrow-active.png')) 280px center no-repeat;
+        background: $green url(image-path('dt-arrow-active.png')) 280px center no-repeat;
         color:#fff;
         text-shadow:1px 1px 1px #508937;
         a {
@@ -3018,7 +2992,7 @@ form[id*=project] {
   .span8 {
 		margin-top:60px;
 		.page-title {
-			color:#70bf4c;
+			color: $green;
 			margin-top:0;
 			text-transform:uppercase;}
 		ul {
@@ -3053,7 +3027,7 @@ form[id*=project] {
     margin-bottom:15px;}
   .fixed {
     background:#f8f8f8;
-    border-top:6px solid #70bf4c;
+    border-top:6px solid  $green;
     counter-reset: my-badass-counter;
     margin-left:0;
     padding:15px 0;
@@ -3069,7 +3043,7 @@ form[id*=project] {
       line-height:30px;
       padding:0 20px;
       &.active, &:hover {
-        background:#70bf4c url(image-path('dt-arrow-active.png')) 280px center no-repeat;
+        background: $green url(image-path('dt-arrow-active.png')) 280px center no-repeat;
         color:#fff;
         text-shadow:1px 1px 1px #508937;
         a {
@@ -3090,7 +3064,7 @@ form[id*=project] {
 	position:fixed;
 	width:300px;
 	h4 {
-		color:#70bf4c;
+		color: $green;
 		margin-bottom:0;
 	}
 	p {
@@ -3102,7 +3076,7 @@ form[id*=project] {
   .span12 {
 		margin-top:20px;
 		.page-title {
-			color:#70bf4c;
+			color: $green;
 			font-family:"Proxima Nova";
 			margin-top:0;
 			text-transform:uppercase;}
@@ -3142,7 +3116,7 @@ form[id*=project] {
     margin-bottom:15px;}
   .fixed {
     background:#f8f8f8;
-    border-top:6px solid #70bf4c;
+    border-top:6px solid  $green;
     counter-reset: my-badass-counter;
     margin-left:0;
     padding:15px 0;
@@ -3158,7 +3132,7 @@ form[id*=project] {
       line-height:30px;
       padding:0 20px;
       &.active, &:hover {
-        background:#70bf4c url(image-path('dt-arrow-active.png')) 280px center no-repeat;
+        background: $green url(image-path('dt-arrow-active.png')) 280px center no-repeat;
         color:#fff;
         text-shadow:1px 1px 1px #508937;
         a {
@@ -3179,7 +3153,7 @@ form[id*=project] {
 	.span4 {
 		margin-top:60px;
 		h4 {
-			color:#70bf4c;}
+			color: $green;}
 		.twitter-button {
 			display:inline-block;
 			margin:10px 0 18px;}}
@@ -3188,11 +3162,11 @@ form[id*=project] {
 		hr {
 			margin:25px 0;}
 		h2 {
-			color:#70bf4c;
+			color: $green;
 			margin:0;}}
 	form {
 		label {
-			color:#70bf4c;}
+			color: $green;}
 		input[type=text] {
 			background:#f8f8f8;
 			margin-bottom:25px;
@@ -3206,7 +3180,7 @@ form[id*=project] {
 			height:320px;
 			width:100%;}
 		.send .btn {
-			background:#70bf4c;
+			background: $green;
 			border-radius:5px;
 			behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 			box-shadow:1px 1px 2px rgba(0,0,0,0.45);
@@ -3230,7 +3204,7 @@ form[id*=project] {
 
 .donations {
 	.hero {
-		background:url(image-path('bg-tile.jpg')) top left repeat;
+		background:$blue;
 		padding:45px 0;
 		img {
 			display:inline-block;
@@ -3247,13 +3221,13 @@ form[id*=project] {
 				color:#fff;
 				font:normal 14px/24px 'Proxima Nova Light';}
 			h2 {
-				color:#70bf4c;
+				color: $green;
 				font-family:'Proxima Nova';
 				letter-spacing:normal;
 				margin:0;
 				text-transform:none;}}}
 	h3.title {
-		border-bottom:6px solid #70bf4c;}
+		border-bottom:6px solid  $green;}
 	form {
 		.name {
 			width:100%;
@@ -3296,7 +3270,7 @@ form[id*=project] {
 					button {
 						float:right;}}
 	.btn {
-		background:#70bf4c;
+		background: $green;
 		border-radius:0;
 /*		box-shadow:1px 1px 2px rgba(0,0,0,0.45);*/
 		color:#fff;
@@ -3315,7 +3289,7 @@ form[id*=project] {
 
 .sponsors {
   .hero {
-		background: url(image-path('bg-tile.jpg')) top left repeat;
+		background: $blue;
 		margin-bottom:40px;
 		padding:35px 0 70px;
   }
@@ -3323,7 +3297,7 @@ form[id*=project] {
 
 .funding_sources {
 	.hero {
-		background: url(image-path('bg-tile.jpg')) top left repeat;
+		background: $blue;
 		padding:70px 0 70px;
 		.container {
 			.marketing {
@@ -3341,7 +3315,7 @@ form[id*=project] {
 					margin:10px 0 0;
 					text-transform:none;}
 				h3 {
-					color:#70bf4c;
+					color: $green;
 					line-height:100%;
 					margin:0;}
 				p {
@@ -3350,7 +3324,7 @@ form[id*=project] {
 					font-size:14px;
 					margin-top:30px;}
 				.btn {
-					background:#70bf4c;
+					background: $green;
 					border-radius:4px;
 					behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 					box-shadow:1px 1px 2px rgba(0,0,0,0.45);
@@ -3385,7 +3359,7 @@ form[id*=project] {
 					float:left;
 					width:620px;
 					h3 {
-						color:#70bf4c;
+						color: $green;
 						line-height:100%;
 						margin:0;
 					}
@@ -3407,7 +3381,7 @@ form[id*=project] {
 			display:inline-block;
   		text-transform:none;
 			span {
-				color:#70bf4c;
+				color: $green;
 			}
   	}
 		.get-funded {
@@ -3417,7 +3391,7 @@ form[id*=project] {
 
 .projects.new {
 	.hero {
-		background: url(image-path('bg-tile.jpg')) top left repeat;
+		background: $blue;
 		padding:35px 0 70px;
 		.container {
 			div {
@@ -3433,7 +3407,7 @@ form[id*=project] {
 					text-transform:none;
 				}
 				h3 {
-					color:#70bf4c;
+					color: $green;
 					line-height:100%;
 					margin:0;}
 				p {
@@ -3442,7 +3416,7 @@ form[id*=project] {
 					font-size:14px;
 					margin-top:30px;}
 				.btn {
-					background:#70bf4c;
+					background: $green;
 					border-radius:4px;
 					behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 					box-shadow:1px 1px 2px rgba(0,0,0,0.45);
@@ -3471,13 +3445,13 @@ form[id*=project] {
 				text-align:center;
 				text-transform:none;}
 			h3 {
-				color:#70bf4c;
+				color: $green;
 				font-family:"Proxima Nova Semi";
 				line-height:100%;
 				margin:0;
 				text-align:center;}
 			h5 {
-				color:#70bf4c;
+				color: $green;
 				font-family:"Proxima Nova Semi";
 				line-height:100%;
 				margin:30px 0 10px;}
@@ -3502,7 +3476,7 @@ form[id*=project] {
 			margin-right:20px;
 			text-transform:none;}
 		.btn {
-			background:#70bf4c;
+			background: $green;
 			border-radius:4px;
 			behavior: url(image-path('PIE-1.0.0/PIE.htc'));
 			box-shadow:1px 1px 2px rgba(0,0,0,0.45);

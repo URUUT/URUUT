@@ -1,69 +1,75 @@
-%h1.logo.pull-left
-  = link_to "Home", root_path
+.header
+  .container
+    %h1.logo
+      = link_to "Home", 'http://techbridge.org/'
 
-%ul.nav
-  %li
-    = link_to "Fund Projects", browse_projects_path, style: "#{"color: #70BF4C !important" if session[:page_active].eql?("project")}"
-  %li
-    = link_to "/projects/new", style: "#{"color: #70BF4C !important" if session[:page_active].eql?("funding")}" do
-      Get Funding
-  %li
-    = link_to about_pages_path, style: "#{"color: #70BF4C !important" if session[:page_active].eql?("about") }" do
-      About URUUT
-  -#%li
-    -#= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
+.navigation
+  .container
+    %ul.nav
+      %li{style: "#{"background:#19345f !important;" if session[:page_active].eql?("project")}"}
+        = link_to "Fund Projects", browse_projects_path
+      %li{style: "#{"background:#19345f !important;" if session[:page_active].eql?("funding")}"}
+        = link_to "Get Funding", "/projects/new"
+      %li{style: "#{"background:#19345f !important;" if session[:page_active].eql?("about") }"}
+        = link_to "About NPXchange", about_pages_path
+      -#%li
+        -#= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
 
-%ul.pull-right.right.logged-in
-  - if user_signed_in?
-    %li.signed-in.dropdown
-      %a.dropdown-toggle{'data-toggle' => 'dropdown'}
-        = image_tag "#{current_user.avatar}", :class => "img-circle avatar-thumb"
-        = current_user.first_name
-        = current_user.last_name
-        = image_tag 'down-arrow.png'
-      %div.dropdown-menu
-        .drop-wrapper
-          .dropdown-arrow
-          %ul
-            %li
-              = link_to 'My Profile', current_user
-            %li
-              = link_to 'Edit Account Settings', edit_user_registration_path
-            %li
-              = link_to 'Logout', destroy_user_session_path
-  - else
-    %li.dropdown
-      = link_to "Log In", "#", :class => "dropdown-toggle", 'data-toggle' => 'dropdown'
-      %span.or or
-      = link_to "Sign Up", new_user_registration_path, :class => "sign-up-link"
-      %div.log-in.dropdown-menu
-        .drop-wrapper
-          .dropdown-arrow
-          %ul
-            %li
-              %h5 Account Log In
-              = form_tag user_session_path, remote: true  do
-                = hidden_field_tag 'url', request.url
-                = text_field_tag 'user[email]', nil, :placeholder => "Your Email"
-                = password_field_tag 'user[password]', nil, :placeholder => "Your Password"
-                %div
-                  = check_box_tag 'user[remember_me]'
-                  = label_tag 'user[remember_me]', 'Remember me'
-                %button.btn
-                  Log in ►
+    %ul.pull-right.right.logged-in
+      - if user_signed_in?
+        %li.signed-in.dropdown
+          %a.dropdown-toggle{'data-toggle' => 'dropdown'}
+            = image_tag "#{current_user.avatar}", :class => "img-circle avatar-thumb"
+            = current_user.first_name
+            = current_user.last_name
+            = image_tag 'down-arrow.png'
+          %div.dropdown-menu
+            .drop-wrapper
+              .dropdown-arrow
+              %ul
+                %li
+                  = link_to 'My Profile', current_user
+                %li
+                  = link_to 'Edit Account Settings', edit_user_registration_path
+                %li
+                  = link_to 'Logout', destroy_user_session_path
+      - else
+        %li.dropdown
+          = link_to "Log In", "#", :class => "dropdown-toggle", 'data-toggle' => 'dropdown'
+          %span.or or
+          = link_to "Sign Up", new_user_registration_path, :class => "sign-up-link"
+          %div.log-in.dropdown-menu
+            .drop-wrapper
+              .dropdown-arrow
+              %ul
+                %li
+                  %h5 Account Log In
+                  = form_tag user_session_path, remote: true  do
+                    = hidden_field_tag 'url', request.url
+                    = text_field_tag 'user[email]', nil, :placeholder => "Your Email"
+                    = password_field_tag 'user[password]', nil, :placeholder => "Your Password"
+                    %div
+                      = check_box_tag 'user[remember_me]'
+                      = label_tag 'user[remember_me]', 'Remember me'
+                    %button.btn
+                      Log in ►
 
-              %a{"data-toggle" => "modal", :href => "#forgotModal", :role => "button", style: "font: italic 12px/15px 'Georgia', georgia, serif !important;text-transform:none;"}
-                Forgot your password?
+                  %a{"data-toggle" => "modal", :href => "#forgotModal", :role => "button", style: "font: italic 12px/15px 'Georgia', georgia, serif !important;text-transform:none;"}
+                    Forgot your password?
 
-              %hr
-              %h5 FACEBOOK LOG IN
-              %p It’s fast and easy.
-              = link_to user_omniauth_authorize_path(:facebook) do
-                = image_tag 'fb-180.png'
-              %p
-                We’ll never post anything
-                %br
-                without permission.
+                  %hr
+                  %h5 FACEBOOK LOG IN
+                  %p It’s fast and easy.
+                  = link_to user_omniauth_authorize_path(:facebook) do
+                    = image_tag 'fb-180.png'
+                  %p
+                    We’ll never post anything
+                    %br
+                    without permission.
+.nav-triangle-holder
+  .triangle-left
+  .between-triangles
+  .triangle-right
 
   -#%input{:type => "search", :placeholder => "Search"}
 #forgotModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "width: 440px;"}
@@ -82,7 +88,7 @@
           %span.error-container.error-email{style: "margin-top: 3px;"}
         = f.email_field :email, class: "email-address-forgot"
       %div{:style => "text-align: center"}
-        = f.submit "Reset My Password ►", class: "btn button-reset", style: "background: #81C263; border-radius: 5px; padding-top: 20px; padding-bottom: 20px; behavior: url('assets/PIE-1.0.0/PIE.htc');"
+        = f.submit "Reset My Password ►", class: "btn button-reset", style: "background: #95D60A; border-radius: 5px; padding-top: 20px; padding-bottom: 20px; behavior: url('assets/PIE-1.0.0/PIE.htc');"
 
 #errorModalForm.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "width: 440px;"}
   .modal-header{:style => "border-bottom: none;"}

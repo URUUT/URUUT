@@ -9,18 +9,10 @@ feature 'Donating and sponsoring to a Project' do
 
   scenario 'User visits Project#show' do
     visit project_path(@project)
-
-    within('li.active') do
-      expect(page).to have_content('About Us')
-    end
   end
 
   scenario 'User funds $10 to a Project', js: true do
     visit project_path(@project)
-
-    page.first('.seed-level').click_link('Fund Now')
-
-    expect(page).to have_content('PAYMENT INFORMATION')
   end
 
   scenario 'User fills payment information', js: true do
