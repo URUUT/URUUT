@@ -698,9 +698,11 @@ header {
     margin-top:8px;
     background-repeat: no-repeat;
     a {
-      background: url(image-path('new-logo.png'));
+      background: url(image-path('logo-tech.jpg'));
+      background-size: 100%;
+      background-repeat: no-repeat;
 			display:inline-block;
-			height:130px;
+			height:90px;
       text-decoration:none;
 			text-indent:-9999px;
 			width:290px;}}}
