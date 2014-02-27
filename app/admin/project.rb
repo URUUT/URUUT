@@ -1,10 +1,66 @@
 ActiveAdmin.register Project do
+
+  actions :all, :except => [:destroy]
+
   index do
     column :project_title do |project|
       link_to project.project_title, admin_project_path(project)
     end
 
     default_actions
+  end
+
+  show do |project|
+    attributes_table do
+      row :large_image do
+        image_tag("#{project.large_image}/convert?w=500")
+      end
+      row :project_title
+      row :organization
+      row :organization_classification
+      row :description
+      row :duration do
+        project.duration + " days"
+      end
+
+      row :goal do
+        number_to_currency project.goal
+      end
+      row :partial_funding
+      row :address
+      row :city do
+        project.city.capitalize
+      end
+      row :state
+      row :zip
+      row :category
+      row :website
+      row :twitter_handle
+      row :facebook_page
+      row :title
+      row :short_description
+      row :sponsorship_permission
+
+      row :perk_permission
+
+      row :status
+
+      row :seed_video
+
+      row :story
+      row :about
+
+      row :seed_image
+      row :cultivation_image
+      row :organization_type
+
+      row :cultivation_video
+      row :campaign_deadline
+      row :sponsor_permission
+
+      row :live
+    end
+    active_admin_comments
   end
 
   form do |f|
@@ -51,5 +107,20 @@ ActiveAdmin.register Project do
       f.input :partial_funding
     end
     f.actions
+  end
+
+  action_item :only => :show do
+    link_to('Approve Project', approve_project_admin_project_path(project), :method => :post) if project.ready_for_approval == 1
+  end
+
+  member_action :approve_project, :method => :post do
+    # Just a regular controller method in here
+    project = Project.find params[:id]
+    project.approve!
+    redirect_to :back, :notice => "Project Approved"
+  end
+
+  scope :unapproved do |projects|
+    projects.where('ready_for_approval = ?', 1)
   end
 end

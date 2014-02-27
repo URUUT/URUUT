@@ -1,4 +1,6 @@
 ActiveAdmin.register User do
+  actions :all, :except => [:destroy]
+
   index do
     column :email
     column :first_name

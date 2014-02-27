@@ -33,10 +33,12 @@ ActiveAdmin.register_page "Dashboard" do
   content do
     columns do
       column :class => 'projects-container' do
-        panel "Projects Ready For Approval" do
-          ul do
-            Project.where(ready_for_approval: 1).each do |project|
-              li link_to(project.title, admin_project_path(project))
+        unless Project.where(ready_for_approval: 1).count == 0
+          panel "Projects Ready For Approval" do
+            ul do
+              Project.where(ready_for_approval: 1).each do |project|
+                li link_to(project.title, admin_project_path(project))
+              end
             end
           end
         end
@@ -52,6 +54,25 @@ ActiveAdmin.register_page "Dashboard" do
         end
       end
 
+      column :class => 'projects-container' do
+        panel "Sign Ups" do
+          h4 do
+            text_node "Fee Plan ("
+            text_node link_to Membership.includes(:plan).where(:plans => {:name => 'fee'}).count, admin_memberships_path(scope: 'fee')
+            text_node ")"
+          end
+          h4 do
+            text_node "Basic Plan ("
+            text_node link_to Membership.joins(:plan).where(:plans => {:name => 'basic'}).count, admin_memberships_path(scope: 'basic')
+            text_node ")"
+          end
+          h4 do
+            text_node "Plus Plan ("
+            text_node link_to Membership.joins(:plan).where(:plans => {:name => 'plus'}).count, admin_memberships_path(scope: 'plus')
+            text_node ")"
+          end
+        end
+      end
     end
   end
 

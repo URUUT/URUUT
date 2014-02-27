@@ -16,4 +16,5 @@ class Membership < ActiveRecord::Base
     self.stripe_subscription_id = nil
     save
   end
+
 end

@@ -38,7 +38,15 @@
     padding: 0;
 
     li {
+      line-height: 2;
       list-style-type: none;
     }
+  }
+}
+
+.customers-container {
+  h3 {
+    font-size: 1.3em;
+    line-height: 1.5em;
   }
 }
