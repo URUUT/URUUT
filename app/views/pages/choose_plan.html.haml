@@ -124,10 +124,6 @@
 = render partial: 'signup_modal'
 
 :javascript
-  $(function() {
-    $('.plan-tooltip').tooltip();
-  });
-
   $(document).ready(function(){
     $('.modal').remove();
     $('#modal-form').addClass('modal');
@@ -136,4 +132,12 @@
       $('.signin').attr('href','/users/sign_in?sign_in_plan=' + $(this).data('plan-type'))
       $('.modal').modal();
     })
+
+    $('.plan-tooltip').tooltip();
+
+    $('body').bind('touchstart', function(e){
+      $('.plan-tooltip').each(function () {
+        if(!$(this).is(e.target)) $(this).tooltip('hide');
+      });
+    });
   });
