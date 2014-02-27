@@ -696,16 +696,17 @@ header {
     background: #fff;
     margin-left:10px;
     margin-top:8px;
+    margin-bottom:0;
     background-repeat: no-repeat;
     a {
       background: url(image-path('logo-tech.jpg'));
       background-size: 100%;
       background-repeat: no-repeat;
 			display:inline-block;
-			height:90px;
+			height:77px;
       text-decoration:none;
 			text-indent:-9999px;
-			width:290px;}}}
+			width:250px;}}}
 
 p.sections {
   color:$light-blue;
