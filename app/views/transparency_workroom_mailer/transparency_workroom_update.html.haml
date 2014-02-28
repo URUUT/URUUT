@@ -1,0 +1,17 @@
+%tr
+  %td{:valign => "top"}
+    %img{:src => "http://#{@host}/assets/pr-email-banner.jpg", :style => "display:block;"}
+%tr
+  %td{:valign => "top", :style => "color:#444;font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size:13px;margin:14px;" }
+    %p Hello #{@user.first_name},
+    %br
+    %p
+      There has been an update made to your Transparency Workroom on {insert Project Name}.
+    %br
+    %p
+      To view the latest updates and news, please click here: 
+      = link_to @project
+    %br
+    %p Thanks.
+    %br
+    %p #{@manager.first_name} #{@manager.last_name}
