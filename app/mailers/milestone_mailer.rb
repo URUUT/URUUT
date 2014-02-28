@@ -1,6 +1,6 @@
 class MilestoneMailer < ActionMailer::Base
   layout 'mailer'
-  default from: "info@techbridge.com"
+  default from: "xchange@techbridge.org"
 
   def milestone_email(email, percent, project)
   	  @email = email
