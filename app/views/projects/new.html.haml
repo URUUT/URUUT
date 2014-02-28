@@ -19,11 +19,8 @@
 	.container
 		%h2 Click here to connect with TechBridge for a consultation on your technology project .
 		- if user_signed_in?
-			- if @special_users.include?(current_user.first_name)
-				= link_to "/projects", method: :post, class: "btn" do
-					Get Started ►
-			- else
-				= link_to 'Get Started ►', "http://www.techbridge.org/inquiry", class: "btn"
+			= link_to "/projects", method: :post, class: "btn" do
+				Get Started ►
 		- else
 			= link_to '#', class: 'btn must-login' do
 				Get Started ►
