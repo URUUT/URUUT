@@ -12,7 +12,7 @@ ActiveAdmin.register Membership do
       membership.user.organization.capitalize if membership.user.organization
     end
     column :plan do |membership|
-      membership.plan.name.capitalize
+      membership.plan.try(:name).try(:capitalize)
     end
     column :email do |membership|
       link_to membership.user.email, "mailto:#{membership.user.email}"
