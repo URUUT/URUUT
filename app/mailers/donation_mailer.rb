@@ -25,6 +25,7 @@ class DonationMailer < ActionMailer::Base
     project = Project.find(donation.project_id)
     sponsor = User.find_by_id(project.user_id)
 
+    @donation_amount = donation.amount
     @donator_name = "#{user.first_name}" + " #{user.last_name}"
     @email = user.email
     @image = project.large_image
@@ -36,6 +37,7 @@ class DonationMailer < ActionMailer::Base
     @project_title = project.project_title
     @sponsor_email = sponsor.email
     @sponsor_name = "#{sponsor.first_name}" + " #{sponsor.last_name}"
+    @user_id = user.id
 
     mail to: @email, subject: "Thank You, Donor!"
   end

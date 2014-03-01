@@ -1,6 +1,8 @@
 require 'sidekiq/web'
 
 Crowdfund::Application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   # match '/users/auth/:provider/callback', to: 'services#create'
 
   devise_for :users, :controllers => {
@@ -70,14 +72,14 @@ Crowdfund::Application.routes.draw do
 
   post "#{Rails.root}/public/images"
 
-  get "admin/unapproved"
-  post "admin/approve"
+  # get "admin/unapproved"
+  # post "admin/approve"
 
   get "/skip_sponsor" => "projects#skip_sponsor"
 
-  resources :admin do
-    get "deny", :on => :member
-  end
+  # resources :admin do
+  #   get "deny", :on => :member
+  # end
 
   resources :s3_uploads
   namespace :project_admin do

@@ -16,3 +16,5 @@ filepicker:
 
 cloudsponge:
   api_key: "<%= ENV['CLOUDSPONGE_API'] %>"
+
+secret_key: "<%= ENV['SECRET_TOKEN'] %>"

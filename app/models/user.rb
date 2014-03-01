@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email, :case_sensitive => false
 
   with_options dependent: :destroy do |user|
-    user.has_many :services
+    # user.has_many :services
     user.has_many :projects
     user.has_many :contacts
   end

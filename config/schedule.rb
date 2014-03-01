@@ -21,3 +21,7 @@
 every 5.minutes do
   runner "ContactMailer.delay.contact_confirmation('Chad', 'chad.bartels@gmail.com', 'test', 'test')"
 end
+
+every 1.day, at: '0:00 am' do
+  rake "transparency_workroom_notification"
+end

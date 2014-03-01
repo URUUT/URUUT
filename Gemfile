@@ -31,7 +31,8 @@ gem 'meta_request'
 gem 'airbrake'
 gem 'prawn'
 gem 'writeexcel', '~> 1.0.3'
-gem 'acts_as_tenant', '~> 0.3.1'
+gem 'activeadmin'
+gem "meta_search", '>= 1.1.0.pre'
 gem 'writeexcel', '~> 1.0.3'
 gem 'acts_as_tenant', '~> 0.3.1'
 
@@ -73,6 +74,7 @@ group :development, :test do
   # gem 'jasminerice'
   gem 'launchy'
   gem 'dotenv-rails'
+  gem 'rails_email_preview', '~> 0.2.12'
 end
 
 group :test do
