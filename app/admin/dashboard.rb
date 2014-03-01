@@ -42,9 +42,7 @@ ActiveAdmin.register_page "Dashboard" do
             end
           end
         end
-      end
 
-      column :class => 'projects-container' do
         panel "Recent Demo Requests (5)" do
           ul do
             Demo.limit(5).each do |demo|
