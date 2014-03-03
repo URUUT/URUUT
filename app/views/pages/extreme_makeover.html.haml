@@ -1,0 +1,113 @@
+!!!
+%html
+  = render 'layouts/head'
+
+  %body.extreme-makeover
+    #wrap
+      %header.navbar
+        .container
+          %h1.logo.pull-left
+            = link_to "Home", root_path
+          .cta
+            = link_to 'Sign Up ►', choose_plan_pages_path, class: 'btn btn-primary sign-up'
+            = link_to 'Demo ►', new_demo_request_path, class: 'btn btn-primary demo'
+
+      .container
+        %h1
+          Does Your Donor Experience Need an
+          %br
+          Extreme Makeover?
+
+        %p.tagline First-generation "Donate Now" buttons create boring/confusing donor experiences that are hurting your nonprofit's ability to consistently raise funds, online. That's why more and more non profits just like yours are upgrading that old "Donate Now Button" to URUUT.
+
+        .span5
+          %h4
+            IN JUST A FEW SIMPLE CLICKS,
+            %br
+            GO FROM THIS:
+
+          = image_tag 'no-donate-button.png'
+
+          %h4 REGISTER FOR A FREE DEMO!
+
+          = form_for @demo, url: demo_request_index_path , html: {class: "well"} do |f|
+            - if @demo.errors.any?
+              .error-box
+                %ul
+                  - @demo.errors.full_messages.each do |error_message|
+                    %li= error_message
+            #step1
+              %div
+                = f.label :first_name, class: "label-green" do
+                  First Name*
+                  %span.error-container
+                = f.text_field :first_name, class: 'full-with', required: true
+
+              %div
+                = f.label :last_name, class: "label-green" do
+                  Last Name*
+                  %span.error-container
+                = f.text_field :last_name, class: 'full-with', required: true
+
+              %div
+                = f.label :organization, class: "label-green" do
+                  %span.error-container
+                  Organization name*
+                = f.text_field :organization, class: 'full-with', required: true
+
+              %div
+                = f.label :email, class: "label-green" do
+                  %span.error-container
+                  Email address*
+                = f.email_field :email, class: 'full-with', required: true
+
+              %div
+                = f.label :phone, class: "label-green" do
+                  Phone number*
+                  %span.error-container
+                = f.text_field :phone, id: "user_pass", class: 'full-with', required: true
+
+              %div
+                = f.submit 'Next Step ►', class: "btn btn-primary", id: "project-submit", style: "border-radius: 5px; padding: 19px;margin-top: 35px;"
+
+        .span6.offset1
+          %h4 TO THIS!
+
+          = image_tag 'extreme_makeover.jpg'
+
+          %h2 The Top 5 Reasons Nonprofits Prefer URUUT:
+
+          %ol
+            %li
+              %span.bold Multi-donor fundraising
+              \- makes it as easy to receive donations from businesses and foundations as it does for individuals
+            %li
+              %span.bold "All or Nothing" AND "Partial" Campaigns
+              supported
+            %li
+              %span.bold Industry-first "Transparency Workroom"
+              \- enables donors to see how and where their donations are being spent using photo and video.
+            %li
+              %span.bold Automatic Tax Receipts & Thank You Letters
+            %li
+              %span.bold Flexible Pricing Options
+              \- including monthly subscriptions starting under $100!
+
+          .plus – PLUS –
+
+          %p
+            We assign a
+            %span.bold dedicated launch manager
+            who will help you set up your account, plan your campaign strategy and successfully launch your campaign!
+
+          %a.learn Learn More &rsaquo;
+
+      .copyright
+        .container
+          %p
+            = image_tag 'footer-logo.png'
+            &copy;
+            = Date.today.strftime('%Y')
+            URUUT.
+            %span.italic
+              All Rights Reserved.

@@ -61,6 +61,11 @@ class PagesController < ApplicationController
     # session[:previous_page] = request.referer
   end
 
+  def extreme_makeover
+    @demo = Demo.new
+    render layout: false
+  end
+
   def media
     @press_releases = PressRelease.all
     @press_coverages = PressCoverage.order("release_date DESC").all

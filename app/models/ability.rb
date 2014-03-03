@@ -10,5 +10,8 @@ class Ability
         can :manage, PressCoverage
         can :manage, PressRelease
     end
+    if user.role == "member"
+        can :read, :all
+    end
   end
 end

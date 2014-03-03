@@ -1,0 +1,30 @@
+%head
+  %meta{:charset => "utf-8"}
+  %meta{"http-equiv" => "X-UA-Compatible", :content => "IE=edge,chrome=1"}
+  %meta{:name => "viewport", :content => "width=960, maximum-scale=1"}
+  %title= content_for?(:title) ? yield(:title) : "URUUT"
+  %meta{:content => "A cloud-based SaaS solution that makes it easy for nonprofits to reach and secure more donors and raise more funds.", :name => "description"}
+  %meta{:content => "", :name => "author"}
+  - if controller_name == "projects" and action_name == "show"
+    %meta{:property => "og:image", :content => "#{@project.large_image}"}
+    %meta{:property => "og:title", :content => "#{@project.title}"}
+  - else
+    %meta{:property => "og:image", :content => "https://www.uruut.com#{asset_path('uruut-fb-og.png') }"}
+    %meta{:property => "og:title", :content => ""}
+    %meta{:property => "og:description", :content => "Giving You The Power To Create A Better Community"}
+  = favicon_link_tag 'favicon.ico'
+  = stylesheet_link_tag  "default/application", "trontastic/jquery-ui-1.8.22.custom.css", "leaflet.css", "style.css.scss", :media => "all"
+  = stylesheet_link_tag "image_select/jquery.Jcrop.min"
+  = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"
+  = javascript_include_tag "application", "https://js.stripe.com/v1/", :media => "all"
+  = javascript_include_tag "jquery.ui.mouse", "jquery.ui.touch-punch.min"
+  = javascript_include_tag "jquery.Jcrop.min"
+  /[if lt IE 9]
+    = stylesheet_link_tag "ie-only.css.scss"
+    = javascript_include_tag "selectivizr-min"
+  = filepicker_js_include_tag
+  = javascript_tag do
+    Stripe.setPublishableKey("#{STRIPE_PUBLIC_KEY}");
+  = airbrake_javascript_notifier
+  = csrf_meta_tags
+  = yield(:head)

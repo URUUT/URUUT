@@ -2945,3 +2945,129 @@ input, select, textarea{
       }
   }
 }
+
+.extreme-makeover {
+
+  .cta {
+    float: right;
+
+    .sign-up {
+      background: $green;
+      height: 23px;
+      line-height: 23px;
+      margin-top: 8px;
+      padding: 10px 35px;
+      @include border-radius(5px);
+    }
+
+    .demo {
+      background: #8d8d8d;
+      height: 23px;
+      line-height: 23px;
+      margin-left: 15px;
+      margin-top: 8px;
+      padding: 10px 35px;
+      @include border-radius(5px);
+    }
+  }
+
+  h1 {
+    color: $green;
+    font-family: 'Proxima Nova Light', sans-serif;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-top: 50px;
+    text-align: center;
+    text-transform: none;
+  }
+
+  h2 {
+    color: $green;
+    font-family: 'Proxima Nova', sans-serif;
+    font-size: 30px;
+    margin-top: 30px;
+    text-align: left;
+    text-transform: none;
+  }
+
+  h4 {
+    color: $green;
+    font-family: 'Proxima Nova', sans-serif;
+    font-size: 18px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .tagline {
+    color: #8d8d8d;
+    font-family: 'Proxima Nova Light', sans-serif;
+    font-size: 24px;
+    line-height: 1.5;
+    margin: 10px 0 50px;
+    text-align: center;
+  }
+
+  .bold, .plus {
+    font-family: 'Proxima Nova Semi', sans-serif;
+    font-weight: 600;
+  }
+
+  .plus {
+    color: #8d8d8d;
+    font-size: 20px;
+    margin: 35px 0;
+  }
+
+  input[type=text], input[type=email] {
+    margin-bottom: 20px;
+    margin-top: 8px;
+    width: 100%;
+  }
+
+  input[type=submit] {
+    margin-top: 35px;
+    padding: 19px;
+    width: 100%;
+  }
+
+  .span5 {
+    img {
+      display: block;
+      margin-bottom: 55px;
+    }
+  }
+
+  .span6 {
+    img {
+      display: block;
+      margin: 0 auto;
+    }
+
+    ol, p {
+      color: #8d8d8d;
+      font-family: 'Proxima Nova Light', sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    ol {
+      margin-top: 20px;
+
+      li {
+        margin-bottom: 5px;
+      }
+    }
+
+    .learn {
+      display: inline-block;
+      font-size: 16px;
+      margin-top: 25px;
+    }
+  }
+
+  .copyright {
+    margin-top: 50px;
+  }
+}
