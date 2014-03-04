@@ -1,3 +1,5 @@
+require 'bitly'
+
 Bitly.configure do |config|
   config.api_version = 3
   config.login = "chadbartels"
