@@ -5,7 +5,8 @@ class Users::SessionsController < DeviseController
 
   # GET /resource/sign_in
   def new
-    resource = build_resource(nil, :unsafe => true)
+    # resource = build_resource(nil, :unsafe => true)
+    resource = resource_class.new(sign_in_params)
     clean_up_passwords(resource)
     respond_to do |format|
       format.js
