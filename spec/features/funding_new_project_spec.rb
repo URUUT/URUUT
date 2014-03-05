@@ -62,29 +62,29 @@ feature 'Funding a new project' do
   #   expect(page).to have_content('SEEDER PERKS')
   # end
 
-  scenario 'User fills SEEDER PERKS', :js => true do
-    create_project
-    page.set_rack_session(:connected => true)
+  # scenario 'User fills SEEDER PERKS', :js => true do
+  #   create_project
+  #   page.set_rack_session(:connected => true)
 
-    visit edit_project_path(@project, anchor: 'perks')
+  #   visit edit_project_path(@project, anchor: 'perks')
 
-    click_link 'CONTINUE TO STEP 4'
+  #   click_link 'CONTINUE TO STEP 4'
 
-    expect(page).to have_content('SPONSORSHIP DETAILS')
-  end
+  #   expect(page).to have_content('SPONSORSHIP DETAILS')
+  # end
 
-  scenario 'User fills SPONSORSHIP DETAILS', :js => true do
-    create_project
-    page.set_rack_session(:connected => true)
+  # scenario 'User fills SPONSORSHIP DETAILS', :js => true do
+  #   create_project
+  #   page.set_rack_session(:connected => true)
 
-    visit edit_project_path(@project, anchor: 'sponsorship')
+  #   visit edit_project_path(@project, anchor: 'sponsorship')
 
-    check 'platinum_1'
+  #   check 'platinum_1'
 
-    click_link 'next-link-to-assets'
+  #   click_link 'next-link-to-assets'
 
-    expect(page).to have_content('ABOUT US')
-  end
+  #   expect(page).to have_content('ABOUT US')
+  # end
 
   # scenario 'User fills VISUALS', :js => true do
   #   create_project
