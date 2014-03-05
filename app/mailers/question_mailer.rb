@@ -7,6 +7,7 @@ class QuestionMailer < ActionMailer::Base
     @body  = body
     @subject = subject
     @owner = owner
+    @host = ActionMailer::Base.default_url_options[:host]
     mail subject: @subject, from: @email, to: @owner.email
   end
 end

@@ -7,7 +7,7 @@ class MilestoneMailer < ActionMailer::Base
   	  @percent = percent
   	  @project = Project.find_by_id(project)
   	  @image = @project.large_image
-
+      @host = ActionMailer::Base.default_url_options[:host]
   	  mail to: @email, subject: "Milestone Email Test"
   end
 end

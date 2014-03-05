@@ -72,6 +72,7 @@ class SponsorMailer < ActionMailer::Base
 
   def send_sponsor_report
     attachments['sponsor_report.csv'] = File.read('reports/sponsor_report.csv')
+    @host = ActionMailer::Base.default_url_options[:host]
 
     mail to: 'cbartels@uruut.com', subject: 'Sponsor Report', body: ''
   end
