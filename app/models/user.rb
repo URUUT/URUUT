@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  SPECIAL_USERS = ['Jennifer', 'thecaptainjenny@gmail.com']
+  SPECIAL_USERS = ['Jennifer', 'thecaptainjenny@gmail.com', 'sergio@hashdog100.com']
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
