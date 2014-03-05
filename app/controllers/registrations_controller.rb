@@ -3,7 +3,7 @@ class RegistrationsController < Devise::RegistrationsController
   layout "landing", only: [:confirmation]
 
   def new
-    build_resource
+    self.resource = resource_class.new
 
     @marketing_info = MarketingInfo.find_by_id(params[:marketing_info_id])
 
@@ -20,7 +20,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def create
-    build_resource
+    self.resource = resource_class.new(params[:user])
 
     if resource.save
       resource.build_membership.save
