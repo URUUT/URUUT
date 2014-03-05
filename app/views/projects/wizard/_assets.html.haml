@@ -417,7 +417,7 @@
 
   $(function(){
     var geocoder = new google.maps.Geocoder();
-    var geocoderRequest = { address: "#{@project.address},#{@project.city},#{@project.state}" };
+    var geocoderRequest = { address: $('#project_city').val() + ',' + $('#project_state').val() + ',' + $('#project_zip').val() };
     geocoder.geocode(geocoderRequest, function(results, status){
       var latitude = results[0].geometry.location.lat();
       var longitude = results[0].geometry.location.lng();
