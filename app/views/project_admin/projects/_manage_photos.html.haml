@@ -67,7 +67,7 @@
           $('.coverphoto').html("CHOOSE A COVER PHOTO");
           var largeImageObj = new Image;
           largeImageObj.src = largeImage;
-          if ( largeImageObj.width >= 1600 )
+          if ( largeImageObj.width >= 1024 )
           {
             $(".loader-cover").hide();
             $("#url_image").val(largeImage);
@@ -107,7 +107,7 @@
             $(".loader-cover").hide();
             $('.drag-instructions').remove();
             $(".project-cover-image").show();
-            $('.cover-content-image-data').append('<span class="drag-instructions" style="width: 300px;"><b>image width for cover should be more than 1600px</b></span>');
+            $('.cover-content-image-data').append('<span class="drag-instructions" style="width: 300px;"><b>image width for cover should be more than 1024px</b></span>');
           }
         });
       },
