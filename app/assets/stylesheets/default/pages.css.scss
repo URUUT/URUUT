@@ -1467,7 +1467,7 @@ div[id^='step'] {
 }
 
 .show-content {
-  margin-top:190px!important;
+  margin-top:0px;
 	margin-bottom: 100px;
 }
 
@@ -1924,7 +1924,7 @@ ul.perks {
         position:relative;
         .btn {
           background:none;
-          background:$blue;
+          background:$blue!important;
           border:none;
           border-radius:0;
           box-shadow:none;
