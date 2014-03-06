@@ -15,7 +15,7 @@
           %p
           = @project_sponsors[1].last.mission
 - if !@project.large_image.blank?
-  #large_image{:style => "background:url(#{@project.large_image});"}
+  #large_image{:style => "background:url(#{@project.large_image}); margin-left:0;"}
     .funding-info
       .container
         .span8
@@ -68,7 +68,7 @@
                   Left
                 .amount= campaign_days_left(@project) > 0 ? campaign_days_left(@project):0
 - else
-  #large_image{:style => "background:url(#{@project.large_image}); background-size: cover"}
+  #large_image{:style => "background:url(#{@project.large_image}); background-size: cover; margin-left:0;"}
     .funding-info
       .container
         .span8
