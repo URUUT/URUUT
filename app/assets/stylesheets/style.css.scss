@@ -485,7 +485,11 @@ h3, h4, h5{
 
       .btn{
         font-family: 'Proxima Nova Semi', arial, sans-serif;
-        color: #fff;
+
+        &:hover{
+          background: #19345f!important;
+          color: #fff;
+        }
       }
     }
   }
@@ -518,7 +522,7 @@ h3, h4, h5{
      font-family: 'Proxima Nova Semi', arial, sans-serif;
 
      &:hover{
-      background: $green2 !important;
+      background: $blue !important;
       color: #fff !important;
     }
   }
