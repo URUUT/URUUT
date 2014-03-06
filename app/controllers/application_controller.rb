@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+  require "net/http"
+  require "uri"
+
   protect_from_forgery
   set_current_tenant_through_filter
   layout :layout_by_resource

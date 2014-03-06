@@ -256,7 +256,8 @@ class ProjectsController < ApplicationController
     link_video = generate_video_link(video)
     link_video = link_video.gsub('watch?v=', 'embed/')
 
-    logger.debug "#{link_video}"
+    logger.debug link_video
+    puts "#{link_video}"
 
     @project = Project.find_by_id(session[:current_project])
     if params[:video_type].eql?("seed")
