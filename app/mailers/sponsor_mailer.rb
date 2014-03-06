@@ -4,7 +4,7 @@ class SponsorMailer < ActionMailer::Base
   helper MailerHelper
   include MailerHelper
 
-  default from: "info@techbridge.com"
+  default from: "xchange@techbridge.org"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -72,6 +72,7 @@ class SponsorMailer < ActionMailer::Base
 
   def send_sponsor_report
     attachments['sponsor_report.csv'] = File.read('reports/sponsor_report.csv')
+    @host = ActionMailer::Base.default_url_options[:host]
 
     mail to: 'cbartels@uruut.com', subject: 'Sponsor Report', body: ''
   end

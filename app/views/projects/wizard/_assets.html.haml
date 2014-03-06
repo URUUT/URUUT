@@ -153,12 +153,6 @@
                           - if p.limit
                             %span.small-heading
                               = p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of #{p.perk_limit} Available)"
-                        When you seed $#{p.amount.to_i}, you will receive:
-                        %ul.normal-font.dashed-list
-                          %li
-                            #{p.description}
-                        %p.subtext
-                          Nonprofit Xchange Reward Points: #{p.amount.to_i}
                         .clearfix
                           .seed-num
                             .amount
@@ -168,12 +162,8 @@
                   - default_perk.each_with_index do |perk, index|
                     - index += 1
                     - name = "LEVEL #{index}"
-                    - description = "#{perk} Nonprofit Xchange Reward Points"
                     .seed-level
                       %h3= name
-                      When you seed $#{perk.to_i}, you will receive:
-                      %ul.normal-font.dashed-list
-                        %li= description
                       .clearfix
                         .seed-num
                           .amount
@@ -183,7 +173,7 @@
                 .seed-level{id: "perk-id-custom"}
                   %h3.perk-name-other{id: "perk-name-other-custom"}
                     CHOOSE YOUR PERK
-                  %p With this option you choose the amount to seed, you will receive 1 Nonprofit Xchange Reward Point for each dollar you seed.
+                  %p With this option you choose the amount to seed.
                   .clearfix
                     .seed-num
                       .amount
@@ -266,12 +256,6 @@
                       - if p.limit
                         %span.small-heading
                           = p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of #{p.perk_limit} Available)"
-                    When you seed $#{p.amount.to_i}, you will receive:
-                    %ul.normal-font.dashed-list
-                      %li
-                        #{p.description}
-                    %p.subtext
-                      Nonprofit Xchange Reward Points: #{p.amount.to_i}
                     .clearfix
                       .seed-num
                         .amount
@@ -282,12 +266,8 @@
               - default_perk.each_with_index do |perk, index|
                 - index += 1
                 - name = "LEVEL #{index}"
-                - description = "#{perk} Nonprofit Xchange Reward Points"
                 .seed-level
                   %h3= name
-                  When you seed $#{perk.to_i}, you will receive:
-                  %ul.normal-font.dashed-list
-                    %li= description
                   .clearfix
                     .seed-num
                       .amount
@@ -298,7 +278,7 @@
             .seed-level{id: "perk-id-custom"}
               %h3.perk-name-other{id: "perk-name-other-custom"}
                 CHOOSE YOUR PERK
-              %p With this option you choose the amount to seed, you will receive 1 Nonprofit Xchange Reward Point for each dollar you seed.
+              %p With this option you choose the amount to seed.
               .clearfix
                 .seed-num
                   .amount
@@ -357,6 +337,7 @@
 
 = javascript_include_tag "jquery-ui"
 = javascript_include_tag "jquery.ui.touch-punch.min"
+= javascript_include_tag "//maps.google.com/maps/api/js?sensor=false"
 
 :javascript
   $('.new-save-btn').hide();
@@ -381,56 +362,44 @@
       $('.coverphoto').html("CHOOSE A COVER PHOTO");
       var largeImageObj = new Image;
       largeImageObj.src = largeImage;
-      if ( largeImageObj.width >= 1600 )
-      {
-        $(".loader-cover").hide();
-        $(".coverphoto").hide();
-        $(".div-image-priview").remove();
-        $("#url_image").val(largeImage);
+      $(".loader-cover").hide();
+      $(".coverphoto").hide();
+      $(".div-image-priview").remove();
+      $("#url_image").val(largeImage);
 
-        var dragImg = new Image;
-        dragImg.src = largeImage;
-        dragImg.id = "dragImg"
+      var dragImg = new Image;
+      dragImg.src = largeImage;
+      dragImg.id = "dragImg"
 
-        $('.ui-draggable').remove();
-        $('#large_image').prepend(dragImg);
-        $('#large_image').append('<span class="drag-instructions">DRAG TO REPOSITION COVER PHOTO</span>');
+      $('.ui-draggable').remove();
+      $('#large_image').prepend(dragImg);
+      $('#large_image').append('<span class="drag-instructions">DRAG TO REPOSITION COVER PHOTO</span>');
 
-        $("#y_position").val(0);
+      $("#y_position").val(0);
 
-        $('#dragImg').draggable({
-          axis: 'y',
-          drag: function(event, ui) {
-            var bottom = $(this).parent().height() - $(this).height();
-            if(ui.position.top > 0) {
-              ui.position.top = 0;
-            }
-
-            if(ui.position.top < bottom) {
-              ui.position.top = bottom;
-            }
-          },
-          stop: function(event, ui) {
-            var w = $('.ui-draggable').width();
-            var wOriginal = largeImageObj.width;
-            var ratio = parseInt(wOriginal) / parseInt(w);
-            $('#y_position').val(Math.round(Math.abs(ui.position.top * ratio)));
+      $('#dragImg').draggable({
+        axis: 'y',
+        drag: function(event, ui) {
+          var bottom = $(this).parent().height() - $(this).height();
+          if(ui.position.top > 0) {
+            ui.position.top = 0;
           }
-        });
 
-        $('#large_image').css('background-image','');
-        $('#dragImg').css('position', 'absolute')
-        $('.new-save-btn').show();
-        $(".action-convert").show();
-      }
-      else{
-        $('.new-save-btn').hide();
-        $(".loader-cover").hide();
-        $(".coverphoto").show();
-        $('#large_image').css('background-image', current_bg);
-        $('.drag-instructions').remove();
-        $("#large_image").append('<span class="drag-instructions" style="width: 300px;"><b>image width for cover should be more than 1600px</b></span>');
-      }
+          if(ui.position.top < bottom) {
+            ui.position.top = bottom;
+          }
+        },
+        stop: function(event, ui) {
+          var w = $('.ui-draggable').width();
+          var wOriginal = largeImageObj.width;
+          var ratio = parseInt(wOriginal) / parseInt(w);
+          $('#y_position').val(Math.round(Math.abs(ui.position.top * ratio)));
+        }
+      });
+
+      $('#large_image').css('background-image','');
+      $('.new-save-btn').show();
+      $(".action-convert").show();
     });
   }
 

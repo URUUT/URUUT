@@ -22,7 +22,7 @@
         %span.italic{style: "color: #000"} (Ex. Dunwoody City Park Fountain)
         %span.italic.project-title-remaining{style: "color: #000"}
         %span.error-container
-      = f.text_field :project_title, maxlength: 35, :required => true, class: "span8 project-title"
+      = f.text_field :project_title, maxlength: 45, :required => true, class: "span8 project-title"
 
     %div
       = f.label :goal, class: "label-green" do
@@ -193,7 +193,7 @@
   };
 
   function updateCutdownTitle() {
-    var remaining = 35 - jQuery('.project-title').val().length;
+    var remaining = 45 - jQuery('.project-title').val().length;
     jQuery('.project-title-remaining').text('(' + remaining + ' characters remaining.)');
   };
 

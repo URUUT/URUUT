@@ -9,6 +9,7 @@ class ProjectsController < ApplicationController
   before_filter :set_session_page
   before_filter :set_session_wizard, only: [:new, :create]
   before_filter :admin_required!, only: [:edit, :update, :delete_image]
+  before_filter :check_for_special_user, only: [:edit]
 
   layout false, :only => "stripe_update"
 
@@ -20,7 +21,6 @@ class ProjectsController < ApplicationController
     @project = Project.new
     session[:current_project] = ''
     session[:connected] = ''
-
 
     #    @project.perks.build
     #    @project.galleries.build
@@ -427,6 +427,10 @@ class ProjectsController < ApplicationController
        redirect_to root_url and return false
       end
      end
+  end
+
+  def check_for_special_user
+    redirect_to 'http://www.techbridge.org/inquiry' unless User::SPECIAL_USERS.include?(current_user.email || current_user.first_name)
   end
 
 end

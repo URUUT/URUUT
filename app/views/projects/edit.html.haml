@@ -1,48 +1,48 @@
 = javascript_include_tag "global/jquery.joyride-2.0.3"
 = javascript_include_tag "accounting.min"
+.container.content{style: 'margin-left: -12px;'}
+  .breadcrumb-container
+    %ul.breadcrumbs
+      %li.sponsor-info
+        = link_to "#{ wizard_link("sponsor_info", @project) }", class: "wizard-link sponsor-info-link", "wizard-type" => "sponsor_info" do
+          %span.steps Step 1
+          %span.title PROFILE
+          %span.description Basic Information
+          %span.border
 
-.breadcrumb-container
-  %ul.breadcrumbs
-    %li.sponsor-info
-      = link_to "#{ wizard_link("sponsor_info", @project) }", class: "wizard-link sponsor-info-link", "wizard-type" => "sponsor_info" do
-        %span.steps Step 1
-        %span.title PROFILE
-        %span.description Basic Information
-        %span.border
+      %li.project-details
+        = link_to "#{ wizard_link("project_details", @project) }", class: "wizard-link project-details-link", "wizard-type" => "#{"project_detail" if ["first", "second", "third", "fourth", "last"].include? session[:step]}" do
+          %span.steps Step 2
+          %span.title STORY
+          %span.description Project Details
+          %span.border
 
-    %li.project-details
-      = link_to "#{ wizard_link("project_details", @project) }", class: "wizard-link project-details-link", "wizard-type" => "#{"project_detail" if ["first", "second", "third", "fourth", "last"].include? session[:step]}" do
-        %span.steps Step 2
-        %span.title STORY
-        %span.description Project Details
-        %span.border
+      %li.perks
+        = link_to "#{ wizard_link("perks", @project) }", class: "wizard-link perks-link", "wizard-type" => "#{ "perks" if ["second", "third", "fourth", "last"].include? session[:step]}" do
+          %span.steps Step 3
+          %span.title PERKS
+          %span.description Donor Rewards
+          %span.border
 
-    %li.perks
-      = link_to "#{ wizard_link("perks", @project) }", class: "wizard-link perks-link", "wizard-type" => "#{ "perks" if ["second", "third", "fourth", "last"].include? session[:step]}" do
-        %span.steps Step 3
-        %span.title PERKS
-        %span.description Donor Rewards
-        %span.border
+      %li.sponsorship
+        = link_to "#{ wizard_link("sponsorship", @project) }", class: "wizard-link sponsorship-link", "wizard-type" => "#{"sponsorship" if ["third", "fourth", "last"].include? session[:step]}" do
+          %span.steps Step 4
+          %span.title Sponsors
+          %span.description Sponsorship Details
+          %span.border
 
-    %li.sponsorship
-      = link_to "#{ wizard_link("sponsorship", @project) }", class: "wizard-link sponsorship-link", "wizard-type" => "#{"sponsorship" if ["third", "fourth", "last"].include? session[:step]}" do
-        %span.steps Step 4
-        %span.title Sponsors
-        %span.description Sponsorship Details
-        %span.border
+      %li.assets
+        = link_to "#{ wizard_link("assets", @project) }", class: "wizard-link assets-link", "wizard-type" => "#{"assets" if ["fourth", "last"].include? session[:step]}" do
+          %span.steps Step 5
+          %span.title VISUALS
+          %span.description Project Page Setup
+          %span.border
 
-    %li.assets
-      = link_to "#{ wizard_link("assets", @project) }", class: "wizard-link assets-link", "wizard-type" => "#{"assets" if ["fourth", "last"].include? session[:step]}" do
-        %span.steps Step 5
-        %span.title VISUALS
-        %span.description Project Page Setup
-        %span.border
-
-    %li.submit
-      = link_to "javascript:void(0)", class: "submit-finish-project #{"submit-finish-project" if session[:step].eql?("fourth") }" do
-        %span.steps Get Started
-        %span.title Submit
-        %span.description Submit Your Project for Approval
+      %li.submit
+        = link_to "javascript:void(0)", class: "submit-finish-project #{"submit-finish-project" if session[:step].eql?("fourth") }" do
+          %span.steps Get Started
+          %span.title Submit
+          %span.description Submit Your Project for Approval
 
 = render "projects/wizard/sponsor_info", :project => @project
 = render "projects/wizard/project_details", :project => @project
@@ -67,7 +67,7 @@
   /* data-id needs to be the same as the parent it will attach to */
   %li{"data-class" => "pick-cover-photo", "data-options" => "tipLocation:right"}
     %h5 CHOOSE A COVER PHOTO
-    %p The cover photo is the large splash image that appears on your page. The dimensions should be at least 1600 x 546 pixels. It’s a big photo and a great opportunity to give your page a striking, eye-catching look. Choose something that reflects your organization, project, and personality.
+    %p The cover photo is the large splash image that appears on your page. It’s a big photo and a great opportunity to give your page a striking, eye-catching look. Choose something that reflects your organization, project, and personality.
     %a{:href => "#", :class => "button small quit-tour joyride-close-tip close-tip-custom"} Quit Tour
   %li{"data-id" => "planting_seeds", "data-options" => "tipLocation:top"}
     %h5 ADD PHOTO / VIDEO
@@ -490,6 +490,25 @@
       $('#project_facebook_page').val(localStorage.getItem('facebook_page'));
     }
 
+    var geocoder = new google.maps.Geocoder();
+    var geocoderRequest = { address: $('#project_city').val() + ',' + $('#project_state').val() + ',' + $('#project_zip').val() };
+    geocoder.geocode(geocoderRequest, function(results, status){
+      var latitude = results[0].geometry.location.lat();
+      var longitude = results[0].geometry.location.lng();
+
+      var map = L.map('map', {
+          scrollWheelZoom: false
+      }).setView([latitude,longitude], 11);
+
+      var uruutIcon = L.icon({
+        iconUrl: '#{image_path("map-icon.png")}',
+        iconSize:     [36, 52]
+      });
+
+      L.tileLayer("https://stamen-tiles.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png", {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
+      }).addTo(map);
+    });
   });
 
   getPerkProjectUrl = "#{get_perk_projects_url}";

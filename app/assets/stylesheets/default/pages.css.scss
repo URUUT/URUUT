@@ -5,6 +5,9 @@
 $green: #95D60A;
 $green2: $green;
 $light-green: $green;
+$blue: #19345f;
+$light-blue: #66C3ea;
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700);
 
 @font-face {
   font-family: 'Proxima Nova Light';
@@ -109,10 +112,18 @@ body {
 
 body {
   color:#3f403b;
+  background: url('http://techbridge.org/alpha/wp-content/themes/techbridge-2013/img/stripes-bg.png');
   font:normal 13px/19px 'Georgia', georgia, serif;
   margin:0;
   padding:0;}
-
+.container.content{
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: 0.1em 0.2em 0.5em #666;
+  width: 1024px!important;}
 h1,
 h2,
 h3,
@@ -120,7 +131,7 @@ h4,
 h5,
 h6 {
   color:#464646;
-  font-family:'Proxima Nova Semi', sans-serif;
+  font-family:'Source Sans Pro', sans-serif;
 	letter-spacing:2px;
   text-transform:uppercase;}
 
@@ -166,7 +177,7 @@ input[type=submit] {
   border:none;
   box-shadow:1px 1px 1px rgba(0,0,0,.28);
   color:#fff;
-  font:300 13px/17px 'Proxima Nova', sans-serif;
+  font:300 13px/17px 'Source Sans Pro', sans-serif;
   padding:5px 8px;}
 
 textarea {
@@ -354,7 +365,7 @@ select {
 
 .btn {
   background:none;
-  background:#3f403b;
+  background:$blue;
   border:none;
   border-radius:0;
   behavior: url(image-path('PIE-1.0.0/PIE.htc'));
@@ -417,7 +428,7 @@ select {
   padding:0;}
 .pages {
 	.texture {
-		background: url(image-path('bg-tile.jpg')) top left repeat;
+		background: $blue;
 		padding:20px 0;
         form {
             display:inline;
@@ -430,6 +441,7 @@ select {
 			vertical-align:middle;
 		}
 		h3 {
+      color: #fff;
 			display:inline-block;
 			line-height:100%;
 			margin:0 0 0 5px;
@@ -443,7 +455,7 @@ select {
       vertical-align: middle;
 			/*width:300px;*/
 			label {
-				color:#403e37;
+				color:#fff!important;
 			}
 			&:last-child {
 				margin-right:0;
@@ -493,7 +505,7 @@ select {
 
 .pages {
   .texture {
-    background: url(image-path('bg-tile.jpg')) top left repeat;
+    background: $blue;
     padding:20px 0;
         form {
             display:inline;
@@ -674,6 +686,7 @@ select {
 	font:normal 12px/12px "Proxima Nova Semi", arial, sans-serif;
 	list-style-type:none;
 	margin-top:20px;
+  padding: 0 15px;
 	a {
 		color:#fff;	}}
 
@@ -681,23 +694,23 @@ header {
 	.container {
 		width:960px !important;}
 	h1.logo {
-		background: url(image-path('logo-tech.png'));
-		float:left;
-    height:41px;
-		left:0px;
+    background: #fff;
     margin-left:10px;
     margin-top:8px;
-		position:relative;
-		width:87px;
-		a {
+    margin-bottom:0;
+    background-repeat: no-repeat;
+    a {
+      background: url(image-path('logo-tech.jpg'));
+      background-size: 100%;
+      background-repeat: no-repeat;
 			display:inline-block;
-			height:40px;
+			height:77px;
       text-decoration:none;
 			text-indent:-9999px;
-			width:87px;}}}
+			width:250px;}}}
 
 p.sections {
-  color:#55554d;
+  color:$light-blue;
   font:normal 18px/18px "Proxima Nova Semi", arial, sans-serif;
   letter-spacing:2px;
   margin-bottom:15px;
@@ -805,9 +818,12 @@ footer {
     margin-left:15px;}}
 
 .copyright {
-  background:#55554d;
+  background:$blue;
   color:#fff;
   line-height:45px;
+  width: 1024px;
+  margin:auto;
+  box-shadow: 0.1em 0.2em 0.5em #666;
 	p {
 		font-size:10px;
 		margin:0;
@@ -820,33 +836,62 @@ footer {
 	display:none; }
 
 ul.nav {
-  color:#242424;
-	margin-left:64px !important;
 	li {
-		border-left:1px solid #55554d;
+		border-right:1px solid #fff;
     padding:0 10px;
 		position:relative;
 		width:auto;
 		&:last-child {
-			border-right:1px solid #55554d;}
-		a {
-			color:#fff !important;
-      font-family:'Proxima Nova Semi', sans-serif;
-      font-size:12px;
-			letter-spacing:2px;
-			line-height:60px !important;
+			border-right:0px;}
+    &:hover { background: $blue; }
+    a {
+      color:#fff !important;
+      font-family:'Source Sans Pro', sans-serif;
+      font-size:18px;
+      letter-spacing:2px;
+      line-height:60px !important;
       padding:0 !important;
       text-decoration:none;
-			text-shadow:0 0 0 !important;
-      text-transform:uppercase;
+      text-shadow:0 0 0 !important;
+      text-transform:capitalize;
       &:hover {
-        color: $green !important;
         text-decoration:underline;}}
-		img {
+    img {
       margin:-2px 0 0 5px;
-			vertical-align:middle;}}}
-
-
+      vertical-align:middle;}}}
+.nav-triangle-holder {
+  height: 0.714285714em;
+  background-color: transparent;
+  margin: 0 -0.714285714em;
+}
+.triangle-left, triangle-right {
+  width: 0;
+  height: 0;
+  clear: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  display: block;
+}
+.triangle-left {
+  border-bottom: 0.714285714em solid transparent;
+  border-right: 0.714285714em solid #50a52d;
+  float: left;
+}
+.between-triangles {
+  background-color: #fff;
+  height: 0.714285714em;
+  width: 71.4285714em;
+  position: relative;
+  float: left;
+  clear: none;
+}
+.triangle-right {
+  border-bottom: 0.714285714em solid transparent;
+  border-left: 0.714285714em solid #50a52d;
+  float: right;
+}
+.right .dropdown-menu.log-in ul li:hover{ background: #fff; }
 div.dropdown {
   color:#fff !important;
   display:none;
@@ -889,7 +934,7 @@ div.dropdown {
 
 
 .right li .img-circle {
-	margin-right:5px;
+  margin-right:5px;
   vertical-align:middle !important;}
 
 .left {
@@ -899,8 +944,8 @@ div.dropdown {
   text-align:center;
   width:100%;
   li {
-    border-left:1px solid #55554d;
-    font:normal 12px/12px 'Proxima Nova', sans-serif;
+    border-left:1px solid $light-blue;
+    font:normal 12px/12px 'Source Sans Pro', sans-serif;
     display:inline-block;
     letter-spacing:2px;
     line-height:60px;
@@ -920,7 +965,7 @@ div.dropdown {
   text-align:right;
   li {
     border-right:1px solid #242424;
-    font:normal 12px/12px 'Proxima Nova', sans-serif;
+    font:normal 12px/12px 'Source Sans Pro', sans-serif;
     display:inline-block;
     list-style-type:none;
     -webkit-font-smoothing: subpixel-antialiased;
@@ -941,7 +986,7 @@ div.dropdown {
       &:hover {
         text-decoration:none}}
     a.sign-up-link {
-      color:$green;}
+      color:#fff;}
     span.or {
       color:#fff;
       font-family:"Georgia", georgia, serif;
@@ -958,7 +1003,7 @@ div.dropdown {
   input[type=search]{
     border-radius: 0;
     behavior: url(image-path('PIE-1.0.0/PIE.htc'));
-    font-family:'Proxima Nova', sans-serif;
+    font-family:'Source Sans Pro', sans-serif;
     font-size:11px;
     line-height: 18px;
     margin-left:5px;
@@ -1012,7 +1057,7 @@ nav.navbar-inner {
     overflow:hidden;
     a{
       color:#689d00;
-      font-family: 'Proxima Nova', sans-serif;
+      font-family: 'Source Sans Pro', sans-serif;
       font-weight:400;
       line-height:normal;
       text-transform:uppercase;
@@ -1072,13 +1117,13 @@ nav.navbar-inner {
     width:260px;}}
 
 .funding {
-  background:url(image-path('bg-tile.jpg')) top left repeat;
+  background:$blue;
 	display:inline-block;
   height:90px;
   position:relative;
   width:100%;
   .btn {
-	background:url(image-path('bg-tile.jpg')) top left repeat;
+	background:$blue;
 	border-radius: 3px;
 	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 	display:inline-block;
@@ -1141,7 +1186,7 @@ nav.navbar-inner {
   h5 {
 		color:#403e37;
 		display:block;
-    font-family: 'Proxima Nova', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     font-size:8px;
     font-style:normal;
     font-weight:400;
@@ -1279,14 +1324,19 @@ h5.time-left {
   content:'' !important;}
 
 .navbar {
-  background:#403e37;
-  height:60px;
   margin-bottom:0;}
-
+.navigation{
+  background:$green;
+  border-bottom: 1px solid #3D4A5E;
+  width: 1044px;
+  margin-left: -10px;
+  .container{ width: 1024px!important;}
+}
 .nav {
-	height:60px;
+  height:60px;
 	li {
 		a {
+      font-family: 'Source Sans Pro', sans-serif;
 			line-height:60px;
 		}
 	}
@@ -1378,9 +1428,10 @@ div[id^='step'] {
   height:545px;
   left:0;
   overflow:hidden;
-  position:absolute;
-  top:60px;
-  width:100%;
+  position:relative;
+  top:0px;
+  width:1024px;
+  margin-left: -12px;
 	.coverphoto {
 		left:100px;
 		position:relative;
@@ -1416,7 +1467,7 @@ div[id^='step'] {
 }
 
 .show-content {
-  margin-top:495px;
+  margin-top:190px!important;
 	margin-bottom: 100px;
 }
 
@@ -1566,7 +1617,6 @@ div[id^='step'] {
 
 .projects.edit {
 	#large_image {
-		top:180px;
 		.coverphoto.btn {
 			left:50%;
 			margin-left:-480px;
@@ -1654,7 +1704,7 @@ img.avatar-thumb {
 }
 
 .banner {
-  background:url(image-path('bg-tile.jpg'))top left repeat;
+  background:$blue;
   left:0;
   margin-bottom:50px;
   position:absolute;
@@ -1874,7 +1924,7 @@ ul.perks {
         position:relative;
         .btn {
           background:none;
-          background:#3f403b;
+          background:$blue;
           border:none;
           border-radius:0;
           box-shadow:none;
@@ -2202,9 +2252,7 @@ input.selectbox {
 			width:135px;}}}
 
 .breadcrumb-container {
-	background:url(image-path('bg-tile.jpg')) top left repeat;
-	left:0;
-	position:absolute;
+	background:$blue;
 	width:100%;
 }
 
@@ -2229,7 +2277,7 @@ input.selectbox {
 		&:hover:after {
 			border-left: 8px solid #ccc;}
 		a {
-			color:#333;
+			color:#fff;
 			font: normal 15px/42px "Proxima Nova Semi", arial, sans-serif !important;
 			letter-spacing:2px;
 			text-transform:uppercase;
@@ -2267,7 +2315,7 @@ input.selectbox {
 		text-align:left;
 		text-shadow:0 1px 1px rgba(255, 255, 255, 0.15);}
 	.steps {
-		color:#fff;
+		color:$green;
 		font:normal 12px/12px "Proxima Nova Semi", arial, sans-serif;
 		margin:30px 0 3px 0;}
 	.title {
@@ -2275,7 +2323,7 @@ input.selectbox {
 		font:normal 24px/24px "Proxima Nova Semi", arial, sans-serif;
 		margin-bottom:3px;}
 	.description {
-		color:#403e37;
+		color:$green;
 		font:italic 12px/12px "Georgia", georgia, serif;
 		text-transform:none;}
 	.border {
@@ -2461,7 +2509,7 @@ form[id*=project] {
 		}
 	}
 	&.partner {
-		background:url(image-path('bg-tile.jpg')) top left repeat;
+		background:$blue;
 		height:378px;
 		.marketing {
 			margin-top:80px;
@@ -2503,7 +2551,7 @@ form[id*=project] {
 			margin:65px 0 5px;
 		}
 		p {
-			color:#55554d;
+			color:$light-blue;
 			font-family:'Proxima Nova';
 			font-size:14px;
 			margin-bottom:40px;
@@ -2533,7 +2581,7 @@ form[id*=project] {
 					}
 				}
 				p {
-					color:#55554d;
+					color:$light-blue;
 					font-family:'Proxima Nova';
 					margin-bottom:20px;
 				}
@@ -2695,17 +2743,17 @@ form[id*=project] {
 
 .full-width {
   &.our-story {
-    background:$green;
+    background:#eee;
     padding:80px 0;
     h2 {
-     color:#fff;}
+     color:$green;}
     p {
       color:#55554d;
       font-family:'Proxima Nova';
       font-size:16px;
       line-height:24px;}}
   &.our-mission {
-    background:#55554d;
+    background:$blue;
     padding:80px 0;
     h3 {
       color:$green;
@@ -2785,7 +2833,7 @@ form[id*=project] {
     background:#eee;
     padding:80px 0;
     p {
-      color:#55554d;
+      color:$light-blue;
       font-family:'Proxima Nova';
       font-size:14px;
       line-height:150%;
@@ -3160,7 +3208,7 @@ form[id*=project] {
 
 .donations {
 	.hero {
-		background:url(image-path('bg-tile.jpg')) top left repeat;
+		background:$blue;
 		padding:45px 0;
 		img {
 			display:inline-block;
@@ -3245,7 +3293,7 @@ form[id*=project] {
 
 .sponsors {
   .hero {
-		background: url(image-path('bg-tile.jpg')) top left repeat;
+		background: $blue;
 		margin-bottom:40px;
 		padding:35px 0 70px;
   }
@@ -3253,7 +3301,7 @@ form[id*=project] {
 
 .funding_sources {
 	.hero {
-		background: url(image-path('bg-tile.jpg')) top left repeat;
+		background: $blue;
 		padding:70px 0 70px;
 		.container {
 			.marketing {
@@ -3347,7 +3395,7 @@ form[id*=project] {
 
 .projects.new {
 	.hero {
-		background: url(image-path('bg-tile.jpg')) top left repeat;
+		background: $blue;
 		padding:35px 0 70px;
 		.container {
 			div {
@@ -3488,4 +3536,10 @@ body.media {
 	a {
 		display:block;
 	}
+}
+
+#dragImg{
+  position: static;
+  display: block;
+  margin: auto;
 }

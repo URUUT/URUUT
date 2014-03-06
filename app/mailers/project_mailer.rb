@@ -1,6 +1,6 @@
 class ProjectMailer < ActionMailer::Base
   layout 'mailer'
-  default from: "info@techbridge.com"
+  default from: "xchange@techbridge.org"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -18,7 +18,7 @@ class ProjectMailer < ActionMailer::Base
     @project = project
     @project_title = project.project_title
 
-    mail to: @email, bcc: "npx@techbridge.org, cbartels@uruut.com", subject: "Wait For Approval"
+    mail to: @email, bcc: "xchange@techbridge.org, cbartels@uruut.com", subject: "Wait For Approval"
   end
 
   def project_message(recepient, subject_email, header_image, content)
