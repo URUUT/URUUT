@@ -1428,10 +1428,9 @@ div[id^='step'] {
   height:545px;
   left:0;
   overflow:hidden;
-  position:relative;
-  top:0px;
-  left: -12px;
-  width:1024px;
+  position:absolute;
+  top:60px;
+  width:100%;
 	.coverphoto {
 		left:100px;
 		position:relative;
@@ -3539,4 +3538,10 @@ body.media {
 	a {
 		display:block;
 	}
+}
+
+#dragImg{
+  position: static;
+  display: block;
+  margin: auto;
 }
