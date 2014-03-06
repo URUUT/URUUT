@@ -256,6 +256,8 @@ class ProjectsController < ApplicationController
     link_video = generate_video_link(video)
     link_video = link_video.gsub('watch?v=', 'embed/')
 
+    logger.debug "#{link_video}"
+
     @project = Project.find_by_id(session[:current_project])
     if params[:video_type].eql?("seed")
       @project.seed_video = link_video
@@ -412,6 +414,7 @@ class ProjectsController < ApplicationController
 
   def generate_video_link(link)
     video_data = video_data_by_link(link)
+    logger.debug "#{video_data}"
     video_data.player_url.sub('&feature=youtube_gdata_player', '').sub(/^(http|https):/, '')
   end
 
