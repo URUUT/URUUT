@@ -1,7 +1,4 @@
 class ApplicationController < ActionController::Base
-  require "net/http"
-  require "uri"
-
   protect_from_forgery
   set_current_tenant_through_filter
   layout :layout_by_resource
@@ -39,9 +36,8 @@ class ApplicationController < ActionController::Base
   end
 
   def video_data_by_link(link)
-    puts "Link is #{link}"
     youtube_client = YouTubeIt::Client.new
-    youtube_client.video_by("#{link}")
+    youtube_client.video_by(link)
   end
 
   def not_found
