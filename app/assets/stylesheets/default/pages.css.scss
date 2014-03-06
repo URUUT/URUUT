@@ -1428,9 +1428,10 @@ div[id^='step'] {
   height:545px;
   left:0;
   overflow:hidden;
-  position:absolute;
-  top:60px;
-  width:100%;
+  position:relative;
+  top:0px;
+  left: -12px;
+  width:1024px;
 	.coverphoto {
 		left:100px;
 		position:relative;
@@ -2342,6 +2343,8 @@ form[id*=project] {
 		background:#fff url(image-path('twitter-handle.png')) 2% 50% no-repeat;
 		padding-left:40px;
 		position:relative;}}
+
+.edit_project{ margin-top: 0; }
 
 #project_website {
 	background:#fff url(image-path('http.png')) 2% 50% no-repeat;
