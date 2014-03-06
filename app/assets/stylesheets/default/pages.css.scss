@@ -1428,9 +1428,10 @@ div[id^='step'] {
   height:545px;
   left:0;
   overflow:hidden;
-  position:absolute;
-  top:60px;
-  width:100%;
+  position:relative;
+  top:0px;
+  width:1024px;
+  margin-left: -12px;
 	.coverphoto {
 		left:100px;
 		position:relative;
@@ -1466,7 +1467,7 @@ div[id^='step'] {
 }
 
 .show-content {
-  margin-top:0px;
+  margin-top:0px!important;
 	margin-bottom: 100px;
 }
 
