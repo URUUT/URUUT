@@ -80,8 +80,6 @@
             %li.perk.clearfix{id: "perk-id-#{index}"}
               %h3.perk-name-other{id: "perk-name-other-#{index}"}
                 = name
-              %ul.normal-font.dashed-list
-                %li= description
               %ul{style: "padding-top: 10px;"}
                 %li.seed-amount{id: "amount-id-#{index}"}
                   %p.amount= number_to_currency(perk_amount, precision: 0)
