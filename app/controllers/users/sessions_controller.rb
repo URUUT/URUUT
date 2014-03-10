@@ -28,7 +28,7 @@ class Users::SessionsController < DeviseController
     # else
     #   respond_to :js
     # end
-      respond_with resource, :location => after_sign_in_path_for(resource)
+      respond_with resource, :location => after_sign_in_path_for(resource), protocol: 'https://'
 
   end
 
@@ -41,7 +41,7 @@ class Users::SessionsController < DeviseController
     # We actually need to hardcode this as Rails default responder doesn't
     # support returning empty response on GET request
     respond_to do |format|
-      format.any(*navigational_formats) { redirect_to redirect_path }
+      format.any(*navigational_formats) { redirect_to redirect_path, protocol: 'https://' }
       format.all do
         head :no_content
       end

@@ -1027,6 +1027,7 @@ nav.navbar-inner {
 .step-container {
 	color:#464646;
 	display:none;
+  margin-top: -130px;
 	div.checkbox {
 		color:#403e37;
 		font:normal 18px/18px "Proxima Nova", arial, sans-serif;
@@ -1705,10 +1706,12 @@ img.avatar-thumb {
 
 .banner {
   background:$blue;
-  left:0;
+  margin: auto;
+  margin-left: -12px;
   margin-bottom:50px;
   position:absolute;
-  width:100%;
+  display: block;
+  width:1024px;
   height:130px;
   .center {
     color:#73736c;
