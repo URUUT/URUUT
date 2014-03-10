@@ -9,16 +9,16 @@ Crowdfund::Application.configure do
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
-  config.serve_static_assets = true
+  config.serve_static_assets = false
   config.static_cache_control = "public, max-age=#{1.year.to_i}"
 
   # Compress JavaScripts and CSS
-  config.assets.compress = true
-  config.assets.css_compressor = :yui
-  config.assets.js_compressor = :uglifier
+  # config.assets.compress = true
+  # config.assets.css_compressor = :yui
+  # config.assets.js_compressor = :uglifier
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
-  config.assets.compile = true
+  config.assets.compile = false
 
   # Generate digests for assets URLs
   config.assets.digest = true
@@ -31,7 +31,7 @@ Crowdfund::Application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = true
+  config.force_ssl = false
 
   # See everything in the log (default is :info)
   # config.log_level = :debug
@@ -49,7 +49,8 @@ Crowdfund::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  # config.assets.precompile += %w( search.js )
+  config.assets.precompile += %w( leaflet.js tile.stamen.js style.css trontastic/jquery-ui-1.8.22.custom.css leaflet.css prettyPhoto.css
+    jquery.prettyPhoto.js ie-only.css selectivizr-min.js pages.js)
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
@@ -86,8 +87,8 @@ Crowdfund::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   # config.action_controller.asset_host = Proc.new do |source, request = nil, *_|
-#     "//#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
-#   end
+  #   "//#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
+  # end
 
   # config.middleware.use ExceptionNotification::Rack,
   #   :email => {
