@@ -12,7 +12,7 @@
 //
 //= require jquery_ujs
 //= require twitter/bootstrap
-//= require_tree ./global
+//= require_tree .
 
 $(document).ready(function(){
   for (var i=0;i<$('input[id*="amount"]').length;i++) {
