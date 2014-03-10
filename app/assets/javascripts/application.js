@@ -13,7 +13,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require jquery
-//= require bootstrap.min
+//= require bootstrap
 //= require_tree ./global
 
 $(document).ready(function(){
