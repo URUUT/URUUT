@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  include SslRequirement
   protect_from_forgery
   layout :layout_by_resource
   before_filter :last_url, :session_email_forgot_password, :additional_information
