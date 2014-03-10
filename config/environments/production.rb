@@ -97,4 +97,6 @@ Crowdfund::Application.configure do
   #     :exception_recipients => %w{cbartels@uruut.com}
   #   }
 
+  Devise::SessionsController.ssl_required :create, :destroy
+
 end
