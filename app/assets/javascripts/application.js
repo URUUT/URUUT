@@ -12,6 +12,8 @@
 //
 //= require jquery_ujs
 //= require twitter/bootstrap
+//= require jquery-1.8.3
+//= require bootstrap.min
 //= require_tree ./global
 
 $(document).ready(function(){
