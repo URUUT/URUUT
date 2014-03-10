@@ -15,6 +15,7 @@ set :password,  'qwerty1000'
 set :use_sudo,  false
 default_run_options[:pty] = true
 
+set :keep_releases, 5
 
 server '192.34.58.42', :app, :web, :db, :primary => true
 set :bundle_flags, '--deployment --quiet --binstubs'
