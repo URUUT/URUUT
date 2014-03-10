@@ -28,8 +28,7 @@ class Users::SessionsController < DeviseController
     # else
     #   respond_to :js
     # end
-      respond_with resource, :location => after_sign_out_path_for(resource_name)
-
+    redirect_to get_redirect_path
   end
 
   # DELETE /resource/sign_out
