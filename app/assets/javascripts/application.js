@@ -13,6 +13,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require jquery-ui
+//= require jquery.ui.mouse
 //= require_tree ./global
 
 $(document).ready(function(){
