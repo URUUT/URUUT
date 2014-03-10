@@ -29,9 +29,9 @@ namespace :db do
     run "cp -f #{shared_path}/system/database.yml #{release_path}/config/database.yml"
   end
 
-  task :load_schema, :except => { :no_release => true }, :roles => :app do
-    run "cd #{release_path}; bundle exec rake db:schema:load RAILS_ENV=#{rails_env}"
-  end
+  # task :load_schema, :except => { :no_release => true }, :roles => :app do
+  #   run "cd #{release_path}; bundle exec rake db:schema:load RAILS_ENV=#{rails_env}"
+  # end
 end
 
 namespace :deploy do
@@ -45,10 +45,10 @@ namespace :deploy do
     end
   end
 
-  desc "reload the database with seed data"
-  task :seed do
-    run "cd #{release_path}; bundle exec rake db:seed RAILS_ENV=#{rails_env}"
-  end
+  # desc "reload the database with seed data"
+  # task :seed do
+  #   run "cd #{release_path}; bundle exec rake db:seed RAILS_ENV=#{rails_env}"
+  # end
 
   desc "Clear Tmp folder"
   task :seed do
@@ -72,6 +72,6 @@ namespace :deploy do
   end
 end
 
-after "deploy:finalize_update", "db:db_config", "db:load_schema"
-after "deploy", "deploy:migrate", "deploy:seed", "deploy:change_file_permission",
+after "deploy:finalize_update", "db:db_config"
+after "deploy", "deploy:migrate", "deploy:change_file_permission",
       "deploy:bundle_install", 'deploy:restart', 'deploy:reload_nginx'
