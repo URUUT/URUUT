@@ -10,6 +10,7 @@
  *
  *= require_self
  *= require_tree ../image_select
+ *= require ../admin_project
  *= require_tree .
  */
 
