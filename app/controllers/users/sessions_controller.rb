@@ -28,7 +28,7 @@ class Users::SessionsController < DeviseController
     # else
     #   respond_to :js
     # end
-    respond_with resource, :location => get_redirect_path
+    redirect_to "https://#{request.host_with_port}"
   end
 
   # DELETE /resource/sign_out
