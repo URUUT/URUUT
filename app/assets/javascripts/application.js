@@ -15,7 +15,7 @@
 //= require jquery-ui
 //= require jquery.ui.mouse
 //= require jquery.Jcrop.min
-//= require highchart
+//= require_tree ./highchart
 //= require_tree ./global
 
 $(document).ready(function(){
