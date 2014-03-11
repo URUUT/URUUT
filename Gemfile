@@ -32,6 +32,7 @@ gem 'airbrake'
 gem 'prawn'
 gem 'writeexcel', '~> 1.0.3'
 gem 'activeadmin'
+gem 'ssl_requirement'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

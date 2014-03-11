@@ -1,6 +1,7 @@
 class Users::SessionsController < DeviseController
   prepend_before_filter :require_no_authentication, :only => [ :new, :create ]
   prepend_before_filter :allow_params_authentication!, :only => :create
+  ssl_required :create, :destroy
 
 
   # GET /resource/sign_in
@@ -28,7 +29,7 @@ class Users::SessionsController < DeviseController
     # else
     #   respond_to :js
     # end
-    redirect_to "https://#{request.host_with_port}"
+    respond_with resource, :location => after_sign_out_path_for(resource_name)
   end
 
   # DELETE /resource/sign_out
@@ -39,7 +40,7 @@ class Users::SessionsController < DeviseController
     # We actually need to hardcode this as Rails default responder doesn't
     # support returning empty response on GET request
     respond_to do |format|
-      format.any(*navigational_formats) { redirect_to get_redirect_path }
+      format.any(*navigational_formats) { redirect_to after_sign_out_path_for(resource_name) }
       format.all do
         head :no_content
       end
