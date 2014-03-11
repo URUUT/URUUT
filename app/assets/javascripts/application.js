@@ -13,7 +13,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require jquery-ui
-//= require jquery.ui.touch-punch
+//= require jquery.ui.touch-punch.min
 //= require jquery.ui.mouse
 //= require jquery.Jcrop.min
 //= require_tree ./highchart
