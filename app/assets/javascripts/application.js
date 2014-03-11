@@ -16,6 +16,7 @@
 //= require jquery.ui.touch-punch.min
 //= require jquery.ui.mouse
 //= require jquery.Jcrop.min
+//= require transparency_workroom
 //= require_tree ./highchart
 //= require_tree ./global
 
