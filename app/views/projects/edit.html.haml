@@ -99,7 +99,7 @@
    $(document).ready(function(){
 
     if($('div[data-id="assets"]').is(":visible")) {
-      var userLocation = 'http://maps.googleapis.com/maps/api/geocode/json?address=#{@project.address},#{@project.city},#{@project.state}&sensor=false';
+      var userLocation = '//maps.googleapis.com/maps/api/geocode/json?address=#{@project.address},#{@project.city},#{@project.state}&sensor=false';
 
       $.ajax({
         url: userLocation,
