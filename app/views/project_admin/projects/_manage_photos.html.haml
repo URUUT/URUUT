@@ -35,8 +35,8 @@
     %div{:style => "float:left; width: 100%"}
       %button{:id => "new-photo-button", :type => "button"} ADD NEW PHOTO
 
-= javascript_include_tag "jquery-ui"
-= javascript_include_tag "jquery.ui.touch-punch.min"
+/ = javascript_include_tag "jquery-ui"
+/ = javascript_include_tag "jquery.ui.touch-punch.min"
 
 :javascript
   var mimetypesData = 'image/*';
@@ -49,7 +49,7 @@
       });
     });
   };
-  
+
   deleteImages();
 
   $("#project-submit-button").click(function(){
