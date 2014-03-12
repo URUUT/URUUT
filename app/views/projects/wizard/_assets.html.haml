@@ -7,7 +7,7 @@
           .content-loader{style: "margin-top: 150px; margin-left: 49%;"}
             .loader-image{style: "margin-left: -3%; font-weight: bolder;"} LOADING
             = image_tag "3.gif"
-        .div{style: "height: 546px; margin-top: -756px;", id: "image-priview"}
+        .div{style: "height: 546px; margin-top: 0px;", id: "image-priview"}
           %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => Settings.filepicker.api_key, 'data-fp-button-class' => 'coverphoto btn', 'onchange' => 'updateCover(event)', :style => 'left:50%', 'data-fp-mimetypes' => 'image/*', 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA'}
           = render "funding_info"
     - else
@@ -16,7 +16,7 @@
           .content-loader{style: "margin-top: 150px; margin-left: 49%;"}
             .loader-image{style: "margin-left: -3%; font-weight: bolder;"} LOADING
             = image_tag "3.gif"
-        .div{style: "height: 546px; margin-top: -756px;", id: "image-priview"}
+        .div{style: "height: 546px; margin-top: 0px;", id: "image-priview"}
           %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => Settings.filepicker.api_key, 'data-fp-button-class' => 'coverphoto btn pick-cover-photo', 'onchange' => 'updateCover(event)', :style => 'left:50%', 'data-fp-mimetypes' => 'image/*', 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA'}
           = render "funding_info"
 
