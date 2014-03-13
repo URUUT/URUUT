@@ -3556,3 +3556,11 @@ body.media {
 .sponsorship, .sponsor-info, .project-details, .perks, .assets{
   form { margin-top: 0px!important; }
 }
+.action.new-save-btn {
+  margin-top: 0px;
+  text-align: center;
+  z-index: 9999;
+  position: absolute;
+  top: 250px;
+  left: 400px;
+}
