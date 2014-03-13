@@ -3546,3 +3546,21 @@ body.media {
   display: block;
   margin: auto;
 }
+
+.step-container {
+    margin-top: 50px!important;
+    .aside{ margin-top: -35px!important; }
+}
+.step-container.assets { margin-top: 0px!important; }
+
+.sponsorship, .sponsor-info, .project-details, .perks, .assets{
+  form { margin-top: 0px!important; }
+}
+.action.new-save-btn {
+  margin-top: 0px!important;
+  text-align: center;
+  z-index: 9999;
+  position: absolute;
+  top: 250px;
+  left: 400px;
+}

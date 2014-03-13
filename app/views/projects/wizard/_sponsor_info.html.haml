@@ -1,4 +1,4 @@
-.step-container{"data-id" => "sponsor-info"}
+.step-container.sponsor-info{"data-id" => "sponsor-info"}
   = form_for(project, :html => {:class => "sponsor-info sponsor-info-form span8 well"}) do |f|
 
     - if project.errors.any?
@@ -100,7 +100,7 @@
           %a.btn.wizard-btn{"data-toggle" => "modal", :href => "#connectStripeModal", :role => "button", style: "width: 266px;"}
             Save & Continue ►
 
-  .span4{:style => "margin-top:155px;"}
+  .span4.aside
     %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
     .well.info
       %h5{:style => "color:#95d60a;margin-bottom:10px;"} Profile
