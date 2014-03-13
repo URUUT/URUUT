@@ -2126,6 +2126,10 @@ form{
   }
 }
 
+.action-convert {
+  display: none!important;
+}
+
 .drag-instructions {
   background: rgba(0, 0, 0, 0.4) url('drag-icon.png') no-repeat 4% 50%;
   color: #fff;
@@ -2140,6 +2144,7 @@ form{
   letter-spacing: 1;
   @include border-radius(5px);
   behavior: url(image-path('PIE-1.0.0/PIE.htc'));
+  display: none;
 
   b{
     font-weight: normal;
@@ -2278,7 +2283,7 @@ body.pages.index, body.pages.search{
 }
 
 .action.new-save-btn{
-  margin-top: 210px;
+  margin-top: -256px;
   text-align: center;
   @include cleared;
 
