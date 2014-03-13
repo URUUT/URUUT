@@ -1,5 +1,5 @@
 
-.step-container{"data-id" => "project-details"}
+.step-container.project-details{"data-id" => "project-details"}
   = form_for(@project, :html => {:class => "project-details-form span8 well", :multipart => true}) do |f|
 
     %h4.title
@@ -73,7 +73,7 @@
       = f.submit "Save & Continue ►", :class => "btn wizard-btn", :id => "project-submit"
 
 
-  .span4{:style => "margin-top:155px;"}
+  .span4.aside
     %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
     .well.info
 

@@ -1,4 +1,4 @@
-.step-container{"data-id" => "sponsorship"}
+.step-container.sponsorship{"data-id" => "sponsorship"}
   = form_for(@project, :html => {:class => "span8 well", :multipart => true}) do |f|
 
     %h4.title
@@ -243,7 +243,7 @@
 
     %div.sponsorship-false{:style => "display:none"}
       = link_to "CONTINUE TO STEP 5", "/projects/#{@project.id}/edit#assets", class: "btn skip-step", id: "project-submit", style: "position: relative;display:block;margin:0 auto;width:35%"
-  .span4{:style => "margin-top:155px;"}
+  .span4.aside
     %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
     .well.info
       %h5{:style => "color:#95d60a;margin-bottom:10px;"} SPONSORSHIP DETAILS

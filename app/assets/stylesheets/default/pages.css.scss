@@ -3546,3 +3546,12 @@ body.media {
   display: block;
   margin: auto;
 }
+
+.step-container {
+    margin-top: 50px!important;
+    .aside{ margin-top: -35px!important; }
+}
+
+.sponsorship, .sponsor-info, .project-details, .perks, .assets{
+  form { margin-top: 0px!important; }
+}
