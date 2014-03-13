@@ -2286,6 +2286,7 @@ body.pages.index, body.pages.search{
   margin-top: -256px;
   text-align: center;
   @include cleared;
+  z-index: 9999;
 
   .btn{
     width: 70px;
