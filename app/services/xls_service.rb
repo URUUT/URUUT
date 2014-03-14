@@ -1,8 +1,7 @@
 class XlsService
 
-  def initialize(donors, project_sponsors)
-    @donors = donors
-    @project_sponsors = project_sponsors
+  def initialize(project)
+    @project = project
     @xls = WriteExcel.new(file_path)
   end
 
@@ -21,14 +20,14 @@ class XlsService
 
 private
 
-  attr_reader :donors, :project_sponsors, :xls
+  attr_reader :project, :xls
 
   def create_donors_worksheet
-    Worksheet::Donors.new(xls, donors).create
+    Worksheet::Donors.new(xls, project).create
   end
 
   def create_project_sponsors_worksheet
-    Worksheet::Sponsors.new(xls, project_sponsors).create
+    Worksheet::Sponsors.new(xls, project).create
   end
 
 end
