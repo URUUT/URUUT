@@ -165,7 +165,7 @@ class DonationsController < ApplicationController
 
   def thank_you
     @need_doctype = true
-    @thanks_url = URI.encode(session[:donation_thank_you][:bitly])
+    @thanks_url = URI.encode(session[:donation_thank_you][:project_bitly])
     render :layout => "application"
   end
 
