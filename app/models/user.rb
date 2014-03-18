@@ -44,8 +44,8 @@ class User < ActiveRecord::Base
   # Badging
   has_merit
 
-  scope :unique_project_donors, ->(project) { joins(:donations).
-    where(donations: { project_id: project.id, confirmed: true }).uniq }
+  scope :who_donated_to, ->(project) { joins(:donations).
+    where(donations: { project_id: project.id, confirmed: true, anonymous: false }) }
 
   delegate :plan, to: :membership, prefix: true
 

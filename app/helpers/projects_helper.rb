@@ -111,7 +111,7 @@ module ProjectsHelper
   end
 
   def any_project_donors_or_sponsors?(project)
-    User.unique_project_donors(project).any? ||
+    User.who_donated_to(project).any? ||
     project.project_sponsors.any?
   end
 
