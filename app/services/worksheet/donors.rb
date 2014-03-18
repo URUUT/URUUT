@@ -21,7 +21,7 @@ private
   end
 
   def funders
-    @funders = User.unique_project_donors(project)
+    @funders = User.who_donated_to(project)
   end
 
   def donation(funder)
