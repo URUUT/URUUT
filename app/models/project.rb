@@ -157,7 +157,7 @@ class Project < ActiveRecord::Base
       self.created_at.to_date.upto(Time.now.to_date).each do |date|
         amount = 0
         amount += project_donations.select{ |donation| donation.updated_at > date.at_beginning_of_day and donation.updated_at < date.end_of_day }.map { |donation| donation.amount }.inject(0) {|sum, element| sum + element }
-        amount += project_sponsors.select{ |sponsor| sponsor.updated_at > date.at_beginning_of_day and sponsor.updated_at < date.end_of_day }.map { |sponsor| sponsor.cost }.inject(0) {|sum, element| sum + element }
+        amount += project_sponsors.select{ |sponsor| sponsor.updated_at > date.at_beginning_of_day and sponsor.updated_at < date.end_of_day }.map { |sponsor| sponsor.cost }.compact.sum
         amount += amount_by_date.last unless amount_by_date.empty?
         amount_by_date << amount
       end
