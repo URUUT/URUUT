@@ -9,7 +9,8 @@ class Donation < ActiveRecord::Base
   default_scope { where(confirmed: true) }
   scope :approved, where(approved: true)
   scope :with_funder, ->(funder) { where(user_id: funder) }
-  scope :with_project, ->(project) { where(project_id: project) }
+  scope :for_project, ->(project) { where(project_id: project) }
+  scope :known_users, -> { where(anonymous: false) }
 
   def save_with_payment
     current_user = :current_user
