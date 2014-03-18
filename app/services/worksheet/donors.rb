@@ -2,30 +2,24 @@ class Worksheet::Donors < Worksheet::Base
 
   def initialize(xls, project)
     @project = project
-    super(xls, project, funders, 'Donors')
+    super(xls, project, donations, 'Donors')
   end
 
 private
   attr_reader :project
 
-  def attributes(funder)
-    funder_donation = donation(funder)
-
-    { project_name: project.title,
-      email:        funder.email,
-      first_name:   funder.first_name,
-      last_name:    funder.last_name,
-      amount:       funder_donation.amount,
-      perk:         funder_donation.perk_name,
-      description:  funder_donation.description }
+  def attributes(donation)
+    { project_name: donation.project.title,
+      email:        donation.user.email,
+      first_name:   donation.user.first_name,
+      last_name:    donation.user.last_name,
+      amount:       donation.amount,
+      perk:         donation.perk_name,
+      description:  donation.description }
   end
 
-  def funders
-    @funders = User.unique_project_donors(project)
-  end
-
-  def donation(funder)
-    Donation.with_funder(funder).with_project(project).first
+  def donations
+    Donation.for_project(project).known_users
   end
 
   def column_titles
