@@ -47,14 +47,14 @@ class Donation < ActiveRecord::Base
 
     if !project.perk_permission
       perk_description = "#{amount.to_i} Uruut Reward Points"
-      arr = AMOUNTS.each do |a|
-        a < amount
+      arr = AMOUNTS.select do |a|
+        a == amount
       end
 
-      if arr[0] == nil || arr[0] == ''
+      if arr.first == nil || arr.first == ''
         perk_name_selected = "Custom"
       else
-        perk_name_selected = LEVELS[AMOUNTS.index(arr[0])]
+        perk_name_selected = LEVELS[AMOUNTS.index(arr.last)]
       end
 
     elsif perks.blank?
