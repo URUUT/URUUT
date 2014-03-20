@@ -29,6 +29,7 @@
       = airbrake_javascript_notifier
       = csrf_meta_tags
       = yield(:head)
+      = render 'shared/uservoice'
     %body{:class => "#{controller_name} #{action_name}"}
       #fb-root
         :javascript
@@ -93,6 +94,7 @@
 
       = csrf_meta_tags
       = yield(:head)
+      = render 'shared/uservoice'
     %body{:class => "#{controller_name} #{action_name}"}
       #fb-root
         :javascript
