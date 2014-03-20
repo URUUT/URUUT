@@ -16,18 +16,18 @@ class DonationStepsController < ApplicationController
         @perk.get_perk_name(session[:payment_amount])
 
         if session[:payment_amount].to_s.split(".")[1].eql?("0")
-          @perk.description = "You will receive #{session[:payment_amount].to_i} Uruut Reward Points when you seed $#{session[:payment_amount].to_i}"
+          @perk.description = "You will receive #{session[:payment_amount].to_i} Uruut Reward Points when you pledge $#{session[:payment_amount].to_i}"
         else
-          @perk.description = "You will receive #{session[:payment_amount].to_i} Uruut Reward Points when you seed $#{session[:payment_amount].to_f}"
+          @perk.description = "You will receive #{session[:payment_amount].to_i} Uruut Reward Points when you pledge $#{session[:payment_amount].to_f}"
         end
       else
         @perk = Perk.new
         @perk.name = @donation.perk_name
         @perk.amount = @donation.amount
         if @perk.amount.to_s.split(".")[1].eql?("0")
-          @perk.description = "You will receive #{@perk.amount.to_i} Uruut Reward Points when you seed $#{@perk.amount.to_i}"
+          @perk.description = "You will receive #{@perk.amount.to_i} Uruut Reward Points when you pledge $#{@perk.amount.to_i}"
         else
-          @perk.description = "You will receive #{@perk.amount.to_i} Uruut Reward Points when you seed $#{@perk.amount.to_f}"
+          @perk.description = "You will receive #{@perk.amount.to_i} Uruut Reward Points when you pledge $#{@perk.amount.to_f}"
         end
       end
 

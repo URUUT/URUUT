@@ -344,11 +344,11 @@
               .seed-level{id: "perk-id-custom"}
                 %h3.perk-name-other{id: "perk-name-other-custom"}
                   CHOOSE YOUR PERK
-                %p With this option you choose the amount to seed.
+                %p With this option you choose the amount to pledge.
                 .clearfix
                   .seed-num
                     .amount
-                    %h5 AMOUNT TO SEED
+                    %h5 AMOUNT TO PLEDGE
                     .textarea.seed-amount= text_field_tag :custom_seed, nil, style: "width: 100%"
                   %a.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "#{user_signed_in? ? 'button-seed-custom' : 'button-seed-custom-unsignin'}"} Fund Now ►
           #sponsorship.tab-pane
@@ -466,7 +466,7 @@
                   - if p.limit
                     %span.small-heading
                       = p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of #{p.perk_limit} Available)"
-                When you seed #{amount_converter(p.amount.to_i)}, you will receive:
+                When you pledge #{amount_converter(p.amount.to_i)}, you will receive:
                 %ul.normal-font.dashed-list
                   %li
                     #{p.description}
@@ -511,11 +511,11 @@
           .seed-level{id: "perk-id-custom"}
             %h3.perk-name-other{id: "perk-name-other-custom"}
               CHOOSE YOUR PERK
-            %p With this option you choose the amount to seed.
+            %p With this option you choose the amount to pledge.
             .clearfix
               .seed-num
                 .amount
-                %h5 AMOUNT TO SEED
+                %h5 AMOUNT TO PLEDGE
                 .textarea.seed-amount= text_field_tag :custom_seed, nil, style: "width: 100%"
               %a.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "#{user_signed_in? ? 'button-seed-custom' : 'button-seed-custom-unsignin'}"} Fund Now ►
 

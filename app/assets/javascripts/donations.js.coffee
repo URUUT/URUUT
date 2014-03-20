@@ -171,7 +171,7 @@ $ ->
     if $("#new_donation").valid()
       Stripe.setPublishableKey(stripe_pub_key)
       if $(".choiced-perk").attr("style") isnt "display:none" and $("#custom_amount").val() is "0"
-        alert "You Can't Input 0 For Seed Amount"
+        alert "You Can't Input 0 For Pledge Amount"
       else
         new_subscription.setupForm()
         # if $('#card_number').val() == ''
@@ -183,7 +183,7 @@ $ ->
     if $(".edit_donation").valid()
       Stripe.setPublishableKey(stripe_pub_key)
       if $(".choiced-perk").attr("style") isnt "display:none" and $("#custom_amount").val() is "0"
-        alert "You Can't Input 0 For Seed Amount"
+        alert "You Can't Input 0 For Pledge Amount"
       else
         edit_subscription.setupForm()
       # if $('#card_number').val() == ''

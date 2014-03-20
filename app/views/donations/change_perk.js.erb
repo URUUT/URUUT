@@ -39,9 +39,9 @@ $("#perk_description").val("<%= @perk_description %>");
   <% if @project.perk_permission? %>
     $(".description-custom").show();
     <% if @perk.amount.to_s.split(".")[1].eql?("0") %>
-      $(".description-custom").html("You will receive <%= @perk.amount.to_i %> Uruut Reward Points when you seed <%= number_to_currency(@perk.amount.to_f, precision: 0) %>");
+      $(".description-custom").html("You will receive <%= @perk.amount.to_i %> Uruut Reward Points when you pledge <%= number_to_currency(@perk.amount.to_f, precision: 0) %>");
     <% else %>
-      $(".description-custom").html("You will receive <%= @perk.amount.to_i %> Uruut Reward Points when you seed <%= number_to_currency(@perk.amount.to_f, precision: 2) %>");
+      $(".description-custom").html("You will receive <%= @perk.amount.to_i %> Uruut Reward Points when you pledge <%= number_to_currency(@perk.amount.to_f, precision: 2) %>");
     <% end %>
   <% else %>
     $(".description-custom").hide();
@@ -71,9 +71,9 @@ $("#perk_description").val("<%= @perk_description %>");
 
   $(".description-custom").show();
   <% if @perk.amount.to_s.split(".")[1].eql?("0") %>
-    $(".description-custom").html("You will receive <%= @perk.amount.to_i %> Uruut Reward Points when you seed <%= number_to_currency(@perk.amount.to_f, precision: 0) %>");
+    $(".description-custom").html("You will receive <%= @perk.amount.to_i %> Uruut Reward Points when you pledge <%= number_to_currency(@perk.amount.to_f, precision: 0) %>");
   <% else %>
-    $(".description-custom").html("You will receive <%= @perk.amount.to_i %> Uruut Reward Points when you seed <%= number_to_currency(@perk.amount.to_f, precision: 2) %>");
+    $(".description-custom").html("You will receive <%= @perk.amount.to_i %> Uruut Reward Points when you pledge <%= number_to_currency(@perk.amount.to_f, precision: 2) %>");
   <% end %>
   <% if @perks.blank? %>
     $(".selectParent").hide();
@@ -86,9 +86,9 @@ $("#perk_description").val("<%= @perk_description %>");
     <% end %>
 
     <% if @perk.amount.to_s.split(".")[1].eql?("0") %>
-      $(".none-perks").html("You will receive <%= @perk.amount.to_i %> Uruut Reward Points when you seed <%= number_to_currency(@perk.amount, precision: 0) %>");
+      $(".none-perks").html("You will receive <%= @perk.amount.to_i %> Uruut Reward Points when you pledge <%= number_to_currency(@perk.amount, precision: 0) %>");
     <% else %>
-      $(".none-perks").html("You will receive <%= @perk.amount.to_i %> Uruut Reward Points when you seed <%= number_to_currency(@perk.amount, precision: 2) %>");
+      $(".none-perks").html("You will receive <%= @perk.amount.to_i %> Uruut Reward Points when you pledge <%= number_to_currency(@perk.amount, precision: 2) %>");
     <% end %>
   <% else %>
 

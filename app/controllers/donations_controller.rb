@@ -65,7 +65,7 @@ class DonationsController < ApplicationController
           session[:perk_id] = @perks.last[0]
         end
         @perk.name = "Level #{@perk.id}"
-        @perk.description = "You will receive #{@perk.amount.to_i} Uruut Reward Points when you seed $#{@perk.amount.to_i}"
+        @perk.description = "You will receive #{@perk.amount.to_i} Uruut Reward Points when you pledge $#{@perk.amount.to_i}"
       end
     else
       @perk = Perk.new
@@ -82,7 +82,7 @@ class DonationsController < ApplicationController
       session[:perk_id] = Donation.set_perk_id(@perks, @project)
       session[:perk_amount] = @perk.amount.to_f
       @perk.name = "Custom"
-      @perk.description = "You will receive #{@perk.amount} Uruut Reward Points when you seed $#{@perk.amount}"
+      @perk.description = "You will receive #{@perk.amount} Uruut Reward Points when you pledge $#{@perk.amount}"
     end
   end
 
