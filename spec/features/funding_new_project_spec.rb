@@ -96,19 +96,25 @@ feature 'Funding a new project' do
     expect(page).to have_content('ABOUT US')
   end
 
-  # scenario 'User fills VISUALS', :js => true do
-  #   @project.update_attributes(large_image: 'https://www.filepicker.io/api/file/dcFwLDJTrqA2encyBmAx')
-  #   page.set_rack_session(:connected => true)
+  scenario 'User fills VISUALS', :js => true do
+    @project.update_attributes(large_image: 'https://www.filepicker.io/api/file/dcFwLDJTrqA2encyBmAx')
+    page.set_rack_session(:connected => true)
 
-  #   visit edit_project_path(@project, anchor: 'assets')
+    visit edit_project_path(@project, anchor: 'assets')
 
-  #   page.execute_script("localStorage.setItem('step-assets', 'image_path')")
+    within(".span12") do
+      click_link 'Submit Your Project for Approval'
+    end
 
-  #   within(".span12") do
-  #     click_link 'Get Ruuted'
-  #   end
+    expect(page).to have_content 'YOU DID IT!'
+    expect(current_path).to eql(thank_you_pages_path)
 
-  #   expect(page).to have_content('YOU DID IT')
-  # end
+    project = Project.last
+    expect(project.organization).to eql @project.organization
+    expect(project.state).to eql @project.state
+    expect(project.live).to eql 0
+    expect(project.ready_for_approval).to eql 1
+    
+  end
 
 end

@@ -47,3 +47,6 @@ config/initializers/secret_token.rb
 
 # ignore large file script
 git-large-files.pl
+
+#Coverage files
+coverage

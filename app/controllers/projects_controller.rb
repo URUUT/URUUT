@@ -338,16 +338,14 @@ class ProjectsController < ApplicationController
   end
 
   def submit_project
-    project = Project.find_by_id(params[:id])
-    # project_live = 0
+    project = Project.find(params[:id])
     project.live = 0
-    # project.approval_date = Date.today.strftime("%F")
     project.ready_for_approval = 1
     if project.save!
       session[:step] = nil
       respond_to do |format|
         Project.delay.send_confirmation_email(project)
-        format.json { render :json => project.ready_for_approval }
+        format.json { render :json => { ready_for_approval: project.ready_for_approval, status: 200 } }
       end
     end
   end

@@ -1,3 +1,6 @@
+require "simplecov"
+SimpleCov.start 'rails'
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
@@ -17,11 +20,9 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 WebMock.disable_net_connect!(allow_localhost: true)
 
-Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app)
-end
+#Capybara.default_driver = :selenium
 
-Capybara.javascript_driver = :webkit
+Capybara.javascript_driver = :poltergeist
 
 RSpec.configure do |config|
   config.include(EmailSpec::Helpers)
