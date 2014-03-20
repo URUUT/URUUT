@@ -39,11 +39,11 @@ feature 'Funding a new project' do
     visit edit_project_path(@project, anchor: 'sponsor-info')
 
     fill_in 'project[organization]', with: @project.organization
-    select 'School', from: 'project_organization_type'
-    select '501(c)(3)', from: 'project_organization_classification'
-    fill_in 'project_address', with: @project.address
-    fill_in 'project_city', with: @project.city
-    select 'CA', from: 'project_state'
+    select @project.organization_type, from: 'project_organization_type'
+    select @project.organization_classification, from: 'project_organization_classification'
+    fill_in 'project[address]', with: @project.address
+    fill_in 'project[city]', with: @project.city
+    select @project.state, from: 'project[state]'
     fill_in 'project_zip', with: @project.zip
     fill_in 'project_website', with: @project.website
     fill_in 'project_facebook_page', with: @project.facebook_page
@@ -53,28 +53,25 @@ feature 'Funding a new project' do
 
     expect(page).to have_content('YOUR STORY')
   end
-  # scenario 'User fills Your Story', :js => true do
-  #   create_project
-  #   page.set_rack_session(:connected => true)
 
-  #   visit edit_project_path(@project, anchor: 'project-details')
+  scenario 'User fills Your Story', :js => true do
+    page.set_rack_session(:connected => true)
 
-  #   fill_in 'project_project_title', with: 'Project title'
-  #   fill_in 'project_goal', with: '100'
-  #   check 'project_partial_funding'
-  #   select '30', from: 'project_duration'
-  #   select 'Art / Culture', from: 'project_category'
-  #   fill_in 'project_title', with: 'Campaign title'
-  #   fill_in 'project_story', with: 'The story'
-  #   fill_in 'project_about', with: 'About the project'
+    visit edit_project_path(@project, anchor: 'project-details')
 
-  #   click_button 'Save & Continue'
+    fill_in 'project[project_title]', with: @project.project_title
+    fill_in 'project[goal]', with: @project.goal
+    select @project.duration, from: 'project[duration]'
+    select @project.category, from: 'project[category]'
+    fill_in 'project[title]', with: @project.title
+    fill_in 'project[story]', with: @project.story
+    fill_in 'project[about]', with:  @project.about
+    click_button 'Save & Continue'
 
-  #   expect(page).to have_content('SEEDER PERKS')
-  # end
+    expect(page).to have_content('SEEDER PERKS')
+  end
 
   # scenario 'User fills SEEDER PERKS', :js => true do
-  #   create_project
   #   page.set_rack_session(:connected => true)
 
   #   visit edit_project_path(@project, anchor: 'perks')
@@ -87,7 +84,6 @@ feature 'Funding a new project' do
   # end
 
   # scenario 'User fills SPONSORSHIP DETAILS', :js => true do
-  #   create_project
   #   page.set_rack_session(:connected => true)
 
   #   visit edit_project_path(@project, anchor: 'sponsorship')
@@ -101,7 +97,6 @@ feature 'Funding a new project' do
   # end
 
   # scenario 'User fills VISUALS', :js => true do
-  #   create_project
   #   @project.update_attributes(large_image: 'https://www.filepicker.io/api/file/dcFwLDJTrqA2encyBmAx')
   #   page.set_rack_session(:connected => true)
 
@@ -114,15 +109,6 @@ feature 'Funding a new project' do
   #   end
 
   #   expect(page).to have_content('YOU DID IT')
-  # end
-
-  # def create_project
-  #   @project         = Project.new
-  #   @project.user    = @user
-  #   @project.project_details = false
-  #   @project.project_token = 'token'
-  #   @project.bitly = 'blablabla'
-  #   @project.save
   # end
 
 end
