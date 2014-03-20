@@ -14,7 +14,7 @@ class WelcomeMailer < ActionMailer::Base
     @email = user.email
     @host = ActionMailer::Base.default_url_options[:host]
     unless @email.empty?
-      mail to: @email, subject: "Welcome To URUUT"
+      mail to: @email, subject: "Welcome to TechBridge Nonprofit Xchange"
     end
   end
 end
