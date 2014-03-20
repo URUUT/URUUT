@@ -3,6 +3,10 @@ require 'spec_helper'
 feature 'Funding a new project' do
   background do
     @user = FactoryGirl.create(:user)
+    @membership = FactoryGirl.create(:membership, user:@user)
+    @feature = FactoryGirl.create(:feature)
+    @plan = FactoryGirl.create(:plan, membership:[@membership], features:[@feature])
+    @project = FactoryGirl.create(:project, user: @user, partial_funding:true)
     login_as(@user, :scope => :user)
   end
 
@@ -19,38 +23,36 @@ feature 'Funding a new project' do
   #   expect(page.body).to have_content('Get Started')
   # end
 
-  # scenario 'User clicks on Get Started', :js => true do
-  #   visit new_project_path
+  scenario 'User clicks on Get Started', :js => true do
+    visit new_project_path
 
-  #   within('.hero') do
-  #     click_link 'Get Started'
-  #   end
+    within('.hero') do
+      click_link 'Get Started'
+    end
 
-  #   expect(page).to have_content('Basic Information')
-  # end
+    expect(page).to have_content('Profile')
+    expect(page).to have_content('Basic Information')
+  end
 
-  # scenario 'User fills Project info', :js => true do
-  #   create_project
-  #   page.set_rack_session(:connected => true)
+  scenario 'User fills Project info', :js => true do
+    page.set_rack_session(:connected => true)
+    visit edit_project_path(@project, anchor: 'sponsor-info')
 
-  #   visit edit_project_path(@project, anchor: 'sponsor-info')
+    fill_in 'project[organization]', with: @project.organization
+    select 'School', from: 'project_organization_type'
+    select '501(c)(3)', from: 'project_organization_classification'
+    fill_in 'project_address', with: @project.address
+    fill_in 'project_city', with: @project.city
+    select 'CA', from: 'project_state'
+    fill_in 'project_zip', with: @project.zip
+    fill_in 'project_website', with: @project.website
+    fill_in 'project_facebook_page', with: @project.facebook_page
+    fill_in 'project_twitter_handle', with: @project.twitter_handle
 
-  #   fill_in 'project_organization', with: 'Some Project Name'
-  #   select 'School', from: 'project_organization_type'
-  #   select '501(c)(3)', from: 'project_organization_classification'
-  #   fill_in 'project_address', with: '367 Beacon Street'
-  #   fill_in 'project_city', with: 'Los Angeles'
-  #   select 'CA', from: 'project_state'
-  #   fill_in 'project_zip', with: '90001'
-  #   fill_in 'project_website', with: 'www.facebook.com'
-  #   fill_in 'project_facebook_page', with: 'facebook.com/adele'
-  #   fill_in 'project_twitter_handle', with: 'adele'
+    click_button 'Save & Continue'
 
-  #   click_button 'Save & Continue'
-
-  #   expect(page).to have_content('YOUR STORY')
-  # end
-
+    expect(page).to have_content('YOUR STORY')
+  end
   # scenario 'User fills Your Story', :js => true do
   #   create_project
   #   page.set_rack_session(:connected => true)

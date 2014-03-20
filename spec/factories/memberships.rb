@@ -3,6 +3,6 @@
 FactoryGirl.define do
   factory :membership do
     user nil
-    kind "MyString"
+    plan nil
   end
 end
