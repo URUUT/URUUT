@@ -32,7 +32,7 @@
             %span.perk-amount{:style => "font-size:30px;color:#95d60a;font-family:'Proxima Nova Bold';line-height:100%; #{"display:none" if session[:perk_type].eql?("custom")}"}= number_to_currency(@donation.amount.to_f, precision: precision)
         %div.perk-info-choiced{:style => "float:left;display:inline-block;width:340px;padding-right:20px;height:auto;"}
           .choiced-perk{style: "#{"display:none" if !session[:perk_type].eql?("custom")}"}
-            %h6{:style => "line-height:100%;margin-bottom:10px;margin-top:20px"} Choose your perk
+            %h6{:style => "line-height:100%;margin-bottom:10px;margin-top:20px"} Choose your amount
             - unless @perks.blank?
               .selectParent
                 = select_tag :perk_type, options_for_select(@perks), {:onchange => 'changeAmount(this)', class: "styledSelect"}
@@ -88,7 +88,7 @@
 
         %li.perk.clearfix{id: "perk-id-custom", style: "#{"background: #95d60a" if session[:perk_type].eql?("custom")}"}
           %h3.perk-name-other{style: "#{"color: #000" if session[:perk_type].eql?("custom")}", id: "perk-name-other"}
-            CHOOSE YOUR PERK
+            CHOOSE YOUR AMOUNT
           %p With this option you choose the amount to pledge and which perk you receive. (Perk egibility based on donation amount)
           %ul
             %li.seed-amount{id: "amount-id-custom", style: "#{"background: #95d60a" if session[:perk_type].eql?("custom")}"}
