@@ -100,6 +100,8 @@ feature 'Funding a new project' do
     @project.update_attributes(large_image: 'https://www.filepicker.io/api/file/dcFwLDJTrqA2encyBmAx')
     page.set_rack_session(:connected => true)
 
+    page.execute_script("localStorage.setItem('step-assets', 'image-path')")
+
     visit edit_project_path(@project, anchor: 'assets')
 
     within(".span12") do
