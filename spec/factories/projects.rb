@@ -6,7 +6,7 @@ FactoryGirl.define do
     description                  { Faker::Lorem.paragraph(3) }
     duration                     "75"
     goal                         "1000"
-    category                     "Walkability / Bike / Paths"
+    category                     "Art / Culture"
     association                  :user
     address                      { Faker::Address.street_address }
     city                         { Faker::Address.city }

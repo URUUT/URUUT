@@ -7,77 +7,87 @@ feature 'Donating and sponsoring to a Project' do
     login_as(@user, :scope => :user)
   end
 
-  # scenario 'User visits Project#show' do
-  #   visit project_path(@project)
+  scenario 'User visits Project#show' do
+    visit project_path(@project)
 
-  #   within('.tab-nav li.active') do
-  #     expect(page).to have_link('About Us')
-  #   end
-  # end
+    within('.tab-nav li.active') do
+      expect(page).to have_link('About Us')
+    end
+  end
 
-  # scenario 'User funds $10 to a Project', js: true do
-  #   visit project_path(@project)
+  scenario 'User funds $10 to a Project', js: true do
+    visit project_path(@project)
 
-  #   page.first('.seed-level').click_link('Fund Now')
+    page.first('.seed-level').click_link('Fund Now')
 
-  #   expect(page).to have_content('PAYMENT INFORMATION')
-  # end
+    expect(page).to have_content('PAYMENT INFORMATION')
+    expect(page).to have_content(@project.project_title.upcase)
 
-  # scenario 'User fills payment information', js: true do
-  #   WebMock.allow_net_connect!
+    within('.perk-name') do
+      expect(page).to have_content 'LEVEL 1'
+    end
+  end
 
-  #   visit default_perk_donations_path(
-  #     amount:      '10',
-  #     name:        'LEVEL 1',
-  #     description: '10 Uruut Reward Points',
-  #     project_id:  @project.id)
+  scenario 'User fills payment information', js: true do
+    WebMock.allow_net_connect!
 
-  #   page.execute_script('stripe_pub_key = "pk_test_WRrfoQLUDkpGHAxCmOY0Y6ud"')
-  #   page.execute_script("$('#donation_project_id').val(#{@project.id})")
+    visit default_perk_donations_path(
+      amount:      '10',
+      name:        'LEVEL 1',
+      description: '10 Uruut Reward Points',
+      project_id:  @project.id)
 
-  #   fill_in 'name', with: @user.first_name
-  #   fill_in 'card_number', with: '4242424242424242'
-  #   fill_in 'card_code', with: '123'
-  #   fill_in 'card_month', with: '12'
-  #   fill_in 'card_year', with: 1.year.from_now.year
-  #   check 'donation_anonymous'
+    page.execute_script('stripe_pub_key = "pk_test_WRrfoQLUDkpGHAxCmOY0Y6ud"')
+    page.execute_script("$('#donation_project_id').val(#{@project.id})")
 
-  #   click_button 'Contribute'
+    fill_in 'name', with: @user.first_name
+    fill_in 'card_number', with: '4242424242424242'
+    fill_in 'card_code', with: '123'
+    fill_in 'card_month', with: '12'
+    fill_in 'card_year', with: 1.year.from_now.year
+    check 'donation_anonymous'
 
-  #   sleep(5)
+    click_button 'Contribute'
 
-  #   expect(page).to have_content('CONFIRM')
+    sleep(5)
 
-  #   WebMock.disable_net_connect!(allow_localhost: true)
-  # end
+    expect(page).to have_content('CONFIRM')
 
-  # scenario 'User confirms $10 donation', js: true do
-  #   WebMock.allow_net_connect!
+    WebMock.disable_net_connect!(allow_localhost: true)
+  end
 
-  #   visit default_perk_donations_path(
-  #     amount:      '10',
-  #     name:        'LEVEL 1',
-  #     description: '10 Uruut Reward Points',
-  #     project_id:  @project.id)
+  scenario 'User confirms $10 donation', js: true do
+    WebMock.allow_net_connect!
 
-  #   page.execute_script('stripe_pub_key = "pk_test_WRrfoQLUDkpGHAxCmOY0Y6ud"')
-  #   page.execute_script("$('#donation_project_id').val(#{@project.id})")
+    visit default_perk_donations_path(
+      amount:      '10',
+      name:        'LEVEL 1',
+      description: '10 Uruut Reward Points',
+      project_id:  @project.id)
 
-  #   fill_in 'name', with: @user.first_name
-  #   fill_in 'card_number', with: '4242424242424242'
-  #   fill_in 'card_code', with: '123'
-  #   fill_in 'card_month', with: '12'
-  #   fill_in 'card_year', with: 1.year.from_now.year
-  #   check 'donation_anonymous'
-  #   click_button 'Contribute'
-  #   sleep(5)
+    page.execute_script('stripe_pub_key = "pk_test_WRrfoQLUDkpGHAxCmOY0Y6ud"')
+    page.execute_script("$('#donation_project_id').val(#{@project.id})")
 
-  #   click_button 'Confirm'
-  #   sleep(5)
+    fill_in 'name', with: @user.first_name
+    fill_in 'card_number', with: '4242424242424242'
+    fill_in 'card_code', with: '123'
+    fill_in 'card_month', with: '12'
+    fill_in 'card_year', with: 1.year.from_now.year
+    check 'donation_anonymous'
+    click_button 'Contribute'
+    sleep(5)
 
-  #   expect(page).to have_content('THANK YOU!')
+    click_button 'Confirm'
+    sleep(5)
 
-  #   WebMock.disable_net_connect!(allow_localhost: true)
-  # end
+    expect(page).to have_content('THANK YOU!')
+
+    donations = @user.donations.where(project_id: @project)
+    expect(donations).to exist
+    expect(donations.last.amount).to eql 10.0
+    expect(donations.last.perk_name.downcase).to eql 'level 1'
+
+    WebMock.disable_net_connect!(allow_localhost: true)
+  end
 
 end
