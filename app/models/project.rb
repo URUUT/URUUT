@@ -2,7 +2,7 @@ class Project < ActiveRecord::Base
   belongs_to :user
 
   before_save :downcase_url_and_facebook
-  before_save :downcase_city
+  before_save :capitalize_city
 
   before_validation :strip_comma_from_goal, :if => :project_details
 
@@ -236,8 +236,8 @@ class Project < ActiveRecord::Base
     ProjectMailer.project_approved(project).deliver
   end
 
-  def downcase_city
-    self.city.downcase! unless self.city.nil?
+  def capitalize_city
+    self.city.capitalize! unless self.city.nil?
   end
 
   def downcase_url_and_facebook
