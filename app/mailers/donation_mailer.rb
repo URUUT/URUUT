@@ -17,7 +17,7 @@ class DonationMailer < ActionMailer::Base
     @image = @project.large_image
     @host = ActionMailer::Base.default_url_options[:host]
 
-    mail to: recepient, subject: "Checkout The Project I Donated To"
+    mail bcc: recepient, subject: "Checkout the latest campaign"
   end
 
   def donation_confirmation(donation)
