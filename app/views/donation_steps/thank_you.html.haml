@@ -17,8 +17,7 @@
         %h5.label-green{style: "margin-bottom: 0;"} Payment amount
         %p #{number_to_currency(@donation.amount, :precision => 0)}
         %h5.label-green{style: "margin-bottom: 0;"} Your perk
-        %h6{style: "margin: 0;"}
-          = @perk.name.titleize
+        %h6{style: "margin: 0;"}= @donation.perk_name
         - precision = @donation.amount.to_s.split(".")[1].eql?("0") ? 0 : 2
         / %p{style: "color: #e0e0e0; font-size: 11px;"}
         /   %span{style: "font-family: 'Proxima Nova Semi', sans-serif;"}
