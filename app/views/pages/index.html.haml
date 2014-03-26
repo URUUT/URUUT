@@ -46,4 +46,8 @@
         $("#location :selected").text(truncText($("#location :selected").text(), 15, "..."))
       }
     })
+
+    if (document.referrer != 'https://www.facebook.com/dialog/feed') {
+      window.close();
+    }
   });
