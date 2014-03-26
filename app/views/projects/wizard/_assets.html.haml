@@ -436,26 +436,6 @@
   }
 
   $(function(){
-      var geocoder = new google.maps.Geocoder();
-      var geocoderRequest = { address: $('#project_city').val() + ',' + $('#project_state').val() + ',' + $('#project_zip').val() };
-      geocoder.geocode(geocoderRequest, function(results, status){
-        var latitude = results[0].geometry.location.lat();
-        var longitude = results[0].geometry.location.lng();
-
-        var map = L.map('map', {
-            scrollWheelZoom: false
-        }).setView([latitude,longitude], 11);
-
-        var uruutIcon = L.icon({
-          iconUrl: '#{image_path("map-icon.png")}',
-          iconSize:     [36, 52]
-        });
-
-        L.tileLayer("https://stamen-tiles.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png", {
-          attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
-        }).addTo(map);
-        L.marker([latitude,longitude], {icon:uruutIcon}).addTo(map);
-    });
 
     $('#myTab4 a').click(function (e) {
       e.preventDefault();
