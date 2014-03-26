@@ -77,7 +77,7 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'rails_best_practices'
-  gem 'debugger',                       '~> 1.6.2'
+  gem 'debugger',                       '~> 1.6.6'
   gem 'cucumber-rails',                 '~> 1.3.1', :require => false
   # gem 'jasmine'
   # gem 'jasmine-rails'
