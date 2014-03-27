@@ -239,8 +239,8 @@ class SponsorsController < ApplicationController
                                       level_id: params[:project_sponsor][:level_id], card_token: token,
                                       card_type: card_type, card_last4: last4, sponsor_type: params[:type] })
     session[:project_sponsor] = @project_sponsor
-    Sponsor.delay.send_confirmation_email(@sponsor)
-    Sponsor.delay.sponsor_thank_you(@sponsor.id, @sponsor.email)
+    SponsorMailer.delay.send_confirmation_email(@sponsor)
+    SponsorMailer.delay.sponsor_thank_you(@sponsor.id, @sponsor.email)
     redirect_to confirmation_url(params[:project_id], @sponsor.id)
   end
 
