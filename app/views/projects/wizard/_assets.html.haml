@@ -357,6 +357,7 @@
 
 = javascript_include_tag "jquery-ui"
 = javascript_include_tag "jquery.ui.touch-punch.min"
+= javascript_include_tag "//maps.google.com/maps/api/js?sensor=false"
 
 :javascript
   $('.new-save-btn').hide();
@@ -435,6 +436,7 @@
   }
 
   $(function(){
+
     $('#myTab4 a').click(function (e) {
       e.preventDefault();
       $(this).tab('show');

@@ -39,5 +39,14 @@ FactoryGirl.define do
     sponsor_permission           false
     step                         "/projects/11/edit#assets"
     partial_funding              false
+
+    factory :project_with_sponsor do
+      sponsor_permission   true
+      after(:create) do |project|
+        create_list :sponsorship_level, 5, project: project
+        create_list :sponsorship_benefit, 2, project: project
+      end
+    end
+
   end
 end
