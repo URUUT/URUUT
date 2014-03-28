@@ -39,7 +39,7 @@ class DonationMailer < ActionMailer::Base
     @sponsor_name = "#{sponsor.first_name}" + " #{sponsor.last_name}"
     @user_id = user.id
 
-    mail from:'alejo+from@bandofcoders.com', to: @email, subject: "Thank You, Donor!"
+    mail to: @email, subject: "Thank You, Donor!"
   end
 
   def send_donation_report
