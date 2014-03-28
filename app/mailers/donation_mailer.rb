@@ -35,11 +35,12 @@ class DonationMailer < ActionMailer::Base
     @project_facebook = @project.facebook_page
     @project_twitter = @project.twitter_handle
     @project_title = project.project_title
+    @project_email = project.project_email
     @sponsor_email = sponsor.email
     @sponsor_name = "#{sponsor.first_name}" + " #{sponsor.last_name}"
     @user_id = user.id
 
-    mail to: @email, subject: "Thank You, Donor!"
+    mail from: @project_email, to: @email, subject: "Thank You, Donor!"
   end
 
   def send_donation_report
