@@ -23,7 +23,7 @@ WebMock.disable_net_connect!(allow_localhost: true)
 #Capybara.default_driver = :selenium
 Capybara.register_driver :poltergeist do |app|
     options = {
-        :js_errors => true,
+        :js_errors => false,
         :timeout => 320,
         :debug => false,
         :phantomjs_options => ['--load-images=no', '--disk-cache=false'],
