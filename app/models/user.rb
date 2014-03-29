@@ -146,9 +146,8 @@ class User < ActiveRecord::Base
     eligible_perk = perks.compact.find_all { |item| ActionController::Base.helpers.number_to_currency(item.amount) <= total_donated }.max
     eligible_perk_name = eligible_perk.nil? ? "None" : eligible_perk.name
     eligible_perk_description = eligible_perk.nil? ? " " : eligible_perk.description
-    todays_date = Date.today
     # Implicit Block
-    Prawn::Document.generate("tmp/#{project.organization[0..8].gsub(/\s+/, '')}_#{Date.today.strftime('%Y%m%d')}#{self.id}.pdf") do
+    Prawn::Document.generate("tmp/#{project.organization[0..8].gsub(/\s+/, '')}_#{project.campaign_deadline.strftime('%Y%m%d')}#{self.id}.pdf") do
       font_size 18
       pad(20) { text "#{project.organization}" }
       stroke_horizontal_rule
