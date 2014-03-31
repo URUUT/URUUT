@@ -153,7 +153,7 @@ class User < ActiveRecord::Base
       stroke_horizontal_rule
 
       font_size 12
-      pad(20) { text "Date: #{todays_date}"}
+      pad(20) { text "Date: #{project.campaign_deadline.strftime('%Y%m%d')}"}
       pad(20) { text "Donator Name: #{first_name} #{last_name}" }
       pad(20) { text "Total Donated: #{total_donated}" }
 
@@ -163,7 +163,7 @@ class User < ActiveRecord::Base
       font_size 10
       pad(20) { text "No goods or services were received in exchange for the donation unless specified above.  It is recommended you seek advice from a tax professional." }
     end
-    upload_to_s3("#{project.organization[0..8].gsub(/\s+/, '')}_#{Date.today.strftime('%Y%m%d')}#{self.id}.pdf", project)
+    upload_to_s3("#{project.organization[0..8].gsub(/\s+/, '')}_#{project.campaign_deadline.strftime('%Y%m%d')}#{self.id}.pdf", project)
   end
 
   def upload_to_s3(filename, project)
