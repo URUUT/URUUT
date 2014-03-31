@@ -153,7 +153,7 @@ class User < ActiveRecord::Base
       stroke_horizontal_rule
 
       font_size 12
-      pad(20) { text "Date: #{project.campaign_deadline.strftime('%d-%m-%Y')}"}
+      pad(20) { text "Date: #{project.campaign_deadline.strftime('%m-%d-%Y')}"}
       pad(20) { text "Donator Name: #{first_name} #{last_name}" }
       pad(20) { text "Total Donated: #{total_donated}" }
 
@@ -168,7 +168,7 @@ class User < ActiveRecord::Base
 
   def upload_to_s3(filename, project)
     s3 = AWS::S3.new
-    bucket = s3.buckets['uruut/tax_reports']
+    bucket = s3.buckets["uruut/tax_reports/#{project.id}"]
     obj = bucket.objects[filename]
     obj.write(:file => "#{Rails.root}/tmp/#{filename}")
     url = obj.public_url.to_s
