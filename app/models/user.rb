@@ -153,7 +153,7 @@ class User < ActiveRecord::Base
       stroke_horizontal_rule
 
       font_size 12
-      pad(20) { text "Date: #{project.campaign_deadline.strftime('%Y%m%d')}"}
+      pad(20) { text "Date: #{project.campaign_deadline.strftime('%d-%m-%Y')}"}
       pad(20) { text "Donator Name: #{first_name} #{last_name}" }
       pad(20) { text "Total Donated: #{total_donated}" }
 
