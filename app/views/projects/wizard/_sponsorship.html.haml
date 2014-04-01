@@ -27,7 +27,11 @@
 
       %div
         %h6{:style => "color:#70bf4c"}
-          PLATINUM LEVEL SPONSORSHIP*
+          - if current_user.has_plan?('plus')
+            = text_field_tag 'level[platinum][name]', 'PLATINUM'
+          - else
+            PLATINUM
+          LEVEL SPONSORSHIP*
           %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;"} (industry-specific exclusivity)
           %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;", class: "platinum-availibility"} (1 AVAILABLE)
       .row-fluid
@@ -85,7 +89,11 @@
 
       %div
         %h6{:style => "color:#70bf4c"}
-          Gold LEVEL SPONSORSHIP*
+          - if current_user.has_plan?('plus')
+            = text_field_tag 'level[gold][name]', 'Gold'
+          - else
+            Gold
+          LEVEL SPONSORSHIP*
           %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;"} (industry-specific exclusivity)
           %span{:style => "font-size:10px;color:#403e37", class: "gold-availibility"} (3 AVAILABLE)
       .row-fluid
@@ -143,7 +151,11 @@
 
       %div
         %h6{:style => "color:#70bf4c"}
-          Silver LEVEL SPONSORSHIP*
+          - if current_user.has_plan?('plus')
+            = text_field_tag 'level[silver][name]', 'Silver'
+          - else
+            Silver
+          LEVEL SPONSORSHIP*
           %span{:style => "font-size:10px;color:#403e37", class: "silver-availibility"} (5 AVAILABLE)
       .row-fluid
         .span3.left{:style => "text-align:left;color:#464646;"}
@@ -201,7 +213,11 @@
 
       %div
         %h6{:style => "color:#70bf4c;"}
-          Bronze LEVEL SPONSORSHIP*
+          - if current_user.has_plan?('plus')
+            = text_field_tag 'level[bronze][name]', 'Bronze'
+          - else
+            Bronze
+          LEVEL SPONSORSHIP*
       .row-fluid
         .span3.left{:style => "text-align:left;color:#464646;"}
           %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0;"} Cost
