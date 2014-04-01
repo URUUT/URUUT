@@ -26,6 +26,25 @@ feature 'Custom sponsorship creation' do
     expect( page.has_field?('level[bronze][name]') ).to be_true
   end
 
+  scenario "Should create custom level name", js: true do
+    page.set_rack_session(connected: true)
+
+    visit edit_project_path(@project, anchor: 'sponsorship')
+
+    select 'Yes', from: 'project_sponsorship_permission'
+
+    fill_in 'level[platinum][name]', with: 'Ninja'
+    fill_in 'level[bronze][name]', with: 'Ronnin'
+
+    check 'platinum_1'
+
+    click_link 'next-link-to-assets'
+    page.driver.browser.switch_to.alert.accept
+
+    expect(SponsorshipLevel.where(name: 'Ninja')).to exist
+    expect(SponsorshipLevel.where(name: 'Ronnin')).to exist
+  end
+
   scenario "Should not display level name fields if there is not a Plus User", js: true do
     @plan.name = 'basic'
     @plan.save!

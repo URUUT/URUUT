@@ -504,3 +504,14 @@
       }
     });
   }
+
+  $("#next-link-to-assets").click(function(){
+    window.location.href = '/projects/' + projectId + '/edit#assets';
+    window.location.reload(true);
+  })
+
+- if current_user.has_plan? 'plus'
+  :javascript
+    var custom_level_url_path = "#{sponsorship_level_url}";
+    console.log(custom_level_url_path);
+  = javascript_include_tag 'customSponsorshipBehavior'

@@ -3,4 +3,11 @@ class SponsorshipLevel < ActiveRecord::Base
 
   belongs_to :project
   has_many :sponsorship_benefits
+
+  DEFAULT_NAMES = HashWithIndifferentAccess.new({
+    platinum: 1,
+    gold: 2,
+    silver: 3,
+    bronze: 4
+    })
 end
