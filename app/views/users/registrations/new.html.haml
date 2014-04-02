@@ -30,6 +30,7 @@
       = f.label :organization, class: "label-green" do
         %span.error-container
         Organization name*
+        = "(Not Required for Donor Signup)" unless params[:sign_up_plan] || (params[:user] && params[:user][:sign_up_plan]) || params[:full_registration] || (params[:user] && params[:user][:full_registration])
       = f.text_field :organization
 
     %div
