@@ -1,9 +1,14 @@
 .recent.clearfix
   .container
-    %p.sections
-      = image_tag "recent-project-icon.png"
-      PROJECTS
+    - unless @projects.empty?
+      %p.sections
+        CURRENT PROJECTS
 
-      = link_to "View All", "#", :class => 'view-all'
+        = link_to "View All", "#", :class => 'view-all'
 
-    = render "project", :projects => @projects
+      = render "project", :projects => @projects
+
+    - unless @project_success.empty?
+      %p.sections
+        FEATURED SUCCESSES
+      = render "project_success", :projects => @project_success
