@@ -192,52 +192,23 @@
                     %a.black-btn.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "button-seed-custom"} Fund Now ►
 
               #sponsorship.tab-pane
-                .seed-level.platinum-level
-                  %h3
-                    PLATINUM
-                    %span.small-heading
-                      (1 of 1 available)
-                  %ul.normal-font.dashed-list
-                    -if @sponsorship_benefits.include?(1)
-                      -@sponsorship_benefits[1].each do |benefit|
-                        %li= benefit.name
-                  .clearfix
-                    .seed-num
-                      .amount
-                        = amount_converter(@project.goal.to_i * 0.25)
-                    %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
-                      Sponsor ►
-                .seed-level.gold-level
-                  %h3
-                    GOLD
-                    %span.small-heading
-                      (3 of 3 available)
-                  %ul.normal-font.dashed-list
-                    -if @sponsorship_benefits.include?(2)
-                      -@sponsorship_benefits[2].each do |benefit|
-                        %li= benefit.name
-                  .clearfix
-                    .seed-num
-                      .amount
-                        = amount_converter(@project.goal.to_i * 0.1)
-                    %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
-                      Sponsor ►
-                .seed-level.silver-level
-                  %h3
-                    SILVER
-                    %span.small-heading
-                      (5 of 5 available)
-                  %ul.normal-font.dashed-list
-                    -if @sponsorship_benefits.include?(3)
-                      -@sponsorship_benefits[3].each do |benefit|
-                        %li= benefit.name
-                        %span
-                  .clearfix
-                    .seed-num
-                      .amount
-                        = amount_converter(@project.goal.to_i * 0.05)
-                    %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
-                      Sponsor ►
+                - @sponsorship_levels.each_with_index do |level, index|
+                  .seed-level{:class => "#{cycle('platinum-level', 'gold-level','silver-level','bronze-level', name: 'class_cycle')}"}
+                    %h3
+                      = level.name
+                      %span.small-heading
+                        = cycle('(1 of 1 available)', '(3 of 3 available)', '(5 of 5 available)', '', class: 'availity_cycle')
+                    %ul.normal-font.dashed-list
+                      -if @sponsorship_benefits.include?(level.id)
+                        -@sponsorship_benefits[level.id].each do |benefit|
+                          %li= benefit.name
+                    .clearfix
+                      .seed-num
+                        .amount
+                          - amount = cycle(@project.goal.to_i * 0.25, @project.goal.to_i * 0.1, @project.goal.to_i * 0.05)
+                          = amount_converter(amount)
+                      %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
+                        Sponsor ►
                 .seed-level.bronze-level
                   %h3 BRONZE
                   %ul.normal-font.dashed-list

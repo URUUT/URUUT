@@ -40,9 +40,15 @@ feature 'Custom sponsorship creation' do
 
     click_link 'next-link-to-assets'
     page.driver.browser.switch_to.alert.accept
-
+    sleep(1)
     expect(SponsorshipLevel.where(name: 'Ninja')).to exist
     expect(SponsorshipLevel.where(name: 'Ronnin')).to exist
+
+    ninja_id = SponsorshipLevel.where(name: 'Ninja').first
+    ronnin_id = SponsorshipLevel.where(name: 'Ronnin').first
+    expect(@project.sponsorship_benefits.where(sponsorship_level_id: ninja_id)).to exist
+    expect(@project.sponsorship_benefits.where(sponsorship_level_id: ronnin_id)).to exist
+    expect(@project.sponsorship_benefits.where(sponsorship_level_id: 2)).to exist
   end
 
   scenario "Should not display level name fields if there is not a Plus User", js: true do
