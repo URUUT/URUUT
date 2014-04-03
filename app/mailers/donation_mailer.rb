@@ -36,7 +36,7 @@ class DonationMailer < ActionMailer::Base
     @project_title = project.project_title
     @sponsor_email = sponsor.email
     @sponsor_name = "#{sponsor.first_name}" + " #{sponsor.last_name}"
-    @remove_signature? = true
+    @remove_signature = true
 
     mail to: @email, subject: "Thank You, Donor!"
   end
