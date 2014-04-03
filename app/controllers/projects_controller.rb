@@ -87,6 +87,7 @@ class ProjectsController < ApplicationController
       session[:current_project] = @project.id
       @project.update_attributes!(params[:project])
       @perks = @project.perks.order(:amount)
+      @sponsorship_levels = SponsorshipLevel.by_project(@project)
       respond_to do |format|
         format.html
         format.js
@@ -102,6 +103,7 @@ class ProjectsController < ApplicationController
     @project_sponsors = sort_sponsorships.group_by {|sponsor| sponsor.level_id }
     @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).order(:id).group_by {|sponsor| sponsor.sponsorship_level_id}
     @perks = @project.perks.order(:amount)
+    @sponsorship_levels = SponsorshipLevel.by_project(@project)
     session[:current_project] = @project.id
     render :layout => 'landing'
   end
@@ -191,6 +193,7 @@ class ProjectsController < ApplicationController
       if params[:step].eql?("fourth")
         @perks = @project.perks.order(:amount)
         @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
+        @sponsorship_levels = SponsorshipLevel.by_project(@project)
         respond_to do |format|
           format.js { render "skip_sponsor.js.erb" }
         end
@@ -229,6 +232,7 @@ class ProjectsController < ApplicationController
     @project.update_attributes!(sponsor_permission: false)
     @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
     @perks = @project.perks.order(:amount)
+    @sponsorship_levels = SponsorshipLevel.by_project(@project)
 
     respond_to :js
   end
@@ -376,6 +380,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
     @perks = @project.perks.order(:amount)
+    @sponsorship_levels = SponsorshipLevel.by_project(@project)
 
     respond_to do |format|
       format.js { render "skip_sponsor.js.erb" }

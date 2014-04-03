@@ -7,9 +7,8 @@ $('#next-link-to-assets').click( function (e) {
       type: 'PUT',
       data: $('[name^=level]')
     }).done(function(data) {
-      console.log(data);
-      /*window.location.href = '/projects/' + projectId + '/edit#assets';
-      window.location.reload(true);*/
+      window.location.href = '/projects/' + projectId + '/edit#assets';
+      window.location.reload(true);
     });
   }
 });
