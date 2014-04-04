@@ -254,10 +254,10 @@
       %hr{:style => "background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
       = hidden_field_tag "step", "fourth"
       %div
-        = f.submit "Save & Continue ►", :class => "btn", :id => "project-submit", :style => "position: relative;display:none;margin:0 auto;"
-        - if current_user.has_plan? 'plus' && !@project.live?
+        - if current_user.has_plan?('plus') && !@project.live?
           = link_to "Save & Continue ►", "#confirm-changes", id: "next-link-to-assets", class: 'btn', style: "position: relative;display:block;margin:0 auto;width: 262px;", data: { toggle: "modal", role: "button" }
         - else
+          = f.submit "Save & Continue ►", :class => "btn", :id => "project-submit", :style => "position: relative;display:none;margin:0 auto;"
           = link_to "Save & Continue ►", "javascript:void(0)", id: "next-link-to-assets", :class => "btn", :style => "position: relative;display:block;margin:0 auto;width: 262px;"
 
     %div.sponsorship-false{:style => "display:none"}

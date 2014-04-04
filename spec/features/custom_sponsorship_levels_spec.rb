@@ -16,6 +16,7 @@ feature 'Custom sponsorship creation' do
   scenario "Should display level name fields", js: true do
     @project.live = 0
     @project.save!
+    
     page.set_rack_session(connected: true)
 
     visit edit_project_path(@project, anchor: 'sponsorship')
