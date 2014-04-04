@@ -14,6 +14,8 @@ feature 'Custom sponsorship creation' do
   end
 
   scenario "Should display level name fields", js: true do
+    @project.live = 0
+    @project.save!
     page.set_rack_session(connected: true)
 
     visit edit_project_path(@project, anchor: 'sponsorship')
@@ -27,6 +29,9 @@ feature 'Custom sponsorship creation' do
   end
 
   scenario "Should create custom level name", js: true do
+    @project.live = 0
+    @project.save!
+
     page.set_rack_session(connected: true)
 
     visit edit_project_path(@project, anchor: 'sponsorship')
@@ -49,6 +54,19 @@ feature 'Custom sponsorship creation' do
     expect(@project.sponsorship_benefits.where(sponsorship_level_id: ninja_id)).to exist
     expect(@project.sponsorship_benefits.where(sponsorship_level_id: ronnin_id)).to exist
     expect(@project.sponsorship_benefits.where(sponsorship_level_id: 2)).to exist
+  end
+
+  scenario "A live project can't edit custom level names", js: true do
+    page.set_rack_session(connected: true)
+
+    visit edit_project_path(@project, anchor: 'sponsorship')
+
+    select 'Yes', from: 'project_sponsorship_permission'
+
+    expect( page.has_field?('level[platinum][name]') ).to be_false
+    expect( page.has_field?('level[gold][name]') ).to be_false
+    expect( page.has_field?('level[silver][name]') ).to be_false
+    expect( page.has_field?('level[bronze][name]') ).to be_false
   end
 
   scenario "Should not display level name fields if there is not a Plus User", js: true do

@@ -401,6 +401,10 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def live?
+    live == 1
+  end
+
 private
 
   def calculate_funder_application_fee(application_fee)
