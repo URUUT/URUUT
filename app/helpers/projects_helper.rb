@@ -116,4 +116,8 @@ module ProjectsHelper
     project.project_sponsors.any?
   end
 
+  def level_name(index, level, default)
+    (@sponsorship_levels[index])? @sponsorship_levels[index].name : default
+  end
+
 end
