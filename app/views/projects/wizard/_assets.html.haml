@@ -205,8 +205,7 @@
                     .clearfix
                       .seed-num
                         .amount
-                          - amount = cycle(@project.goal.to_i * 0.25, @project.goal.to_i * 0.1, @project.goal.to_i * 0.05, ((@project.goal.to_i * 0.02) >= 750)? 750 : @project.goal.to_i * 0.02 )
-                          = amount_converter(amount)
+                          = amount_converter( @project.amount_converter(index) )
                       %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
                         Sponsor ►
           - else

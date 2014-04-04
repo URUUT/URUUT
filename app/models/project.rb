@@ -405,6 +405,21 @@ class Project < ActiveRecord::Base
     live == 1
   end
 
+  def amount_converter(index)
+    case index
+    when 0 
+      goal.to_i * 0.25
+    when 1 
+      goal.to_i * 0.1
+    when 2 
+      goal.to_i * 0.05
+    when 3
+      ((goal.to_i * 0.02) >= 750)? 750 : goal.to_i * 0.02
+    else
+      0
+    end
+  end
+
 private
 
   def calculate_funder_application_fee(application_fee)
