@@ -39,7 +39,7 @@ feature 'Custom sponsorship creation' do
     check 'platinum_1'
 
     click_link 'next-link-to-assets'
-    page.driver.browser.switch_to.alert.accept
+    within('#confirm-changes') { click_button 'Save changes' }
     sleep(1)
     expect(SponsorshipLevel.where(name: 'Ninja')).to exist
     expect(SponsorshipLevel.where(name: 'Ronnin')).to exist
