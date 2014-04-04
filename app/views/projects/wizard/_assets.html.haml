@@ -205,26 +205,10 @@
                     .clearfix
                       .seed-num
                         .amount
-                          - amount = cycle(@project.goal.to_i * 0.25, @project.goal.to_i * 0.1, @project.goal.to_i * 0.05)
+                          - amount = cycle(@project.goal.to_i * 0.25, @project.goal.to_i * 0.1, @project.goal.to_i * 0.05, ((@project.goal.to_i * 0.02) >= 750)? 750 : @project.goal.to_i * 0.02 )
                           = amount_converter(amount)
                       %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
                         Sponsor ►
-                .seed-level.bronze-level
-                  %h3 BRONZE
-                  %ul.normal-font.dashed-list
-                    %li Text mention on project page
-                    -if @sponsorship_benefits.include?(4)
-                      -@sponsorship_benefits[4].each do |benefit|
-                        %li= benefit.name
-                  .clearfix
-                    .seed-num
-                      .amount
-                        - if (@project.goal.to_i * 0.02) >= 750
-                          = number_to_currency(750, precision: 0)
-                        - else
-                          = number_to_currency(@project.goal.to_i * 0.02, precision: 0)
-                    %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
-                      Sponsor ►
           - else
             %h4.tittle.wizard-data-donation{style: "margin-bottom: 0;"} Donation
             -if @project.perk_permission

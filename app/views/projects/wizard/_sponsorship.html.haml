@@ -28,9 +28,9 @@
       %div
         %h6{:style => "color:#70bf4c"}
           - if current_user.has_plan?('plus') && !@project.live?
-            = text_field_tag 'level[platinum][name]', 'PLATINUM'
+            = text_field_tag 'level[platinum][name]', level_name(0, 'PLATINUM', @sponsorship_levels)
           - else
-            PLATINUM
+            = level_name(0, 'PLATINUM', @sponsorship_levels)
           LEVEL SPONSORSHIP*
           %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;"} (industry-specific exclusivity)
           %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;", class: "platinum-availibility"} (1 AVAILABLE)
@@ -90,9 +90,9 @@
       %div
         %h6{:style => "color:#70bf4c"}
           - if current_user.has_plan?('plus') && !@project.live?
-            = text_field_tag 'level[gold][name]', 'Gold'
+            = text_field_tag 'level[gold][name]', level_name(1, 'Gold', @sponsorship_levels)
           - else
-            Gold
+            = level_name(1, 'Gold', @sponsorship_levels)
           LEVEL SPONSORSHIP*
           %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;"} (industry-specific exclusivity)
           %span{:style => "font-size:10px;color:#403e37", class: "gold-availibility"} (3 AVAILABLE)
@@ -152,9 +152,9 @@
       %div
         %h6{:style => "color:#70bf4c"}
           - if current_user.has_plan?('plus') && !@project.live?
-            = text_field_tag 'level[silver][name]', 'Silver'
+            = text_field_tag 'level[silver][name]', level_name(2, 'Silver', @sponsorship_levels)
           - else
-            Silver
+            = level_name(2, 'Silver', @sponsorship_levels)
           LEVEL SPONSORSHIP*
           %span{:style => "font-size:10px;color:#403e37", class: "silver-availibility"} (5 AVAILABLE)
       .row-fluid
@@ -214,9 +214,9 @@
       %div
         %h6{:style => "color:#70bf4c;"}
           - if current_user.has_plan?('plus') && !@project.live?
-            = text_field_tag 'level[bronze][name]', 'Bronze'
+            = text_field_tag 'level[bronze][name]', level_name(3, 'Bronze', @sponsorship_levels)
           - else
-            Bronze
+            = level_name(3, 'Bronze', @sponsorship_levels)
           LEVEL SPONSORSHIP*
       .row-fluid
         .span3.left{:style => "text-align:left;color:#464646;"}
