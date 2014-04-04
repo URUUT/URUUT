@@ -27,7 +27,7 @@
 
       %div
         %h6{:style => "color:#70bf4c"}
-          - if current_user.has_plan?('plus')
+          - if current_user.has_plan?('plus') && !@project.live?
             = text_field_tag 'level[platinum][name]', 'PLATINUM'
           - else
             PLATINUM
@@ -89,7 +89,7 @@
 
       %div
         %h6{:style => "color:#70bf4c"}
-          - if current_user.has_plan?('plus')
+          - if current_user.has_plan?('plus') && !@project.live?
             = text_field_tag 'level[gold][name]', 'Gold'
           - else
             Gold
@@ -151,7 +151,7 @@
 
       %div
         %h6{:style => "color:#70bf4c"}
-          - if current_user.has_plan?('plus')
+          - if current_user.has_plan?('plus') && !@project.live?
             = text_field_tag 'level[silver][name]', 'Silver'
           - else
             Silver
@@ -213,7 +213,7 @@
 
       %div
         %h6{:style => "color:#70bf4c;"}
-          - if current_user.has_plan?('plus')
+          - if current_user.has_plan?('plus') && !@project.live?
             = text_field_tag 'level[bronze][name]', 'Bronze'
           - else
             Bronze
@@ -255,7 +255,7 @@
       = hidden_field_tag "step", "fourth"
       %div
         = f.submit "Save & Continue ►", :class => "btn", :id => "project-submit", :style => "position: relative;display:none;margin:0 auto;"
-        - if current_user.has_plan? 'plus'
+        - if current_user.has_plan? 'plus' && !@project.live?
           = link_to "Save & Continue ►", "#confirm-changes", id: "next-link-to-assets", class: 'btn', style: "position: relative;display:block;margin:0 auto;width: 262px;", data: { toggle: "modal", role: "button" }
         - else
           = link_to "Save & Continue ►", "javascript:void(0)", id: "next-link-to-assets", :class => "btn", :style => "position: relative;display:block;margin:0 auto;width: 262px;"
