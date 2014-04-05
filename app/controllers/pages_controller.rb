@@ -9,7 +9,7 @@ class PagesController < ApplicationController
 
   def index
     @projects = Project.where(live: true, status: 'Funding Active')
-    @project_success = Project.where("live = 1 AND status = 'Funding Completed'")
+    @project_success = Project.not_hidden.where("live = 1 AND status = 'Funding Completed'")
   end
 
   def home

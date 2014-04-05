@@ -10,7 +10,8 @@ class Project < ActiveRecord::Base
   :city, :state, :zip, :neighborhood, :title, :image, :video, :tags, :live, :short_description, :perk_permission,
   :perks_attributes, :galleries_attributes, :status, :organization, :website, :twitter_handle, :facebook_page, :seed_video,
   :story, :about, :large_image, :seed_image, :cultivation_image, :ready_for_approval, :organization_type, :cultivation_mime_type,
-  :organization_classification, :cultivation_video, :campaign_deadline, :sponsor_permission, :step, :seed_mime_type, :partial_funding
+  :organization_classification, :cultivation_video, :campaign_deadline, :sponsor_permission, :step, :seed_mime_type,
+  :partial_funding, :hide_featured
 
   attr_accessor :sponsorship_permission, :perk_type, :sponsor_info, :project_details, :assets
 
@@ -48,6 +49,7 @@ class Project < ActiveRecord::Base
   scope :funding_complete, where("status = 'Funding Complete'")
   scope :ending_today, where("campaign_deadline BETWEEN ? AND ?", DateTime.now.beginning_of_day, DateTime.now.end_of_day)
   scope :updated_yesterday, -> { where("updated_at >= ?", (Time.now - 1.day).utc) }
+  scope :not_hidden, where(hide_featured: false)
 
   def self.unique_values_of(type)
     self.select(type).uniq.pluck(type)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140303042707) do
+ActiveRecord::Schema.define(:version => 20140405044517) do
 
   create_table "accounts", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -415,6 +415,7 @@ ActiveRecord::Schema.define(:version => 20140303042707) do
     t.boolean  "sponsor_permission",          :default => true
     t.string   "step"
     t.boolean  "partial_funding",             :default => false
+    t.boolean  "hide_featured",               :default => false
   end
 
   add_index "projects", ["user_id"], :name => "index_projects_on_user_id"
