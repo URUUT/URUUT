@@ -59,6 +59,7 @@ ActiveAdmin.register Project do
       row :sponsor_permission
 
       row :live
+      row :hide_featured
     end
     active_admin_comments
   end
@@ -105,6 +106,8 @@ ActiveAdmin.register Project do
       f.input :step
       f.input :seed_mime_type
       f.input :partial_funding
+
+      f.input :hide_featured, :label => "Hide Featured"
     end
     f.actions
   end

@@ -417,6 +417,7 @@ ActiveRecord::Schema.define(:version => 20140407165903) do
     t.boolean  "sponsor_permission",          :default => true
     t.string   "step"
     t.boolean  "partial_funding",             :default => false
+    t.boolean  "hide_featured",               :default => false
   end
 
   add_index "projects", ["user_id"], :name => "index_projects_on_user_id"
