@@ -71,20 +71,20 @@ feature 'Custom sponsorship creation' do
     expect( page.has_field?('level[silver][name]') ).to be_false
     expect( page.has_field?('level[bronze][name]') ).to be_false
   end
-#
-#  scenario "Should not display level name fields if there is not a Plus User", js: true do
-#    @plan.name = 'basic'
-#    @plan.save!
-#    
-#    page.set_rack_session(connected: true)
-#
-#    visit edit_project_path(@project, anchor: 'sponsorship')
-#
-#    select 'Yes', from: 'project_sponsorship_permission'
-#
-#    expect( page.has_field?('level[platinum][name]') ).to be_false
-#    expect( page.has_field?('level[gold][name]') ).to be_false
-#    expect( page.has_field?('level[silver][name]') ).to be_false
-#    expect( page.has_field?('level[bronze][name]') ).to be_false
-#  end
+
+  scenario "Should not display level name fields if there is not a Plus User", js: true do
+    @plan.name = 'basic'
+    @plan.save!
+    
+    page.set_rack_session(connected: true)
+
+    visit edit_project_path(@project, anchor: 'sponsorship')
+
+    select 'Yes', from: 'project_sponsorship_permission'
+
+    expect( page.has_field?('level[platinum][name]') ).to be_false
+    expect( page.has_field?('level[gold][name]') ).to be_false
+    expect( page.has_field?('level[silver][name]') ).to be_false
+    expect( page.has_field?('level[bronze][name]') ).to be_false
+  end
 end
