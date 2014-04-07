@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140405044517) do
+ActiveRecord::Schema.define(:version => 20140407165903) do
 
   create_table "accounts", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(:version => 20140405044517) do
   add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_active_admin_comments_on_resource_type_and_resource_id"
 
   create_table "admin_users", :force => true do |t|
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
     t.string   "email",                  :default => "",       :null => false
     t.string   "encrypted_password",     :default => "",       :null => false
     t.string   "reset_password_token"
@@ -44,8 +46,6 @@ ActiveRecord::Schema.define(:version => 20140405044517) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                                   :null => false
-    t.datetime "updated_at",                                   :null => false
     t.string   "role",                   :default => "member"
   end
 
@@ -64,11 +64,9 @@ ActiveRecord::Schema.define(:version => 20140405044517) do
   add_index "badges_sashes", ["sash_id"], :name => "index_badges_sashes_on_sash_id"
 
   create_table "comments", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.text     "body"
-    t.integer  "post_id"
-    t.integer  "user_id"
+    t.text    "body"
+    t.integer "post_id"
+    t.integer "user_id"
   end
 
   add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
@@ -176,6 +174,8 @@ ActiveRecord::Schema.define(:version => 20140405044517) do
     t.integer  "project_id"
     t.string   "gallery_type"
     t.string   "thumbnail_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "galleries", ["project_id"], :name => "index_galleries_on_project_id"
@@ -305,12 +305,12 @@ ActiveRecord::Schema.define(:version => 20140405044517) do
   end
 
   create_table "posts", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
     t.string   "title"
     t.text     "body"
-    t.integer  "user_id"
     t.integer  "project_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "posts", ["project_id"], :name => "index_posts_on_project_id"
@@ -449,17 +449,6 @@ ActiveRecord::Schema.define(:version => 20140405044517) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
 
-  create_table "settings", :force => true do |t|
-    t.string   "var",         :null => false
-    t.text     "value"
-    t.integer  "target_id",   :null => false
-    t.string   "target_type", :null => false
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  add_index "settings", ["target_type", "target_id", "var"], :name => "index_settings_on_target_type_and_target_id_and_var", :unique => true
-
   create_table "sponsors", :force => true do |t|
     t.string  "payment_type"
     t.string  "name"
@@ -505,7 +494,6 @@ ActiveRecord::Schema.define(:version => 20140405044517) do
   end
 
   add_index "tax_reports", ["project_id"], :name => "index_tax_reports_on_project_id"
-  add_index "tax_reports", ["user_id"], :name => "index_tax_reports_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",                           :null => false
