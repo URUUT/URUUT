@@ -1,5 +1,5 @@
 class SponsorshipLevel < ActiveRecord::Base
-  attr_accessible :name, :cost, :description, :required, :funding_goal, :project_id
+  attr_accessible :name, :cost, :description, :required, :funding_goal, :project_id, :parent_id
 
   belongs_to :project
   has_many :sponsorship_benefits
@@ -12,10 +12,12 @@ class SponsorshipLevel < ActiveRecord::Base
     })
 
   def self.by_project(project)
-    joins(:sponsorship_benefits)
-      .where("sponsorship_benefits.project_id = #{project.id}")
-      .select('sponsorship_levels.name, sponsorship_levels.id, sponsorship_levels.parent_id')
-      .group('sponsorship_levels.id')
-      .order('sponsorship_levels.parent_id')
+    with_benefits = SponsorshipLevel.where(id: SponsorshipBenefit.sponsorship_level_ids(project)).
+      order(:parent_id)
+
+    default = SponsorshipLevel.where(id: [1,2,3,4]).
+                where('id NOT IN (?)', with_benefits.pluck(:parent_id).join(','))
+
+    (default | with_benefits).sort { |x,y| x.parent_id <=> y.parent_id }
   end
 end
