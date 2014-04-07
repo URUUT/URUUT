@@ -8,6 +8,10 @@ task :transparency_workroom_notification => :environment do
         project.donations.each do |donation|
           TransparencyWorkroomMailer.transparency_workroom_update(donation.user, project).deliver
         end
+
+        project.sponsors.each do |sponsor|
+          TransparencyWorkroomMailer.transparency_workroom_update(sponsor, project).deliver
+        end
       end
     end
   end
