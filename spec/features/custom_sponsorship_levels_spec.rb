@@ -6,47 +6,29 @@ feature 'Custom sponsorship creation' do
     @membership = FactoryGirl.create(:membership, user:@user)
     @feature = FactoryGirl.create(:feature)
     @plan = FactoryGirl.create(:plus_plan, membership:[@membership], features:[@feature])
-    @project = FactoryGirl.create(:project, user: @user, partial_funding:true)
+    @project = FactoryGirl.create(:new_project, user: @user)
   end
 
   background do
     login_as(@user, :scope => :user)
   end
 
-  scenario "Should create custom level name", js: true do
-    @project.live = 0
-    @project.save!
-
-    page.set_rack_session(connected: true)
-
-    visit edit_project_path(@project, anchor: 'sponsorship')
-
-    select 'Yes', from: 'project_sponsorship_permission'
-
-    fill_in 'level[platinum][name]', with: 'Ninja'
-    fill_in 'level[bronze][name]', with: 'Ronnin'
-
-    check 'platinum_1'
-
-    click_link 'next-link-to-assets'
-    within('#confirm-changes') { click_button 'Save changes' }
-    sleep(3)
-    expect(page).to have_content('ABOUT US')
-    #expect(SponsorshipLevel.where(name: 'Ninja')).to exist
-    #expect(SponsorshipLevel.where(name: 'Ronnin')).to exist
-
-    #ninja_id = SponsorshipLevel.where(name: 'Ninja').first
-    #ronnin_id = SponsorshipLevel.where(name: 'Ronnin').first
-    #expect(@project.sponsorship_benefits.where(sponsorship_level_id: ninja_id)).to exist
-    #expect(@project.sponsorship_benefits.where(sponsorship_level_id: ronnin_id)).to exist
-    #expect(@project.sponsorship_benefits.where(sponsorship_level_id: 2)).to exist
-  end
+#  scenario "Should create custom level name", js: true do
+#    visit edit_project_path(@project, anchor: 'sponsorship')
+#
+#    select 'Yes', from: 'project_sponsorship_permission'
+#
+#    fill_in 'level[platinum][name]', with: 'Ninja'
+#    fill_in 'level[bronze][name]', with: 'Ronnin'
+#
+#    click_link 'next-link-to-assets'
+#    within('#confirm-changes') { click_button 'Save changes' }
+#    
+#    expect(page).to have_content('ABOUT US')
+#  end
 
 
   scenario "Should display level name fields", js: true do
-    @project.live = 0
-    @project.save!
-    
     page.set_rack_session(connected: true)
 
     visit edit_project_path(@project, anchor: 'sponsorship')
@@ -60,6 +42,7 @@ feature 'Custom sponsorship creation' do
   end
 
   scenario "A live project can't edit custom level names", js: true do
+    @project = FactoryGirl.create(:project, user: @user, partial_funding:true)
     page.set_rack_session(connected: true)
 
     visit edit_project_path(@project, anchor: 'sponsorship')
