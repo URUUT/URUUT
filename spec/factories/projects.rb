@@ -48,5 +48,10 @@ FactoryGirl.define do
       end
     end
 
+    factory :new_project do
+        live                    0
+        partial_funding         true
+    end
+
   end
 end
