@@ -18,6 +18,10 @@ class Sponsor < ActiveRecord::Base
   validates :card_name, presence: true, if: :payment_type_credit_card?
   validates :phone, :email, :name, presence: true, if: :payment_type_transfer?
 
+  def first_name
+    name.split(' ').first
+  end
+
   def payment_type_transfer?
     self.payment_type.eql? "Wire Transfer"
   end
