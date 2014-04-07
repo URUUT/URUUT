@@ -29,5 +29,9 @@ class SponsorshipBenefit < ActiveRecord::Base
       b.save!
     end
   end
+
+  def self.sponsorship_level_ids(project)
+    for_project(project).group(:sponsorship_level_id).pluck(:sponsorship_level_id)
+  end
     
 end
