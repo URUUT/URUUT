@@ -7,32 +7,33 @@ class SponsorsController < ApplicationController
     @sponsor = Sponsor.new
     @sponsor.anonymous = false
     @project = Project.find(params[:project_id])
+    @project_levels = SponsorshipLevel.by_project(@project)
     session[:path] = "sponsor_new"
     case params[:level]
       when 'platinum'
         @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[1]
         @cost = @project.goal.to_i * 0.25
-        @level = "Platinum"
-        session[:level_id] = 1
+        @level = @project_levels[0].name || "Platinum"
+        session[:level_id] = @project_levels[0].id || 1
       when 'gold'
         @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[2]
         @cost = @project.goal.to_i * 0.1
-        @level = "Gold"
-        session[:level_id] = 2
+        @level = @project_levels[1].name || "Gold"
+        session[:level_id] = @project_levels[1].id || 2
       when 'silver'
         @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[3]
         @cost = @project.goal.to_i * 0.05
-        @level = "Silver"
-        session[:level_id] = 3
+        @level = @project_levels[2].name || "Silver"
+        session[:level_id] = @project_levels[2].name || 3
       when 'bronze'
-        @level = "Bronze"
+        @level = @project_levels[3].name || "Bronze"
         @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[4]
         if (@project.goal.to_i * 0.02) >= 750
           @cost = 750
         else
           @cost = @project.goal.to_i * 0.02
         end
-        session[:level_id] = 4
+        session[:level_id] = @project_levels[3].name || 4
       else
         level_sponsor = @sponsorship_levels.first.id
         @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[level_sponsor]
