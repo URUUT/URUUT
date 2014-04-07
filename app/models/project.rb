@@ -403,6 +403,24 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def documents_updated_since(date)
+    documents.where('documents.updated_at >= ?', date.beginning_of_day)
+  end
+
+  def posts_updated_since(date)
+    posts.where('posts.updated_at >= ?', date.beginning_of_day)
+  end
+
+  def galleries_updated_since(date)
+    galleries.where('galleries.updated_at >= ?', date.beginning_of_day)
+  end
+
+  def transparency_workroom_updated_since?(date)
+    documents_updated_since(date).any? ||
+    posts_updated_since(date).any?     ||
+    galleries_updated_since(date).any?
+  end
+
 private
 
   def calculate_funder_application_fee(application_fee)
