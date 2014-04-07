@@ -67,5 +67,6 @@ RSpec.configure do |config|
 
   config.after(:each) do
     DatabaseCleaner.clean
+    Rails.application.load_seed
   end
 end
