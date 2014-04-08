@@ -16,8 +16,9 @@ class DonationMailer < ActionMailer::Base
     @donator_name = "#{user.first_name}" + " #{user.last_name}"
     @image = @project.large_image
     @host = ActionMailer::Base.default_url_options[:host]
+    @remove_signature = true
 
-    mail to:'exchange@techbridge.org', bcc: recepient, subject: "Checkout the latest campaign"
+    mail to:'exchange@techbridge.org', bcc: recepient, subject: "Check out the project I supported"
   end
 
   def donation_confirmation(donation)

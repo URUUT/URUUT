@@ -66,6 +66,7 @@ class SponsorMailer < ActionMailer::Base
     @project_facebook = project.facebook_page
     @project_twitter = project.twitter_handle
     @project_id = project.id
+    @remove_signature = true
 
     mail to: @email, subject: "Thank You, Sponsor!"
   end
