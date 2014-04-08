@@ -35,14 +35,15 @@ class Sponsor < ActiveRecord::Base
   end
 
   def self.set_sponsorship_percentage(level_id, project)
-    case level_id
-      when "1"
+    level = SponsorshipLevel.find(level_id)
+    case level.parent_id
+      when 1
         cost = project.goal.to_i * 0.25
-      when "2"
+      when 2
         cost = project.goal.to_i * 0.1
-      when "3"
+      when 3
         cost = project.goal.to_i * 0.05
-      when "4"
+      when 4
         if project.goal.to_i * 0.02 >= 750
           cost = 750
         else
@@ -64,6 +65,21 @@ class Sponsor < ActiveRecord::Base
     logger.error "Stripe error while creating customer: #{e.message}"
     # errors.add :base, "There was a problem with your credit card."
     false
+  end
+
+  def self.can_be_created?(level_id, project)
+    rtn = true
+    sponsor_count = project.project_sponsors.where(level_id: level_id).count
+    level = SponsorshipLevel.find(level_id)
+    case level.parent_id
+    when 1
+      rtn = (sponsor_count < 1)? true : false
+    when 2
+      rtn = (sponsor_count < 3)? true : false
+    when 3
+      rtn = (sponsor_count < 5)? true : false
+    end
+    rtn
   end
 
   def self.create_charge(project_sponsor)

@@ -34,12 +34,12 @@
       %h4 SPONSORSHIP LEVELS
       .well
         %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;"}
-          Platinum
+          = @project_levels[0].name
           %span.small-heading
             (#{availability(@project.project_sponsors, 1)} of 1 Available)
         %ul.normal-font.dashed-list
-          - if @sponsorship_benefits.include?(1)
-            - @sponsorship_benefits[1].each do |benefit|
+          - if @sponsorship_benefits.include?(@project_levels[0].id)
+            - @sponsorship_benefits[@project_levels[0].id].each do |benefit|
               %li #{benefit.name}
         .clearfix{:style => "margin-left: -19px; margin-right: -19px; padding: 0 19px; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #e0e0e0"}
           .pull-left
@@ -52,12 +52,12 @@
               Not Available
               %span
         %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;"}
-          Gold
+          = @project_levels[1].name
           %span.small-heading
             (#{availability(@project.project_sponsors, 2)} of 3 Available)
         %ul.normal-font.dashed-list
-          - if @sponsorship_benefits.include?(2)
-            - @sponsorship_benefits[2].each do |benefit|
+          - if @sponsorship_benefits.include?(@project_levels[1].id)
+            - @sponsorship_benefits[@project_levels[1].id].each do |benefit|
               %li #{benefit.name}
         / %div{:style => "height: 80px; width: 100%;"}
         .clearfix{:style => "margin-left: -19px; margin-right: -19px; padding: 0 19px; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #e0e0e0"}
@@ -72,12 +72,12 @@
               Not Available
               %span
         %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;"}
-          Silver
+          = @project_levels[2].name
           %span.small-heading
             (#{availability(@project.project_sponsors, 3)} of 5 Available)
         %ul.normal-font.dashed-list
-          - if @sponsorship_benefits.include?(3)
-            - @sponsorship_benefits[3].each do |benefit|
+          - if @sponsorship_benefits.include?(@project_levels[2].id)
+            - @sponsorship_benefits[@project_levels[2].id].each do |benefit|
               %li #{benefit.name}
         / %div{:style => "height: 80px; width: 100%;"}
         .clearfix{:style => "margin-left: -19px; margin-right: -19px; padding: 0 19px; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #e0e0e0"}
@@ -92,11 +92,11 @@
               Not Available
               %span
         %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;"}
-          Bronze
+          = @project_levels[3].name
         %ul.normal-font.dashed-list
           %li Text mention on project page
-          - if @sponsorship_benefits.include?(4)
-            - @sponsorship_benefits[4].each do |benefit|
+          - if @sponsorship_benefits.include?(@project_levels[3].id)
+            - @sponsorship_benefits[@project_levels[3].id].each do |benefit|
               %li #{benefit.name}
         /%div{:style => "height: 80px; width: 100%;"}
         .clearfix
@@ -126,7 +126,8 @@
             = label_tag :project_sponsor_name do
               CHOOSE YOUR SPONSORSHIP LEVEL
             .selectParent
-              = select :project_sponsor, :level_id, options_for_select(@sponsorship_levels.map {|level| ["#{level.name} Level", level.id]}, session[:level_id]), class: "selectbox"
+              = hidden_field_tag :parent_id, @parent_id
+              = select :project_sponsor, :level_id, options_for_select(@project_levels.map {|level| ["#{level.name} Level", level.id]}, session[:level_id]), class: "selectbox"
 
             %br/
             %h5 SPONSORSHIP DETAILS
@@ -296,7 +297,7 @@
     }
 
     $('.sponsor-placement').hide();
-    switch ($('#project_sponsor_level_id').val())
+    switch ($('#parent_id').val())
     {
       case '1': $(".platinum").show(); break;
       case '2': $(".gold").show(); break;
