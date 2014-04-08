@@ -36,14 +36,12 @@ feature 'Sponsoring to a Project' do
 
     page.execute_script("$('#new_sponsor').first().submit();")
     sleep(5)
-    expect(page).to have_content('BUSSINES NAME')
-
     click_link('project-submit')
     sleep(5)
     
     expect(page).to have_content('THANK YOU!') 
 
-    sponsor =ProjectSponsor.last
+    sponsor = ProjectSponsor.last
     expect(sponsor.name).to eql 'Bussines Name' 
     expect(sponsor.level_id).to eql 1
     expect(sponsor.project_id).to eql @project.id

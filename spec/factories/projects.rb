@@ -42,9 +42,9 @@ FactoryGirl.define do
 
     factory :project_with_sponsor do
       sponsor_permission   true
+      live 1
       after(:create) do |project|
-        create_list :sponsorship_level, 5, project: project
-        create_list :sponsorship_benefit, 2, project: project
+        create_list :sponsorship_benefit_platinum, 5, project: project
       end
     end
 
