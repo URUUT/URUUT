@@ -11,23 +11,23 @@ class SponsorsController < ApplicationController
     session[:path] = "sponsor_new"
     case params[:level]
       when 'platinum'
-        @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[1]
+        @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[@project_levels[0].id]
         @cost = @project.goal.to_i * 0.25
         @level = @project_levels[0].name || "Platinum"
         session[:level_id] = @project_levels[0].id || 1
       when 'gold'
-        @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[2]
+        @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[@project_levels[1].id]
         @cost = @project.goal.to_i * 0.1
         @level = @project_levels[1].name || "Gold"
         session[:level_id] = @project_levels[1].id || 2
       when 'silver'
-        @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[3]
+        @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[@project_levels[2].id]
         @cost = @project.goal.to_i * 0.05
         @level = @project_levels[2].name || "Silver"
         session[:level_id] = @project_levels[2].name || 3
       when 'bronze'
         @level = @project_levels[3].name || "Bronze"
-        @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[4]
+        @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[@project_levels[3].id]
         if (@project.goal.to_i * 0.02) >= 750
           @cost = 750
         else
