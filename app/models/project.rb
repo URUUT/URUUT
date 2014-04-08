@@ -34,6 +34,7 @@ class Project < ActiveRecord::Base
     project.has_many :documents
   end
 
+  has_many :donors,   through: :donations, source: :user, foreign_key: 'user_id'
   has_many :sponsors, through: :project_sponsors
   has_many :sponsorship_levels
   has_many :documents
