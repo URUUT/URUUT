@@ -246,4 +246,8 @@ module ApplicationHelper
     return "- #{user.first_name} #{user.last_name}"
   end
 
+  def editable_level?(user, project)
+    user.has_plan?('plus') && !project.live?
+  end
+
 end
