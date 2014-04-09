@@ -420,6 +420,15 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def funding_active?
+    status === "Funding Active"
+  end
+
+  def funding_complete?
+    status.downcase == 'funding complete' if status
+    false
+  end
+
 private
 
   def calculate_funder_application_fee(application_fee)

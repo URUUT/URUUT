@@ -108,7 +108,7 @@
                 - if editable_level?(current_user, @project)
                   = text_field_tag 'level[gold][cost]', level_cost(1, 'gold', @sponsorship_levels, project)
                 - else
-                  = amount_converter(@project.goal.gsub(/,/, '').to_i * 0.10)
+                  = amount_converter(SponsorshipLevel.default_costs('gold',project))
           %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (10% of funding goal)
         .span9.left{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
@@ -172,7 +172,7 @@
                 - if editable_level?(current_user, @project)
                   = text_field_tag 'level[silver][cost]', level_cost(2, 'silver', @sponsorship_levels, project)
                 - else
-                  = amount_converter(@project.goal.gsub(/,/, '').to_i * 0.05)
+                  = amount_converter(SponsorshipLevel.default_costs('silver',project))
           %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (5% of funding goal)
         .span9.left{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
