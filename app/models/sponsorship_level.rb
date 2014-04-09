@@ -3,6 +3,7 @@ class SponsorshipLevel < ActiveRecord::Base
 
   belongs_to :project
   has_many :sponsorship_benefits
+  belongs_to :parent, class_name: 'SponsorshipLevel'
 
   DEFAULT_NAMES = HashWithIndifferentAccess.new({
     platinum: 1,
@@ -17,6 +18,13 @@ class SponsorshipLevel < ActiveRecord::Base
     silver: 0.05,
     bronze: 0.02    
     })
+
+  AVAILABILITY = HashWithIndifferentAccess.new({
+    platinum: 1,
+    gold: 3,
+    silver: 5,
+    bronze: 10
+  })
 
   scope :default_levels, where(id: [1,2,3,4])
 
@@ -44,7 +52,7 @@ class SponsorshipLevel < ActiveRecord::Base
   end
 
   def calculated_cost(project)
-    return SponsorshipLevel.default_costs(name, project) if DEFAULT_NAMES[name]
+    return SponsorshipLevel.default_costs(name.downcase, project) if DEFAULT_NAMES[name.downcase]
     cost
   end
 

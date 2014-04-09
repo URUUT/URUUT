@@ -11,30 +11,26 @@ class SponsorsController < ApplicationController
     case params[:level]
       when 'platinum'
         @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[@project_levels[0].id]
-        @cost = @project.goal.to_i * 0.25
+        @cost = @project_levels[0].calculated_cost(@project)
         @level = @project_levels[0].name || "Platinum"
         session[:level_id] = @project_levels[0].id || 1
         @parent_id = @project_levels[0].parent_id || 1
       when 'gold'
         @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[@project_levels[1].id]
-        @cost = @project.goal.to_i * 0.1
+        @cost = @project_levels[1].calculated_cost(@project)
         @level = @project_levels[1].name || "Gold"
         session[:level_id] = @project_levels[1].id || 2
         @parent_id = @project_levels[1].parent_id || 2
       when 'silver'
         @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[@project_levels[2].id]
-        @cost = @project.goal.to_i * 0.05
+        @cost = @project_levels[2].calculated_cost(@project)
         @level = @project_levels[2].name || "Silver"
         session[:level_id] = @project_levels[2].id || 3
         @parent_id = @project_levels[2].parent_id || 3
       when 'bronze'
         @level = @project_levels[3].name || "Bronze"
         @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[@project_levels[3].id]
-        if (@project.goal.to_i * 0.02) >= 750
-          @cost = 750
-        else
-          @cost = @project.goal.to_i * 0.02
-        end
+        @cost = @project_levels[3].calculated_cost(@project)
         session[:level_id] = @project_levels[3].id || 4
         @parent_id = @project_levels[3].id || 4
       else
@@ -117,23 +113,16 @@ class SponsorsController < ApplicationController
     @sponsorship_level = SponsorshipLevel.find(params[:sponsor_id])
     @benefits = project.sponsorship_benefits.where(status: true, sponsorship_level_id: params[:sponsor_id])
 
+    @cost = @sponsorship_level.calculated_cost(@project)
     case @sponsorship_level.parent_id
     when 1
-      @cost = project.goal.to_i * 0.25
       @image = "/assets/platinum-placement.png"
     when 2
-      @cost = project.goal.to_i * 0.1
       @image = "/assets/gold-placement.png"
     when 3
-      @cost = project.goal.to_i * 0.05
       @image = "/assets/silver-placement.png"
     when 4
       @image = "/assets/bronze-placement.png"
-      if project.goal.to_i * 0.02 >= 750
-        @cost = 750
-      else
-        @cost = project.goal.to_i * 0.02
-      end
     end
 
     respond_to :js
@@ -144,7 +133,7 @@ class SponsorsController < ApplicationController
     @project_sponsor =   ProjectSponsor.unscoped.where(project_id: @project.id, sponsor_id: @sponsor.id).first
     @benefits = @project.sponsorship_benefits.where(status: true, sponsorship_level_id: @project_sponsor.level_id )
     @sponsorship_level = SponsorshipLevel.find(@project_sponsor.level_id)
-    @cost = Sponsor.set_sponsorship_percentage(@project_sponsor.level_id, @project)
+    @cost =  @sponsorship_level.calculated_cost(@project)
   end
 
   def thank_you
@@ -156,20 +145,7 @@ class SponsorsController < ApplicationController
     # @sponsorship_level = SponsorshipLevel.find(project_sponsor.level_id)
     @benefits = @project.sponsorship_benefits.where(status: true, sponsorship_level_id: project_sponsor.level_id )
     @level = project_sponsor.sponsorship_level.name
-    case project_sponsor.sponsorship_level.parent_id
-    when 1
-      @cost = @project.goal.to_i * 0.25
-    when 2
-      @cost = @project.goal.to_i * 0.1
-    when 3
-      @cost = @project.goal.to_i * 0.05
-    when 4
-      if @project.goal.to_i * 0.02 >= 750
-        @cost = 750
-      else
-        @cost = @project.goal.to_i * 0.02
-      end
-    end
+    @cost = project_sponsor.sponsorship_level.calculated_cost(@project)
     @need_doctype = true
   end
 
@@ -199,8 +175,8 @@ class SponsorsController < ApplicationController
     sponsor = params[:sponsor]
     sponsor_name = sponsor[:payment_type].eql?("Wire Transfer") ? sponsor[:name] : sponsor[:card_name]
     project = Project.find(params[:project_id])
-
-    cost = Sponsor.set_sponsorship_percentage(params[:project_sponsor][:level_id], project)
+    level = SponsorshipLevel.find(params[:project_sponsor][:level_id])
+    cost = level.calculated_cost(@project)
     params[:sponsor][:name] = sponsor_name
     card_type = params[:project_sponsor][:card_type]
     last4 = params[:project_sponsor][:card_last4]

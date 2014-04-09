@@ -41,4 +41,12 @@ describe Project do
   it { should respond_to(:sponsor_permission) } 
   it { should respond_to(:step) } 
   it { should respond_to(:seed_mime_type) }
+
+  describe "custom methods" do
+    before(:each) do
+      @project = FactoryGirl.create(:project)
+    end
+
+    it { expect(@project.funding_active?).to be_true }
+  end
 end
