@@ -27,7 +27,7 @@
 
       %div
         %h6{:style => "color:#70bf4c"}
-          - if current_user.has_plan?('plus') && !@project.live?
+          - if editable_level?(current_user, @project)
             = text_field_tag 'level[platinum][name]', level_name(0, 'PLATINUM', @sponsorship_levels)
           - else
             = level_name(0, 'PLATINUM', @sponsorship_levels)
@@ -40,7 +40,10 @@
           %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0"}
             %span.platinum-amount-value
               - if @project.goal
-                = amount_converter(@project.goal.gsub(/,/, '').to_i * 0.25)
+                - if editable_level?(current_user, @project)
+                  = text_field_tag 'level[platinum][cost]', level_cost(0, 'platinum', @sponsorship_levels, @project)
+                - else
+                  = amount_converter(SponsorshipLevel.default_costs('platinum',project))
           %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (25% of funding goal)
         .span9{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
@@ -89,7 +92,7 @@
 
       %div
         %h6{:style => "color:#70bf4c"}
-          - if current_user.has_plan?('plus') && !@project.live?
+          - if editable_level?(current_user, @project)
             = text_field_tag 'level[gold][name]', level_name(1, 'Gold', @sponsorship_levels)
           - else
             = level_name(1, 'Gold', @sponsorship_levels)
@@ -102,7 +105,10 @@
           %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0"}
             %span.gold-amount-value
               -if @project.goal
-                = amount_converter(@project.goal.gsub(/,/, '').to_i * 0.10)
+                - if editable_level?(current_user, @project)
+                  = text_field_tag 'level[gold][cost]', level_cost(1, 'gold', @sponsorship_levels, project)
+                - else
+                  = amount_converter(@project.goal.gsub(/,/, '').to_i * 0.10)
           %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (10% of funding goal)
         .span9.left{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
@@ -151,7 +157,7 @@
 
       %div
         %h6{:style => "color:#70bf4c"}
-          - if current_user.has_plan?('plus') && !@project.live?
+          - if editable_level?(current_user, @project)
             = text_field_tag 'level[silver][name]', level_name(2, 'Silver', @sponsorship_levels)
           - else
             = level_name(2, 'Silver', @sponsorship_levels)
@@ -163,7 +169,10 @@
           %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0"}
             %span.silver-amount-value
               -if @project.goal
-                = amount_converter(@project.goal.gsub(/,/, '').to_i * 0.05)
+                - if editable_level?(current_user, @project)
+                  = text_field_tag 'level[silver][cost]', level_cost(2, 'silver', @sponsorship_levels, project)
+                - else
+                  = amount_converter(@project.goal.gsub(/,/, '').to_i * 0.05)
           %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (5% of funding goal)
         .span9.left{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
@@ -213,7 +222,7 @@
 
       %div
         %h6{:style => "color:#70bf4c;"}
-          - if current_user.has_plan?('plus') && !@project.live?
+          - if editable_level?(current_user, @project)
             = text_field_tag 'level[bronze][name]', level_name(3, 'Bronze', @sponsorship_levels)
           - else
             = level_name(3, 'Bronze', @sponsorship_levels)
@@ -223,10 +232,11 @@
           %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0;"} Cost
           %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0"}
             %span.bronze-amount-value
-              - if @project.goal && @project.goal.gsub(/,/, '').to_i * 0.02 < 750
-                = amount_converter(@project.goal.gsub(/,/, '').to_i * 0.02)
-              -else
-                = amount_converter(750)
+              - if @project.goal
+                - if editable_level?(current_user, @project)
+                  = text_field_tag 'level[bronze][cost]', level_cost(3, 'bronze', @sponsorship_levels, project)
+                - else
+                  = amount_converter(SponsorshipLevel.default_costs('bronze', project))
         .span9.left{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"} Bronze Level Sponsorship includes business / foundation name listing and a link to the sponsor’s website on your project page. In addition to these benefits, you can create custom benefits for bronze level sponsors below.
           %div#bronze-box
@@ -254,7 +264,7 @@
       %hr{:style => "background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
       = hidden_field_tag "step", "fourth"
       %div
-        - if current_user.has_plan?('plus') && !@project.live?
+        - if editable_level?(current_user, @project)
           = link_to "Save & Continue ►", "#confirm-changes", id: "next-link-to-assets", class: 'btn', style: "position: relative;display:block;margin:0 auto;width: 262px;", data: { toggle: "modal", role: "button" }
         - else
           = f.submit "Save & Continue ►", :class => "btn", :id => "project-submit", :style => "position: relative;display:none;margin:0 auto;"

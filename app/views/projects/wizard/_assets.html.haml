@@ -205,7 +205,7 @@
                     .clearfix
                       .seed-num
                         .amount
-                          = amount_converter( @project.amount_converter(index) )
+                          = amount_converter( level.calculated_cost(@project) )
                       %a.black-btn.btn.pull-right{:href => "javascript:void(0)"}
                         Sponsor ►
           - else

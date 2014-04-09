@@ -23,6 +23,14 @@ describe SponsorshipLevel do
 
     it { expect(SponsorshipLevel.by_project(@project)).to start_with(@tandel) }
     it { expect(SponsorshipLevel.by_project(@project)).to end_with(@bronze) }
-    
+  end
+
+  describe "#default_costs" do
+    before do
+      @project = FactoryGirl.create(:project)
+    end
+
+    it { expect(SponsorshipLevel.default_costs('platinum', @project)).to \
+          eql @project.goal.gsub(/,/, '').to_i * 0.25 }
   end
 end
