@@ -1,0 +1,21 @@
+%tr
+	%td{:valign => "top"}
+		%img{:src => "#{@image}/convert?w=620", :style => "display:block;"}
+%tr
+	%td{:valign => "top"}
+		%p{:style => "color:#444;font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size:13px;margin:14px;"} Dear #{@donator_name},
+		%br
+		%p{:style => "color:#444;font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size:13px;margin:14px;"}
+			Thank you so much for your donation. We appreciate your role in helping us reach our Campaign goals.
+		%br
+		%p{:style => "color:#444;font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size:13px;margin:14px;"}
+			At this time, we would like to confirm that your donation has been charged to your credit card in the amount of $#{@donation_amount} for the #{@project.title} Campaign.
+		%br
+		%p{:style => "color:#444;font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size:13px;margin:14px;"}
+			-# For your convenience, please follow this link to review your Tax Receipt for this donation
+			-# %a{ "http://#{@host}/users/#{@user_id}" }
+				-# here.
+		%br
+		%p{:style => "color:#444;font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size:13px;margin:14px;"} Thank you.
+
+		%p{:style => "color:#444;font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size:13px;margin:14px;"} #{@project.organization}
