@@ -247,7 +247,7 @@ module ApplicationHelper
   end
 
   def editable_level?(user, project)
-    user.has_plan?('plus') && !project.live?
+    user.has_plan?('plus') && !project.is_live?
   end
 
 end
