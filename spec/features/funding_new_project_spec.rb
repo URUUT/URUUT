@@ -107,7 +107,7 @@ feature 'Funding a new project' do
     within(".span12") do
       click_link 'Submit Your Project for Approval'
     end
-
+    sleep(5)
     expect(page).to have_content 'YOU DID IT!'
     expect(current_path).to eql(thank_you_pages_path)
 
