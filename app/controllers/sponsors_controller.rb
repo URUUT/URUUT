@@ -176,7 +176,7 @@ class SponsorsController < ApplicationController
     sponsor_name = sponsor[:payment_type].eql?("Wire Transfer") ? sponsor[:name] : sponsor[:card_name]
     project = Project.find(params[:project_id])
     level = SponsorshipLevel.find(params[:project_sponsor][:level_id])
-    cost = level.calculated_cost(@project)
+    cost = level.calculated_cost(project)
     params[:sponsor][:name] = sponsor_name
     card_type = params[:project_sponsor][:card_type]
     last4 = params[:project_sponsor][:card_last4]
