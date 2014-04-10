@@ -262,11 +262,11 @@
         %h4 DONATE OR SPONSOR?
         .well.donor-sponsor-type
           %p.description
-            %b Nonprofit Xchange's crowdfunding platform encourages participation from multiple audiences. Select the tab below that best fits your description:
+            %b Nonprofit Exchange's crowdfunding platform encourages participation from multiple audiences. Select the tab below that best fits your description:
           %h3.label-green.type-header DONATE
           %p.type-content.type-content-top You are an individual who cares about specific causes and wants to support that cause.
           %h3.label-green.type-header SPONSOR
-          %p.type-content You are an a business, foundation or a family that wants to firmly, visibly associate yourself with a cause or project.
+          %p.type-content You are a business, foundation or a family that wants to firmly, visibly associate yourself with a cause or project.
 
         .sidebar-tab
           %ul#myTab2.tab-nav
@@ -343,12 +343,12 @@
             - unless @project.status == "Funding Completed"
               .seed-level{id: "perk-id-custom"}
                 %h3.perk-name-other{id: "perk-name-other-custom"}
-                  CHOOSE YOUR PERK
-                %p With this option you choose the amount to seed.
+                  CHOOSE YOUR AMOUNT
+                %p With this option you choose the amount to pledge.
                 .clearfix
                   .seed-num
                     .amount
-                    %h5 AMOUNT TO SEED
+                    %h5 AMOUNT TO PLEDGE
                     .textarea.seed-amount= text_field_tag :custom_seed, nil, style: "width: 100%"
                   %a.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "#{user_signed_in? ? 'button-seed-custom' : 'button-seed-custom-unsignin'}"} Fund Now ►
           #sponsorship.tab-pane
@@ -466,7 +466,7 @@
                   - if p.limit
                     %span.small-heading
                       = p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of #{p.perk_limit} Available)"
-                When you seed #{amount_converter(p.amount.to_i)}, you will receive:
+                When you pledge #{amount_converter(p.amount.to_i)}, you will receive:
                 %ul.normal-font.dashed-list
                   %li
                     #{p.description}
@@ -510,12 +510,12 @@
         - unless @project.status == "Funding Completed"
           .seed-level{id: "perk-id-custom"}
             %h3.perk-name-other{id: "perk-name-other-custom"}
-              CHOOSE YOUR PERK
-            %p With this option you choose the amount to seed.
+              CHOOSE YOUR AMOUNT
+            %p With this option you choose the amount to pledge.
             .clearfix
               .seed-num
                 .amount
-                %h5 AMOUNT TO SEED
+                %h5 AMOUNT TO PLEDGE
                 .textarea.seed-amount= text_field_tag :custom_seed, nil, style: "width: 100%"
               %a.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "#{user_signed_in? ? 'button-seed-custom' : 'button-seed-custom-unsignin'}"} Fund Now ►
 
@@ -675,8 +675,8 @@
       }).setView([latitude,longitude], 11);
 
       var uruutIcon = L.icon({
-        iconUrl: '#{image_path("map-icon.png")}',
-        iconSize:     [36, 52]
+        iconUrl: '#{image_path("map-star.png")}',
+        iconSize:     [52, 52]
       });
 
       L.tileLayer("https://stamen-tiles.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png", {

@@ -65,7 +65,7 @@
 /* This creates the order the tips are displayed */
 %ol{:id => "uruutTour"}
   /* data-id needs to be the same as the parent it will attach to */
-  %li{"data-class" => "pick-cover-photo", "data-options" => "tipLocation:right"}
+  %li{"data-class" => "coverphoto", "data-options" => "tipLocation:right"}
     %h5 CHOOSE A COVER PHOTO
     %p The cover photo is the large splash image that appears on your page. It’s a big photo and a great opportunity to give your page a striking, eye-catching look. Choose something that reflects your organization, project, and personality.
     %a{:href => "#", :class => "button small quit-tour joyride-close-tip close-tip-custom"} Quit Tour
@@ -113,8 +113,8 @@
 
           console.log(new_map = map);
           var uruutIcon = L.icon({
-            iconUrl: '#{image_path("map-icon.png")}',
-            iconSize:     [36, 52]
+            iconUrl: '#{image_path("map-star.png")}',
+            iconSize:     [52, 52]
           });
 
           L.tileLayer('http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {
@@ -501,8 +501,8 @@
       }).setView([latitude,longitude], 11);
 
       var uruutIcon = L.icon({
-        iconUrl: '#{image_path("map-icon.png")}',
-        iconSize:     [36, 52]
+        iconUrl: '#{image_path("map-star.png")}',
+        iconSize:     [52, 52]
       });
 
       L.tileLayer("https://stamen-tiles.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png", {

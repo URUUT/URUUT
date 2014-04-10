@@ -4,7 +4,7 @@ class SponsorMailer < ActionMailer::Base
   helper MailerHelper
   include MailerHelper
 
-  default from: "xchange@techbridge.org"
+  default from: "exchange@techbridge.org"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -66,6 +66,7 @@ class SponsorMailer < ActionMailer::Base
     @project_facebook = project.facebook_page
     @project_twitter = project.twitter_handle
     @project_id = project.id
+    @remove_signature = true
 
     mail to: @email, subject: "Thank You, Sponsor!"
   end

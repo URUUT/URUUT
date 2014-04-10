@@ -28,13 +28,9 @@ class DonationsController < ApplicationController
       @perks = @project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i] }
       session[:perk_id] = "custom_donate"
     else
-
       perks = Donation.set_perks(@project)
-
       @perks = Donation.reorder_perks(perks, @perk_amount)
-
       @perk_name_selected, @perk_description = Donation.get_perk_info(@project, @perk_amount, @perks)
-
       session[:perk_id] = Donation.set_perk_id(@perks, @project)
     end
     render :new
@@ -65,7 +61,7 @@ class DonationsController < ApplicationController
           session[:perk_id] = @perks.last[0]
         end
         @perk.name = "Level #{@perk.id}"
-        @perk.description = "You will receive #{@perk.amount.to_i} Uruut Reward Points when you seed $#{@perk.amount.to_i}"
+        @perk.description = "You will receive #{@perk.amount.to_i} Uruut Reward Points when you pledge $#{@perk.amount.to_i}"
       end
     else
       @perk = Perk.new
@@ -82,7 +78,7 @@ class DonationsController < ApplicationController
       session[:perk_id] = Donation.set_perk_id(@perks, @project)
       session[:perk_amount] = @perk.amount.to_f
       @perk.name = "Custom"
-      @perk.description = "You will receive #{@perk.amount} Uruut Reward Points when you seed $#{@perk.amount}"
+      @perk.description = "You will receive #{@perk.amount} Uruut Reward Points when you pledge $#{@perk.amount}"
     end
   end
 

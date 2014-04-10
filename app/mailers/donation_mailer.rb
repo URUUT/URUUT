@@ -1,6 +1,6 @@
 class DonationMailer < ActionMailer::Base
   layout 'mailer'
-  default from: "xchange@techbridge.org"
+  default from: "exchange@techbridge.org"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -16,8 +16,9 @@ class DonationMailer < ActionMailer::Base
     @donator_name = "#{user.first_name}" + " #{user.last_name}"
     @image = @project.large_image
     @host = ActionMailer::Base.default_url_options[:host]
+    @remove_signature = true
 
-    mail to: recepient, subject: "Checkout The Project I Donated To"
+    mail to:'exchange@techbridge.org', bcc: recepient, subject: "Check out the project I supported"
   end
 
   def donation_confirmation(donation)
@@ -36,6 +37,7 @@ class DonationMailer < ActionMailer::Base
     @project_title = project.project_title
     @sponsor_email = sponsor.email
     @sponsor_name = "#{sponsor.first_name}" + " #{sponsor.last_name}"
+    @remove_signature = true
 
     mail to: @email, subject: "Thank You, Donor!"
   end

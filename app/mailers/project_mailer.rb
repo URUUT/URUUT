@@ -1,6 +1,6 @@
 class ProjectMailer < ActionMailer::Base
   layout 'mailer'
-  default from: "xchange@techbridge.org"
+  default from: "exchange@techbridge.org"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -18,7 +18,7 @@ class ProjectMailer < ActionMailer::Base
     @project = project
     @project_title = project.project_title
 
-    mail to: @email, bcc: "xchange@techbridge.org, cbartels@uruut.com", subject: "Wait For Approval"
+    mail to: @email, bcc: "exchange@techbridge.org, cbartels@uruut.com", subject: "Wait For Approval"
   end
 
   def project_message(recepient, subject_email, header_image, content)
@@ -35,7 +35,6 @@ class ProjectMailer < ActionMailer::Base
     @image = project.large_image
     @host = ActionMailer::Base.default_url_options[:host]
     @project_id = project.id
-    attachments['URUUTGuidebookFinal.pdf'] = File.read("#{Rails.root}/public/data/URUUTGuidebookFinal.pdf")
     mail to: email, subject: "Your Project Has Been Approved"
   end
 end
