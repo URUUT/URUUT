@@ -1,6 +1,4 @@
 class Project < ActiveRecord::Base
-  include ApplicationHelper
-
   belongs_to :user
 
   before_save :downcase_url_and_facebook
@@ -446,6 +444,16 @@ private
 
   def calculate_funder_application_fee(application_fee)
     user.membership_kind == 'fee' ? application_fee : nil
+  end
+
+  def totalsponsor(project)
+    donation = Donation.where("project_id = ?", project.id)
+    total_funded = 0.0
+    donation.each do |d|
+      total_funded = total_funded + d.amount.to_f
+    end
+    total_funded += project.project_sponsors.sum(:cost)
+    return total_funded
   end
 
 end
