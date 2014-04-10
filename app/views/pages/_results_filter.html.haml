@@ -11,22 +11,8 @@
         = image_tag "3.gif", style: "margin-left: 20%"
       .project-all-content
         = render "project", :projects => @projects
-      .potential
-        %div.project
-          .project-img
-            = image_tag "project_started.jpg"
-          .content
-            .cont-desc
-              %h3 Your Project
-              %p.short-description We are now accepting applications for projects. If you have a project that needs funding apply to get funding now.
-            .location
-              %span &nbsp;
-          .funding
-            %p
-              - if user_signed_in? && current_user.campaign_manager?
-                = link_to 'Get Funded ►', '/projects', method: :post, class: 'btn'
-              - else
-                = link_to 'Get Funded ►', choose_plan_pages_path, class: 'btn'
+
+    = paginate @projects
 
 .recent.clearfix
   .container
@@ -40,6 +26,8 @@
         = image_tag "3.gif", style: "margin-left: 20%"
       .projects
         = render "project_success", :projects => @project_success
+
+    = paginate @project_success
 
 .ending-soon.clearfix
   .container

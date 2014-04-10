@@ -1,4 +1,6 @@
 class Project < ActiveRecord::Base
+  include ApplicationHelper
+
   belongs_to :user
 
   before_save :downcase_url_and_facebook
@@ -48,6 +50,7 @@ class Project < ActiveRecord::Base
 
   scope :ready_for_approval, where(ready_for_approval: 1)
   scope :live, where("live = 1")
+  scope :funding_active, where("status = 'Funding Active'")
   scope :funding_complete, where("status = 'Funding Complete'")
   scope :ending_today, where("campaign_deadline BETWEEN ? AND ?", DateTime.now.beginning_of_day, DateTime.now.end_of_day)
   scope :updated_yesterday, -> { where("updated_at >= ?", (Time.now - 1.day).utc) }
@@ -73,6 +76,22 @@ class Project < ActiveRecord::Base
     if :current_user
       Stripe.api_key = API_KEY
     end
+  end
+
+  def percent_to_goal
+    ((totalsponsor(self).to_f / self.goal.to_f) * 100).to_i
+  end
+
+  def total_funded
+    totalsponsor(self).to_f
+  end
+
+  def self.order_by_percentage
+    Project.live.funding_active.sort_by(&:percent_to_goal).reverse
+  end
+
+  def self.order_by_raised
+    Project.live.funding_complete.sort_by(&:total_funded).reverse
   end
 
   def distinct_donors

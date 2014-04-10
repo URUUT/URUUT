@@ -8,8 +8,10 @@ class PagesController < ApplicationController
   before_filter :set_session_wizard, except: :home
 
   def index
-    @projects = Project.where(live: true, status: 'Funding Active')
-    @project_success = Project.not_hidden.where("live = 1 AND status = 'Funding Completed'")
+    projects = Project.order_by_percentage
+    project_success = Project.order_by_raised
+    @projects = Kaminari.paginate_array(projects).page(params[:page]).per(9)
+    @project_success = Kaminari.paginate_array(project_success).page(params[:page]).per(6)
   end
 
   def home
