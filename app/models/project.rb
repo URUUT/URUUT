@@ -51,7 +51,7 @@ class Project < ActiveRecord::Base
   scope :ready_for_approval, where(ready_for_approval: 1)
   scope :live, where("live = 1")
   scope :funding_active, where("status = 'Funding Active'")
-  scope :funding_complete, where("status = 'Funding Complete'")
+  scope :funding_complete, where("status = 'Funding Completed'")
   scope :ending_today, where("campaign_deadline BETWEEN ? AND ?", DateTime.now.beginning_of_day, DateTime.now.end_of_day)
   scope :updated_yesterday, -> { where("updated_at >= ?", (Time.now - 1.day).utc) }
   scope :not_hidden, where(hide_featured: false)
