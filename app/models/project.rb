@@ -429,6 +429,12 @@ class Project < ActiveRecord::Base
     false
   end
 
+  def sponsorship_benefits_list
+    sponsorship_benefits.
+      where(status: true).
+      group_by {|sponsor| sponsor.sponsorship_level_id}
+  end
+
 private
 
   def calculate_funder_application_fee(application_fee)

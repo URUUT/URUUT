@@ -192,7 +192,7 @@ class ProjectsController < ApplicationController
     if @project.save
       if params[:step].eql?("fourth")
         @perks = @project.perks.order(:amount)
-        @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
+        @sponsorship_benefits = @project.sponsorship_benefits_list
         @sponsorship_levels = SponsorshipLevel.by_project(@project)
         respond_to do |format|
           format.js { render "skip_sponsor.js.erb" }
