@@ -33,6 +33,7 @@ Capybara.register_driver :poltergeist do |app|
 end
 Capybara.javascript_driver = :poltergeist
 
+Capybara.default_wait_time = 3
 
 RSpec.configure do |config|
   config.include(EmailSpec::Helpers)
