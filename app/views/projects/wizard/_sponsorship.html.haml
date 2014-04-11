@@ -41,7 +41,7 @@
             %span.platinum-amount-value
               - if @project.goal
                 - if editable_level?(current_user, @project)
-                  = text_field_tag 'level[platinum][cost]', level_cost(0, 'platinum', @sponsorship_levels, @project)
+                  = text_field_tag 'level[platinum][cost]', level_cost(0, 'platinum', @sponsorship_levels, @project), class: 'span12'
                 - else
                   = amount_converter(SponsorshipLevel.default_costs('platinum',project))
           %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (25% of funding goal)
@@ -106,7 +106,7 @@
             %span.gold-amount-value
               -if @project.goal
                 - if editable_level?(current_user, @project)
-                  = text_field_tag 'level[gold][cost]', level_cost(1, 'gold', @sponsorship_levels, project)
+                  = text_field_tag 'level[gold][cost]', level_cost(1, 'gold', @sponsorship_levels, project), class: 'span12'
                 - else
                   = amount_converter(SponsorshipLevel.default_costs('gold',project))
           %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (10% of funding goal)
@@ -170,7 +170,7 @@
             %span.silver-amount-value
               -if @project.goal
                 - if editable_level?(current_user, @project)
-                  = text_field_tag 'level[silver][cost]', level_cost(2, 'silver', @sponsorship_levels, project)
+                  = text_field_tag 'level[silver][cost]', level_cost(2, 'silver', @sponsorship_levels, project), class: 'span12'
                 - else
                   = amount_converter(SponsorshipLevel.default_costs('silver',project))
           %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (5% of funding goal)
@@ -234,7 +234,7 @@
             %span.bronze-amount-value
               - if @project.goal
                 - if editable_level?(current_user, @project)
-                  = text_field_tag 'level[bronze][cost]', level_cost(3, 'bronze', @sponsorship_levels, project)
+                  = text_field_tag 'level[bronze][cost]', level_cost(3, 'bronze', @sponsorship_levels, project), class: 'span12'
                 - else
                   = amount_converter(SponsorshipLevel.default_costs('bronze', project))
         .span9.left{:style => "text-align:left;color:#464646;"}
