@@ -12,7 +12,7 @@
       .project-all-content
         = render "project", :projects => @projects
 
-    = paginate @projects
+    = paginate @project, param_name: :project_page
 
 .recent.clearfix
   .container
@@ -27,7 +27,7 @@
       .projects
         = render "project_success", :projects => @project_success
 
-    = paginate @project_success
+    = paginate @project_success, param_name: :featured_page
 
 .ending-soon.clearfix
   .container

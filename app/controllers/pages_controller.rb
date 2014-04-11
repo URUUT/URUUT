@@ -10,8 +10,8 @@ class PagesController < ApplicationController
   def index
     projects = Project.order_by_percentage
     project_success = Project.order_by_raised
-    @projects = Kaminari.paginate_array(projects).page(params[:page]).per(9)
-    @project_success = Kaminari.paginate_array(project_success).page(params[:page]).per(6)
+    @projects = Kaminari.paginate_array(projects).page(params[:project_page]).per(9)
+    @project_success = Kaminari.paginate_array(project_success).page(params[:featured_page]).per(6)
   end
 
   def home
