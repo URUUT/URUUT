@@ -89,7 +89,7 @@ class Project < ActiveRecord::Base
   end
 
   def self.order_by_raised
-    Project.live.funding_complete.sort_by(&:total_funded).reverse
+    Project.live.funding_complete.not_hidden.sort_by(&:total_funded).reverse
   end
 
   def distinct_donors
