@@ -11,11 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(:version => 20140407165903) do
-=======
 ActiveRecord::Schema.define(:version => 20140403163000) do
->>>>>>> c0c0009d4b18dd4ec5426fc8baa696bce7486ae0
 
   create_table "accounts", :force => true do |t|
     t.datetime "created_at", :null => false
