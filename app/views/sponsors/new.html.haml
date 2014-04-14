@@ -33,7 +33,7 @@
     .span4.sidebar.pull-right
       %h4 SPONSORSHIP LEVELS
       .well
-        - @project_levels.each do |level|
+        - @project_levels.each_pair do |key, level|
           %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;"}
             = level.name
             %span.small-heading
@@ -54,7 +54,7 @@
                 Not Available
                 %span
 
-        
+
 
     = form_for(@sponsor, :url => project_sponsors_path, :html => {:class => "span8", :style => "margin-left: 0;", multipart: true, method: 'POST'}) do |f|
       .well.clearfix{:style => "border-top: none; padding-bottom: 0; border: 1px solid #e0e0e0;"}
@@ -74,7 +74,7 @@
               CHOOSE YOUR SPONSORSHIP LEVEL
             .selectParent
               = hidden_field_tag :parent_id, @parent_id
-              = select :project_sponsor, :level_id, options_for_select(@project_levels.map {|level| ["#{level.name} Level", level.id]}, session[:level_id]), class: "selectbox"
+              = select :project_sponsor, :level_id, options_for_select(@project_levels.map {|levels| ["#{levels[1].name} Level", levels[1].id]}, session[:level_id]), class: "selectbox"
 
             %br/
             %h5 SPONSORSHIP DETAILS
