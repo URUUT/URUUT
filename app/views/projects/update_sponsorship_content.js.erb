@@ -1,10 +1,22 @@
-<% if params[:funding_goal].gsub(/,/, '').to_i * 0.02 < 750 %>
-  $(".bronze-amount-value").text("<%= amount_converter(params[:funding_goal].gsub(/,/, '').to_i * 0.02) %>");
-<% else %>
-  $(".bronze-amount-value").text("<%= amount_converter(750) %>");
-<% end %>
+if ( $('#level_platinum_name').length > 0 ) {
+  $('#level_platinum_cost').val('<%= amount_converter(params[:funding_goal].gsub(/,/, '').to_i * 0.25) %>')
+  $('#level_gold_cost').val("<%= amount_converter(params[:funding_goal].gsub(/,/, '').to_i * 0.10) %>")
+  $('#level_silver_cost').val("<%= amount_converter(params[:funding_goal].gsub(/,/, '').to_i * 0.05) %>")
+  <% if params[:funding_goal].gsub(/,/, '').to_i * 0.02 < 750 %>
+    $('#level_bronze_cost').val("<%= amount_converter(params[:funding_goal].gsub(/,/, '').to_i * 0.02) %>")
+  <% else %>
+    $('#level_bronze_cost').val("<%= amount_converter(750) %>")
+  <% end %>
+} else {
+  <% if params[:funding_goal].gsub(/,/, '').to_i * 0.02 < 750 %>
+    $(".bronze-amount-value").text("<%= amount_converter(params[:funding_goal].gsub(/,/, '').to_i * 0.02) %>");
+  <% else %>
+    $(".bronze-amount-value").text("<%= amount_converter(750) %>");
+  <% end %>
 
-$(".silver-amount-value").text("<%= amount_converter(params[:funding_goal].gsub(/,/, '').to_i * 0.05) %>");
-$(".gold-amount-value").text("<%= amount_converter(params[:funding_goal].gsub(/,/, '').to_i * 0.10) %>");
-$(".platinum-amount-value").text("<%= amount_converter(params[:funding_goal].gsub(/,/, '').to_i * 0.25) %>");
+  $(".silver-amount-value").text("<%= amount_converter(params[:funding_goal].gsub(/,/, '').to_i * 0.05) %>");
+  $(".gold-amount-value").text("<%= amount_converter(params[:funding_goal].gsub(/,/, '').to_i * 0.10) %>");
+  $(".platinum-amount-value").text("<%= amount_converter(params[:funding_goal].gsub(/,/, '').to_i * 0.25) %>");
+}
+
 
