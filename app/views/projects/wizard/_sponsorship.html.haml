@@ -28,9 +28,9 @@
       %div
         %h6{:style => "color:#70bf4c"}
           - if editable_level?(current_user, @project)
-            = text_field_tag 'level[platinum][name]', level_name(0, 'PLATINUM', @sponsorship_levels)
+            = text_field_tag 'level[platinum][name]', level_name('PLATINUM', @sponsorship_levels[1])
           - else
-            = level_name(0, 'PLATINUM', @sponsorship_levels)
+            = level_name('PLATINUM', @sponsorship_levels)
           LEVEL SPONSORSHIP*
           %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;"} (industry-specific exclusivity)
           %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;", class: "platinum-availibility"} (1 AVAILABLE)
@@ -41,7 +41,7 @@
             %span.platinum-amount-value
               - if @project.goal
                 - if editable_level?(current_user, @project)
-                  = text_field_tag 'level[platinum][cost]', level_cost(0, 'platinum', @sponsorship_levels, @project), class: 'span12'
+                  = text_field_tag 'level[platinum][cost]', level_cost('platinum', @sponsorship_levels[1], @project), class: 'span12'
                 - else
                   = amount_converter(SponsorshipLevel.default_costs('platinum',project))
           %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (25% of funding goal)
@@ -67,7 +67,7 @@
                         %span.edit-benefit.italic.label-green select to edit
                         = text_field_tag "platinum[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field", style: "width: 320px !important; display: none;"
               -else
-                -@project.sponsorship_benefits.where(sponsorship_level_id: 1).order(:id).each_with_index do |benefit, index|
+                -@project.sponsorship_benefits.where(sponsorship_level_id: @sponsorship_levels[1]? @sponsorship_levels[1].id : 1 ).order(:id).each_with_index do |benefit, index|
                   %div.checkbox.default
                     = hidden_field_tag "platinum[id_#{index + 1}]", benefit.id
                     = check_box_tag "platinum[#{index + 1}]", nil, benefit.status, class: "sponsor_checkbox"
@@ -93,9 +93,9 @@
       %div
         %h6{:style => "color:#70bf4c"}
           - if editable_level?(current_user, @project)
-            = text_field_tag 'level[gold][name]', level_name(1, 'Gold', @sponsorship_levels)
+            = text_field_tag 'level[gold][name]', level_name('Gold', @sponsorship_levels[2])
           - else
-            = level_name(1, 'Gold', @sponsorship_levels)
+            = level_name('Gold', @sponsorship_levels)
           LEVEL SPONSORSHIP*
           %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;"} (industry-specific exclusivity)
           %span{:style => "font-size:10px;color:#403e37", class: "gold-availibility"} (3 AVAILABLE)
@@ -106,7 +106,7 @@
             %span.gold-amount-value
               -if @project.goal
                 - if editable_level?(current_user, @project)
-                  = text_field_tag 'level[gold][cost]', level_cost(1, 'gold', @sponsorship_levels, project), class: 'span12'
+                  = text_field_tag 'level[gold][cost]', level_cost('gold', @sponsorship_levels[2], project), class: 'span12'
                 - else
                   = amount_converter(SponsorshipLevel.default_costs('gold',project))
           %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (10% of funding goal)
@@ -132,7 +132,7 @@
                         %span.edit-benefit.italic.label-green select to edit
                         = text_field_tag "gold[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field", style: "width: 320px !important; display: none;"
               -else
-                -@project.sponsorship_benefits.where(sponsorship_level_id: 2).order(:id).each_with_index do |benefit, index|
+                -@project.sponsorship_benefits.where(sponsorship_level_id: @sponsorship_levels[2]? @sponsorship_levels[2] : 2 ).order(:id).each_with_index do |benefit, index|
                   %div.checkbox.default
                     = hidden_field_tag "gold[id_#{index + 1}]", benefit.id
                     = check_box_tag "gold[#{index + 1}]", nil, benefit.status, class: "sponsor_checkbox"
@@ -158,9 +158,9 @@
       %div
         %h6{:style => "color:#70bf4c"}
           - if editable_level?(current_user, @project)
-            = text_field_tag 'level[silver][name]', level_name(2, 'Silver', @sponsorship_levels)
+            = text_field_tag 'level[silver][name]', level_name('Silver', @sponsorship_levels[3])
           - else
-            = level_name(2, 'Silver', @sponsorship_levels)
+            = level_name('Silver', @sponsorship_levels)
           LEVEL SPONSORSHIP*
           %span{:style => "font-size:10px;color:#403e37", class: "silver-availibility"} (5 AVAILABLE)
       .row-fluid
@@ -170,7 +170,7 @@
             %span.silver-amount-value
               -if @project.goal
                 - if editable_level?(current_user, @project)
-                  = text_field_tag 'level[silver][cost]', level_cost(2, 'silver', @sponsorship_levels, project), class: 'span12'
+                  = text_field_tag 'level[silver][cost]', level_cost('silver', @sponsorship_levels[3], project), class: 'span12'
                 - else
                   = amount_converter(SponsorshipLevel.default_costs('silver',project))
           %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (5% of funding goal)
@@ -197,7 +197,7 @@
                         %span.edit-benefit.italic.label-green select to edit
                         = text_field_tag "silver[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field", style: "width: 320px !important; display: none;"
               -else
-                -@project.sponsorship_benefits.where(sponsorship_level_id: 3).order(:id).each_with_index do |benefit, index|
+                -@project.sponsorship_benefits.where(sponsorship_level_id: @sponsorship_levels[3]? @sponsorship_levels[3] : 3).order(:id).each_with_index do |benefit, index|
                   %div.checkbox.default
                     = hidden_field_tag "silver[id_#{index + 1}]", benefit.id
                     = check_box_tag "silver[#{index + 1}]", nil, benefit.status, class: "sponsor_checkbox"
@@ -223,9 +223,9 @@
       %div
         %h6{:style => "color:#70bf4c;"}
           - if editable_level?(current_user, @project)
-            = text_field_tag 'level[bronze][name]', level_name(3, 'Bronze', @sponsorship_levels)
+            = text_field_tag 'level[bronze][name]', level_name('Bronze', @sponsorship_levels[4])
           - else
-            = level_name(3, 'Bronze', @sponsorship_levels)
+            = level_name('Bronze', @sponsorship_levels)
           LEVEL SPONSORSHIP*
       .row-fluid
         .span3.left{:style => "text-align:left;color:#464646;"}
@@ -234,7 +234,7 @@
             %span.bronze-amount-value
               - if @project.goal
                 - if editable_level?(current_user, @project)
-                  = text_field_tag 'level[bronze][cost]', level_cost(3, 'bronze', @sponsorship_levels, project), class: 'span12'
+                  = text_field_tag 'level[bronze][cost]', level_cost('bronze', @sponsorship_levels[4], project), class: 'span12'
                 - else
                   = amount_converter(SponsorshipLevel.default_costs('bronze', project))
         .span9.left{:style => "text-align:left;color:#464646;"}
@@ -243,7 +243,7 @@
             %div#bronze-checkbox.existing-checkbox
 
               -if !@project.sponsorship_benefits.empty?
-                -@project.sponsorship_benefits.where(sponsorship_level_id: 4).order(:id).each_with_index do |benefit, index|
+                -@project.sponsorship_benefits.where(sponsorship_level_id: @sponsorship_levels[4]? @sponsorship_levels[4] : 4).order(:id).each_with_index do |benefit, index|
                   %div.checkbox.default
                     = hidden_field_tag "custom[id_#{index + 1}]", benefit.id
                     = check_box_tag "custom[#{index + 1}]", nil, benefit.status, class: "sponsor_checkbox"

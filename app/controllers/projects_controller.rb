@@ -87,7 +87,7 @@ class ProjectsController < ApplicationController
       session[:current_project] = @project.id
       @project.update_attributes!(params[:project])
       @perks = @project.perks.order(:amount)
-      @sponsorship_levels = SponsorshipLevel.by_project(@project)
+      @sponsorship_levels = SponsorshipLevel.with_benefits(@project)
       respond_to do |format|
         format.html
         format.js
@@ -103,7 +103,7 @@ class ProjectsController < ApplicationController
     @project_sponsors = sort_sponsorships.group_by {|sponsor| sponsor.level_id }
     @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).order(:id).group_by {|sponsor| sponsor.sponsorship_level_id}
     @perks = @project.perks.order(:amount)
-    @sponsorship_levels = SponsorshipLevel.by_project(@project)
+    @sponsorship_levels = SponsorshipLevel.with_benefits(@project)
     session[:current_project] = @project.id
     render :layout => 'landing'
   end
