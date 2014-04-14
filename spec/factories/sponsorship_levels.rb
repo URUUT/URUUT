@@ -8,8 +8,25 @@ FactoryGirl.define do
     project
 
     after(:create) do |level|
-      create :sponsorship_benefit, sponsorship_level_id: level.id,
+      create_list :sponsorship_benefit, 5, sponsorship_level_id: level.id,
         project_id: level.project.id
     end
+
+    factory :custom_platinum do
+      parent_id 1
+    end
+
+    factory :custom_gold do
+      parent_id 2
+    end
+
+    factory :custom_silver do
+      parent_id 3
+    end
+
+    factory :custom_bronze do
+      parent_id 4
+    end
+
   end
 end

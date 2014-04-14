@@ -438,6 +438,24 @@ class Project < ActiveRecord::Base
     documents_updated_since(date).any? ||
     posts_updated_since(date).any?     ||
     galleries_updated_since(date).any?
+
+  def is_live?
+    live == 1
+  end
+
+  def funding_active?
+    status === "Funding Active"
+  end
+
+  def funding_complete?
+    status.downcase == 'funding complete' if status
+    false
+  end
+
+  def sponsorship_benefits_list
+    sponsorship_benefits.
+      where(status: true).
+      group_by {|sponsor| sponsor.sponsorship_level_id}
   end
 
 private

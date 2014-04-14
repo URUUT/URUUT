@@ -15,10 +15,10 @@ deployment:
     branch: develop
     heroku:
       appname: uruut-dev
-  multitenant:
-    branch: multitenant
+  custom-sponsorships:
+    branch: custom-sponsorships
     heroku:
-      appname: uruut-multitenant
+      appname: uruut-custom-sponsorship
   techbridge:
     branch: techbridge-staging
     heroku:

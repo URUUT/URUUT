@@ -124,6 +124,7 @@ Crowdfund::Application.routes.draw do
       get "more_donators"
     end
   end
+  resources :sponsorship_levels, only: [:update]
   resources :projects do
     resources :question, :only => [:new, :create]
     collection do

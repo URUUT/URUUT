@@ -115,4 +115,15 @@ module ProjectsHelper
     project.project_sponsors.any?
   end
 
+  def level_name(index, default, levels)
+    return default unless levels.any?
+    (levels[index])? levels[index].name : default
+  end
+
+  def level_cost(index, default, levels, project)
+    default_cost = SponsorshipLevel.default_costs(default, project)
+    return default_cost unless levels.any?
+    (levels[index].cost)? levels[index].cost : default_cost
+  end
+
 end

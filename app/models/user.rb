@@ -200,6 +200,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def has_plan?(plan)
+    membership.kind == plan
+  end
+
 private
 
   def assign_default_badge

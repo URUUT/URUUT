@@ -33,81 +33,28 @@
     .span4.sidebar.pull-right
       %h4 SPONSORSHIP LEVELS
       .well
-        %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;"}
-          Platinum
-          %span.small-heading
-            (#{availability(@project.project_sponsors, 1)} of 1 Available)
-        %ul.normal-font.dashed-list
-          - if @sponsorship_benefits.include?(1)
-            - @sponsorship_benefits[1].each do |benefit|
-              %li #{benefit.name}
-        .clearfix{:style => "margin-left: -19px; margin-right: -19px; padding: 0 19px; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #e0e0e0"}
-          .pull-left
-            %h3{style: "margin: 0; margin-top: 20px; line-height: 20px;"}= amount_converter(@project.goal.to_i * 0.25)
-          - if check_availibility(@project, 1) < 1
-            %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-1", :"sponsor-id" => "1"}
-              SPONSOR ►
-          -else
-            .pull-right{style: "font-style: italic; margin-top:20px;"}
-              Not Available
-              %span
-        %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;"}
-          Gold
-          %span.small-heading
-            (#{availability(@project.project_sponsors, 2)} of 3 Available)
-        %ul.normal-font.dashed-list
-          - if @sponsorship_benefits.include?(2)
-            - @sponsorship_benefits[2].each do |benefit|
-              %li #{benefit.name}
-        / %div{:style => "height: 80px; width: 100%;"}
-        .clearfix{:style => "margin-left: -19px; margin-right: -19px; padding: 0 19px; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #e0e0e0"}
-          .pull-left
-            %h3{style: "margin: 0; margin-top: 20px; line-height: 20px;"}= amount_converter(@project.goal.to_i * 0.1)
-            .amount-percentage
-          - if check_availibility(@project, 2) < 3
-            %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-2", :"sponsor-id" => "2"}
-              SPONSOR ►
-          -else
-            .pull-right{style: "font-style: italic; margin-top:20px;"}
-              Not Available
-              %span
-        %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;"}
-          Silver
-          %span.small-heading
-            (#{availability(@project.project_sponsors, 3)} of 5 Available)
-        %ul.normal-font.dashed-list
-          - if @sponsorship_benefits.include?(3)
-            - @sponsorship_benefits[3].each do |benefit|
-              %li #{benefit.name}
-        / %div{:style => "height: 80px; width: 100%;"}
-        .clearfix{:style => "margin-left: -19px; margin-right: -19px; padding: 0 19px; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #e0e0e0"}
-          .pull-left
-            %h3{style: "margin: 0; margin-top: 20px; line-height: 20px;"}= amount_converter(@project.goal.to_i * 0.05)
-            .amount-percentage
-          - if check_availibility(@project, 3) < 5
-            %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-3", :"sponsor-id" => "3"}
-              SPONSOR ►
-          - else
-            .pull-right{style: "font-style: italic; margin-top:20px;"}
-              Not Available
-              %span
-        %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;"}
-          Bronze
-        %ul.normal-font.dashed-list
-          %li Text mention on project page
-          - if @sponsorship_benefits.include?(4)
-            - @sponsorship_benefits[4].each do |benefit|
-              %li #{benefit.name}
-        /%div{:style => "height: 80px; width: 100%;"}
-        .clearfix
-          .pull-left
-            - if (@project.goal.to_i * 0.02) >= 750
+        - @project_levels.each do |level|
+          %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;"}
+            = level.name
+            %span.small-heading
+              ( #{availability(@project.project_sponsors, level)} of #{SponsorshipLevel::AVAILABILITY[level.parent.name.downcase]} available)
+          %ul.normal-font.dashed-list
+            - if @sponsorship_benefits.include?(level.id)
+              - @sponsorship_benefits[level.id].each do |benefit|
+                %li #{benefit.name}
+          .clearfix{:style => "margin-left: -19px; margin-right: -19px; padding: 0 19px; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #e0e0e0"}
+            .pull-left
               %h3{style: "margin: 0; margin-top: 20px; line-height: 20px;"}
-                = number_to_currency((750), precision: 0)
-            - else
-              %h3{style: "margin: 0;line-height: 20px;"}= amount_converter(@project.goal.to_i * 0.02)
-          %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-4", :"sponsor-id" => "4"}
-            SPONSOR ►
+                = amount_converter( level.calculated_cost(@project) )
+            - if check_availibility(@project, level.id) < 1
+              %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-1", :"sponsor-id" => "1"}
+                SPONSOR ►
+            -else
+              .pull-right{style: "font-style: italic; margin-top:20px;"}
+                Not Available
+                %span
+
+        
 
     = form_for(@sponsor, :url => project_sponsors_path, :html => {:class => "span8", :style => "margin-left: 0;", multipart: true, method: 'POST'}) do |f|
       .well.clearfix{:style => "border-top: none; padding-bottom: 0; border: 1px solid #e0e0e0;"}
@@ -126,7 +73,8 @@
             = label_tag :project_sponsor_name do
               CHOOSE YOUR SPONSORSHIP LEVEL
             .selectParent
-              = select :project_sponsor, :level_id, options_for_select(@sponsorship_levels.map {|level| ["#{level.name} Level", level.id]}, session[:level_id]), class: "selectbox"
+              = hidden_field_tag :parent_id, @parent_id
+              = select :project_sponsor, :level_id, options_for_select(@project_levels.map {|level| ["#{level.name} Level", level.id]}, session[:level_id]), class: "selectbox"
 
             %br/
             %h5 SPONSORSHIP DETAILS
@@ -296,7 +244,7 @@
     }
 
     $('.sponsor-placement').hide();
-    switch ($('#project_sponsor_level_id').val())
+    switch ($('#parent_id').val())
     {
       case '1': $(".platinum").show(); break;
       case '2': $(".gold").show(); break;

@@ -17,7 +17,7 @@ module ApplicationHelper
   end
 
   def check_availibility(project, level)
-    total_sponsor = project.project_sponsors.where(level_id: level).count
+    project.project_sponsors.where(level_id: level).count
   end
 
   def strip_url(url)
@@ -244,6 +244,10 @@ module ApplicationHelper
 
   def full_name user
     return "- #{user.first_name} #{user.last_name}"
+  end
+
+  def editable_level?(user, project)
+    user.has_plan?('plus') && !project.is_live?
   end
 
 end
