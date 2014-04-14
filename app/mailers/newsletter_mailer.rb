@@ -5,6 +5,6 @@ class NewsletterMailer < ActionMailer::Base
   def newsletter_confirmation(newsletter)
     @user = newsletter
 
-    mail to: @user.email, bcc: "kbush@uruut.com, mfeinberg@uruut.com, bnorwood@uruut.com, alejo+bcc@bandofcoders.com", subject: 'Welcome to URUUT News!'
+    mail to: @user.email, bcc: "charris@uruut.com, mfeinberg@uruut.com, bnorwood@uruut.com, alejo+bcc@bandofcoders.com", subject: 'Welcome to URUUT News!'
   end
 end
