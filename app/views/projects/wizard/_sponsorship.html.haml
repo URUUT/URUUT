@@ -30,7 +30,7 @@
           - if editable_level?(current_user, @project)
             = text_field_tag 'level[platinum][name]', level_name('PLATINUM', @sponsorship_levels[1])
           - else
-            = level_name('PLATINUM', @sponsorship_levels)
+            = level_name('PLATINUM', @sponsorship_levels[1])
           LEVEL SPONSORSHIP*
           %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;"} (industry-specific exclusivity)
           %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;", class: "platinum-availibility"} (1 AVAILABLE)
@@ -95,7 +95,7 @@
           - if editable_level?(current_user, @project)
             = text_field_tag 'level[gold][name]', level_name('Gold', @sponsorship_levels[2])
           - else
-            = level_name('Gold', @sponsorship_levels)
+            = level_name('Gold', @sponsorship_levels[2])
           LEVEL SPONSORSHIP*
           %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;"} (industry-specific exclusivity)
           %span{:style => "font-size:10px;color:#403e37", class: "gold-availibility"} (3 AVAILABLE)
@@ -160,7 +160,7 @@
           - if editable_level?(current_user, @project)
             = text_field_tag 'level[silver][name]', level_name('Silver', @sponsorship_levels[3])
           - else
-            = level_name('Silver', @sponsorship_levels)
+            = level_name('Silver', @sponsorship_levels[3])
           LEVEL SPONSORSHIP*
           %span{:style => "font-size:10px;color:#403e37", class: "silver-availibility"} (5 AVAILABLE)
       .row-fluid
@@ -225,7 +225,7 @@
           - if editable_level?(current_user, @project)
             = text_field_tag 'level[bronze][name]', level_name('Bronze', @sponsorship_levels[4])
           - else
-            = level_name('Bronze', @sponsorship_levels)
+            = level_name('Bronze', @sponsorship_levels[4])
           LEVEL SPONSORSHIP*
       .row-fluid
         .span3.left{:style => "text-align:left;color:#464646;"}
