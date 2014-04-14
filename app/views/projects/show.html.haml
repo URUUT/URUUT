@@ -358,7 +358,7 @@
                     .textarea.seed-amount= text_field_tag :custom_seed, nil, style: "width: 100%"
                   %a.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "#{user_signed_in? ? 'button-seed-custom' : 'button-seed-custom-unsignin'}"} Fund Now ►
           #sponsorship.tab-pane
-            - @sponsorship_levels.each do |level|
+            - @sponsorship_levels.each_pair do |key, level|
               .seed-level
                 %h3
                   = level.name

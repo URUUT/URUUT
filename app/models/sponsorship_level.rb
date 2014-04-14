@@ -16,7 +16,7 @@ class SponsorshipLevel < ActiveRecord::Base
     platinum: 0.25,
     gold: 0.10,
     silver: 0.05,
-    bronze: 0.02    
+    bronze: 0.02
     })
 
   AVAILABILITY = HashWithIndifferentAccess.new({
@@ -26,11 +26,18 @@ class SponsorshipLevel < ActiveRecord::Base
     bronze: 10
   })
 
+  DEFAULT_AVAILITY = {
+      1 => '(1 of 1 available)',
+      2 => '(3 of 3 available)',
+      3 => '(5 of 5 available)',
+      4 => ''
+    }
+
   scope :default_levels, where(id: [1,2,3,4])
+  scope :by_parent, order(:parent_id)
 
   def self.by_project(project)
-    with_benefits = SponsorshipLevel.where(id: SponsorshipBenefit.sponsorship_level_ids(project)).
-      order(:parent_id)
+    with_benefits = SponsorshipLevel.with_benefits(project)
 
     if with_benefits.any?
       default = SponsorshipLevel.default_levels.
@@ -38,6 +45,12 @@ class SponsorshipLevel < ActiveRecord::Base
       return (default | with_benefits).sort { |x,y| x.parent_id <=> y.parent_id }
     end
     SponsorshipLevel.default_levels
+  end
+
+  def self.with_benefits(project)
+    ids = SponsorshipBenefit.sponsorship_level_ids(project)
+    where(id: ids).by_parent.group_by {|level| level.parent_id}.
+      reduce({}) { |memo,value| memo.merge({value[0] => value[1][0]}) }
   end
 
   def self.default_costs(index, project)

@@ -19,6 +19,7 @@ class SponsorshipBenefit < ActiveRecord::Base
                           4 => [{id: 1, desc: "Lorem ipsum dolor sit amet."}]}
 
   scope :for_project, ->(project) { where(project_id: project.id) }
+  scope :actives, -> { where(status: true) }
   scope :with_project_sponsor_level, ->(project_sponsor) { where(sponsorship_level_id: project_sponsor.level_id) }
 
   def self.modify_benefits_of_level(name, project, level)
@@ -31,7 +32,7 @@ class SponsorshipBenefit < ActiveRecord::Base
   end
 
   def self.sponsorship_level_ids(project)
-    for_project(project).group(:sponsorship_level_id).pluck(:sponsorship_level_id)
+    for_project(project).actives.group(:sponsorship_level_id).pluck(:sponsorship_level_id)
   end
-    
+
 end
