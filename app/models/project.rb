@@ -442,6 +442,7 @@ class Project < ActiveRecord::Base
     documents_updated_since(date).any? ||
     posts_updated_since(date).any?     ||
     galleries_updated_since(date).any?
+  end
 
   def is_live?
     live == 1
