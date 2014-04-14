@@ -10,29 +10,29 @@ class SponsorsController < ApplicationController
     session[:path] = "sponsor_new"
     case params[:level]
       when 'platinum'
-        @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[@project_levels[0].id]
-        @cost = @project_levels[0].calculated_cost(@project)
-        @level = @project_levels[0].name || "Platinum"
-        session[:level_id] = @project_levels[0].id || 1
-        @parent_id = @project_levels[0].parent_id || 1
-      when 'gold'
         @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[@project_levels[1].id]
         @cost = @project_levels[1].calculated_cost(@project)
-        @level = @project_levels[1].name || "Gold"
-        session[:level_id] = @project_levels[1].id || 2
-        @parent_id = @project_levels[1].parent_id || 2
-      when 'silver'
+        @level = @project_levels[1].name || "Platinum"
+        session[:level_id] = @project_levels[1].id || 1
+        @parent_id = @project_levels[1].parent_id || 1
+      when 'gold'
         @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[@project_levels[2].id]
         @cost = @project_levels[2].calculated_cost(@project)
-        @level = @project_levels[2].name || "Silver"
-        session[:level_id] = @project_levels[2].id || 3
-        @parent_id = @project_levels[2].parent_id || 3
-      when 'bronze'
-        @level = @project_levels[3].name || "Bronze"
+        @level = @project_levels[2].name || "Gold"
+        session[:level_id] = @project_levels[2].id || 2
+        @parent_id = @project_levels[2].parent_id || 2
+      when 'silver'
         @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[@project_levels[3].id]
         @cost = @project_levels[3].calculated_cost(@project)
-        session[:level_id] = @project_levels[3].id || 4
-        @parent_id = @project_levels[3].id || 4
+        @level = @project_levels[3].name || "Silver"
+        session[:level_id] = @project_levels[3].id || 3
+        @parent_id = @project_levels[3].parent_id || 3
+      when 'bronze'
+        @level = @project_levels[4].name || "Bronze"
+        @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[@project_levels[4].id]
+        @cost = @project_levels[4].calculated_cost(@project)
+        session[:level_id] = @project_levels[4].id || 4
+        @parent_id = @project_levels[4].id || 4
       else
         level_sponsor = @project_levels.first.id
         @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[level_sponsor]
@@ -166,7 +166,7 @@ class SponsorsController < ApplicationController
 
   def project_id
     @project = Project.find(params[:project_id])
-    @project_levels = SponsorshipLevel.by_project(@project)
+    @project_levels = SponsorshipLevel.with_benefits(@project)
   end
 
   def create_sponsor
