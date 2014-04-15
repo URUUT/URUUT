@@ -1,12 +1,15 @@
-if ( $('#level_platinum_name').length > 0 ) {
-  $('#level_platinum_cost').val('<%= amount_converter(params[:funding_goal].gsub(/,/, '').to_i * 0.25) %>')
-  $('#level_gold_cost').val("<%= amount_converter(params[:funding_goal].gsub(/,/, '').to_i * 0.10) %>")
-  $('#level_silver_cost').val("<%= amount_converter(params[:funding_goal].gsub(/,/, '').to_i * 0.05) %>")
-  <% if params[:funding_goal].gsub(/,/, '').to_i * 0.02 < 750 %>
-    $('#level_bronze_cost').val("<%= amount_converter(params[:funding_goal].gsub(/,/, '').to_i * 0.02) %>")
-  <% else %>
-    $('#level_bronze_cost').val("<%= amount_converter(750) %>")
-  <% end %>
+if ( $('#level_platinum_cost').length < 1 ) {
+  <% if editable_level?(current_user, @project) %>
+    var platinum_cost_el = '<%= text_field_tag "level[platinum][cost]", level_cost("platinum", @sponsorship_levels[1], @project), class: "span12" %>',
+        gold_cost_el = '<%= text_field_tag "level[gold][cost]", level_cost("gold", @sponsorship_levels[2], @project), class: "span12" %>',
+        silver_cost_el = '<%= text_field_tag "level[silver][cost]", level_cost("silver", @sponsorship_levels[3], @project), class: "span12" %>',
+        bronze_cost_el = '<%= text_field_tag "level[bronze][cost]", level_cost("bronze", @sponsorship_levels[4], @project), class: "span12" %>';
+
+    $(".platinum-amount-value").html(platinum_cost_el);
+    $(".gold-amount-value").html(gold_cost_el);
+    $(".silver-amount-value").html(silver_cost_el);
+    $(".bronze-amount-value").html(bronze_cost_el);
+  <% end -%>
 } else {
   <% if params[:funding_goal].gsub(/,/, '').to_i * 0.02 < 750 %>
     $(".bronze-amount-value").text("<%= amount_converter(params[:funding_goal].gsub(/,/, '').to_i * 0.02) %>");

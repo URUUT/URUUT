@@ -388,6 +388,8 @@ class ProjectsController < ApplicationController
   end
 
   def update_sponsorship_content
+    @project = Project.find(params[:id])
+    @sponsorship_levels = SponsorshipLevel.with_benefits(@project)
     respond_to :js
   end
 

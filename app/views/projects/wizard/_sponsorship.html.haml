@@ -106,7 +106,7 @@
             %span.gold-amount-value
               -if @project.goal
                 - if editable_level?(current_user, @project)
-                  = text_field_tag 'level[gold][cost]', level_cost('gold', @sponsorship_levels[2], project), class: 'span12'
+                  = text_field_tag 'level[gold][cost]', level_cost('gold', @sponsorship_levels[2], @project), class: 'span12'
                 - else
                   = amount_converter(SponsorshipLevel.default_costs('gold',project))
           %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (10% of funding goal)
@@ -170,7 +170,7 @@
             %span.silver-amount-value
               -if @project.goal
                 - if editable_level?(current_user, @project)
-                  = text_field_tag 'level[silver][cost]', level_cost('silver', @sponsorship_levels[3], project), class: 'span12'
+                  = text_field_tag 'level[silver][cost]', level_cost('silver', @sponsorship_levels[3], @project), class: 'span12'
                 - else
                   = amount_converter(SponsorshipLevel.default_costs('silver',project))
           %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (5% of funding goal)
@@ -234,9 +234,9 @@
             %span.bronze-amount-value
               - if @project.goal
                 - if editable_level?(current_user, @project)
-                  = text_field_tag 'level[bronze][cost]', level_cost('bronze', @sponsorship_levels[4], project), class: 'span12'
+                  = text_field_tag 'level[bronze][cost]', level_cost('bronze', @sponsorship_levels[4], @project), class: 'span12'
                 - else
-                  = amount_converter(SponsorshipLevel.default_costs('bronze', project))
+                  = amount_converter(SponsorshipLevel.default_costs('bronze', @project))
         .span9.left{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"} Bronze Level Sponsorship includes business / foundation name listing and a link to the sponsor’s website on your project page. In addition to these benefits, you can create custom benefits for bronze level sponsors below.
           %div#bronze-box
@@ -532,5 +532,4 @@
 - if current_user.has_plan? 'plus'
   :javascript
     var custom_level_url_path = "#{sponsorship_level_url}";
-    console.log(custom_level_url_path);
   = javascript_include_tag 'customSponsorshipBehavior'
