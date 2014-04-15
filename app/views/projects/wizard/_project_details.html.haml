@@ -168,7 +168,7 @@
     }).done(function(data){
       $.ajax({
         type: 'GET',
-        url: '/projects/update_sponsorship_content?funding_goal='+ $("#project_goal").val()
+        url: '/projects/update_sponsorship_content?funding_goal='+ $("#project_goal").val()+'&id='+projectId
       });
       $(".perks-link").attr("href", "/projects/" + data +"/edit#perks");
       $('.step-container[data-id="project-details"] form input#project-submit').val("SAVE & CONTINUE ►");
