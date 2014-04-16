@@ -37,7 +37,8 @@
           %h3{:style => "font-size:20px;letter-spacing:normal;color:#70bf4c;line-height:100%;margin:0;"}
             = level.name
             %span.small-heading
-              ( #{availability(@project.project_sponsors, level)} of #{SponsorshipLevel::AVAILABILITY[level.parent.name.downcase]} available)
+              - unless level.parent.name.downcase === 'bronze'
+                ( #{availability(@project.project_sponsors, level)} of #{SponsorshipLevel::AVAILABILITY[level.parent.name.downcase]} available)
           %ul.normal-font.dashed-list
             - if @sponsorship_benefits.include?(level.id)
               - @sponsorship_benefits[level.id].each do |benefit|
@@ -46,8 +47,8 @@
             .pull-left
               %h3{style: "margin: 0; margin-top: 20px; line-height: 20px;"}
                 = amount_converter( level.calculated_cost(@project) )
-            - if check_availibility(@project, level.id) < 1
-              %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-1", :"sponsor-id" => "1"}
+            - if check_availibility(@project, level.id) < SponsorshipLevel::AVAILABILITY[level.parent.name.downcase]
+              %div{class: 'btn pull-right sponsor-change', style: 'margin-top:10px;', id: "level-1", :"sponsor-id" => level.id}
                 SPONSOR ►
             -else
               .pull-right{style: "font-style: italic; margin-top:20px;"}
