@@ -41,9 +41,9 @@
     %div.inline
       = f.label :duration, class: "label-green" do
         CAMPAIGN LENGTH*
-        %span.italic{style: "color: #000"} (max 90 days)
-      .selectParent{style: "width: 290px;"}
-        = f.select :duration, options_for_select(project_length, @project.duration), {}, :required => true, class: "styledSelect"
+        %span.italic{style: "color: #000"} (max 365 days)
+      .selectParent
+        = f.text_field :duration, :required => true, html: {style: "width: 290px;"}
       %span.error-container
 
     %div.inline{:style => "margin-left:25px;"}
@@ -131,7 +131,10 @@
         required: true
       },
       "project[duration]": {
-        required: true
+        required: true,
+        number: true,
+        min: 1,
+        max: 365
       },
       "project[title]": {
         required: true
