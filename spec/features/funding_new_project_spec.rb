@@ -11,7 +11,7 @@ feature 'Funding a new project' do
   end
 
   # this test was commented because we removed
-  # Get Funding link from the menu, delete in 
+  # Get Funding link from the menu, delete in
   # the future after confirmation
   # scenario 'User clicks on Get Funding' do
   #   visit root_url
@@ -61,7 +61,7 @@ feature 'Funding a new project' do
 
     fill_in 'project[project_title]', with: @project.project_title
     fill_in 'project[goal]', with: @project.goal
-    select @project.duration, from: 'project[duration]'
+    fill_in 'project[duration]', with: @project.duration
     select @project.category, from: 'project[category]'
     fill_in 'project[title]', with: @project.title
     fill_in 'project[story]', with: @project.story
@@ -116,7 +116,7 @@ feature 'Funding a new project' do
     expect(project.state).to eql @project.state
     expect(project.live).to eql 0
     expect(project.ready_for_approval).to eql 1
-    
+
   end
 
 end
