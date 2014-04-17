@@ -168,6 +168,7 @@ class SponsorsController < ApplicationController
     project_sponsor =  ProjectSponsor.unscoped.where(project_id: @project.id, sponsor_id: params[:sponsor_id]).first
     @project_sponsor = project_sponsor
     Sponsor.save_customer(current_user, @project_sponsor)
+    sponsor = Sponsor.find(params[:sponsor_id])
     # Sponsor.create_charge(@project_sponsor)
     # @sponsorship_level = SponsorshipLevel.find(project_sponsor.level_id)
     @benefits = @project.sponsorship_benefits.where(status: true, sponsorship_level_id: project_sponsor.level_id )
@@ -190,6 +191,8 @@ class SponsorsController < ApplicationController
       @level = "Bronze"
     end
     @need_doctype = true
+    Sponsor.delay.send_confirmation_email(sponsor)
+    Sponsor.delay.sponsor_thank_you(sponsor.id, sponsor.email)
   end
 
   def confirm_sponsor
