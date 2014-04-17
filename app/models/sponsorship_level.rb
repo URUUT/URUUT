@@ -35,14 +35,15 @@ class SponsorshipLevel < ActiveRecord::Base
 
   scope :default_levels, where(id: [1,2,3,4])
   scope :by_parent, order(:parent_id)
+  scope :without_ids, ->(ids) { where(id: ids) }
 
   def self.by_project(project)
     with_benefits = SponsorshipLevel.with_benefits(project)
 
     if with_benefits.any?
-      default = SponsorshipLevel.default_levels.
-                  where('id NOT IN (?)', with_benefits.pluck(:parent_id))
-      return (default | with_benefits).sort { |x,y| x.parent_id <=> y.parent_id }
+      with_benefits_ids = with_benefits.collect {|k,v| v.parent_id}
+      default = SponsorshipLevel.default_levels.without_ids(with_benefits_ids)
+      return (default | with_benefits.values).sort { |x,y| x.parent_id <=> y.parent_id }
     end
     SponsorshipLevel.default_levels
   end
