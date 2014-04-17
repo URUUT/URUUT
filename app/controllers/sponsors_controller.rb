@@ -160,7 +160,7 @@ class SponsorsController < ApplicationController
     @project_sponsor =   ProjectSponsor.unscoped.where(project_id: @project.id, sponsor_id: @sponsor.id).first
     @benefits = @project.sponsorship_benefits.where(status: true, sponsorship_level_id: @project_sponsor.level_id )
     @sponsorship_level = SponsorshipLevel.find(@project_sponsor.level_id)
-    @cost = Sponsor.set_sponsorship_percentage(@project_sponsor.level_id, @project)
+    @cost = Sponsor.set_sponsorship_percentage(@project_sponsor.level_id.to_s, @project)
   end
 
   def thank_you
