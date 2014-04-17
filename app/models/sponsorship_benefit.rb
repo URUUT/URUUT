@@ -21,6 +21,11 @@ class SponsorshipBenefit < ActiveRecord::Base
   scope :for_project, ->(project) { where(project_id: project.id) }
   scope :actives, -> { where(status: true) }
   scope :with_project_sponsor_level, ->(project_sponsor) { where(sponsorship_level_id: project_sponsor.level_id) }
+  scope :by_sponsorship_level_id, ->(id) { where(sponsorship_level_id: id) }
+  scope :platinum, -> { by_sponsorship_level_id(1) }
+  scope :gold,     -> { by_sponsorship_level_id(2) }
+  scope :silver,   -> { by_sponsorship_level_id(3) }
+  scope :bronze,   -> { by_sponsorship_level_id(4) }
 
   def self.modify_benefits_of_level(name, project, level)
     old_level_id = SponsorshipLevel::DEFAULT_NAMES[ name ]
