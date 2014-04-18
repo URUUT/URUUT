@@ -3,6 +3,8 @@ class SponsorsController < ApplicationController
   before_filter :project_id, except: [:create, :thank_you, :share_email]
   before_filter :authenticate_user!
 
+  skip_before_filter :session_email_forgot_password, :only => [:share_email]
+
   def new
     @sponsor = Sponsor.new
     @sponsor.anonymous = false
@@ -158,7 +160,7 @@ class SponsorsController < ApplicationController
     @project_sponsor =   ProjectSponsor.unscoped.where(project_id: @project.id, sponsor_id: @sponsor.id).first
     @benefits = @project.sponsorship_benefits.where(status: true, sponsorship_level_id: @project_sponsor.level_id )
     @sponsorship_level = SponsorshipLevel.find(@project_sponsor.level_id)
-    @cost = Sponsor.set_sponsorship_percentage(@project_sponsor.level_id, @project)
+    @cost = Sponsor.set_sponsorship_percentage(@project_sponsor.level_id.to_s, @project)
   end
 
   def thank_you
@@ -166,6 +168,7 @@ class SponsorsController < ApplicationController
     project_sponsor =  ProjectSponsor.unscoped.where(project_id: @project.id, sponsor_id: params[:sponsor_id]).first
     @project_sponsor = project_sponsor
     Sponsor.save_customer(current_user, @project_sponsor)
+    sponsor = Sponsor.find(params[:sponsor_id])
     # Sponsor.create_charge(@project_sponsor)
     # @sponsorship_level = SponsorshipLevel.find(project_sponsor.level_id)
     @benefits = @project.sponsorship_benefits.where(status: true, sponsorship_level_id: project_sponsor.level_id )
@@ -188,6 +191,8 @@ class SponsorsController < ApplicationController
       @level = "Bronze"
     end
     @need_doctype = true
+    Sponsor.delay.send_confirmation_email(sponsor)
+    Sponsor.delay.sponsor_thank_you(sponsor.id, sponsor.email)
   end
 
   def confirm_sponsor
@@ -239,8 +244,8 @@ class SponsorsController < ApplicationController
                                       level_id: params[:project_sponsor][:level_id], card_token: token,
                                       card_type: card_type, card_last4: last4, sponsor_type: params[:type] })
     session[:project_sponsor] = @project_sponsor
-    Sponsor.delay.send_confirmation_email(@sponsor)
-    Sponsor.delay.sponsor_thank_you(@sponsor.id, @sponsor.email)
+    # Sponsor.delay.send_confirmation_email(@sponsor)
+    # Sponsor.delay.sponsor_thank_you(@sponsor.id, @sponsor.email)
     redirect_to confirmation_url(params[:project_id], @sponsor.id)
   end
 

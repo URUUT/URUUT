@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   end
 
   def session_email_forgot_password
-      session[:email_forgot_password] = params[:user][:email] if params[:user]
+      # session[:email_forgot_password] = params[:user][:email] if params[:user]
   end
 
   def additional_information

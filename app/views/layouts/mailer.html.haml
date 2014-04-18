@@ -23,7 +23,7 @@
 								%tr{:style => "margin: 0;padding: 0;"}
 									%td{:style => "margin: 0;padding: 0;"}
 										%p{:style => "margin: 0;padding: 10px 0;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;font-weight: normal;font-size: 11px;line-height: 1;"}
-											%span{:style => "color:#95d60a"}Nonprofit Exchange.
+											%span{:style => "color:#95d60a"}
 					%tr
 						%td{:align => "center", :valign => "top"}
 							%table#email-header{:bgcolor => "#ffffff", :width => "100%", :cellspacing => "0", :style => "border-spacing:0;border-collapse: collapse;"}
@@ -38,8 +38,7 @@
 					- unless @remove_signature
 						%tr
 							%td
-								%b Xchange Team | TechBridge
-								%i Business smart. Community focused.
+								%b Jennifer Higgins | Manager, TechBridge Nonprofit Exchange
 								%p
 									Office
 									%a 404.405.2772
@@ -47,7 +46,7 @@
 									= mail_to 'exchange@techbridge.org'
 									|
 									= link_to 'www.techbridge.org', 'http://www.techbridge.org'
-								%img{:src => "http://#{@host}/assets/logo-tech.jpg", style: "width: 806px; height:77px;" }
+								%img{:src => "http://#{@host}/assets/logo-tech-mailer.jpg", style: "width: 400px; height:38px;" }
 					%tr
 						%td{:align => "center", :valign => "top"}
 							%table#email-footer{:bgcolor => "#95d60a", :width => "100%", :cellspacing => "0", :style => "border-spacing:0;border-collapse: collapse;"}
@@ -57,5 +56,5 @@
 											FIND US ON:
 											%a{:href => "http://www.facebook.com/iamtechbridge", :style => "color:#fff;margin-left:10px"}
 												%img{:src => "https://d2q0qd5iz04n9u.cloudfront.net/_ssl/proxy.php/http/uruut-dev.herokuapp.com/assets/email-facebook.png", :style => "vertical-align:middle;margin:3px;"} /iamtechbridge
-											%a{:href => "http://www.twitter.com/iamtechbridge", :style => "color:#fff;margin-left:10px"}
+											%a{:href => "http://www.twitter.com/iamnpexchange", :style => "color:#fff;margin-left:10px"}
 												%img{:src => "https://d2q0qd5iz04n9u.cloudfront.net/_ssl/proxy.php/http/uruut-dev.herokuapp.com/assets/email-twitter.png", :style => "vertical-align:middle;margin:3px;"} @IamNPExchange

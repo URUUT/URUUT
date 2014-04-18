@@ -3,9 +3,11 @@
     %img{:src => "#{@image}/convert?w=620", :style => "display:block;"}
 %tr
   %td{:valign => "top"}
-    %p{:style => "color:#444;font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size:13px;margin:14px;"} Dear #{@name}
-    %p{:style => "color:#444;font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size:13px;margin:14px;"} We have received your submission for #{@project_title} to Nonprofit Exchange.
-    %p{:style => "color:#444;font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size:13px;margin:14px;"} Over the next 72 hours, we will review your information and approve or provide feedback to your project. This process is intended to alert you to the circumstances you may not have foreseen and put you in a position to be succesful. 
+    %p{:style => "color:#444;font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size:13px;margin:14px;"} Dear #{@name},
+    %p{:style => "color:#444;font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size:13px;margin:14px;"} We have received your submission for the campaign #{@project_title} on Nonprofit Exchange.
+    %p{:style => "color:#444;font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size:13px;margin:14px;"} Over the next 72 hours, we will review your information and approve or provide feedback to your project.
     %p{:style => "color:#444;font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size:13px;margin:14px;"} Thank you for your patience while we ensure everything is ready to go.  We will be back in touch with you as quickly as we can.
     %p{:style => "color:#444;font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size:13px;margin:14px;"}
-      In the meantime, please take a moment to review the FAQ’s and if there are issues not covered there, please feel free to reach out to out team.
+      In the meantime, please take a moment to review the 
+      %a{:href => "http://#{@host}/pages/about"}FAQ’s. 
+      If there are issues not covered there, please feel free to reach out to our team.

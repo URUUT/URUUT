@@ -48,7 +48,7 @@ class SponsorMailer < ActionMailer::Base
     @sponsor_real_name = sponsor.name
     @sponsor_email = sponsor.email
 
-    mail to: @email, subject: "Sponsor thank you follow-up"
+    mail to: @email, subject: "You have a new Sponsor!"
   end
 
   def sponsor_thank_you(sponsor, email)

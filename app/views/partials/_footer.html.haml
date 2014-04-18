@@ -1,8 +1,11 @@
 .copyright
   .container
-    %p
+    %p.span3
       &copy;
       = Date.today.strftime('%Y')
       TechBridge.
       %span.italic
         All Rights Reserved.
+    = link_to 'http://www.uruut.com', class: 'span3 offset2', style: "font-size: 10px; text-decoration: none; color:white; text-align: left;" do
+      Powered by
+      = image_tag 'logo-new.png', style: "width: 60px;"

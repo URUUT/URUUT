@@ -32,13 +32,13 @@ class Sponsor < ActiveRecord::Base
 
   def self.set_sponsorship_percentage(level_id, project)
     case level_id
-      when 1
+      when "1"
         cost = project.goal.to_i * 0.25
-      when 2
+      when "2"
         cost = project.goal.to_i * 0.1
-      when 3
+      when "3"
         cost = project.goal.to_i * 0.05
-      when 4
+      when "4"
         if project.goal.to_i * 0.02 >= 750
           cost = 750
         else
