@@ -70,4 +70,27 @@ class SponsorshipLevel < ActiveRecord::Base
     cost
   end
 
+  def self.create_custom(project, levels, params)
+    SponsorshipBenefit.where(project_id: project.id).destroy_all
+    levels.each_pair do |default_name, value|
+      new_name = value['name'].downcase
+      level = SponsorshipLevel::DEFAULT_NAMES[ new_name ]? find(SponsorshipLevel::DEFAULT_NAMES[ new_name ]) : false
+      unless level
+        level = SponsorshipLevel.new(value)
+        level.parent_id = SponsorshipLevel::DEFAULT_NAMES[ default_name ]
+        level.save!
+      end
+      if params["#{default_name}"]
+        benefits = params["#{default_name}"].select { |key, value| key.to_i > 0 }
+        benefits.each_pair do |key, value|
+          unless params["#{default_name}"]["info_#{key}"].blank?
+            new_benefit = SponsorshipBenefit.new({name: params["#{default_name}"]["info_#{key}"], sponsorship_level_id: level.id, project_id: project.id, status: 1})
+            new_benefit.save!
+          end
+        end
+      end
+    end
+    levels.to_a.compact
+  end
+
 end

@@ -234,14 +234,14 @@
               -if @sponsorship_levels[4].present? || @project.sponsorship_benefits.bronze.any?
                 -@project.sponsorship_benefits.where(sponsorship_level_id: @sponsorship_levels[4]? @sponsorship_levels[4] : 4).order(:id).each_with_index do |benefit, index|
                   %div.checkbox.default
-                    = hidden_field_tag "custom[id_#{index + 1}]", benefit.id
-                    = check_box_tag "custom[#{index + 1}]", nil, benefit.status, class: "sponsor_checkbox"
+                    = hidden_field_tag "bronze[id_#{index + 1}]", benefit.id
+                    = check_box_tag "bronze[#{index + 1}]", nil, benefit.status, class: "sponsor_checkbox"
                     %span#name= benefit.name
                     %span.edit-benefit.italic.label-green select to edit
-                    = hidden_field_tag "custom[info_#{index + 1}]", benefit.name, class: "edit-text-field"
+                    = hidden_field_tag "bronze[info_#{index + 1}]", benefit.name, class: "edit-text-field"
 
-              = hidden_field_tag "custom_count", nil, id: "custom-count"
-            %div#custom-checkbox
+              = hidden_field_tag "bronze_count", nil, id: "bronze-count"
+            %div#bronze-checkbox
               %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 10px;"} CREATE CUSTOM BENEFITS:
               %div.checkbox.add_checkbox
                 = check_box_tag "add_bronze", nil,false, class: "box_bronze_benefits"
@@ -302,7 +302,7 @@
   $(".box_gold_benefits").attr("name", "silver[" + (silverSum + 1) + "]");
   $(".box_gold_benefits").attr("id", "silver_" + (silverSum + 1));
 
-  $("#custom-count").val(bronzeSum + 1);
+  $("#bronze-count").val(bronzeSum + 1);
   $(".bronze_benefits").attr("name", "bronze[info_" + (bronzeSum + 1) + "]");
   $(".bronze_benefits").attr("id", "bronze_info_" + (bronzeSum + 1));
   $(".box_gold_benefits").attr("name", "bronze[" + (bronzeSum + 1) + "]");
