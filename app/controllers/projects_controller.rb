@@ -114,52 +114,6 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    sponsorship_benefits = []
-    def sponsorship_benefit_level(level, benefit, key)
-      data = []
-      1.upto(params["#{level}_count"].to_i) do |x|
-        count = if !benefit[x - 1].blank?
-          !benefit[x - 1][:id].blank? ? benefit[x - 1][:id] : x
-        else
-          x
-        end
-        status = params["#{level}"]["#{count}"] ? 1 : 0
-        if level.eql?("platinum")
-          cost = 0.25 * @project.goal.to_i
-        elsif level.eql?("gold")
-          cost = 0.1 * @project.goal.to_i
-        elsif level.eql?("silver")
-          cost = 0.05 * @project.goal.to_i
-        else
-          if @project.goal.to_i * 0.02 >= 750
-            cost = 750
-          else
-            cost = 0.02 * @project.goal.to_i
-          end
-        end
-        # if @project.sponsorship_benefits.blank? || params["#{level}"]["id_#{count}"].nil?
-          unless params["#{level}"]["info_#{count}"].blank?
-            data <<  {name: params["#{level}"]["info_#{count}"],sponsorship_level_id: key, project_id: @project.id, status: status, cost: cost}
-          end
-        # else
-        #   sponsorship_benefit = SponsorshipBenefit.find(params[level]["id_#{count}"])
-        #   sponsorship_benefit.update_attributes({name: params["#{level}"]["info_#{count}"],sponsorship_level_id: key, project_id: @project.id, status: status, cost: cost})
-        # end
-      end
-      data
-    end
-
-    SponsorshipBenefit::SPONSORSHIP_BENEFITS.each do |key, value|
-
-      case key
-        when 1 then sponsorship_benefits += sponsorship_benefit_level("platinum", value, key)
-        when 2 then sponsorship_benefits += sponsorship_benefit_level("gold", value, key)
-        when 3 then sponsorship_benefits += sponsorship_benefit_level("silver", value, key)
-        when 4 then sponsorship_benefits += sponsorship_benefit_level("custom", value, key) if params[:custom].present?
-      end
-
-    end
-
     unless params[:project][:duration].blank?
       params[:project][:campaign_deadline] = params[:project][:duration].to_i.days.from_now.end_of_day.to_time
     end
@@ -176,10 +130,6 @@ class ProjectsController < ApplicationController
       @project.step = "/projects/#{@project.id}/edit#assets"
     end
 
-    unless sponsorship_benefits.blank?
-      SponsorshipBenefit.where(project_id: params[:id]).destroy_all
-      @sponsorship_benefits = SponsorshipBenefit.create!(sponsorship_benefits)
-    end
     params[:project][:goal] = params[:project][:goal].gsub(",", "") if !params[:project][:goal].nil?
     params[:project][:sponsor_permission] = params[:project][:sponsorship_permission] if !params[:project][:sponsorship_permission].nil?
     @project.update_attributes!(params[:project])
