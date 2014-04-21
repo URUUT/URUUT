@@ -58,14 +58,12 @@
           %div#platinum-box{data:{max: "1", type: "platinum"}}
             %div#platinum-checkbox.existing-checkbox
               -if @sponsorship_levels[1].blank? && @project.sponsorship_benefits.platinum.empty?
-                -SponsorshipBenefit::SPONSORSHIP_BENEFITS.each do |key, value|
-                  -if key.eql? 1
-                    -value.each_with_index do |benefit|
-                      %div.checkbox.default
-                        = check_box_tag "platinum[#{benefit[:id]}]", '1', false, class: "sponsor_checkbox"
-                        %span#name= benefit[:desc]
-                        %span.edit-benefit.italic.label-green select to edit
-                        = text_field_tag "platinum[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field", style: "width: 320px !important; display: none;"
+                -SponsorshipBenefit::SPONSORSHIP_BENEFITS[1].each do |benefit|
+                  %div.checkbox.default
+                    = check_box_tag "platinum[#{benefit[:id]}]", '1', false, class: "sponsor_checkbox"
+                    %span#name= benefit[:desc]
+                    %span.edit-benefit.italic.label-green select to edit
+                    = hidden_field_tag "platinum[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field"
               -else
                 -@project.sponsorship_benefits.where(sponsorship_level_id: @sponsorship_levels[1]? @sponsorship_levels[1].id : 1 ).order(:id).each_with_index do |benefit, index|
                   %div.checkbox.default
@@ -123,14 +121,12 @@
           %div#gold-box{data:{max: "3", type: "gold"}}
             %div#gold-checkbox.existing-checkbox
               -if @sponsorship_levels[2].blank? && @project.sponsorship_benefits.gold.empty?
-                -SponsorshipBenefit::SPONSORSHIP_BENEFITS.each do |key, value|
-                  -if key.eql? 2
-                    -value.each_with_index do |benefit|
-                      %div.checkbox.default
-                        = check_box_tag "gold[#{benefit[:id]}]", '1', false, class: "sponsor_checkbox"
-                        %span#name= benefit[:desc]
-                        %span.edit-benefit.italic.label-green select to edit
-                        = text_field_tag "gold[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field", style: "width: 320px !important; display: none;"
+                -SponsorshipBenefit::SPONSORSHIP_BENEFITS[2].each do |benefit|
+                  %div.checkbox.default
+                    = check_box_tag "gold[#{benefit[:id]}]", '1', false, class: "sponsor_checkbox"
+                    %span#name= benefit[:desc]
+                    %span.edit-benefit.italic.label-green select to edit
+                    = hidden_field_tag "gold[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field"
               -else
                 -@project.sponsorship_benefits.where(sponsorship_level_id: @sponsorship_levels[2]? @sponsorship_levels[2] : 2 ).order(:id).each_with_index do |benefit, index|
                   %div.checkbox.default
@@ -186,16 +182,13 @@
             \:
           %div#silver-box{data:{max: "5", type: "silver"}}
             %div#silver-checkbox.existing-checkbox
-
               -if @sponsorship_levels[3].blank? && @project.sponsorship_benefits.silver.empty?
-                -SponsorshipBenefit::SPONSORSHIP_BENEFITS.each do |key, value|
-                  -if key.eql? 3
-                    -value.each_with_index do |benefit|
-                      %div.checkbox.default
-                        = check_box_tag "silver[#{benefit[:id]}]", '1', false, class: "sponsor_checkbox"
-                        %span#name= benefit[:desc]
-                        %span.edit-benefit.italic.label-green select to edit
-                        = text_field_tag "silver[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field", style: "width: 320px !important; display: none;"
+                -SponsorshipBenefit::SPONSORSHIP_BENEFITS[3].each do |benefit|
+                  %div.checkbox.default
+                    = check_box_tag "silver[#{benefit[:id]}]", '1', false, class: "sponsor_checkbox"
+                    %span#name= benefit[:desc]
+                    %span.edit-benefit.italic.label-green select to edit
+                    = hidden_field_tag "silver[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field"
               -else
                 -@project.sponsorship_benefits.where(sponsorship_level_id: @sponsorship_levels[3]? @sponsorship_levels[3] : 3).order(:id).each_with_index do |benefit, index|
                   %div.checkbox.default
@@ -241,7 +234,6 @@
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"} Bronze Level Sponsorship includes business / foundation name listing and a link to the sponsor’s website on your project page. In addition to these benefits, you can create custom benefits for bronze level sponsors below.
           %div#bronze-box
             %div#bronze-checkbox.existing-checkbox
-
               -if @sponsorship_levels[4].present? || @project.sponsorship_benefits.bronze.any?
                 -@project.sponsorship_benefits.where(sponsorship_level_id: @sponsorship_levels[4]? @sponsorship_levels[4] : 4).order(:id).each_with_index do |benefit, index|
                   %div.checkbox.default
@@ -249,7 +241,7 @@
                     = check_box_tag "custom[#{index + 1}]", nil, benefit.status, class: "sponsor_checkbox"
                     %span#name= benefit.name
                     %span.edit-benefit.italic.label-green select to edit
-                    = text_field_tag "custom[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
+                    = hidden_field_tag "custom[info_#{index + 1}]", benefit.name, class: "edit-text-field"
 
               = hidden_field_tag "custom_count", nil, id: "custom-count"
             %div#custom-checkbox
