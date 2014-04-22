@@ -64,13 +64,13 @@
                     %span.edit-benefit.italic.label-green select to edit
                     = hidden_field_tag "platinum[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field"
               -else
-                -@project.sponsorship_benefits.where(sponsorship_level_id: @sponsorship_levels[1]? @sponsorship_levels[1].id : 1 ).order(:id).each_with_index do |benefit, index|
+                - SponsorshipBenefit.default_plus_level(@project, @sponsorship_levels[1]? @sponsorship_levels[1].id : 1, 1).each_with_index do |benefit, index|
                   %div.checkbox.default
-                    = hidden_field_tag "platinum[id_#{index + 1}]", benefit.id
-                    = check_box_tag "platinum[#{index + 1}]", nil, benefit.status, class: "sponsor_checkbox"
-                    %span#name= benefit.name
+                    = hidden_field_tag "platinum[id_#{index + 1}]", benefit[:id]
+                    = check_box_tag "platinum[#{index + 1}]", nil, benefit[:status], class: "sponsor_checkbox"
+                    %span#name= benefit[:name] || benefit[:desc]
                     %span.edit-benefit.italic.label-green select to edit
-                    = text_field_tag "platinum[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
+                    = text_field_tag "platinum[info_#{index + 1}]", benefit[:name] || benefit[:desc], class: "edit-text-field", style: "width: 320px !important; display: none;"
               / %a.italic.green-link.check-all{:href => "javascript:void(0)", data:{target: "platinum-checkbox"}}
               /   (Check All That Apply)
 
@@ -122,17 +122,17 @@
                 -SponsorshipBenefit::SPONSORSHIP_BENEFITS[2].each do |benefit|
                   %div.checkbox.default
                     = check_box_tag "gold[#{benefit[:id]}]", '1', false, class: "sponsor_checkbox"
-                    %span#name= benefit[:desc]
+                    %span#name= benefit[:name] || benefit[:desc]
                     %span.edit-benefit.italic.label-green select to edit
                     = hidden_field_tag "gold[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field"
               -else
-                -@project.sponsorship_benefits.where(sponsorship_level_id: @sponsorship_levels[2]? @sponsorship_levels[2] : 2 ).order(:id).each_with_index do |benefit, index|
+                - SponsorshipBenefit.default_plus_level(@project, @sponsorship_levels[2]? @sponsorship_levels[2] : 2, 2).each_with_index do |benefit, index|
                   %div.checkbox.default
-                    = hidden_field_tag "gold[id_#{index + 1}]", benefit.id
-                    = check_box_tag "gold[#{index + 1}]", nil, benefit.status, class: "sponsor_checkbox"
-                    %span#name= benefit.name
+                    = hidden_field_tag "gold[id_#{index + 1}]", benefit[:id]
+                    = check_box_tag "gold[#{index + 1}]", nil, benefit[:status], class: "sponsor_checkbox"
+                    %span#name= benefit[:name] || benefit[:desc]
                     %span.edit-benefit.italic.label-green select to edit
-                    = text_field_tag "gold[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
+                    = text_field_tag "gold[info_#{index + 1}]", benefit[:name] || benefit[:desc], class: "edit-text-field", style: "width: 320px !important; display: none;"
               / %a.italic.green-link.check-all{:href => "javascript:void(0)", data:{target: "gold-checkbox"}}
               /   (Check All That Apply)
 
@@ -187,13 +187,13 @@
                     %span.edit-benefit.italic.label-green select to edit
                     = hidden_field_tag "silver[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field"
               -else
-                -@project.sponsorship_benefits.where(sponsorship_level_id: @sponsorship_levels[3]? @sponsorship_levels[3] : 3).order(:id).each_with_index do |benefit, index|
+                - SponsorshipBenefit.default_plus_level(@project, @sponsorship_levels[3]? @sponsorship_levels[3] : 3, 3).each_with_index do |benefit, index|
                   %div.checkbox.default
-                    = hidden_field_tag "silver[id_#{index + 1}]", benefit.id
-                    = check_box_tag "silver[#{index + 1}]", nil, benefit.status, class: "sponsor_checkbox"
-                    %span#name= benefit.name
+                    = hidden_field_tag "silver[id_#{index + 1}]", benefit[:id]
+                    = check_box_tag "silver[#{index + 1}]", nil, benefit[:status], class: "sponsor_checkbox"
+                    %span#name= benefit[:name] || benefit[:desc]
                     %span.edit-benefit.italic.label-green select to edit
-                    = text_field_tag "silver[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
+                    = text_field_tag "silver[info_#{index + 1}]", benefit[:name] || benefit[:desc], class: "edit-text-field", style: "width: 320px !important; display: none;"
               / %a.italic.green-link.check-all{:href => "javascript:void(0)", data:{target: "silver-checkbox"}}
               /   (Check All That Apply)
 
