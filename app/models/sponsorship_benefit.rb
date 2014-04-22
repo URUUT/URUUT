@@ -40,4 +40,13 @@ class SponsorshipBenefit < ActiveRecord::Base
     for_project(project).actives.group(:sponsorship_level_id).pluck(:sponsorship_level_id)
   end
 
+  def self.default_plus_level(project, level_id, parent_id)
+    benefits = for_project(project).by_sponsorship_level_id(level_id).order(:id)
+    rtn = []
+    default_benefit = SponsorshipBenefit::SPONSORSHIP_BENEFITS[parent_id].select do |benefit|
+      rtn << benefit if benefits.find_index {|x| x.name != benefit[:desc]}
+    end
+    rtn + benefits
+  end
+
 end
