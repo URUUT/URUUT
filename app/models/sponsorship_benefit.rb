@@ -41,10 +41,10 @@ class SponsorshipBenefit < ActiveRecord::Base
   end
 
   def self.default_plus_level(project, level_id, parent_id)
-    benefits = for_project(project).by_sponsorship_level_id(level_id).order(:id)
+    benefits = for_project(project).by_sponsorship_level_id(level_id)
     rtn = []
-    default_benefit = SponsorshipBenefit::SPONSORSHIP_BENEFITS[parent_id].select do |benefit|
-      rtn << benefit if benefits.find_index {|x| x.name != benefit[:desc]}
+    SponsorshipBenefit::SPONSORSHIP_BENEFITS[parent_id].each do |benefit|
+      rtn << benefit unless benefits.find_index { |x| x.name == benefit[:desc] }
     end
     rtn + benefits
   end

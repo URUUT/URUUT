@@ -13,13 +13,15 @@ describe SponsorshipBenefit do
       @benefits = FactoryGirl.create_list(:sponsorship_benefit, 5, \
         project: @project, sponsorship_level_id: 1)
       @default_benefit = SponsorshipBenefit::SPONSORSHIP_BENEFITS[1]
+      @project.sponsorship_benefits << FactoryGirl.create(:default_sponsorship_benefits)
     end
 
     it { expect(SponsorshipBenefit.default_plus_level(@project, 1, 1)).to \
       include @benefits.first }
     it { expect(SponsorshipBenefit.default_plus_level(@project, 1, 1)).to \
-      include @default_benefit.first }
-    it { expect(SponsorshipBenefit.default_plus_level(@project, 1, 1)).to \
       include @default_benefit.second }
+    it { expect(SponsorshipBenefit.default_plus_level(@project, 1, 1).
+                count {|x| x[:name] == @default_benefit.first[:desc] ||
+                           x[:desc] == @default_benefit.first[:desc]} ).to eql 1 }
   end
 end
