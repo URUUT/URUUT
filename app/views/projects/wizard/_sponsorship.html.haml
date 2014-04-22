@@ -513,12 +513,20 @@
     });
   }
 
-  $("#next-link-to-assets").click(function(){
-    window.location.href = '/projects/' + projectId + '/edit#assets';
-    window.location.reload(true);
+  var custom_level_url_path = "#{sponsorship_level_url}";
+  $("#next-link-to-assets").click(function(e){
+    e.preventDefault();
+    $.ajax({
+      url: custom_level_url_path,
+      type: 'PUT',
+      data: $('.step-container[data-id="sponsorship"] form').serialize()
+    }).done(function(data) {
+      window.location.href = '/projects/' + projectId + '/edit#assets';
+      window.location.reload(true);
+    });
   })
+
 
 - if current_user.has_plan? 'plus'
   :javascript
-    var custom_level_url_path = "#{sponsorship_level_url}";
   = javascript_include_tag 'customSponsorshipBehavior'

@@ -26,6 +26,13 @@ class SponsorshipLevel < ActiveRecord::Base
     bronze: 10
   })
 
+  DEFAULT_SPONSORSHIP_LEVEL_PARAM = {
+    'platinum' => { "name" => 'platinum' },
+    'gold' => { "name" => 'gold' },
+    'silver' => { "name" => 'silver' },
+    'bronze' => { "name" => 'bronze' }
+  }
+
   DEFAULT_AVAILITY = {
       1 => '(1 of 1 available)',
       2 => '(3 of 3 available)',
