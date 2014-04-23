@@ -19,3 +19,30 @@
       = paginate @documents, remote: true
 
 / = javascript_include_tag "transparency_workroom"
+:javascript
+  $(function() {
+    $(".new-document-button").click(function() {
+      var projectId;
+      projectId = $(this).attr("project_id");
+      filepicker.pick({
+        openTo: "COMPUTER",
+        extensions: [".doc", ".pdf", ".ppt", ".txt", ".xls", ".docx"],
+        services: ["COMPUTER", "BOX", "DROPBOX", "EVERNOTE", "FTP", "GOOGLE_DRIVE", "SKYDRIVE"]
+      }, (function(e) {
+        var fileName, fileUrl;
+        fileUrl = e.url;
+        fileName = e.filename;
+        $.ajax({
+          url: "/project_admin/documents.js",
+          type: "POST",
+          data: {
+            url: fileUrl,
+            filename: fileName,
+            project_id: projectId
+          }
+        });
+      }), function(e) {
+        console.log(JSON.stringify(e));
+      });
+    });
+  });
