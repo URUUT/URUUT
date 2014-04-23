@@ -10,23 +10,8 @@ $ ->
     projectId = $(this).attr("project_id")
     filepicker.pick
       openTo: "COMPUTER"
-      extensions: [
-        ".doc"
-        ".pdf"
-        ".ppt"
-        ".txt"
-        ".xls"
-        ".docx"
-      ]
-      services: [
-        "COMPUTER"
-        "BOX"
-        "DROPBOX"
-        "EVERNOTE"
-        "FTP"
-        "GOOGLE_DRIVE"
-        "SKYDRIVE"
-      ]
+      extensions: [".doc", ".pdf", ".ppt", ".txt", ".xls", ".docx"]
+      services: ["COMPUTER", "BOX", "DROPBOX", "EVERNOTE", "FTP", "GOOGLE_DRIVE", "SKYDRIVE"]
     , ((e) ->
       fileUrl = e.url
       fileName = e.filename
@@ -38,8 +23,8 @@ $ ->
           filename: fileName
           project_id: projectId
 
-        success: (data) ->
-          deleteImages()
+        # success: (data) ->
+        #   deleteImages()
     ), (e) ->
       console.log JSON.stringify(e)
 
@@ -48,15 +33,7 @@ $ ->
     filepicker.pick
       openTo: "COMPUTER"
       mimetypes: "image/*"
-      services: [
-        "BOX"
-        "COMPUTER"
-        "FACEBOOK"
-        "DROPBOX"
-        "INSTAGRAM"
-        "FLICKR"
-        "PICASA"
-      ]
+      services: ["BOX", "COMPUTER", "FACEBOOK", "DROPBOX", "INSTAGRAM", "FLICKR", "PICASA"]
     , ((e) ->
       fileUrl = e.url
       $.ajax
@@ -71,4 +48,5 @@ $ ->
 
   $(".upload-video-button").on "click", ->
     $("#save-video").modal "show"
+
   deleteImages()
