@@ -203,7 +203,7 @@ class SponsorsController < ApplicationController
   end
 
   def share_email
-    render :layout => false
+    render nothing: true
     SponsorMailer.share_project(params[:emails], params[:project_id], params[:user]).deliver
     respond_to :js
   end
