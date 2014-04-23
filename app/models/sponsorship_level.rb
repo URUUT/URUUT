@@ -48,9 +48,7 @@ class SponsorshipLevel < ActiveRecord::Base
     with_benefits = SponsorshipLevel.with_benefits(project)
 
     if with_benefits.any?
-      with_benefits_ids = with_benefits.collect {|k,v| v.parent_id}
-      default = SponsorshipLevel.default_levels.without_ids(with_benefits_ids)
-      return (default | with_benefits.values).sort { |x,y| x.parent_id <=> y.parent_id }
+      return with_benefits.values.sort { |x,y| x.parent_id <=> y.parent_id }
     end
     SponsorshipLevel.default_levels
   end

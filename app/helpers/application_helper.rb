@@ -117,25 +117,26 @@ module ApplicationHelper
     return "pk_test_1XvbGBUir6OeX1ljhENDmZ7h"
   end
 
-  def project_sponsor_by_level(founders, page_num)
+  def project_sponsor_by_level(founders, page_num, project)
     if page_num.nil?
       gold_sponsors, silver_sponsors, bronze_sponsors, platinum_sponsors = [], [], [], []
       founders.each do |sponsor|
-        if sponsor.level_id.eql?(1)
+        if sponsor.sponsorship_level.parent_id.eql?(1)
           platinum_sponsors << sponsor
-        elsif sponsor.level_id.eql?(2)
+        elsif sponsor.sponsorship_level.parent_id.eql?(2)
           gold_sponsors << sponsor
-        elsif sponsor.level_id.eql?(3)
+        elsif sponsor.sponsorship_level.parent_id.eql?(3)
           silver_sponsors << sponsor
-        elsif sponsor.level_id.eql?(4)
+        elsif sponsor.sponsorship_level.parent_id.eql?(4)
           bronze_sponsors << sponsor
         end
       end
+      levels = SponsorshipLevel.by_project(project)
       sponsors = {
-        "PLATINUM" => platinum_sponsors,
-        "GOLD" => gold_sponsors,
-        "SILVER" => silver_sponsors,
-        "BRONZE" => bronze_sponsors
+        levels[0].name.upcase => platinum_sponsors,
+        levels[1].name.upcase => gold_sponsors,
+        levels[2].name.upcase => silver_sponsors,
+        levels[3].name.upcase => bronze_sponsors
       }
     else
       bronze_sponsors = []
