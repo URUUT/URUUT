@@ -50,7 +50,7 @@ Crowdfund::Application.configure do
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   config.assets.precompile += %w( leaflet.js tile.stamen.js style.css trontastic/jquery-ui-1.8.22.custom.css leaflet.css prettyPhoto.css
-    jquery.prettyPhoto.js ie-only.css selectivizr-min.js pages.js)
+    jquery.prettyPhoto.js ie-only.css selectivizr-min.js pages.js transparency_workroom.js)
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
