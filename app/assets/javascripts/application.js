@@ -10,6 +10,7 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
+//= require transparency_workroom
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require jquery-ui
@@ -19,7 +20,6 @@
 //= require accounting.min
 //= require leaflet
 //= require tile.stamen.js
-//= require transparency_workroom
 //= require_tree ./highchart
 //= require_tree ./global
 
