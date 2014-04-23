@@ -11,7 +11,7 @@
           %td{style: "text-align: center"}= truncate(founders[0], length: 17)
           %td{style: "text-align: center"}= founder.last.last_founded.to_date.strftime("%m/%d")
 - else
-  - sponsors = project_sponsor_by_level(@founders, params[:page])
+  - sponsors = project_sponsor_by_level(@founders, params[:page], @project)
   - sponsors.each do |sponsor_level, sponsors|
     %div.label-green= "#{sponsor_level} LEVEL SPONSORS (#{count_project_sponsor_by_level(sponsors, @project)})"
     - if sponsors.blank?
