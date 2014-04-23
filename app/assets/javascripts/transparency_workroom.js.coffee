@@ -29,6 +29,7 @@ $(".new-document-button").click ->
     console.log JSON.stringify(e)
 
 $(".upload-photo-button").click ->
+  console.log 'Upload photo button clicked'
   projectId = $(this).attr("project_id")
   filepicker.pick
     openTo: "COMPUTER"
