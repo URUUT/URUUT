@@ -6,6 +6,7 @@ deleteImages = ->
       $.ajax url: $(this).attr("data-href")
 
 $ ->
+  console.log "This is a test"
   $(".new-document-button").click ->
     projectId = $(this).attr("project_id")
     filepicker.pick
