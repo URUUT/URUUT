@@ -204,7 +204,9 @@ class SponsorsController < ApplicationController
 
   def share_email
     SponsorMailer.share_project(params[:emails], params[:project_id], params[:user]).deliver
-    respond_to :js { render :layout => false }
+    respond_to do |format|
+      format.js { render :layout => false }
+    end
   end
 
   private
