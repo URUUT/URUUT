@@ -36,3 +36,46 @@
       %input.btn{:type => "submit", :value => "Submit video", style: "float: none; margin: 0 auto;"}
 
 / = javascript_include_tag "transparency_workroom"
+:javascript
+  var deleteImages = function() {
+    $(".image-delete-button").click(function() {
+      var confirmation;
+      confirmation = confirm("Are you sure you want to delete?");
+      if (confirmation === true) {
+        $(this).parent().remove();
+        $.ajax({
+          url: $(this).attr("data-href")
+        });
+      }
+    });
+  };
+
+  $(function() {
+    $(".upload-photo-button").click(function() {
+      var projectId;
+      projectId = $(this).attr("project_id");
+      filepicker.pick({
+        openTo: "COMPUTER",
+        mimetypes: "image/*",
+        services: ["BOX", "COMPUTER", "FACEBOOK", "DROPBOX", "INSTAGRAM", "FLICKR", "PICASA"]
+      }, (function(e) {
+        var fileUrl;
+        fileUrl = e.url;
+        $.ajax({
+          url: "/galleries/save_photo_tw_room.js",
+          type: "POST",
+          data: {
+            file_url: fileUrl,
+            mimetype: "image",
+            project_id: projectId
+          }
+        });
+      }), function(e) {
+        console.log(JSON.stringify(e));
+      });
+    });
+    $(".upload-video-button").on("click", function() {
+      $("#save-video").modal("show");
+    });
+    deleteImages();
+  });
