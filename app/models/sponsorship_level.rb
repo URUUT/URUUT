@@ -71,18 +71,20 @@ class SponsorshipLevel < ActiveRecord::Base
   end
 
   def calculated_cost(project)
-    return SponsorshipLevel.default_costs(name.downcase, project) if DEFAULT_NAMES[name.downcase]
+    return SponsorshipLevel.default_costs(name.downcase, project) unless cost
     cost
   end
 
   def self.create_custom(project, levels, params)
     SponsorshipBenefit.where(project_id: project.id).destroy_all
+    SponsorshipLevel.where(project_id: project.id).destroy_all
     levels.each_pair do |default_name, value|
       new_name = value['name'].downcase
       level = SponsorshipLevel::DEFAULT_NAMES[ new_name ]? find(SponsorshipLevel::DEFAULT_NAMES[ new_name ]) : false
-      unless level
+      if !level || default_costs(default_name, project) != value['cost'].to_i
         level = SponsorshipLevel.new(value)
         level.parent_id = SponsorshipLevel::DEFAULT_NAMES[ default_name ]
+        level.project = project
         level.save!
       end
       if params["#{default_name}"]
