@@ -19,8 +19,9 @@ class SponsorMailer < ActionMailer::Base
     @project_title = @project.project_title
     @project_id = @project.id
     @host = ActionMailer::Base.default_url_options[:host]
+    @remove_signature = true
 
-    mail to: recepient, subject: "Share from Crowfund project sponsor"
+    mail to: recepient, subject: "Check out the project we sponsored"
   end
 
   def new_sponsor(sponsor)

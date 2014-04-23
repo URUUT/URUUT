@@ -30,7 +30,7 @@
           %hr
           %p.short-desc= @project.title
           %h6{:style => "color:#403e37;font-family:'Proxima Nova Semi';display:inline-block;margin:0;letter-spacing:normal;"} SHARE:
-          %a.fb-count{:href => "https://www.facebook.com/dialog/feed?app_id=#{Settings.facebook.api_key}&link=#{project_url(@project.id)}&picture=#{@project.large_image}&name=#{url_encode(@project.project_title)}&caption=#{url_encode(@project.category)}&description=#{url_encode("Like making a difference in the community? Check out this great project I found on @URUUT.  You can help fund it, or set up a project of your own to Get RUUTed! ")}&redirect_uri=#{root_url}", :target => "_blank"}
+          %a.fb-count{:href => "https://www.facebook.com/dialog/feed?app_id=#{Settings.facebook.api_key}&link=#{project_url(@project.id)}&picture=#{@project.large_image}&name=#{url_encode(@project.project_title)}&caption=#{url_encode(@project.category)}&description=#{url_encode("Like making a difference in the community? Check out this great project I found on The TechBridge Nonprofit Exchange.  You can help fund it or set up a project of your own. ")}&redirect_uri=#{root_url}", :target => "_blank"}
             %span
           .tw-count
             %span
@@ -86,7 +86,7 @@
           / = image_tag "fb-count.png", :class => "fb-share", :style => "margin-right:20px;"
           / = image_tag "tw-count.png", :class => "tw-share", :style => "margin-right:20px;"
           / = image_tag "bitly-link.png", :style => "margin-right:20px;"
-          %a.fb-count{:href => "https://www.facebook.com/dialog/feed?app_id=#{Settings.facebook.api_key}&link=#{project_url(@project.id)}&picture=#{@project.large_image}&name=#{url_encode(@project.project_title)}&caption=#{url_encode(@project.category)}&description=#{url_encode("Like making a difference in the community? Check out this great project I found on @URUUT.  You can help fund it, or set up a project of your own to Get RUUTed! ")}&redirect_uri=#{root_url}", :target => "_blank"}
+          %a.fb-count{:href => "https://www.facebook.com/dialog/feed?app_id=#{Settings.facebook.api_key}&link=#{project_url(@project.id)}&picture=#{@project.large_image}&name=#{url_encode(@project.project_title)}&caption=#{url_encode(@project.category)}&description=#{url_encode("Like making a difference in the community? Check out this great project I found on The TechBridge Nonprofit Exchange.  You can help fund it or set up a project of your own. ")}&redirect_uri=#{root_url}", :target => "_blank"}
             %span
           .tw-count
             %span
@@ -736,7 +736,7 @@
           height = 400,
           left   = ($(window).width()  - width)  / 2,
           top    = ($(window).height() - height) / 2,
-          url    = "#{request.protocol}twitter.com/share?url=#{project_url(@project.id)}&text=Like%20making%20a%20difference%20in%20the%20community%3F%20Check%20out%20this%20great%20project%20I%20found%20on%20%40URUUT%20&hashtags=GetRUUTed",
+          url    = "#{request.protocol}twitter.com/share?url=#{project_url(@project.id)}&text=Check%20out%20this%20great%20project%20I%20found%20on%20@IamNPExchange%20Make%20a%20difference%20Today!%20%2E%20&hashtags=fundchange",
           opts   = 'status=1' +
                    ',width='  + width  +
                    ',height=' + height +
