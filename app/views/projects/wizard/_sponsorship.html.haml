@@ -46,6 +46,11 @@
                   = amount_converter(SponsorshipLevel.default_costs('platinum',project))
           - unless editable_level?(current_user, @project)
             %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (25% of funding goal)
+          - else
+            %p.percentage{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"}
+              (
+              %span 25
+              &#37; of funding goal)
         .span9{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
             Platinum Level Sponsorship includes priority logo placement, a link to the sponsor’s website, and the company / foundation’s mission statement on your project page. Platinum Sponsors gain industry exclusivity for project sponsors. In addition to these benefits, select suggested benefits or create custom benefits for platinum level sponsors from the checklist below.
@@ -110,6 +115,11 @@
                   = amount_converter(SponsorshipLevel.default_costs('gold',project))
           - unless editable_level?(current_user, @project)
             %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (10% of funding goal)
+          - else
+            %p.percentage{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"}
+              (
+              %span 10
+              &#37; of funding goal)
         .span9.left{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
             Gold Level Sponsorship includes placement of a large logo and a link to the sponsor’s website on your project page. Gold Sponsors gain industry exclusivity for project sponsors. In addition to these benefits, select suggested benefits or create custom benefits for gold level sponsors from the checklist below.
@@ -173,6 +183,11 @@
                   = amount_converter(SponsorshipLevel.default_costs('silver',project))
           - unless editable_level?(current_user, @project)
             %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (5% of funding goal)
+          - else
+            %p.percentage{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"}
+              (
+              %span 5
+              &#37; of funding goal)
         .span9.left{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
             Silver Level Sponsorship includes placement of a medium-sized logo and a link to the sponsor’s website on your project page. In addition to these benefits, select suggested benefits or create custom benefits for silver level sponsors from the checklist below.
@@ -332,6 +347,7 @@
     editBenefit();
     addAnotherNewBenefit();
     removeAnotherBenefit();
+    updateSponsorPercentage();
     $(".check-all").click(function(){
       var id = $(this).attr("data-target");
         $("#"+id).find(".sponsor_checkbox").click();
@@ -345,9 +361,20 @@
       $(".sponsorship-false").hide();
       $(".sponsorship-true").show();
     }
+
+    $('input[id*=_cost]').on('change', function() {
+      updateSponsorPercentage();
+    });
   });
 
-
+  function updateSponsorPercentage() {
+    var total = #{@project.goal};
+    $('.percentage').each(function() {
+      var sponsor_value = $(this).prev('h2').find('span input').val();
+      var new_percentage = Math.ceil((sponsor_value/total) * 100);
+      $(this).find('span').text(new_percentage);
+    });
+  }
 
   var changeProjectPermission = function(){
     if ( $("#project_sponsorship_permission").val() == "false" ){
