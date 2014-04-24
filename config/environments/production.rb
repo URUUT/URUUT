@@ -62,8 +62,8 @@ Crowdfund::Application.configure do
     port: 587,
     domain: "nonprofit-exchange.techbridge.org",
     enable_starttls_auto: true,
-    user_name: ENV["MANDRILL_USER"],
-    password: ENV["MANDRILL_PASSWORD"],
+    user_name: "techbridge@uruut.com",
+    password: "ovitH7VjVGKo6hO-_NEG_g",
     authentication: 'login'
   }
 
