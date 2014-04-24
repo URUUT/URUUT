@@ -60,10 +60,11 @@ Crowdfund::Application.configure do
   config.action_mailer.smtp_settings = {
     address: "smtp.mandrillapp.com",
     port: 587,
-    domain: "localhost",
-    enable_starttls_auto: :true,
+    domain: "nonprofit-exchange.techbridge.org",
+    enable_starttls_auto: true,
     user_name: ENV["MANDRILL_USER"],
-    password: ENV["MANDRILL_PASSWORD"]
+    password: ENV["MANDRILL_PASSWORD"],
+    authentication: 'login'
   }
 
   config.middleware.use ExceptionNotification::Rack,
