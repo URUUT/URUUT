@@ -20,9 +20,20 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 WebMock.disable_net_connect!(allow_localhost: true)
 
-Capybara.default_driver = :selenium
+#Capybara.default_driver = :selenium
+Capybara.register_driver :poltergeist do |app|
+    options = {
+        :js_errors => false,
+        :timeout => 320,
+        :debug => false,
+        :phantomjs_options => ['--load-images=no', '--disk-cache=false'],
+        :inspector => true,
+    }
+    Capybara::Poltergeist::Driver.new(app, options)
+end
+Capybara.javascript_driver = :poltergeist
 
-
+Capybara.default_wait_time = 3
 
 RSpec.configure do |config|
   config.include(EmailSpec::Helpers)
@@ -57,5 +68,6 @@ RSpec.configure do |config|
 
   config.after(:each) do
     DatabaseCleaner.clean
+    Rails.application.load_seed
   end
 end
