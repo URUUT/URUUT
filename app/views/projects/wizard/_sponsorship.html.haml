@@ -289,7 +289,7 @@
       = hidden_field_tag "step", "fourth"
       %div
         - if editable_level?(current_user, @project)
-          = link_to "Save & Continue ►", "#confirm-changes", id: "next-link-to-assets", class: 'btn', style: "position: relative;display:block;margin:0 auto;width: 262px;", data: { toggle: "modal", role: "button" }
+          = link_to "Save & Continue ►", "#confirm-changes", id: "next-link-to-assets", class: 'btn', style: "position: relative;display:block;margin:0 auto;width: 262px;", data: { toggle: "modal", role: "button", show: 'false' }
         - else
           = f.submit "Save & Continue ►", :class => "btn", :id => "project-submit", :style => "position: relative;display:none;margin:0 auto;"
           = link_to "Save & Continue ►", "javascript:void(0)", id: "next-link-to-assets", :class => "btn", :style => "position: relative;display:block;margin:0 auto;width: 262px;"
@@ -560,13 +560,11 @@
     });
   }
 
-  function validate_benefits_check() {
-    var platinum = $('.sponsor_checkbox[name*=platinum]:checked').length,
-        gold = $('.sponsor_checkbox[name*=gold]:checked').length,
-        silver = $('.sponsor_checkbox[name*=silver]:checked').length,
+  function has_any_benefits() {
+    var benefits = $('.sponsor_checkbox:checked').length,
         valid = false;
 
-    if (platinum && gold && silver) { valid = true; }
+    if ( benefits ) { valid = true; }
     return valid;
   };
 
