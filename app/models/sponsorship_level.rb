@@ -81,7 +81,7 @@ class SponsorshipLevel < ActiveRecord::Base
     levels.each_pair do |default_name, value|
       new_name = value['name'].downcase
       level = SponsorshipLevel::DEFAULT_NAMES[ new_name ]? find(SponsorshipLevel::DEFAULT_NAMES[ new_name ]) : false
-      if !level || default_costs(default_name, project) != value['cost'].to_i
+      if !level || ( value['cost'] && default_costs(default_name, project) != value['cost'].to_i )
         level = SponsorshipLevel.new(value)
         level.parent_id = SponsorshipLevel::DEFAULT_NAMES[ default_name ]
         level.project = project
