@@ -17,7 +17,7 @@ private
       email:             project_sponsor.sponsor.email || "",
       amount:            project_sponsor.cost || "",
       level:             project_sponsor.sponsorship_level.name || "",
-      description:       project_sponsor_benefit || "" }
+      description:       project_sponsor_benefit.try(:name) || "" }
   end
 
   def project_sponsors
