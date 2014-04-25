@@ -1,5 +1,4 @@
 require 'bundler/capistrano'
-require "dotenv/deployment/capistrano"
 
 set :application, 'techbridge'
 
