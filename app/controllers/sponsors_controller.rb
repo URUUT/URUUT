@@ -191,8 +191,6 @@ class SponsorsController < ApplicationController
       @level = "Bronze"
     end
     @need_doctype = true
-    Sponsor.delay.send_confirmation_email(sponsor)
-    Sponsor.delay.sponsor_thank_you(sponsor.id, sponsor.email)
   end
 
   def confirm_sponsor
@@ -200,12 +198,15 @@ class SponsorsController < ApplicationController
     project_sponsor = ProjectSponsor.unscoped.where(project_id: params[:project_id], sponsor_id: @sponsor.id).last
     project_sponsor.update_attributes!(status: "confirmed", confirmed: true)
     Sponsor.delay.send_confirmation_email(@sponsor)
+    Sponsor.delay.sponsor_thank_you(@sponsor.id, @sponsor.email)
     redirect_to thank_you_for_sponsor_url(params[:project_id], @sponsor.id)
   end
 
   def share_email
     SponsorMailer.share_project(params[:emails], params[:project_id], params[:user]).deliver
-    respond_to :js
+    respond_to do |format|
+      format.js { render :nothing => true }
+    end
   end
 
   private

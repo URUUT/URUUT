@@ -160,13 +160,15 @@ class DonationsController < ApplicationController
 
   def thank_you
     @need_doctype = true
-    @thanks_url = URI.encode(session[:donation_thank_you][:bitly]) 
+    @thanks_url = URI.encode(session[:donation_thank_you][:bitly])
     render :layout => "application"
   end
 
   def share_email
     DonationMailer.share_project(params[:emails], params[:project_id], params[:user_id]).deliver
-    respond_to :js
+    respond_to do |format|
+      format.js { render :nothing => true }
+    end
   end
 
   private

@@ -29,6 +29,9 @@
     margin-top: 20px;
     padding: 15px 58px;
   }
+  .perks .perk:hover {
+    background: #F5F5F5;
+  }
 
 .step-container.perks{"data-id" => "perks"}
   = form_for(@project, :html => {:class => "project-perks-form span8 well", :multipart => true}) do |f|
@@ -40,17 +43,12 @@
     .perk-view
       %h5.label-green{:style => "margin-bottom:10px;"} PERKS ON Nonprofit Exchange
       %p
-        Using customized Seeder Perks for your donors is not required, but it is an option.
-      %p
-        If you don't use custom Seeder Perks, your project will have the default donation levels of $10, $25, $50, $100 and $250.
+        By using customized Seeder Perks for your donors; you, as a project owner, will have to create your own donation levels for each perk offered.
 
-      %p
-        If you do choose to offer custom perks, as the project owner, will be required to create your own donation levels for each perk offered.
-
-      %label.label-green{:style => "margin-top : 20px;"} USE CUSTOM SEEDER PERKS?
+      %label.label-green{:style => "margin-top : 20px;display: none;"} USE CUSTOM SEEDER PERKS?
       .span2{style: "margin-left: 0"}
-        .selectParent{style: "width: 140px;"}
-          = f.select :perk_permission, options_for_select({ "Yes" => "yes", "No" => "no" }, @project.perk_permission.eql?(true) ? "yes" : "no"), {}, {:onchange => "changePerkPermission()", class: "styledSelect"}
+        .selectParent{style: "width: 140px;display: none;"}
+          = f.select :perk_permission, options_for_select({ "Yes" => "yes", "No" => "no" }, @project.perk_permission.eql?(false) ? "yes" : "no"), {}, {:onchange => "changePerkPermission()", class: "styledSelect"}
 
     .clearfix
 
@@ -61,7 +59,7 @@
         %ul
           - @project.errors.full_messages.each do |msg|
             %li #{msg}
-    %div.perk-true{style: "#{@project.perk_permission ? '' : 'display:none' }"}
+    %div.perk-true
       %hr{style: "margin-top: 0; margin-left: -19px; margin-right: -19px; background: #e0e0e0;"}
       %h4.clearfix{style: "margin-bottom: 20px;"}
         Perk #
@@ -118,9 +116,9 @@
 
       %a.update-perk{:href => "#"} UPDATE PERK ►
 
-    %hr#line{:style => "margin-left: -20px; margin-right: -20px; background: #e0e0e0;"}
+    %hr#line{:style => "display: none; margin-left: -20px; margin-right: -20px; background: #e0e0e0;"}
 
-    %div.perk-false{style: "#{@project.perk_permission ? 'display:none' : '' }"}
+    %div.perk-false{style: "display: none"}
       = link_to "CONTINUE TO STEP 4 ►", "/projects/#{@project.id}/edit#sponsorship", class: "btn skip-perk wizard-btn", id: "project-submit", style: "position: relative;display:block;margin:0 auto;width:36%"
 
   .span4.aside
@@ -262,18 +260,18 @@
   $('#perk-description').change(updateDescTitle);
   $('#perk-description').keyup(updateDescTitle);
 
-  var changePerkPermission = function(){
-    if ( $("#project_perk_permission").val() == "no" ){
-      $(".perk-true").hide();
-      $(".perk-false").show();
-      $('#line').show()
-    }
-    else{
-      $(".perk-false").hide();
-      $(".perk-true").show();
-      $('#line').hide()
-    }
-  };
+  //var changePerkPermission = function(){
+  //  if ( $("#project_perk_permission").val() == "no" ){
+  //    $(".perk-true").hide();
+  //    $(".perk-false").show();
+  //    $('#line').show()
+  //  }
+  //  else{
+  //    $(".perk-false").hide();
+  //    $(".perk-true").show();
+  //    $('#line').hide()
+  //  }
+  //};
 
   $(".project-perks-form").validate({
     messages:{

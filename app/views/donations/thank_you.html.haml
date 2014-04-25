@@ -16,7 +16,7 @@
       .well.pull-left{style: "margin-left: 0;"}
         %h5.label-green{style: "margin-bottom: 0;"} Payment amount
         %p #{number_to_currency(session[:donation_thank_you][:amount], :precision => 0)}
-        %h5.label-green{style: "margin-bottom: 0;"} Your perk
+        %h5.label-green{style: "margin-bottom: 0;"} Your level
         %h6{style: "margin: 0;"}
           = session[:donation_thank_you][:perk_name]
         %p= session[:donation_thank_you][:perk_description]

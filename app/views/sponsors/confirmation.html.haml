@@ -4,9 +4,9 @@
       %h4.tittle Review Your Sponsorship
       %p.normal-font
         By confirming your project sponsorship, you agree to Nonprofit Exchange's
-        = link_to "Privacy Policy", privacy_pages_path, target: "_blank"
-        and
-        = link_to "Terms of Use", terms_pages_path, target: "_blank"
+      = link_to "Privacy Policy", "http://techbridge.org/privacy-policy", target: "_blank"
+      and
+      =link_to "Terms of Use", "http://www.techbridge.org/nonprofit-exchange/terms", target: "_blank"
 
 
       .sponsorships
@@ -74,7 +74,7 @@
       .well
         %h3{:style => "font-size:20px;letter-spacing:normal;color:#95d60a;line-height:100%;margin:0;font-family:'Proxima Nova';"}
         -if @sponsor.payment_type.eql? "Wire Transfer/Check"
-          %p.subtext Please confirm we have your contact information correct so we can contact you to arrage for your preferred method of payment.
+          %p.subtext Please confirm we have your contact information correct so we can contact you to arrange for your preferred method of payment.
           %h6.label-green{:style => "margin-bottom: 0;"}
             Preferred payment method
           %p.normal-font
