@@ -519,6 +519,16 @@
     });
   }
 
+  function validate_benefits_check() {
+    var platinum = $('.sponsor_checkbox[name*=platinum]:checked').length,
+        gold = $('.sponsor_checkbox[name*=gold]:checked').length,
+        silver = $('.sponsor_checkbox[name*=silver]:checked').length,
+        valid = false;
+
+    if (platinum && gold && silver) { valid = true; }
+    return valid;
+  };
+
   var custom_level_url_path = "#{sponsorship_level_url}";
   $("#next-link-to-assets").click(function(e){
     e.preventDefault();
