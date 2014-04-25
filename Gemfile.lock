@@ -161,7 +161,6 @@ GEM
       devise (>= 2.2)
     diff-lcs (1.2.4)
     dotenv (0.9.0)
-    dotenv-deployment (0.0.2)
     dotenv-rails (0.9.0)
       dotenv (= 0.9.0)
     email_spec (1.5.0)
@@ -489,7 +488,6 @@ DEPENDENCIES
   debugger (~> 1.6.6)
   devise (~> 2.2.3)
   devise-async
-  dotenv-deployment
   dotenv-rails (~> 0.9.0)
   email_spec (~> 1.5.0)
   erb2haml (~> 0.1.5)

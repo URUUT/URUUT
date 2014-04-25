@@ -59,8 +59,6 @@ end
 group :production do
   gem 'sass-rails',                     '~> 3.2.3'
   gem 'exception_notification'
-  gem 'dotenv-rails',                   '~> 0.9.0'
-  gem 'dotenv-deployment'
 end
 
 group :staging do
