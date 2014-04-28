@@ -18,7 +18,6 @@
 //= require jquery.ui.mouse
 //= require jquery.Jcrop.min
 //= require accounting.min
-//= require donations
 //= require leaflet
 //= require tile.stamen.js
 //= require_tree ./highchart
