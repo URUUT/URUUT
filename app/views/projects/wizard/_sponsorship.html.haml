@@ -382,7 +382,7 @@
   function updateSponsorPercentage() {
     var total = #{@project.goal};
     $('.percentage').each(function() {
-      var sponsor_value = $(this).prev('h2').find('span input').val();
+      var sponsor_value = $(this).prev('h2').find('span input').val().split(',').join('');
       var new_percentage = Math.ceil((sponsor_value/total) * 100);
       $(this).find('span').text(new_percentage);
     });
