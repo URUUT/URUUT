@@ -11,8 +11,16 @@ $("#confirm-changes").on('shown', function (e) {
   return this;
 });
 
+function parseLevelsAmout () {
+  $('#level_platinum_cost').val( $('#level_platinum_cost').val().split(',').join('') )
+  $('#level_gold_cost').val( $('#level_gold_cost').val().split(',').join('') )
+  $('#level_silver_cost').val( $('#level_silver_cost').val().split(',').join('') )
+  $('#level_bronze_cost').val( $('#level_bronze_cost').val().split(',').join('') )
+}
+
 $('#confirm-changes .btn-primary').click( function (e) {
   e.preventDefault();
+  parseLevelsAmout();
   $.ajax({
     url: custom_level_url_path,
     type: 'PUT',
