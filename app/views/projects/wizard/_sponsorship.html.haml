@@ -579,7 +579,12 @@
       window.location.href = '/projects/' + projectId + '/edit#assets';
       window.location.reload(true);
     });
-  })
+  });
+
+  fields = [ '#level_platinum_cost', '#level_gold_cost', '#level_silver_cost',
+             '#level_bronze_cost' ]
+  $(fields+"").maskMoney({allowZero:false, precision: 0});
+  $(fields+"").maskMoney('mask')
 
 
 - if current_user.has_plan? 'plus'
