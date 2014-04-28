@@ -258,8 +258,6 @@
                 - if editable_level?(current_user, @project)
                   %div
                     = text_field_tag 'level[bronze][cost]', level_cost('bronze', @sponsorship_levels[4], @project), class: 'span12'
-
-                    %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;line-height: 13px;width:63%;vertical-align: top;display: inline-block;margin-left: 10px;margin-top: 3px;"} ( Sponsor names and the amount of each sponsor category is set below.  Sponsor names and amount totals can be edited as needed, but please understand that once saved, edits cannot be made to the customization )
                 - else
                   = amount_converter(SponsorshipLevel.default_costs('bronze', @project))
         .span9.left{:style => "text-align:left;color:#464646;"}
