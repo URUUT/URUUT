@@ -39,7 +39,8 @@ module ProjectsHelper
       ['Municipal'],
       ['Member'],
       ['Foundation'],
-      ['Other Civic']
+      ['Other Civic'],
+      ['Special Situation']
     ]
   end
 
