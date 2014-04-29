@@ -22,7 +22,7 @@ class Project < ActiveRecord::Base
 
   validates :project_title, :duration, :category, :title, :story, :about, presence: true, :if => :project_details
   validates :duration, numericality: { only_integer:true, greater_than: 0,
-    less_than_or_equal_to: 365}, if: :project_details
+    less_than_or_equal_to: 365, message: 'must be a whole number' }, if: :project_details
   validates :goal, presence: true, numericality: true, :if => :project_details
 
   validates :large_image, presence: true, :if => :assets
