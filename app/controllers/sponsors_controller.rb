@@ -34,7 +34,7 @@ class SponsorsController < ApplicationController
         session[:level_id] = @project_levels[4].id || 4
         @parent_id = @project_levels[4].id || 4
       else
-        level_sponsor = @project_levels.first.id
+        level_sponsor = @project_levels[1].id
         @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[level_sponsor]
 
         @cost = Sponsor.set_sponsorship_percentage(level_sponsor, @project)
