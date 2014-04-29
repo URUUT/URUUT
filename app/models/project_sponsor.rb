@@ -15,10 +15,10 @@ class ProjectSponsor < ActiveRecord::Base
   validates_length_of :mission, maximum: 275
 
   default_scope { where(confirmed: true) }
-  scope :platinum, where(level_id: 1)
-  scope :gold, where(level_id: 2)
-  scope :silver, where(level_id: 3)
-  scope :bronze, where(level_id: 4)
+  scope :platinum, includes(:sponsorship_level).where(sponsorship_levels: { parent_id: 1 })
+  scope :gold, includes(:sponsorship_level).where(sponsorship_levels: { parent_id: 2 })
+  scope :silver, includes(:sponsorship_level).where(sponsorship_levels: { parent_id: 3 })
+  scope :bronze, includes(:sponsorship_level).where(sponsorship_levels: { parent_id: 4 })
 
   def self.save_customer
     logger.debug "Save With Payment Working?"
