@@ -287,7 +287,7 @@
       = hidden_field_tag "step", "fourth"
       %div
         - if editable_level?(current_user, @project)
-          = link_to "Save & Continue ►", "#confirm-changes", id: "next-link-to-assets", class: 'btn', style: "position: relative;display:block;margin:0 auto;width: 262px;", data: { toggle: "modal", role: "button", show: 'false' }
+          = link_to "Save & Continue ►", "#sponsorship", id: "next-link-to-assets", class: 'btn', style: "position: relative;display:block;margin:0 auto;width: 262px;"
         - else
           = f.submit "Save & Continue ►", :class => "btn", :id => "project-submit", :style => "position: relative;display:none;margin:0 auto;"
           = link_to "Save & Continue ►", "javascript:void(0)", id: "next-link-to-assets", :class => "btn", :style => "position: relative;display:block;margin:0 auto;width: 262px;"
@@ -303,7 +303,7 @@
       %p There are 4 different levels of sponsorship, with different benefits for each level. Use the checklists to define what each sponsor level includes.  The Uruut Wizard will automatically calculate the sponsorship levels for you.  Below each level are suggested benefits.  You can use these or create your own, but be sure that you are making it worth your sponsors’ contribution, while being sure to make promises you can deliver.
 
 
-#confirm-changes.modal.hide.fade
+#confirm-changes-modal.modal.hide.fade
   .modal-body
     %p IMPORTANT: By clicking confirm you agree and understand the customized sponsor information you just created cannot be changed once saved. Click Cancel to edit before saving.
   .modal-footer

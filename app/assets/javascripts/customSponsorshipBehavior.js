@@ -1,12 +1,12 @@
 $('#next-link-to-assets').unbind();
 
-$("#confirm-changes").on('shown', function (e) {
+$("#next-link-to-assets").on('click', function (e) {
   e.preventDefault;
   if ( !has_any_benefits() ) {
-    alert('You must select a benefit for each level.');
-    $('#confirm-changes').modal('hide');
+    $('#errorForm').modal();
+    $('#errorForm .error-messages').text('You must select at least one benefit');
   } else {
-    $('#confirm-changes').modal('show');
+    $('#confirm-changes-modal').modal();
   }
   return this;
 });
@@ -18,7 +18,7 @@ function parseLevelsAmout () {
   $('#level_bronze_cost').val( $('#level_bronze_cost').val().split(',').join('') )
 }
 
-$('#confirm-changes .btn-primary').click( function (e) {
+$('#confirm-changes-modal .btn-primary').click( function (e) {
   e.preventDefault();
   parseLevelsAmout();
   $.ajax({
@@ -26,7 +26,7 @@ $('#confirm-changes .btn-primary').click( function (e) {
     type: 'PUT',
     data: $('.step-container[data-id="sponsorship"] form').serialize()
   }).done(function(data) {
-    $('#confirm-changes').modal('hide');
+    $('#confirm-changes-modal').modal('hide');
     window.location.href = '/projects/' + projectId + '/edit#assets';
     window.location.reload(true);
   });
