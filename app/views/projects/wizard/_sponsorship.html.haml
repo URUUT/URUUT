@@ -14,7 +14,7 @@
 
     %div
       %h6{:style => "color:#70bf4c"} SPONSORSHIP ON URUUT
-      %p One of the things that makes Uruut different from other crowd-funding platforms is the ability for businesses and foundations to sponsor projects. While we believe business and foundation sponsorship are the best way to help you reach your goal, you are not required to offer sponsorship.
+      %p One of the things that makes Uruut different from other peer­-to-­peer/crowdfunding platforms is the ability for businesses and foundations to sponsor projects (and the business or foundation is recognized on the project page and with other sponsor gives). While we believe business and foundation sponsorship are the best way to help you reach your goal, you are not required to offer sponsorship.
 
     %div
       %h6{:style => "color:#70bf4c"} ALLOW PROJECT SPONSORSHIPS?
@@ -30,7 +30,7 @@
           - if editable_level?(current_user, @project)
             %div
               = text_field_tag 'level[platinum][name]', level_name('PLATINUM', @sponsorship_levels[1]), style:'display:inline-block;'
-              %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;line-height: 13px;width:63%;vertical-align: top;display: inline-block;margin-left: 10px;margin-top: 3px;"} ( Sponsor names and the amount of each sponsor category is set below.  Sponsor names and amount totals can be edited as needed, but please understand that once saved, edits cannot be made to the customization )
+              %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;line-height: 13px;width:63%;vertical-align: top;display: inline-block;margin-left: 10px;margin-top: 3px;"} ( Sponsor names and the amount of each sponsor category is set to defaulted names and amounts below.  Sponsor names and the amount of each sponsor level can be edited, but please understand that once saved, edits cannot be made to the customization. )
           - else
             = level_name('PLATINUM', @sponsorship_levels[1])
           LEVEL SPONSORSHIP*
@@ -55,7 +55,7 @@
               &#37; of funding goal)
         .span9{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
-            Platinum Level Sponsorship includes priority logo placement, a link to the sponsor’s website, and the company / foundation’s mission statement on your project page. Platinum Sponsors gain industry exclusivity for project sponsors. In addition to these benefits, select suggested benefits or create custom benefits for platinum level sponsors from the checklist below.
+            This sponsorship level includes priority logo placement, a link to the sponsor’s website, and the company / foundation’s mission statement on your project page. These sponsors gain industry exclusivity for project sponsors. In addition to these benefits, select suggested benefits or create custom benefits for these sponsors from the checklist below.
             %span{:style =>  "color:#403e37;font-style:italic;"}
               (Suggested benefits should be used as a guide and can be customized to meet your project's specific needs.)
           %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"}
@@ -102,7 +102,7 @@
             %div
               = text_field_tag 'level[gold][name]', level_name('Gold', @sponsorship_levels[2]), style:'display:inline-block;'
 
-              %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;line-height: 13px;width:63%;vertical-align: top;display: inline-block;margin-left: 10px;margin-top: 3px;"} ( Sponsor names and the amount of each sponsor category is set below.  Sponsor names and amount totals can be edited as needed, but please understand that once saved, edits cannot be made to the customization )
+              %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;line-height: 13px;width:63%;vertical-align: top;display: inline-block;margin-left: 10px;margin-top: 3px;"} ( Sponsor names and the amount of each sponsor category is set to defaulted names and amounts below.  Sponsor names and the amount of each sponsor level can be edited, but please understand that once saved, edits cannot be made to the customization. )
           - else
             = level_name('Gold', @sponsorship_levels[2])
           LEVEL SPONSORSHIP*
@@ -127,7 +127,7 @@
               &#37; of funding goal)
         .span9.left{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
-            Gold Level Sponsorship includes placement of a large logo and a link to the sponsor’s website on your project page. Gold Sponsors gain industry exclusivity for project sponsors. In addition to these benefits, select suggested benefits or create custom benefits for gold level sponsors from the checklist below.
+            This sponsorship level includes placement of a large logo and a link to the sponsor’s website on your project page. These sponsors gain industry exclusivity for project sponsors. In addition to these benefits, select suggested benefits or create custom benefits for these sponsors from the checklist below.
             %span{:style =>  "color:#403e37;font-style:italic;"}
               (Suggested benefits should be used as a guide and can be customized to meet your project's specific needs.)
           %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"}
@@ -174,7 +174,7 @@
             %div
               = text_field_tag 'level[silver][name]', level_name('Silver', @sponsorship_levels[3]), style:'display:inline-block;'
 
-              %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;line-height: 13px;width:63%;vertical-align: top;display: inline-block;margin-left: 10px;margin-top: 3px;"} ( Sponsor names and the amount of each sponsor category is set below.  Sponsor names and amount totals can be edited as needed, but please understand that once saved, edits cannot be made to the customization )
+              %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;line-height: 13px;width:63%;vertical-align: top;display: inline-block;margin-left: 10px;margin-top: 3px;"} ( Sponsor names and the amount of each sponsor category is set to defaulted names and amounts below.  Sponsor names and the amount of each sponsor level can be edited, but please understand that once saved, edits cannot be made to the customization. )
           - else
             = level_name('Silver', @sponsorship_levels[3])
           LEVEL SPONSORSHIP*
@@ -198,7 +198,7 @@
               &#37; of funding goal)
         .span9.left{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
-            Silver Level Sponsorship includes placement of a medium-sized logo and a link to the sponsor’s website on your project page. In addition to these benefits, select suggested benefits or create custom benefits for silver level sponsors from the checklist below.
+            This sponsorship level includes placement of a medium­sized logo and a link to the sponsor’s website on your project page. In addition to these benefits, select suggested benefits or create custom benefits for these sponsors from the checklist below.
             %span{:style =>  "color:#403e37;font-style:italic;"}
               (Suggested benefits should be used as a guide and can be customized to meet your project's specific needs.)
           %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"}
@@ -245,7 +245,7 @@
             %div
               = text_field_tag 'level[bronze][name]', level_name('Bronze', @sponsorship_levels[4]), style:'display:inline-block;'
 
-              %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;line-height: 13px;width:63%;vertical-align: top;display: inline-block;margin-left: 10px;margin-top: 3px;"} ( Sponsor names and the amount of each sponsor category is set below.  Sponsor names and amount totals can be edited as needed, but please understand that once saved, edits cannot be made to the customization )
+              %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;line-height: 13px;width:63%;vertical-align: top;display: inline-block;margin-left: 10px;margin-top: 3px;"} ( Sponsor names and the amount of each sponsor category is set to defaulted names and amounts below.  Sponsor names and the amount of each sponsor level can be edited, but please understand that once saved, edits cannot be made to the customization. )
           - else
             = level_name('Bronze', @sponsorship_levels[4])
           LEVEL SPONSORSHIP*
@@ -261,7 +261,7 @@
                 - else
                   = amount_converter(SponsorshipLevel.default_costs('bronze', @project))
         .span9.left{:style => "text-align:left;color:#464646;"}
-          %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"} Bronze Level Sponsorship includes business / foundation name listing and a link to the sponsor’s website on your project page. In addition to these benefits, you can create custom benefits for bronze level sponsors below.
+          %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"} This sponsorship level includes business / foundation name listing and a link to the sponsor’s website on your project page. In addition to these benefits, you can create custom benefits for these sponsors below.
           %div#bronze-box
             %div#bronze-checkbox.existing-checkbox
               -if @sponsorship_levels[4].present? || @project.sponsorship_benefits.bronze.any?
