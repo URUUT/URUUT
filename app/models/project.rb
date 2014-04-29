@@ -15,9 +15,10 @@ class Project < ActiveRecord::Base
 
   attr_accessor :sponsorship_permission, :perk_type, :sponsor_info, :project_details, :assets
 
-  validates :organization, :organization_type, :organization_classification, :address,
+  validates :organization, :organization_type, :address,
             :city, :state, :zip, :website, :facebook_page, :twitter_handle, :project_token,
             presence: true,:if => :sponsor_info
+  validates :organization_classification, presence: true, unless: "organization_type === 'Special Situation'"
 
   validates :project_title, :duration, :category, :title, :story, :about, presence: true, :if => :project_details
   validates :duration, numericality: { only_integer:true, greater_than: 0,

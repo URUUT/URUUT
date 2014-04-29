@@ -51,7 +51,7 @@ class ProjectsController < ApplicationController
     if params[:step]
       if params[:step] == 'first'
         @project.errors.clear
-        @project.update_attributes!(params[:project])
+        @project.update_attributes(params[:project])
         @project.sponsor_info = true
         if @project.valid?
           render :json => "Success"
