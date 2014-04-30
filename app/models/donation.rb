@@ -166,4 +166,61 @@ class Donation < ActiveRecord::Base
 
   end
 
+  def create_charges!
+    if project.partial_funding && confirmed
+      token = project.create_token(customer_token, project.project_token)
+      cost = amount.to_i * 100
+      description = "Donor #{project.project_title} #{user.first_name} #{user.last_name} #{user.email}"
+      application_fee = (cost * 0.05).to_i
+      project_token = project.project_token
+      begin
+        Stripe::Charge.create({
+            :amount => cost,
+            :currency => "usd",
+            :card => token.id,
+            :description => description,
+            :application_fee => calculate_funder_application_fee(application_fee)
+          },
+          project_token
+        )
+        update_column(:approved, true)
+        return true
+      rescue Stripe::CardError => e
+        # Since it's a decline, Stripe::CardError will be caught
+        body = e.json_body
+        err  = body[:error]
+
+        puts "Status is: #{e.http_status}"
+        puts "Type is: #{err[:type]}"
+        puts "Code is: #{err[:code]}"
+        # param is '' in this case
+        puts "Param is: #{err[:param]}"
+        puts "Message is: #{err[:message]}"
+      rescue Stripe::InvalidRequestError => e
+        # Invalid parameters were supplied to Stripe's API
+        puts e
+      rescue Stripe::AuthenticationError => e
+        # Authentication with Stripe's API failed
+        # (maybe you changed API keys recently)
+        puts e
+      rescue Stripe::APIConnectionError => e
+        # Network communication with Stripe failed
+        puts e
+      rescue Stripe::StripeError => e
+        # Display a very generic error to the user, and maybe send
+        # yourself an email
+        puts e
+      rescue => e
+        # Something else happened, completely unrelated to Stripe
+        puts e
+      end
+    end
+  end
+
+  private
+
+  def calculate_funder_application_fee(application_fee)
+    project.user.membership_kind == 'fee' ? application_fee : nil
+  end
+
 end
