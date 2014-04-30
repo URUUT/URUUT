@@ -3,12 +3,11 @@ namespace :uruut do
 	task :finished_projects => [:environment] do
   	include ApplicationHelper
 
-		projects = Project.live.ending_today
+		projects = Project.live.ending_today.not_partial_funding
 		projects.each do |project|
 			if valid_project?(project)
 				project.update_attributes(status: "Funding Completed")
 
-				project.create_donation_charges
 				project.create_sponsor_charges
 
 				user_ids = project.donations.approved.select(:user_id).map(&:user_id).uniq
