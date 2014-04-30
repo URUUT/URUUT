@@ -184,7 +184,6 @@ class Donation < ActiveRecord::Base
           project_token
         )
         update_column(:approved, true)
-        return true
       rescue Stripe::CardError => e
         # Since it's a decline, Stripe::CardError will be caught
         body = e.json_body
@@ -215,6 +214,7 @@ class Donation < ActiveRecord::Base
         puts e
       end
     end
+    true
   end
 
   private
