@@ -11,7 +11,46 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140109180139) do
+ActiveRecord::Schema.define(:version => 20140407165903) do
+
+  create_table "accounts", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "active_admin_comments", :force => true do |t|
+    t.string   "namespace"
+    t.text     "body"
+    t.string   "resource_id",   :null => false
+    t.string   "resource_type", :null => false
+    t.integer  "author_id"
+    t.string   "author_type"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "active_admin_comments", ["author_type", "author_id"], :name => "index_active_admin_comments_on_author_type_and_author_id"
+  add_index "active_admin_comments", ["namespace"], :name => "index_active_admin_comments_on_namespace"
+  add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_active_admin_comments_on_resource_type_and_resource_id"
+
+  create_table "admin_users", :force => true do |t|
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
+    t.string   "email",                  :default => "",       :null => false
+    t.string   "encrypted_password",     :default => "",       :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0,        :null => false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "role",                   :default => "member"
+  end
+
+  add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
+  add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
   create_table "badges_sashes", :force => true do |t|
     t.integer  "badge_id"
@@ -25,11 +64,9 @@ ActiveRecord::Schema.define(:version => 20140109180139) do
   add_index "badges_sashes", ["sash_id"], :name => "index_badges_sashes_on_sash_id"
 
   create_table "comments", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.text     "body"
-    t.integer  "post_id"
-    t.integer  "user_id"
+    t.text    "body"
+    t.integer "post_id"
+    t.integer "user_id"
   end
 
   add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
@@ -60,6 +97,40 @@ ActiveRecord::Schema.define(:version => 20140109180139) do
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
+  create_table "demos", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "organization"
+    t.string   "email"
+    t.string   "phone"
+    t.integer  "non_profit"
+    t.text     "organization_description"
+    t.integer  "money_raised_yearly"
+    t.boolean  "fund_events"
+    t.boolean  "fund_website_donation"
+    t.boolean  "fund_direct_email"
+    t.boolean  "fund_email"
+    t.boolean  "fund_year_round"
+    t.boolean  "fund_seasonal"
+    t.boolean  "fund_other"
+    t.string   "fund_other_description"
+    t.integer  "type_of_accepted_donations"
+    t.boolean  "accepts_donations_from_individual"
+    t.boolean  "accepts_donations_from_businesses"
+    t.boolean  "accepts_donations_from_foundations"
+    t.boolean  "accepts_donations_from_other"
+    t.string   "accepts_donations_from_other_description"
+    t.integer  "sponsorship_program"
+    t.integer  "crowdfunding"
+    t.integer  "crowdfunding_campaign_goals"
+    t.integer  "seven_days_to_receive_funds"
+    t.string   "social_outreach"
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+    t.integer  "partial_funding"
+    t.integer  "founded_date"
+  end
+
   create_table "documents", :force => true do |t|
     t.string   "filename"
     t.integer  "project_id"
@@ -89,6 +160,13 @@ ActiveRecord::Schema.define(:version => 20140109180139) do
   add_index "donations", ["project_id"], :name => "index_donations_on_project_id"
   add_index "donations", ["user_id"], :name => "index_donations_on_user_id"
 
+  create_table "features", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "galleries", :force => true do |t|
     t.string   "gallery_file_name"
     t.string   "gallery_content_type"
@@ -96,6 +174,8 @@ ActiveRecord::Schema.define(:version => 20140109180139) do
     t.integer  "project_id"
     t.string   "gallery_type"
     t.string   "thumbnail_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "galleries", ["project_id"], :name => "index_galleries_on_project_id"
@@ -110,6 +190,28 @@ ActiveRecord::Schema.define(:version => 20140109180139) do
   end
 
   add_index "identities", ["user_id"], :name => "index_identities_on_user_id"
+
+  create_table "marketing_infos", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "memberships", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+    t.integer  "sponsor_id"
+    t.integer  "plan_id"
+    t.string   "stripe_subscription_id"
+  end
+
+  add_index "memberships", ["plan_id"], :name => "index_memberships_on_plan_id"
+  add_index "memberships", ["sponsor_id"], :name => "index_memberships_on_sponsor_id"
+  add_index "memberships", ["user_id"], :name => "index_memberships_on_user_id"
 
   create_table "merit_actions", :force => true do |t|
     t.integer  "user_id"
@@ -185,13 +287,30 @@ ActiveRecord::Schema.define(:version => 20140109180139) do
 
   add_index "perks", ["project_id"], :name => "index_perks_on_project_id"
 
-  create_table "posts", :force => true do |t|
+  create_table "plan_features", :force => true do |t|
+    t.integer  "plan_id"
+    t.integer  "feature_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  add_index "plan_features", ["feature_id"], :name => "index_plan_features_on_feature_id"
+  add_index "plan_features", ["plan_id"], :name => "index_plan_features_on_plan_id"
+
+  create_table "plans", :force => true do |t|
+    t.string   "stripe_plan_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.string   "name"
+  end
+
+  create_table "posts", :force => true do |t|
     t.string   "title"
     t.text     "body"
-    t.integer  "user_id"
     t.integer  "project_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "posts", ["project_id"], :name => "index_posts_on_project_id"
@@ -296,6 +415,7 @@ ActiveRecord::Schema.define(:version => 20140109180139) do
     t.boolean  "sponsor_permission",          :default => true
     t.string   "step"
     t.boolean  "partial_funding",             :default => false
+    t.boolean  "hide_featured",               :default => false
   end
 
   add_index "projects", ["user_id"], :name => "index_projects_on_user_id"
@@ -328,17 +448,6 @@ ActiveRecord::Schema.define(:version => 20140109180139) do
   end
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
-
-  create_table "settings", :force => true do |t|
-    t.string   "var",         :null => false
-    t.text     "value"
-    t.integer  "target_id",   :null => false
-    t.string   "target_type", :null => false
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  add_index "settings", ["target_type", "target_id", "var"], :name => "index_settings_on_target_type_and_target_id_and_var", :unique => true
 
   create_table "sponsors", :force => true do |t|
     t.string  "payment_type"
@@ -374,6 +483,7 @@ ActiveRecord::Schema.define(:version => 20140109180139) do
     t.integer  "funding_goal"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.integer  "parent_id"
   end
 
   create_table "tax_reports", :force => true do |t|
@@ -385,7 +495,6 @@ ActiveRecord::Schema.define(:version => 20140109180139) do
   end
 
   add_index "tax_reports", ["project_id"], :name => "index_tax_reports_on_project_id"
-  add_index "tax_reports", ["user_id"], :name => "index_tax_reports_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",                           :null => false
@@ -419,8 +528,13 @@ ActiveRecord::Schema.define(:version => 20140109180139) do
     t.integer  "level",                  :default => 0
     t.integer  "uruut_point",            :default => 0
     t.string   "role",                   :default => ""
+    t.integer  "account_id"
+    t.string   "stripe_user_token"
+    t.string   "stripe_card_token"
+    t.string   "telephone"
   end
 
+  add_index "users", ["account_id"], :name => "index_users_on_account_id"
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["sash_id"], :name => "index_users_on_sash_id"
