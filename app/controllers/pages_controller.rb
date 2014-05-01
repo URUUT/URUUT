@@ -6,7 +6,7 @@ class PagesController < ApplicationController
   before_filter :set_session_wizard, except: :home
 
   def index
-    @projects = Project.where(live: true, status: 'Funding Active')
+    @projects = Project.where(live: true, status: 'Funding Active').order(id: :asc)
     @project_success = Project.where("live = 1 AND status = 'Funding Completed'")
   end
 
