@@ -367,6 +367,9 @@
     editBenefit();
     addAnotherNewBenefit();
     removeAnotherBenefit();
+    if($('input[id*=_cost]').is(':visible')) {
+      updateSponsorPercentage();
+    }
     $(".check-all").click(function(){
       var id = $(this).attr("data-target");
         $("#"+id).find(".sponsor_checkbox").click();
