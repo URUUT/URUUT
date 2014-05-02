@@ -29,6 +29,7 @@
         %h6{:style => "color:#70bf4c"}
           - if editable_level?(current_user, @project)
             %div
+              %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0;"} Custom Sponsor Name
               = text_field_tag 'level[platinum][name]', level_name('PLATINUM', @sponsorship_levels[1]), style:'display:inline-block;'
               %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;line-height: 13px;width:63%;vertical-align: top;display: inline-block;margin-left: 10px;margin-top: 3px;"} ( Sponsor names and the amount of each sponsor category is set to URUUT defaults. Once a campaign is launched, they cannot be changed. )
           - else
@@ -100,6 +101,7 @@
         %h6{:style => "color:#70bf4c"}
           - if editable_level?(current_user, @project)
             %div
+              %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0;"} Custom Sponsor Name
               = text_field_tag 'level[gold][name]', level_name('Gold', @sponsorship_levels[2]), style:'display:inline-block;'
 
               %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;line-height: 13px;width:63%;vertical-align: top;display: inline-block;margin-left: 10px;margin-top: 3px;"} ( Sponsor names and the amount of each sponsor category is set to URUUT defaults. Once a campaign is launched, they cannot be changed. )
@@ -172,9 +174,10 @@
         %h6{:style => "color:#70bf4c"}
           - if editable_level?(current_user, @project)
             %div
+              %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0;"} Custom Sponsor Name
               = text_field_tag 'level[silver][name]', level_name('Silver', @sponsorship_levels[3]), style:'display:inline-block;'
 
-              %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;line-height: 13px;width:63%;vertical-align: top;display: inline-block;margin-left: 10px;margin-top: 3px;"} ( SSponsor names and the amount of each sponsor category is set to URUUT defaults. Once a campaign is launched, they cannot be changed. )
+              %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;line-height: 13px;width:63%;vertical-align: top;display: inline-block;margin-left: 10px;margin-top: 3px;"} ( Sponsor names and the amount of each sponsor category is set to URUUT defaults. Once a campaign is launched, they cannot be changed. )
           - else
             = level_name('Silver', @sponsorship_levels[3])
           LEVEL SPONSORSHIP*
@@ -243,6 +246,7 @@
         %h6{:style => "color:#70bf4c;"}
           - if editable_level?(current_user, @project)
             %div
+              %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0;"} Custom Sponsor Name
               = text_field_tag 'level[bronze][name]', level_name('Bronze', @sponsorship_levels[4]), style:'display:inline-block;'
 
               %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;line-height: 13px;width:63%;vertical-align: top;display: inline-block;margin-left: 10px;margin-top: 3px;"} ( Sponsor names and the amount of each sponsor category is set to URUUT defaults. Once a campaign is launched, they cannot be changed. )
@@ -298,7 +302,7 @@
     %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
     .well.info
       %h5{:style => "color:#70bf4c;margin-bottom:10px;"} SPONSORSHIP DETAILS
-      %p There are 4 different levels of sponsorship, with different benefits for each level. Use the checklists to define what each sponsor level includes. The URUUT Wizard will automatically calculate the sponsorship amounts for you and have name defaults (platinum, gold, silver and bronze). 
+      %p There are 4 different levels of sponsorship, with different benefits for each level. Use the checklists to define what each sponsor level includes. The URUUT Wizard will automatically calculate the sponsorship amounts for you and have name defaults (platinum, gold, silver and bronze).
       - if editable_level?(current_user, @project)
         %p You can use the default amounts and names or set customized amounts and names.
 
@@ -363,7 +367,6 @@
     editBenefit();
     addAnotherNewBenefit();
     removeAnotherBenefit();
-    updateSponsorPercentage();
     $(".check-all").click(function(){
       var id = $(this).attr("data-target");
         $("#"+id).find(".sponsor_checkbox").click();
@@ -378,12 +381,12 @@
       $(".sponsorship-true").show();
     }
 
-    $('input[id*=_cost]').on('change', function() {
+    $('input[id*=_cost]').on('blur', function() {
       updateSponsorPercentage();
     });
   });
 
-  function updateSponsorPercentage() {
+  var updateSponsorPercentage = function() {
     var total = $('#project_goal').val();
     $('.percentage').each(function() {
       var sponsor_value = $(this).prev('h2').find('span input').val().split(',').join('');
