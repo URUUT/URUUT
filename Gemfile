@@ -92,7 +92,6 @@ group :test do
   gem 'ci_reporter'
   gem 'ffaker'
   gem 'webmock'
-  gem 'simplecov', '~> 0.7.1'
 end
 
 gem 'jquery-rails'
