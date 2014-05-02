@@ -168,13 +168,11 @@ class Donation < ActiveRecord::Base
 
   def create_charges!
     if project.partial_funding && confirmed
-      puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>> Apply Charges"
-      token = project.create_token(customer_token, project.project_token)
-      cost = amount.to_i * 100
-      description = "Donor #{project.project_title} #{user.first_name} #{user.last_name} #{user.email}"
-      application_fee = (cost * 0.05).to_i
-      project_token = project.project_token
       begin
+        token = project.create_token(customer_token, project.project_token)
+        cost = amount.to_i * 100
+        description = "Donor #{project.project_title} #{user.first_name} #{user.last_name} #{user.email}"
+        application_fee = (cost * 0.05).to_i
         Stripe::Charge.create({
             :amount => cost,
             :currency => "usd",
@@ -182,7 +180,7 @@ class Donation < ActiveRecord::Base
             :description => description,
             :application_fee => calculate_funder_application_fee(application_fee)
           },
-          project_token
+          project.project_token
         )
         update_column(:approved, true)
         return true
