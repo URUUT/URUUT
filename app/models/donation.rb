@@ -178,7 +178,7 @@ class Donation < ActiveRecord::Base
         Stripe::Charge.create({
             :amount => cost,
             :currency => "usd",
-            :card => token.id
+            :card => token.id,
             :description => description,
             :application_fee => calculate_funder_application_fee(application_fee)
           },
