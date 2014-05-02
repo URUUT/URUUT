@@ -384,7 +384,7 @@
   });
 
   function updateSponsorPercentage() {
-    var total = #{@project.goal};
+    var total = $('#project_goal').val();
     $('.percentage').each(function() {
       var sponsor_value = $(this).prev('h2').find('span input').val().split(',').join('');
       var new_percentage = Math.ceil((sponsor_value/total) * 100);
@@ -573,14 +573,19 @@
   var custom_level_url_path = "#{sponsorship_level_url}";
   $("#next-link-to-assets").click(function(e){
     e.preventDefault();
-    $.ajax({
-      url: custom_level_url_path,
-      type: 'PUT',
-      data: $('.step-container[data-id="sponsorship"] form').serialize()
-    }).done(function(data) {
-      window.location.href = '/projects/' + projectId + '/edit#assets';
-      window.location.reload(true);
-    });
+    if ( has_any_benefits() ) {
+      $.ajax({
+        url: custom_level_url_path,
+        type: 'PUT',
+        data: $('.step-container[data-id="sponsorship"] form').serialize()
+      }).done(function(data) {
+        window.location.href = '/projects/' + projectId + '/edit#assets';
+        window.location.reload(true);
+      });
+    } else {
+      $('#errorForm').modal();
+      $('#errorForm .error-messages').text('You must select at least one benefit');
+    }
   });
 
   fields = [ '#level_platinum_cost', '#level_gold_cost', '#level_silver_cost',
