@@ -178,13 +178,14 @@ class Donation < ActiveRecord::Base
         Stripe::Charge.create({
             :amount => cost,
             :currency => "usd",
-            :customer => customer_token,
+            :card => token.id
             :description => description,
             :application_fee => calculate_funder_application_fee(application_fee)
           },
           project_token
         )
         update_column(:approved, true)
+        return true
       rescue Stripe::CardError => e
         # Since it's a decline, Stripe::CardError will be caught
         body = e.json_body
@@ -196,23 +197,29 @@ class Donation < ActiveRecord::Base
         # param is '' in this case
         puts "Param is: #{err[:param]}"
         puts "Message is: #{err[:message]}"
+        return false
       rescue Stripe::InvalidRequestError => e
         # Invalid parameters were supplied to Stripe's API
         puts e
+        return false
       rescue Stripe::AuthenticationError => e
         # Authentication with Stripe's API failed
         # (maybe you changed API keys recently)
         puts e
+        return false
       rescue Stripe::APIConnectionError => e
         # Network communication with Stripe failed
         puts e
+        return false
       rescue Stripe::StripeError => e
         # Display a very generic error to the user, and maybe send
         # yourself an email
         puts e
+        return false
       rescue => e
         # Something else happened, completely unrelated to Stripe
         puts e
+        return false
       end
     end
     true
