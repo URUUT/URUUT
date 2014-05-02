@@ -30,11 +30,11 @@
           - if editable_level?(current_user, @project)
             %div
               = text_field_tag 'level[platinum][name]', level_name('PLATINUM', @sponsorship_levels[1]), style:'display:inline-block;'
-              %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;line-height: 13px;width:63%;vertical-align: top;display: inline-block;margin-left: 10px;margin-top: 3px;"} ( Sponsor names and the amount of each sponsor category is set to defaulted names and amounts below.  Sponsor names and the amount of each sponsor level can be edited, but please understand that once saved, edits cannot be made to the customization. )
+              %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;line-height: 13px;width:63%;vertical-align: top;display: inline-block;margin-left: 10px;margin-top: 3px;"} ( Sponsor names and the amount of each sponsor category is set to URUUT defaults. Once a campaign is launched, they cannot be changed. )
           - else
             = level_name('PLATINUM', @sponsorship_levels[1])
           LEVEL SPONSORSHIP*
-          %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;"} (industry-specific exclusivity)
+          %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;"} (industry-specific exclusivity suggested)
           %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;", class: "platinum-availibility"} (1 AVAILABLE)
       .row-fluid
         .span3{:style => "text-align:left;color:#464646;"}
@@ -55,7 +55,7 @@
               &#37; of funding goal)
         .span9{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
-            This sponsorship level includes priority logo placement, a link to the sponsor’s website, and the company / foundation’s mission statement on your project page. These sponsors gain industry exclusivity for project sponsors. In addition to these benefits, select suggested benefits or create custom benefits for these sponsors from the checklist below.
+            This sponsorship level includes priority logo placement, a link to the sponsor’s website, and the company / foundation’s mission statement at the top of your project page.  We suggest industry exclusivity.
             %span{:style =>  "color:#403e37;font-style:italic;"}
               (Suggested benefits should be used as a guide and can be customized to meet your project's specific needs.)
           %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"}
@@ -102,7 +102,7 @@
             %div
               = text_field_tag 'level[gold][name]', level_name('Gold', @sponsorship_levels[2]), style:'display:inline-block;'
 
-              %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;line-height: 13px;width:63%;vertical-align: top;display: inline-block;margin-left: 10px;margin-top: 3px;"} ( Sponsor names and the amount of each sponsor category is set to defaulted names and amounts below.  Sponsor names and the amount of each sponsor level can be edited, but please understand that once saved, edits cannot be made to the customization. )
+              %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;line-height: 13px;width:63%;vertical-align: top;display: inline-block;margin-left: 10px;margin-top: 3px;"} ( Sponsor names and the amount of each sponsor category is set to URUUT defaults. Once a campaign is launched, they cannot be changed. )
           - else
             = level_name('Gold', @sponsorship_levels[2])
           LEVEL SPONSORSHIP*
@@ -127,7 +127,7 @@
               &#37; of funding goal)
         .span9.left{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
-            This sponsorship level includes placement of a large logo and a link to the sponsor’s website on your project page. These sponsors gain industry exclusivity for project sponsors. In addition to these benefits, select suggested benefits or create custom benefits for these sponsors from the checklist below.
+            This sponsorship level includes placement of a large logo and a link to the sponsor’s website on your project page. We suggest industry exclusivity.
             %span{:style =>  "color:#403e37;font-style:italic;"}
               (Suggested benefits should be used as a guide and can be customized to meet your project's specific needs.)
           %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"}
@@ -174,7 +174,7 @@
             %div
               = text_field_tag 'level[silver][name]', level_name('Silver', @sponsorship_levels[3]), style:'display:inline-block;'
 
-              %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;line-height: 13px;width:63%;vertical-align: top;display: inline-block;margin-left: 10px;margin-top: 3px;"} ( Sponsor names and the amount of each sponsor category is set to defaulted names and amounts below.  Sponsor names and the amount of each sponsor level can be edited, but please understand that once saved, edits cannot be made to the customization. )
+              %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;line-height: 13px;width:63%;vertical-align: top;display: inline-block;margin-left: 10px;margin-top: 3px;"} ( SSponsor names and the amount of each sponsor category is set to URUUT defaults. Once a campaign is launched, they cannot be changed. )
           - else
             = level_name('Silver', @sponsorship_levels[3])
           LEVEL SPONSORSHIP*
@@ -198,7 +198,7 @@
               &#37; of funding goal)
         .span9.left{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
-            This sponsorship level includes placement of a medium­sized logo and a link to the sponsor’s website on your project page. In addition to these benefits, select suggested benefits or create custom benefits for these sponsors from the checklist below.
+            This sponsorship level includes placement of a medium-sized logo and a link to the sponsor’s website on your project page.
             %span{:style =>  "color:#403e37;font-style:italic;"}
               (Suggested benefits should be used as a guide and can be customized to meet your project's specific needs.)
           %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"}
@@ -245,7 +245,7 @@
             %div
               = text_field_tag 'level[bronze][name]', level_name('Bronze', @sponsorship_levels[4]), style:'display:inline-block;'
 
-              %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;line-height: 13px;width:63%;vertical-align: top;display: inline-block;margin-left: 10px;margin-top: 3px;"} ( Sponsor names and the amount of each sponsor category is set to defaulted names and amounts below.  Sponsor names and the amount of each sponsor level can be edited, but please understand that once saved, edits cannot be made to the customization. )
+              %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;line-height: 13px;width:63%;vertical-align: top;display: inline-block;margin-left: 10px;margin-top: 3px;"} ( Sponsor names and the amount of each sponsor category is set to URUUT defaults. Once a campaign is launched, they cannot be changed. )
           - else
             = level_name('Bronze', @sponsorship_levels[4])
           LEVEL SPONSORSHIP*
@@ -261,7 +261,7 @@
                 - else
                   = amount_converter(SponsorshipLevel.default_costs('bronze', @project))
         .span9.left{:style => "text-align:left;color:#464646;"}
-          %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"} This sponsorship level includes business / foundation name listing and a link to the sponsor’s website on your project page. In addition to these benefits, you can create custom benefits for these sponsors below.
+          %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"} This sponsorship level includes business / foundation name listing and a link to the sponsor’s website on your project page.
           %div#bronze-box
             %div#bronze-checkbox.existing-checkbox
               -if @sponsorship_levels[4].present? || @project.sponsorship_benefits.bronze.any?
@@ -298,9 +298,13 @@
     %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
     .well.info
       %h5{:style => "color:#70bf4c;margin-bottom:10px;"} SPONSORSHIP DETAILS
-      %p URUUT's Partner-Funding depends not only individual contributors, but sponsorship from businesses and foundations.
+      %p There are 4 different levels of sponsorship, with different benefits for each level. Use the checklists to define what each sponsor level includes. The URUUT Wizard will automatically calculate the sponsorship amounts for you and have name defaults (platinum, gold, silver and bronze). 
+      - if editable_level?(current_user, @project)
+        %p You can use the default amounts and names or set customized amounts and names.
 
-      %p There are 4 different levels of sponsorship, with different benefits for each level. Use the checklists to define what each sponsor level includes.  The Uruut Wizard will automatically calculate the sponsorship levels for you.  Below each level are suggested benefits.  You can use these or create your own, but be sure that you are making it worth your sponsors’ contribution, while being sure to make promises you can deliver.
+        %p While it is entirely up to you what you offer at each level, make sure your benefits are attractive and deliverable.
+      -else
+        %p While it is entirely up to you what you offer at each level, make sure your benefits are attractive and deliverable.
 
 
 #confirm-changes-modal.modal.hide.fade
