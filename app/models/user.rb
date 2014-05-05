@@ -138,8 +138,13 @@ class User < ActiveRecord::Base
   end
 
   def generate_tax_report(project)
-    donations = self.donations.where(project_id: project.id)
-    total_donated = ActionController::Base.helpers.number_to_currency(donations.inject(0) {|sum, i| sum + i.amount}.to_f)
+    if project.partial_funding
+      donation = self.donations
+      total_donated = ActionController::Base.helpers.number_to_currency donation.amount
+    else
+      donations = self.donations.where(project_id: project.id)
+      total_donated = ActionController::Base.helpers.number_to_currency(donations.inject(0) {|sum, i| sum + i.amount}.to_f)
+    end
     first_name = self.first_name
     last_name = self.last_name
     perks = Perk.where(project_id: project.id).order("amount ASC")
