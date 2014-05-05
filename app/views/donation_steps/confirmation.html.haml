@@ -67,7 +67,7 @@
         %h5 Payment amount
         = number_to_currency(@donation.amount, :precision => precision)
       %hr
-      - if @project.user.membership_plan.has_feature? 'partial_funding'
+      - if @project.partial_funding
         %p.grey
           %strong Note: Your credit card will be charged at the time of your donation. All transactions are processed through a secure third-party payment processor.
       -else
