@@ -139,7 +139,7 @@ class User < ActiveRecord::Base
 
   def generate_tax_report(project)
     if project.partial_funding
-      donation = self.donations
+      donation = self.donations.last
       total_donated = ActionController::Base.helpers.number_to_currency donation.amount
     else
       donations = self.donations.where(project_id: project.id)
