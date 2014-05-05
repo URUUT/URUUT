@@ -3,6 +3,8 @@ require 'spec_helper'
 feature 'Donating and sponsoring to a Project' do
   background do
     @user = FactoryGirl.create(:user)
+    User.any_instance.stub(:membership_plan).and_return(FactoryGirl.build(:plan))
+    Plan.any_instance.stub(:has_feature?).with('partial_funding').and_return(false)
     @project = FactoryGirl.create(:project)
     login_as(@user, :scope => :user)
   end
