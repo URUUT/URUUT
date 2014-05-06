@@ -5,7 +5,7 @@
       %meta{:charset => "utf-8"}
       %meta{"http-equiv" => "X-UA-Compatible", :content => "IE=edge,chrome=1"}
       %meta{:name => "viewport", :content => "width=960, maximum-scale=1"}
-      %title= content_for?(:title) ? yield(:title) : "TechBridge Nonprofit Exchange"
+      %title= content_for?(:title) ? yield(:title) : "TechBridge | Nonprofit Exchange"
       %meta{:content => "", :name => "description"}
       %meta{:content => "", :name => "author"}
       - if controller_name == "projects" and action_name == "show"
@@ -13,7 +13,7 @@
         %meta{:property => "og:title", :content => "#{@project.project_title} | Nonprofit Exchange"}
         %meta{:property => 'og:description', :content=> "#{@project.title}" }
       - else
-        %meta{:property => "og:image", :content => "#{image_url(tb-fb-og.png)}"}
+        %meta{:property => "og:image", :content => "#{image_url('tb-fb-og.png')}"}
         %meta{:property => "og:title", :content => ""}
         %meta{:property => "og:description", :content => ""}
       = favicon_link_tag "http://techbridge.org/alpha/wp-content/themes/techbridge-2013/favicon.png"
