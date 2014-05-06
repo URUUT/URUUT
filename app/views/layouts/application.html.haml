@@ -4,16 +4,16 @@
     %meta{:charset => "utf-8"}
     %meta{"http-equiv" => "X-UA-Compatible", :content => "IE=edge,chrome=1"}
     %meta{:name => "viewport", :content => "width=960, maximum-scale=1"}
-    %title= content_for?(:title) ? yield(:title) : "Nonprofit Exchange"
+    %title= content_for?(:title) ? yield(:title) : "TechBridge Nonprofit Exchange"
     %meta{:content => "", :name => "description"}
     %meta{:content => "", :name => "author"}
     - if controller_name == "projects" and action_name == "show"
       %meta{:property => "og:image", :content => "#{@project.large_image}"}
       %meta{:property => "og:title", :content => "#{@project.title}"}
     - else
-      %meta{:property => "og:image", :content => "https://www.uruut.com#{asset_path('uruut-fb-og.png') }"}
+      %meta{:property => "og:image", :content => "https://#{@host}#{asset_path('tb-fb-og.png') }"}
       %meta{:property => "og:title", :content => ""}
-      %meta{:property => "og:description", :content => "Giving You The Power To Create A Better Community"}
+      %meta{:property => "og:description", :content => ""}
     = favicon_link_tag "http://techbridge.org/alpha/wp-content/themes/techbridge-2013/favicon.png"
     = stylesheet_link_tag  "default/application", "trontastic/jquery-ui-1.8.22.custom.css", "leaflet.css", "style.css", :media => "all"
     / = stylesheet_link_tag "image_select/jquery.Jcrop.min"
