@@ -54,6 +54,16 @@
               (
               %span 25
               &#37; of funding goal)
+            %p.formula
+              (
+              %span.custom-amount= number_to_currency(level_cost('platinum', @sponsorship_levels[1], @project), precision: 0)
+              *
+              %span.available 1
+              Sponsors =
+              %span.custom-total= number_to_currency(level_cost('platinum', @sponsorship_levels[1], @project), precision: 0)
+              ,
+              %span.custom-total-percent 25%
+              )
         .span9{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
             This sponsorship level includes priority logo placement, a link to the sponsor’s website, and the company / foundation’s mission statement at the top of your project page.  We suggest industry exclusivity.
@@ -127,6 +137,16 @@
               (
               %span 10
               &#37; of funding goal)
+            %p.formula
+              (
+              %span.custom-amount= number_to_currency(level_cost('gold', @sponsorship_levels[2], @project), precision: 0)
+              *
+              %span.available 3
+              Sponsors =
+              %span.custom-total= number_to_currency(level_cost('gold', @sponsorship_levels[2], @project) * 3, precision: 0)
+              ,
+              %span.custom-total-percent 30%
+              )
         .span9.left{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
             This sponsorship level includes placement of a large logo and a link to the sponsor’s website on your project page. We suggest industry exclusivity.
@@ -199,6 +219,16 @@
               (
               %span 5
               &#37; of funding goal)
+            %p.formula
+              (
+              %span.custom-amount= number_to_currency(level_cost('silver', @sponsorship_levels[3], @project), precision: 0)
+              *
+              %span.available 5
+              Sponsors =
+              %span.custom-total= number_to_currency(level_cost('silver', @sponsorship_levels[3], @project) * 5, precision: 0)
+              ,
+              %span.custom-total-percent 25%
+              )
         .span9.left{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
             This sponsorship level includes placement of a medium-sized logo and a link to the sponsor’s website on your project page.
@@ -389,12 +419,29 @@
     });
   });
 
+  format_currency = function(n, currency) {
+    return currency + " " + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");;
+  }
+
   var updateSponsorPercentage = function() {
     var total = $('#project_goal').val();
     $('.percentage').each(function() {
       var sponsor_value = $(this).prev('h2').find('span input').val().split(',').join('');
       var new_percentage = Math.ceil((sponsor_value/total) * 100);
       $(this).find('span').text(new_percentage);
+    });
+
+    $('.formula').each(function() {
+      var input_amount = $(this).parent().find('h2 span input').val().split(',').join('');
+      var custom_amount = $(this).find('.custom-amount');
+      var available = $(this).find('.available');
+      var custom_total = $(this).find('.custom-total');
+      var custom_total_percent  = $(this).find('.custom-total-percent');
+      var new_total = input_amount * $(available).text();
+
+      $(custom_amount).text(format_currency(parseInt(input_amount), '$'));
+      $(custom_total).text(format_currency(parseInt(input_amount * $(available).text()), '$'));
+      $(custom_total_percent).text(Math.ceil((new_total/total) * 100) + '%');
     });
   }
 
