@@ -10,8 +10,8 @@ FactoryGirl.define do
     association                  :user
     address                      { Faker::Address.street_address }
     city                         { Faker::Address.city }
-    state                        { Faker::Address.us_state_abbr }
-    zip                          { Faker::Address.zip_code }
+    state                        { Faker::AddressUS.state_abbr }
+    zip                          { Faker::AddressUS.zip_code }
     live                         1
     short_description            { Faker::Lorem.paragraph(1) }
     bitly                        { Faker::Internet.http_url }
