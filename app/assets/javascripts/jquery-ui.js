@@ -14614,7 +14614,7 @@ $.widget( "ui.tabs", {
 
 })( jQuery );
 
-(function( $ ) {
+/*(function( $ ) {
 
 var increments = 0;
 
@@ -15000,4 +15000,4 @@ $.widget( "ui.tooltip", {
 	}
 });
 
-}( jQuery ) );
+}( jQuery ) );*/
