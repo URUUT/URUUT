@@ -315,6 +315,10 @@ class Project < ActiveRecord::Base
     )
   end
 
+  def has_organization_type(type)
+    self.organization_type === type
+  end
+
   def create_sponsor_charges
     sponsors = get_sponsors(self)
 

@@ -183,7 +183,10 @@ class Donation < ActiveRecord::Base
           project.project_token
         )
         update_column(:approved, true)
-        user.generate_tax_report(project)
+        if  project.has_organization_type("501(c)3") ||
+            project.has_organization_type("170(c)1")
+          user.generate_tax_report(project)
+        end
         return true
       rescue Stripe::CardError => e
         # Since it's a decline, Stripe::CardError will be caught
