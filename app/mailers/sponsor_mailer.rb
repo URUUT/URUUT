@@ -66,9 +66,8 @@ class SponsorMailer < ActionMailer::Base
     @project_facebook = project.facebook_page
     @project_twitter = project.twitter_handle
     @project_id = project.id
-    @sponsor_email = sponsor.email
 
-    mail from: @sponsor_email, to: @email, subject: "Thank You, Sponsor!"
+    mail to: @email, subject: "Thank You, Sponsor!"
   end
 
   def send_sponsor_report
