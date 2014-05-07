@@ -61,10 +61,10 @@ class SponsorshipLevel < ActiveRecord::Base
 
   def self.default_costs(index, project)
     unless index === 'bronze'
-      return project.goal.gsub(/,/, '').to_i * DEFAULT_COST_PERCENTS[index]
+      return project.goal.to_i * DEFAULT_COST_PERCENTS[index]
     end
-    if project.goal.gsub(/,/, '').to_i * 0.02 < 750
-      project.goal.gsub(/,/, '').to_i * 0.02
+    if project.goal.to_i * 0.02 < 750
+      project.goal.to_i * 0.02
     else
       750
     end

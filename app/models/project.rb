@@ -6,6 +6,8 @@ class Project < ActiveRecord::Base
 
   before_validation :strip_comma_from_goal, :if => :project_details
 
+  after_initialize :init
+
   attr_accessible :category, :description, :duration, :goal, :address, :project_title, :sponsorship_permission,
   :city, :state, :zip, :neighborhood, :title, :image, :video, :tags, :live, :short_description, :perk_permission,
   :perks_attributes, :galleries_attributes, :status, :organization, :website, :twitter_handle, :facebook_page, :seed_video,
@@ -465,6 +467,10 @@ class Project < ActiveRecord::Base
     sponsorship_benefits.
       where(status: true).
       group_by {|sponsor| sponsor.sponsorship_level_id}
+  end
+
+  def init
+    self.goal ||= 0.0
   end
 
 private
