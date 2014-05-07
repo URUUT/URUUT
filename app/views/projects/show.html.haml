@@ -6,7 +6,7 @@
           = image_tag @project_sponsors[1].last.logo, :class => "sponsor-logo img-polaroid"
           .sponsor-info
             %h5
-              Platinum Level Sponsor
+              = "#{@project_sponsors[1].last.sponsorship_level_name} Level Sponsor"
             %h3
               = @project_sponsors[1].last.name
             - unless @project_sponsors[1].last.site.nil?
@@ -205,13 +205,13 @@
           - if @project_sponsors.include?(2)
             .gold-level
               - if @project_sponsors.include?(2)
-                %h4 Gold Level Sponsors
+                %h4= "#{@project_sponsors[2].last.sponsorship_level_name} Level Sponsors"
                 - @project_sponsors[2].each do |sponsor|
                   = sponsor_item(sponsor)
           - if @project_sponsors.include?(3)
             .silver-level
               - if @project_sponsors.include?(3)
-                %h4 Silver Level Sponsors
+                %h4= "#{@project_sponsors[3].last.sponsorship_level_name} Level Sponsors"
                 - @project_sponsors[3].each do |sponsor|
                   = sponsor_item(sponsor)
 

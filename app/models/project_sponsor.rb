@@ -20,7 +20,7 @@ class ProjectSponsor < ActiveRecord::Base
   scope :silver, includes(:sponsorship_level).where(sponsorship_levels: { parent_id: 3 })
   scope :bronze, includes(:sponsorship_level).where(sponsorship_levels: { parent_id: 4 })
 
-  delegate :name, to: :sponsorship_level, prefix: true
+  delegate :name, :parent_id, to: :sponsorship_level, prefix: true
 
   def self.save_customer
     logger.debug "Save With Payment Working?"

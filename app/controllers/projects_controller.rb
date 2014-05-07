@@ -100,7 +100,7 @@ class ProjectsController < ApplicationController
 
     @images = @project.galleries.page(params[:page]).per(6)
     sort_sponsorships = @project.project_sponsors.sort_by {|ps| ps.level_id}
-    @project_sponsors = sort_sponsorships.group_by {|sponsor| sponsor.level_id }
+    @project_sponsors = sort_sponsorships.group_by {|sponsor| sponsor.sponsorship_level_parent_id }
     @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).order(:id).group_by {|sponsor| sponsor.sponsorship_level_id}
     @perks = @project.perks.order(:amount)
     @sponsorship_levels = SponsorshipLevel.with_benefits(@project)
