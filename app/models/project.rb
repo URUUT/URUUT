@@ -91,7 +91,7 @@ class Project < ActiveRecord::Base
   end
 
   def self.order_by_percentage
-    Project.live.funding_active.sort_by(&:percent_to_goal).reverse
+    Project.live.funding_active.not_hidden.sort_by(&:percent_to_goal).reverse
   end
 
   def self.order_by_raised
