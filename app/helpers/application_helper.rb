@@ -138,7 +138,7 @@ module ApplicationHelper
                           "3" => silver_sponsors,
                           "4" => bronze_sponsors }
       levels.each do |level|
-        sponsors[level.name.upcase] = levels_sponsors[level.parent_id]
+        sponsors[level.name.upcase] = levels_sponsors[level.parent_id.to_s]
       end
     else
       bronze_sponsors = []
