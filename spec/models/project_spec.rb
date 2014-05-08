@@ -48,5 +48,8 @@ describe Project do
     end
 
     it { expect(@project.funding_active?).to be_true }
+    
+    it { expect(@project.has_classification?("501(c)(4)")).to be_true }
+    it { expect(@project.has_classification?("False")).to be_false }
   end
 end

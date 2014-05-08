@@ -317,8 +317,8 @@ class Project < ActiveRecord::Base
     )
   end
 
-  def has_organization_type(type)
-    self.organization_type === type
+  def has_classification?(classification)
+    self.organization_classification === classification
   end
 
   def create_sponsor_charges
