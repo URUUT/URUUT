@@ -132,12 +132,14 @@ module ApplicationHelper
         end
       end
       levels = SponsorshipLevel.by_project(project)
-      sponsors = {
-        levels[0].name.upcase => platinum_sponsors,
-        levels[1].name.upcase => gold_sponsors,
-        levels[2].name.upcase => silver_sponsors,
-        levels[3].name.upcase => bronze_sponsors
-      }
+      sponsors = {}
+      levels_sponsors = { "1" => platinum_sponsors,
+                          "2" => gold_sponsors,
+                          "3" => silver_sponsors,
+                          "4" => bronze_sponsors }
+      levels.each do |level|
+        sponsors[level.name.upcase] = levels_sponsors[level.parent_id]
+      end
     else
       bronze_sponsors = []
       founders.each do |sponsor|
