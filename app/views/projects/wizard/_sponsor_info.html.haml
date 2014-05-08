@@ -142,7 +142,13 @@
           digits: "Invalid"
         },
         "project[organization_classification]": {
-          required: "Required"
+          required: function(element) {
+            if ( $('#project_organization_type').val() === "Special Situation" ) {
+              return false;
+            } else {
+              return true;
+            }
+          }
         }
       },
       rules: {
@@ -236,3 +242,5 @@
     }
 
   })
+
+= javascript_include_tag 'specialSituationBehavior'

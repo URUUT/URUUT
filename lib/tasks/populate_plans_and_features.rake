@@ -26,7 +26,8 @@ namespace :populate do
       partial_funding: 'All or Nothing AND Partial Funding',
       auto_tax: 'Auto Tax Letter Generation',
       volunteer_tracker: 'Volunteer Solicitation Tracker',
-      google_seo: 'Free Google SEO Grant Application'
+      google_seo: 'Free Google SEO Grant Application',
+      custom_sponsors: 'Custom Sponsors'
     })
 
     # Creates all features

@@ -1,10 +1,33 @@
-<% if params[:funding_goal].gsub(/,/, '').to_i * 0.02 < 750 %>
-  $(".bronze-amount-value").text("<%= amount_converter(params[:funding_goal].gsub(/,/, '').to_i * 0.02) %>");
+<% if editable_level?(current_user, @project) %>
+    var amount_array = [ <%= level_cost("platinum", @sponsorship_levels[1], @project) %>,
+						 <%= level_cost("gold", @sponsorship_levels[2], @project) %>,
+						 <%= level_cost("silver", @sponsorship_levels[3], @project) %> ],
+		multiplier = [1, 3, 5];
+
+    $('#level_platinum_cost').val(<%= level_cost("platinum", @sponsorship_levels[1], @project) %>);
+    $('#level_gold_cost').val(<%= level_cost("gold", @sponsorship_levels[2], @project) %>);
+    $('#level_silver_cost').val(<%= level_cost("silver", @sponsorship_levels[3], @project) %>);
+    $('#level_bronze_cost').val(<%= level_cost("bronze", @sponsorship_levels[4], @project) %>);
+
+	$('.custom-amount').each(function(index){
+		this.innerHTML = amount_array[index];
+	});
+
+	$('.custom-total').each(function(index) {
+		this.innerHTML = amount_array[index] * multiplier[index];	
+	});
+
 <% else %>
-  $(".bronze-amount-value").text("<%= amount_converter(750) %>");
-<% end %>
+  <% if params[:funding_goal].gsub(/,/, '').to_i * 0.02 < 750 %>
+    $(".bronze-amount-value").text("<%= amount_converter(params[:funding_goal].gsub(/,/, '').to_i * 0.02) %>");
+  <% else %>
+    $(".bronze-amount-value").text("<%= amount_converter(750) %>");
+  <% end %>
 
-$(".silver-amount-value").text("<%= amount_converter(params[:funding_goal].gsub(/,/, '').to_i * 0.05) %>");
-$(".gold-amount-value").text("<%= amount_converter(params[:funding_goal].gsub(/,/, '').to_i * 0.10) %>");
-$(".platinum-amount-value").text("<%= amount_converter(params[:funding_goal].gsub(/,/, '').to_i * 0.25) %>");
+  $(".silver-amount-value").text("<%= amount_converter(params[:funding_goal].gsub(/,/, '').to_i * 0.05) %>");
+  $(".gold-amount-value").text("<%= amount_converter(params[:funding_goal].gsub(/,/, '').to_i * 0.10) %>");
+  $(".platinum-amount-value").text("<%= amount_converter(params[:funding_goal].gsub(/,/, '').to_i * 0.25) %>");
+<% end -%>
 
+updateSponsorPercentage();
+applyMaskMoney();

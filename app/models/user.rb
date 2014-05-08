@@ -138,16 +138,22 @@ class User < ActiveRecord::Base
   end
 
   def generate_tax_report(project)
-    donations = self.donations.where(project_id: project.id)
-    total_donated = ActionController::Base.helpers.number_to_currency(donations.inject(0) {|sum, i| sum + i.amount}.to_f)
+    if project.partial_funding
+      donation = self.donations.last
+      total_donated = ActionController::Base.helpers.number_to_currency donation.amount
+    else
+      donations = self.donations.where(project_id: project.id)
+      total_donated = ActionController::Base.helpers.number_to_currency(donations.inject(0) {|sum, i| sum + i.amount}.to_f)
+    end
     first_name = self.first_name
     last_name = self.last_name
     perks = Perk.where(project_id: project.id).order("amount ASC")
     eligible_perk = perks.compact.find_all { |item| ActionController::Base.helpers.number_to_currency(item.amount) <= total_donated }.max
     eligible_perk_name = eligible_perk.nil? ? "None" : eligible_perk.name
     eligible_perk_description = eligible_perk.nil? ? " " : eligible_perk.description
+    document_name = "#{project.organization[0..8].gsub(/\s+/, '')}_#{project.campaign_deadline.strftime('%Y%m%d')}#{self.id}_#{DateTime.now.strftime('%Y%m%dT%H%M')}.pdf"
     # Implicit Block
-    Prawn::Document.generate("tmp/#{project.organization[0..8].gsub(/\s+/, '')}_#{project.campaign_deadline.strftime('%Y%m%d')}#{self.id}.pdf") do
+    Prawn::Document.generate("tmp/" + document_name) do
       font_size 18
       pad(20) { text "#{project.organization}" }
       stroke_horizontal_rule
@@ -163,7 +169,7 @@ class User < ActiveRecord::Base
       font_size 10
       pad(20) { text "No goods or services were received in exchange for the donation unless specified above.  It is recommended you seek advice from a tax professional." }
     end
-    upload_to_s3("#{project.organization[0..8].gsub(/\s+/, '')}_#{project.campaign_deadline.strftime('%Y%m%d')}#{self.id}.pdf", project)
+    upload_to_s3(document_name, project)
   end
 
   def upload_to_s3(filename, project)
@@ -198,6 +204,10 @@ class User < ActiveRecord::Base
     else
       WelcomeMailer.welcome_confirmation_user(self).deliver
     end
+  end
+
+  def has_plan?(plan)
+    membership.kind == plan
   end
 
 private

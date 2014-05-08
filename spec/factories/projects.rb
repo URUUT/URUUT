@@ -6,12 +6,12 @@ FactoryGirl.define do
     description                  { Faker::Lorem.paragraph(3) }
     duration                     "75"
     goal                         "1000"
-    category                     "Walkability / Bike / Paths"
+    category                     "Art / Culture"
     association                  :user
     address                      { Faker::Address.street_address }
     city                         { Faker::Address.city }
-    state                        { Faker::Address.us_state_abbr }
-    zip                          { Faker::Address.zip_code }
+    state                        { Faker::AddressUS.state_abbr }
+    zip                          { Faker::AddressUS.zip_code }
     live                         1
     short_description            { Faker::Lorem.paragraph(1) }
     bitly                        { Faker::Internet.http_url }
@@ -39,5 +39,19 @@ FactoryGirl.define do
     sponsor_permission           false
     step                         "/projects/11/edit#assets"
     partial_funding              false
+
+    factory :project_with_sponsor do
+      sponsor_permission   true
+      live 1
+      after(:create) do |project|
+        create_list :sponsorship_benefit_platinum, 5, project: project
+      end
+    end
+
+    factory :new_project do
+        live                    0
+        partial_funding         true
+    end
+
   end
 end

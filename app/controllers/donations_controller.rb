@@ -28,13 +28,9 @@ class DonationsController < ApplicationController
       @perks = @project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i] }
       session[:perk_id] = "custom_donate"
     else
-
       perks = Donation.set_perks(@project)
-
       @perks = Donation.reorder_perks(perks, @perk_amount)
-
       @perk_name_selected, @perk_description = Donation.get_perk_info(@project, @perk_amount, @perks)
-
       session[:perk_id] = Donation.set_perk_id(@perks, @project)
     end
     render :new

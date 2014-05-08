@@ -14,7 +14,7 @@
 
     %div
       %h6{:style => "color:#70bf4c"} SPONSORSHIP ON URUUT
-      %p One of the things that makes Uruut different from other crowd-funding platforms is the ability for businesses and foundations to sponsor projects. While we believe business and foundation sponsorship are the best way to help you reach your goal, you are not required to offer sponsorship.
+      %p One of the things that makes Uruut different from other peer­-to-­peer/crowdfunding platforms is the ability for businesses and foundations to sponsor projects (and the business or foundation is recognized on the project page and with other sponsor gives). While we believe business and foundation sponsorship are the best way to help you reach your goal, you are not required to offer sponsorship.
 
     %div
       %h6{:style => "color:#70bf4c"} ALLOW PROJECT SPONSORSHIPS?
@@ -27,20 +27,45 @@
 
       %div
         %h6{:style => "color:#70bf4c"}
-          PLATINUM LEVEL SPONSORSHIP*
-          %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;"} (industry-specific exclusivity)
+          - if editable_level?(current_user, @project)
+            %div
+              %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0;"} Custom Sponsor Name
+              = text_field_tag 'level[platinum][name]', level_name('PLATINUM', @sponsorship_levels[1]), style:'display:inline-block;'
+              %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;line-height: 13px;width:63%;vertical-align: top;display: inline-block;margin-left: 10px;margin-top: 3px;"} ( Sponsor names and the amount of each sponsor category is set to URUUT defaults. Once a campaign is launched, they cannot be changed. )
+          - else
+            = level_name('PLATINUM', @sponsorship_levels[1])
+          LEVEL SPONSORSHIP*
+          %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;"} (industry-specific exclusivity suggested)
           %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;", class: "platinum-availibility"} (1 AVAILABLE)
       .row-fluid
         .span3{:style => "text-align:left;color:#464646;"}
-          %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0;"} Cost
+          %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0;"} Amount
           %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0"}
             %span.platinum-amount-value
-              - if @project.goal
-                = amount_converter(@project.goal.gsub(/,/, '').to_i * 0.25)
-          %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (25% of funding goal)
+              - if editable_level?(current_user, @project)
+                = text_field_tag 'level[platinum][cost]', level_cost('platinum', @sponsorship_levels[1], @project), class: 'span12'
+              - else
+                = amount_converter(SponsorshipLevel.default_costs('platinum',project))
+          - unless editable_level?(current_user, @project)
+            %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (25% of funding goal)
+          - else
+            %p.percentage{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"}
+              (
+              %span 25
+              &#37; of funding goal)
+            %p.formula
+              (
+              %span.custom-amount= number_to_currency(level_cost('platinum', @sponsorship_levels[1], @project), precision: 0)
+              *
+              %span.available 1
+              Sponsors =
+              %span.custom-total= number_to_currency(level_cost('platinum', @sponsorship_levels[1], @project), precision: 0)
+              ,
+              %span.custom-total-percent 25%
+              )
         .span9{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
-            Platinum Level Sponsorship includes priority logo placement, a link to the sponsor’s website, and the company / foundation’s mission statement on your project page. Platinum Sponsors gain industry exclusivity for project sponsors. In addition to these benefits, select suggested benefits or create custom benefits for platinum level sponsors from the checklist below. (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
+            This sponsorship level includes priority logo placement, a link to the sponsor’s website, and the company / foundation’s mission statement at the top of your project page.  We suggest industry exclusivity.
             %span{:style =>  "color:#403e37;font-style:italic;"}
               (Suggested benefits should be used as a guide and can be customized to meet your project's specific needs.)
           %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"}
@@ -50,23 +75,21 @@
             \:
           %div#platinum-box{data:{max: "1", type: "platinum"}}
             %div#platinum-checkbox.existing-checkbox
-              -if @project.sponsorship_benefits.empty?
-                -SponsorshipBenefit::SPONSORSHIP_BENEFITS.each do |key, value|
-                  -if key.eql? 1
-                    -value.each_with_index do |benefit|
-                      %div.checkbox.default
-                        = check_box_tag "platinum[#{benefit[:id]}]", '1', false, class: "sponsor_checkbox"
-                        %span#name= benefit[:desc]
-                        %span.edit-benefit.italic.label-green select to edit
-                        = text_field_tag "platinum[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field", style: "width: 320px !important; display: none;"
-              -else
-                -@project.sponsorship_benefits.where(sponsorship_level_id: 1).order(:id).each_with_index do |benefit, index|
+              -if @sponsorship_levels[1].blank? && @project.sponsorship_benefits.platinum.empty?
+                -SponsorshipBenefit::SPONSORSHIP_BENEFITS[1].each do |benefit|
                   %div.checkbox.default
-                    = hidden_field_tag "platinum[id_#{index + 1}]", benefit.id
-                    = check_box_tag "platinum[#{index + 1}]", nil, benefit.status, class: "sponsor_checkbox"
-                    %span#name= benefit.name
+                    = check_box_tag "platinum[#{benefit[:id]}]", '1', false, class: "sponsor_checkbox"
+                    %span#name= benefit[:desc]
                     %span.edit-benefit.italic.label-green select to edit
-                    = text_field_tag "platinum[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
+                    = hidden_field_tag "platinum[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field"
+              -else
+                - SponsorshipBenefit.default_plus_level(@project, @sponsorship_levels[1]? @sponsorship_levels[1].id : 1, 1).each_with_index do |benefit, index|
+                  %div.checkbox.default
+                    = hidden_field_tag "platinum[id_#{index + 1}]", benefit[:id]
+                    = check_box_tag "platinum[#{index + 1}]", nil, benefit[:status], class: "sponsor_checkbox"
+                    %span#name= benefit[:name] || benefit[:desc]
+                    %span.edit-benefit.italic.label-green select to edit
+                    = text_field_tag "platinum[info_#{index + 1}]", benefit[:name] || benefit[:desc], class: "edit-text-field", style: "width: 320px !important; display: none;"
               / %a.italic.green-link.check-all{:href => "javascript:void(0)", data:{target: "platinum-checkbox"}}
               /   (Check All That Apply)
 
@@ -85,20 +108,47 @@
 
       %div
         %h6{:style => "color:#70bf4c"}
-          Gold LEVEL SPONSORSHIP*
+          - if editable_level?(current_user, @project)
+            %div
+              %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0;"} Custom Sponsor Name
+              = text_field_tag 'level[gold][name]', level_name('Gold', @sponsorship_levels[2]), style:'display:inline-block;'
+
+              %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;line-height: 13px;width:63%;vertical-align: top;display: inline-block;margin-left: 10px;margin-top: 3px;"} ( Sponsor names and the amount of each sponsor category is set to URUUT defaults. Once a campaign is launched, they cannot be changed. )
+          - else
+            = level_name('Gold', @sponsorship_levels[2])
+          LEVEL SPONSORSHIP*
           %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;"} (industry-specific exclusivity)
           %span{:style => "font-size:10px;color:#403e37", class: "gold-availibility"} (3 AVAILABLE)
       .row-fluid
         .span3.left{:style => "text-align:left;color:#464646;"}
-          %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0;"} Cost
+          %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0;"} Amount
           %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0"}
             %span.gold-amount-value
               -if @project.goal
-                = amount_converter(@project.goal.gsub(/,/, '').to_i * 0.10)
-          %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (10% of funding goal)
+                - if editable_level?(current_user, @project)
+                  = text_field_tag 'level[gold][cost]', level_cost('gold', @sponsorship_levels[2], @project), class: 'span12'
+                - else
+                  = amount_converter(SponsorshipLevel.default_costs('gold',project))
+          - unless editable_level?(current_user, @project)
+            %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (10% of funding goal)
+          - else
+            %p.percentage{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"}
+              (
+              %span 10
+              &#37; of funding goal)
+            %p.formula
+              (
+              %span.custom-amount= number_to_currency(level_cost('gold', @sponsorship_levels[2], @project), precision: 0)
+              *
+              %span.available 3
+              Sponsors =
+              %span.custom-total= number_to_currency(level_cost('gold', @sponsorship_levels[2], @project) * 3, precision: 0)
+              ,
+              %span.custom-total-percent 30%
+              )
         .span9.left{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
-            Gold Level Sponsorship includes placement of a large logo and a link to the sponsor’s website on your project page. Gold Sponsors gain industry exclusivity for project sponsors. In addition to these benefits, select suggested benefits or create custom benefits for gold level sponsors from the checklist below. (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
+            This sponsorship level includes placement of a large logo and a link to the sponsor’s website on your project page. We suggest industry exclusivity.
             %span{:style =>  "color:#403e37;font-style:italic;"}
               (Suggested benefits should be used as a guide and can be customized to meet your project's specific needs.)
           %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"}
@@ -108,23 +158,21 @@
             \:
           %div#gold-box{data:{max: "3", type: "gold"}}
             %div#gold-checkbox.existing-checkbox
-              -if @project.sponsorship_benefits.empty?
-                -SponsorshipBenefit::SPONSORSHIP_BENEFITS.each do |key, value|
-                  -if key.eql? 2
-                    -value.each_with_index do |benefit|
-                      %div.checkbox.default
-                        = check_box_tag "gold[#{benefit[:id]}]", '1', false, class: "sponsor_checkbox"
-                        %span#name= benefit[:desc]
-                        %span.edit-benefit.italic.label-green select to edit
-                        = text_field_tag "gold[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field", style: "width: 320px !important; display: none;"
-              -else
-                -@project.sponsorship_benefits.where(sponsorship_level_id: 2).order(:id).each_with_index do |benefit, index|
+              -if @sponsorship_levels[2].blank? && @project.sponsorship_benefits.gold.empty?
+                -SponsorshipBenefit::SPONSORSHIP_BENEFITS[2].each do |benefit|
                   %div.checkbox.default
-                    = hidden_field_tag "gold[id_#{index + 1}]", benefit.id
-                    = check_box_tag "gold[#{index + 1}]", nil, benefit.status, class: "sponsor_checkbox"
-                    %span#name= benefit.name
+                    = check_box_tag "gold[#{benefit[:id]}]", '1', false, class: "sponsor_checkbox"
+                    %span#name= benefit[:name] || benefit[:desc]
                     %span.edit-benefit.italic.label-green select to edit
-                    = text_field_tag "gold[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
+                    = hidden_field_tag "gold[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field"
+              -else
+                - SponsorshipBenefit.default_plus_level(@project, @sponsorship_levels[2]? @sponsorship_levels[2] : 2, 2).each_with_index do |benefit, index|
+                  %div.checkbox.default
+                    = hidden_field_tag "gold[id_#{index + 1}]", benefit[:id]
+                    = check_box_tag "gold[#{index + 1}]", nil, benefit[:status], class: "sponsor_checkbox"
+                    %span#name= benefit[:name] || benefit[:desc]
+                    %span.edit-benefit.italic.label-green select to edit
+                    = text_field_tag "gold[info_#{index + 1}]", benefit[:name] || benefit[:desc], class: "edit-text-field", style: "width: 320px !important; display: none;"
               / %a.italic.green-link.check-all{:href => "javascript:void(0)", data:{target: "gold-checkbox"}}
               /   (Check All That Apply)
 
@@ -143,19 +191,46 @@
 
       %div
         %h6{:style => "color:#70bf4c"}
-          Silver LEVEL SPONSORSHIP*
+          - if editable_level?(current_user, @project)
+            %div
+              %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0;"} Custom Sponsor Name
+              = text_field_tag 'level[silver][name]', level_name('Silver', @sponsorship_levels[3]), style:'display:inline-block;'
+
+              %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;line-height: 13px;width:63%;vertical-align: top;display: inline-block;margin-left: 10px;margin-top: 3px;"} ( Sponsor names and the amount of each sponsor category is set to URUUT defaults. Once a campaign is launched, they cannot be changed. )
+          - else
+            = level_name('Silver', @sponsorship_levels[3])
+          LEVEL SPONSORSHIP*
           %span{:style => "font-size:10px;color:#403e37", class: "silver-availibility"} (5 AVAILABLE)
       .row-fluid
         .span3.left{:style => "text-align:left;color:#464646;"}
-          %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0;"} Cost
+          %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0;"} Amount
           %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0"}
             %span.silver-amount-value
               -if @project.goal
-                = amount_converter(@project.goal.gsub(/,/, '').to_i * 0.05)
-          %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (5% of funding goal)
+                - if editable_level?(current_user, @project)
+                  = text_field_tag 'level[silver][cost]', level_cost('silver', @sponsorship_levels[3], @project), class: 'span12'
+                - else
+                  = amount_converter(SponsorshipLevel.default_costs('silver',project))
+          - unless editable_level?(current_user, @project)
+            %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (5% of funding goal)
+          - else
+            %p.percentage{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"}
+              (
+              %span 5
+              &#37; of funding goal)
+            %p.formula
+              (
+              %span.custom-amount= number_to_currency(level_cost('silver', @sponsorship_levels[3], @project), precision: 0)
+              *
+              %span.available 5
+              Sponsors =
+              %span.custom-total= number_to_currency(level_cost('silver', @sponsorship_levels[3], @project) * 5, precision: 0)
+              ,
+              %span.custom-total-percent 25%
+              )
         .span9.left{:style => "text-align:left;color:#464646;"}
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"}
-            Silver Level Sponsorship includes placement of a medium-sized logo and a link to the sponsor’s website on your project page. In addition to these benefits, select suggested benefits or create custom benefits for silver level sponsors from the checklist below. (Suggested benefits should be used as a guide and can be customized to meet your project’s specific needs.)
+            This sponsorship level includes placement of a medium-sized logo and a link to the sponsor’s website on your project page.
             %span{:style =>  "color:#403e37;font-style:italic;"}
               (Suggested benefits should be used as a guide and can be customized to meet your project's specific needs.)
           %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 3px;"}
@@ -165,24 +240,21 @@
             \:
           %div#silver-box{data:{max: "5", type: "silver"}}
             %div#silver-checkbox.existing-checkbox
-
-              -if @project.sponsorship_benefits.empty?
-                -SponsorshipBenefit::SPONSORSHIP_BENEFITS.each do |key, value|
-                  -if key.eql? 3
-                    -value.each_with_index do |benefit|
-                      %div.checkbox.default
-                        = check_box_tag "silver[#{benefit[:id]}]", '1', false, class: "sponsor_checkbox"
-                        %span#name= benefit[:desc]
-                        %span.edit-benefit.italic.label-green select to edit
-                        = text_field_tag "silver[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field", style: "width: 320px !important; display: none;"
-              -else
-                -@project.sponsorship_benefits.where(sponsorship_level_id: 3).order(:id).each_with_index do |benefit, index|
+              -if @sponsorship_levels[3].blank? && @project.sponsorship_benefits.silver.empty?
+                -SponsorshipBenefit::SPONSORSHIP_BENEFITS[3].each do |benefit|
                   %div.checkbox.default
-                    = hidden_field_tag "silver[id_#{index + 1}]", benefit.id
-                    = check_box_tag "silver[#{index + 1}]", nil, benefit.status, class: "sponsor_checkbox"
-                    %span#name= benefit.name
+                    = check_box_tag "silver[#{benefit[:id]}]", '1', false, class: "sponsor_checkbox"
+                    %span#name= benefit[:desc]
                     %span.edit-benefit.italic.label-green select to edit
-                    = text_field_tag "silver[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
+                    = hidden_field_tag "silver[info_#{benefit[:id]}]", "#{benefit[:desc]}", class: "edit-text-field"
+              -else
+                - SponsorshipBenefit.default_plus_level(@project, @sponsorship_levels[3]? @sponsorship_levels[3] : 3, 3).each_with_index do |benefit, index|
+                  %div.checkbox.default
+                    = hidden_field_tag "silver[id_#{index + 1}]", benefit[:id]
+                    = check_box_tag "silver[#{index + 1}]", nil, benefit[:status], class: "sponsor_checkbox"
+                    %span#name= benefit[:name] || benefit[:desc]
+                    %span.edit-benefit.italic.label-green select to edit
+                    = text_field_tag "silver[info_#{index + 1}]", benefit[:name] || benefit[:desc], class: "edit-text-field", style: "width: 320px !important; display: none;"
               / %a.italic.green-link.check-all{:href => "javascript:void(0)", data:{target: "silver-checkbox"}}
               /   (Check All That Apply)
 
@@ -201,32 +273,41 @@
 
       %div
         %h6{:style => "color:#70bf4c;"}
-          Bronze LEVEL SPONSORSHIP*
+          - if editable_level?(current_user, @project)
+            %div
+              %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0;"} Custom Sponsor Name
+              = text_field_tag 'level[bronze][name]', level_name('Bronze', @sponsorship_levels[4]), style:'display:inline-block;'
+
+              %span{:style => "font-size:10px;color:#403e37;letter-spacing:normal;line-height: 13px;width:63%;vertical-align: top;display: inline-block;margin-left: 10px;margin-top: 3px;"} ( Sponsor names and the amount of each sponsor category is set to URUUT defaults. Once a campaign is launched, they cannot be changed. )
+          - else
+            = level_name('Bronze', @sponsorship_levels[4])
+          LEVEL SPONSORSHIP*
       .row-fluid
         .span3.left{:style => "text-align:left;color:#464646;"}
-          %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0;"} Cost
+          %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0;"} Amount
           %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0"}
             %span.bronze-amount-value
-              - if @project.goal && @project.goal.gsub(/,/, '').to_i * 0.02 < 750
-                = amount_converter(@project.goal.gsub(/,/, '').to_i * 0.02)
-              -else
-                = amount_converter(750)
+              - if @project.goal
+                - if editable_level?(current_user, @project)
+                  %div
+                    = text_field_tag 'level[bronze][cost]', level_cost('bronze', @sponsorship_levels[4], @project), class: 'span12'
+                - else
+                  = amount_converter(SponsorshipLevel.default_costs('bronze', @project))
         .span9.left{:style => "text-align:left;color:#464646;"}
-          %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"} Bronze Level Sponsorship includes business / foundation name listing and a link to the sponsor’s website on your project page. In addition to these benefits, you can create custom benefits for bronze level sponsors below.
+          %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"} This sponsorship level includes business / foundation name listing and a link to the sponsor’s website on your project page.
           %div#bronze-box
             %div#bronze-checkbox.existing-checkbox
-
-              -if !@project.sponsorship_benefits.empty?
-                -@project.sponsorship_benefits.where(sponsorship_level_id: 4).order(:id).each_with_index do |benefit, index|
+              -if @sponsorship_levels[4].present? || @project.sponsorship_benefits.bronze.any?
+                -@project.sponsorship_benefits.where(sponsorship_level_id: @sponsorship_levels[4]? @sponsorship_levels[4] : 4).order(:id).each_with_index do |benefit, index|
                   %div.checkbox.default
-                    = hidden_field_tag "custom[id_#{index + 1}]", benefit.id
-                    = check_box_tag "custom[#{index + 1}]", nil, benefit.status, class: "sponsor_checkbox"
+                    = hidden_field_tag "bronze[id_#{index + 1}]", benefit.id
+                    = check_box_tag "bronze[#{index + 1}]", nil, benefit.status, class: "sponsor_checkbox"
                     %span#name= benefit.name
                     %span.edit-benefit.italic.label-green select to edit
-                    = text_field_tag "custom[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: "width: 320px !important; display: none;"
+                    = hidden_field_tag "bronze[info_#{index + 1}]", benefit.name, class: "edit-text-field"
 
-              = hidden_field_tag "custom_count", nil, id: "custom-count"
-            %div#custom-checkbox
+              = hidden_field_tag "bronze_count", nil, id: "bronze-count"
+            %div#bronze-checkbox
               %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 10px;"} CREATE CUSTOM BENEFITS:
               %div.checkbox.add_checkbox
                 = check_box_tag "add_bronze", nil,false, class: "box_bronze_benefits"
@@ -238,8 +319,11 @@
       %hr{:style => "background: #e0e0e0; margin-left: -19px; margin-right: -19px;"}
       = hidden_field_tag "step", "fourth"
       %div
-        = f.submit "Save & Continue ►", :class => "btn", :id => "project-submit", :style => "position: relative;display:none;margin:0 auto;"
-        = link_to "Save & Continue ►", "javascript:void(0)", id: "next-link-to-assets", :class => "btn", :style => "position: relative;display:block;margin:0 auto;width: 262px;"
+        - if editable_level?(current_user, @project)
+          = link_to "Save & Continue ►", "#sponsorship", id: "next-link-to-assets", class: 'btn', style: "position: relative;display:block;margin:0 auto;width: 262px;"
+        - else
+          = f.submit "Save & Continue ►", :class => "btn", :id => "project-submit", :style => "position: relative;display:none;margin:0 auto;"
+          = link_to "Save & Continue ►", "javascript:void(0)", id: "next-link-to-assets", :class => "btn", :style => "position: relative;display:block;margin:0 auto;width: 262px;"
 
     %div.sponsorship-false{:style => "display:none"}
       = link_to "CONTINUE TO STEP 5", "/projects/#{@project.id}/edit#assets", class: "btn skip-step", id: "project-submit", style: "position: relative;display:block;margin:0 auto;width:35%"
@@ -247,11 +331,21 @@
     %h4.title{:style => "margin-bottom:5px;"} SET UP GUIDE
     .well.info
       %h5{:style => "color:#70bf4c;margin-bottom:10px;"} SPONSORSHIP DETAILS
-      %p URUUT's Partner-Funding depends not only individual contributors, but sponsorship from businesses and foundations.
+      %p There are 4 different levels of sponsorship, with different benefits for each level. Use the checklists to define what each sponsor level includes. The URUUT Wizard will automatically calculate the sponsorship amounts for you and have name defaults (platinum, gold, silver and bronze).
+      - if editable_level?(current_user, @project)
+        %p You can use the default amounts and names or set customized amounts and names.
 
-      %p There are 4 different levels of sponsorship, with different benefits for each level. Use the checklists to define what each sponsor level includes.  The Uruut Wizard will automatically calculate the sponsorship levels for you.  Below each level are suggested benefits.  You can use these or create your own, but be sure that you are making it worth your sponsors’ contribution, while being sure to make promises you can deliver.
+        %p While it is entirely up to you what you offer at each level, make sure your benefits are attractive and deliverable.
+      -else
+        %p While it is entirely up to you what you offer at each level, make sure your benefits are attractive and deliverable.
 
 
+#confirm-changes-modal.modal.hide.fade
+  .modal-body
+    %p IMPORTANT: By clicking confirm you agree and understand the customized sponsor information you just created cannot be changed once saved. Click Cancel to edit before saving.
+  .modal-footer
+    %button.btn{ data: { dismiss: "modal" }, "aria-hidden" => true } Cancel
+    %button.btn.btn-primary Confirm
 
 :javascript
 
@@ -278,7 +372,7 @@
   $(".box_gold_benefits").attr("name", "silver[" + (silverSum + 1) + "]");
   $(".box_gold_benefits").attr("id", "silver_" + (silverSum + 1));
 
-  $("#custom-count").val(bronzeSum + 1);
+  $("#bronze-count").val(bronzeSum + 1);
   $(".bronze_benefits").attr("name", "bronze[info_" + (bronzeSum + 1) + "]");
   $(".bronze_benefits").attr("id", "bronze_info_" + (bronzeSum + 1));
   $(".box_gold_benefits").attr("name", "bronze[" + (bronzeSum + 1) + "]");
@@ -302,6 +396,9 @@
     editBenefit();
     addAnotherNewBenefit();
     removeAnotherBenefit();
+    if($('input[id*=_cost]').is(':visible')) {
+      updateSponsorPercentage();
+    }
     $(".check-all").click(function(){
       var id = $(this).attr("data-target");
         $("#"+id).find(".sponsor_checkbox").click();
@@ -315,9 +412,37 @@
       $(".sponsorship-false").hide();
       $(".sponsorship-true").show();
     }
+
+    $('input[id*=_cost]').on('blur', function() {
+      updateSponsorPercentage();
+    });
   });
 
+  format_currency = function(n, currency) {
+    return currency + " " + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
 
+  var updateSponsorPercentage = function() {
+    var total = $('#project_goal').val().split(',').join('');
+    $('.percentage').each(function() {
+      var sponsor_value = $(this).prev('h2').find('span input').val().split(',').join('');
+      var new_percentage = Math.ceil((sponsor_value/total) * 100);
+      $(this).find('span').text(new_percentage);
+    });
+
+    $('.formula').each(function() {
+      var input_amount = $(this).parent().find('h2 span input').val().split(',').join('');
+      var custom_amount = $(this).find('.custom-amount');
+      var available = $(this).find('.available');
+      var custom_total = $(this).find('.custom-total');
+      var custom_total_percent  = $(this).find('.custom-total-percent');
+      var new_total = input_amount * $(available).text();
+
+      $(custom_amount).text(format_currency(parseInt(input_amount), '$'));
+      $(custom_total).text(format_currency(parseInt(input_amount * $(available).text()), '$'));
+      $(custom_total_percent).text(Math.ceil((new_total/total) * 100) + '%');
+    });
+  }
 
   var changeProjectPermission = function(){
     if ( $("#project_sponsorship_permission").val() == "false" ){
@@ -488,3 +613,40 @@
       }
     });
   }
+
+  function has_any_benefits() {
+    var benefits = $('.sponsor_checkbox:checked').length,
+        valid = false;
+
+    if ( benefits ) { valid = true; }
+    return valid;
+  };
+
+  var custom_level_url_path = "#{sponsorship_level_url}";
+  $("#next-link-to-assets").click(function(e){
+    e.preventDefault();
+    if ( has_any_benefits() ) {
+      $.ajax({
+        url: custom_level_url_path,
+        type: 'PUT',
+        data: $('.step-container[data-id="sponsorship"] form').serialize()
+      }).done(function(data) {
+        window.location.href = '/projects/' + projectId + '/edit#assets';
+        window.location.reload(true);
+      });
+    } else {
+      $('#errorForm').modal();
+      $('#errorForm .error-messages').text('You must select at least one benefit');
+    }
+  });
+
+  function applyMaskMoney() {
+    fields = [ '#level_platinum_cost', '#level_gold_cost', '#level_silver_cost',
+               '#level_bronze_cost' ]
+    $(fields+"").maskMoney({allowZero:false, precision: 0});
+    $(fields+"").maskMoney('mask')
+  }
+  applyMaskMoney();
+
+- if current_user.has_plan? 'plus'
+  = javascript_include_tag 'customSponsorshipBehavior'

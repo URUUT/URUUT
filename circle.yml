@@ -4,7 +4,8 @@ machine:
 
 test:
   override:
-    - RAILS_ENV="test" RACK_ENV="test" bundle exec rspec -cfn spec
+    - RAILS_ENV="test" RACK_ENV="test"
+    # - RAILS_ENV="test" RACK_ENV="test" bundle exec rspec -cfn spec
 
 deployment:
   production:
@@ -15,10 +16,10 @@ deployment:
     branch: develop
     heroku:
       appname: uruut-dev
-  multitenant:
-    branch: multitenant
+  custom-sponsorships:
+    branch: custom-sponsorships
     heroku:
-      appname: uruut-multitenant
+      appname: uruut-custom-sponsorship
   techbridge:
     branch: techbridge-staging
     heroku:

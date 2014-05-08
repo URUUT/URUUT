@@ -52,7 +52,7 @@ class DonationStepsController < ApplicationController
   def update
     @donation = Donation.unscoped.find(session[:donation_id])
     @donation.token = session[:card_token]
-    if @donation.save_with_payment
+    if @donation.save_with_payment && @donation.create_charges!
       donate_badge = Merit::Badge.new(id:3, name:"Project donation badge")
       if !current_user.badges.include?(donate_badge)
         current_user.add_badge(3)

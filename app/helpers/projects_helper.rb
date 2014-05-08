@@ -39,7 +39,8 @@ module ProjectsHelper
       ['Municipal'],
       ['Member'],
       ['Foundation'],
-      ['Other Civic']
+      ['Other Civic'],
+      ['Special Situation']
     ]
   end
 
@@ -113,6 +114,17 @@ module ProjectsHelper
   def any_project_donors_or_sponsors?(project)
     User.who_donated_to(project).any? ||
     project.project_sponsors.any?
+  end
+
+  def level_name(default, level)
+    return default unless level
+    (level)? level.name : default
+  end
+
+  def level_cost(default, level, project)
+    default_cost = SponsorshipLevel.default_costs(default, project)
+    return default_cost.to_i unless level
+    (level.cost)? level.cost.to_i : default_cost.to_i
   end
 
 end

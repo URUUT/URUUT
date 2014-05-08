@@ -17,7 +17,7 @@ module ApplicationHelper
   end
 
   def check_availibility(project, level)
-    total_sponsor = project.project_sponsors.where(level_id: level).count
+    project.project_sponsors.where(level_id: level).count
   end
 
   def strip_url(url)
@@ -117,26 +117,29 @@ module ApplicationHelper
     return "pk_test_1XvbGBUir6OeX1ljhENDmZ7h"
   end
 
-  def project_sponsor_by_level(founders, page_num)
+  def project_sponsor_by_level(founders, page_num, project)
     if page_num.nil?
       gold_sponsors, silver_sponsors, bronze_sponsors, platinum_sponsors = [], [], [], []
       founders.each do |sponsor|
-        if sponsor.level_id.eql?(1)
+        if sponsor.sponsorship_level.parent_id.eql?(1)
           platinum_sponsors << sponsor
-        elsif sponsor.level_id.eql?(2)
+        elsif sponsor.sponsorship_level.parent_id.eql?(2)
           gold_sponsors << sponsor
-        elsif sponsor.level_id.eql?(3)
+        elsif sponsor.sponsorship_level.parent_id.eql?(3)
           silver_sponsors << sponsor
-        elsif sponsor.level_id.eql?(4)
+        elsif sponsor.sponsorship_level.parent_id.eql?(4)
           bronze_sponsors << sponsor
         end
       end
-      sponsors = {
-        "PLATINUM" => platinum_sponsors,
-        "GOLD" => gold_sponsors,
-        "SILVER" => silver_sponsors,
-        "BRONZE" => bronze_sponsors
-      }
+      levels = SponsorshipLevel.by_project(project)
+      sponsors = {}
+      levels_sponsors = { "1" => platinum_sponsors,
+                          "2" => gold_sponsors,
+                          "3" => silver_sponsors,
+                          "4" => bronze_sponsors }
+      levels.each do |level|
+        sponsors[level.name.upcase] = levels_sponsors[level.parent_id.to_s]
+      end
     else
       bronze_sponsors = []
       founders.each do |sponsor|
@@ -244,6 +247,10 @@ module ApplicationHelper
 
   def full_name user
     return "- #{user.first_name} #{user.last_name}"
+  end
+
+  def editable_level?(user, project)
+    user.has_plan?('plus') && !project.is_live?
   end
 
 end

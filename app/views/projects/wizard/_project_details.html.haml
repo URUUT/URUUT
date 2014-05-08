@@ -38,20 +38,20 @@
         = f.check_box :partial_funding, style: 'display: inline-block;margin: 0 0 0 5px;vertical-align:middle'
         %span.italic{style: "color: #000; margin-left: 5px;"} Allows pledged amounts to be charged regardless of full project funding.
 
-    %div.inline
-      = f.label :duration, class: "label-green" do
-        CAMPAIGN LENGTH*
-        %span.italic{style: "color: #000"} (max 90 days)
-      .selectParent{style: "width: 290px;"}
-        = f.select :duration, options_for_select(project_length, @project.duration), {}, :required => true, class: "styledSelect"
-      %span.error-container
+    .row
+      .span4
+        = f.label :duration, class: "label-green" do
+          CAMPAIGN LENGTH*
+          %span.italic{style: "color: #000"} (max 365 days)
+        = f.text_field :duration, required: true, class: 'span4'
+        %span.error-container.duration-error.span4
 
-    %div.inline{:style => "margin-left:25px;"}
-      = f.label :category, class: "label-green" do
-        CATEGORY*
-      .selectParent{style: "width: 290px;"}
-        = f.select :category, options_for_select(project_categories, @project.category), {}, :required => true, class: "styledSelect"
-      %span.error-container
+      .span4
+        = f.label :category, class: "label-green" do
+          CATEGORY*
+        .selectParent{style: "width: 290px;"}
+          = f.select :category, options_for_select(project_categories, @project.category), {}, :required => true, class: "styledSelect"
+        %span.error-container
 
     %div
       = f.label :title, class: "label-green" do
@@ -131,7 +131,10 @@
         required: true
       },
       "project[duration]": {
-        required: true
+        required: true,
+        number: true,
+        min: 1,
+        max: 365
       },
       "project[title]": {
         required: true
@@ -165,7 +168,7 @@
     }).done(function(data){
       $.ajax({
         type: 'GET',
-        url: '/projects/update_sponsorship_content?funding_goal='+ $("#project_goal").val()
+        url: '/projects/update_sponsorship_content?funding_goal='+ $("#project_goal").val()+'&id='+projectId
       });
       $(".perks-link").attr("href", "/projects/" + data +"/edit#perks");
       $('.step-container[data-id="project-details"] form input#project-submit').val("SAVE & CONTINUE ►");

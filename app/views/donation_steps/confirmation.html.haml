@@ -67,8 +67,12 @@
         %h5 Payment amount
         = number_to_currency(@donation.amount, :precision => precision)
       %hr
-      %p.grey
-        %strong Note: Your card will not be charged at the time of your pledge. For all or nothing campaigns you will be charged at the end of the campaign, only if this campaign reaches its funding goal. For partial funding projects, you will be charged at the end of this campaign. All transactions are processed through a secure third-party payment processor.
+      - if @project.partial_funding
+        %p.grey
+          %strong Note: Your credit card will be charged at the time of your donation. All transactions are processed through a secure third-party payment processor.
+      -else
+        %p.grey
+          %strong Note: For all or nothing campaigns you will be charged at the end of the campaign, only if this campaign reaches its funding goal. All transactions are processed through a secure third-party payment processor.
       %hr
       = form_for @donation, :url => wizard_path do |f|
         %button.btn.btn-primary.btn-block{:type => "submit"}

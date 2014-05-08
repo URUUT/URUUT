@@ -6,6 +6,8 @@ class Project < ActiveRecord::Base
 
   before_validation :strip_comma_from_goal, :if => :project_details
 
+  after_initialize :init
+
   attr_accessible :category, :description, :duration, :goal, :address, :project_title, :sponsorship_permission,
   :city, :state, :zip, :neighborhood, :title, :image, :video, :tags, :live, :short_description, :perk_permission,
   :perks_attributes, :galleries_attributes, :status, :organization, :website, :twitter_handle, :facebook_page, :seed_video,
@@ -15,11 +17,14 @@ class Project < ActiveRecord::Base
 
   attr_accessor :sponsorship_permission, :perk_type, :sponsor_info, :project_details, :assets
 
-  validates :organization, :organization_type, :organization_classification, :address,
+  validates :organization, :organization_type, :address,
             :city, :state, :zip, :website, :facebook_page, :twitter_handle, :project_token,
             presence: true,:if => :sponsor_info
+  validates :organization_classification, presence: true, unless: "organization_type === 'Special Situation'", if: :sponsor_info
 
   validates :project_title, :duration, :category, :title, :story, :about, presence: true, :if => :project_details
+  validates :duration, numericality: { only_integer:true, greater_than: 0,
+    less_than_or_equal_to: 365, message: 'must be a whole number' }, if: :project_details
   validates :goal, presence: true, numericality: true, :if => :project_details
 
   validates :large_image, presence: true, :if => :assets
@@ -50,6 +55,7 @@ class Project < ActiveRecord::Base
   scope :live, where("live = 1")
   scope :funding_active, where("status = 'Funding Active'")
   scope :funding_complete, where("status = 'Funding Completed'")
+  scope :not_partial_funding, where(partial_funding: false)
   scope :ending_today, where("campaign_deadline BETWEEN ? AND ?", DateTime.now.beginning_of_day, DateTime.now.end_of_day)
   scope :updated_yesterday, -> { where("updated_at >= ?", (Time.now - 1.day).utc) }
   scope :not_hidden, where(hide_featured: false)
@@ -85,7 +91,7 @@ class Project < ActiveRecord::Base
   end
 
   def self.order_by_percentage
-    Project.live.funding_active.sort_by(&:percent_to_goal).reverse
+    Project.live.funding_active.not_hidden.sort_by(&:percent_to_goal).reverse
   end
 
   def self.order_by_raised
@@ -311,6 +317,10 @@ class Project < ActiveRecord::Base
     )
   end
 
+  def has_classification?(classification)
+    self.organization_classification === classification
+  end
+
   def create_sponsor_charges
     sponsors = get_sponsors(self)
 
@@ -438,6 +448,29 @@ class Project < ActiveRecord::Base
     documents_updated_since(date).any? ||
     posts_updated_since(date).any?     ||
     galleries_updated_since(date).any?
+  end
+
+  def is_live?
+    live == 1
+  end
+
+  def funding_active?
+    status === "Funding Active"
+  end
+
+  def funding_complete?
+    status.downcase == 'funding complete' if status
+    false
+  end
+
+  def sponsorship_benefits_list
+    sponsorship_benefits.
+      where(status: true).
+      group_by {|sponsor| sponsor.sponsorship_level_id}
+  end
+
+  def init
+    self.goal ||= 0.0
   end
 
 private

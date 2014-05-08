@@ -427,19 +427,9 @@
       })
     });
 
-    $(".sponsor_checkbox").on("click", function(){
-      $('.step-container[data-id="sponsorship"] form').submit();
-    })
-
     $("#project_sponsorship_permission").on("change", function(){
       $('.step-container[data-id="sponsorship"] form').submit();
     })
-
-    $("#next-link-to-assets").click(function(){
-      window.location.href = '/projects/' + projectId + '/edit#assets';
-      window.location.reload(true);
-    })
-
 
     $('.stripe-connect').click(function() {
       localStorage.setItem('organization', $('#project_organization').val());

@@ -47,14 +47,14 @@ class Donation < ActiveRecord::Base
 
     if !project.perk_permission
       perk_description = "#{amount.to_i} Uruut Reward Points"
-      arr = AMOUNTS.each do |a|
-        a < amount
+      arr = AMOUNTS.select do |a|
+        a == amount
       end
 
-      if arr[0] == nil || arr[0] == ''
+      if arr.first == nil || arr.first == ''
         perk_name_selected = "Custom"
       else
-        perk_name_selected = LEVELS[AMOUNTS.index(arr[0])]
+        perk_name_selected = LEVELS[AMOUNTS.index(arr.last)]
       end
 
     elsif perks.blank?
@@ -164,6 +164,58 @@ class Donation < ActiveRecord::Base
 
     DonationMailer.send_donation_report.deliver
 
+  end
+
+  def create_charges!
+    if project.partial_funding && confirmed
+      begin
+        token = project.create_token(customer_token, project.project_token)
+        cost = amount.to_i * 100
+        description = "Donor #{project.project_title} #{user.first_name} #{user.last_name} #{user.email}"
+        application_fee = (cost * 0.05).to_i
+        Stripe::Charge.create({
+            :amount => cost,
+            :currency => "usd",
+            :card => token.id,
+            :description => description,
+            :application_fee => calculate_funder_application_fee(application_fee)
+          },
+          project.project_token
+        )
+        update_column(:approved, true)
+        if  project.has_classification?("501(c)(3)") ||
+            project.has_classification?("170(c)(1)")
+          user.generate_tax_report(project)
+        end
+        return true
+      rescue Stripe::CardError => e
+        # Since it's a decline, Stripe::CardError will be caught
+        body = e.json_body
+        err  = body[:error]
+
+        Rails.logger.error "Status is: #{e.http_status}"
+        Rails.logger.error "Type is: #{err[:type]}"
+        Rails.logger.error "Code is: #{err[:code]}"
+        # param is '' in this case
+        Rails.logger.error "Param is: #{err[:param]}"
+        Rails.logger.error "Message is: #{err[:message]}"
+      rescue Stripe::InvalidRequestError, Stripe::AuthenticationError,
+             Stripe::APIConnectionError, Stripe::StripeError => e
+        Rails.logger.error e
+      rescue => e
+        # Something else happened, completely unrelated to Stripe
+        Rails.logger.error e
+      end
+      false
+    else
+      true
+    end
+  end
+
+  private
+
+  def calculate_funder_application_fee(application_fee)
+    project.user.membership_kind == 'fee' ? application_fee : nil
   end
 
 end

@@ -21,7 +21,7 @@
         .events
             - unless @project.project_sponsors.platinum.first.blank?
                 .platinum.cf
-                    %h5 Platinum Sponsor
+                    %h5= "#{@project.project_sponsors.platinum.first.sponsorship_level_name} Sponsor"
                     .platinum-logo
                         = image_tag @project.project_sponsors.platinum.first.logo
                     %p= @project.project_sponsors.platinum.first.name
@@ -29,7 +29,7 @@
 
             - unless @project.project_sponsors.gold.first.blank?
                 .gold.cf
-                    %h5 Gold Sponsors:
+                    %h5= "#{@project.project_sponsors.gold.first.sponsorship_level_name} Sponsors:"
                     - @project.project_sponsors.gold.each do |sponsor|
                         .gold-container
                             .gold-logo
@@ -39,7 +39,7 @@
 
             - unless @project.project_sponsors.silver.first.blank?
                 .gold.cf
-                    %h5 Silver Sponsors:
+                    %h5= "#{@project.project_sponsors.silver.first.sponsorship_level_name} Sponsors:"
                     - @project.project_sponsors.silver.each do |sponsor|
                         .gold-container
                             .silver-logo

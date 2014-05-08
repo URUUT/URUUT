@@ -51,7 +51,7 @@ class ProjectsController < ApplicationController
     if params[:step]
       if params[:step] == 'first'
         @project.errors.clear
-        @project.update_attributes!(params[:project])
+        @project.update_attributes(params[:project])
         @project.sponsor_info = true
         if @project.valid?
           render :json => "Success"
@@ -87,6 +87,7 @@ class ProjectsController < ApplicationController
       session[:current_project] = @project.id
       @project.update_attributes!(params[:project])
       @perks = @project.perks.order(:amount)
+      @sponsorship_levels = SponsorshipLevel.with_benefits(@project)
       respond_to do |format|
         format.html
         format.js
@@ -99,9 +100,10 @@ class ProjectsController < ApplicationController
 
     @images = @project.galleries.page(params[:page]).per(6)
     sort_sponsorships = @project.project_sponsors.sort_by {|ps| ps.level_id}
-    @project_sponsors = sort_sponsorships.group_by {|sponsor| sponsor.level_id }
+    @project_sponsors = sort_sponsorships.group_by {|sponsor| sponsor.sponsorship_level_parent_id }
     @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).order(:id).group_by {|sponsor| sponsor.sponsorship_level_id}
     @perks = @project.perks.order(:amount)
+    @sponsorship_levels = SponsorshipLevel.with_benefits(@project)
     session[:current_project] = @project.id
     render :layout => 'landing'
   end
@@ -112,52 +114,6 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    sponsorship_benefits = []
-    def sponsorship_benefit_level(level, benefit, key)
-      data = []
-      1.upto(params["#{level}_count"].to_i) do |x|
-        count = if !benefit[x - 1].blank?
-          !benefit[x - 1][:id].blank? ? benefit[x - 1][:id] : x
-        else
-          x
-        end
-        status = params["#{level}"]["#{count}"] ? 1 : 0
-        if level.eql?("platinum")
-          cost = 0.25 * @project.goal.to_i
-        elsif level.eql?("gold")
-          cost = 0.1 * @project.goal.to_i
-        elsif level.eql?("silver")
-          cost = 0.05 * @project.goal.to_i
-        else
-          if @project.goal.to_i * 0.02 >= 750
-            cost = 750
-          else
-            cost = 0.02 * @project.goal.to_i
-          end
-        end
-        # if @project.sponsorship_benefits.blank? || params["#{level}"]["id_#{count}"].nil?
-          unless params["#{level}"]["info_#{count}"].blank?
-            data <<  {name: params["#{level}"]["info_#{count}"],sponsorship_level_id: key, project_id: @project.id, status: status, cost: cost}
-          end
-        # else
-        #   sponsorship_benefit = SponsorshipBenefit.find(params[level]["id_#{count}"])
-        #   sponsorship_benefit.update_attributes({name: params["#{level}"]["info_#{count}"],sponsorship_level_id: key, project_id: @project.id, status: status, cost: cost})
-        # end
-      end
-      data
-    end
-
-    SponsorshipBenefit::SPONSORSHIP_BENEFITS.each do |key, value|
-
-      case key
-        when 1 then sponsorship_benefits += sponsorship_benefit_level("platinum", value, key)
-        when 2 then sponsorship_benefits += sponsorship_benefit_level("gold", value, key)
-        when 3 then sponsorship_benefits += sponsorship_benefit_level("silver", value, key)
-        when 4 then sponsorship_benefits += sponsorship_benefit_level("custom", value, key) if params[:custom].present?
-      end
-
-    end
-
     unless params[:project][:duration].blank?
       params[:project][:campaign_deadline] = params[:project][:duration].to_i.days.from_now.end_of_day.to_time
     end
@@ -174,10 +130,6 @@ class ProjectsController < ApplicationController
       @project.step = "/projects/#{@project.id}/edit#assets"
     end
 
-    unless sponsorship_benefits.blank?
-      SponsorshipBenefit.where(project_id: params[:id]).destroy_all
-      @sponsorship_benefits = SponsorshipBenefit.create!(sponsorship_benefits)
-    end
     params[:project][:goal] = params[:project][:goal].gsub(",", "") if !params[:project][:goal].nil?
     params[:project][:sponsor_permission] = params[:project][:sponsorship_permission] if !params[:project][:sponsorship_permission].nil?
     @project.update_attributes!(params[:project])
@@ -190,7 +142,8 @@ class ProjectsController < ApplicationController
     if @project.save
       if params[:step].eql?("fourth")
         @perks = @project.perks.order(:amount)
-        @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
+        @sponsorship_benefits = @project.sponsorship_benefits_list
+        @sponsorship_levels = SponsorshipLevel.by_project(@project)
         respond_to do |format|
           format.js { render "skip_sponsor.js.erb" }
         end
@@ -229,6 +182,7 @@ class ProjectsController < ApplicationController
     @project.update_attributes!(sponsor_permission: false)
     @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
     @perks = @project.perks.order(:amount)
+    @sponsorship_levels = SponsorshipLevel.by_project(@project)
 
     respond_to :js
   end
@@ -338,16 +292,14 @@ class ProjectsController < ApplicationController
   end
 
   def submit_project
-    project = Project.find_by_id(params[:id])
-    # project_live = 0
+    project = Project.find(params[:id])
     project.live = 0
-    # project.approval_date = Date.today.strftime("%F")
     project.ready_for_approval = 1
     if project.save!
       session[:step] = nil
       respond_to do |format|
         Project.delay.send_confirmation_email(project)
-        format.json { render :json => project.ready_for_approval }
+        format.json { render :json => { ready_for_approval: project.ready_for_approval, status: 200 } }
       end
     end
   end
@@ -378,6 +330,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
     @perks = @project.perks.order(:amount)
+    @sponsorship_levels = SponsorshipLevel.by_project(@project)
 
     respond_to do |format|
       format.js { render "skip_sponsor.js.erb" }
@@ -385,6 +338,8 @@ class ProjectsController < ApplicationController
   end
 
   def update_sponsorship_content
+    @project = Project.find(params[:id])
+    @sponsorship_levels = SponsorshipLevel.with_benefits(@project)
     respond_to :js
   end
 

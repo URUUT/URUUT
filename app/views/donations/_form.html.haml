@@ -64,7 +64,10 @@
     %hr
     %p{:style => "font:normal 12px/18px 'Proxima Nova';color:#403e37"}
       %span{:style => "Proxima Nova Bold"}
-        Note: Your card will not be charged at the time of your pledge. For all or nothing campaigns you will be charged at the end of the campaign, only if this campaign reaches its funding goal. For partial funding projects, you will be charged at the end of this campaign. All transactions are processed through a secure third-party payment processor.
+      - if @project.partial_funding
+        %strong Note: Your credit card will be charged at the time of your donation. All transactions are processed through a secure third-party payment processor.
+      -else
+        %strong Note: For all or nothing campaigns you will be charged at the end of the campaign, only if this campaign reaches its funding goal. All transactions are processed through a secure third-party payment processor.
     = button_tag :type => 'submit', :id => "donate", :class => "btn" do
       Contribute ►
     .cf
