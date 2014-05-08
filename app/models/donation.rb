@@ -183,8 +183,8 @@ class Donation < ActiveRecord::Base
           project.project_token
         )
         update_column(:approved, true)
-        if  project.has_classification?("501(c)3") ||
-            project.has_classification?("170(c)1")
+        if  project.has_classification?("501(c)(3)") ||
+            project.has_classification?("170(c)(1)")
           user.generate_tax_report(project)
         end
         return true
