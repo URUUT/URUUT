@@ -42,11 +42,10 @@
           %h6{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0;"} Amount
           %h2{:style => "letter-spacing:normal;font-family: 'Proxima Nova Semi', arial, sans-serif;line-height:normal;margin:0"}
             %span.platinum-amount-value
-              - if @project.goal
-                - if editable_level?(current_user, @project)
-                  = text_field_tag 'level[platinum][cost]', level_cost('platinum', @sponsorship_levels[1], @project), class: 'span12'
-                - else
-                  = amount_converter(SponsorshipLevel.default_costs('platinum',project))
+              - if editable_level?(current_user, @project)
+                = text_field_tag 'level[platinum][cost]', level_cost('platinum', @sponsorship_levels[1], @project), class: 'span12'
+              - else
+                = amount_converter(SponsorshipLevel.default_costs('platinum',project))
           - unless editable_level?(current_user, @project)
             %p{:style => "font-family:georgia, serif;font-style:italic;margin-top:8px"} (25% of funding goal)
           - else
@@ -424,7 +423,7 @@
   }
 
   var updateSponsorPercentage = function() {
-    var total = $('#project_goal').val();
+    var total = $('#project_goal').val().split(',').join('');
     $('.percentage').each(function() {
       var sponsor_value = $(this).prev('h2').find('span input').val().split(',').join('');
       var new_percentage = Math.ceil((sponsor_value/total) * 100);
@@ -641,11 +640,13 @@
     }
   });
 
-  fields = [ '#level_platinum_cost', '#level_gold_cost', '#level_silver_cost',
-             '#level_bronze_cost' ]
-  $(fields+"").maskMoney({allowZero:false, precision: 0});
-  $(fields+"").maskMoney('mask')
-
+  function applyMaskMoney() {
+    fields = [ '#level_platinum_cost', '#level_gold_cost', '#level_silver_cost',
+               '#level_bronze_cost' ]
+    $(fields+"").maskMoney({allowZero:false, precision: 0});
+    $(fields+"").maskMoney('mask')
+  }
+  applyMaskMoney();
 
 - if current_user.has_plan? 'plus'
   = javascript_include_tag 'customSponsorshipBehavior'
