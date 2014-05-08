@@ -487,10 +487,10 @@
         - unless @project.funding_complete?
           %div{style: "margin-top: 5px;"}
             - if user_signed_in?
-              %a.btn{:href => "/projects/#{@project.id}/sponsors/new?level=bronze"}
+              %a.btn{:href => "/projects/#{@project.id}/sponsors/new"}
                 Become A Sponsor ►
             - else
-              = link_to "javascript:void(0)", "url-data" => "/projects/#{@project.id}/sponsors/new?level=bronze", class: "btn unsignin" do
+              = link_to "javascript:void(0)", "url-data" => "/projects/#{@project.id}/sponsors/new", class: "btn unsignin" do
                 Become A Sponsor ►
 
       %h4.title{:style => 'margin-top:50px;'}Donors(#{@project.distinct_donors.count})
