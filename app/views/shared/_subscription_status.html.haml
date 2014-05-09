@@ -5,9 +5,8 @@
     #{membership_cost_message_start(current_user)}
     %b #{membership_cost(current_user)}
     #{membership_cost_message_end(current_user)}
-    %br
-    - if current_user.coupon_stripe_token
-      = membership_coupon_message(current_user.coupon_stripe_token)
+  - if current_user.coupon_stripe_token
+    %p{style: "font-style: italic;"}= membership_coupon_message(current_user.coupon_stripe_token)
       
 - else
   %p
