@@ -1,6 +1,6 @@
 require 'stripe'
 
-class Gateway::CouponService <  Gateway::BaseService
+class Gateway::CouponService < Gateway::BaseService
   
   def create(coupon)
     return true if coupon.blank?
