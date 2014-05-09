@@ -1,3 +1,4 @@
+require 'stripe'
 module MembershipsHelper
 
   def membership_title(user)
@@ -50,6 +51,11 @@ module MembershipsHelper
     when 'basic', 'plus'
       'unless you cancel your subscription before that time.'
     end
+  end
+
+  def membership_coupon_message(coupon_id)
+    coupon = Stripe::Coupon.retrieve coupon_id
+    "You applied a #{coupon.id} discount coupon to your membership"
   end
 
 end
