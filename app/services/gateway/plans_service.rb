@@ -29,7 +29,7 @@ private
       membership.save
     when 'basic', 'plus'
       find_card
-      response = customer.update_subscription(plan: plan_id)
+      response = customer.subscriptions.create({ :plan => plan.name })
       membership.stripe_subscription_id = response.id
       membership.save
     else

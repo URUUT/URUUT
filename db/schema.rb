@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140423181519) do
+ActiveRecord::Schema.define(:version => 20140509153634) do
 
   create_table "accounts", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -546,6 +546,7 @@ ActiveRecord::Schema.define(:version => 20140423181519) do
     t.string   "stripe_user_token"
     t.string   "stripe_card_token"
     t.string   "telephone"
+    t.string   "coupon_stripe_token"
   end
 
   add_index "users", ["account_id"], :name => "index_users_on_account_id"

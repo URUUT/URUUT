@@ -21,9 +21,10 @@ class PaymentMethodsController < ApplicationController
     @credit_card = CreditCard.new(params[:credit_card])
     customer_plan = Gateway::PlansService.new(current_user)
     plan_id = params[:credit_card][:plan_id]
-
+    coupon = Gateway::CouponService.new(current_user)
     begin
-      if @credit_card.valid? && @card_service.create(@credit_card)
+      if @credit_card.valid? && @card_service.create(@credit_card) && 
+         coupon.create(params[:coupon])
         customer_plan.update_plan(plan_id) if plan_id.present?
         current_user.send_welcome_email
         redirect_to users_sign_up_confirmation_path
@@ -59,5 +60,4 @@ private
     @card_service = Gateway::CardsService.new(current_user)
     @customer = @card_service.find_customer
   end
-
 end
