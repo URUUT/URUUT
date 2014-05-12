@@ -55,7 +55,9 @@ module MembershipsHelper
 
   def membership_coupon_message(coupon_id)
     coupon = Stripe::Coupon.retrieve coupon_id
-    "You applied a #{coupon.amount_off || coupon.percent_off} discount coupon to your membership"
+    discount_text = coupon.amount_off ?
+      "$#{coupon.amount_off}" : "#{coupon.percent_off}%"
+    "You applied a #{discount_text} discount coupon to your membership"
   end
 
 end
