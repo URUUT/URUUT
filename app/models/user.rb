@@ -152,6 +152,8 @@ class User < ActiveRecord::Base
     eligible_perk_name = eligible_perk.nil? ? "None" : eligible_perk.name
     eligible_perk_description = eligible_perk.nil? ? " " : eligible_perk.description
     document_name = "#{project.organization[0..8].gsub(/\s+/, '')}_#{project.campaign_deadline.strftime('%Y%m%d')}#{self.id}_#{DateTime.now.strftime('%Y%m%dT%H%M')}.pdf"
+    pdf_date = project.partial_funding ?
+      Date.today : project.campaign_deadline
     # Implicit Block
     Prawn::Document.generate("tmp/" + document_name) do
       font_size 18
@@ -159,7 +161,7 @@ class User < ActiveRecord::Base
       stroke_horizontal_rule
 
       font_size 12
-      pad(20) { text "Date: #{project.campaign_deadline.strftime('%m-%d-%Y')}"}
+      pad(20) { text "Date: #{pdf_date.strftime('%m-%d-%Y')}"}
       pad(20) { text "Donator Name: #{first_name} #{last_name}" }
       pad(20) { text "Total Donated: #{total_donated}" }
 
