@@ -26,12 +26,13 @@
           %span.error-container
         = f.text_field :last_name
 
-    %div
-      = f.label :organization, class: "label-green" do
-        %span.error-container
-        Organization name*
-        = "(Not Required for Donor Signup)" unless params[:sign_up_plan] || (params[:user] && params[:user][:sign_up_plan]) || params[:full_registration] || (params[:user] && params[:user][:full_registration])
-      = f.text_field :organization
+    - unless @is_donor
+      %div
+        = f.label :organization, class: "label-green" do
+          %span.error-container
+          Organization name*
+          = "(Not Required for Donor Signup)" unless params[:sign_up_plan] || (params[:user] && params[:user][:sign_up_plan]) || params[:full_registration] || (params[:user] && params[:user][:full_registration])
+        = f.text_field :organization
 
     %div
       = f.label :email, class: "label-green" do
@@ -39,12 +40,13 @@
         Email address*
       = f.email_field :email
 
-    .row
-      .span3.well-half
-        = f.label :telephone, class: "label-green" do
-          Phone number*
-          %span.error-container
-        = f.text_field :telephone, id: "user_telephone"
+    - unless @is_donor
+      .row
+        .span3.well-half
+          = f.label :telephone, class: "label-green" do
+            Phone number*
+            %span.error-container
+          = f.text_field :telephone, id: "user_telephone"
 
     .row
       .span3.well-half

@@ -13,6 +13,7 @@ class RegistrationsController < Devise::RegistrationsController
       resource.email      = @marketing_info.email
     end
     @plan = Plan.where("name = ?", params[:sign_up_plan]).first
+    @is_donor = session[:is_donor]
   end
 
   def edit
@@ -21,6 +22,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   def create
     self.resource = resource_class.new(params[:user])
+    session.delete(:is_donor)
 
     if resource.save
       resource.build_membership.save

@@ -344,7 +344,7 @@
                     - else
                       - unless @project.funding_complete?
                         - url = url_encode("#{request.protocol}#{request.host_with_port}/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}")
-                        = link_to "javascript:void(0)", "url-sign-up" => url, "url-sign-in" => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "btn perk pull-right unsignin-perk", :style => "margin-top: 10px;" do
+                        = link_to "javascript:void(0)", "url-sign-up" => url, "url-sign-in" => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", "data-is-donor" => 'true', :class => "btn perk pull-right unsignin-perk", :style => "margin-top: 10px;" do
                           Fund Now ►
             - unless @project.funding_complete?
               .seed-level{id: "perk-id-custom"}
@@ -558,7 +558,7 @@
     $("a[rel^='prettyPhoto']").prettyPhoto();
 
     $('.unsignin').click(function(){
-      sign_url = '#{request.protocol}' + document.location.hostname + ":" + document.location.port + $(this).attr("url-data");
+      sign_url = '#{request.protocol}' + document.location.hostname + ":" + document.location.port + $(this).attr("url-data")
       url = $(this).attr("url-data");
       $('.modal').remove();
       $('body').append('<div class="modal hide fade" style="text-align:center;padding:50px;"><button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="position:absolute;top:10px;right:20px;">×</button><h5 style="margin-bottom:20px;">You need to sign in or sign up before continuing.</h5><a href="'+ url +'" class="btn green-btn">Sign In ►</a> <span style="font:italic 12px/21px georgia, serif;margin:0 10px;">or</span> <a href="/projects/set_previous_path_for_registration?url='+ sign_url +'" class="btn green-btn">Sign Up ►</a></div>');
@@ -566,7 +566,7 @@
     });
 
     $(".unsignin-perk").click(function(){
-      sign_up_url = $(this).attr("url-sign-up");
+      sign_up_url = $(this).attr("url-sign-up") + '&is_donor=' + this.getAttribute('data-is-donor');
       sign_in_url = $(this).attr("url-sign-in");
       $('.modal').remove();
       $('body').append('<div class="modal hide fade" style="text-align:center;padding:50px;"><button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="position:absolute;top:10px;right:20px;">×</button><h5 style="margin-bottom:20px;">You need to sign in or sign up before continuing.</h5><a href="'+ sign_in_url +'" class="btn green-btn">Sign In ►</a> <span style="font:italic 12px/21px georgia, serif;margin:0 10px;">or</span> <a href="/projects/set_previous_path_for_registration_perk?url='+ sign_up_url +'" class="btn green-btn">Sign Up  ►</a></div>');

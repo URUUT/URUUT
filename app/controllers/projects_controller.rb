@@ -350,11 +350,13 @@ class ProjectsController < ApplicationController
 
   def set_previous_path_for_registration
     session[:path] = params[:url]
+    session[:is_donor] = params[:is_donor]
     redirect_to new_user_registration_url
   end
 
   def set_previous_path_for_registration_perk
     session[:path] = URI.escape(CGI::unescape params[:url])
+    session[:is_donor] = params[:is_donor]
     redirect_to new_user_registration_url
   end
 
