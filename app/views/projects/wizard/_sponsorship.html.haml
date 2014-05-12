@@ -297,12 +297,13 @@
           %p{:style => "font-family:'Proxima Nova', arial, sans-serif;font-size:12px;color:#403e37;letter-spacing:normal;line-height:18px;"} This sponsorship level includes business / foundation name listing and a link to the sponsor’s website on your project page.
           %div#bronze-box
             %div#bronze-checkbox.existing-checkbox
-              %div.checkbox.default
-                = check_box_tag "bronze[1]", '1', true, class: "sponsor_checkbox"
-                %span#name Text mention on project body
-                %span.edit-benefit.italic.label-green select to edit
-                = hidden_field_tag "bronze[info_1]", "Text mention on project body", class: "edit-text-field"
-              -if @sponsorship_levels[4].present? || @project.sponsorship_benefits.bronze.any?
+              -if @sponsorship_levels[4].blank? && @project.sponsorship_benefits.bronze.empty?
+                %div.checkbox.default
+                  = check_box_tag "bronze[1]", '1', true, class: "sponsor_checkbox"
+                  %span#name Text mention on project body
+                  %span.edit-benefit.italic.label-green select to edit
+                  = hidden_field_tag "bronze[info_1]", "Text mention on project body", class: "edit-text-field"
+              -else
                 -@project.sponsorship_benefits.where(sponsorship_level_id: @sponsorship_levels[4]? @sponsorship_levels[4] : 4).order(:id).each_with_index do |benefit, index|
                   %div.checkbox.default
                     = hidden_field_tag "bronze[id_#{index + 1}]", benefit.id
