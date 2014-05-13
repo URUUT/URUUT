@@ -9,7 +9,11 @@
       %meta{:content => "", :name => "description"}
       %meta{:content => "", :name => "author"}
       - if controller_name == "projects" and action_name == "show"
-        %meta{:property => "og:image", :content => "#{@project.large_image}"}
+        - if @project.large_image
+          %meta{:property => "og:image", :content => "#{@project.large_image}"}
+        - else
+          %meta{:property => "og:image", :content => "#{root_url.chomp('/')}#{asset_path('tb-fb-og.png')}"}
+
         %meta{:property => "og:title", :content => "#{@project.project_title} | Nonprofit Exchange"}
         %meta{:property => 'og:description', :content=> "#{@project.title}" }
         %meta{:property => "og:url", :content => "#{request.original_url}"}
