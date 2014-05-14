@@ -155,6 +155,7 @@ class SponsorsController < ApplicationController
     project_sponsor = ProjectSponsor.unscoped.where(project_id: params[:project_id], sponsor_id: @sponsor.id).last
     project_sponsor.update_attributes!(status: "confirmed", confirmed: true)
     SponsorMailer.delay.new_sponsor(@sponsor)
+    SponsorMailer.delay.sponsor_thank_you(@sponsor.id, @sponsor.email)
     redirect_to thank_you_for_sponsor_url(params[:project_id], @sponsor.id)
   end
 
@@ -192,8 +193,6 @@ class SponsorsController < ApplicationController
                                       level_id: params[:project_sponsor][:level_id], card_token: token,
                                       card_type: card_type, card_last4: last4, sponsor_type: params[:type] })
     session[:project_sponsor] = @project_sponsor
-    SponsorMailer.delay.new_sponsor(@sponsor)
-    SponsorMailer.delay.sponsor_thank_you(@sponsor.id, @sponsor.email)
     redirect_to confirmation_url(params[:project_id], @sponsor.id)
   end
 
