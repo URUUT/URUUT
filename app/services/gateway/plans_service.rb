@@ -29,11 +29,23 @@ private
       membership.save
     when 'basic', 'plus'
       find_card
-      response = customer.subscriptions.create({ :plan => plan.name })
+      response = update_or_create_basic_plus_subscription(plan)
       membership.stripe_subscription_id = response.id
       membership.save
     else
       false
+    end
+  end
+
+  def update_or_create_basic_plus_subscription(plan)
+    response = customer.subscriptions.all(limit: 1)
+    if response.count > 0
+      response = response.data[0]
+      response.plan = plan.name
+      response.save
+      response
+    else
+      response = customer.subscriptions.create(plan: plan.name)
     end
   end
 
