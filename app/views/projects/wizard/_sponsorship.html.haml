@@ -304,18 +304,16 @@
                   %div.hide
                     = check_box_tag "bronze[1]", nil, class: "sponsor_checkbox", checked: true
                     %span#name Text mention on project body
-                    %span.edit-benefit.italic.label-green select to edit
-                    = hidden_field_tag "bronze[info_1]", "Text mention on project body", class: "edit-text-field"
 
               - else
                 -@project.sponsorship_benefits.where(sponsorship_level_id: @sponsorship_levels[4]? @sponsorship_levels[4] : 4).order(:id).each_with_index do |benefit, index|
                   %div.checkbox.default
                     = hidden_field_tag "bronze[id_#{index + 1}]", benefit.id
-                    = hidden_field_tag "bronze[info_#{index + 1}]", benefit.name, class: "edit-text-field"
                     - if benefit.name != 'Text mention on project body'
                       = check_box_tag "bronze[#{index + 1}]", nil, benefit.status, class: "sponsor_checkbox"
                       %span#name= benefit.name
                       %span.edit-benefit.italic.label-green select to edit
+                      = text_field_tag "bronze[info_#{index + 1}]", benefit.name, class: "edit-text-field", style: 'width: 320px !important; display: none;'
                     - else
                       = check_box_tag "bronze", '1', true, class: "sponsor_checkbox", disabled: true, id: 'bronze_1_1'
                       %span#name Text mention on project body
