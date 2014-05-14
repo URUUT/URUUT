@@ -317,8 +317,6 @@
                     - else
                       = check_box_tag "bronze", '1', true, class: "sponsor_checkbox", disabled: true, id: 'bronze_1_1'
                       %span#name Text mention on project body
-                      %div.hide
-                        = check_box_tag "bronze[#{index + 1}]", nil, class: "sponsor_checkbox", checked: true
 
 
 
@@ -510,7 +508,7 @@
         c = 0;
       }
       c++;
-      $(sponsorship).attr({id: name + "_" + c , name: name + "["+ c + "]"});
+      $(sponsorship).attr({id: name + "_" + c , name: name + "["+ c + "]", value: c});
     }
   }
 
