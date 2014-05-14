@@ -8,6 +8,7 @@ class Donation < ActiveRecord::Base
 
   default_scope { where(confirmed: true) }
   scope :approved, where(approved: true)
+  scope :unapproved, where(approved: false)
   scope :with_funder, ->(funder) { where(user_id: funder) }
   scope :for_project, ->(project) { where(project_id: project) }
   scope :known_users, -> { where(anonymous: false) }

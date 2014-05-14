@@ -8,7 +8,7 @@ namespace :uruut do
 			if valid_project?(project)
 				project.update_attributes(status: "Funding Completed")
 
-				project.create_donation_charges unless project.partial_funding
+				project.create_donation_charges
 				project.create_sponsor_charges
 
 				user_ids = project.donations.approved.select(:user_id).map(&:user_id).uniq
