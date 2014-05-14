@@ -87,6 +87,7 @@ class SponsorshipLevel < ActiveRecord::Base
         level.project = project
         level.save!
       end
+      level.create_default_bronze_benefit(project) if level.parent_id == 4
       if params["#{default_name}"]
         benefits = params["#{default_name}"].select { |key, value| key.to_i > 0 }
         benefits.each_pair do |key, value|
@@ -98,6 +99,11 @@ class SponsorshipLevel < ActiveRecord::Base
       end
     end
     levels.to_a.compact
+  end
+
+  def create_default_bronze_benefit(project)
+    new_benefit = SponsorshipBenefit.new({name: 'Text mention on project body', sponsorship_level_id: id, project_id: project.id, status: 1})
+    new_benefit.save!
   end
 
 end
