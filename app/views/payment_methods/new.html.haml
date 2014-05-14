@@ -2,6 +2,11 @@
   .span8{:style => "margin-top:35px;"}
     %h4.font-bold SET PAYMENT METHOD
     = form_for @credit_card, url: user_payment_method_path(current_user), method: :post, html: { class: "well registration-edit"} do |f|
+      - if current_user.errors.any?
+        .error-box
+          %ul
+            - current_user.errors.full_messages.each do |message|
+              %li= message
       - if @credit_card.errors.any?
         .error-box
           %ul
