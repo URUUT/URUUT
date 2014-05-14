@@ -303,7 +303,7 @@ class Project < ActiveRecord::Base
   end
 
   def get_donors(project)
-    donors = Donation.where("project_id = ? AND customer_token != ?", project.id, '')
+    donors = Donation.unapproved.where("project_id = ? AND customer_token != ?", project.id, '')
   end
 
   def get_sponsors(project)
