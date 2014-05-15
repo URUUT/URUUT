@@ -19,8 +19,9 @@ class SponsorMailer < ActionMailer::Base
     @project_title = @project.project_title
     @project_id = @project.id
     @host = ActionMailer::Base.default_url_options[:host]
+    @sponsor_email = project_sponsor.email
 
-    mail to: recepient, subject: "Share from Crowfundproject sponsor"
+    mail from: @sponsor_email, to: recepient, subject: "Share from Crowfundproject sponsor"
   end
 
   def new_sponsor(sponsor)

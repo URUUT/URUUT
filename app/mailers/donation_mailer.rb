@@ -16,9 +16,9 @@ class DonationMailer < ActionMailer::Base
     @donator_name = "#{user.first_name}" + " #{user.last_name}"
     @image = @project.large_image
     @host = ActionMailer::Base.default_url_options[:host]
-    @donor_mail = user.email
+    @donor_email = user.email
 
-    mail from: @donor_mail, to: recepient, subject: "Checkout The Project I Donated To"
+    mail from: @donor_email, to: recepient, subject: "Checkout The Project I Donated To"
   end
 
   def donation_confirmation(donation)
