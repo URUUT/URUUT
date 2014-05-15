@@ -8,8 +8,13 @@ class ProjectMailer < ActionMailer::Base
   #   en.contact_mailer.contact_confirmation.subject
   #
   def project_confirmation(project)
+    if Rails.env.development?
+      bcc = "alejo+bcc@bandofcoders.com, cbartels@uruut.com"
+    else
+      bcc = "project-confirmation@uruut.com"
+    end
+
     user = User.find_by_id(project.user_id)
-    logger.debug(user)
 
     @name = "#{user.first_name}" + " #{user.last_name}"
     @email = user.email
@@ -18,7 +23,7 @@ class ProjectMailer < ActionMailer::Base
     @project = project
     @project_title = project.project_title
 
-    mail to: @email, bcc: "info@uruut.com, cbartels@uruut.com, agraham@uruut.com, mfeinberg@uruut.com, bnorwood@uruut.com", subject: "Wait For Approval"
+    mail to: @email, bcc: bcc, subject: "Wait For Approval"
   end
 
   def project_message(recepient, subject_email, header_image, content)
