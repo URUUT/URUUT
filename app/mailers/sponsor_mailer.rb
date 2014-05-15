@@ -69,7 +69,7 @@ class SponsorMailer < ActionMailer::Base
     @project_id = project.id
     @sponsor_email = project_sponsor.email
 
-    mail from: @sponsors_email, to: @email, subject: "Thank You, Sponsor!"
+    mail from: @sponsor_email, to: @email, subject: "Thank You, Sponsor!"
   end
 
   def send_sponsor_report
