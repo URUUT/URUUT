@@ -21,7 +21,7 @@ class SponsorMailer < ActionMailer::Base
     @host = ActionMailer::Base.default_url_options[:host]
     @sponsor_email = project_sponsor.email
 
-    mail from: @sponsor_email, to: recepient, subject: "Share from Crowfundproject sponsor"
+    mail from: @sponsor_email to: recepient, subject: "Share from Crowfundproject sponsor"
   end
 
   def new_sponsor(sponsor)
@@ -67,8 +67,9 @@ class SponsorMailer < ActionMailer::Base
     @project_facebook = project.facebook_page
     @project_twitter = project.twitter_handle
     @project_id = project.id
+    @project_sponsor_email = project_sponsor.email
 
-    mail to: @email, subject: "Thank You, Sponsor!"
+    mail from: @project_sponsor_email, to: @email, subject: "Thank You, Sponsor!"
   end
 
   def send_sponsor_report
