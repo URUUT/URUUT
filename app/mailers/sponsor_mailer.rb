@@ -14,12 +14,14 @@ class SponsorMailer < ActionMailer::Base
   def share_project(recepient, project_id, user_id)
     @project = Project.find(project_id)
     project_sponsor = ProjectSponsor.find_by_id(user_id)
+    user = User.find_by_id(project.user_id)
+
     @sponsor_name = project_sponsor.name
     @image = @project.large_image
     @project_title = @project.project_title
     @project_id = @project.id
     @host = ActionMailer::Base.default_url_options[:host]
-    @sponsor_email = @sponsors.email
+    @sponsor_email = user.email
 
     mail from: @sponsor_email, to: recepient, subject: "Share from Crowfundproject sponsor"
   end
