@@ -8,24 +8,24 @@ class Worksheet::Donors < Worksheet::Base
 private
   attr_reader :project
 
-  def attributes(funder)
-    funder_donation = donation(funder)
+  def attributes(donation)
+    funder = get_founder(donation)
 
     { project_name: project.title,
       email:        funder.email,
       first_name:   funder.first_name,
       last_name:    funder.last_name,
-      amount:       funder_donation.amount,
-      perk:         funder_donation.perk_name,
-      description:  funder_donation.description }
+      amount:       donation.amount,
+      perk:         donation.perk_name,
+      description:  donation.description }
   end
 
   def funders
-    @funders = User.unique_project_donors(project)
+    @donations ||= project.donations
   end
 
-  def donation(funder)
-    Donation.with_funder(funder).with_project(project).first
+  def get_founder(donation)
+    donation.user
   end
 
   def column_titles
