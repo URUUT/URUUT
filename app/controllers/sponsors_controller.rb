@@ -3,6 +3,8 @@ class SponsorsController < ApplicationController
   before_filter :project_id, except: [:create, :thank_you, :share_email]
   before_filter :authenticate_user!
 
+  skip_before_filter :session_email_forgot_password, only: [:share_email]
+
   def new
     @sponsor = Sponsor.new
     @sponsor.anonymous = false
