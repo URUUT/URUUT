@@ -335,17 +335,11 @@
                     %li= description
                   .clearfix
                     .seed-num
-                      / %div Seed
                       .amount
                         =amount_converter(perk)
-                    - if user_signed_in? && @project.funding_active?
+                    - if @project.funding_active?
                       = link_to "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "btn perk pull-right", :style => "margin-top: 10px;" do
                         Fund Now ►
-                    - else
-                      - unless @project.funding_complete?
-                        - url = url_encode("#{request.protocol}#{request.host_with_port}/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}")
-                        = link_to "javascript:void(0)", "url-sign-up" => url, "url-sign-in" => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", "data-is-donor" => 'true', :class => "btn perk pull-right unsignin-perk", :style => "margin-top: 10px;" do
-                          Fund Now ►
             - unless @project.funding_complete?
               .seed-level{id: "perk-id-custom"}
                 %h3.perk-name-other{id: "perk-name-other-custom"}
@@ -442,12 +436,8 @@
                   / %div Seed
                   .amount
                     = amount_converter(perk)
-                - if user_signed_in? && @project.funding_active?
+                - if @project.funding_active?
                   %a.btn.pull-right{:href => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "fund btn"} Fund Now ►
-                - else
-                  - unless @project.funding_complete?
-                    - url = url_encode("#{request.protocol}#{request.host_with_port}/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}")
-                    %a.btn.pull-right.unsignin-perk{"url-sign-up" => url, "url-sign-in" => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "fund btn"} Fund Now ►
         - unless @project.funding_complete?
           .seed-level{id: "perk-id-custom"}
             %h3.perk-name-other{id: "perk-name-other-custom"}

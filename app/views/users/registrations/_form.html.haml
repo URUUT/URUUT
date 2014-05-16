@@ -1,0 +1,68 @@
+= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "well" }) do |f|
+  = devise_error_messages!
+  - if params[:sign_up_plan] || (params[:user] && params[:user][:sign_up_plan])
+    = f.hidden_field :sign_up_plan, value: params[:sign_up_plan] || (params[:user] && params[:user][:sign_up_plan])
+  - if params[:full_registration] || (params[:user] && params[:user][:full_registration])
+    = f.hidden_field :full_registration, value: params[:full_registration] || (params[:user] && params[:user][:full_registration])
+  %h4 Tell us about you.
+  %br
+  .row
+    .span3.well-half.field
+      = f.label :first_name, class: "label-green" do
+        First Name*
+        %div.error-container
+          %label.error
+      = f.text_field :first_name
+    .span3.well-half.field
+      = f.label :last_name, class: "label-green" do
+        Last Name*
+        %div.error-container
+          %label.error
+      = f.text_field :last_name
+
+  - unless @is_donor
+    %div.field
+      = f.label :organization, class: "label-green" do
+        %div.error-container
+          %label.error
+        Organization name*
+        = "(Not Required for Donor Signup)" unless params[:sign_up_plan] || (params[:user] && params[:user][:sign_up_plan]) || params[:full_registration] || (params[:user] && params[:user][:full_registration])
+      = f.text_field :organization
+
+  %div.field
+    = f.label :email, class: "label-green" do
+      %div.error-container
+        %label.error
+      Email address*
+    = f.email_field :email
+
+  - unless @is_donor
+    .row
+      .span3.well-half.field
+        = f.label :telephone, class: "label-green" do
+          Phone number*
+          %div.error-container
+            %label.error
+        = f.text_field :telephone, id: "user_telephone"
+
+  .row
+    .span3.well-half.field
+      = f.label :password, class: "label-green" do
+        Password*
+        %div.error-container
+          %label.error
+      = f.password_field :password, id: "user_password"
+
+    .span3.well-half.field
+      = f.label :password_confirmation, class: "label-green" do
+        Password Confirmation*
+        %div.error-container
+          %label.error
+      = f.password_field :password_confirmation, id: "user_password_confirmation"
+
+  - if with_submits
+    %div.inline
+      - if (params[:sign_up_plan] || (params[:user] && params[:user][:sign_up_plan])) == 'fee'
+        = f.submit 'Finish', class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:left; border-radius: 5px; width: 230px;"
+      - else
+        = f.submit 'Continue', class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:left; border-radius: 5px; width: 230px;"

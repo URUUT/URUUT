@@ -11,8 +11,9 @@
   = f.hidden_field :token
   = f.hidden_field :card_type
   = f.hidden_field :card_last4
-  = f.hidden_field :email, :value => "#{current_user.email}"
-  = f.hidden_field :user_id, :value => "#{current_user.id}"
+  - if user_signed_in?
+    = f.hidden_field :email, :value => "#{current_user.email}"
+    = f.hidden_field :user_id, :value => "#{current_user.id}"
   = f.hidden_field :project_id, :value => "#{current_project}"
   - if @donation.token.present?
     Credit card has been provided.
@@ -30,7 +31,7 @@
       = label_tag nil, class: "label-green" do
         NAME AS IT APPEARS ON CARD*
         %span.error-container
-      = text_field_tag nil, [current_user.first_name, current_user.last_name].join(" "), name: "name", id: "name"
+      = text_field_tag nil, nil, name: "name", id: "name"
     .field.card-number
       = label_tag :card_number, class: "label-green" do
         Credit Card Number*

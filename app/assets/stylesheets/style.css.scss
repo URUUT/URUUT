@@ -3115,3 +3115,7 @@ input, select, textarea{
   font-family: georgia, serif;
   font-style: italic;
 }
+
+.field > input {
+  width: 100%;
+}
