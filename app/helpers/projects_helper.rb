@@ -83,7 +83,7 @@ module ProjectsHelper
 
   def image_sponsor(sponsor)
     if sponsor.anonymous
-      image_tag("uruut-fb-og.png", class: "img-polaroid")
+      image_tag("tb-fb-og.png", class: "img-polaroid")
     else
       link_to(image_tag(sponsor.logo, class: "img-polaroid"), recognize_url(sponsor.site), target: "_blank")
     end
