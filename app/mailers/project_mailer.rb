@@ -26,11 +26,11 @@ class ProjectMailer < ActionMailer::Base
     mail to: @email, bcc: bcc, subject: "Wait For Approval"
   end
 
-  def project_message(recepient, subject_email, header_image, content)
+  def project_message(recepient, subject_email, header_image, content, project)
     @image = header_image
     @host = ActionMailer::Base.default_url_options[:host]
     @content = ApplicationController.helpers.simple_format(content)
-    mail to: recepient, subject: subject_email
+    mail from: project.user.email, to: recepient, subject: subject_email
   end
 
   def project_approved(project)
