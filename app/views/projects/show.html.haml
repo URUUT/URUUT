@@ -248,13 +248,6 @@
             - elsif @project.cultivation_mime_type.eql?("image") and !@project.cultivation_image.blank?
               = image_tag "#{@project.cultivation_image}", style: "float:left; width:100%"
             %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: pre-line;"}= simple_format(@project.about)
-      -#%hr
-      -#.comments
-        -#%h4.comment Post a message
-        -#%p
-          -#Tell #{@project.title} you support their campaign! Got questions or need more information? Post them here and get an answer!
-
-      -#.fb-comments{'data-href' => "http://127.0.0.1:8080", :style => "width:100%"}
 
 
     .span4.sidebar
@@ -303,25 +296,13 @@
                           Not Available
                           %span
                       - elsif p.limit && !p.perks_available.to_i.zero?
-                        - if user_signed_in?
-                          - unless @project.funding_complete?
-                            = link_to "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", class: "btn perk pull-right", style: "margin-top: 10px;" do
-                              Fund Now ►
-                        - else
-                          - unless @project.funding_complete?
-                            - url = url_encode("#{request.protocol}#{request.host_with_port}/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}")
-                            = link_to "javascript:void(0)", "url-sign-up" => url, "url-sign-in" => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", class: "btn perk pull-right unsignin-perk", style: "margin-top: 10px;" do
-                              Fund Now ►
+                        - unless @project.funding_complete?
+                          = link_to "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", class: "btn perk pull-right", style: "margin-top: 10px;" do
+                            Fund Now ►
                       - else
-                        - if user_signed_in?
-                          - unless @project.funding_complete?
-                            = link_to "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", class: "btn perk pull-right", style: "margin-top: 10px;" do
-                              Fund Now ►
-                        - else
-                          - unless @project.funding_complete?
-                            - url = url_encode("#{request.protocol}#{request.host_with_port}/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}")
-                            = link_to "javascript:void(0)", "url-sign-up" => url, "url-sign-in" => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", class: "btn perk pull-right unsignin-perk", style: "margin-top: 10px;" do
-                              Fund Now ►
+                        - unless @project.funding_complete?
+                          = link_to "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", class: "btn perk pull-right", style: "margin-top: 10px;" do
+                            Fund Now ►
 
             -else
               - default_perk.each_with_index do |perk, index|
@@ -350,7 +331,7 @@
                     .amount
                     %h5 AMOUNT TO SEED
                     .textarea.seed-amount= text_field_tag :custom_seed, nil, style: "width: 100%"
-                  %a.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "#{user_signed_in? ? 'button-seed-custom' : 'button-seed-custom-unsignin'}"} Fund Now ►
+                  %a.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "button-seed-custom"} Fund Now ►
           #sponsorship.tab-pane
             - @sponsorship_levels.each_pair do |key, level|
               .seed-level
@@ -409,18 +390,10 @@
                       Not Available
                       %span
                   -elsif p.limit && !p.perks_available.to_i.zero? && @project.funding_active?
-                    - if user_signed_in?
-                      %a.btn.pull-right{:href => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", :class => "fund btn"} Fund Now ►
-                    - else
-                      - url = url_encode("#{request.protocol}#{request.host_with_port}/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}")
-                      %a.btn.pull-right.unsignin-perk{"url-sign-up" => url, "url-sign-in" => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}"} Fund Now
+                    %a.btn.pull-right{:href => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", :class => "fund btn"} Fund Now ►
                   - else
                     - unless @project.funding_complete?
-                      - if user_signed_in?
-                        %a.btn.pull-right{:href => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}"} Fund Now
-                      - else
-                        - url = url_encode("#{request.protocol}#{request.host_with_port}/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}")
-                        %a.btn.pull-right.unsignin-perk{"url-sign-up" => url, "url-sign-in" => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}"} Fund Now
+                      %a.btn.pull-right{:href => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}"} Fund Now
         -else
           - default_perk.each_with_index do |perk, index|
             - index += 1
