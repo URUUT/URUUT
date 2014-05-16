@@ -151,7 +151,7 @@ class User < ActiveRecord::Base
     eligible_perk = perks.compact.find_all { |item| ActionController::Base.helpers.number_to_currency(item.amount) <= total_donated }.max
     eligible_perk_name = eligible_perk.nil? ? "None" : eligible_perk.name
     eligible_perk_description = eligible_perk.nil? ? " " : eligible_perk.description
-    document_name = "#{project.organization[0..8].gsub(/\s+/, '')}_#{project.campaign_deadline.strftime('%Y%m%d')}#{self.id}_#{DateTime.now.strftime('%Y%m%dT%H%M')}.pdf"
+    document_name = "#{project.organization[0..8].gsub(/\s+/, '')}_#{DateTime.now.strftime('%Y%m%dT%H%M%S')}#{self.id}.pdf"
     pdf_date = project.partial_funding ?
       Date.today : project.campaign_deadline
     # Implicit Block
