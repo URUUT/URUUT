@@ -1,3 +1,5 @@
+require 'stripe'
+
 module ApplicationHelper
 
 	def current_project
@@ -263,6 +265,12 @@ module ApplicationHelper
 
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
+  end
+
+  def can_use_coupon?(user)
+    return true unless user.coupon_stripe_token
+    coupon = Stripe::Coupon.retrieve(user.coupon_stripe_token)
+    ! coupon.valid
   end
 
 end

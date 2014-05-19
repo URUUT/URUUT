@@ -43,8 +43,9 @@
     ZIP CODE
     %span.error-container
   = f.text_field :zip_code
-%div.inline.well-half
-  = label_tag 'coupon'
-  = text_field_tag 'coupon'
+- if can_use_coupon?(current_user)
+  %div.inline.well-half
+    = label_tag 'coupon'
+    = text_field_tag 'coupon'
 %button.btn.btn-primary{:type => "submit"}
   Submit ►

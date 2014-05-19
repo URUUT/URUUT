@@ -23,7 +23,7 @@ class PaymentMethodsController < ApplicationController
     plan_id = params[:credit_card][:plan_id]
     coupon = Gateway::CouponService.new(current_user)
     begin
-      if @credit_card.valid? && @card_service.create(@credit_card) && 
+      if @credit_card.valid? && @card_service.create(@credit_card) &&
          coupon.create(params[:coupon])
         customer_plan.update_plan(plan_id) if plan_id.present?
         current_user.send_welcome_email
