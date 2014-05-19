@@ -459,8 +459,7 @@ class Project < ActiveRecord::Base
   end
 
   def funding_complete?
-    status.downcase == 'funding complete' if status
-    false
+    status == 'Funding Completed'
   end
 
   def sponsorship_benefits_list
