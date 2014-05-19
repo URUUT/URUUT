@@ -20,20 +20,14 @@ class Users::SessionsController < DeviseController
     resource = warden.authenticate!(auth_options)
     set_flash_message(:notice, :signed_in) if is_navigational_format?
     sign_in(resource_name, resource)
-    # if user_signed_in?
-      # unless params[:url].nil?
-      #   session[:redirect_url] = params[:url]
-      # end
-    #   redirect_to after_sign_in_path_for(resource)
-    # else
-    #   respond_to :js
-    # end
-    if request.xhr?
-      render js: "window.location = '#{after_sign_in_path_for(resource, params[:user])}';"
+    if user_signed_in?
+      respond_to do |format|
+        format.js { render js: "window.location = '#{after_sign_in_path_for(resource, params[:user])}';" }
+        format.html { respond_with resource, location: after_sign_in_path_for(resource, params[:user]) }
+      end
     else
-      respond_with resource, :location => after_sign_in_path_for(resource, params[:user])
+      render :new
     end
-
   end
 
   # DELETE /resource/sign_out
