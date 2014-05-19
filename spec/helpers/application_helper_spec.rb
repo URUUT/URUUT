@@ -13,9 +13,7 @@ describe ApplicationHelper do
       expect( helper.can_use_coupon?(@user) ).to be_true
     end
 
-    it "return false if there is an active coupon" do
-      expect( helper.can_use_coupon?(@user) ).to be_false
-    end
+    it { expect( helper.can_use_coupon?(@user) ).to be_false }
 
     it "return true if there is an inactive coupon" do
       Stripe::Coupon.stub(:retrieve).with(@user.coupon_stripe_token).and_return(
@@ -36,6 +34,21 @@ describe ApplicationHelper do
         } ,nil));
       expect( helper.can_use_coupon?(@user) ).to be_true
     end
+
+    after(:each) do
+      StripeMock.stop
+    end
+  end
+
+  describe "#upgrade_plan?" do
+    before(:each) do
+      StripeMock.start
+      @user = FactoryGirl.create(:full_user)
+      @user.membership.plan = FactoryGirl.create(:plan)
+    end
+
+    it { expect( helper.upgrade_plan?(@user, @user.membership_kind) ).to be_false }
+    it { expect( helper.upgrade_plan?(@user, 'plus') ).to be_true }
 
     after(:each) do
       StripeMock.stop

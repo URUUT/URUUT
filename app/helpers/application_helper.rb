@@ -273,4 +273,12 @@ module ApplicationHelper
     ! coupon.valid
   end
 
+  def upgrade_plan?(user, plan_id)
+    return false if user.membership_kind == plan_id
+    if user.membership_kind == 'basic' && plan_id == 'plus' ||
+       user.membership_kind == 'fee' && plan_id == 'basic'
+      return true
+    end
+  end
+
 end
