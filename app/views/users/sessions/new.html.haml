@@ -1,9 +1,17 @@
+:scss
+  #flash_alert {
+    a {
+      color: #81c263;
+    }
+  }
+
 .span8{:style => "margin-top:35px;"}
   %h4 Login
   = form_for(resource, :url => user_session_path, :method => :post, :html => {:class => "well clearfix form-signin"}) do |f|
-    = devise_error_messages!
-    - flash.each do |name, msg|
-      = content_tag :div, msg.html_safe, :id => "flash_#{name}", style: "#{message_style(controller_name, action_name)}; background: transparent;color: #333;font-style: normal;font-family: 'Proxima Nova Semi', sans-serif;" if msg.is_a?(String)
+    .span7
+      = devise_error_messages!
+      - flash.each do |name, msg|
+        = content_tag :div, msg.html_safe, :id => "flash_#{name}", style: "#{message_style(controller_name, action_name)}; background: transparent;color: #333;font-style: normal;font-family: 'Proxima Nova Semi', sans-serif;width:auto;" if msg.is_a?(String)
 
     .req-legend
       *Required
