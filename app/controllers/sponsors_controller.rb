@@ -8,6 +8,8 @@ class SponsorsController < ApplicationController
     @sponsor = Sponsor.new
     @sponsor.anonymous = false
     @project = Project.find(params[:project_id])
+    @is_sponsor = true
+    @is_donor = false
     session[:path] = "sponsor_new"
     case params[:level]
       when 'platinum'

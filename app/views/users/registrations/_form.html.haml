@@ -35,7 +35,7 @@
       Email address*
     = f.email_field :email
 
-  - unless @is_donor
+  - unless @is_donor || @is_sponsor
     .row-fluid
       .span6.field
         = f.label :telephone, class: "label-green" do
