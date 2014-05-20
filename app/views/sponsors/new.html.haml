@@ -18,6 +18,10 @@
       %p Continue to the checkout process below to confirm your sponsorship level, enter sponsor information, and choose your payment method.
 .container
   .row-fluid
+    - unless user_signed_in?
+      .span12
+        %h4 User sign up
+        = render 'users/registrations/form', with_submits: false
     .span8
       %h4.tittle{:style => "padding-bottom: 10px;"} CHECKOUT
       .project-location
@@ -439,3 +443,6 @@
 
   });
 / $.get("/projects/" + projectId + "/sponsors/" + this.value + "/get_sponsorship_levels.js")
+
+- unless user_signed_in?
+  = javascript_include_tag "sponsorBehavior"

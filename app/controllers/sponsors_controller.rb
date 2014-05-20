@@ -1,7 +1,6 @@
 class SponsorsController < ApplicationController
 
   before_filter :project_id, except: [:create, :thank_you, :share_email]
-  before_filter :authenticate_user!
 
   skip_before_filter :session_email_forgot_password, only: [:share_email]
 
@@ -105,7 +104,7 @@ class SponsorsController < ApplicationController
     project = Project.find(params[:project_id])
     logger.debug "Project is #{project}"
     if Sponsor.can_be_created?(params[:project_sponsor][:level_id], project)
-      create_sponsor
+      create_sponsor_and_user
     else
       failed_create_sponsor
     end
@@ -173,7 +172,8 @@ class SponsorsController < ApplicationController
     @project_levels = SponsorshipLevel.with_benefits(@project)
   end
 
-  def create_sponsor
+  def create_sponsor_and_user
+    create_user(params[:user]) unless current_user
     params[:project_sponsor][:anonymous] = params[:sponsor][:anonymous]
     params[:sponsor].delete("anonymous")
     sponsor = params[:sponsor]
@@ -186,19 +186,41 @@ class SponsorsController < ApplicationController
     last4 = params[:project_sponsor][:card_last4]
     token = params[:token]
     @sponsor = Sponsor.new(params[:sponsor])
-    @sponsor.email = current_user.email if params[:sponsor][:email].blank?
-    @sponsor.save!(validate: false)
+    @sponsor.email = (current_user && params[:sponsor][:email].blank?)? current_user.email : params[:sponsor][:email]
     @project_sponsor = ProjectSponsor.create!(params[:project_sponsor])
     @project_sponsor.confirmed = false
-    @project_sponsor.save!
-    @project_sponsor.update_attributes!({cost: cost, project_id: params[:project_id], sponsor_id: @sponsor.id,
-                                      level_id: params[:project_sponsor][:level_id], card_token: token,
-                                      card_type: card_type, card_last4: last4, sponsor_type: params[:type] })
-    session[:project_sponsor] = @project_sponsor
-    redirect_to confirmation_url(params[:project_id], @sponsor.id)
+
+    if @sponsor.save!(validate: false) && @project_sponsor.save! && current_user
+      @project_sponsor.update_attributes!({cost: cost, project_id: params[:project_id], sponsor_id: @sponsor.id,
+                                        level_id: params[:project_sponsor][:level_id], card_token: token,
+                                        card_type: card_type, card_last4: last4, sponsor_type: params[:type] })
+      session[:project_sponsor] = @project_sponsor
+      respond_to do |format|
+        format.html { redirect_to confirmation_url(params[:project_id], @sponsor.id) }
+        format.json { render json: { redirect: confirmation_url(params[:project_id], @sponsor.id) } }
+      end
+    else
+      respond_to do |format|
+        format.json { render json: { user: @user.errors, sponsor: @project_sponsor.errors } }
+      end
+    end
   end
 
   def failed_create_sponsor
     redirect_to :back
+  end
+
+  private
+
+  def create_user(user_params)
+    return nil unless user_params
+    @user = User.new(user_params)
+    if @user.save
+      @user.build_membership.save
+      Gateway::CustomerService.new(@user).create
+      Gateway::PlansService.new(@user).update_plan('fee') if @user.sign_up_plan == 'fee'
+      sign_in(:user, @user)
+    end
+    @user
   end
 end
