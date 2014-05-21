@@ -10,8 +10,9 @@
   = form_for(resource, :url => user_session_path, :method => :post, :html => {:class => "well clearfix form-signin"}) do |f|
     .span7
       = devise_error_messages!
-      - flash.each do |name, msg|
-        = content_tag :div, msg.html_safe, :id => "flash_#{name}", style: "#{message_style(controller_name, action_name)}; background: transparent;color: #333;font-style: normal;font-family: 'Proxima Nova Semi', sans-serif;width:auto;" if msg.is_a?(String)
+      - if flash
+        %div{ style: "#{message_style(controller_name, action_name)}; background: transparent;color: #333;font-style: normal;font-family: 'Proxima Nova Semi', sans-serif;width:auto;" }
+          Invalid email or password. If you have not signed up on URUUT. Please Sign Up to continue.
 
     .req-legend
       *Required
