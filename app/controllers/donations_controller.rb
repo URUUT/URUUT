@@ -15,6 +15,7 @@ class DonationsController < ApplicationController
     @perks = @project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i] }
     @is_donor = true
     session[:perk_id] = params[:perk]
+    session[:redirect_url] = request.url
   end
 
   def default_perk
@@ -80,6 +81,7 @@ class DonationsController < ApplicationController
       session[:payment_amount] = params[:donation][:amount]
       session[:project_id_of_perk_selected] = params[:donation][:project_id]
       session[:perk_amount] = params[:donation][:amount]
+      session.delete(:redirect_url)
       respond_to do |format|
         format.html { redirect_to donation_steps_path }
         format.json { render json: { redirect: donation_steps_url } }

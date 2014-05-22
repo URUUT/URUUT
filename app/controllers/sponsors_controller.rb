@@ -46,6 +46,7 @@ class SponsorsController < ApplicationController
         @parent_id = 1
     end
     @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
+    session[:redirect_url] = request.url
     render :layout => 'landing'
   end
 
@@ -103,6 +104,7 @@ class SponsorsController < ApplicationController
   end
 
   def create
+    session.delete(:redirect_url)
     project = Project.find(params[:project_id])
     logger.debug "Project is #{project}"
     if Sponsor.can_be_created?(params[:project_sponsor][:level_id], project)
