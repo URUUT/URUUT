@@ -10,9 +10,9 @@
   = form_for(resource, :url => user_session_path, :method => :post, :html => {:class => "well clearfix form-signin"}) do |f|
     .span7
       = devise_error_messages!
-      - if flash
+      - if flash[:alert]
         %div{ style: "#{message_style(controller_name, action_name)}; background: transparent;color: #333;font-style: normal;font-family: 'Proxima Nova Semi', sans-serif;width:auto;" }
-          Invalid email or password. If you have not signed up on URUUT. Please Sign Up to continue.
+          = I18n.t('devise.failure.invalid').html_safe
 
     .req-legend
       *Required
