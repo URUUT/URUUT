@@ -20,7 +20,7 @@
   .row-fluid
     - unless user_signed_in?
       .span12
-        %h4 User sign up
+        %h4= "User sign up (Already a user? #{link_to 'Sign in', new_user_session_path})".html_safe
         = render 'users/registrations/form', with_submits: false
     .span8
       %h4.tittle{:style => "padding-bottom: 10px;"} CHECKOUT

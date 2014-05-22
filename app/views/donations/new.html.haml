@@ -51,7 +51,7 @@
         %p.checkout-continue-subtext Continue to payment information below or choose a different seed amount/perk from the right.
 
       - unless user_signed_in?
-        %h3 User sign up
+        %h3= "User sign up (Already a user? #{link_to 'Sign in', new_user_session_path})".html_safe
         = render 'users/registrations/form', with_submits: false
       %h3 Payment Information
       .well

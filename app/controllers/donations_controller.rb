@@ -73,7 +73,7 @@ class DonationsController < ApplicationController
     @donation = Donation.new(donation_params)
     @donation.confirmed = false
     create_donation_user(@donation) unless current_user
-    if @donation.save
+    if current_user && @donation.save
       session.merge!(:donation_id => @donation.id, :card_token => @donation.token, :card_type => @donation.card_type,
                      :card_last4 => @donation.card_last4)
       session[:perk_type] = params[:perk_type]
@@ -86,6 +86,7 @@ class DonationsController < ApplicationController
       end
     else
       @perk = Perk.new
+      @user.delete if @user
       respond_to do |format|
         format.html { render :new }
         format.json { render json: { user: @user.errors, donation: @donation.errors } }
@@ -213,11 +214,6 @@ class DonationsController < ApplicationController
       donation.user = @user
       donation.email = @user.email
       sign_in(:user, @user)
-    else
-      @perk = Perk.new
-      respond_to do |format|
-        format.json { render json: { user: @user.errors, donation: @donation.errors } }
-      end
     end
   end
 end
