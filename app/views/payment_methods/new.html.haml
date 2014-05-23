@@ -12,7 +12,7 @@
           %ul
             - @credit_card.errors.full_messages.each do |error_message|
               %li= error_message
-      - if current_user.membership_plan && !upgrade_plan?(current_user, params[:plan_id])
+      - if current_user.membership_plan && !upgrade_plan?(current_user, params[:plan_id]) && params[:plan_id] != current_user.membership_kind
         .error-box
           %ul
             %li You are about to downgrade your current plan. This will inactivate your current promotional code. To keep your current promotional code active, you will need to stay on your current plan or upgrade if possible.
