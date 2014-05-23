@@ -14,16 +14,23 @@ class Gateway::CouponService < Gateway::BaseService
       customer.coupon = coupon
       customer.save
 
-      user.coupon_stripe_token = coupon
-      user.save
+      user.update_attributes({ coupon_stripe_token: coupon })
       rescue => e
         Rails.logger.error e
         return false
       end
     else
       return false unless coupon.blank?
-      user.coupon_stripe_token = nil
-      user.save
+      user.update_attributes({ coupon_stripe_token: nil })
+    end
+  end
+
+  def removeInvalid
+    retrieve(user.coupon_stripe_token)
+    if @coupon && !@coupon.valid
+      customer.coupon = nil
+      customer.save
+      user.update_attributes({ coupon_stripe_token: nil })
     end
   end
 
