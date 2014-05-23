@@ -264,7 +264,7 @@
                       - if p.limit
                         %span.small-heading
                           = p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of #{p.perk_limit} Available)"
-                    When you seed #{amount_converter(p.amount.to_i)}, you will receive:
+                    When you give #{amount_converter(p.amount.to_i)}, you will receive:
                     %ul.normal-font.dashed-list
                       %li
                         #{p.description}
@@ -295,7 +295,7 @@
                 - description = "#{perk} Uruut Reward Points"
                 .seed-level
                   %h3= name
-                  When you seed #{amount_converter(perk.to_i)}, you will receive:
+                  When you give #{amount_converter(perk.to_i)}, you will receive:
                   %ul.normal-font.dashed-list
                     %li= description
                   .clearfix
@@ -309,7 +309,7 @@
               .seed-level{id: "perk-id-custom"}
                 %h3.perk-name-other{id: "perk-name-other-custom"}
                   CHOOSE YOUR PERK
-                %p With this option you choose the amount to seed, you will receive 1 Uruut Reward Point for each dollar you seed.
+                %p With this option you choose the desired amount, you will receive 1 Uruut Reward Point for each dollar you give.
                 .clearfix
                   .seed-num
                     .amount
@@ -354,7 +354,7 @@
                   - if p.limit
                     %span.small-heading
                       = p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of #{p.perk_limit} Available)"
-                When you seed #{amount_converter(p.amount.to_i)}, you will receive:
+                When you give #{amount_converter(p.amount.to_i)}, you will receive:
                 %ul.normal-font.dashed-list
                   %li
                     #{p.description}
@@ -381,7 +381,7 @@
             - description = "#{perk} Uruut Reward Points"
             .seed-level
               %h3= name
-              When you seed #{amount_converter(perk.to_i)}, you will receive:
+              When you give #{amount_converter(perk.to_i)}, you will receive:
               %ul.normal-font.dashed-list
                 %li= description
               .clearfix
