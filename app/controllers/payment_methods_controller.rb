@@ -22,7 +22,7 @@ class PaymentMethodsController < ApplicationController
     customer_plan = Gateway::PlansService.new(current_user)
     plan_id = params[:credit_card][:plan_id]
     coupon = Gateway::CouponService.new(current_user)
-    coupon.removeInvalid
+    coupon.removeInvalid if current_user.coupon_stripe_token
     begin
       if @credit_card.valid? && @card_service.create(@credit_card) &&
          coupon.create(params[:coupon])

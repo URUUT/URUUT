@@ -36,6 +36,7 @@ feature "Edit User" do
 
       @user.reload
       expect(@user.coupon_stripe_token).to be_nil
+      expect(Stripe::Customer.retrieve(@user.stripe_user_token).coupon).to eql ""
       expect(@user.membership.kind).to eql 'basic'
     end
 
