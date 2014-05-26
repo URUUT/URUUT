@@ -24,8 +24,9 @@ function submitWithUserForm () {
 
     jqxhr.done(function(data) {
       if ( data.user || data.donations ) {
-        processErrors(data.user, 'user')
-        processErrors(data.donations, 'donation')
+        processErrors(data.user, 'user');
+        processErrors(data.donations, 'donation');
+        $("#donate").text("Contribute ►");
       } else {
         window.location.href = data.redirect;
       }
@@ -43,5 +44,6 @@ function processErrors(errors, form) {
     el = ['#', form, '_', field].join('');
     $("#new_" + form).find(el).parents('.field').find('.error')
       .css('display', 'inline').text( errors[field].join(',') );
+    $('#new_' + form).find(el).focus();
   }
 }
