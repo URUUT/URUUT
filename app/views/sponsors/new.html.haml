@@ -93,9 +93,9 @@
         %h4= "CREATE AN ACCOUNT (Already a user? #{link_to 'Sign in', new_user_session_path})".html_safe
         .well
           - if @user.try(:errors)
-            .alert.alert-error
+            %ul
               - @user.errors.full_messages.each do |e|
-                %p= e
+                %li= e
           = render 'registartion_fields'
 
       %h4 SPONSOR INFORMATION

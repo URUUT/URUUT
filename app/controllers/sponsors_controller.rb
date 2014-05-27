@@ -201,6 +201,13 @@ class SponsorsController < ApplicationController
       session[:project_sponsor] = @project_sponsor
       redirect_to confirmation_url(params[:project_id], @sponsor.id)
     else
+      level_sponsor = level.id
+      @level = level.name
+      @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[level_sponsor]
+
+      @cost = Sponsor.set_sponsorship_percentage(level_sponsor, @project)
+      session[:level_id] = level_sponsor
+      @parent_id = level.id
       @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
       render :new, :layout => 'landing'
     end
