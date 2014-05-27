@@ -18,7 +18,7 @@
       %p Continue to the checkout process below to confirm your sponsorship level, enter sponsor information, and choose your payment method.
 .container
   .row-fluid
-    .span12
+    .span8
       %h4.tittle{:style => "padding-bottom: 10px;"} CHECKOUT
       .project-location
         %h4.label-green
@@ -92,6 +92,10 @@
       - unless user_signed_in?
         %h4= "CREATE AN ACCOUNT (Already a user? #{link_to 'Sign in', new_user_session_path})".html_safe
         .well
+          - if @user.try(:errors)
+            .alert.alert-error
+              - @user.errors.full_messages.each do |e|
+                %p= e
           = render 'registartion_fields'
 
       %h4 SPONSOR INFORMATION

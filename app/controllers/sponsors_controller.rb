@@ -1,6 +1,6 @@
 class SponsorsController < ApplicationController
 
-  before_filter :project_id, except: [:create, :thank_you, :share_email]
+  before_filter :project_id, except: [:thank_you, :share_email]
 
   skip_before_filter :session_email_forgot_password, only: [:share_email]
 
@@ -199,14 +199,10 @@ class SponsorsController < ApplicationController
                                         level_id: params[:project_sponsor][:level_id], card_token: token,
                                         card_type: card_type, card_last4: last4, sponsor_type: params[:type] })
       session[:project_sponsor] = @project_sponsor
-      respond_to do |format|
-        format.html { redirect_to confirmation_url(params[:project_id], @sponsor.id) }
-        format.json { render json: { redirect: confirmation_url(params[:project_id], @sponsor.id) } }
-      end
+      redirect_to confirmation_url(params[:project_id], @sponsor.id)
     else
-      respond_to do |format|
-        format.json { render json: { user: @user.errors, sponsor: @project_sponsor.errors } }
-      end
+      @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
+      render :new, :layout => 'landing'
     end
   end
 
