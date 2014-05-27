@@ -1,0 +1,41 @@
+- if params[:sign_up_plan] || (params[:user] && params[:user][:sign_up_plan])
+  = hidden_field_tag :sign_up_plan, value: params[:sign_up_plan] || (params[:user] && params[:user][:sign_up_plan])
+- if params[:full_registration] || (params[:user] && params[:user][:full_registration])
+  = hidden_field_tag :full_registration, value: params[:full_registration] || (params[:user] && params[:user][:full_registration])
+%h4 Tell us about you.
+%br
+.row-fluid
+  .span6.field
+    = label_tag 'user[first_name]', class: "label-green" do
+      First Name*
+      %div.error-container
+        %label.error
+    = text_field_tag 'user[first_name]'
+  .span6.field
+    = label_tag 'user[last_name]', class: "label-green" do
+      Last Name*
+      %div.error-container
+        %label.error
+    = text_field_tag 'user[last_name]'
+
+%div.field
+  = label_tag 'user[email]', class: "label-green" do
+    %div.error-container
+      %label.error
+    Email address*
+  = email_field_tag 'user[email]'
+
+.row-fluid
+  .span6.field
+    = label_tag 'user[password]', class: "label-green" do
+      Password*
+      %div.error-container
+        %label.error
+    = password_field_tag 'user[password]', id: "user_password"
+
+  .span6.field
+    = label_tag 'user[password_confirmation]', class: "label-green" do
+      Password Confirmation*
+      %div.error-container
+        %label.error
+    = password_field_tag 'user[password_confirmation]', id: "user_password_confirmation"
