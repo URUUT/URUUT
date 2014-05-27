@@ -10,7 +10,11 @@ $("#new_user").validate({
   errorPlacement: function(error, element) {
     error.appendTo( element.parent().find(".error-container") );
   }
-})
+});
+
+$('#user_organization').on('blur', function(){
+  $('#project_sponsor_name').val( this.value );
+});
 
 $('#project-submit').click(function(e) {
   e.preventDefault();
