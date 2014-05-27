@@ -1,4 +1,4 @@
-$("#new_user").validate({
+$("#new_sponsor").validate({
   rules: {
     "user[last_name]": { required: true },
     "user[first_name]": { required: true },
@@ -16,7 +16,7 @@ $('#user_organization').on('blur', function(){
   $('#project_sponsor_name').val( this.value );
 });
 
-$('#project-submit').click(function(e) {
+/*$('#project-submit').click(function(e) {
   e.preventDefault();
   if ( $('#new_user').valid() && $('#new_sponsor').valid() ) {
     var data = $('#new_user, #new_sponsor').serialize();
@@ -50,4 +50,4 @@ function processErrors(errors, form) {
     $("#new_" + form).find(el).parents('.field').find('.error')
       .css('display', 'inline').text( errors[field].join(',') );
   }
-}
+}*/

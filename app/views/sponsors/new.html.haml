@@ -18,11 +18,7 @@
       %p Continue to the checkout process below to confirm your sponsorship level, enter sponsor information, and choose your payment method.
 .container
   .row-fluid
-    - unless user_signed_in?
-      .span12
-        %h4= "CREATE AN ACCOUNT (Already a user? #{link_to 'Sign in', new_user_session_path})".html_safe
-        = render 'users/registrations/form', with_submits: false
-    .span8
+    .span12
       %h4.tittle{:style => "padding-bottom: 10px;"} CHECKOUT
       .project-location
         %h4.label-green
@@ -92,6 +88,11 @@
                     %li #{benefit.name}
         .span12{:style => "margin: 0 -19px; padding: 0 19px; border-top: 1px solid #d3d3d3; width: 632px;"}
           %p.checkout-continue-subtext{:style => "border-top: none;"} Continue to payment information below or choose a different seed amount/perk from the right.
+
+      - unless user_signed_in?
+        %h4= "CREATE AN ACCOUNT (Already a user? #{link_to 'Sign in', new_user_session_path})".html_safe
+        .well
+          = render 'registartion_fields'
 
       %h4 SPONSOR INFORMATION
       .well
