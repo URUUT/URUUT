@@ -8,6 +8,7 @@ class Gateway::CouponService < Gateway::BaseService
   end
 
   def create(coupon)
+    return true if coupon.blank?
     retrieve(coupon)
     if @coupon
       begin
@@ -19,9 +20,6 @@ class Gateway::CouponService < Gateway::BaseService
         Rails.logger.error e
         return false
       end
-    else
-      return false unless coupon.blank?
-      user.update_attributes({ coupon_stripe_token: nil })
     end
   end
 
@@ -29,7 +27,6 @@ class Gateway::CouponService < Gateway::BaseService
     retrieve(user.coupon_stripe_token)
     if @coupon && ( !@coupon.valid || is_downgrade(plan_id) )
       customer.delete_discount
-      customer.save
       user.update_attributes({ coupon_stripe_token: nil })
     end
   end
@@ -45,8 +42,8 @@ class Gateway::CouponService < Gateway::BaseService
   end
 
   def is_downgrade(plan_id)
-    if user.membership_kind == 'basic' && plan_id == 'plus' ||
-       user.membership_kind == 'fee' && plan_id == 'basic'
+    if (user.membership_kind == 'plus' && plan_id == 'basic') ||
+       (user.membership_kind == 'basic' && plan_id == 'fee')
       return true
     end
     false

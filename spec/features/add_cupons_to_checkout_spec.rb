@@ -12,9 +12,8 @@ feature "Cupons on checkouts" do
       :currency => 'usd',
       :id => 'plus'
     )
-    
   end
-  
+
   scenario "User choise a plus plan", js: true do
     WebMock.allow_net_connect!
     visit new_user_registration_path(
@@ -40,7 +39,7 @@ feature "Cupons on checkouts" do
 
     expect(User.last.coupon_stripe_token).to eql '25OFF'
   end
-  
+
   scenario "an user adds an inexistent coupon" do
     WebMock.allow_net_connect!
     visit new_user_registration_path(
@@ -49,19 +48,18 @@ feature "Cupons on checkouts" do
       marketing_info_id: 20
     )
 
-    fill_basic_sign_up_fields
-
+    within(:css, '#new_user') do
+      fill_basic_sign_up_fields
+    end
     click_button('Continue')
-
-    expect(page).to have_content('Uruut Plus')
 
     fill_credit_card_fields
     fill_in 'coupon', with: "asd123"
 
-	click_button('Submit ►')
-    WebMock.disable_net_connect!(allow_localhost: true)
+	  click_button('Submit ►')
 
-	expect(page).not_to have_content 'Thank You! Your Uruut Account is Now Active.'
+    expect(page.body).to have_content "No such coupon asd123"
+    WebMock.disable_net_connect!(allow_localhost: true)
   end
 
   after { StripeMock.stop }
