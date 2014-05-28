@@ -199,17 +199,15 @@ class SponsorsController < ApplicationController
                                         level_id: params[:project_sponsor][:level_id], card_token: token,
                                         card_type: card_type, card_last4: last4, sponsor_type: params[:type] })
       session[:project_sponsor] = @project_sponsor
-      redirect_to confirmation_url(params[:project_id], @sponsor.id)
+      respond_to do |format|
+        format.html { redirect_to confirmation_url(params[:project_id], @sponsor.id) }
+        format.json { render json: { redirect: confirmation_url(params[:project_id], @sponsor.id) } }
+      end
     else
-      level_sponsor = level.id
-      @level = level.name
-      @first_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}[level_sponsor]
-
-      @cost = Sponsor.set_sponsorship_percentage(level_sponsor, @project)
-      session[:level_id] = level_sponsor
-      @parent_id = level.id
-      @sponsorship_benefits = @project.sponsorship_benefits.where(status: true).group_by {|sponsor| sponsor.sponsorship_level_id}
-      render :new, :layout => 'landing'
+      respond_to do |format|
+        format.html { render :new }
+        format.json { render json: { user: @user.errors, sponsor: @project_sponsor.errors } }
+      end
     end
   end
 

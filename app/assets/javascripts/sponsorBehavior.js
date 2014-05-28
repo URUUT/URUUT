@@ -16,10 +16,10 @@ $('#user_organization').on('blur', function(){
   $('#project_sponsor_name').val( this.value );
 });
 
-/*$('#project-submit').click(function(e) {
+$('#project-submit').click(function(e) {
   e.preventDefault();
-  if ( $('#new_user').valid() && $('#new_sponsor').valid() ) {
-    var data = $('#new_user, #new_sponsor').serialize();
+  if ( $('#new_sponsor').valid() ) {
+    var data = $('#new_sponsor').serialize();
     Stripe.setPublishableKey(stripe_pub_key)
     var jqxhr = $.ajax({
       type: 'POST',
@@ -50,4 +50,5 @@ function processErrors(errors, form) {
     $("#new_" + form).find(el).parents('.field').find('.error')
       .css('display', 'inline').text( errors[field].join(',') );
   }
-}*/
+  $('label.error:visible:first').parents('.field').find('input').focus();
+}
