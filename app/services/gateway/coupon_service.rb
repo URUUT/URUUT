@@ -25,9 +25,9 @@ class Gateway::CouponService < Gateway::BaseService
     end
   end
 
-  def removeInvalid
+  def removeInvalid(plan_id)
     retrieve(user.coupon_stripe_token)
-    if @coupon && !@coupon.valid
+    if @coupon && ( !@coupon.valid || is_downgrade(plan_id) )
       customer.coupon = nil
       customer.save
       user.update_attributes({ coupon_stripe_token: nil })
@@ -43,6 +43,14 @@ class Gateway::CouponService < Gateway::BaseService
       Rails.logger.error e
       false
     end
+  end
+
+  def is_downgrade(plan_id)
+    if user.membership_kind == 'basic' && plan_id == 'plus' ||
+       user.membership_kind == 'fee' && plan_id == 'basic'
+      return true
+    end
+    false
   end
 
 end
