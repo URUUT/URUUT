@@ -61,7 +61,7 @@ private
     if response.count > 0
       response = response.data[0]
       response.plan = plan.name
-      response.coupon = @coupon
+      response.coupon = @coupon if @coupon
       response.save
       response
     else
