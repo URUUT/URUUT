@@ -28,7 +28,7 @@ class Gateway::CouponService < Gateway::BaseService
   def removeInvalid(plan_id)
     retrieve(user.coupon_stripe_token)
     if @coupon && ( !@coupon.valid || is_downgrade(plan_id) )
-      customer.coupon = nil
+      customer.delete_discount
       customer.save
       user.update_attributes({ coupon_stripe_token: nil })
     end
@@ -41,7 +41,6 @@ class Gateway::CouponService < Gateway::BaseService
     rescue => e
       user.errors.add(:coupon_stripe_token, "No such coupon #{coupon}")
       Rails.logger.error e
-      false
     end
   end
 

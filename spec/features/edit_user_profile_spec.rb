@@ -20,6 +20,7 @@ feature "Edit User" do
         :currency => 'usd', :id => 'basic'
       )
       @user.membership.plan = FactoryGirl.create(:plus_plan)
+      @user.membership.save
       visit new_user_payment_method_path(@user, { "plan_id" => "basic" })
 
       fill_in 'credit_card[name]',          with: @user.first_name
@@ -33,10 +34,9 @@ feature "Edit User" do
       fill_in 'credit_card[zip_code]',      with: '3000'
 
       click_button('Submit ►')
-
       @user.reload
       expect(@user.coupon_stripe_token).to be_nil
-      expect(Stripe::Customer.retrieve(@user.stripe_user_token).coupon).to eql ""
+      expect(Stripe::Customer.retrieve(@user.stripe_user_token).discount).to be_nil
       expect(@user.membership.kind).to eql 'basic'
     end
 
