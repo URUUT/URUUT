@@ -31,6 +31,7 @@ class PaymentMethodsController < ApplicationController
         current_user.send_welcome_email
         redirect_to users_sign_up_confirmation_path
       else
+        @plan = Plan.where("name = ?", plan_id).first
         render :new
       end
     rescue Stripe::CardError => e
