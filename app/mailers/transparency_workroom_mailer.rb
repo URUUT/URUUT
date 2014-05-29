@@ -6,6 +6,8 @@ class TransparencyWorkroomMailer < ActionMailer::Base
     @user = user
     @manager = User.find_by_id(project.user_id)
     @project = project
-    mail to: user.email, subject: 'Transparency Workroom Update'
+    @manager_email = user.email
+
+    mail from: @manager_email, to: user.email, subject: 'Transparency Workroom Update'
   end
 end

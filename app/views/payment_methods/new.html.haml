@@ -2,11 +2,20 @@
   .span8{:style => "margin-top:35px;"}
     %h4.font-bold SET PAYMENT METHOD
     = form_for @credit_card, url: user_payment_method_path(current_user), method: :post, html: { class: "well registration-edit"} do |f|
+      - if current_user.errors.any?
+        .error-box
+          %ul
+            - current_user.errors.full_messages.each do |message|
+              %li= message
       - if @credit_card.errors.any?
         .error-box
           %ul
             - @credit_card.errors.full_messages.each do |error_message|
               %li= error_message
+      - if current_user.membership_plan && !upgrade_plan?(current_user, params[:plan_id]) && params[:plan_id] != current_user.membership_kind
+        .error-box
+          %ul
+            %li You are about to downgrade your current plan. This will inactivate your current promotional code. To keep your current promotional code active, you will need to stay on your current plan or upgrade if possible.
       - if (params[:plan_id] || (params[:credit_card] && params[:credit_card][:plan_id]))
         = f.hidden_field :plan_id, value: (params[:plan_id] || (params[:credit_card] && params[:credit_card][:plan_id]))
       = render partial: 'payment_methods/credit_card_fields', locals: { f: f }

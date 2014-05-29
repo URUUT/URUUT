@@ -10,6 +10,7 @@ require 'database_cleaner'
 require 'email_spec'
 require 'webmock/rspec'
 require "rack_session_access/capybara"
+require 'stripe_mock'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.

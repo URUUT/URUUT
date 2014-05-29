@@ -2463,7 +2463,6 @@ input, select, textarea{
     line-height: 13px;
     color: red;
     text-align: center;
-    margin-top: -18px;
   }
 }
 
@@ -3115,4 +3114,8 @@ input, select, textarea{
 .formula {
   font-family: georgia, serif;
   font-style: italic;
+}
+
+.field > input {
+  width: 100%;
 }

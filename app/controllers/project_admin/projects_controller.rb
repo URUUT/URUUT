@@ -86,10 +86,11 @@ class ProjectAdmin::ProjectsController < ApplicationController
     @error_messages << "email content can't be blank" if params[:post]["email_content"].blank?
 
     if @error_messages.blank?
+      project = Project.find(params[:project])
       subject = params[:post][:subject]
       recepients = params[:email_recepient].split(",")
       recepients.each do |recepient|
-        ProjectMailer.project_message(recepient, params[:post]["subject"], params[:email_header], params[:post]["email_content"]).deliver
+        ProjectMailer.project_message(recepient, params[:post]["subject"], params[:email_header], params[:post]["email_content"], project).deliver
       end
     end
   end

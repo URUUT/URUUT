@@ -98,17 +98,9 @@
 
         .span4
           .progress-container.span3.offset1
-            / = image_tag 'seed.png', :class => "seed"
             %div
               %span Funds Pledged
-              - if totalsponsor(@project).eql?(0)
-                %p $0
-              - else
-                / - totalDonated = 0
-                / - if @donation
-                /   - @donation.each do |d|
-                /     - totalDonated += d.amount
-                %p= amount_converter(totalsponsor(@project))
+              %p= totalsponsor(@project).eql?(0) ? '$0' : amount_converter(totalsponsor(@project))
 
           #progressbar
 
@@ -186,22 +178,14 @@
           PROJECT SPONSORS
           - unless @project.funding_complete?
             - if @project_sponsors.include?(2) || @project_sponsors.include?(3)
-              - if user_signed_in?
-                = link_to new_project_sponsor_path(@project.id), :class => 'btn', :style => 'margin-top: -10px;'  do
-                  Become A Sponsor ►
-              - else
-                = link_to "javascript:void(0)", "url-data" => "/projects/#{@project.id}/sponsors/new", :class => 'btn unsignin', :style => 'margin-top: -10px;'  do
-                  Become A Sponsor ►
+              = link_to new_project_sponsor_path(@project.id), :class => 'btn', :style => 'margin-top: -10px;'  do
+                Become A Sponsor ►
           %span
         .project-sponsors
           - if !@project_sponsors.include?(2) && !@project_sponsors.include?(3)
             - unless @project.funding_complete?
-              - if user_signed_in?
-                = link_to new_project_sponsor_path(@project.id), :class => 'btn' do
-                  Become A Sponsor ►
-              - else
-                = link_to "javascript:void(0)", "url-data" => "/projects/#{@project.id}/sponsors/new", :class => 'btn unsignin' do
-                  Become A Sponsor ►
+              = link_to new_project_sponsor_path(@project.id), :class => 'btn' do
+                Become A Sponsor ►
           - if @project_sponsors.include?(2)
             .gold-level
               - if @project_sponsors.include?(2)
@@ -248,13 +232,6 @@
             - elsif @project.cultivation_mime_type.eql?("image") and !@project.cultivation_image.blank?
               = image_tag "#{@project.cultivation_image}", style: "float:left; width:100%"
             %div{:style => "font:normal 14px/24px 'Proxima Nova', arial, sans-serif;margin-top:10px;word-wrap: pre-line;"}= simple_format(@project.about)
-      -#%hr
-      -#.comments
-        -#%h4.comment Post a message
-        -#%p
-          -#Tell #{@project.title} you support their campaign! Got questions or need more information? Post them here and get an answer!
-
-      -#.fb-comments{'data-href' => "http://127.0.0.1:8080", :style => "width:100%"}
 
 
     .span4.sidebar
@@ -303,25 +280,13 @@
                           Not Available
                           %span
                       - elsif p.limit && !p.perks_available.to_i.zero?
-                        - if user_signed_in?
-                          - unless @project.funding_complete?
-                            = link_to "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", class: "btn perk pull-right", style: "margin-top: 10px;" do
-                              Fund Now ►
-                        - else
-                          - unless @project.funding_complete?
-                            - url = url_encode("#{request.protocol}#{request.host_with_port}/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}")
-                            = link_to "javascript:void(0)", "url-sign-up" => url, "url-sign-in" => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", class: "btn perk pull-right unsignin-perk", style: "margin-top: 10px;" do
-                              Fund Now ►
+                        - unless @project.funding_complete?
+                          = link_to "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", class: "btn perk pull-right", style: "margin-top: 10px;" do
+                            Fund Now ►
                       - else
-                        - if user_signed_in?
-                          - unless @project.funding_complete?
-                            = link_to "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", class: "btn perk pull-right", style: "margin-top: 10px;" do
-                              Fund Now ►
-                        - else
-                          - unless @project.funding_complete?
-                            - url = url_encode("#{request.protocol}#{request.host_with_port}/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}")
-                            = link_to "javascript:void(0)", "url-sign-up" => url, "url-sign-in" => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", class: "btn perk pull-right unsignin-perk", style: "margin-top: 10px;" do
-                              Fund Now ►
+                        - unless @project.funding_complete?
+                          = link_to "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", class: "btn perk pull-right", style: "margin-top: 10px;" do
+                            Fund Now ►
 
             -else
               - default_perk.each_with_index do |perk, index|
@@ -335,17 +300,11 @@
                     %li= description
                   .clearfix
                     .seed-num
-                      / %div Seed
                       .amount
                         =amount_converter(perk)
-                    - if user_signed_in? && @project.funding_active?
+                    - if @project.funding_active?
                       = link_to "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "btn perk pull-right", :style => "margin-top: 10px;" do
                         Fund Now ►
-                    - else
-                      - unless @project.funding_complete?
-                        - url = url_encode("#{request.protocol}#{request.host_with_port}/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}")
-                        = link_to "javascript:void(0)", "url-sign-up" => url, "url-sign-in" => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "btn perk pull-right unsignin-perk", :style => "margin-top: 10px;" do
-                          Fund Now ►
             - unless @project.funding_complete?
               .seed-level{id: "perk-id-custom"}
                 %h3.perk-name-other{id: "perk-name-other-custom"}
@@ -356,7 +315,7 @@
                     .amount
                     %h5 DESIRED AMOUNT
                     .textarea.seed-amount= text_field_tag :custom_seed, nil, style: "width: 100%"
-                  %a.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "#{user_signed_in? ? 'button-seed-custom' : 'button-seed-custom-unsignin'}"} Fund Now ►
+                  %a.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "button-seed-custom"} Fund Now ►
           #sponsorship.tab-pane
             - @sponsorship_levels.each_pair do |key, level|
               .seed-level
@@ -377,12 +336,8 @@
                     .amount
                       = amount_converter( level.calculated_cost(@project) )
                   - if (check_availibility(@project, level.id) < SponsorshipLevel::AVAILABILITY[level.parent.name.downcase] || level.parent.name.downcase === 'bronze') && @project.funding_active?
-                    - if user_signed_in?
-                      %a.btn.pull-right.sponsors{:href => "/projects/#{@project.id}/sponsors/new?level=#{level.parent.name.downcase}", style: "margin-top: 10px;"}
-                        Sponsor ►
-                    - else
-                      %a.btn.pull-right.sponsors.unsignin{"url-data" => "/projects/#{@project.id}/sponsors/new?level=#{level.parent.name.downcase}", style: "margin-top: 10px;"}
-                        Sponsor ►
+                    %a.btn.pull-right.sponsors{:href => "/projects/#{@project.id}/sponsors/new?level=#{level.parent.name.downcase}", style: "margin-top: 10px;"}
+                      Sponsor ►
                   - else
                     .pull-right{style: "margin-top: 24px; font-style: italic;"}
                       Not Available
@@ -415,18 +370,10 @@
                       Not Available
                       %span
                   -elsif p.limit && !p.perks_available.to_i.zero? && @project.funding_active?
-                    - if user_signed_in?
-                      %a.btn.pull-right{:href => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", :class => "fund btn"} Fund Now ►
-                    - else
-                      - url = url_encode("#{request.protocol}#{request.host_with_port}/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}")
-                      %a.btn.pull-right.unsignin-perk{"url-sign-up" => url, "url-sign-in" => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}"} Fund Now
+                    %a.btn.pull-right{:href => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}", :class => "fund btn"} Fund Now ►
                   - else
                     - unless @project.funding_complete?
-                      - if user_signed_in?
-                        %a.btn.pull-right{:href => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}"} Fund Now
-                      - else
-                        - url = url_encode("#{request.protocol}#{request.host_with_port}/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}")
-                        %a.btn.pull-right.unsignin-perk{"url-sign-up" => url, "url-sign-in" => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}"} Fund Now
+                      %a.btn.pull-right{:href => "/donations/new?perk=#{p.id}&amount=#{p.amount.to_i}&name=#{p.name}&description=#{p.description}&project_id=#{@project.id}"} Fund Now
         -else
           - default_perk.each_with_index do |perk, index|
             - index += 1
@@ -442,12 +389,8 @@
                   / %div Seed
                   .amount
                     = amount_converter(perk)
-                - if user_signed_in? && @project.funding_active?
+                - if @project.funding_active?
                   %a.btn.pull-right{:href => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "fund btn"} Fund Now ►
-                - else
-                  - unless @project.funding_complete?
-                    - url = url_encode("#{request.protocol}#{request.host_with_port}/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}")
-                    %a.btn.pull-right.unsignin-perk{"url-sign-up" => url, "url-sign-in" => "/default_perk_donations?amount=#{perk}&name=#{name}&description=#{description}&project_id=#{@project.id}", :class => "fund btn"} Fund Now ►
         - unless @project.funding_complete?
           .seed-level{id: "perk-id-custom"}
             %h3.perk-name-other{id: "perk-name-other-custom"}
@@ -458,7 +401,7 @@
                 .amount
                 %h5 DESIRED AMOUNT
                 .textarea.seed-amount= text_field_tag :custom_seed, nil, style: "width: 100%"
-              %a.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "#{user_signed_in? ? 'button-seed-custom' : 'button-seed-custom-unsignin'}"} Fund Now ►
+              %a.btn.pull-right{:class => "fund btn", "perk-id" => "custom", id: "button-seed-custom"} Fund Now ►
 
 
       %h4.title{:style => 'margin-top:50px;'}
@@ -486,12 +429,8 @@
                     ,
         - unless @project.funding_complete?
           %div{style: "margin-top: 5px;"}
-            - if user_signed_in?
-              %a.btn{:href => "/projects/#{@project.id}/sponsors/new?level=bronze"}
-                Become A Sponsor ►
-            - else
-              = link_to "javascript:void(0)", "url-data" => "/projects/#{@project.id}/sponsors/new?level=bronze", class: "btn unsignin" do
-                Become A Sponsor ►
+            %a.btn{:href => "/projects/#{@project.id}/sponsors/new?level=bronze"}
+              Become A Sponsor ►
 
       %h4.title{:style => 'margin-top:50px;'}Donors(#{@project.distinct_donors.count})
       - if notice
@@ -558,7 +497,7 @@
     $("a[rel^='prettyPhoto']").prettyPhoto();
 
     $('.unsignin').click(function(){
-      sign_url = '#{request.protocol}' + document.location.hostname + ":" + document.location.port + $(this).attr("url-data");
+      sign_url = '#{request.protocol}' + document.location.hostname + ":" + document.location.port + $(this).attr("url-data")
       url = $(this).attr("url-data");
       $('.modal').remove();
       $('body').append('<div class="modal hide fade" style="text-align:center;padding:50px;"><button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="position:absolute;top:10px;right:20px;">×</button><h5 style="margin-bottom:20px;">You need to sign in or sign up before continuing.</h5><a href="'+ url +'" class="btn green-btn">Sign In ►</a> <span style="font:italic 12px/21px georgia, serif;margin:0 10px;">or</span> <a href="/projects/set_previous_path_for_registration?url='+ sign_url +'" class="btn green-btn">Sign Up ►</a></div>');
@@ -566,7 +505,7 @@
     });
 
     $(".unsignin-perk").click(function(){
-      sign_up_url = $(this).attr("url-sign-up");
+      sign_up_url = $(this).attr("url-sign-up") + '&is_donor=' + this.getAttribute('data-is-donor');
       sign_in_url = $(this).attr("url-sign-in");
       $('.modal').remove();
       $('body').append('<div class="modal hide fade" style="text-align:center;padding:50px;"><button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="position:absolute;top:10px;right:20px;">×</button><h5 style="margin-bottom:20px;">You need to sign in or sign up before continuing.</h5><a href="'+ sign_in_url +'" class="btn green-btn">Sign In ►</a> <span style="font:italic 12px/21px georgia, serif;margin:0 10px;">or</span> <a href="/projects/set_previous_path_for_registration_perk?url='+ sign_up_url +'" class="btn green-btn">Sign Up  ►</a></div>');

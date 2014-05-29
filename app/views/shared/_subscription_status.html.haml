@@ -5,6 +5,9 @@
     #{membership_cost_message_start(current_user)}
     %b #{membership_cost(current_user)}
     #{membership_cost_message_end(current_user)}
+  - if current_user.coupon_stripe_token
+    %p{style: "font-style: italic;"}= membership_coupon_message(current_user.coupon_stripe_token)
+      
 - else
   %p
     None selected yet

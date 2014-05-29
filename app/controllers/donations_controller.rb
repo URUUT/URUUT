@@ -2,8 +2,8 @@ require 'open-uri'
 
 class DonationsController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: :default_perk
-	before_filter :authenticate_user!
   before_filter :set_session_page, :set_session_wizard, :set_previous_path_for_registration
+  before_filter :set_project, :set_perk_amount, :set_perks
   layout "landing"
 
   def new
@@ -12,27 +12,18 @@ class DonationsController < ApplicationController
     @perk_name = params[:name].to_s
     @perk_amount = params[:amount].gsub(",", "").to_f
     @perk_description = params[:description]
-    @project = Project.find(params[:project_id])
     @perks = @project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i] }
+    @is_donor = true
     session[:perk_id] = params[:perk]
+    session[:redirect_url] = request.url
   end
 
   def default_perk
     @donation = Donation.new
     @perk = Perk.new
     @perk_name = params[:name].to_s
-    @perk_amount = params[:amount].gsub(",", "").to_f
     @perk_description = params[:description]
-    @project = Project.find(params[:project_id])
-    if params[:amount].blank?
-      @perks = @project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i] }
-      session[:perk_id] = "custom_donate"
-    else
-      perks = Donation.set_perks(@project)
-      @perks = Donation.reorder_perks(perks, @perk_amount)
-      @perk_name_selected, @perk_description = Donation.get_perk_info(@project, @perk_amount, @perks)
-      session[:perk_id] = Donation.set_perk_id(@perks, @project)
-    end
+    @is_donor = true
     render :new
   end
 
@@ -40,7 +31,6 @@ class DonationsController < ApplicationController
     if !params[:id].eql?("custom")
       if params["amount"].blank?
         @perk = Perk.find(params[:id])
-        @project = Project.find(params["project_id"])
         session[:perk_id] = @perk.id
         session[:perk_amount] = @perk.amount.to_f
         @perk_description = @perk.description
@@ -49,10 +39,7 @@ class DonationsController < ApplicationController
         @perk.id = params["level"]
         @perk.amount = params["amount"].gsub(",", "").to_f
         session[:perk_amount] = @perk.amount.to_f
-        @project = Project.find(params["project_id"])
 
-        perks = Donation.set_perks(@project)
-        @perks = Donation.reorder_perks(perks, @perk.amount)
         @perk_name_selected = @perks.last[0]
         @perk_description = @perks.last[3]
         if @project.perk_permission
@@ -83,26 +70,29 @@ class DonationsController < ApplicationController
   end
 
   def create
-    if params[:perk_type].eql?("default")
-      params[:donation][:description] = "#{params[:donation][:amount].to_i} Uruut Reward Points"
-    else
-      params[:donation][:description] = params[:perk_description]
-    end
-    params[:donation][:perk_name] = params[:name_of_perk]
     logger.debug params[:donation].to_yaml
-    @donation = Donation.new(params[:donation])
+    @donation = Donation.new(donation_params)
     @donation.confirmed = false
-
-    if @donation.save
+    create_donation_user(@donation) unless current_user
+    if current_user && @donation.save
       session.merge!(:donation_id => @donation.id, :card_token => @donation.token, :card_type => @donation.card_type,
                      :card_last4 => @donation.card_last4)
       session[:perk_type] = params[:perk_type]
       session[:payment_amount] = params[:donation][:amount]
       session[:project_id_of_perk_selected] = params[:donation][:project_id]
       session[:perk_amount] = params[:donation][:amount]
-      redirect_to donation_steps_path
+      session.delete(:redirect_url)
+      respond_to do |format|
+        format.html { redirect_to donation_steps_path }
+        format.json { render json: { redirect: donation_steps_url } }
+      end
     else
-      render :new
+      @perk = Perk.new
+      @user.delete if @user
+      respond_to do |format|
+        format.html { render :new }
+        format.json { render json: { user: @user.errors, donation: @donation.errors } }
+      end
     end
 
   end
@@ -180,4 +170,52 @@ class DonationsController < ApplicationController
     session[:path] = params[:url]
   end
 
+  def set_project
+    id = params[:project_id] ? params[:project_id] : params[:donation][:project_id]
+    session[:current_project] = id
+    @project = Project.find(id)
+  end
+
+  def set_donation_description_param
+    if params[:perk_type].eql?("default")
+      params[:donation][:description] = "#{params[:donation][:amount].to_i} Uruut Reward Points"
+    else
+      params[:donation][:description] = params[:perk_description]
+    end
+  end
+
+  def donation_params
+    set_donation_description_param()
+    params[:donation][:perk_name] = params[:name_of_perk]
+    params[:donation]
+  end
+
+  def set_perk_amount
+    @perk_amount = params[:amount] ?
+      params[:amount].gsub(",", "").to_f : params[:donation][:amount]
+  end
+
+  def set_perks
+    if params[:amount].blank?
+      @perks = @project.perks.order(:amount).map{ |perk| [perk.name, perk.amount.to_i] }
+      session[:perk_id] = "custom_donate"
+    else
+      perks = Donation.set_perks(@project)
+      @perks = Donation.reorder_perks(perks, @perk_amount)
+      @perk_name_selected, @perk_description = Donation.get_perk_info(@project, @perk_amount, @perks)
+      session[:perk_id] = Donation.set_perk_id(@perks, @project)
+    end
+  end
+
+  def create_donation_user(donation)
+    @user = User.new(params[:user])
+    if @user.save
+      @user.build_membership.save
+      Gateway::CustomerService.new(@user).create
+      Gateway::PlansService.new(@user).update_plan('fee') if @user.sign_up_plan == 'fee'
+      donation.user = @user
+      donation.email = @user.email
+      sign_in(:user, @user)
+    end
+  end
 end

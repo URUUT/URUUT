@@ -1,3 +1,5 @@
+require 'stripe'
+
 module ApplicationHelper
 
 	def current_project
@@ -251,6 +253,32 @@ module ApplicationHelper
 
   def editable_level?(user, project)
     user.has_plan?('plus') && !project.is_live?
+  end
+
+  def resource_name
+    :user
+  end
+
+  def resource
+    @resource ||= User.new
+  end
+
+  def devise_mapping
+    @devise_mapping ||= Devise.mappings[:user]
+  end
+
+  def can_use_coupon?(user)
+    return true unless user.coupon_stripe_token
+    coupon = Stripe::Coupon.retrieve(user.coupon_stripe_token)
+    ! coupon.valid
+  end
+
+  def upgrade_plan?(user, plan_id)
+    return false if user.membership_kind == plan_id
+    if (user.membership_kind == 'basic' && plan_id == 'plus') ||
+       (user.membership_kind == 'fee' && (plan_id == 'basic' || plan_id == 'plus') )
+      return true
+    end
   end
 
 end

@@ -7,5 +7,9 @@ FactoryGirl.define do
     factory :plus_plan do
     	name	'plus'
     end
+
+    factory :fee_plan do
+      name 'fee'
+    end
   end
 end

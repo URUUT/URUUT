@@ -1,7 +1,3 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
-
 new_subscription =
   setupForm: ->
     $("#donate").text("LOADING")
@@ -29,7 +25,10 @@ new_subscription =
       $('input#donation_token').attr('value', response.id)
       $('input#donation_card_last4').attr('value', response.card.last4)
       $('input#donation_card_type').attr('value', response.card.type)
-      $('#new_donation')[0].submit()
+      if $('#new_user').length > 0
+        submitWithUserForm()
+      else
+        $('#new_donation')[0].submit()
       # return false
     else
       console.log response
@@ -174,9 +173,6 @@ $ ->
         alert "You Can't Input 0 For Seed Amount"
       else
         new_subscription.setupForm()
-        # if $('#card_number').val() == ''
-          # $('#new_donation')[0].submit()
-        # else
 
   $('.edit_donation #donate').on 'click', (event) ->
     event.preventDefault()

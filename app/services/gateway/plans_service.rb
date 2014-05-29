@@ -18,6 +18,26 @@ class Gateway::PlansService < Gateway::BaseService
     membership.clean_plan_data!
   end
 
+  def addCoupon(coupon_id)
+    @coupon = (coupon_id.blank?)? nil : coupon_id
+  end
+
+  def validCoupon
+    if @coupon
+      begin
+      coupon = Stripe::Coupon.retrieve(@coupon)
+      return true if coupon.valid
+      user.errors.add(:coupon_stripe_token, "Invalid coupon. #{@coupon}")
+      return false
+      rescue => e
+        user.errors.add(:coupon_stripe_token, "No such coupon #{@coupon}")
+        Rails.logger.error e
+        return false
+      end
+    end
+    true
+  end
+
 private
 
   def update_stripe_subscription(membership, plan_id)
@@ -29,12 +49,31 @@ private
       membership.save
     when 'basic', 'plus'
       find_card
-      response = customer.update_subscription(plan: plan_id)
+      response = update_or_create_basic_plus_subscription(plan)
       membership.stripe_subscription_id = response.id
       membership.save
     else
       false
     end
+  end
+
+  def update_or_create_basic_plus_subscription(plan)
+    response = customer.subscriptions.all(limit: 1)
+    user.update_attributes({coupon_stripe_token: @coupon})
+    if response.count > 0
+      response = response.data[0]
+      response.plan = plan.name
+      begin
+        response.delete_discount
+      rescue => e
+        Rails.logger.error e
+      end
+    else
+      response = customer.subscriptions.create(plan: plan.name)
+    end
+    response.coupon = @coupon if @coupon
+    response.save
+    response
   end
 
   def cancel_stripe_subscription(membership)

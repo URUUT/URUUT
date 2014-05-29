@@ -11,7 +11,7 @@ gem 'devise-async'
 gem 'cancan'
 gem 'aws-sdk'
 gem 'daemons'
-gem 'stripe', '~> 1.8.8'
+gem 'stripe', '~> 1.10.1'
 gem 'truncate_html'
 gem 'activerecord-postgresql-adapter'
 gem 'oauth2'
@@ -92,6 +92,7 @@ group :test do
   gem 'ci_reporter'
   gem 'ffaker'
   gem 'webmock'
+  gem 'stripe-ruby-mock', '~> 1.10.1.7'
 end
 
 gem 'jquery-rails'

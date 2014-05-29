@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
     elsif session[:redirect_url] == user_registration_url || request.referer.nil? || request.referer.start_with?(edit_user_password_url) || session[:redirect_url] == root_url
       root_url
     else
-      stored_location_for(resource) || request.referer || session[:redirect_url]  ||  request.env['omniauth.origin']
+      session[:redirect_url] || stored_location_for(resource) || request.referer || request.env['omniauth.origin']
     end
   end
 

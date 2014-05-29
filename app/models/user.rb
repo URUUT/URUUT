@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :remember_me, :city, :state, :zip,
     :neighborhood, :provider, :role, :uid, :token, :organization, :mission, :subscribed, :avatar, :uruut_point,
-    :telephone, :full_registration, :sign_in_plan, :sign_up_plan
+    :telephone, :full_registration, :sign_in_plan, :sign_up_plan, :coupon_stripe_token
 
   after_create :assign_default_badge
 

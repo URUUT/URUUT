@@ -1,3 +1,4 @@
+require 'stripe'
 module MembershipsHelper
 
   def membership_title(user)
@@ -50,6 +51,13 @@ module MembershipsHelper
     when 'basic', 'plus'
       'unless you cancel your subscription before that time.'
     end
+  end
+
+  def membership_coupon_message(coupon_id)
+    coupon = Stripe::Coupon.retrieve coupon_id
+    discount_text = coupon.amount_off ?
+      "$#{coupon.amount_off.round(2)/100}" : "#{coupon.percent_off}%"
+    "You applied a #{discount_text} discount coupon to your membership"
   end
 
 end

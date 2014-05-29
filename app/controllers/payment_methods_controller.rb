@@ -20,14 +20,18 @@ class PaymentMethodsController < ApplicationController
   def create
     @credit_card = CreditCard.new(params[:credit_card])
     customer_plan = Gateway::PlansService.new(current_user)
+    customer_plan.addCoupon(params[:coupon])
     plan_id = params[:credit_card][:plan_id]
-
+    #coupon = Gateway::CouponService.new(current_user)
+    #coupon.removeInvalid(plan_id) if current_user.coupon_stripe_token
     begin
-      if @credit_card.valid? && @card_service.create(@credit_card)
+      if @credit_card.valid? && @card_service.create(@credit_card) &&
+          customer_plan.validCoupon
         customer_plan.update_plan(plan_id) if plan_id.present?
         current_user.send_welcome_email
         redirect_to users_sign_up_confirmation_path
       else
+        @plan = Plan.where("name = ?", plan_id).first
         render :new
       end
     rescue Stripe::CardError => e
@@ -59,5 +63,4 @@ private
     @card_service = Gateway::CardsService.new(current_user)
     @customer = @card_service.find_customer
   end
-
 end

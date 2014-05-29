@@ -1,0 +1,11 @@
+= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "well" }) do |f|
+  = devise_error_messages!
+
+  = render 'registartion_fields', f: f
+
+  - if with_submits
+    %div.inline
+      - if (params[:sign_up_plan] || (params[:user] && params[:user][:sign_up_plan])) == 'fee'
+        = f.submit 'Finish', class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:left; border-radius: 5px; width: 230px;"
+      - else
+        = f.submit 'Continue', class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:left; border-radius: 5px; width: 230px;"

@@ -86,4 +86,8 @@ module UsersHelper
     end
   end
 
+  def user_fullname(user, joiner)
+    [user.first_name, user.last_name].join(joiner)
+  end
+
 end

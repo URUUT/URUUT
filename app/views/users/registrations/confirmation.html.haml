@@ -1,6 +1,8 @@
 %section.full-width.our-story
   .container
     %h1 Thank You! Your Uruut Account is Now Active.
+    - if current_user.coupon_stripe_token
+      %h4= "You used a coupon: #{current_user.coupon_stripe_token}"
 
     %p{ style: 'margin: 12px 115px 35px;' }
       Set up your first campaign, access Uruut’s powerful donor relationship management tools, or just start exploring.

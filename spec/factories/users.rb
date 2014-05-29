@@ -11,5 +11,20 @@ FactoryGirl.define do
     factory :admin do
       role      'admin'
     end
+
+    factory :full_user do
+      membership
+
+      after(:build) do |user, evaluator|
+        card_token = StripeMock.generate_card_token(last4: "9191", exp_year: 2.years.from_now)
+        Stripe::Coupon.create(percent_off: 25, duration: 'repeating',
+          duration_in_months: 3, id: '25OFF')
+        customer = Stripe::Customer.create(description: "Customer")
+        customer.cards.create(:card => card_token)
+        user.stripe_user_token = customer.id
+        #user.stripe_card_token = "tok_2jIDoCDYm7WkO0"
+        user.coupon_stripe_token = '25OFF'
+      end
+    end
   end
 end

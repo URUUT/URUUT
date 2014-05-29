@@ -20,7 +20,7 @@ feature 'User creation' do
     fill_in 'marketing_info[last_name]',  with: @user.last_name
     fill_in 'marketing_info[email]',      with: @user.email
     click_button 'Next ►'
-
+	sleep(0.5)
     expect(page).to have_content('Uruut Basic')
   end
 
