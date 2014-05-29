@@ -19,7 +19,7 @@ class Gateway::PlansService < Gateway::BaseService
   end
 
   def addCoupon(coupon_id)
-    @coupon = coupon_id
+    @coupon = (coupon_id.blank?)? nil : coupon_id
   end
 
   def validCoupon
