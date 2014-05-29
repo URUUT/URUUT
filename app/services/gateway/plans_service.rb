@@ -29,7 +29,6 @@ class Gateway::PlansService < Gateway::BaseService
       return true if coupon.valid
       user.errors.add(:coupon_stripe_token, "Invalid coupon. #{@coupon}")
       return false
-      end
       rescue => e
         user.errors.add(:coupon_stripe_token, "No such coupon #{@coupon}")
         Rails.logger.error e
