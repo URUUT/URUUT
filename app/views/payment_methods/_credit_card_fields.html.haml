@@ -43,7 +43,7 @@
     ZIP CODE
     %span.error-container
   = f.text_field :zip_code
-- unless params[:plan_id] == 'fee' || (params[:controller] == 'payment_method' && params[:action] == 'edit')
+- unless params[:plan_id] == 'fee' || (params[:action] == 'edit')
   - if can_use_coupon?(current_user) || upgrade_plan?(current_user, params[:plan_id])
     %div.inline.well-half
       = label_tag 'coupon', 'Promotional Code'
