@@ -61,13 +61,17 @@ private
     if response.count > 0
       response = response.data[0]
       response.plan = plan.name
-      response.delete_discount if response.discount
-      response.coupon = @coupon if @coupon
-      response.save
-      response
+      begin
+        response.delete_discount
+      rescue => e
+        Rails.logger.error e
+      end
     else
-      response = customer.subscriptions.create(plan: plan.name, coupon: @coupon)
+      response = customer.subscriptions.create(plan: plan.name)
     end
+    response.coupon = @coupon if @coupon
+    response.save
+    response
   end
 
   def cancel_stripe_subscription(membership)

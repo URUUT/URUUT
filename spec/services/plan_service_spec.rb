@@ -28,11 +28,17 @@ describe Gateway::PlansService do
         address_state: 'NY'
         })
       Gateway::CardsService.new(@user).create(@card)
+      Stripe::Coupon.create(
+        :percent_off => 25,
+        :duration => 'repeating',
+        :duration_in_months => 3,
+        :id => '25OFF'
+      )
+      @plan_service = Gateway::PlansService.new(@user)
     end
 
     it "should create a new plan when it is not assigned to user" do
-      plan_service = Gateway::PlansService.new(@user)
-      plan_service.update_plan('plus')
+      @plan_service.update_plan('plus')
 
       customer = Stripe::Customer.retrieve(@user.stripe_user_token)
       expect(customer.subscriptions.count).to eql 1
@@ -48,13 +54,40 @@ describe Gateway::PlansService do
         :id => 'basic'
       )
 
-      plan_service = Gateway::PlansService.new(@user)
-      plan_service.update_plan('plus')
-      plan_service.update_plan('basic')
+      @plan_service.update_plan('plus')
+      @plan_service.update_plan('basic')
 
       customer = Stripe::Customer.retrieve(@user.stripe_user_token)
       expect(customer.subscriptions.count).to eql 1
       expect(customer.subscriptions.data[0].plan.id).to eql 'basic'
+    end
+
+    context 'coupons' do
+      it "undefined" do
+        @plan_service.addCoupon(nil)
+        @plan_service.update_plan('plus')
+
+        customer = Stripe::Customer.retrieve(@user.stripe_user_token)
+        expect(customer.discount).to eql nil
+      end
+
+      it "inexistent" do
+        @plan_service.addCoupon('asd')
+        @plan_service.update_plan('plus')
+
+        customer = Stripe::Customer.retrieve(@user.stripe_user_token)
+        expect(customer.discount).to eql nil
+      end
+
+      #it "exists" do
+      #  @plan_service.addCoupon('25OFF')
+      #  @plan_service.update_plan('plus')
+
+      #  customer = Stripe::Customer.retrieve(@user.stripe_user_token)
+      #  expect(customer.subscriptions.count).to eql 1
+      #  expect(customer.subscriptions.data[0].plan.id).to eql 'plus'
+      #  expect(customer.discount.coupon.id).to eql '25OFF'
+      #end
     end
 
     after { StripeMock.stop }
