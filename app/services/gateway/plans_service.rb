@@ -26,7 +26,7 @@ class Gateway::PlansService < Gateway::BaseService
     if @coupon
       begin
       coupon = Stripe::Coupon.retrieve(@coupon)
-      return true if coupon.valid
+      return (coupon.valid)? true : false
       rescue => e
         user.errors.add(:coupon_stripe_token, "No such coupon #{@coupon}")
         Rails.logger.error e
