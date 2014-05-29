@@ -48,11 +48,11 @@
       Password*
       %div.error-container
         %label.error
-    = f.password_field :password, id: "user_password"
+    = f.password_field :password, nil, id: "user_password"
 
   .span6.field
     = f.label :password_confirmation, class: "label-green" do
       Password Confirmation*
       %div.error-container
         %label.error
-    = f.password_field :password_confirmation, id: "user_password_confirmation"
+    = f.password_field :password_confirmation, nil, id: "user_password_confirmation"

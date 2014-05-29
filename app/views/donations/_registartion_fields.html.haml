@@ -31,11 +31,11 @@
       Password*
       %div.error-container
         %label.error
-    = password_field_tag 'user[password]', id: "user_password"
+    = password_field_tag 'user[password]', nil, id: "user_password"
 
   .span6.field
     = label_tag 'user[password_confirmation]', class: "label-green" do
       Password Confirmation*
       %div.error-container
         %label.error
-    = password_field_tag 'user[password_confirmation]', id: "user_password_confirmation"
+    = password_field_tag 'user[password_confirmation]', nil, id: "user_password_confirmation"
