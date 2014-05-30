@@ -56,9 +56,10 @@ describe Project do
   describe "scopes" do
     describe ".ending_today" do
       before(:each) do
-        @projects_end_today = FactoryGirl.create_list(:project, 20, campaign_deadline: DateTime.now.end_of_day)
+        Time.zone = 'EST'
+        @projects_end_today = FactoryGirl.create_list(:project, 20, campaign_deadline: Time.zone.now.end_of_day)
         @projects_common = FactoryGirl.create_list(:project, 10)
-        @project_beginning_of_day = FactoryGirl.create_list(:project, 20, campaign_deadline: DateTime.now.beginning_of_day)
+        @project_beginning_of_day = FactoryGirl.create_list(:project, 20, campaign_deadline: Time.zone.now.beginning_of_day)
       end
 
       it { expect(Project.ending_today.count).to eql 40 }

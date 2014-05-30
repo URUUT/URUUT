@@ -56,7 +56,7 @@ class Project < ActiveRecord::Base
   scope :funding_active, where("status = 'Funding Active'")
   scope :funding_complete, where("status = 'Funding Completed'")
   scope :not_partial_funding, where(partial_funding: false)
-  scope :ending_today, -> { where( campaign_deadline: (DateTime.now.beginning_of_day.utc..DateTime.now.end_of_day.utc) ) }
+  scope :ending_today, -> { where( campaign_deadline: (Time.zone.now.beginning_of_day..Time.zone.now.end_of_day) ) }
   scope :updated_yesterday, -> { where("updated_at >= ?", (Time.now - 1.day).utc) }
   scope :not_hidden, where(hide_featured: false)
 
