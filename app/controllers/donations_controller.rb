@@ -3,7 +3,7 @@ require 'open-uri'
 class DonationsController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: :default_perk
   before_filter :set_session_page, :set_session_wizard, :set_previous_path_for_registration
-  before_filter :set_project, :set_perk_amount, :set_perks
+  before_filter :set_project, :set_perk_amount, :set_perks, :except => [:more_donators]
   layout "landing"
 
   def new
