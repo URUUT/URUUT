@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140509153634) do
+ActiveRecord::Schema.define(:version => 20140530142754) do
 
   create_table "accounts", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -190,6 +190,18 @@ ActiveRecord::Schema.define(:version => 20140509153634) do
   end
 
   add_index "identities", ["user_id"], :name => "index_identities_on_user_id"
+
+  create_table "manual_donations", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.integer  "project_id"
+    t.decimal  "amount",     :precision => 8, :scale => 2
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+  end
+
+  add_index "manual_donations", ["project_id"], :name => "index_manual_donations_on_project_id"
 
   create_table "marketing_infos", :force => true do |t|
     t.integer  "user_id"
