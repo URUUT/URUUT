@@ -67,4 +67,27 @@ describe Project do
       it { expect(Project.ending_today).to include @project_beginning_of_day.first }
     end
   end
+
+  describe "#total_funded" do
+    before(:each) do
+      @project = FactoryGirl.create(:project, goal: 1000000)
+      FactoryGirl.create_list(:project_sponsor, 10, project: @project)
+      FactoryGirl.create_list(:manual_donation, 5, project: @project)
+      FactoryGirl.create_list(:donation, 5, project: @project)
+    end
+
+    it { expect(@project.total_funded).to eql (7500.0 + 5000.0 + 500.0) }
+  end
+
+  describe "#percent_to_goal" do
+    before(:each) do
+      @project = FactoryGirl.create(:project, goal: 1000000)
+      FactoryGirl.create_list(:project_sponsor, 10, project: @project)
+      FactoryGirl.create_list(:manual_donation, 5, project: @project)
+      FactoryGirl.create_list(:donation, 5, project: @project)
+      @expected = (((7500.0 + 5000.0 + 500.0) / @project.goal.to_f) * 100).to_i
+    end
+
+    it { expect(@project.percent_to_goal).to eql @expected }
+  end
 end
