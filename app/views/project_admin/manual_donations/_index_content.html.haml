@@ -1,0 +1,15 @@
+%h2.title.project-founder MANUAL DONATIONS
+.project-funder.well
+  .all-founder
+    = render 'form'
+    - if @manual_donations.try(:any?)
+      %table.table.table-striped
+        - @manual_donations.each do |donation|
+          %tr
+            %td= image_tag "anonymous.png", width: 50, height: 50
+            %td{style: "width: 210px;"}= truncate("#{donation.first_name} #{donation.last_name}", length: 17)
+            %td= "#{amount_converter(donation.amount)}"
+            %td= donation.updated_at.strftime("%m/%d")
+      = paginate @manual_donations, remote: true
+    - else
+      No manual donations yet.

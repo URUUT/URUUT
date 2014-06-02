@@ -1,0 +1,34 @@
+.well
+  = form_for([:project_admin, :project, @manual_donation], html: { class: 'row-fluid' }) do |f|
+
+    .span5.field
+      = f.label :first_name, class: 'label-green' do
+        First Name *
+        %div.error-container
+          %label.error
+      = f.text_field :first_name, placeholder: "First Name", style: 'margin-right: 10px;'
+
+    .span5.field
+      = f.label :last_name, class: 'label-green' do
+        Last Name *
+        %div.error-container
+          %label.error
+      = f.text_field :last_name, placeholder: "Last Name"
+
+    .span10.field
+      = f.label :email, class: 'label-green' do
+        Email *
+        %div.error-container
+          %label.error
+      = f.email_field :email, placeholder: "Email"
+
+    .span5.field
+      = f.label :amount, class: 'label-green' do
+        Amount *
+        %div.error-container
+          %label.error
+      = f.number_field :amount
+    .span10
+      = f.submit 'Create', class: "btn btn-primary span3", id: "donation-submit", style: "font-family: 'Proxima Nova Semi';padding: 8px 25px;"
+
+= javascript_include_tag 'manualDonationBehavior'
