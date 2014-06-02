@@ -22,6 +22,15 @@ class ProjectAdmin::ManualDonationsController < ApplicationController
     end
   end
 
+  def destroy
+    manual_donation = ManualDonation.find(params[:id])
+    manual_donation.delete
+    donations = @project.manual_donations
+    @manual_donation = ManualDonation.new
+    @manual_donations = Kaminari.paginate_array(donations).page(params[:page]).per(25)
+    render :index
+  end
+
   private
 
   def set_project

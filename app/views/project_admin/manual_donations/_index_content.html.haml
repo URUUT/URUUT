@@ -10,6 +10,8 @@
             %td{style: "width: 210px;"}= truncate("#{donation.first_name} #{donation.last_name}", length: 17)
             %td= "#{amount_converter(donation.amount)}"
             %td= donation.updated_at.strftime("%m/%d")
+            %td
+              = link_to 'Delete', project_admin_project_manual_donation_path(@project, donation), remote: true, method: :delete, confirm: 'Are you sure?'
       = paginate @manual_donations, remote: true
     - else
       No manual donations yet.

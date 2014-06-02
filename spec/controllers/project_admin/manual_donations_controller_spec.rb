@@ -51,4 +51,13 @@ describe ProjectAdmin::ManualDonationsController do
     end
   end
 
+  describe "DELETE delete" do
+    before(:each) do
+      @deleted_donation = project.manual_donations.first
+      delete :destroy, { project_id: project.id, id: @deleted_donation.id }
+      project.reload
+    end
+
+    it { expect( project.manual_donations ).not_to include @deleted_donation }
+  end
 end
