@@ -102,6 +102,7 @@ Crowdfund::Application.routes.draw do
       get "communication_zone"
 
       resource :xls, only: [:create]
+      resources :manual_donations
 
       collection do
         get "email_based_on_sponsor_level"

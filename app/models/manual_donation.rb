@@ -1,5 +1,8 @@
 class ManualDonation < ActiveRecord::Base
-  attr_accessible :email, :first_name, :last_name, :project_id
+  belongs_to :project
 
-  belongs_to :project_id
+  attr_accessible :email, :first_name, :last_name, :project_id, :amount
+
+  validates :email, :first_name, :last_name, :amount, presence: true
+
 end
