@@ -2,6 +2,7 @@ $(".admin-menu li").removeClass("active");
 $(".founder").parent().addClass("active");
 
 $('.founder-content').html("<%=j render 'index_content' %>");
+$('#total_funding').text("<%= number_to_currency(@project.total_funded, precision: 0) %>")
 
 var header = "MANUAL DONATIONS";
 $(".menu-messages").removeClass('active');
