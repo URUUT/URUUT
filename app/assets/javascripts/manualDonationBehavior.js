@@ -45,7 +45,7 @@ $('.edit-manual-donation').on('click', function(e) {
   request.done(function(manual_donation, status, xhr) {
     $form.find('input:visible').each(function (index, el) {
       /*
-        We want to get the inside content from field name bracket
+        We want get content inside of bracket
         Example inputs and responses
           inputs                                  responses
           manual_donation[first_name]             ["[first_name]", "first_name"]
@@ -61,6 +61,7 @@ $('.edit-manual-donation').on('click', function(e) {
     });
 
     $submit.attr('value', 'Edit');
+    $form.find('input:visible').first().focus();
   });
 
 });
