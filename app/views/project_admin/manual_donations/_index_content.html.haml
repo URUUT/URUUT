@@ -12,6 +12,7 @@
             %td= donation.updated_at.strftime("%m/%d")
             %td
               = link_to 'Delete', project_admin_project_manual_donation_path(@project, donation), remote: true, method: :delete, confirm: 'Are you sure?'
+              = link_to 'Edit', project_admin_project_manual_donation_path(@project, donation), class: 'edit-manual-donation'
       = paginate @manual_donations, remote: true
     - else
       No manual donations yet.

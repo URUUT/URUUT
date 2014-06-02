@@ -2,9 +2,15 @@ $('#donation-submit').on('click', function (e) {
   e.preventDefault();
   var url = this.form.getAttribute('action'),
       data = $(this.form).serialize(),
+      old_value = this.value,
       that = this;
   this.value = 'Loading'
-  var request = $.post(url, data);
+
+  var request = $.ajax({
+    type: this.form.getAttribute('method'),
+    data: data,
+    url: url
+  })
 
   request.done(function(data, status, xhr) {
     console.log('Manual Donation was added successfully.');
@@ -13,7 +19,7 @@ $('#donation-submit').on('click', function (e) {
   request.fail(function(response, status, xhr) {
     var errors = JSON.parse(response.responseText);
     processErrors(errors, 'manual_donation');
-    that.value = 'Create'
+    that.value = old_value
   });
 })
 
@@ -25,3 +31,36 @@ function processErrors(errors, form) {
     $('#new_' + form).find(el).focus();
   }
 }
+
+$('.edit-manual-donation').on('click', function(e) {
+  e.preventDefault();
+  var url = this.getAttribute('href'),
+      $form = $('#new_manual_donation'),
+      $submit = $('#donation-submit');
+
+  $form.attr('action', url);
+  $form.attr('method', 'put');
+
+  var request = $.get(url)
+  request.done(function(manual_donation, status, xhr) {
+    $form.find('input:visible').each(function (index, el) {
+      /*
+        We want to get the inside content from field name bracket
+        Example inputs and responses
+          inputs                                  responses
+          manual_donation[first_name]             ["[first_name]", "first_name"]
+          manual_donation[last_name]              ["[last_name]", "last_name"]
+          manual_donation[email]                  ["[email]", "email"]
+
+        Regex: /\[(.+)\]/
+      */
+      field = this.name.match(/\[(.+)\]/);
+      if (field) {
+        this.value = manual_donation[field[1]];
+      }
+    });
+
+    $submit.attr('value', 'Edit');
+  });
+
+});

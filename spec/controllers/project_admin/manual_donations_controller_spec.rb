@@ -60,4 +60,30 @@ describe ProjectAdmin::ManualDonationsController do
 
     it { expect( project.manual_donations ).not_to include @deleted_donation }
   end
+
+  describe "PUT update" do
+    before(:each) do
+      @modified_donation = project.manual_donations.first
+    end
+
+    describe "with valid data" do
+      before(:each) do
+        put :update, { project_id: project.id, id: @modified_donation.id,
+          manual_donation: { email: 'test_qw@text.com'} }
+        project.reload
+      end
+      it { expect( project.manual_donations.where(email: 'test_qw@text.com') ).to exist }
+    end
+
+    describe "with invalid data" do
+      before(:each) do
+        put :update, { project_id: project.id, id: @modified_donation.id,
+          manual_donation: {}, format: :json }
+        project.reload
+      end
+
+      it { expect( project.manual_donations.where(email: @modified_donation.email) ).to exist }
+      it { expect( response.status ).to eql 303 }
+    end
+  end
 end

@@ -11,6 +11,13 @@ class ProjectAdmin::ManualDonationsController < ApplicationController
     @manual_donations = Kaminari.paginate_array(donations).page(params[:page]).per(25)
   end
 
+  def show
+    manual_donation = ManualDonation.find(params[:id])
+    respond_to do |format|
+      format.json { render json: manual_donation }
+    end
+  end
+
   def create
     manual_donation = ManualDonation.new(manual_donation_params)
     if manual_donation.save
@@ -22,13 +29,21 @@ class ProjectAdmin::ManualDonationsController < ApplicationController
     end
   end
 
+  def update
+    manual_donation = ManualDonation.find(params[:id])
+    if manual_donation.update_attributes(manual_donation_params)
+      redirect_to project_admin_project_manual_donations_path(@project), status: :see_other
+    else
+      respond_to do |format|
+        format.json { render json: manual_donation.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def destroy
     manual_donation = ManualDonation.find(params[:id])
     manual_donation.delete
-    donations = @project.manual_donations
-    @manual_donation = ManualDonation.new
-    @manual_donations = Kaminari.paginate_array(donations).page(params[:page]).per(25)
-    render :index
+    redirect_to project_admin_project_manual_donations_path(@project), status: :see_other
   end
 
   private
