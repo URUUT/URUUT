@@ -27,7 +27,6 @@
           Current Amount Funded
         %h2.highlighted-value#total_funding
           = number_to_currency(@total_fundings[:total_amount], :precision => 0)
-        }
         .of-italic
           of #{number_to_currency(@project.goal, :precision => 0)}
 
