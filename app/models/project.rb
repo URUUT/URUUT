@@ -84,11 +84,11 @@ class Project < ActiveRecord::Base
   end
 
   def percent_to_goal
-    ((totalsponsor(self).to_f / self.goal.to_f) * 100).to_i
+    ((totalsponsor.to_f / self.goal.to_f) * 100).to_i
   end
 
   def total_funded
-    totalsponsor(self).to_f
+    totalsponsor.to_f
   end
 
   def self.order_by_percentage
@@ -214,12 +214,11 @@ class Project < ActiveRecord::Base
   end
 
   def total_funding_by_project
-    total_amout, individual_amount, business_amount, family_amount, foundation_amount = 0, 0, 0, 0, 0
+    individual_amount, business_amount, family_amount, foundation_amount = 0, 0, 0, 0
 
     populate_funding_by_project.each do |funding|
       if funding.type_founder.eql?("individual")
         individual_amount += funding.amount.to_i
-        total_amout += funding.amount.to_i
       else
         if funding.sponsor_type.eql?("Foundation")
           foundation_amount += funding.cost.to_i
@@ -228,12 +227,11 @@ class Project < ActiveRecord::Base
         else
           family_amount += funding.cost.to_i
         end
-        total_amout += funding.cost.to_i
       end
     end
 
     fundings_data = {
-      total_amount: total_amout,
+      total_amount: totalsponsor,
       individual_amount: individual_amount,
       business_amount: business_amount,
       family_amount: family_amount,
@@ -479,10 +477,10 @@ private
     user.membership_kind == 'fee' ? application_fee : nil
   end
 
-  def totalsponsor(project)
-    donation_funded = Donation.where("project_id = ?", project.id).sum(:amount)
-    sponsors_funded = project.project_sponsors.sum(:cost)
-    manual_donations_funded = project.manual_donations.sum(:amount)
+  def totalsponsor
+    donation_funded = Donation.where("project_id = ?", self.id).sum(:amount)
+    sponsors_funded = self.project_sponsors.sum(:cost)
+    manual_donations_funded = self.manual_donations.sum(:amount)
     return donation_funded + sponsors_funded + manual_donations_funded
   end
 
