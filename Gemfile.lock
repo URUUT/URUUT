@@ -325,6 +325,7 @@ GEM
     rack_session_access (0.1.1)
       builder (>= 2.0.0)
       rack (>= 1.0.0)
+    railroady (1.1.1)
     rails (3.2.15)
       actionmailer (= 3.2.15)
       actionpack (= 3.2.15)
@@ -553,6 +554,7 @@ DEPENDENCIES
   poltergeist (~> 1.5.0)
   prawn
   rack_session_access
+  railroady
   rails (= 3.2.15)
   rails-dev-boost!
   rails_best_practices

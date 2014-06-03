@@ -21,6 +21,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+/doc
 
 # Ignore uploaded files
 /public/uploads
