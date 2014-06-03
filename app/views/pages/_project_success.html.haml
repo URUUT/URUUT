@@ -30,7 +30,7 @@
         %ul
           %li.funded
             %p
-              = amount_converter(totalsponsor(p))
+              = amount_converter(p.total_funded)
               %span of
               = amount_converter(p.goal)
             %h5{:style => "color:#b6b6b4 !important;"} Funded
@@ -48,7 +48,7 @@
 
       :javascript
         $('.progressbar#{p.id}_project').progressbar({
-            value: #{percentage_sponsor(p)}
+            value: #{p.percent_to_goal}
           });
         $('.progressbar#{p.id}_project > div').css({ 'background': '#70bf4c' });
         $('.tax-deductible').tooltip({

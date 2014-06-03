@@ -28,7 +28,7 @@ namespace :uruut do
 	end
 
 	def valid_project?(project)
-		(totalsponsor(project) >= project.goal.to_f && project.goal.to_f > 0) ||
+		(project.total_funded >= project.goal.to_f && project.goal.to_f > 0) ||
 		((project.partial_funding == true && project.goal.to_f > 0)           &&
 		project.user.membership.kind == 'plus')
 	end
