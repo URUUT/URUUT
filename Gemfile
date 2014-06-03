@@ -76,6 +76,7 @@ group :development, :test do
   gem 'launchy'
   gem 'dotenv-rails'
   gem 'rails_email_preview', '~> 0.2.12'
+  gem 'railroady'
 end
 
 group :test do
