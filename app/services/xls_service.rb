@@ -8,6 +8,7 @@ class XlsService
   def create
     create_donors_worksheet
     create_project_sponsors_worksheet
+    create_manual_donations_worksheet
 
     xls.close
 
@@ -28,6 +29,10 @@ private
 
   def create_project_sponsors_worksheet
     Worksheet::Sponsors.new(xls, project).create
+  end
+
+  def create_manual_donations_worksheet
+    Worksheet::ManualDonations.new(xls, project).create
   end
 
 end
