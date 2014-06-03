@@ -65,3 +65,21 @@ $('.edit-manual-donation').on('click', function(e) {
   });
 
 });
+
+
+$('.delete-manual-donation').on('click', function (e) {
+  e.preventDefault();
+  var $modal = $('#deleteModal'),
+      $confirmButton = $('#confirm-delete'),
+      url = this.getAttribute('href');
+
+  $confirmButton.on('click', function(e) {
+    $('.table.table-striped').html('Loading...');
+    var request = $.ajax({ type: 'DELETE', url: url });
+    request.done(function() {
+      console.log('The element was deleted successfully');
+    });
+  });
+
+  $modal.modal();
+})
