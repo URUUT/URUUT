@@ -13,7 +13,7 @@
           = link_to "INDIVIDUAL CONTRIBUTORS", "/project_admin/projects/#{@project.id}/project_founder?type=individual", remote: true, style: "font-size: 10px"
           .arrow
         %h3{:class => "menu-messages manual-donations"}
-          = link_to "MANUAL DONATIONS", project_admin_project_manual_donations_path(@project), remote: true, style: 'font-size: 10px;'
+          = link_to "OFFLINE DONATIONS", project_admin_project_manual_donations_path(@project), remote: true, style: 'font-size: 10px;'
           .arrow
         - if any_project_donors_or_sponsors?(@project)
           %h3{:class => "menu-messages"}

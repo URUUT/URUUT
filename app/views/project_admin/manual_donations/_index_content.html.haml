@@ -1,4 +1,4 @@
-%h2.title.project-founder MANUAL DONATIONS
+%h2.title.project-founder OFFLINE DONATIONS
 .project-funder.well
   .all-founder
     = render 'form'
@@ -15,7 +15,7 @@
               = link_to 'Edit', project_admin_project_manual_donation_path(@project, donation), class: 'edit-manual-donation'
       = paginate @manual_donations, remote: true
     - else
-      No manual donations yet.
+      No offline donations yet.
 
 #deleteModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "width: 440px;"}
   .modal-header{:style => "border-bottom: none;"}

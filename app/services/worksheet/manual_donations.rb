@@ -2,7 +2,7 @@ class Worksheet::ManualDonations < Worksheet::Base
 
   def initialize(xls, project)
     @project = project
-    super(xls, project, project.manual_donations, 'Manual Donations')
+    super(xls, project, project.manual_donations, 'Offline Donations')
   end
 
 private
