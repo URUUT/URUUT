@@ -9,7 +9,7 @@ $("#new_user").validate({
   errorPlacement: function(error, element) {
     error.appendTo( element.parent().find(".error-container") );
   }
-})
+});
 
 function submitWithUserForm () {
   if ( $('#new_user').valid() && $("#new_donation").valid() ) {

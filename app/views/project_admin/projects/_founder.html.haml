@@ -3,7 +3,7 @@
     .span3.pull-left
       %div{:style => "margin-top: 60px"}
       %div{:class => "well info"}
-        %h3{:class => "menu-messages founder-all", :style => "background: #81C263"}
+        %h3{:class => "menu-messages founder-all"}
           = link_to "ALL PROJECT FUNDERS", project_admin_project_project_founder_path(@project.id), remote: true, style: "font-size: 10px"
           .arrow
         %h3{:class => "menu-messages sponsor-type"}
@@ -12,6 +12,10 @@
         %h3{:class => "menu-messages individuals-type"}
           = link_to "INDIVIDUAL CONTRIBUTORS", "/project_admin/projects/#{@project.id}/project_founder?type=individual", remote: true, style: "font-size: 10px"
           .arrow
+        - if current_user.membership_plan.has_feature?('manual_donations')
+          %h3{:class => "menu-messages manual-donations"}
+            = link_to "OFFLINE DONATIONS", project_admin_project_manual_donations_path(@project), remote: true, style: 'font-size: 10px;'
+            .arrow
         - if any_project_donors_or_sponsors?(@project)
           %h3{:class => "menu-messages"}
             = link_to 'Download Funders List', project_admin_project_xls_path(@project), method: :post, style: "font-size: 10px"

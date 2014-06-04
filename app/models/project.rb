@@ -37,6 +37,7 @@ class Project < ActiveRecord::Base
     project.has_many :project_sponsors
     project.has_many :sponsorship_benefits
     project.has_many :documents
+    project.has_many :manual_donations
   end
 
   has_many :donors,   through: :donations, source: :user, foreign_key: 'user_id'
@@ -56,7 +57,7 @@ class Project < ActiveRecord::Base
   scope :funding_active, where("status = 'Funding Active'")
   scope :funding_complete, where("status = 'Funding Completed'")
   scope :not_partial_funding, where(partial_funding: false)
-  scope :ending_today, where("campaign_deadline BETWEEN ? AND ?", DateTime.now.beginning_of_day, DateTime.now.end_of_day)
+  scope :ending_today, -> { where( campaign_deadline: (Time.zone.now.beginning_of_day..Time.zone.now.end_of_day) ) }
   scope :updated_yesterday, -> { where("updated_at >= ?", (Time.now - 1.day).utc) }
   scope :not_hidden, where(hide_featured: false)
 
@@ -83,11 +84,11 @@ class Project < ActiveRecord::Base
   end
 
   def percent_to_goal
-    ((totalsponsor(self).to_f / self.goal.to_f) * 100).to_i
+    ((totalsponsor.to_f / self.goal.to_f) * 100).to_i
   end
 
   def total_funded
-    totalsponsor(self).to_f
+    totalsponsor.to_f
   end
 
   def self.order_by_percentage
@@ -213,12 +214,11 @@ class Project < ActiveRecord::Base
   end
 
   def total_funding_by_project
-    total_amout, individual_amount, business_amount, family_amount, foundation_amount = 0, 0, 0, 0, 0
+    individual_amount, business_amount, family_amount, foundation_amount = 0, 0, 0, 0
 
     populate_funding_by_project.each do |funding|
       if funding.type_founder.eql?("individual")
         individual_amount += funding.amount.to_i
-        total_amout += funding.amount.to_i
       else
         if funding.sponsor_type.eql?("Foundation")
           foundation_amount += funding.cost.to_i
@@ -227,12 +227,11 @@ class Project < ActiveRecord::Base
         else
           family_amount += funding.cost.to_i
         end
-        total_amout += funding.cost.to_i
       end
     end
 
     fundings_data = {
-      total_amount: total_amout,
+      total_amount: totalsponsor,
       individual_amount: individual_amount,
       business_amount: business_amount,
       family_amount: family_amount,
@@ -478,14 +477,11 @@ private
     user.membership_kind == 'fee' ? application_fee : nil
   end
 
-  def totalsponsor(project)
-    donation = Donation.where("project_id = ?", project.id)
-    total_funded = 0.0
-    donation.each do |d|
-      total_funded = total_funded + d.amount.to_f
-    end
-    total_funded += project.project_sponsors.sum(:cost)
-    return total_funded
+  def totalsponsor
+    donation_funded = Donation.where("project_id = ?", self.id).sum(:amount)
+    sponsors_funded = self.project_sponsors.sum(:cost)
+    manual_donations_funded = self.manual_donations.sum(:amount)
+    return donation_funded + sponsors_funded + manual_donations_funded
   end
 
 end

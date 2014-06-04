@@ -45,4 +45,16 @@ module SponsorsHelper
 
   end
 
+  def level_placement_image(parent_id)
+    case parent_id
+    when 1
+      "/assets/platinum-placement.png"
+    when 2
+      "/assets/gold-placement.png"
+    when 3
+      "/assets/silver-placement.png"
+    when 4
+      "/assets/bronze-placement.png"
+    end
+  end
 end

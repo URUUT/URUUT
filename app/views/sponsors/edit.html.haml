@@ -116,10 +116,7 @@
           .pull-left{:style => "width: 250px; height: 500px; border-right: solid 1px #d3d3d3; margin-top: -19px; padding-top: 19px;"}
             %h4 SPONSORSHIP COST
             %h1.cost-level.label-green-big.label-green #{amount_converter(@cost)}
-            = image_tag "platinum-placement.png", class: "sponsor-placement platinum"
-            = image_tag "gold-placement.png", class: "sponsor-placement gold"
-            = image_tag "silver-placement.png", class: "sponsor-placement silver"
-            = image_tag "bronze-placement.png", class: "sponsor-placement bronze"
+            = image_tag level_placement_image(@parent_id), class: "sponsor-placement"
 
           .pull-right{:style => "width: 320px;"}
             = label_tag :project_sponsor_name do
@@ -298,15 +295,6 @@
       Stripe.createToken(card, handleStripeResponse);
     };
 
-    $('.sponsor-placement').hide();
-      switch ($('#project_sponsor_level_id').val())
-      {
-        case '1': $(".platinum").show(); break;
-        case '2': $(".gold").show(); break;
-        case '3': $(".silver").show(); break;
-        case '4' : $(".bronze").show(); break;
-      }
-
     var handleStripeResponse = function(status, response) {
       if (status === 200) {
         $('input#token').attr('value', response.id);
@@ -454,7 +442,6 @@
     $(".sponsor-change").click(function(){
       var projectId = parseInt($(".project-id").text());
       var sponsorId = parseInt($(this).attr("sponsor-id"));
-      // $("#project_sponsor_level_id option").removeAttr("selected").removeAttr("selected");
       $("#project_sponsor_level_id option").removeAttr("selected");
       $("#project_sponsor_level_id option[value='"+ sponsorId +"']").attr("selected", "selected");
       $.ajax({

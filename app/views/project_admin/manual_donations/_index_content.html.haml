@@ -1,0 +1,29 @@
+%h2.title.project-founder OFFLINE DONATIONS
+.project-funder.well
+  .all-founder
+    = render 'form'
+    - if @manual_donations.try(:any?)
+      %table.table.table-striped
+        - @manual_donations.each do |donation|
+          %tr
+            %td= image_tag "anonymous.png", width: 50, height: 50
+            %td{style: "width: 210px;"}= truncate("#{donation.first_name} #{donation.last_name}", length: 17)
+            %td= "#{amount_converter(donation.amount)}"
+            %td= donation.updated_at.strftime("%m/%d")
+            %td
+              = link_to 'Delete', project_admin_project_manual_donation_path(@project, donation), class: 'delete-manual-donation'
+              = link_to 'Edit', project_admin_project_manual_donation_path(@project, donation), class: 'edit-manual-donation'
+      = paginate @manual_donations, remote: true
+    - else
+      No offline donations yet.
+
+#deleteModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "width: 440px;"}
+  .modal-header{:style => "border-bottom: none;"}
+    %button.close.label-green{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button", :style => "font-family: 'Proxima Nova', sans-serif; font-size: 12px;opacity: 1;"}
+      Close X
+    %h3#myModalLabel.tittle{:style => "margin-bottom: 0;"} Confirm changes
+  .modal-body{:style => "padding-top: 0; font-size: 13px; letter-spacing: 1px;"}
+    %p Are you sure?
+  .modal-footer
+    %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Cancel
+    %button#confirm-delete.btn.btn-primary{"aria-hidden" => "true", "data-dismiss" => "modal"} Accept

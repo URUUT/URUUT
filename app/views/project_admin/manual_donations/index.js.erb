@@ -1,0 +1,13 @@
+$(".admin-menu li").removeClass("active");
+$(".founder").parent().addClass("active");
+
+$('.founder-content').html("<%=j render 'index_content' %>");
+$('#total_funding').text("<%= number_to_currency(@project.total_funded, precision: 0) %>")
+
+var header = "OFFLINE DONATIONS";
+$(".menu-messages").removeClass('active');
+$(".manual-donations").addClass('active')
+                      .append("<div class='arrow'></div>")
+                      .append('<div class="arrow"></div>');
+
+$(".project-founder").text(header);

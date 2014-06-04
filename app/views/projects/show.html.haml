@@ -45,10 +45,7 @@
             / = image_tag 'seed.png', :class => "seed"
             %div
               %span Funds Pledged
-              - if totalsponsor(@project).eql?(0)
-                %p $0
-              - else
-                %p= amount_converter(totalsponsor(@project))
+              %p= @project.total_funded.eql?(0) ? "$0" : amount_converter(@project.total_funded)
 
           #progressbar
 
@@ -100,7 +97,7 @@
           .progress-container.span3.offset1
             %div
               %span Funds Pledged
-              %p= totalsponsor(@project).eql?(0) ? '$0' : amount_converter(totalsponsor(@project))
+              %p= @project.total_funded.eql?(0) ? '$0' : amount_converter(@project.total_funded)
 
           #progressbar
 
@@ -452,7 +449,7 @@
               = link_to(image_tag("anonymous.png", style: "width: 27px; height:27px; margin-bottom: 5px; border-radius: 500px 500px 500px 500px; behavior: url('assets/PIE-1.0.0/PIE.htc');", "data-toggle" => "tooltip", title: "ANONYMOUS DONOR", class: "donor-anonymous"), "javascript:void(0)")
         - if @project.distinct_donors.count > 20
           - if user_signed_in?
-            = link_to "/donations/#{@project.id}/more_donators?logged_in=yes", :class => 'btn more', :style => 'margin-top:10px;', remote: true do
+            = link_to project_more_donators_path(@project, logged_in: :yes), :class => 'btn more', :style => 'margin-top:10px;', remote: true do
               Show More
               %span
           - else
@@ -578,25 +575,16 @@
     $(activeTab).show();
 
     $( "#progressbar" ).progressbar({
-      value: #{percentage_sponsor(@project)}
+      value: #{@project.percent_to_goal}
     });
 
 
     var margin;
-    if(#{percentage_sponsor(@project)} > 50) {
+    if(#{@project.percent_to_goal} > 50) {
       margin = 50;
     }else{
-      margin = #{percentage_sponsor(@project)};
+      margin = #{@project.percent_to_goal};
     }
-
-    // $('.progress-container').attr('style', 'margin-left: ' + margin  + '%');
-
-    //if(#{percentage_sponsor(@project)} >= 50){
-    //  $('img.seed').attr('style','float: right');
-
-    //  $('.progress-container').attr('style', 'margin-left: ' + (#{percentage_sponsor(@project)} - 64)
-  //+ '%');
-    //}
 
     $('#progressbar > div').css({ 'background': '#3f403b' });
 

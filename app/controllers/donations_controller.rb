@@ -3,7 +3,8 @@ require 'open-uri'
 class DonationsController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: :default_perk
   before_filter :set_session_page, :set_session_wizard, :set_previous_path_for_registration
-  before_filter :set_project, :set_perk_amount, :set_perks, :except => [:more_donators]
+  before_filter :set_perk_amount, :set_perks, except: :more_donators
+  before_filter :set_project
   layout "landing"
 
   def new
@@ -142,7 +143,6 @@ class DonationsController < ApplicationController
   end
 
   def more_donators
-    @project = Project.find(params[:id])
     respond_to do |format|
       format.html { redirect_to project_url(@project), notice: "successfully" }
       format.js
@@ -171,6 +171,7 @@ class DonationsController < ApplicationController
   end
 
   def set_project
+    puts ">>>>>>>>>>>>>>>>>>>> #{params.inspect}"
     id = params[:project_id] ? params[:project_id] : params[:donation][:project_id]
     session[:current_project] = id
     @project = Project.find(id)

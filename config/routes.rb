@@ -102,6 +102,7 @@ Crowdfund::Application.routes.draw do
       get "communication_zone"
 
       resource :xls, only: [:create]
+      resources :manual_donations
 
       collection do
         get "email_based_on_sponsor_level"
@@ -121,12 +122,12 @@ Crowdfund::Application.routes.draw do
 
     member do
       get "change_perk"
-      get "more_donators"
     end
   end
   resources :sponsorship_levels, only: [:update]
   resources :projects do
     resources :question, :only => [:new, :create]
+    get :more_donators, to: "donations#more_donators"
     collection do
       get :get_complete_project
       get :get_complete_project_public

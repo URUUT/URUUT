@@ -1,7 +1,7 @@
 namespace :populate do
   desc 'Creates plans and features'
   task plans_and_features: :environment do
-
+    Feature.delete_all
     FEE_FEATURES = {
       multidonor: 'Multi-donor Social Fundraising Platform',
       stripe_payments: 'Uruut Payments Powered by Stripe',
@@ -27,7 +27,8 @@ namespace :populate do
       auto_tax: 'Auto Tax Letter Generation',
       volunteer_tracker: 'Volunteer Solicitation Tracker',
       google_seo: 'Free Google SEO Grant Application',
-      custom_sponsors: 'Custom Sponsors'
+      custom_sponsors: 'Custom Sponsors',
+      manual_donations: 'Offline Donations'
     })
 
     # Creates all features
@@ -36,19 +37,18 @@ namespace :populate do
     end
 
     # Creates fee plan and it features
-    fee_plan = Plan.new(name: 'fee')
-    fee_plan.save
+    fee_plan = Plan.where(name: 'fee').first_or_create
     fee_plan_features = Feature.where(name: FEE_FEATURES.keys.map(&:to_s))
     fee_plan.features << fee_plan_features
 
     # Creates basic plan and it features
-    basic_plan = Plan.new(name: 'basic', stripe_plan_id: 'basic')
+    basic_plan = Plan.where(name: 'basic', stripe_plan_id: 'basic').first_or_create
     basic_plan.save
     basic_plan_features = Feature.where(name: BASIC_FEATURES.keys.map(&:to_s))
     basic_plan.features << basic_plan_features
 
     # Creates plus plan and it features
-    plus_plan = Plan.new(name: 'plus', stripe_plan_id: 'plus')
+    plus_plan = Plan.where(name: 'plus', stripe_plan_id: 'plus').first_or_create
     plus_plan.save
     plus_plan_features = Feature.where(name: PLUS_FEATURES.keys.map(&:to_s))
     plus_plan.features << plus_plan_features
