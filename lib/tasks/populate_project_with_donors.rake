@@ -10,8 +10,13 @@ namespace :populate do
     donors_length = ENV['N_DONORS'].blank? ? 100 : ENV['N_DONORS'].to_i
 
     project = Project.find(project_id)
-    user = User.find(1)
     donors_length.times do |i|
+      user = User.create({
+        first_name: Time.now.to_i,
+        last_name: i,
+        email: "#{Time.now.to_i}+#{i}@email.com",
+        password: "asdasdasd",
+        password_confirmation: 'asdasdasd' })
       Donation.create({
         email:              "email-#{i}",
         customer_token:     "customer-#{i}",
