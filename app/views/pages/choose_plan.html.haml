@@ -104,7 +104,7 @@
 
               %li{'data-toggle' => 'tooltip', 'data-placement' => 'left', title: "The PLUS plan offers the ability to keep projects stored in the Transparency Workroom for as long as you like (compared with 60 days in the BASIC plan).", class: 'plan-tooltip'} - Advanced campaign transparency
 
-              %li{'data-toggle' => 'tooltip', 'data-placement' => 'left', title: "You will also have the ability to add Offline Donations and add them to your goal.", class: 'plan-tooltip'} - Offline Donation Entry
+              %li{'data-toggle' => 'tooltip', 'data-placement' => 'left', title: "Bring together your offline and online worlds by quickly and easily entering offline donations to be reflected in online campaigns.", class: 'plan-tooltip'} - Offline Donation Entry
 
             - if user_signed_in?
               = link_to 'Select Plan ►', new_user_payment_method_path(current_user, plan_id: 'plus'), class: 'btn', style: 'font-weight: bold;'
