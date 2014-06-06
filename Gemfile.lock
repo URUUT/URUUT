@@ -232,6 +232,7 @@ GEM
     kgio (2.9.1)
     launchy (2.4.2)
       addressable (~> 2.3)
+    libv8 (3.16.14.3)
     listen (2.4.1)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
@@ -368,6 +369,7 @@ GEM
     redis (3.0.7)
     redis-namespace (1.4.1)
       redis (~> 3.0.4)
+    ref (1.0.5)
     request_store (1.0.5)
     require_all (1.3.2)
     responders (0.9.3)
@@ -450,6 +452,9 @@ GEM
     temple (0.6.7)
     term-ansicolor (1.2.2)
       tins (~> 0.8)
+    therubyracer (0.12.1)
+      libv8 (~> 3.16.14.0)
+      ref
     thor (0.18.1)
     thread_safe (0.1.3)
       atomic
@@ -531,6 +536,7 @@ DEPENDENCIES
   email_spec
   erb2haml
   exception_notification
+  execjs
   factory_girl_rails
   ffaker
   filepicker-rails
@@ -572,6 +578,7 @@ DEPENDENCIES
   slim (>= 1.1.0)
   stripe (~> 1.10.1)
   stripe-ruby-mock (~> 1.10.1.7)
+  therubyracer
   truncate_html
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)

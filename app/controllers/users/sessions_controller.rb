@@ -5,6 +5,7 @@ class Users::SessionsController < DeviseController
 
   # GET /resource/sign_in
   def new
+    flash.keep(:error)
     self.resource = resource_class.new(params[:user])
     clean_up_passwords(resource)
     respond_to do |format|
@@ -17,7 +18,8 @@ class Users::SessionsController < DeviseController
 
   # POST /resource/sign_in
   def create
-    resource = warden.authenticate!(auth_options)
+    flash[:error] = 'devise.failure.invalid'
+    self.resource = warden.authenticate!(auth_options)
     set_flash_message(:notice, :signed_in) if is_navigational_format?
     sign_in(resource_name, resource)
     if user_signed_in?

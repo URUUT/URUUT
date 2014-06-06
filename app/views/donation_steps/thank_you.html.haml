@@ -4,11 +4,11 @@
       %h4.tittle{style: "padding-bottom: 10px;"} THANK YOU!
       %h4.label-green{style: "text-transform: none;"} Congratulations!
       %p{:style => "letter-spacing: 1px;"} You are now an official donor to #{@project.project_title}! Now it's time to spread the word.
-      %div
-        = link_to image_tag("fb-share.png",style: "width: 150px", class: "fb-share-button"), "https://www.facebook.com/dialog/feed?app_id=#{Settings.facebook.api_key}&link=#{project_url(@project.id)}&picture=#{@project.large_image}&name=#{url_encode(@project.project_title)}&caption=#{url_encode(@project.category)}&description=#{url_encode("Like making a difference? Check out this great project I found....")}&redirect_uri=#{thank_you_donations_url}", style: "display: block; float: left;", target: "_blank"
-        = image_tag "tw-share.png", style: "cursor:pinter; margin-left: 2%; display: block; float: left; width: 150px; cursor:pointer", class: "tw-share"
-        = link_to image_tag("ml-share.png", style: "width: 150px"), "javascript:void(0)", style: "margin-left: 2%; display: block; float: left;", class: "cs_import"
-        %span.link-short{:style => "font-weight:bolder; font-size: 18px !important; margin-left: 2%"}
+      .row-fluid
+        = link_to image_tag("fb-share.png", class: "fb-share-button"), "https://www.facebook.com/dialog/feed?app_id=#{Settings.facebook.api_key}&link=#{project_url(@project.id)}&picture=#{@project.large_image}&name=#{url_encode(@project.project_title)}&caption=#{url_encode(@project.category)}&description=#{url_encode("Like making a difference? Check out this great project I found....")}&redirect_uri=#{thank_you_donations_url}", class: 'span3', target: "_blank"
+        = image_tag "tw-share.png", style: "cursor:pinter;", class: "tw-share span3"
+        = link_to image_tag("ml-share.png"), "javascript:void(0)", class: "cs_import span3"
+        %span.span3.link-short{:style => "font-size: 18px !important;"}
           = @project.bitly
 
     .span3.pull-right.messages-content

@@ -10,9 +10,9 @@
   = form_for(resource, :url => user_session_path, :method => :post, :html => {:class => "well clearfix form-signin"}) do |f|
     .span7
       = devise_error_messages!
-      - if flash[:alert]
-        %div{ style: "#{message_style(controller_name, action_name)}; background: transparent;color: #333;font-style: normal;font-family: 'Proxima Nova Semi', sans-serif;width:auto;" }
-          = I18n.t('devise.failure.invalid').html_safe
+      - if flash[:error]
+        %div.alert{ style: "#{message_style(controller_name, action_name)}; background: transparent;color: #333;font-style: normal;font-family: 'Proxima Nova Semi', sans-serif;width:auto;" }
+          = I18n.t(flash[:error]).html_safe
 
     .req-legend
       *Required
