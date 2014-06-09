@@ -212,6 +212,13 @@ class User < ActiveRecord::Base
     membership.kind == plan
   end
 
+  def finish_ongoing_projects
+    projects.live.each do |project|
+      project.update({ live: 0 })
+    end
+    true
+  end
+
 private
 
   def assign_default_badge

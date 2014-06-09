@@ -22,12 +22,13 @@ class MembershipsController < ApplicationController
   def destroy
     plan_service = Gateway::PlansService.new(current_user)
 
-    if plan_service.cancel_plan
-      redirect_to root_path
-    else
-      render :cancel
+    respond_to do |format|
+      if plan_service.cancel_plan && current_user.finish_ongoing_projects
+        format.json { render json: root_path }
+      else
+        format.json { render json: { message: 'Something was wrong.' }, status: 500 }
+      end
     end
-
   end
 
   private

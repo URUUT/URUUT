@@ -69,5 +69,6 @@
     %p Are you sure you want to cancel your subscription? By doing this all the ongoing projects will be marked as INCOMPLETE.
   .modal-footer
     %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Cancel
-    = link_to "Accept", user_membership_path(current_user, current_user.membership), remote: true, method: :delete, data: { "dismiss" => "modal" }, html: { "aria-hidden" => "true" }, class: 'btn btn-primary'
+    = link_to "Accept", user_membership_path(current_user, current_user.membership), remote: true, method: :delete, html: { "aria-hidden" => "true" }, class: 'btn btn-primary'
 
+= javascript_include_tag 'cancelSubscriptionBehavior'
