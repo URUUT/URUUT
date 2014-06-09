@@ -13,51 +13,61 @@
               = image_tag 'image.png'
             .side-info
               %p
-                %b Fundraising - 
-                Uruut’s fundraising platform has been called 
-                beautiful and enjoyable to use. Incorporating best practices in online giving, 
-                crowdfunding and social interaction, it turns donating to a cause into an 
-                enjoyable, social and interactive experience. We are also the only platform built to 
-                help nonproﬁts attract donors from not only individuals but businesses and 
+                %b Fundraising -
+                Uruut’s fundraising platform has been called
+                beautiful and enjoyable to use. Incorporating best practices in online giving,
+                crowdfunding and social interaction, it turns donating to a cause into an
+                enjoyable, social and interactive experience. We are also the only platform built to
+                help nonproﬁts attract donors from not only individuals but businesses and
                 foundations as well.
           %li
             .side-icon
               = image_tag 'image2.png'
             .side-info
               %p
-                %b Donor Relationship Management - 
-                Let’s face it at the end of the day it’s about your 
-                donor. The more you know about them and the easier it is to reach them then the 
-                greater chance for long term success. Whether its our tools or through our 
-                partnership program Uruut aims to offer the most ﬂexible, powerful donor 
+                %b Donor Relationship Management -
+                Let’s face it at the end of the day it’s about your
+                donor. The more you know about them and the easier it is to reach them then the
+                greater chance for long term success. Whether its our tools or through our
+                partnership program Uruut aims to offer the most ﬂexible, powerful donor
                 management solutions at an affordable price.
           %li
             .side-icon
               = image_tag 'image3.png'
             .side-info
               %p
-                %b Analytics and Insights - 
+                %b Analytics and Insights -
                 In this day and age its critical that you have real time visibility into your fundraising campaigns. How else will you know if you have to make adjustments? Plus if you don’t, your competition will. It’s also critical that you quickly identify new donors and supporters. Want to identify the next business that will become the platinum level sponsor on your next big campaign, now you can. These and more.
           %li
             .side-icon
               = image_tag 'image4.png'
             .side-info
               %p
-                %b Donor Convenience & Transparency - 
+                %b Donor Convenience & Transparency -
                 We want to make your life easier. From generating tax letters, to providing an interactive and transparent way for you to update donors, we’ve got you covered.
         %h5.label-green{style: "margin-bottom: 7px;"} STILL WANT TO CANCEL YOUR SUBSCRIPTION?
         %p
-          Remember, if you click ‘Cancel Subscription’ below, your Uruut subscription will expire on 
-          #{membership_expire_date(current_user)}. 
-          But you’re welcome back anytime and we hope to help make your life as a 
+          Remember, if you click ‘Cancel Subscription’ below, your Uruut subscription will expire on
+          #{membership_expire_date(current_user)}.
+          But you’re welcome back anytime and we hope to help make your life as a
           nonproﬁt easier in the future.
 
-        = link_to user_membership_path(current_user, current_user.membership), method: :delete do
-          .btn{style: 'width: 285px; margin-left: 0;'}
-            CANCEL SUBSCRIPTION ►
+        = link_to "CANCEL SUBSCRIPTION ►", "#cancelModal", class: 'btn', style: 'width: 285px; margin-left: 0; text-decoration: none;', data: { toggle: 'modal' }
+
   .span4
     .well.info.without-title
       .box-content
         %h5.label-green{style: "margin-bottom: 7px;"} SUBSCRIPTION STATUS
         = render partial: 'shared/subscription_status', locals: { current_user: current_user }
+
+#cancelModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "width: 440px;"}
+  .modal-header{:style => "border-bottom: none;"}
+    %button.close.label-green{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button", :style => "font-family: 'Proxima Nova', sans-serif; font-size: 12px;opacity: 1;"}
+      Close X
+    %h3#myModalLabel.tittle{:style => "margin-bottom: 0;"} Confirm changes
+  .modal-body{:style => "padding-top: 0; font-size: 13px; letter-spacing: 1px;"}
+    %p Are you sure you want to cancel your subscription? By doing this all the ongoing projects will be marked as INCOMPLETE.
+  .modal-footer
+    %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Cancel
+    = link_to "Accept", user_membership_path(current_user, current_user.membership), remote: true, method: :delete, data: { "dismiss" => "modal" }, html: { "aria-hidden" => "true" }, class: 'btn btn-primary'
 
