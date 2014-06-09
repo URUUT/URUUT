@@ -214,7 +214,8 @@ class User < ActiveRecord::Base
 
   def finish_ongoing_projects
     projects.live.each do |project|
-      project.update({ live: 0 })
+      project.live = 0
+      project.save
     end
     true
   end

@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :membership do
-    user nil
-    plan nil
+    association :user
+    association :plan
   end
 end

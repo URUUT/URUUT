@@ -13,7 +13,7 @@ FactoryGirl.define do
     end
 
     factory :full_user do
-      membership
+      association :membership
 
       after(:build) do |user, evaluator|
         card_token = StripeMock.generate_card_token(last4: "9191", exp_year: 2.years.from_now)
