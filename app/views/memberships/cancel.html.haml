@@ -66,7 +66,7 @@
       Close X
     %h3#myModalLabel.tittle{:style => "margin-bottom: 0;"} Confirm changes
   .modal-body{:style => "padding-top: 0; font-size: 13px; letter-spacing: 1px;"}
-    %p Are you sure you want to cancel your subscription? By doing this all the ongoing projects will be marked as INCOMPLETE.
+    %p Are you sure you want to cancel your subscription? By doing this, your current projects and funding will be marked as INCOMPLETE and you will not receive your funds
   .modal-footer
     %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Cancel
     = link_to "Accept", user_membership_path(current_user, current_user.membership), remote: true, method: :delete, html: { "aria-hidden" => "true" }, class: 'btn btn-primary'
