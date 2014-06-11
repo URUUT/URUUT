@@ -71,7 +71,7 @@
         %h3 My Tax Receipts
         .well
           - @tax_reports.each do |report|
-            = link_to report.url.gsub('https://s3.amazonaws.com/uruut/tax_reports/',''), report.url, target: '_blank', class: 'tax-report'
+            = link_to report.url.gsub('https://s3.amazonaws.com/techbridge/tax_reports/',''), report.url, target: '_blank', class: 'tax-report'
           = paginate @tax_reports, :param_name => "tax_report"
 
       -unless @pending_projects.empty?
