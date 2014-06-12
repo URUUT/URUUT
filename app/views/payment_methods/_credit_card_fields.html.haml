@@ -15,11 +15,11 @@
       %span.error-container
     = f.text_field :cvc, class: 'input cvc'
   .span6.offset1
+    %span.error-container
     = f.label :expiration do
       CARD EXPIRATION
       %span.italic.help
         (MM / YYYY)
-      %span.error-container
     = f.text_field :exp_month, id: 'card_month'
     = f.text_field :exp_year, id: 'card_year'
 %div

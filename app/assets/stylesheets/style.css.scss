@@ -2411,6 +2411,8 @@ input, select, textarea{
   }
 
   label.error {
+    display: inline-block;
+    margin-left: 5px;
     font-family: 'Georgia', serif;
     font-style: italic;
     text-transform: none;
