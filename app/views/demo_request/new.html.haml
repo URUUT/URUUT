@@ -1,5 +1,5 @@
 .demo-requests
-  .span8{style: "margin-top:35px;"}
+  .span8
     %h4.step_name DEMO REGISTRATION (STEP 1 OF 2)
     = form_for @demo, url: demo_request_index_path , html: {class: "well"} do |f|
       - if @demo.errors.any?

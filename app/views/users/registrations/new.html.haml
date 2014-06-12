@@ -4,9 +4,9 @@
   }
 
 
-.span8{:style => "margin-top:35px;"}
+.span8
   %h4.step_name Create your account
-  = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => "well"}) do |f|
+  = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => "well signup_form"}) do |f|
     = devise_error_messages!
     - if params[:sign_up_plan] || (params[:user] && params[:user][:sign_up_plan])
       = f.hidden_field :sign_up_plan, value: params[:sign_up_plan] || (params[:user] && params[:user][:sign_up_plan])
@@ -26,13 +26,12 @@
           %span.error-container
         = f.text_field :last_name
 
-    - unless @is_donor
-      %div
-        = f.label :organization, class: "label-green" do
-          %span.error-container
-          Organization name*
-          = "(Not Required for Donor Signup)" unless params[:sign_up_plan] || (params[:user] && params[:user][:sign_up_plan]) || params[:full_registration] || (params[:user] && params[:user][:full_registration])
-        = f.text_field :organization
+    %div
+      = f.label :organization, class: "label-green" do
+        %span.error-container
+        Organization name*
+        = "(Not Required for Donor Signup)" unless params[:sign_up_plan] || (params[:user] && params[:user][:sign_up_plan]) || params[:full_registration] || (params[:user] && params[:user][:full_registration])
+      = f.text_field :organization
 
     %div
       = f.label :email, class: "label-green" do
@@ -40,13 +39,12 @@
         Email address*
       = f.email_field :email
 
-    - unless @is_donor
-      .row
-        .span3.well-half
-          = f.label :telephone, class: "label-green" do
-            Phone number*
-            %span.error-container
-          = f.text_field :telephone, id: "user_telephone"
+    .row
+      .span3.well-half
+        = f.label :telephone, class: "label-green" do
+          Phone number*
+          %span.error-container
+        = f.text_field :telephone, id: "user_telephone"
 
     .row
       .span3.well-half
@@ -63,9 +61,9 @@
 
     %div.inline
       - if (params[:sign_up_plan] || (params[:user] && params[:user][:sign_up_plan])) == 'fee'
-        = f.submit 'Finish', class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:left; border-radius: 5px; width: 230px;"
+        = f.submit 'Finish', class: "btn btn-primary", id: "project-submit"
       - else
-        = f.submit 'Continue', class: "btn btn-primary", id: "project-submit", style: "margin:20px 0 0;float:left; border-radius: 5px; width: 230px;"
+        = f.submit 'Continue', class: "btn btn-primary", id: "project-submit"
 
 .span4
   = render partial: 'shared/summary', locals: { current_user: current_user }
