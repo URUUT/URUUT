@@ -1,26 +1,27 @@
-%div.name
+%div
   = f.label :name do
     NAME AS IT APPEARS ON CARD
     %span.error-container
-  = f.text_field :name
-%div.card-number
+  = f.text_field :name, class: 'input name'
+%div
   = f.label :number do
     CARD NUMBER
     %span.error-container
-  = f.text_field :number
-%div.ccv
-  = f.label :cvc do
-    CVC
-    %span.error-container
-  = f.text_field :cvc, style: 'width: 90%!important;'
-%div.expiration.well-half
-  = f.label :expiration do
-    CARD EXPIRATION
-    %span.italic{style: "font-size: 11px; letter-spacing: 0;"}
-      (MM / YYYY)
-    %span.error-container
-  = f.text_field :exp_month, id: 'card_month'
-  = f.text_field :exp_year, id: 'card_year'
+  = f.text_field :number, class: 'input card-number'
+.row-fluid
+  .span5
+    = f.label :cvc do
+      CVC
+      %span.error-container
+    = f.text_field :cvc, class: 'input cvc'
+  .span6.offset1
+    = f.label :expiration do
+      CARD EXPIRATION
+      %span.italic.help
+        (MM / YYYY)
+      %span.error-container
+    = f.text_field :exp_month, id: 'card_month'
+    = f.text_field :exp_year, id: 'card_year'
 %div
   = f.label :billing_address do
     BILLING STREET ADDRESS
@@ -31,18 +32,20 @@
     CITY
     %span.error-container
   = f.text_field :city
-%div.inline.well-half{style: "margin-right: 19px;"}
-  = f.label :state, class: "label-green" do
-    STATE
-    %span.error-container
-  .selectParent{style: "width: 280px;"}
-    = f.select :state, options_for_select(us_states), {:include_blank => true}, {class: "styledSelect required"}
 
-%div.inline.well-half{style: "vertical-align: top;"}
-  = f.label :zip_code do
-    ZIP CODE
-    %span.error-container
-  = f.text_field :zip_code
+.row-fluid
+  .span6
+    = f.label :state, class: "label-green" do
+      STATE
+      %span.error-container
+    .selectParent
+      = f.select :state, options_for_select(us_states), {:include_blank => true}, {class: "styledSelect required"}
+  .span6
+    = f.label :zip_code do
+      ZIP CODE
+      %span.error-container
+    = f.text_field :zip_code
+
 - unless params[:plan_id] == 'fee' || (params[:action] == 'edit')
   - if can_use_coupon?(current_user) || upgrade_plan?(current_user, params[:plan_id])
     %div.inline.well-half

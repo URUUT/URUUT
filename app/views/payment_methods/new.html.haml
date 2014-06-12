@@ -1,7 +1,7 @@
-.row{:style => "margin-top:35px;"}
-  .span8{:style => "margin-top:35px;"}
-    %h4.font-bold SET PAYMENT METHOD
-    = form_for @credit_card, url: user_payment_method_path(current_user), method: :post, html: { class: "well registration-edit"} do |f|
+.row
+  .span8
+    %h4.step_name SET PAYMENT METHOD
+    = form_for @credit_card, url: user_payment_method_path(current_user), method: :post, html: { class: "well registration-edit payment_methods_form"} do |f|
       - if current_user.errors.any?
         .error-box
           %ul
@@ -12,7 +12,7 @@
           %ul
             - @credit_card.errors.full_messages.each do |error_message|
               %li= error_message
-      - if current_user.membership_plan && !upgrade_plan?(current_user, params[:plan_id]) && params[:plan_id] != current_user.membership_kind
+      - if is_downgrade_plan?(current_user, params[:plan_id])
         .error-box
           %ul
             %li You are about to downgrade your current plan. This will inactivate your current promotional code. To keep your current promotional code active, you will need to stay on your current plan or upgrade if possible.

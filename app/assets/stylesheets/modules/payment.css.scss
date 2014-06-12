@@ -1,0 +1,23 @@
+.payment_methods_form {
+  .input {
+    padding-left: 60px;
+    &.name { background: #fff url('../blank-ava.png') no-repeat left center; }
+    &.card-number { background: #fff url('../credit-card.png') no-repeat left center; }
+    &.cvc { background: #fff url('../sharp.png') no-repeat left center; }
+  }
+
+  #card_month {
+    display:inline-block;
+    width:38%; }
+
+  #card_year {
+    display:inline-block;
+    width:60% }
+
+  .selectParent {
+    width: 280px; }
+
+  .help {
+    font-size: 11px;
+    letter-spacing: 0; }
+}

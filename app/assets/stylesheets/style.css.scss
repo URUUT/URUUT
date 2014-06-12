@@ -1161,16 +1161,6 @@ form {
     margin-bottom: 50px;
   }
 
-  .name {
-    width:100%;
-
-    input[type="text"] {
-      width:100% !important;
-      padding-left: 60px;
-      background: #fff url('blank-ava.png') no-repeat left center;
-    }
-  }
-
   .email{
     width: 100%;
 
@@ -1192,29 +1182,6 @@ form {
     }
   }
 
-  .card-number {
-    width:100%;
-
-    input[type=text] {
-      width:100% !important;
-      padding-left: 60px;
-      background: #fff url('credit-card.png') no-repeat left center;
-    }
-  }
-
-  .ccv {
-    display:inline-block;
-    float:left;
-
-    width:45%;
-
-    input[type=text] {
-      width:136px !important;
-      padding-left: 60px;
-      background: #fff url('sharp.png') no-repeat left center;
-    }
-  }
-
   .expiration {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -1232,17 +1199,6 @@ form {
     input[type=text]#card_year {
       display:inline-block;
       width:100px !important;
-    }
-  }
-
-  .expiration.well-half {
-    input[type=text]#card_month {
-      width:32% !important;
-    }
-
-    input[type=text]#card_year {
-      margin-left: 20px;
-      width:60% !important;
     }
   }
 

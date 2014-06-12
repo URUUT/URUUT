@@ -254,9 +254,14 @@ module ApplicationHelper
 
   def upgrade_plan?(user, plan_id)
     return false if user.membership_kind == plan_id
-    if (user.membership_kind == 'basic' && plan_id == 'plus') ||
-       (user.membership_kind == 'fee' && (plan_id == 'basic' || plan_id == 'plus') )
-      return true
+    !is_downgrade_plan?(user, plan_id)
+  end
+
+  def is_downgrade_plan?(user, plan_id)
+    return false unless user.membership_plan && user.membership_kind != plan_id
+    if ( user.membership_kind == 'plus' && (plan_id == 'base' || plan_id == 'fee') ||
+         user.membership_kind == 'base' && plan_id == 'fee' )
+      true
     end
   end
 
