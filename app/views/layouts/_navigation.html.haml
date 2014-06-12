@@ -91,38 +91,38 @@
         %span.border
 
   -#%input{:type => "search", :placeholder => "Search"}
-#forgotModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "width: 440px;"}
-  .modal-header{:style => "border-bottom: none;"}
-    %button.close.label-green{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button", :style => "font-family: 'Proxima Nova', sans-serif; font-size: 12px;opacity: 1;"}
+#forgotModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close.label-green{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"}
       Close X
-    %h3#myModalLabel.tittle{:style => "margin-bottom: 0;"} FORGOT YOUR PASSWORD?
-  .modal-body{:style => "padding-top: 0; font-size: 13px; letter-spacing: 1px;"}
+    %h3#myModalLabel.tittle FORGOT YOUR PASSWORD?
+  .modal-body
     %p Enter the email address you used when you signed up and we'll send you instructions to reset your password.
     %p For security reasons, we do NOT store your password. So rest assured that we will never send your password via email.
 
-    = form_for(:user, :as => :user, :url => password_path(:user), :html => { :method => :post, remote: true, class: "forgot-password" }, style: "margin-top: 20px;") do |f|
+    = form_for(:user, :as => :user, :url => password_path(:user), :html => { :method => :post, remote: true, class: "forgot-password" }) do |f|
       .email
         %h4.label-green
           Email Address
-          %span.error-container.error-email{style: "margin-top: 3px;"}
+          %span.error-container.error-email
         = f.email_field :email, class: "email-address-forgot"
       %div{:style => "text-align: center"}
-        = f.submit "Reset My Password ►", class: "btn button-reset", style: "background: #81C263; border-radius: 5px; padding-top: 20px; padding-bottom: 20px; behavior: url('assets/PIE-1.0.0/PIE.htc');"
+        = f.submit "Reset My Password ►", class: "btn button-reset"
 
-#errorModalForm.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "width: 440px;"}
-  .modal-header{:style => "border-bottom: none;"}
-    %button.close.label-green{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button", :style => "font-family: 'Proxima Nova', sans-serif; font-size: 12px;opacity: 1;"}
+#errorModalForm.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close.label-green{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"}
       Close X
-    %h3#myModalLabel.tittle{:style => "margin-bottom: 0;"} LOGIN UNSUCCESSFUL
-  .modal-body{:style => "padding-top: 0; font-size: 13px; letter-spacing: 1px;"}
+    %h3#myModalLabel.tittle LOGIN UNSUCCESSFUL
+  .modal-body
     %p It appears you've entered the wrong email or password.  Please try again.
 
-#forgotPasswordModalForm.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "width: 440px;"}
-  .modal-header{:style => "border-bottom: none;"}
-    %button.close.label-green{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button", :style => "font-family: 'Proxima Nova', sans-serif; font-size: 12px;opacity: 1;"}
+#forgotPasswordModalForm.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close.label-green{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"}
       Close X
-    %h3#myModalLabel.tittle{:style => "margin-bottom: 0;"} FORGOT YOUR PASSWORD?
-  .modal-body{:style => "padding-top: 0; font-size: 13px; letter-spacing: 1px;"}
+    %h3#myModalLabel.tittle FORGOT YOUR PASSWORD?
+  .modal-body
     %p{id: "updated-email-forgot"} We've sent an email to #{session[:email_forgot_password]} with instructions on how to change your password.
     %p{id: "updated-email-forgot-2"} It may take a few minutes to receive the email. If you don't receive the email:
     %ul{id: "updated-email-forgot-3"}

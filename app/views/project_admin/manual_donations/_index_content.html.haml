@@ -17,12 +17,12 @@
     - else
       No offline donations yet.
 
-#deleteModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "width: 440px;"}
-  .modal-header{:style => "border-bottom: none;"}
-    %button.close.label-green{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button", :style => "font-family: 'Proxima Nova', sans-serif; font-size: 12px;opacity: 1;"}
+#deleteModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close.label-green{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"}
       Close X
-    %h3#myModalLabel.tittle{:style => "margin-bottom: 0;"} Confirm changes
-  .modal-body{:style => "padding-top: 0; font-size: 13px; letter-spacing: 1px;"}
+    %h3#myModalLabel.tittle Confirm changes
+  .modal-body
     %p Are you sure?
   .modal-footer
     %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Cancel

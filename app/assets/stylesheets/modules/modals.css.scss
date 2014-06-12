@@ -1,0 +1,65 @@
+.modal, #forgotModal {
+  width: 440px;
+
+  .modal-header {
+    border-bottom: none; }
+
+  .close {
+    opacity: 1;
+    font-family: 'Proxima Nova', sans-serif;
+    font-size: 12px; }
+
+  .tittle {
+    margin-bottom: 0; }
+
+  .modal-body {
+    padding-top: 0;
+    font-size: 13px;
+    letter-spacing: 1px; }
+}
+
+#forgotModal {
+  .forgot-password {
+    margin-top: 20px; }
+
+  .error-container.error-email {
+    margin-top: 3px; }
+
+  .btn.button-reset {
+    border-radius: 5px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    behavior: url('assets/PIE-1.0.0/PIE.htc');
+    background: #81C263;
+  }
+
+  .modal-form-buttons {
+    text-align: center }
+}
+
+#emailSuccess,
+#noticeSuccess,
+#errorForm,
+#connectStripeModal {
+  .modal-header {
+    height: 17px; }
+
+  .btn {
+    float: none;
+    margin: 0 auto; }
+}
+
+#save-video {
+  .modal-body {
+    color: #464646;
+    font-size: 14px; }
+
+  .youtube-field {
+    height: 30px;
+    width: 100%;
+    box-sizing: border-box; }
+
+  .btn {
+    float: none;
+    margin: 0 auto; }
+}

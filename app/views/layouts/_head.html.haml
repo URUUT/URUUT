@@ -24,9 +24,9 @@
     = javascript_include_tag "selectivizr-min"
   = filepicker_js_include_tag
   = javascript_tag do
+    var Settings = { facebook: { api_key: "#{Settings.facebook.api_key}" } }
     Stripe.setPublishableKey("#{STRIPE_PUBLIC_KEY}");
   = airbrake_javascript_notifier
   = csrf_meta_tags
+  = javascript_include_tag 'libs/all'
   = yield(:head)
-
-  = render 'shared/uservoice'

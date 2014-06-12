@@ -25,14 +25,14 @@
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
     %h3.title-form-video.tittle Add youtube video
   = form_tag galleries_save_photo_tw_room_path, class: "video-upload", method: :post, remote: true do
-    .modal-body{style: "font-family: 'Proxima Nova Semi', sans-serif; color: #464646"}
+    .modal-body
       %span.error-container
-      = url_field_tag "video_link", nil, placeholder: "Youtube URL", class: "span4", style: "height: 30px; width: 100%; box-sizing: border-box;"
-      %p{style: "font-size: 14px;"}
+      = url_field_tag "video_link", nil, placeholder: "Youtube URL", class: "span4 youtube-field"
+      %p
         To upload a video please copy and paste Youtube video link into the space provided.
       = hidden_field_tag "mimetype", "video"
       = hidden_field_tag "project_id", @project.id
     .modal-footer
-      %input.btn{:type => "submit", :value => "Submit video", style: "float: none; margin: 0 auto;"}
+      %input.btn{:type => "submit", :value => "Submit video"}
 
 = javascript_include_tag "transparency_workroom"

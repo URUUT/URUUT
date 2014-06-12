@@ -58,31 +58,23 @@
   / = render "devise/shared/links"
 
 = render "social-login"
-#forgotModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :style => "width: 440px;"}
-  .modal-header{:style => "border-bottom: none;"}
-    %button.close.label-green{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button", :style => "font-family: 'Proxima Nova', sans-serif; font-size: 12px;opacity: 1;"}
+#forgotModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close.label-green{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"}
       Close X
-    %h3#myModalLabel.tittle{:style => "margin-bottom: 0;"} FORGOT YOUR PASSWORD?
-  .modal-body{:style => "padding-top: 0; font-size: 13px; letter-spacing: 1px;"}
+    %h3#myModalLabel.tittle FORGOT YOUR PASSWORD?
+  .modal-body
     %p Enter the email address you used when you signed up and we'll send you instructions to reset your password.
     %p For security reasons, we do NOT store your password. So rest assured that we will never send your password via email.
 
 
-    = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }, style: "margin-top: 20px;") do |f|
+    = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :class => 'forgot-password' }) do |f|
       = forgot_password_messages!
       .email
         %h4.label-green Email Address
         = f.email_field :email
-      %div{:style => "text-align: center"}
-        = f.submit "Reset My Password", class: "btn", style: "background: #81C263; border-radius: 5px; padding-top: 20px; padding-bottom: 20px;"
-    / %form{:style => "margin-top: 20px;"}
-    /   .email
-    /     %h4.label-green Email Address
-    /     %input{:type => "text"}
-    /   %div{:style => "text-align: center"}
-    /     %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal", :style => "background: #81C263; border-radius: 5px; padding-top: 20px; padding-bottom: 20px;"}
-    /       Reset My Password
-    /       %span
+      .modal-form-buttons
+        = f.submit "Reset My Password", class: "btn button-reset"
 
 
 :javascript

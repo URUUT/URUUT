@@ -40,14 +40,14 @@
         = f.submit "SEND EMAIL ►", :class => "btn", :id => "project-submit", :style => "border-radius: 5px;"
 
 %section#emailSuccess.modal.hide.fade
-  .modal-header{style: "height: 17px;"}
+  .modal-header
     %button.close.closes{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"}
       Close X
-    %h3#myModalLabel.tittle{:style => "margin-bottom: 0;"} Email Sent
+    %h3#myModalLabel.tittle Email Sent
   .modal-body
     %p Your email was sent successfully
   .modal-footer
-    %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal", style: "float: none; margin: 0 auto;"} Ok
+    %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Ok
 
 :javascript
 
