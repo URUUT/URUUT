@@ -45,7 +45,7 @@ class Project < ActiveRecord::Base
 
   scope :live, where("live = 1")
   scope :funding_complete, where("status = 'Funding Complete'")
-  scope :ending_today, where("campaign_deadline BETWEEN ? AND ?", DateTime.now.beginning_of_day, DateTime.now.end_of_day)
+  scope :ending_today, -> { where( campaign_deadline: (Time.zone.now.beginning_of_day..Time.zone.now.end_of_day) ) }
 
   def self.unique_values_of(type)
     self.select(type).uniq.pluck(type)
