@@ -18,6 +18,6 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-every 5.minutes do
-  runner "ContactMailer.delay.contact_confirmation('Chad', 'chad.bartels@gmail.com', 'test', 'test')"
+every 1.day, :at => '11:55 pm' do
+  rake "uruut:finished_projects"
 end
