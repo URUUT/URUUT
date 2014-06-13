@@ -49,12 +49,12 @@
       });
     });
   };
-  
+
   deleteImages();
 
   $("#project-submit-button").click(function(){
     filepicker.pick({
-      mimetypes: mimetypesData,
+      extensions: ['.png', '.jpg', '.jpeg', '.gif'],
       openTo: 'COMPUTER',
       services: servicesData,
       },
@@ -168,7 +168,7 @@
 
   $("#new-photo-button").click(function(){
     filepicker.pick({
-      mimetypes: mimetypesData,
+      extensions: ['.png', '.jpg', '.jpeg', '.gif'],
       openTo: 'COMPUTER',
       services: servicesData,
       },
