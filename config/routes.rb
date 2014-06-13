@@ -47,6 +47,7 @@ Crowdfund::Application.routes.draw do
   match "browse/projects" => "pages#index", :as => "browse_projects"
   match "search/projects" => "pages#search", :as => "search_projects"
   match "extreme_makeover" => "pages#extreme_makeover", as: :extreme_makeover
+  match "stripe-webhooks" => "stripe_webhooks#index"
 
   get "projects/save_image"
   get "update_image" => "projects#update_image"
