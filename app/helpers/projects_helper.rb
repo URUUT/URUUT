@@ -130,5 +130,4 @@ module ProjectsHelper
   def tax_deductible?(p)
     p.organization_classification.eql?("170(c)(1)") || p.organization_classification.eql?("501(c)(3)")
   end
-
 end

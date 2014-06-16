@@ -14,107 +14,55 @@
         .span4
           %p
           = @project_sponsors[1].last.mission
-- if !@project.large_image.blank?
-  #large_image{:style => "background:url(#{@project.large_image});"}
-    .funding-info
-      .container
-        .span8
-          %h4.title= @project.project_title
-          %span.location #{@project.city}, #{@project.state}
-          %span.pull-right{:style => "margin-top: -20px"}
-            - if @project.partial_funding
-              = image_tag 'pf-logo-black.png', class: "tax-deductible deductable-black", "data-toggle" => "tooltip", title: "Partial Funding"
-          %span.pull-right{:style => "margin-top: -20px"}
-            - if @project.organization_classification.eql?("170(c)(1)") || @project.organization_classification.eql?("501(c)(3)")
-              = image_tag 'td-logo-black.png', class: "tax-deductible deductable-black", "data-toggle" => "tooltip", title: "Donations Are Tax Deductible"
-          %hr
-          %p.short-desc= @project.title
-          %h6{:style => "color:#403e37;font-family:'Proxima Nova Semi';display:inline-block;margin:0;letter-spacing:normal;"} SHARE:
-          %a.fb-count{:href => "https://www.facebook.com/dialog/feed?app_id=#{Settings.facebook.api_key}&link=#{project_url(@project.id)}&picture=#{@project.large_image}&name=#{url_encode(@project.project_title)}&caption=#{url_encode(@project.category)}&description=#{url_encode("Like making a difference? Check out this great project I found....")}&redirect_uri=#{root_url}", :target => "_blank"}
+#large_image{:style => "background:url(#{@project.large_image}); background-size: cover"}
+  .funding-info
+    .container
+      .span8
+        %h4.title= @project.project_title
+        %span.location #{@project.city}, #{@project.state}
+        %span.pull-right{:style => "margin-top: -20px"}
+          - if @project.partial_funding
+            = image_tag 'pf-logo-black.png', class: "tax-deductible deductable-black", "data-toggle" => "tooltip", title: "Partial Funding"
+        %span.pull-right{:style => "margin-top: -20px"}
+          - if tax_deductible?(@project)
+            = image_tag 'td-logo-black.png', class: "tax-deductible deductable-black", "data-toggle" => "tooltip", title: "Donations Are Tax Deductible"
+        %hr
+        %p.short-desc= @project.title
+        %h6{:style => "color:#403e37;font-family:'Proxima Nova Semi';display:inline-block;margin:0;letter-spacing:normal;"} SHARE:
+        %a.fb-count{:href => "https://www.facebook.com/dialog/feed?app_id=#{Settings.facebook.api_key}&link=#{project_url(@project.id)}&picture=#{@project.large_image}&name=#{url_encode(@project.project_title)}&caption=#{url_encode(@project.category)}&description=#{url_encode("Like making a difference? Check out this great project I found....")}&redirect_uri=#{root_url}", :target => "_blank"}
+          %span
+        .tw-count
+          %span
+        .bitly-link
+          - if @project.bitly
+            %span= @project.bitly.sub(/http:\/\//, '')
+          - else
             %span
-          .tw-count
-            %span
-          .bitly-link
-            - if @project.bitly
-              %span= @project.bitly.sub(/http:\/\//, '')
-            - else
-              %span
 
-        .span4
-          .progress-container.span3.offset1
-            / = image_tag 'seed.png', :class => "seed"
-            %div
-              %span Funds Pledged
-              %p= @project.total_funded.eql?(0) ? "$0" : amount_converter(@project.total_funded)
+        /%p= link_to "Contact Project Creator", "mailto:#{User.find(@project.user_id).email}"
 
-          #progressbar
+      .span4
+        .progress-container.span3.offset1
+          %div
+            %span Funds Pledged
+            %p= @project.total_funded.eql?(0) ? "$0" : amount_converter(@project.total_funded)
 
-          .project-details.cf
-            %span.small
-              Project
-              %br
-              Goal
-            .amount
-              = amount_converter(@project.goal)
+        #progressbar
 
-            - unless @project.funding_complete?
-              .days-left
-                %span.small
-                  Days
-                  %br
-                  Left
-                .amount= campaign_days_left(@project) > 0 ? campaign_days_left(@project):0
-- else
-  #large_image{:style => "background:url(#{@project.large_image}); background-size: cover"}
-    .funding-info
-      .container
-        .span8
-          %h4.title= @project.project_title
-          %span.location #{@project.city}, #{@project.state}
-          %span.pull-right{:style => "margin-top: -20px"}
-            - if @project.partial_funding
-              = image_tag 'pf-logo-black.png', class: "tax-deductible deductable-black", "data-toggle" => "tooltip", title: "Partial Funding"
-          %span.pull-right{:style => "margin-top: -20px"}
-            - if @project.organization_classification.eql?("170(c)(1)") || @project.organization_classification.eql?("501(c)(3)")
-              = image_tag 'td-logo-black.png', class: "tax-deductible deductable-black", "data-toggle" => "tooltip", title: "Donations Are Tax Deductible"
-          %hr
-          %p.short-desc= @project.title
-          %h6{:style => "color:#403e37;font-family:'Proxima Nova Semi';display:inline-block;margin:0;letter-spacing:normal;"} SHARE:
-          / = image_tag "fb-count.png", :class => "fb-share", :style => "margin-right:20px;"
-          / = image_tag "tw-count.png", :class => "tw-share", :style => "margin-right:20px;"
-          / = image_tag "bitly-link.png", :style => "margin-right:20px;"
-          %a.fb-count{:href => "https://www.facebook.com/dialog/feed?app_id=#{Settings.facebook.api_key}&link=#{project_url(@project.id)}&picture=#{@project.large_image}&name=#{url_encode(@project.project_title)}&caption=#{url_encode(@project.category)}&description=#{url_encode("Like making a difference in the community? Check out this great project I found on @URUUT.  You can help fund it, or set up a project of your own to Get RUUTed! ")}&redirect_uri=#{root_url}", :target => "_blank"}
-            %span
-          .tw-count
-            %span
-          .bitly-link
-            - if @project.bitly
-              %span= @project.bitly.sub(/http:\/\//, '')
+        .project-details.cf
+          %span.small
+            Project
+            %br
+            Goal
+          .amount= amount_converter(@project.goal)
 
-          %p= link_to "Contact Project Creator", "mailto:#{User.find(@project.user_id).email}"
-
-        .span4
-          .progress-container.span3.offset1
-            %div
-              %span Funds Pledged
-              %p= @project.total_funded.eql?(0) ? '$0' : amount_converter(@project.total_funded)
-
-          #progressbar
-
-          .project-details.cf
-            %span.small
-              Project
-              %br
-              Goal
-            .amount= amount_converter(@project.goal)
-
-            - unless @project.funding_complete?
-              .days-left
-                %span.small
-                  Days
-                  %br
-                  Left
-                .amount= campaign_days_left(@project) > 0 ? campaign_days_left(@project):0
+          - unless @project.funding_complete?
+            .days-left
+              %span.small
+                Days
+                %br
+                Left
+              .amount= campaign_days_left(@project) > 0 ? campaign_days_left(@project):0
 
 .container
   .row-fluid.show-content
