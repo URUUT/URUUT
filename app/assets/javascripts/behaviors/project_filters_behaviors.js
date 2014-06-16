@@ -1,6 +1,6 @@
 $("#category, #location").on("change", function(){
   $(".project-all-content").html("");
-  $(".loader").fadeIn("fast");
+  $(".loading_project").fadeIn("fast");
   var category = $("#category :selected").attr("data-item")
   $.ajax({
     url: "/pages/search_category_or_location",
@@ -9,7 +9,7 @@ $("#category, #location").on("change", function(){
       "city": $("#location").val()
     }
   }).done(function(data) {
-    $(".loader").fadeOut("fast");
+    $(".loading_project").fadeOut("fast");
   });
 });
 

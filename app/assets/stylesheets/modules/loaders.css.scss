@@ -1,0 +1,19 @@
+.loading_project {
+  display: none;
+  z-index: 1000;
+  position: relative;
+  width: 72px;
+  padding-left: 20px;
+  line-height: 100px;
+  margin: 60px auto;
+  font-weight: bold;
+  font-size: 16px;
+
+  .loading_icon {
+    display: block;
+    float: left;
+    margin: 0 auto;
+    position: absolute;
+    left: 0;
+    top: 38px; }
+}

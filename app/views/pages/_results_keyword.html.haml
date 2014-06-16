@@ -4,10 +4,7 @@
       = image_tag 'featured-success-icon.png'
       Projects
     .project-all
-      .loader{:style => "margin-left: 45%; font-weight: bold; font-size: 16px; display:none"}
-        Loading..
-        %br
-        = image_tag "3.gif", style: "margin-left: 3%"
+      = render "shared/loading"
       .project-all-content
         = render "project", :projects => @projects
     .cf
