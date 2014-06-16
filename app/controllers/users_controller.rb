@@ -27,7 +27,7 @@ class UsersController < ApplicationController
     # @projects = Project.where("user_id = ?", current_user.id).page(params[:page]).per(2)
     if params[:status].present?
       comparison = params[:status].eql?("Funding Active") ? ">" : "<"
-      @projects_created = @user.projects.live.where("campaign_deadline #{comparison} ? AND live = 1", Time.now).order("updated_at DESC").page(params[:created_page]).per(2)
+      @projects_created = @user.projects.where("campaign_deadline #{comparison} ?", Time.now).order("updated_at DESC").page(params[:created_page]).per(2)
       @projects_funded = @user.projects_funded.where("campaign_deadline #{comparison} ? AND live = 1", Time.now).order("updated_at DESC").page(params[:funded_page]).per(2)
     else
       @projects_created = @user.projects.live.order("updated_at DESC").page(params[:created_page]).per(2)
