@@ -19,7 +19,7 @@
     .project-all.clearfix
       = render "shared/loading"
       .projects
-        = render "project_success", :projects => @project_success
+        = render "project", :projects => @project_success
 
     = paginate @project_success, :param_name => :featured
 

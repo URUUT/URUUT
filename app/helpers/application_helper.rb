@@ -265,4 +265,8 @@ module ApplicationHelper
     end
   end
 
+  def default_image_url(width, height)
+    "http://placehold.it/#{width}x#{height}"
+  end
+
 end

@@ -4,10 +4,8 @@ div.html("<%=j render 'project', :projects => @projects_funded %>");
 div.append("<div class='cf'></div>");
 div.append("<%=j paginate @projects_funded, :param_name => 'funded_page' %>");
 
-$('.tax-deductible').tooltip({
-  placement: "top",
-  trigger: "hover"
-});
+initProjectProgressbar();
+initToolTips();
 
 $(".pagination").find('a').each(function(){
   var href = $($(this)).attr('href').replace("get_complete_project", "<%= @user.id %>");

@@ -56,7 +56,7 @@
                 %option Funding Active
                 %option Funding Completed
         #project-fund
-          = render "project", :projects => @projects_funded
+          = render "project", :projects => @projects_funded.live
           .cf
           = paginate @projects_funded, :param_name => "funded_page"
 

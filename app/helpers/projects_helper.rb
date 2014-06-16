@@ -127,4 +127,8 @@ module ProjectsHelper
     (level.cost)? level.cost.to_i : default_cost.to_i
   end
 
+  def tax_deductible?(p)
+    p.organization_classification.eql?("170(c)(1)") || p.organization_classification.eql?("501(c)(3)")
+  end
+
 end

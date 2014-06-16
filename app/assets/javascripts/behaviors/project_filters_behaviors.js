@@ -10,6 +10,8 @@ $("#category, #location").on("change", function(){
     }
   }).done(function(data) {
     $(".loading_project").fadeOut("fast");
+    initProjectProgressbar();
+    initToolTips();
   });
 });
 

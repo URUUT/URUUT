@@ -1098,49 +1098,6 @@ h5{
   border: 1px solid #d6d6d6;
 }
 
-.project-img{
-  position: relative;
-
-  .project-img-layer{
-    display: none;
-    /* Fallback for web browsers that doesn't support RGBa */
-    background: rgb(112, 191, 76);
-    /* RGBa with 0.6 opacity */
-    background: rgba(112, 191, 76, 0.65);
-    /* For IE 5.5 - 7*/
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
-    /* For IE 8*/
-    /*-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);*/
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 50px;
-    width: 100%;
-    text-align: center;
-    padding: 50px 0;
-    color: #fff;
-    vertical-align: middle;
-
-    &.success{
-      display: block;
-    }
-
-    &.plus-btn{
-      height: 100px;
-      padding: 25px 0;
-
-      .btn{
-        letter-spacing: 1px;
-        @include border-radius(3px);
-      }
-    }
-
-    h2, h3, h4{
-      color: #fff;
-    }
-  }
-}
-
 .project-sponsors-link{
   a{
     color: $grey;
