@@ -1,0 +1,26 @@
+.project-filter {
+  .keyword_field {
+    display: block;
+    float: left;
+    margin: 0;
+    margin-bottom: 25px;
+    -webkit-border-radius: 5px 0 0 5px;
+       -moz-border-radius: 5px 0 0 5px;
+            border-radius: 5px 0 0 5px;
+    behavior: url(image-path('PIE-1.0.0/PIE.htc'));
+    color:#555;
+    width: 240px; }
+
+  .keyword_btn {
+    display: block;
+    margin-top: 5px;
+    border-radius:0 5px 5px 0;
+    behavior: url(image-path('PIE-1.0.0/PIE.htc'));
+    margin-left:239px;
+    padding:0;
+    height:54px;
+    width:45px;
+    background: #70bf4c;
+    &:hover { background: #70bf4c; }
+  }
+}
