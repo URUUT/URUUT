@@ -1360,29 +1360,6 @@ div[id^='step'] {
   &:hover {
     background:#70bf4c;}}
 
-#large_image {
-  background:#ddd url(image-path('cover-photo.png')) top center no-repeat;
-	display:inline-block;
-  height:545px;
-  left:0;
-  overflow:hidden;
-  position:absolute;
-  top:60px;
-  width:100%;
-	.coverphoto {
-		left:100px;
-		position:relative;
-		top:330px;}
-  .funding-info {
-  	background: url(image-path('funding-info.png')) repeat;
-    background: rgba(112, 191, 76, 0.85);
-    bottom:0;
-    height:125px;
-    left:0;
-    padding:20px 0;
-    position:absolute;
-    width:100%;}}
-
 .planting-seed-image {
 	background:url(image-path('click-add-photo.png')) top center no-repeat;
 	border: none;

@@ -75,7 +75,9 @@ module ProjectsHelper
   end
 
   def campaign_days_left(project)
-    ((project.campaign_deadline.end_of_day - DateTime.current) / 1.day).to_i rescue 0
+    day_left = ((project.campaign_deadline.end_of_day - DateTime.current) / 1.day).to_i rescue 0
+    return 0 if day_left <= 0
+    day_left
   end
 
   def default_perk
@@ -129,5 +131,16 @@ module ProjectsHelper
 
   def tax_deductible?(p)
     p.organization_classification.eql?("170(c)(1)") || p.organization_classification.eql?("501(c)(3)")
+  end
+
+  def share_project_facebook_url(project)
+    app_id = Settings.facebook.api_key
+    link = project_url(project)
+    picture = project.large_image
+    name = url_encode(project.project_title)
+    caption = url_encode(project.category)
+    description = url_encode("Like making a difference? Check out this great project I found....")
+    redirect = root_url
+    "https://www.facebook.com/dialog/feed?app_id=#{app_id}&link=#{link}&picture=#{picture}&name=#{name}&caption=#{caption}&description=#{description}&redirect_uri=#{redirect}"
   end
 end
