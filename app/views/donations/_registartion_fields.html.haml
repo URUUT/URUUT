@@ -32,6 +32,8 @@
       %div.error-container
         %label.error
     = password_field_tag 'user[password]', nil, id: "user_password"
+    = label_tag 'pwd[disclaimer]', class: "label-black" do
+      *password needed to store your tax receipt.
 
   .span6.field
     = label_tag 'user[password_confirmation]', class: "label-green" do
