@@ -32,7 +32,7 @@
       %div.error-container
         %label.error
     = password_field_tag 'user[password]', nil, id: "user_password"
-    = label_tag 'pwd[disclaimer]', class: "label-black" do
+    = label_tag 'pwd[disclaimer]', class: "label-black", styles: 'font-size: 10px; font-style: italic' do
       *password needed to store your tax receipt.
 
   .span6.field
