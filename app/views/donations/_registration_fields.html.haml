@@ -19,13 +19,6 @@
     = text_field_tag 'user[last_name]'
 
 %div.field
-  = label_tag 'user[organization]', class: "label-green" do
-    %div.error-container
-      %label.error
-    Organization name*
-  = text_field_tag 'user[organization]'
-
-%div.field
   = label_tag 'user[email]', class: "label-green" do
     %div.error-container
       %label.error
@@ -39,7 +32,7 @@
       %div.error-container
         %label.error
     = password_field_tag 'user[password]', nil, id: "user_password"
-    = label_tag 'pwd[disclaimer]', class: "label-black" do
+    = label_tag 'pwd[disclaimer]', class: "label-black", style: 'font-size: 10px; font-style: italic' do
       *password needed to store your tax receipt.
 
   .span6.field
