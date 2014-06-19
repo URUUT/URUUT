@@ -47,8 +47,7 @@
             %span Funds Pledged
             %p= amount_converter(@project.total_funded)
 
-        #progressbar
-
+        #progressbar.progressbar_project{ data: {value: @project.percent_to_goal, color: '#3f403b'} }
         .project-details.cf
           %span.small
             Project
@@ -128,20 +127,18 @@
         .project-sponsors
           - if @project_sponsors.include?(2)
             .gold-level
-              - if @project_sponsors.include?(2)
-                %h4= "#{@project_sponsors[2].last.sponsorship_level_name} Level Sponsors"
-                - @project_sponsors[2].each do |sponsor|
-                  = sponsor_item(sponsor)
+              %h4= "#{@project_sponsors[2].last.sponsorship_level_name} Level Sponsors"
+              - @project_sponsors[2].each do |sponsor|
+                = sponsor_item(sponsor)
           - if @project_sponsors.include?(3)
             .silver-level
-              - if @project_sponsors.include?(3)
-                %h4= "#{@project_sponsors[3].last.sponsorship_level_name} Level Sponsors"
-                - @project_sponsors[3].each do |sponsor|
-                  = sponsor_item(sponsor)
+              %h4= "#{@project_sponsors[3].last.sponsorship_level_name} Level Sponsors"
+              - @project_sponsors[3].each do |sponsor|
+                = sponsor_item(sponsor)
 
       %h4.title Location
       .map-container
-        #map
+        #map{ data: { icon: image_path("map-icon.png") } }
         #map-details
           .project-location
             %div
@@ -403,162 +400,4 @@
 = javascript_include_tag "//maps.google.com/maps/api/js?sensor=false"
 = javascript_include_tag "leaflet"
 = javascript_include_tag "tile.stamen"
-
-:javascript
-
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=209907642492838";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-
-  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
-
-  $("#button-seed-custom").on("click", function(){
-    $.ajax({
-      url: "/default_perk_donations?amount="+ $("#custom_seed").val() +"&name=custom&project_id=#{@project.id}"
-    }).done(function(data) {
-      window.location.href = "/default_perk_donations?amount="+ $("#custom_seed").val() +"&name=custom&project_id=#{@project.id}"
-    });
-  });
-
-  $("#button-seed-custom-unsignin").on("click", function(){
-    sign_url = '#{request.protocol}' + document.location.hostname + ":" + document.location.port + "/default_perk_donations?amount="+ $("#custom_seed").val() +"&name=custom&project_id=#{@project.id}";
-    url = "/default_perk_donations?amount="+ $("#custom_seed").val() +"&name=custom&project_id=#{@project.id}";
-    $('.modal').remove();
-      $('body').append('<div class="modal hide fade" style="text-align:center;padding:50px;"><button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="position:absolute;top:10px;right:20px;">×</button><h5 style="margin-bottom:20px;">You need to sign in or sign up before continuing.</h5><a href="'+ url +'" class="btn green-btn">Sign In ►</a> <span style="font:italic 12px/21px georgia, serif;margin:0 10px;">or</span> <a href="/projects/set_previous_path_for_registration_perk?url='+ encodeURIComponent(sign_url) +'" class="btn green-btn">Sign Up ►</a></div>');
-    $('.modal').modal();
-  });
-
-  $(document).ready(function(){
-    $('.donor-anonymous').tooltip();
-    $("a[rel^='prettyPhoto']").prettyPhoto();
-
-    $('.unsignin').click(function(){
-      sign_url = '#{request.protocol}' + document.location.hostname + ":" + document.location.port + $(this).attr("url-data")
-      url = $(this).attr("url-data");
-      $('.modal').remove();
-      $('body').append('<div class="modal hide fade" style="text-align:center;padding:50px;"><button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="position:absolute;top:10px;right:20px;">×</button><h5 style="margin-bottom:20px;">You need to sign in or sign up before continuing.</h5><a href="'+ url +'" class="btn green-btn">Sign In ►</a> <span style="font:italic 12px/21px georgia, serif;margin:0 10px;">or</span> <a href="/projects/set_previous_path_for_registration?url='+ sign_url +'" class="btn green-btn">Sign Up ►</a></div>');
-      $('.modal').modal();
-    });
-
-    $(".unsignin-perk").click(function(){
-      sign_up_url = $(this).attr("url-sign-up") + '&is_donor=' + this.getAttribute('data-is-donor');
-      sign_in_url = $(this).attr("url-sign-in");
-      $('.modal').remove();
-      $('body').append('<div class="modal hide fade" style="text-align:center;padding:50px;"><button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="position:absolute;top:10px;right:20px;">×</button><h5 style="margin-bottom:20px;">You need to sign in or sign up before continuing.</h5><a href="'+ sign_in_url +'" class="btn green-btn">Sign In ►</a> <span style="font:italic 12px/21px georgia, serif;margin:0 10px;">or</span> <a href="/projects/set_previous_path_for_registration_perk?url='+ sign_up_url +'" class="btn green-btn">Sign Up  ►</a></div>');
-      $('.modal').modal();
-    });
-
-  });
-
-  var getFbCount = function() {
-    $.ajax({
-      type: "GET",
-      dataType: 'jsonp',
-      url: "#{request.protocol}graph.facebook.com/fql?q=select%20%20like_count%20from%20link_stat%20where%20url=%22#{root_url}projects/#{@project.id}%22"
-    }).done(function(data) {
-      $('.fb-count span').text(data.data[0].like_count);
-    });
-  }
-
-  var getTwCount = function() {
-    $.ajax({
-      type: "GET",
-      dataType: 'jsonp',
-      url: "#{request.protocol}cdn.api.twitter.com/1/urls/count.json?url=#{root_url}projects/#{@project.id}"
-    }).done(function(data) {
-      $('.tw-count span').text(data.count);
-    });
-  }
-
-  $(function(){
-    $('#myTab1 a').click(function (e) {
-      e.preventDefault();
-      $(this).tab('show');
-    });
-
-    $('#myTab2 a').click(function (e) {
-      e.preventDefault();
-      $(this).tab('show');
-    });
-    getFbCount();
-    getTwCount();
-    var activeTab = $('.nav-tabs li.active a').attr('href');
-
-    var geocoder = new google.maps.Geocoder();
-    var geocoderRequest = { address: "#{@project.address},#{@project.city},#{@project.state}" };
-    geocoder.geocode(geocoderRequest, function(results, status){
-      var latitude = results[0].geometry.location.lat();
-      var longitude = results[0].geometry.location.lng();
-
-      var map = L.map('map', {
-          scrollWheelZoom: false
-      }).setView([latitude,longitude], 11);
-
-      var uruutIcon = L.icon({
-        iconUrl: '#{image_path("map-icon.png")}',
-        iconSize:     [36, 52]
-      });
-
-      L.tileLayer("https://stamen-tiles.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png", {
-        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
-      }).addTo(map);
-
-      L.marker([latitude,longitude], {icon:uruutIcon}).addTo(map);
-    });
-
-    $('.tax-deductible').tooltip({
-      placement: "top",
-      trigger: "hover"
-    });
-
-    $(activeTab).show();
-
-    $( "#progressbar" ).progressbar({
-      value: #{@project.percent_to_goal}
-    });
-
-
-    var margin;
-    if(#{@project.percent_to_goal} > 50) {
-      margin = 50;
-    }else{
-      margin = #{@project.percent_to_goal};
-    }
-
-    $('#progressbar > div').css({ 'background': '#3f403b' });
-
-    $('.nav-tabs li a').click(function(e){
-      e.preventDefault();
-      var show = $(this).attr('href');
-
-      $('.nav-tabs li').removeClass('active');
-      $('.nav-tabs li').each(function(){
-        var content = $(this).find('a').attr('href');
-        $(content).hide();
-      });
-
-      $(this).parent('li').addClass('active');
-      $(show).show();
-    });
-
-    $('.tw-count').click(function(e) {
-      e.preventDefault();
-      var width  = 575,
-          height = 400,
-          left   = ($(window).width()  - width)  / 2,
-          top    = ($(window).height() - height) / 2,
-          url    = "#{request.protocol}twitter.com/share?url=#{project_url(@project.id)}&text=Like%20making%20a%20difference?%20Check%20out%20this%20great%20project%20I%20found....%20&hashtags=Uruut",
-          opts   = 'status=1' +
-                   ',width='  + width  +
-                   ',height=' + height +
-                   ',top='    + top    +
-                   ',left='   + left;
-
-      window.open(url, 'twitter', opts);
-    })
-
-  });
+= javascript_include_tag "project_behavior"
