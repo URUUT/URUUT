@@ -10,12 +10,6 @@
     $("#project_sponsor_logo").val(logoImage);
   }
 
-.full-width.hero
-  .container
-    = image_tag "thank-u.png"
-    .headline
-      %h2 Thanks for becoming a project sponsor.
-      %p Continue to the checkout process below to confirm your sponsorship level, enter sponsor information, and choose your payment method.
 .container
   .row-fluid
     .span8
@@ -93,7 +87,7 @@
             %ul
               - @user.errors.full_messages.each do |e|
                 %li= e
-          = render 'registartion_fields'
+          = render 'registration_fields'
 
       %h4 SPONSOR INFORMATION
       .well
