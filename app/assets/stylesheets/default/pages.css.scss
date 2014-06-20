@@ -476,15 +476,6 @@ select {
 					}
 				}
 			}
-			#keyword {
-				border-radius: 5px;
-				behavior: url(image-path('PIE-1.0.0/PIE.htc'));
-				box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-				color:#555;
-				font: bold 24px/24px arial, helvetica, sans-serif;
-				height: 44px;
-				width: 300px;
-			}
 		}
 	}
 }
@@ -549,31 +540,6 @@ select {
             padding:10px;
             width:100%;
           }
-        }
-      }
-      #keyword {
-        -webkit-border-radius: 5px 0 0 5px !important;
-        -moz-border-radius: 5px 0 0 5px !important;
-        border-radius: 5px 0 0 5px !important;
-        behavior: url(image-path('PIE-1.0.0/PIE.htc'));
-        margin: -9px 0 0 0;
-        box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-        color:#555;
-        font: bold 24px/24px arial, helvetica, sans-serif;
-        height: 54px;
-        width: 240px;
-      }
-      #keyword + .btns {
-        border-radius:0 5px 5px 0;
-        behavior: url(image-path('PIE-1.0.0/PIE.htc'));
-        margin-left:239px;
-        margin-top:-54px;
-        padding:0;
-        height:54px;
-        width:45px;
-        background: #70bf4c;
-        &:hover {
-          background: #70bf4c;
         }
       }
     }
@@ -1074,10 +1040,6 @@ nav.navbar-inner {
   float:right;
   margin:2px 5px 0 0;}
 
-.project-image {
-  width:100% !important;
-  height:150px;}
-
 .cont-desc {
   height:80px;
   text-overflow:ellipsis;
@@ -1192,9 +1154,6 @@ div[class*='progressbar']{
   height:16px;
   margin:12px auto;
 	width:258px;}
-
-h5.time-left {
-  display:inline-block;}
 
 /*p.days {
   display:inline-block;
@@ -1400,29 +1359,6 @@ div[id^='step'] {
   text-transform:uppercase;
   &:hover {
     background:#70bf4c;}}
-
-#large_image {
-  background:#ddd url(image-path('cover-photo.png')) top center no-repeat;
-	display:inline-block;
-  height:545px;
-  left:0;
-  overflow:hidden;
-  position:absolute;
-  top:60px;
-  width:100%;
-	.coverphoto {
-		left:100px;
-		position:relative;
-		top:330px;}
-  .funding-info {
-  	background: url(image-path('funding-info.png')) repeat;
-    background: rgba(112, 191, 76, 0.85);
-    bottom:0;
-    height:125px;
-    left:0;
-    padding:20px 0;
-    position:absolute;
-    width:100%;}}
 
 .planting-seed-image {
 	background:url(image-path('click-add-photo.png')) top center no-repeat;
