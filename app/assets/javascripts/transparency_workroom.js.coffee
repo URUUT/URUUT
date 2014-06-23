@@ -32,7 +32,7 @@ $(".upload-photo-button").click ->
   projectId = $(this).attr("project_id")
   filepicker.pick
     openTo: "COMPUTER"
-    extensions: ['.png', '.jpg', '.jpeg', '.gif']
+    mimetypes:  ['image/png', 'image/jpg', 'image/jpeg', 'image/gif']
     services: ["BOX", "COMPUTER", "FACEBOOK", "DROPBOX", "INSTAGRAM", "FLICKR", "PICASA"]
   , ((e) ->
     fileUrl = e.url

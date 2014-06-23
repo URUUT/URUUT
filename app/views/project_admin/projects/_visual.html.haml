@@ -98,7 +98,7 @@
 
   $("#new-seed").click(function(){
     filepicker.pick({
-      extensions: ['.png', '.jpg', '.jpeg', '.gif'],
+      mimetypes: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'],
       openTo: 'COMPUTER',
       services: servicesData,
       },
@@ -126,7 +126,7 @@
 
   $("#new-cultivation").click(function(){
     filepicker.pick({
-      extensions: ['.png', '.jpg', '.jpeg', '.gif'],
+      mimetypes: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'],
       openTo: 'COMPUTER',
       services: servicesData,
       },
