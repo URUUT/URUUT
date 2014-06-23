@@ -143,4 +143,8 @@ module ProjectsHelper
     redirect = root_url
     "https://www.facebook.com/dialog/feed?app_id=#{app_id}&link=#{link}&picture=#{picture}&name=#{name}&caption=#{caption}&description=#{description}&redirect_uri=#{redirect}"
   end
+
+  def is_project_with_sponsors(project, benefits)
+    project.sponsor_permission && benefits.any?
+  end
 end

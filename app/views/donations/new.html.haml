@@ -54,32 +54,31 @@
     %h3.title OTHER PERKS
     .well{:style => "border:none; padding: 0;"}
       %ul.perks
-        -if @project.perk_permission
-          -unless @project.perks.blank?
-            - @project.perks.order(:amount).each do |p|
-              %li.perk.clearfix{style: "#{"background: #bee0b4" if @perk.id.eql?(p.id)}", id: "perk-id-#{p.id}"}
-                %h3.perk-name-other{style: "#{"color: #000" if @perk.id.eql?(p.id)}", id: "perk-name-other-#{p.id}"}= p.name
-                %h3
+        -if @project.perk_permission && @project.perks.any?
+          - @project.perks.order(:amount).each do |p|
+            %li.perk.clearfix{style: "#{"background: #bee0b4" if @perk.id.eql?(p.id)}", id: "perk-id-#{p.id}"}
+              %h3.perk-name-other{style: "#{"color: #000" if @perk.id.eql?(p.id)}", id: "perk-name-other-#{p.id}"}= p.name
+              %h3
+                - if p.limit
+                  %span.small-heading
+                    = p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of #{p.perk_limit} Available)"
+              When you seed #{amount_converter(p.amount)}, you will receive:
+              %ul.normal-font.dashed-list
+                %li
+                  #{p.description}
+              %p.subtext
+                Uruut Reward Points: #{p.amount.to_i}
+              %ul{style: "padding-top: 10px;"}
+                %li.seed-amount{style: "#{"background: #bee0b4" if @perk.id.eql?(p.id)}", id: "amount-id-#{p.id}"}
+                  %p.amount #{amount_converter(p.amount.to_i)}
+                %li.fund-button
                   - if p.limit
-                    %span.small-heading
-                      = p.perks_available.to_i.zero? ? "(No Perks Remaining)" : "(#{p.perks_available} of #{p.perk_limit} Available)"
-                When you seed #{amount_converter(p.amount)}, you will receive:
-                %ul.normal-font.dashed-list
-                  %li
-                    #{p.description}
-                %p.subtext
-                  Uruut Reward Points: #{p.amount.to_i}
-                %ul{style: "padding-top: 10px;"}
-                  %li.seed-amount{style: "#{"background: #bee0b4" if @perk.id.eql?(p.id)}", id: "amount-id-#{p.id}"}
-                    %p.amount #{amount_converter(p.amount.to_i)}
-                  %li.fund-button
-                    - if p.limit
-                      - if p.perks_available.to_i.zero?
-                        %span{:class => "fund pull-right", style: "font-style: italic;"} Not Available
-                      -else
-                        %a{:class => "fund btn change-fund pull-right", "perk-id" => "#{p.id}", style: "#{"background: #81C263" if @perk.id.eql?(p.id)}", id: "button-fund-#{p.id}"} Fund Now ►
+                    - if p.perks_available.to_i.zero?
+                      %span{:class => "fund pull-right", style: "font-style: italic;"} Not Available
                     -else
                       %a{:class => "fund btn change-fund pull-right", "perk-id" => "#{p.id}", style: "#{"background: #81C263" if @perk.id.eql?(p.id)}", id: "button-fund-#{p.id}"} Fund Now ►
+                  -else
+                    %a{:class => "fund btn change-fund pull-right", "perk-id" => "#{p.id}", style: "#{"background: #81C263" if @perk.id.eql?(p.id)}", id: "button-fund-#{p.id}"} Fund Now ►
         -else
           - default_perk.each_with_index do |perk_amount, index|
             - index += 1
