@@ -1,4 +1,6 @@
 class Project < ActiveRecord::Base
+  has_paper_trail
+
   belongs_to :user
 
   before_save :downcase_url_and_facebook
