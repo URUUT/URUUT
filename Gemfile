@@ -31,29 +31,27 @@ gem 'newrelic_rpm'
 gem 'meta_request'
 gem 'airbrake'
 gem 'prawn'
-gem 'writeexcel', '~> 1.0.3'
 gem 'activeadmin'
 gem "meta_search", '>= 1.1.0.pre'
 gem 'writeexcel', '~> 1.0.3'
 gem 'acts_as_tenant', '~> 0.3.1'
 gem 'execjs'
 gem 'therubyracer'
+gem 'paper_trail', '~> 3.0.2'
+gem 'sass-rails',   '~> 3.2.3'
+gem 'pg'
 
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
   gem 'yui-compressor'
 end
 
 group :production do
-  gem 'pg'
-  gem 'sass-rails',   '~> 3.2.3'
   gem 'exception_notification'
 end
 
-group :staging do
-  gem 'pg'
+group :staging, :development do
   gem 'erb2haml'
   gem 'rb-fsevent', '~> 0.9.1'
   gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git'
@@ -63,18 +61,8 @@ group :staging do
 end
 
 group :development, :test do
-  gem 'pg'
-  gem 'erb2haml'
-  gem 'rb-fsevent', '~> 0.9.1'
-  gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git'
-  gem 'better_errors'
-  gem 'binding_of_caller'
-  gem 'rails_best_practices'
   gem 'debugger', '~> 1.6.4'
   gem 'cucumber-rails', :require => false
-  # gem 'jasmine'
-  # gem 'jasmine-rails'
-  # gem 'jasminerice'
   gem 'launchy'
   gem 'dotenv-rails'
   gem 'rails_email_preview', '~> 0.2.12'
