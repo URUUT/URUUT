@@ -11,7 +11,7 @@
           %input{:type => 'filepicker', :name => 'large_image', 'data-fp-button-text' => 'Choose A Cover Photo', 'data-fp-apikey' => Settings.filepicker.api_key, 'data-fp-mimetypes' => 'image/png, image/jpg, image/jpeg, image/gif', 'data-fp-button-class' => 'coverphoto btn', 'onchange' => 'updateCover(event)', :style => 'left:50%', 'data-fp-services' => 'BOX,COMPUTER,FACEBOOK,DROPBOX,INSTAGRAM,FLICKR,PICASA'}
           = render "funding_info"
     - else
-      #large_image{data: {image: 'false'}}
+      #large_image{style: '-webkit-background-size: cover !important; background-size: cover !important;', data: {image: 'false'}}
         .div.loader-cover.container{style: "display:none"}
           .content-loader{style: "margin-top: 150px; margin-left: 49%;"}
             .loader-image{style: "margin-left: -3%; font-weight: bolder;"} LOADING
@@ -374,7 +374,9 @@
         });
 
         $('#large_image').css('background-image','');
-        $('#dragImg').css('position', 'absolute')
+        $('#dragImg').css({
+          position: 'absolute'
+        });
         $('.new-save-btn').show();
         $(".action-convert").show();
       }
@@ -460,6 +462,7 @@
         $(".save-image").text('SAVE');
         $(".cancel-image").text("CANCEL");
         $('.new-save-btn').hide();
+        location.reload();
       },
       function(FPError){
         $(".save-image").text('SAVE');
