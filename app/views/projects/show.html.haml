@@ -194,7 +194,6 @@
         #perks.tab-pane.active
           -if @project.perk_permission && @perks.any?
             - @perks.each do |p|
-              = p.inspect
               .seed-level
                 %h3{style: "font-size: 20px;"}= p.name
                 %h3
