@@ -25,6 +25,7 @@ private
         amount:       donation.amount,
         perk:         donation.perk_name,
         description:  donation.description }
+    end
   end
 
   def donations
