@@ -9,13 +9,22 @@ private
   attr_reader :project
 
   def attributes(donation)
-    { project_name: donation.project.title,
-      email:        donation.user.email,
-      first_name:   donation.user.first_name,
-      last_name:    donation.user.last_name,
-      amount:       donation.amount,
-      perk:         donation.perk_name,
-      description:  donation.description }
+    if donation.user
+      { project_name: donation.project.title,
+        email:        donation.user.email,
+        first_name:   donation.user.first_name,
+        last_name:    donation.user.last_name,
+        amount:       donation.amount,
+        perk:         donation.perk_name,
+        description:  donation.description }
+    else
+      { project_name: donation.project.title,
+        email:        "No Record",
+        first_name:   "No Record",
+        last_name:    "No Record",
+        amount:       donation.amount,
+        perk:         donation.perk_name,
+        description:  donation.description }
   end
 
   def donations
