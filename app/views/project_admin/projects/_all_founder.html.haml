@@ -18,7 +18,7 @@
         - else
           %td
 
-        - if founder.user.first_name && founder.user.last_name
+        - if founder.user
           %td{style: "width: 210px;"}= donor_name_project_admin(truncate([founder.user.first_name, founder.user.last_name].join(" "), length: 17), founder.anonymous)
         - else
           %td No Record
