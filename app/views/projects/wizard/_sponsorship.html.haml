@@ -321,7 +321,7 @@
 
 
               = hidden_field_tag "bronze_count", nil, id: "bronze-count"
-            %div#custom-checkbox
+            %div#bronze-checkbox
               %h6{:style => "color:#70bf4c;letter-spacing:normal;margin:15px 0 10px;"} CREATE CUSTOM BENEFITS:
               %div.checkbox.add_checkbox
                 = check_box_tag "add_bronze", nil,false, class: "box_bronze_benefits"
@@ -517,9 +517,6 @@
       var divCore = $(this).parent().children("#custom-checkbox");
       var fieldP = $(this).parent().children(".existing-checkbox").children(".checkbox");
 
-      console.log(divCore);
-      console.log(fieldP);
-
       if ( fieldP.length > 0 ){
         var checkFieldP = fieldP.last().children().first();
         var checkboxName = checkFieldP.attr("id").split("_")[0];
@@ -540,7 +537,7 @@
         }
 
       // $("#"+ checkboxName +"-count").val(countCheckbox);
-      $("<div class='checkbox default'><input class='sponsor_checkbox' id='"+ checkboxName + "_" + countCheckbox + "' type='checkbox' value='1' name='"+ checkboxName +"[id_"+ countCheckbox +"]''><input id='"+ checkboxName + "_info_"+ countCheckbox +"' class='"+checkboxName+"_benefits add_benefits' type='text' style='width: 100% !important;' placeholder='Create your custom benefit here...' name='"+ checkboxName + "[info_"+countCheckbox+"]'><span><span class='save_new_benefit pull-right btn' style='margin-top:-19px; left:0px' data-type='"+checkboxName+"' >Save</span></span><span class='remove-another pull-right btn' style='margin-top:-19px; left: -5px;'>Remove</span></div>").appendTo(divCore);
+      $("<div class='checkbox default'><input calss='sponsor_checkbox' id='"+ checkboxName + "_" + countCheckbox + "' type='checkbox' value='1' name='"+ checkboxName +"[id_"+ countCheckbox +"]''><input id='"+ checkboxName + "_info_"+ countCheckbox +"' class='"+checkboxName+"_benefits add_benefits' type='text' style='width: 100% !important;' placeholder='Create your custom benefit here...' name='"+ checkboxName + "[info_"+countCheckbox+"]'><span><span class='save_new_benefit pull-right btn' style='margin-top:-19px; left:0px' data-type='"+checkboxName+"' >Save</span></span><span class='remove-another pull-right btn' style='margin-top:-19px; left: -5px;'>Remove</span></div>").appendTo(divCore);
       $("#"+checkboxName+"-count").val(parseInt($("#"+checkboxName+"-count").val())+1)
       // countCheckbox++;
       addNewBenefit();
