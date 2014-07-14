@@ -13,7 +13,7 @@
         %td= founder.updated_at.strftime("%m/%d")
     - else
       %tr
-        - if founder.user.avatar
+        - if founder.user && founder.user.avatar
           %td= image_tag avatar_project_admin(founder.user.avatar, founder.anonymous), style: "width:50px"
         - else
           %td
