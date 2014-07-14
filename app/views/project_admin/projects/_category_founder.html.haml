@@ -5,8 +5,13 @@
       - founders[1].group_by {|donation| donation.user_id }.each do |user_id, founder|
         %tr
           %td{style: "text-align: left"}
-            = image_tag avatar_project_admin(founder.last.user.avatar, founder.last.anonymous), height: 50
-          %td{style: "width: 260px; text-align: left"}= donor_name_project_admin(truncate([founder.last.user.first_name, founder.last.user.last_name].join(" "), length: 17), founder.last.anonymous)
+            - if founder.last.user
+              = image_tag avatar_project_admin(founder.last.user.avatar, founder.last.anonymous), height: 50
+          %td{style: "width: 260px; text-align: left"}
+            - if founder.last.user
+              = donor_name_project_admin(truncate([founder.last.user.first_name, founder.last.user.last_name].join(" "), length: 17), founder.last.anonymous)
+            - else
+              No Record
           %td{style: "text-align: center"}= "#{amount_converter(founder.last.amount)}"
           %td{style: "text-align: center"}= truncate(founders[0], length: 17)
           %td{style: "text-align: center"}= founder.last.last_founded.to_date.strftime("%m/%d")
