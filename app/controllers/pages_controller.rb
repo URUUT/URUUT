@@ -7,8 +7,6 @@ class PagesController < ApplicationController
   before_filter :set_session_page
   before_filter :set_session_wizard, except: :home
 
-  caches_action :index
-
   def index
     projects = Project.order_by_percentage
     project_success = Project.order_by_raised
