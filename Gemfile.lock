@@ -149,6 +149,7 @@ GEM
       nokogiri (>= 1.5.0)
       rails (>= 3.0.0)
     daemons (1.1.9)
+    dalli (2.7.2)
     dante (0.2.0)
     database_cleaner (1.2.0)
     debug_inspector (0.0.2)
@@ -531,6 +532,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   cucumber-rails
   daemons
+  dalli
   database_cleaner
   debugger (~> 1.6.4)
   devise

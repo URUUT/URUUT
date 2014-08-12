@@ -41,6 +41,8 @@ gem 'paper_trail', '~> 3.0.2'
 gem 'sass-rails',   '~> 3.2.3'
 gem 'pg'
 
+gem 'dalli'
+
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
