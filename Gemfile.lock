@@ -565,6 +565,7 @@ DEPENDENCIES
   pg
   poltergeist (~> 1.5.0)
   prawn
+  rack-cache
   rack_session_access
   railroady
   rails (= 3.2.15)
