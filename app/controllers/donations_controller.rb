@@ -151,7 +151,7 @@ class DonationsController < ApplicationController
   end
 
   def thank_you
-    puts session.inspect
+    logger.debug "Session Vars: #{session.inspect}"
     @need_doctype = true
     @thanks_url = URI.encode(session[:donation_thank_you][:project_bitly])
     render :layout => "application"
