@@ -52,6 +52,7 @@ class DonationStepsController < ApplicationController
   def update
     @donation = Donation.unscoped.find(session[:donation_id])
     @donation.token = session[:card_token]
+    perk = Perk.where(name: session[:donation_thank_you][:perk_name], project_id: session[:project_id_of_perk_selected]).first
     if @donation.save_with_payment && @donation.create_charges!
       donate_badge = Merit::Badge.new(id:3, name:"Project donation badge")
       if !current_user.badges.include?(donate_badge)
@@ -68,7 +69,7 @@ class DonationStepsController < ApplicationController
       redirect_to wizard_path(:thank_you)
     else
       # redirect_to wizard_path(:confirmation)
-      redirect_to new_donation_path( perk: session[:perk_id], amount: session[:perk_amount], name: session[:donation_thank_you][:perk_name], project_id: session[:project_id_of_perk_selected] )
+      redirect_to new_donation_path( perk: perk.id, amount: session[:perk_amount], name: session[:donation_thank_you][:perk_name], project_id: session[:project_id_of_perk_selected] )
     end
   end
 
