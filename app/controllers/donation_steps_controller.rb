@@ -67,7 +67,8 @@ class DonationStepsController < ApplicationController
       Donation.send_confirmation_email(@donation)
       redirect_to wizard_path(:thank_you)
     else
-      redirect_to wizard_path(:confirmation)
+      # redirect_to wizard_path(:confirmation)
+      new_donation_path( perk: session[:perk_id], amount: session[:perk_amount], name: session[:donation_thank_you][:perk_name], project_id: session[:project_id_of_perk_selected] )
     end
   end
 
