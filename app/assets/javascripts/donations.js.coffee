@@ -21,7 +21,7 @@ new_subscription =
     Stripe.createToken(card, new_subscription.handleStripeResponse)
 
   handleStripeResponse: (status, response) ->
-    if status == 200
+    unless response.error
       $('input#donation_token').attr('value', response.id)
       $('input#donation_card_last4').attr('value', response.card.last4)
       $('input#donation_card_type').attr('value', response.card.type)
