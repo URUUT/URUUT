@@ -1,4 +1,6 @@
 .container
+  = @donation.errors.full_messages.each do |message|
+    = message
   .span8
     %h3.title CHECKOUT
     .donation
