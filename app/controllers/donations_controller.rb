@@ -151,10 +151,13 @@ class DonationsController < ApplicationController
   end
 
   def thank_you
-    logger.debug "Session Vars: #{session.inspect}"
-    @need_doctype = true
-    @thanks_url = URI.encode(session[:donation_thank_you][:project_bitly])
-    render :layout => "application"
+    if params[:post_id]
+      redirect_to project_path(session[:project_id_of_perk_selected])
+    else
+      @need_doctype = true
+      @thanks_url = URI.encode(session[:donation_thank_you][:project_bitly])
+      render :layout => "application"
+    end
   end
 
   def share_email
