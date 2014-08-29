@@ -5,7 +5,7 @@ class DonationsController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: :default_perk
   before_filter :set_session_page, :set_session_wizard, :set_previous_path_for_registration,
     :set_project, except: [:thank_you]
-  before_filter :set_perk_amount, :set_perks, except: [:more_donators, :change_perk]
+  before_filter :set_perk_amount, :set_perks, except: [:more_donators, :change_perk, :thank_you]
   layout "landing"
 
   def new
@@ -151,13 +151,9 @@ class DonationsController < ApplicationController
   end
 
   def thank_you
-    if params[:post_id]
-      redirect_to project_path(session[:project_id_of_perk_selected])
-    else
-      @need_doctype = true
-      @thanks_url = URI.encode(session[:donation_thank_you][:project_bitly])
-      render :layout => "application"
-    end
+    @need_doctype = true
+    @thanks_url = URI.encode(session[:donation_thank_you][:project_bitly])
+    render :layout => "application"
   end
 
   def share_email
