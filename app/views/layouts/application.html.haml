@@ -51,15 +51,6 @@
   ga('send', 'pageview');
 
 :javascript
-  stripe_pub_key = "#{Settings.stripe.pub_key}";
-
-  $('.stripe-connect').click(function(e) {
-    e.preventDefault();
-    var ahref = $(this).attr('href');
-    if($('#connected').val() !== 'true') {
-      window.open(ahref,'_blank', 'height=500,width=500,location=no,menubar=no');
-    }
-  })
 
   function showCoords(coords)
   {
@@ -116,10 +107,6 @@
 
   $(function(){
     //$("img").lazyload();
-    if(window.opener) {
-      window.opener.location.reload(true);
-      window.close()
-    }
 
     $('form fieldset p a').addClass('btn');
     $('form [id*="edit_project"]').h5Validate();
